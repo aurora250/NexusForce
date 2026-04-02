@@ -93,29 +93,45 @@ $(function(){initNavTree('thread_8hpp.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>线程支持  
+<p>线程管理类  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="apply_8hpp_source.html">NeForce/core/functional/apply.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="terminate_8hpp_source.html">NeForce/core/exception/terminate.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="exception_8hpp_source.html">NeForce/core/exception/exception.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="unique__ptr_8hpp_source.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="this__thread_8hpp_source.html">NeForce/core/async/this_thread.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 thread.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="thread_8hpp__incl.svg" width="1035" height="854"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="thread_8hpp__incl.svg" width="1018" height="838"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="thread_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:thread_5Fexception" id="r_thread_5Fexception"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structthread__exception.html">thread_exception</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程操作异常  <a href="structthread__exception.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:thread" id="r_thread"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classthread.html">thread</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程类  <a href="classthread.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:thread_3A_3Aid" id="r_thread_3A_3Aid"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structthread_1_1id.html">thread::id</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程唯一标识符类  <a href="structthread_1_1id.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:thread_3A_3Ahook" id="r_thread_3A_3Ahook"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structthread_1_1hook.html">thread::hook</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程生命周期钩子  <a href="structthread_1_1hook.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga505a22091b6fb9a4a8e147bf2258e47a" id="r_ga505a22091b6fb9a4a8e147bf2258e47a"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE thread::id&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a> () noexcept</td></tr>
+<tr class="memitem:ga505a22091b6fb9a4a8e147bf2258e47a" id="r_ga505a22091b6fb9a4a8e147bf2258e47a"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="structthread_1_1id.html">thread::id</a>&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a> () noexcept</td></tr>
 <tr class="memdesc:ga505a22091b6fb9a4a8e147bf2258e47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程标识符  <br /></td></tr>
+<tr class="memitem:ga9c11108611d4c65deb691d1b88f0dc07" id="r_ga9c11108611d4c65deb691d1b88f0dc07"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga9c11108611d4c65deb691d1b88f0dc07">handle</a> () noexcept</td></tr>
+<tr class="memdesc:ga9c11108611d4c65deb691d1b88f0dc07"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程句柄  <br /></td></tr>
+<tr class="memitem:ga6f83c2a4509ed1d467ba909884e9850b" id="r_ga6f83c2a4509ed1d467ba909884e9850b"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a> (char *buffer, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>)</td></tr>
+<tr class="memdesc:ga6f83c2a4509ed1d467ba909884e9850b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程名称  <br /></td></tr>
+<tr class="memitem:ga303744653fe3bf181857637488927d28" id="r_ga303744653fe3bf181857637488927d28"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga303744653fe3bf181857637488927d28">set_name</a> (const char *<a class="el" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>)</td></tr>
+<tr class="memdesc:ga303744653fe3bf181857637488927d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置当前线程名称  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>线程支持 </p>
-<p>此文件提供了线程类和相关操作。 </p>
+<div class="textblock"><p>线程管理类 </p>
+<p>此文件提供了跨平台的线程管理功能， 包括线程创建、等待、分离、线程标识符、线程名称设置等操作。 </p>
 
 <p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

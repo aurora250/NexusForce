@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup HeapAlgorithms 堆算法
  * @brief 堆算法的实现
  * @{
@@ -332,6 +338,8 @@ NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
 }
 
 /** @} */ // HeapAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_HEAP_HPP__

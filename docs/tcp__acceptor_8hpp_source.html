@@ -95,23 +95,22 @@ $(function(){initNavTree('tcp__acceptor_8hpp_source.html','',''); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_SOCKET_TCP_ACCEPTOR_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_SOCKET_TCP_ACCEPTOR_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;NeForce/network/socket/tcp_socket.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span>NEFORCE_API tcp_acceptor : <span class="keyword">public</span> socket_base {</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span>NEFORCE_API tcp_acceptor : <span class="keyword">public</span> <a class="code hl_class" href="classip__socket.html">ip_socket</a> {</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    tcp_acceptor() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">void</span> open(<span class="keyword">const</span> ip_address&amp; endpoint, <span class="keywordtype">int</span> backlog = SOMAXCONN);</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    tcp_socket accept();</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    NEFORCE_NODISCARD tcp_socket accept();</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    optional&lt;tcp_socket&gt; accept_nonblock();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    NEFORCE_NODISCARD optional&lt;tcp_socket&gt; accept_nonblock();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SOCKET_TCP_ACCEPTOR_HPP__</span></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="aclassip__socket_html"><div class="ttname"><a href="classip__socket.html">ip_socket</a></div><div class="ttdoc">面向 IP 协议族（IPv4 / IPv6）的 socket 基类</div><div class="ttdef"><b>定义</b> <a href="ip__socket_8hpp_source.html#l00033">ip_socket.hpp:33</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

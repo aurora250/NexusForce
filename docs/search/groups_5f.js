@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['转换字符串_0',['转换字符串',['../group___to_string.html',1,'']]]
+  ['边界查找算法_0',['边界查找算法',['../group___bound_algorithms.html',1,'']]]
 ];

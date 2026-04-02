@@ -135,18 +135,18 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a00036c31cc71fde2272b05a178bb7d0e" id="r_a00036c31cc71fde2272b05a178bb7d0e"><td class="memTemplParams" colspan="2">template&lt;typename T = This, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structis__move__assignable.html">is_move_assignable</a>&lt; T &gt;, <a class="el" href="structis__move__assignable.html">is_move_assignable</a>&lt; Rest &gt;... &gt;::value, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:a00036c31cc71fde2272b05a178bb7d0e template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a00036c31cc71fde2272b05a178bb7d0e">operator=</a> (<a class="el" href="group___type_traits_utilities.html#gaca42c1976d1b12998afcabf8f39e8c23">type_identity_t</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&amp; &gt; tup) noexcept(<a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structis__nothrow__move__assignable.html">is_nothrow_move_assignable</a>&lt; T &gt;, <a class="el" href="structis__nothrow__move__assignable.html">is_nothrow_move_assignable</a>&lt; Rest &gt;... &gt;::value)</td></tr>
 <tr class="memdesc:a00036c31cc71fde2272b05a178bb7d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
-<tr class="memitem:ac5e63e50ddf01213ee05dc3257b45144" id="r_ac5e63e50ddf01213ee05dc3257b45144"><td class="memTemplParams" colspan="2">template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ac5e63e50ddf01213ee05dc3257b45144 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac5e63e50ddf01213ee05dc3257b45144">operator=</a> (const <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;tup) noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt;::value)</td></tr>
-<tr class="memdesc:ac5e63e50ddf01213ee05dc3257b45144"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他元组拷贝赋值  <br /></td></tr>
-<tr class="memitem:afe0d817c868a206c3f169889e0cc773d" id="r_afe0d817c868a206c3f169889e0cc773d"><td class="memTemplParams" colspan="2">template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:afe0d817c868a206c3f169889e0cc773d template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afe0d817c868a206c3f169889e0cc773d">operator=</a> (<a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;&amp;tup) noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt;::value)</td></tr>
-<tr class="memdesc:afe0d817c868a206c3f169889e0cc773d"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他元组移动赋值  <br /></td></tr>
-<tr class="memitem:ab1e7bc6d14ed704f8170f476b3b4269c" id="r_ab1e7bc6d14ed704f8170f476b3b4269c"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ab1e7bc6d14ed704f8170f476b3b4269c template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab1e7bc6d14ed704f8170f476b3b4269c">operator=</a> (const <a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;pir) noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value)</td></tr>
-<tr class="memdesc:ab1e7bc6d14ed704f8170f476b3b4269c"><td class="mdescLeft">&#160;</td><td class="mdescRight">从pair拷贝赋值  <br /></td></tr>
-<tr class="memitem:ae0365cb16e31d794aab8dc199b10eda8" id="r_ae0365cb16e31d794aab8dc199b10eda8"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ae0365cb16e31d794aab8dc199b10eda8 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae0365cb16e31d794aab8dc199b10eda8">operator=</a> (<a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;&amp;pir) noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value)</td></tr>
-<tr class="memdesc:ae0365cb16e31d794aab8dc199b10eda8"><td class="mdescLeft">&#160;</td><td class="mdescRight">从pair移动赋值  <br /></td></tr>
+<tr class="memitem:a3596a1b7d2e46551b53566c1e2bda049" id="r_a3596a1b7d2e46551b53566c1e2bda049"><td class="memTemplParams" colspan="2">template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a3596a1b7d2e46551b53566c1e2bda049 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3596a1b7d2e46551b53566c1e2bda049">operator=</a> (const <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;tup) noexcept(inner::tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt;::value)</td></tr>
+<tr class="memdesc:a3596a1b7d2e46551b53566c1e2bda049"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他元组拷贝赋值  <br /></td></tr>
+<tr class="memitem:ad9773aea82b05d04d51b41a4de4a79f2" id="r_ad9773aea82b05d04d51b41a4de4a79f2"><td class="memTemplParams" colspan="2">template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ad9773aea82b05d04d51b41a4de4a79f2 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad9773aea82b05d04d51b41a4de4a79f2">operator=</a> (<a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;&amp;tup) noexcept(inner::tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt;::value)</td></tr>
+<tr class="memdesc:ad9773aea82b05d04d51b41a4de4a79f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他元组移动赋值  <br /></td></tr>
+<tr class="memitem:a8253d7882ff6766e4eb2462b5d213636" id="r_a8253d7882ff6766e4eb2462b5d213636"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a8253d7882ff6766e4eb2462b5d213636 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8253d7882ff6766e4eb2462b5d213636">operator=</a> (const <a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;pir) noexcept(inner::tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value)</td></tr>
+<tr class="memdesc:a8253d7882ff6766e4eb2462b5d213636"><td class="mdescLeft">&#160;</td><td class="mdescRight">从pair拷贝赋值  <br /></td></tr>
+<tr class="memitem:a6976dc812518b45a02891cbaa0a0a14c" id="r_a6976dc812518b45a02891cbaa0a0a14c"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a6976dc812518b45a02891cbaa0a0a14c template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6976dc812518b45a02891cbaa0a0a14c">operator=</a> (<a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;&amp;pir) noexcept(inner::tuple_nothrow_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value)</td></tr>
+<tr class="memdesc:a6976dc812518b45a02891cbaa0a0a14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">从pair移动赋值  <br /></td></tr>
 <tr class="memitem:a0568fe0377496bbbc0c7e303e0f290d9" id="r_a0568fe0377496bbbc0c7e303e0f290d9"><td class="memItemLeft"><a id="a0568fe0377496bbbc0c7e303e0f290d9" name="a0568fe0377496bbbc0c7e303e0f290d9"></a>
 <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const volatile <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a> &amp;)=delete</td></tr>
 <tr class="memdesc:a0568fe0377496bbbc0c7e303e0f290d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止volatile拷贝赋值 <br /></td></tr>
@@ -256,7 +256,7 @@ template&lt;typename Tag, typename U1, typename... U2, <a class="el" href="group
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00262">262</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="tuple_8hpp_source.html#l00573">equal_to()</a>, <a class="el" href="tuple_8hpp_source.html#l00686">get</a>, <a class="el" href="tuple_8hpp_source.html#l00658">get</a>, <a class="el" href="tuple_8hpp_source.html#l00672">get</a>, <a class="el" href="tuple_8hpp_source.html#l00644">get</a>, <a class="el" href="tuple_8hpp_source.html#l00584">less_to()</a>, <a class="el" href="tuple_8hpp_source.html#l00605">operator&lt;()</a>, <a class="el" href="tuple_8hpp_source.html#l00529">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00500">operator=()</a>, <a class="el" href="#a0568fe0377496bbbc0c7e303e0f290d9">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00545">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00514">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00470">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00485">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00601">operator==()</a>, <a class="el" href="tuple_8hpp_source.html#l00621">swap()</a>, <a class="el" href="#a3d566a846202269fb58cefdce8f29fef">tuple()</a>, <a class="el" href="tuple_8hpp_source.html#l00285">tuple()</a> , 以及 <a class="el" href="#a46f16f8547cd57ff0eaa28bfccae223c">tuple()</a>.</p>
 
@@ -367,7 +367,7 @@ template&lt;typename Tag, typename Tuple, <a class="el" href="group___type_trait
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00285">285</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
@@ -538,15 +538,15 @@ template&lt;typename... U&gt; </div>
 
 </div>
 </div>
-<a id="ab1e7bc6d14ed704f8170f476b3b4269c" name="ab1e7bc6d14ed704f8170f476b3b4269c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1e7bc6d14ed704f8170f476b3b4269c">&#9670;&#160;</a></span>operator=() <span class="overload">[1/6]</span></h2>
+<a id="a8253d7882ff6766e4eb2462b5d213636" name="a8253d7882ff6766e4eb2462b5d213636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8253d7882ff6766e4eb2462b5d213636">&#9670;&#160;</a></span>operator=() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename This, typename... Rest&gt; </div>
 <div class="memtemplate">
-template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value, int &gt; = 0&gt; </div>
+template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -583,19 +583,19 @@ template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_ut
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00529">529</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
-<a id="ac5e63e50ddf01213ee05dc3257b45144" name="ac5e63e50ddf01213ee05dc3257b45144"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5e63e50ddf01213ee05dc3257b45144">&#9670;&#160;</a></span>operator=() <span class="overload">[2/6]</span></h2>
+<a id="a3596a1b7d2e46551b53566c1e2bda049" name="a3596a1b7d2e46551b53566c1e2bda049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3596a1b7d2e46551b53566c1e2bda049">&#9670;&#160;</a></span>operator=() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename This, typename... Rest&gt; </div>
 <div class="memtemplate">
-template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt; &gt;::value, int &gt; = 0&gt; </div>
+template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt; &gt;::value, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -631,19 +631,19 @@ template&lt;typename... U, <a class="el" href="group___type_traits_utilities.htm
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00500">500</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
-<a id="ae0365cb16e31d794aab8dc199b10eda8" name="ae0365cb16e31d794aab8dc199b10eda8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0365cb16e31d794aab8dc199b10eda8">&#9670;&#160;</a></span>operator=() <span class="overload">[3/6]</span></h2>
+<a id="a6976dc812518b45a02891cbaa0a0a14c" name="a6976dc812518b45a02891cbaa0a0a14c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6976dc812518b45a02891cbaa0a0a14c">&#9670;&#160;</a></span>operator=() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename This, typename... Rest&gt; </div>
 <div class="memtemplate">
-template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value, int &gt; = 0&gt; </div>
+template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -680,19 +680,19 @@ template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_ut
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00545">545</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
-<a id="afe0d817c868a206c3f169889e0cc773d" name="afe0d817c868a206c3f169889e0cc773d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe0d817c868a206c3f169889e0cc773d">&#9670;&#160;</a></span>operator=() <span class="overload">[4/6]</span></h2>
+<a id="ad9773aea82b05d04d51b41a4de4a79f2" name="ad9773aea82b05d04d51b41a4de4a79f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9773aea82b05d04d51b41a4de4a79f2">&#9670;&#160;</a></span>operator=() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename This, typename... Rest&gt; </div>
 <div class="memtemplate">
-template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt; &gt;::value, int &gt; = 0&gt; </div>
+template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structnegation.html">negation</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &gt; &gt;, inner::tuple_assignable&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt; &gt;::value, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -728,7 +728,7 @@ template&lt;typename... U, <a class="el" href="group___type_traits_utilities.htm
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00514">514</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
@@ -824,7 +824,7 @@ template&lt;typename T = This, <a class="el" href="group___type_traits_utilities
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00485">485</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00558">get_rest()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
@@ -863,7 +863,7 @@ template&lt;typename This, typename... Rest&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00621">621</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00262">tuple()</a>.</p>
 
 </div>
 </div>
@@ -896,8 +896,6 @@ template&lt;typename This, typename... Rest&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>元组的哈希值 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00613">613</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>.</p>
 
 </div>
 </div>

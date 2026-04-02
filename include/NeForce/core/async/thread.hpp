@@ -1,5 +1,14 @@
 #ifndef NEFORCE_CORE_ASYNC_THREAD_HPP__
 #define NEFORCE_CORE_ASYNC_THREAD_HPP__
+
+/**
+ * @file thread.hpp
+ * @brief 线程管理类
+ *
+ * 此文件提供了跨平台的线程管理功能，
+ * 包括线程创建、等待、分离、线程标识符、线程名称设置等操作。
+ */
+
 #include "NeForce/core/functional/apply.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
@@ -17,10 +26,21 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct thread_exception
- * @extends system_exception
  * @brief 线程操作异常
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(thread_exception, system_exception, "Thread Operation Failed.")
+struct thread_exception final : system_exception {
+    explicit thread_exception(const char* info = "Thread Operation Failed.",
+                              const char* type = static_type,
+                              const int code = 0) noexcept
+    : system_exception(info, type, code) {}
+
+    explicit thread_exception(const exception& e)
+    : system_exception(e) {}
+
+    ~thread_exception() override = default;
+
+    static constexpr auto static_type = "thread_exception";
+};
 
 /** @} */ // Exceptions
 
@@ -33,12 +53,17 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(thread_exception, system_exception, "Thread Oper
 /**
  * @class thread
  * @brief 线程类
+ *
+ * 提供跨平台的线程管理功能，支持线程创建、等待、分离、ID获取等操作。
+ * 线程对象可移动但不可复制。
  */
 class NEFORCE_API thread {
 public:
     /**
      * @struct id
      * @brief 线程唯一标识符类
+     *
+     * 用于标识线程，支持哈希和比较操作。
      */
     struct id : ihashable<id> {
     private:
@@ -105,19 +130,44 @@ public:
         }
     };
 
+    /**
+     * @struct hook
+     * @brief 线程生命周期钩子
+     *
+     * 提供线程生命周期事件的回调机制，用于监控线程的创建和销毁。
+     */
     struct NEFORCE_API hook {
+        /**
+         * @enum point
+         * @brief 钩子触发点枚举
+         */
         enum class point {
-            before_create,
-            after_create,
-            thread_start,
-            thread_end,
-            before_destroy
+            before_create,  ///< 线程创建前
+            after_create,   ///< 线程创建后
+            thread_start,   ///< 线程函数开始执行
+            thread_end,     ///< 线程函数结束
+            before_destroy  ///< 线程对象销毁前
         };
 
-        using callback_t = void(*)(point point, id thread_id);
+        using callback_t = void(*)(point point, id thread_id); ///< 钩子回调函数类型
 
+        /**
+         * @brief 添加钩子回调
+         * @param hook 回调函数指针
+         */
         static void add_hook(callback_t hook);
+
+        /**
+         * @brief 移除钩子回调
+         * @param hook 要移除的回调函数指针
+         */
         static void remove_hook(callback_t hook);
+
+        /**
+         * @brief 调用钩子回调
+         * @param point 触发点
+         * @param thread_id 线程ID
+         */
         static void invoke(point point, id thread_id);
     };
 
@@ -159,17 +209,37 @@ private:
         void run() override { func_(); }
     };
 
+    /**
+     * @struct thread_startup_args
+     * @brief 线程启动参数
+     *
+     * 传递给线程入口函数的参数结构。
+     */
     struct thread_startup_args {
-        unique_ptr<data_base> data;
-        id thread_id;
+        unique_ptr<data_base> data; ///< 线程执行数据
+        id thread_id;               ///< 线程ID
     };
 
+    /**
+     * @struct thread_monitor
+     * @brief 线程监控器
+     *
+     * 在线程函数开始和结束时自动调用钩子并更新跟踪计数。
+     */
     struct NEFORCE_API thread_monitor {
     private:
-        id thread_id_;
+        id thread_id_; ///< 线程ID
 
     public:
-        thread_monitor(id thread_id);
+        /**
+         * @brief 构造函数
+         * @param thread_id 线程ID
+         */
+        explicit thread_monitor(id thread_id);
+
+        /**
+         * @brief 析构函数
+         */
         ~thread_monitor();
     };
 
@@ -296,7 +366,20 @@ public:
      */
     void detach();
 
+    /**
+     * @brief 设置线程名称
+     * @param name 线程名称
+     * @return 是否设置成功
+     * @throw thread_exception 如果线程不可被等待
+     */
     bool set_name(const char* name);
+
+    /**
+     * @brief 获取线程名称
+     * @param buffer 存储名称的缓冲区
+     * @param size 缓冲区大小
+     * @return 是否获取成功
+     */
     bool name(char* buffer, size_t size) const;
 
     /**
@@ -305,7 +388,21 @@ public:
      */
     void swap(thread& other) noexcept;
 
+    /**
+     * @brief 设置指定线程的名称
+     * @param handle 线程句柄
+     * @param name 线程名称
+     * @return 是否设置成功
+     */
     static bool set_name(native_handle_type handle, const char* name);
+
+    /**
+     * @brief 获取指定线程的名称
+     * @param handle 线程句柄
+     * @param buffer 存储名称的缓冲区
+     * @param size 缓冲区大小
+     * @return 是否获取成功
+     */
     static bool name(native_handle_type handle, char* buffer, size_t size);
 };
 
@@ -331,6 +428,10 @@ NEFORCE_ALWAYS_INLINE_INLINE thread::id id() noexcept {
 #endif
 }
 
+/**
+ * @brief 获取当前线程句柄
+ * @return 当前线程的句柄
+ */
 NEFORCE_ALWAYS_INLINE_INLINE thread::native_handle_type handle() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetCurrentThread();
@@ -339,10 +440,21 @@ NEFORCE_ALWAYS_INLINE_INLINE thread::native_handle_type handle() noexcept {
 #endif
 }
 
+/**
+ * @brief 获取当前线程名称
+ * @param buffer 存储名称的缓冲区
+ * @param size 缓冲区大小
+ * @return 是否获取成功
+ */
 NEFORCE_ALWAYS_INLINE_INLINE bool name(char* buffer, size_t size) {
     return thread::name(this_thread::handle(), buffer, size);
 }
 
+/**
+ * @brief 设置当前线程名称
+ * @param name 线程名称
+ * @return 是否设置成功
+ */
 NEFORCE_ALWAYS_INLINE_INLINE bool set_name(const char* name) {
     return thread::set_name(this_thread::handle(), name);
 }

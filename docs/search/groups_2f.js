@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['布隆过滤器_0',['布隆过滤器',['../group___bloom_filter.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

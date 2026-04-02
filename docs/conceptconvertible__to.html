@@ -99,10 +99,9 @@ $(function(){initNavTree('conceptconvertible__to.html','',''); });
 <p><code>#include &lt;<a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a>&gt;</code></p>
 <h2 id="header-conceptdef" class="groupheader">概念定义</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> From, <span class="keyword">typename</span> To&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptconvertible__to.html">convertible_to</a> = is_convertible_v&lt;From, To&gt; &amp;&amp; <span class="keyword">requires</span> { <span class="keyword">static_cast&lt;</span>To<span class="keyword">&gt;</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval&lt;From&gt;</a>()); }</div>
-<div class="ttc" id="aconceptconvertible__to_html"><div class="ttname"><a href="conceptconvertible__to.html">convertible_to</a></div><div class="ttdoc">检查类型From是否可以转换为类型To</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03190">type_traits.hpp:3190</a></div></div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptconvertible__to.html">convertible_to</a> = is_convertible_v&lt;From, To&gt; &amp;&amp; <span class="keyword">requires</span> { <span class="keyword">static_cast&lt;</span>To<span class="keyword">&gt;</span>(_NEFORCE <a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval&lt;From&gt;</a>()); }</div>
+<div class="ttc" id="aconceptconvertible__to_html"><div class="ttname"><a href="conceptconvertible__to.html">convertible_to</a></div><div class="ttdoc">检查类型From是否可以转换为类型To</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03165">type_traits.hpp:3165</a></div></div>
 <div class="ttc" id="agroup___declval_tools_html_ga7c6502597045c02b014ec72343367f5c"><div class="ttname"><a href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a></div><div class="ttdeci">add_rvalue_reference_t&lt; T &gt; declval() noexcept</div><div class="ttdoc">获取类型的右值引用，仅用于非求值上下文</div></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>检查类型From是否可以转换为类型To </p>
 <dl class="tparams"><dt>模板参数</dt><dd>
@@ -113,7 +112,7 @@ $(function(){initNavTree('conceptconvertible__to.html','',''); });
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03190">3190</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03165">3165</a> 行定义.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/exception/breakpoint.hpp"
 #include <new>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -21,10 +22,21 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct allocate_exception
- * @extends memory_exception
  * @brief 内存分配异常
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
+struct allocate_exception final : memory_exception {
+    explicit allocate_exception(const char* info = "Memory Allocation Failed.",
+                                const char* type = static_type,
+                                const int code = 0) noexcept
+    : memory_exception(info, type, code) {}
+
+    explicit allocate_exception(const exception& e)
+    : memory_exception(e) {}
+
+    ~allocate_exception() override = default;
+    static constexpr auto static_type = "allocate_exception";
+};
+
 
 /** @} */ // Exceptions
 

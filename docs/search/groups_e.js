@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['交换性工具_0',['交换性工具',['../group___swap_utility.html',1,'']]]
+  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
 ];

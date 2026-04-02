@@ -2,7 +2,7 @@ var classunique__ptr =
 [
     [ "deleter_type", "classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204", null ],
     [ "element_type", "classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0", null ],
-    [ "pointer", "classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d", null ],
+    [ "pointer", "classunique__ptr.html#aeac73084354db39d713b4bc1c27b52c0", null ],
     [ "unique_ptr", "classunique__ptr.html#a0897adc49645599a28665301f66a75fe", null ],
     [ "unique_ptr", "classunique__ptr.html#a37d8df72732fc43a9ae2b12a33d71cd5", null ],
     [ "unique_ptr", "classunique__ptr.html#a0b73b217dba624cc177e31a92a67abde", null ],

@@ -1,4 +1,5 @@
 #include <NeForce/core/file/path.hpp>
+#include <NeForce/core/file/path_tree.hpp>
 #include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -316,6 +317,57 @@ path path::operator /(const path& other) const {
 path path::operator /(const string_view pth) const {
     path result = *this;
     result /= pth;
+    return result;
+}
+
+path_tree path::to_tree() const {
+    return path_tree::scan(*this, path_tree::scan_options{});
+}
+
+vector<path> path::children(const bool include_hidden) const {
+    path_tree::scan_options opts;
+    opts.max_depth = 1;
+    opts.include_hidden = include_hidden;
+    const path_tree tree = path_tree::scan(*this, opts);
+
+    vector<path> result;
+    if (!tree.empty() && tree.root()) {
+        for (const auto& child : tree.root()->children()) {
+            result.push_back(child->get_path());
+        }
+    }
+    return result;
+}
+
+vector<path> path::child_files(const bool include_hidden) const {
+    path_tree::scan_options opts;
+    opts.max_depth = 1;
+    opts.include_hidden = include_hidden;
+    opts.files_only = true;
+    const path_tree tree = path_tree::scan(*this, opts);
+
+    vector<path> result;
+    if (!tree.empty() && tree.root()) {
+        for (const auto& child : tree.root()->children()) {
+            result.push_back(child->get_path());
+        }
+    }
+    return result;
+}
+
+vector<path> path::child_dirs(const bool include_hidden) const {
+    path_tree::scan_options opts;
+    opts.max_depth = 1;
+    opts.include_hidden = include_hidden;
+    opts.dirs_only = true;
+    const path_tree tree = path_tree::scan(*this, opts);
+
+    vector<path> result;
+    if (!tree.empty() && tree.root()) {
+        for (const auto& child : tree.root()->children()) {
+            result.push_back(child->get_path());
+        }
+    }
     return result;
 }
 

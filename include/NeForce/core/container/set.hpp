@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Set 集合
- * @brief 基于红黑树的有序唯一键集合
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -511,7 +511,7 @@ template <typename Key, typename Alloc>
 set(std::initializer_list<Key>, Alloc) -> set<Key, less<Key>, Alloc>;
 #endif
 
-/** @} */ // Set
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_SET_HPP__

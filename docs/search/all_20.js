@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['优先队列_0',['优先队列',['../group___priority_queue.html',1,'']]]
+  ['位操作_0',['位操作',['../group___bit_manipulation.html',1,'']]]
 ];

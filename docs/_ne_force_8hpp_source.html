@@ -95,89 +95,103 @@ $(function(){initNavTree('_ne_force_8hpp_source.html','',''); });
 <a href="_ne_force_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NEFORCE_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NEFORCE_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="zlib__compress_8hpp.html">NeForce/compress/zlib_compress.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="algorithm_8hpp.html">NeForce/core/algorithm/algorithm.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ext__sort_8hpp.html">NeForce/core/algorithm/ext_sort.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="async_8hpp.html">NeForce/core/async/async.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="barrier_8hpp.html">NeForce/core/async/barrier.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="latch_8hpp.html">NeForce/core/async/latch.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="lock__free__queue_8hpp.html">NeForce/core/async/lock_free_queue.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;NeForce/core/async/generator.hpp&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="hazard__ptr_8hpp.html">NeForce/core/async/hazard_ptr.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="scoped__thread_8hpp.html">NeForce/core/async/scoped_thread.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="signals_8hpp.html">NeForce/core/async/signals.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;NeForce/core/async/thread_pool.hpp&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="virtual__thread_8hpp.html">NeForce/core/async/virtual_thread.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="timer_8hpp.html">NeForce/core/async/timer.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="bloom__filter_8hpp.html">NeForce/core/container/bloom_filter.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="bitmap_8hpp.html">NeForce/core/container/bitmap.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="bitset_8hpp.html">NeForce/core/container/bitset.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="list_8hpp.html">NeForce/core/container/list.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="map_8hpp.html">NeForce/core/container/map.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="multimap_8hpp.html">NeForce/core/container/multimap.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="multiset_8hpp.html">NeForce/core/container/multiset.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="container_2set_8hpp.html">NeForce/core/container/set.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__multimap_8hpp.html">NeForce/core/container/unordered_multimap.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__multiset_8hpp.html">NeForce/core/container/unordered_multiset.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__set_8hpp.html">NeForce/core/container/unordered_set.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;NeForce/core/encrypt/encrypt.hpp&quot;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="breakpoint_8hpp.html">NeForce/core/exception/breakpoint.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;<a class="code" href="env__builder_8hpp.html">NeForce/core/file/env/env_builder.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;<a class="code" href="env__parser_8hpp.html">NeForce/core/file/env/env_parser.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;<a class="code" href="file__watcher_8hpp.html">NeForce/core/file/file_watcher.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &quot;<a class="code" href="ini__builder_8hpp.html">NeForce/core/file/ini/ini_builder.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="ini__parser_8hpp.html">NeForce/core/file/ini/ini_parser.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="json__builder_8hpp.html">NeForce/core/file/json/json_builder.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;<a class="code" href="json__parser_8hpp.html">NeForce/core/file/json/json_parser.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &quot;<a class="code" href="temp__file_8hpp.html">NeForce/core/file/temp_file.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="toml__builder_8hpp.html">NeForce/core/file/toml/toml_builder.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="toml__parser_8hpp.html">NeForce/core/file/toml/toml_parser.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &quot;NeForce/core/file/yaml/yaml_builder.hpp&quot;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;NeForce/core/file/yaml/yaml_parser.hpp&quot;</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &quot;<a class="code" href="bind_8hpp.html">NeForce/core/functional/bind.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &quot;<a class="code" href="insert__iterator_8hpp.html">NeForce/core/iterator/insert_iterator.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &quot;NeForce/core/iterator/ranges.hpp&quot;</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#include &quot;NeForce/core/memory/endian.hpp&quot;</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#include &quot;<a class="code" href="trace__memory_8hpp.html">NeForce/core/memory/trace_memory.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#include &quot;NeForce/core/string/regex.hpp&quot;</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#include &quot;<a class="code" href="vsprintf_8hpp.html">NeForce/core/string/vsprintf.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &quot;NeForce/core/system/cmdline.hpp&quot;</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &quot;<a class="code" href="console_8hpp.html">NeForce/core/system/console.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#include &quot;NeForce/core/system/device/serial_port.hpp&quot;</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#include &quot;NeForce/core/system/device/storage_device.hpp&quot;</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#include &quot;<a class="code" href="process_8hpp.html">NeForce/core/system/process.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#include &quot;NeForce/core/system/signal.hpp&quot;</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#include &quot;<a class="code" href="sysinfo_8hpp.html">NeForce/core/system/sysinfo.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#include &quot;<a class="code" href="environment_8hpp.html">NeForce/core/system/environment.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#include &quot;<a class="code" href="click_8hpp.html">NeForce/core/time/click.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#include &quot;<a class="code" href="check__type_8hpp.html">NeForce/core/typeinfo/check_type.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#include &quot;<a class="code" href="any_8hpp.html">NeForce/core/utility/any.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#include &quot;NeForce/core/utility/expected.hpp&quot;</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#include &quot;<a class="code" href="variant_8hpp.html">NeForce/core/utility/variant.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#include &quot;NeForce/db/database_pool.hpp&quot;</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#include &quot;NeForce/db/mysql/mysql_connect.hpp&quot;</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#include &quot;NeForce/db/pgsql/pgsql_connect.hpp&quot;</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#include &quot;NeForce/db/redis/redis_connect.hpp&quot;</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#include &quot;NeForce/db/redis/redis_result.hpp&quot;</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#include &quot;NeForce/db/sql_builder.hpp&quot;</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#include &quot;NeForce/db/sqlite/sqlite_connect.hpp&quot;</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#include &quot;NeForce/logging/file_sink.hpp&quot;</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#include &quot;<a class="code" href="logger_8hpp.html">NeForce/logging/logger.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#include &quot;NeForce/network/http/http_client.hpp&quot;</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#include &quot;NeForce/network/http/http_server.hpp&quot;</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#include &quot;NeForce/network/http/http_server.hpp&quot;</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#include &quot;NeForce/network/socket/ssl_acceptor.hpp&quot;</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#include &quot;NeForce/network/socket/tcp_acceptor.hpp&quot;</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#include &quot;NeForce/network/socket/udp_socket.hpp&quot;</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#include &quot;NeForce/network/websocket.hpp&quot;</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#include &quot;<a class="code" href="plugin__manager_8hpp.html">NeForce/plugin/plugin_manager.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NEFORCE_HPP__</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="lz4__compress_8hpp.html">NeForce/compress/lz4_compress.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="zlib__compress_8hpp.html">NeForce/compress/zlib_compress.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="algorithm_8hpp.html">NeForce/core/algorithm/algorithm.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="ext__sort_8hpp.html">NeForce/core/algorithm/ext_sort.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="async_8hpp.html">NeForce/core/async/async.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="barrier_8hpp.html">NeForce/core/async/barrier.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="latch_8hpp.html">NeForce/core/async/latch.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="lock__free__queue_8hpp.html">NeForce/core/async/lock_free_queue.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;NeForce/core/async/generator.hpp&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="hazard__ptr_8hpp.html">NeForce/core/async/hazard_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="scoped__thread_8hpp.html">NeForce/core/async/scoped_thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="signals_8hpp.html">NeForce/core/async/signals.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="thread__pool_8hpp.html">NeForce/core/async/thread_pool.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="thread__tracker_8hpp.html">NeForce/core/async/thread_tracker.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="virtual__thread_8hpp.html">NeForce/core/async/virtual_thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="bloom__filter_8hpp.html">NeForce/core/container/bloom_filter.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="bitmap_8hpp.html">NeForce/core/container/bitmap.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="bitset_8hpp.html">NeForce/core/container/bitset.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="list_8hpp.html">NeForce/core/container/list.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="multimap_8hpp.html">NeForce/core/container/multimap.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="multiset_8hpp.html">NeForce/core/container/multiset.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="container_2set_8hpp.html">NeForce/core/container/set.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="ttl__cache_8hpp.html">NeForce/core/container/ttl_cache.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__multimap_8hpp.html">NeForce/core/container/unordered_multimap.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__multiset_8hpp.html">NeForce/core/container/unordered_multiset.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__set_8hpp.html">NeForce/core/container/unordered_set.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="aes256_8hpp.html">NeForce/core/encrypt/aes256.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;<a class="code" href="base64_8hpp.html">NeForce/core/encrypt/base64.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;<a class="code" href="md5_8hpp.html">NeForce/core/encrypt/md5.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;<a class="code" href="sha1_8hpp.html">NeForce/core/encrypt/sha1.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &quot;<a class="code" href="sha256_8hpp.html">NeForce/core/encrypt/sha256.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="xor_8hpp.html">NeForce/core/encrypt/xor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="breakpoint_8hpp.html">NeForce/core/exception/breakpoint.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;<a class="code" href="terminate_8hpp.html">NeForce/core/exception/terminate.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &quot;<a class="code" href="env__builder_8hpp.html">NeForce/core/file/env/env_builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="env__parser_8hpp.html">NeForce/core/file/env/env_parser.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="file__watcher_8hpp.html">NeForce/core/file/file_watcher.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &quot;<a class="code" href="filesystem_8hpp.html">NeForce/core/file/filesystem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="path__tree_8hpp.html">NeForce/core/file/path_tree.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &quot;<a class="code" href="ini__builder_8hpp.html">NeForce/core/file/ini/ini_builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &quot;<a class="code" href="ini__parser_8hpp.html">NeForce/core/file/ini/ini_parser.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &quot;<a class="code" href="json__builder_8hpp.html">NeForce/core/file/json/json_builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#include &quot;<a class="code" href="json__parser_8hpp.html">NeForce/core/file/json/json_parser.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#include &quot;<a class="code" href="temp__file_8hpp.html">NeForce/core/file/temp_file.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#include &quot;<a class="code" href="toml__builder_8hpp.html">NeForce/core/file/toml/toml_builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#include &quot;<a class="code" href="toml__parser_8hpp.html">NeForce/core/file/toml/toml_parser.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &quot;NeForce/core/file/yaml/yaml_builder.hpp&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &quot;NeForce/core/file/yaml/yaml_parser.hpp&quot;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#include &quot;<a class="code" href="bind_8hpp.html">NeForce/core/functional/bind.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#include &quot;<a class="code" href="insert__iterator_8hpp.html">NeForce/core/iterator/insert_iterator.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#include &quot;NeForce/core/iterator/ranges.hpp&quot;</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#include &quot;<a class="code" href="endian_8hpp.html">NeForce/core/memory/endian.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#include &quot;<a class="code" href="trace__memory_8hpp.html">NeForce/core/memory/trace_memory.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#include &quot;<a class="code" href="vsprintf_8hpp.html">NeForce/core/string/vsprintf.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#include &quot;NeForce/core/serialize/binary_serializer.hpp&quot;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#include &quot;NeForce/core/serialize/json_serializer.hpp&quot;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#include &quot;NeForce/core/system/cmdline.hpp&quot;</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#include &quot;<a class="code" href="console_8hpp.html">NeForce/core/system/console.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#include &quot;<a class="code" href="process_8hpp.html">NeForce/core/system/process.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#include &quot;<a class="code" href="share__memory_8hpp.html">NeForce/core/system/share_memory.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#include &quot;<a class="code" href="signal_8hpp.html">NeForce/core/system/signal.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#include &quot;<a class="code" href="sysinfo_8hpp.html">NeForce/core/system/sysinfo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#include &quot;<a class="code" href="environment_8hpp.html">NeForce/core/system/environment.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#include &quot;<a class="code" href="click_8hpp.html">NeForce/core/time/click.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#include &quot;<a class="code" href="check__type_8hpp.html">NeForce/core/typeinfo/check_type.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#include &quot;<a class="code" href="utility_2any_8hpp.html">NeForce/core/utility/any.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#include &quot;NeForce/core/utility/expected.hpp&quot;</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#include &quot;<a class="code" href="scope_8hpp.html">NeForce/core/utility/scope.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#include &quot;<a class="code" href="uuid_8hpp.html">NeForce/core/utility/uuid.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#include &quot;NeForce/db/database_pool.hpp&quot;</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#include &quot;NeForce/db/mysql/mysql_connect.hpp&quot;</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#include &quot;NeForce/db/pgsql/pgsql_connect.hpp&quot;</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#include &quot;NeForce/db/redis/redis_connect.hpp&quot;</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#include &quot;NeForce/db/redis/redis_result.hpp&quot;</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#include &quot;<a class="code" href="sql__builder_8hpp.html">NeForce/db/sql_builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#include &quot;NeForce/db/sqlite/sqlite_connect.hpp&quot;</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#include &quot;NeForce/logging/file_sink.hpp&quot;</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#include &quot;<a class="code" href="logger_8hpp.html">NeForce/logging/logger.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#include &quot;NeForce/network/http/http_client.hpp&quot;</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#include &quot;NeForce/network/http/http_server.hpp&quot;</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#include &quot;NeForce/network/http/http_server.hpp&quot;</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#include &quot;NeForce/network/socket/icmp_socket.hpp&quot;</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#include &quot;NeForce/network/socket/smtp_socket.hpp&quot;</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#include &quot;NeForce/network/socket/ssl_acceptor.hpp&quot;</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#include &quot;NeForce/network/socket/udp_socket.hpp&quot;</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#include &quot;NeForce/network/arp.hpp&quot;</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#include &quot;NeForce/network/ftp_server.hpp&quot;</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#include &quot;NeForce/network/ftp_client.hpp&quot;</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#include &quot;NeForce/network/websocket.hpp&quot;</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#include &quot;<a class="code" href="plugin__manager_8hpp.html">NeForce/plugin/plugin_manager.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NEFORCE_HPP__</span></div>
+<div class="ttc" id="aaes256_8hpp_html"><div class="ttname"><a href="aes256_8hpp.html">aes256.hpp</a></div><div class="ttdoc">AES-256加密算法实现</div></div>
 <div class="ttc" id="aalgorithm_8hpp_html"><div class="ttname"><a href="algorithm_8hpp.html">algorithm.hpp</a></div><div class="ttdoc">常用算法集</div></div>
-<div class="ttc" id="aany_8hpp_html"><div class="ttname"><a href="any_8hpp.html">any.hpp</a></div><div class="ttdoc">任意类</div></div>
 <div class="ttc" id="aasync_8hpp_html"><div class="ttname"><a href="async_8hpp.html">async.hpp</a></div><div class="ttdoc">异步执行函数</div></div>
 <div class="ttc" id="abarrier_8hpp_html"><div class="ttname"><a href="barrier_8hpp.html">barrier.hpp</a></div><div class="ttdoc">屏障实现</div></div>
+<div class="ttc" id="abase64_8hpp_html"><div class="ttname"><a href="base64_8hpp.html">base64.hpp</a></div><div class="ttdoc">Base64编解码实现</div></div>
 <div class="ttc" id="abind_8hpp_html"><div class="ttname"><a href="bind_8hpp.html">bind.hpp</a></div><div class="ttdoc">函数绑定工具</div></div>
 <div class="ttc" id="abitmap_8hpp_html"><div class="ttname"><a href="bitmap_8hpp.html">bitmap.hpp</a></div><div class="ttdoc">位图容器</div></div>
 <div class="ttc" id="abitset_8hpp_html"><div class="ttname"><a href="bitset_8hpp.html">bitset.hpp</a></div><div class="ttdoc">固定大小位集容器</div></div>
@@ -187,11 +201,13 @@ $(function(){initNavTree('_ne_force_8hpp_source.html','',''); });
 <div class="ttc" id="aclick_8hpp_html"><div class="ttname"><a href="click_8hpp.html">click.hpp</a></div><div class="ttdoc">计时器工具</div></div>
 <div class="ttc" id="aconsole_8hpp_html"><div class="ttname"><a href="console_8hpp.html">console.hpp</a></div><div class="ttdoc">控制台输入输出工具</div></div>
 <div class="ttc" id="acontainer_2set_8hpp_html"><div class="ttname"><a href="container_2set_8hpp.html">set.hpp</a></div><div class="ttdoc">集合容器</div></div>
+<div class="ttc" id="aendian_8hpp_html"><div class="ttname"><a href="endian_8hpp.html">endian.hpp</a></div><div class="ttdoc">端序转换工具</div></div>
 <div class="ttc" id="aenv__builder_8hpp_html"><div class="ttname"><a href="env__builder_8hpp.html">env_builder.hpp</a></div><div class="ttdoc">env配置格式构建器</div></div>
 <div class="ttc" id="aenv__parser_8hpp_html"><div class="ttname"><a href="env__parser_8hpp.html">env_parser.hpp</a></div><div class="ttdoc">env配置格式解析器</div></div>
 <div class="ttc" id="aenvironment_8hpp_html"><div class="ttname"><a href="environment_8hpp.html">environment.hpp</a></div><div class="ttdoc">环境变量管理工具</div></div>
 <div class="ttc" id="aext__sort_8hpp_html"><div class="ttname"><a href="ext__sort_8hpp.html">ext_sort.hpp</a></div><div class="ttdoc">扩展排序算法集合</div></div>
 <div class="ttc" id="afile__watcher_8hpp_html"><div class="ttname"><a href="file__watcher_8hpp.html">file_watcher.hpp</a></div><div class="ttdoc">文件系统监视器</div></div>
+<div class="ttc" id="afilesystem_8hpp_html"><div class="ttname"><a href="filesystem_8hpp.html">filesystem.hpp</a></div><div class="ttdoc">文件系统操作工具类</div></div>
 <div class="ttc" id="ahazard__ptr_8hpp_html"><div class="ttname"><a href="hazard__ptr_8hpp.html">hazard_ptr.hpp</a></div><div class="ttdoc">无锁编程中的险象指针实现</div></div>
 <div class="ttc" id="aini__builder_8hpp_html"><div class="ttname"><a href="ini__builder_8hpp.html">ini_builder.hpp</a></div><div class="ttdoc">ini配置格式构建器</div></div>
 <div class="ttc" id="aini__parser_8hpp_html"><div class="ttname"><a href="ini__parser_8hpp.html">ini_parser.hpp</a></div><div class="ttdoc">ini配置解析器</div></div>
@@ -202,26 +218,38 @@ $(function(){initNavTree('_ne_force_8hpp_source.html','',''); });
 <div class="ttc" id="alist_8hpp_html"><div class="ttname"><a href="list_8hpp.html">list.hpp</a></div><div class="ttdoc">双向链表容器</div></div>
 <div class="ttc" id="alock__free__queue_8hpp_html"><div class="ttname"><a href="lock__free__queue_8hpp.html">lock_free_queue.hpp</a></div><div class="ttdoc">无锁队列</div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div><div class="ttdoc">日志记录器</div></div>
-<div class="ttc" id="amap_8hpp_html"><div class="ttname"><a href="map_8hpp.html">map.hpp</a></div><div class="ttdoc">映射容器</div></div>
+<div class="ttc" id="alz4__compress_8hpp_html"><div class="ttname"><a href="lz4__compress_8hpp.html">lz4_compress.hpp</a></div><div class="ttdoc">LZ4压缩解压缩工具</div></div>
+<div class="ttc" id="amd5_8hpp_html"><div class="ttname"><a href="md5_8hpp.html">md5.hpp</a></div><div class="ttdoc">MD5哈希算法实现</div></div>
 <div class="ttc" id="amultimap_8hpp_html"><div class="ttname"><a href="multimap_8hpp.html">multimap.hpp</a></div><div class="ttdoc">多重映射容器</div></div>
 <div class="ttc" id="amultiset_8hpp_html"><div class="ttname"><a href="multiset_8hpp.html">multiset.hpp</a></div><div class="ttdoc">多重集合容器</div></div>
+<div class="ttc" id="apath__tree_8hpp_html"><div class="ttname"><a href="path__tree_8hpp.html">path_tree.hpp</a></div><div class="ttdoc">文件路径树类</div></div>
 <div class="ttc" id="aplugin__manager_8hpp_html"><div class="ttname"><a href="plugin__manager_8hpp.html">plugin_manager.hpp</a></div><div class="ttdoc">插件管理器</div></div>
 <div class="ttc" id="aprocess_8hpp_html"><div class="ttname"><a href="process_8hpp.html">process.hpp</a></div><div class="ttdoc">进程管理工具</div></div>
+<div class="ttc" id="ascope_8hpp_html"><div class="ttname"><a href="scope_8hpp.html">scope.hpp</a></div><div class="ttdoc">RAII作用域守卫实现</div></div>
 <div class="ttc" id="ascoped__thread_8hpp_html"><div class="ttname"><a href="scoped__thread_8hpp.html">scoped_thread.hpp</a></div><div class="ttdoc">作用域线程</div></div>
+<div class="ttc" id="asha1_8hpp_html"><div class="ttname"><a href="sha1_8hpp.html">sha1.hpp</a></div><div class="ttdoc">SHA-1哈希算法实现</div></div>
+<div class="ttc" id="asha256_8hpp_html"><div class="ttname"><a href="sha256_8hpp.html">sha256.hpp</a></div><div class="ttdoc">SHA-256哈希算法实现</div></div>
+<div class="ttc" id="ashare__memory_8hpp_html"><div class="ttname"><a href="share__memory_8hpp.html">share_memory.hpp</a></div><div class="ttdoc">共享内存管理工具</div></div>
+<div class="ttc" id="asignal_8hpp_html"><div class="ttname"><a href="signal_8hpp.html">signal.hpp</a></div><div class="ttdoc">跨平台信号处理系统</div></div>
 <div class="ttc" id="asignals_8hpp_html"><div class="ttname"><a href="signals_8hpp.html">signals.hpp</a></div><div class="ttdoc">信号槽机制</div></div>
+<div class="ttc" id="asql__builder_8hpp_html"><div class="ttname"><a href="sql__builder_8hpp.html">sql_builder.hpp</a></div><div class="ttdoc">SQL语句构建器</div></div>
 <div class="ttc" id="asysinfo_8hpp_html"><div class="ttname"><a href="sysinfo_8hpp.html">sysinfo.hpp</a></div><div class="ttdoc">系统信息查询工具</div></div>
 <div class="ttc" id="atemp__file_8hpp_html"><div class="ttname"><a href="temp__file_8hpp.html">temp_file.hpp</a></div><div class="ttdoc">临时文件管理类</div></div>
-<div class="ttc" id="atimer_8hpp_html"><div class="ttname"><a href="timer_8hpp.html">timer.hpp</a></div><div class="ttdoc">异步定时器</div></div>
+<div class="ttc" id="aterminate_8hpp_html"><div class="ttname"><a href="terminate_8hpp.html">terminate.hpp</a></div><div class="ttdoc">程序终止处理</div></div>
+<div class="ttc" id="athread__pool_8hpp_html"><div class="ttname"><a href="thread__pool_8hpp.html">thread_pool.hpp</a></div><div class="ttdoc">线程池实现</div></div>
+<div class="ttc" id="athread__tracker_8hpp_html"><div class="ttname"><a href="thread__tracker_8hpp.html">thread_tracker.hpp</a></div><div class="ttdoc">线程跟踪器</div></div>
 <div class="ttc" id="atoml__builder_8hpp_html"><div class="ttname"><a href="toml__builder_8hpp.html">toml_builder.hpp</a></div><div class="ttdoc">toml配置格式构建器</div></div>
 <div class="ttc" id="atoml__parser_8hpp_html"><div class="ttname"><a href="toml__parser_8hpp.html">toml_parser.hpp</a></div><div class="ttdoc">toml配置文件解析器</div></div>
 <div class="ttc" id="atrace__memory_8hpp_html"><div class="ttname"><a href="trace__memory_8hpp.html">trace_memory.hpp</a></div><div class="ttdoc">内存追踪分配器</div></div>
-<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+<div class="ttc" id="attl__cache_8hpp_html"><div class="ttname"><a href="ttl__cache_8hpp.html">ttl_cache.hpp</a></div><div class="ttdoc">TTL缓存实现</div></div>
 <div class="ttc" id="aunordered__multimap_8hpp_html"><div class="ttname"><a href="unordered__multimap_8hpp.html">unordered_multimap.hpp</a></div><div class="ttdoc">无序多重映射容器</div></div>
 <div class="ttc" id="aunordered__multiset_8hpp_html"><div class="ttname"><a href="unordered__multiset_8hpp.html">unordered_multiset.hpp</a></div><div class="ttdoc">无序多重集合容器</div></div>
 <div class="ttc" id="aunordered__set_8hpp_html"><div class="ttname"><a href="unordered__set_8hpp.html">unordered_set.hpp</a></div><div class="ttdoc">无序集合容器</div></div>
-<div class="ttc" id="avariant_8hpp_html"><div class="ttname"><a href="variant_8hpp.html">variant.hpp</a></div><div class="ttdoc">变体类型实现</div></div>
+<div class="ttc" id="autility_2any_8hpp_html"><div class="ttname"><a href="utility_2any_8hpp.html">any.hpp</a></div><div class="ttdoc">任意类</div></div>
+<div class="ttc" id="auuid_8hpp_html"><div class="ttname"><a href="uuid_8hpp.html">uuid.hpp</a></div><div class="ttdoc">UUID实现</div></div>
 <div class="ttc" id="avirtual__thread_8hpp_html"><div class="ttname"><a href="virtual__thread_8hpp.html">virtual_thread.hpp</a></div><div class="ttdoc">虚拟线程实现</div></div>
 <div class="ttc" id="avsprintf_8hpp_html"><div class="ttname"><a href="vsprintf_8hpp.html">vsprintf.hpp</a></div><div class="ttdoc">兼容C格式化函数</div></div>
+<div class="ttc" id="axor_8hpp_html"><div class="ttname"><a href="xor_8hpp.html">xor.hpp</a></div><div class="ttdoc">XOR异或加密实现</div></div>
 <div class="ttc" id="azlib__compress_8hpp_html"><div class="ttname"><a href="zlib__compress_8hpp.html">zlib_compress.hpp</a></div><div class="ttdoc">ZLib压缩解压缩工具</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -97,77 +97,55 @@ $(function(){initNavTree('pgsql__connect_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifdef NEFORCE_SUPPORT_POSTGRESQL</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;NeForce/db/db_interface.hpp&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;libpq-fe.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span>NEFORCE_API pgsql_connect final : <span class="keyword">public</span> idb_tb_connect {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    db_config config_{};</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">string</span> last_error_{};</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">string</span> charset_ = <span class="stringliteral">&quot;utf8&quot;</span>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    clock_type last_alive_ = 0;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> last_errno_ = 0;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    ::PGconn* conn_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> clear_error() noexcept;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> set_error(<span class="keywordtype">string</span> error, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> errno_val = 0);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> update_error();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">string</span> build_conn_string(</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        const <span class="keywordtype">string</span>&amp; user, const <span class="keywordtype">string</span>&amp; password,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        const <span class="keywordtype">string</span>&amp; dbname, const <span class="keywordtype">string</span>&amp; host,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> port) const;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    ::PGconn* link_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">mutable</span> <span class="keywordtype">string</span> last_error_{};</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> last_errno_ = 0;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    pgsql_connect() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    ~pgsql_connect()<span class="keyword"> override </span>{ close(); }</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    pgsql_connect(<span class="keyword">const</span> pgsql_connect&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    pgsql_connect&amp; operator =(<span class="keyword">const</span> pgsql_connect&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> connect(<span class="keyword">const</span> db_config&amp; config) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">bool</span> reconnect(<span class="keyword">const</span> db_config&amp; config) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> close() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>public:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    pgsql_connect() : last_alive_(std::clock()) {}</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    ~pgsql_connect()<span class="keyword"> override </span>{ close(); }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    pgsql_connect(<span class="keyword">const</span> pgsql_connect&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    pgsql_connect&amp; operator =(<span class="keyword">const</span> pgsql_connect&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> connect_to(</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; user, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; password,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; dbname, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ip,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> port, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; character_set) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> connect_to(<span class="keyword">const</span> db_config&amp; config) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> set_character_set(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; encoding) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> get_character_set() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> get_error()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> last_error_.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>(); }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> get_errno()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> last_errno_; }</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">bool</span> update(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sql) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">bool</span> set_character_set(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; encoding) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> get_character_set() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> get_error()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> last_error_.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>(); }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> get_errno()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> last_errno_; }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">bool</span> update(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sql) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    unique_ptr&lt;idb_tb_result&gt; query(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sql) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    unique_ptr&lt;idb_prepared_statement&gt; prepare_statement(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sql) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> connected() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_valid()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> connected(); }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">class </span>NEFORCE_API pgsql_factory final : <span class="keyword">public</span> idb_factory {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">explicit</span> pgsql_factory(db_config config) : idb_factory(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(config)) {}</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    ~pgsql_factory() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> connected() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_valid()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> connected(); }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> close() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    idb_connect* create_connect() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    idb_result* create_result(<span class="keywordtype">void</span>* native_result) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> refresh_alive()<span class="keyword"> override </span>{ last_alive_ = std::clock(); }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    NEFORCE_NODISCARD clock_type get_alive()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> last_alive_; }</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">bool</span> reset_connect(<span class="keyword">const</span> db_config&amp; config) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    unique_ptr&lt;idb_tb_result&gt; query(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sql) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    unique_ptr&lt;idb_prepared_statement&gt; prepare_statement(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sql) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">class </span>NEFORCE_API pgsql_factory final : <span class="keyword">public</span> idb_factory {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">explicit</span> pgsql_factory(db_config config) : idb_factory(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(config)) {}</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    ~pgsql_factory() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    idb_connect* create_connect() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    idb_result* create_result(<span class="keywordtype">void</span>* native_result) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>};</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_PGSQL_CONNECT_HPP__</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_PGSQL_CONNECT_HPP__</span></div>
 <div class="ttc" id="aclassbasic__string_html_a123c35595a7addcd463a2ca11eba7a32"><div class="ttname"><a href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">basic_string::view</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 view_type view() const noexcept</div><div class="ttdoc">获取字符串视图</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l02140">basic_string.hpp:2140</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

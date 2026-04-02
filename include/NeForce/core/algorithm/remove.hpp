@@ -14,6 +14,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup RemoveAlgorithms 删除算法
  * @brief 删除算法的实现
  * @{
@@ -180,6 +186,8 @@ constexpr size_t erase_if(Container& cont, Predicate pred) {
 }
 
 /** @} */ // RemoveAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_REMOVE_HPP__

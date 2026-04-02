@@ -24,7 +24,7 @@ var classtoml__value =
     [ "is_integer", "classtoml__value.html#a17680300e827a8b928380bd3124afb34", null ],
     [ "is_string", "classtoml__value.html#acfdd706261d58f8ed78539591694213e", null ],
     [ "is_table", "classtoml__value.html#afb8721c1ec571f356373669515b1ad72", null ],
-    [ "to_document", "group___toml_config.html#gac00f20c5513da332d15925adf8c757d8", null ],
-    [ "to_string", "group___toml_config.html#ga9c76cf3e46561d028af29468ee8fdd14", null ],
+    [ "to_document", "classtoml__value.html#a65273258447afd3f04b24e8645f4786e", null ],
+    [ "to_string", "classtoml__value.html#ac355f4d55e3df1ccf6be354ad2f6f663", null ],
     [ "type", "classtoml__value.html#a2a95645e1f52b6c6a92b014caf1a9f7a", null ]
 ];

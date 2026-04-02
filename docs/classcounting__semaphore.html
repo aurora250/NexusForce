@@ -132,10 +132,11 @@ class counting_semaphore&lt; LeastMaxValue &gt;</div><p>计数信号量类模板
   </table>
   </dd>
 </dl>
-<p>计数信号量是一个轻量级的同步原语，用于控制对共享资源的访问。</p>
-<p>LeastMaxValue指定了信号量计数器的最小最大值，实际值可以小于此值。 这个模板参数主要用于静态检查，确保信号量的合理使用。 </p>
+<p>计数信号量是一个轻量级的同步原语，用于控制对共享资源的访问。 基于原子操作和平台无关的等待机制实现，适用于用户态同步场景。</p>
+<p>LeastMaxValue指定了信号量计数器的最小最大值，实际值可以小于此值。 这个模板参数主要用于静态检查，确保信号量的合理使用。</p>
+<dl class="section note"><dt>注解</dt><dd>此信号量不支持递归获取 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00031">31</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00038">38</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a6af22fbe02ff8b7fcb34863f2687148e" name="a6af22fbe02ff8b7fcb34863f2687148e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6af22fbe02ff8b7fcb34863f2687148e">&#9670;&#160;</a></span>counting_semaphore()</h2>
@@ -169,9 +170,9 @@ template&lt;<a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc23
   </table>
   </dd>
 </dl>
-<p>创建计数信号量并设置初始计数值。 </p>
+<p>创建计数信号量并设置初始计数值。 </p><dl class="section note"><dt>注解</dt><dd>desired不能为负数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00060">60</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00068">68</a> 行定义.</p>
 
 </div>
 </div>
@@ -204,7 +205,7 @@ template&lt;<a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc23
 <p>获取信号量 </p>
 <p>阻塞当前线程，直到成功获取信号量。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00096">96</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00104">104</a> 行定义.</p>
 
 </div>
 </div>
@@ -236,7 +237,7 @@ template&lt;<a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc23
 <p>获取信号量的最大可能值 </p>
 <dl class="section return"><dt>返回</dt><dd>信号量的最大计数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00074">74</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00082">82</a> 行定义.</p>
 
 </div>
 </div>
@@ -274,7 +275,7 @@ template&lt;<a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc23
 </dl>
 <p>增加信号量的计数值，并通知等待的线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00084">84</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00092">92</a> 行定义.</p>
 
 </div>
 </div>
@@ -307,7 +308,7 @@ template&lt;<a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc23
 <dl class="section return"><dt>返回</dt><dd>是否成功获取</dd></dl>
 <p>非阻塞地尝试获取信号量。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00109">109</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00117">117</a> 行定义.</p>
 
 </div>
 </div>
@@ -353,9 +354,9 @@ template&lt;typename Rep, typename Period&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前成功获取</dd></dl>
-<p>阻塞当前线程，直到成功获取信号量或超时。 </p>
+<p>阻塞当前线程，直到成功获取信号量或超时。 超时时间从调用开始计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00126">126</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00135">135</a> 行定义.</p>
 
 </div>
 </div>
@@ -403,7 +404,7 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前成功获取</dd></dl>
 <p>阻塞当前线程，直到成功获取信号量或到达指定时间点。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00143">143</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00152">152</a> 行定义.</p>
 
 </div>
 </div>

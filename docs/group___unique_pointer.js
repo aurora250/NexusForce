@@ -3,7 +3,7 @@ var group___unique_pointer =
     [ "unique_ptr&lt; T, Deleter &gt;", "classunique__ptr.html", [
       [ "deleter_type", "classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204", null ],
       [ "element_type", "classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0", null ],
-      [ "pointer", "classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d", null ],
+      [ "pointer", "classunique__ptr.html#aeac73084354db39d713b4bc1c27b52c0", null ],
       [ "unique_ptr", "classunique__ptr.html#a0897adc49645599a28665301f66a75fe", null ],
       [ "unique_ptr", "classunique__ptr.html#a37d8df72732fc43a9ae2b12a33d71cd5", null ],
       [ "unique_ptr", "classunique__ptr.html#a0b73b217dba624cc177e31a92a67abde", null ],
@@ -30,7 +30,7 @@ var group___unique_pointer =
     [ "unique_ptr&lt; T[], Deleter &gt;", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html", [
       [ "deleter_type", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1", null ],
       [ "element_type", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8ace3789d9c673b8141ac033485fca51", null ],
-      [ "pointer", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0", null ],
+      [ "pointer", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a19cef8dabae40630596ba78bb5587d7c", null ],
       [ "unique_ptr", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071", null ],
       [ "unique_ptr", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8e4e3f9349fad379cd3c58b8cf0c53dc", null ],
       [ "unique_ptr", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a007644845a7ac5df7d978b2d490b86b4", null ],
@@ -55,9 +55,6 @@ var group___unique_pointer =
       [ "reset", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a3b9e3e5a15f0865eb7d104f9498d052c", null ],
       [ "reset", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9e16512f0f1ee0f05ccebe9fd4199d15", null ],
       [ "swap", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8a09e0389ccad830e6eb29f8b5333b57", null ]
-    ] ],
-    [ "hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;", "structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html", [
-      [ "operator()", "structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html#ab39395368c801c244cce1a2476a10653", null ]
     ] ],
     [ "const_pointer_cast", "group___unique_pointer.html#ga8236ff854917f0a44e679af28ba98128", null ],
     [ "const_pointer_cast", "group___unique_pointer.html#gaa1882c39d000059af9a4806b14ee003c", null ],

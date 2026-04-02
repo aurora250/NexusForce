@@ -1,0 +1,2316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sql_builder类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classsql__builder.html','','classsql__builder-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sql_builder类 参考<div class="ingroups"><a class="el" href="group___s_q_l.html">SQL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>SQL语句构建器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:select_5Fdata" id="r_select_5Fdata"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsql__builder_1_1select__data.html">select_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SELECT语句的数据结构  <a href="structsql__builder_1_1select__data.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:insert_5Fdata" id="r_insert_5Fdata"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsql__builder_1_1insert__data.html">insert_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">INSERT语句的数据结构  <a href="structsql__builder_1_1insert__data.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:update_5Fdata" id="r_update_5Fdata"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsql__builder_1_1update__data.html">update_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UPDATE语句的数据结构  <a href="structsql__builder_1_1update__data.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a8b0f0283b7cee23f2be15789e114c9bc" id="r_a8b0f0283b7cee23f2be15789e114c9bc"><td class="memItemLeft"><a id="a8b0f0283b7cee23f2be15789e114c9bc" name="a8b0f0283b7cee23f2be15789e114c9bc"></a>
+&#160;</td><td class="memItemRight"><b>sql_builder</b> ()=default</td></tr>
+<tr class="memdesc:a8b0f0283b7cee23f2be15789e114c9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a3192c5cdeca6b7e4f1a0ef3582b75bb1" id="r_a3192c5cdeca6b7e4f1a0ef3582b75bb1"><td class="memItemLeft"><a id="a3192c5cdeca6b7e4f1a0ef3582b75bb1" name="a3192c5cdeca6b7e4f1a0ef3582b75bb1"></a>
+&#160;</td><td class="memItemRight"><b>~sql_builder</b> ()=default</td></tr>
+<tr class="memdesc:a3192c5cdeca6b7e4f1a0ef3582b75bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:adf52dc62517cacf5b0be7795a16f6800" id="r_adf52dc62517cacf5b0be7795a16f6800"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adf52dc62517cacf5b0be7795a16f6800">sql_builder</a> (const <a class="el" href="classsql__builder.html">sql_builder</a> &amp;other)</td></tr>
+<tr class="memdesc:adf52dc62517cacf5b0be7795a16f6800"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:a35ebabe264b20847e227eae79afa90c3" id="r_a35ebabe264b20847e227eae79afa90c3"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a35ebabe264b20847e227eae79afa90c3">operator=</a> (const <a class="el" href="classsql__builder.html">sql_builder</a> &amp;other)</td></tr>
+<tr class="memdesc:a35ebabe264b20847e227eae79afa90c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a9cc08500a5a461c52306582c98e57f40" id="r_a9cc08500a5a461c52306582c98e57f40"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9cc08500a5a461c52306582c98e57f40">select</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; fields)</td></tr>
+<tr class="memdesc:a9cc08500a5a461c52306582c98e57f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">列表设置SELECT字段  <br /></td></tr>
+<tr class="memitem:a5ca9bd523d8a957506c68ed188e7ff71" id="r_a5ca9bd523d8a957506c68ed188e7ff71"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5ca9bd523d8a957506c68ed188e7ff71">select</a> (std::initializer_list&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; fields)</td></tr>
+<tr class="memdesc:a5ca9bd523d8a957506c68ed188e7ff71"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表设置SELECT字段  <br /></td></tr>
+<tr class="memitem:a997006310fc9b4843417afe02ab7e142" id="r_a997006310fc9b4843417afe02ab7e142"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a997006310fc9b4843417afe02ab7e142">select</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a997006310fc9b4843417afe02ab7e142"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加SELECT字段  <br /></td></tr>
+<tr class="memitem:a62a5bd7054ec802d96df24bf55ddea49" id="r_a62a5bd7054ec802d96df24bf55ddea49"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a62a5bd7054ec802d96df24bf55ddea49">select_all</a> () noexcept</td></tr>
+<tr class="memdesc:a62a5bd7054ec802d96df24bf55ddea49"><td class="mdescLeft">&#160;</td><td class="mdescRight">选择所有字段（SELECT *）  <br /></td></tr>
+<tr class="memitem:a7cce030bf100a184321a334bed2ff4c8" id="r_a7cce030bf100a184321a334bed2ff4c8"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7cce030bf100a184321a334bed2ff4c8">distinct</a> ()</td></tr>
+<tr class="memdesc:a7cce030bf100a184321a334bed2ff4c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加DISTINCT关键字  <br /></td></tr>
+<tr class="memitem:a38e875449e1a80698c9ccac7e22b7c4b" id="r_a38e875449e1a80698c9ccac7e22b7c4b"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a38e875449e1a80698c9ccac7e22b7c4b">from</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>) noexcept</td></tr>
+<tr class="memdesc:a38e875449e1a80698c9ccac7e22b7c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置主表  <br /></td></tr>
+<tr class="memitem:a5850000292544af9a81af5eb5e063423" id="r_a5850000292544af9a81af5eb5e063423"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5850000292544af9a81af5eb5e063423">from</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias) noexcept</td></tr>
+<tr class="memdesc:a5850000292544af9a81af5eb5e063423"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置主表并指定别名  <br /></td></tr>
+<tr class="memitem:a5f08709ea5072c07a2509ceb2d1b6af5" id="r_a5f08709ea5072c07a2509ceb2d1b6af5"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5f08709ea5072c07a2509ceb2d1b6af5">join</a> (<a class="el" href="group___s_q_l.html#gaf35aeadb60139f2c65a19c4e8d61ec72">sql_join</a> <a class="el" href="#a1b7e4c48fce78b1d8960187c21661a5f">type</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> on_condition)</td></tr>
+<tr class="memdesc:a5f08709ea5072c07a2509ceb2d1b6af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加JOIN子句  <br /></td></tr>
+<tr class="memitem:ad1c26fcae54506102ac0c143a21785e3" id="r_ad1c26fcae54506102ac0c143a21785e3"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad1c26fcae54506102ac0c143a21785e3">join</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> on_condition)</td></tr>
+<tr class="memdesc:ad1c26fcae54506102ac0c143a21785e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加INNER JOIN子句  <br /></td></tr>
+<tr class="memitem:a286a2826b81b3f0b3e26813dea254947" id="r_a286a2826b81b3f0b3e26813dea254947"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a286a2826b81b3f0b3e26813dea254947">left_join</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> on_condition)</td></tr>
+<tr class="memdesc:a286a2826b81b3f0b3e26813dea254947"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加LEFT JOIN子句  <br /></td></tr>
+<tr class="memitem:a9d0ea46b0e7cc12516d8838edb80a2f7" id="r_a9d0ea46b0e7cc12516d8838edb80a2f7"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9d0ea46b0e7cc12516d8838edb80a2f7">right_join</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> on_condition)</td></tr>
+<tr class="memdesc:a9d0ea46b0e7cc12516d8838edb80a2f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加RIGHT JOIN子句  <br /></td></tr>
+<tr class="memitem:a172f93bf3cbdf9b5a98e2bb60e379b97" id="r_a172f93bf3cbdf9b5a98e2bb60e379b97"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a172f93bf3cbdf9b5a98e2bb60e379b97">inner_join</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> on_condition)</td></tr>
+<tr class="memdesc:a172f93bf3cbdf9b5a98e2bb60e379b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加INNER JOIN子句  <br /></td></tr>
+<tr class="memitem:aa89b2d7118a363f391127f27565eff1a" id="r_aa89b2d7118a363f391127f27565eff1a"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa89b2d7118a363f391127f27565eff1a">full_join</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> on_condition)</td></tr>
+<tr class="memdesc:aa89b2d7118a363f391127f27565eff1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加FULL JOIN子句  <br /></td></tr>
+<tr class="memitem:a8144ccb671db9f7d32e00866fde722e7" id="r_a8144ccb671db9f7d32e00866fde722e7"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8144ccb671db9f7d32e00866fde722e7">where</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> condition)</td></tr>
+<tr class="memdesc:a8144ccb671db9f7d32e00866fde722e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加WHERE条件  <br /></td></tr>
+<tr class="memitem:a9e4d6f43ecda4cf778acb4c02fd44a14" id="r_a9e4d6f43ecda4cf778acb4c02fd44a14"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9e4d6f43ecda4cf778acb4c02fd44a14">where_eq</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a9e4d6f43ecda4cf778acb4c02fd44a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加相等条件  <br /></td></tr>
+<tr class="memitem:abd5ca82b3b933339840f25a085da8f4d" id="r_abd5ca82b3b933339840f25a085da8f4d"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abd5ca82b3b933339840f25a085da8f4d">where_ne</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:abd5ca82b3b933339840f25a085da8f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加不等条件  <br /></td></tr>
+<tr class="memitem:a11271996cbef1448650bc4825409dc4c" id="r_a11271996cbef1448650bc4825409dc4c"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a11271996cbef1448650bc4825409dc4c">where_gt</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a11271996cbef1448650bc4825409dc4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加大于条件  <br /></td></tr>
+<tr class="memitem:a87d5ca4743c6162776f90baa294bf5e9" id="r_a87d5ca4743c6162776f90baa294bf5e9"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a87d5ca4743c6162776f90baa294bf5e9">where_ge</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a87d5ca4743c6162776f90baa294bf5e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加大于等于条件  <br /></td></tr>
+<tr class="memitem:a67a5a5014af4be97d7551628cd5252c2" id="r_a67a5a5014af4be97d7551628cd5252c2"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a67a5a5014af4be97d7551628cd5252c2">where_lt</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a67a5a5014af4be97d7551628cd5252c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加小于条件  <br /></td></tr>
+<tr class="memitem:a95466c021652b64fad07c3343b0b4108" id="r_a95466c021652b64fad07c3343b0b4108"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a95466c021652b64fad07c3343b0b4108">where_le</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a95466c021652b64fad07c3343b0b4108"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加小于等于条件  <br /></td></tr>
+<tr class="memitem:ab95dcbd5a8821557b0ab4cd6fa44cac4" id="r_ab95dcbd5a8821557b0ab4cd6fa44cac4"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab95dcbd5a8821557b0ab4cd6fa44cac4">where_like</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> pattern)</td></tr>
+<tr class="memdesc:ab95dcbd5a8821557b0ab4cd6fa44cac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加LIKE条件  <br /></td></tr>
+<tr class="memitem:a92286bf4132951a3a6e07e9a76f0d345" id="r_a92286bf4132951a3a6e07e9a76f0d345"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a92286bf4132951a3a6e07e9a76f0d345">where_not_like</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> pattern)</td></tr>
+<tr class="memdesc:a92286bf4132951a3a6e07e9a76f0d345"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加NOT LIKE条件  <br /></td></tr>
+<tr class="memitem:a4d23f39317ebe20a68d880a5abae5ce8" id="r_a4d23f39317ebe20a68d880a5abae5ce8"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4d23f39317ebe20a68d880a5abae5ce8">where_in</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; <a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values</a>)</td></tr>
+<tr class="memdesc:a4d23f39317ebe20a68d880a5abae5ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加IN条件  <br /></td></tr>
+<tr class="memitem:a56213bebc963550487828c8fa7b47cb7" id="r_a56213bebc963550487828c8fa7b47cb7"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a56213bebc963550487828c8fa7b47cb7">where_not_in</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; <a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values</a>)</td></tr>
+<tr class="memdesc:a56213bebc963550487828c8fa7b47cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加NOT IN条件  <br /></td></tr>
+<tr class="memitem:ad1934416aa7f6fd466b3a4c25969f2f1" id="r_ad1934416aa7f6fd466b3a4c25969f2f1"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad1934416aa7f6fd466b3a4c25969f2f1">where_between</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> start, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>)</td></tr>
+<tr class="memdesc:ad1934416aa7f6fd466b3a4c25969f2f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加BETWEEN条件  <br /></td></tr>
+<tr class="memitem:ae69c1ea92f9bf39ceb52f8bd238d537d" id="r_ae69c1ea92f9bf39ceb52f8bd238d537d"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae69c1ea92f9bf39ceb52f8bd238d537d">where_not_between</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> start, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>)</td></tr>
+<tr class="memdesc:ae69c1ea92f9bf39ceb52f8bd238d537d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加NOT BETWEEN条件  <br /></td></tr>
+<tr class="memitem:aaa244cda7c7171f16fce3d592566729b" id="r_aaa244cda7c7171f16fce3d592566729b"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaa244cda7c7171f16fce3d592566729b">where_is_null</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:aaa244cda7c7171f16fce3d592566729b"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加IS NULL条件  <br /></td></tr>
+<tr class="memitem:ace5278583af3bb1db3fb008ca07e0bb7" id="r_ace5278583af3bb1db3fb008ca07e0bb7"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ace5278583af3bb1db3fb008ca07e0bb7">where_is_not_null</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:ace5278583af3bb1db3fb008ca07e0bb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加IS NOT NULL条件  <br /></td></tr>
+<tr class="memitem:a067bc0c2b309ba8f1dc21ee6ab5b5955" id="r_a067bc0c2b309ba8f1dc21ee6ab5b5955"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a067bc0c2b309ba8f1dc21ee6ab5b5955">where_exists</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> subquery)</td></tr>
+<tr class="memdesc:a067bc0c2b309ba8f1dc21ee6ab5b5955"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加EXISTS条件  <br /></td></tr>
+<tr class="memitem:a65855eeeddcb91202e7c4579812e3305" id="r_a65855eeeddcb91202e7c4579812e3305"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a65855eeeddcb91202e7c4579812e3305">where_not_exists</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> subquery)</td></tr>
+<tr class="memdesc:a65855eeeddcb91202e7c4579812e3305"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加NOT EXISTS条件  <br /></td></tr>
+<tr class="memitem:aa6190aecd621762b44339d8bb5fe3e9e" id="r_aa6190aecd621762b44339d8bb5fe3e9e"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa6190aecd621762b44339d8bb5fe3e9e">or_where</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> condition)</td></tr>
+<tr class="memdesc:aa6190aecd621762b44339d8bb5fe3e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加OR条件（与上一个条件组合）  <br /></td></tr>
+<tr class="memitem:a7ff6d8bc08a7332e2053d765c1551e19" id="r_a7ff6d8bc08a7332e2053d765c1551e19"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7ff6d8bc08a7332e2053d765c1551e19">group_by</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a7ff6d8bc08a7332e2053d765c1551e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加GROUP BY字段  <br /></td></tr>
+<tr class="memitem:a325314dc7d25a4ae0fbca61e4119d470" id="r_a325314dc7d25a4ae0fbca61e4119d470"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a325314dc7d25a4ae0fbca61e4119d470">group_by</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; fields)</td></tr>
+<tr class="memdesc:a325314dc7d25a4ae0fbca61e4119d470"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加GROUP BY字段列表  <br /></td></tr>
+<tr class="memitem:aa8035540bdbb1b6ba930f51afd8e2a0c" id="r_aa8035540bdbb1b6ba930f51afd8e2a0c"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa8035540bdbb1b6ba930f51afd8e2a0c">having</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> condition)</td></tr>
+<tr class="memdesc:aa8035540bdbb1b6ba930f51afd8e2a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加HAVING条件  <br /></td></tr>
+<tr class="memitem:ab265c61e1818c1c782bac1dc056a06dd" id="r_ab265c61e1818c1c782bac1dc056a06dd"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab265c61e1818c1c782bac1dc056a06dd">order_by</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___s_q_l.html#ga9ae417fadc6859de056601afc47ffb4a">sql_order</a> order=<a class="el" href="group___s_q_l.html#gga9ae417fadc6859de056601afc47ffb4aac6e421eaad140c1bc1a39980502df80c">sql_order::ASC</a>)</td></tr>
+<tr class="memdesc:ab265c61e1818c1c782bac1dc056a06dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加ORDER BY子句  <br /></td></tr>
+<tr class="memitem:af4eb574d2a8c0f4db21e54a0f1f6fb62" id="r_af4eb574d2a8c0f4db21e54a0f1f6fb62"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af4eb574d2a8c0f4db21e54a0f1f6fb62">order_by_asc</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:af4eb574d2a8c0f4db21e54a0f1f6fb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加升序排序  <br /></td></tr>
+<tr class="memitem:a72e00c81be1c595cdc1faa845af40dcc" id="r_a72e00c81be1c595cdc1faa845af40dcc"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a72e00c81be1c595cdc1faa845af40dcc">order_by_desc</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a72e00c81be1c595cdc1faa845af40dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加降序排序  <br /></td></tr>
+<tr class="memitem:af2e00efd7814f646d06c196e2168db6e" id="r_af2e00efd7814f646d06c196e2168db6e"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af2e00efd7814f646d06c196e2168db6e">limit</a> (int <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>)</td></tr>
+<tr class="memdesc:af2e00efd7814f646d06c196e2168db6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加LIMIT限制  <br /></td></tr>
+<tr class="memitem:a1009828707c0bb4e545b5dbc035f3ce7" id="r_a1009828707c0bb4e545b5dbc035f3ce7"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1009828707c0bb4e545b5dbc035f3ce7">offset</a> (int <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>)</td></tr>
+<tr class="memdesc:a1009828707c0bb4e545b5dbc035f3ce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加OFFSET偏移  <br /></td></tr>
+<tr class="memitem:aff5f47921fc86be14561253198418f77" id="r_aff5f47921fc86be14561253198418f77"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aff5f47921fc86be14561253198418f77">page</a> (int page_num, int page_size)</td></tr>
+<tr class="memdesc:aff5f47921fc86be14561253198418f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加分页  <br /></td></tr>
+<tr class="memitem:a4d5b0a798c9a9469de8bec6667cf2dec" id="r_a4d5b0a798c9a9469de8bec6667cf2dec"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4d5b0a798c9a9469de8bec6667cf2dec">insert_into</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>, <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; fields)</td></tr>
+<tr class="memdesc:a4d5b0a798c9a9469de8bec6667cf2dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置INSERT INTO表名和字段  <br /></td></tr>
+<tr class="memitem:a334539a22f0e38ff71322ff3fea91398" id="r_a334539a22f0e38ff71322ff3fea91398"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a334539a22f0e38ff71322ff3fea91398">insert_into</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>)</td></tr>
+<tr class="memdesc:a334539a22f0e38ff71322ff3fea91398"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置INSERT INTO表名  <br /></td></tr>
+<tr class="memitem:aa675ef57fbc76c9e9b25cf1d29197068" id="r_aa675ef57fbc76c9e9b25cf1d29197068"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; values)</td></tr>
+<tr class="memdesc:aa675ef57fbc76c9e9b25cf1d29197068"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置VALUES占位符  <br /></td></tr>
+<tr class="memitem:a069642c4a50ebff15f07a6aa1563555f" id="r_a069642c4a50ebff15f07a6aa1563555f"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a069642c4a50ebff15f07a6aa1563555f">columns</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; fields)</td></tr>
+<tr class="memdesc:a069642c4a50ebff15f07a6aa1563555f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置INSERT字段列表  <br /></td></tr>
+<tr class="memitem:a631067e549433698c14cc6dfe306732f" id="r_a631067e549433698c14cc6dfe306732f"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a631067e549433698c14cc6dfe306732f">update</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>)</td></tr>
+<tr class="memdesc:a631067e549433698c14cc6dfe306732f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置UPDATE表名  <br /></td></tr>
+<tr class="memitem:a513b5cd2ac409015474b9c914da8381c" id="r_a513b5cd2ac409015474b9c914da8381c"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a513b5cd2ac409015474b9c914da8381c">set</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> assignment)</td></tr>
+<tr class="memdesc:a513b5cd2ac409015474b9c914da8381c"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加SET赋值  <br /></td></tr>
+<tr class="memitem:a8c73f9d2758a9d8e5f9b8a45afafa4a6" id="r_a8c73f9d2758a9d8e5f9b8a45afafa4a6"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8c73f9d2758a9d8e5f9b8a45afafa4a6">set</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a8c73f9d2758a9d8e5f9b8a45afafa4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加SET赋值（字段=值形式）  <br /></td></tr>
+<tr class="memitem:afba61f998299ad00d5e14e9f2183f4d1" id="r_afba61f998299ad00d5e14e9f2183f4d1"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afba61f998299ad00d5e14e9f2183f4d1">set_increment</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, int value=1)</td></tr>
+<tr class="memdesc:afba61f998299ad00d5e14e9f2183f4d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加自增赋值  <br /></td></tr>
+<tr class="memitem:a08afd12c3366c9734a94443bceefbacb" id="r_a08afd12c3366c9734a94443bceefbacb"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a08afd12c3366c9734a94443bceefbacb">set_decrement</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, int value=1)</td></tr>
+<tr class="memdesc:a08afd12c3366c9734a94443bceefbacb"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加自减赋值  <br /></td></tr>
+<tr class="memitem:a358e21a930f18ab9bcff30f0443fa848" id="r_a358e21a930f18ab9bcff30f0443fa848"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a358e21a930f18ab9bcff30f0443fa848">remove</a> ()</td></tr>
+<tr class="memdesc:a358e21a930f18ab9bcff30f0443fa848"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置DELETE操作  <br /></td></tr>
+<tr class="memitem:a08bbb254ad562aafc801482729301f6b" id="r_a08bbb254ad562aafc801482729301f6b"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a08bbb254ad562aafc801482729301f6b">delete_from</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a>)</td></tr>
+<tr class="memdesc:a08bbb254ad562aafc801482729301f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置DELETE FROM表名  <br /></td></tr>
+<tr class="memitem:ab009c6352973982fef07620dcaa0b541" id="r_ab009c6352973982fef07620dcaa0b541"><td class="memItemLeft"><a id="ab009c6352973982fef07620dcaa0b541" name="ab009c6352973982fef07620dcaa0b541"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_count</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:ab009c6352973982fef07620dcaa0b541"><td class="mdescLeft">&#160;</td><td class="mdescRight">COUNT聚合 <br /></td></tr>
+<tr class="memitem:a204b7b8d45177de7fa5d64599857c342" id="r_a204b7b8d45177de7fa5d64599857c342"><td class="memItemLeft"><a id="a204b7b8d45177de7fa5d64599857c342" name="a204b7b8d45177de7fa5d64599857c342"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_count</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a204b7b8d45177de7fa5d64599857c342"><td class="mdescLeft">&#160;</td><td class="mdescRight">COUNT聚合（无别名） <br /></td></tr>
+<tr class="memitem:a925dac273519d31f0e40ca471ff3b441" id="r_a925dac273519d31f0e40ca471ff3b441"><td class="memItemLeft"><a id="a925dac273519d31f0e40ca471ff3b441" name="a925dac273519d31f0e40ca471ff3b441"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_count</b> ()</td></tr>
+<tr class="memdesc:a925dac273519d31f0e40ca471ff3b441"><td class="mdescLeft">&#160;</td><td class="mdescRight">COUNT(*) <br /></td></tr>
+<tr class="memitem:a2b556bf028a5d0e219e48779f7934d09" id="r_a2b556bf028a5d0e219e48779f7934d09"><td class="memItemLeft"><a id="a2b556bf028a5d0e219e48779f7934d09" name="a2b556bf028a5d0e219e48779f7934d09"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_sum</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:a2b556bf028a5d0e219e48779f7934d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">SUM聚合 <br /></td></tr>
+<tr class="memitem:ac23623101688d2bf161da6f91680d692" id="r_ac23623101688d2bf161da6f91680d692"><td class="memItemLeft"><a id="ac23623101688d2bf161da6f91680d692" name="ac23623101688d2bf161da6f91680d692"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_sum</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:ac23623101688d2bf161da6f91680d692"><td class="mdescLeft">&#160;</td><td class="mdescRight">SUM聚合（无别名） <br /></td></tr>
+<tr class="memitem:a52d11515e823443127b723ee45965191" id="r_a52d11515e823443127b723ee45965191"><td class="memItemLeft"><a id="a52d11515e823443127b723ee45965191" name="a52d11515e823443127b723ee45965191"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_avg</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:a52d11515e823443127b723ee45965191"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVG聚合 <br /></td></tr>
+<tr class="memitem:a984dace87e34e1210a7b801ee88dca41" id="r_a984dace87e34e1210a7b801ee88dca41"><td class="memItemLeft"><a id="a984dace87e34e1210a7b801ee88dca41" name="a984dace87e34e1210a7b801ee88dca41"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_avg</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a984dace87e34e1210a7b801ee88dca41"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVG聚合（无别名） <br /></td></tr>
+<tr class="memitem:ad4b3ca9e5048455db110e88c81f99bc6" id="r_ad4b3ca9e5048455db110e88c81f99bc6"><td class="memItemLeft"><a id="ad4b3ca9e5048455db110e88c81f99bc6" name="ad4b3ca9e5048455db110e88c81f99bc6"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_max</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:ad4b3ca9e5048455db110e88c81f99bc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAX聚合 <br /></td></tr>
+<tr class="memitem:a8b3da55485897ca4b0ca9f343bbec631" id="r_a8b3da55485897ca4b0ca9f343bbec631"><td class="memItemLeft"><a id="a8b3da55485897ca4b0ca9f343bbec631" name="a8b3da55485897ca4b0ca9f343bbec631"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_max</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a8b3da55485897ca4b0ca9f343bbec631"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAX聚合（无别名） <br /></td></tr>
+<tr class="memitem:a8cfeb01efe7c6292d2934baa5704aaaf" id="r_a8cfeb01efe7c6292d2934baa5704aaaf"><td class="memItemLeft"><a id="a8cfeb01efe7c6292d2934baa5704aaaf" name="a8cfeb01efe7c6292d2934baa5704aaaf"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_min</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:a8cfeb01efe7c6292d2934baa5704aaaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">MIN聚合 <br /></td></tr>
+<tr class="memitem:abb948bf44766d9ceb504813652c06316" id="r_abb948bf44766d9ceb504813652c06316"><td class="memItemLeft"><a id="abb948bf44766d9ceb504813652c06316" name="abb948bf44766d9ceb504813652c06316"></a>
+<a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><b>select_min</b> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:abb948bf44766d9ceb504813652c06316"><td class="mdescLeft">&#160;</td><td class="mdescRight">MIN聚合（无别名） <br /></td></tr>
+<tr class="memitem:a74bc12f92f9c0e225508e4155b1f900f" id="r_a74bc12f92f9c0e225508e4155b1f900f"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a74bc12f92f9c0e225508e4155b1f900f">select_distinct</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> field)</td></tr>
+<tr class="memdesc:a74bc12f92f9c0e225508e4155b1f900f"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加DISTINCT字段  <br /></td></tr>
+<tr class="memitem:a15cb1af02193d7b5b597a8e6bc50fe87" id="r_a15cb1af02193d7b5b597a8e6bc50fe87"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a15cb1af02193d7b5b597a8e6bc50fe87">select_subquery</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> subquery, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:a15cb1af02193d7b5b597a8e6bc50fe87"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加子查询作为SELECT字段  <br /></td></tr>
+<tr class="memitem:aaec84dd5fbbdd80c50b211a61bebc9a6" id="r_aaec84dd5fbbdd80c50b211a61bebc9a6"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaec84dd5fbbdd80c50b211a61bebc9a6">select_subquery</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> subquery)</td></tr>
+<tr class="memdesc:aaec84dd5fbbdd80c50b211a61bebc9a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加子查询作为SELECT字段（无别名）  <br /></td></tr>
+<tr class="memitem:a5cc0c74563c6224bcb62bd5f1c9b7940" id="r_a5cc0c74563c6224bcb62bd5f1c9b7940"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5cc0c74563c6224bcb62bd5f1c9b7940">from_subquery</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> subquery, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> alias)</td></tr>
+<tr class="memdesc:a5cc0c74563c6224bcb62bd5f1c9b7940"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用子查询作为FROM表  <br /></td></tr>
+<tr class="memitem:a038e6eeecc09b401642ae2fe56fdc80c" id="r_a038e6eeecc09b401642ae2fe56fdc80c"><td class="memItemLeft"><a class="el" href="classsql__builder.html">sql_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a038e6eeecc09b401642ae2fe56fdc80c">reset</a> () noexcept</td></tr>
+<tr class="memdesc:a038e6eeecc09b401642ae2fe56fdc80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置构建器状态  <br /></td></tr>
+<tr class="memitem:a1b7e4c48fce78b1d8960187c21661a5f" id="r_a1b7e4c48fce78b1d8960187c21661a5f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___s_q_l.html#gadbaccc2cc51836f54eab02a0ec397945">sql_operate</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1b7e4c48fce78b1d8960187c21661a5f">type</a> () const noexcept</td></tr>
+<tr class="memdesc:a1b7e4c48fce78b1d8960187c21661a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前SQL操作类型  <br /></td></tr>
+<tr class="memitem:a79c9228c4851908d5765ddeca67ba562" id="r_a79c9228c4851908d5765ddeca67ba562"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a79c9228c4851908d5765ddeca67ba562">table</a> () const noexcept</td></tr>
+<tr class="memdesc:a79c9228c4851908d5765ddeca67ba562"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前表名  <br /></td></tr>
+<tr class="memitem:a74cbbd02ffa38d910b5ead55dfc50d4a" id="r_a74cbbd02ffa38d910b5ead55dfc50d4a"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a74cbbd02ffa38d910b5ead55dfc50d4a">is_empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a74cbbd02ffa38d910b5ead55dfc50d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查构建器是否为空  <br /></td></tr>
+<tr class="memitem:a47122e2687cae336ee14bc7d131f9377" id="r_a47122e2687cae336ee14bc7d131f9377"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47122e2687cae336ee14bc7d131f9377">build</a> () const</td></tr>
+<tr class="memdesc:a47122e2687cae336ee14bc7d131f9377"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建最终的SQL语句  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>SQL语句构建器 </p>
+<p>提供流式API构建SQL语句：</p><ul>
+<li>支持SELECT、INSERT、UPDATE、DELETE操作</li>
+<li>支持JOIN、WHERE、GROUP BY、ORDER BY、LIMIT等子句</li>
+<li>支持聚合函数（COUNT、SUM、AVG、MAX、MIN）</li>
+<li>支持子查询</li>
+<li>自动处理SQL语法 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00069">69</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="adf52dc62517cacf5b0be7795a16f6800" name="adf52dc62517cacf5b0be7795a16f6800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf52dc62517cacf5b0be7795a16f6800">&#9670;&#160;</a></span>sql_builder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sql_builder::sql_builder </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsql__builder.html">sql_builder</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a47122e2687cae336ee14bc7d131f9377" name="a47122e2687cae336ee14bc7d131f9377"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47122e2687cae336ee14bc7d131f9377">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> sql_builder::build </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建最终的SQL语句 </p>
+<dl class="section return"><dt>返回</dt><dd>完整的SQL字符串 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>当SQL结构不完整时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>根据当前构建的状态生成完整的SQL语句。 </p>
+
+</div>
+</div>
+<a id="a069642c4a50ebff15f07a6aa1563555f" name="a069642c4a50ebff15f07a6aa1563555f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a069642c4a50ebff15f07a6aa1563555f">&#9670;&#160;</a></span>columns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::columns </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>fields</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置INSERT字段列表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fields</td><td>字段列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a069642c4a50ebff15f07a6aa1563555f">columns()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a069642c4a50ebff15f07a6aa1563555f">columns()</a>.</p>
+
+</div>
+</div>
+<a id="a08bbb254ad562aafc801482729301f6b" name="a08bbb254ad562aafc801482729301f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08bbb254ad562aafc801482729301f6b">&#9670;&#160;</a></span>delete_from()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::delete_from </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置DELETE FROM表名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>表名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a08bbb254ad562aafc801482729301f6b">delete_from()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a08bbb254ad562aafc801482729301f6b">delete_from()</a>.</p>
+
+</div>
+</div>
+<a id="a7cce030bf100a184321a334bed2ff4c8" name="a7cce030bf100a184321a334bed2ff4c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cce030bf100a184321a334bed2ff4c8">&#9670;&#160;</a></span>distinct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::distinct </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加DISTINCT关键字 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a7cce030bf100a184321a334bed2ff4c8">distinct()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a7cce030bf100a184321a334bed2ff4c8">distinct()</a>.</p>
+
+</div>
+</div>
+<a id="a38e875449e1a80698c9ccac7e22b7c4b" name="a38e875449e1a80698c9ccac7e22b7c4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e875449e1a80698c9ccac7e22b7c4b">&#9670;&#160;</a></span>from() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::from </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置主表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>表名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a38e875449e1a80698c9ccac7e22b7c4b">from()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a38e875449e1a80698c9ccac7e22b7c4b">from()</a> , 以及 <a class="el" href="#a5850000292544af9a81af5eb5e063423">from()</a>.</p>
+
+</div>
+</div>
+<a id="a5850000292544af9a81af5eb5e063423" name="a5850000292544af9a81af5eb5e063423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5850000292544af9a81af5eb5e063423">&#9670;&#160;</a></span>from() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::from </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>alias</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置主表并指定别名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>表名 </td></tr>
+    <tr><td class="paramname">alias</td><td>表别名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a38e875449e1a80698c9ccac7e22b7c4b">from()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+</div>
+</div>
+<a id="a5cc0c74563c6224bcb62bd5f1c9b7940" name="a5cc0c74563c6224bcb62bd5f1c9b7940"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cc0c74563c6224bcb62bd5f1c9b7940">&#9670;&#160;</a></span>from_subquery()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::from_subquery </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>subquery</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>alias</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用子查询作为FROM表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subquery</td><td>子查询SQL </td></tr>
+    <tr><td class="paramname">alias</td><td>别名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a5cc0c74563c6224bcb62bd5f1c9b7940">from_subquery()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5cc0c74563c6224bcb62bd5f1c9b7940">from_subquery()</a>.</p>
+
+</div>
+</div>
+<a id="aa89b2d7118a363f391127f27565eff1a" name="aa89b2d7118a363f391127f27565eff1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa89b2d7118a363f391127f27565eff1a">&#9670;&#160;</a></span>full_join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::full_join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>on_condition</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加FULL JOIN子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>连接表名 </td></tr>
+    <tr><td class="paramname">on_condition</td><td>ON条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aa89b2d7118a363f391127f27565eff1a">full_join()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa89b2d7118a363f391127f27565eff1a">full_join()</a>.</p>
+
+</div>
+</div>
+<a id="a7ff6d8bc08a7332e2053d765c1551e19" name="a7ff6d8bc08a7332e2053d765c1551e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff6d8bc08a7332e2053d765c1551e19">&#9670;&#160;</a></span>group_by() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::group_by </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加GROUP BY字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a7ff6d8bc08a7332e2053d765c1551e19">group_by()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a7ff6d8bc08a7332e2053d765c1551e19">group_by()</a> , 以及 <a class="el" href="#a325314dc7d25a4ae0fbca61e4119d470">group_by()</a>.</p>
+
+</div>
+</div>
+<a id="a325314dc7d25a4ae0fbca61e4119d470" name="a325314dc7d25a4ae0fbca61e4119d470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a325314dc7d25a4ae0fbca61e4119d470">&#9670;&#160;</a></span>group_by() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::group_by </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>fields</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加GROUP BY字段列表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fields</td><td>字段列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a7ff6d8bc08a7332e2053d765c1551e19">group_by()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a id="aa8035540bdbb1b6ba930f51afd8e2a0c" name="aa8035540bdbb1b6ba930f51afd8e2a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8035540bdbb1b6ba930f51afd8e2a0c">&#9670;&#160;</a></span>having()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::having </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>condition</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加HAVING条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>条件表达式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aa8035540bdbb1b6ba930f51afd8e2a0c">having()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa8035540bdbb1b6ba930f51afd8e2a0c">having()</a>.</p>
+
+</div>
+</div>
+<a id="a172f93bf3cbdf9b5a98e2bb60e379b97" name="a172f93bf3cbdf9b5a98e2bb60e379b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172f93bf3cbdf9b5a98e2bb60e379b97">&#9670;&#160;</a></span>inner_join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::inner_join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>on_condition</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加INNER JOIN子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>连接表名 </td></tr>
+    <tr><td class="paramname">on_condition</td><td>ON条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a172f93bf3cbdf9b5a98e2bb60e379b97">inner_join()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a172f93bf3cbdf9b5a98e2bb60e379b97">inner_join()</a>.</p>
+
+</div>
+</div>
+<a id="a334539a22f0e38ff71322ff3fea91398" name="a334539a22f0e38ff71322ff3fea91398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a334539a22f0e38ff71322ff3fea91398">&#9670;&#160;</a></span>insert_into() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::insert_into </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置INSERT INTO表名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>表名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a4d5b0a798c9a9469de8bec6667cf2dec">insert_into()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+</div>
+</div>
+<a id="a4d5b0a798c9a9469de8bec6667cf2dec" name="a4d5b0a798c9a9469de8bec6667cf2dec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d5b0a798c9a9469de8bec6667cf2dec">&#9670;&#160;</a></span>insert_into() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::insert_into </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>fields</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置INSERT INTO表名和字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>表名 </td></tr>
+    <tr><td class="paramname">fields</td><td>字段列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a4d5b0a798c9a9469de8bec6667cf2dec">insert_into()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a334539a22f0e38ff71322ff3fea91398">insert_into()</a> , 以及 <a class="el" href="#a4d5b0a798c9a9469de8bec6667cf2dec">insert_into()</a>.</p>
+
+</div>
+</div>
+<a id="a74cbbd02ffa38d910b5ead55dfc50d4a" name="a74cbbd02ffa38d910b5ead55dfc50d4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74cbbd02ffa38d910b5ead55dfc50d4a">&#9670;&#160;</a></span>is_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool sql_builder::is_empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查构建器是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>未设置表名返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00599">599</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5f08709ea5072c07a2509ceb2d1b6af5" name="a5f08709ea5072c07a2509ceb2d1b6af5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f08709ea5072c07a2509ceb2d1b6af5">&#9670;&#160;</a></span>join() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___s_q_l.html#gaf35aeadb60139f2c65a19c4e8d61ec72">sql_join</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>on_condition</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加JOIN子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>JOIN类型 </td></tr>
+    <tr><td class="paramname">table</td><td>连接表名 </td></tr>
+    <tr><td class="paramname">on_condition</td><td>ON条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a5f08709ea5072c07a2509ceb2d1b6af5">join()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>, <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00587">type()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5f08709ea5072c07a2509ceb2d1b6af5">join()</a> , 以及 <a class="el" href="#ad1c26fcae54506102ac0c143a21785e3">join()</a>.</p>
+
+</div>
+</div>
+<a id="ad1c26fcae54506102ac0c143a21785e3" name="ad1c26fcae54506102ac0c143a21785e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1c26fcae54506102ac0c143a21785e3">&#9670;&#160;</a></span>join() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>on_condition</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加INNER JOIN子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>连接表名 </td></tr>
+    <tr><td class="paramname">on_condition</td><td>ON条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a5f08709ea5072c07a2509ceb2d1b6af5">join()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+</div>
+</div>
+<a id="a286a2826b81b3f0b3e26813dea254947" name="a286a2826b81b3f0b3e26813dea254947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a286a2826b81b3f0b3e26813dea254947">&#9670;&#160;</a></span>left_join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::left_join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>on_condition</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加LEFT JOIN子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>连接表名 </td></tr>
+    <tr><td class="paramname">on_condition</td><td>ON条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a286a2826b81b3f0b3e26813dea254947">left_join()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a286a2826b81b3f0b3e26813dea254947">left_join()</a>.</p>
+
+</div>
+</div>
+<a id="af2e00efd7814f646d06c196e2168db6e" name="af2e00efd7814f646d06c196e2168db6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2e00efd7814f646d06c196e2168db6e">&#9670;&#160;</a></span>limit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::limit </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加LIMIT限制 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>返回行数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>, <a class="el" href="#af2e00efd7814f646d06c196e2168db6e">limit()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af2e00efd7814f646d06c196e2168db6e">limit()</a>.</p>
+
+</div>
+</div>
+<a id="a1009828707c0bb4e545b5dbc035f3ce7" name="a1009828707c0bb4e545b5dbc035f3ce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1009828707c0bb4e545b5dbc035f3ce7">&#9670;&#160;</a></span>offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::offset </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加OFFSET偏移 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>偏移行数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>, <a class="el" href="#a1009828707c0bb4e545b5dbc035f3ce7">offset()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a1009828707c0bb4e545b5dbc035f3ce7">offset()</a>.</p>
+
+</div>
+</div>
+<a id="a35ebabe264b20847e227eae79afa90c3" name="a35ebabe264b20847e227eae79afa90c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35ebabe264b20847e227eae79afa90c3">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsql__builder.html">sql_builder</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a id="aa6190aecd621762b44339d8bb5fe3e9e" name="aa6190aecd621762b44339d8bb5fe3e9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6190aecd621762b44339d8bb5fe3e9e">&#9670;&#160;</a></span>or_where()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::or_where </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>condition</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加OR条件（与上一个条件组合） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>条件表达式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用</dd></dl>
+<p>将当前条件与上一个条件用OR连接。 </p>
+
+<p class="reference">引用了 <a class="el" href="#aa6190aecd621762b44339d8bb5fe3e9e">or_where()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa6190aecd621762b44339d8bb5fe3e9e">or_where()</a>.</p>
+
+</div>
+</div>
+<a id="ab265c61e1818c1c782bac1dc056a06dd" name="ab265c61e1818c1c782bac1dc056a06dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab265c61e1818c1c782bac1dc056a06dd">&#9670;&#160;</a></span>order_by()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::order_by </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___s_q_l.html#ga9ae417fadc6859de056601afc47ffb4a">sql_order</a></td>          <td class="paramname"><span class="paramname"><em>order</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___s_q_l.html#gga9ae417fadc6859de056601afc47ffb4aac6e421eaad140c1bc1a39980502df80c">sql_order::ASC</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加ORDER BY子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">order</td><td>排序方向 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ab265c61e1818c1c782bac1dc056a06dd">order_by()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab265c61e1818c1c782bac1dc056a06dd">order_by()</a>.</p>
+
+</div>
+</div>
+<a id="af4eb574d2a8c0f4db21e54a0f1f6fb62" name="af4eb574d2a8c0f4db21e54a0f1f6fb62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4eb574d2a8c0f4db21e54a0f1f6fb62">&#9670;&#160;</a></span>order_by_asc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::order_by_asc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加升序排序 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#af4eb574d2a8c0f4db21e54a0f1f6fb62">order_by_asc()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af4eb574d2a8c0f4db21e54a0f1f6fb62">order_by_asc()</a>.</p>
+
+</div>
+</div>
+<a id="a72e00c81be1c595cdc1faa845af40dcc" name="a72e00c81be1c595cdc1faa845af40dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e00c81be1c595cdc1faa845af40dcc">&#9670;&#160;</a></span>order_by_desc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::order_by_desc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加降序排序 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a72e00c81be1c595cdc1faa845af40dcc">order_by_desc()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a72e00c81be1c595cdc1faa845af40dcc">order_by_desc()</a>.</p>
+
+</div>
+</div>
+<a id="aff5f47921fc86be14561253198418f77" name="aff5f47921fc86be14561253198418f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5f47921fc86be14561253198418f77">&#9670;&#160;</a></span>page()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::page </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>page_num</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>page_size</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加分页 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">page_num</td><td>页码（从1开始） </td></tr>
+    <tr><td class="paramname">page_size</td><td>每页大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aff5f47921fc86be14561253198418f77">page()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aff5f47921fc86be14561253198418f77">page()</a>.</p>
+
+</div>
+</div>
+<a id="a358e21a930f18ab9bcff30f0443fa848" name="a358e21a930f18ab9bcff30f0443fa848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358e21a930f18ab9bcff30f0443fa848">&#9670;&#160;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::remove </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置DELETE操作 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a358e21a930f18ab9bcff30f0443fa848">remove()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a358e21a930f18ab9bcff30f0443fa848">remove()</a>.</p>
+
+</div>
+</div>
+<a id="a038e6eeecc09b401642ae2fe56fdc80c" name="a038e6eeecc09b401642ae2fe56fdc80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a038e6eeecc09b401642ae2fe56fdc80c">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重置构建器状态 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a038e6eeecc09b401642ae2fe56fdc80c">reset()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a038e6eeecc09b401642ae2fe56fdc80c">reset()</a>.</p>
+
+</div>
+</div>
+<a id="a9d0ea46b0e7cc12516d8838edb80a2f7" name="a9d0ea46b0e7cc12516d8838edb80a2f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d0ea46b0e7cc12516d8838edb80a2f7">&#9670;&#160;</a></span>right_join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::right_join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>on_condition</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加RIGHT JOIN子句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>连接表名 </td></tr>
+    <tr><td class="paramname">on_condition</td><td>ON条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a9d0ea46b0e7cc12516d8838edb80a2f7">right_join()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a9d0ea46b0e7cc12516d8838edb80a2f7">right_join()</a>.</p>
+
+</div>
+</div>
+<a id="a5ca9bd523d8a957506c68ed188e7ff71" name="a5ca9bd523d8a957506c68ed188e7ff71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ca9bd523d8a957506c68ed188e7ff71">&#9670;&#160;</a></span>select() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>fields</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>初始化列表设置SELECT字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fields</td><td>字段列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a9cc08500a5a461c52306582c98e57f40">select()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a997006310fc9b4843417afe02ab7e142" name="a997006310fc9b4843417afe02ab7e142"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a997006310fc9b4843417afe02ab7e142">&#9670;&#160;</a></span>select() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加SELECT字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a9cc08500a5a461c52306582c98e57f40">select()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a9cc08500a5a461c52306582c98e57f40" name="a9cc08500a5a461c52306582c98e57f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cc08500a5a461c52306582c98e57f40">&#9670;&#160;</a></span>select() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>fields</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>列表设置SELECT字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fields</td><td>字段列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a9cc08500a5a461c52306582c98e57f40">select()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5ca9bd523d8a957506c68ed188e7ff71">select()</a>, <a class="el" href="#a997006310fc9b4843417afe02ab7e142">select()</a> , 以及 <a class="el" href="#a9cc08500a5a461c52306582c98e57f40">select()</a>.</p>
+
+</div>
+</div>
+<a id="a62a5bd7054ec802d96df24bf55ddea49" name="a62a5bd7054ec802d96df24bf55ddea49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62a5bd7054ec802d96df24bf55ddea49">&#9670;&#160;</a></span>select_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select_all </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>选择所有字段（SELECT *） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a62a5bd7054ec802d96df24bf55ddea49">select_all()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a62a5bd7054ec802d96df24bf55ddea49">select_all()</a>.</p>
+
+</div>
+</div>
+<a id="a74bc12f92f9c0e225508e4155b1f900f" name="a74bc12f92f9c0e225508e4155b1f900f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74bc12f92f9c0e225508e4155b1f900f">&#9670;&#160;</a></span>select_distinct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select_distinct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加DISTINCT字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a74bc12f92f9c0e225508e4155b1f900f">select_distinct()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a74bc12f92f9c0e225508e4155b1f900f">select_distinct()</a>.</p>
+
+</div>
+</div>
+<a id="aaec84dd5fbbdd80c50b211a61bebc9a6" name="aaec84dd5fbbdd80c50b211a61bebc9a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaec84dd5fbbdd80c50b211a61bebc9a6">&#9670;&#160;</a></span>select_subquery() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select_subquery </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>subquery</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加子查询作为SELECT字段（无别名） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subquery</td><td>子查询SQL </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a15cb1af02193d7b5b597a8e6bc50fe87">select_subquery()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a15cb1af02193d7b5b597a8e6bc50fe87" name="a15cb1af02193d7b5b597a8e6bc50fe87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15cb1af02193d7b5b597a8e6bc50fe87">&#9670;&#160;</a></span>select_subquery() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::select_subquery </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>subquery</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>alias</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加子查询作为SELECT字段 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subquery</td><td>子查询SQL </td></tr>
+    <tr><td class="paramname">alias</td><td>别名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a15cb1af02193d7b5b597a8e6bc50fe87">select_subquery()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aaec84dd5fbbdd80c50b211a61bebc9a6">select_subquery()</a> , 以及 <a class="el" href="#a15cb1af02193d7b5b597a8e6bc50fe87">select_subquery()</a>.</p>
+
+</div>
+</div>
+<a id="a513b5cd2ac409015474b9c914da8381c" name="a513b5cd2ac409015474b9c914da8381c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a513b5cd2ac409015474b9c914da8381c">&#9670;&#160;</a></span>set() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>assignment</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加SET赋值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assignment</td><td>赋值表达式（如"field = value"） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a513b5cd2ac409015474b9c914da8381c">set()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a513b5cd2ac409015474b9c914da8381c">set()</a> , 以及 <a class="el" href="#a8c73f9d2758a9d8e5f9b8a45afafa4a6">set()</a>.</p>
+
+</div>
+</div>
+<a id="a8c73f9d2758a9d8e5f9b8a45afafa4a6" name="a8c73f9d2758a9d8e5f9b8a45afafa4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c73f9d2758a9d8e5f9b8a45afafa4a6">&#9670;&#160;</a></span>set() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加SET赋值（字段=值形式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a513b5cd2ac409015474b9c914da8381c">set()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a08afd12c3366c9734a94443bceefbacb" name="a08afd12c3366c9734a94443bceefbacb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08afd12c3366c9734a94443bceefbacb">&#9670;&#160;</a></span>set_decrement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::set_decrement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加自减赋值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>减少量，默认为1 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a08afd12c3366c9734a94443bceefbacb">set_decrement()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a08afd12c3366c9734a94443bceefbacb">set_decrement()</a>.</p>
+
+</div>
+</div>
+<a id="afba61f998299ad00d5e14e9f2183f4d1" name="afba61f998299ad00d5e14e9f2183f4d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afba61f998299ad00d5e14e9f2183f4d1">&#9670;&#160;</a></span>set_increment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::set_increment </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加自增赋值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>增加量，默认为1 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afba61f998299ad00d5e14e9f2183f4d1">set_increment()</a> , 以及 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#afba61f998299ad00d5e14e9f2183f4d1">set_increment()</a>.</p>
+
+</div>
+</div>
+<a id="a79c9228c4851908d5765ddeca67ba562" name="a79c9228c4851908d5765ddeca67ba562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c9228c4851908d5765ddeca67ba562">&#9670;&#160;</a></span>table()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> sql_builder::table </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前表名 </p>
+<dl class="section return"><dt>返回</dt><dd>表名视图 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00593">593</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="basic__string__view_8hpp_source.html#l00457">basic_string_view&lt; CharT, Traits &gt;::view()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a08bbb254ad562aafc801482729301f6b">delete_from()</a>, <a class="el" href="#a38e875449e1a80698c9ccac7e22b7c4b">from()</a>, <a class="el" href="#a5850000292544af9a81af5eb5e063423">from()</a>, <a class="el" href="#aa89b2d7118a363f391127f27565eff1a">full_join()</a>, <a class="el" href="#a172f93bf3cbdf9b5a98e2bb60e379b97">inner_join()</a>, <a class="el" href="#a334539a22f0e38ff71322ff3fea91398">insert_into()</a>, <a class="el" href="#a4d5b0a798c9a9469de8bec6667cf2dec">insert_into()</a>, <a class="el" href="#a5f08709ea5072c07a2509ceb2d1b6af5">join()</a>, <a class="el" href="#ad1c26fcae54506102ac0c143a21785e3">join()</a>, <a class="el" href="#a286a2826b81b3f0b3e26813dea254947">left_join()</a>, <a class="el" href="#a9d0ea46b0e7cc12516d8838edb80a2f7">right_join()</a> , 以及 <a class="el" href="#a631067e549433698c14cc6dfe306732f">update()</a>.</p>
+
+</div>
+</div>
+<a id="a1b7e4c48fce78b1d8960187c21661a5f" name="a1b7e4c48fce78b1d8960187c21661a5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b7e4c48fce78b1d8960187c21661a5f">&#9670;&#160;</a></span>type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___s_q_l.html#gadbaccc2cc51836f54eab02a0ec397945">sql_operate</a> sql_builder::type </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前SQL操作类型 </p>
+<dl class="section return"><dt>返回</dt><dd>操作类型 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00587">587</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sql__builder_8hpp_source.html#l00587">type()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5f08709ea5072c07a2509ceb2d1b6af5">join()</a> , 以及 <a class="el" href="sql__builder_8hpp_source.html#l00587">type()</a>.</p>
+
+</div>
+</div>
+<a id="a631067e549433698c14cc6dfe306732f" name="a631067e549433698c14cc6dfe306732f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a631067e549433698c14cc6dfe306732f">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>table</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置UPDATE表名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>表名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>, <a class="el" href="sql__builder_8hpp_source.html#l00593">table()</a> , 以及 <a class="el" href="#a631067e549433698c14cc6dfe306732f">update()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a631067e549433698c14cc6dfe306732f">update()</a>.</p>
+
+</div>
+</div>
+<a id="aa675ef57fbc76c9e9b25cf1d29197068" name="aa675ef57fbc76c9e9b25cf1d29197068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa675ef57fbc76c9e9b25cf1d29197068">&#9670;&#160;</a></span>values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>values</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置VALUES占位符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">values</td><td>值占位符列表（如"?"或实际值） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values()</a>, <a class="el" href="#a4d23f39317ebe20a68d880a5abae5ce8">where_in()</a> , 以及 <a class="el" href="#a56213bebc963550487828c8fa7b47cb7">where_not_in()</a>.</p>
+
+</div>
+</div>
+<a id="a8144ccb671db9f7d32e00866fde722e7" name="a8144ccb671db9f7d32e00866fde722e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8144ccb671db9f7d32e00866fde722e7">&#9670;&#160;</a></span>where()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>condition</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加WHERE条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>条件表达式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a8144ccb671db9f7d32e00866fde722e7">where()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a8144ccb671db9f7d32e00866fde722e7">where()</a>.</p>
+
+</div>
+</div>
+<a id="ad1934416aa7f6fd466b3a4c25969f2f1" name="ad1934416aa7f6fd466b3a4c25969f2f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1934416aa7f6fd466b3a4c25969f2f1">&#9670;&#160;</a></span>where_between()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_between </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>start</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>end</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加BETWEEN条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">start</td><td>起始值 </td></tr>
+    <tr><td class="paramname">end</td><td>结束值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#ad1934416aa7f6fd466b3a4c25969f2f1">where_between()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad1934416aa7f6fd466b3a4c25969f2f1">where_between()</a>.</p>
+
+</div>
+</div>
+<a id="a9e4d6f43ecda4cf778acb4c02fd44a14" name="a9e4d6f43ecda4cf778acb4c02fd44a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4d6f43ecda4cf778acb4c02fd44a14">&#9670;&#160;</a></span>where_eq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_eq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加相等条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a9e4d6f43ecda4cf778acb4c02fd44a14">where_eq()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a9e4d6f43ecda4cf778acb4c02fd44a14">where_eq()</a>.</p>
+
+</div>
+</div>
+<a id="a067bc0c2b309ba8f1dc21ee6ab5b5955" name="a067bc0c2b309ba8f1dc21ee6ab5b5955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a067bc0c2b309ba8f1dc21ee6ab5b5955">&#9670;&#160;</a></span>where_exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_exists </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>subquery</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加EXISTS条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subquery</td><td>子查询 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a067bc0c2b309ba8f1dc21ee6ab5b5955">where_exists()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a067bc0c2b309ba8f1dc21ee6ab5b5955">where_exists()</a>.</p>
+
+</div>
+</div>
+<a id="a87d5ca4743c6162776f90baa294bf5e9" name="a87d5ca4743c6162776f90baa294bf5e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d5ca4743c6162776f90baa294bf5e9">&#9670;&#160;</a></span>where_ge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_ge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加大于等于条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a87d5ca4743c6162776f90baa294bf5e9">where_ge()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a87d5ca4743c6162776f90baa294bf5e9">where_ge()</a>.</p>
+
+</div>
+</div>
+<a id="a11271996cbef1448650bc4825409dc4c" name="a11271996cbef1448650bc4825409dc4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11271996cbef1448650bc4825409dc4c">&#9670;&#160;</a></span>where_gt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_gt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加大于条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a11271996cbef1448650bc4825409dc4c">where_gt()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a11271996cbef1448650bc4825409dc4c">where_gt()</a>.</p>
+
+</div>
+</div>
+<a id="a4d23f39317ebe20a68d880a5abae5ce8" name="a4d23f39317ebe20a68d880a5abae5ce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d23f39317ebe20a68d880a5abae5ce8">&#9670;&#160;</a></span>where_in()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_in </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>values</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加IN条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">values</td><td>值列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>, <a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values()</a> , 以及 <a class="el" href="#a4d23f39317ebe20a68d880a5abae5ce8">where_in()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a4d23f39317ebe20a68d880a5abae5ce8">where_in()</a>.</p>
+
+</div>
+</div>
+<a id="ace5278583af3bb1db3fb008ca07e0bb7" name="ace5278583af3bb1db3fb008ca07e0bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace5278583af3bb1db3fb008ca07e0bb7">&#9670;&#160;</a></span>where_is_not_null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_is_not_null </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加IS NOT NULL条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#ace5278583af3bb1db3fb008ca07e0bb7">where_is_not_null()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ace5278583af3bb1db3fb008ca07e0bb7">where_is_not_null()</a>.</p>
+
+</div>
+</div>
+<a id="aaa244cda7c7171f16fce3d592566729b" name="aaa244cda7c7171f16fce3d592566729b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa244cda7c7171f16fce3d592566729b">&#9670;&#160;</a></span>where_is_null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_is_null </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加IS NULL条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#aaa244cda7c7171f16fce3d592566729b">where_is_null()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aaa244cda7c7171f16fce3d592566729b">where_is_null()</a>.</p>
+
+</div>
+</div>
+<a id="a95466c021652b64fad07c3343b0b4108" name="a95466c021652b64fad07c3343b0b4108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95466c021652b64fad07c3343b0b4108">&#9670;&#160;</a></span>where_le()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_le </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加小于等于条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a95466c021652b64fad07c3343b0b4108">where_le()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a95466c021652b64fad07c3343b0b4108">where_le()</a>.</p>
+
+</div>
+</div>
+<a id="ab95dcbd5a8821557b0ab4cd6fa44cac4" name="ab95dcbd5a8821557b0ab4cd6fa44cac4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95dcbd5a8821557b0ab4cd6fa44cac4">&#9670;&#160;</a></span>where_like()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_like </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>pattern</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加LIKE条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">pattern</td><td>模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#ab95dcbd5a8821557b0ab4cd6fa44cac4">where_like()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab95dcbd5a8821557b0ab4cd6fa44cac4">where_like()</a>.</p>
+
+</div>
+</div>
+<a id="a67a5a5014af4be97d7551628cd5252c2" name="a67a5a5014af4be97d7551628cd5252c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a5a5014af4be97d7551628cd5252c2">&#9670;&#160;</a></span>where_lt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_lt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加小于条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a67a5a5014af4be97d7551628cd5252c2">where_lt()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a67a5a5014af4be97d7551628cd5252c2">where_lt()</a>.</p>
+
+</div>
+</div>
+<a id="abd5ca82b3b933339840f25a085da8f4d" name="abd5ca82b3b933339840f25a085da8f4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd5ca82b3b933339840f25a085da8f4d">&#9670;&#160;</a></span>where_ne()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_ne </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加不等条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#abd5ca82b3b933339840f25a085da8f4d">where_ne()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#abd5ca82b3b933339840f25a085da8f4d">where_ne()</a>.</p>
+
+</div>
+</div>
+<a id="ae69c1ea92f9bf39ceb52f8bd238d537d" name="ae69c1ea92f9bf39ceb52f8bd238d537d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae69c1ea92f9bf39ceb52f8bd238d537d">&#9670;&#160;</a></span>where_not_between()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_not_between </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>start</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>end</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加NOT BETWEEN条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">start</td><td>起始值 </td></tr>
+    <tr><td class="paramname">end</td><td>结束值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#ae69c1ea92f9bf39ceb52f8bd238d537d">where_not_between()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ae69c1ea92f9bf39ceb52f8bd238d537d">where_not_between()</a>.</p>
+
+</div>
+</div>
+<a id="a65855eeeddcb91202e7c4579812e3305" name="a65855eeeddcb91202e7c4579812e3305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65855eeeddcb91202e7c4579812e3305">&#9670;&#160;</a></span>where_not_exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_not_exists </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>subquery</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加NOT EXISTS条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subquery</td><td>子查询 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a65855eeeddcb91202e7c4579812e3305">where_not_exists()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a65855eeeddcb91202e7c4579812e3305">where_not_exists()</a>.</p>
+
+</div>
+</div>
+<a id="a56213bebc963550487828c8fa7b47cb7" name="a56213bebc963550487828c8fa7b47cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56213bebc963550487828c8fa7b47cb7">&#9670;&#160;</a></span>where_not_in()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_not_in </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>values</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加NOT IN条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">values</td><td>值列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a>, <a class="el" href="#aa675ef57fbc76c9e9b25cf1d29197068">values()</a> , 以及 <a class="el" href="#a56213bebc963550487828c8fa7b47cb7">where_not_in()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a56213bebc963550487828c8fa7b47cb7">where_not_in()</a>.</p>
+
+</div>
+</div>
+<a id="a92286bf4132951a3a6e07e9a76f0d345" name="a92286bf4132951a3a6e07e9a76f0d345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92286bf4132951a3a6e07e9a76f0d345">&#9670;&#160;</a></span>where_not_like()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsql__builder.html">sql_builder</a> &amp; sql_builder::where_not_like </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>pattern</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加NOT LIKE条件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>字段名 </td></tr>
+    <tr><td class="paramname">pattern</td><td>模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8b0f0283b7cee23f2be15789e114c9bc">sql_builder()</a> , 以及 <a class="el" href="#a92286bf4132951a3a6e07e9a76f0d345">where_not_like()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a92286bf4132951a3a6e07e9a76f0d345">where_not_like()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classsql__builder.html">sql_builder</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

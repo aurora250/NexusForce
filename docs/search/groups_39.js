@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['控制台io_0',['控制台IO',['../group___console_i_o.html',1,'']]]
+  ['整数序列_0',['整数序列',['../group___integer_sequence.html',1,'']]]
 ];

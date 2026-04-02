@@ -95,57 +95,54 @@ $(function(){initNavTree('ssl__socket_8hpp_source.html','',''); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;NeForce/network/socket/tcp_socket.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifdef NEFORCE_SUPPORT_OPENSSL</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;NeForce/network/ssl/ssl_stream.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span>NEFORCE_API ssl_socket final : <span class="keyword">public</span> tcp_socket {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    optional&lt;ssl_stream&gt; ssl_;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    ssl_socket() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">explicit</span> ssl_socket(<span class="keyword">const</span> native_handle_type fd)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    : tcp_socket(fd) {}</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">explicit</span> ssl_socket(tcp_socket sock)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    : tcp_socket(<a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(sock)) {}</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    ssl_socket(ssl_socket&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    ssl_socket&amp; operator=(ssl_socket&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    ~ssl_socket() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> init_server_ssl(<span class="keyword">const</span> ssl_context&amp; ctx);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> init_client_ssl(<span class="keyword">const</span> ssl_context&amp; ctx);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">string</span> peer_certificate_info() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> send(memory_view&lt;const char&gt; <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> receive(memory_view&lt;char&gt; buffer, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> is_ssl() const noexcept<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> ssl_.<a class="code hl_function" href="classoptional.html#a7cce9b645768dc9a9124ab67166f4480">has_value</a>();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    ssl_stream&amp; ssl() noexcept {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> *ssl_;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">const</span> ssl_stream&amp; ssl() const noexcept {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> *ssl_;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
-<div class="ttc" id="aclassoptional_html_a7cce9b645768dc9a9124ab67166f4480"><div class="ttname"><a href="classoptional.html#a7cce9b645768dc9a9124ab67166f4480">optional::has_value</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool has_value() const noexcept</div><div class="ttdoc">检查是否包含值</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00475">optional.hpp:475</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;NeForce/network/ssl/ssl_stream.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span>NEFORCE_API ssl_socket final : <span class="keyword">public</span> tcp_socket {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    optional&lt;ssl_stream&gt; ssl_;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    ssl_socket() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">explicit</span> ssl_socket(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#gae2333730750b4450551f71afd3bb2182">native_handle_type</a> fd)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    : tcp_socket(fd) {}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">explicit</span> ssl_socket(tcp_socket sock)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    : tcp_socket(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(sock)) {}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    ssl_socket(ssl_socket&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    ssl_socket&amp; operator=(ssl_socket&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    ~ssl_socket() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> init_server_ssl(<span class="keyword">const</span> ssl_context&amp; ctx);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> init_client_ssl(<span class="keyword">const</span> ssl_context&amp; ctx, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; hostname = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> peer_certificate_info() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> send(memory_view&lt;const char&gt; <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> receive(memory_view&lt;char&gt; buffer, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_ssl() const noexcept<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> ssl_.<a class="code hl_function" href="classoptional.html#a7cce9b645768dc9a9124ab67166f4480">has_value</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NEFORCE_NODISCARD ssl_stream&amp; ssl() noexcept {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> *ssl_;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    NEFORCE_NODISCARD <span class="keyword">const</span> ssl_stream&amp; ssl() const noexcept {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> *ssl_;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
+<div class="ttc" id="aclassoptional_html_a7cce9b645768dc9a9124ab67166f4480"><div class="ttname"><a href="classoptional.html#a7cce9b645768dc9a9124ab67166f4480">optional::has_value</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool has_value() const noexcept</div><div class="ttdoc">检查是否包含值</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00485">optional.hpp:485</a></div></div>
+<div class="ttc" id="agroup___core_types_html_gae2333730750b4450551f71afd3bb2182"><div class="ttname"><a href="group___core_types.html#gae2333730750b4450551f71afd3bb2182">native_handle_type</a></div><div class="ttdeci">int native_handle_type</div><div class="ttdoc">系统句柄类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00055">types.hpp:55</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga2f30f05ade8bbe5bda5e59d2698af9f5"><div class="ttname"><a href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00170">types.hpp:170</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

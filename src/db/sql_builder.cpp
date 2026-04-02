@@ -72,13 +72,13 @@ sql_builder& sql_builder::operator =(const sql_builder& other) {
 }
 
 sql_builder& sql_builder::select(vector<string> fields) {
-    sql_type_ = SQL_OPERATE_TYPE::SELECT;
+    sql_type_ = sql_operate::SELECT;
     ensure_select_data()->fields = move(fields);
     return *this;
 }
 
 sql_builder& sql_builder::select(const std::initializer_list<string> fields) {
-    sql_type_ = SQL_OPERATE_TYPE::SELECT;
+    sql_type_ = sql_operate::SELECT;
     auto* data = ensure_select_data();
     data->fields.clear();
     data->fields.reserve(fields.size());
@@ -89,13 +89,13 @@ sql_builder& sql_builder::select(const std::initializer_list<string> fields) {
 }
 
 sql_builder& sql_builder::select(string field) {
-    sql_type_ = SQL_OPERATE_TYPE::SELECT;
+    sql_type_ = sql_operate::SELECT;
     ensure_select_data()->fields.emplace_back(move(field));
     return *this;
 }
 
 sql_builder& sql_builder::select_all() noexcept {
-    sql_type_ = SQL_OPERATE_TYPE::SELECT;
+    sql_type_ = sql_operate::SELECT;
     if (select_data_) {
         select_data_->fields.clear();
     }
@@ -119,13 +119,13 @@ sql_builder& sql_builder::from(string table, string alias) noexcept {
 }
 
 
-sql_builder& sql_builder::join(const SQL_JOIN_TYPE type, string table, string on_condition) {
+sql_builder& sql_builder::join(const sql_join type, string table, string on_condition) {
     string join_str;
     switch (type) {
-        case SQL_JOIN_TYPE::INNER: join_str = "INNER JOIN "; break;
-        case SQL_JOIN_TYPE::LEFT: join_str = "LEFT JOIN "; break;
-        case SQL_JOIN_TYPE::RIGHT: join_str = "RIGHT JOIN "; break;
-        case SQL_JOIN_TYPE::FULL: join_str = "FULL JOIN "; break;
+        case sql_join::INNER: join_str = "INNER JOIN "; break;
+        case sql_join::LEFT: join_str = "LEFT JOIN "; break;
+        case sql_join::RIGHT: join_str = "RIGHT JOIN "; break;
+        case sql_join::FULL: join_str = "FULL JOIN "; break;
     }
     join_str += move(table) + " ON " + move(on_condition);
     ensure_select_data()->join_clauses.emplace_back(move(join_str));
@@ -133,23 +133,23 @@ sql_builder& sql_builder::join(const SQL_JOIN_TYPE type, string table, string on
 }
 
 sql_builder& sql_builder::join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::INNER, move(table), move(on_condition));
+    return join(sql_join::INNER, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::left_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::LEFT, move(table), move(on_condition));
+    return join(sql_join::LEFT, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::right_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::RIGHT, move(table), move(on_condition));
+    return join(sql_join::RIGHT, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::inner_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::INNER, move(table), move(on_condition));
+    return join(sql_join::INNER, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::full_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::FULL, move(table), move(on_condition));
+    return join(sql_join::FULL, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::where(string condition) {
@@ -279,18 +279,18 @@ sql_builder& sql_builder::having(string condition) {
 }
 
 
-sql_builder& sql_builder::order_by(string field, const SQL_ORDER_TYPE order) {
-    string order_str = move(field) + (order == SQL_ORDER_TYPE::ASC ? " ASC" : " DESC");
+sql_builder& sql_builder::order_by(string field, const sql_order order) {
+    string order_str = move(field) + (order == sql_order::ASC ? " ASC" : " DESC");
     ensure_select_data()->order_by_clauses.emplace_back(move(order_str));
     return *this;
 }
 
 sql_builder& sql_builder::order_by_asc(string field) {
-    return order_by(move(field), SQL_ORDER_TYPE::ASC);
+    return order_by(move(field), sql_order::ASC);
 }
 
 sql_builder& sql_builder::order_by_desc(string field) {
-    return order_by(move(field), SQL_ORDER_TYPE::DESC);
+    return order_by(move(field), sql_order::DESC);
 }
 
 sql_builder& sql_builder::limit(const int count) {
@@ -311,7 +311,7 @@ sql_builder& sql_builder::page(const int page_num, const int page_size) {
 }
 
 sql_builder& sql_builder::insert_into(string table, vector<string> fields) {
-    sql_type_ = SQL_OPERATE_TYPE::INSERT;
+    sql_type_ = sql_operate::INSERT;
     table_ = move(table);
     auto* data = ensure_insert_data();
     data->fields = move(fields);
@@ -321,7 +321,7 @@ sql_builder& sql_builder::insert_into(string table, vector<string> fields) {
 }
 
 sql_builder& sql_builder::insert_into(string table) {
-    sql_type_ = SQL_OPERATE_TYPE::INSERT;
+    sql_type_ = sql_operate::INSERT;
     table_ = move(table);
     ensure_insert_data();
     return *this;
@@ -342,7 +342,7 @@ sql_builder& sql_builder::columns(vector<string> fields) {
 }
 
 sql_builder& sql_builder::update(string table) {
-    sql_type_ = SQL_OPERATE_TYPE::UPDATE;
+    sql_type_ = sql_operate::UPDATE;
     table_ = move(table);
     ensure_update_data();
     return *this;
@@ -369,12 +369,12 @@ sql_builder& sql_builder::set_decrement(string field, const int value) {
 }
 
 sql_builder& sql_builder::remove() {
-    sql_type_ = SQL_OPERATE_TYPE::DELETE;
+    sql_type_ = sql_operate::DELETE;
     return *this;
 }
 
 sql_builder& sql_builder::delete_from(string table) {
-    sql_type_ = SQL_OPERATE_TYPE::DELETE;
+    sql_type_ = sql_operate::DELETE;
     table_ = move(table);
     return *this;
 }
@@ -476,7 +476,7 @@ sql_builder& sql_builder::from_subquery(string subquery, string alias) {
 
 sql_builder& sql_builder::reset() noexcept {
     clear_data();
-    sql_type_ = SQL_OPERATE_TYPE::SELECT;
+    sql_type_ = sql_operate::SELECT;
     table_.clear();
     table_alias_.clear();
     where_conditions_.clear();
@@ -486,7 +486,7 @@ sql_builder& sql_builder::reset() noexcept {
 string sql_builder::build() const {
     string result;
     switch (sql_type_) {
-        case SQL_OPERATE_TYPE::SELECT: {
+        case sql_operate::SELECT: {
             result += "SELECT ";
             if (select_data_ && select_data_->distinct) {
                 result += "DISTINCT ";
@@ -561,7 +561,7 @@ string sql_builder::build() const {
 
             break;
         }
-        case SQL_OPERATE_TYPE::INSERT: {
+        case sql_operate::INSERT: {
             if (!insert_data_ || insert_data_->fields.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No fields for INSERT"));
             }
@@ -578,7 +578,7 @@ string sql_builder::build() const {
             result += ")";
             break;
         }
-        case SQL_OPERATE_TYPE::UPDATE: {
+        case sql_operate::UPDATE: {
             if (!update_data_ || update_data_->assignments.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No assignments for UPDATE"));
             }
@@ -596,7 +596,7 @@ string sql_builder::build() const {
             }
             break;
         }
-        case SQL_OPERATE_TYPE::DELETE: {
+        case sql_operate::DELETE: {
             result += "DELETE FROM " + table_;
             if (!where_conditions_.empty()) {
                 result += " WHERE ";

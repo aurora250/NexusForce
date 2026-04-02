@@ -89,21 +89,26 @@ $(function(){initNavTree('group___partition_algorithms.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">分区算法 </div></div>
+  <div class="headertitle"><div class="title">分区算法 <div class="ingroups"><a class="el" href="group___standard_algorithms.html">标准算法</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>分区算法的实现  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+分区算法 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___partition_algorithms.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:gaa675cc7f025a4451dc1179e2ed53f4f1" id="r_gaa675cc7f025a4451dc1179e2ed53f4f1"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gaa675cc7f025a4451dc1179e2ed53f4f1 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gaa675cc7f025a4451dc1179e2ed53f4f1">partition</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
-<tr class="memdesc:gaa675cc7f025a4451dc1179e2ed53f4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">分区算法  <br /></td></tr>
-<tr class="memitem:gab6d7a6734184b726fc208d71e43706fe" id="r_gab6d7a6734184b726fc208d71e43706fe"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gab6d7a6734184b726fc208d71e43706fe template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gab6d7a6734184b726fc208d71e43706fe">lomuto_partition</a> (Iterator first, Iterator last, const T &amp;pivot, Compare comp)</td></tr>
-<tr class="memdesc:gab6d7a6734184b726fc208d71e43706fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto分区算法  <br /></td></tr>
+<tr class="memitem:ga165394317b9b3996c7a9b5cd4fdc32c8" id="r_ga165394317b9b3996c7a9b5cd4fdc32c8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate&gt; </td></tr>
+<tr class="memitem:ga165394317b9b3996c7a9b5cd4fdc32c8 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga165394317b9b3996c7a9b5cd4fdc32c8">partition</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
+<tr class="memdesc:ga165394317b9b3996c7a9b5cd4fdc32c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">分区算法  <br /></td></tr>
+<tr class="memitem:gabf7e94ae4719b697cb1ee9a21caff522" id="r_gabf7e94ae4719b697cb1ee9a21caff522"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:gabf7e94ae4719b697cb1ee9a21caff522 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gabf7e94ae4719b697cb1ee9a21caff522">lomuto_partition</a> (Iterator first, Iterator last, const T &amp;pivot, Compare comp)</td></tr>
+<tr class="memdesc:gabf7e94ae4719b697cb1ee9a21caff522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto分区算法  <br /></td></tr>
 <tr class="memitem:ga86193efd157c615ae77826fa39f9e097" id="r_ga86193efd157c615ae77826fa39f9e097"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
 <tr class="memitem:ga86193efd157c615ae77826fa39f9e097 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga86193efd157c615ae77826fa39f9e097">lomuto_partition</a> (Iterator first, Iterator last, const T &amp;pivot)</td></tr>
 <tr class="memdesc:ga86193efd157c615ae77826fa39f9e097"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto分区算法  <br /></td></tr>
@@ -163,19 +168,19 @@ template&lt;typename Iterator, typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一部分结束位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00105">105</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00117">117</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a>.</p>
+<p class="reference">引用了 <a class="el" href="partition_8hpp_source.html#l00092">lomuto_partition()</a>.</p>
 
 </div>
 </div>
-<a id="gab6d7a6734184b726fc208d71e43706fe" name="gab6d7a6734184b726fc208d71e43706fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab6d7a6734184b726fc208d71e43706fe">&#9670;&#160;</a></span>lomuto_partition() <span class="overload">[2/2]</span></h2>
+<a id="gabf7e94ae4719b697cb1ee9a21caff522" name="gabf7e94ae4719b697cb1ee9a21caff522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabf7e94ae4719b697cb1ee9a21caff522">&#9670;&#160;</a></span>lomuto_partition() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename T, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -236,21 +241,21 @@ template&lt;typename Iterator, typename T, typename Compare, <a class="el" href=
 <li>重复直到指针相遇 </li>
 </ol>
 
-<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00083">83</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00092">92</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00435">iter_swap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00105">lomuto_partition()</a>, <a class="el" href="sort_8hpp_source.html#l00489">nth_element()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00364">quick_sort()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00333">introspective_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00117">lomuto_partition()</a>, <a class="el" href="sort_8hpp_source.html#l00509">nth_element()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00381">quick_sort()</a>.</p>
 
 </div>
 </div>
-<a id="gaa675cc7f025a4451dc1179e2ed53f4f1" name="gaa675cc7f025a4451dc1179e2ed53f4f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa675cc7f025a4451dc1179e2ed53f4f1">&#9670;&#160;</a></span>partition()</h2>
+<a id="ga165394317b9b3996c7a9b5cd4fdc32c8" name="ga165394317b9b3996c7a9b5cd4fdc32c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga165394317b9b3996c7a9b5cd4fdc32c8">&#9670;&#160;</a></span>partition()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Predicate&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -303,9 +308,9 @@ template&lt;typename Iterator, typename Predicate, <a class="el" href="group___t
 <li>重复直到两个扫描指针相遇 </li>
 </ol>
 
-<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00040">40</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00046">46</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_bid_iter_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00435">iter_swap()</a>.</p>
 
 </div>
 </div>

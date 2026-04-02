@@ -17,8 +17,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup List 双向链表
- * @brief 双向链表容器实现
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -1105,7 +1105,7 @@ template <typename Iterator, typename Alloc>
 list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_value_t<Iterator>, Alloc>;
 #endif
 
-/** @} */ // List
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_LIST_HPP__

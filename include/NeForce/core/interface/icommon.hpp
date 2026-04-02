@@ -46,6 +46,18 @@ public:
     }
 };
 
+/** @} */ // CRTPInterfaces
+
+/**
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
+ * @{
+ */
+
+/**
+ * @brief ihashable的哈希特化
+ * @tparam T 子类类型
+ */
 template <typename T>
 struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
     NEFORCE_NODISCARD constexpr size_t operator ()(const T& obj) const
@@ -54,6 +66,13 @@ struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
     }
 };
 
+/** @} */ // HashPrimary
+
+/**
+ * @defgroup CRTPInterfaces CRTP接口
+ * @brief 提供基本功能的CRTP基类
+ * @{
+ */
 
 /**
  * @struct icomparable

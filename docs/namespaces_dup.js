@@ -1,6 +1,5 @@
 var namespaces_dup =
 [
-    [ "constants", "namespaceconstants.html", null ],
     [ "literals", "namespaceliterals.html", null ],
     [ "placeholders", "namespaceplaceholders.html", [
       [ "p1", "namespaceplaceholders.html#a9fcf8f2fa0e0591d9df352bc625f06d9", null ],
@@ -32,6 +31,5 @@ var namespaces_dup =
       [ "p7", "namespaceplaceholders.html#a854d85436e1211e6b826a49c7e762368", null ],
       [ "p8", "namespaceplaceholders.html#ae084d7fc5b9cc26603271cb0a7e4b3a3", null ],
       [ "p9", "namespaceplaceholders.html#a1672d269ff1067da895af8d697afa8ff", null ]
-    ] ],
-    [ "this_thread", "namespacethis__thread.html", null ]
+    ] ]
 ];

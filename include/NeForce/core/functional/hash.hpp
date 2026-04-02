@@ -7,14 +7,16 @@
  *
  * 此文件提供了各种哈希算法的实现，包括FNV-1a、DJB2和MurmurHash等，
  * 以及基本数据类型的哈希函数特化。支持编译时哈希计算和运行时高效哈希。
+ *
+ * 对基本类型的哈希特化将不展示在文档内，有需要可自行查看本文件内容。
  */
 
 #include "NeForce/core/typeinfo/type_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup HashPrimary 哈希主模板
- * @brief 哈希函数的主模板和基础定义
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
  * @{
  */
 
@@ -31,16 +33,11 @@ template <typename Key, typename Dummy = void>
 struct hash;
 
 /**
- * @brief 指针类型的哈希函数特化
+ * @brief 指针类型的哈希特化
  * @tparam T 指针指向的类型
  */
 template <typename T>
 struct hash<T*> {
-    /**
-     * @brief 指针哈希运算符
-     * @param ptr 要哈希的指针
-     * @return 指针地址的哈希值
-     */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t operator ()(const T* ptr) const noexcept {
         return static_cast<size_t>(reinterpret_cast<uintptr_t>(ptr));
     }
@@ -48,14 +45,13 @@ struct hash<T*> {
 
 /** @} */ // HashPrimary
 
+NEFORCE_BEGIN_CONSTANTS__
+
 /**
- * @defgroup FNVHash FNV哈希算法
- * @brief Fowler-Noll-Vo非加密哈希算法实现
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
  * @{
  */
-
-/// @cond
-NEFORCE_BEGIN_CONSTANTS__
 
 /**
  * @var FNV_OFFSET_BASIS
@@ -81,8 +77,15 @@ NEFORCE_INLINE17 constexpr size_t FNV_PRIME
      = 16777619U;
 #endif
 
+/** @} */ // HashPrimary
+
 NEFORCE_END_CONSTANTS__
-/// @endcond
+
+/**
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
+ * @{
+ */
 
 /**
  * @brief FNV-1a哈希算法
@@ -144,8 +147,9 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) n
     return result;
 }
 
-/** @} */ // FNVHash
+/** @} */ // HashPrimary
 
+/// @cond
 
 template <>
 struct hash<bool> {
@@ -183,12 +187,25 @@ public: \
 NEFORCE_MACRO_RANGE_FLOAT(__NEFORCE_BUILD_FLOAT_HASH_STRUCT)
 #undef __NEFORCE_BUILD_FLOAT_HASH_STRUCT
 
+/// @endcond
 
 /**
- * @defgroup DJB2Hash DJB2哈希算法
- * @brief Daniel J. Bernstein的DJB2哈希算法
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
  * @{
  */
+
+/**
+ * @brief 枚举类型的哈希特化
+ * @tparam T 枚举类型
+ */
+template <typename T>
+struct hash<T, enable_if_t<is_enum_v<T>>> {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 size_t operator ()(const T e) const {
+        using UT = underlying_type_t<T>;
+        return hash<UT>()(static_cast<UT>(e));
+    }
+};
 
 /**
  * @brief DJB2哈希算法
@@ -211,15 +228,8 @@ NEFORCE_CONSTEXPR14 size_t DJB2_hash(const char* str, const size_t len) noexcept
     return hash;
 }
 
-/** @} */ // DJB2Hash
 
-/**
- * @defgroup MurmurHash MurmurHash算法
- * @brief Austin Appleby的MurmurHash非加密哈希算法
- * @{
- */
-
-#ifdef NEFORCE_ARCH_BITS_64
+#if defined(NEFORCE_ARCH_BITS_64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 
 /**
  * @struct murmur_hash
@@ -274,13 +284,6 @@ murmur_hash NEFORCE_API MurmurHash_x64(const void* key, size_t len, uint32_t see
  */
 uint32_t NEFORCE_API MurmurHash_x32(const void* key, size_t len, uint32_t seed) noexcept;
 
-/** @} */ // MurmurHash
-
-/**
- * @defgroup HashTraits 哈希特性检查
- * @brief 检查类型是否支持哈希操作
- * @{
- */
 
 /**
  * @struct is_nothrow_hashable
@@ -335,7 +338,7 @@ template <typename Func, typename Arg>
 constexpr bool is_hash_v = is_hash<Func, Arg>::value;
 #endif
 
-/** @} */ // HashTraits
+/** @} */ // HashPrimary
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FUNCTIONAL_HASH_HPP__

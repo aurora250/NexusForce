@@ -16,6 +16,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup SortAlgorithms 排序算法
  * @brief 排序算法的实现
  * @{
@@ -523,6 +529,8 @@ void nth_element(Iterator first, Iterator nth, Iterator last) {
 }
 
 /** @} */ // SortAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_SORT_HPP__

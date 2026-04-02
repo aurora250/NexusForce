@@ -95,11 +95,12 @@ $(function(){initNavTree('semaphore_8hpp.html','',''); });
 
 <p>信号量支持  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 semaphore.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="semaphore_8hpp__incl.svg" width="754" height="987"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="semaphore_8hpp__incl.svg" width="744" height="971"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="semaphore_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -108,6 +109,8 @@ semaphore.hpp 的引用(Include)关系图:</div>
 类</h2></td></tr>
 <tr class="memitem:counting_5Fsemaphore_3C_20LeastMaxValue_20_3E" id="r_counting_5Fsemaphore_3C_20LeastMaxValue_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcounting__semaphore.html">counting_semaphore&lt; LeastMaxValue &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">计数信号量类模板  <a href="classcounting__semaphore.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:semaphore" id="r_semaphore"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsemaphore.html">semaphore</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">系统信号量类  <a href="classsemaphore.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
@@ -116,7 +119,10 @@ semaphore.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>信号量支持 </p>
-<p>此文件提供了信号量的实现，用于控制对共享资源的并发访问。 </p>
+<p>此文件提供了信号量的实现，用于控制对共享资源的并发访问。 包含两种信号量类型：</p><ul>
+<li><a class="el" href="classcounting__semaphore.html" title="计数信号量类模板">counting_semaphore</a>: 轻量级计数信号量，基于原子操作和等待机制</li>
+<li>semaphore: 系统级信号量，基于操作系统API </li>
+</ul>
 
 <p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

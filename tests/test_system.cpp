@@ -142,19 +142,19 @@ void test_env_var() {
     println(environment::all_envs());
 }
 
-bool signal_handler(SIGNAL_EVENT event, void* context) {
+bool signal_handler(signal_event event, void* context) {
     printcln(color::green(), "处理信号: ", static_cast<int>(event));
 
     switch (event) {
-        case SIGNAL_EVENT::INTERRUPT: {
+        case signal_event::INTERRUPT: {
             println("收到中断信号 (Ctrl+C)");
             return false;
         }
-        case SIGNAL_EVENT::TERMINATE: {
+        case signal_event::TERMINATE: {
             println("收到终止信号");
             return false;
         }
-        case SIGNAL_EVENT::USER1: {
+        case signal_event::USER1: {
             println("收到用户自定义信号1");
             if (context) {
                 const int* value = static_cast<int*>(context);
@@ -162,7 +162,7 @@ bool signal_handler(SIGNAL_EVENT event, void* context) {
             }
             return true;
         }
-        case SIGNAL_EVENT::TIMEOUT: {
+        case signal_event::TIMEOUT: {
             println("超时信号");
             return false;
         }
@@ -178,14 +178,14 @@ void test_signal() {
         signal_guard guard;
 
         signal_manager::instance().register_handler(
-            SIGNAL_EVENT::INTERRUPT,
+            signal_event::INTERRUPT,
             signal_handler
         );
 
-        vector<SIGNAL_EVENT> signals = {
-            SIGNAL_EVENT::TERMINATE,
-            SIGNAL_EVENT::USER1,
-            SIGNAL_EVENT::USER2
+        vector<signal_event> signals = {
+            signal_event::TERMINATE,
+            signal_event::USER1,
+            signal_event::USER2
         };
         signal_manager::instance().register_handlers(
             signals,
@@ -211,7 +211,7 @@ void test_signal() {
             if (i == 5) {
                 int context_data = 42;
                 signal_manager::instance().send_signal(
-                    SIGNAL_EVENT::USER1,
+                    signal_event::USER1,
                     &context_data
                 );
             }

@@ -88,6 +88,7 @@ var menudata={children:[
 {text:"u",url:"functions_func_u.html#index_u"},
 {text:"v",url:"functions_func_v.html#index_v"},
 {text:"w",url:"functions_func_w.html#index_w"},
+{text:"x",url:"functions_func_x.html#index_x"},
 {text:"y",url:"functions_func_y.html#index_y"},
 {text:"z",url:"functions_func_z.html#index_z"},
 {text:"~",url:"functions_func_~.html#index__7E"}]},
@@ -124,6 +125,7 @@ var menudata={children:[
 {text:"d",url:"functions_type_d.html#index_d"},
 {text:"e",url:"functions_type_e.html#index_e"},
 {text:"f",url:"functions_type_f.html#index_f"},
+{text:"g",url:"functions_type_g.html#index_g"},
 {text:"h",url:"functions_type_h.html#index_h"},
 {text:"i",url:"functions_type_i.html#index_i"},
 {text:"k",url:"functions_type_k.html#index_k"},
@@ -134,7 +136,8 @@ var menudata={children:[
 {text:"r",url:"functions_type_r.html#index_r"},
 {text:"s",url:"functions_type_s.html#index_s"},
 {text:"t",url:"functions_type_t.html#index_t"},
-{text:"v",url:"functions_type_v.html#index_v"}]},
+{text:"v",url:"functions_type_v.html#index_v"},
+{text:"w",url:"functions_type_w.html#index_w"}]},
 {text:"枚举",url:"functions_enum.html"},
 {text:"枚举值",url:"functions_eval.html"},
 {text:"相关符号",url:"functions_rela.html"}]}]},
@@ -142,8 +145,7 @@ var menudata={children:[
 {text:"文件列表",url:"files.html"},
 {text:"文件成员",url:"globals.html",children:[
 {text:"全部",url:"globals.html",children:[
-{text:"_",url:"globals.html#index__5F"},
-{text:"a",url:"globals_a.html#index_a"},
+{text:"a",url:"globals.html#index_a"},
 {text:"b",url:"globals_b.html#index_b"},
 {text:"c",url:"globals_c.html#index_c"},
 {text:"d",url:"globals_d.html#index_d"},
@@ -166,6 +168,7 @@ var menudata={children:[
 {text:"u",url:"globals_u.html#index_u"},
 {text:"v",url:"globals_v.html#index_v"},
 {text:"w",url:"globals_w.html#index_w"},
+{text:"x",url:"globals_x.html#index_x"},
 {text:"y",url:"globals_y.html#index_y"}]},
 {text:"函数",url:"globals_func.html",children:[
 {text:"a",url:"globals_func.html#index_a"},
@@ -189,6 +192,7 @@ var menudata={children:[
 {text:"t",url:"globals_func_t.html#index_t"},
 {text:"u",url:"globals_func_u.html#index_u"},
 {text:"v",url:"globals_func_v.html#index_v"},
+{text:"x",url:"globals_func_x.html#index_x"},
 {text:"y",url:"globals_func_y.html#index_y"}]},
 {text:"变量",url:"globals_vars.html",children:[
 {text:"b",url:"globals_vars.html#index_b"},
@@ -229,5 +233,4 @@ var menudata={children:[
 {text:"y",url:"globals_type.html#index_y"}]},
 {text:"枚举",url:"globals_enum.html"},
 {text:"宏定义",url:"globals_defs.html",children:[
-{text:"_",url:"globals_defs.html#index__5F"},
 {text:"n",url:"globals_defs.html#index_n"}]}]}]}]}

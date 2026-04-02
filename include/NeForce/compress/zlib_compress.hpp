@@ -10,7 +10,7 @@
  * 包括一次性压缩和流式压缩两种模式。
  */
 
-#ifdef NEFORCE_SUPPORT_ZLIB
+#if defined(NEFORCE_SUPPORT_ZLIB) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/string/string.hpp"
 #include <zlib.h>
@@ -28,7 +28,17 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * zlib操作异常。
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(zlib_exception, system_exception, "Zlib Operation Failed.")
+struct zlib_exception final : thirdparty_exception {
+    explicit zlib_exception(const char* info = "Zlib Operation Failed.",
+                            const char* type = static_type,
+                            const int code = 0) noexcept
+    : thirdparty_exception(info, type, code) {}
+
+    explicit zlib_exception(const exception& e) : thirdparty_exception(e) {}
+
+    ~zlib_exception() override = default;
+    static constexpr auto static_type = "zlib_exception";
+};
 
 /** @} */ // Exceptions
 

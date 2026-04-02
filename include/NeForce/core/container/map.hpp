@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Map 映射
- * @brief 基于红黑树的有序键值对容器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -631,7 +631,7 @@ template <typename Key, typename T, typename Alloc>
 map(std::initializer_list<pair<Key, T>>, Alloc) -> map<Key, T, less<Key>, Alloc>;
 #endif
 
-/** @} */ // Map
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_MAP_HPP__

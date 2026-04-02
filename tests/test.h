@@ -5,10 +5,11 @@ using namespace neforce;
 
 const path& res_root();
 
-bool signal_handler(SIGNAL_EVENT event, void* context);
+bool signal_handler(signal_event event, void* context);
 
 
 void test_file();
+void test_pathtree();
 void test_process();
 void test_datetimes();
 void test_print();

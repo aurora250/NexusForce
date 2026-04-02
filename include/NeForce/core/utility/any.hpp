@@ -8,6 +8,7 @@
  * 此文件提供了类型安全的任意类，可以在运行时存储和访问任何类型的值。
  */
 
+#include "NeForce/core/exception/breakpoint.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include <initializer_list>
 #include <typeinfo>
@@ -43,10 +44,21 @@ NEFORCE_END_INNER__
 
 /**
  * @struct anycast_exception
- * @extends typecast_exception
  * @brief any转换异常
  */
-NEFORCE_ERROR_BUILD_DERIVED_CLASS(anycast_exception, typecast_exception, "Cast From any Type Failed.")
+struct anycast_exception final : typecast_exception {
+    explicit anycast_exception(const char* info = "Cast From any Type Failed.",
+                               const char* type = static_type,
+                               const int code = 0) noexcept
+    : typecast_exception(info, type, code) {}
+
+    explicit anycast_exception(const exception& e)
+    : typecast_exception(e) {}
+
+    ~anycast_exception() override = default;
+
+    static constexpr auto static_type = "anycast_exception";
+};
 
 /** @} */ // Exceptions
 

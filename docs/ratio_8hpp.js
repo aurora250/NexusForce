@@ -15,9 +15,9 @@ var ratio_8hpp =
     [ "nano", "group___s_i_units.html#ga349bee71865755536b99842ec17234de", null ],
     [ "peta", "group___s_i_units.html#ga95229110f3c875b07502e3001f80eb92", null ],
     [ "pico", "group___s_i_units.html#ga75d6d4af732e8816459f593379d95a1e", null ],
-    [ "ratio_add", "group___ratio_class.html#ga9b526d5e063afa29e90d92466c38b6c9", null ],
-    [ "ratio_divide", "group___ratio_class.html#ga321792a8bd772f6ad121402329efda64", null ],
-    [ "ratio_multiply", "group___ratio_class.html#gabee89ba418e51c333348bcc9c2c906a3", null ],
-    [ "ratio_subtract", "group___ratio_class.html#ga9e137bda60d1f8e668b3ed828ad99415", null ],
+    [ "ratio_add", "group___ratio_class.html#ga10d63a785db8e771c356addf4eba7bfc", null ],
+    [ "ratio_divide", "group___ratio_class.html#gae324269b0fe8d0d16c4b4f76649dd640", null ],
+    [ "ratio_multiply", "group___ratio_class.html#ga191e42eb9dcda5b5f126a5c3463bef2f", null ],
+    [ "ratio_subtract", "group___ratio_class.html#ga7463b6530129e8162e0172bcc0e3fd57", null ],
     [ "tera", "group___s_i_units.html#gae6c1bb30ae523be528754aa2820898e0", null ]
 ];

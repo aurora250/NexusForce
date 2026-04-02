@@ -94,14 +94,14 @@ $(function(){initNavTree('db__config_8hpp_source.html','',''); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_DATABASE_DB_CONFIG_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_DATABASE_DB_CONFIG_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">../core/string/string.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><a class="code hl_define" href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a>(database_typecast_exception, <a class="code hl_struct" href="structdatabase__exception.html">database_exception</a>, <span class="stringliteral">&quot;Database Type Cast Failed.&quot;</span>)</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><a class="code hl_define" href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a>(database_prepared_stmt_exception, <a class="code hl_struct" href="structdatabase__exception.html">database_exception</a>, <span class="stringliteral">&quot;Database Prepared Statement Operations Error.&quot;</span>)</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>enum class DB_TYPE {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>enum class db_type : <a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifdef NEFORCE_SUPPORT_MYSQL</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    MYSQL = 1,</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#endif</span></div>
@@ -141,14 +141,13 @@ $(function(){initNavTree('db__config_8hpp_source.html','',''); });
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_DB_CONFIG_HPP__</span></div>
+<div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00098">types.hpp:98</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
 <div class="ttc" id="agroup___exception_handling_html_ga438313508830676344f6ccbfad172758"><div class="ttname"><a href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a></div><div class="ttdeci">#define NEFORCE_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO)</div><div class="ttdoc">构建最终异常类宏</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00064">exception.hpp:64</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
 <div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
-<div class="ttc" id="astructdatabase__exception_html"><div class="ttname"><a href="structdatabase__exception.html">database_exception</a></div><div class="ttdoc">数据库行为异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00243">exception.hpp:243</a></div></div>
+<div class="ttc" id="astructdatabase__exception_html"><div class="ttname"><a href="structdatabase__exception.html">database_exception</a></div><div class="ttdoc">数据库行为异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00249">exception.hpp:249</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

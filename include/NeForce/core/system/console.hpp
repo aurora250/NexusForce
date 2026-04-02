@@ -19,10 +19,20 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct console_exception
- * @extends device_exception
  * @brief 控制台行为异常
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(console_exception, device_exception, "Pipe Operation Failed.")
+struct console_exception final : device_exception {
+    explicit console_exception(const char* info = "Pipe Operation Failed.",
+                               const char* type = static_type,
+                               const int code = 0) noexcept
+    : device_exception(info, type, code) {}
+
+    explicit console_exception(const exception& e)
+    : device_exception(e) {}
+
+    ~console_exception() override = default;
+    static constexpr auto static_type = "console_exception";
+};
 
 /** @} */ // Exceptions
 
@@ -697,7 +707,48 @@ NEFORCE_ALWAYS_INLINE_INLINE void println() {
     console.println();
 }
 
-#ifndef NEFORCE_STANDARD_17
+#if defined(NEFORCE_STANDARD_17) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+
+/**
+ * @brief 打印多个值
+ */
+template <typename This, typename ...Rests>
+void print(const This& t, const Rests&... r) {
+    console.print<remove_cvref_t<This>>(t);
+    ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
+}
+
+/**
+ * @brief 带颜色打印多个值
+ */
+template <typename This, typename ...Rests>
+void printc(const color& color, const This& t, const Rests&... r) {
+    console.printc<remove_cvref_t<This>>(color, t);
+    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
+}
+
+/**
+ * @brief 打印多个值并换行
+ */
+template <typename This, typename ...Rests>
+void println(const This& t, const Rests&... r) {
+    console.print<remove_cvref_t<This>>(t);
+    ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
+    println();
+}
+
+/**
+ * @brief 带颜色打印多个值并换行
+ */
+template <typename This, typename ...Rests>
+void printcln(const color& color, const This& t, const Rests&... r) {
+    console.printc<remove_cvref_t<This>>(color, t);
+    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
+    println();
+}
+
+#else
+
 /// @cond
 NEFORCE_BEGIN_INNER__
 
@@ -764,46 +815,6 @@ void printcln(const color& color, const This& t, const Rests&... rests) {
     println();
 }
 
-#else
-
-/**
- * @brief 打印多个值
- */
-template <typename This, typename ...Rests>
-void print(const This& t, const Rests&... r) {
-    console.print<remove_cvref_t<This>>(t);
-    ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
-}
-
-/**
- * @brief 带颜色打印多个值
- */
-template <typename This, typename ...Rests>
-void printc(const color& color, const This& t, const Rests&... r) {
-    console.printc<remove_cvref_t<This>>(color, t);
-    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
-}
-
-/**
- * @brief 打印多个值并换行
- */
-template <typename This, typename ...Rests>
-void println(const This& t, const Rests&... r) {
-    console.print<remove_cvref_t<This>>(t);
-    ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
-    println();
-}
-
-/**
- * @brief 带颜色打印多个值并换行
- */
-template <typename This, typename ...Rests>
-void printcln(const color& color, const This& t, const Rests&... r) {
-    console.printc<remove_cvref_t<This>>(color, t);
-    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
-    println();
-}
-
 #endif
 
 /**
@@ -823,11 +834,17 @@ void printfln(const string_view fmt, Args&&... args) {
     println();
 }
 
+/**
+ * @brief 格式化颜色打印
+ */
 template <typename... Args>
 void printcf(const color& color, const string_view fmt, Args&&... args) {
     console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);
 }
 
+/**
+ * @brief 格式化颜色打印并换行
+ */
 template <typename... Args>
 void printcfln(const color& color, const string_view fmt, Args&&... args) {
     console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);

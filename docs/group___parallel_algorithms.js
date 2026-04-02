@@ -1,5 +1,5 @@
 var group___parallel_algorithms =
 [
-    [ "reduce", "group___parallel_algorithms.html#ga3b5bb62ce52f535f960cee0e89c098a2", null ],
-    [ "transform_reduce", "group___parallel_algorithms.html#ga46cae370db6b6a2b3b980b815382595c", null ]
+    [ "reduce", "group___parallel_algorithms.html#gad447586eb3e4c5bd99c06300195deeba", null ],
+    [ "transform_reduce", "group___parallel_algorithms.html#ga9c84b149470430f99e5bb9f2de2a03dd", null ]
 ];

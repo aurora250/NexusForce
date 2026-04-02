@@ -9,7 +9,7 @@ var classini__value =
     [ "as_section", "classini__value.html#aea8366c0aeecc956e688dd6800073f8b", null ],
     [ "is_property", "classini__value.html#a21831bfb54cc6721ee70433915d11227", null ],
     [ "is_section", "classini__value.html#aeba633d0c30110bc93e5602b52d04474", null ],
-    [ "to_document", "group___ini_config.html#gac63ce33922f3996edc6d5a681cd78147", null ],
-    [ "to_string", "group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede", null ],
+    [ "to_document", "classini__value.html#a697279f8769fd320b39c8ab312017cdd", null ],
+    [ "to_string", "classini__value.html#a10ca623af48564eb1d740a4f63b42e6c", null ],
     [ "type", "classini__value.html#a721b4228adb73ddc402724c6f34889fb", null ]
 ];

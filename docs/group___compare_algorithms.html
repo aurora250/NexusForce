@@ -89,24 +89,29 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">比较算法 </div></div>
+  <div class="headertitle"><div class="title">比较算法 <div class="ingroups"><a class="el" href="group___standard_algorithms.html">标准算法</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>比较算法的实现  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+比较算法 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___compare_algorithms.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga036b36b8a9c1e27a0552d0534da786da" id="r_ga036b36b8a9c1e27a0552d0534da786da"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga036b36b8a9c1e27a0552d0534da786da template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga036b36b8a9c1e27a0552d0534da786da">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2)))</td></tr>
-<tr class="memdesc:ga036b36b8a9c1e27a0552d0534da786da"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
+<tr class="memitem:ga682c1803a35a1de8b019d003138ae5dd" id="r_ga682c1803a35a1de8b019d003138ae5dd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate&gt; </td></tr>
+<tr class="memitem:ga682c1803a35a1de8b019d003138ae5dd template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga682c1803a35a1de8b019d003138ae5dd">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2)))</td></tr>
+<tr class="memdesc:ga682c1803a35a1de8b019d003138ae5dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
 <tr class="memitem:ga30ce5b72d86c71092da113c7703b0cd9" id="r_ga30ce5b72d86c71092da113c7703b0cd9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
-<tr class="memitem:ga30ce5b72d86c71092da113c7703b0cd9 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga30ce5b72d86c71092da113c7703b0cd9">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> equal(first1, last1, first2, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structequal__to.html">equal_to</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator1 &gt; &gt;())))</td></tr>
+<tr class="memitem:ga30ce5b72d86c71092da113c7703b0cd9 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga30ce5b72d86c71092da113c7703b0cd9">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(noexcept(_NEFORCE equal(first1, last1, first2, _NEFORCE <a class="el" href="structequal__to.html">equal_to</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator1 &gt; &gt;())))</td></tr>
 <tr class="memdesc:ga30ce5b72d86c71092da113c7703b0cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
-<tr class="memitem:ga65b86622c1e8805c6d4511950105672c" id="r_ga65b86622c1e8805c6d4511950105672c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga65b86622c1e8805c6d4511950105672c template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga65b86622c1e8805c6d4511950105672c">equal_range</a> (Iterator first, Iterator last, const T &amp;value, Compare comp)</td></tr>
-<tr class="memdesc:ga65b86622c1e8805c6d4511950105672c"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
+<tr class="memitem:ga396286e554573557c1781c8b3bae3860" id="r_ga396286e554573557c1781c8b3bae3860"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga396286e554573557c1781c8b3bae3860 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga396286e554573557c1781c8b3bae3860">equal_range</a> (Iterator first, Iterator last, const T &amp;value, Compare comp)</td></tr>
+<tr class="memdesc:ga396286e554573557c1781c8b3bae3860"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
 <tr class="memitem:gac30be768f6bc7c5ca6d488a61f2335ba" id="r_gac30be768f6bc7c5ca6d488a61f2335ba"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
 <tr class="memitem:gac30be768f6bc7c5ca6d488a61f2335ba template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac30be768f6bc7c5ca6d488a61f2335ba">equal_range</a> (Iterator first, Iterator last, const T &amp;value)</td></tr>
 <tr class="memdesc:gac30be768f6bc7c5ca6d488a61f2335ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
@@ -126,35 +131,35 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 <tr class="memitem:ga69873b0598cc28f930d89d2930e78f85 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga69873b0598cc28f930d89d2930e78f85">median</a> (const T &amp;a, const T &amp;b, const T &amp;c, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
 <tr class="memdesc:ga69873b0598cc28f930d89d2930e78f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
 <tr class="memitem:gabbd04f7b10b553579113f5f424c6ee9e" id="r_gabbd04f7b10b553579113f5f424c6ee9e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gabbd04f7b10b553579113f5f424c6ee9e template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gabbd04f7b10b553579113f5f424c6ee9e">median</a> (const T &amp;a, const T &amp;b, const T &amp;c) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> median(a, b, c, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structless.html">less</a>&lt; T &gt;())))</td></tr>
+<tr class="memitem:gabbd04f7b10b553579113f5f424c6ee9e template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gabbd04f7b10b553579113f5f424c6ee9e">median</a> (const T &amp;a, const T &amp;b, const T &amp;c) noexcept(noexcept(_NEFORCE median(a, b, c, _NEFORCE <a class="el" href="structless.html">less</a>&lt; T &gt;())))</td></tr>
 <tr class="memdesc:gabbd04f7b10b553579113f5f424c6ee9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
-<tr class="memitem:ga93f642042bfad29f941dc8f66c12ecaf" id="r_ga93f642042bfad29f941dc8f66c12ecaf"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga93f642042bfad29f941dc8f66c12ecaf template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ga93f642042bfad29f941dc8f66c12ecaf">minmax</a> (Iterator first, Iterator last, Compare comp)</td></tr>
-<tr class="memdesc:ga93f642042bfad29f941dc8f66c12ecaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
+<tr class="memitem:ga70a83034ef33873011570363e7c39b20" id="r_ga70a83034ef33873011570363e7c39b20"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
+<tr class="memitem:ga70a83034ef33873011570363e7c39b20 template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ga70a83034ef33873011570363e7c39b20">minmax</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga70a83034ef33873011570363e7c39b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
 <tr class="memitem:ga61158fd40dfd86ed5f3fc4834f321fed" id="r_ga61158fd40dfd86ed5f3fc4834f321fed"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga61158fd40dfd86ed5f3fc4834f321fed template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga61158fd40dfd86ed5f3fc4834f321fed">minmax</a> (Iterator first, Iterator last)</td></tr>
 <tr class="memdesc:ga61158fd40dfd86ed5f3fc4834f321fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
-<tr class="memitem:ga3cc3e298f8ce7cca7211883311e56b5e" id="r_ga3cc3e298f8ce7cca7211883311e56b5e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga3cc3e298f8ce7cca7211883311e56b5e template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga3cc3e298f8ce7cca7211883311e56b5e">max_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
-<tr class="memdesc:ga3cc3e298f8ce7cca7211883311e56b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
+<tr class="memitem:gae047220bf13f52d30732510ec976bf5c" id="r_gae047220bf13f52d30732510ec976bf5c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
+<tr class="memitem:gae047220bf13f52d30732510ec976bf5c template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gae047220bf13f52d30732510ec976bf5c">max_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gae047220bf13f52d30732510ec976bf5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
 <tr class="memitem:gaa226ea8eefb93332e43e44ab173c650e" id="r_gaa226ea8eefb93332e43e44ab173c650e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:gaa226ea8eefb93332e43e44ab173c650e template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gaa226ea8eefb93332e43e44ab173c650e">max_element</a> (Iterator first, Iterator last)</td></tr>
 <tr class="memdesc:gaa226ea8eefb93332e43e44ab173c650e"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
 <tr class="memitem:ga21bf5779df2939ac7e9bbf2fa016798c" id="r_ga21bf5779df2939ac7e9bbf2fa016798c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga21bf5779df2939ac7e9bbf2fa016798c template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga21bf5779df2939ac7e9bbf2fa016798c">max</a> (std::initializer_list&lt; T &gt; <a class="el" href="classlist.html">list</a>)</td></tr>
 <tr class="memdesc:ga21bf5779df2939ac7e9bbf2fa016798c"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回初始化列表中的最大值  <br /></td></tr>
-<tr class="memitem:ga3e7d0df68e92c6f3efa9ad08941c0912" id="r_ga3e7d0df68e92c6f3efa9ad08941c0912"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga3e7d0df68e92c6f3efa9ad08941c0912 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga3e7d0df68e92c6f3efa9ad08941c0912">min_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
-<tr class="memdesc:ga3e7d0df68e92c6f3efa9ad08941c0912"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
+<tr class="memitem:gaab4025164d755b851a1282e3cfbc3d1a" id="r_gaab4025164d755b851a1282e3cfbc3d1a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
+<tr class="memitem:gaab4025164d755b851a1282e3cfbc3d1a template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gaab4025164d755b851a1282e3cfbc3d1a">min_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaab4025164d755b851a1282e3cfbc3d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
 <tr class="memitem:ga4ee266bd70d4abf25afc39fe5eb8ac53" id="r_ga4ee266bd70d4abf25afc39fe5eb8ac53"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga4ee266bd70d4abf25afc39fe5eb8ac53 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga4ee266bd70d4abf25afc39fe5eb8ac53">min_element</a> (Iterator first, Iterator last)</td></tr>
 <tr class="memdesc:ga4ee266bd70d4abf25afc39fe5eb8ac53"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
 <tr class="memitem:ga69a55cc167f3341fffddaffc0686dc2a" id="r_ga69a55cc167f3341fffddaffc0686dc2a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga69a55cc167f3341fffddaffc0686dc2a template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga69a55cc167f3341fffddaffc0686dc2a">min</a> (std::initializer_list&lt; T &gt; <a class="el" href="classlist.html">list</a>)</td></tr>
 <tr class="memdesc:ga69a55cc167f3341fffddaffc0686dc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回初始化列表中的最小值  <br /></td></tr>
-<tr class="memitem:ga99bb01978c10c89f43e747fa2dfaecd7" id="r_ga99bb01978c10c89f43e747fa2dfaecd7"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga99bb01978c10c89f43e747fa2dfaecd7 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga99bb01978c10c89f43e747fa2dfaecd7">minmax_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
-<tr class="memdesc:ga99bb01978c10c89f43e747fa2dfaecd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
+<tr class="memitem:gaafcb422504addb63d771b9061f7533a9" id="r_gaafcb422504addb63d771b9061f7533a9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
+<tr class="memitem:gaafcb422504addb63d771b9061f7533a9 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaafcb422504addb63d771b9061f7533a9">minmax_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaafcb422504addb63d771b9061f7533a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
 <tr class="memitem:ga4bf98caed4f28cf09092e830792d143a" id="r_ga4bf98caed4f28cf09092e830792d143a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga4bf98caed4f28cf09092e830792d143a template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga4bf98caed4f28cf09092e830792d143a">minmax_element</a> (Iterator first, Iterator last)</td></tr>
 <tr class="memdesc:ga4bf98caed4f28cf09092e830792d143a"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
@@ -162,17 +167,17 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 <tr class="memitem:ga6adb4308a8ce2f67f21bf8b2599fa4ad template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga6adb4308a8ce2f67f21bf8b2599fa4ad">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper, Compare comp) noexcept(noexcept(comp(value, lower)))</td></tr>
 <tr class="memdesc:ga6adb4308a8ce2f67f21bf8b2599fa4ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
 <tr class="memitem:gaed82ddbf10f93f2a7912dea29587ea4d" id="r_gaed82ddbf10f93f2a7912dea29587ea4d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gaed82ddbf10f93f2a7912dea29587ea4d template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaed82ddbf10f93f2a7912dea29587ea4d">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> clamp(value, lower, upper, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structless.html">less</a>&lt; T &gt;())))</td></tr>
+<tr class="memitem:gaed82ddbf10f93f2a7912dea29587ea4d template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaed82ddbf10f93f2a7912dea29587ea4d">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper) noexcept(noexcept(_NEFORCE clamp(value, lower, upper, _NEFORCE <a class="el" href="structless.html">less</a>&lt; T &gt;())))</td></tr>
 <tr class="memdesc:gaed82ddbf10f93f2a7912dea29587ea4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
-<tr class="memitem:gac2a7bf2e648cdd3aeb26ac994c4cc026" id="r_gac2a7bf2e648cdd3aeb26ac994c4cc026"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gac2a7bf2e648cdd3aeb26ac994c4cc026 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gac2a7bf2e648cdd3aeb26ac994c4cc026">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2))</td></tr>
-<tr class="memdesc:gac2a7bf2e648cdd3aeb26ac994c4cc026"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
-<tr class="memitem:ga8b23344007862fb7f8c57cb7e8ef9faa" id="r_ga8b23344007862fb7f8c57cb7e8ef9faa"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga8b23344007862fb7f8c57cb7e8ef9faa template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga8b23344007862fb7f8c57cb7e8ef9faa">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __lexicographical_compare_aux(first1, last1, first2, last2)))</td></tr>
-<tr class="memdesc:ga8b23344007862fb7f8c57cb7e8ef9faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
-<tr class="memitem:ga59e483a83ea490570027f614657e74b8" id="r_ga59e483a83ea490570027f614657e74b8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga59e483a83ea490570027f614657e74b8 template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ga59e483a83ea490570027f614657e74b8">mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Compare comp)</td></tr>
-<tr class="memdesc:ga59e483a83ea490570027f614657e74b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
+<tr class="memitem:ga9b8af8f5da11c5b93627d6e5fb30f784" id="r_ga9b8af8f5da11c5b93627d6e5fb30f784"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </td></tr>
+<tr class="memitem:ga9b8af8f5da11c5b93627d6e5fb30f784 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2))</td></tr>
+<tr class="memdesc:ga9b8af8f5da11c5b93627d6e5fb30f784"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
+<tr class="memitem:gabfbbda604611f4f7c0d36c08eac44941" id="r_gabfbbda604611f4f7c0d36c08eac44941"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:gabfbbda604611f4f7c0d36c08eac44941 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gabfbbda604611f4f7c0d36c08eac44941">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept(noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, last2)))</td></tr>
+<tr class="memdesc:gabfbbda604611f4f7c0d36c08eac44941"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
+<tr class="memitem:gaa1f5764de7664a120fcf33ccfe392d5b" id="r_gaa1f5764de7664a120fcf33ccfe392d5b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </td></tr>
+<tr class="memitem:gaa1f5764de7664a120fcf33ccfe392d5b template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="#gaa1f5764de7664a120fcf33ccfe392d5b">mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Compare comp)</td></tr>
+<tr class="memdesc:gaa1f5764de7664a120fcf33ccfe392d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
 <tr class="memitem:ga16ccb89e351ec10651b7c27d3bdc9c37" id="r_ga16ccb89e351ec10651b7c27d3bdc9c37"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
 <tr class="memitem:ga16ccb89e351ec10651b7c27d3bdc9c37 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga16ccb89e351ec10651b7c27d3bdc9c37">mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2)</td></tr>
 <tr class="memdesc:ga16ccb89e351ec10651b7c27d3bdc9c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
@@ -231,9 +236,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>限制后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00440">440</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00453">453</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00422">clamp()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00435">clamp()</a>.</p>
 
 </div>
 </div>
@@ -301,9 +306,9 @@ template&lt;typename T, typename Compare&gt; </div>
 </ul>
 <p>要求 lower &lt;= upper </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00422">422</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00435">435</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00440">clamp()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00453">clamp()</a>.</p>
 
 </div>
 </div>
@@ -359,19 +364,19 @@ template&lt;typename Iterator1, typename Iterator2&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果两个范围相等则返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00067">67</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00073">73</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00049">equal()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00054">equal()</a>.</p>
 
 </div>
 </div>
-<a id="ga036b36b8a9c1e27a0552d0534da786da" name="ga036b36b8a9c1e27a0552d0534da786da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga036b36b8a9c1e27a0552d0534da786da">&#9670;&#160;</a></span>equal() <span class="overload">[2/2]</span></h2>
+<a id="ga682c1803a35a1de8b019d003138ae5dd" name="ga682c1803a35a1de8b019d003138ae5dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga682c1803a35a1de8b019d003138ae5dd">&#9670;&#160;</a></span>equal() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -425,9 +430,11 @@ template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a
 <dl class="section return"><dt>返回</dt><dd>如果两个范围相等则返回true，否则返回false</dd></dl>
 <p>比较范围 [first1, last1) 和以 first2 开始的范围是否相等。 使用二元谓词 binary_pred 判断两个元素是否相等。 要求第二个范围至少与第一个范围一样长。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00049">49</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00054">54</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00067">equal()</a>, <a class="el" href="array_8hpp_source.html#l00448">array&lt; T, Size &gt;::operator==()</a>, <a class="el" href="bitmap_8hpp_source.html#l01158">bitmap::operator==()</a>, <a class="el" href="deque_8hpp_source.html#l01499">deque&lt; T, Alloc, BufSize &gt;::operator==()</a>, <a class="el" href="list_8hpp_source.html#l01087">list&lt; T, Alloc &gt;::operator==()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01546">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator==()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01253">vector&lt; byte_t &gt;::operator==()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00073">equal()</a>, <a class="el" href="array_8hpp_source.html#l00448">array&lt; byte_t, MAC_LEN &gt;::operator==()</a>, <a class="el" href="bitmap_8hpp_source.html#l01158">bitmap::operator==()</a>, <a class="el" href="deque_8hpp_source.html#l01494">deque&lt; T, Alloc, BufSize &gt;::operator==()</a>, <a class="el" href="list_8hpp_source.html#l01087">list&lt; pair&lt; Key, Value &gt; &gt;::operator==()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01579">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator==()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01253">vector&lt; byte_t &gt;::operator==()</a>.</p>
 
 </div>
 </div>
@@ -483,19 +490,19 @@ template&lt;typename Iterator, typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含相等范围的pair&lt;起始迭代器, 结束迭代器&gt; </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00122">122</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00131">131</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00087">equal_range()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00093">equal_range()</a>.</p>
 
 </div>
 </div>
-<a id="ga65b86622c1e8805c6d4511950105672c" name="ga65b86622c1e8805c6d4511950105672c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga65b86622c1e8805c6d4511950105672c">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+<a id="ga396286e554573557c1781c8b3bae3860" name="ga396286e554573557c1781c8b3bae3860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga396286e554573557c1781c8b3bae3860">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename T, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -549,21 +556,21 @@ template&lt;typename Iterator, typename T, typename Compare, <a class="el" href=
 <dl class="section return"><dt>返回</dt><dd>包含相等范围的pair&lt;起始迭代器, 结束迭代器&gt;</dd></dl>
 <p>在已排序的范围 [first, last) 中查找所有等于 value 的元素。 返回的pair包含相等范围的 [起始, 结束) 迭代器。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00087">87</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00093">93</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00090">advance()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="search_8hpp_source.html#l00037">lower_bound()</a> , 以及 <a class="el" href="search_8hpp_source.html#l00087">upper_bound()</a>.</p>
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00108">advance()</a>, <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00582">is_ranges_fwd_iter_v</a>, <a class="el" href="search_8hpp_source.html#l00043">lower_bound()</a> , 以及 <a class="el" href="search_8hpp_source.html#l00095">upper_bound()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00122">equal_range()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00131">equal_range()</a>.</p>
 
 </div>
 </div>
-<a id="ga8b23344007862fb7f8c57cb7e8ef9faa" name="ga8b23344007862fb7f8c57cb7e8ef9faa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8b23344007862fb7f8c57cb7e8ef9faa">&#9670;&#160;</a></span>lexicographical_compare() <span class="overload">[1/2]</span></h2>
+<a id="gabfbbda604611f4f7c0d36c08eac44941" name="gabfbbda604611f4f7c0d36c08eac44941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabfbbda604611f4f7c0d36c08eac44941">&#9670;&#160;</a></span>lexicographical_compare() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -616,19 +623,19 @@ template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___
 <dl class="section return"><dt>返回</dt><dd>如果第一个范围字典序小于第二个范围则返回true，否则返回false</dd></dl>
 <p>对连续迭代器进行优化，使用内存比较提高性能。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00543">543</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00551">551</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>.</p>
 
 </div>
 </div>
-<a id="gac2a7bf2e648cdd3aeb26ac994c4cc026" name="gac2a7bf2e648cdd3aeb26ac994c4cc026"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac2a7bf2e648cdd3aeb26ac994c4cc026">&#9670;&#160;</a></span>lexicographical_compare() <span class="overload">[2/2]</span></h2>
+<a id="ga9b8af8f5da11c5b93627d6e5fb30f784" name="ga9b8af8f5da11c5b93627d6e5fb30f784"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9b8af8f5da11c5b93627d6e5fb30f784">&#9670;&#160;</a></span>lexicographical_compare() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -692,9 +699,11 @@ template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="
 <li>所有对应元素都相等，但第一个范围较短时返回true </li>
 </ol>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00465">465</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00477">477</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="array_8hpp_source.html#l00456">array&lt; T, Size &gt;::operator&lt;()</a>, <a class="el" href="bitmap_8hpp_source.html#l01168">bitmap::operator&lt;()</a>, <a class="el" href="deque_8hpp_source.html#l01509">deque&lt; T, Alloc, BufSize &gt;::operator&lt;()</a>, <a class="el" href="hashtable_8hpp_source.html#l01368">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator&lt;()</a>, <a class="el" href="list_8hpp_source.html#l01097">list&lt; T, Alloc &gt;::operator&lt;()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01556">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator&lt;()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01263">vector&lt; byte_t &gt;::operator&lt;()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="array_8hpp_source.html#l00456">array&lt; byte_t, MAC_LEN &gt;::operator&lt;()</a>, <a class="el" href="bitmap_8hpp_source.html#l01168">bitmap::operator&lt;()</a>, <a class="el" href="deque_8hpp_source.html#l01504">deque&lt; T, Alloc, BufSize &gt;::operator&lt;()</a>, <a class="el" href="hashtable_8hpp_source.html#l01368">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator&lt;()</a>, <a class="el" href="list_8hpp_source.html#l01097">list&lt; pair&lt; Key, Value &gt; &gt;::operator&lt;()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01589">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator&lt;()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01263">vector&lt; byte_t &gt;::operator&lt;()</a>.</p>
 
 </div>
 </div>
@@ -743,7 +752,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>a和b中的较大者 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00154">154</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00163">163</a> 行定义.</p>
 
 </div>
 </div>
@@ -803,9 +812,9 @@ template&lt;typename T, typename Compare&gt; </div>
 <li>否则 a 较大 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00141">141</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00150">150</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00801">allocate_shared()</a>, <a class="el" href="basic__string_8hpp_source.html#l00777">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00738">make_shared()</a>, <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00110">random_lcd::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00101">random_lcd::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00218">random_mt::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00208">random_mt::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00061">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00073">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00183">random_mt::next_int()</a>, <a class="el" href="classrandom__mt.html#a8c694174037ef836a33063c5399dcc5f">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00246">secret::next_int()</a>, <a class="el" href="classsecret.html#a349824b70b51e399f70c774f67c316bb">secret::next_int()</a>, <a class="el" href="hashtable_8hpp_source.html#l00876">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="vector_8hpp_source.html#l00817">vector&lt; byte_t &gt;::reserve()</a> , 以及 <a class="el" href="variant_8hpp_source.html#l00558">variant&lt; Types &gt;::swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00844">allocate_shared()</a>, <a class="el" href="basic__string_8hpp_source.html#l00777">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00775">make_shared()</a>, <a class="el" href="compare_8hpp_source.html#l00397">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00170">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00158">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00332">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00320">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00467">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00454">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00081">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00100">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00243">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00262">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00377">secret::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00396">secret::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00121">random_lcd::next_uint64()</a>, <a class="el" href="random_8hpp_source.html#l00283">random_mt::next_uint64()</a>, <a class="el" href="random_8hpp_source.html#l00417">secret::next_uint64()</a>, <a class="el" href="hashtable_8hpp_source.html#l00876">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="vector_8hpp_source.html#l00817">vector&lt; byte_t &gt;::reserve()</a>, <a class="el" href="reflect_2function_8hpp_source.html#l00095">meta_function::set_arg_hints()</a> , 以及 <a class="el" href="variant_8hpp_source.html#l00558">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::swap()</a>.</p>
 
 </div>
 </div>
@@ -849,9 +858,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>列表中的最大值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00323">323</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00334">334</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00296">max_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00306">max_element()</a>.</p>
 
 </div>
 </div>
@@ -900,19 +909,19 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00312">312</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00323">323</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00296">max_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00306">max_element()</a>.</p>
 
 </div>
 </div>
-<a id="ga3cc3e298f8ce7cca7211883311e56b5e" name="ga3cc3e298f8ce7cca7211883311e56b5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3cc3e298f8ce7cca7211883311e56b5e">&#9670;&#160;</a></span>max_element() <span class="overload">[2/2]</span></h2>
+<a id="gae047220bf13f52d30732510ec976bf5c" name="gae047220bf13f52d30732510ec976bf5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae047220bf13f52d30732510ec976bf5c">&#9670;&#160;</a></span>max_element() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -959,9 +968,11 @@ template&lt;typename Iterator, typename Compare, <a class="el" href="group___typ
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的迭代器，如果范围为空则返回first</dd></dl>
 <p>查找范围 [first, last) 中的最大元素。 如果有多个最大元素，返回第一个遇到的。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00296">296</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00306">306</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00323">max()</a>, <a class="el" href="compare_8hpp_source.html#l00312">max_element()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00334">max()</a>, <a class="el" href="compare_8hpp_source.html#l00323">max_element()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00397">minmax_element()</a>.</p>
 
 </div>
 </div>
@@ -1016,9 +1027,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>a、b、c中的中位数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00232">232</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00241">241</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00205">median()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00214">median()</a>.</p>
 
 </div>
 </div>
@@ -1081,9 +1092,9 @@ template&lt;typename T, typename Compare&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>a、b、c中的中位数</dd></dl>
 <p>使用比较函数 comp 确定三个值的中位数。 最多进行3次比较。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00205">205</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00214">214</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a>, <a class="el" href="compare_8hpp_source.html#l00232">median()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00489">nth_element()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00333">introspective_sort()</a>, <a class="el" href="compare_8hpp_source.html#l00241">median()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00509">nth_element()</a>.</p>
 
 </div>
 </div>
@@ -1132,7 +1143,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>a和b中的较小者 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00186">186</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00195">195</a> 行定义.</p>
 
 </div>
 </div>
@@ -1192,9 +1203,9 @@ template&lt;typename T, typename Compare&gt; </div>
 <li>否则 a 较小 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00173">173</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00182">182</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01664">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01631">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01027">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="char__traits_8hpp_source.html#l00357">char_traits_compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00692">char_traits_find_last_not_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00542">char_traits_find_last_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00424">char_traits_rfind()</a>, <a class="el" href="char__traits_8hpp_source.html#l00449">char_traits_rfind_char()</a>, <a class="el" href="char__traits_8hpp_source.html#l00750">char_traits_rfind_not_char()</a>, <a class="el" href="basic__string_8hpp_source.html#l02163">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l01989">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01976">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00101">random_lcd::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00208">random_mt::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00073">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00183">random_mt::next_int()</a>, <a class="el" href="classsecret.html#a349824b70b51e399f70c774f67c316bb">secret::next_int()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00139">select_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02130">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00517">tim_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02150">basic_string&lt; char &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00769">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00759">vector&lt; byte_t &gt;::view()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01664">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01631">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01027">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="char__traits_8hpp_source.html#l00357">char_traits_compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00692">char_traits_find_last_not_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00542">char_traits_find_last_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00424">char_traits_rfind()</a>, <a class="el" href="char__traits_8hpp_source.html#l00449">char_traits_rfind_char()</a>, <a class="el" href="char__traits_8hpp_source.html#l00750">char_traits_rfind_not_char()</a>, <a class="el" href="basic__string_8hpp_source.html#l02163">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l01989">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01976">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="compare_8hpp_source.html#l00397">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00158">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00320">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00454">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00100">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00262">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00396">secret::next_int()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00151">select_sort()</a>, <a class="el" href="reflect_2function_8hpp_source.html#l00095">meta_function::set_arg_hints()</a>, <a class="el" href="basic__string_8hpp_source.html#l02130">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00554">tim_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02150">basic_string&lt; char &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00769">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00759">vector&lt; byte_t &gt;::view()</a>.</p>
 
 </div>
 </div>
@@ -1238,9 +1249,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>列表中的最小值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00368">368</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00380">380</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00341">min_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00352">min_element()</a>.</p>
 
 </div>
 </div>
@@ -1289,19 +1300,19 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00357">357</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00369">369</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00341">min_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00352">min_element()</a>.</p>
 
 </div>
 </div>
-<a id="ga3e7d0df68e92c6f3efa9ad08941c0912" name="ga3e7d0df68e92c6f3efa9ad08941c0912"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3e7d0df68e92c6f3efa9ad08941c0912">&#9670;&#160;</a></span>min_element() <span class="overload">[2/2]</span></h2>
+<a id="gaab4025164d755b851a1282e3cfbc3d1a" name="gaab4025164d755b851a1282e3cfbc3d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab4025164d755b851a1282e3cfbc3d1a">&#9670;&#160;</a></span>min_element() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1348,9 +1359,11 @@ template&lt;typename Iterator, typename Compare, <a class="el" href="group___typ
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器，如果范围为空则返回first</dd></dl>
 <p>查找范围 [first, last) 中的最小元素。 如果有多个最小元素，返回第一个遇到的。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00341">341</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00352">352</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00368">min()</a>, <a class="el" href="compare_8hpp_source.html#l00357">min_element()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00380">min()</a>, <a class="el" href="compare_8hpp_source.html#l00369">min_element()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00397">minmax_element()</a>.</p>
 
 </div>
 </div>
@@ -1399,19 +1412,19 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含最小值和最大值的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00278">278</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00288">288</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00252">minmax()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00261">minmax()</a>.</p>
 
 </div>
 </div>
-<a id="ga93f642042bfad29f941dc8f66c12ecaf" name="ga93f642042bfad29f941dc8f66c12ecaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga93f642042bfad29f941dc8f66c12ecaf">&#9670;&#160;</a></span>minmax() <span class="overload">[2/2]</span></h2>
+<a id="ga70a83034ef33873011570363e7c39b20" name="ga70a83034ef33873011570363e7c39b20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70a83034ef33873011570363e7c39b20">&#9670;&#160;</a></span>minmax() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1458,11 +1471,11 @@ template&lt;typename Iterator, typename Compare, <a class="el" href="group___typ
 <dl class="section return"><dt>返回</dt><dd>包含最小值和最大值的pair</dd></dl>
 <p>同时查找范围 [first, last) 中的最小值和最大值。 如果范围为空，返回默认构造的pair。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00252">252</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00261">261</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00278">minmax()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00288">minmax()</a>.</p>
 
 </div>
 </div>
@@ -1511,19 +1524,19 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>pair&lt;指向最小元素的迭代器, 指向最大元素的迭代器&gt; </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00399">399</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00412">412</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00397">minmax_element()</a>.</p>
 
 </div>
 </div>
-<a id="ga99bb01978c10c89f43e747fa2dfaecd7" name="ga99bb01978c10c89f43e747fa2dfaecd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga99bb01978c10c89f43e747fa2dfaecd7">&#9670;&#160;</a></span>minmax_element() <span class="overload">[2/2]</span></h2>
+<a id="gaafcb422504addb63d771b9061f7533a9" name="gaafcb422504addb63d771b9061f7533a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaafcb422504addb63d771b9061f7533a9">&#9670;&#160;</a></span>minmax_element() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1570,11 +1583,11 @@ template&lt;typename Iterator, typename Compare, <a class="el" href="group___typ
 <dl class="section return"><dt>返回</dt><dd>pair&lt;指向最小元素的迭代器, 指向最大元素的迭代器&gt;</dd></dl>
 <p>同时查找范围 [first, last) 中的最小和最大元素。 如果范围为空，两个迭代器都指向first。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00385">385</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00397">397</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>, <a class="el" href="compare_8hpp_source.html#l00141">max()</a>, <a class="el" href="compare_8hpp_source.html#l00296">max_element()</a>, <a class="el" href="compare_8hpp_source.html#l00173">min()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00341">min_element()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>, <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>, <a class="el" href="compare_8hpp_source.html#l00150">max()</a>, <a class="el" href="compare_8hpp_source.html#l00306">max_element()</a>, <a class="el" href="compare_8hpp_source.html#l00182">min()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00352">min_element()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00312">bucket_sort_greater()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00282">bucket_sort_less()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00225">counting_sort()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00399">minmax_element()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00336">bucket_sort_greater()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00305">bucket_sort_less()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00242">counting_sort()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00412">minmax_element()</a>.</p>
 
 </div>
 </div>
@@ -1630,19 +1643,19 @@ template&lt;typename Iterator1, typename Iterator2&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>pair&lt;第一个范围中不匹配的位置, 第二个范围中对应的位置&gt; </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00585">585</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00592">592</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00568">mismatch()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00574">mismatch()</a>.</p>
 
 </div>
 </div>
-<a id="ga59e483a83ea490570027f614657e74b8" name="ga59e483a83ea490570027f614657e74b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga59e483a83ea490570027f614657e74b8">&#9670;&#160;</a></span>mismatch() <span class="overload">[2/2]</span></h2>
+<a id="gaa1f5764de7664a120fcf33ccfe392d5b" name="gaa1f5764de7664a120fcf33ccfe392d5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa1f5764de7664a120fcf33ccfe392d5b">&#9670;&#160;</a></span>mismatch() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1696,11 +1709,11 @@ template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="
 <dl class="section return"><dt>返回</dt><dd>pair&lt;第一个范围中不匹配的位置, 第二个范围中对应的位置&gt;</dd></dl>
 <p>比较范围 [first1, last1) 和以 first2 开始的范围， 返回第一个不满足 comp(*it1, *it2) 的位置。 如果所有对应元素都满足谓词，返回 pair&lt;last1, first2 + (last1 - first1)&gt; </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00568">568</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00574">574</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00585">mismatch()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00592">mismatch()</a>.</p>
 
 </div>
 </div>

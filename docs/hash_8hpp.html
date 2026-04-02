@@ -99,7 +99,7 @@ $(function(){initNavTree('hash_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 hash.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="hash_8hpp__incl.svg" width="243" height="400"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="hash_8hpp__incl.svg" width="162" height="384"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="hash_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -107,7 +107,11 @@ hash.hpp 的引用(Include)关系图:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
 <tr class="memitem:hash_3C_20T_20_2A_20_3E" id="r_hash_3C_20T_20_2A_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhash_3_01_t_01_5_01_4.html">hash&lt; T * &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型的哈希函数特化  <a href="structhash_3_01_t_01_5_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型的哈希特化  <a href="structhash_3_01_t_01_5_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:hash_3C_20T_2C_20enable_5Fif_5Ft_3C_20is_5Fenum_5Fv_3C_20T_20_3E_20_3E_20_3E" id="r_hash_3C_20T_2C_20enable_5Fif_5Ft_3C_20is_5Fenum_5Fv_3C_20T_20_3E_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhash_3_01_t_00_01enable__if__t_3_01is__enum__v_3_01_t_01_4_01_4_01_4.html">hash&lt; T, enable_if_t&lt; is_enum_v&lt; T &gt; &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">枚举类型的哈希特化  <a href="structhash_3_01_t_00_01enable__if__t_3_01is__enum__v_3_01_t_01_4_01_4_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:murmur_5Fhash" id="r_murmur_5Fhash"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structmurmur__hash.html">murmur_hash</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MurmurHash_x64的128位哈希结果容器  <a href="structmurmur__hash.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fnothrow_5Fhashable_3C_20Key_2C_20Dummy_20_3E" id="r_is_5Fnothrow_5Fhashable_3C_20Key_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__nothrow__hashable.html">is_nothrow_hashable&lt; Key, Dummy &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否可无异常哈希  <a href="structis__nothrow__hashable.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fhash_3C_20Func_2C_20Arg_2C_20Dummy_20_3E" id="r_is_5Fhash_3C_20Func_2C_20Arg_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__hash.html">is_hash&lt; Func, Arg, Dummy &gt;</a></td></tr>
@@ -115,16 +119,32 @@ hash.hpp 的引用(Include)关系图:</div>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga20409000240b9904721f7918223dc731" id="r_ga20409000240b9904721f7918223dc731"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___f_n_v_hash.html#ga20409000240b9904721f7918223dc731">FNV_hash</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *first, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>) noexcept</td></tr>
+<tr class="memitem:ga20409000240b9904721f7918223dc731" id="r_ga20409000240b9904721f7918223dc731"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#ga20409000240b9904721f7918223dc731">FNV_hash</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *first, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>) noexcept</td></tr>
 <tr class="memdesc:ga20409000240b9904721f7918223dc731"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV-1a哈希算法  <br /></td></tr>
-<tr class="memitem:ga874816e8d77feae51451b53f8c026b57" id="r_ga874816e8d77feae51451b53f8c026b57"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___d_j_b2_hash.html#ga874816e8d77feae51451b53f8c026b57">DJB2_hash</a> (const char *str, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len) noexcept</td></tr>
+<tr class="memitem:ga7ba8ee96f866b11a393bb705b97132fe" id="r_ga7ba8ee96f866b11a393bb705b97132fe"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga7ba8ee96f866b11a393bb705b97132fe template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#ga7ba8ee96f866b11a393bb705b97132fe">FNV_hash_integer</a> (const T value) noexcept</td></tr>
+<tr class="memdesc:ga7ba8ee96f866b11a393bb705b97132fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">整数类型的FNV哈希  <br /></td></tr>
+<tr class="memitem:gacee153134b3c477f48bf2c7f20e82237" id="r_gacee153134b3c477f48bf2c7f20e82237"><td class="memTemplParams" colspan="2">template&lt;typename CharT&gt; </td></tr>
+<tr class="memitem:gacee153134b3c477f48bf2c7f20e82237 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#gacee153134b3c477f48bf2c7f20e82237">FNV_hash_string</a> (const CharT *str, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len) noexcept</td></tr>
+<tr class="memdesc:gacee153134b3c477f48bf2c7f20e82237"><td class="mdescLeft">&#160;</td><td class="mdescRight">字符串类型的FNV哈希  <br /></td></tr>
+<tr class="memitem:ga874816e8d77feae51451b53f8c026b57" id="r_ga874816e8d77feae51451b53f8c026b57"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#ga874816e8d77feae51451b53f8c026b57">DJB2_hash</a> (const char *str, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len) noexcept</td></tr>
 <tr class="memdesc:ga874816e8d77feae51451b53f8c026b57"><td class="mdescLeft">&#160;</td><td class="mdescRight">DJB2哈希算法  <br /></td></tr>
-<tr class="memitem:ga10907e3249f281ccbf2ceaa0cd21db77" id="r_ga10907e3249f281ccbf2ceaa0cd21db77"><td class="memItemLeft"><a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___murmur_hash.html#ga10907e3249f281ccbf2ceaa0cd21db77">MurmurHash_x32</a> (const void *key, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> seed) noexcept</td></tr>
+<tr class="memitem:gaa610d5c5365bf2d436f5f6f0c38c91db" id="r_gaa610d5c5365bf2d436f5f6f0c38c91db"><td class="memItemLeft"><a class="el" href="structmurmur__hash.html">murmur_hash</a> NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#gaa610d5c5365bf2d436f5f6f0c38c91db">MurmurHash_x64</a> (const void *key, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> seed) noexcept</td></tr>
+<tr class="memdesc:gaa610d5c5365bf2d436f5f6f0c38c91db"><td class="mdescLeft">&#160;</td><td class="mdescRight">MurmurHash3_x64_128算法  <br /></td></tr>
+<tr class="memitem:ga10907e3249f281ccbf2ceaa0cd21db77" id="r_ga10907e3249f281ccbf2ceaa0cd21db77"><td class="memItemLeft"><a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#ga10907e3249f281ccbf2ceaa0cd21db77">MurmurHash_x32</a> (const void *key, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> seed) noexcept</td></tr>
 <tr class="memdesc:ga10907e3249f281ccbf2ceaa0cd21db77"><td class="mdescLeft">&#160;</td><td class="mdescRight">MurmurHash3_x86_32算法  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:ga7b623749eb368d9c6142805167d8c3e8" id="r_ga7b623749eb368d9c6142805167d8c3e8"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#ga7b623749eb368d9c6142805167d8c3e8">FNV_OFFSET_BASIS</a></td></tr>
+<tr class="memdesc:ga7b623749eb368d9c6142805167d8c3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV哈希算法的偏移基础值  <br /></td></tr>
+<tr class="memitem:gac9c1200d5d9591e537701046e3cb0eb0" id="r_gac9c1200d5d9591e537701046e3cb0eb0"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___hash_primary.html#gac9c1200d5d9591e537701046e3cb0eb0">FNV_PRIME</a> = 16777619U</td></tr>
+<tr class="memdesc:gac9c1200d5d9591e537701046e3cb0eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV哈希算法的质数乘数  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>哈希函数库 </p>
-<p>此文件提供了各种哈希算法的实现，包括FNV-1a、DJB2和MurmurHash等， 以及基本数据类型的哈希函数特化。支持编译时哈希计算和运行时高效哈希。 </p>
+<p>此文件提供了各种哈希算法的实现，包括FNV-1a、DJB2和MurmurHash等， 以及基本数据类型的哈希函数特化。支持编译时哈希计算和运行时高效哈希。</p>
+<p>对基本类型的哈希特化将不展示在文档内，有需要可自行查看本文件内容。 </p>
 
 <p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

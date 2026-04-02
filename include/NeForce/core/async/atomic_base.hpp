@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/async/atomic_wait.hpp"
+#include "NeForce/core/exception/breakpoint.hpp"
 #ifdef NEFORCE_COMPILER_MSVC
 #include <intrin.h>
 #endif
@@ -56,7 +57,7 @@ NEFORCE_INLINE17 constexpr auto memory_order_seq_cst = memory_order::seq_cst;
  * 用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。
  */
 enum class memory_order_modifier : int64_t {
-	memory_order_mask          = 0x0ffff,      ///< 内存顺序掩码
+	memory_order_mask          = 0x0000ffff,   ///< 内存顺序掩码
 	memory_order_modifier_mask = 0xffff0000,   ///< 修饰符掩码
 	memory_order_hle_acquire   = 0x10000,      ///< HLE获取修饰符
 	memory_order_hle_release   = 0x20000       ///< HLE释放修饰符

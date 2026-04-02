@@ -77,6 +77,7 @@ var group___shared_pointer =
       [ "unique", "classshared__ptr.html#ad0f39143b8c43e77e3f9d17464b351e2", null ],
       [ "use_count", "classshared__ptr.html#a14df07f511486326b06c8904b9592eb9", null ]
     ] ],
+    [ "is_shared_ptr&lt; T &gt;", "structis__shared__ptr.html", null ],
     [ "allocate_shared", "group___shared_pointer.html#gac6d23654fe34f82cb9ce90e5402945c2", null ],
     [ "const_pointer_cast", "group___shared_pointer.html#ga4ef3f2a464d7055ef265b2cb5365a9f9", null ],
     [ "dynamic_pointer_cast", "group___shared_pointer.html#ga9a104d4a2412bb50c6ea44e89b52836b", null ],

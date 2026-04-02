@@ -89,32 +89,37 @@ $(function(){initNavTree('group___parallel_algorithms.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">并行算法 </div></div>
+  <div class="headertitle"><div class="title">并行算法 <div class="ingroups"><a class="el" href="group___standard_algorithms.html">标准算法</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>并行计算算法  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+并行算法 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___parallel_algorithms.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga3b5bb62ce52f535f960cee0e89c098a2" id="r_ga3b5bb62ce52f535f960cee0e89c098a2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename BinaryOperation, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga3b5bb62ce52f535f960cee0e89c098a2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga3b5bb62ce52f535f960cee0e89c098a2">reduce</a> (Iterator first, Iterator last, BinaryOperation op, Result &amp;res)</td></tr>
-<tr class="memdesc:ga3b5bb62ce52f535f960cee0e89c098a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">并行归约操作  <br /></td></tr>
-<tr class="memitem:ga46cae370db6b6a2b3b980b815382595c" id="r_ga46cae370db6b6a2b3b980b815382595c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga46cae370db6b6a2b3b980b815382595c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga46cae370db6b6a2b3b980b815382595c">transform_reduce</a> (Iterator first, Iterator last, UnaryOperation <a class="el" href="group___shift_algorithms.html#gaf74fb6288b592e5ac9b1fdd28a2265a3">transform</a>, BinaryOp <a class="el" href="#ga3b5bb62ce52f535f960cee0e89c098a2">reduce</a>, Result &amp;res)</td></tr>
-<tr class="memdesc:ga46cae370db6b6a2b3b980b815382595c"><td class="mdescLeft">&#160;</td><td class="mdescRight">并行变换归约操作  <br /></td></tr>
+<tr class="memitem:gad447586eb3e4c5bd99c06300195deeba" id="r_gad447586eb3e4c5bd99c06300195deeba"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename BinaryOperation, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10&gt; </td></tr>
+<tr class="memitem:gad447586eb3e4c5bd99c06300195deeba template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad447586eb3e4c5bd99c06300195deeba">reduce</a> (Iterator first, Iterator last, BinaryOperation op, Result &amp;res)</td></tr>
+<tr class="memdesc:gad447586eb3e4c5bd99c06300195deeba"><td class="mdescLeft">&#160;</td><td class="mdescRight">并行归约操作  <br /></td></tr>
+<tr class="memitem:ga9c84b149470430f99e5bb9f2de2a03dd" id="r_ga9c84b149470430f99e5bb9f2de2a03dd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10&gt; </td></tr>
+<tr class="memitem:ga9c84b149470430f99e5bb9f2de2a03dd template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9c84b149470430f99e5bb9f2de2a03dd">transform_reduce</a> (Iterator first, Iterator last, UnaryOperation <a class="el" href="group___shift_algorithms.html#ga08e72453e12c29254c5a5d45e58d648f">transform</a>, BinaryOp <a class="el" href="#gad447586eb3e4c5bd99c06300195deeba">reduce</a>, Result &amp;res)</td></tr>
+<tr class="memdesc:ga9c84b149470430f99e5bb9f2de2a03dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">并行变换归约操作  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>并行计算算法 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga3b5bb62ce52f535f960cee0e89c098a2" name="ga3b5bb62ce52f535f960cee0e89c098a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3b5bb62ce52f535f960cee0e89c098a2">&#9670;&#160;</a></span>reduce()</h2>
+<a id="gad447586eb3e4c5bd99c06300195deeba" name="gad447586eb3e4c5bd99c06300195deeba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad447586eb3e4c5bd99c06300195deeba">&#9670;&#160;</a></span>reduce()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename BinaryOperation, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename BinaryOperation, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void reduce </td>
@@ -160,21 +165,21 @@ template&lt;typename Iterator, typename BinaryOperation, typename Result, <a cla
 </dl>
 <p>使用分治法的并行归约算法。将范围分成两半，分别在不同线程中计算，最后合并结果。 当元素数量小于阈值时，使用串行算法。 </p>
 
-<p class="definition">在文件 <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a> 第 <a class="el" href="parallel_8hpp_source.html#l00037">37</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a> 第 <a class="el" href="parallel_8hpp_source.html#l00042">42</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a>, <a class="el" href="parallel_8hpp_source.html#l00037">reduce()</a> , 以及 <a class="el" href="reference__wrapper_8hpp_source.html#l00137">ref()</a>.</p>
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>, <a class="el" href="iterator_8hpp_source.html#l00155">next()</a>, <a class="el" href="parallel_8hpp_source.html#l00042">reduce()</a> , 以及 <a class="el" href="reference__wrapper_8hpp_source.html#l00137">ref()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="parallel_8hpp_source.html#l00037">reduce()</a> , 以及 <a class="el" href="parallel_8hpp_source.html#l00071">transform_reduce()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="parallel_8hpp_source.html#l00042">reduce()</a> , 以及 <a class="el" href="parallel_8hpp_source.html#l00076">transform_reduce()</a>.</p>
 
 </div>
 </div>
-<a id="ga46cae370db6b6a2b3b980b815382595c" name="ga46cae370db6b6a2b3b980b815382595c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga46cae370db6b6a2b3b980b815382595c">&#9670;&#160;</a></span>transform_reduce()</h2>
+<a id="ga9c84b149470430f99e5bb9f2de2a03dd" name="ga9c84b149470430f99e5bb9f2de2a03dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9c84b149470430f99e5bb9f2de2a03dd">&#9670;&#160;</a></span>transform_reduce()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void transform_reduce </td>
@@ -227,11 +232,11 @@ template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typen
 </dl>
 <p>先对每个元素应用变换操作，然后进行归约。使用分治法的并行算法。 当元素数量小于阈值时，使用串行算法。 </p>
 
-<p class="definition">在文件 <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a> 第 <a class="el" href="parallel_8hpp_source.html#l00071">71</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a> 第 <a class="el" href="parallel_8hpp_source.html#l00076">76</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="type__traits_8hpp_source.html#l04381">initialize()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a>, <a class="el" href="parallel_8hpp_source.html#l00037">reduce()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00137">ref()</a>, <a class="el" href="shift_8hpp_source.html#l00867">transform()</a> , 以及 <a class="el" href="parallel_8hpp_source.html#l00071">transform_reduce()</a>.</p>
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="type__traits_8hpp_source.html#l04356">initialize()</a>, <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>, <a class="el" href="iterator_8hpp_source.html#l00155">next()</a>, <a class="el" href="parallel_8hpp_source.html#l00042">reduce()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00137">ref()</a>, <a class="el" href="shift_8hpp_source.html#l00926">transform()</a> , 以及 <a class="el" href="parallel_8hpp_source.html#l00076">transform_reduce()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="parallel_8hpp_source.html#l00071">transform_reduce()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="parallel_8hpp_source.html#l00076">transform_reduce()</a>.</p>
 
 </div>
 </div>

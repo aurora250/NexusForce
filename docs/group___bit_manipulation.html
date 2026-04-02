@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NexusForce: 位操作函数</title>
+<title>NexusForce: 位操作</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,15 +89,48 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">位操作函数 </div></div>
+  <div class="headertitle"><div class="title">位操作 </div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>位宽计算、位取整和位检查函数  
+<p>位操作类与函数的实现  
 <a href="#details">更多...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:bit_5Freference" id="r_bit_5Freference"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structbit__reference.html">bit_reference</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">位引用类  <a href="structbit__reference.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:bitmap_5Fiterator_3C_20IsConst_2C_20BitMap_20_3E" id="r_bitmap_5Fiterator_3C_20IsConst_2C_20BitMap_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structbitmap__iterator.html">bitmap_iterator&lt; IsConst, BitMap &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">位图迭代器  <a href="structbitmap__iterator.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:bitmap" id="r_bitmap"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbitmap.html">bitmap</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">位图容器  <a href="classbitmap.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:bitset_3C_20N_20_3E" id="r_bitset_3C_20N_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbitset.html">bitset&lt; N &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">固定大小的位集  <a href="classbitset.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
+<tr class="memitem:ga2e8de9ca6e14827b422486dc3ed35706" id="r_ga2e8de9ca6e14827b422486dc3ed35706"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#ga2e8de9ca6e14827b422486dc3ed35706">popcount32</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga2e8de9ca6e14827b422486dc3ed35706"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算32位整数中1的个数  <br /></td></tr>
+<tr class="memitem:ga7eab8660ce57f82d76864c980f77a087" id="r_ga7eab8660ce57f82d76864c980f77a087"><td class="memItemLeft">NEFORCE_CONSTEXPR14 int&#160;</td><td class="memItemRight"><a class="el" href="#ga7eab8660ce57f82d76864c980f77a087">clz32</a> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga7eab8660ce57f82d76864c980f77a087"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算32位整数前导零的个数  <br /></td></tr>
+<tr class="memitem:ga7493eb3d8ac54b313025c16119a3e9df" id="r_ga7493eb3d8ac54b313025c16119a3e9df"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#ga7493eb3d8ac54b313025c16119a3e9df">popcount</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga7493eb3d8ac54b313025c16119a3e9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数中1的个数  <br /></td></tr>
+<tr class="memitem:gaccd54859db374262f5c36034b8669abb" id="r_gaccd54859db374262f5c36034b8669abb"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#gaccd54859db374262f5c36034b8669abb">countl_zero</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:gaccd54859db374262f5c36034b8669abb"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数前导零的个数  <br /></td></tr>
+<tr class="memitem:ga1da158bf3815ab2e7503f8cd52d9ca96" id="r_ga1da158bf3815ab2e7503f8cd52d9ca96"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#ga1da158bf3815ab2e7503f8cd52d9ca96">countl_one</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga1da158bf3815ab2e7503f8cd52d9ca96"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数前导1的个数  <br /></td></tr>
+<tr class="memitem:gaf2706acea69cb92b45211c361b3cd40b" id="r_gaf2706acea69cb92b45211c361b3cd40b"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#gaf2706acea69cb92b45211c361b3cd40b">countr_zero</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:gaf2706acea69cb92b45211c361b3cd40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数尾随零的个数  <br /></td></tr>
+<tr class="memitem:gab8f133d4b23b52b75fd0c952d85af189" id="r_gab8f133d4b23b52b75fd0c952d85af189"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#gab8f133d4b23b52b75fd0c952d85af189">countr_one</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:gab8f133d4b23b52b75fd0c952d85af189"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数尾随1的个数  <br /></td></tr>
+<tr class="memitem:ga68513d991c2a3a4be5f5d3bbd9827913" id="r_ga68513d991c2a3a4be5f5d3bbd9827913"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#ga68513d991c2a3a4be5f5d3bbd9827913">lowest_set_bit_pos</a> (const <a class="el" href="group___platform_dependent_types.html#ga39d546efc0e36ab5e76470c42e646552">intptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga68513d991c2a3a4be5f5d3bbd9827913"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最低设置位的位置，从0开始  <br /></td></tr>
+<tr class="memitem:ga4bdc65d39ae6ee2a96635db35ef668ad" id="r_ga4bdc65d39ae6ee2a96635db35ef668ad"><td class="memItemLeft">NEFORCE_CONSTEXPR14 int&#160;</td><td class="memItemRight"><a class="el" href="#ga4bdc65d39ae6ee2a96635db35ef668ad">highest_set_bit_pos</a> (const <a class="el" href="group___platform_dependent_types.html#ga39d546efc0e36ab5e76470c42e646552">intptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga4bdc65d39ae6ee2a96635db35ef668ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最高设置位的位置  <br /></td></tr>
+<tr class="memitem:ga2bfc6542da7cf0106ecf09fbd4394fa8" id="r_ga2bfc6542da7cf0106ecf09fbd4394fa8"><td class="memItemLeft">NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga2bfc6542da7cf0106ecf09fbd4394fa8">parity32</a> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga2bfc6542da7cf0106ecf09fbd4394fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算32位整数的奇偶性  <br /></td></tr>
+<tr class="memitem:ga1a1649ec9d3f0fb2aad2df2550467318" id="r_ga1a1649ec9d3f0fb2aad2df2550467318"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga1a1649ec9d3f0fb2aad2df2550467318">parity</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
+<tr class="memdesc:ga1a1649ec9d3f0fb2aad2df2550467318"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数的奇偶性  <br /></td></tr>
 <tr class="memitem:gae781ff6a7fad2bc8db38b0c3b371658e" id="r_gae781ff6a7fad2bc8db38b0c3b371658e"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#gae781ff6a7fad2bc8db38b0c3b371658e">bit_width</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
 <tr class="memdesc:gae781ff6a7fad2bc8db38b0c3b371658e"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算表示整数所需的最小位宽  <br /></td></tr>
 <tr class="memitem:gace6550d923413b36d07c574320cff214" id="r_gace6550d923413b36d07c574320cff214"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gace6550d923413b36d07c574320cff214">bit_floor</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
@@ -124,9 +157,17 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 <tr class="memdesc:ga6d479a2f9fba29a8fc0109f60c2b4254"><td class="mdescLeft">&#160;</td><td class="mdescRight">反转整数的位顺序  <br /></td></tr>
 <tr class="memitem:ga502c62305af2c0eb853c3d7d755933bd" id="r_ga502c62305af2c0eb853c3d7d755933bd"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga502c62305af2c0eb853c3d7d755933bd">mask_from_to</a> (const int from, const int to) noexcept</td></tr>
 <tr class="memdesc:ga502c62305af2c0eb853c3d7d755933bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成从from到to的位掩码  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:gafba370ed4270e4741f6a79f49582b081" id="r_gafba370ed4270e4741f6a79f49582b081"><td class="memItemLeft"><a id="gafba370ed4270e4741f6a79f49582b081" name="gafba370ed4270e4741f6a79f49582b081"></a>
+NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>BITMAP_WORD_SIZE</b> = 8 * sizeof(<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>)</td></tr>
+<tr class="memdesc:gafba370ed4270e4741f6a79f49582b081"><td class="mdescLeft">&#160;</td><td class="mdescRight">每个字的位数 <br /></td></tr>
+<tr class="memitem:ga9d407777ef6c13fd950d17144fcf93d8" id="r_ga9d407777ef6c13fd950d17144fcf93d8"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga9d407777ef6c13fd950d17144fcf93d8">POPCOUNT_TABLE</a> [256]</td></tr>
+<tr class="memdesc:ga9d407777ef6c13fd950d17144fcf93d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">popcount查找表  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>位宽计算、位取整和位检查函数 </p>
+<div class="textblock"><p>位操作类与函数的实现 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="gac832844ba0a5424f07b316752a6cbc7f" name="gac832844ba0a5424f07b316752a6cbc7f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac832844ba0a5424f07b316752a6cbc7f">&#9670;&#160;</a></span>bit_ceil()</h2>
@@ -160,9 +201,9 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>不小于x的最小2的幂，如果x为0则返回1 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00295">295</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00292">292</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00286">bit_floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00444">floor()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00283">bit_floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00450">floor()</a>.</p>
 
 </div>
 </div>
@@ -209,7 +250,7 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>提取的位段 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00400">400</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00397">397</a> 行定义.</p>
 
 </div>
 </div>
@@ -245,11 +286,11 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>不大于x的最大2的幂，如果x为0则返回0 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00286">286</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00283">283</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00273">bit_width()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00270">bit_width()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00295">bit_ceil()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00292">bit_ceil()</a>.</p>
 
 </div>
 </div>
@@ -302,7 +343,7 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入后的整数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00412">412</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00409">409</a> 行定义.</p>
 
 </div>
 </div>
@@ -338,11 +379,210 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>表示x所需的最小位数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00273">273</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00270">270</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00144">countl_zero()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00148">countl_zero()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00286">bit_floor()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00283">bit_floor()</a>.</p>
+
+</div>
+</div>
+<a id="ga7eab8660ce57f82d76864c980f77a087" name="ga7eab8660ce57f82d76864c980f77a087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7eab8660ce57f82d76864c980f77a087">&#9670;&#160;</a></span>clz32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 int clz32 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算32位整数前导零的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>32位无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中前导零的个数，如果x为0则返回32</dd></dl>
+<p>使用二分查找法优化前导零计数。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00115">115</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00148">countl_zero()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00204">highest_set_bit_pos()</a>.</p>
+
+</div>
+</div>
+<a id="ga1da158bf3815ab2e7503f8cd52d9ca96" name="ga1da158bf3815ab2e7503f8cd52d9ca96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1da158bf3815ab2e7503f8cd52d9ca96">&#9670;&#160;</a></span>countl_one()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int countl_one </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算整数前导1的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中前导1的个数</dd></dl>
+<p>通过对x按位取反后计算前导零个数。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00148">countl_zero()</a>.</p>
+
+</div>
+</div>
+<a id="gaccd54859db374262f5c36034b8669abb" name="gaccd54859db374262f5c36034b8669abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaccd54859db374262f5c36034b8669abb">&#9670;&#160;</a></span>countl_zero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int countl_zero </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算整数前导零的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中前导零的个数</dd></dl>
+<p>根据平台位数调用相应的clz函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00148">148</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00115">clz32()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00270">bit_width()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00163">countl_one()</a>.</p>
+
+</div>
+</div>
+<a id="gab8f133d4b23b52b75fd0c952d85af189" name="gab8f133d4b23b52b75fd0c952d85af189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab8f133d4b23b52b75fd0c952d85af189">&#9670;&#160;</a></span>countr_one()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int countr_one </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算整数尾随1的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中尾随1的个数</dd></dl>
+<p>通过对x按位取反后计算尾随零个数。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00185">185</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00174">countr_zero()</a>.</p>
+
+</div>
+</div>
+<a id="gaf2706acea69cb92b45211c361b3cd40b" name="gaf2706acea69cb92b45211c361b3cd40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf2706acea69cb92b45211c361b3cd40b">&#9670;&#160;</a></span>countr_zero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int countr_zero </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算整数尾随零的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中尾随零的个数</dd></dl>
+<p>使用位运算技巧得到最低有效位的掩码。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00174">174</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00133">popcount()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00185">countr_one()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00195">lowest_set_bit_pos()</a>.</p>
 
 </div>
 </div>
@@ -378,7 +618,83 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果x是2的幂则返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00306">306</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00303">303</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga4bdc65d39ae6ee2a96635db35ef668ad" name="ga4bdc65d39ae6ee2a96635db35ef668ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4bdc65d39ae6ee2a96635db35ef668ad">&#9670;&#160;</a></span>highest_set_bit_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 int highest_set_bit_pos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga39d546efc0e36ab5e76470c42e646552">intptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最高设置位的位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>有符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>最高设置位的位置，如果没有设置位则返回-1 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00204">204</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00115">clz32()</a>.</p>
+
+</div>
+</div>
+<a id="ga68513d991c2a3a4be5f5d3bbd9827913" name="ga68513d991c2a3a4be5f5d3bbd9827913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga68513d991c2a3a4be5f5d3bbd9827913">&#9670;&#160;</a></span>lowest_set_bit_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int lowest_set_bit_pos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga39d546efc0e36ab5e76470c42e646552">intptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最低设置位的位置，从0开始 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>有符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>最低设置位的位置，如果没有设置位则返回-1 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00195">195</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00174">countr_zero()</a>.</p>
 
 </div>
 </div>
@@ -419,7 +735,165 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>从from位到to位为1，其他位为0的掩码 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00473">473</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00470">470</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1a1649ec9d3f0fb2aad2df2550467318" name="ga1a1649ec9d3f0fb2aad2df2550467318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1a1649ec9d3f0fb2aad2df2550467318">&#9670;&#160;</a></span>parity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool parity </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算整数的奇偶性 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x中1的个数为奇数返回true，否则返回false</dd></dl>
+<p>根据平台位数调用相应的奇偶性计算函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00256">256</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00221">parity32()</a>.</p>
+
+</div>
+</div>
+<a id="ga2bfc6542da7cf0106ecf09fbd4394fa8" name="ga2bfc6542da7cf0106ecf09fbd4394fa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2bfc6542da7cf0106ecf09fbd4394fa8">&#9670;&#160;</a></span>parity32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 bool parity32 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算32位整数的奇偶性 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>32位无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x中1的个数为奇数返回true，否则返回false</dd></dl>
+<p>使用分治法计算奇偶性。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00221">221</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00256">parity()</a>.</p>
+
+</div>
+</div>
+<a id="ga7493eb3d8ac54b313025c16119a3e9df" name="ga7493eb3d8ac54b313025c16119a3e9df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7493eb3d8ac54b313025c16119a3e9df">&#9670;&#160;</a></span>popcount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int popcount </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算整数中1的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中1的个数</dd></dl>
+<p>根据平台位数调用相应的popcount函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00133">133</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00100">popcount32()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bitset_8hpp_source.html#l00422">bitset&lt; N &gt;::count()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00174">countr_zero()</a>.</p>
+
+</div>
+</div>
+<a id="ga2e8de9ca6e14827b422486dc3ed35706" name="ga2e8de9ca6e14827b422486dc3ed35706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2e8de9ca6e14827b422486dc3ed35706">&#9670;&#160;</a></span>popcount32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int popcount32 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算32位整数中1的个数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>32位无符号整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>x中1的个数</dd></dl>
+<p>使用查表法分别计算4个字节的popcount，然后求和。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00100">100</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00133">popcount()</a>.</p>
 
 </div>
 </div>
@@ -456,9 +930,9 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>位反转后的整数</dd></dl>
 <p>根据平台位数调用相应的位反转函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00458">458</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00455">455</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00423">reverse_bits32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00420">reverse_bits32()</a>.</p>
 
 </div>
 </div>
@@ -494,9 +968,9 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>位反转后的整数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00423">423</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00420">420</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00458">reverse_bits()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00455">reverse_bits()</a>.</p>
 
 </div>
 </div>
@@ -538,9 +1012,9 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>循环左移后的结果</dd></dl>
 <p>根据平台位数调用相应的循环左移函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00368">368</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00365">365</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00316">rotate_l32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00313">rotate_l32()</a>.</p>
 
 </div>
 </div>
@@ -581,9 +1055,9 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>循环左移后的结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00316">316</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00313">313</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00368">rotate_l()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00329">rotate_r32()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00365">rotate_l()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00326">rotate_r32()</a>.</p>
 
 </div>
 </div>
@@ -625,9 +1099,9 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>循环右移后的结果</dd></dl>
 <p>根据平台位数调用相应的循环右移函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00384">384</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00381">381</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00329">rotate_r32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00326">rotate_r32()</a>.</p>
 
 </div>
 </div>
@@ -668,11 +1142,49 @@ $(function(){initNavTree('group___bit_manipulation.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>循环右移后的结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00329">329</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00326">326</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00316">rotate_l32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00313">rotate_l32()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00384">rotate_r()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00381">rotate_r()</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">变量说明</h2>
+<a id="ga9d407777ef6c13fd950d17144fcf93d8" name="ga9d407777ef6c13fd950d17144fcf93d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d407777ef6c13fd950d17144fcf93d8">&#9670;&#160;</a></span>POPCOUNT_TABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> POPCOUNT_TABLE[256]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">                                                 = {</div>
+<div class="line">    0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,</div>
+<div class="line">    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,</div>
+<div class="line">    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,</div>
+<div class="line">    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,</div>
+<div class="line">    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,</div>
+<div class="line">    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,</div>
+<div class="line">    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,</div>
+<div class="line">    3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>popcount查找表 </p>
+<p>预计算的popcount表，用于快速计算字节中1的个数。 包含0-255所有可能字节值的popcount值。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00030">30</a> 行定义.</p>
 
 </div>
 </div>

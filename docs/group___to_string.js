@@ -1,6 +1,5 @@
 var group___to_string =
 [
-    [ "hexadecimal::to_string", "group___to_string.html#ga4202617b1a33618284469145ba8f4b34", null ],
     [ "to_string", "group___to_string.html#gaaea09a977e7aca90ca8a7932146302c4", null ],
     [ "to_string", "group___to_string.html#ga6a95dfac223f390c14a66fac35c45234", null ],
     [ "to_string", "group___to_string.html#gaa01564d742c111d8bc26d09d6ab32f99", null ],

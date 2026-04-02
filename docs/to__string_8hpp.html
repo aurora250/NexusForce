@@ -98,11 +98,13 @@ $(function(){initNavTree('to__string_8hpp.html','',''); });
 <div class="textblock"><code>#include &quot;<a class="el" href="istringify_8hpp_source.html">NeForce/core/interface/istringify.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="icollector_8hpp_source.html">NeForce/core/interface/icollector.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="type__erase_8hpp_source.html">NeForce/core/algorithm/type_erase.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="character_8hpp_source.html">NeForce/core/string/character.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="math_8hpp_source.html">NeForce/core/numeric/math.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="numeric__types_8hpp_source.html">NeForce/core/numeric/numeric_types.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utf_8hpp_source.html">NeForce/core/string/utf.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 to_string.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="to__string_8hpp__incl.svg" width="1427" height="1488"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="to__string_8hpp__incl.svg" width="2043" height="1563"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="to__string_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -126,9 +128,6 @@ to_string.hpp 的引用(Include)关系图:</div>
 <tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_bounded_array_v&lt; T &gt; &amp;&amp;!is_cstring_v&lt; T &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;arr)</td></tr>
 <tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将有界数组转换为字符串  <br /></td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_base_of_v&lt; <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structexception.html">exception</a>, T &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;obj)</td></tr>
-<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将异常转换为字符串  <br /></td></tr>
 <tr class="memitem:ga094214fc66ed142546ccf87a3dd3084d" id="r_ga094214fc66ed142546ccf87a3dd3084d"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
 <tr class="memitem:ga094214fc66ed142546ccf87a3dd3084d template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga094214fc66ed142546ccf87a3dd3084d">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, true &gt; &amp;obj)</td></tr>
 <tr class="memdesc:ga094214fc66ed142546ccf87a3dd3084d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（已压缩版本）转换为字符串  <br /></td></tr>
@@ -164,7 +163,7 @@ to_string.hpp 的引用(Include)关系图:</div>
 <p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 中定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[1/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -189,12 +188,12 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>空数组字符串"[]" </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00095">95</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00101">101</a> 行定义.</p>
 
 </div>
 </div>
 <a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[2/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,14 +224,12 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>字符串表示 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00106">106</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00112">112</a> 行定义.</p>
 
 </div>
 </div>
 <a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[3/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,50 +260,12 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>字符串表示 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00085">85</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00091">91</a> 行定义.</p>
 
 </div>
 </div>
 <a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[4/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_base_of_v&lt; <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structexception.html">exception</a>, T &gt;, int &gt; = 0&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
-          <td>(</td>
-          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>将异常转换为字符串 </p>
-<dl class="tparams"><dt>模板参数</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>异常类型 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">obj</td><td>异常对象 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>格式为"类型(what)"的字符串 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00117">117</a> 行定义.</p>
-
-</div>
-</div>
-<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[5/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,9 +297,9 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 <dl class="section return"><dt>返回</dt><dd>指针的地址字符串</dd></dl>
 <p>将指针转换为地址字符串，排除C风格字符串。 </p>
 
-<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00055">55</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00057">57</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="string_8hpp_source.html#l00320">address_string()</a>.</p>
+<p class="reference">引用了 <a class="el" href="string_8hpp_source.html#l00308">address_string()</a>.</p>
 
 </div>
 </div>

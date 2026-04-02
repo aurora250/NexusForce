@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup MultiMap 多重映射
- * @brief 基于红黑树的有序键值对容器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -572,7 +572,7 @@ template <typename Key, typename T, typename Alloc>
 multimap(std::initializer_list<pair<Key, T>>, Alloc) -> multimap<Key, T, less<Key>, Alloc>;
 #endif
 
-/** @} */ // MultiMap
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_MULTIMAP_HPP__

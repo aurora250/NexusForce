@@ -89,21 +89,26 @@ $(function(){initNavTree('group___counting_algorithms.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">计数算法 </div></div>
+  <div class="headertitle"><div class="title">计数算法 <div class="ingroups"><a class="el" href="group___standard_algorithms.html">标准算法</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>统计元素数量的算法  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+计数算法 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___counting_algorithms.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
 <tr class="memitem:ga5d0fab1508e6f8692b5efafed6bd722c" id="r_ga5d0fab1508e6f8692b5efafed6bd722c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:ga5d0fab1508e6f8692b5efafed6bd722c template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a> (Iterator first, Iterator last, const T &amp;value, BinaryPredicate pred)</td></tr>
 <tr class="memdesc:ga5d0fab1508e6f8692b5efafed6bd722c"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计范围内满足二元谓词的元素数量  <br /></td></tr>
-<tr class="memitem:gad05772bf8ecff060052c93aa4eb49174" id="r_gad05772bf8ecff060052c93aa4eb49174"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gad05772bf8ecff060052c93aa4eb49174 template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gad05772bf8ecff060052c93aa4eb49174">count_if</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
-<tr class="memdesc:gad05772bf8ecff060052c93aa4eb49174"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计范围内满足谓词的元素数量  <br /></td></tr>
+<tr class="memitem:ga1b902ac9fed79516a0188338ec0b5c8a" id="r_ga1b902ac9fed79516a0188338ec0b5c8a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate&gt; </td></tr>
+<tr class="memitem:ga1b902ac9fed79516a0188338ec0b5c8a template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga1b902ac9fed79516a0188338ec0b5c8a">count_if</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
+<tr class="memdesc:ga1b902ac9fed79516a0188338ec0b5c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计范围内满足谓词的元素数量  <br /></td></tr>
 <tr class="memitem:ga7f00e4c627612d89b2c6152a0c498c40" id="r_ga7f00e4c627612d89b2c6152a0c498c40"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
 <tr class="memitem:ga7f00e4c627612d89b2c6152a0c498c40 template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga7f00e4c627612d89b2c6152a0c498c40">count</a> (Iterator first, Iterator last, const T &amp;value)</td></tr>
 <tr class="memdesc:ga7f00e4c627612d89b2c6152a0c498c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计范围内等于指定值的元素数量  <br /></td></tr>
@@ -163,11 +168,11 @@ template&lt;typename Iterator, typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>等于value的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="search_8hpp_source.html">search.hpp</a> 第 <a class="el" href="search_8hpp_source.html#l00350">350</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="search_8hpp_source.html">search.hpp</a> 第 <a class="el" href="search_8hpp_source.html#l00370">370</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="search_8hpp_source.html#l00313">count_if()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00332">count_if()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="char__traits_8hpp_source.html#l00108">base_char_traits&lt; CharT, IntT &gt;::assign()</a>, <a class="el" href="deque_8hpp_source.html#l01255">deque&lt; T, Alloc, BufSize &gt;::assign()</a>, <a class="el" href="barrier_8hpp_source.html#l00244">barrier&lt; CmplFunc &gt;::barrier()</a>, <a class="el" href="char__traits_8hpp_source.html#l00075">base_char_traits&lt; CharT, IntT &gt;::compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00049">base_char_traits&lt; CharT, IntT &gt;::copy()</a>, <a class="el" href="shift_8hpp_source.html#l00140">copy_n()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00225">counting_sort()</a>, <a class="el" href="char__traits_8hpp_source.html#l00096">base_char_traits&lt; CharT, IntT &gt;::find()</a>, <a class="el" href="memory__view_8hpp_source.html#l00388">memory_view&lt; byte_t &gt;::first()</a>, <a class="el" href="hash_8hpp_source.html#l00100">FNV_hash()</a>, <a class="el" href="memory__view_8hpp_source.html#l00410">memory_view&lt; byte_t &gt;::last()</a>, <a class="el" href="memory_8hpp_source.html#l00119">memory_compare()</a>, <a class="el" href="memory_8hpp_source.html#l00030">memory_copy()</a>, <a class="el" href="memory_8hpp_source.html#l00068">memory_copy_offset()</a>, <a class="el" href="memory_8hpp_source.html#l00090">memory_copy_until()</a>, <a class="el" href="memory_8hpp_source.html#l00234">memory_find()</a>, <a class="el" href="memory_8hpp_source.html#l00158">memory_move()</a>, <a class="el" href="memory_8hpp_source.html#l00186">memory_set()</a>, <a class="el" href="memory__view_8hpp_source.html#l00174">memory_view&lt; byte_t &gt;::memory_view()</a>, <a class="el" href="memory_8hpp_source.html#l00205">memory_zero()</a>, <a class="el" href="char__traits_8hpp_source.html#l00062">base_char_traits&lt; CharT, IntT &gt;::move()</a>, <a class="el" href="duration_8hpp_source.html#l00574">operator%()</a>, <a class="el" href="duration_8hpp_source.html#l00591">operator%()</a>, <a class="el" href="duration_8hpp_source.html#l00508">operator*()</a>, <a class="el" href="duration_8hpp_source.html#l00471">operator+()</a>, <a class="el" href="duration_8hpp_source.html#l00490">operator-()</a>, <a class="el" href="duration_8hpp_source.html#l00539">operator/()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00433">radix_sort_greater()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00387">radix_sort_less()</a>, <a class="el" href="this__thread_8hpp_source.html#l00104">relax()</a>, <a class="el" href="search_8hpp_source.html#l00481">search_n()</a>, <a class="el" href="search_8hpp_source.html#l00511">search_n()</a>, <a class="el" href="generator_8hpp_source.html#l00405">generator&lt; T &gt;::skip()</a>, <a class="el" href="signals_8hpp_source.html#l00690">signal&lt; Types &gt;::slot_count()</a>, <a class="el" href="memory_8hpp_source.html#l00520">string_compare()</a>, <a class="el" href="memory_8hpp_source.html#l00576">string_compare_ignore_case()</a>, <a class="el" href="memory_8hpp_source.html#l00958">string_concatenate()</a>, <a class="el" href="memory_8hpp_source.html#l00406">string_copy()</a>, <a class="el" href="memory_8hpp_source.html#l00461">string_copy_offset()</a>, <a class="el" href="memory_8hpp_source.html#l00670">string_find()</a>, <a class="el" href="memory_8hpp_source.html#l00884">string_set()</a>, <a class="el" href="generator_8hpp_source.html#l00391">generator&lt; T &gt;::take()</a>, <a class="el" href="barrier_8hpp_source.html#l00134">tree_barrier&lt; CmplFunc &gt;::tree_barrier()</a>, <a class="el" href="uninitialized_8hpp_source.html#l00156">uninitialized_copy_n()</a>, <a class="el" href="uninitialized_8hpp_source.html#l00419">uninitialized_move_n()</a>, <a class="el" href="memory__view_8hpp_source.html#l00435">memory_view&lt; byte_t &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00769">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00759">vector&lt; byte_t &gt;::view()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="char__traits_8hpp_source.html#l00108">base_char_traits&lt; CharT, IntT &gt;::assign()</a>, <a class="el" href="deque_8hpp_source.html#l01250">deque&lt; T, Alloc, BufSize &gt;::assign()</a>, <a class="el" href="barrier_8hpp_source.html#l00244">barrier&lt; CmplFunc &gt;::barrier()</a>, <a class="el" href="char__traits_8hpp_source.html#l00075">base_char_traits&lt; CharT, IntT &gt;::compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00049">base_char_traits&lt; CharT, IntT &gt;::copy()</a>, <a class="el" href="shift_8hpp_source.html#l00154">copy_n()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00242">counting_sort()</a>, <a class="el" href="char__traits_8hpp_source.html#l00096">base_char_traits&lt; CharT, IntT &gt;::find()</a>, <a class="el" href="memory__view_8hpp_source.html#l00410">memory_view&lt; byte_t &gt;::first()</a>, <a class="el" href="hash_8hpp_source.html#l00103">FNV_hash()</a>, <a class="el" href="memory__view_8hpp_source.html#l00432">memory_view&lt; byte_t &gt;::last()</a>, <a class="el" href="classsql__builder.html#af2e00efd7814f646d06c196e2168db6e">sql_builder::limit()</a>, <a class="el" href="memory_8hpp_source.html#l00119">memory_compare()</a>, <a class="el" href="memory_8hpp_source.html#l00030">memory_copy()</a>, <a class="el" href="memory_8hpp_source.html#l00068">memory_copy_offset()</a>, <a class="el" href="memory_8hpp_source.html#l00090">memory_copy_until()</a>, <a class="el" href="memory_8hpp_source.html#l00234">memory_find()</a>, <a class="el" href="memory_8hpp_source.html#l00158">memory_move()</a>, <a class="el" href="memory_8hpp_source.html#l00186">memory_set()</a>, <a class="el" href="memory__view_8hpp_source.html#l00196">memory_view&lt; byte_t &gt;::memory_view()</a>, <a class="el" href="memory_8hpp_source.html#l00205">memory_zero()</a>, <a class="el" href="char__traits_8hpp_source.html#l00062">base_char_traits&lt; CharT, IntT &gt;::move()</a>, <a class="el" href="classsql__builder.html#a1009828707c0bb4e545b5dbc035f3ce7">sql_builder::offset()</a>, <a class="el" href="duration_8hpp_source.html#l00574">operator%()</a>, <a class="el" href="duration_8hpp_source.html#l00591">operator%()</a>, <a class="el" href="duration_8hpp_source.html#l00508">operator*()</a>, <a class="el" href="duration_8hpp_source.html#l00471">operator+()</a>, <a class="el" href="duration_8hpp_source.html#l00490">operator-()</a>, <a class="el" href="duration_8hpp_source.html#l00539">operator/()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00464">radix_sort_greater()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00412">radix_sort_less()</a>, <a class="el" href="this__thread_8hpp_source.html#l00099">relax()</a>, <a class="el" href="search_8hpp_source.html#l00509">search_n()</a>, <a class="el" href="search_8hpp_source.html#l00541">search_n()</a>, <a class="el" href="generator_8hpp_source.html#l00405">generator&lt; T &gt;::skip()</a>, <a class="el" href="memory_8hpp_source.html#l00520">string_compare()</a>, <a class="el" href="memory_8hpp_source.html#l00576">string_compare_ignore_case()</a>, <a class="el" href="memory_8hpp_source.html#l00954">string_concatenate()</a>, <a class="el" href="memory_8hpp_source.html#l00406">string_copy()</a>, <a class="el" href="memory_8hpp_source.html#l00461">string_copy_offset()</a>, <a class="el" href="memory_8hpp_source.html#l00670">string_find()</a>, <a class="el" href="memory_8hpp_source.html#l00884">string_set()</a>, <a class="el" href="generator_8hpp_source.html#l00391">generator&lt; T &gt;::take()</a>, <a class="el" href="barrier_8hpp_source.html#l00134">tree_barrier&lt; CmplFunc &gt;::tree_barrier()</a>, <a class="el" href="uninitialized_8hpp_source.html#l00156">uninitialized_copy_n()</a>, <a class="el" href="uninitialized_8hpp_source.html#l00419">uninitialized_move_n()</a>, <a class="el" href="memory__view_8hpp_source.html#l00457">memory_view&lt; byte_t &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00769">vector&lt; byte_t &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00759">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="thread__pool_8hpp_source.html#l00085">task_group::wait()</a>.</p>
 
 </div>
 </div>
@@ -230,19 +235,19 @@ template&lt;typename Iterator, typename T, typename BinaryPredicate, <a class="e
 </dl>
 <dl class="section return"><dt>返回</dt><dd>满足谓词的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="search_8hpp_source.html">search.hpp</a> 第 <a class="el" href="search_8hpp_source.html#l00313">313</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="search_8hpp_source.html">search.hpp</a> 第 <a class="el" href="search_8hpp_source.html#l00332">332</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
-<a id="gad05772bf8ecff060052c93aa4eb49174" name="gad05772bf8ecff060052c93aa4eb49174"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad05772bf8ecff060052c93aa4eb49174">&#9670;&#160;</a></span>count_if() <span class="overload">[2/2]</span></h2>
+<a id="ga1b902ac9fed79516a0188338ec0b5c8a" name="ga1b902ac9fed79516a0188338ec0b5c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1b902ac9fed79516a0188338ec0b5c8a">&#9670;&#160;</a></span>count_if() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Predicate&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -288,7 +293,9 @@ template&lt;typename Iterator, typename Predicate, <a class="el" href="group___t
 </dl>
 <dl class="section return"><dt>返回</dt><dd>满足谓词的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="search_8hpp_source.html">search.hpp</a> 第 <a class="el" href="search_8hpp_source.html#l00332">332</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="search_8hpp_source.html">search.hpp</a> 第 <a class="el" href="search_8hpp_source.html#l00350">350</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00562">is_ranges_input_iter_v</a>.</p>
 
 </div>
 </div>

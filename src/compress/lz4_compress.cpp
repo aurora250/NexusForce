@@ -4,7 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size, const int level) {
-    const int max_compressed_size = LZ4_compressBound(static_cast<int>(size));
+    const int max_compressed_size = ::LZ4_compressBound(static_cast<int>(size));
     if (max_compressed_size <= 0) {
         NEFORCE_THROW_EXCEPTION(lz4_exception("Input size too large for LZ4 compression"));
     }
@@ -13,7 +13,7 @@ byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size,
     int compressed_size = 0;
 
     if (level >= 1 && level <= 12) {
-        compressed_size = LZ4_compress_HC(
+        compressed_size = ::LZ4_compress_HC(
             reinterpret_cast<const char*>(data),
             reinterpret_cast<char*>(compressed.data()),
             static_cast<int>(size),
@@ -22,7 +22,7 @@ byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size,
         );
     } else {
         const int acceleration = (level > 12) ? (21 - level) : 1;
-        compressed_size = LZ4_compress_fast(
+        compressed_size = ::LZ4_compress_fast(
             reinterpret_cast<const char*>(data),
             reinterpret_cast<char*>(compressed.data()),
             static_cast<int>(size),
@@ -59,7 +59,7 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
             decompressed.resize(estimated_original_size);
         }
 
-        result = LZ4_decompress_safe(
+        result = ::LZ4_decompress_safe(
             reinterpret_cast<const char*>(data),
             reinterpret_cast<char*>(decompressed.data()),
             static_cast<int>(size),
@@ -88,7 +88,7 @@ lz4_compressor::stream_compressor::stream_compressor(const int level) {
 
 lz4_compressor::stream_compressor::~stream_compressor() {
     if (stream_) {
-        LZ4_freeStream(stream_);
+        ::LZ4_freeStream(stream_);
     }
 }
 
@@ -104,7 +104,7 @@ lz4_compressor::stream_compressor&
 lz4_compressor::stream_compressor::operator =(stream_compressor&& other) noexcept {
     if (this != &other) {
         if (stream_) {
-            LZ4_freeStream(stream_);
+            ::LZ4_freeStream(stream_);
         }
 
         stream_ = other.stream_;
@@ -122,10 +122,10 @@ lz4_compressor::stream_compressor::operator =(stream_compressor&& other) noexcep
 
 void lz4_compressor::stream_compressor::reset(const int level) {
     if (stream_) {
-        LZ4_freeStream(stream_);
+        ::LZ4_freeStream(stream_);
     }
 
-    stream_ = LZ4_createStream();
+    stream_ = ::LZ4_createStream();
     if (!stream_) {
         NEFORCE_THROW_EXCEPTION(lz4_exception("Failed to create LZ4 stream"));
     }
@@ -151,12 +151,12 @@ byte_vector lz4_compressor::stream_compressor::compress(const cbyte_view& data, 
     byte_vector output;
 
     if (data.size() > 0) {
-        const int max_compressed_size = LZ4_compressBound(static_cast<int>(data.size()));
+        const int max_compressed_size = ::LZ4_compressBound(static_cast<int>(data.size()));
         output.resize(max_compressed_size);
 
         int compressed_size = 0;
         if (use_hc_) {
-            compressed_size = LZ4_compress_HC(
+            compressed_size = ::LZ4_compress_HC(
                 reinterpret_cast<const char*>(data.data()),
                 reinterpret_cast<char*>(output.data()),
                 static_cast<int>(data.size()),
@@ -165,7 +165,7 @@ byte_vector lz4_compressor::stream_compressor::compress(const cbyte_view& data, 
             );
         } else {
             const int acceleration = (level_ > 12) ? (21 - level_) : 1;
-            compressed_size = LZ4_compress_fast_continue(
+            compressed_size = ::LZ4_compress_fast_continue(
                 stream_,
                 reinterpret_cast<const char*>(data.data()),
                 reinterpret_cast<char*>(output.data()),
@@ -210,7 +210,7 @@ lz4_compressor::stream_decompressor::stream_decompressor() {
 
 lz4_compressor::stream_decompressor::~stream_decompressor() {
     if (stream_) {
-        LZ4_freeStreamDecode(stream_);
+        ::LZ4_freeStreamDecode(stream_);
     }
 }
 
@@ -225,7 +225,7 @@ lz4_compressor::stream_decompressor&
 lz4_compressor::stream_decompressor::operator =(stream_decompressor&& other) noexcept {
     if (this != &other) {
         if (stream_) {
-            LZ4_freeStreamDecode(stream_);
+            ::LZ4_freeStreamDecode(stream_);
         }
 
         stream_ = other.stream_;
@@ -241,10 +241,10 @@ lz4_compressor::stream_decompressor::operator =(stream_decompressor&& other) noe
 
 void lz4_compressor::stream_decompressor::reset() {
     if (stream_) {
-        LZ4_freeStreamDecode(stream_);
+        ::LZ4_freeStreamDecode(stream_);
     }
 
-    stream_ = LZ4_createStreamDecode();
+    stream_ = ::LZ4_createStreamDecode();
     if (!stream_) {
         NEFORCE_THROW_EXCEPTION(lz4_exception("Failed to create LZ4 decode stream"));
     }
@@ -266,7 +266,7 @@ byte_vector lz4_compressor::stream_decompressor::decompress(const byte_view& dat
     if (!data.empty()) {
         output.resize(block_size);
 
-        const int decompressed_size = LZ4_decompress_safe_continue(
+        const int decompressed_size = ::LZ4_decompress_safe_continue(
             stream_,
             reinterpret_cast<const char*>(data.data()),
             reinterpret_cast<char*>(output.data()),

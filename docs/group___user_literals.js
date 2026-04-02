@@ -23,5 +23,6 @@ var group___user_literals =
     [ "operator\"\"_sv", "group___user_literals.html#gaaa66b002c7f05dd7cce8949f39921fb2", null ],
     [ "operator\"\"_sv", "group___user_literals.html#gab4af94eaded03747ffa6be0ddd92884b", null ],
     [ "operator\"\"_us", "group___user_literals.html#ga20f73421b5381fee949aee9ec6baa1bb", null ],
-    [ "operator\"\"_us", "group___user_literals.html#gaa22eed76fcc181d85b9dad42e53f1a24", null ]
+    [ "operator\"\"_us", "group___user_literals.html#gaa22eed76fcc181d85b9dad42e53f1a24", null ],
+    [ "operator\"\"_uuid", "group___user_literals.html#ga47e6f3e63055ed903bc9ef9ff0d2cea0", null ]
 ];

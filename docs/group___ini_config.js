@@ -33,8 +33,8 @@ var group___ini_config =
       [ "as_section", "classini__value.html#aea8366c0aeecc956e688dd6800073f8b", null ],
       [ "is_property", "classini__value.html#a21831bfb54cc6721ee70433915d11227", null ],
       [ "is_section", "classini__value.html#aeba633d0c30110bc93e5602b52d04474", null ],
-      [ "to_document", "group___ini_config.html#gac63ce33922f3996edc6d5a681cd78147", null ],
-      [ "to_string", "group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede", null ],
+      [ "to_document", "classini__value.html#a697279f8769fd320b39c8ab312017cdd", null ],
+      [ "to_string", "classini__value.html#a10ca623af48564eb1d740a4f63b42e6c", null ],
       [ "type", "classini__value.html#a721b4228adb73ddc402724c6f34889fb", null ]
     ] ],
     [ "ini_property", "classini__property.html", [
@@ -81,13 +81,6 @@ var group___ini_config =
       [ "get_string", "classini__document.html#a337d79602e5de4c228eed1bf75761980", null ],
       [ "has_section", "classini__document.html#a39180b19126198a95f268753ba91df8f", null ],
       [ "operator=", "classini__document.html#af54adac8913fa4335850f5ea41c05530", null ],
-      [ "to_string", "group___ini_config.html#gac6bc4eafd282f592ac7d5b2b500be97b", null ]
-    ] ],
-    [ "ini_value::to_document", "group___ini_config.html#gac63ce33922f3996edc6d5a681cd78147", null ],
-    [ "ini_document::to_string", "group___ini_config.html#gac6bc4eafd282f592ac7d5b2b500be97b", null ],
-    [ "ini_value::to_string", "group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede", null ],
-    [ "to_string", "group___ini_config.html#gac7d6c8791d6e3d9bc93729b53e9a416b", null ],
-    [ "to_string", "group___ini_config.html#gad57ea443840597329ace1f7f9092ffb7", null ],
-    [ "to_string", "group___ini_config.html#ga339ebd18befc1e220495c0392f94d9da", null ],
-    [ "to_string", "group___ini_config.html#ga130d9b71a44899abb7d3fd0357913b93", null ]
+      [ "to_string", "classini__document.html#af17f1e4ea9e72de485bb3fd294cde32e", null ]
+    ] ]
 ];

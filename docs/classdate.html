@@ -122,6 +122,8 @@ constexpr&#160;</td><td class="memItemRight"><b>date</b> () noexcept=default</td
 <tr class="memdesc:aec731c8289bc469a30dac9c413779db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取月份  <br /></td></tr>
 <tr class="memitem:a030622abeb1dd4497040ee3c52b6ac61" id="r_a030622abeb1dd4497040ee3c52b6ac61"><td class="memItemLeft">NEFORCE_NODISCARD constexpr <a class="el" href="#a11d4f6d97331d073ad174db4a25de107">date_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a030622abeb1dd4497040ee3c52b6ac61">day</a> () const noexcept</td></tr>
 <tr class="memdesc:a030622abeb1dd4497040ee3c52b6ac61"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取日期  <br /></td></tr>
+<tr class="memitem:a6a3245b6888126f41fed86d78b4ba8f7" id="r_a6a3245b6888126f41fed86d78b4ba8f7"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a6a3245b6888126f41fed86d78b4ba8f7">is_valid</a> () const noexcept</td></tr>
+<tr class="memdesc:a6a3245b6888126f41fed86d78b4ba8f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查日期是否有效  <br /></td></tr>
 <tr class="memitem:ab45247a1ff4975696add401a3f6ac576" id="r_ab45247a1ff4975696add401a3f6ac576"><td class="memItemLeft">NEFORCE_NODISCARD constexpr <a class="el" href="#a11d4f6d97331d073ad174db4a25de107">date_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab45247a1ff4975696add401a3f6ac576">days_of_week</a> () const noexcept</td></tr>
 <tr class="memdesc:ab45247a1ff4975696add401a3f6ac576"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取星期几  <br /></td></tr>
 <tr class="memitem:a6d18b75b9cac84ce18a41c03e8915f30" id="r_a6d18b75b9cac84ce18a41c03e8915f30"><td class="memItemLeft">NEFORCE_NODISCARD constexpr <a class="el" href="#a11d4f6d97331d073ad174db4a25de107">date_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6d18b75b9cac84ce18a41c03e8915f30">days_of_year</a> () const noexcept</td></tr>
@@ -290,7 +292,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 
 <p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00101">101</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00195">from_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00295">operator+()</a>, <a class="el" href="datetime_8hpp_source.html#l00241">operator+=()</a>, <a class="el" href="datetime_8hpp_source.html#l00306">operator-()</a>, <a class="el" href="datetime_8hpp_source.html#l00276">operator-=()</a>, <a class="el" href="datetime_8hpp_source.html#l00362">parse()</a>, <a class="el" href="datetime_8hpp_source.html#l00343">to_hash()</a>, <a class="el" href="datetime_8hpp_source.html#l00183">to_julian_day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00352">to_string()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00203">from_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00303">operator+()</a>, <a class="el" href="datetime_8hpp_source.html#l00249">operator+=()</a>, <a class="el" href="datetime_8hpp_source.html#l00314">operator-()</a>, <a class="el" href="datetime_8hpp_source.html#l00284">operator-=()</a>, <a class="el" href="datetime_8hpp_source.html#l00370">parse()</a>, <a class="el" href="datetime_8hpp_source.html#l00351">to_hash()</a>, <a class="el" href="datetime_8hpp_source.html#l00191">to_julian_day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00360">to_string()</a>.</p>
 
 </div>
 </div>
@@ -331,11 +333,11 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>天数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00156">156</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00164">164</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00131">is_leap_year()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a>, <a class="el" href="datetime_8hpp_source.html#l00047">month_days</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00139">is_leap_year()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a>, <a class="el" href="datetime_8hpp_source.html#l00047">month_days</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00168">days_of_year()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00241">operator+=()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00276">operator-=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00176">days_of_year()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00249">operator+=()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00284">operator-=()</a>.</p>
 
 </div>
 </div>
@@ -365,7 +367,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 <p>获取星期几 </p>
 <dl class="section return"><dt>返回</dt><dd>0=周日，1=周一，...，6=周六 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00139">139</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00147">147</a> 行定义.</p>
 
 </div>
 </div>
@@ -395,9 +397,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 <p>获取一年中的第几天 </p>
 <dl class="section return"><dt>返回</dt><dd>天数（1-366） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00168">168</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00176">176</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>.</p>
 
 </div>
 </div>
@@ -427,7 +429,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 <p>获取纪元起始日期（1970-01-01） </p>
 <dl class="section return"><dt>返回</dt><dd>纪元起始日期 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00122">122</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00130">130</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>.</p>
 
@@ -465,11 +467,11 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>对应的日期 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00195">195</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00203">203</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00241">operator+=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00249">operator+=()</a>.</p>
 
 </div>
 </div>
@@ -505,16 +507,48 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否为闰年 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00131">131</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00139">139</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>.</p>
+
+</div>
+</div>
+<a id="a6a3245b6888126f41fed86d78b4ba8f7" name="a6a3245b6888126f41fed86d78b4ba8f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a3245b6888126f41fed86d78b4ba8f7">&#9670;&#160;</a></span>is_valid() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool date::is_valid </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查日期是否有效 </p>
+<dl class="section return"><dt>返回</dt><dd>是否有效 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00122">122</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>.</p>
 
 </div>
 </div>
 <a id="a8b7166ce5c98caab0e562207c171665d" name="a8b7166ce5c98caab0e562207c171665d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b7166ce5c98caab0e562207c171665d">&#9670;&#160;</a></span>is_valid()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b7166ce5c98caab0e562207c171665d">&#9670;&#160;</a></span>is_valid() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,9 +592,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 
 <p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00112">112</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00122">is_valid()</a>.</p>
 
 </div>
 </div>
@@ -592,7 +626,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 
 <p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00093">93</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00195">from_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00362">parse()</a>, <a class="el" href="datetime_8hpp_source.html#l00343">to_hash()</a>, <a class="el" href="datetime_8hpp_source.html#l00183">to_julian_day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00352">to_string()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00203">from_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00370">parse()</a>, <a class="el" href="datetime_8hpp_source.html#l00351">to_hash()</a>, <a class="el" href="datetime_8hpp_source.html#l00191">to_julian_day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00360">to_string()</a>.</p>
 
 </div>
 </div>
@@ -628,7 +662,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>新日期 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00295">295</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00303">303</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>.</p>
 
@@ -666,9 +700,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00241">241</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00249">249</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00195">from_julian_day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00183">to_julian_day()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00203">from_julian_day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00191">to_julian_day()</a>.</p>
 
 </div>
 </div>
@@ -704,9 +738,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>相差的天数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00334">334</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00342">342</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00183">to_julian_day()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00191">to_julian_day()</a>.</p>
 
 </div>
 </div>
@@ -742,7 +776,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>新日期 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00306">306</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00314">314</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>.</p>
 
@@ -780,9 +814,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00276">276</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00284">284</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>.</p>
 
 </div>
 </div>
@@ -824,11 +858,11 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00362">362</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00370">370</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a>, <a class="el" href="basic__string__view_8hpp_source.html#l00326">basic_string_view&lt; CharT, Traits &gt;::size()</a>, <a class="el" href="basic__string__view_8hpp_source.html#l00445">basic_string_view&lt; CharT, Traits &gt;::substr()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l01351">datetime::parse()</a>, <a class="el" href="datetime_8hpp_source.html#l01309">datetime::parse_ISO()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01175">datetime::parse_ISO_UTC()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l01375">datetime::parse()</a>, <a class="el" href="datetime_8hpp_source.html#l01333">datetime::parse_ISO()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01199">datetime::parse_ISO_UTC()</a>.</p>
 
 </div>
 </div>
@@ -863,9 +897,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00376">376</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00384">384</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a491cd21ea43f670d4c45150eb6ba1bd4">date()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
 
 </div>
 </div>
@@ -895,7 +929,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 <p>计算哈希值 </p>
 <dl class="section return"><dt>返回</dt><dd>哈希值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00343">343</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00351">351</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
@@ -944,11 +978,11 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 </dl>
 <dl class="section return"><dt>返回</dt><dd>儒略日数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00183">183</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00191">191</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00241">operator+=()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00334">operator-()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00249">operator+=()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00342">operator-()</a>.</p>
 
 </div>
 </div>
@@ -978,9 +1012,9 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 <p>转换为字符串 </p>
 <dl class="section return"><dt>返回</dt><dd>格式为 YYYY-MM-DD 的字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00352">352</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00360">360</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="format_8hpp_source.html#l00682">format()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00101">day()</a>, <a class="el" href="format_8hpp_source.html#l00663">format()</a>, <a class="el" href="datetime_8hpp_source.html#l00093">month()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
 </div>
 </div>
@@ -1014,7 +1048,7 @@ static constexpr <a class="el" href="group___core_types.html#ga9f99c01571d1afadb
 
 <p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00156">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00195">from_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00131">is_leap_year()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00362">parse()</a>, <a class="el" href="datetime_8hpp_source.html#l00343">to_hash()</a>, <a class="el" href="datetime_8hpp_source.html#l00183">to_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00352">to_string()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00068">date()</a>, <a class="el" href="datetime_8hpp_source.html#l00164">days_of_month()</a>, <a class="el" href="datetime_8hpp_source.html#l00203">from_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00139">is_leap_year()</a>, <a class="el" href="datetime_8hpp_source.html#l00112">is_valid()</a>, <a class="el" href="datetime_8hpp_source.html#l00370">parse()</a>, <a class="el" href="datetime_8hpp_source.html#l00351">to_hash()</a>, <a class="el" href="datetime_8hpp_source.html#l00191">to_julian_day()</a>, <a class="el" href="datetime_8hpp_source.html#l00360">to_string()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00085">year()</a>.</p>
 
 </div>
 </div>

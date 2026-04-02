@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup UnorderedSet 无序集合
- * @brief 基于哈希表的键集合
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -553,7 +553,7 @@ unordered_set(std::initializer_list<Key>, HashFcn, Alloc)
 -> unordered_set<Key, HashFcn, equal_to<Key>, Alloc>;
 #endif
 
-/** @} */ // UnorderedSet
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_UNORDERED_SET_HPP__

@@ -14,5 +14,5 @@ var classini__document =
     [ "get_string", "classini__document.html#a337d79602e5de4c228eed1bf75761980", null ],
     [ "has_section", "classini__document.html#a39180b19126198a95f268753ba91df8f", null ],
     [ "operator=", "classini__document.html#af54adac8913fa4335850f5ea41c05530", null ],
-    [ "to_string", "group___ini_config.html#gac6bc4eafd282f592ac7d5b2b500be97b", null ]
+    [ "to_string", "classini__document.html#af17f1e4ea9e72de485bb3fd294cde32e", null ]
 ];

@@ -1,7 +1,6 @@
 var group___c_r_t_p_interfaces =
 [
     [ "icharacter&lt; T, CharT &gt;", "structicharacter.html", [
-      [ "icharacter", "structicharacter.html#a22456a37b9244e03357d6f8a0c3ac416", null ],
       [ "icharacter", "structicharacter.html#a50417e7f290cfdc1f9a5070a3aecbe0e", null ],
       [ "operator bool", "structicharacter.html#a8e6c3790d0b57f1c16281e92b3f73a7f", null ]
     ] ],
@@ -24,22 +23,22 @@ var group___c_r_t_p_interfaces =
     [ "iiterator&lt; Iterator &gt;", "structiiterator.html", [
       [ "operator!=", "structiiterator.html#ae1d654e0bdebce5de93691c1521767ab", null ],
       [ "operator*", "structiiterator.html#a38542caf08064732ea33b4c4bada41cb", null ],
-      [ "operator+", "structiiterator.html#aa511a59cd786285c5a61c1671dfddaa3", null ],
+      [ "operator+", "structiiterator.html#a70c35e54eb9a283316a815aab00f2986", null ],
       [ "operator++", "structiiterator.html#a251522d2785c4415a0f74129315f75db", null ],
       [ "operator++", "structiiterator.html#aaf7bfb36608be49f1bf4289db046efcc", null ],
-      [ "operator+=", "structiiterator.html#a5a7ef8f4b63d27b5e7de90142c5b29da", null ],
+      [ "operator+=", "structiiterator.html#a7777923a1a69db61f718c2b358522467", null ],
       [ "operator-", "structiiterator.html#a56328f61c87fd71c9ce2460ba6418754", null ],
       [ "operator-", "structiiterator.html#a0734377e9354318b8728f01841bcfb10", null ],
       [ "operator--", "structiiterator.html#a7d5d00d2fa5115c7c3fc5eb93d66be98", null ],
       [ "operator--", "structiiterator.html#a8f20f2ea8cc4054292010754489850f7", null ],
-      [ "operator-=", "structiiterator.html#a075464798b6884b44897c4e98814892d", null ],
+      [ "operator-=", "structiiterator.html#a4aa2a32cfd3581b745db141b491723db", null ],
       [ "operator->", "structiiterator.html#a789b844bcb717b7bbdd8727e3f27a2f8", null ],
       [ "operator<", "structiiterator.html#ae131b6da2b79f90e9c35f7c6e1e6e2ea", null ],
       [ "operator<=", "structiiterator.html#acd45ddf410739b47f977be6ed1e964bb", null ],
       [ "operator==", "structiiterator.html#a36a4df98fec0b13eb84e938feeb0d7d7", null ],
       [ "operator>", "structiiterator.html#af75d4ca526effe8e955ef1f340f28440", null ],
       [ "operator>=", "structiiterator.html#aa367239b9d38c3af07fa911f3b1af1ae", null ],
-      [ "operator+", "structiiterator.html#a5dc28b83b5e217786763b70804876a99", null ]
+      [ "operator+", "structiiterator.html#aa72e9f33acae994f81c07eba411a693e", null ]
     ] ],
     [ "iarithmetic&lt; T &gt;", "structiarithmetic.html", [
       [ "operator%", "structiarithmetic.html#a3b14f9e9ae6f508d3f3c73e634405405", null ],
@@ -76,10 +75,7 @@ var group___c_r_t_p_interfaces =
     ] ],
     [ "ipackage&lt; T, PackageT &gt;", "structipackage.html", [
       [ "package_type", "structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816", null ],
-      [ "ipackage", "structipackage.html#a7aa989ea26f1dddba13c3bf018b51901", null ],
       [ "ipackage", "structipackage.html#a549625561e81e554b6552a292cf69aea", null ],
-      [ "ipackage", "structipackage.html#a4da02ab67ec801560ff02e4784324750", null ],
-      [ "ipackage", "structipackage.html#a129b2b663ac277c5f6d11bd1720e6ea7", null ],
       [ "~ipackage", "structipackage.html#aef48c710de7f2a81b1e238892b026f5f", null ],
       [ "operator package_type", "structipackage.html#a2070d73d6d864bd28fdb4fb21a557a2c", null ],
       [ "operator%=", "structipackage.html#a92ce2f75002df8eab6ade4cf29bc0b29", null ],

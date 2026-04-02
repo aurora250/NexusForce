@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup UnorderedMultiMap 无序多重映射
- * @brief 基于哈希表的键值对容器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -576,7 +576,7 @@ unordered_multimap(std::initializer_list<pair<Key, T>>, HashFcn, Alloc)
 -> unordered_multimap<Key, T, HashFcn, equal_to<Key>, Alloc>;
 #endif
 
-/** @} */ // UnorderedMultiMap
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_UNORDERED_MULTIMAP_HPP__

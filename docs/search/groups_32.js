@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
+  ['弱智能指针_0',['弱智能指针',['../group___weak_pointer.html',1,'']]]
 ];

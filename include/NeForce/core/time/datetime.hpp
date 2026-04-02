@@ -1132,23 +1132,6 @@ public:
     }
 
     /**
-     * @brief 从 Unix 时间戳（秒）构造 datetime
-     * @param seconds 从 1970-01-01 00:00:00 UTC 开始的秒数
-     * @return 对应的 datetime 对象
-     */
-    static constexpr datetime from_unix(const int64_t seconds) noexcept {
-        return epoch() + seconds;
-    }
-
-    /**
-     * @brief 转换为 Unix 时间戳（秒）
-     * @return 从 1970-01-01 00:00:00 UTC 开始的秒数
-     */
-    constexpr int64_t to_unix() const noexcept {
-        return *this - epoch();
-    }
-
-    /**
      * @brief 转换为时区偏移字符串
      * @return 格式为 ±HH:MM 或 "Z"
      */

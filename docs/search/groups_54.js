@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['系统信息_0',['系统信息',['../group___system_info.html',1,'']]]
+  ['红黑树_0',['红黑树',['../group___r_b_tree.html',1,'']]]
 ];

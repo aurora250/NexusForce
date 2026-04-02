@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['红黑树_0',['红黑树',['../group___r_b_tree.html',1,'']]]
+  ['终止处理_0',['终止处理',['../group___termination_functions.html',1,'']]]
 ];

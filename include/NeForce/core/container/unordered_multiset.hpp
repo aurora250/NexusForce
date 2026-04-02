@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup UnorderedMultiSet 无序多重集合
- * @brief 基于哈希表的键集合
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -555,7 +555,7 @@ unordered_multiset(std::initializer_list<Value>, HashFcn, Alloc)
 -> unordered_multiset<Value, HashFcn, equal_to<Value>, Alloc>;
 #endif
 
-/** @} */ // UnorderedMultiSet
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_UNORDERED_MULTISET_HPP__

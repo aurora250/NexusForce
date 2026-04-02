@@ -97,58 +97,109 @@ $(function(){initNavTree('http__client__message_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="duration_8hpp.html">NeForce/core/time/duration.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;NeForce/network/http/session.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">struct </span>http_client_response {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> http_version_major = 1;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> http_version_minor = 1;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">bool</span> chunked = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> content_length = 0;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">string</span> effective_url;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">int</span> redirect_count = 0;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> total_time{0};</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumeration" href="group___http.html#ga339f5d89d0fcce6500b75b76c5a41845">HTTP_STATUS</a> status;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">string</span> status_message;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    unordered_map&lt;string, vector&lt;string&gt;&gt; headers;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">string</span> body;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    vector&lt;cookie&gt; cookies;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> header(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = headers.find(key);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">if</span> (it == headers.end() || it-&gt;second.empty()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span> it-&gt;second[0].view();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">struct </span>http_client_request {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    HTTP_METHOD method = <a class="code hl_variable" href="struct_h_t_t_p___m_e_t_h_o_d.html#ae5826a057702d9b3bbbcfbb05224260b">HTTP_METHOD::GET</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">string</span> host;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> port = 80;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">string</span> path = <span class="stringliteral">&quot;/&quot;</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">string</span> version = <span class="stringliteral">&quot;HTTP/1.1&quot;</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    unordered_map&lt;string, string&gt; headers;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">string</span> body;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;NeForce/network/http/http_session.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;NeForce/network/ports.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">struct </span>http_client_response {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> http_version_major = 1;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> http_version_minor = 1;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">bool</span> chunked = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> content_length = 0;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">string</span> effective_url;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> redirect_count = 0;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> total_time{0};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> connect_time{0};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> send_time{0};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> receive_time{0};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_enumeration" href="group___http.html#ga339f5d89d0fcce6500b75b76c5a41845">HTTP_STATUS</a> status = <a class="code hl_enumvalue" href="group___http.html#gga339f5d89d0fcce6500b75b76c5a41845aa83896e2df473a400c23e956ffc554f6">HTTP_STATUS::S2_OK</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">string</span> status_message;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    unordered_map&lt;string, vector&lt;string&gt;&gt; headers;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">string</span> body;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    vector&lt;http_cookie&gt; cookies;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> header(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = headers.find(key);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">if</span> (it == headers.end() || it-&gt;second.empty()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">return</span> it-&gt;second[0].view();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    NEFORCE_NODISCARD <span class="keyword">const</span> vector&lt;string&gt;&amp; headers_all(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keyword">static</span> <span class="keyword">const</span> vector&lt;string&gt; <a class="code hl_function" href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = headers.find(key);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> it != headers.end() ? it-&gt;second : <a class="code hl_function" href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> header(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = headers.find(key);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (it == headers.end() || it-&gt;second.empty()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> it-&gt;second.view();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_HTTP_CLIENT_MESSAGE_HPP__</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> has_header(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> headers.find(key) != headers.end();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_success() const noexcept {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">const</span> <span class="keyword">auto</span> code = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(status);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> code &gt;= 200 &amp;&amp; code &lt; 300;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_redirect() const noexcept {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">const</span> <span class="keyword">auto</span> code = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(status);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> code &gt;= 300 &amp;&amp; code &lt; 400;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_client_error() const noexcept {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keyword">const</span> <span class="keyword">auto</span> code = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(status);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span> code &gt;= 400 &amp;&amp; code &lt; 500;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_server_error() const noexcept {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keyword">const</span> <span class="keyword">auto</span> code = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(status);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> code &gt;= 500 &amp;&amp; code &lt; 600;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> content_type() const noexcept {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> header(<span class="stringliteral">&quot;Content-Type&quot;</span>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">struct </span>http_client_request {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    HTTP_METHOD method{<a class="code hl_variable" href="struct_h_t_t_p___m_e_t_h_o_d.html#ae5826a057702d9b3bbbcfbb05224260b">HTTP_METHOD::GET</a>};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">string</span> host;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    ports port;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">string</span> path = <span class="stringliteral">&quot;/&quot;</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">string</span> version = <span class="stringliteral">&quot;HTTP/1.1&quot;</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    unordered_map&lt;string, string&gt; headers;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    unordered_map&lt;string, string&gt; query_params;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">string</span> body;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> header(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = headers.find(key);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">if</span> (it == headers.end() || it-&gt;second.empty()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">return</span> it-&gt;second.view();</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> set_header(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">string</span> value) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        headers[key] = _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(value);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span> add_query_param(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">string</span> value) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        query_params[key] = _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(value);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> build_full_path() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>};</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_HTTP_CLIENT_MESSAGE_HPP__</span></div>
 <div class="ttc" id="aduration_8hpp_html"><div class="ttname"><a href="duration_8hpp.html">duration.hpp</a></div><div class="ttdoc">持续时间类型</div></div>
 <div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00160">duration.hpp:160</a></div></div>
 <div class="ttc" id="agroup___http_html_ga339f5d89d0fcce6500b75b76c5a41845"><div class="ttname"><a href="group___http.html#ga339f5d89d0fcce6500b75b76c5a41845">HTTP_STATUS</a></div><div class="ttdeci">HTTP_STATUS</div><div class="ttdoc">HTTP状态码枚举</div><div class="ttdef"><b>定义</b> <a href="http__constants_8hpp_source.html#l00051">http_constants.hpp:51</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___http_html_gga339f5d89d0fcce6500b75b76c5a41845aa83896e2df473a400c23e956ffc554f6"><div class="ttname"><a href="group___http.html#gga339f5d89d0fcce6500b75b76c5a41845aa83896e2df473a400c23e956ffc554f6">HTTP_STATUS::S2_OK</a></div><div class="ttdeci">@ S2_OK</div><div class="ttdoc">200 OK 请求成功</div><div class="ttdef"><b>定义</b> <a href="http__constants_8hpp_source.html#l00068">http_constants.hpp:68</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
-<div class="ttc" id="astruct_h_t_t_p___m_e_t_h_o_d_html_ae5826a057702d9b3bbbcfbb05224260b"><div class="ttname"><a href="struct_h_t_t_p___m_e_t_h_o_d.html#ae5826a057702d9b3bbbcfbb05224260b">HTTP_METHOD::GET</a></div><div class="ttdeci">static const HTTP_METHOD GET</div><div class="ttdoc">GET方法</div><div class="ttdef"><b>定义</b> <a href="http__constants_8hpp_source.html#l00410">http_constants.hpp:410</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga57a416f9c003e19a8fae0edc3f0902bb"><div class="ttname"><a href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const Container &amp;cont) noexcept(noexcept(cont.empty()))</div><div class="ttdoc">检查容器是否为空</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00383">type_erase.hpp:383</a></div></div>
+<div class="ttc" id="astruct_h_t_t_p___m_e_t_h_o_d_html_ae5826a057702d9b3bbbcfbb05224260b"><div class="ttname"><a href="struct_h_t_t_p___m_e_t_h_o_d.html#ae5826a057702d9b3bbbcfbb05224260b">HTTP_METHOD::GET</a></div><div class="ttdeci">static const HTTP_METHOD GET</div><div class="ttdoc">GET方法</div><div class="ttdef"><b>定义</b> <a href="http__constants_8hpp_source.html#l00391">http_constants.hpp:391</a></div></div>
 <div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
 <div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
 </div><!-- fragment --></div><!-- contents -->

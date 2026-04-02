@@ -13,8 +13,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup StringFormat 字符串格式化
- * @brief 字符串格式化功能
+ * @defgroup BufferFormat 缓冲区格式化
+ * @brief C风格缓冲区格式化功能
  * @{
  */
 
@@ -76,7 +76,7 @@ int NEFORCE_API snprintf(char* buf, size_t size, const char* fmt, ...) noexcept;
  */
 int NEFORCE_API scprintf(const char* fmt, ...) noexcept;
 
-/** @} */ // StringFormat
+/** @} */ // BufferFormat
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_STRING_VSPRINTF_HPP__

@@ -41,8 +41,8 @@ var group___env_config =
       [ "~env_value", "classenv__value.html#aea8033fba4703a097fbcec974276dd45", null ],
       [ "as_variable", "classenv__value.html#a01e05632f5314d3c2579f54a9dfd5828", null ],
       [ "is_variable", "classenv__value.html#aa874d0508a18550e5a332b26d4e919a9", null ],
-      [ "to_document", "group___env_config.html#gae76b8450372210a70d786ed9fbfe0174", null ],
-      [ "to_string", "group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970", null ],
+      [ "to_document", "classenv__value.html#a1a7397aae09bcd56c497a4bd7baa8ce5", null ],
+      [ "to_string", "classenv__value.html#a9a425e6eafabe4e5e144f56e183df4da", null ],
       [ "type", "classenv__value.html#a61699803e9ea077a48ee2fc5f8cce019", null ]
     ] ],
     [ "env_variable", "classenv__variable.html", [
@@ -83,13 +83,6 @@ var group___env_config =
       [ "operator=", "classenv__document.html#a4a9bc79fd9889797f1e29c792041d965", null ],
       [ "remove_variable", "classenv__document.html#a3c1ef5060483e825066c5964ae019497", null ],
       [ "set_variable", "classenv__document.html#a81b7190ea0b57c461429b12ebe628dcb", null ],
-      [ "to_string", "group___env_config.html#ga3f671f0fa480e536bb4139128def75ac", null ]
-    ] ],
-    [ "env_value::to_document", "group___env_config.html#gae76b8450372210a70d786ed9fbfe0174", null ],
-    [ "env_document::to_string", "group___env_config.html#ga3f671f0fa480e536bb4139128def75ac", null ],
-    [ "env_value::to_string", "group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970", null ],
-    [ "to_string", "group___env_config.html#ga6763c31dd895542f0bf6b3f3cd6c27b5", null ],
-    [ "to_string", "group___env_config.html#ga3bef4745c860d3f2819d97256c571fea", null ],
-    [ "to_string", "group___env_config.html#ga51ed38ac998784edffc52e4c4e266c17", null ],
-    [ "to_string", "group___env_config.html#ga420418bb5bf8c1be8f3d82e6e4a552ce", null ]
+      [ "to_string", "classenv__document.html#a2a6ff382165c5e024df98292592d5072", null ]
+    ] ]
 ];

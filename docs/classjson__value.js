@@ -21,6 +21,7 @@ var classjson__value =
     [ "is_number", "classjson__value.html#aaca5337ac8066cb481cb777186a1a366", null ],
     [ "is_object", "classjson__value.html#aa31cdc5e4d2503aba579b3ff3c59255d", null ],
     [ "is_string", "classjson__value.html#adca513d9dd56e4bddc8fd105c56545c9", null ],
-    [ "to_string", "group___json_config.html#gac97985dc68baacf3126505506e68f7bb", null ],
+    [ "to_indent_string", "classjson__value.html#aaf6c2cb66b8d4a35459f9d3609a78599", null ],
+    [ "to_string", "classjson__value.html#a15535d4046e675ccc6810fd1addc84f6", null ],
     [ "type", "classjson__value.html#a5e87488279236cfbc020f432d59c6bc6", null ]
 ];

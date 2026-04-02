@@ -20,18 +20,57 @@ var group___thread =
       [ "request_stop", "classscoped__thread.html#a6580ea47c0b858252ce209745f06b194", null ],
       [ "swap", "classscoped__thread.html#a0a9ff2b109a329646c3854daa70a1ae9", null ]
     ] ],
-    [ "thread", "classthread.html", null ],
+    [ "thread", "classthread.html", [
+      [ "id", "structthread_1_1id.html", [
+        [ "id", "structthread_1_1id.html#a9947a8a4c74d5b79c0308ac815a581da", null ],
+        [ "id", "structthread_1_1id.html#a1cfa2f52365f99c539d5494754907366", null ],
+        [ "native_handle", "structthread_1_1id.html#acc1fccc5ea2409154ba6a30af9736dff", null ],
+        [ "operator!=", "structthread_1_1id.html#a884f8afe38ca9c59db3a677d3d44cb1a", null ],
+        [ "operator==", "structthread_1_1id.html#a68100ff0ac4133f9d9f7e24b30a05c3d", null ],
+        [ "to_hash", "structthread_1_1id.html#aa1e76c7df33be4d83151f47bc0825aaf", null ]
+      ] ],
+      [ "hook", "structthread_1_1hook.html", [
+        [ "callback_t", "structthread_1_1hook.html#a3cb0384db8eb83e2341c918b0f1f15ff", null ],
+        [ "point", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cf", [
+          [ "before_create", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfac791155e22a5ee01f385ee533fd91dd0", null ],
+          [ "after_create", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfa5c7067e65bdfce3ef3585a9a9fb9ac80", null ],
+          [ "thread_start", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfa13e2a25074d78e849b7fae903fa49dbc", null ],
+          [ "thread_end", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfa7bd3c5962dec6212482752210eb16a8b", null ],
+          [ "before_destroy", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfa2eae5b3e7d6706844f2660cac218e366", null ]
+        ] ]
+      ] ],
+      [ "native_handle_type", "classthread.html#a892af261639992f04c59a3cdf167356d", null ],
+      [ "thread", "classthread.html#a1dde16c1af24bfef1e4484d5d805cb1d", null ],
+      [ "thread", "classthread.html#adf1e800d8ae9a2a3fc18818fb88e32a7", null ],
+      [ "thread", "classthread.html#a81db94c6a1a6db93d805d7462b9fe758", null ],
+      [ "~thread", "classthread.html#a117e0892c1d1a90bece03424311676f6", null ],
+      [ "detach", "classthread.html#af47e30f5736daa2ca26cbac3f3a3e2e4", null ],
+      [ "get_id", "classthread.html#a21249ff125493aa13fad2c9551dc85bb", null ],
+      [ "join", "classthread.html#ac77d974035148375cbcd0835d631b3d0", null ],
+      [ "joinable", "classthread.html#aa91102b5cd9db20963ffe2c13dde1666", null ],
+      [ "name", "classthread.html#ac1c3666fcd10451cee601dec58c32c00", null ],
+      [ "native_handle", "classthread.html#a972490197894f12244e23509d79c969a", null ],
+      [ "operator=", "classthread.html#aa3c72628994c7bdd2eaf62ae547b6a10", null ],
+      [ "set_name", "classthread.html#a11943219b9d0cef98e433e6663e8b000", null ],
+      [ "swap", "classthread.html#a4d4f770a1048122b6b9954f780e3640c", null ]
+    ] ],
+    [ "thread_tracker", "classthread__tracker.html", null ],
     [ "affinity", "group___thread.html#gae1aea059988cd9dd0edf5f7823610ba6", null ],
     [ "current_cpu", "group___thread.html#ga97d5771fda7efbec7ffd4cfed32c074d", null ],
+    [ "handle", "group___thread.html#ga9c11108611d4c65deb691d1b88f0dc07", null ],
     [ "id", "group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a", null ],
+    [ "is_single_threaded", "group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb", null ],
+    [ "name", "group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b", null ],
     [ "priority", "group___thread.html#ga0d65da9844fd9c1b7b0123ba22e9a3f0", null ],
     [ "relax", "group___thread.html#gaef795de3960f4434c3f11391cce5e9b4", null ],
     [ "relax", "group___thread.html#gad354de74be581f6cbbaedd5494d62d88", null ],
+    [ "set_name", "group___thread.html#ga303744653fe3bf181857637488927d28", null ],
     [ "sleep_for", "group___thread.html#gadbe19150bdd95fb6be280139d5ef441c", null ],
     [ "sleep_for_ms", "group___thread.html#ga369d5171a87b9dcaa7e23d446d5dae91", null ],
     [ "sleep_for_ms", "group___thread.html#ga502974f51f85fd2faba9b8a3241b7e85", null ],
     [ "sleep_for_ns", "group___thread.html#ga806b20f01364f190e884d670c292ca20", null ],
     [ "sleep_for_us", "group___thread.html#gaaa75c27bf501bf3c77980e5397349d3f", null ],
     [ "sleep_until", "group___thread.html#gaafee6defcb6e71227538a97a5b41e235", null ],
+    [ "thread_count", "group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee", null ],
     [ "yield", "group___thread.html#gab8ae3d955c7c6a9052597e15e896f96e", null ]
 ];

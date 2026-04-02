@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup MergeAlgorithms 合并算法
  * @brief 合并算法的实现
  * @{
@@ -290,6 +296,8 @@ NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator
 }
 
 /** @} */ // MergeAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_MERGE_HPP__

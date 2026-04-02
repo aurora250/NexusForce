@@ -99,7 +99,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="type__traits_8hpp.html">NeForce/core/typeinfo/type_traits.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="bit_8hpp.html">NeForce/core/memory/bit.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="numeric__traits_8hpp.html">NeForce/core/numeric/numeric_traits.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span>max_t Numerator&gt;</div>
@@ -232,7 +232,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    static constexpr uintmax_t num_high_shifted = (NumHigh % Den) * shift_factor1;  </div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    static constexpr uintmax_t num_low_high = (leading_zeros != 0) ? (NumLow / shift_factor2) : 0;  </div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    static constexpr uintmax_t scaled_num_high = num_high_shifted + num_low_high;  </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    using division_result = _INNER __big_div_impl&lt;scaled_num_high, scaled_num_low, scaled_den&gt;;  </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    using division_result = inner::__big_div_impl&lt;scaled_num_high, scaled_num_low, scaled_den&gt;;  </div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>public:</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="structbig__div.html#a2d3156e58dcebed6eef7f8a752576b0c">  238</a></span>    static constexpr uintmax_t quotient_high = NumHigh / Den;  </div>
@@ -276,64 +276,64 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>struct static_char_digit&lt;Base, &#39;2&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 2&gt; {};</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>struct static_char_digit&lt;Base, &#39;2&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 2&gt; {};</div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>struct static_char_digit&lt;Base, &#39;3&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 3&gt; {};</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>struct static_char_digit&lt;Base, &#39;3&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 3&gt; {};</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>struct static_char_digit&lt;Base, &#39;4&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 4&gt; {};</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>struct static_char_digit&lt;Base, &#39;4&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 4&gt; {};</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>struct static_char_digit&lt;Base, &#39;5&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 5&gt; {};</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>struct static_char_digit&lt;Base, &#39;5&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 5&gt; {};</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>struct static_char_digit&lt;Base, &#39;6&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 6&gt; {};</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>struct static_char_digit&lt;Base, &#39;6&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 6&gt; {};</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>struct static_char_digit&lt;Base, &#39;7&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 7&gt; {};</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>struct static_char_digit&lt;Base, &#39;7&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 7&gt; {};</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>struct static_char_digit&lt;Base, &#39;8&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 8&gt; {};</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>struct static_char_digit&lt;Base, &#39;8&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 8&gt; {};</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>struct static_char_digit&lt;Base, &#39;9&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 9&gt; {};</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>struct static_char_digit&lt;Base, &#39;9&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 9&gt; {};</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>struct static_char_digit&lt;Base, &#39;a&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xa&gt; {};</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>struct static_char_digit&lt;Base, &#39;a&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xa&gt; {};</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>struct static_char_digit&lt;Base, &#39;A&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xa&gt; {};</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>struct static_char_digit&lt;Base, &#39;A&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xa&gt; {};</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>struct static_char_digit&lt;Base, &#39;b&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xb&gt; {};</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>struct static_char_digit&lt;Base, &#39;b&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xb&gt; {};</div>
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>struct static_char_digit&lt;Base, &#39;B&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xb&gt; {};</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>struct static_char_digit&lt;Base, &#39;B&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xb&gt; {};</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>struct static_char_digit&lt;Base, &#39;c&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xc&gt; {};</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>struct static_char_digit&lt;Base, &#39;c&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xc&gt; {};</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>struct static_char_digit&lt;Base, &#39;C&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xc&gt; {};</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>struct static_char_digit&lt;Base, &#39;C&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xc&gt; {};</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>struct static_char_digit&lt;Base, &#39;d&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xd&gt; {};</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>struct static_char_digit&lt;Base, &#39;d&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xd&gt; {};</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>struct static_char_digit&lt;Base, &#39;D&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xd&gt; {};</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>struct static_char_digit&lt;Base, &#39;D&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xd&gt; {};</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>struct static_char_digit&lt;Base, &#39;e&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xe&gt; {};</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>struct static_char_digit&lt;Base, &#39;e&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xe&gt; {};</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>struct static_char_digit&lt;Base, &#39;E&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xe&gt; {};</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>struct static_char_digit&lt;Base, &#39;E&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xe&gt; {};</div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>struct static_char_digit&lt;Base, &#39;f&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xf&gt; {};</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>struct static_char_digit&lt;Base, &#39;f&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xf&gt; {};</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>template &lt;uint32_t Base&gt;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>struct static_char_digit&lt;Base, &#39;F&#39;&gt; : _INNER __static_char_digit_aux&lt;Base, 0xf&gt; {};</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>struct static_char_digit&lt;Base, &#39;F&#39;&gt; : inner::__static_char_digit_aux&lt;Base, 0xf&gt; {};</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>template &lt;uint32_t Base&gt;</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>struct static_char_digit&lt;Base, &#39;\&#39;&#39;&gt; : uint32_constant&lt;0&gt; {</div>
@@ -365,7 +365,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span></div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>template &lt;uint32_t Base, char... Digits&gt;</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno"><a class="line" href="structstatic__power.html">  411</a></span>struct static_power : _INNER __power_helper&lt;Base, Digits...&gt;::type {};</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno"><a class="line" href="structstatic__power.html">  411</a></span>struct static_power : inner::__power_helper&lt;Base, Digits...&gt;::type {};</div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span> </div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>template &lt;uint32_t Base&gt;</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>struct static_power&lt;Base&gt; : uint64_constant&lt;0&gt; {};</div>
@@ -405,7 +405,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>template &lt;uint32_t Base, char... Digits&gt;</div>
 <div class="foldopen" id="foldopen00469" data-start="{" data-end="};">
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno"><a class="line" href="structstatic__number.html">  469</a></span>struct static_number :</div>
-<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    _INNER __number_aux&lt;Base, static_power&lt;Base, Digits...&gt;::value, Digits...&gt;::type {};</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    inner::__number_aux&lt;Base, static_power&lt;Base, Digits...&gt;::value, Digits...&gt;::type {};</div>
 </div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span> </div>
 <div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>template &lt;uint32_t Base&gt;</div>
@@ -453,7 +453,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span></div>
 <div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>template &lt;char... Digits&gt;</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno"><a class="line" href="group___static_char_digit.html#ga039a7f9ac0912bac40ebebc12111994c">  545</a></span>using static_select_int_t = typename _INNER __select_int_base&lt;</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno"><a class="line" href="group___static_char_digit.html#ga587bce9467981a2a7af91fbd1cdfea74">  545</a></span>using static_select_int_t = typename inner::__select_int_base&lt;</div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    static_parse_int&lt;Digits...&gt;::value,</div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    unsigned char,</div>
 <div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>    unsigned short,</div>
@@ -466,7 +466,6 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>#endif <span class="comment">// NEFORCE_CORE_NUMERIC_STATIC_NUMERIC_HPP__</span></div>
 <div class="ttc" id="abit_8hpp_html"><div class="ttname"><a href="bit_8hpp.html">bit.hpp</a></div><div class="ttdoc">位操作函数</div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
 <div class="ttc" id="anumeric__traits_8hpp_html"><div class="ttname"><a href="numeric__traits_8hpp.html">numeric_traits.hpp</a></div><div class="ttdoc">数值特征</div></div>
 <div class="ttc" id="astructintegral__constant_html"><div class="ttname"><a href="structintegral__constant.html">integral_constant</a></div><div class="ttdoc">整数常量包装器</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00030">type_traits.hpp:30</a></div></div>
 <div class="ttc" id="astructstatic__sign_html"><div class="ttname"><a href="structstatic__sign.html">static_sign</a></div><div class="ttdoc">计算整数的符号</div><div class="ttdef"><b>定义</b> <a href="#l00031">static_numeric.hpp:31</a></div></div>

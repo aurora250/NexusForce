@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['整数序列_0',['整数序列',['../group___integer_sequence.html',1,'']]]
+  ['无锁队列_0',['无锁队列',['../group___lock_free_queue.html',1,'']]]
 ];

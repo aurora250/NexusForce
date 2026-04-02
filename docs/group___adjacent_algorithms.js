@@ -1,5 +1,5 @@
 var group___adjacent_algorithms =
 [
-    [ "adjacent_find", "group___adjacent_algorithms.html#ga3fd6619eff8aa891c210d02475ed2203", null ],
-    [ "adjacent_find", "group___adjacent_algorithms.html#gadaa3071ed4790874e3c3e930c3c69e1e", null ]
+    [ "adjacent_find", "group___adjacent_algorithms.html#ga66044ecc5c63afc5e3fc716e74cb9b68", null ],
+    [ "adjacent_find", "group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be", null ]
 ];

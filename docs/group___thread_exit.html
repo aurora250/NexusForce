@@ -103,41 +103,14 @@ $(function(){initNavTree('group___thread_exit.html','',''); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga7532965b01605aab66402a6b67c83c7b" id="r_ga7532965b01605aab66402a6b67c83c7b"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga7532965b01605aab66402a6b67c83c7b">at_thread_exit_register</a> (<a class="el" href="structat__thread__exit__elt.html">at_thread_exit_elt</a> *elt, void(*callback)(void *)) noexcept</td></tr>
-<tr class="memdesc:ga7532965b01605aab66402a6b67c83c7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册线程退出回调  <br /></td></tr>
-<tr class="memitem:ga3ecb7e94d000ff1e10fdb08870e943e9" id="r_ga3ecb7e94d000ff1e10fdb08870e943e9"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga3ecb7e94d000ff1e10fdb08870e943e9">at_thread_exit_callbacks</a> ()</td></tr>
-<tr class="memdesc:ga3ecb7e94d000ff1e10fdb08870e943e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行线程退出回调  <br /></td></tr>
+<tr class="memitem:ga7dde42f8087c208f60c82547f98afad1" id="r_ga7dde42f8087c208f60c82547f98afad1"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga7dde42f8087c208f60c82547f98afad1">thread_exit_register</a> (<a class="el" href="structat__thread__exit__elt.html">at_thread_exit_elt</a> *elt, void(*callback)(void *)) noexcept</td></tr>
+<tr class="memdesc:ga7dde42f8087c208f60c82547f98afad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册线程退出回调  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>线程退出时的回调管理 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga3ecb7e94d000ff1e10fdb08870e943e9" name="ga3ecb7e94d000ff1e10fdb08870e943e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3ecb7e94d000ff1e10fdb08870e943e9">&#9670;&#160;</a></span>at_thread_exit_callbacks()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NEFORCE_API at_thread_exit_callbacks </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>执行线程退出回调 </p>
-<p>执行所有已注册的线程退出回调。 通常在以下情况下被调用：</p><ol type="1">
-<li>线程正常退出</li>
-<li>线程局部存储的析构函数中 按照注册的逆序执行回调。 </li>
-</ol>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00302">NEFORCE_END_NAMESPACE__</a>.</p>
-
-</div>
-</div>
-<a id="ga7532965b01605aab66402a6b67c83c7b" name="ga7532965b01605aab66402a6b67c83c7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7532965b01605aab66402a6b67c83c7b">&#9670;&#160;</a></span>at_thread_exit_register()</h2>
+<a id="ga7dde42f8087c208f60c82547f98afad1" name="ga7dde42f8087c208f60c82547f98afad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7dde42f8087c208f60c82547f98afad1">&#9670;&#160;</a></span>thread_exit_register()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,7 +119,7 @@ $(function(){initNavTree('group___thread_exit.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NEFORCE_API at_thread_exit_register </td>
+          <td class="memname">void NEFORCE_API thread_exit_register </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structat__thread__exit__elt.html">at_thread_exit_elt</a> *</td>          <td class="paramname"><span class="paramname"><em>elt</em></span>, </td>
         </tr>

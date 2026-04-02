@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup PartitionAlgorithms 分区算法
  * @brief 分区算法的实现
  * @{
@@ -113,6 +119,8 @@ constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivo
 }
 
 /** @} */ // PartitionAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_PARTITION_HPP__

@@ -1,7 +1,7 @@
 var group___merge_algorithms =
 [
-    [ "inplace_merge", "group___merge_algorithms.html#gaee0dcfc14e269a86ad7ffaa635970ef1", null ],
-    [ "inplace_merge", "group___merge_algorithms.html#ga33c87a66ef070be6001c33a05fd4e755", null ],
+    [ "inplace_merge", "group___merge_algorithms.html#gab19c5ed5eb001e8a69501fa739605fd0", null ],
+    [ "inplace_merge", "group___merge_algorithms.html#ga55d7862a1ac8f26c6d17ad4d9e12489d", null ],
     [ "merge", "group___merge_algorithms.html#ga91839cd96c2e631f63fabfb72bd70482", null ],
-    [ "merge", "group___merge_algorithms.html#ga734badfe126e6f61b93771797e6b89d9", null ]
+    [ "merge", "group___merge_algorithms.html#ga0b9cd2bc635fe355dff2344b03e0b7bb", null ]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['literals_0',['literals',['../namespaceliterals.html',1,'']]]
+  ['placeholders_0',['placeholders',['../namespaceplaceholders.html',1,'']]]
 ];

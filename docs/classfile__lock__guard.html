@@ -93,31 +93,36 @@ $(function(){initNavTree('classfile__lock__guard.html','','classfile__lock__guar
 </div><!--header-->
 <div class="contents">
 
-<p>文件锁守卫  
+<p>文件区域锁守卫  
  <a href="#details">更多...</a></p>
 
-<p><code>#include &lt;<a class="el" href="file_8hpp_source.html">file.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="file__locker_8hpp_source.html">file_locker.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a1a5bd134ad110a7c33ac67bc27f35513" id="r_a1a5bd134ad110a7c33ac67bc27f35513"><td class="memItemLeft"><a id="a1a5bd134ad110a7c33ac67bc27f35513" name="a1a5bd134ad110a7c33ac67bc27f35513"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="classfile__locker.html#a0d5945085777171f908ae673f33b4083">file_locker::difference_type</a></td></tr>
+<tr class="memdesc:a1a5bd134ad110a7c33ac67bc27f35513"><td class="mdescLeft">&#160;</td><td class="mdescRight">偏移量类型 <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:aff758c38ae9aeef2b5cbb0b7c41ebb2f" id="r_aff758c38ae9aeef2b5cbb0b7c41ebb2f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aff758c38ae9aeef2b5cbb0b7c41ebb2f">file_lock_guard</a> (<a class="el" href="classfile.html">file</a> &amp;f, difference_type offset, difference_type length, <a class="el" href="group___file.html#ga6c3d23ab55b986046a20482ba1d037e2">FILE_LOCK</a> mode)</td></tr>
-<tr class="memdesc:aff758c38ae9aeef2b5cbb0b7c41ebb2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（自动加锁）  <br /></td></tr>
-<tr class="memitem:af502f63935fa4e7b59c485716aa2af3a" id="r_af502f63935fa4e7b59c485716aa2af3a"><td class="memItemLeft"><a id="af502f63935fa4e7b59c485716aa2af3a" name="af502f63935fa4e7b59c485716aa2af3a"></a>
-&#160;</td><td class="memItemRight"><b>~file_lock_guard</b> ()</td></tr>
-<tr class="memdesc:af502f63935fa4e7b59c485716aa2af3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数（自动解锁） <br /></td></tr>
-<tr class="memitem:ac5e99c4dd16140e3e08ace11391e5cc3" id="r_ac5e99c4dd16140e3e08ace11391e5cc3"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ac5e99c4dd16140e3e08ace11391e5cc3">is_locked</a> () const</td></tr>
-<tr class="memdesc:ac5e99c4dd16140e3e08ace11391e5cc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已锁定  <br /></td></tr>
-<tr class="memitem:a4cdd14560fa587bb7c91e66a98ef3412" id="r_a4cdd14560fa587bb7c91e66a98ef3412"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4cdd14560fa587bb7c91e66a98ef3412">unlock</a> ()</td></tr>
-<tr class="memdesc:a4cdd14560fa587bb7c91e66a98ef3412"><td class="mdescLeft">&#160;</td><td class="mdescRight">手动解锁  <br /></td></tr>
+<tr class="memitem:a110d10bc9f6c3037945d63c5c97fb21d" id="r_a110d10bc9f6c3037945d63c5c97fb21d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a110d10bc9f6c3037945d63c5c97fb21d">file_lock_guard</a> (<a class="el" href="classfile__locker.html">file_locker</a> &amp;locker, <a class="el" href="#a1a5bd134ad110a7c33ac67bc27f35513">difference_type</a> offset, <a class="el" href="#a1a5bd134ad110a7c33ac67bc27f35513">difference_type</a> length, <a class="el" href="group___file.html#ga7ff0ce5ce53760cad46eb6509f978ecf">file_lock</a> mode)</td></tr>
+<tr class="memdesc:a110d10bc9f6c3037945d63c5c97fb21d"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，立即获取锁  <br /></td></tr>
+<tr class="memitem:af502f63935fa4e7b59c485716aa2af3a" id="r_af502f63935fa4e7b59c485716aa2af3a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af502f63935fa4e7b59c485716aa2af3a">~file_lock_guard</a> ()</td></tr>
+<tr class="memdesc:af502f63935fa4e7b59c485716aa2af3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数，自动释放锁  <br /></td></tr>
+<tr class="memitem:a1aa1e94b3c835c67eda130d636c3a348" id="r_a1aa1e94b3c835c67eda130d636c3a348"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a1aa1e94b3c835c67eda130d636c3a348">is_locked</a> () const noexcept</td></tr>
+<tr class="memdesc:a1aa1e94b3c835c67eda130d636c3a348"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否持有锁  <br /></td></tr>
+<tr class="memitem:a3cafdf0ebd5af925ea17ba6f2f5ea2e0" id="r_a3cafdf0ebd5af925ea17ba6f2f5ea2e0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3cafdf0ebd5af925ea17ba6f2f5ea2e0">unlock</a> () noexcept</td></tr>
+<tr class="memdesc:a3cafdf0ebd5af925ea17ba6f2f5ea2e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">手动释放锁  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>文件锁守卫 </p>
-<p>RAII风格的自动文件锁管理类。 </p>
+<div class="textblock"><p>文件区域锁守卫 </p>
+<p>自动管理文件锁的生命周期， 在构造时获取锁，在析构时自动释放锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="file_8hpp_source.html">file.hpp</a> 第 <a class="el" href="file_8hpp_source.html#l00882">882</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="file__locker_8hpp_source.html">file_locker.hpp</a> 第 <a class="el" href="file__locker_8hpp_source.html#l00135">135</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="aff758c38ae9aeef2b5cbb0b7c41ebb2f" name="aff758c38ae9aeef2b5cbb0b7c41ebb2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff758c38ae9aeef2b5cbb0b7c41ebb2f">&#9670;&#160;</a></span>file_lock_guard()</h2>
+<a id="a110d10bc9f6c3037945d63c5c97fb21d" name="a110d10bc9f6c3037945d63c5c97fb21d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a110d10bc9f6c3037945d63c5c97fb21d">&#9670;&#160;</a></span>file_lock_guard()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,44 +130,67 @@ Public 成员函数</h2></td></tr>
         <tr>
           <td class="memname">file_lock_guard::file_lock_guard </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classfile.html">file</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfile__locker.html">file_locker</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>locker</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">difference_type</td>          <td class="paramname"><span class="paramname"><em>offset</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a1a5bd134ad110a7c33ac67bc27f35513">difference_type</a></td>          <td class="paramname"><span class="paramname"><em>offset</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">difference_type</td>          <td class="paramname"><span class="paramname"><em>length</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a1a5bd134ad110a7c33ac67bc27f35513">difference_type</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___file.html#ga6c3d23ab55b986046a20482ba1d037e2">FILE_LOCK</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="group___file.html#ga7ff0ce5ce53760cad46eb6509f978ecf">file_lock</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>构造函数（自动加锁） </p>
+<p>构造函数，立即获取锁 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">f</td><td>文件对象 </td></tr>
-    <tr><td class="paramname">offset</td><td>锁定偏移 </td></tr>
+    <tr><td class="paramname">locker</td><td>文件锁管理器 </td></tr>
+    <tr><td class="paramname">offset</td><td>锁定起始偏移 </td></tr>
     <tr><td class="paramname">length</td><td>锁定长度 </td></tr>
-    <tr><td class="paramname">mode</td><td>锁定模式 </td></tr>
+    <tr><td class="paramname">mode</td><td>锁定模式</td></tr>
   </table>
   </dd>
 </dl>
+<p>在构造时尝试获取锁。如果获取失败，locked_标志为false。 </p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#af502f63935fa4e7b59c485716aa2af3a">~file_lock_guard()</a>.</p>
 
 </div>
 </div>
+<a id="af502f63935fa4e7b59c485716aa2af3a" name="af502f63935fa4e7b59c485716aa2af3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af502f63935fa4e7b59c485716aa2af3a">&#9670;&#160;</a></span>~file_lock_guard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">file_lock_guard::~file_lock_guard </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构函数，自动释放锁 </p>
+<p>如果当前持有锁，自动释放。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a110d10bc9f6c3037945d63c5c97fb21d">file_lock_guard()</a>.</p>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="ac5e99c4dd16140e3e08ace11391e5cc3" name="ac5e99c4dd16140e3e08ace11391e5cc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5e99c4dd16140e3e08ace11391e5cc3">&#9670;&#160;</a></span>is_locked()</h2>
+<a id="a1aa1e94b3c835c67eda130d636c3a348" name="a1aa1e94b3c835c67eda130d636c3a348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aa1e94b3c835c67eda130d636c3a348">&#9670;&#160;</a></span>is_locked()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,23 +207,26 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>检查是否已锁定 </p>
-<dl class="section return"><dt>返回</dt><dd>是否已锁定 </dd></dl>
+<p>检查是否持有锁 </p>
+<dl class="section return"><dt>返回</dt><dd>持有锁返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="file_8hpp_source.html">file.hpp</a> 第 <a class="el" href="file_8hpp_source.html#l00914">914</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="file__locker_8hpp_source.html">file_locker.hpp</a> 第 <a class="el" href="file__locker_8hpp_source.html#l00171">171</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a4cdd14560fa587bb7c91e66a98ef3412" name="a4cdd14560fa587bb7c91e66a98ef3412"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cdd14560fa587bb7c91e66a98ef3412">&#9670;&#160;</a></span>unlock()</h2>
+<a id="a3cafdf0ebd5af925ea17ba6f2f5ea2e0" name="a3cafdf0ebd5af925ea17ba6f2f5ea2e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cafdf0ebd5af925ea17ba6f2f5ea2e0">&#9670;&#160;</a></span>unlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool file_lock_guard::unlock </td>
@@ -204,15 +235,21 @@ Public 成员函数</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>手动解锁 </p>
-<dl class="section return"><dt>返回</dt><dd>是否成功 </dd></dl>
+<p>手动释放锁 </p>
+<dl class="section return"><dt>返回</dt><dd>释放成功返回true</dd></dl>
+<p>提前释放锁，之后析构函数不会再尝试释放。 释放后is_locked()返回false。 </p>
 
 </div>
 </div>
 <hr/>该类的文档由以下文件生成:<ul>
-<li><a class="el" href="file_8hpp_source.html">file.hpp</a></li>
+<li><a class="el" href="file__locker_8hpp_source.html">file_locker.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

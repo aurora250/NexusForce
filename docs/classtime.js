@@ -6,6 +6,7 @@ var classtime =
     [ "time", "classtime.html#af952b8e86c96883aa54aa0e1dd77ffee", null ],
     [ "clear", "classtime.html#a7a900345c3b57ab64060715c1a624c0e", null ],
     [ "hours", "classtime.html#a3ac21e1964f6e65b799e0356ba6cc90c", null ],
+    [ "is_valid", "classtime.html#a913d264411382fa9cbffa7b2196d1adb", null ],
     [ "minutes", "classtime.html#a18fd17881f13626bc6fc834df1b5d631", null ],
     [ "operator+", "classtime.html#aff2b9b0862c974f40d248fec8350ca5c", null ],
     [ "operator++", "classtime.html#ad37d7ea0a0b5675a98f3d91d6b345351", null ],

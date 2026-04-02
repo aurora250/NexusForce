@@ -28,14 +28,15 @@
  * @section dependency 前置依赖
  *
  * - CMake 3.19+
+ * - 必选依赖：
+ *   - pcre2
+ *   - OpenSSL
  * - 可选依赖：
  *   - PostGreSQL
  *   - MySQL
  *   - SQLite3
  *   - hiredis
  *   - zlib
- *   - OpenSSL
- *   - pcre2
  *
  * @section license 开源协议
  *
@@ -44,11 +45,20 @@
 
 /**
  * @file c++config.hpp
- * @brief 核心配置
+ * @brief 核心配置头文件
  *
- * 此头文件定义了整个库的平台、编译器和语言特性的配置宏
+ * 此头文件定义了整个库的平台、编译器和语言特性的配置宏。
+ * 是所有其他头文件的基础依赖
  *
- * 项目内部使用的宏将不写入文档，具体您可以查看本文件内容
+ * 主要功能：
+ * - 平台检测
+ * - 编译器检测
+ * - 指令集架构检测
+ * - C++标准版本检测
+ * - 命名空间宏定义
+ * - 编译器特定属性宏
+ *
+ * @note 项目内部使用的宏将不写入文档，具体您可以查看本文件内容
  */
 
 #include <assert.h>
@@ -232,61 +242,68 @@
 
 /** @} */ // APIImpExpSpec
 
+/**
+ * @defgroup ArchitectureDetection 架构检测
+ * @brief CPU架构检测宏
+ * @{
+ */
 
 #if defined(__i386__) || defined(__i386) || defined(_M_IX86) || \
-    defined(__X86__) || defined(_X86_) || defined(__I86__)
-    #define NEFORCE_ARCH_X86_32     1
+    defined(__X86__) || defined(_X86_) || defined(__I86__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+    #define NEFORCE_ARCH_X86_32     1 ///< 32位x86架构
 #endif
 
 #if defined(__x86_64__) || defined(__x86_64) || defined(_M_X64) || \
-    defined(__amd64__) || defined(__amd64) || defined(_M_AMD64)
-    #define NEFORCE_ARCH_X86_64     1
+    defined(__amd64__) || defined(__amd64) || defined(_M_AMD64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+    #define NEFORCE_ARCH_X86_64     1 ///< 64位x86_64架构
 #endif
 
 #if defined(NEFORCE_ARCH_X86_32) || defined(NEFORCE_ARCH_X86_64)
-    #define NEFORCE_ARCH_X86        1
+    #define NEFORCE_ARCH_X86        1 ///< x86架构
 #endif
 
 
 #if defined(__arm__) || defined(__arm) || defined(_ARM_) || \
-    defined(_M_ARM) || defined(__ARM_ARCH) || defined(__TARGET_ARCH_ARM)
-    #define NEFORCE_ARCH_ARM32      1
+    defined(_M_ARM) || defined(__ARM_ARCH) || defined(__TARGET_ARCH_ARM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+    #define NEFORCE_ARCH_ARM32      1 ///< 32位ARM架构
 #endif
 
 #if defined(__aarch64__) || defined(__aarch64) || defined(_M_ARM64) || \
-    defined(__ARM64_ARCH_8__) || defined(__ARM_ARCH_ISA_A64)
-    #define NEFORCE_ARCH_AARCH64    1
+    defined(__ARM64_ARCH_8__) || defined(__ARM_ARCH_ISA_A64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+    #define NEFORCE_ARCH_AARCH64    1 ///< 64位AArch64架构
 #endif
 
 #if defined(NEFORCE_ARCH_ARM32) || defined(NEFORCE_ARCH_AARCH64)
-    #define NEFORCE_ARCH_ARM        1
+    #define NEFORCE_ARCH_ARM        1 ///< ARM架构
 #endif
 
 
-#if defined(__riscv) || defined(__riscv__) || defined(riscv)
-    #define NEFORCE_ARCH_RISCV          1
-    #if __riscv_xlen == 32
-        #define NEFORCE_ARCH_RISCV32    1
-    #elif __riscv_xlen == 64
-        #define NEFORCE_ARCH_RISCV64    1
+#if defined(__riscv) || defined(__riscv__) || defined(riscv) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+    #define NEFORCE_ARCH_RISCV          1 ///< RISC-V架构
+    #if __riscv_xlen == 32 || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+        #define NEFORCE_ARCH_RISCV32    1 ///< 32位RISC-V
+    #elif __riscv_xlen == 64 || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+        #define NEFORCE_ARCH_RISCV64    1 ///< 64位RISC-V
     #endif
 #endif
 
 
 #if defined(__loongarch__) || defined(__loongarch) || \
     defined(__loongarch32) || defined(__loongarch64) || \
-    defined(_LOONGARCH_SIM) || defined(_LOONGARCH)
-    #define NEFORCE_ARCH_LOONGARCH          1
-    #if defined(__loongarch32) || defined(_LOONGARCH_SIM == _ABILP32_SIM)
-        #define NEFORCE_ARCH_LOONGARCH32    1
-    #elif defined(__loongarch64) || defined(_LOONGARCH_SIM == _ABILP64_SIM)
-        #define NEFORCE_ARCH_LOONGARCH64    1
+    defined(_LOONGARCH_SIM) || defined(_LOONGARCH) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+    #define NEFORCE_ARCH_LOONGARCH          1 ///< LoongArch架构
+    #if defined(__loongarch32) || defined(_LOONGARCH_SIM == _ABILP32_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+        #define NEFORCE_ARCH_LOONGARCH32    1 ///< 32位LoongArch
+    #elif defined(__loongarch64) || defined(_LOONGARCH_SIM == _ABILP64_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+        #define NEFORCE_ARCH_LOONGARCH64    1 ///< 64位LoongArch
     #endif
 #endif
 
 #if !(defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_ARM) || defined(NEFORCE_ARCH_RISCV) || defined(NEFORCE_ARCH_LOONGARCH))
 #error "NeForce: 不支持的指令集"
 #endif
+
+/** @} */ // ArchitectureDetection
 
 /**
  * @defgroup DataBusWidth 数据总线宽度
@@ -316,171 +333,6 @@
 #endif
 
 /** @} */ // DataBusWidth
-
-/**
- * @defgroup NamespaceMacros 命名空间宏
- * @brief 命名空间结构
- * @{
- */
-
-/**
- * @def __NEFORCE_GLOBAL_NAMESPACE__
- * @brief 全局命名空间neforce名称
- */
-#define __NEFORCE_GLOBAL_NAMESPACE__ neforce
-
-/**
- * @def NEFORCE_BEGIN_NAMESPACE__
- * @brief 开始全局命名空间neforce
- */
-#define NEFORCE_BEGIN_NAMESPACE__ namespace __NEFORCE_GLOBAL_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_NAMESPACE__
- * @brief 结束全局命名空间neforce
- */
-#define NEFORCE_END_NAMESPACE__ }
-
-/**
- * @def _NEFORCE
- * @brief 全局命名空间前缀
- */
-#define _NEFORCE __NEFORCE_GLOBAL_NAMESPACE__ ::
-
-
-/**
- * @def __NEFORCE_INNER_NAMESPACE__
- * @brief inner命名空间名称
- */
-#define __NEFORCE_INNER_NAMESPACE__ inner
-
-/**
- * @def NEFORCE_BEGIN_INNER__
- * @brief 开始inner命名空间
- */
-#define NEFORCE_BEGIN_INNER__ namespace __NEFORCE_INNER_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_INNER__
- * @brief 结束inner命名空间
- */
-#define NEFORCE_END_INNER__ }
-
-
-/**
- * @def __NEFORCE_CONSTANTS_NAMESPACE__
- * @brief constants命名空间名称
- */
-#define __NEFORCE_CONSTANTS_NAMESPACE__ constants
-
-/**
- * @def NEFORCE_BEGIN_CONSTANTS__
- * @brief 开始constants命名空间
- */
-#define NEFORCE_BEGIN_CONSTANTS__ namespace __NEFORCE_CONSTANTS_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_CONSTANTS__
- * @brief 结束constants命名空间
- */
-#define NEFORCE_END_CONSTANTS__ }
-
-
-/**
- * @def __NEFORCE_THIS_THREAD_NAMESPACE__
- * @brief this_thread命名空间名称
- */
-#define __NEFORCE_THIS_THREAD_NAMESPACE__ this_thread
-
-/**
- * @def NEFORCE_END_THIS_THREAD__
- * @brief this_thread命名空间
- */
-#define NEFORCE_BEGIN_THIS_THREAD__ namespace __NEFORCE_THIS_THREAD_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_THIS_THREAD__
- * @brief 结束this_thread命名空间
- */
-#define NEFORCE_END_THIS_THREAD__ }
-
-
-/**
- * @def __NEFORCE_RANGES_NAMESPACE__
- * @brief ranges命名空间名称
- */
-#define __NEFORCE_RANGES_NAMESPACE__ ranges
-
-/**
- * @def NEFORCE_BEGIN_RANGES__
- * @brief 开始ranges命名空间
- */
-#define NEFORCE_BEGIN_RANGES__ namespace __NEFORCE_RANGES_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_RANGES__
- * @brief 结束ranges命名空间
- */
-#define NEFORCE_END_RANGES__ }
-
-
-/**
- * @def __NEFORCE_RANGES_VIEWS_NAMESPACE__
- * @brief ranges::view命名空间名称
- */
-#define __NEFORCE_RANGES_VIEWS_NAMESPACE__ views
-
-/**
- * @def NEFORCE_BEGIN_RANGES_VIEWS__
- * @brief 开始ranges::view命名空间
- */
-#define NEFORCE_BEGIN_RANGES_VIEWS__ namespace __NEFORCE_RANGES_VIEWS_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_RANGES_VIEWS__
- * @brief 结束ranges::view命名空间
- */
-#define NEFORCE_END_RANGES_VIEWS__ }
-
-
-/**
- * @def __NEFORCE_LITERALS_NAMESPACE__
- * @brief literals命名空间名称
- */
-#define __NEFORCE_LITERALS_NAMESPACE__ literals
-
-/**
- * @def NEFORCE_BEGIN_LITERALS__
- * @brief 开始literals命名空间（内联）
- */
-#define NEFORCE_BEGIN_LITERALS__ inline namespace __NEFORCE_LITERALS_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_LITERALS__
- * @brief 结束literals命名空间
- */
-#define NEFORCE_END_LITERALS__ }
-
-
-/**
- * @def __NEFORCE_REFLECT_NAMESPACE__
- * @brief reflect命名空间名称
- */
-#define __NEFORCE_REFLECT_NAMESPACE__ reflect
-
-/**
- * @def NEFORCE_BEGIN_REFLECT__
- * @brief 开始reflect命名空间
- */
-#define NEFORCE_BEGIN_REFLECT__ namespace __NEFORCE_REFLECT_NAMESPACE__ {
-
-/**
- * @def NEFORCE_END_REFLECT__
- * @brief 结束reflect命名空间
- */
-#define NEFORCE_END_REFLECT__ }
-
-/** @} */ // NamespaceMacros
 
 /**
  * @defgroup CxxStandardDetection C++标准检测
@@ -532,6 +384,40 @@
 #endif
 
 /** @} */ // CxxStandardDetection
+
+
+#define __NEFORCE_GLOBAL_NAMESPACE__ neforce
+#define NEFORCE_BEGIN_NAMESPACE__ namespace __NEFORCE_GLOBAL_NAMESPACE__ {
+#define NEFORCE_END_NAMESPACE__ }
+#define _NEFORCE __NEFORCE_GLOBAL_NAMESPACE__ ::
+
+#define __NEFORCE_INNER_NAMESPACE__ inner
+#define NEFORCE_BEGIN_INNER__ namespace __NEFORCE_INNER_NAMESPACE__ {
+#define NEFORCE_END_INNER__ }
+
+#define __NEFORCE_CONSTANTS_NAMESPACE__ constants
+#define NEFORCE_BEGIN_CONSTANTS__ namespace __NEFORCE_CONSTANTS_NAMESPACE__ {
+#define NEFORCE_END_CONSTANTS__ }
+
+#define __NEFORCE_THIS_THREAD_NAMESPACE__ this_thread
+#define NEFORCE_BEGIN_THIS_THREAD__ namespace __NEFORCE_THIS_THREAD_NAMESPACE__ {
+#define NEFORCE_END_THIS_THREAD__ }
+
+#define __NEFORCE_RANGES_NAMESPACE__ ranges
+#define NEFORCE_BEGIN_RANGES__ namespace __NEFORCE_RANGES_NAMESPACE__ {
+#define NEFORCE_END_RANGES__ }
+
+#define __NEFORCE_RANGES_VIEWS_NAMESPACE__ views
+#define NEFORCE_BEGIN_RANGES_VIEWS__ namespace __NEFORCE_RANGES_VIEWS_NAMESPACE__ {
+#define NEFORCE_END_RANGES_VIEWS__ }
+
+#define __NEFORCE_LITERALS_NAMESPACE__ literals
+#define NEFORCE_BEGIN_LITERALS__ inline namespace __NEFORCE_LITERALS_NAMESPACE__ {
+#define NEFORCE_END_LITERALS__ }
+
+#define __NEFORCE_REFLECT_NAMESPACE__ reflect
+#define NEFORCE_BEGIN_REFLECT__ namespace __NEFORCE_REFLECT_NAMESPACE__ {
+#define NEFORCE_END_REFLECT__ }
 
 
 #ifdef NEFORCE_STANDARD_11
@@ -690,8 +576,19 @@
 #endif
 
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @defgroup TypeRangeMacros 类型范围宏
+ * @brief 用于遍历类型列表的宏
+ *
+ * 提供宏定义，用于在代码生成时遍历各种类型列表。
+ * @{
+ */
 
+#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_MACRO_RANGE_UNICODE_CHARS
+ * @brief Unicode字符类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_UNICODE_CHARS(MAC) \
 	MAC(char8_t) \
 	MAC(char16_t) \
@@ -702,11 +599,19 @@
 	MAC(char32_t)
 #endif
 
+/**
+ * @def NEFORCE_MACRO_RANGE_CHARS
+ * @brief 所有字符类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_CHARS(MAC) \
 	MAC(char) \
 	MAC(wchar_t) \
 	NEFORCE_MACRO_RANGE_UNICODE_CHARS(MAC)
 
+/**
+ * @def NEFORCE_MACRO_RANGE_SIGNED_INT
+ * @brief 有符号整数类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_SIGNED_INT(MAC) \
 	MAC(signed char) \
 	MAC(short) \
@@ -714,6 +619,10 @@
 	MAC(long) \
 	MAC(long long)
 
+/**
+ * @def NEFORCE_MACRO_RANGE_UNSIGNED_INT
+ * @brief 无符号整数类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_UNSIGNED_INT(MAC) \
 	MAC(unsigned char) \
 	MAC(unsigned short) \
@@ -721,26 +630,45 @@
 	MAC(unsigned long) \
 	MAC(unsigned long long)
 
+/**
+ * @def NEFORCE_MACRO_RANGE_INT
+ * @brief 所有整数类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_INT(MAC) \
 	NEFORCE_MACRO_RANGE_SIGNED_INT(MAC) \
 	NEFORCE_MACRO_RANGE_UNSIGNED_INT(MAC)
 
+/**
+ * @def NEFORCE_MACRO_RANGE_FLOAT
+ * @brief 浮点类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_FLOAT(MAC) \
 	MAC(float) \
 	MAC(double) \
 	MAC(long double)
 
+/**
+ * @def NEFORCE_MACRO_RANGE_ARITHMETIC
+ * @brief 所有算术类型列表宏
+ */
 #define NEFORCE_MACRO_RANGE_ARITHMETIC(MAC) \
 	NEFORCE_MACRO_RANGE_CHARS(MAC) \
 	NEFORCE_MACRO_RANGE_INT(MAC) \
 	NEFORCE_MACRO_RANGE_FLOAT(MAC)
 
-
+/**
+ * @def NEFORCE_MACRO_RANGES_CV
+ * @brief cv限定符列表宏
+ */
 #define NEFORCE_MACRO_RANGES_CV(MAC) \
 	MAC(const) \
 	MAC(volatile) \
 	MAC(const volatile)
 
+/**
+ * @def NEFORCE_MACRO_RANGES_CV_REF
+ * @brief cv和引用限定符列表宏
+ */
 #define NEFORCE_MACRO_RANGES_CV_REF(MAC) \
     MAC(&) \
 	MAC(const &) \
@@ -751,6 +679,10 @@
 	MAC(volatile &&) \
 	MAC(const volatile &&)
 
+/**
+ * @def NEFORCE_MACRO_RANGES_CV_REF_NOEXCEPT
+ * @brief cv、引用和noexcept限定符列表宏
+ */
 #define NEFORCE_MACRO_RANGES_CV_REF_NOEXCEPT(MAC) \
     MAC(noexcept) \
     MAC(const noexcept) \
@@ -765,63 +697,6 @@
 	MAC(volatile && noexcept) \
 	MAC(const volatile && noexcept) \
 
-
-#ifdef NEFORCE_STATE_DEBUG
-#define NEFORCE_DEBUG_VERIFY(CON, MESG) \
-    { if (CON) {} else { assert(false && MESG); } }
-#else
-#define NEFORCE_DEBUG_VERIFY(CON, MESG)
-#endif
-
-
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @brief 标记不可达代码路径
- *
- * 该函数用于向编译器指示当前代码路径永远不会被执行。当编译器遇到此调用时，
- * 可以进行激进的优化，假设此后的代码永远不会运行。如果实际执行到了此函数，
- * 将导致未定义行为（通常是程序崩溃或产生不可预测的结果）。
- *
- * @note 此函数永远不会返回，调用后程序行为未定义。
- * @warning 仅在确定代码路径绝对不可达时使用，否则会导致严重的运行时问题。
- */
-NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE
-void unreachable() noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-    __builtin_unreachable();
-#else
-    __assume(false);
-#endif
-}
-
-#ifdef NEFORCE_STANDARD_17
-
-/**
- * @brief 检查当前上下文是否在常量求值中
- * @return 如果在常量求值上下文中返回true，否则返回false
- *
- * 用于区分编译时和运行时
- */
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE
-constexpr bool is_constant_evaluated() noexcept {
-    return __builtin_is_constant_evaluated();
-}
-
-#endif
-
-NEFORCE_END_NAMESPACE__
-
-
-#if defined(NEFORCE_STANDARD_20)
-#define NEFORCE_CONSTEXPR_ASSERT(COND) \
-do { \
-    if (_NEFORCE is_constant_evaluated() && !bool(COND)) { \
-        _NEFORCE unreachable(); \
-    } \
-} while (false);
-#else
-#define NEFORCE_CONSTEXPR_ASSERT(COND)
-#endif
+/** @} */ // TypeRangeMacros
 
 #endif // NEFORCE_CORE_CONFIG_CPPCONFIG_HPP__

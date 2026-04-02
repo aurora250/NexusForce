@@ -113,17 +113,17 @@ void test_reflect() {
 
     println("circle is derived from shape: ", circle_meta->is_derived_from("shape"));
 
-    reflect::any obj = circle_meta->create();
+    reflect::meta_any obj = circle_meta->create();
     circle* c = obj.cast<circle>();
 
     if (auto* func = circle_meta->get_function("move")) {
-        vector<reflect::any> args = {reflect::any(10.0), reflect::any(20.0)};
+        vector<reflect::meta_any> args = {reflect::meta_any(10.0), reflect::meta_any(20.0)};
         func->invoke(c, args);
         println("After move:", c->position());
     }
 
     if (auto* func = circle_meta->get_function("scale")) {
-        vector<reflect::any> args = {reflect::any(2.0), reflect::any(0.5)};
+        vector<reflect::meta_any> args = {reflect::meta_any(2.0), reflect::meta_any(0.5)};
         func->invoke(c, args);
         println("After scale: radius =", c->radius);
     }
@@ -146,14 +146,14 @@ void test_reflect() {
     }
 
     auto* rect_meta = reflect::registry::instance().find("rectangle");
-    reflect::any rect_obj = rect_meta->create();
+    reflect::meta_any rect_obj = rect_meta->create();
     rectangle* r = rect_obj.cast<rectangle>();
 
     r->width = 10.0;
     r->height = 5.0;
 
     if (auto* func = rect_meta->get_function("move")) {
-        vector<reflect::any> args = {reflect::any(100.0), reflect::any(200.0)};
+        vector<reflect::meta_any> args = {reflect::meta_any(100.0), reflect::meta_any(200.0)};
         func->invoke(r, args);
         println("rectangle position:", r->position());
     }

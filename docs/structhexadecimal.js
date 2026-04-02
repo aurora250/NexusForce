@@ -12,7 +12,7 @@ var structhexadecimal =
     [ "hexadecimal", "structhexadecimal.html#a7b571981fbd63d333dde54b4516bf18f", null ],
     [ "flip_bit", "structhexadecimal.html#a73f4b4757f67c1fb2fe811bf79299ebe", null ],
     [ "get_bit", "structhexadecimal.html#ae5ae7037efa90daf549a73fce16ac9f5", null ],
-    [ "NEFORCE_BUILD_PACKAGE_CONSTRUCTOR", "structhexadecimal.html#a871427e8043a583488424f0340ab4133", null ],
+    [ "operator bool", "structhexadecimal.html#a197d50b088872d18bdc53a5f5bbbc62f", null ],
     [ "set_bit", "structhexadecimal.html#a50075c219b3bf89aa63b87aca8eb3bf3", null ],
-    [ "to_string", "group___to_string.html#ga4202617b1a33618284469145ba8f4b34", null ]
+    [ "to_string", "structhexadecimal.html#a21ae010cdd67e4bece1f6b279cbaae08", null ]
 ];

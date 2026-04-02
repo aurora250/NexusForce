@@ -28,6 +28,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/filesystem.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_parser.cpp
@@ -58,7 +59,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/shared_memory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/share_memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/sysinfo.cpp

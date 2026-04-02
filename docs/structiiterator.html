@@ -117,12 +117,15 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a7d5d00d2fa5115c7c3fc5eb93d66be98"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递减操作符  <br /></td></tr>
 <tr class="memitem:a8f20f2ea8cc4054292010754489850f7" id="r_a8f20f2ea8cc4054292010754489850f7"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#a8f20f2ea8cc4054292010754489850f7">operator--</a> (int) noexcept</td></tr>
 <tr class="memdesc:a8f20f2ea8cc4054292010754489850f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置递减操作符  <br /></td></tr>
-<tr class="memitem:a5a7ef8f4b63d27b5e7de90142c5b29da" id="r_a5a7ef8f4b63d27b5e7de90142c5b29da"><td class="memItemLeft">constexpr Iterator &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5a7ef8f4b63d27b5e7de90142c5b29da">operator+=</a> (auto &amp;&amp;n) noexcept</td></tr>
-<tr class="memdesc:a5a7ef8f4b63d27b5e7de90142c5b29da"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合加法赋值操作符  <br /></td></tr>
-<tr class="memitem:aa511a59cd786285c5a61c1671dfddaa3" id="r_aa511a59cd786285c5a61c1671dfddaa3"><td class="memItemLeft">NEFORCE_NODISCARD constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#aa511a59cd786285c5a61c1671dfddaa3">operator+</a> (auto &amp;&amp;n) const noexcept</td></tr>
-<tr class="memdesc:aa511a59cd786285c5a61c1671dfddaa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">加法操作符  <br /></td></tr>
-<tr class="memitem:a075464798b6884b44897c4e98814892d" id="r_a075464798b6884b44897c4e98814892d"><td class="memItemLeft">constexpr Iterator &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a075464798b6884b44897c4e98814892d">operator-=</a> (auto &amp;&amp;n) noexcept</td></tr>
-<tr class="memdesc:a075464798b6884b44897c4e98814892d"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合减法赋值操作符  <br /></td></tr>
+<tr class="memitem:a7777923a1a69db61f718c2b358522467" id="r_a7777923a1a69db61f718c2b358522467"><td class="memTemplParams" colspan="2">template&lt;typename Distance&gt; </td></tr>
+<tr class="memitem:a7777923a1a69db61f718c2b358522467 template"><td class="memItemLeft">constexpr Iterator &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7777923a1a69db61f718c2b358522467">operator+=</a> (Distance n) noexcept</td></tr>
+<tr class="memdesc:a7777923a1a69db61f718c2b358522467"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合加法赋值操作符  <br /></td></tr>
+<tr class="memitem:a70c35e54eb9a283316a815aab00f2986" id="r_a70c35e54eb9a283316a815aab00f2986"><td class="memTemplParams" colspan="2">template&lt;typename Distance&gt; </td></tr>
+<tr class="memitem:a70c35e54eb9a283316a815aab00f2986 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#a70c35e54eb9a283316a815aab00f2986">operator+</a> (Distance n) const noexcept</td></tr>
+<tr class="memdesc:a70c35e54eb9a283316a815aab00f2986"><td class="mdescLeft">&#160;</td><td class="mdescRight">加法操作符  <br /></td></tr>
+<tr class="memitem:a4aa2a32cfd3581b745db141b491723db" id="r_a4aa2a32cfd3581b745db141b491723db"><td class="memTemplParams" colspan="2">template&lt;typename Distance&gt; </td></tr>
+<tr class="memitem:a4aa2a32cfd3581b745db141b491723db template"><td class="memItemLeft">constexpr Iterator &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4aa2a32cfd3581b745db141b491723db">operator-=</a> (Distance n) noexcept</td></tr>
+<tr class="memdesc:a4aa2a32cfd3581b745db141b491723db"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合减法赋值操作符  <br /></td></tr>
 <tr class="memitem:a0734377e9354318b8728f01841bcfb10" id="r_a0734377e9354318b8728f01841bcfb10"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a0734377e9354318b8728f01841bcfb10 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!is_same_v&lt; T, Iterator &gt;, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0734377e9354318b8728f01841bcfb10">operator-</a> (const T n) const noexcept</td></tr>
 <tr class="memdesc:a0734377e9354318b8728f01841bcfb10"><td class="mdescLeft">&#160;</td><td class="mdescRight">减法操作符  <br /></td></tr>
@@ -188,7 +191,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果迭代器不相等返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00174">174</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00177">177</a> 行定义.</p>
 
 </div>
 </div>
@@ -220,17 +223,19 @@ template&lt;typename Iterator&gt; </div>
 <p>解引用操作符 </p>
 <dl class="section return"><dt>返回</dt><dd>迭代器指向的元素引用或值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00045">45</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00044">44</a> 行定义.</p>
 
 </div>
 </div>
-<a id="aa511a59cd786285c5a61c1671dfddaa3" name="aa511a59cd786285c5a61c1671dfddaa3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa511a59cd786285c5a61c1671dfddaa3">&#9670;&#160;</a></span>operator+()</h2>
+<a id="a70c35e54eb9a283316a815aab00f2986" name="a70c35e54eb9a283316a815aab00f2986"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70c35e54eb9a283316a815aab00f2986">&#9670;&#160;</a></span>operator+()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Iterator&gt; </div>
+<div class="memtemplate">
+template&lt;typename Distance&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -238,7 +243,7 @@ template&lt;typename Iterator&gt; </div>
         <tr>
           <td class="memname">NEFORCE_NODISCARD constexpr Iterator <a class="el" href="structiiterator.html">iiterator</a>&lt; Iterator &gt;::operator+ </td>
           <td>(</td>
-          <td class="paramtype">auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td class="paramtype">Distance</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -258,7 +263,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>前进后的新迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00110">110</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00111">111</a> 行定义.</p>
 
 </div>
 </div>
@@ -290,7 +295,7 @@ template&lt;typename Iterator&gt; </div>
 <p>前置递增操作符 </p>
 <dl class="section return"><dt>返回</dt><dd>递增后的迭代器引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00060">60</a> 行定义.</p>
 
 </div>
 </div>
@@ -322,17 +327,19 @@ template&lt;typename Iterator&gt; </div>
 <p>后置递增操作符 </p>
 <dl class="section return"><dt>返回</dt><dd>递增前的迭代器副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00069">69</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a5a7ef8f4b63d27b5e7de90142c5b29da" name="a5a7ef8f4b63d27b5e7de90142c5b29da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a7ef8f4b63d27b5e7de90142c5b29da">&#9670;&#160;</a></span>operator+=()</h2>
+<a id="a7777923a1a69db61f718c2b358522467" name="a7777923a1a69db61f718c2b358522467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7777923a1a69db61f718c2b358522467">&#9670;&#160;</a></span>operator+=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Iterator&gt; </div>
+<div class="memtemplate">
+template&lt;typename Distance&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -340,7 +347,7 @@ template&lt;typename Iterator&gt; </div>
         <tr>
           <td class="memname">Iterator &amp; <a class="el" href="structiiterator.html">iiterator</a>&lt; Iterator &gt;::operator+= </td>
           <td>(</td>
-          <td class="paramtype">auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td class="paramtype">Distance</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -398,7 +405,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>两个迭代器之间的距离 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00156">156</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00159">159</a> 行定义.</p>
 
 </div>
 </div>
@@ -444,7 +451,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>后退后的新迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00144">144</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00147">147</a> 行定义.</p>
 
 </div>
 </div>
@@ -476,7 +483,7 @@ template&lt;typename Iterator&gt; </div>
 <p>前置递减操作符 </p>
 <dl class="section return"><dt>返回</dt><dd>递减后的迭代器引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00080">80</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00079">79</a> 行定义.</p>
 
 </div>
 </div>
@@ -508,17 +515,19 @@ template&lt;typename Iterator&gt; </div>
 <p>后置递减操作符 </p>
 <dl class="section return"><dt>返回</dt><dd>递减前的迭代器副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00089">89</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00088">88</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a075464798b6884b44897c4e98814892d" name="a075464798b6884b44897c4e98814892d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a075464798b6884b44897c4e98814892d">&#9670;&#160;</a></span>operator-=()</h2>
+<a id="a4aa2a32cfd3581b745db141b491723db" name="a4aa2a32cfd3581b745db141b491723db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aa2a32cfd3581b745db141b491723db">&#9670;&#160;</a></span>operator-=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Iterator&gt; </div>
+<div class="memtemplate">
+template&lt;typename Distance&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -526,7 +535,7 @@ template&lt;typename Iterator&gt; </div>
         <tr>
           <td class="memname">Iterator &amp; <a class="el" href="structiiterator.html">iiterator</a>&lt; Iterator &gt;::operator-= </td>
           <td>(</td>
-          <td class="paramtype">auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td class="paramtype">Distance</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -546,7 +555,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>后退后的迭代器引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00131">131</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00134">134</a> 行定义.</p>
 
 </div>
 </div>
@@ -578,7 +587,7 @@ template&lt;typename Iterator&gt; </div>
 <p>成员访问操作符 </p>
 <dl class="section return"><dt>返回</dt><dd>指向元素的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00053">53</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00052">52</a> 行定义.</p>
 
 </div>
 </div>
@@ -616,7 +625,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果当前迭代器在rhs之前返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00183">183</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00186">186</a> 行定义.</p>
 
 </div>
 </div>
@@ -654,7 +663,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果当前迭代器不在rhs之后返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00201">201</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00204">204</a> 行定义.</p>
 
 </div>
 </div>
@@ -692,7 +701,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果迭代器相等返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00165">165</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00168">168</a> 行定义.</p>
 
 </div>
 </div>
@@ -730,7 +739,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果当前迭代器在rhs之后返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00195">195</a> 行定义.</p>
 
 </div>
 </div>
@@ -768,7 +777,7 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果当前迭代器不在rhs之前返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00210">210</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="iiterator_8hpp_source.html">iiterator.hpp</a> 第 <a class="el" href="iiterator_8hpp_source.html#l00213">213</a> 行定义.</p>
 
 </div>
 </div>

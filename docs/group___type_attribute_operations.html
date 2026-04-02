@@ -111,15 +111,15 @@ $(function(){initNavTree('group___type_attribute_operations.html','',''); });
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga80b97e91b05a2ed8b6185bba229f39a8 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>decay_t</b> = typename <a class="el" href="structdecay.html">decay</a>&lt;T&gt;::type</td></tr>
 <tr class="memdesc:ga80b97e91b05a2ed8b6185bba229f39a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">decay的便捷别名 <br /></td></tr>
-<tr class="memitem:gab0b386306f72a6c76b1b9ea9d13ca4f5" id="r_gab0b386306f72a6c76b1b9ea9d13ca4f5"><td class="memTemplParams" colspan="2">template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </td></tr>
-<tr class="memitem:gab0b386306f72a6c76b1b9ea9d13ca4f5 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gab0b386306f72a6c76b1b9ea9d13ca4f5">detected_or</a> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __detector&lt;Default, void, Op, Args...&gt;</td></tr>
-<tr class="memdesc:gab0b386306f72a6c76b1b9ea9d13ca4f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">检测Op&lt;Args...&gt;是否有效，如果无效则使用Default类型  <br /></td></tr>
+<tr class="memitem:ga999daadde7e6033d617ad91266fcfd7c" id="r_ga999daadde7e6033d617ad91266fcfd7c"><td class="memTemplParams" colspan="2">template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </td></tr>
+<tr class="memitem:ga999daadde7e6033d617ad91266fcfd7c template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga999daadde7e6033d617ad91266fcfd7c">detected_or</a> = inner::__detector&lt;Default, void, Op, Args...&gt;</td></tr>
+<tr class="memdesc:ga999daadde7e6033d617ad91266fcfd7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检测Op&lt;Args...&gt;是否有效，如果无效则使用Default类型  <br /></td></tr>
 <tr class="memitem:ga80f94c5a0b73ffc291247f406ee7e3b2" id="r_ga80f94c5a0b73ffc291247f406ee7e3b2"><td class="memTemplParams" colspan="2"><a id="ga80f94c5a0b73ffc291247f406ee7e3b2" name="ga80f94c5a0b73ffc291247f406ee7e3b2"></a>
 template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </td></tr>
-<tr class="memitem:ga80f94c5a0b73ffc291247f406ee7e3b2 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>detected_or_t</b> = typename <a class="el" href="#gab0b386306f72a6c76b1b9ea9d13ca4f5">detected_or</a>&lt;Default, Op, Args...&gt;::type</td></tr>
+<tr class="memitem:ga80f94c5a0b73ffc291247f406ee7e3b2 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>detected_or_t</b> = typename <a class="el" href="#ga999daadde7e6033d617ad91266fcfd7c">detected_or</a>&lt;Default, Op, Args...&gt;::type</td></tr>
 <tr class="memdesc:ga80f94c5a0b73ffc291247f406ee7e3b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">detected_or的便捷别名，返回检测到的类型或默认类型 <br /></td></tr>
 <tr class="memitem:ga6f7624c2711c293f19f15c71febeaeb0" id="r_ga6f7624c2711c293f19f15c71febeaeb0"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
-<tr class="memitem:ga6f7624c2711c293f19f15c71febeaeb0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga6f7624c2711c293f19f15c71febeaeb0">common_ternary_operator_t</a> = decltype(true ? <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T1&gt;() : <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T2&gt;())</td></tr>
+<tr class="memitem:ga6f7624c2711c293f19f15c71febeaeb0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga6f7624c2711c293f19f15c71febeaeb0">common_ternary_operator_t</a> = decltype(true ? _NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T1&gt;() : _NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T2&gt;())</td></tr>
 <tr class="memdesc:ga6f7624c2711c293f19f15c71febeaeb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">三目运算符的公共类型推导  <br /></td></tr>
 <tr class="memitem:ga63597ca81f0a3a80001c836bc4cbbb84" id="r_ga63597ca81f0a3a80001c836bc4cbbb84"><td class="memTemplParams" colspan="2"><a id="ga63597ca81f0a3a80001c836bc4cbbb84" name="ga63597ca81f0a3a80001c836bc4cbbb84"></a>
 template&lt;typename... Types&gt; </td></tr>
@@ -144,7 +144,7 @@ template&lt;typename... Types&gt; </td></tr>
 template&lt;typename T1, typename T2&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ga6f7624c2711c293f19f15c71febeaeb0">common_ternary_operator_t</a> = decltype(true ? <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T1&gt;() : <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T2&gt;())</td>
+          <td class="memname">using <a class="el" href="#ga6f7624c2711c293f19f15c71febeaeb0">common_ternary_operator_t</a> = decltype(true ? _NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T1&gt;() : _NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T2&gt;())</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -163,12 +163,12 @@ template&lt;typename T1, typename T2&gt; </div>
 <li>转换规则通常基于标准的隐式类型转换规则 </li>
 </ol>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03648">3648</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03623">3623</a> 行定义.</p>
 
 </div>
 </div>
-<a id="gab0b386306f72a6c76b1b9ea9d13ca4f5" name="gab0b386306f72a6c76b1b9ea9d13ca4f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab0b386306f72a6c76b1b9ea9d13ca4f5">&#9670;&#160;</a></span>detected_or</h2>
+<a id="ga999daadde7e6033d617ad91266fcfd7c" name="ga999daadde7e6033d617ad91266fcfd7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga999daadde7e6033d617ad91266fcfd7c">&#9670;&#160;</a></span>detected_or</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +176,7 @@ template&lt;typename T1, typename T2&gt; </div>
 template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#gab0b386306f72a6c76b1b9ea9d13ca4f5">detected_or</a> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __detector&lt;Default, void, Op, Args...&gt;</td>
+          <td class="memname">using <a class="el" href="#ga999daadde7e6033d617ad91266fcfd7c">detected_or</a> = inner::__detector&lt;Default, void, Op, Args...&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -191,7 +191,7 @@ template&lt;typename Default, template&lt; typename... &gt; class Op, typename..
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03626">3626</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03601">3601</a> 行定义.</p>
 
 </div>
 </div>
@@ -231,7 +231,7 @@ template&lt;typename T, template&lt; typename... &gt; class Template&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果T是Template的特化返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03850">3850</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03825">3825</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00031">integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</a>.</p>
 

@@ -18,30 +18,10 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Deque 双端队列
- * @brief 双端队列容器实现
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
-
-/**
- * @brief 计算双端队列缓冲区大小
- * @param n 用户指定的缓冲区大小
- * @param sz 元素类型大小
- * @return 计算得到的缓冲区大小
- *
- * 如果n不为0，返回n；否则根据元素大小计算合适的缓冲区大小：
- * 元素大小小于256字节时返回4096/sz，否则返回16。
- */
-constexpr size_t deque_buf_size(const size_t n, const size_t sz) noexcept {
-    constexpr size_t buffer_threshhold = 256;
-    constexpr size_t buffer_max_size = MEMORY_BIG_ALLOC_THRESHHOLD;
-    return n != 0 ? n : sz < buffer_threshhold ? buffer_max_size / sz : 16;
-}
-
-
-template <typename T, typename Alloc, size_t BufSize>
-class deque;
-
 
 /**
  * @struct deque_iterator
@@ -64,8 +44,23 @@ public:
     using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;  ///< 引用类型
     using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;  ///< 指针类型
 
+    /**
+     * @brief 计算双端队列缓冲区大小
+     * @param n 用户指定的缓冲区大小
+     * @param sz 元素类型大小
+     * @return 计算得到的缓冲区大小
+     *
+     * 如果n不为0，返回n；否则根据元素大小计算合适的缓冲区大小：
+     * 元素大小小于256字节时返回4096/sz，否则返回16。
+     */
+    static constexpr size_t deque_buf_size(const size_t n, const size_t sz) noexcept {
+        constexpr size_t buffer_threshhold = 256;
+        constexpr size_t buffer_max_size = MEMORY_BIG_ALLOC_THRESHHOLD;
+        return n != 0 ? n : sz < buffer_threshhold ? buffer_max_size / sz : 16;
+    }
+
     /// 缓冲区大小
-    static constexpr difference_type buffer_size = _NEFORCE deque_buf_size(BufSize, sizeof(value_type));
+    static constexpr difference_type buffer_size = deque_buf_size(BufSize, sizeof(value_type));
 
 private:
     pointer current_ = nullptr;  ///< 指向当前元素
@@ -1520,7 +1515,7 @@ template <typename Iterator, typename Alloc>
 deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_value_t<Iterator>, Alloc>;
 #endif
 
-/** @} */ // Deque
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_DEQUE_HPP__

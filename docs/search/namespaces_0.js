@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['constants_0',['constants',['../namespaceconstants.html',1,'']]]
+  ['literals_0',['literals',['../namespaceliterals.html',1,'']]]
 ];

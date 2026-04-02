@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup UnorderedMap 无序映射
- * @brief 基于哈希表的键值对容器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -599,7 +599,7 @@ unordered_map(std::initializer_list<pair<Key, T>>, HashFcn, Alloc)
 -> unordered_map<Key, T, HashFcn, equal_to<Key>, Alloc>;
 #endif
 
-/** @} */ // UnorderedMap
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_UNORDERED_MAP_HPP__

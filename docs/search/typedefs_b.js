@@ -14,5 +14,5 @@ var searchData=
   ['milliseconds_11',['milliseconds',['../group___duration.html#ga0c9e480a0040ed5977448019fb74cd55',1,'duration.hpp']]],
   ['minutes_12',['minutes',['../group___duration.html#ga9e5521f8c307af553c2d7e25ed300429',1,'duration.hpp']]],
   ['months_13',['months',['../group___duration.html#gaa86dd6948fa2f24d156ef787e45137db',1,'duration.hpp']]],
-  ['mutex_5ftype_14',['mutex_type',['../classlock.html#a07bc65592fbda66982f353f6ac2895d0',1,'lock::mutex_type'],['../classlock_3_01_mutex_00_01true_01_4.html#ae106eebb5005a5d7ce9accbedf2de7e0',1,'lock&lt; Mutex, true &gt;::mutex_type'],['../classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d',1,'shared_lock::mutex_type']]]
+  ['mutex_5ftype_14',['mutex_type',['../classlock.html#a84a083c123993bf411cc52cc47fc7766',1,'lock::mutex_type'],['../classunique__lock.html#a7b0e20ed2032e613a03c2883d3df7b0c',1,'unique_lock::mutex_type'],['../classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d',1,'shared_lock::mutex_type']]]
 ];

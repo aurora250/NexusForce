@@ -92,335 +92,452 @@ $(function(){initNavTree('regex_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">regex.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_STRING_REGEX_HPP__</span></div>
+<a href="regex_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_STRING_REGEX_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_STRING_REGEX_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifdef NEFORCE_SUPPORT_PCRE2</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;pcre2.h&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><a class="code hl_define" href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a>(regex_exception, <a class="code hl_struct" href="structvalue__exception.html">value_exception</a>, <span class="stringliteral">&quot;Regex Operation Failed&quot;</span>)</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>class NEFORCE_API match_result {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">using </span>iterator = <a class="code hl_typedef" href="classvector.html#aa50c3e7db9567b65ae725223c3cd22c5">vector&lt;string&gt;::const_iterator</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> groups_;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="classvector.html">vector&lt;pair&lt;size_t, size_t&gt;</a>&gt; group_positions_;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">size_t</span> position_ = <a class="code hl_variable" href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">string::npos</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">size_t</span> length_ = 0;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">string</span> subject_;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    match_result() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    match_result(</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; subject,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordtype">size_t</span> pos, <span class="keywordtype">size_t</span> len,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; groups,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector</a>&lt;<a class="code hl_class" href="structpair.html">pair&lt;size_t, size_t&gt;</a>&gt;&amp; group_positions);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> matched() const noexcept {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> position_ != <a class="code hl_variable" href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">string::npos</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> position() const noexcept {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> position_;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> length() const noexcept {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> length_;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>() const noexcept {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> matched() ? groups_[0].<a class="code hl_function" href="classvector.html#a34f5c656876b3e08a5bc81b032c92dad">view</a>() : <span class="stringliteral">&quot;&quot;</span>_sv;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>() const noexcept {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span> groups_.<a class="code hl_function" href="classvector.html#ab26ef5bb14c5103a95d936d6e27f5cd2">size</a>();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> operator [](<span class="keyword">const</span> <span class="keywordtype">size_t</span> idx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">if</span> (idx &gt;= groups_.<a class="code hl_function" href="classvector.html#ab26ef5bb14c5103a95d936d6e27f5cd2">size</a>()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>_sv;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> groups_[idx].<a class="code hl_function" href="classvector.html#a34f5c656876b3e08a5bc81b032c92dad">view</a>();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    NEFORCE_NODISCARD <a class="code hl_class" href="structpair.html">pair&lt;size_t, size_t&gt;</a> position(<span class="keyword">const</span> <span class="keywordtype">size_t</span> idx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span> (idx &gt;= group_positions_.<a class="code hl_function" href="classvector.html#ab26ef5bb14c5103a95d936d6e27f5cd2">size</a>()) {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordflow">return</span> {<a class="code hl_variable" href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">string::npos</a>, 0};</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">return</span> group_positions_[idx];</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> prefix() const noexcept {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">if</span> (!matched()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>_sv;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> subject_.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>(0, position_);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> suffix() const noexcept {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">if</span> (!matched()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>_sv;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> subject_.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>(position_ + length_);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">string</span> <a class="code hl_function" href="group___string_format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf">format</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    NEFORCE_NODISCARD iterator <a class="code hl_function" href="group___type_erasure_functions.html#ga278da9db83e0ea0b3ba56d8dedf43d86">begin</a>() const noexcept {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">return</span> groups_.<a class="code hl_function" href="classvector.html#a9aed5ec59526ae8e0220840d9b4d09c9">begin</a>();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    NEFORCE_NODISCARD iterator <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>() const noexcept {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> groups_.<a class="code hl_function" href="classvector.html#a41e8769a977c988206809198abaf4fad">end</a>();</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">class </span>NEFORCE_API regex {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">struct </span>pcre2_code_deleter {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordtype">void</span> operator ()(pcre2_code* code) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">if</span> (code) pcre2_code_free(code);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    };</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">struct </span>pcre2_match_data_deleter {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">void</span> operator ()(pcre2_match_data* <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>) pcre2_match_data_free(<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    };</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    unique_ptr&lt;pcre2_code, pcre2_code_deleter&gt; code_;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">string</span> pattern_;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options_;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">int</span> capture_count_ = 0;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">friend</span> <span class="keyword">class </span>regex_iterator;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">friend</span> <span class="keyword">class </span>regex_token_iterator;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">void</span> compile(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; pattern, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options = 0);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    match_result do_match(PCRE2_SPTR subject, <span class="keywordtype">size_t</span> length,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                          <span class="keywordtype">size_t</span> start_offset, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options,</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                          <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; subject_str) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">explicit</span> regex(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; pattern, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options = 0);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    regex(regex&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    regex&amp; operator =(regex&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    regex(<span class="keyword">const</span> regex&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    regex&amp; operator =(<span class="keyword">const</span> regex&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> match(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    NEFORCE_NODISCARD match_result <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga20e9ef4ca8cca9a7e2c132fe434af6e0">search</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">size_t</span> pos = 0) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    NEFORCE_NODISCARD vector&lt;match_result&gt; find_all(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">string</span> replace_first(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">string</span> replace_all(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">string</span> replace_all_callback(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, function&lt;<span class="keywordtype">string</span>(<span class="keyword">const</span> match_result&amp;)&gt; callback) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    NEFORCE_NODISCARD vector&lt;string&gt; <a class="code hl_function" href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">int</span> max_splits = -1) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> capture_count() const noexcept {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">return</span> capture_count_;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; pattern() const noexcept {</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">return</span> pattern_;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> valid() const noexcept {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> code_ != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;pcre2.h&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structregex__exception.html">   30</a></span><span class="keyword">struct </span>regex_exception final : value_exception {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">explicit</span> regex_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;Regex Operation Failed&quot;</span>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                             <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structexception.html#a50dcb7544585c5cda232c3133d027eff">type</a> = static_type,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                             <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a> = 0) noexcept</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    : value_exception(info, <a class="code hl_function" href="structexception.html#a50dcb7544585c5cda232c3133d027eff">type</a>, <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) {}</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">explicit</span> regex_exception(<span class="keyword">const</span> <a class="code hl_function" href="structexception.html#a33710bd2e564614575128e2c3de94883">exception</a>&amp; e)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    : value_exception(e) {}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    ~regex_exception() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> static_type = <span class="stringliteral">&quot;regex_exception&quot;</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> <span class="comment">// Exceptions</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="};">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classmatch__result.html">   59</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classmatch__result.html#a0ea18f4ed7d8d309b5554677c5f8240a">match_result</a> {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce">   61</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce">iterator</a> = <a class="code hl_typedef" href="classvector.html#aa50c3e7db9567b65ae725223c3cd22c5">vector&lt;string&gt;::const_iterator</a>;    </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> groups_;                              </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_class" href="classvector.html">vector&lt;pair&lt;size_t, size_t&gt;</a>&gt; group_positions_;       </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">size_t</span> position_ = <a class="code hl_variable" href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">string::npos</a>;                     </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">size_t</span> length_ = 0;                                  </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">string</span> subject_;                                     </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classmatch__result.html#a0ea18f4ed7d8d309b5554677c5f8240a">   74</a></span>    <a class="code hl_function" href="classmatch__result.html#a0ea18f4ed7d8d309b5554677c5f8240a">match_result</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classmatch__result.html#a8309604649cce649cc993ef2fbbea5da">   84</a></span>    <a class="code hl_function" href="classmatch__result.html#a8309604649cce649cc993ef2fbbea5da">match_result</a>(</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; subject,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordtype">size_t</span> pos, <span class="keywordtype">size_t</span> len,</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; groups,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector</a>&lt;<a class="code hl_class" href="structpair.html">pair&lt;size_t, size_t&gt;</a>&gt;&amp; group_positions);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classmatch__result.html#a0fe4eda6d6a4f686106fcf2c02ff49a1">   94</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classmatch__result.html#a0fe4eda6d6a4f686106fcf2c02ff49a1">matched</a>() const noexcept {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> position_ != <a class="code hl_variable" href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">string::npos</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
+</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classmatch__result.html#a7166600df0956fc6563786e91bd8bbeb">  102</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classmatch__result.html#a7166600df0956fc6563786e91bd8bbeb">position</a>() const noexcept {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> position_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classmatch__result.html#af97c0520b4e6e7928f3516c0d440d277">  110</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classmatch__result.html#af97c0520b4e6e7928f3516c0d440d277">length</a>() const noexcept {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">return</span> length_;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classmatch__result.html#a42984c5c848fdb2637ef4621877ecc10">  118</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="code hl_function" href="classmatch__result.html#a42984c5c848fdb2637ef4621877ecc10">data</a>() const noexcept {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classmatch__result.html#a0fe4eda6d6a4f686106fcf2c02ff49a1">matched</a>() ? groups_[0].view() : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="foldopen" id="foldopen00126" data-start="{" data-end="}">
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classmatch__result.html#a5f035a33a4db70c454a6d736f704a51b">  126</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classmatch__result.html#a5f035a33a4db70c454a6d736f704a51b">size</a>() const noexcept {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">return</span> groups_.size();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classmatch__result.html#aaeb0151a9dc529b235c982546f1b4c6f">  135</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> operator [](<span class="keyword">const</span> <span class="keywordtype">size_t</span> idx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">return</span> idx &lt; groups_.size() ? groups_[idx].view() : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span></div>
+<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classmatch__result.html#a36d268bb2a82c4f49f8acc549cfa4be4">  144</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="structpair.html">pair&lt;size_t, size_t&gt;</a> <a class="code hl_function" href="classmatch__result.html#a36d268bb2a82c4f49f8acc549cfa4be4">position</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> idx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> idx &lt; group_positions_.size() ? group_positions_[idx] : <a class="code hl_class" href="structpair.html">pair&lt;size_t, size_t&gt;</a>{<a class="code hl_variable" href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">string::npos</a>, 0};</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    NEFORCE_NODISCARD regex_iterator <a class="code hl_function" href="group___type_erasure_functions.html#ga278da9db83e0ea0b3ba56d8dedf43d86">begin</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    NEFORCE_NODISCARD regex_iterator <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>};</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">class </span>NEFORCE_API regex_iterator {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keyword">using </span>iterator_category = bidirectional_iterator_tag;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">using </span>value_type        = match_result;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keyword">using </span>difference_type   = <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keyword">using </span>pointer           = <span class="keyword">const</span> match_result*;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keyword">using </span>reference         = <span class="keyword">const</span> match_result&amp;;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keyword">const</span> regex* regex_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">string</span> subject_;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">mutable</span> vector&lt;match_result&gt; cached_matches_;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">mutable</span> <span class="keywordtype">bool</span> cache_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> current_index_ = -1;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">void</span> build_cache() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">void</span> move_next();</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">void</span> move_previous();</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">void</span> find_from_position(<span class="keywordtype">size_t</span> pos) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordtype">void</span> find_last_before_position(<span class="keywordtype">size_t</span> pos);</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    regex_iterator() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    regex_iterator(<span class="keyword">const</span> regex* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">size_t</span> pos = 0);</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keyword">static</span> regex_iterator from_index(<span class="keyword">const</span> regex* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> index);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    NEFORCE_NODISCARD reference <a class="code hl_function" href="group___duration.html#ga8907d2081e58b2c04b82e02bfc4af628">operator *</a>() const noexcept;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    NEFORCE_NODISCARD pointer operator -&gt;() const noexcept {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordflow">return</span> &amp;(<a class="code hl_function" href="group___duration.html#ga8907d2081e58b2c04b82e02bfc4af628">operator*</a>());</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    regex_iterator&amp; operator ++() {</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        move_next();</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
+</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span></div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classmatch__result.html#a4c032fa4cc15d2c48d5226e9dc0a8179">  152</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="code hl_function" href="classmatch__result.html#a4c032fa4cc15d2c48d5226e9dc0a8179">prefix</a>() const noexcept {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classmatch__result.html#a0fe4eda6d6a4f686106fcf2c02ff49a1">matched</a>() ? subject_.view(0, position_) : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="foldopen" id="foldopen00160" data-start="{" data-end="}">
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classmatch__result.html#a08d3f5a97e79b00f6c9d9d785c15211e">  160</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="code hl_function" href="classmatch__result.html#a08d3f5a97e79b00f6c9d9d785c15211e">suffix</a>() const noexcept {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classmatch__result.html#a0fe4eda6d6a4f686106fcf2c02ff49a1">matched</a>() ? subject_.view(position_ + length_) : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
+</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="group___format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf">format</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span></div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classmatch__result.html#a6d80e827d6b0bbd37cc7bc277b0aca81">  183</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce">iterator</a> <a class="code hl_function" href="classmatch__result.html#a6d80e827d6b0bbd37cc7bc277b0aca81">begin</a>() const noexcept {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">return</span> groups_.begin();</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    }</div>
+</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span></div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classmatch__result.html#aaae69b99847fc9680cb11c9d37bbf34e">  191</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce">iterator</a> <a class="code hl_function" href="classmatch__result.html#aaae69b99847fc9680cb11c9d37bbf34e">end</a>() const noexcept {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">return</span> groups_.end();</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
+</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>};</div>
+</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    regex_iterator operator ++(<span class="keywordtype">int</span>) {</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        regex_iterator tmp = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        ++(*this);</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    regex_iterator&amp; operator --() {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">if</span> (current_index_ == -1 &amp;&amp; cache_built_) {</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">if</span> (!cached_matches_.<a class="code hl_function" href="classvector.html#ac79fa8e19e603d8de07a5ed61ae7140b">empty</a>()) {</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                current_index_ = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a><span class="keyword">&gt;</span>(cached_matches_.<a class="code hl_function" href="classvector.html#ab26ef5bb14c5103a95d936d6e27f5cd2">size</a>()) - 1;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            }</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            move_previous();</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        }</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    }</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    regex_iterator operator --(<span class="keywordtype">int</span>) {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        regex_iterator tmp = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        --(*this);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    }</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<span class="keyword">const</span> regex_iterator&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="keyword">class </span>NEFORCE_API <a class="code hl_class" href="classregex__iterator.html">regex_iterator</a>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keyword">class </span>NEFORCE_API <a class="code hl_class" href="classregex__token__iterator.html">regex_token_iterator</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span></div>
+<div class="foldopen" id="foldopen00208" data-start="{" data-end="};">
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="classregex.html">  208</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a> {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keyword">struct </span>pcre2_code_deleter {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordtype">void</span> operator ()(pcre2_code* code) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="keywordflow">if</span> (code) pcre2_code_free(code);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    };</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keyword">struct </span>pcre2_match_data_deleter {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordtype">void</span> operator ()(pcre2_match_data* <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>) pcre2_match_data_free(<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    };</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<span class="keyword">const</span> regex_iterator&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    }</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keyword">static</span> regex_iterator <a class="code hl_function" href="group___type_erasure_functions.html#ga278da9db83e0ea0b3ba56d8dedf43d86">begin</a>(<span class="keyword">const</span> regex* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) {</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordflow">return</span> regex_iterator(re, str, 0);</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;pcre2_code, pcre2_code_deleter&gt;</a> code_;  </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">string</span> pattern_;                                   </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options_;                                 </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">int</span> capture_count_ = 0;                            </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keyword">friend</span> <span class="keyword">class </span>regex_iterator;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keyword">friend</span> <span class="keyword">class </span>regex_token_iterator;</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keyword">static</span> regex_iterator <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>(<span class="keyword">const</span> regex* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        regex_iterator it;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        it.regex_ = re;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        it.subject_ = str;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">if</span> (re) {</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            it.build_cache();</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            it.current_index_ = -1;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        }</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordflow">return</span> it;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    }</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>};</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="keyword">class </span>NEFORCE_API regex_token_iterator {</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keyword">enum class</span> State {</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        BEFORE_FIRST,    <span class="comment">// 第一个匹配之前</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        BETWEEN_MATCHES, <span class="comment">// 匹配之间</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        AFTER_LAST,      <span class="comment">// 最后一个匹配之后</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <a class="code hl_enumvalue" href="group___file.html#ggae7c2d8818fbe092703eb5db944ea226aab1a326c06d88bf042f73d70f50197905">END</a>              <span class="comment">// 结束</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    };</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keyword">const</span> regex* regex_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordtype">string</span> subject_;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    regex_iterator match_iterator_;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    regex_iterator end_iterator_;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> current_;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordtype">int</span> index_ = 0;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    State state_ = State::END;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordtype">size_t</span> last_pos_ = 0;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordtype">void</span> find_next() noexcept;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>public:</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    regex_token_iterator() = default;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    regex_token_iterator(const regex* re, const <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">int</span> index = 0);</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> operator *() const noexcept {</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">return</span> current_;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    regex_token_iterator&amp; operator ++() noexcept;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    regex_token_iterator operator ++(<span class="keywordtype">int</span>) noexcept {</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        regex_token_iterator tmp = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        ++(*this);</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    }</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<span class="keyword">const</span> regex_token_iterator&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    </div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<span class="keyword">const</span> regex_token_iterator&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    }</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>};</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="keyword">inline</span> regex_iterator regex::begin(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordflow">return</span> regex_iterator::begin(<span class="keyword">this</span>, str);</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>}</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="keyword">inline</span> regex_iterator regex::end(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">return</span> regex_iterator::end(<span class="keyword">this</span>, str);</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>}</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_STRING_REGEX_HPP__</span></div>
-<div class="ttc" id="aclassbasic__string_html_a123c35595a7addcd463a2ca11eba7a32"><div class="ttname"><a href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">basic_string::view</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 view_type view() const noexcept</div><div class="ttdoc">获取字符串视图</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l02140">basic_string.hpp:2140</a></div></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordtype">void</span> compile(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classregex.html#a645b32b78c0e4cee6759a8a851195274">pattern</a>, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options = 0);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordtype">void</span> compile(<span class="keywordtype">string</span>&amp;&amp; <a class="code hl_function" href="classregex.html#a645b32b78c0e4cee6759a8a851195274">pattern</a>, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options = 0);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <a class="code hl_class" href="classmatch__result.html">match_result</a> do_match(PCRE2_SPTR subject, <span class="keywordtype">size_t</span> length,</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                          <span class="keywordtype">size_t</span> start_offset, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options,</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                          <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; subject_str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">  245</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classregex.html#a645b32b78c0e4cee6759a8a851195274">pattern</a>, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options = 0);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classregex.html#a6e9e9b06beeeb0d24312b527f9ddb816">  253</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classregex.html#a6e9e9b06beeeb0d24312b527f9ddb816">regex</a>(<span class="keywordtype">string</span>&amp;&amp; <a class="code hl_function" href="classregex.html#a645b32b78c0e4cee6759a8a851195274">pattern</a>, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> options = 0);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>(<a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>&amp; operator =(<a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>(<span class="keyword">const</span> <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classregex.html#a22fd50c40c009e6eb2f6296df34c51ee">  268</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classmatch__result.html">match_result</a> <a class="code hl_function" href="classregex.html#a22fd50c40c009e6eb2f6296df34c51ee">do_match</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno"><a class="line" href="classregex.html#a12ff5ac4822ae3ac59184d7789458e0b">  275</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classregex.html#a12ff5ac4822ae3ac59184d7789458e0b">match</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="classregex.html#ab4fb572da5f242f1f79d6b9959b15366">  283</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classmatch__result.html">match_result</a> <a class="code hl_function" href="classregex.html#ab4fb572da5f242f1f79d6b9959b15366">search</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">size_t</span> pos = 0) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno"><a class="line" href="classregex.html#a3283b7adca81d9857d025558167d6d23">  290</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classvector.html">vector&lt;match_result&gt;</a> <a class="code hl_function" href="classregex.html#a3283b7adca81d9857d025558167d6d23">find_all</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno"><a class="line" href="classregex.html#aa2b3e88047eddfa040a7bfc01a7a4e9b">  298</a></span>    <span class="keywordtype">string</span> <a class="code hl_function" href="classregex.html#aa2b3e88047eddfa040a7bfc01a7a4e9b">replace_first</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="classregex.html#ad2d588837ecfbece42bb55ea2aff70de">  306</a></span>    <span class="keywordtype">string</span> <a class="code hl_function" href="classregex.html#ad2d588837ecfbece42bb55ea2aff70de">replace_all</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classregex.html#ab031f04f095a00bbc98dc343c1dd799e">  314</a></span>    <span class="keywordtype">string</span> <a class="code hl_function" href="classregex.html#ab031f04f095a00bbc98dc343c1dd799e">replace_all_callback</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_class" href="classfunction.html">function</a>&lt;<span class="keywordtype">string</span>(<span class="keyword">const</span> <a class="code hl_class" href="classmatch__result.html">match_result</a>&amp;)&gt; callback) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno"><a class="line" href="classregex.html#ac260a2e47372181b6dbd4603d91bb247">  322</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> <a class="code hl_function" href="classregex.html#ac260a2e47372181b6dbd4603d91bb247">split</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">int</span> max_splits = -1) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span></div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="classregex.html#ab6f3682c611875bfdaea39f3a9e66848">  328</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classregex.html#ab6f3682c611875bfdaea39f3a9e66848">capture_count</a>() const noexcept {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        <span class="keywordflow">return</span> capture_count_;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    }</div>
+</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span></div>
+<div class="foldopen" id="foldopen00336" data-start="{" data-end="}">
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="classregex.html#a645b32b78c0e4cee6759a8a851195274">  336</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classregex.html#a645b32b78c0e4cee6759a8a851195274">pattern</a>() const noexcept {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">return</span> pattern_;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    }</div>
+</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span></div>
+<div class="foldopen" id="foldopen00344" data-start="{" data-end="}">
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno"><a class="line" href="classregex.html#aae93fd06fc0780fc36d969a4708cf232">  344</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classregex.html#aae93fd06fc0780fc36d969a4708cf232">valid</a>() const noexcept {</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordflow">return</span> code_ != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    }</div>
+</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno"><a class="line" href="classregex.html#a733cbc989acbbce57dcbe8f6e848631d">  353</a></span>    NEFORCE_NODISCARD regex_iterator <a class="code hl_function" href="classregex.html#a733cbc989acbbce57dcbe8f6e848631d">begin</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="classregex.html#a2076e569e03e7a02b35bb058c77a93b3">  360</a></span>    NEFORCE_NODISCARD regex_iterator <a class="code hl_function" href="classregex.html#a2076e569e03e7a02b35bb058c77a93b3">end</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>};</div>
+</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span></div>
+<div class="foldopen" id="foldopen00370" data-start="{" data-end="};">
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno"><a class="line" href="classregex__iterator.html">  370</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> {</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a1f718751e6168b441c5ea191c666b602">  372</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classregex__iterator.html#a1f718751e6168b441c5ea191c666b602">iterator_category</a> = <a class="code hl_struct" href="structbidirectional__iterator__tag.html">bidirectional_iterator_tag</a>; </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a008141f536edbdd9cdb6483d231e909f">  373</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classregex__iterator.html#a008141f536edbdd9cdb6483d231e909f">value_type</a>        = <a class="code hl_class" href="classmatch__result.html">match_result</a>;               </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a83d13299dfa95febaa1318f1459daf65">  374</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classregex__iterator.html#a83d13299dfa95febaa1318f1459daf65">difference_type</a>   = <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>;                  </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno"><a class="line" href="classregex__iterator.html#ad8aa533189ab91035258c7bcf1596612">  375</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classregex__iterator.html#ad8aa533189ab91035258c7bcf1596612">pointer</a>           = <span class="keyword">const</span> <a class="code hl_class" href="classmatch__result.html">match_result</a>*;        </div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a91ac94ae92e726ae490cd7bbc6331c68">  376</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classregex__iterator.html#a91ac94ae92e726ae490cd7bbc6331c68">reference</a>         = <span class="keyword">const</span> <a class="code hl_class" href="classmatch__result.html">match_result</a>&amp;;        </div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keyword">const</span> <a class="code hl_class" href="classregex.html">regex</a>* regex_ = <span class="keyword">nullptr</span>;        </div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    <span class="keywordtype">string</span> subject_;                      </div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classvector.html">vector&lt;match_result&gt;</a> cached_matches_; </div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="keyword">mutable</span> <span class="keywordtype">bool</span> cache_built_ = <span class="keyword">false</span>;            </div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> current_index_ = -1;        </div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    <span class="keywordtype">void</span> build_cache() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    <span class="keywordtype">void</span> move_next();</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keywordtype">void</span> move_previous();</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="keywordtype">void</span> find_from_position(<span class="keywordtype">size_t</span> pos) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordtype">void</span> find_last_before_position(<span class="keywordtype">size_t</span> pos);</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">  399</a></span>    <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a7ff151b47153c56e747a27b846033d8c">  407</a></span>    <a class="code hl_function" href="classregex__iterator.html#a7ff151b47153c56e747a27b846033d8c">regex_iterator</a>(<span class="keyword">const</span> <a class="code hl_class" href="classregex.html">regex</a>* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">size_t</span> pos = 0);</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span></div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a5a6392c2006b7991ff9c8cbcd3f83a17">  416</a></span>    <span class="keyword">static</span> <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> <a class="code hl_function" href="classregex__iterator.html#a5a6392c2006b7991ff9c8cbcd3f83a17">from_index</a>(<span class="keyword">const</span> <a class="code hl_class" href="classregex.html">regex</a>* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> index);</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span></div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a8624e4e94c42b6729674dd82481abdc1">  422</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classregex__iterator.html#a91ac94ae92e726ae490cd7bbc6331c68">reference</a> <a class="code hl_function" href="group___duration.html#ga2dd06db59c1399f29426a136c2d139e0">operator *</a>() const noexcept;</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span></div>
+<div class="foldopen" id="foldopen00428" data-start="{" data-end="}">
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno"><a class="line" href="classregex__iterator.html#af32e43d6b8094c5d95c3ca7a23f0bc37">  428</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classregex__iterator.html#ad8aa533189ab91035258c7bcf1596612">pointer</a> operator -&gt;() const noexcept {</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        <span class="keywordflow">return</span> &amp;(<a class="code hl_function" href="group___duration.html#ga2dd06db59c1399f29426a136c2d139e0">operator*</a>());</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    }</div>
+</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span></div>
+<div class="foldopen" id="foldopen00436" data-start="{" data-end="}">
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno"><a class="line" href="classregex__iterator.html#aed5b19b5be776eb0ac8087be4bd8bad4">  436</a></span>    <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a>&amp; operator ++() {</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>        move_next();</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    }</div>
+</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span></div>
+<div class="foldopen" id="foldopen00445" data-start="{" data-end="}">
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a0de0979dd96aa54ef5e5a6269980245f">  445</a></span>    <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> operator ++(<span class="keywordtype">int</span>) {</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>        <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> tmp = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>        ++(*this);</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>        <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>    }</div>
+</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span></div>
+<div class="foldopen" id="foldopen00455" data-start="{" data-end="}">
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno"><a class="line" href="classregex__iterator.html#abb1bb425c46e2457306ed6f4ad35fea4">  455</a></span>    <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a>&amp; operator --() {</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>        <span class="keywordflow">if</span> (current_index_ == -1 &amp;&amp; cache_built_) {</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>            <span class="keywordflow">if</span> (!cached_matches_.empty()) {</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>                current_index_ = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a><span class="keyword">&gt;</span>(cached_matches_.size()) - 1;</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>            }</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>            move_previous();</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>        }</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>    }</div>
+</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span></div>
+<div class="foldopen" id="foldopen00470" data-start="{" data-end="}">
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a70f7da1a7023158550ebe8a259607881">  470</a></span>    <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> operator --(<span class="keywordtype">int</span>) {</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>        <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> tmp = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>        --(*this);</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>        <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>    }</div>
+</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span></div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a5faa8585584a4958609edc84f4987fc8">  481</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span></div>
+<div class="foldopen" id="foldopen00488" data-start="{" data-end="}">
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno"><a class="line" href="classregex__iterator.html#ab6919a48754b802589a4acd7387b8f5e">  488</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>        <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    }</div>
+</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span></div>
+<div class="foldopen" id="foldopen00498" data-start="{" data-end="}">
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno"><a class="line" href="classregex__iterator.html#a87d8cbe1f65c9b6db97447b8242c9bc9">  498</a></span>    <span class="keyword">static</span> <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> <a class="code hl_function" href="classregex__iterator.html#a87d8cbe1f65c9b6db97447b8242c9bc9">begin</a>(<span class="keyword">const</span> <a class="code hl_class" href="classregex.html">regex</a>* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) {</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a>(re, str, 0);</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    }</div>
+</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span></div>
+<div class="foldopen" id="foldopen00508" data-start="{" data-end="}">
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno"><a class="line" href="classregex__iterator.html#aede5a6db50e475732ce9ffd06e8f083e">  508</a></span>    <span class="keyword">static</span> <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> <a class="code hl_function" href="classregex__iterator.html#aede5a6db50e475732ce9ffd06e8f083e">end</a>(<span class="keyword">const</span> <a class="code hl_class" href="classregex.html">regex</a>* re, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) {</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        <a class="code hl_function" href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator</a> it;</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>        it.regex_ = re;</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>        it.subject_ = str;</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>        <span class="keywordflow">if</span> (re) {</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>            it.build_cache();</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>            it.current_index_ = -1;</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>        }</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>        <span class="keywordflow">return</span> it;</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    }</div>
+</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>};</div>
+</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span></div>
+<div class="foldopen" id="foldopen00527" data-start="{" data-end="};">
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html">  527</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a> {</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00533" data-start="{" data-end="};">
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6">  533</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6">state</a> {</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6ad0b923fb885b36f92a78c19ca4cc41a0">  534</a></span>        BEFORE_FIRST,    </div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6afad0588b7b5d0fe4e6b7fefc26731e69">  535</a></span>        BETWEEN_MATCHES, </div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6affc01f81637cc9c854cd5a002e31e400">  536</a></span>        AFTER_LAST,      </div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6ab1a326c06d88bf042f73d70f50197905">  537</a></span>        <a class="code hl_enumvalue" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905">END</a>              </div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    };</div>
+</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="keyword">const</span> <a class="code hl_class" href="classregex.html">regex</a>* regex_ = <span class="keyword">nullptr</span>;           </div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keywordtype">string</span> subject_;                         </div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <a class="code hl_class" href="classregex__iterator.html">regex_iterator</a> match_iterator_;          </div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <a class="code hl_class" href="classregex__iterator.html">regex_iterator</a> end_iterator_;             </div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> current_;                    </div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    <span class="keywordtype">int</span> index_ = 0;                          </div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    state state_ = state::END;               </div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>    <span class="keywordtype">size_t</span> last_pos_ = 0;                    </div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span> </div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <span class="keywordtype">void</span> find_next() noexcept;</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>public:</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">  557</a></span>    <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a>() = default;</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span></div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#aa0f0f5820cff16647bd444e0cf06e7a2">  565</a></span>    <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a>(const <a class="code hl_class" href="classregex.html">regex</a>* re, const <span class="keywordtype">string</span>&amp; str, <span class="keywordtype">int</span> index = 0);</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span></div>
+<div class="foldopen" id="foldopen00571" data-start="{" data-end="}">
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#a964a698e7c2e358b9b056f4f0576eb8f">  571</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> operator *() const noexcept {</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>        <span class="keywordflow">return</span> current_;</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    }</div>
+</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span></div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#a87504a82fcf1aa56574ac8919c0935c9">  579</a></span>    <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a>&amp; operator ++() noexcept;</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span></div>
+<div class="foldopen" id="foldopen00585" data-start="{" data-end="}">
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#a2882fa2cf7e59b947fe5c7a06bb64096">  585</a></span>    <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a> operator ++(<span class="keywordtype">int</span>) noexcept {</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>        <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a> tmp = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        ++(*this);</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>        <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    }</div>
+</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span></div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#adaaf7a55f8eccce1532148a1e8e09a55">  596</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span></div>
+<div class="foldopen" id="foldopen00603" data-start="{" data-end="}">
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno"><a class="line" href="classregex__token__iterator.html#a8dddcc464a56a29889e7bcdb1bd499ad">  603</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>        <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>    }</div>
+</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>};</div>
+</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span></div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span><span class="keyword">inline</span> <a class="code hl_class" href="classregex__iterator.html">regex_iterator</a> <a class="code hl_function" href="classregex.html#a733cbc989acbbce57dcbe8f6e848631d">regex::begin</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classregex__iterator.html#a87d8cbe1f65c9b6db97447b8242c9bc9">regex_iterator::begin</a>(<span class="keyword">this</span>, str);</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>}</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span> </div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span><span class="keyword">inline</span> <a class="code hl_class" href="classregex__iterator.html">regex_iterator</a> <a class="code hl_function" href="classregex.html#a2076e569e03e7a02b35bb058c77a93b3">regex::end</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classregex__iterator.html#aede5a6db50e475732ce9ffd06e8f083e">regex_iterator::end</a>(<span class="keyword">this</span>, str);</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>}</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span> <span class="comment">// Regex</span></div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span> </div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_STRING_REGEX_HPP__</span></div>
 <div class="ttc" id="aclassbasic__string_html_addc40fa63f885bb692988057be4798a6"><div class="ttname"><a href="classbasic__string.html#addc40fa63f885bb692988057be4798a6">basic_string&lt; char &gt;::npos</a></div><div class="ttdeci">static constexpr size_type npos</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l00201">basic_string.hpp:201</a></div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="aclassmatch__result_html"><div class="ttname"><a href="classmatch__result.html">match_result</a></div><div class="ttdoc">正则表达式匹配结果类</div><div class="ttdef"><b>定义</b> <a href="#l00059">regex.hpp:59</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a08d3f5a97e79b00f6c9d9d785c15211e"><div class="ttname"><a href="classmatch__result.html#a08d3f5a97e79b00f6c9d9d785c15211e">match_result::suffix</a></div><div class="ttdeci">NEFORCE_NODISCARD string_view suffix() const noexcept</div><div class="ttdoc">获取匹配后的后缀</div><div class="ttdef"><b>定义</b> <a href="#l00160">regex.hpp:160</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a0ea18f4ed7d8d309b5554677c5f8240a"><div class="ttname"><a href="classmatch__result.html#a0ea18f4ed7d8d309b5554677c5f8240a">match_result::match_result</a></div><div class="ttdeci">match_result()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclassmatch__result_html_a0fe4eda6d6a4f686106fcf2c02ff49a1"><div class="ttname"><a href="classmatch__result.html#a0fe4eda6d6a4f686106fcf2c02ff49a1">match_result::matched</a></div><div class="ttdeci">NEFORCE_NODISCARD bool matched() const noexcept</div><div class="ttdoc">检查是否匹配成功</div><div class="ttdef"><b>定义</b> <a href="#l00094">regex.hpp:94</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a32ed7c726cf627b6711b5ef034f264ce"><div class="ttname"><a href="classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce">match_result::iterator</a></div><div class="ttdeci">vector&lt; string &gt;::const_iterator iterator</div><div class="ttdoc">捕获组迭代器类型</div><div class="ttdef"><b>定义</b> <a href="#l00061">regex.hpp:61</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a36d268bb2a82c4f49f8acc549cfa4be4"><div class="ttname"><a href="classmatch__result.html#a36d268bb2a82c4f49f8acc549cfa4be4">match_result::position</a></div><div class="ttdeci">NEFORCE_NODISCARD pair&lt; size_t, size_t &gt; position(const size_t idx) const noexcept</div><div class="ttdoc">获取指定捕获组的位置信息</div><div class="ttdef"><b>定义</b> <a href="#l00144">regex.hpp:144</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a42984c5c848fdb2637ef4621877ecc10"><div class="ttname"><a href="classmatch__result.html#a42984c5c848fdb2637ef4621877ecc10">match_result::data</a></div><div class="ttdeci">NEFORCE_NODISCARD string_view data() const noexcept</div><div class="ttdoc">获取完整匹配的文本</div><div class="ttdef"><b>定义</b> <a href="#l00118">regex.hpp:118</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a4c032fa4cc15d2c48d5226e9dc0a8179"><div class="ttname"><a href="classmatch__result.html#a4c032fa4cc15d2c48d5226e9dc0a8179">match_result::prefix</a></div><div class="ttdeci">NEFORCE_NODISCARD string_view prefix() const noexcept</div><div class="ttdoc">获取匹配前的前缀</div><div class="ttdef"><b>定义</b> <a href="#l00152">regex.hpp:152</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a5f035a33a4db70c454a6d736f704a51b"><div class="ttname"><a href="classmatch__result.html#a5f035a33a4db70c454a6d736f704a51b">match_result::size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t size() const noexcept</div><div class="ttdoc">获取捕获组数量</div><div class="ttdef"><b>定义</b> <a href="#l00126">regex.hpp:126</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a6d80e827d6b0bbd37cc7bc277b0aca81"><div class="ttname"><a href="classmatch__result.html#a6d80e827d6b0bbd37cc7bc277b0aca81">match_result::begin</a></div><div class="ttdeci">NEFORCE_NODISCARD iterator begin() const noexcept</div><div class="ttdoc">格式化替换结果</div><div class="ttdef"><b>定义</b> <a href="#l00183">regex.hpp:183</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a7166600df0956fc6563786e91bd8bbeb"><div class="ttname"><a href="classmatch__result.html#a7166600df0956fc6563786e91bd8bbeb">match_result::position</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t position() const noexcept</div><div class="ttdoc">获取匹配起始位置</div><div class="ttdef"><b>定义</b> <a href="#l00102">regex.hpp:102</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_a8309604649cce649cc993ef2fbbea5da"><div class="ttname"><a href="classmatch__result.html#a8309604649cce649cc993ef2fbbea5da">match_result::match_result</a></div><div class="ttdeci">match_result(const string &amp;subject, size_t pos, size_t len, const vector&lt; string &gt; &amp;groups, const vector&lt; pair&lt; size_t, size_t &gt; &gt; &amp;group_positions)</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassmatch__result_html_aaae69b99847fc9680cb11c9d37bbf34e"><div class="ttname"><a href="classmatch__result.html#aaae69b99847fc9680cb11c9d37bbf34e">match_result::end</a></div><div class="ttdeci">NEFORCE_NODISCARD iterator end() const noexcept</div><div class="ttdoc">获取捕获组迭代器结束位置</div><div class="ttdef"><b>定义</b> <a href="#l00191">regex.hpp:191</a></div></div>
+<div class="ttc" id="aclassmatch__result_html_af97c0520b4e6e7928f3516c0d440d277"><div class="ttname"><a href="classmatch__result.html#af97c0520b4e6e7928f3516c0d440d277">match_result::length</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t length() const noexcept</div><div class="ttdoc">获取匹配长度</div><div class="ttdef"><b>定义</b> <a href="#l00110">regex.hpp:110</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html"><div class="ttname"><a href="classregex__iterator.html">regex_iterator</a></div><div class="ttdoc">正则表达式匹配迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00370">regex.hpp:370</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_a008141f536edbdd9cdb6483d231e909f"><div class="ttname"><a href="classregex__iterator.html#a008141f536edbdd9cdb6483d231e909f">regex_iterator::value_type</a></div><div class="ttdeci">match_result value_type</div><div class="ttdoc">元素类型</div><div class="ttdef"><b>定义</b> <a href="#l00373">regex.hpp:373</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_a1f718751e6168b441c5ea191c666b602"><div class="ttname"><a href="classregex__iterator.html#a1f718751e6168b441c5ea191c666b602">regex_iterator::iterator_category</a></div><div class="ttdeci">bidirectional_iterator_tag iterator_category</div><div class="ttdoc">迭代器类型</div><div class="ttdef"><b>定义</b> <a href="#l00372">regex.hpp:372</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_a56d42abfdfd967f92f214c3c25592dc1"><div class="ttname"><a href="classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator::regex_iterator</a></div><div class="ttdeci">regex_iterator()=default</div><div class="ttdoc">默认构造函数，构造结束迭代器</div></div>
+<div class="ttc" id="aclassregex__iterator_html_a5a6392c2006b7991ff9c8cbcd3f83a17"><div class="ttname"><a href="classregex__iterator.html#a5a6392c2006b7991ff9c8cbcd3f83a17">regex_iterator::from_index</a></div><div class="ttdeci">static regex_iterator from_index(const regex *re, const string &amp;str, ptrdiff_t index)</div><div class="ttdoc">从指定索引构造迭代器</div></div>
+<div class="ttc" id="aclassregex__iterator_html_a7ff151b47153c56e747a27b846033d8c"><div class="ttname"><a href="classregex__iterator.html#a7ff151b47153c56e747a27b846033d8c">regex_iterator::regex_iterator</a></div><div class="ttdeci">regex_iterator(const regex *re, const string &amp;str, size_t pos=0)</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassregex__iterator_html_a83d13299dfa95febaa1318f1459daf65"><div class="ttname"><a href="classregex__iterator.html#a83d13299dfa95febaa1318f1459daf65">regex_iterator::difference_type</a></div><div class="ttdeci">ptrdiff_t difference_type</div><div class="ttdoc">差值类型</div><div class="ttdef"><b>定义</b> <a href="#l00374">regex.hpp:374</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_a87d8cbe1f65c9b6db97447b8242c9bc9"><div class="ttname"><a href="classregex__iterator.html#a87d8cbe1f65c9b6db97447b8242c9bc9">regex_iterator::begin</a></div><div class="ttdeci">static regex_iterator begin(const regex *re, const string &amp;str)</div><div class="ttdoc">获取起始迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00498">regex.hpp:498</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_a91ac94ae92e726ae490cd7bbc6331c68"><div class="ttname"><a href="classregex__iterator.html#a91ac94ae92e726ae490cd7bbc6331c68">regex_iterator::reference</a></div><div class="ttdeci">const match_result &amp; reference</div><div class="ttdoc">引用类型</div><div class="ttdef"><b>定义</b> <a href="#l00376">regex.hpp:376</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_ad8aa533189ab91035258c7bcf1596612"><div class="ttname"><a href="classregex__iterator.html#ad8aa533189ab91035258c7bcf1596612">regex_iterator::pointer</a></div><div class="ttdeci">const match_result * pointer</div><div class="ttdoc">指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00375">regex.hpp:375</a></div></div>
+<div class="ttc" id="aclassregex__iterator_html_aede5a6db50e475732ce9ffd06e8f083e"><div class="ttname"><a href="classregex__iterator.html#aede5a6db50e475732ce9ffd06e8f083e">regex_iterator::end</a></div><div class="ttdeci">static regex_iterator end(const regex *re, const string &amp;str)</div><div class="ttdoc">获取结束迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00508">regex.hpp:508</a></div></div>
+<div class="ttc" id="aclassregex__token__iterator_html"><div class="ttname"><a href="classregex__token__iterator.html">regex_token_iterator</a></div><div class="ttdoc">正则表达式令牌迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00527">regex.hpp:527</a></div></div>
+<div class="ttc" id="aclassregex__token__iterator_html_ad31d581d18f38941421775bcf8eb8ff6"><div class="ttname"><a href="classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6">regex_token_iterator::state</a></div><div class="ttdeci">state</div><div class="ttdoc">迭代器状态枚举</div><div class="ttdef"><b>定义</b> <a href="#l00533">regex.hpp:533</a></div></div>
+<div class="ttc" id="aclassregex__token__iterator_html_ae554bca42259aaad8fa8f273b3312198"><div class="ttname"><a href="classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198">regex_token_iterator::regex_token_iterator</a></div><div class="ttdeci">regex_token_iterator()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclassregex_html"><div class="ttname"><a href="classregex.html">regex</a></div><div class="ttdoc">正则表达式类</div><div class="ttdef"><b>定义</b> <a href="#l00208">regex.hpp:208</a></div></div>
+<div class="ttc" id="aclassregex_html_a12ff5ac4822ae3ac59184d7789458e0b"><div class="ttname"><a href="classregex.html#a12ff5ac4822ae3ac59184d7789458e0b">regex::match</a></div><div class="ttdeci">NEFORCE_NODISCARD bool match(const string &amp;str) const</div><div class="ttdoc">检查是否完全匹配</div></div>
+<div class="ttc" id="aclassregex_html_a2076e569e03e7a02b35bb058c77a93b3"><div class="ttname"><a href="classregex.html#a2076e569e03e7a02b35bb058c77a93b3">regex::end</a></div><div class="ttdeci">NEFORCE_NODISCARD regex_iterator end(const string &amp;str) const</div><div class="ttdoc">获取匹配结果迭代器结束位置</div></div>
+<div class="ttc" id="aclassregex_html_a22fd50c40c009e6eb2f6296df34c51ee"><div class="ttname"><a href="classregex.html#a22fd50c40c009e6eb2f6296df34c51ee">regex::do_match</a></div><div class="ttdeci">NEFORCE_NODISCARD match_result do_match(const string &amp;str) const</div><div class="ttdoc">执行完整匹配</div></div>
+<div class="ttc" id="aclassregex_html_a3283b7adca81d9857d025558167d6d23"><div class="ttname"><a href="classregex.html#a3283b7adca81d9857d025558167d6d23">regex::find_all</a></div><div class="ttdeci">NEFORCE_NODISCARD vector&lt; match_result &gt; find_all(const string &amp;str) const</div><div class="ttdoc">查找所有匹配</div></div>
+<div class="ttc" id="aclassregex_html_a645b32b78c0e4cee6759a8a851195274"><div class="ttname"><a href="classregex.html#a645b32b78c0e4cee6759a8a851195274">regex::pattern</a></div><div class="ttdeci">NEFORCE_NODISCARD const string &amp; pattern() const noexcept</div><div class="ttdoc">获取正则表达式模式</div><div class="ttdef"><b>定义</b> <a href="#l00336">regex.hpp:336</a></div></div>
+<div class="ttc" id="aclassregex_html_a6e9e9b06beeeb0d24312b527f9ddb816"><div class="ttname"><a href="classregex.html#a6e9e9b06beeeb0d24312b527f9ddb816">regex::regex</a></div><div class="ttdeci">regex(string &amp;&amp;pattern, uint32_t options=0)</div><div class="ttdoc">从字符串构造正则表达式</div></div>
+<div class="ttc" id="aclassregex_html_a733cbc989acbbce57dcbe8f6e848631d"><div class="ttname"><a href="classregex.html#a733cbc989acbbce57dcbe8f6e848631d">regex::begin</a></div><div class="ttdeci">NEFORCE_NODISCARD regex_iterator begin(const string &amp;str) const</div><div class="ttdoc">获取匹配结果迭代器起始位置</div></div>
+<div class="ttc" id="aclassregex_html_a9cc420382e161b3120f0c1fa2b96de1b"><div class="ttname"><a href="classregex.html#a9cc420382e161b3120f0c1fa2b96de1b">regex::regex</a></div><div class="ttdeci">regex(const string &amp;pattern, uint32_t options=0)</div><div class="ttdoc">从字符串构造正则表达式</div></div>
+<div class="ttc" id="aclassregex_html_aa2b3e88047eddfa040a7bfc01a7a4e9b"><div class="ttname"><a href="classregex.html#aa2b3e88047eddfa040a7bfc01a7a4e9b">regex::replace_first</a></div><div class="ttdeci">string replace_first(const string &amp;str, string_view fmt) const</div><div class="ttdoc">替换第一个匹配</div></div>
+<div class="ttc" id="aclassregex_html_aae93fd06fc0780fc36d969a4708cf232"><div class="ttname"><a href="classregex.html#aae93fd06fc0780fc36d969a4708cf232">regex::valid</a></div><div class="ttdeci">NEFORCE_NODISCARD bool valid() const noexcept</div><div class="ttdoc">检查正则表达式是否有效</div><div class="ttdef"><b>定义</b> <a href="#l00344">regex.hpp:344</a></div></div>
+<div class="ttc" id="aclassregex_html_ab031f04f095a00bbc98dc343c1dd799e"><div class="ttname"><a href="classregex.html#ab031f04f095a00bbc98dc343c1dd799e">regex::replace_all_callback</a></div><div class="ttdeci">string replace_all_callback(const string &amp;str, function&lt; string(const match_result &amp;)&gt; callback) const</div><div class="ttdoc">使用回调函数替换所有匹配</div></div>
+<div class="ttc" id="aclassregex_html_ab4fb572da5f242f1f79d6b9959b15366"><div class="ttname"><a href="classregex.html#ab4fb572da5f242f1f79d6b9959b15366">regex::search</a></div><div class="ttdeci">NEFORCE_NODISCARD match_result search(const string &amp;str, size_t pos=0) const</div><div class="ttdoc">在字符串中搜索第一个匹配</div></div>
+<div class="ttc" id="aclassregex_html_ab6f3682c611875bfdaea39f3a9e66848"><div class="ttname"><a href="classregex.html#ab6f3682c611875bfdaea39f3a9e66848">regex::capture_count</a></div><div class="ttdeci">NEFORCE_NODISCARD int capture_count() const noexcept</div><div class="ttdoc">获取捕获组数量</div><div class="ttdef"><b>定义</b> <a href="#l00328">regex.hpp:328</a></div></div>
+<div class="ttc" id="aclassregex_html_ac260a2e47372181b6dbd4603d91bb247"><div class="ttname"><a href="classregex.html#ac260a2e47372181b6dbd4603d91bb247">regex::split</a></div><div class="ttdeci">NEFORCE_NODISCARD vector&lt; string &gt; split(const string &amp;str, int max_splits=-1) const</div><div class="ttdoc">使用正则表达式分割字符串</div></div>
+<div class="ttc" id="aclassregex_html_ad2d588837ecfbece42bb55ea2aff70de"><div class="ttname"><a href="classregex.html#ad2d588837ecfbece42bb55ea2aff70de">regex::replace_all</a></div><div class="ttdeci">string replace_all(const string &amp;str, string_view fmt) const</div><div class="ttdoc">替换所有匹配</div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00224">unique_ptr.hpp:224</a></div></div>
 <div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
-<div class="ttc" id="aclassvector_html_a34f5c656876b3e08a5bc81b032c92dad"><div class="ttname"><a href="classvector.html#a34f5c656876b3e08a5bc81b032c92dad">vector::view</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view&lt; T &gt; view() noexcept</div><div class="ttdoc">获取底层数据的视图</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00741">vector.hpp:741</a></div></div>
-<div class="ttc" id="aclassvector_html_a41e8769a977c988206809198abaf4fad"><div class="ttname"><a href="classvector.html#a41e8769a977c988206809198abaf4fad">vector::end</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 iterator end() noexcept</div><div class="ttdoc">获取结束迭代器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00605">vector.hpp:605</a></div></div>
-<div class="ttc" id="aclassvector_html_a9aed5ec59526ae8e0220840d9b4d09c9"><div class="ttname"><a href="classvector.html#a9aed5ec59526ae8e0220840d9b4d09c9">vector::begin</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 iterator begin() noexcept</div><div class="ttdoc">获取起始迭代器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00597">vector.hpp:597</a></div></div>
 <div class="ttc" id="aclassvector_html_aa50c3e7db9567b65ae725223c3cd22c5"><div class="ttname"><a href="classvector.html#aa50c3e7db9567b65ae725223c3cd22c5">vector::const_iterator</a></div><div class="ttdeci">vector_iterator&lt; true, vector&lt; T, Alloc &gt; &gt; const_iterator</div><div class="ttdoc">常量迭代器类型</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00186">vector.hpp:186</a></div></div>
-<div class="ttc" id="aclassvector_html_ab26ef5bb14c5103a95d936d6e27f5cd2"><div class="ttname"><a href="classvector.html#ab26ef5bb14c5103a95d936d6e27f5cd2">vector::size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept</div><div class="ttdoc">获取当前元素数量</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00691">vector.hpp:691</a></div></div>
-<div class="ttc" id="aclassvector_html_ac79fa8e19e603d8de07a5ed61ae7140b"><div class="ttname"><a href="classvector.html#ac79fa8e19e603d8de07a5ed61ae7140b">vector::empty</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept</div><div class="ttdoc">检查是否为空</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00715">vector.hpp:715</a></div></div>
-<div class="ttc" id="afunction_8hpp_html"><div class="ttname"><a href="function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
 <div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
-<div class="ttc" id="agroup___duration_html_ga8907d2081e58b2c04b82e02bfc4af628"><div class="ttname"><a href="group___duration.html#ga8907d2081e58b2c04b82e02bfc4af628">operator*</a></div><div class="ttdeci">constexpr duration&lt; _INNER __common_rep_t&lt; Rep1, Rep2 &gt;, Period &gt; operator*(const duration&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</div><div class="ttdoc">乘法运算符（持续时间 * 标量）</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00508">duration.hpp:508</a></div></div>
-<div class="ttc" id="agroup___exception_handling_html_ga438313508830676344f6ccbfad172758"><div class="ttname"><a href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a></div><div class="ttdeci">#define NEFORCE_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO)</div><div class="ttdoc">构建最终异常类宏</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00064">exception.hpp:64</a></div></div>
-<div class="ttc" id="agroup___file_html_ggae7c2d8818fbe092703eb5db944ea226aab1a326c06d88bf042f73d70f50197905"><div class="ttname"><a href="group___file.html#ggae7c2d8818fbe092703eb5db944ea226aab1a326c06d88bf042f73d70f50197905">FILE_POINTER::END</a></div><div class="ttdeci">@ END</div><div class="ttdoc">从文件结尾开始</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00205">file_constants.hpp:205</a></div></div>
-<div class="ttc" id="agroup___function_wrapper_html_ga4063e745b1da8e2d0122514512f9a9a1"><div class="ttname"><a href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator!=</a></div><div class="ttdeci">bool operator!=(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">不等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00564">function.hpp:564</a></div></div>
-<div class="ttc" id="agroup___function_wrapper_html_ga445cf4ef6b33e97b2e24b538f3efcd33"><div class="ttname"><a href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator==</a></div><div class="ttdeci">bool operator==(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00538">function.hpp:538</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
-<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga20e9ef4ca8cca9a7e2c132fe434af6e0"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga20e9ef4ca8cca9a7e2c132fe434af6e0">search</a></div><div class="ttdeci">constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate binary_pred)</div><div class="ttdoc">在范围内查找子序列的第一次出现</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00431">search.hpp:431</a></div></div>
+<div class="ttc" id="agroup___duration_html_ga2dd06db59c1399f29426a136c2d139e0"><div class="ttname"><a href="group___duration.html#ga2dd06db59c1399f29426a136c2d139e0">operator*</a></div><div class="ttdeci">constexpr duration&lt; inner::__common_rep_t&lt; Rep1, Rep2 &gt;, Period &gt; operator*(const duration&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</div><div class="ttdoc">乘法运算符（持续时间 * 标量）</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00508">duration.hpp:508</a></div></div>
+<div class="ttc" id="agroup___file_html_gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905"><div class="ttname"><a href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905">file_pointer::END</a></div><div class="ttdeci">@ END</div><div class="ttdoc">从文件结尾开始</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00207">file_constants.hpp:207</a></div></div>
+<div class="ttc" id="agroup___format_html_ga2f48d1b0493594ccd0e5571cfc7f3ecf"><div class="ttname"><a href="group___format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf">format</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const string_view fmt, Args &amp;&amp;... args)</div><div class="ttdoc">格式化字符串</div><div class="ttdef"><b>定义</b> <a href="format_8hpp_source.html#l00663">format.hpp:663</a></div></div>
+<div class="ttc" id="agroup___function_wrapper_html_ga4063e745b1da8e2d0122514512f9a9a1"><div class="ttname"><a href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator!=</a></div><div class="ttdeci">bool operator!=(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">不等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00562">functional/function.hpp:562</a></div></div>
+<div class="ttc" id="agroup___function_wrapper_html_ga445cf4ef6b33e97b2e24b538f3efcd33"><div class="ttname"><a href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator==</a></div><div class="ttdeci">bool operator==(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00536">functional/function.hpp:536</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_gad967839dbf3a606e0d4c9d556c0e5e7c"><div class="ttname"><a href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></div><div class="ttdeci">int64_t ptrdiff_t</div><div class="ttdoc">指针差类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00178">types.hpp:178</a></div></div>
-<div class="ttc" id="agroup___string_format_html_ga2f48d1b0493594ccd0e5571cfc7f3ecf"><div class="ttname"><a href="group___string_format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf">format</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const string_view fmt, Args &amp;&amp;... args)</div><div class="ttdoc">格式化字符串</div><div class="ttdef"><b>定义</b> <a href="format_8hpp_source.html#l00682">format.hpp:682</a></div></div>
-<div class="ttc" id="agroup___string_html_ga3961240d8c1324f4022b14f6841c4269"><div class="ttname"><a href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split</a></div><div class="ttdeci">vector&lt; string_view &gt; NEFORCE_API split(string_view str, string_view delimiters, bool skip_empty=true)</div><div class="ttdoc">分割字符串视图</div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga278da9db83e0ea0b3ba56d8dedf43d86"><div class="ttname"><a href="group___type_erasure_functions.html#ga278da9db83e0ea0b3ba56d8dedf43d86">begin</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) begin(Container &amp;cont) noexcept(noexcept(cont.begin()))</div><div class="ttdoc">获取容器的起始迭代器</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00030">type_erase.hpp:30</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga4957a4e04980dc4efffacefa1de50c3c"><div class="ttname"><a href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) end(Container &amp;cont) noexcept(noexcept(cont.end()))</div><div class="ttdoc">获取容器的结束迭代器</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00043">type_erase.hpp:43</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
 <div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
 <div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="astructbidirectional__iterator__tag_html"><div class="ttname"><a href="structbidirectional__iterator__tag.html">bidirectional_iterator_tag</a></div><div class="ttdoc">双向迭代器标签</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00410">types.hpp:410</a></div></div>
+<div class="ttc" id="astructexception_html_a33710bd2e564614575128e2c3de94883"><div class="ttname"><a href="structexception.html#a33710bd2e564614575128e2c3de94883">exception::exception</a></div><div class="ttdeci">exception(const char *info=static_type, const char *type=static_type, const int code=0)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00097">exception.hpp:97</a></div></div>
+<div class="ttc" id="astructexception_html_a4b5c972aaec8251632ca72bdfc9820fb"><div class="ttname"><a href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">exception::code</a></div><div class="ttdeci">NEFORCE_NODISCARD int code() const noexcept</div><div class="ttdoc">获取异常码</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00186">exception.hpp:186</a></div></div>
+<div class="ttc" id="astructexception_html_a50dcb7544585c5cda232c3133d027eff"><div class="ttname"><a href="structexception.html#a50dcb7544585c5cda232c3133d027eff">exception::type</a></div><div class="ttdeci">NEFORCE_NODISCARD const char * type() const noexcept</div><div class="ttdoc">获取异常类型</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00180">exception.hpp:180</a></div></div>
 <div class="ttc" id="astructpair_html"><div class="ttname"><a href="structpair.html">pair</a></div><div class="ttdoc">存储两个值的元组对</div><div class="ttdef"><b>定义</b> <a href="pair_8hpp_source.html#l00097">pair.hpp:97</a></div></div>
-<div class="ttc" id="astructvalue__exception_html"><div class="ttname"><a href="structvalue__exception.html">value_exception</a></div><div class="ttdoc">变量处理异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00219">exception.hpp:219</a></div></div>
 <div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
 <div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -429,7 +546,7 @@ $(function(){initNavTree('regex_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>string</b></li><li class="navelem"><b>regex.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>string</b></li><li class="navelem"><a href="regex_8hpp.html">regex.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

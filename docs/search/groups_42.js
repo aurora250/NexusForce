@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['映射_0',['映射',['../group___map.html',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

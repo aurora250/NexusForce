@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: codepoint.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('codepoint_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">codepoint.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="codepoint_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_STRING_CODEPOINT_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_STRING_CODEPOINT_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="endian_8hpp.html">NeForce/core/memory/endian.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classcodepoint.html">   32</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classcodepoint.html#a447b7c2eda15d0463a766966c7eb3f26">   35</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="classcodepoint.html#a447b7c2eda15d0463a766966c7eb3f26">REPLACEMENT_VALUE</a> = 0xFFFD;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classcodepoint.html#a3d4d199a816a762d5b57314547b77e3c">   37</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="classcodepoint.html#a3d4d199a816a762d5b57314547b77e3c">MAX_VALUE</a> = 0x10FFFF;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classcodepoint.html#a61b32f83b0edff62c6eac05fd2416af5">   46</a></span>    NEFORCE_CONST_FUNCTION <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#a61b32f83b0edff62c6eac05fd2416af5">is_high_surrogate</a>(<span class="keyword">const</span> <span class="keywordtype">char16_t</span> c) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span> c &gt;= 0xD800 &amp;&amp; c &lt;= 0xDBFF;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcodepoint.html#a123d98ac2eb1a5338cad0f1955717b1f">   57</a></span>    NEFORCE_CONST_FUNCTION <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#a123d98ac2eb1a5338cad0f1955717b1f">is_low_surrogate</a>(<span class="keyword">const</span> <span class="keywordtype">char16_t</span> c) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> c &gt;= 0xDC00 &amp;&amp; c &lt;= 0xDFFF;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classcodepoint.html#a7179c61506b754a925271732b83cee04">   69</a></span>    NEFORCE_CONST_FUNCTION <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> <a class="code hl_function" href="classcodepoint.html#a7179c61506b754a925271732b83cee04">combine_surrogates</a>(<span class="keyword">const</span> <span class="keywordtype">char16_t</span> high, <span class="keyword">const</span> <span class="keywordtype">char16_t</span> low) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>{0x10000 + ((<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(high) - 0xD800) &lt;&lt; 10) + (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(low) - 0xDC00)};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classcodepoint.html#ad21d41765d278c5fb73703a2ca14752e">   83</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#ad21d41765d278c5fb73703a2ca14752e">is_valid_codepoint</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> v) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span> v &lt;= <a class="code hl_variable" href="classcodepoint.html#a3d4d199a816a762d5b57314547b77e3c">MAX_VALUE</a> &amp;&amp; !<a class="code hl_function" href="classcodepoint.html#a61b32f83b0edff62c6eac05fd2416af5">is_high_surrogate</a>(v) &amp;&amp; !<a class="code hl_function" href="classcodepoint.html#a123d98ac2eb1a5338cad0f1955717b1f">is_low_surrogate</a>(v);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classcodepoint.html#a702fd83e48fc1e49c8839dc09c63e6f1">   93</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> <a class="code hl_function" href="classcodepoint.html#a702fd83e48fc1e49c8839dc09c63e6f1">replacement</a>() noexcept {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> cp;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        cp.value_ = <a class="code hl_variable" href="classcodepoint.html#a447b7c2eda15d0463a766966c7eb3f26">REPLACEMENT_VALUE</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">return</span> cp;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
+</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classcodepoint.html#a279a0abba71583cab5b26e5e6760c491">  103</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> <a class="code hl_function" href="classcodepoint.html#a279a0abba71583cab5b26e5e6760c491">null</a>() noexcept {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>(0u);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classcodepoint.html#adf083ce51482394f0364326c9a85b4d7">  117</a></span>    <span class="keyword">static</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> <a class="code hl_function" href="classcodepoint.html#adf083ce51482394f0364326c9a85b4d7">decode_utf8</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keywordtype">size_t</span>&amp; i, <span class="keywordtype">size_t</span> len) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcodepoint.html#a227536677f4baeb23aba244ac04cb8e4">  132</a></span>    <span class="keyword">static</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> <a class="code hl_function" href="classcodepoint.html#a227536677f4baeb23aba244ac04cb8e4">decode_utf16</a>(<span class="keyword">const</span> T* <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keywordtype">size_t</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">size_t</span> len, <span class="keyword">const</span> <span class="keywordtype">bool</span> need_swap) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> cp;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordtype">size_t</span> consumed;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> ok = codepoint::utf16_codepoint(<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, index, len, cp, consumed, need_swap);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">if</span> (consumed == 0) <span class="keywordflow">return</span> <a class="code hl_function" href="classcodepoint.html#a702fd83e48fc1e49c8839dc09c63e6f1">replacement</a>();</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        index += consumed;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">return</span> ok ? <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>(cp) : <a class="code hl_function" href="classcodepoint.html#a702fd83e48fc1e49c8839dc09c63e6f1">replacement</a>();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
+</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span></div>
+<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classcodepoint.html#a62e8189fc2b54ddbf09e41d9eea1a145">  148</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a> <a class="code hl_function" href="classcodepoint.html#a62e8189fc2b54ddbf09e41d9eea1a145">from_utf32</a>(<span class="keywordtype">char32_t</span> <a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>));</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
+</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> value_;  </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> utf16_codepoint(<span class="keyword">const</span> T* <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keywordtype">size_t</span> index, <span class="keyword">const</span> <span class="keywordtype">size_t</span> len,</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                                    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&amp; cp, <span class="keywordtype">size_t</span>&amp; consumed, <span class="keyword">const</span> <span class="keywordtype">bool</span> need_swap) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">if</span> (index &gt;= len) {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            cp = 0xFFFD;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            consumed = 0;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keyword">const</span> <span class="keyword">auto</span> raw1 = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>[index]);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keyword">const</span> <span class="keyword">auto</span> c1 = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(need_swap ? <a class="code hl_function" href="structendian.html#a1506846e44e452398168cd3393b5b02a">endian::byteswap16</a>(raw1) : raw1);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        consumed = 1;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">if</span> (is_high_surrogate(c1)) {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            <span class="keywordflow">if</span> (index + 1 &lt; len) {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                <span class="keyword">const</span> <span class="keyword">auto</span> raw2 = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>[index + 1]);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                <span class="keyword">const</span> <span class="keyword">auto</span> c2 = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(need_swap ? <a class="code hl_function" href="structendian.html#a1506846e44e452398168cd3393b5b02a">endian::byteswap16</a>(raw2) : raw2);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                <span class="keywordflow">if</span> (is_low_surrogate(c2)) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                    cp = combine_surrogates(c1, c2).value();</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    consumed = 2;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            cp = 0xFFFD;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">if</span> (is_low_surrogate(c1)) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            cp = 0xFFFD;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        cp = c1;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">  199</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>() noexcept : value_(0) {}</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span></div>
+<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="classcodepoint.html#a8e4935210659a78ac5df4e07e6274c2e">  207</a></span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classcodepoint.html#a8e4935210659a78ac5df4e07e6274c2e">codepoint</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>) noexcept</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    : value_(<a class="code hl_function" href="classcodepoint.html#ad21d41765d278c5fb73703a2ca14752e">is_valid_codepoint</a>(<a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>) ? <a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a> : <a class="code hl_variable" href="classcodepoint.html#a447b7c2eda15d0463a766966c7eb3f26">REPLACEMENT_VALUE</a>) {}</div>
+</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span></div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classcodepoint.html#abf29fb9b124b0a0f54afbb3b7b74844d">  214</a></span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classcodepoint.html#abf29fb9b124b0a0f54afbb3b7b74844d">codepoint</a>(<span class="keyword">const</span> <span class="keywordtype">char32_t</span> <a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>) noexcept</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    : <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>)) {}</div>
+</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classcodepoint.html">codepoint</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classcodepoint.html">codepoint</a>(<a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    constexpr <a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp; operator =(<a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">  226</a></span>    constexpr <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_function" href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">value</a>() const noexcept { <span class="keywordflow">return</span> value_; }</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span></div>
+<div class="foldopen" id="foldopen00232" data-start="{" data-end="}">
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="classcodepoint.html#a3481e8f571d9fae334dbe74c59ad237f">  232</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">char32_t</span> <a class="code hl_function" href="classcodepoint.html#a3481e8f571d9fae334dbe74c59ad237f">to_char32</a>() const noexcept {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">char32_t</span><span class="keyword">&gt;</span>(value_);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
+</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span></div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classcodepoint.html#a1cdc351eeb5a0c03f7cc2a7f4a34dfec">  240</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#a1cdc351eeb5a0c03f7cc2a7f4a34dfec">is_replacement</a>() const noexcept {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keywordflow">return</span> value_ == <a class="code hl_variable" href="classcodepoint.html#a447b7c2eda15d0463a766966c7eb3f26">REPLACEMENT_VALUE</a>;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    }</div>
+</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span></div>
+<div class="foldopen" id="foldopen00248" data-start="{" data-end="}">
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7">  248</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7">is_ascii</a>() const noexcept {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">return</span> value_ &lt;= 0x7F;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    }</div>
+</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span></div>
+<div class="foldopen" id="foldopen00256" data-start="{" data-end="}">
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd">  256</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd">is_bmp</a>() const noexcept {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordflow">return</span> value_ &lt;= 0xFFFF;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span></div>
+<div class="foldopen" id="foldopen00264" data-start="{" data-end="}">
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="classcodepoint.html#a911866174ad7892efd4336cab8e44676">  264</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#a911866174ad7892efd4336cab8e44676">is_supplementary</a>() const noexcept {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keywordflow">return</span> value_ &gt; 0xFFFF &amp;&amp; value_ &lt;= <a class="code hl_variable" href="classcodepoint.html#a3d4d199a816a762d5b57314547b77e3c">MAX_VALUE</a>;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    }</div>
+</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span></div>
+<div class="foldopen" id="foldopen00272" data-start="{" data-end="}">
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="classcodepoint.html#a55154ba8f8d16407f7a0390fcfc0c77d">  272</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classcodepoint.html#a55154ba8f8d16407f7a0390fcfc0c77d">needs_surrogate_pair</a>() const noexcept {</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcodepoint.html#a911866174ad7892efd4336cab8e44676">is_supplementary</a>();</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
+</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span></div>
+<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="classcodepoint.html#abbf4985b5785488a2199f3a373cb3532">  286</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classcodepoint.html#abbf4985b5785488a2199f3a373cb3532">utf8_length</a>() const noexcept {</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        <span class="keywordflow">if</span> (value_ &lt;= 0x7F)    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">if</span> (value_ &lt;= 0x7FF)   <span class="keywordflow">return</span> 2;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">if</span> (value_ &lt;= 0xFFFF)  <span class="keywordflow">return</span> 3;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">return</span> 4;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span></div>
+<div class="foldopen" id="foldopen00299" data-start="{" data-end="}">
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="classcodepoint.html#a81017f2d4c6b74945efef889037ccc21">  299</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classcodepoint.html#a81017f2d4c6b74945efef889037ccc21">utf16_length</a>() const noexcept {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classcodepoint.html#a911866174ad7892efd4336cab8e44676">is_supplementary</a>() ? 2u : 1u;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    }</div>
+</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno"><a class="line" href="classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b">  309</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b">append_to</a>(<span class="keywordtype">string</span>&amp; result) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b">append_to</a>(<a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a>&amp; result) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="classcodepoint.html#aec04440229dbf33585649a017be1dae9">  328</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcodepoint.html#aec04440229dbf33585649a017be1dae9">append_to</a>(<a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a>&amp; result) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span></div>
+<div class="foldopen" id="foldopen00336" data-start="{" data-end="}">
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="classcodepoint.html#ae92078f825d07e7989a9350cf3251321">  336</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcodepoint.html#ae92078f825d07e7989a9350cf3251321">append_to</a>(<a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a>&amp; result)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        result.<a class="code hl_function" href="classbasic__string.html#a72b1e63dfd1b7d0197f9e902d163b7f9">push_back</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">char32_t</span><span class="keyword">&gt;</span>(value_));</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    }</div>
+</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno"><a class="line" href="classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66">  344</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66">append_to</a>(<a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a>&amp; result) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keywordflow">return</span> value_ == other.value_;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classcodepoint.html">codepoint</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="keywordflow">return</span> value_ != other.value_;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    }</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___normal_iterators.html#ga3f7004027fd480f36198f41fd1e747ec">operator &lt;</a>(<span class="keyword">const</span> codepoint&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keywordflow">return</span> value_ &lt; other.value_;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    }</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___normal_iterators.html#ga19f4e3857efc093bf9295cae564907c9">operator &lt;=</a>(<span class="keyword">const</span> codepoint&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        <span class="keywordflow">return</span> value_ &lt;= other.value_;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    }</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___normal_iterators.html#ga4846261d3788103ee506f57edd73303b">operator &gt;</a>(<span class="keyword">const</span> codepoint&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="keywordflow">return</span> value_ &gt; other.value_;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    }</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___normal_iterators.html#gaced111428258b42c842fbf3086076b11">operator &gt;=</a>(<span class="keyword">const</span> codepoint&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keywordflow">return</span> value_ &gt;= other.value_;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    }</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> v) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> value_ == v; }</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> v) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> value_ != v; }</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>};</div>
+</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> <span class="comment">// CodePoint</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_STRING_CODEPOINT_HPP__</span></div>
+<div class="ttc" id="aclassbasic__string_html_a72b1e63dfd1b7d0197f9e902d163b7f9"><div class="ttname"><a href="classbasic__string.html#a72b1e63dfd1b7d0197f9e902d163b7f9">basic_string::push_back</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void push_back(value_type value)</div><div class="ttdoc">在末尾插入字符</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01547">basic_string.hpp:1547</a></div></div>
+<div class="ttc" id="aclasscodepoint_html"><div class="ttname"><a href="classcodepoint.html">codepoint</a></div><div class="ttdoc">Unicode码点包装类</div><div class="ttdef"><b>定义</b> <a href="#l00032">codepoint.hpp:32</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a123d98ac2eb1a5338cad0f1955717b1f"><div class="ttname"><a href="classcodepoint.html#a123d98ac2eb1a5338cad0f1955717b1f">codepoint::is_low_surrogate</a></div><div class="ttdeci">static NEFORCE_CONST_FUNCTION constexpr bool is_low_surrogate(const char16_t c) noexcept</div><div class="ttdoc">检查字符是否为低代理项</div><div class="ttdef"><b>定义</b> <a href="#l00057">codepoint.hpp:57</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a1cdc351eeb5a0c03f7cc2a7f4a34dfec"><div class="ttname"><a href="classcodepoint.html#a1cdc351eeb5a0c03f7cc2a7f4a34dfec">codepoint::is_replacement</a></div><div class="ttdeci">constexpr bool is_replacement() const noexcept</div><div class="ttdoc">是否为替换符U+FFFD</div><div class="ttdef"><b>定义</b> <a href="#l00240">codepoint.hpp:240</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a227536677f4baeb23aba244ac04cb8e4"><div class="ttname"><a href="classcodepoint.html#a227536677f4baeb23aba244ac04cb8e4">codepoint::decode_utf16</a></div><div class="ttdeci">static codepoint decode_utf16(const T *data, size_t &amp;index, const size_t len, const bool need_swap) noexcept</div><div class="ttdoc">从UTF-16序列解码一个码点，并推进索引</div><div class="ttdef"><b>定义</b> <a href="#l00132">codepoint.hpp:132</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a279a0abba71583cab5b26e5e6760c491"><div class="ttname"><a href="classcodepoint.html#a279a0abba71583cab5b26e5e6760c491">codepoint::null</a></div><div class="ttdeci">static constexpr codepoint null() noexcept</div><div class="ttdoc">构造空字符U+0000</div><div class="ttdef"><b>定义</b> <a href="#l00103">codepoint.hpp:103</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a3481e8f571d9fae334dbe74c59ad237f"><div class="ttname"><a href="classcodepoint.html#a3481e8f571d9fae334dbe74c59ad237f">codepoint::to_char32</a></div><div class="ttdeci">constexpr char32_t to_char32() const noexcept</div><div class="ttdoc">获取码点的char32_t值</div><div class="ttdef"><b>定义</b> <a href="#l00232">codepoint.hpp:232</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a3d4d199a816a762d5b57314547b77e3c"><div class="ttname"><a href="classcodepoint.html#a3d4d199a816a762d5b57314547b77e3c">codepoint::MAX_VALUE</a></div><div class="ttdeci">static constexpr uint32_t MAX_VALUE</div><div class="ttdoc">Unicode 最大合法码点</div><div class="ttdef"><b>定义</b> <a href="#l00037">codepoint.hpp:37</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a447b7c2eda15d0463a766966c7eb3f26"><div class="ttname"><a href="classcodepoint.html#a447b7c2eda15d0463a766966c7eb3f26">codepoint::REPLACEMENT_VALUE</a></div><div class="ttdeci">static constexpr uint32_t REPLACEMENT_VALUE</div><div class="ttdoc">Unicode 替换符 U+FFFD</div><div class="ttdef"><b>定义</b> <a href="#l00035">codepoint.hpp:35</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a55154ba8f8d16407f7a0390fcfc0c77d"><div class="ttname"><a href="classcodepoint.html#a55154ba8f8d16407f7a0390fcfc0c77d">codepoint::needs_surrogate_pair</a></div><div class="ttdeci">constexpr bool needs_surrogate_pair() const noexcept</div><div class="ttdoc">是否需要UTF-16代理对表示</div><div class="ttdef"><b>定义</b> <a href="#l00272">codepoint.hpp:272</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a61b32f83b0edff62c6eac05fd2416af5"><div class="ttname"><a href="classcodepoint.html#a61b32f83b0edff62c6eac05fd2416af5">codepoint::is_high_surrogate</a></div><div class="ttdeci">static NEFORCE_CONST_FUNCTION constexpr bool is_high_surrogate(const char16_t c) noexcept</div><div class="ttdoc">检查字符是否为高代理项</div><div class="ttdef"><b>定义</b> <a href="#l00046">codepoint.hpp:46</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a62e8189fc2b54ddbf09e41d9eea1a145"><div class="ttname"><a href="classcodepoint.html#a62e8189fc2b54ddbf09e41d9eea1a145">codepoint::from_utf32</a></div><div class="ttdeci">static constexpr codepoint from_utf32(char32_t value) noexcept</div><div class="ttdoc">从UTF-32值直接构造码点</div><div class="ttdef"><b>定义</b> <a href="#l00148">codepoint.hpp:148</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a702fd83e48fc1e49c8839dc09c63e6f1"><div class="ttname"><a href="classcodepoint.html#a702fd83e48fc1e49c8839dc09c63e6f1">codepoint::replacement</a></div><div class="ttdeci">static constexpr codepoint replacement() noexcept</div><div class="ttdoc">构造替换符U+FFFD</div><div class="ttdef"><b>定义</b> <a href="#l00093">codepoint.hpp:93</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a7179c61506b754a925271732b83cee04"><div class="ttname"><a href="classcodepoint.html#a7179c61506b754a925271732b83cee04">codepoint::combine_surrogates</a></div><div class="ttdeci">static NEFORCE_CONST_FUNCTION constexpr codepoint combine_surrogates(const char16_t high, const char16_t low) noexcept</div><div class="ttdoc">组合高代理项和低代理项为完整的Unicode码点</div><div class="ttdef"><b>定义</b> <a href="#l00069">codepoint.hpp:69</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a7876f9adc0c922f3991e081ac01716c7"><div class="ttname"><a href="classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7">codepoint::is_ascii</a></div><div class="ttdeci">constexpr bool is_ascii() const noexcept</div><div class="ttdoc">是否为ASCII字符（U+0000 ~ U+007F）</div><div class="ttdef"><b>定义</b> <a href="#l00248">codepoint.hpp:248</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a7d9fdbda25dae744df0fac4b49444e66"><div class="ttname"><a href="classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66">codepoint::append_to</a></div><div class="ttdeci">void append_to(wstring &amp;result) const</div><div class="ttdoc">追加编码到wstring</div></div>
+<div class="ttc" id="aclasscodepoint_html_a81017f2d4c6b74945efef889037ccc21"><div class="ttname"><a href="classcodepoint.html#a81017f2d4c6b74945efef889037ccc21">codepoint::utf16_length</a></div><div class="ttdeci">constexpr size_t utf16_length() const noexcept</div><div class="ttdoc">UTF-16编码后的码元数</div><div class="ttdef"><b>定义</b> <a href="#l00299">codepoint.hpp:299</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a8e4935210659a78ac5df4e07e6274c2e"><div class="ttname"><a href="classcodepoint.html#a8e4935210659a78ac5df4e07e6274c2e">codepoint::codepoint</a></div><div class="ttdeci">constexpr codepoint(uint32_t value) noexcept</div><div class="ttdoc">从uint32_t构造码点</div><div class="ttdef"><b>定义</b> <a href="#l00207">codepoint.hpp:207</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a911866174ad7892efd4336cab8e44676"><div class="ttname"><a href="classcodepoint.html#a911866174ad7892efd4336cab8e44676">codepoint::is_supplementary</a></div><div class="ttdeci">constexpr bool is_supplementary() const noexcept</div><div class="ttdoc">是否为辅助平面字符（需要UTF-16代理对）</div><div class="ttdef"><b>定义</b> <a href="#l00264">codepoint.hpp:264</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_a930add221646e2ffc4cfc77b55512587"><div class="ttname"><a href="classcodepoint.html#a930add221646e2ffc4cfc77b55512587">codepoint::codepoint</a></div><div class="ttdeci">constexpr codepoint() noexcept</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00199">codepoint.hpp:199</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_abbf4985b5785488a2199f3a373cb3532"><div class="ttname"><a href="classcodepoint.html#abbf4985b5785488a2199f3a373cb3532">codepoint::utf8_length</a></div><div class="ttdeci">constexpr size_t utf8_length() const noexcept</div><div class="ttdoc">UTF-8编码后的字节数</div><div class="ttdef"><b>定义</b> <a href="#l00286">codepoint.hpp:286</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_abf29fb9b124b0a0f54afbb3b7b74844d"><div class="ttname"><a href="classcodepoint.html#abf29fb9b124b0a0f54afbb3b7b74844d">codepoint::codepoint</a></div><div class="ttdeci">constexpr codepoint(const char32_t value) noexcept</div><div class="ttdoc">从char32_t构造码点</div><div class="ttdef"><b>定义</b> <a href="#l00214">codepoint.hpp:214</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_ac2541988a6b948b7496d1b39628c81fd"><div class="ttname"><a href="classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd">codepoint::is_bmp</a></div><div class="ttdeci">constexpr bool is_bmp() const noexcept</div><div class="ttdoc">是否位于基本多文种平面（BMP, U+0000 ~ U+FFFF）</div><div class="ttdef"><b>定义</b> <a href="#l00256">codepoint.hpp:256</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_ad21d41765d278c5fb73703a2ca14752e"><div class="ttname"><a href="classcodepoint.html#ad21d41765d278c5fb73703a2ca14752e">codepoint::is_valid_codepoint</a></div><div class="ttdeci">static constexpr bool is_valid_codepoint(const uint32_t v) noexcept</div><div class="ttdoc">检查码点值是否合法</div><div class="ttdef"><b>定义</b> <a href="#l00083">codepoint.hpp:83</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_ad5ec860f3407adf538aac80106f4a13b"><div class="ttname"><a href="classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b">codepoint::append_to</a></div><div class="ttdeci">void append_to(string &amp;result) const</div><div class="ttdoc">追加UTF-8编码到string</div></div>
+<div class="ttc" id="aclasscodepoint_html_adf083ce51482394f0364326c9a85b4d7"><div class="ttname"><a href="classcodepoint.html#adf083ce51482394f0364326c9a85b4d7">codepoint::decode_utf8</a></div><div class="ttdeci">static codepoint decode_utf8(const byte_t *data, size_t &amp;i, size_t len) noexcept</div><div class="ttdoc">从UTF-8字节流解码一个码点，并推进索引</div></div>
+<div class="ttc" id="aclasscodepoint_html_ae92078f825d07e7989a9350cf3251321"><div class="ttname"><a href="classcodepoint.html#ae92078f825d07e7989a9350cf3251321">codepoint::append_to</a></div><div class="ttdeci">void append_to(u32string &amp;result) const</div><div class="ttdoc">追加UTF-32编码到u32string</div><div class="ttdef"><b>定义</b> <a href="#l00336">codepoint.hpp:336</a></div></div>
+<div class="ttc" id="aclasscodepoint_html_aec04440229dbf33585649a017be1dae9"><div class="ttname"><a href="classcodepoint.html#aec04440229dbf33585649a017be1dae9">codepoint::append_to</a></div><div class="ttdeci">void append_to(u16string &amp;result) const</div><div class="ttdoc">追加UTF-16编码到u16string</div></div>
+<div class="ttc" id="aclasscodepoint_html_af44dad42fbb2b64fb3e842d0db9acd6d"><div class="ttname"><a href="classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d">codepoint::value</a></div><div class="ttdeci">constexpr uint32_t value() const noexcept</div><div class="ttdoc">获取码点的uint32_t值</div><div class="ttdef"><b>定义</b> <a href="#l00226">codepoint.hpp:226</a></div></div>
+<div class="ttc" id="aendian_8hpp_html"><div class="ttname"><a href="endian_8hpp.html">endian.hpp</a></div><div class="ttdoc">端序转换工具</div></div>
+<div class="ttc" id="agroup___core_types_html_ga18a5de45c0adec9c9e545674cc14755f"><div class="ttname"><a href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00037">types.hpp:37</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
+<div class="ttc" id="agroup___function_wrapper_html_ga4063e745b1da8e2d0122514512f9a9a1"><div class="ttname"><a href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator!=</a></div><div class="ttdeci">bool operator!=(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">不等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00562">functional/function.hpp:562</a></div></div>
+<div class="ttc" id="agroup___function_wrapper_html_ga445cf4ef6b33e97b2e24b538f3efcd33"><div class="ttname"><a href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator==</a></div><div class="ttdeci">bool operator==(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00536">functional/function.hpp:536</a></div></div>
+<div class="ttc" id="agroup___normal_iterators_html_ga19f4e3857efc093bf9295cae564907c9"><div class="ttname"><a href="group___normal_iterators.html#ga19f4e3857efc093bf9295cae564907c9">operator&lt;=</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&lt;=(const normal_iterator&lt; LeftIter &gt; &amp;lhs, const normal_iterator&lt; RightIter &gt; &amp;rhs) noexcept</div><div class="ttdoc">小于等于比较运算符</div><div class="ttdef"><b>定义</b> <a href="normal__iterator_8hpp_source.html#l00273">normal_iterator.hpp:273</a></div></div>
+<div class="ttc" id="agroup___normal_iterators_html_ga3f7004027fd480f36198f41fd1e747ec"><div class="ttname"><a href="group___normal_iterators.html#ga3f7004027fd480f36198f41fd1e747ec">operator&lt;</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&lt;(const normal_iterator&lt; LeftIter &gt; &amp;lhs, const normal_iterator&lt; RightIter &gt; &amp;rhs) noexcept</div><div class="ttdoc">小于比较运算符</div><div class="ttdef"><b>定义</b> <a href="normal__iterator_8hpp_source.html#l00227">normal_iterator.hpp:227</a></div></div>
+<div class="ttc" id="agroup___normal_iterators_html_ga4846261d3788103ee506f57edd73303b"><div class="ttname"><a href="group___normal_iterators.html#ga4846261d3788103ee506f57edd73303b">operator&gt;</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&gt;(const normal_iterator&lt; LeftIter &gt; &amp;lhs, const normal_iterator&lt; RightIter &gt; &amp;rhs) noexcept</div><div class="ttdoc">大于比较运算符</div><div class="ttdef"><b>定义</b> <a href="normal__iterator_8hpp_source.html#l00250">normal_iterator.hpp:250</a></div></div>
+<div class="ttc" id="agroup___normal_iterators_html_gaced111428258b42c842fbf3086076b11"><div class="ttname"><a href="group___normal_iterators.html#gaced111428258b42c842fbf3086076b11">operator&gt;=</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&gt;=(const normal_iterator&lt; LeftIter &gt; &amp;lhs, const normal_iterator&lt; RightIter &gt; &amp;rhs) noexcept</div><div class="ttdoc">大于等于比较运算符</div><div class="ttdef"><b>定义</b> <a href="normal__iterator_8hpp_source.html#l00296">normal_iterator.hpp:296</a></div></div>
+<div class="ttc" id="agroup___string_html_ga5a46d14521a34d38878f9d7b09aa6452"><div class="ttname"><a href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a></div><div class="ttdeci">basic_string&lt; char16_t &gt; u16string</div><div class="ttdoc">UTF-16字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00033">string.hpp:33</a></div></div>
+<div class="ttc" id="agroup___string_html_gaa25cbe3f775d6f4076da8510ffa1a0f4"><div class="ttname"><a href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a></div><div class="ttdeci">basic_string&lt; char8_t &gt; u8string</div><div class="ttdoc">UTF-8字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00029">string.hpp:29</a></div></div>
+<div class="ttc" id="agroup___string_html_gac8b291943e376bed3f3ed295a7dd68af"><div class="ttname"><a href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a></div><div class="ttdeci">basic_string&lt; wchar_t &gt; wstring</div><div class="ttdoc">宽字符字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00025">string.hpp:25</a></div></div>
+<div class="ttc" id="agroup___string_html_gae9d2688d8ad654e665cf2b8032125af9"><div class="ttname"><a href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a></div><div class="ttdeci">basic_string&lt; char32_t &gt; u32string</div><div class="ttdoc">UTF-32字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00036">string.hpp:36</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="astructendian_html_a1506846e44e452398168cd3393b5b02a"><div class="ttname"><a href="structendian.html#a1506846e44e452398168cd3393b5b02a">endian::byteswap16</a></div><div class="ttdeci">static constexpr uint16_t byteswap16(uint16_t value) noexcept</div><div class="ttdoc">16位整数字节序反转</div><div class="ttdef"><b>定义</b> <a href="endian_8hpp_source.html#l00069">endian.hpp:69</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>string</b></li><li class="navelem"><a href="codepoint_8hpp.html">codepoint.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

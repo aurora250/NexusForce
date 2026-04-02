@@ -97,7 +97,7 @@ $(function(){initNavTree('iobject_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="istringify_8hpp.html">NeForce/core/interface/istringify.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
@@ -118,7 +118,7 @@ $(function(){initNavTree('iobject_8hpp_source.html','',''); });
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        } <span class="keywordflow">catch</span> (...) {</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        *<span class="keyword">this</span> = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(tmp);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        *<span class="keyword">this</span> = _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(tmp);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
 </div>
@@ -126,12 +126,9 @@ $(function(){initNavTree('iobject_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> <span class="comment">// CRTPInterfaces</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_INTERFACE_IOBJECT_HPP__</span></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
 <div class="ttc" id="aistringify_8hpp_html"><div class="ttname"><a href="istringify_8hpp.html">istringify.hpp</a></div><div class="ttdoc">可字符串化接口</div></div>
 <div class="ttc" id="astructiobject_html"><div class="ttname"><a href="structiobject.html">iobject</a></div><div class="ttdoc">可解析对象接口</div><div class="ttdef"><b>定义</b> <a href="#l00031">iobject.hpp:31</a></div></div>

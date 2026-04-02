@@ -89,27 +89,32 @@ $(function(){initNavTree('group___remove_algorithms.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">删除算法 </div></div>
+  <div class="headertitle"><div class="title">删除算法 <div class="ingroups"><a class="el" href="group___standard_algorithms.html">标准算法</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>删除算法的实现  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+删除算法 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___remove_algorithms.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga1df961b0e78c205fa25515491f6351cd" id="r_ga1df961b0e78c205fa25515491f6351cd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga1df961b0e78c205fa25515491f6351cd template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga1df961b0e78c205fa25515491f6351cd">remove_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result, const T &amp;value)</td></tr>
-<tr class="memdesc:ga1df961b0e78c205fa25515491f6351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制范围中不等于指定值的元素  <br /></td></tr>
-<tr class="memitem:ga4d00d790872d59348250d2e6cf269234" id="r_ga4d00d790872d59348250d2e6cf269234"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga4d00d790872d59348250d2e6cf269234 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga4d00d790872d59348250d2e6cf269234">remove_copy_if</a> (Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred)</td></tr>
-<tr class="memdesc:ga4d00d790872d59348250d2e6cf269234"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制范围中不满足谓词的元素  <br /></td></tr>
-<tr class="memitem:ga6ebee7fbecf7983d218544a20420f55c" id="r_ga6ebee7fbecf7983d218544a20420f55c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga6ebee7fbecf7983d218544a20420f55c template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga6ebee7fbecf7983d218544a20420f55c">remove</a> (Iterator first, Iterator last, const T &amp;value)</td></tr>
-<tr class="memdesc:ga6ebee7fbecf7983d218544a20420f55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除范围中等于指定值的元素  <br /></td></tr>
-<tr class="memitem:ga49fb89299333bc6fad2db15128aad32d" id="r_ga49fb89299333bc6fad2db15128aad32d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga49fb89299333bc6fad2db15128aad32d template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga49fb89299333bc6fad2db15128aad32d">remove_if</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
-<tr class="memdesc:ga49fb89299333bc6fad2db15128aad32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除范围中满足谓词的元素  <br /></td></tr>
+<tr class="memitem:ga5962b7908ac4eea784e2872b03294a7e" id="r_ga5962b7908ac4eea784e2872b03294a7e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename T&gt; </td></tr>
+<tr class="memitem:ga5962b7908ac4eea784e2872b03294a7e template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga5962b7908ac4eea784e2872b03294a7e">remove_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result, const T &amp;value)</td></tr>
+<tr class="memdesc:ga5962b7908ac4eea784e2872b03294a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制范围中不等于指定值的元素  <br /></td></tr>
+<tr class="memitem:gab79933ba60a9e8d48147d15911fef58f" id="r_gab79933ba60a9e8d48147d15911fef58f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Predicate&gt; </td></tr>
+<tr class="memitem:gab79933ba60a9e8d48147d15911fef58f template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gab79933ba60a9e8d48147d15911fef58f">remove_copy_if</a> (Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred)</td></tr>
+<tr class="memdesc:gab79933ba60a9e8d48147d15911fef58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制范围中不满足谓词的元素  <br /></td></tr>
+<tr class="memitem:gab60509ebaf6c33a45885638e30e9e9b2" id="r_gab60509ebaf6c33a45885638e30e9e9b2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
+<tr class="memitem:gab60509ebaf6c33a45885638e30e9e9b2 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gab60509ebaf6c33a45885638e30e9e9b2">remove</a> (Iterator first, Iterator last, const T &amp;value)</td></tr>
+<tr class="memdesc:gab60509ebaf6c33a45885638e30e9e9b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除范围中等于指定值的元素  <br /></td></tr>
+<tr class="memitem:ga02dd5101700733210a677808983ebfcc" id="r_ga02dd5101700733210a677808983ebfcc"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate&gt; </td></tr>
+<tr class="memitem:ga02dd5101700733210a677808983ebfcc template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga02dd5101700733210a677808983ebfcc">remove_if</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
+<tr class="memdesc:ga02dd5101700733210a677808983ebfcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除范围中满足谓词的元素  <br /></td></tr>
 <tr class="memitem:ga80e72b34181ffb739e061b6dbe19a6b6" id="r_ga80e72b34181ffb739e061b6dbe19a6b6"><td class="memTemplParams" colspan="2">template&lt;typename Container, typename U&gt; </td></tr>
 <tr class="memitem:ga80e72b34181ffb739e061b6dbe19a6b6 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga80e72b34181ffb739e061b6dbe19a6b6">erase</a> (Container &amp;cont, const U &amp;value)</td></tr>
 <tr class="memdesc:ga80e72b34181ffb739e061b6dbe19a6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">从容器中删除所有等于指定值的元素  <br /></td></tr>
@@ -170,9 +175,9 @@ template&lt;typename Container, typename U&gt; </div>
 <dd>
 值类型 U 必须与容器的元素类型相同 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00135">135</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00147">147</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval()</a>, <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00114">remove_if()</a>.</p>
+<p class="reference">引用了 <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval()</a>, <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00124">remove_if()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00195">rb_tree_erase_rebalance()</a>.</p>
 
@@ -226,19 +231,19 @@ template&lt;typename Container, typename Predicate&gt; </div>
 <p>从容器中删除所有满足谓词 pred 的元素。 谓词应接受容器元素类型的值并返回可转换为 bool 的类型。 如果 pred(element) 返回 true，则该元素将被删除。</p>
 <dl class="section note"><dt>注解</dt><dd>要求容器提供 <a class="el" href="group___type_erasure_functions.html#ga278da9db83e0ea0b3ba56d8dedf43d86" title="获取容器的起始迭代器">begin()</a>, <a class="el" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c" title="获取容器的结束迭代器">end()</a>, <a class="el" href="#ga80e72b34181ffb739e061b6dbe19a6b6" title="从容器中删除所有等于指定值的元素">erase()</a> 方法 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00166">166</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00177">177</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00137">ref()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00114">remove_if()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00137">ref()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00124">remove_if()</a>.</p>
 
 </div>
 </div>
-<a id="ga6ebee7fbecf7983d218544a20420f55c" name="ga6ebee7fbecf7983d218544a20420f55c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6ebee7fbecf7983d218544a20420f55c">&#9670;&#160;</a></span>remove()</h2>
+<a id="gab60509ebaf6c33a45885638e30e9e9b2" name="gab60509ebaf6c33a45885638e30e9e9b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab60509ebaf6c33a45885638e30e9e9b2">&#9670;&#160;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -286,19 +291,19 @@ template&lt;typename Iterator, typename T, <a class="el" href="group___type_trai
 <p>从范围 [first, last) 中移除所有等于 value 的元素。 被移除的元素会移动到范围的末尾，但不会被物理删除。 返回的迭代器指向移除操作后范围的新逻辑结束位置。</p>
 <dl class="section note"><dt>注解</dt><dd>算法保持剩余元素的相对顺序 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00092">92</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00100">100</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="search_8hpp_source.html#l00372">find()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00040">remove_copy()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00392">find()</a>, <a class="el" href="concepts_8hpp_source.html#l00582">is_ranges_fwd_iter_v</a>, <a class="el" href="iterator_8hpp_source.html#l00155">next()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00045">remove_copy()</a>.</p>
 
 </div>
 </div>
-<a id="ga1df961b0e78c205fa25515491f6351cd" name="ga1df961b0e78c205fa25515491f6351cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1df961b0e78c205fa25515491f6351cd">&#9670;&#160;</a></span>remove_copy()</h2>
+<a id="ga5962b7908ac4eea784e2872b03294a7e" name="ga5962b7908ac4eea784e2872b03294a7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5962b7908ac4eea784e2872b03294a7e">&#9670;&#160;</a></span>remove_copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator1, typename Iterator2, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator1, typename Iterator2, typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -353,19 +358,21 @@ template&lt;typename Iterator1, typename Iterator2, typename T, <a class="el" hr
 <p>将范围 [first, last) 中不等于 value 的所有元素复制到以 result 开始的范围。 原范围保持不变。</p>
 <p>如果 pred(*it) 返回 true，则该元素将被排除。 </p>
 
-<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00040">40</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00045">45</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="remove_8hpp_source.html#l00092">remove()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00582">is_ranges_fwd_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="remove_8hpp_source.html#l00100">remove()</a>.</p>
 
 </div>
 </div>
-<a id="ga4d00d790872d59348250d2e6cf269234" name="ga4d00d790872d59348250d2e6cf269234"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4d00d790872d59348250d2e6cf269234">&#9670;&#160;</a></span>remove_copy_if()</h2>
+<a id="gab79933ba60a9e8d48147d15911fef58f" name="gab79933ba60a9e8d48147d15911fef58f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab79933ba60a9e8d48147d15911fef58f">&#9670;&#160;</a></span>remove_copy_if()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator1, typename Iterator2, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator1, typename Iterator2, typename Predicate&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -419,19 +426,21 @@ template&lt;typename Iterator1, typename Iterator2, typename Predicate, <a class
 <dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
 <p>将范围 [first, last) 中不满足谓词 pred 的所有元素复制到以 result 开始的范围。 原范围保持不变。 </p>
 
-<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00066">66</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00072">72</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="remove_8hpp_source.html#l00114">remove_if()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00582">is_ranges_fwd_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="remove_8hpp_source.html#l00124">remove_if()</a>.</p>
 
 </div>
 </div>
-<a id="ga49fb89299333bc6fad2db15128aad32d" name="ga49fb89299333bc6fad2db15128aad32d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga49fb89299333bc6fad2db15128aad32d">&#9670;&#160;</a></span>remove_if()</h2>
+<a id="ga02dd5101700733210a677808983ebfcc" name="ga02dd5101700733210a677808983ebfcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga02dd5101700733210a677808983ebfcc">&#9670;&#160;</a></span>remove_if()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename Predicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, typename Predicate&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -479,11 +488,11 @@ template&lt;typename Iterator, typename Predicate, <a class="el" href="group___t
 <p>从范围 [first, last) 中移除所有满足谓词 pred 的元素。 谓词应接受元素类型的值并返回可转换为 bool 的类型。 如果 pred(*it) 返回 true，则该元素将被移除。</p>
 <dl class="section note"><dt>注解</dt><dd>算法保持剩余元素的相对顺序 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00114">114</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="remove_8hpp_source.html">remove.hpp</a> 第 <a class="el" href="remove_8hpp_source.html#l00124">124</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="search_8hpp_source.html#l00388">find_if()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00066">remove_copy_if()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00409">find_if()</a>, <a class="el" href="concepts_8hpp_source.html#l00582">is_ranges_fwd_iter_v</a>, <a class="el" href="iterator_8hpp_source.html#l00155">next()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00072">remove_copy_if()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="remove_8hpp_source.html#l00135">erase()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00166">erase_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00493">signal&lt; Types &gt;::emit()</a>, <a class="el" href="remove_8hpp_source.html#l00147">erase()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00177">erase_if()</a>.</p>
 
 </div>
 </div>

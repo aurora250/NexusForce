@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hex_5flow_0',['HEX_LOW',['../group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba61288448eaf9c1ef72d424a313a40802',1,'format.hpp']]],
-  ['hex_5fup_1',['HEX_UP',['../group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecbae212e17e5974774a9ff262e59872ec78',1,'format.hpp']]]
+  ['general_0',['GENERAL',['../group___format.html#ggacf69152a3f3bf73a87406d0730a11a3cab61773b9b3968a9988d765d728985862',1,'format.hpp']]],
+  ['gzip_1',['gzip',['../group___compression.html#gga3aad07e45fe05732549e0fb76f8578dea749cadba7b2ed8d4a2aaa91a9cb1896c',1,'zlib_compress.hpp']]]
 ];

@@ -102,6 +102,8 @@ $(function(){initNavTree('group___thread.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">作用域线程类  <a href="classscoped__thread.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:thread" id="r_thread"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classthread.html">thread</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程类  <a href="classthread.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:thread_5Ftracker" id="r_thread_5Ftracker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classthread__tracker.html">thread_tracker</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程跟踪器类  <a href="classthread__tracker.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
@@ -125,8 +127,18 @@ $(function(){initNavTree('group___thread.html','',''); });
 <tr class="memdesc:gae1aea059988cd9dd0edf5f7823610ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程的CPU亲和性  <br /></td></tr>
 <tr class="memitem:ga0d65da9844fd9c1b7b0123ba22e9a3f0" id="r_ga0d65da9844fd9c1b7b0123ba22e9a3f0"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority</a> (int priority) noexcept</td></tr>
 <tr class="memdesc:ga0d65da9844fd9c1b7b0123ba22e9a3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程优先级  <br /></td></tr>
-<tr class="memitem:ga505a22091b6fb9a4a8e147bf2258e47a" id="r_ga505a22091b6fb9a4a8e147bf2258e47a"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE thread::id&#160;</td><td class="memItemRight"><a class="el" href="#ga505a22091b6fb9a4a8e147bf2258e47a">id</a> () noexcept</td></tr>
+<tr class="memitem:ga505a22091b6fb9a4a8e147bf2258e47a" id="r_ga505a22091b6fb9a4a8e147bf2258e47a"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="structthread_1_1id.html">thread::id</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga505a22091b6fb9a4a8e147bf2258e47a">id</a> () noexcept</td></tr>
 <tr class="memdesc:ga505a22091b6fb9a4a8e147bf2258e47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程标识符  <br /></td></tr>
+<tr class="memitem:ga9c11108611d4c65deb691d1b88f0dc07" id="r_ga9c11108611d4c65deb691d1b88f0dc07"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga9c11108611d4c65deb691d1b88f0dc07">handle</a> () noexcept</td></tr>
+<tr class="memdesc:ga9c11108611d4c65deb691d1b88f0dc07"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程句柄  <br /></td></tr>
+<tr class="memitem:ga6f83c2a4509ed1d467ba909884e9850b" id="r_ga6f83c2a4509ed1d467ba909884e9850b"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#ga6f83c2a4509ed1d467ba909884e9850b">name</a> (char *buffer, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>)</td></tr>
+<tr class="memdesc:ga6f83c2a4509ed1d467ba909884e9850b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程名称  <br /></td></tr>
+<tr class="memitem:ga303744653fe3bf181857637488927d28" id="r_ga303744653fe3bf181857637488927d28"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#ga303744653fe3bf181857637488927d28">set_name</a> (const char *<a class="el" href="#ga6f83c2a4509ed1d467ba909884e9850b">name</a>)</td></tr>
+<tr class="memdesc:ga303744653fe3bf181857637488927d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置当前线程名称  <br /></td></tr>
+<tr class="memitem:gaaaab5bab899d6f3e7f2bb2c2867254fb" id="r_gaaaab5bab899d6f3e7f2bb2c2867254fb"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#gaaaab5bab899d6f3e7f2bb2c2867254fb">is_single_threaded</a> () noexcept</td></tr>
+<tr class="memdesc:gaaaab5bab899d6f3e7f2bb2c2867254fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查当前是否处于单线程模式  <br /></td></tr>
+<tr class="memitem:ga48979ba9a5dbca2adc1b3b94bf0edbee" id="r_ga48979ba9a5dbca2adc1b3b94bf0edbee"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE int&#160;</td><td class="memItemRight"><a class="el" href="#ga48979ba9a5dbca2adc1b3b94bf0edbee">thread_count</a> () noexcept</td></tr>
+<tr class="memdesc:ga48979ba9a5dbca2adc1b3b94bf0edbee"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前活动线程数量  <br /></td></tr>
 <tr class="memitem:gaafee6defcb6e71227538a97a5b41e235" id="r_gaafee6defcb6e71227538a97a5b41e235"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur&gt; </td></tr>
 <tr class="memitem:gaafee6defcb6e71227538a97a5b41e235 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaafee6defcb6e71227538a97a5b41e235">sleep_until</a> (const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;<a class="el" href="classtime.html">time</a>)</td></tr>
 <tr class="memdesc:gaafee6defcb6e71227538a97a5b41e235"><td class="mdescLeft">&#160;</td><td class="mdescRight">使当前线程睡眠直到指定时间点  <br /></td></tr>
@@ -199,7 +211,39 @@ $(function(){initNavTree('group___thread.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>当前线程运行的CPU核心编号</dd></dl>
 <p>返回当前线程正在运行的CPU核心的逻辑编号。 </p>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00050">50</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00045">45</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga9c11108611d4c65deb691d1b88f0dc07" name="ga9c11108611d4c65deb691d1b88f0dc07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9c11108611d4c65deb691d1b88f0dc07">&#9670;&#160;</a></span>handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a> handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前线程句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>当前线程的句柄 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00435">435</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="classfile__async.html#aa27dd3253c71dea9e0329739724561fb">file_async::file_async()</a>, <a class="el" href="classfile__info.html#a90d01d2d0b844bb827fbe41b53d6482c">file_info::file_info()</a>, <a class="el" href="classfile__locker.html#a299b55e3366398a88544208942baaea2">file_locker::file_locker()</a>, <a class="el" href="classthread.html#a4b2d684cd7193db5dfedf70fd705d5e6">thread::name()</a> , 以及 <a class="el" href="classthread.html#ad7c681ee3c6085a87309f040467b19cb">thread::set_name()</a>.</p>
 
 </div>
 </div>
@@ -213,7 +257,7 @@ $(function(){initNavTree('group___thread.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE thread::id id </td>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="structthread_1_1id.html">thread::id</a> id </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -229,9 +273,78 @@ $(function(){initNavTree('group___thread.html','',''); });
 <p>获取当前线程标识符 </p>
 <dl class="section return"><dt>返回</dt><dd>当前线程的标识符 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00345">345</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00423">423</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="timer_8hpp_source.html#l00154">timer_scheduler&lt; Clock &gt;::add_task()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="timer_8hpp_source.html#l00154">timer_scheduler&lt; Clock &gt;::add_task()</a> , 以及 <a class="el" href="type_8hpp_source.html#l00105">meta_type::meta_type()</a>.</p>
+
+</div>
+</div>
+<a id="gaaaab5bab899d6f3e7f2bb2c2867254fb" name="gaaaab5bab899d6f3e7f2bb2c2867254fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaaab5bab899d6f3e7f2bb2c2867254fb">&#9670;&#160;</a></span>is_single_threaded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool is_single_threaded </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查当前是否处于单线程模式 </p>
+<dl class="section return"><dt>返回</dt><dd>如果只有主线程运行则返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00088">88</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="thread__tracker_8hpp_source.html#l00068">thread_tracker::is_single_threaded()</a>.</p>
+
+</div>
+</div>
+<a id="ga6f83c2a4509ed1d467ba909884e9850b" name="ga6f83c2a4509ed1d467ba909884e9850b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f83c2a4509ed1d467ba909884e9850b">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool name </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取当前线程名称 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>存储名称的缓冲区 </td></tr>
+    <tr><td class="paramname">size</td><td>缓冲区大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否获取成功 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00449">449</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="classthread.html#ac1c3666fcd10451cee601dec58c32c00">thread::name()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ini__value_8hpp_source.html#l00393">ini_document::add_section()</a>, <a class="el" href="env__value_8hpp_source.html#l00254">env_document::add_variable()</a>, <a class="el" href="classtoml__builder.html#a974fb3c69991d8ed2763fb67cc360a98">toml_builder::begin_array_table()</a>, <a class="el" href="classini__builder.html#a44b845c6e271597ff3777dfb5ad79384">ini_builder::begin_section()</a>, <a class="el" href="classtoml__builder.html#a738d1624f77ed33ab8aa325ab10d2287">toml_builder::begin_table()</a>, <a class="el" href="classcmdline.html#a38140f2bc12f09b3f740c17a1ac72500">cmdline::count()</a>, <a class="el" href="structenvironment.html#a2cb6fddbbc74d714d891aa35991013c8">environment::exists()</a>, <a class="el" href="registry_8hpp_source.html#l00086">registry::find()</a>, <a class="el" href="classpath__tree.html#a72defec19aa8e46baca07b4376ef8f43">path_tree::find_all()</a>, <a class="el" href="classpath__tree_1_1node.html#a81aa88f21fb15b4a7f7967c6b669a078">path_tree::node::find_child()</a>, <a class="el" href="registry_8hpp_source.html#l00076">registry::find_unlocked()</a>, <a class="el" href="reflect_8hpp_source.html#l00122">type_builder&lt; T &gt;::function()</a>, <a class="el" href="reflect_8hpp_source.html#l00104">type_builder&lt; T &gt;::function()</a>, <a class="el" href="structenvironment.html#a9dcaf983add1110407167a43beb96207">environment::get()</a>, <a class="el" href="env__value_8hpp_source.html#l00384">env_document::get_bool()</a>, <a class="el" href="env__value_8hpp_source.html#l00373">env_document::get_double()</a>, <a class="el" href="env__value_8hpp_source.html#l00351">env_document::get_int()</a>, <a class="el" href="env__value_8hpp_source.html#l00362">env_document::get_int64()</a>, <a class="el" href="classplugin__manager.html#a785b545933063abb5225b0a54cb016b2">plugin_manager::get_plugin()</a>, <a class="el" href="ini__value_8hpp_source.html#l00418">ini_document::get_section()</a>, <a class="el" href="ini__value_8hpp_source.html#l00406">ini_document::get_section()</a>, <a class="el" href="env__value_8hpp_source.html#l00340">env_document::get_string()</a>, <a class="el" href="env__value_8hpp_source.html#l00287">env_document::get_variable()</a>, <a class="el" href="env__value_8hpp_source.html#l00276">env_document::get_variable()</a>, <a class="el" href="classcmdline.html#aa30667509d2573f743e124724e76e690">cmdline::has()</a>, <a class="el" href="ini__value_8hpp_source.html#l00430">ini_document::has_section()</a>, <a class="el" href="classdynamic__library.html#a0a770868526da593b7863afa30a5be1a">dynamic_library::has_symbol()</a>, <a class="el" href="env__value_8hpp_source.html#l00298">env_document::has_variable()</a>, <a class="el" href="ini__value_8hpp_source.html#l00203">ini_section::ini_section()</a>, <a class="el" href="reflect_8hpp_source.html#l00077">type_builder&lt; T &gt;::property()</a>, <a class="el" href="reflect_8hpp_source.html#l00200">reflect()</a>, <a class="el" href="registry_8hpp_source.html#l00056">registry::register_type()</a>, <a class="el" href="classpath__tree_1_1node.html#aae4918b9c6ab3c7fe16339bffff203d6">path_tree::node::remove_child()</a>, <a class="el" href="env__value_8hpp_source.html#l00306">env_document::remove_variable()</a>, <a class="el" href="structenvironment.html#a6a5a4531f8ec5310d84c067fcfb6c388">environment::set()</a>, <a class="el" href="ini__value_8hpp_source.html#l00244">ini_section::set_name()</a>, <a class="el" href="thread_8hpp_source.html#l00458">set_name()</a>, <a class="el" href="env__value_8hpp_source.html#l00265">env_document::set_variable()</a>, <a class="el" href="reflect_8hpp_source.html#l00140">type_builder&lt; T &gt;::static_function()</a>, <a class="el" href="classdynamic__library.html#a31449138e99fe50bad7212a06bf454eb">dynamic_library::symbol()</a>, <a class="el" href="dynamic__library_8hpp_source.html#l00101">dynamic_library::to_symbol()</a>, <a class="el" href="reflect_8hpp_source.html#l00045">type_builder&lt; T &gt;::type_builder()</a>, <a class="el" href="classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae">plugin_manager::unload_plugin()</a>, <a class="el" href="structenvironment.html#af1d2eff32051b0a9ecb3a3c0a08078eb">environment::unset()</a> , 以及 <a class="el" href="classini__builder.html#aa679a98a37b87316f9fe875058dad9cb">ini_builder::value_section()</a>.</p>
 
 </div>
 </div>
@@ -268,9 +381,9 @@ $(function(){initNavTree('group___thread.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>设置是否成功</dd></dl>
 <p>设置当前线程的调度优先级。 </p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00302">NEFORCE_END_NAMESPACE__</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00377">NEFORCE_END_THIS_THREAD__</a> , 以及 <a class="el" href="#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00439">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00457">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00634">signal&lt; Types &gt;::connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00581">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00607">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00545">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00560">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00661">signal&lt; Types &gt;::connect_transformed()</a> , 以及 <a class="el" href="#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00452">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00470">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00661">signal&lt; Types &gt;::connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00608">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00634">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00572">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00587">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00688">signal&lt; Types &gt;::connect_transformed()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority()</a>, <a class="el" href="classthread__pool.html#ae3bf04c2adddd193bba36f6c338c9b9e">thread_pool::submit_after()</a>, <a class="el" href="classthread__pool.html#a159c162d139e452d7539a4d0c46fc908">thread_pool::submit_every()</a> , 以及 <a class="el" href="classthread__pool.html#a4269d4f0985eeb9e6f38bb9aeae9e67a">thread_pool::submit_task()</a>.</p>
 
 </div>
 </div>
@@ -300,7 +413,7 @@ $(function(){initNavTree('group___thread.html','',''); });
 <p>线程放松 </p>
 <p>使用CPU特定的暂停指令让当前线程短暂放松，减少CPU功耗。 适用于自旋锁等场景中的忙等待。 </p>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00077">77</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00072">72</a> 行定义.</p>
 
 </div>
 </div>
@@ -340,9 +453,39 @@ $(function(){initNavTree('group___thread.html','',''); });
 <li>大计数：直接让出时间片 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00104">104</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00099">99</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
+
+</div>
+</div>
+<a id="ga303744653fe3bf181857637488927d28" name="ga303744653fe3bf181857637488927d28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga303744653fe3bf181857637488927d28">&#9670;&#160;</a></span>set_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool set_name </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置当前线程名称 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>线程名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否设置成功 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00458">458</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00449">name()</a> , 以及 <a class="el" href="classthread.html#a11943219b9d0cef98e433e6663e8b000">thread::set_name()</a>.</p>
 
 </div>
 </div>
@@ -380,9 +523,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00908">908</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00268">duration&lt; Rep, Period &gt;::count()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="clocks_8hpp_source.html#l00176">sleep_until()</a>.</p>
+<p class="reference">引用了 <a class="el" href="duration_8hpp_source.html#l00268">duration&lt; Rep, Period &gt;::count()</a>.</p>
 
 </div>
 </div>
@@ -419,7 +560,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>让当前线程睡眠指定的时间。</p>
 <dl class="section note"><dt>注解</dt><dd>使用系统睡眠，实际睡眠时间受系统调度影响。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00124">124</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00119">119</a> 行定义.</p>
 
 </div>
 </div>
@@ -569,9 +710,39 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <li>对于非稳定时钟，循环检查直到达到目标时间。 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="clocks_8hpp_source.html">clocks.hpp</a> 第 <a class="el" href="clocks_8hpp_source.html#l00176">176</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="clocks_8hpp_source.html">clocks.hpp</a> 第 <a class="el" href="clocks_8hpp_source.html#l00175">175</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00383">_THIS_THREAD</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00908">sleep_for()</a>.</p>
+</div>
+</div>
+<a id="ga48979ba9a5dbca2adc1b3b94bf0edbee" name="ga48979ba9a5dbca2adc1b3b94bf0edbee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga48979ba9a5dbca2adc1b3b94bf0edbee">&#9670;&#160;</a></span>thread_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE int thread_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前活动线程数量 </p>
+<dl class="section return"><dt>返回</dt><dd>活动的NexusForce线程数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00096">96</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="thread__tracker_8hpp_source.html#l00078">thread_tracker::thread_count()</a>.</p>
 
 </div>
 </div>
@@ -601,7 +772,7 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <p>让出当前线程的时间片 </p>
 <p>主动让出当前线程的CPU时间片，让其他线程可以运行。 </p>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00058">58</a> 行定义.</p>
 
 </div>
 </div>

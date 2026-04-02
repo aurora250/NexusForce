@@ -1,20 +1,22 @@
 var format_8hpp =
 [
-    [ "FORMAT_ALIGN", "group___string_format.html#gab1952e41389ca02abe738738a3557378", [
-      [ "LEFT", "group___string_format.html#ggab1952e41389ca02abe738738a3557378a684d325a7303f52e64011467ff5c5758", null ],
-      [ "RIGHT", "group___string_format.html#ggab1952e41389ca02abe738738a3557378a21507b40c80068eda19865706fdc2403", null ],
-      [ "INTERNAL", "group___string_format.html#ggab1952e41389ca02abe738738a3557378a182fa1c42a2468f8488e6dcf75a81b81", null ],
-      [ "CENTER", "group___string_format.html#ggab1952e41389ca02abe738738a3557378ac397289ee45877be0cd49811fe245b4e", null ]
+    [ "format_align", "group___format.html#ga42d318d7a8f82021aa5e0db07e420beb", [
+      [ "DEFAULT", "group___format.html#gga42d318d7a8f82021aa5e0db07e420beba5b39c8b553c821e7cddc6da64b5bd2ee", null ],
+      [ "LEFT", "group___format.html#gga42d318d7a8f82021aa5e0db07e420beba684d325a7303f52e64011467ff5c5758", null ],
+      [ "RIGHT", "group___format.html#gga42d318d7a8f82021aa5e0db07e420beba21507b40c80068eda19865706fdc2403", null ],
+      [ "CENTER", "group___format.html#gga42d318d7a8f82021aa5e0db07e420bebac397289ee45877be0cd49811fe245b4e", null ],
+      [ "NUMERIC", "group___format.html#gga42d318d7a8f82021aa5e0db07e420bebab22f521f17b09d0fd389e231f8f6d66d", null ]
     ] ],
-    [ "FORMAT_TYPE", "group___string_format.html#ga5092edbbfe4860c8afe989f77b1f0ecb", [
-      [ "BINARY", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba98ad0e8750ae10ad556ed7a62affb452", null ],
-      [ "OCTAL", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba62bfcf2abd9e92ff5e7cc7f6aa552d14", null ],
-      [ "DECIMAL", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba13d992d671957e9a2b3e936ca0cf14a4", null ],
-      [ "HEX_LOW", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba61288448eaf9c1ef72d424a313a40802", null ],
-      [ "HEX_UP", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecbae212e17e5974774a9ff262e59872ec78", null ],
-      [ "FLOAT_FIX", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba9a11510071aefdf203dd89f959d763e3", null ],
-      [ "FLOAT_EXP", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba153b810ab2ce83fe5b6853c5e27518a8", null ],
-      [ "FLOAT_GEN", "group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecbadc6f268d2126ff880fc4d29605dacf5c", null ]
+    [ "format_type", "group___format.html#gacf69152a3f3bf73a87406d0730a11a3c", [
+      [ "DEFAULT", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca5b39c8b553c821e7cddc6da64b5bd2ee", null ],
+      [ "DECIMAL", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca13d992d671957e9a2b3e936ca0cf14a4", null ],
+      [ "BINARY", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca98ad0e8750ae10ad556ed7a62affb452", null ],
+      [ "OCTAL", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca62bfcf2abd9e92ff5e7cc7f6aa552d14", null ],
+      [ "HEX", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca58c9566f3c750ce7147b045fdd14202b", null ],
+      [ "SCIENTIFIC", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3caba3fc8d7ed55e1aeae64e5a01ffa1454", null ],
+      [ "FIXED", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3cac6e6dc18b53b4c2681394b9d8aefcec7", null ],
+      [ "GENERAL", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3cab61773b9b3968a9988d765d728985862", null ],
+      [ "CHAR", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca027acd3aa6b1dd7f26119d3cf0f9a063", null ]
     ] ],
-    [ "format", "group___string_format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf", null ]
+    [ "format", "group___format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf", null ]
 ];

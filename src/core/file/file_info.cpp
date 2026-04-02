@@ -13,12 +13,12 @@ namespace {
         ull.HighPart = ft.dwHighDateTime;
         constexpr uint64_t EPOCH_DIFF = 116444736000000000ULL;
         const uint64_t unix_100ns = ull.QuadPart - EPOCH_DIFF;
-        return datetime::from_unix(static_cast<int64_t>(unix_100ns / 10000000ULL));
+        return timestamp(static_cast<int64_t>(unix_100ns / 10000000ULL)).to_datetime();
     }
 
     ::FILETIME datetime_to_filetime(const datetime& dt) noexcept {
         constexpr uint64_t EPOCH_DIFF = 116444736000000000ULL;
-        const uint64_t val = static_cast<uint64_t>(dt.to_unix()) * 10000000ULL + EPOCH_DIFF;
+        const uint64_t val = static_cast<uint64_t>(timestamp(dt).value()) * 10000000ULL + EPOCH_DIFF;
         ::FILETIME ft;
         ft.dwLowDateTime = static_cast<::DWORD>(val & 0xFFFFFFFF);
         ft.dwHighDateTime = static_cast<::DWORD>(val >> 32);
@@ -26,7 +26,7 @@ namespace {
     }
 #else
     datetime filetime_to_datetime(const ::time_t t) noexcept {
-        return datetime::from_unix(static_cast<int64_t>(t));
+        return timestamp(static_cast<int64_t>(t)).to_datetime();
     }
 #endif
 }

@@ -9,7 +9,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct smtp_exception
- * @extends network_exception
  * @brief SMTP操作异常
  */
 struct NEFORCE_API smtp_exception final : network_exception {

@@ -1,4 +1,0 @@
-var structformatter_3_01_t_00_01enable__if__t_3_01is__integral__v_3_01_t_01_4_01_6_6is__unsigned__v_3_01_t_01_4_01_4_01_4 =
-[
-    [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__integral__v_3_01_t_01_4_01_6_6is__unsigned__v_3_01_t_01_4_01_4_01_4.html#aef809ed6959701338f58896f825a9b77", null ]
-];

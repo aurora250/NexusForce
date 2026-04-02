@@ -19,7 +19,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct dynamic_library_exception
- * @extends system_exception
  * @brief 动态库操作异常
  */
 struct dynamic_library_exception final : system_exception {

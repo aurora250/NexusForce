@@ -1,0 +1,594 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: lru_cache&lt; Key, Value &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classlru__cache.html','','classlru__cache-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">lru_cache&lt; Key, Value &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___cache.html">缓存</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>LRU缓存类模板  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a0760e289cbf7b6f0df8a92974492af95" id="r_a0760e289cbf7b6f0df8a92974492af95"><td class="memItemLeft"><a id="a0760e289cbf7b6f0df8a92974492af95" name="a0760e289cbf7b6f0df8a92974492af95"></a>
+using&#160;</td><td class="memItemRight"><b>key_type</b> = Key</td></tr>
+<tr class="memdesc:a0760e289cbf7b6f0df8a92974492af95"><td class="mdescLeft">&#160;</td><td class="mdescRight">键类型 <br /></td></tr>
+<tr class="memitem:a61044e4d2a9410f5292b950fce2970e0" id="r_a61044e4d2a9410f5292b950fce2970e0"><td class="memItemLeft"><a id="a61044e4d2a9410f5292b950fce2970e0" name="a61044e4d2a9410f5292b950fce2970e0"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = Value</td></tr>
+<tr class="memdesc:a61044e4d2a9410f5292b950fce2970e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:a9f23e9f2267840d0935c54d9c73e084c" id="r_a9f23e9f2267840d0935c54d9c73e084c"><td class="memItemLeft"><a id="a9f23e9f2267840d0935c54d9c73e084c" name="a9f23e9f2267840d0935c54d9c73e084c"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td></tr>
+<tr class="memdesc:a9f23e9f2267840d0935c54d9c73e084c"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:af5c9f1f0d941c88179b008e50dda5db5" id="r_af5c9f1f0d941c88179b008e50dda5db5"><td class="memItemLeft"><a id="af5c9f1f0d941c88179b008e50dda5db5" name="af5c9f1f0d941c88179b008e50dda5db5"></a>
+using&#160;</td><td class="memItemRight"><b>clock</b> = <a class="el" href="structsteady__clock.html">steady_clock</a></td></tr>
+<tr class="memdesc:af5c9f1f0d941c88179b008e50dda5db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">时钟类型 <br /></td></tr>
+<tr class="memitem:adeb130b554929a695109f792972e2422" id="r_adeb130b554929a695109f792972e2422"><td class="memItemLeft"><a id="adeb130b554929a695109f792972e2422" name="adeb130b554929a695109f792972e2422"></a>
+using&#160;</td><td class="memItemRight"><b>time_point</b> = <a class="el" href="structsteady__clock.html#aaf25d203f1455c8c7010a6681de52dc5">clock::time_point</a></td></tr>
+<tr class="memdesc:adeb130b554929a695109f792972e2422"><td class="mdescLeft">&#160;</td><td class="mdescRight">时间点类型 <br /></td></tr>
+<tr class="memitem:ad0c079d5b47be277e53b2835ae6d467d" id="r_ad0c079d5b47be277e53b2835ae6d467d"><td class="memItemLeft"><a id="ad0c079d5b47be277e53b2835ae6d467d" name="ad0c079d5b47be277e53b2835ae6d467d"></a>
+using&#160;</td><td class="memItemRight"><b>duration</b> = <a class="el" href="structsteady__clock.html#a2835ea558a6187fa15658b5d5fcd439c">clock::duration</a></td></tr>
+<tr class="memdesc:ad0c079d5b47be277e53b2835ae6d467d"><td class="mdescLeft">&#160;</td><td class="mdescRight">持续时间类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aa82df920dfc5477ffa7f24c890710f5f" id="r_aa82df920dfc5477ffa7f24c890710f5f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa82df920dfc5477ffa7f24c890710f5f">lru_cache</a> (<a class="el" href="#a9f23e9f2267840d0935c54d9c73e084c">size_type</a> <a class="el" href="#ad429db08175b2e435cb5f4ff5cbd20b0">capacity</a>)</td></tr>
+<tr class="memdesc:aa82df920dfc5477ffa7f24c890710f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a4a71e61754ae48fad15dc287f60c9f5c" id="r_a4a71e61754ae48fad15dc287f60c9f5c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4a71e61754ae48fad15dc287f60c9f5c">put</a> (const Key &amp;key, const Value &amp;value)</td></tr>
+<tr class="memdesc:a4a71e61754ae48fad15dc287f60c9f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入或更新缓存项  <br /></td></tr>
+<tr class="memitem:aa92267d21c4dfd557110cf8a4f62098b" id="r_aa92267d21c4dfd557110cf8a4f62098b"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classoptional.html">optional</a>&lt; Value &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa92267d21c4dfd557110cf8a4f62098b">get</a> (const Key &amp;key)</td></tr>
+<tr class="memdesc:aa92267d21c4dfd557110cf8a4f62098b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取缓存项  <br /></td></tr>
+<tr class="memitem:afedb8af9733008df427dba7e42b13a80" id="r_afedb8af9733008df427dba7e42b13a80"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classoptional.html">optional</a>&lt; Value &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afedb8af9733008df427dba7e42b13a80">peek</a> (const Key &amp;key) const</td></tr>
+<tr class="memdesc:afedb8af9733008df427dba7e42b13a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">查看缓存项（不更新访问状态）  <br /></td></tr>
+<tr class="memitem:ad51a6a89091afd89fd41bd9e40e8be09" id="r_ad51a6a89091afd89fd41bd9e40e8be09"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad51a6a89091afd89fd41bd9e40e8be09">erase</a> (const Key &amp;key)</td></tr>
+<tr class="memdesc:ad51a6a89091afd89fd41bd9e40e8be09"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除缓存项  <br /></td></tr>
+<tr class="memitem:a82764435595a401f7bcfb8cb3cbe5938" id="r_a82764435595a401f7bcfb8cb3cbe5938"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a82764435595a401f7bcfb8cb3cbe5938">remove_expired</a> (<a class="el" href="#ad0c079d5b47be277e53b2835ae6d467d">duration</a> max_age)</td></tr>
+<tr class="memdesc:a82764435595a401f7bcfb8cb3cbe5938"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除过期的缓存项  <br /></td></tr>
+<tr class="memitem:ab590b9fac875677e4d419e0896eaf3c0" id="r_ab590b9fac875677e4d419e0896eaf3c0"><td class="memItemLeft"><a id="ab590b9fac875677e4d419e0896eaf3c0" name="ab590b9fac875677e4d419e0896eaf3c0"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> ()</td></tr>
+<tr class="memdesc:ab590b9fac875677e4d419e0896eaf3c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空所有缓存项 <br /></td></tr>
+<tr class="memitem:afcd36edda0227ed552d370cd67872421" id="r_afcd36edda0227ed552d370cd67872421"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9f23e9f2267840d0935c54d9c73e084c">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#afcd36edda0227ed552d370cd67872421">size</a> () const noexcept</td></tr>
+<tr class="memdesc:afcd36edda0227ed552d370cd67872421"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前缓存大小  <br /></td></tr>
+<tr class="memitem:ad429db08175b2e435cb5f4ff5cbd20b0" id="r_ad429db08175b2e435cb5f4ff5cbd20b0"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9f23e9f2267840d0935c54d9c73e084c">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad429db08175b2e435cb5f4ff5cbd20b0">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:ad429db08175b2e435cb5f4ff5cbd20b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取缓存容量  <br /></td></tr>
+<tr class="memitem:ac2df6da252a87415559a9d73d5ffca77" id="r_ac2df6da252a87415559a9d73d5ffca77"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ac2df6da252a87415559a9d73d5ffca77">contains</a> (const Key &amp;key) const noexcept</td></tr>
+<tr class="memdesc:ac2df6da252a87415559a9d73d5ffca77"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查缓存是否包含指定键  <br /></td></tr>
+<tr class="memitem:aaa0b895d5dab968d375ad526d265a7ae" id="r_aaa0b895d5dab968d375ad526d265a7ae"><td class="memTemplParams" colspan="2">template&lt;typename Predicate&gt; </td></tr>
+<tr class="memitem:aaa0b895d5dab968d375ad526d265a7ae template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaa0b895d5dab968d375ad526d265a7ae">remove_if</a> (Predicate pred)</td></tr>
+<tr class="memdesc:aaa0b895d5dab968d375ad526d265a7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">按条件删除缓存项  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename Value&gt;<br />
+class lru_cache&lt; Key, Value &gt;</div><p>LRU缓存类模板 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">Value</td><td>值类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>实现LRU（最近最少使用）缓存淘汰策略的容器。 当缓存达到容量上限时，会淘汰最长时间未被访问的条目。</p>
+<p>特性：</p><ul>
+<li>O(1)时间复杂度的插入和访问</li>
+<li>支持缓存项过期时间</li>
+<li>支持条件删除</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>此类不是线程安全的，多线程环境下需要外部同步 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00039">39</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="aa82df920dfc5477ffa7f24c890710f5f" name="aa82df920dfc5477ffa7f24c890710f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa82df920dfc5477ffa7f24c890710f5f">&#9670;&#160;</a></span>lru_cache()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::lru_cache </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9f23e9f2267840d0935c54d9c73e084c">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>缓存容量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>当capacity为0时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建一个指定容量的LRU缓存。 </p>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00065">65</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="lru__cache_8hpp_source.html#l00192">capacity()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ad429db08175b2e435cb5f4ff5cbd20b0" name="ad429db08175b2e435cb5f4ff5cbd20b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad429db08175b2e435cb5f4ff5cbd20b0">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9f23e9f2267840d0935c54d9c73e084c">size_type</a> <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::capacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取缓存容量 </p>
+<dl class="section return"><dt>返回</dt><dd>缓存的最大容量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00192">192</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="lru__cache_8hpp_source.html#l00065">lru_cache()</a>.</p>
+
+</div>
+</div>
+<a id="ac2df6da252a87415559a9d73d5ffca77" name="ac2df6da252a87415559a9d73d5ffca77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2df6da252a87415559a9d73d5ffca77">&#9670;&#160;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查缓存是否包含指定键 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果存在返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00201">201</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad51a6a89091afd89fd41bd9e40e8be09" name="ad51a6a89091afd89fd41bd9e40e8be09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad51a6a89091afd89fd41bd9e40e8be09">&#9670;&#160;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除缓存项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果键存在并成功删除返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00142">142</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="lru__cache_8hpp_source.html#l00159">remove_expired()</a>.</p>
+
+</div>
+</div>
+<a id="aa92267d21c4dfd557110cf8a4f62098b" name="aa92267d21c4dfd557110cf8a4f62098b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa92267d21c4dfd557110cf8a4f62098b">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classoptional.html">optional</a>&lt; Value &gt; <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取缓存项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含值的optional，如果键不存在则返回none</dd></dl>
+<p>访问缓存项会将其移动到最近使用位置，并更新最后访问时间。 </p>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00111">111</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+
+</div>
+</div>
+<a id="afedb8af9733008df427dba7e42b13a80" name="afedb8af9733008df427dba7e42b13a80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afedb8af9733008df427dba7e42b13a80">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classoptional.html">optional</a>&lt; Value &gt; <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::peek </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查看缓存项（不更新访问状态） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含值的optional，如果键不存在则返回none</dd></dl>
+<p>与get不同，此方法不会移动缓存项到最近使用位置，也不会更新访问时间。 适用于仅需要查看而不改变缓存状态的场景。 </p>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00129">129</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="none_8hpp_source.html#l00073">none</a>.</p>
+
+</div>
+</div>
+<a id="a4a71e61754ae48fad15dc287f60c9f5c" name="a4a71e61754ae48fad15dc287f60c9f5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a71e61754ae48fad15dc287f60c9f5c">&#9670;&#160;</a></span>put()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Value &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入或更新缓存项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+    <tr><td class="paramname">value</td><td>值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>如果键已存在，更新其值并将其移动到最近使用位置； 如果键不存在且缓存已满，淘汰最久未使用的项后再插入新项； 无论插入还是更新，都会更新该键的最后访问时间。 </p>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00086">86</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+
+</div>
+</div>
+<a id="a82764435595a401f7bcfb8cb3cbe5938" name="a82764435595a401f7bcfb8cb3cbe5938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82764435595a401f7bcfb8cb3cbe5938">&#9670;&#160;</a></span>remove_expired()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::remove_expired </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ad0c079d5b47be277e53b2835ae6d467d">duration</a></td>          <td class="paramname"><span class="paramname"><em>max_age</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除过期的缓存项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max_age</td><td>最大存活时间</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>遍历所有缓存项，删除最后访问时间超过max_age的项。 适用于需要自动清理过期数据的场景。 </p>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00159">159</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="lru__cache_8hpp_source.html#l00142">erase()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+
+</div>
+</div>
+<a id="aaa0b895d5dab968d375ad526d265a7ae" name="aaa0b895d5dab968d375ad526d265a7ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa0b895d5dab968d375ad526d265a7ae">&#9670;&#160;</a></span>remove_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<div class="memtemplate">
+template&lt;typename Predicate&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::remove_if </td>
+          <td>(</td>
+          <td class="paramtype">Predicate</td>          <td class="paramname"><span class="paramname"><em>pred</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>按条件删除缓存项 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Predicate</td><td>谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pred</td><td>判断函数，返回true时删除对应项</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>遍历所有缓存项，删除满足谓词条件的项。 </p>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00213">213</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afcd36edda0227ed552d370cd67872421" name="afcd36edda0227ed552d370cd67872421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcd36edda0227ed552d370cd67872421">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9f23e9f2267840d0935c54d9c73e084c">size_type</a> <a class="el" href="classlru__cache.html">lru_cache</a>&lt; Key, Value &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前缓存大小 </p>
+<dl class="section return"><dt>返回</dt><dd>缓存中的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a> 第 <a class="el" href="lru__cache_8hpp_source.html#l00184">184</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="lru__cache_8hpp_source.html">lru_cache.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classlru__cache.html">lru_cache</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

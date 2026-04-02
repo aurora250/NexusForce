@@ -12,8 +12,14 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup LegacyFunctionAdapters 旧式函数适配器
- * @brief 为兼容性提供的旧式函数适配器基类
+ * @defgroup Functor 仿函数
+ * @brief 模仿函数行为的类型对象
+ * @{
+ */
+
+/**
+ * @defgroup LegacyFunctionAdapters 旧式仿函数基类
+ * @brief 为兼容性提供的旧式仿函数基类
  * @{
  */
 
@@ -489,6 +495,8 @@ struct select2nd {
 };
 
 /** @} */ // SelectionFunctors
+
+/** @} */ // Functor
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FUNCTIONAL_FUNCTOR_HPP__

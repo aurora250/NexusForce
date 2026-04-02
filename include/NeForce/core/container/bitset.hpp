@@ -16,8 +16,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Bitset 位集
- * @brief 固定大小的位序列容器
+ * @defgroup BitManipulation 位操作
+ * @brief 位操作类与函数的实现
  * @{
  */
 
@@ -590,7 +590,7 @@ public:
     }
 };
 
-/** @} */ // Bitset
+/** @} */ // BitManipulation
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_BITSET_HPP__

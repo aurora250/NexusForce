@@ -100,15 +100,15 @@ $(function(){initNavTree('classpromise.html','','classpromise-members'); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public 类型</h2></td></tr>
-<tr class="memitem:aba7da285b3ed8efe8a593b6f23f5faff" id="r_aba7da285b3ed8efe8a593b6f23f5faff"><td class="memItemLeft"><a id="aba7da285b3ed8efe8a593b6f23f5faff" name="aba7da285b3ed8efe8a593b6f23f5faff"></a>
-using&#160;</td><td class="memItemRight"><b>state_type</b> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::state_base</td></tr>
-<tr class="memdesc:aba7da285b3ed8efe8a593b6f23f5faff"><td class="mdescLeft">&#160;</td><td class="mdescRight">状态类型 <br /></td></tr>
-<tr class="memitem:a88c1f99a1d78e58e855037e97bfa2ae4" id="r_a88c1f99a1d78e58e855037e97bfa2ae4"><td class="memItemLeft"><a id="a88c1f99a1d78e58e855037e97bfa2ae4" name="a88c1f99a1d78e58e855037e97bfa2ae4"></a>
-using&#160;</td><td class="memItemRight"><b>result_type</b> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::basic_result&lt;Res&gt;</td></tr>
-<tr class="memdesc:a88c1f99a1d78e58e855037e97bfa2ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">结果类型 <br /></td></tr>
-<tr class="memitem:a3d29b3f8ec5ca9714ae42ba55c1b419c" id="r_a3d29b3f8ec5ca9714ae42ba55c1b419c"><td class="memItemLeft"><a id="a3d29b3f8ec5ca9714ae42ba55c1b419c" name="a3d29b3f8ec5ca9714ae42ba55c1b419c"></a>
-using&#160;</td><td class="memItemRight"><b>ptr_type</b> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::Ptr&lt;<a class="el" href="#a88c1f99a1d78e58e855037e97bfa2ae4">result_type</a>&gt;</td></tr>
-<tr class="memdesc:a3d29b3f8ec5ca9714ae42ba55c1b419c"><td class="mdescLeft">&#160;</td><td class="mdescRight">结果指针类型 <br /></td></tr>
+<tr class="memitem:a9c9867e00fe11c873a268f9b7bfb5e5b" id="r_a9c9867e00fe11c873a268f9b7bfb5e5b"><td class="memItemLeft"><a id="a9c9867e00fe11c873a268f9b7bfb5e5b" name="a9c9867e00fe11c873a268f9b7bfb5e5b"></a>
+using&#160;</td><td class="memItemRight"><b>state_type</b> = inner::__future_base::state_base</td></tr>
+<tr class="memdesc:a9c9867e00fe11c873a268f9b7bfb5e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">状态类型 <br /></td></tr>
+<tr class="memitem:a974737ae92ff2bf7c88f104121768387" id="r_a974737ae92ff2bf7c88f104121768387"><td class="memItemLeft"><a id="a974737ae92ff2bf7c88f104121768387" name="a974737ae92ff2bf7c88f104121768387"></a>
+using&#160;</td><td class="memItemRight"><b>result_type</b> = inner::__future_base::basic_result&lt;Res&gt;</td></tr>
+<tr class="memdesc:a974737ae92ff2bf7c88f104121768387"><td class="mdescLeft">&#160;</td><td class="mdescRight">结果类型 <br /></td></tr>
+<tr class="memitem:a23ef12fa1a0278408fbff4ca4d4ec86c" id="r_a23ef12fa1a0278408fbff4ca4d4ec86c"><td class="memItemLeft"><a id="a23ef12fa1a0278408fbff4ca4d4ec86c" name="a23ef12fa1a0278408fbff4ca4d4ec86c"></a>
+using&#160;</td><td class="memItemRight"><b>ptr_type</b> = inner::__future_base::Ptr&lt;<a class="el" href="#a974737ae92ff2bf7c88f104121768387">result_type</a>&gt;</td></tr>
+<tr class="memdesc:a23ef12fa1a0278408fbff4ca4d4ec86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">结果指针类型 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -151,7 +151,7 @@ class promise&lt; Res &gt;</div><p>Promise类模板 </p>
 <p>表示一个异步计算的结果提供者，与future配对使用。 可以将计算结果或异常设置到promise中，关联的future可以获取这些结果。</p>
 <dl class="section note"><dt>注解</dt><dd>结果类型不能是数组、函数，必须是可析构类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00032">32</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00031">31</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a980a39afa21321c8e9ec5022b0a0123c" name="a980a39afa21321c8e9ec5022b0a0123c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a980a39afa21321c8e9ec5022b0a0123c">&#9670;&#160;</a></span>promise() <span class="overload">[1/2]</span></h2>
@@ -181,11 +181,11 @@ template&lt;typename Res&gt; </div>
 <p>默认构造函数 </p>
 <p>创建新的promise对象，初始化共享状态和结果存储。 </p>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00065">65</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00064">64</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shared__ptr_8hpp_source.html#l00738">make_shared()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00775">make_shared()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00493">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>, <a class="el" href="#a4f73b1bc32d04a4051b70f93279a5d23">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00082">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00308">promise&lt; void &gt;::operator=()</a>, <a class="el" href="#accc51c0d31121acce00d75341b18cd34">promise()</a>, <a class="el" href="promise_8hpp_source.html#l00073">promise()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00105">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00493">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>, <a class="el" href="#a4f73b1bc32d04a4051b70f93279a5d23">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00081">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00307">promise&lt; void &gt;::operator=()</a>, <a class="el" href="#accc51c0d31121acce00d75341b18cd34">promise()</a>, <a class="el" href="promise_8hpp_source.html#l00072">promise()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00104">swap()</a>.</p>
 
 </div>
 </div>
@@ -222,9 +222,9 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00073">73</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00072">72</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00065">promise()</a>.</p>
+<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00064">promise()</a>.</p>
 
 </div>
 </div>
@@ -256,9 +256,9 @@ template&lt;typename Res&gt; </div>
 <p>析构函数 </p>
 <p>如果存在关联的future且promise未被设置结果，会自动设置broken_promise异常。 </p>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00095">95</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00094">94</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -292,12 +292,12 @@ template&lt;typename Res&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>future对象 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果future已被获取 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果future已被获取 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00115">115</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00114">114</a> 行定义.</p>
 
 </div>
 </div>
@@ -335,9 +335,9 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00082">82</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00081">81</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00065">promise()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00064">promise()</a>.</p>
 
 </div>
 </div>
@@ -375,12 +375,12 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00133">133</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00132">132</a> 行定义.</p>
 
 </div>
 </div>
@@ -418,12 +418,12 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00152">152</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00151">151</a> 行定义.</p>
 
 </div>
 </div>
@@ -461,14 +461,14 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00124">124</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00123">123</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
 </div>
 </div>
@@ -506,15 +506,15 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structfuture__exception.html" title="期望值操作异常">future_exception</a></td><td>如果结果已被设置 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>结果会在当前线程退出时设置，适用于需要保证某些资源在结果设置前有效的场景 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00143">143</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00142">142</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
 </div>
 </div>
@@ -551,9 +551,9 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00105">105</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00104">104</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00065">promise()</a>.</p>
+<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00064">promise()</a>.</p>
 
 </div>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NexusForce: 莱昂纳多堆</title>
+<title>NexusForce: 莱昂纳多堆算法</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,41 +89,46 @@ $(function(){initNavTree('group___leonardo_heap.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">莱昂纳多堆 </div></div>
+  <div class="headertitle"><div class="title">莱昂纳多堆算法 <div class="ingroups"><a class="el" href="group___standard_algorithms.html">标准算法</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>莱昂纳多堆算法实现  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+莱昂纳多堆算法 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___leonardo_heap.svg" width="332" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga1a95da830b9536025c4d8ddbdd8c17a6" id="r_ga1a95da830b9536025c4d8ddbdd8c17a6"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga1a95da830b9536025c4d8ddbdd8c17a6 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga1a95da830b9536025c4d8ddbdd8c17a6">adjust_leonardo_heap</a> (Iterator first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> current_heap, int level_index, <a class="el" href="classvector.html">vector</a>&lt; int &gt; &amp;levels)</td></tr>
-<tr class="memdesc:ga1a95da830b9536025c4d8ddbdd8c17a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">调整莱昂纳多堆  <br /></td></tr>
-<tr class="memitem:gac9d2ac4d42b6773a36e5cf4fca543f2a" id="r_gac9d2ac4d42b6773a36e5cf4fca543f2a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gac9d2ac4d42b6773a36e5cf4fca543f2a template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gac9d2ac4d42b6773a36e5cf4fca543f2a">push_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:gac9d2ac4d42b6773a36e5cf4fca543f2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">向莱昂纳多堆中推入元素  <br /></td></tr>
-<tr class="memitem:gab387b81ac30e01eb2f7fdead928dbd66" id="r_gab387b81ac30e01eb2f7fdead928dbd66"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gab387b81ac30e01eb2f7fdead928dbd66 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab387b81ac30e01eb2f7fdead928dbd66">pop_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:gab387b81ac30e01eb2f7fdead928dbd66"><td class="mdescLeft">&#160;</td><td class="mdescRight">从莱昂纳多堆中弹出最大元素  <br /></td></tr>
-<tr class="memitem:ga18fb43499ec482bfef34fab1291f5565" id="r_ga18fb43499ec482bfef34fab1291f5565"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga18fb43499ec482bfef34fab1291f5565 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga18fb43499ec482bfef34fab1291f5565">sort_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:ga18fb43499ec482bfef34fab1291f5565"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用莱昂纳多堆进行排序  <br /></td></tr>
-<tr class="memitem:ga054a6b7c4f78cb86f48a2f5110af0cbe" id="r_ga054a6b7c4f78cb86f48a2f5110af0cbe"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga054a6b7c4f78cb86f48a2f5110af0cbe template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga054a6b7c4f78cb86f48a2f5110af0cbe">make_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:ga054a6b7c4f78cb86f48a2f5110af0cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建莱昂纳多堆  <br /></td></tr>
+<tr class="memitem:gac60b0313c9a99501982d00f52c3017c4" id="r_gac60b0313c9a99501982d00f52c3017c4"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gac60b0313c9a99501982d00f52c3017c4 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a> (Iterator first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> current_heap, int level_index, <a class="el" href="classvector.html">vector</a>&lt; int &gt; &amp;levels)</td></tr>
+<tr class="memdesc:gac60b0313c9a99501982d00f52c3017c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">调整莱昂纳多堆  <br /></td></tr>
+<tr class="memitem:ga339f8c175e964064f8d7e8e2676591fa" id="r_ga339f8c175e964064f8d7e8e2676591fa"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga339f8c175e964064f8d7e8e2676591fa template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga339f8c175e964064f8d7e8e2676591fa">push_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga339f8c175e964064f8d7e8e2676591fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">向莱昂纳多堆中推入元素  <br /></td></tr>
+<tr class="memitem:ga136d8080ad6127b70845b45e199e2c5d" id="r_ga136d8080ad6127b70845b45e199e2c5d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga136d8080ad6127b70845b45e199e2c5d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga136d8080ad6127b70845b45e199e2c5d">pop_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga136d8080ad6127b70845b45e199e2c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">从莱昂纳多堆中弹出最大元素  <br /></td></tr>
+<tr class="memitem:ga30b3db79677a6fbb9e3b71a62b48933f" id="r_ga30b3db79677a6fbb9e3b71a62b48933f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga30b3db79677a6fbb9e3b71a62b48933f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga30b3db79677a6fbb9e3b71a62b48933f">sort_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga30b3db79677a6fbb9e3b71a62b48933f"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用莱昂纳多堆进行排序  <br /></td></tr>
+<tr class="memitem:gaeccafcd2bf9df72de2f4a7ec6ff469fa" id="r_gaeccafcd2bf9df72de2f4a7ec6ff469fa"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaeccafcd2bf9df72de2f4a7ec6ff469fa template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaeccafcd2bf9df72de2f4a7ec6ff469fa">make_leonardo_heap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gaeccafcd2bf9df72de2f4a7ec6ff469fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建莱昂纳多堆  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>莱昂纳多堆算法实现 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga1a95da830b9536025c4d8ddbdd8c17a6" name="ga1a95da830b9536025c4d8ddbdd8c17a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1a95da830b9536025c4d8ddbdd8c17a6">&#9670;&#160;</a></span>adjust_leonardo_heap()</h2>
+<a id="gac60b0313c9a99501982d00f52c3017c4" name="gac60b0313c9a99501982d00f52c3017c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac60b0313c9a99501982d00f52c3017c4">&#9670;&#160;</a></span>adjust_leonardo_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void adjust_leonardo_heap </td>
@@ -166,21 +171,21 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
 </dl>
 <p>调整指定位置的莱昂纳多堆，确保堆性质得以维护。 如果父节点小于子节点，则进行交换并递归调整。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00034">34</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">40</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00088">leonardo()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00435">iter_swap()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00091">leonardo()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00216">make_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00131">pop_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00088">push_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00172">sort_leonardo_heap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00230">make_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00141">pop_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00096">push_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00184">sort_leonardo_heap()</a>.</p>
 
 </div>
 </div>
-<a id="ga054a6b7c4f78cb86f48a2f5110af0cbe" name="ga054a6b7c4f78cb86f48a2f5110af0cbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga054a6b7c4f78cb86f48a2f5110af0cbe">&#9670;&#160;</a></span>make_leonardo_heap()</h2>
+<a id="gaeccafcd2bf9df72de2f4a7ec6ff469fa" name="gaeccafcd2bf9df72de2f4a7ec6ff469fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeccafcd2bf9df72de2f4a7ec6ff469fa">&#9670;&#160;</a></span>make_leonardo_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void make_leonardo_heap </td>
@@ -211,21 +216,21 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
 </dl>
 <p>将指定范围内的元素构建成一个莱昂纳多堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00216">216</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00230">230</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00034">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00496">smooth_sort()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00534">smooth_sort()</a>.</p>
 
 </div>
 </div>
-<a id="gab387b81ac30e01eb2f7fdead928dbd66" name="gab387b81ac30e01eb2f7fdead928dbd66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab387b81ac30e01eb2f7fdead928dbd66">&#9670;&#160;</a></span>pop_leonardo_heap()</h2>
+<a id="ga136d8080ad6127b70845b45e199e2c5d" name="ga136d8080ad6127b70845b45e199e2c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga136d8080ad6127b70845b45e199e2c5d">&#9670;&#160;</a></span>pop_leonardo_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void pop_leonardo_heap </td>
@@ -256,19 +261,19 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
 </dl>
 <p>移除堆顶元素，并重新调整堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00131">131</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00141">141</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00034">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="math_8hpp_source.html#l00088">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a>, <a class="el" href="math_8hpp_source.html#l00091">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
 
 </div>
 </div>
-<a id="gac9d2ac4d42b6773a36e5cf4fca543f2a" name="gac9d2ac4d42b6773a36e5cf4fca543f2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac9d2ac4d42b6773a36e5cf4fca543f2a">&#9670;&#160;</a></span>push_leonardo_heap()</h2>
+<a id="ga339f8c175e964064f8d7e8e2676591fa" name="ga339f8c175e964064f8d7e8e2676591fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga339f8c175e964064f8d7e8e2676591fa">&#9670;&#160;</a></span>push_leonardo_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void push_leonardo_heap </td>
@@ -299,19 +304,19 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
 </dl>
 <p>将最后一个元素插入到莱昂纳多堆中，并调整堆以维持堆性质。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00088">88</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00096">96</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00034">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
 
 </div>
 </div>
-<a id="ga18fb43499ec482bfef34fab1291f5565" name="ga18fb43499ec482bfef34fab1291f5565"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga18fb43499ec482bfef34fab1291f5565">&#9670;&#160;</a></span>sort_leonardo_heap()</h2>
+<a id="ga30b3db79677a6fbb9e3b71a62b48933f" name="ga30b3db79677a6fbb9e3b71a62b48933f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga30b3db79677a6fbb9e3b71a62b48933f">&#9670;&#160;</a></span>sort_leonardo_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void sort_leonardo_heap </td>
@@ -342,11 +347,11 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
 </dl>
 <p>实现平滑排序算法，时间复杂度O(n log n)，在接近有序的序列上表现优异。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00172">172</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00184">184</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00034">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="math_8hpp_source.html#l00088">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00198">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a>, <a class="el" href="math_8hpp_source.html#l00091">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00929">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00496">smooth_sort()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00534">smooth_sort()</a>.</p>
 
 </div>
 </div>

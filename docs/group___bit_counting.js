@@ -10,5 +10,6 @@ var group___bit_counting =
     [ "parity", "group___bit_counting.html#ga1a1649ec9d3f0fb2aad2df2550467318", null ],
     [ "parity32", "group___bit_counting.html#ga2bfc6542da7cf0106ecf09fbd4394fa8", null ],
     [ "popcount", "group___bit_counting.html#ga7493eb3d8ac54b313025c16119a3e9df", null ],
-    [ "popcount32", "group___bit_counting.html#ga2e8de9ca6e14827b422486dc3ed35706", null ]
+    [ "popcount32", "group___bit_counting.html#ga2e8de9ca6e14827b422486dc3ed35706", null ],
+    [ "POPCOUNT_TABLE", "group___bit_counting.html#ga9d407777ef6c13fd950d17144fcf93d8", null ]
 ];

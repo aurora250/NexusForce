@@ -24,6 +24,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup CompareAlgorithms 比较算法
  * @brief 比较算法的实现
  * @{
@@ -588,6 +594,8 @@ constexpr pair<Iterator1, Iterator2> mismatch(Iterator1 first1, Iterator1 last1,
 }
 
 /** @} */ // CompareAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_COMPARE_HPP__

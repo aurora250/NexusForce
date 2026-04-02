@@ -5,7 +5,7 @@ var dir_14dba93626a13e8e6eaef5e9fc86c3ef =
     [ "allocator_traits.hpp", "allocator__traits_8hpp.html", null ],
     [ "bit.hpp", "bit_8hpp.html", "bit_8hpp" ],
     [ "construct.hpp", "construct_8hpp.html", "construct_8hpp" ],
-    [ "endian.hpp", "endian_8hpp_source.html", null ],
+    [ "endian.hpp", "endian_8hpp.html", null ],
     [ "memory.hpp", "memory_8hpp.html", "memory_8hpp" ],
     [ "memory_view.hpp", "memory__view_8hpp.html", "memory__view_8hpp" ],
     [ "shared_ptr.hpp", "shared__ptr_8hpp.html", "shared__ptr_8hpp" ],

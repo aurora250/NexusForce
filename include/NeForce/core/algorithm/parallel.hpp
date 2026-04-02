@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup ParallelAlgorithms 并行算法
  * @brief 并行计算算法
  * @{
@@ -86,6 +92,8 @@ void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, B
 }
 
 /** @} */ // ParallelAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_PARALLEL_HPP__

@@ -96,20 +96,67 @@ $(function(){initNavTree('group___invoke_function.html','',''); });
 <p>可调用函数系列函数的实现  
 <a href="#details">更多...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:invoke_5Fresult_3C_20Sign_20_3E" id="r_invoke_5Fresult_3C_20Sign_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structinvoke__result.html">invoke_result&lt; Sign &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">推导函数调用结果类型的主模板  <a href="structinvoke__result.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:invoke_5Fresult_3C_20F_28Args_2E_2E_2E_29_3E" id="r_invoke_5Fresult_3C_20F_28Args_2E_2E_2E_29_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structinvoke__result_3_01_f_07_args_8_8_8_08_4.html">invoke_result&lt; F(Args...)&gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">invoke_result的特化版本  <a href="structinvoke__result_3_01_f_07_args_8_8_8_08_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:is_5Finvocable_3C_20F_2C_20Args_20_3E" id="r_is_5Finvocable_3C_20F_2C_20Args_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__invocable.html">is_invocable&lt; F, Args &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否可调用  <a href="structis__invocable.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:is_5Finvocable_5Fr_3C_20Ret_2C_20F_2C_20Args_20_3E" id="r_is_5Finvocable_5Fr_3C_20Ret_2C_20F_2C_20Args_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__invocable__r.html">is_invocable_r&lt; Ret, F, Args &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否可调用并返回指定类型  <a href="structis__invocable__r.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:is_5Fnothrow_5Finvocable_3C_20F_2C_20Args_20_3E" id="r_is_5Fnothrow_5Finvocable_3C_20F_2C_20Args_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable&lt; F, Args &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断调用是否不会抛出异常  <a href="structis__nothrow__invocable.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:gaf42c40449c9ef12db7fcf0532b6c90b5" id="r_gaf42c40449c9ef12db7fcf0532b6c90b5"><td class="memTemplParams" colspan="2">template&lt;typename F, typename... Args&gt; </td></tr>
+<tr class="memitem:gaf42c40449c9ef12db7fcf0532b6c90b5 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gaf42c40449c9ef12db7fcf0532b6c90b5">invoke_result_t</a> = typename inner::__invoke_result_aux&lt;F, Args...&gt;::type</td></tr>
+<tr class="memdesc:gaf42c40449c9ef12db7fcf0532b6c90b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">invoke_result的便捷别名  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga7a594af8ce76532c80fe80966c396d34" id="r_ga7a594af8ce76532c80fe80966c396d34"><td class="memTemplParams" colspan="2">template&lt;typename Callable, typename... Args&gt; </td></tr>
-<tr class="memitem:ga7a594af8ce76532c80fe80966c396d34 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __invoke_result_aux&lt; Callable, Args... &gt;::type&#160;</td><td class="memItemRight"><a class="el" href="#ga7a594af8ce76532c80fe80966c396d34">invoke</a> (Callable &amp;&amp;f, Args &amp;&amp;... args) noexcept(<a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>&lt; Callable, Args... &gt;::value)</td></tr>
-<tr class="memdesc:ga7a594af8ce76532c80fe80966c396d34"><td class="mdescLeft">&#160;</td><td class="mdescRight">统一调用接口  <br /></td></tr>
+<tr class="memitem:ga529f4a5476de9eb8ed295cb17c719c96" id="r_ga529f4a5476de9eb8ed295cb17c719c96"><td class="memTemplParams" colspan="2">template&lt;typename Callable, typename... Args&gt; </td></tr>
+<tr class="memitem:ga529f4a5476de9eb8ed295cb17c719c96 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 inner::__invoke_result_aux&lt; Callable, Args... &gt;::type&#160;</td><td class="memItemRight"><a class="el" href="#ga529f4a5476de9eb8ed295cb17c719c96">invoke</a> (Callable &amp;&amp;f, Args &amp;&amp;... args) noexcept(<a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>&lt; Callable, Args... &gt;::value)</td></tr>
+<tr class="memdesc:ga529f4a5476de9eb8ed295cb17c719c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">统一调用接口  <br /></td></tr>
 <tr class="memitem:ga2112b65ec3b25190db36ea014f65503e" id="r_ga2112b65ec3b25190db36ea014f65503e"><td class="memTemplParams" colspan="2">template&lt;typename Res, typename Callable, typename... Args&gt; </td></tr>
 <tr class="memitem:ga2112b65ec3b25190db36ea014f65503e template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__invocable__r.html">is_invocable_r</a>&lt; Res, Callable, Args... &gt;::value, Res &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga2112b65ec3b25190db36ea014f65503e">invoke_r</a> (Callable &amp;&amp;f, Args &amp;&amp;... args) noexcept(<a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>&lt; Callable, Args... &gt;::value)</td></tr>
 <tr class="memdesc:ga2112b65ec3b25190db36ea014f65503e"><td class="mdescLeft">&#160;</td><td class="mdescRight">带返回类型检查的统一调用接口  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>可调用函数系列函数的实现 </p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga7a594af8ce76532c80fe80966c396d34" name="ga7a594af8ce76532c80fe80966c396d34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7a594af8ce76532c80fe80966c396d34">&#9670;&#160;</a></span>invoke()</h2>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">类型定义说明</h2>
+<a id="gaf42c40449c9ef12db7fcf0532b6c90b5" name="gaf42c40449c9ef12db7fcf0532b6c90b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf42c40449c9ef12db7fcf0532b6c90b5">&#9670;&#160;</a></span>invoke_result_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F, typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#gaf42c40449c9ef12db7fcf0532b6c90b5">invoke_result_t</a> = typename inner::__invoke_result_aux&lt;F, Args...&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>invoke_result的便捷别名 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="invoke_8hpp_source.html">invoke.hpp</a> 第 <a class="el" href="invoke_8hpp_source.html#l00311">311</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga529f4a5476de9eb8ed295cb17c719c96" name="ga529f4a5476de9eb8ed295cb17c719c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga529f4a5476de9eb8ed295cb17c719c96">&#9670;&#160;</a></span>invoke()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,7 +167,7 @@ template&lt;typename Callable, typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __invoke_result_aux&lt; Callable, Args... &gt;::type invoke </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 inner::__invoke_result_aux&lt; Callable, Args... &gt;::type invoke </td>
           <td>(</td>
           <td class="paramtype">Callable &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
         </tr>
@@ -160,11 +207,11 @@ template&lt;typename Callable, typename... Args&gt; </div>
 <li>函数对象调用 </li>
 </ol>
 
-<p class="definition">在文件 <a class="el" href="invoke_8hpp_source.html">invoke.hpp</a> 第 <a class="el" href="invoke_8hpp_source.html#l00559">559</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="invoke_8hpp_source.html">invoke.hpp</a> 第 <a class="el" href="invoke_8hpp_source.html#l00538">538</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="call__once_8hpp_source.html#l00065">once_flag::call_once</a> , 以及 <a class="el" href="reference__wrapper_8hpp_source.html#l00118">reference_wrapper&lt; T &gt;::operator()()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a> , 以及 <a class="el" href="reference__wrapper_8hpp_source.html#l00118">reference_wrapper&lt; T &gt;::operator()()</a>.</p>
 
 </div>
 </div>
@@ -216,9 +263,9 @@ template&lt;typename Res, typename Callable, typename... Args&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>调用结果，转换为Res类型</dd></dl>
 <p>与invoke类似，但额外检查返回类型是否可以转换为Res。 </p>
 
-<p class="definition">在文件 <a class="el" href="invoke_8hpp_source.html">invoke.hpp</a> 第 <a class="el" href="invoke_8hpp_source.html#l00603">603</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="invoke_8hpp_source.html">invoke.hpp</a> 第 <a class="el" href="invoke_8hpp_source.html#l00582">582</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
 </div>
 </div>

@@ -28,10 +28,21 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @class future_exception
- * @extends exception
  * @brief 期望值操作异常
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(future_exception, exception, "Future Operation Failed.")
+struct future_exception final : exception {
+    explicit future_exception(const char* info = "Future Operation Failed.",
+                              const char* type = static_type,
+                              const int code = 0) noexcept
+    : exception(info, type, code) {}
+
+    explicit future_exception(const exception& e)
+    : exception(e) {}
+
+    ~future_exception() override = default;
+    static constexpr auto static_type = "future_exception";
+};
+
 
 /** @} */ // Exceptions
 

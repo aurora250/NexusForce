@@ -99,7 +99,7 @@ $(function(){initNavTree('type__traits_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 type_traits.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="type__traits_8hpp__incl.svg" width="243" height="310"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="type__traits_8hpp__incl.svg" width="162" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="type__traits_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -154,8 +154,6 @@ type_traits.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否被解包  <a href="structis__unpackaged.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fcharacter_3C_20T_20_3E" id="r_is_5Fcharacter_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__character.html">is_character&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否为字符类型  <a href="structis__character.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:is_5Fstandard_5Fcharacter_3C_20T_20_3E" id="r_is_5Fstandard_5Fcharacter_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__standard__character.html">is_standard_character&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否为标准字符类型  <a href="structis__standard__character.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fboolean_3C_20T_20_3E" id="r_is_5Fboolean_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__boolean.html">is_boolean&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否为布尔类型  <a href="structis__boolean.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fstandard_5Fintegral_3C_20T_20_3E" id="r_is_5Fstandard_5Fintegral_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__standard__integral.html">is_standard_integral&lt; T &gt;</a></td></tr>
@@ -529,15 +527,15 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga80b97e91b05a2ed8b6185bba229f39a8 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>decay_t</b> = typename <a class="el" href="structdecay.html">decay</a>&lt;T&gt;::type</td></tr>
 <tr class="memdesc:ga80b97e91b05a2ed8b6185bba229f39a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">decay的便捷别名 <br /></td></tr>
-<tr class="memitem:gab0b386306f72a6c76b1b9ea9d13ca4f5" id="r_gab0b386306f72a6c76b1b9ea9d13ca4f5"><td class="memTemplParams" colspan="2">template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </td></tr>
-<tr class="memitem:gab0b386306f72a6c76b1b9ea9d13ca4f5 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___type_attribute_operations.html#gab0b386306f72a6c76b1b9ea9d13ca4f5">detected_or</a> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __detector&lt;Default, void, Op, Args...&gt;</td></tr>
-<tr class="memdesc:gab0b386306f72a6c76b1b9ea9d13ca4f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">检测Op&lt;Args...&gt;是否有效，如果无效则使用Default类型  <br /></td></tr>
+<tr class="memitem:ga999daadde7e6033d617ad91266fcfd7c" id="r_ga999daadde7e6033d617ad91266fcfd7c"><td class="memTemplParams" colspan="2">template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </td></tr>
+<tr class="memitem:ga999daadde7e6033d617ad91266fcfd7c template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___type_attribute_operations.html#ga999daadde7e6033d617ad91266fcfd7c">detected_or</a> = inner::__detector&lt;Default, void, Op, Args...&gt;</td></tr>
+<tr class="memdesc:ga999daadde7e6033d617ad91266fcfd7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检测Op&lt;Args...&gt;是否有效，如果无效则使用Default类型  <br /></td></tr>
 <tr class="memitem:ga80f94c5a0b73ffc291247f406ee7e3b2" id="r_ga80f94c5a0b73ffc291247f406ee7e3b2"><td class="memTemplParams" colspan="2">
 template&lt;typename Default, template&lt; typename... &gt; class Op, typename... Args&gt; </td></tr>
-<tr class="memitem:ga80f94c5a0b73ffc291247f406ee7e3b2 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>detected_or_t</b> = typename <a class="el" href="group___type_attribute_operations.html#gab0b386306f72a6c76b1b9ea9d13ca4f5">detected_or</a>&lt;Default, Op, Args...&gt;::type</td></tr>
+<tr class="memitem:ga80f94c5a0b73ffc291247f406ee7e3b2 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>detected_or_t</b> = typename <a class="el" href="group___type_attribute_operations.html#ga999daadde7e6033d617ad91266fcfd7c">detected_or</a>&lt;Default, Op, Args...&gt;::type</td></tr>
 <tr class="memdesc:ga80f94c5a0b73ffc291247f406ee7e3b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">detected_or的便捷别名，返回检测到的类型或默认类型 <br /></td></tr>
 <tr class="memitem:ga6f7624c2711c293f19f15c71febeaeb0" id="r_ga6f7624c2711c293f19f15c71febeaeb0"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
-<tr class="memitem:ga6f7624c2711c293f19f15c71febeaeb0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___type_attribute_operations.html#ga6f7624c2711c293f19f15c71febeaeb0">common_ternary_operator_t</a> = decltype(true ? <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T1&gt;() : <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T2&gt;())</td></tr>
+<tr class="memitem:ga6f7624c2711c293f19f15c71febeaeb0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___type_attribute_operations.html#ga6f7624c2711c293f19f15c71febeaeb0">common_ternary_operator_t</a> = decltype(true ? _NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T1&gt;() : _NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;T2&gt;())</td></tr>
 <tr class="memdesc:ga6f7624c2711c293f19f15c71febeaeb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">三目运算符的公共类型推导  <br /></td></tr>
 <tr class="memitem:ga63597ca81f0a3a80001c836bc4cbbb84" id="r_ga63597ca81f0a3a80001c836bc4cbbb84"><td class="memTemplParams" colspan="2">
 template&lt;typename... Types&gt; </td></tr>

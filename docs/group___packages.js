@@ -33,18 +33,19 @@ var group___packages =
       [ "hexadecimal", "structhexadecimal.html#a7b571981fbd63d333dde54b4516bf18f", null ],
       [ "flip_bit", "structhexadecimal.html#a73f4b4757f67c1fb2fe811bf79299ebe", null ],
       [ "get_bit", "structhexadecimal.html#ae5ae7037efa90daf549a73fce16ac9f5", null ],
-      [ "NEFORCE_BUILD_PACKAGE_CONSTRUCTOR", "structhexadecimal.html#a871427e8043a583488424f0340ab4133", null ],
+      [ "operator bool", "structhexadecimal.html#a197d50b088872d18bdc53a5f5bbbc62f", null ],
       [ "set_bit", "structhexadecimal.html#a50075c219b3bf89aa63b87aca8eb3bf3", null ],
-      [ "to_string", "group___to_string.html#ga4202617b1a33618284469145ba8f4b34", null ]
+      [ "to_string", "structhexadecimal.html#a21ae010cdd67e4bece1f6b279cbaae08", null ]
     ] ],
     [ "boolean", "structboolean.html", [
-      [ "NEFORCE_BUILD_PACKAGE_CONSTRUCTOR", "structboolean.html#a026be687c2840035d5d4ad21802162be", null ],
       [ "operator!", "structboolean.html#a695d44476867e77651c8c12b8abc2b06", null ],
       [ "to_string", "structboolean.html#ab4fc4f95047a73f2e86cf430cbfd1aa9", null ]
     ] ],
+    [ "integer8", "structinteger8.html", null ],
     [ "integer16", "structinteger16.html", null ],
     [ "integer32", "structinteger32.html", null ],
     [ "integer64", "structinteger64.html", null ],
+    [ "uinteger8", "structuinteger8.html", null ],
     [ "uinteger16", "structuinteger16.html", null ],
     [ "uinteger32", "structuinteger32.html", null ],
     [ "uinteger64", "structuinteger64.html", null ],

@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Vector 向量
- * @brief 动态大小数组容器实现
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -1279,7 +1279,7 @@ vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_value_t<Iterator>, Al
  */
 using byte_vector = vector<byte_t>;
 
-/** @} */ // Vector
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_VECTOR_HPP__

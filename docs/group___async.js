@@ -1,12 +1,19 @@
 var group___async =
 [
+    [ "future&lt; Res &gt;", "classfuture.html", [
+      [ "future", "classfuture.html#a7d0aba61e382ac1909dcd970bc525f22", null ],
+      [ "future", "classfuture.html#ae603243b3c1b6c6d21bb6a3c9718975d", null ],
+      [ "get", "classfuture.html#a5c06db6e4a9055b83db367db0d402b4a", null ],
+      [ "operator=", "classfuture.html#a7b033bcdcafd506b5b415441e42d6c30", null ],
+      [ "share", "classfuture.html#ae9f9089752fe5ff4dd222eadd485d2c0", null ]
+    ] ],
     [ "shared_future&lt; Res &gt;", "classshared__future.html", [
       [ "get", "classshared__future.html#a8c7a2bdcb8da8213d3389a49d8f0bf58", null ]
     ] ],
     [ "promise&lt; Res &gt;", "classpromise.html", [
-      [ "ptr_type", "classpromise.html#a3d29b3f8ec5ca9714ae42ba55c1b419c", null ],
-      [ "result_type", "classpromise.html#a88c1f99a1d78e58e855037e97bfa2ae4", null ],
-      [ "state_type", "classpromise.html#aba7da285b3ed8efe8a593b6f23f5faff", null ],
+      [ "ptr_type", "classpromise.html#a23ef12fa1a0278408fbff4ca4d4ec86c", null ],
+      [ "result_type", "classpromise.html#a974737ae92ff2bf7c88f104121768387", null ],
+      [ "state_type", "classpromise.html#a9c9867e00fe11c873a268f9b7bfb5e5b", null ],
       [ "promise", "classpromise.html#a980a39afa21321c8e9ec5022b0a0123c", null ],
       [ "promise", "classpromise.html#a9a572899607d8841d930d6ae2c067280", null ],
       [ "promise", "classpromise.html#accc51c0d31121acce00d75341b18cd34", null ],
@@ -19,13 +26,6 @@ var group___async =
       [ "set_value", "classpromise.html#a3002df1df9d416019fe00dd89fc0e5ff", null ],
       [ "set_value_at_thread_exit", "classpromise.html#ae5d2f35b49c5f86a4e695ab8e5ae77f1", null ],
       [ "swap", "classpromise.html#a4e1557182307b5f8298782037b153939", null ]
-    ] ],
-    [ "future&lt; Res &gt;", "classfuture.html", [
-      [ "future", "classfuture.html#a7d0aba61e382ac1909dcd970bc525f22", null ],
-      [ "future", "classfuture.html#ae603243b3c1b6c6d21bb6a3c9718975d", null ],
-      [ "get", "classfuture.html#a5c06db6e4a9055b83db367db0d402b4a", null ],
-      [ "operator=", "classfuture.html#a7b033bcdcafd506b5b415441e42d6c30", null ],
-      [ "share", "classfuture.html#ae9f9089752fe5ff4dd222eadd485d2c0", null ]
     ] ],
     [ "future&lt; Res &amp; &gt;", "classfuture_3_01_res_01_6_01_4.html", [
       [ "get", "classfuture_3_01_res_01_6_01_4.html#a1e61af47606186d85acefdadffc9e012", null ]
@@ -57,9 +57,9 @@ var group___async =
       [ "valid", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7cd09ddad944479f2a571e124afe79b4", null ]
     ] ],
     [ "promise&lt; Res &amp; &gt;", "classpromise_3_01_res_01_6_01_4.html", [
-      [ "ptr_type", "classpromise_3_01_res_01_6_01_4.html#a6fe837af1dc769be262b6c4f8bb6d63a", null ],
-      [ "result_type", "classpromise_3_01_res_01_6_01_4.html#a1c9cfee3c719f611a82331651c21c7b3", null ],
-      [ "state_type", "classpromise_3_01_res_01_6_01_4.html#ab8004eeed0002a17b71c5a8bc50cb849", null ],
+      [ "ptr_type", "classpromise_3_01_res_01_6_01_4.html#a58f321250d62ee76eeb219ee0e67c3ae", null ],
+      [ "result_type", "classpromise_3_01_res_01_6_01_4.html#a7473358eab49c3171e75b7368dce60cf", null ],
+      [ "state_type", "classpromise_3_01_res_01_6_01_4.html#aec672fc89e746ed40d5a19c98903b0c9", null ],
       [ "promise", "classpromise_3_01_res_01_6_01_4.html#a0c9db50baf0d8bad238d066b51ac8b24", null ],
       [ "promise", "classpromise_3_01_res_01_6_01_4.html#a372ff6171d84316a2795bfa364831293", null ],
       [ "promise", "classpromise_3_01_res_01_6_01_4.html#a38396aeb0f030d94174e091a2f637561", null ],
@@ -74,9 +74,9 @@ var group___async =
       [ "swap", "classpromise_3_01_res_01_6_01_4.html#a98f79a3eb75decbbdbcf7a6087b13ddf", null ]
     ] ],
     [ "promise&lt; void &gt;", "classpromise_3_01void_01_4.html", [
-      [ "ptr_type", "classpromise_3_01void_01_4.html#acacb1443e0dd3300f3eec8a475e895fc", null ],
-      [ "result_type", "classpromise_3_01void_01_4.html#a73c9438bbef000354b56ebe2db437f73", null ],
-      [ "state_type", "classpromise_3_01void_01_4.html#ab9c6e80ab8f51062f55d40eab160863b", null ],
+      [ "ptr_type", "classpromise_3_01void_01_4.html#aff4c6f463c34add52cbc58e24e54088c", null ],
+      [ "result_type", "classpromise_3_01void_01_4.html#a81d6b124af3b258df55ae78a227c5c61", null ],
+      [ "state_type", "classpromise_3_01void_01_4.html#a9574607703f74df962c70097c9b9c792", null ],
       [ "promise", "classpromise_3_01void_01_4.html#ac277841e88a39702719d9a90b21e6c57", null ],
       [ "promise", "classpromise_3_01void_01_4.html#a1bc7fd6a05bb8861144d8645c361a95b", null ],
       [ "promise", "classpromise_3_01void_01_4.html#a79894a850aab5199527197290e90e65d", null ],

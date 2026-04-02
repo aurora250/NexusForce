@@ -120,6 +120,11 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <tr class="memdesc:ga2bfc6542da7cf0106ecf09fbd4394fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算32位整数的奇偶性  <br /></td></tr>
 <tr class="memitem:ga1a1649ec9d3f0fb2aad2df2550467318" id="r_ga1a1649ec9d3f0fb2aad2df2550467318"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga1a1649ec9d3f0fb2aad2df2550467318">parity</a> (const <a class="el" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> x) noexcept</td></tr>
 <tr class="memdesc:ga1a1649ec9d3f0fb2aad2df2550467318"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算整数的奇偶性  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:ga9d407777ef6c13fd950d17144fcf93d8" id="r_ga9d407777ef6c13fd950d17144fcf93d8"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga9d407777ef6c13fd950d17144fcf93d8">POPCOUNT_TABLE</a> [256]</td></tr>
+<tr class="memdesc:ga9d407777ef6c13fd950d17144fcf93d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">popcount查找表  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>计算位中1的个数和前导零个数 </p>
@@ -157,9 +162,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中前导零的个数，如果x为0则返回32</dd></dl>
 <p>使用二分查找法优化前导零计数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00111">111</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00115">115</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00144">countl_zero()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00200">highest_set_bit_pos()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00148">countl_zero()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00204">highest_set_bit_pos()</a>.</p>
 
 </div>
 </div>
@@ -196,9 +201,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中前导1的个数</dd></dl>
 <p>通过对x按位取反后计算前导零个数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00159">159</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00163">163</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00144">countl_zero()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00148">countl_zero()</a>.</p>
 
 </div>
 </div>
@@ -235,11 +240,11 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中前导零的个数</dd></dl>
 <p>根据平台位数调用相应的clz函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00144">144</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00148">148</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00111">clz32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00115">clz32()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00273">bit_width()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00159">countl_one()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00277">bit_width()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00163">countl_one()</a>.</p>
 
 </div>
 </div>
@@ -276,9 +281,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中尾随1的个数</dd></dl>
 <p>通过对x按位取反后计算尾随零个数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00181">181</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00185">185</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00170">countr_zero()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00174">countr_zero()</a>.</p>
 
 </div>
 </div>
@@ -315,11 +320,11 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中尾随零的个数</dd></dl>
 <p>使用位运算技巧得到最低有效位的掩码。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00170">170</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00174">174</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00129">popcount()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00133">popcount()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00181">countr_one()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00191">lowest_set_bit_pos()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00185">countr_one()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00195">lowest_set_bit_pos()</a>.</p>
 
 </div>
 </div>
@@ -355,9 +360,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>最高设置位的位置，如果没有设置位则返回-1 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00200">200</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00204">204</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00111">clz32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00115">clz32()</a>.</p>
 
 </div>
 </div>
@@ -393,9 +398,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>最低设置位的位置，如果没有设置位则返回-1 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00191">191</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00195">195</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00170">countr_zero()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00174">countr_zero()</a>.</p>
 
 </div>
 </div>
@@ -432,9 +437,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>如果x中1的个数为奇数返回true，否则返回false</dd></dl>
 <p>根据平台位数调用相应的奇偶性计算函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00252">252</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00256">256</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00217">parity32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00221">parity32()</a>.</p>
 
 </div>
 </div>
@@ -471,9 +476,9 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>如果x中1的个数为奇数返回true，否则返回false</dd></dl>
 <p>使用分治法计算奇偶性。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00217">217</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00221">221</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00252">parity()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00256">parity()</a>.</p>
 
 </div>
 </div>
@@ -510,11 +515,11 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中1的个数</dd></dl>
 <p>根据平台位数调用相应的popcount函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00129">129</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00133">133</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00096">popcount32()</a>.</p>
+<p class="reference">引用了 <a class="el" href="bit_8hpp_source.html#l00100">popcount32()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bitset_8hpp_source.html#l00439">bitset&lt; N &gt;::count()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00170">countr_zero()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bitset_8hpp_source.html#l00422">bitset&lt; N &gt;::count()</a> , 以及 <a class="el" href="bit_8hpp_source.html#l00174">countr_zero()</a>.</p>
 
 </div>
 </div>
@@ -551,11 +556,47 @@ $(function(){initNavTree('group___bit_counting.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>x中1的个数</dd></dl>
 <p>使用查表法分别计算4个字节的popcount，然后求和。 </p>
 
-<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00096">96</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00100">100</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00358">_CONSTANTS</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00133">popcount()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00129">popcount()</a>.</p>
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">变量说明</h2>
+<a id="ga9d407777ef6c13fd950d17144fcf93d8" name="ga9d407777ef6c13fd950d17144fcf93d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d407777ef6c13fd950d17144fcf93d8">&#9670;&#160;</a></span>POPCOUNT_TABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> POPCOUNT_TABLE[256]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">                                                 = {</div>
+<div class="line">    0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,</div>
+<div class="line">    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,</div>
+<div class="line">    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,</div>
+<div class="line">    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,</div>
+<div class="line">    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,</div>
+<div class="line">    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,</div>
+<div class="line">    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,</div>
+<div class="line">    3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>popcount查找表 </p>
+<p>预计算的popcount表，用于快速计算字节中1的个数。 包含0-255所有可能字节值的popcount值。 </p>
+
+<p class="definition">在文件 <a class="el" href="bit_8hpp_source.html">bit.hpp</a> 第 <a class="el" href="bit_8hpp_source.html#l00030">30</a> 行定义.</p>
 
 </div>
 </div>

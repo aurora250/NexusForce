@@ -12,7 +12,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct socket_exception
- * @extends network_exception
  * @brief socket操作异常
  */
 struct NEFORCE_API socket_exception final : network_exception {

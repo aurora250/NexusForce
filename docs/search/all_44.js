@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['开源协议_0',['开源协议',['../index.html#license',1,'']]]
+  ['引用包装_0',['引用包装',['../group___reference_wrapper.html',1,'']]]
 ];

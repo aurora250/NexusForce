@@ -19,7 +19,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct pipe_exception
- * @extends system_exception
  * @brief 管道操作异常
  */
 struct pipe_exception final : system_exception {

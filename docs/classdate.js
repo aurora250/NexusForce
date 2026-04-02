@@ -7,6 +7,7 @@ var classdate =
     [ "day", "classdate.html#a030622abeb1dd4497040ee3c52b6ac61", null ],
     [ "days_of_week", "classdate.html#ab45247a1ff4975696add401a3f6ac576", null ],
     [ "days_of_year", "classdate.html#a6d18b75b9cac84ce18a41c03e8915f30", null ],
+    [ "is_valid", "classdate.html#a6a3245b6888126f41fed86d78b4ba8f7", null ],
     [ "month", "classdate.html#aec731c8289bc469a30dac9c413779db6", null ],
     [ "operator+", "classdate.html#ae027ddd0d858df582e9351ce77352eb9", null ],
     [ "operator++", "classdate.html#a1293019fb6ff130ee4e108750becb8be", null ],

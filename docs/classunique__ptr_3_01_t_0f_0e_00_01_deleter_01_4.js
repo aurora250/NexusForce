@@ -2,7 +2,7 @@ var classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4 =
 [
     [ "deleter_type", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1", null ],
     [ "element_type", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8ace3789d9c673b8141ac033485fca51", null ],
-    [ "pointer", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0", null ],
+    [ "pointer", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a19cef8dabae40630596ba78bb5587d7c", null ],
     [ "unique_ptr", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071", null ],
     [ "unique_ptr", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8e4e3f9349fad379cd3c58b8cf0c53dc", null ],
     [ "unique_ptr", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a007644845a7ac5df7d978b2d490b86b4", null ],

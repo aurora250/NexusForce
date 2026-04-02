@@ -13,7 +13,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct cmdline_exception
- * @extends system_exception
  * @brief 命令行解析异常
  */
 struct cmdline_exception final : system_exception {

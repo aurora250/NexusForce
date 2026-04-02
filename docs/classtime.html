@@ -125,6 +125,8 @@ NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><b>~time</b> ()=default</
 <tr class="memdesc:a18fd17881f13626bc6fc834df1b5d631"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取分钟  <br /></td></tr>
 <tr class="memitem:aa081dca6d284d7f831aae5c2076bfec1" id="r_aa081dca6d284d7f831aae5c2076bfec1"><td class="memItemLeft">NEFORCE_NODISCARD constexpr <a class="el" href="#a8dd32b184c33f27177802bf37522a5cb">time_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa081dca6d284d7f831aae5c2076bfec1">seconds</a> () const noexcept</td></tr>
 <tr class="memdesc:aa081dca6d284d7f831aae5c2076bfec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取秒  <br /></td></tr>
+<tr class="memitem:a913d264411382fa9cbffa7b2196d1adb" id="r_a913d264411382fa9cbffa7b2196d1adb"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a913d264411382fa9cbffa7b2196d1adb">is_valid</a> () const noexcept</td></tr>
+<tr class="memdesc:a913d264411382fa9cbffa7b2196d1adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查时间是否有效  <br /></td></tr>
 <tr class="memitem:a7a900345c3b57ab64060715c1a624c0e" id="r_a7a900345c3b57ab64060715c1a624c0e"><td class="memItemLeft"><a id="a7a900345c3b57ab64060715c1a624c0e" name="a7a900345c3b57ab64060715c1a624c0e"></a>
 constexpr void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 <tr class="memdesc:a7a900345c3b57ab64060715c1a624c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置为00:00:00 <br /></td></tr>
@@ -201,7 +203,7 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <div class="textblock"><p>时间类 </p>
 <p>表示一天中的时间（时、分、秒），支持时间间隔计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00390">390</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00398">398</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="af952b8e86c96883aa54aa0e1dd77ffee" name="af952b8e86c96883aa54aa0e1dd77ffee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af952b8e86c96883aa54aa0e1dd77ffee">&#9670;&#160;</a></span>time()</h2>
@@ -245,9 +247,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00416">416</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00424">424</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00460">is_valid()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00468">is_valid()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
 </div>
 </div>
@@ -278,16 +280,48 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <p>获取小时 </p>
 <dl class="section return"><dt>返回</dt><dd>小时 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00433">433</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00441">441</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00433">hours()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00441">hours()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00433">hours()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00441">hours()</a>.</p>
+
+</div>
+</div>
+<a id="a913d264411382fa9cbffa7b2196d1adb" name="a913d264411382fa9cbffa7b2196d1adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a913d264411382fa9cbffa7b2196d1adb">&#9670;&#160;</a></span>is_valid() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool time::is_valid </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查时间是否有效 </p>
+<dl class="section return"><dt>返回</dt><dd>是否有效 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00476">476</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00468">is_valid()</a>.</p>
 
 </div>
 </div>
 <a id="ae1d5c3733b24ac907c3e49f5c5c9039a" name="ae1d5c3733b24ac907c3e49f5c5c9039a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1d5c3733b24ac907c3e49f5c5c9039a">&#9670;&#160;</a></span>is_valid()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1d5c3733b24ac907c3e49f5c5c9039a">&#9670;&#160;</a></span>is_valid() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,9 +363,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否有效 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00460">460</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00468">468</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00416">time()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00476">is_valid()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00424">time()</a>.</p>
 
 </div>
 </div>
@@ -361,7 +395,7 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <p>获取分钟 </p>
 <dl class="section return"><dt>返回</dt><dd>分钟 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00441">441</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00449">449</a> 行定义.</p>
 
 </div>
 </div>
@@ -397,9 +431,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 </dl>
 <dl class="section return"><dt>返回</dt><dd>新时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00545">545</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00561">561</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00449">seconds()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00457">seconds()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
 </div>
 </div>
@@ -435,9 +469,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00505">505</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00521">521</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00449">seconds()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00457">seconds()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
 </div>
 </div>
@@ -473,7 +507,7 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 </dl>
 <dl class="section return"><dt>返回</dt><dd>相差的秒数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00599">599</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00615">615</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
@@ -511,9 +545,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 </dl>
 <dl class="section return"><dt>返回</dt><dd>新时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00556">556</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00572">572</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00449">seconds()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00457">seconds()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
 </div>
 </div>
@@ -549,9 +583,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00527">527</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00543">543</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00449">seconds()</a>, <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00477">to_seconds()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00457">seconds()</a>, <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00493">to_seconds()</a>.</p>
 
 </div>
 </div>
@@ -593,11 +627,11 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00629">629</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00645">645</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="basic__string__view_8hpp_source.html#l00326">basic_string_view&lt; CharT, Traits &gt;::size()</a>, <a class="el" href="basic__string__view_8hpp_source.html#l00445">basic_string_view&lt; CharT, Traits &gt;::substr()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l01351">datetime::parse()</a>, <a class="el" href="datetime_8hpp_source.html#l01309">datetime::parse_ISO()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01175">datetime::parse_ISO_UTC()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l01375">datetime::parse()</a>, <a class="el" href="datetime_8hpp_source.html#l01333">datetime::parse_ISO()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01199">datetime::parse_ISO_UTC()</a>.</p>
 
 </div>
 </div>
@@ -627,9 +661,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <p>获取秒 </p>
 <dl class="section return"><dt>返回</dt><dd>秒 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00449">449</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00457">457</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00545">operator+()</a>, <a class="el" href="datetime_8hpp_source.html#l00505">operator+=()</a>, <a class="el" href="datetime_8hpp_source.html#l00556">operator-()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00527">operator-=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00561">operator+()</a>, <a class="el" href="datetime_8hpp_source.html#l00521">operator+=()</a>, <a class="el" href="datetime_8hpp_source.html#l00572">operator-()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00543">operator-=()</a>.</p>
 
 </div>
 </div>
@@ -664,9 +698,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00643">643</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00659">659</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
+<p class="reference">引用了 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a> , 以及 <a class="el" href="#a80b83664b70c88b8ee782372d2cd4cd1">time()</a>.</p>
 
 </div>
 </div>
@@ -696,7 +730,7 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <p>计算哈希值 </p>
 <dl class="section return"><dt>返回</dt><dd>哈希值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00610">610</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00626">626</a> 行定义.</p>
 
 </div>
 </div>
@@ -726,9 +760,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <p>转换为总秒数 </p>
 <dl class="section return"><dt>返回</dt><dd>从00:00:00开始的秒数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00477">477</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00493">493</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00527">operator-=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l00543">operator-=()</a>.</p>
 
 </div>
 </div>
@@ -758,9 +792,9 @@ constexpr <a class="el" href="classtime.html">time</a>&#160;</td><td class="memI
 <p>转换为字符串 </p>
 <dl class="section return"><dt>返回</dt><dd>格式为 HH:MM:SS 的字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00619">619</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="datetime_8hpp_source.html">datetime.hpp</a> 第 <a class="el" href="datetime_8hpp_source.html#l00635">635</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="format_8hpp_source.html#l00682">format()</a>.</p>
+<p class="reference">引用了 <a class="el" href="format_8hpp_source.html#l00663">format()</a>.</p>
 
 </div>
 </div>

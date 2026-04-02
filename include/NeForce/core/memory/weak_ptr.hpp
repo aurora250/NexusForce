@@ -7,6 +7,11 @@
  *
  * 此文件提供了弱智能指针的完整实现，用于观察共享智能指针管理的对象，
  * 但不增加引用计数，避免循环引用问题。
+ *
+ * 主要用途：
+ * - 打破循环引用（如双向链表、观察者模式）
+ * - 缓存对象但不影响其生命周期
+ * - 安全地检查对象是否存在
  */
 
 #include "NeForce/core/memory/shared_ptr.hpp"
@@ -25,6 +30,15 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 弱智能指针用于观察由共享智能指针管理的对象，但不拥有对象的所有权。
  * 不会增加对象的引用计数，因此不会阻止对象被销毁。
+ *
+ * 特性：
+ * - 不增加对象引用计数
+ * - 可检测对象是否已被销毁
+ * - 可安全地升级为shared_ptr
+ * - 支持所有权比较和排序
+ * - 线程安全的过期检测
+ *
+ * @note 弱指针本身是线程安全的，但升级后的共享指针需要单独管理
  */
 template <typename T>
 class weak_ptr {
@@ -407,7 +421,20 @@ struct owner_less<void> {
     }
 };
 
+/** @} */ // WeakPointer
 
+/**
+ * @defgroup AtomicOperations 原子操作
+ * @brief 原子变量的操作
+ * @{
+ */
+
+/**
+ * @brief weak_ptr的原子特化
+ * @tparam T 对象类型
+ *
+ * 提供weak_ptr的原子操作支持，实现无锁的原子操作。
+ */
 template <typename T>
 struct atomic<weak_ptr<T>> {
 public:
@@ -419,88 +446,124 @@ private:
     inner::smart_pointer_atomic<value_type> atomic_;
 
 public:
+    /**
+     * @brief 检查是否无锁
+     * @return 始终返回false
+     */
     bool is_lock_free() const noexcept {
         return false;
     }
 
     constexpr atomic() noexcept = default;
 
+    /**
+     * @brief 从weak_ptr构造
+     * @param value 初始值
+     */
     atomic(value_type value) noexcept
     : atomic_(move(value)) {}
 
     atomic(const atomic&) = delete;
     void operator =(const atomic&) = delete;
 
+    /**
+     * @brief 原子加载
+     * @param mo 内存序
+     * @return 加载的值
+     */
     value_type load(memory_order mo = memory_order_seq_cst) const noexcept {
         return atomic_.load(mo);
     }
 
+    /**
+     * @brief 隐式转换操作符
+     */
     operator value_type() const noexcept {
         return atomic_.load(memory_order_seq_cst);
     }
 
+    /**
+     * @brief 原子存储
+     * @param desired 要存储的值
+     * @param mo 内存序
+     */
     void store(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
         atomic_.swap(desired, mo);
     }
 
+    /**
+     * @brief 赋值操作符
+     */
     void operator =(value_type desired) noexcept {
         atomic_.swap(desired, memory_order_seq_cst);
     }
 
+    /**
+     * @brief 交换操作
+     * @param desired 要交换的值
+     * @param mo 内存序
+     * @return 交换前的值
+     */
     value_type exchange(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
         atomic_.swap(desired, mo);
         return desired;
     }
 
+    /**
+     * @brief 比较交换强版本
+     */
     bool compare_exchange_strong(value_type& expected, value_type desired,
                                  memory_order mo, memory_order mo2) noexcept {
         return atomic_.compare_exchange_strong(expected, desired, mo, mo2);
     }
 
+    /**
+     * @brief 简化比较交换强版本
+     */
     bool compare_exchange_strong(value_type& expected, value_type desired,
                                  memory_order mo = memory_order_seq_cst) noexcept {
-        memory_order mo2;
-        switch (mo) {
-            case memory_order_acq_rel: {
-                mo2 = memory_order_acquire;
-                break;
-            }
-            case memory_order_release: {
-                mo2 = memory_order_relaxed;
-                break;
-            }
-            default: {
-                mo2 = mo;
-            }
-        }
-        return compare_exchange_strong(expected, move(desired), mo, mo2);
+        return compare_exchange_strong(expected, move(desired), mo, cmpexch_failure_order(mo));
     }
 
+    /**
+     * @brief 比较交换弱版本
+     */
     bool compare_exchange_weak(value_type& expected, value_type desired,
                                memory_order mo, memory_order mo2) noexcept {
         return compare_exchange_strong(expected, move(desired), mo, mo2);
     }
 
+    /**
+     * @brief 简化比较交换弱版本
+     */
     bool compare_exchange_weak(value_type& expected, value_type desired,
                                memory_order mo = memory_order_seq_cst) noexcept {
         return compare_exchange_strong(expected, move(desired), mo);
     }
 
+    /**
+     * @brief 等待值改变
+     */
     void wait(value_type mold, memory_order mo = memory_order_seq_cst) const noexcept {
         atomic_.wait(move(mold), mo);
     }
 
+    /**
+     * @brief 通知一个等待者
+     */
     void notify_one() noexcept {
         atomic_.notify_one();
     }
 
+    /**
+     * @brief 通知所有等待者
+     */
     void notify_all() noexcept {
         atomic_.notify_all();
     }
 };
 
-
-/** @} */ // WeakPointer
+/** @} */ // AtomicOperations
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_MEMORY_WEAK_PTR_HPP__

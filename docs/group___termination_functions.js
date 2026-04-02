@@ -1,5 +1,6 @@
 var group___termination_functions =
 [
+    [ "exit_handler", "group___termination_functions.html#gab42b1569adea1c183f3bb462f92e3ad4", null ],
     [ "terminate_handler", "group___termination_functions.html#ga6940f19ddf8615084b7fc5e1a11d5757", null ],
     [ "abort", "group___termination_functions.html#ga3662ca40b7089b5cf757f202ef083d22", null ],
     [ "exit", "group___termination_functions.html#ga71b7d8bbc81e3efd65f0aee05b89ce50", null ],

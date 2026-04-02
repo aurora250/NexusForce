@@ -760,6 +760,7 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
     return static_cast<size_t>(-1);
 }
 
+/** @} */ // CharTraits
 
 #define __NEFORCE_BUILD_CHAR_PTR_HASH(OPT) \
 template <> \
@@ -789,8 +790,6 @@ struct hash<const OPT[N]> { \
 
 NEFORCE_MACRO_RANGE_CHARS(__NEFORCE_BUILD_CHAR_PTR_HASH)
 #undef __NEFORCE_BUILD_CHAR_PTR_HASH
-
-/** @} */ // CharTraits
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_STRING_CHAR_TRAITS_HPP__

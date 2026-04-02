@@ -14,6 +14,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup BoundAlgorithms 边界查找算法
  * @brief 在有序范围内查找边界的二分查找算法
  * @{
@@ -681,6 +687,8 @@ constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1, Iterator2 f
 }
 
 /** @} */ // PatternMatchingAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_SEARCH_HPP__

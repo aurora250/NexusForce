@@ -14,7 +14,13 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup LeonardoHeap 莱昂纳多堆
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
+ * @defgroup LeonardoHeap 莱昂纳多堆算法
  * @brief 莱昂纳多堆算法实现
  * @{
  */
@@ -247,6 +253,8 @@ void make_leonardo_heap(Iterator first, Iterator last) {
 }
 
 /** @} */ // LeonardoHeap
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_LEONARDO_HEAP_HPP__

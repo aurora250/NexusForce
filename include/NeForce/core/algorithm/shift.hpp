@@ -16,6 +16,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup ShiftAlgorithms 修改算法
  * @brief 移位和修改算法的实现
  * @{
@@ -1043,6 +1049,8 @@ constexpr Iterator unique(Iterator first, Iterator last, BinaryPredicate binary_
 }
 
 /** @} */ // ShiftAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_SHIFT_HPP__

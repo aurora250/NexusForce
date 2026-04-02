@@ -1,12 +1,5 @@
 var to__numerics_8hpp =
 [
-    [ "strtod", "group___string_numerics.html#ga5e92d98de1db849259abd8c9fa926531", null ],
-    [ "strtof", "group___string_numerics.html#ga223c1b5f087a65c9a222816ba6eb29a3", null ],
-    [ "strtol", "group___string_numerics.html#ga6bc4308a6dbf721df2edd7afa76c610f", null ],
-    [ "strtold", "group___string_numerics.html#gadf8789b3630438aff8af443a182121d5", null ],
-    [ "strtoll", "group___string_numerics.html#gaa73bf5a884d411e5607b8f8065bc69c9", null ],
-    [ "strtoul", "group___string_numerics.html#ga248d4b620e2186151ebbcb94a586317a", null ],
-    [ "strtoull", "group___string_numerics.html#ga2b1ed25dd143698dac4a7d02f134187a", null ],
     [ "to_decimal", "group___string_numerics.html#ga19263ca94456dbdd63476072694d7fb1", null ],
     [ "to_float32", "group___string_numerics.html#ga31874b04e06ebff7b7c8e7e5594dc298", null ],
     [ "to_float64", "group___string_numerics.html#ga1f5155d159305f819abbf7be465d99b6", null ],

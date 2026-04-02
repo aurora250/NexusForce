@@ -1,8 +1,8 @@
 var classpromise =
 [
-    [ "ptr_type", "classpromise.html#a3d29b3f8ec5ca9714ae42ba55c1b419c", null ],
-    [ "result_type", "classpromise.html#a88c1f99a1d78e58e855037e97bfa2ae4", null ],
-    [ "state_type", "classpromise.html#aba7da285b3ed8efe8a593b6f23f5faff", null ],
+    [ "ptr_type", "classpromise.html#a23ef12fa1a0278408fbff4ca4d4ec86c", null ],
+    [ "result_type", "classpromise.html#a974737ae92ff2bf7c88f104121768387", null ],
+    [ "state_type", "classpromise.html#a9c9867e00fe11c873a268f9b7bfb5e5b", null ],
     [ "promise", "classpromise.html#a980a39afa21321c8e9ec5022b0a0123c", null ],
     [ "promise", "classpromise.html#a9a572899607d8841d930d6ae2c067280", null ],
     [ "promise", "classpromise.html#accc51c0d31121acce00d75341b18cd34", null ],

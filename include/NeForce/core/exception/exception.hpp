@@ -237,10 +237,16 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(file_exception, system_exception, "File Operatio
 NEFORCE_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Calculation Invalid.")
 
 /**
+ * @struct thirdparty_exception
+ * @brief 第三方操作异常
+ */
+NEFORCE_ERROR_BUILD_DERIVED_CLASS(thirdparty_exception, exception, "ThirdParty Operation Invalid.")
+
+/**
  * @struct database_exception
  * @brief 数据库行为异常
  */
-NEFORCE_ERROR_BUILD_DERIVED_CLASS(database_exception, system_exception, "Database Operation Failed.")
+NEFORCE_ERROR_BUILD_DERIVED_CLASS(database_exception, thirdparty_exception, "Database Operation Failed.")
 
 /**
  * @struct network_exception
@@ -250,7 +256,12 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(network_exception, exception, "Network Operati
 
 /** @} */ // Exceptions
 
-
+/**
+ * @brief 未捕获的异常数量
+ * @return 当前线程中未捕获的异常数量
+ *
+ * 该函数返回在当前线程中已经抛出但尚未被捕获的异常数量。
+ */
 int NEFORCE_API uncaught_exceptions() noexcept NEFORCE_PURE_FUNCTION;
 
 /**

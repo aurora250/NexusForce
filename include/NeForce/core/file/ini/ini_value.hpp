@@ -21,10 +21,20 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct ini_exception
- * @extends value_exception
  * @brief ini格式操作失败
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(ini_exception, value_exception, "INI Operation Failed.")
+struct ini_exception final : value_exception {
+    explicit ini_exception(const char* info = "INI Operation Failed.",
+                           const char* type = static_type,
+                           const int code = 0) noexcept
+    : value_exception(info, type, code) {}
+
+    explicit ini_exception(const exception& e)
+    : value_exception(e) {}
+
+    ~ini_exception() override = default;
+    static constexpr auto static_type = "ini_exception";
+};
 
 /** @} */ // Exceptions
 

@@ -89,7 +89,7 @@ $(function(){initNavTree('classdeque.html','','classdeque-members'); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">deque&lt; T, Alloc, BufSize &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___deque.html">双端队列</a></div></div></div>
+  <div class="headertitle"><div class="title">deque&lt; T, Alloc, BufSize &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___container.html">标准容器</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -133,10 +133,10 @@ using&#160;</td><td class="memItemRight"><b>iterator</b> = <a class="el" href="s
 using&#160;</td><td class="memItemRight"><b>const_iterator</b> = <a class="el" href="structdeque__iterator.html">deque_iterator</a>&lt;true, <a class="el" href="classdeque.html">deque</a>, BufSize&gt;</td></tr>
 <tr class="memdesc:ac8339d67e4f48322f4ef562aa07daff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
 <tr class="memitem:a4e6018f7a8f07be49e6b019931a21374" id="r_a4e6018f7a8f07be49e6b019931a21374"><td class="memItemLeft"><a id="a4e6018f7a8f07be49e6b019931a21374" name="a4e6018f7a8f07be49e6b019931a21374"></a>
-using&#160;</td><td class="memItemRight"><b>reverse_iterator</b> = <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="#a4e6018f7a8f07be49e6b019931a21374">reverse_iterator</a>&lt;<a class="el" href="#adf1f4aca5f08b6b72e638f4c8db6d279">iterator</a>&gt;</td></tr>
+using&#160;</td><td class="memItemRight"><b>reverse_iterator</b> = _NEFORCE <a class="el" href="#a4e6018f7a8f07be49e6b019931a21374">reverse_iterator</a>&lt;<a class="el" href="#adf1f4aca5f08b6b72e638f4c8db6d279">iterator</a>&gt;</td></tr>
 <tr class="memdesc:a4e6018f7a8f07be49e6b019931a21374"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向迭代器类型 <br /></td></tr>
 <tr class="memitem:a87b66790815626aad9fbf6e03678a90c" id="r_a87b66790815626aad9fbf6e03678a90c"><td class="memItemLeft"><a id="a87b66790815626aad9fbf6e03678a90c" name="a87b66790815626aad9fbf6e03678a90c"></a>
-using&#160;</td><td class="memItemRight"><b>const_reverse_iterator</b> = <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="#a4e6018f7a8f07be49e6b019931a21374">reverse_iterator</a>&lt;<a class="el" href="#ac8339d67e4f48322f4ef562aa07daff2">const_iterator</a>&gt;</td></tr>
+using&#160;</td><td class="memItemRight"><b>const_reverse_iterator</b> = _NEFORCE <a class="el" href="#a4e6018f7a8f07be49e6b019931a21374">reverse_iterator</a>&lt;<a class="el" href="#ac8339d67e4f48322f4ef562aa07daff2">const_iterator</a>&gt;</td></tr>
 <tr class="memdesc:a87b66790815626aad9fbf6e03678a90c"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量反向迭代器类型 <br /></td></tr>
 <tr class="memitem:a053b811462aacb3f2b07ceaeb60b1177" id="r_a053b811462aacb3f2b07ceaeb60b1177"><td class="memItemLeft"><a id="a053b811462aacb3f2b07ceaeb60b1177" name="a053b811462aacb3f2b07ceaeb60b1177"></a>
 using&#160;</td><td class="memItemRight"><b>allocator_type</b> = Alloc</td></tr>
@@ -268,9 +268,9 @@ void&#160;</td><td class="memItemRight"><b>pop_front</b> () noexcept(is_nothrow_
 <tr class="memdesc:a0f594207846ba5fa56dda2bf84a6f757"><td class="mdescLeft">&#160;</td><td class="mdescRight">下标访问操作符  <br /></td></tr>
 <tr class="memitem:a2bc9e5114adc88054d962dd466a18920" id="r_a2bc9e5114adc88054d962dd466a18920"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2bc9e5114adc88054d962dd466a18920">swap</a> (<a class="el" href="classdeque.html">deque</a> &amp;other) noexcept(is_nothrow_swappable_v&lt; map_allocator &gt; &amp;&amp;is_nothrow_swappable_v&lt; <a class="el" href="#a053b811462aacb3f2b07ceaeb60b1177">allocator_type</a> &gt;)</td></tr>
 <tr class="memdesc:a2bc9e5114adc88054d962dd466a18920"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个双端队列的内容  <br /></td></tr>
-<tr class="memitem:a33562a00553b6a9423e71afe96f4fe92" id="r_a33562a00553b6a9423e71afe96f4fe92"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a33562a00553b6a9423e71afe96f4fe92">operator==</a> (const <a class="el" href="classdeque.html">deque</a> &amp;rhs) const noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___compare_algorithms.html#ga036b36b8a9c1e27a0552d0534da786da">equal</a>(<a class="el" href="#acb9ef1a1308c650904783174c2dfc249">cbegin</a>(), <a class="el" href="#aa6ab05b3ac23e0476409577283fc57d7">cend</a>(), rhs.cbegin())))</td></tr>
+<tr class="memitem:a33562a00553b6a9423e71afe96f4fe92" id="r_a33562a00553b6a9423e71afe96f4fe92"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a33562a00553b6a9423e71afe96f4fe92">operator==</a> (const <a class="el" href="classdeque.html">deque</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga682c1803a35a1de8b019d003138ae5dd">equal</a>(<a class="el" href="#acb9ef1a1308c650904783174c2dfc249">cbegin</a>(), <a class="el" href="#aa6ab05b3ac23e0476409577283fc57d7">cend</a>(), rhs.cbegin())))</td></tr>
 <tr class="memdesc:a33562a00553b6a9423e71afe96f4fe92"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
-<tr class="memitem:a0d89caa35b086923c582af84f9a35f52" id="r_a0d89caa35b086923c582af84f9a35f52"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a0d89caa35b086923c582af84f9a35f52">operator&lt;</a> (const <a class="el" href="classdeque.html">deque</a> &amp;rhs) const noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___compare_algorithms.html#gac2a7bf2e648cdd3aeb26ac994c4cc026">lexicographical_compare</a>(<a class="el" href="#acb9ef1a1308c650904783174c2dfc249">cbegin</a>(), <a class="el" href="#aa6ab05b3ac23e0476409577283fc57d7">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
+<tr class="memitem:a0d89caa35b086923c582af84f9a35f52" id="r_a0d89caa35b086923c582af84f9a35f52"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a0d89caa35b086923c582af84f9a35f52">operator&lt;</a> (const <a class="el" href="classdeque.html">deque</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a>(<a class="el" href="#acb9ef1a1308c650904783174c2dfc249">cbegin</a>(), <a class="el" href="#aa6ab05b3ac23e0476409577283fc57d7">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
 <tr class="memdesc:a0d89caa35b086923c582af84f9a35f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
 <tr class="inherit_header pub_methods_structicollector"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structicollector')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structicollector.html">icollector&lt; T &gt;</a></td></tr>
 <tr class="memitem:aa12122cd69ca1ec919297f84f0e4b0a4 inherit pub_methods_structicollector" id="r_aa12122cd69ca1ec919297f84f0e4b0a4"><td class="memItemLeft">NEFORCE_NODISCARD constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structicollector.html#aa12122cd69ca1ec919297f84f0e4b0a4">size</a> () const noexcept(noexcept(derived().size()))</td></tr>
@@ -310,7 +310,7 @@ class deque&lt; T, Alloc, BufSize &gt;</div><p>双端队列容器 </p>
 </dl>
 <p>双端队列是一种支持在两端高效插入和删除的序列容器。 采用分块存储结构：元素被分割成多个固定大小的缓冲区， 这些缓冲区的指针存储在中控器中，从而实现动态增长和两端操作。 提供随机访问迭代器，但迭代器可能因重新分配而失效。 </p>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00265">265</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00260">260</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a17268f4bf56124fa71ebb36ef241133b" name="a17268f4bf56124fa71ebb36ef241133b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17268f4bf56124fa71ebb36ef241133b">&#9670;&#160;</a></span>deque() <span class="overload">[1/7]</span></h2>
@@ -340,11 +340,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>默认构造函数 </p>
 <p>构造一个空双端队列。 </p>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00825">825</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00820">820</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l04381">initialize()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l04356">initialize()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00880">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00907">deque()</a>, <a class="el" href="deque_8hpp_source.html#l01509">operator&lt;()</a>, <a class="el" href="deque_8hpp_source.html#l00889">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l00916">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l00870">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l01499">operator==()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01484">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00875">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00902">deque()</a>, <a class="el" href="deque_8hpp_source.html#l01504">operator&lt;()</a>, <a class="el" href="deque_8hpp_source.html#l00884">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l00911">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l00865">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l01494">operator==()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01479">swap()</a>.</p>
 
 </div>
 </div>
@@ -381,9 +381,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00833">833</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00828">828</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l04381">initialize()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l04356">initialize()</a>.</p>
 
 </div>
 </div>
@@ -425,7 +425,7 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00842">842</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00837">837</a> 行定义.</p>
 
 </div>
 </div>
@@ -475,7 +475,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00853">853</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00848">848</a> 行定义.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00861">861</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00856">856</a> 行定义.</p>
 
 </div>
 </div>
@@ -549,9 +549,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00880">880</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00875">875</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00981">cbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00989">cend()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00825">deque()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00976">cbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00984">cend()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00820">deque()</a>.</p>
 
 </div>
 </div>
@@ -588,9 +588,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00907">907</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00902">902</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00825">deque()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01484">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00820">deque()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01479">swap()</a>.</p>
 
 </div>
 </div>
@@ -622,9 +622,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>析构函数 </p>
 <p>销毁所有元素并释放所有内存。 </p>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00928">928</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00923">923</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00285">buffer_size</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01427">clear()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00280">buffer_size</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01422">clear()</a>.</p>
 
 </div>
 </div>
@@ -667,9 +667,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01255">1255</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01250">1250</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
@@ -719,7 +719,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01266">1266</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01261">1261</a> 行定义.</p>
 
 </div>
 </div>
@@ -756,7 +756,7 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01274">1274</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01269">1269</a> 行定义.</p>
 
 </div>
 </div>
@@ -794,7 +794,7 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01458">1458</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01453">1453</a> 行定义.</p>
 
 </div>
 </div>
@@ -832,9 +832,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01449">1449</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01444">1444</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01467">operator[]()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01476">operator[]()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01462">operator[]()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01471">operator[]()</a>.</p>
 
 </div>
 </div>
@@ -866,9 +866,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>访问最后一个常量元素 </p>
 <dl class="section return"><dt>返回</dt><dd>最后一个元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01096">1096</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01091">1091</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01061">empty()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01056">empty()</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00028">NEFORCE_DEBUG_VERIFY</a>.</p>
 
 </div>
 </div>
@@ -900,9 +900,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>访问最后一个元素 </p>
 <dl class="section return"><dt>返回</dt><dd>最后一个元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01087">1087</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01082">1082</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01061">empty()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01056">empty()</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00028">NEFORCE_DEBUG_VERIFY</a>.</p>
 
 </div>
 </div>
@@ -934,9 +934,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00965">965</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00960">960</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00981">cbegin()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00976">cbegin()</a>.</p>
 
 </div>
 </div>
@@ -968,9 +968,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00949">949</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00944">944</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00889">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01005">rend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00884">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01000">rend()</a>.</p>
 
 </div>
 </div>
@@ -1002,9 +1002,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00981">981</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00976">976</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00965">begin()</a>, <a class="el" href="deque_8hpp_source.html#l01037">crend()</a>, <a class="el" href="deque_8hpp_source.html#l00880">deque()</a>, <a class="el" href="deque_8hpp_source.html#l01509">operator&lt;()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01499">operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00960">begin()</a>, <a class="el" href="deque_8hpp_source.html#l01032">crend()</a>, <a class="el" href="deque_8hpp_source.html#l00875">deque()</a>, <a class="el" href="deque_8hpp_source.html#l01504">operator&lt;()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01494">operator==()</a>.</p>
 
 </div>
 </div>
@@ -1036,9 +1036,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00989">989</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00984">984</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01029">crbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00880">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00973">end()</a>, <a class="el" href="deque_8hpp_source.html#l01509">operator&lt;()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01499">operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01024">crbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00875">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00968">end()</a>, <a class="el" href="deque_8hpp_source.html#l01504">operator&lt;()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01494">operator==()</a>.</p>
 
 </div>
 </div>
@@ -1070,11 +1070,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>清空双端队列 </p>
 <p>销毁所有元素，释放所有缓冲区，重置迭代器。 </p>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01427">1427</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01422">1422</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01408">shrink_to_fit()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01403">shrink_to_fit()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01381">erase()</a>, <a class="el" href="deque_8hpp_source.html#l00916">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00928">~deque()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01376">erase()</a>, <a class="el" href="deque_8hpp_source.html#l00911">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00923">~deque()</a>.</p>
 
 </div>
 </div>
@@ -1106,11 +1106,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01029">1029</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01024">1024</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00989">cend()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00984">cend()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01013">rbegin()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01008">rbegin()</a>.</p>
 
 </div>
 </div>
@@ -1142,11 +1142,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01037">1037</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01032">1032</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00981">cbegin()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00976">cbegin()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01021">rend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01016">rend()</a>.</p>
 
 </div>
 </div>
@@ -1197,9 +1197,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01134">1134</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01129">1129</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l01152">emplace_back()</a>, <a class="el" href="deque_8hpp_source.html#l01169">emplace_front()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01147">emplace_back()</a>, <a class="el" href="deque_8hpp_source.html#l01164">emplace_front()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
 </div>
 </div>
@@ -1244,11 +1244,11 @@ template&lt;typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01152">1152</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01147">1147</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="construct_8hpp_source.html#l00034">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01134">emplace()</a>, <a class="el" href="deque_8hpp_source.html#l01302">insert()</a>, <a class="el" href="deque_8hpp_source.html#l01184">push_back()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01200">push_back()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01129">emplace()</a>, <a class="el" href="deque_8hpp_source.html#l01297">insert()</a>, <a class="el" href="deque_8hpp_source.html#l01179">push_back()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01195">push_back()</a>.</p>
 
 </div>
 </div>
@@ -1293,11 +1293,11 @@ template&lt;typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01169">1169</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01164">1164</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="construct_8hpp_source.html#l00034">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01134">emplace()</a>, <a class="el" href="deque_8hpp_source.html#l01302">insert()</a>, <a class="el" href="deque_8hpp_source.html#l01192">push_front()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01208">push_front()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01129">emplace()</a>, <a class="el" href="deque_8hpp_source.html#l01297">insert()</a>, <a class="el" href="deque_8hpp_source.html#l01187">push_front()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01203">push_front()</a>.</p>
 
 </div>
 </div>
@@ -1329,9 +1329,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>检查是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01061">1061</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01056">1056</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01096">back()</a>, <a class="el" href="deque_8hpp_source.html#l01087">back()</a>, <a class="el" href="deque_8hpp_source.html#l01078">front()</a>, <a class="el" href="deque_8hpp_source.html#l01069">front()</a>, <a class="el" href="deque_8hpp_source.html#l01215">pop_back()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01234">pop_front()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01091">back()</a>, <a class="el" href="deque_8hpp_source.html#l01082">back()</a>, <a class="el" href="deque_8hpp_source.html#l01073">front()</a>, <a class="el" href="deque_8hpp_source.html#l01064">front()</a>, <a class="el" href="deque_8hpp_source.html#l01210">pop_back()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01229">pop_front()</a>.</p>
 
 </div>
 </div>
@@ -1363,9 +1363,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00973">973</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00968">968</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00989">cend()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00984">cend()</a>.</p>
 
 </div>
 </div>
@@ -1397,9 +1397,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00957">957</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00952">952</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00889">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00997">rbegin()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00884">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00992">rbegin()</a>.</p>
 
 </div>
 </div>
@@ -1442,9 +1442,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01381">1381</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01376">1376</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l01427">clear()</a>, <a class="el" href="shift_8hpp_source.html#l00083">copy()</a>, <a class="el" href="shift_8hpp_source.html#l00225">copy_backward()</a>, <a class="el" href="construct_8hpp_source.html#l00047">destroy()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01045">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01422">clear()</a>, <a class="el" href="shift_8hpp_source.html#l00093">copy()</a>, <a class="el" href="shift_8hpp_source.html#l00246">copy_backward()</a>, <a class="el" href="construct_8hpp_source.html#l00047">destroy()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01040">size()</a>.</p>
 
 </div>
 </div>
@@ -1482,11 +1482,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01362">1362</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01357">1357</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00083">copy()</a>, <a class="el" href="shift_8hpp_source.html#l00225">copy_backward()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a>, <a class="el" href="deque_8hpp_source.html#l01215">pop_back()</a>, <a class="el" href="deque_8hpp_source.html#l01234">pop_front()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01045">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00093">copy()</a>, <a class="el" href="shift_8hpp_source.html#l00246">copy_backward()</a>, <a class="el" href="iterator_8hpp_source.html#l00155">next()</a>, <a class="el" href="deque_8hpp_source.html#l01210">pop_back()</a>, <a class="el" href="deque_8hpp_source.html#l01229">pop_front()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01040">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00889">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01109">resize()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00884">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01104">resize()</a>.</p>
 
 </div>
 </div>
@@ -1518,9 +1518,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>访问第一个常量元素 </p>
 <dl class="section return"><dt>返回</dt><dd>第一个元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01078">1078</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01073">1073</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01061">empty()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01056">empty()</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00028">NEFORCE_DEBUG_VERIFY</a>.</p>
 
 </div>
 </div>
@@ -1552,9 +1552,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>访问第一个元素 </p>
 <dl class="section return"><dt>返回</dt><dd>第一个元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01069">1069</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01064">1064</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01061">empty()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01056">empty()</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00028">NEFORCE_DEBUG_VERIFY</a>.</p>
 
 </div>
 </div>
@@ -1602,9 +1602,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01341">1341</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01336">1336</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="uninitialized_8hpp_source.html#l00285">uninitialized_fill_n()</a>.</p>
+<p class="reference">引用了 <a class="el" href="uninitialized_8hpp_source.html#l00285">uninitialized_fill_n()</a>.</p>
 
 </div>
 </div>
@@ -1647,11 +1647,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01284">1284</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01279">1279</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00118">prev()</a>, <a class="el" href="deque_8hpp_source.html#l01184">push_back()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01192">push_front()</a>.</p>
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00139">prev()</a>, <a class="el" href="deque_8hpp_source.html#l01179">push_back()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01187">push_front()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01331">insert()</a>, <a class="el" href="deque_8hpp_source.html#l00889">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01109">resize()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01326">insert()</a>, <a class="el" href="deque_8hpp_source.html#l00884">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01104">resize()</a>.</p>
 
 </div>
 </div>
@@ -1707,7 +1707,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01322">1322</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01317">1317</a> 行定义.</p>
 
 </div>
 </div>
@@ -1749,9 +1749,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01331">1331</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01326">1326</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01284">insert()</a>.</p>
+<p class="reference">引用了 <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01279">insert()</a>.</p>
 
 </div>
 </div>
@@ -1794,9 +1794,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01302">1302</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01297">1297</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l01152">emplace_back()</a>, <a class="el" href="deque_8hpp_source.html#l01169">emplace_front()</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00118">prev()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01147">emplace_back()</a>, <a class="el" href="deque_8hpp_source.html#l01164">emplace_front()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00139">prev()</a>.</p>
 
 </div>
 </div>
@@ -1828,7 +1828,7 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取最大可能大小 </p>
 <dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01053">1053</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01048">1048</a> 行定义.</p>
 
 </div>
 </div>
@@ -1866,9 +1866,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01509">1509</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01504">1504</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l00981">cbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00989">cend()</a>, <a class="el" href="deque_8hpp_source.html#l00825">deque()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00465">lexicographical_compare()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00976">cbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00984">cend()</a>, <a class="el" href="deque_8hpp_source.html#l00820">deque()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00477">lexicographical_compare()</a>.</p>
 
 </div>
 </div>
@@ -1906,9 +1906,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00889">889</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00884">884</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03100">addressof()</a>, <a class="el" href="deque_8hpp_source.html#l00949">begin()</a>, <a class="el" href="shift_8hpp_source.html#l00083">copy()</a>, <a class="el" href="deque_8hpp_source.html#l00825">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00957">end()</a>, <a class="el" href="deque_8hpp_source.html#l01362">erase()</a>, <a class="el" href="deque_8hpp_source.html#l01284">insert()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01045">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="deque_8hpp_source.html#l00944">begin()</a>, <a class="el" href="shift_8hpp_source.html#l00093">copy()</a>, <a class="el" href="deque_8hpp_source.html#l00820">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00952">end()</a>, <a class="el" href="deque_8hpp_source.html#l01357">erase()</a>, <a class="el" href="deque_8hpp_source.html#l01279">insert()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01040">size()</a>.</p>
 
 </div>
 </div>
@@ -1946,9 +1946,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00916">916</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00911">911</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03100">addressof()</a>, <a class="el" href="deque_8hpp_source.html#l01427">clear()</a>, <a class="el" href="deque_8hpp_source.html#l00825">deque()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01484">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="deque_8hpp_source.html#l01422">clear()</a>, <a class="el" href="deque_8hpp_source.html#l00820">deque()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01479">swap()</a>.</p>
 
 </div>
 </div>
@@ -1986,9 +1986,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00870">870</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00865">865</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00825">deque()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01484">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00820">deque()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01479">swap()</a>.</p>
 
 </div>
 </div>
@@ -2026,9 +2026,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果两个双端队列大小相等且对应元素相等返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01499">1499</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01494">1494</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l00981">cbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00989">cend()</a>, <a class="el" href="deque_8hpp_source.html#l00825">deque()</a>, <a class="el" href="compare_8hpp_source.html#l00049">equal()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01045">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00976">cbegin()</a>, <a class="el" href="deque_8hpp_source.html#l00984">cend()</a>, <a class="el" href="deque_8hpp_source.html#l00820">deque()</a>, <a class="el" href="compare_8hpp_source.html#l00054">equal()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01040">size()</a>.</p>
 
 </div>
 </div>
@@ -2066,9 +2066,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01467">1467</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01462">1462</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01449">at()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01444">at()</a>.</p>
 
 </div>
 </div>
@@ -2106,9 +2106,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01476">1476</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01471">1471</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01449">at()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01444">at()</a>.</p>
 
 </div>
 </div>
@@ -2145,11 +2145,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01184">1184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01179">1179</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01152">emplace_back()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01147">emplace_back()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01284">insert()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01279">insert()</a>.</p>
 
 </div>
 </div>
@@ -2186,9 +2186,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01200">1200</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01195">1195</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l01152">emplace_back()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01147">emplace_back()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -2225,11 +2225,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01192">1192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01187">1187</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01169">emplace_front()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01164">emplace_front()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01284">insert()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01279">insert()</a>.</p>
 
 </div>
 </div>
@@ -2266,9 +2266,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01208">1208</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01203">1203</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="deque_8hpp_source.html#l01169">emplace_front()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01164">emplace_front()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -2300,9 +2300,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01013">1013</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01008">1008</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01029">crbegin()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01024">crbegin()</a>.</p>
 
 </div>
 </div>
@@ -2334,9 +2334,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00997">997</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l00992">992</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00957">end()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00952">end()</a>.</p>
 
 </div>
 </div>
@@ -2368,9 +2368,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01021">1021</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01016">1016</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01037">crend()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01032">crend()</a>.</p>
 
 </div>
 </div>
@@ -2402,9 +2402,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01005">1005</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01000">1000</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00949">begin()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l00944">begin()</a>.</p>
 
 </div>
 </div>
@@ -2441,9 +2441,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01122">1122</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01117">1117</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l04381">initialize()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01109">resize()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l04356">initialize()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01104">resize()</a>.</p>
 
 </div>
 </div>
@@ -2486,11 +2486,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 </dl>
 <p>如果新大小小于当前大小，删除多余元素； 如果大于当前大小，在末尾插入指定值的副本。 </p>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01109">1109</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01104">1104</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01362">erase()</a>, <a class="el" href="deque_8hpp_source.html#l01284">insert()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01045">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="deque_8hpp_source.html#l01357">erase()</a>, <a class="el" href="deque_8hpp_source.html#l01279">insert()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01040">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01122">resize()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01117">resize()</a>.</p>
 
 </div>
 </div>
@@ -2522,9 +2522,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>收缩容量以适应当前大小 </p>
 <p>释放两端未使用的缓冲区，但保留中控器。 </p>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01408">1408</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01403">1403</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01427">clear()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01422">clear()</a>.</p>
 
 </div>
 </div>
@@ -2556,9 +2556,9 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
 <p>获取当前元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01045">1045</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01040">1040</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01381">erase()</a>, <a class="el" href="deque_8hpp_source.html#l01362">erase()</a>, <a class="el" href="deque_8hpp_source.html#l00889">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l01499">operator==()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01109">resize()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01376">erase()</a>, <a class="el" href="deque_8hpp_source.html#l01357">erase()</a>, <a class="el" href="deque_8hpp_source.html#l00884">operator=()</a>, <a class="el" href="deque_8hpp_source.html#l01494">operator==()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l01104">resize()</a>.</p>
 
 </div>
 </div>
@@ -2595,11 +2595,11 @@ template&lt;typename T, typename Alloc = allocator&lt;T&gt;, <a class="el" href=
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01484">1484</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="deque_8hpp_source.html">deque.hpp</a> 第 <a class="el" href="deque_8hpp_source.html#l01479">1479</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03100">addressof()</a>, <a class="el" href="deque_8hpp_source.html#l00825">deque()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="deque_8hpp_source.html#l00820">deque()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00907">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00916">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00870">operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l00902">deque()</a>, <a class="el" href="deque_8hpp_source.html#l00911">operator=()</a> , 以及 <a class="el" href="deque_8hpp_source.html#l00865">operator=()</a>.</p>
 
 </div>
 </div>

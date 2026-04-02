@@ -147,21 +147,21 @@ using&#160;</td><td class="memItemRight"><b>months</b> = <a class="el" href="str
 <tr class="memitem:gade82f1ff19a457a0f4f708bd634a9649" id="r_gade82f1ff19a457a0f4f708bd634a9649"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt; </td></tr>
 <tr class="memitem:gade82f1ff19a457a0f4f708bd634a9649 template"><td class="memItemLeft">constexpr <a class="el" href="group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84">common_type_t</a>&lt; <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period1 &gt;, <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period2 &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gade82f1ff19a457a0f4f708bd634a9649">operator-</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period1 &gt; &amp;lhs, const <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period2 &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:gade82f1ff19a457a0f4f708bd634a9649"><td class="mdescLeft">&#160;</td><td class="mdescRight">减法运算符  <br /></td></tr>
-<tr class="memitem:ga8907d2081e58b2c04b82e02bfc4af628" id="r_ga8907d2081e58b2c04b82e02bfc4af628"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period, typename Rep2&gt; </td></tr>
-<tr class="memitem:ga8907d2081e58b2c04b82e02bfc4af628 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep1, Rep2 &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8907d2081e58b2c04b82e02bfc4af628">operator*</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</td></tr>
-<tr class="memdesc:ga8907d2081e58b2c04b82e02bfc4af628"><td class="mdescLeft">&#160;</td><td class="mdescRight">乘法运算符（持续时间 * 标量）  <br /></td></tr>
-<tr class="memitem:ga9fbe616db4c65e6006858f7d7c9b12cb" id="r_ga9fbe616db4c65e6006858f7d7c9b12cb"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Rep2, typename Period&gt; </td></tr>
-<tr class="memitem:ga9fbe616db4c65e6006858f7d7c9b12cb template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep2, Rep1 &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga9fbe616db4c65e6006858f7d7c9b12cb">operator*</a> (const Rep1 &amp;scalar, const <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period &gt; &amp;value)</td></tr>
-<tr class="memdesc:ga9fbe616db4c65e6006858f7d7c9b12cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">乘法运算符（标量 * 持续时间）  <br /></td></tr>
-<tr class="memitem:ga7e3684915ae7c8bee442431905e2f8f1" id="r_ga7e3684915ae7c8bee442431905e2f8f1"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period, typename Rep2&gt; </td></tr>
-<tr class="memitem:ga7e3684915ae7c8bee442431905e2f8f1 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga7e3684915ae7c8bee442431905e2f8f1">operator/</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</td></tr>
-<tr class="memdesc:ga7e3684915ae7c8bee442431905e2f8f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">除法运算符（持续时间 / 标量）  <br /></td></tr>
+<tr class="memitem:ga2dd06db59c1399f29426a136c2d139e0" id="r_ga2dd06db59c1399f29426a136c2d139e0"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period, typename Rep2&gt; </td></tr>
+<tr class="memitem:ga2dd06db59c1399f29426a136c2d139e0 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep1, Rep2 &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga2dd06db59c1399f29426a136c2d139e0">operator*</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</td></tr>
+<tr class="memdesc:ga2dd06db59c1399f29426a136c2d139e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">乘法运算符（持续时间 * 标量）  <br /></td></tr>
+<tr class="memitem:ga8d0d2aabf2a8a986f02e3c3b18ca6e87" id="r_ga8d0d2aabf2a8a986f02e3c3b18ca6e87"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Rep2, typename Period&gt; </td></tr>
+<tr class="memitem:ga8d0d2aabf2a8a986f02e3c3b18ca6e87 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep2, Rep1 &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8d0d2aabf2a8a986f02e3c3b18ca6e87">operator*</a> (const Rep1 &amp;scalar, const <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period &gt; &amp;value)</td></tr>
+<tr class="memdesc:ga8d0d2aabf2a8a986f02e3c3b18ca6e87"><td class="mdescLeft">&#160;</td><td class="mdescRight">乘法运算符（标量 * 持续时间）  <br /></td></tr>
+<tr class="memitem:gaf190429377e3da864af80f9430d03663" id="r_gaf190429377e3da864af80f9430d03663"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period, typename Rep2&gt; </td></tr>
+<tr class="memitem:gaf190429377e3da864af80f9430d03663 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf190429377e3da864af80f9430d03663">operator/</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</td></tr>
+<tr class="memdesc:gaf190429377e3da864af80f9430d03663"><td class="mdescLeft">&#160;</td><td class="mdescRight">除法运算符（持续时间 / 标量）  <br /></td></tr>
 <tr class="memitem:gaa9ffa81550bae94e66179583fb380ac4" id="r_gaa9ffa81550bae94e66179583fb380ac4"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt; </td></tr>
 <tr class="memitem:gaa9ffa81550bae94e66179583fb380ac4 template"><td class="memItemLeft">constexpr <a class="el" href="group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84">common_type_t</a>&lt; Rep1, Rep2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaa9ffa81550bae94e66179583fb380ac4">operator/</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period1 &gt; &amp;lhs, const <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period2 &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:gaa9ffa81550bae94e66179583fb380ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">除法运算符（持续时间 / 持续时间）  <br /></td></tr>
-<tr class="memitem:ga54f8c0f345c094af64e6e2721ac07799" id="r_ga54f8c0f345c094af64e6e2721ac07799"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period, typename Rep2&gt; </td></tr>
-<tr class="memitem:ga54f8c0f345c094af64e6e2721ac07799 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga54f8c0f345c094af64e6e2721ac07799">operator%</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</td></tr>
-<tr class="memdesc:ga54f8c0f345c094af64e6e2721ac07799"><td class="mdescLeft">&#160;</td><td class="mdescRight">取模运算符（持续时间 % 标量）  <br /></td></tr>
+<tr class="memitem:gadef6dd8b52eaeebf6b3439d06710de97" id="r_gadef6dd8b52eaeebf6b3439d06710de97"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period, typename Rep2&gt; </td></tr>
+<tr class="memitem:gadef6dd8b52eaeebf6b3439d06710de97 template"><td class="memItemLeft">constexpr <a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gadef6dd8b52eaeebf6b3439d06710de97">operator%</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;value, const Rep2 &amp;scalar)</td></tr>
+<tr class="memdesc:gadef6dd8b52eaeebf6b3439d06710de97"><td class="mdescLeft">&#160;</td><td class="mdescRight">取模运算符（持续时间 % 标量）  <br /></td></tr>
 <tr class="memitem:gaf3c0949d2c9d5b2efc238ba6f6cee8ed" id="r_gaf3c0949d2c9d5b2efc238ba6f6cee8ed"><td class="memTemplParams" colspan="2">template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt; </td></tr>
 <tr class="memitem:gaf3c0949d2c9d5b2efc238ba6f6cee8ed template"><td class="memItemLeft">constexpr <a class="el" href="group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84">common_type_t</a>&lt; <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period1 &gt;, <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period2 &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf3c0949d2c9d5b2efc238ba6f6cee8ed">operator%</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period1 &gt; &amp;lhs, const <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period2 &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:gaf3c0949d2c9d5b2efc238ba6f6cee8ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">取模运算符（持续时间 % 持续时间）  <br /></td></tr>
@@ -348,8 +348,8 @@ template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt;
 
 </div>
 </div>
-<a id="ga54f8c0f345c094af64e6e2721ac07799" name="ga54f8c0f345c094af64e6e2721ac07799"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga54f8c0f345c094af64e6e2721ac07799">&#9670;&#160;</a></span>operator%() <span class="overload">[1/2]</span></h2>
+<a id="gadef6dd8b52eaeebf6b3439d06710de97" name="gadef6dd8b52eaeebf6b3439d06710de97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadef6dd8b52eaeebf6b3439d06710de97">&#9670;&#160;</a></span>operator%() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,7 +360,7 @@ template&lt;typename Rep1, typename Period, typename Rep2&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt; operator% </td>
+          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt; operator% </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
@@ -397,7 +397,7 @@ template&lt;typename Rep1, typename Period, typename Rep2&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00574">574</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
@@ -451,12 +451,12 @@ template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt;
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00591">591</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
-<a id="ga8907d2081e58b2c04b82e02bfc4af628" name="ga8907d2081e58b2c04b82e02bfc4af628"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8907d2081e58b2c04b82e02bfc4af628">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
+<a id="ga2dd06db59c1399f29426a136c2d139e0" name="ga2dd06db59c1399f29426a136c2d139e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2dd06db59c1399f29426a136c2d139e0">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -467,7 +467,7 @@ template&lt;typename Rep1, typename Period, typename Rep2&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep1, Rep2 &gt;, Period &gt; operator* </td>
+          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep1, Rep2 &gt;, Period &gt; operator* </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
@@ -504,12 +504,14 @@ template&lt;typename Rep1, typename Period, typename Rep2&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00508">508</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="regex_8hpp_source.html#l00428">regex_iterator::operator-&gt;()</a>.</p>
 
 </div>
 </div>
-<a id="ga9fbe616db4c65e6006858f7d7c9b12cb" name="ga9fbe616db4c65e6006858f7d7c9b12cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9fbe616db4c65e6006858f7d7c9b12cb">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
+<a id="ga8d0d2aabf2a8a986f02e3c3b18ca6e87" name="ga8d0d2aabf2a8a986f02e3c3b18ca6e87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8d0d2aabf2a8a986f02e3c3b18ca6e87">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -520,7 +522,7 @@ template&lt;typename Rep1, typename Rep2, typename Period&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep2, Rep1 &gt;, Period &gt; operator* </td>
+          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep2, Rep1 &gt;, Period &gt; operator* </td>
           <td>(</td>
           <td class="paramtype">const Rep1 &amp;</td>          <td class="paramname"><span class="paramname"><em>scalar</em></span>, </td>
         </tr>
@@ -609,7 +611,7 @@ template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt;
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00471">471</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
@@ -663,12 +665,12 @@ template&lt;typename Rep1, typename Period1, typename Rep2, typename Period2&gt;
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00490">490</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
-<a id="ga7e3684915ae7c8bee442431905e2f8f1" name="ga7e3684915ae7c8bee442431905e2f8f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7e3684915ae7c8bee442431905e2f8f1">&#9670;&#160;</a></span>operator/() <span class="overload">[1/2]</span></h2>
+<a id="gaf190429377e3da864af80f9430d03663" name="gaf190429377e3da864af80f9430d03663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf190429377e3da864af80f9430d03663">&#9670;&#160;</a></span>operator/() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -679,7 +681,7 @@ template&lt;typename Rep1, typename Period, typename Rep2&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt; operator/ </td>
+          <td class="memname"><a class="el" href="structduration.html">duration</a>&lt; inner::__common_rep_t&lt; Rep1, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="#gac4563088c2189043e64c4063617957c6">is_duration_v</a>&lt; Rep2 &gt;, Rep2 &gt; &gt;, Period &gt; operator/ </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep1, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
@@ -716,7 +718,7 @@ template&lt;typename Rep1, typename Period, typename Rep2&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00539">539</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00370">count()</a>.</p>
 
 </div>
 </div>
@@ -1077,9 +1079,7 @@ template&lt;typename ToDur, typename Rep, typename Period, <a class="el" href="g
 
 <p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00147">147</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="duration_8hpp_source.html#l00723">ceil()</a>, <a class="el" href="time__point_8hpp_source.html#l00231">duration&lt; Rep, Period &gt;::duration()</a>, <a class="el" href="duration_8hpp_source.html#l00249">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::duration()</a>, <a class="el" href="duration_8hpp_source.html#l00705">floor()</a>, <a class="el" href="clocks_8hpp_source.html#l00067">system_clock::from_seconds()</a>, <a class="el" href="time__point_8hpp_source.html#l00072">time_cast()</a> , 以及 <a class="el" href="clocks_8hpp_source.html#l00107">steady_clock::to_system()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="duration_8hpp_source.html#l00723">ceil()</a>, <a class="el" href="time__point_8hpp_source.html#l00231">duration&lt; Rep, Period &gt;::duration()</a>, <a class="el" href="duration_8hpp_source.html#l00249">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::duration()</a>, <a class="el" href="duration_8hpp_source.html#l00705">floor()</a>, <a class="el" href="clocks_8hpp_source.html#l00066">system_clock::from_seconds()</a>, <a class="el" href="time__point_8hpp_source.html#l00072">time_cast()</a>, <a class="el" href="clocks_8hpp_source.html#l00106">steady_clock::to_system()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00246">semaphore::try_acquire_for()</a>.</p>
 
 </div>
 </div>

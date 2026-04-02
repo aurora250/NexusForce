@@ -9,6 +9,7 @@
  * 支持路径的解析、规范化、组合、比较以及文件系统操作。
  */
 
+#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -17,6 +18,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 文件操作
  * @{
  */
+
+class NEFORCE_API path_tree;
+
 
 /**
  * @class path
@@ -359,6 +363,33 @@ public:
      * @return 连接后的新路径
      */
     path operator /(string_view pth) const;
+
+    /**
+     * @brief 扫描此路径（必须为目录）并返回路径树
+     * @return 路径树
+     */
+    NEFORCE_NODISCARD path_tree to_tree() const;
+
+    /**
+     * @brief 获取直接子路径列表（非递归）
+     * @param include_hidden 是否包含隐藏条目
+     * @return 直接子路径列表
+     */
+    NEFORCE_NODISCARD vector<path> children(bool include_hidden = false) const;
+
+    /**
+     * @brief 获取直接子文件路径列表
+     * @param include_hidden 是否包含隐藏文件
+     * @return 子文件路径列表
+     */
+    NEFORCE_NODISCARD vector<path> child_files(bool include_hidden = false) const;
+
+    /**
+     * @brief 获取直接子目录路径列表
+     * @param include_hidden 是否包含隐藏目录
+     * @return 子目录路径列表
+     */
+    NEFORCE_NODISCARD vector<path> child_dirs(bool include_hidden = false) const;
 
     /**
      * @brief 检查路径是否存在

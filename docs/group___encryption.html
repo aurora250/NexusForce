@@ -1,0 +1,1024 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 加密算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___encryption.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">加密算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>加密解密算法集合  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:AES256" id="r_AES256"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_a_e_s256.html">AES256</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AES-256加密算法结构体  <a href="struct_a_e_s256.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:base64" id="r_base64"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structbase64.html">base64</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64编解码结构体  <a href="structbase64.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:MD5" id="r_MD5"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_d5.html">MD5</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MD5哈希算法结构体  <a href="struct_m_d5.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:SHA1" id="r_SHA1"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_s_h_a1.html">SHA1</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-1哈希算法结构体  <a href="struct_s_h_a1.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:SHA256" id="r_SHA256"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_s_h_a256.html">SHA256</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-256哈希算法结构体  <a href="struct_s_h_a256.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:XOR" id="r_XOR"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_x_o_r.html">XOR</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR异或加密结构体  <a href="struct_x_o_r.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gae84302c91975c32afbd96bea61d5952d" id="r_gae84302c91975c32afbd96bea61d5952d"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gae84302c91975c32afbd96bea61d5952d">base64_encode</a> (const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gae84302c91975c32afbd96bea61d5952d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64编码便捷函数（字节视图版本）  <br /></td></tr>
+<tr class="memitem:ga5678c164d7afa1c431cb7f8c9ec996d1" id="r_ga5678c164d7afa1c431cb7f8c9ec996d1"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga5678c164d7afa1c431cb7f8c9ec996d1">base64_encode</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga5678c164d7afa1c431cb7f8c9ec996d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64编码便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:ga432de77c2e0158be47df0a56a3714c50" id="r_ga432de77c2e0158be47df0a56a3714c50"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga432de77c2e0158be47df0a56a3714c50">base64_encode</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga432de77c2e0158be47df0a56a3714c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64编码便捷函数（字符串版本）  <br /></td></tr>
+<tr class="memitem:ga7f37350505c3f4b1be1ed076ef8504d7" id="r_ga7f37350505c3f4b1be1ed076ef8504d7"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga7f37350505c3f4b1be1ed076ef8504d7">base64_decode</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga7f37350505c3f4b1be1ed076ef8504d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64解码便捷函数（字符串视图版本）  <br /></td></tr>
+<tr class="memitem:gac9984e27f1c006721a2ee282db352a32" id="r_gac9984e27f1c006721a2ee282db352a32"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#gac9984e27f1c006721a2ee282db352a32">base64_decode</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gac9984e27f1c006721a2ee282db352a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64解码便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:gad6258058e2fc95b08093d0973bf4e36c" id="r_gad6258058e2fc95b08093d0973bf4e36c"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gad6258058e2fc95b08093d0973bf4e36c">base64_decode</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gad6258058e2fc95b08093d0973bf4e36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64解码便捷函数（字符串版本）  <br /></td></tr>
+<tr class="memitem:gaae07a0d1df9f1cc3cd29ed984a89c5a6" id="r_gaae07a0d1df9f1cc3cd29ed984a89c5a6"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gaae07a0d1df9f1cc3cd29ed984a89c5a6">md5</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gaae07a0d1df9f1cc3cd29ed984a89c5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">MD5哈希便捷函数（字符串视图版本）  <br /></td></tr>
+<tr class="memitem:ga3ed5c69e054744b7c5b58ad2d78c2565" id="r_ga3ed5c69e054744b7c5b58ad2d78c2565"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga3ed5c69e054744b7c5b58ad2d78c2565">md5</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga3ed5c69e054744b7c5b58ad2d78c2565"><td class="mdescLeft">&#160;</td><td class="mdescRight">MD5哈希便捷函数（字符串版本）  <br /></td></tr>
+<tr class="memitem:ga48d292c51ca977e827067d1d2988b43f" id="r_ga48d292c51ca977e827067d1d2988b43f"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga48d292c51ca977e827067d1d2988b43f">md5</a> (const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga48d292c51ca977e827067d1d2988b43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">MD5哈希便捷函数（字节视图版本）  <br /></td></tr>
+<tr class="memitem:ga7baf0fc86aed62784017df69b2383120" id="r_ga7baf0fc86aed62784017df69b2383120"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga7baf0fc86aed62784017df69b2383120">md5</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga7baf0fc86aed62784017df69b2383120"><td class="mdescLeft">&#160;</td><td class="mdescRight">MD5哈希便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:gaace3cde93bd4e2fc473efb9124352ddf" id="r_gaace3cde93bd4e2fc473efb9124352ddf"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gaace3cde93bd4e2fc473efb9124352ddf">sha1</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gaace3cde93bd4e2fc473efb9124352ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-1哈希便捷函数（字符串视图版本）  <br /></td></tr>
+<tr class="memitem:gabc40b02cf709a8973c4dac21e25f5c54" id="r_gabc40b02cf709a8973c4dac21e25f5c54"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gabc40b02cf709a8973c4dac21e25f5c54">sha1</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gabc40b02cf709a8973c4dac21e25f5c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-1哈希便捷函数（字符串版本）  <br /></td></tr>
+<tr class="memitem:gac9d4e016a3045f782adbaff307c3028f" id="r_gac9d4e016a3045f782adbaff307c3028f"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#gac9d4e016a3045f782adbaff307c3028f">sha1</a> (const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:gac9d4e016a3045f782adbaff307c3028f"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-1哈希便捷函数（字节视图版本）  <br /></td></tr>
+<tr class="memitem:ga2caaeef81b984d8cd544f2f9310d4dc1" id="r_ga2caaeef81b984d8cd544f2f9310d4dc1"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga2caaeef81b984d8cd544f2f9310d4dc1">sha1</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga2caaeef81b984d8cd544f2f9310d4dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-1哈希便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:ga6dc789367ce08a844dfdbcf3c8514b4b" id="r_ga6dc789367ce08a844dfdbcf3c8514b4b"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga6dc789367ce08a844dfdbcf3c8514b4b">sha256</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga6dc789367ce08a844dfdbcf3c8514b4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-256哈希便捷函数（字符串视图版本）  <br /></td></tr>
+<tr class="memitem:ga9021306abb79409a4b458027c1f65cec" id="r_ga9021306abb79409a4b458027c1f65cec"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga9021306abb79409a4b458027c1f65cec">sha256</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga9021306abb79409a4b458027c1f65cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-256哈希便捷函数（字符串版本）  <br /></td></tr>
+<tr class="memitem:ga946bf720e706f74259c905358842142d" id="r_ga946bf720e706f74259c905358842142d"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga946bf720e706f74259c905358842142d">sha256</a> (const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga946bf720e706f74259c905358842142d"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-256哈希便捷函数（字节视图版本）  <br /></td></tr>
+<tr class="memitem:ga3cc0d61fe837921bbbd43b601deed38f" id="r_ga3cc0d61fe837921bbbd43b601deed38f"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga3cc0d61fe837921bbbd43b601deed38f">sha256</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:ga3cc0d61fe837921bbbd43b601deed38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-256哈希便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:ga83f94408205b906e9e72b0d7c6c6fc23" id="r_ga83f94408205b906e9e72b0d7c6c6fc23"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga83f94408205b906e9e72b0d7c6c6fc23">XOR_encrypt</a> (const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> key)</td></tr>
+<tr class="memdesc:ga83f94408205b906e9e72b0d7c6c6fc23"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR加密便捷函数（字节视图版本）  <br /></td></tr>
+<tr class="memitem:gacc99ef05b5f45b5e03097d385ba7c87d" id="r_gacc99ef05b5f45b5e03097d385ba7c87d"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#gacc99ef05b5f45b5e03097d385ba7c87d">XOR_encrypt</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;key)</td></tr>
+<tr class="memdesc:gacc99ef05b5f45b5e03097d385ba7c87d"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR加密便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:gac2a495f2810bfb6c90688a09a94e2454" id="r_gac2a495f2810bfb6c90688a09a94e2454"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gac2a495f2810bfb6c90688a09a94e2454">XOR_encrypt</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key)</td></tr>
+<tr class="memdesc:gac2a495f2810bfb6c90688a09a94e2454"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR加密便捷函数（字符串版本）  <br /></td></tr>
+<tr class="memitem:ga1d1cc0815ce4e92bb086aea6f0682bf5" id="r_ga1d1cc0815ce4e92bb086aea6f0682bf5"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga1d1cc0815ce4e92bb086aea6f0682bf5">XOR_decrypt</a> (const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> key)</td></tr>
+<tr class="memdesc:ga1d1cc0815ce4e92bb086aea6f0682bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR解密便捷函数（字节视图版本）  <br /></td></tr>
+<tr class="memitem:ga3d83be7132f464c8ae3aceb8c6b4a8c4" id="r_ga3d83be7132f464c8ae3aceb8c6b4a8c4"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga3d83be7132f464c8ae3aceb8c6b4a8c4">XOR_decrypt</a> (const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;key)</td></tr>
+<tr class="memdesc:ga3d83be7132f464c8ae3aceb8c6b4a8c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR解密便捷函数（字节向量版本）  <br /></td></tr>
+<tr class="memitem:gaa0a82e80059bd84c825c0090df847e73" id="r_gaa0a82e80059bd84c825c0090df847e73"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gaa0a82e80059bd84c825c0090df847e73">XOR_decrypt</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key)</td></tr>
+<tr class="memdesc:gaa0a82e80059bd84c825c0090df847e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">XOR解密便捷函数（字符串版本）  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+AES-256加密便捷函数（十六进制接口）</h2></td></tr>
+<tr class="memitem:ga6a7655483ee3a05db117c933ff31e693" id="r_ga6a7655483ee3a05db117c933ff31e693"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga6a7655483ee3a05db117c933ff31e693">aes256_encrypt</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> key_hex)</td></tr>
+<tr class="memdesc:ga6a7655483ee3a05db117c933ff31e693"><td class="mdescLeft">&#160;</td><td class="mdescRight">AES-256加密便捷函数  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+AES-256解密便捷函数（十六进制接口）</h2></td></tr>
+<tr class="memitem:gab30ade9f206d486a6853c282c0c591de" id="r_gab30ade9f206d486a6853c282c0c591de"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#gab30ade9f206d486a6853c282c0c591de">aes256_decrypt</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> encrypted_hex, const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> key_hex)</td></tr>
+<tr class="memdesc:gab30ade9f206d486a6853c282c0c591de"><td class="mdescLeft">&#160;</td><td class="mdescRight">AES-256解密便捷函数  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>加密解密算法集合 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="gab30ade9f206d486a6853c282c0c591de" name="gab30ade9f206d486a6853c282c0c591de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab30ade9f206d486a6853c282c0c591de">&#9670;&#160;</a></span>aes256_decrypt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> aes256_decrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>encrypted_hex</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>key_hex</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>AES-256解密便捷函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">encrypted_hex</td><td>加密数据的十六进制字符串 </td></tr>
+    <tr><td class="paramname">key_hex</td><td>十六进制密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解密后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="aes256_8hpp_source.html">aes256.hpp</a> 第 <a class="el" href="aes256_8hpp_source.html#l00127">127</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="struct_a_e_s256.html#a5e701b55ad3e5f0f8dffa671a15c2eac">AES256::decrypt_hex()</a>.</p>
+
+</div>
+</div>
+<a id="ga6a7655483ee3a05db117c933ff31e693" name="ga6a7655483ee3a05db117c933ff31e693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6a7655483ee3a05db117c933ff31e693">&#9670;&#160;</a></span>aes256_encrypt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> aes256_encrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>key_hex</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>AES-256加密便捷函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要加密的字符串 </td></tr>
+    <tr><td class="paramname">key_hex</td><td>十六进制密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>加密后的十六进制字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="aes256_8hpp_source.html">aes256.hpp</a> 第 <a class="el" href="aes256_8hpp_source.html#l00098">98</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_a_e_s256.html#a48454dca7385d76ae8e8a6f382738dcf">AES256::encrypt_hex()</a>.</p>
+
+</div>
+</div>
+<a id="gac9984e27f1c006721a2ee282db352a32" name="gac9984e27f1c006721a2ee282db352a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac9984e27f1c006721a2ee282db352a32">&#9670;&#160;</a></span>base64_decode() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> base64_decode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base64解码便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Base64编码的字节向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解码后的字节向量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00091">91</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="structbase64.html#a5705d9bdb878a07ee58ff6adf8b49b20">base64::decode()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02140">basic_string&lt; CharT, Traits, Alloc &gt;::view()</a>.</p>
+
+</div>
+</div>
+<a id="gad6258058e2fc95b08093d0973bf4e36c" name="gad6258058e2fc95b08093d0973bf4e36c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad6258058e2fc95b08093d0973bf4e36c">&#9670;&#160;</a></span>base64_decode() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> base64_decode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base64解码便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Base64编码的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解码后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00101">101</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="base64_8hpp_source.html#l00081">base64_decode()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>.</p>
+
+</div>
+</div>
+<a id="ga7f37350505c3f4b1be1ed076ef8504d7" name="ga7f37350505c3f4b1be1ed076ef8504d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7f37350505c3f4b1be1ed076ef8504d7">&#9670;&#160;</a></span>base64_decode() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> base64_decode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base64解码便捷函数（字符串视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Base64编码的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解码后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="vector_8hpp_source.html#l00723">vector&lt; T, Alloc &gt;::data()</a>, <a class="el" href="structbase64.html#a5705d9bdb878a07ee58ff6adf8b49b20">base64::decode()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00691">vector&lt; T, Alloc &gt;::size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="base64_8hpp_source.html#l00101">base64_decode()</a>.</p>
+
+</div>
+</div>
+<a id="ga5678c164d7afa1c431cb7f8c9ec996d1" name="ga5678c164d7afa1c431cb7f8c9ec996d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5678c164d7afa1c431cb7f8c9ec996d1">&#9670;&#160;</a></span>base64_encode() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> base64_encode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base64编码便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要编码的数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>编码后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00060">60</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="structbase64.html#a8047e752ee89f690f3859400912eab6a">base64::encode()</a>.</p>
+
+</div>
+</div>
+<a id="gae84302c91975c32afbd96bea61d5952d" name="gae84302c91975c32afbd96bea61d5952d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae84302c91975c32afbd96bea61d5952d">&#9670;&#160;</a></span>base64_encode() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> base64_encode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base64编码便捷函数（字节视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要编码的数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>编码后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00051">51</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="structbase64.html#a8047e752ee89f690f3859400912eab6a">base64::encode()</a>.</p>
+
+</div>
+</div>
+<a id="ga432de77c2e0158be47df0a56a3714c50" name="ga432de77c2e0158be47df0a56a3714c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga432de77c2e0158be47df0a56a3714c50">&#9670;&#160;</a></span>base64_encode() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> base64_encode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base64编码便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要编码的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>编码后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00069">69</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="structbase64.html#a8047e752ee89f690f3859400912eab6a">base64::encode()</a>.</p>
+
+</div>
+</div>
+<a id="ga7baf0fc86aed62784017df69b2383120" name="ga7baf0fc86aed62784017df69b2383120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7baf0fc86aed62784017df69b2383120">&#9670;&#160;</a></span>md5() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> md5 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MD5哈希便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>16字节的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="md5_8hpp_source.html">md5.hpp</a> 第 <a class="el" href="md5_8hpp_source.html#l00078">78</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_m_d5.html#adcf35ffce8ecfcae6428a897ad7dd84f">MD5::hash()</a>.</p>
+
+</div>
+</div>
+<a id="ga48d292c51ca977e827067d1d2988b43f" name="ga48d292c51ca977e827067d1d2988b43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga48d292c51ca977e827067d1d2988b43f">&#9670;&#160;</a></span>md5() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> md5 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MD5哈希便捷函数（字节视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>16字节的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="md5_8hpp_source.html">md5.hpp</a> 第 <a class="el" href="md5_8hpp_source.html#l00069">69</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_m_d5.html#adcf35ffce8ecfcae6428a897ad7dd84f">MD5::hash()</a>.</p>
+
+</div>
+</div>
+<a id="ga3ed5c69e054744b7c5b58ad2d78c2565" name="ga3ed5c69e054744b7c5b58ad2d78c2565"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3ed5c69e054744b7c5b58ad2d78c2565">&#9670;&#160;</a></span>md5() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> md5 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MD5哈希便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>32字符的十六进制哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="md5_8hpp_source.html">md5.hpp</a> 第 <a class="el" href="md5_8hpp_source.html#l00060">60</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_m_d5.html#a66116ef65fd8b5f0766f8d09d0db56eb">MD5::hash_hex()</a>.</p>
+
+</div>
+</div>
+<a id="gaae07a0d1df9f1cc3cd29ed984a89c5a6" name="gaae07a0d1df9f1cc3cd29ed984a89c5a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae07a0d1df9f1cc3cd29ed984a89c5a6">&#9670;&#160;</a></span>md5() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> md5 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MD5哈希便捷函数（字符串视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>32字符的十六进制哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="md5_8hpp_source.html">md5.hpp</a> 第 <a class="el" href="md5_8hpp_source.html#l00051">51</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_m_d5.html#a66116ef65fd8b5f0766f8d09d0db56eb">MD5::hash_hex()</a>.</p>
+
+</div>
+</div>
+<a id="ga2caaeef81b984d8cd544f2f9310d4dc1" name="ga2caaeef81b984d8cd544f2f9310d4dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2caaeef81b984d8cd544f2f9310d4dc1">&#9670;&#160;</a></span>sha1() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> sha1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-1哈希便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>20字节的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha1_8hpp_source.html">sha1.hpp</a> 第 <a class="el" href="sha1_8hpp_source.html#l00080">80</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_s_h_a1.html#ae320407b909e63aaa6a5285d7968358c">SHA1::hash()</a>.</p>
+
+</div>
+</div>
+<a id="gac9d4e016a3045f782adbaff307c3028f" name="gac9d4e016a3045f782adbaff307c3028f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac9d4e016a3045f782adbaff307c3028f">&#9670;&#160;</a></span>sha1() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> sha1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-1哈希便捷函数（字节视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>20字节的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha1_8hpp_source.html">sha1.hpp</a> 第 <a class="el" href="sha1_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_s_h_a1.html#ae320407b909e63aaa6a5285d7968358c">SHA1::hash()</a>.</p>
+
+</div>
+</div>
+<a id="gabc40b02cf709a8973c4dac21e25f5c54" name="gabc40b02cf709a8973c4dac21e25f5c54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabc40b02cf709a8973c4dac21e25f5c54">&#9670;&#160;</a></span>sha1() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> sha1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-1哈希便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>20字节的哈希值（原始字节） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha1_8hpp_source.html">sha1.hpp</a> 第 <a class="el" href="sha1_8hpp_source.html#l00062">62</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="sha1_8hpp_source.html#l00052">sha1()</a>.</p>
+
+</div>
+</div>
+<a id="gaace3cde93bd4e2fc473efb9124352ddf" name="gaace3cde93bd4e2fc473efb9124352ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaace3cde93bd4e2fc473efb9124352ddf">&#9670;&#160;</a></span>sha1() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> sha1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-1哈希便捷函数（字符串视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>20字节的哈希值（原始字节） </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>返回原始字节数据而非十六进制字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha1_8hpp_source.html">sha1.hpp</a> 第 <a class="el" href="sha1_8hpp_source.html#l00052">52</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="vector_8hpp_source.html#l00723">vector&lt; T, Alloc &gt;::data()</a>, <a class="el" href="struct_s_h_a1.html#ae320407b909e63aaa6a5285d7968358c">SHA1::hash()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00691">vector&lt; T, Alloc &gt;::size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sha1_8hpp_source.html#l00062">sha1()</a>.</p>
+
+</div>
+</div>
+<a id="ga3cc0d61fe837921bbbd43b601deed38f" name="ga3cc0d61fe837921bbbd43b601deed38f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3cc0d61fe837921bbbd43b601deed38f">&#9670;&#160;</a></span>sha256() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> sha256 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-256哈希便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>32字节的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha256_8hpp_source.html">sha256.hpp</a> 第 <a class="el" href="sha256_8hpp_source.html#l00077">77</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_s_h_a256.html#a48a15c755eec3a67835e24f3ee5fa9a9">SHA256::hash()</a>.</p>
+
+</div>
+</div>
+<a id="ga946bf720e706f74259c905358842142d" name="ga946bf720e706f74259c905358842142d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga946bf720e706f74259c905358842142d">&#9670;&#160;</a></span>sha256() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> sha256 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-256哈希便捷函数（字节视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>32字节的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha256_8hpp_source.html">sha256.hpp</a> 第 <a class="el" href="sha256_8hpp_source.html#l00068">68</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_s_h_a256.html#a48a15c755eec3a67835e24f3ee5fa9a9">SHA256::hash()</a>.</p>
+
+</div>
+</div>
+<a id="ga9021306abb79409a4b458027c1f65cec" name="ga9021306abb79409a4b458027c1f65cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9021306abb79409a4b458027c1f65cec">&#9670;&#160;</a></span>sha256() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> sha256 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-256哈希便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>64字符的十六进制哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha256_8hpp_source.html">sha256.hpp</a> 第 <a class="el" href="sha256_8hpp_source.html#l00059">59</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_s_h_a256.html#a699555f7ee7aa6b03e410c36abe06310">SHA256::hash_hex()</a>.</p>
+
+</div>
+</div>
+<a id="ga6dc789367ce08a844dfdbcf3c8514b4b" name="ga6dc789367ce08a844dfdbcf3c8514b4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6dc789367ce08a844dfdbcf3c8514b4b">&#9670;&#160;</a></span>sha256() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> sha256 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SHA-256哈希便捷函数（字符串视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>64字符的十六进制哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sha256_8hpp_source.html">sha256.hpp</a> 第 <a class="el" href="sha256_8hpp_source.html#l00050">50</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_s_h_a256.html#a699555f7ee7aa6b03e410c36abe06310">SHA256::hash_hex()</a>.</p>
+
+</div>
+</div>
+<a id="ga3d83be7132f464c8ae3aceb8c6b4a8c4" name="ga3d83be7132f464c8ae3aceb8c6b4a8c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3d83be7132f464c8ae3aceb8c6b4a8c4">&#9670;&#160;</a></span>XOR_decrypt() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> XOR_decrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>XOR解密便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要解密的数据 </td></tr>
+    <tr><td class="paramname">key</td><td>解密密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解密后的字节向量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="xor_8hpp_source.html">xor.hpp</a> 第 <a class="el" href="xor_8hpp_source.html#l00106">106</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="xor_8hpp_source.html#l00049">XOR::decrypt()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00741">vector&lt; T, Alloc &gt;::view()</a>.</p>
+
+</div>
+</div>
+<a id="ga1d1cc0815ce4e92bb086aea6f0682bf5" name="ga1d1cc0815ce4e92bb086aea6f0682bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1d1cc0815ce4e92bb086aea6f0682bf5">&#9670;&#160;</a></span>XOR_decrypt() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> XOR_decrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>XOR解密便捷函数（字节视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要解密的数据 </td></tr>
+    <tr><td class="paramname">key</td><td>解密密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解密后的字节向量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="xor_8hpp_source.html">xor.hpp</a> 第 <a class="el" href="xor_8hpp_source.html#l00096">96</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00049">XOR::decrypt()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="xor_8hpp_source.html#l00116">XOR_decrypt()</a>.</p>
+
+</div>
+</div>
+<a id="gaa0a82e80059bd84c825c0090df847e73" name="gaa0a82e80059bd84c825c0090df847e73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa0a82e80059bd84c825c0090df847e73">&#9670;&#160;</a></span>XOR_decrypt() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> XOR_decrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>XOR解密便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要解密的字符串 </td></tr>
+    <tr><td class="paramname">key</td><td>解密密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解密后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="xor_8hpp_source.html">xor.hpp</a> 第 <a class="el" href="xor_8hpp_source.html#l00116">116</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="vector_8hpp_source.html#l00597">vector&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="basic__string_8hpp_source.html#l01384">basic_string&lt; CharT, Traits, Alloc &gt;::data()</a>, <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="vector_8hpp_source.html#l00605">vector&lt; T, Alloc &gt;::end()</a>, <a class="el" href="basic__string_8hpp_source.html#l01231">basic_string&lt; CharT, Traits, Alloc &gt;::size()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00096">XOR_decrypt()</a>.</p>
+
+</div>
+</div>
+<a id="gacc99ef05b5f45b5e03097d385ba7c87d" name="gacc99ef05b5f45b5e03097d385ba7c87d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacc99ef05b5f45b5e03097d385ba7c87d">&#9670;&#160;</a></span>XOR_encrypt() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> XOR_encrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>XOR加密便捷函数（字节向量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要加密的数据 </td></tr>
+    <tr><td class="paramname">key</td><td>加密密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>加密后的字节向量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="xor_8hpp_source.html">xor.hpp</a> 第 <a class="el" href="xor_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="struct_x_o_r.html#a9f7d8a0ebce76400593ec3e52da7136d">XOR::encrypt()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00741">vector&lt; T, Alloc &gt;::view()</a>.</p>
+
+</div>
+</div>
+<a id="ga83f94408205b906e9e72b0d7c6c6fc23" name="ga83f94408205b906e9e72b0d7c6c6fc23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga83f94408205b906e9e72b0d7c6c6fc23">&#9670;&#160;</a></span>XOR_encrypt() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> XOR_encrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>XOR加密便捷函数（字节视图版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要加密的数据 </td></tr>
+    <tr><td class="paramname">key</td><td>加密密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>加密后的字节向量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="xor_8hpp_source.html">xor.hpp</a> 第 <a class="el" href="xor_8hpp_source.html#l00061">61</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a> , 以及 <a class="el" href="struct_x_o_r.html#a9f7d8a0ebce76400593ec3e52da7136d">XOR::encrypt()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="xor_8hpp_source.html#l00081">XOR_encrypt()</a>.</p>
+
+</div>
+</div>
+<a id="gac2a495f2810bfb6c90688a09a94e2454" name="gac2a495f2810bfb6c90688a09a94e2454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2a495f2810bfb6c90688a09a94e2454">&#9670;&#160;</a></span>XOR_encrypt() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> XOR_encrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>XOR加密便捷函数（字符串版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要加密的字符串 </td></tr>
+    <tr><td class="paramname">key</td><td>加密密钥 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>加密后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="xor_8hpp_source.html">xor.hpp</a> 第 <a class="el" href="xor_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="vector_8hpp_source.html#l00597">vector&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="basic__string_8hpp_source.html#l01384">basic_string&lt; CharT, Traits, Alloc &gt;::data()</a>, <a class="el" href="type__erase_8hpp_source.html#l00419">data()</a>, <a class="el" href="vector_8hpp_source.html#l00605">vector&lt; T, Alloc &gt;::end()</a>, <a class="el" href="basic__string_8hpp_source.html#l01231">basic_string&lt; CharT, Traits, Alloc &gt;::size()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00061">XOR_encrypt()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

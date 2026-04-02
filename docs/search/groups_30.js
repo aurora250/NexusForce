@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['平台检测_0',['平台检测',['../group___platform_detection.html',1,'']]],
-  ['平台相关类型_1',['平台相关类型',['../group___platform_dependent_types.html',1,'']]]
+  ['异常处理_0',['异常处理',['../group___exception_handling.html',1,'']]],
+  ['异常类集_1',['异常类集',['../group___exceptions.html',1,'']]],
+  ['异步行为_2',['异步行为',['../group___async.html',1,'']]]
 ];

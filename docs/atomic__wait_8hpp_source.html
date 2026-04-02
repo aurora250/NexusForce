@@ -99,7 +99,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="memory_8hpp.html">NeForce/core/memory/memory.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="this__thread_8hpp.html">NeForce/core/async/this_thread.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="futex_8hpp.html">NeForce/core/async/futex.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
 <div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
@@ -129,7 +129,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
 </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>NEFORCE_BEGIN_INNER__</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">struct </span>waiter_pool_base {</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> align_inner = 64;   </div>
@@ -190,7 +190,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="keyword">struct </span>waiter_pool : waiter_pool_base {</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    NEFORCE_ALWAYS_INLINE <span class="keywordtype">void</span> waiter_do_wait(<a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a>* addr, <span class="keyword">const</span> <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> old) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306">futex_wait</a>(addr, old);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        _NEFORCE <a class="code hl_function" href="group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306">futex_wait</a>(addr, old);</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>};</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
@@ -206,7 +206,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, enable_if_t&lt;platform_wait_val<span class="keywordtype">id</span>_v&lt;U&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    NEFORCE_ALWAYS_INLINE <span class="keyword">static</span> <span class="keywordtype">void</span> waiter_do_spin_v_impl(</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a>*, <span class="keyword">const</span> U&amp; old, <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a>&amp; value) {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___memory_functions.html#ga0dc544b7cbf5891bce974e1b1b396a48">memory_copy</a>(&amp;value, &amp;old, <span class="keyword">sizeof</span>(value));</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        _NEFORCE <a class="code hl_function" href="group___memory_functions.html#ga0dc544b7cbf5891bce974e1b1b396a48">memory_copy</a>(&amp;value, &amp;old, <span class="keyword">sizeof</span>(value));</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, enable_if_t&lt;!platform_wait_val<span class="keywordtype">id</span>_v&lt;U&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    NEFORCE_ALWAYS_INLINE <span class="keyword">static</span> <span class="keywordtype">void</span> waiter_do_spin_v_impl(</div>
@@ -256,10 +256,10 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> waiter_do_spin_v(<a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a>* addr, <span class="keyword">const</span> U&amp; old,</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        Func f, <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a>&amp; value, Spin spin = Spin{}) {</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keyword">auto</span> <span class="keyword">const</span> pred = [=] {</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___memory_functions.html#ga16eceb015a4eb9f200a698ce02c5f291">memory_compare&lt;U&gt;</a>(old, f()) != 0;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___memory_functions.html#ga16eceb015a4eb9f200a698ce02c5f291">memory_compare&lt;U&gt;</a>(old, f()) != 0;</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        };</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        waiter_base::waiter_do_spin_v_impl(addr, old, value);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___atomic_operations.html#ga434f8215fe9022960d09c84d7efca4e9">atomic_spin</a>(pred, spin);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___atomic_operations.html#ga434f8215fe9022960d09c84d7efca4e9">atomic_spin</a>(pred, spin);</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    }</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span></div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> Func, <span class="keyword">typename</span> Spin = default_spin_policy&gt;</div>
@@ -275,7 +275,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        __atomic_load(addr, &amp;value, __ATOMIC_ACQUIRE);</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___atomic_operations.html#ga434f8215fe9022960d09c84d7efca4e9">atomic_spin</a>(pred, spin);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___atomic_operations.html#ga434f8215fe9022960d09c84d7efca4e9">atomic_spin</a>(pred, spin);</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    }</div>
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span></div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred, <span class="keyword">typename</span> Spin = default_spin_policy&gt;</div>
@@ -322,7 +322,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>            <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> value;</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            <span class="keywordflow">if</span> (base_type::waiter_do_spin_v(old, f, value)) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>            waiter_.waiter_do_wait(base_type::addr_, value);</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        } <span class="keywordflow">while</span> (<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___memory_functions.html#ga16eceb015a4eb9f200a698ce02c5f291">memory_compare&lt;T&gt;</a>(old, f()) == 0);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        } <span class="keywordflow">while</span> (_NEFORCE <a class="code hl_function" href="group___memory_functions.html#ga16eceb015a4eb9f200a698ce02c5f291">memory_compare&lt;T&gt;</a>(old, f()) == 0);</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    }</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span></div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
@@ -339,12 +339,12 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span></div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="keyword">using </span>bare_wait = waiter&lt;false_type&gt;;</div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span></div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Func&gt;</div>
 <div class="foldopen" id="foldopen00413" data-start="{" data-end="}">
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="group___atomic_operations.html#ga546bc65d02a41df5d8915cdce428bb61">  413</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___atomic_operations.html#ga546bc65d02a41df5d8915cdce428bb61">atomic_wait_address_v</a>(<span class="keyword">const</span> T* addr, T old, Func f) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> enters_wait waiter(addr);</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    inner::enters_wait waiter(addr);</div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    waiter.waiter_do_wait_v(old, f);</div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>}</div>
 </div>
@@ -352,7 +352,7 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Pred&gt;</div>
 <div class="foldopen" id="foldopen00428" data-start="{" data-end="}">
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno"><a class="line" href="group___atomic_operations.html#ga04b378083d850b094555357ea10e17ef">  428</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___atomic_operations.html#ga04b378083d850b094555357ea10e17ef">atomic_wait_address</a>(<span class="keyword">const</span> T* addr, Pred pred) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> enters_wait waiter(addr);</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    inner::enters_wait waiter(addr);</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    waiter.waiter_do_wait(pred);</div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>}</div>
 </div>
@@ -360,13 +360,13 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="foldopen" id="foldopen00443" data-start="{" data-end="}">
 <div class="line"><a id="l00443" name="l00443"></a><span class="lineno"><a class="line" href="group___atomic_operations.html#ga5c5949e5e1c0b7d9c13b91322f47f79d">  443</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___atomic_operations.html#ga5c5949e5e1c0b7d9c13b91322f47f79d">atomic_notify_address</a>(<span class="keyword">const</span> T* addr, <span class="keyword">const</span> <span class="keywordtype">bool</span> all) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> bare_wait waiter(addr);</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    inner::bare_wait waiter(addr);</div>
 <div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>    waiter.waiter_notify(all);</div>
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>}</div>
 </div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span> <span class="comment">// AtomicOperations</span></div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_ATOMIC_WAIT_HPP__</span></div>
 <div class="ttc" id="afutex_8hpp_html"><div class="ttname"><a href="futex_8hpp.html">futex.hpp</a></div><div class="ttdoc">快速用户空间互斥锁</div></div>
 <div class="ttc" id="agroup___atomic_operations_html_ga04b378083d850b094555357ea10e17ef"><div class="ttname"><a href="group___atomic_operations.html#ga04b378083d850b094555357ea10e17ef">atomic_wait_address</a></div><div class="ttdeci">void atomic_wait_address(const T *addr, Pred pred) noexcept</div><div class="ttdoc">基于谓词的原子等待</div><div class="ttdef"><b>定义</b> <a href="#l00428">atomic_wait.hpp:428</a></div></div>
@@ -379,12 +379,6 @@ $(function(){initNavTree('atomic__wait_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">futex_wait_flags::wait</a></div><div class="ttdeci">@ wait</div><div class="ttdoc">等待操作</div><div class="ttdef"><b>定义</b> <a href="futex_8hpp_source.html#l00042">futex.hpp:42</a></div></div>
 <div class="ttc" id="agroup___memory_functions_html_ga0dc544b7cbf5891bce974e1b1b396a48"><div class="ttname"><a href="group___memory_functions.html#ga0dc544b7cbf5891bce974e1b1b396a48">memory_copy</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 void * memory_copy(void *NEFORCE_RESTRICT dest, const void *NEFORCE_RESTRICT src, size_t count) noexcept</div><div class="ttdoc">从源内存复制到目标内存</div><div class="ttdef"><b>定义</b> <a href="memory_8hpp_source.html#l00030">memory.hpp:30</a></div></div>
 <div class="ttc" id="agroup___memory_functions_html_ga16eceb015a4eb9f200a698ce02c5f291"><div class="ttname"><a href="group___memory_functions.html#ga16eceb015a4eb9f200a698ce02c5f291">memory_compare</a></div><div class="ttdeci">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const void *lhs, const void *rhs, size_t count) noexcept</div><div class="ttdoc">比较两个内存区域的内容</div><div class="ttdef"><b>定义</b> <a href="memory_8hpp_source.html#l00119">memory.hpp:119</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga5b7cbd695e4ef11023a4088e5ebe9612"><div class="ttname"><a href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></div><div class="ttdeci">uint64_t uintptr_t</div><div class="ttdoc">可容纳指针的无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00194">types.hpp:194</a></div></div>
 <div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
 <div class="ttc" id="amemory_8hpp_html"><div class="ttname"><a href="memory_8hpp.html">memory.hpp</a></div><div class="ttdoc">内存操作函数</div></div>

@@ -95,11 +95,12 @@ $(function(){initNavTree('iterator_8hpp.html','',''); });
 
 <p>迭代器操作算法  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="concepts_8hpp_source.html">NeForce/core/typeinfo/concepts.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="breakpoint_8hpp_source.html">NeForce/core/exception/breakpoint.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="concepts_8hpp_source.html">NeForce/core/typeinfo/concepts.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 iterator.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="iterator_8hpp__incl.svg" width="243" height="582"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="iterator_8hpp__incl.svg" width="339" height="566"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="iterator_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -109,18 +110,18 @@ iterator.hpp 的引用(Include)关系图:</div>
 <tr class="memitem:ga720710ba0a6ddb8ac7aa954b0ee25b31" id="r_ga720710ba0a6ddb8ac7aa954b0ee25b31"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga720710ba0a6ddb8ac7aa954b0ee25b31 template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf6942166677058c886c9f50e90b2e44a">iter_pointer_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#ga720710ba0a6ddb8ac7aa954b0ee25b31">to_pointer</a> (Iterator iter)</td></tr>
 <tr class="memdesc:ga720710ba0a6ddb8ac7aa954b0ee25b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">将迭代器转换为原始指针  <br /></td></tr>
-<tr class="memitem:gae89b9f9d46b1d27ea01f99a5d0afd194" id="r_gae89b9f9d46b1d27ea01f99a5d0afd194"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Distance, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gae89b9f9d46b1d27ea01f99a5d0afd194 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#gae89b9f9d46b1d27ea01f99a5d0afd194">advance</a> (Iterator &amp;i, Distance n)</td></tr>
-<tr class="memdesc:gae89b9f9d46b1d27ea01f99a5d0afd194"><td class="mdescLeft">&#160;</td><td class="mdescRight">将迭代器前进指定距离  <br /></td></tr>
+<tr class="memitem:ga0ebe1ee99151c272bdedc1a48d148aa2" id="r_ga0ebe1ee99151c272bdedc1a48d148aa2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Distance&gt; </td></tr>
+<tr class="memitem:ga0ebe1ee99151c272bdedc1a48d148aa2 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a> (Iterator &amp;i, Distance n)</td></tr>
+<tr class="memdesc:ga0ebe1ee99151c272bdedc1a48d148aa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">将迭代器前进指定距离  <br /></td></tr>
 <tr class="memitem:ga3749de46b53a16d05fb38cc1755990af" id="r_ga3749de46b53a16d05fb38cc1755990af"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga3749de46b53a16d05fb38cc1755990af template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#ga3749de46b53a16d05fb38cc1755990af">prev</a> (Iterator iter, <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt; n=-1)</td></tr>
 <tr class="memdesc:ga3749de46b53a16d05fb38cc1755990af"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的前一个位置  <br /></td></tr>
 <tr class="memitem:ga81a6fcf5c05367caa72c5e1e26ffa38f" id="r_ga81a6fcf5c05367caa72c5e1e26ffa38f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga81a6fcf5c05367caa72c5e1e26ffa38f template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> (Iterator iter, <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt; n=1)</td></tr>
 <tr class="memdesc:ga81a6fcf5c05367caa72c5e1e26ffa38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的后一个位置  <br /></td></tr>
-<tr class="memitem:gab75627c1df8e95d5e92adc5faa6f13d3" id="r_gab75627c1df8e95d5e92adc5faa6f13d3"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gab75627c1df8e95d5e92adc5faa6f13d3 template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#gab75627c1df8e95d5e92adc5faa6f13d3">distance</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:gab75627c1df8e95d5e92adc5faa6f13d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个迭代器之间的距离  <br /></td></tr>
+<tr class="memitem:gabd49270b18593c75e6b68d05a5a389ba" id="r_gabd49270b18593c75e6b68d05a5a389ba"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gabd49270b18593c75e6b68d05a5a389ba template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gabd49270b18593c75e6b68d05a5a389ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个迭代器之间的距离  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>迭代器操作算法 </p>

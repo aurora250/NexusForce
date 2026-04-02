@@ -99,7 +99,7 @@ $(function(){initNavTree('weak__ptr_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 weak_ptr.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="weak__ptr_8hpp__incl.svg" width="1504" height="1035"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="weak__ptr_8hpp__incl.svg" width="1524" height="1019"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="weak__ptr_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -114,10 +114,17 @@ weak_ptr.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱指针的所有权比较器特化  <a href="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:owner_5Fless_3C_20void_20_3E" id="r_owner_5Fless_3C_20void_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structowner__less_3_01void_01_4.html">owner_less&lt; void &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用所有权比较器特化  <a href="structowner__less_3_01void_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:atomic_3C_20weak_5Fptr_3C_20T_20_3E_20_3E" id="r_atomic_3C_20weak_5Fptr_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html">atomic&lt; weak_ptr&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">weak_ptr的原子特化  <a href="structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#details">更多...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>弱智能指针实现 </p>
-<p>此文件提供了弱智能指针的完整实现，用于观察共享智能指针管理的对象， 但不增加引用计数，避免循环引用问题。 </p>
+<p>此文件提供了弱智能指针的完整实现，用于观察共享智能指针管理的对象， 但不增加引用计数，避免循环引用问题。</p>
+<p>主要用途：</p><ul>
+<li>打破循环引用（如双向链表、观察者模式）</li>
+<li>缓存对象但不影响其生命周期</li>
+<li>安全地检查对象是否存在 </li>
+</ul>
 
 <p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

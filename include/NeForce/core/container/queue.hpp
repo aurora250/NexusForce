@@ -14,8 +14,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Queue 队列
- * @brief 先进先出（FIFO）容器适配器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -261,7 +261,7 @@ template <typename Sequence>
 queue(Sequence) -> queue<typename Sequence::value_type, Sequence>;
 #endif
 
-/** @} */ // Queue
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_QUEUE_HPP__

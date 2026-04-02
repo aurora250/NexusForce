@@ -129,7 +129,7 @@ var classbasic__string =
     [ "insert", "classbasic__string.html#ab18a3bdfa6323b59c115e543903cec93", null ],
     [ "insert", "classbasic__string.html#a89954d290dc913b85ddace1bb6819e4f", null ],
     [ "length", "classbasic__string.html#a329250ab8ddcbbe0b763b32bf004e651", null ],
-    [ "lowercase", "classbasic__string.html#ae11306bff13a747096a28496d6282c5d", null ],
+    [ "lowercase", "classbasic__string.html#a14c97bf9634520d168d27c7d627e279a", null ],
     [ "max_size", "classbasic__string.html#a6eca487f0d42dff698b77de61d43fbf5", null ],
     [ "operator+=", "classbasic__string.html#a8f381e49ed8a445e2e56a82168b0b070", null ],
     [ "operator+=", "classbasic__string.html#aa417ae250d27a7047473fa9db44be3eb", null ],
@@ -188,7 +188,7 @@ var classbasic__string =
     [ "trim_left_if", "classbasic__string.html#a5f861a44fc5a091b0f6e5c52417e056d", null ],
     [ "trim_right", "classbasic__string.html#a5c17af8b70c474ea94e99ec87ab6dfc2", null ],
     [ "trim_right_if", "classbasic__string.html#a86b9fb4d97ef4ddec57b12726611fad6", null ],
-    [ "uppercase", "classbasic__string.html#ad1a25864904ef0839e10021440988d07", null ],
+    [ "uppercase", "classbasic__string.html#a014c34462c18fb9bf594d6fe8aac41b0", null ],
     [ "view", "classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32", null ],
     [ "view", "classbasic__string.html#afb9c6828d1b987b9554d791d898dc30f", null ]
 ];

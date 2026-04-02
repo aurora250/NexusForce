@@ -1,6 +1,6 @@
 var group___quantifier_algorithms =
 [
-    [ "all_of", "group___quantifier_algorithms.html#ga07518694bc7bd97c38fd2e9e6759196e", null ],
-    [ "any_of", "group___quantifier_algorithms.html#ga0f833c29d3be0fd70b420bdfbe657a21", null ],
-    [ "none_of", "group___quantifier_algorithms.html#ga769cc17431a9532538b6ccece0683f2a", null ]
+    [ "all_of", "group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e", null ],
+    [ "any_of", "group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc", null ],
+    [ "none_of", "group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc", null ]
 ];

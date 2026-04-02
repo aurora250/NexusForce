@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
+  ['原子内存序_0',['原子内存序',['../group___memory_order.html',1,'']]],
+  ['原子操作_1',['原子操作',['../group___atomic_operations.html',1,'']]]
 ];

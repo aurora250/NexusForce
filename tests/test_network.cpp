@@ -279,9 +279,9 @@ void test_https_server() {
             signal_guard guard;
 
             signal_manager::instance().register_handler(
-                SIGNAL_EVENT::INTERRUPT,
-                [&server](SIGNAL_EVENT event, void* context) -> bool {
-                    if (event == SIGNAL_EVENT::INTERRUPT) {
+                signal_event::INTERRUPT,
+                [&server](signal_event event, void* context) -> bool {
+                    if (event == signal_event::INTERRUPT) {
                         println("Interrupting...");
                         server.stop();
                         immediate_exit(0);
@@ -418,9 +418,9 @@ void test_http_server() {
             signal_manager::instance().start_monitoring();
 
             signal_manager::instance().register_handler(
-                SIGNAL_EVENT::INTERRUPT,
-                [&server](SIGNAL_EVENT event, void* context) -> bool {
-                    if (event == SIGNAL_EVENT::INTERRUPT) {
+                signal_event::INTERRUPT,
+                [&server](signal_event event, void* context) -> bool {
+                    if (event == signal_event::INTERRUPT) {
                         println("Interrupting...");
                         server.stop();
                         immediate_exit(0);

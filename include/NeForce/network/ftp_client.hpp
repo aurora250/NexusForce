@@ -7,7 +7,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct ftp_exception
- * @extends network_exception
  * @brief FTP操作异常
  */
 struct NEFORCE_API ftp_exception final : network_exception {

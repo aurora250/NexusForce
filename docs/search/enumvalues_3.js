@@ -2,10 +2,17 @@ var searchData=
 [
   ['datetime_0',['DateTime',['../classtoml__value.html#a4b6fe229629c77a296512ebfd5278150a453d7f92fd12fdc111a65b6cc9f4a843',1,'toml_value']]],
   ['debug_1',['DEBUG',['../group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15',1,'log_event.hpp']]],
-  ['decimal_2',['DECIMAL',['../group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba13d992d671957e9a2b3e936ca0cf14a4',1,'format.hpp']]],
-  ['deferred_3',['deferred',['../group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3a43fff3df3fc0b3417c86dc3040fb2d86',1,'deferred:&#160;future.hpp'],['../group___async.html#gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86',1,'deferred:&#160;future.hpp']]],
-  ['deleted_4',['DELETED',['../group___file.html#ggaa0b5e9e5c8a86dff59422965cfd27cefa63c2867fdcae0e8e8413d7ac21b69b59',1,'file_constants.hpp']]],
-  ['device_5',['DEVICE',['../group___file.html#gga2a2a018f90da3e2064ba746291f699c9ae10b6ab6a278644ce40631f62f360b6d',1,'file_constants.hpp']]],
-  ['directory_6',['DIRECTORY',['../group___file.html#gga2a2a018f90da3e2064ba746291f699c9a28766b4be065d0c806c2e9c9d914af48',1,'file_constants.hpp']]],
-  ['double_7',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]]
+  ['decimal_2',['DECIMAL',['../group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca13d992d671957e9a2b3e936ca0cf14a4',1,'format.hpp']]],
+  ['default_3',['DEFAULT',['../group___format.html#gga42d318d7a8f82021aa5e0db07e420beba5b39c8b553c821e7cddc6da64b5bd2ee',1,'DEFAULT:&#160;format.hpp'],['../group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca5b39c8b553c821e7cddc6da64b5bd2ee',1,'DEFAULT:&#160;format.hpp']]],
+  ['default_5flevel_4',['default_level',['../group___compression.html#ggabea3bd6adfcf0a71d2d2f2987233318ca6637b88286cba926cc1bb0ef49f9d2e8',1,'zlib_compress.hpp']]],
+  ['default_5fstrategy_5',['default_strategy',['../group___compression.html#gga573846ea8701aabec09c27f2d432c675a631738167a29f3283fb2afb8be36482d',1,'zlib_compress.hpp']]],
+  ['deferred_6',['deferred',['../group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3a43fff3df3fc0b3417c86dc3040fb2d86',1,'deferred:&#160;future.hpp'],['../group___async.html#gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86',1,'deferred:&#160;future.hpp']]],
+  ['deflate_7',['deflate',['../group___compression.html#gga3aad07e45fe05732549e0fb76f8578dea7e8bb5a89f2842ac4af01b3b7e228592',1,'zlib_compress.hpp']]],
+  ['delete_8',['DELETE',['../group___s_q_l.html#ggadbaccc2cc51836f54eab02a0ec397945a32f68a60cef40faedbc6af20298c1a1e',1,'sql_builder.hpp']]],
+  ['deleted_9',['DELETED',['../group___file.html#gga43a6bee6e48cc42ec150c994b67f1cd7a63c2867fdcae0e8e8413d7ac21b69b59',1,'file_constants.hpp']]],
+  ['desc_10',['DESC',['../group___s_q_l.html#gga9ae417fadc6859de056601afc47ffb4aa65a6d757dbb571ccc3af9706e9a5f607',1,'sql_builder.hpp']]],
+  ['device_11',['DEVICE',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d',1,'file_constants.hpp']]],
+  ['directory_12',['DIRECTORY',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48',1,'file_constants.hpp']]],
+  ['directory_13',['directory',['../classpath__tree.html#ab55e0606b796ecf83a0c16b83475abe8a5f8f22b8cdbaeee8cf857673a9b6ba20',1,'path_tree']]],
+  ['double_14',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]]
 ];

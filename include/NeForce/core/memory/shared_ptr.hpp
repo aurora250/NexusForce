@@ -747,6 +747,9 @@ protected:
 };
 
 
+/**
+ * @brief 类型特征：是否为shared_ptr
+ */
 template <typename T>
 struct is_shared_ptr : false_type {};
 
@@ -833,6 +836,8 @@ make_shared(const size_t len) {
  * @param args 构造参数
  * @return 共享指针
  * @throw memory_exception 如果构造对象或控制块时抛出错误
+ *
+ * 使用自定义分配器分配控制块和对象的内存。
  */
 template <typename T, typename Alloc, typename... Args>
 enable_if_t<!is_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>>
@@ -929,7 +934,18 @@ shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
     return nullptr;
 }
 
+/** @} */ // SharedPointer
 
+/**
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
+ * @{
+ */
+
+/**
+ * @brief shared_ptr的哈希特化
+ * @tparam T 元素类型
+ */
 template <typename T>
 struct hash<shared_ptr<T>> {
     NEFORCE_CONSTEXPR20 size_t operator ()(const shared_ptr<T>& ptr) const
@@ -938,7 +954,9 @@ struct hash<shared_ptr<T>> {
     }
 };
 
+/** @} */ // HashPrimary
 
+/// @cond
 NEFORCE_BEGIN_INNER__
 
 template <typename T>
@@ -1123,8 +1141,20 @@ public:
 };
 
 NEFORCE_END_INNER__
+/// @endcond
 
+/**
+ * @defgroup AtomicOperations 原子操作
+ * @brief 原子变量的操作
+ * @{
+ */
 
+/**
+ * @brief shared_ptr的原子特化
+ * @tparam T 对象类型
+ *
+ * 提供shared_ptr的原子操作支持，实现无锁的原子操作。
+ */
 template <typename T>
 struct atomic<shared_ptr<T>> {
 public:
@@ -1136,91 +1166,134 @@ private:
     inner::smart_pointer_atomic<value_type> atomic_;
 
 public:
+    /**
+     * @brief 检查是否无锁
+     * @return 始终返回false
+     */
     bool is_lock_free() const noexcept {
         return false;
     }
 
+    /**
+     * @brief 默认构造函数
+     */
     constexpr atomic(nullptr_t = nullptr) noexcept {}
 
+    /**
+     * @brief 从shared_ptr构造
+     * @param value 初始值
+     */
     atomic(value_type value) noexcept
     : atomic_(move(value)) {}
 
     atomic(const atomic&) = delete;
     void operator =(const atomic&) = delete;
 
+    /**
+     * @brief 原子加载
+     * @param mo 内存序
+     * @return 加载的值
+     */
     value_type load(memory_order mo = memory_order_seq_cst) const noexcept {
         return atomic_.load(mo);
     }
 
+    /**
+     * @brief 隐式转换操作符
+     */
     operator value_type() const noexcept {
         return atomic_.load(memory_order_seq_cst);
     }
 
+    /**
+     * @brief 原子存储
+     * @param desired 要存储的值
+     * @param mo 内存序
+     */
     void store(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
         atomic_.swap(desired, mo);
     }
 
+    /**
+     * @brief 赋值操作符
+     */
     void operator =(value_type desired) noexcept {
         atomic_.swap(desired, memory_order_seq_cst);
     }
 
+    /**
+     * @brief 赋空值操作符
+     */
     void operator =(nullptr_t) noexcept {
         store(nullptr);
     }
 
+    /**
+     * @brief 交换操作
+     * @param desired 要交换的值
+     * @param mo 内存序
+     * @return 交换前的值
+     */
     value_type exchange(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
         atomic_.swap(desired, mo);
         return desired;
     }
 
+    /**
+     * @brief 比较交换强版本
+     */
     bool compare_exchange_strong(value_type& expected, value_type desired,
                                  memory_order mo, memory_order mo2) noexcept {
         return atomic_.compare_exchange_strong(expected, desired, mo, mo2);
     }
 
+    /**
+     * @brief 简化比较交换强版本
+     */
     bool compare_exchange_strong(value_type& expected, value_type desired,
                                  memory_order mo = memory_order_seq_cst) noexcept {
-        memory_order mo2;
-        switch (mo) {
-            case memory_order_acq_rel: {
-                mo2 = memory_order_acquire;
-                break;
-            }
-            case memory_order_release: {
-                mo2 = memory_order_relaxed;
-                break;
-            }
-            default: {
-                mo2 = mo;
-            }
-        }
-        return compare_exchange_strong(expected, move(desired), mo, mo2);
+        return compare_exchange_strong(expected, move(desired), mo, cmpexch_failure_order(mo));
     }
 
+    /**
+     * @brief 比较交换弱版本
+     */
     bool compare_exchange_weak(value_type& expected, value_type desired,
                                memory_order mo, memory_order mo2) noexcept {
         return compare_exchange_strong(expected, move(desired), mo, mo2);
     }
 
+    /**
+     * @brief 简化比较交换弱版本
+     */
     bool compare_exchange_weak(value_type& expected, value_type desired,
                                memory_order mo = memory_order_seq_cst) noexcept {
         return compare_exchange_strong(expected, move(desired), mo);
     }
 
+    /**
+     * @brief 等待值改变
+     */
     void wait(value_type mold, memory_order mo = memory_order_seq_cst) const noexcept {
         atomic_.wait(move(mold), mo);
     }
 
+    /**
+     * @brief 通知一个等待者
+     */
     void notify_one() noexcept {
         atomic_.notify_one();
     }
 
+    /**
+     * @brief 通知所有等待者
+     */
     void notify_all() noexcept {
         atomic_.notify_all();
     }
 };
 
-/** @} */ // SharedPointer
+/** @} */ // AtomicOperations
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_MEMORY_SHARED_PTR_HPP__

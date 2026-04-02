@@ -7,5 +7,5 @@ var dir_23852f3b74e006d6ea2c04361c8a5fc7 =
     [ "database_pool.hpp", "database__pool_8hpp_source.html", null ],
     [ "db_config.hpp", "db__config_8hpp_source.html", null ],
     [ "db_interface.hpp", "db__interface_8hpp_source.html", null ],
-    [ "sql_builder.hpp", "sql__builder_8hpp_source.html", null ]
+    [ "sql_builder.hpp", "sql__builder_8hpp.html", "sql__builder_8hpp" ]
 ];

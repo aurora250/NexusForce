@@ -7,5 +7,7 @@ var searchData=
   ['log_5fevent_2ehpp_4',['log_event.hpp',['../log__event_8hpp.html',1,'']]],
   ['log_5fformatter_2ehpp_5',['log_formatter.hpp',['../log__formatter_8hpp.html',1,'']]],
   ['log_5fsink_2ehpp_6',['log_sink.hpp',['../log__sink_8hpp.html',1,'']]],
-  ['logger_2ehpp_7',['logger.hpp',['../logger_8hpp.html',1,'']]]
+  ['logger_2ehpp_7',['logger.hpp',['../logger_8hpp.html',1,'']]],
+  ['lru_5fcache_2ehpp_8',['lru_cache.hpp',['../lru__cache_8hpp.html',1,'']]],
+  ['lz4_5fcompress_2ehpp_9',['lz4_compress.hpp',['../lz4__compress_8hpp.html',1,'']]]
 ];

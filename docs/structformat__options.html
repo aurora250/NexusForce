@@ -89,11 +89,11 @@ $(function(){initNavTree('structformat__options.html','','structformat__options-
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">format_options结构体 参考<div class="ingroups"><a class="el" href="group___string_format.html">字符串格式化</a></div></div></div>
+  <div class="headertitle"><div class="title">format_options结构体 参考<div class="ingroups"><a class="el" href="group___format.html">字符串格式化</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>格式化选项结构体  
+<p>格式选项  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="format_8hpp_source.html">format.hpp</a>&gt;</code></p>
@@ -103,42 +103,39 @@ Public 属性</h2></td></tr>
 <tr class="memitem:aa87387c79bc88f7a34b4ce68745be0db" id="r_aa87387c79bc88f7a34b4ce68745be0db"><td class="memItemLeft"><a id="aa87387c79bc88f7a34b4ce68745be0db" name="aa87387c79bc88f7a34b4ce68745be0db"></a>
 char&#160;</td><td class="memItemRight"><b>fill</b> = ' '</td></tr>
 <tr class="memdesc:aa87387c79bc88f7a34b4ce68745be0db"><td class="mdescLeft">&#160;</td><td class="mdescRight">填充字符 <br /></td></tr>
+<tr class="memitem:a1e59e7d1603c5aed7c9329f9497455b6" id="r_a1e59e7d1603c5aed7c9329f9497455b6"><td class="memItemLeft"><a id="a1e59e7d1603c5aed7c9329f9497455b6" name="a1e59e7d1603c5aed7c9329f9497455b6"></a>
+<a class="el" href="group___format.html#ga42d318d7a8f82021aa5e0db07e420beb">format_align</a>&#160;</td><td class="memItemRight"><b>align</b> = <a class="el" href="group___format.html#gga42d318d7a8f82021aa5e0db07e420beba5b39c8b553c821e7cddc6da64b5bd2ee">format_align::DEFAULT</a></td></tr>
+<tr class="memdesc:a1e59e7d1603c5aed7c9329f9497455b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">对齐方式 <br /></td></tr>
+<tr class="memitem:abdfc92a4c861f89d19e14666246c3bd2" id="r_abdfc92a4c861f89d19e14666246c3bd2"><td class="memItemLeft"><a id="abdfc92a4c861f89d19e14666246c3bd2" name="abdfc92a4c861f89d19e14666246c3bd2"></a>
+<a class="el" href="group___format.html#gacf69152a3f3bf73a87406d0730a11a3c">format_type</a>&#160;</td><td class="memItemRight"><b>type</b> = <a class="el" href="group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca5b39c8b553c821e7cddc6da64b5bd2ee">format_type::DEFAULT</a></td></tr>
+<tr class="memdesc:abdfc92a4c861f89d19e14666246c3bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型 <br /></td></tr>
 <tr class="memitem:afe8031fd7babcfcefdb70daa5d652195" id="r_afe8031fd7babcfcefdb70daa5d652195"><td class="memItemLeft"><a id="afe8031fd7babcfcefdb70daa5d652195" name="afe8031fd7babcfcefdb70daa5d652195"></a>
 int&#160;</td><td class="memItemRight"><b>width</b> = 0</td></tr>
-<tr class="memdesc:afe8031fd7babcfcefdb70daa5d652195"><td class="mdescLeft">&#160;</td><td class="mdescRight">总宽度 <br /></td></tr>
+<tr class="memdesc:afe8031fd7babcfcefdb70daa5d652195"><td class="mdescLeft">&#160;</td><td class="mdescRight">最小宽度（0表示不限制） <br /></td></tr>
 <tr class="memitem:a42db8df63c6c52f2f2cd4bc32edf1154" id="r_a42db8df63c6c52f2f2cd4bc32edf1154"><td class="memItemLeft"><a id="a42db8df63c6c52f2f2cd4bc32edf1154" name="a42db8df63c6c52f2f2cd4bc32edf1154"></a>
 int&#160;</td><td class="memItemRight"><b>precision</b> = -1</td></tr>
 <tr class="memdesc:a42db8df63c6c52f2f2cd4bc32edf1154"><td class="mdescLeft">&#160;</td><td class="mdescRight">精度（-1表示默认） <br /></td></tr>
-<tr class="memitem:ac9f051acf7645cb6cd30b8288298f69e" id="r_ac9f051acf7645cb6cd30b8288298f69e"><td class="memItemLeft"><a id="ac9f051acf7645cb6cd30b8288298f69e" name="ac9f051acf7645cb6cd30b8288298f69e"></a>
-<a class="el" href="group___string_format.html#gab1952e41389ca02abe738738a3557378">FORMAT_ALIGN</a>&#160;</td><td class="memItemRight"><b>alignment</b> = <a class="el" href="group___string_format.html#ggab1952e41389ca02abe738738a3557378a21507b40c80068eda19865706fdc2403">FORMAT_ALIGN::RIGHT</a></td></tr>
-<tr class="memdesc:ac9f051acf7645cb6cd30b8288298f69e"><td class="mdescLeft">&#160;</td><td class="mdescRight">对齐方式 <br /></td></tr>
-<tr class="memitem:a47818482f4dc5d75b4c62dc15a637a46" id="r_a47818482f4dc5d75b4c62dc15a637a46"><td class="memItemLeft"><a id="a47818482f4dc5d75b4c62dc15a637a46" name="a47818482f4dc5d75b4c62dc15a637a46"></a>
-char&#160;</td><td class="memItemRight"><b>sign_mode</b> = 0</td></tr>
-<tr class="memdesc:a47818482f4dc5d75b4c62dc15a637a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">符号模式：0默认，+总是显示，-只显示负数，空格正数显示空格 <br /></td></tr>
-<tr class="memitem:adcb956073e02ae116e90f96c18d2994e" id="r_adcb956073e02ae116e90f96c18d2994e"><td class="memItemLeft"><a id="adcb956073e02ae116e90f96c18d2994e" name="adcb956073e02ae116e90f96c18d2994e"></a>
-bool&#160;</td><td class="memItemRight"><b>show_base</b> = false</td></tr>
-<tr class="memdesc:adcb956073e02ae116e90f96c18d2994e"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否显示进制前缀 <br /></td></tr>
-<tr class="memitem:a5ca6dc141d463ef4a0331428057ba88a" id="r_a5ca6dc141d463ef4a0331428057ba88a"><td class="memItemLeft"><a id="a5ca6dc141d463ef4a0331428057ba88a" name="a5ca6dc141d463ef4a0331428057ba88a"></a>
-<a class="el" href="group___string_format.html#ga5092edbbfe4860c8afe989f77b1f0ecb">FORMAT_TYPE</a>&#160;</td><td class="memItemRight"><b>type</b> = <a class="el" href="group___string_format.html#gga5092edbbfe4860c8afe989f77b1f0ecba13d992d671957e9a2b3e936ca0cf14a4">FORMAT_TYPE::DECIMAL</a></td></tr>
-<tr class="memdesc:a5ca6dc141d463ef4a0331428057ba88a"><td class="mdescLeft">&#160;</td><td class="mdescRight">数值类型格式 <br /></td></tr>
+<tr class="memitem:a890113aa848457ea0acf8d0150970eb3" id="r_a890113aa848457ea0acf8d0150970eb3"><td class="memItemLeft"><a id="a890113aa848457ea0acf8d0150970eb3" name="a890113aa848457ea0acf8d0150970eb3"></a>
+bool&#160;</td><td class="memItemRight"><b>uppercase</b> = false</td></tr>
+<tr class="memdesc:a890113aa848457ea0acf8d0150970eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否大写 <br /></td></tr>
+<tr class="memitem:ad2c4bd1370b1eaa7ff39cb8ceb8889b5" id="r_ad2c4bd1370b1eaa7ff39cb8ceb8889b5"><td class="memItemLeft"><a id="ad2c4bd1370b1eaa7ff39cb8ceb8889b5" name="ad2c4bd1370b1eaa7ff39cb8ceb8889b5"></a>
+bool&#160;</td><td class="memItemRight"><b>alternate</b> = false</td></tr>
+<tr class="memdesc:ad2c4bd1370b1eaa7ff39cb8ceb8889b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否备用格式（# 前缀） <br /></td></tr>
 <tr class="memitem:ab8407e9a62dacc295dea5398644d7cc4" id="r_ab8407e9a62dacc295dea5398644d7cc4"><td class="memItemLeft"><a id="ab8407e9a62dacc295dea5398644d7cc4" name="ab8407e9a62dacc295dea5398644d7cc4"></a>
 bool&#160;</td><td class="memItemRight"><b>zero_pad</b> = false</td></tr>
-<tr class="memdesc:ab8407e9a62dacc295dea5398644d7cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否用0填充 <br /></td></tr>
+<tr class="memdesc:ab8407e9a62dacc295dea5398644d7cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否零填充 <br /></td></tr>
+<tr class="memitem:a81d3c2f99048f1e908f9176fa5eca827" id="r_a81d3c2f99048f1e908f9176fa5eca827"><td class="memItemLeft"><a id="a81d3c2f99048f1e908f9176fa5eca827" name="a81d3c2f99048f1e908f9176fa5eca827"></a>
+bool&#160;</td><td class="memItemRight"><b>show_sign</b> = false</td></tr>
+<tr class="memdesc:a81d3c2f99048f1e908f9176fa5eca827"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否强制显示符号 '+' <br /></td></tr>
+<tr class="memitem:a16efbb924767d50e491ef5379c205da4" id="r_a16efbb924767d50e491ef5379c205da4"><td class="memItemLeft"><a id="a16efbb924767d50e491ef5379c205da4" name="a16efbb924767d50e491ef5379c205da4"></a>
+bool&#160;</td><td class="memItemRight"><b>space_sign</b> = false</td></tr>
+<tr class="memdesc:a16efbb924767d50e491ef5379c205da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否空格占位符号 ' ' <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>格式化选项结构体 </p>
-<p>包含所有格式化相关的选项：</p><ul>
-<li>fill: 填充字符</li>
-<li>width: 总宽度</li>
-<li>precision: 精度（浮点数有效位）</li>
-<li>alignment: 对齐方式</li>
-<li>sign_mode: 符号显示模式</li>
-<li>show_base: 是否显示进制前缀</li>
-<li>type: 数值类型格式</li>
-<li>zero_pad: 是否用0填充 </li>
-</ul>
+<div class="textblock"><p>格式选项 </p>
+<p>对应格式规范：[[fill]align][sign][#][0][width][.precision][type] </p>
 
-<p class="definition">在文件 <a class="el" href="format_8hpp_source.html">format.hpp</a> 第 <a class="el" href="format_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="format_8hpp_source.html">format.hpp</a> 第 <a class="el" href="format_8hpp_source.html#l00055">55</a> 行定义.</p>
 </div><hr/>该结构体的文档由以下文件生成:<ul>
 <li><a class="el" href="format_8hpp_source.html">format.hpp</a></li>
 </ul>

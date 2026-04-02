@@ -12,6 +12,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup ShuffleAlgorithms 随机重排算法
  * @brief 随机重排算法的实现
  * @{
@@ -73,6 +79,8 @@ void shuffle(Iterator first, Iterator last, Generator& rand) {
 }
 
 /** @} */ // ShuffleAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_SHUFFLE_HPP__

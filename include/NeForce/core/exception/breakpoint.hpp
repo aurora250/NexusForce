@@ -13,10 +13,74 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup DebugBreakpoints 调试断点
+ * @defgroup DebugBreakpointsAndAssertions 调试与断言
  * @brief 调试断点和断言工具
  * @{
  */
+
+#if defined(NEFORCE_STATE_DEBUG) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_DEBUG_VERIFY
+ * @brief 调试模式断言
+ *
+ * 仅在调试模式下检查条件，发布模式下不产生任何代码。
+ */
+#define NEFORCE_DEBUG_VERIFY(CON, MESG) \
+    { if (CON) {} else { assert(false && MESG); } }
+#else
+#define NEFORCE_DEBUG_VERIFY(CON, MESG)
+#endif
+
+#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_CONSTEXPR_ASSERT
+ * @brief 编译时常量断言
+ *
+ * 在常量求值上下文中进行断言，如果条件为false则触发不可达代码。
+ * 仅在C++20及以上版本有效。
+ */
+#define NEFORCE_CONSTEXPR_ASSERT(COND) \
+do { \
+    if (_NEFORCE is_constant_evaluated() && !bool(COND)) { \
+    _NEFORCE unreachable(); \
+    } \
+} while (false);
+#else
+#define NEFORCE_CONSTEXPR_ASSERT(COND)
+#endif
+
+
+/**
+ * @brief 标记不可达代码路径
+ *
+ * 该函数用于向编译器指示当前代码路径永远不会被执行。当编译器遇到此调用时，
+ * 可以进行激进的优化，假设此后的代码永远不会运行。如果实际执行到了此函数，
+ * 将导致未定义行为（通常是程序崩溃或产生不可预测的结果）。
+ *
+ * @note 此函数永远不会返回，调用后程序行为未定义。
+ * @warning 仅在确定代码路径绝对不可达时使用，否则会导致严重的运行时问题。
+ */
+NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE
+void unreachable() noexcept {
+#ifdef NEFORCE_COMPILER_GNUC
+    __builtin_unreachable();
+#else
+    __assume(false);
+#endif
+}
+
+#if defined(NEFORCE_STANDARD_17) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @brief 检查当前上下文是否在常量求值中
+ * @return 如果在常量求值上下文中返回true，否则返回false
+ *
+ * 用于区分编译时和运行时
+ */
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE
+constexpr bool is_constant_evaluated() noexcept {
+    return __builtin_is_constant_evaluated();
+}
+#endif
 
 /**
  * @brief 检测当前进程是否正在被调试器附加
@@ -73,7 +137,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging() noexcept {
     }
 }
 
-/** @} */ // DebugBreakpoints
+/** @} */ // DebugBreakpointsAndAssertions
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_EXCEPTION_BREAKPOINT_HPP__

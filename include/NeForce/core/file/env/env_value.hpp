@@ -21,10 +21,20 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct env_exception
- * @extends value_exception
  * @brief env格式操作失败
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(env_exception, value_exception, "ENV Operation Failed.")
+struct env_exception final : value_exception {
+    explicit env_exception(const char* info = "ENV Operation Failed.",
+                           const char* type = static_type,
+                           const int code = 0) noexcept
+    : value_exception(info, type, code) {}
+
+    explicit env_exception(const exception& e)
+    : value_exception(e) {}
+
+    ~env_exception() override = default;
+    static constexpr auto static_type = "env_exception";
+};
 
 /** @} */ // Exceptions
 

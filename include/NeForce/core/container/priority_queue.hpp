@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup PriorityQueue 优先队列
- * @brief 基于堆的优先级队列容器适配器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -281,7 +281,7 @@ priority_queue(Iterator, Iterator, Compare = Compare(), Sequence = Sequence())
 -> priority_queue<iter_value_t<Iterator>, Sequence, Compare>;
 #endif
 
-/** @} */ // PriorityQueue
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_PRIORITY_QUEUE_HPP__

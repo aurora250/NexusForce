@@ -1,5 +1,5 @@
 var group___shuffle_algorithms =
 [
-    [ "shuffle", "group___shuffle_algorithms.html#ga2d7771add24b7de1888b0c7554ccf998", null ],
-    [ "shuffle", "group___shuffle_algorithms.html#ga7d8b4b6c0d20843db8ba8bb768d37e12", null ]
+    [ "shuffle", "group___shuffle_algorithms.html#ga3bcbde813bd43737ddaf4c106caac469", null ],
+    [ "shuffle", "group___shuffle_algorithms.html#ga7d0bd6e732e8ea782985610e8276d3ce", null ]
 ];

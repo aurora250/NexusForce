@@ -1,16 +1,19 @@
 var searchData=
 [
-  ['cb_0',['cb',['../structat__thread__exit__elt.html#ac964432306e09d2aa975d7b9295a633c',1,'at_thread_exit_elt::cb'],['../structfile_1_1async__context.html#a115e322a5b92c648cc1714a888c31203',1,'file::async_context::cb'],['../structfile_1_1async__result.html#ab7398e6651715782ca3d8e9724ecf2ac',1,'file::async_result::cb']]],
-  ['circle_1',['CIRCLE',['../group___math_constants.html#ga7c01a358e7f7015c0a3c367da55866aa',1,'math.hpp']]],
-  ['color_5f_2',['color_',['../structrb__tree__node__base.html#a4d5e0bb6fec2463fc7635857655db6af',1,'rb_tree_node_base']]],
-  ['completed_3',['completed',['../structfile_1_1async__result.html#aa7b08e330ca72525712711bcabce83bf',1,'file::async_result']]],
-  ['connect_4',['CONNECT',['../struct_h_t_t_p___m_e_t_h_o_d.html#af79433abad3233a93b1e1c3e628ea48e',1,'HTTP_METHOD']]],
-  ['context_5',['context',['../structlog__event.html#a7bebc182c9d81a466c92e77f5f4ad22f',1,'log_event']]],
-  ['continuation_6',['continuation',['../structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520',1,'task::promise_type']]],
-  ['cores_7',['cores',['../structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215',1,'sysinfo::CPU_info']]],
-  ['count_8',['count',['../structretire__list.html#a15ffcee565539d025ab2894a6bad5c7d',1,'retire_list']]],
-  ['csd_5fversion_9',['csd_version',['../structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c',1,'sysinfo::os_version_info']]],
-  ['css_5ftext_10',['CSS_TEXT',['../struct_h_t_t_p___c_o_n_t_e_n_t.html#a5e4ba61d73d6ea53c4cfdb9fdebd8b87',1,'HTTP_CONTENT']]],
-  ['current_5fmhz_11',['current_MHZ',['../structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572',1,'sysinfo::CPU_info']]],
-  ['current_5fvalue_12',['current_value',['../structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4',1,'generator::promise_type']]]
+  ['cancelled_0',['cancelled',['../structthread__pool_1_1periodic__task__state.html#abd5456c25461360f12c5cadb54c8d3cd',1,'thread_pool::periodic_task_state']]],
+  ['cb_1',['cb',['../structat__thread__exit__elt.html#ac964432306e09d2aa975d7b9295a633c',1,'at_thread_exit_elt::cb'],['../structfile__async_1_1async__result.html#aa315e97f0005796fa5eb9e1d8e9f7acf',1,'file_async::async_result::cb']]],
+  ['circle_2',['CIRCLE',['../group___math_constants.html#ga7c01a358e7f7015c0a3c367da55866aa',1,'math.hpp']]],
+  ['color_5f_3',['color_',['../structrb__tree__node__base.html#a4d5e0bb6fec2463fc7635857655db6af',1,'rb_tree_node_base']]],
+  ['completed_4',['completed',['../structfile__async_1_1async__result.html#a4c9b7352fd87208d710128a18e844dde',1,'file_async::async_result']]],
+  ['connect_5',['CONNECT',['../struct_h_t_t_p___m_e_t_h_o_d.html#af79433abad3233a93b1e1c3e628ea48e',1,'HTTP_METHOD']]],
+  ['consecutive_5fidle_5fcount_6',['consecutive_idle_count',['../structworker__context.html#aa4cb896c147fd86efed7b3f176e8a233',1,'worker_context']]],
+  ['context_7',['context',['../structlog__event.html#a7bebc182c9d81a466c92e77f5f4ad22f',1,'log_event']]],
+  ['continuation_8',['continuation',['../structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520',1,'task::promise_type']]],
+  ['cores_9',['cores',['../structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215',1,'sysinfo::CPU_info']]],
+  ['count_10',['count',['../structretire__list.html#a15ffcee565539d025ab2894a6bad5c7d',1,'retire_list']]],
+  ['csd_5fversion_11',['csd_version',['../structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c',1,'sysinfo::os_version_info']]],
+  ['css_5ftext_12',['CSS_TEXT',['../struct_h_t_t_p___c_o_n_t_e_n_t.html#a5e4ba61d73d6ea53c4cfdb9fdebd8b87',1,'HTTP_CONTENT']]],
+  ['current_5fmhz_13',['current_MHZ',['../structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572',1,'sysinfo::CPU_info']]],
+  ['current_5fvalue_14',['current_value',['../structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4',1,'generator::promise_type']]],
+  ['custom_5ffilter_15',['custom_filter',['../structpath__tree_1_1scan__options.html#a07189eb39976f22adf0b1ab5569735b3',1,'path_tree::scan_options']]]
 ];

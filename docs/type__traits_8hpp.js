@@ -19,7 +19,7 @@ var type__traits_8hpp =
     [ "copy_pointer_t", "group___remove_qualifiers.html#ga3658c92b3b71f7b938337e542dc016e5", null ],
     [ "copy_ref_t", "group___remove_qualifiers.html#gaec29fe3d66b7f267e0480b2ca34af27c", null ],
     [ "decay_t", "group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8", null ],
-    [ "detected_or", "group___type_attribute_operations.html#gab0b386306f72a6c76b1b9ea9d13ca4f5", null ],
+    [ "detected_or", "group___type_attribute_operations.html#ga999daadde7e6033d617ad91266fcfd7c", null ],
     [ "detected_or_t", "group___type_attribute_operations.html#ga80f94c5a0b73ffc291247f406ee7e3b2", null ],
     [ "enable_if_t", "group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0", null ],
     [ "false_type", "group___type_traits_utilities.html#gad15d3ff5d80b8c8c22e9ce862353ba55", null ],

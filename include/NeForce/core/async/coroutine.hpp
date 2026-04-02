@@ -63,6 +63,18 @@ struct coroutine_traits : inner::coroutine_traits_impl<Res> {};
 template <typename Promise = void>
 using coroutine_handle = std::coroutine_handle<Promise>;
 
+/** @} */ // Coroutine
+
+/**
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
+ * @{
+ */
+
+/**
+ * @brief coroutine_handle的哈希特化
+ * @tparam Promise handle持有的保证类型
+ */
 template <typename Promise>
 struct hash<coroutine_handle<Promise>> {
     size_t operator()(const coroutine_handle<Promise>& handle) const noexcept {
@@ -70,6 +82,13 @@ struct hash<coroutine_handle<Promise>> {
     }
 };
 
+/** @} */ // HashPrimary
+
+/**
+ * @defgroup Coroutine 协程
+ * @brief 协程支持
+ * @{
+ */
 
 /**
  * @brief 空操作协程的promise类型别名

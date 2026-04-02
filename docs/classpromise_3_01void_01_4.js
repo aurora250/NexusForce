@@ -1,8 +1,8 @@
 var classpromise_3_01void_01_4 =
 [
-    [ "ptr_type", "classpromise_3_01void_01_4.html#acacb1443e0dd3300f3eec8a475e895fc", null ],
-    [ "result_type", "classpromise_3_01void_01_4.html#a73c9438bbef000354b56ebe2db437f73", null ],
-    [ "state_type", "classpromise_3_01void_01_4.html#ab9c6e80ab8f51062f55d40eab160863b", null ],
+    [ "ptr_type", "classpromise_3_01void_01_4.html#aff4c6f463c34add52cbc58e24e54088c", null ],
+    [ "result_type", "classpromise_3_01void_01_4.html#a81d6b124af3b258df55ae78a227c5c61", null ],
+    [ "state_type", "classpromise_3_01void_01_4.html#a9574607703f74df962c70097c9b9c792", null ],
     [ "promise", "classpromise_3_01void_01_4.html#ac277841e88a39702719d9a90b21e6c57", null ],
     [ "promise", "classpromise_3_01void_01_4.html#a1bc7fd6a05bb8861144d8645c361a95b", null ],
     [ "promise", "classpromise_3_01void_01_4.html#a79894a850aab5199527197290e90e65d", null ],

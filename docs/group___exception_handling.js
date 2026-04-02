@@ -18,7 +18,7 @@ var group___exception_handling =
         [ "ecb", "structexception__ptr_1_1ecb.html#ae25e38edd19bb95d42b7a6b91276f2ea", null ],
         [ "add_ref", "structexception__ptr_1_1ecb.html#a38e94338fa3c2c5d554aa924b4893cd9", null ],
         [ "release", "structexception__ptr_1_1ecb.html#ab28775b35400880fc5464e783645cbe7", null ],
-        [ "ref_count", "structexception__ptr_1_1ecb.html#a4ef4e32ce83d097346084bf05c233ab0", null ],
+        [ "ref_count", "structexception__ptr_1_1ecb.html#a2ac399412a50c2852180a723ce82d812", null ],
         [ "wrapper", "structexception__ptr_1_1ecb.html#ab244c1a9be88e08b1f94a93308706994", null ]
       ] ],
       [ "exception_ptr", "classexception__ptr.html#ae0d425f758c1ca9707bfb390f8487893", null ],
@@ -46,5 +46,6 @@ var group___exception_handling =
     [ "current_exception", "group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419", null ],
     [ "make_exception_ptr", "group___exception_handling.html#gac43ce5d8fc82090c24f3088e37cc2d89", null ],
     [ "rethrow_exception", "group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32", null ],
-    [ "throw_with_stack", "group___exception_handling.html#gafcaf017f48e0577f063b54671e2a06ec", null ]
+    [ "throw_with_stack", "group___exception_handling.html#gafcaf017f48e0577f063b54671e2a06ec", null ],
+    [ "uncaught_exceptions", "group___exception_handling.html#gafa2df93411a6e72fbe11790aea38de2a", null ]
 ];

@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup SetAlgorithms 集合算法
  * @brief 集合算法的实现
  * @{
@@ -168,6 +174,8 @@ constexpr Iterator3 set_symmetric_difference(Iterator1 first1, Iterator1 last1, 
 }
 
 /** @} */ // SetAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_SET_HPP__

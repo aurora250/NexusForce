@@ -14,8 +14,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Stack 栈
- * @brief 后进先出（LIFO）容器适配器
+ * @defgroup Container 标准容器
+ * @brief 支持标准算法的容器的实现
  * @{
  */
 
@@ -186,7 +186,7 @@ template <typename Sequence>
 stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
 #endif
 
-/** @} */ // Stack
+/** @} */ // Container
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_STACK_HPP__

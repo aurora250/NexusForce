@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: regex_iterator类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classregex__iterator.html','','classregex__iterator-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">regex_iterator类 参考<div class="ingroups"><a class="el" href="group___regex.html">正则表达式</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>正则表达式匹配迭代器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="regex_8hpp_source.html">regex.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a1f718751e6168b441c5ea191c666b602" id="r_a1f718751e6168b441c5ea191c666b602"><td class="memItemLeft"><a id="a1f718751e6168b441c5ea191c666b602" name="a1f718751e6168b441c5ea191c666b602"></a>
+using&#160;</td><td class="memItemRight"><b>iterator_category</b> = <a class="el" href="structbidirectional__iterator__tag.html">bidirectional_iterator_tag</a></td></tr>
+<tr class="memdesc:a1f718751e6168b441c5ea191c666b602"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:a008141f536edbdd9cdb6483d231e909f" id="r_a008141f536edbdd9cdb6483d231e909f"><td class="memItemLeft"><a id="a008141f536edbdd9cdb6483d231e909f" name="a008141f536edbdd9cdb6483d231e909f"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = <a class="el" href="classmatch__result.html">match_result</a></td></tr>
+<tr class="memdesc:a008141f536edbdd9cdb6483d231e909f"><td class="mdescLeft">&#160;</td><td class="mdescRight">元素类型 <br /></td></tr>
+<tr class="memitem:a83d13299dfa95febaa1318f1459daf65" id="r_a83d13299dfa95febaa1318f1459daf65"><td class="memItemLeft"><a id="a83d13299dfa95febaa1318f1459daf65" name="a83d13299dfa95febaa1318f1459daf65"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></td></tr>
+<tr class="memdesc:a83d13299dfa95febaa1318f1459daf65"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:ad8aa533189ab91035258c7bcf1596612" id="r_ad8aa533189ab91035258c7bcf1596612"><td class="memItemLeft"><a id="ad8aa533189ab91035258c7bcf1596612" name="ad8aa533189ab91035258c7bcf1596612"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = const <a class="el" href="classmatch__result.html">match_result</a>*</td></tr>
+<tr class="memdesc:ad8aa533189ab91035258c7bcf1596612"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a91ac94ae92e726ae490cd7bbc6331c68" id="r_a91ac94ae92e726ae490cd7bbc6331c68"><td class="memItemLeft"><a id="a91ac94ae92e726ae490cd7bbc6331c68" name="a91ac94ae92e726ae490cd7bbc6331c68"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = const <a class="el" href="classmatch__result.html">match_result</a>&amp;</td></tr>
+<tr class="memdesc:a91ac94ae92e726ae490cd7bbc6331c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a56d42abfdfd967f92f214c3c25592dc1" id="r_a56d42abfdfd967f92f214c3c25592dc1"><td class="memItemLeft"><a id="a56d42abfdfd967f92f214c3c25592dc1" name="a56d42abfdfd967f92f214c3c25592dc1"></a>
+&#160;</td><td class="memItemRight"><b>regex_iterator</b> ()=default</td></tr>
+<tr class="memdesc:a56d42abfdfd967f92f214c3c25592dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数，构造结束迭代器 <br /></td></tr>
+<tr class="memitem:a7ff151b47153c56e747a27b846033d8c" id="r_a7ff151b47153c56e747a27b846033d8c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7ff151b47153c56e747a27b846033d8c">regex_iterator</a> (const <a class="el" href="classregex.html">regex</a> *re, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;str, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> pos=0)</td></tr>
+<tr class="memdesc:a7ff151b47153c56e747a27b846033d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a8624e4e94c42b6729674dd82481abdc1" id="r_a8624e4e94c42b6729674dd82481abdc1"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a91ac94ae92e726ae490cd7bbc6331c68">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8624e4e94c42b6729674dd82481abdc1">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a8624e4e94c42b6729674dd82481abdc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符  <br /></td></tr>
+<tr class="memitem:af32e43d6b8094c5d95c3ca7a23f0bc37" id="r_af32e43d6b8094c5d95c3ca7a23f0bc37"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#ad8aa533189ab91035258c7bcf1596612">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="#af32e43d6b8094c5d95c3ca7a23f0bc37">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="memdesc:af32e43d6b8094c5d95c3ca7a23f0bc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">成员访问操作符  <br /></td></tr>
+<tr class="memitem:aed5b19b5be776eb0ac8087be4bd8bad4" id="r_aed5b19b5be776eb0ac8087be4bd8bad4"><td class="memItemLeft"><a class="el" href="classregex__iterator.html">regex_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aed5b19b5be776eb0ac8087be4bd8bad4">operator++</a> ()</td></tr>
+<tr class="memdesc:aed5b19b5be776eb0ac8087be4bd8bad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递增操作符  <br /></td></tr>
+<tr class="memitem:a0de0979dd96aa54ef5e5a6269980245f" id="r_a0de0979dd96aa54ef5e5a6269980245f"><td class="memItemLeft"><a class="el" href="classregex__iterator.html">regex_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0de0979dd96aa54ef5e5a6269980245f">operator++</a> (int)</td></tr>
+<tr class="memdesc:a0de0979dd96aa54ef5e5a6269980245f"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置递增操作符  <br /></td></tr>
+<tr class="memitem:abb1bb425c46e2457306ed6f4ad35fea4" id="r_abb1bb425c46e2457306ed6f4ad35fea4"><td class="memItemLeft"><a class="el" href="classregex__iterator.html">regex_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abb1bb425c46e2457306ed6f4ad35fea4">operator--</a> ()</td></tr>
+<tr class="memdesc:abb1bb425c46e2457306ed6f4ad35fea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递减操作符  <br /></td></tr>
+<tr class="memitem:a70f7da1a7023158550ebe8a259607881" id="r_a70f7da1a7023158550ebe8a259607881"><td class="memItemLeft"><a class="el" href="classregex__iterator.html">regex_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a70f7da1a7023158550ebe8a259607881">operator--</a> (int)</td></tr>
+<tr class="memdesc:a70f7da1a7023158550ebe8a259607881"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置递减操作符  <br /></td></tr>
+<tr class="memitem:a5faa8585584a4958609edc84f4987fc8" id="r_a5faa8585584a4958609edc84f4987fc8"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a5faa8585584a4958609edc84f4987fc8">operator==</a> (const <a class="el" href="classregex__iterator.html">regex_iterator</a> &amp;other) const noexcept</td></tr>
+<tr class="memdesc:a5faa8585584a4958609edc84f4987fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:ab6919a48754b802589a4acd7387b8f5e" id="r_ab6919a48754b802589a4acd7387b8f5e"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ab6919a48754b802589a4acd7387b8f5e">operator!=</a> (const <a class="el" href="classregex__iterator.html">regex_iterator</a> &amp;other) const noexcept</td></tr>
+<tr class="memdesc:ab6919a48754b802589a4acd7387b8f5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较操作符  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a5a6392c2006b7991ff9c8cbcd3f83a17" id="r_a5a6392c2006b7991ff9c8cbcd3f83a17"><td class="memItemLeft">static <a class="el" href="classregex__iterator.html">regex_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5a6392c2006b7991ff9c8cbcd3f83a17">from_index</a> (const <a class="el" href="classregex.html">regex</a> *re, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;str, <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> index)</td></tr>
+<tr class="memdesc:a5a6392c2006b7991ff9c8cbcd3f83a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指定索引构造迭代器  <br /></td></tr>
+<tr class="memitem:a87d8cbe1f65c9b6db97447b8242c9bc9" id="r_a87d8cbe1f65c9b6db97447b8242c9bc9"><td class="memItemLeft">static <a class="el" href="classregex__iterator.html">regex_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a87d8cbe1f65c9b6db97447b8242c9bc9">begin</a> (const <a class="el" href="classregex.html">regex</a> *re, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;str)</td></tr>
+<tr class="memdesc:a87d8cbe1f65c9b6db97447b8242c9bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:aede5a6db50e475732ce9ffd06e8f083e" id="r_aede5a6db50e475732ce9ffd06e8f083e"><td class="memItemLeft">static <a class="el" href="classregex__iterator.html">regex_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aede5a6db50e475732ce9ffd06e8f083e">end</a> (const <a class="el" href="classregex.html">regex</a> *re, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;str)</td></tr>
+<tr class="memdesc:aede5a6db50e475732ce9ffd06e8f083e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>正则表达式匹配迭代器 </p>
+<p>双向迭代器，用于遍历字符串中的所有匹配结果。 支持向前和向后遍历。 </p>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00370">370</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a7ff151b47153c56e747a27b846033d8c" name="a7ff151b47153c56e747a27b846033d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff151b47153c56e747a27b846033d8c">&#9670;&#160;</a></span>regex_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">regex_iterator::regex_iterator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classregex.html">regex</a> *</td>          <td class="paramname"><span class="paramname"><em>re</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">re</td><td>正则表达式对象 </td></tr>
+    <tr><td class="paramname">str</td><td>待遍历的字符串 </td></tr>
+    <tr><td class="paramname">pos</td><td>起始位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a87d8cbe1f65c9b6db97447b8242c9bc9" name="a87d8cbe1f65c9b6db97447b8242c9bc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d8cbe1f65c9b6db97447b8242c9bc9">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> regex_iterator::begin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classregex.html">regex</a> *</td>          <td class="paramname"><span class="paramname"><em>re</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">re</td><td>正则表达式对象 </td></tr>
+    <tr><td class="paramname">str</td><td>待遍历的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>起始迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00498">498</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="aede5a6db50e475732ce9ffd06e8f083e" name="aede5a6db50e475732ce9ffd06e8f083e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede5a6db50e475732ce9ffd06e8f083e">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> regex_iterator::end </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classregex.html">regex</a> *</td>          <td class="paramname"><span class="paramname"><em>re</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">re</td><td>正则表达式对象 </td></tr>
+    <tr><td class="paramname">str</td><td>待遍历的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>结束迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00508">508</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="a5a6392c2006b7991ff9c8cbcd3f83a17" name="a5a6392c2006b7991ff9c8cbcd3f83a17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a6392c2006b7991ff9c8cbcd3f83a17">&#9670;&#160;</a></span>from_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> regex_iterator::from_index </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classregex.html">regex</a> *</td>          <td class="paramname"><span class="paramname"><em>re</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从指定索引构造迭代器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">re</td><td>正则表达式对象 </td></tr>
+    <tr><td class="paramname">str</td><td>待遍历的字符串 </td></tr>
+    <tr><td class="paramname">index</td><td>索引位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="ab6919a48754b802589a4acd7387b8f5e" name="ab6919a48754b802589a4acd7387b8f5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6919a48754b802589a4acd7387b8f5e">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool regex_iterator::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classregex__iterator.html">regex_iterator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>不等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>另一个迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>不等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00488">488</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="a8624e4e94c42b6729674dd82481abdc1" name="a8624e4e94c42b6729674dd82481abdc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8624e4e94c42b6729674dd82481abdc1">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a91ac94ae92e726ae490cd7bbc6331c68">reference</a> regex_iterator::operator* </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解引用操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>当前匹配结果 </dd></dl>
+
+</div>
+</div>
+<a id="aed5b19b5be776eb0ac8087be4bd8bad4" name="aed5b19b5be776eb0ac8087be4bd8bad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed5b19b5be776eb0ac8087be4bd8bad4">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> &amp; regex_iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>前置递增操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>递增后的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00436">436</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="a0de0979dd96aa54ef5e5a6269980245f" name="a0de0979dd96aa54ef5e5a6269980245f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de0979dd96aa54ef5e5a6269980245f">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> regex_iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>后置递增操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>递增前的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00445">445</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="abb1bb425c46e2457306ed6f4ad35fea4" name="abb1bb425c46e2457306ed6f4ad35fea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb1bb425c46e2457306ed6f4ad35fea4">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> &amp; regex_iterator::operator-- </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>前置递减操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>递减后的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00455">455</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="a70f7da1a7023158550ebe8a259607881" name="a70f7da1a7023158550ebe8a259607881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70f7da1a7023158550ebe8a259607881">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classregex__iterator.html">regex_iterator</a> regex_iterator::operator-- </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>后置递减操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>递减前的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00470">470</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="af32e43d6b8094c5d95c3ca7a23f0bc37" name="af32e43d6b8094c5d95c3ca7a23f0bc37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af32e43d6b8094c5d95c3ca7a23f0bc37">&#9670;&#160;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#ad8aa533189ab91035258c7bcf1596612">pointer</a> regex_iterator::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>成员访问操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>当前匹配结果指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="regex_8hpp_source.html">regex.hpp</a> 第 <a class="el" href="regex_8hpp_source.html#l00428">428</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="duration_8hpp_source.html#l00508">operator*()</a>.</p>
+
+</div>
+</div>
+<a id="a5faa8585584a4958609edc84f4987fc8" name="a5faa8585584a4958609edc84f4987fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5faa8585584a4958609edc84f4987fc8">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool regex_iterator::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classregex__iterator.html">regex_iterator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>另一个迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>相等返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a56d42abfdfd967f92f214c3c25592dc1">regex_iterator()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="regex_8hpp_source.html">regex.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classregex__iterator.html">regex_iterator</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

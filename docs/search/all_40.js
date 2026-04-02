@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['布隆过滤器_0',['布隆过滤器',['../group___bloom_filter.html',1,'']]]
+  ['并行算法_0',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

@@ -18,7 +18,7 @@ var group___process =
         [ "user_time_ms", "structprocess_1_1time__info.html#a7bb18a8a5556aee85d652152a5e243c5", null ],
         [ "wall_time_ms", "structprocess_1_1time__info.html#a15225d1b9e0bcd24c1512c5c810757c6", null ]
       ] ],
-      [ "native_id_type", "classprocess.html#a217a13e2c71f3becbf9493173286c05b", null ],
+      [ "native_id_type", "classprocess.html#a20a5f8b9e680fa516dc1ce2bb65f8a53", null ],
       [ "permission", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242", [
         [ "read", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e", null ],
         [ "write", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee", null ],

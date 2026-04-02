@@ -93,7 +93,7 @@ void test_file_attributes_and_times() {
     datetime now = datetime::now();
     bool set_time_ok = f.info().set_last_write_time(now);
     NEFORCE_ASSERTION(set_time_ok);
-    // NEFORCE_ASSERTION(f.info().last_write_time() == now);
+    NEFORCE_ASSERTION(f.info().last_write_time() == now.to_UTC());
 
     f.close();
     println("test file attributes and times passed");
@@ -162,6 +162,32 @@ void test_file() {
     }
 }
 
+void test_pathtree() {
+    path_tree::scan_options opts;
+    opts.extensions = {"cpp", "hpp"};
+    opts.include_hidden = false;
+
+    path project(res_root() / "../../include/NeForce");
+    path_tree tree = path_tree::scan(project, opts);
+
+    println(tree);
+
+    auto headers = tree.find_by_extension("hpp");
+
+    tree.traverse_files([](const path_tree::node& n) -> path_tree::visit_result {
+        println(n.get_path());
+        return path_tree::visit_result::proceed;
+    });
+
+    path_tree compress_tree = tree.subtree(project / "compress");
+    println(compress_tree);
+
+    path_tree large_files = tree.prune([](const path_tree::node& n) {
+        if (!n.is_file()) return true;
+        return filesystem::size(n.get_path()) > 1024;
+    });
+    println(large_files);
+}
 
 void test_date() {
     date d1(2024, 2, 29);

@@ -35,25 +35,23 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 #define NEFORCE_PLUGIN_DESTROY_FUNC "destroy_plugin"
 
-extern "C" {
-    /**
-     * @brief 创建插件实例
-     * @return 指向新创建的插件对象的指针
-     *
-     * 此函数必须由插件实现并导出，用于创建插件实例。
-     * 返回的指针将由 destroy_plugin 函数销毁。
-     */
-    iplugin* create_plugin();
+/**
+ * @brief 创建插件实例
+ * @return 指向新创建的插件对象的指针
+ *
+ * 此函数必须由插件实现并导出，用于创建插件实例。
+ * 返回的指针将由 destroy_plugin 函数销毁。
+ */
+extern "C" iplugin* create_plugin();
 
-    /**
-     * @brief 销毁插件实例
-     * @param p 要销毁的插件对象指针
-     *
-     * 此函数必须由插件实现并导出，用于销毁通过 create_plugin
-     * 创建的插件对象。释放所有相关资源。
-     */
-    void destroy_plugin(iplugin* p);
-}
+/**
+ * @brief 销毁插件实例
+ * @param p 要销毁的插件对象指针
+ *
+ * 此函数必须由插件实现并导出，用于销毁通过 create_plugin
+ * 创建的插件对象。释放所有相关资源。
+ */
+extern "C" void destroy_plugin(iplugin* p);
 
 /** @} */ // Plugin
 

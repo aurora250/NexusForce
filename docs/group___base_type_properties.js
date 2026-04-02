@@ -6,7 +6,6 @@ var group___base_type_properties =
     [ "unpackage&lt; T, Dummy &gt;", "structunpackage.html", null ],
     [ "is_unpackaged&lt; T &gt;", "structis__unpackaged.html", null ],
     [ "is_character&lt; T &gt;", "structis__character.html", null ],
-    [ "is_standard_character&lt; T &gt;", "structis__standard__character.html", null ],
     [ "is_boolean&lt; T &gt;", "structis__boolean.html", null ],
     [ "is_standard_integral&lt; T &gt;", "structis__standard__integral.html", null ],
     [ "is_integral&lt; T &gt;", "structis__integral.html", null ],

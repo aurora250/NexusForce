@@ -12,11 +12,13 @@
 #include "NeForce/core/typeinfo/types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-/**
- * @namespace constants
- * @brief 计算用常量命名空间
- */
 NEFORCE_BEGIN_CONSTANTS__
+
+/**
+ * @defgroup BitManipulation 位操作
+ * @brief 位操作类与函数的实现
+ * @{
+ */
 
 /**
  * @var POPCOUNT_TABLE
@@ -36,11 +38,13 @@ NEFORCE_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
     3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
 };
 
+/** @} */ // BitManipulation
+
 NEFORCE_END_CONSTANTS__
 
 /**
- * @defgroup BitCounting 位计数函数
- * @brief 计算位中1的个数和前导零个数
+ * @defgroup BitManipulation 位操作
+ * @brief 位操作类与函数的实现
  * @{
  */
 
@@ -257,13 +261,6 @@ constexpr bool parity(const uintptr_t x) noexcept {
 #endif
 }
 
-/** @} */ // BitCounting
-
-/**
- * @defgroup BitManipulation 位操作函数
- * @brief 位宽计算、位取整和位检查函数
- * @{
- */
 
 /**
  * @brief 计算表示整数所需的最小位宽

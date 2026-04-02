@@ -1,8 +1,8 @@
 var classpromise_3_01_res_01_6_01_4 =
 [
-    [ "ptr_type", "classpromise_3_01_res_01_6_01_4.html#a6fe837af1dc769be262b6c4f8bb6d63a", null ],
-    [ "result_type", "classpromise_3_01_res_01_6_01_4.html#a1c9cfee3c719f611a82331651c21c7b3", null ],
-    [ "state_type", "classpromise_3_01_res_01_6_01_4.html#ab8004eeed0002a17b71c5a8bc50cb849", null ],
+    [ "ptr_type", "classpromise_3_01_res_01_6_01_4.html#a58f321250d62ee76eeb219ee0e67c3ae", null ],
+    [ "result_type", "classpromise_3_01_res_01_6_01_4.html#a7473358eab49c3171e75b7368dce60cf", null ],
+    [ "state_type", "classpromise_3_01_res_01_6_01_4.html#aec672fc89e746ed40d5a19c98903b0c9", null ],
     [ "promise", "classpromise_3_01_res_01_6_01_4.html#a0c9db50baf0d8bad238d066b51ac8b24", null ],
     [ "promise", "classpromise_3_01_res_01_6_01_4.html#a372ff6171d84316a2795bfa364831293", null ],
     [ "promise", "classpromise_3_01_res_01_6_01_4.html#a38396aeb0f030d94174e091a2f637561", null ],

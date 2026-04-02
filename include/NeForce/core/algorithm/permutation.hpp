@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup PermutationAlgorithms 排列算法
  * @brief 排列算法的实现
  * @{
@@ -204,6 +210,8 @@ constexpr bool prev_permutation(Iterator first, Iterator last) {
 }
 
 /** @} */ // PermutationAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_PERMUTATION_HPP__

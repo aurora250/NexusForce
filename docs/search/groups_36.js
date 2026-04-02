@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
+  ['控制台io_0',['控制台IO',['../group___console_i_o.html',1,'']]]
 ];

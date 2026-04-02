@@ -12,7 +12,7 @@ var classmemory__view =
     [ "value_type", "classmemory__view.html#a53efaf0c5969f9db536c888f2be284a4", null ],
     [ "memory_view", "classmemory__view.html#a645472943be8b76f05f5156594422e53", null ],
     [ "memory_view", "classmemory__view.html#a05f88483baf1ed602d89290c83ead6a5", null ],
-    [ "memory_view", "classmemory__view.html#a6b24e64c0e0a0f96531ecf5a60c40bd4", null ],
+    [ "memory_view", "classmemory__view.html#a276beb130d6828577698cb9f2cc3ccc6", null ],
     [ "memory_view", "classmemory__view.html#a858dedeba5cb6398e26c47c6e9947e8a", null ],
     [ "memory_view", "classmemory__view.html#a2f14ff02501af4cd798f314e44839232", null ],
     [ "memory_view", "classmemory__view.html#aa8fbc95e2c4a7bf4a9cc60ced8910182", null ],

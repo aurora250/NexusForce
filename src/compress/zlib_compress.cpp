@@ -95,13 +95,13 @@ byte_vector zlib_compressor::decompress_data(
     byte_vector decompressed;
     decompressed.reserve(estimated_original_size);
 
-    constexpr size_t CHUNK_SIZE = 16384;
+    constexpr size_t chunk_size = 16384;
     int result = Z_OK;
-    
+
     do {
-        decompressed.resize(decompressed.size() + CHUNK_SIZE);
-        stream.next_out = decompressed.data() + decompressed.size() - CHUNK_SIZE;
-        stream.avail_out = CHUNK_SIZE;
+        decompressed.resize(decompressed.size() + chunk_size);
+        stream.next_out = decompressed.data() + decompressed.size() - chunk_size;
+        stream.avail_out = chunk_size;
 
         result = ::inflate(&stream, Z_NO_FLUSH);
 
@@ -109,10 +109,10 @@ byte_vector zlib_compressor::decompress_data(
             result == Z_DATA_ERROR || result == Z_MEM_ERROR) {
             ::inflateEnd(&stream);
             check_zlib_error(result);
-            }
+        }
 
-        size_t have = CHUNK_SIZE - stream.avail_out;
-        decompressed.resize(decompressed.size() - CHUNK_SIZE + have);
+        const size_t have = chunk_size - stream.avail_out;
+        decompressed.resize(decompressed.size() - chunk_size + have);
     } while (result != Z_STREAM_END);
 
     const int end_result = ::inflateEnd(&stream);

@@ -123,7 +123,7 @@ using&#160;</td><td class="memItemRight"><b>size_type</b> = typename real_size&l
 <tr class="memitem:a8e88b6aa814b1baade140b0e3d9d7055" id="r_a8e88b6aa814b1baade140b0e3d9d7055"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#a8e88b6aa814b1baade140b0e3d9d7055">deallocate</a> (Alloc &amp;alloc, pointer ptr, <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> n)</td></tr>
 <tr class="memdesc:a8e88b6aa814b1baade140b0e3d9d7055"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放内存  <br /></td></tr>
 <tr class="memitem:ae806a2a73a74220974021200268db645" id="r_ae806a2a73a74220974021200268db645"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:ae806a2a73a74220974021200268db645 template"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ae806a2a73a74220974021200268db645">construct</a> (Alloc &amp;alloc, T *ptr, Args &amp;&amp;... args) noexcept(noexcept(allocator_traits::__construct_aux(alloc, ptr, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt; Args &gt;(args)...)))</td></tr>
+<tr class="memitem:ae806a2a73a74220974021200268db645 template"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ae806a2a73a74220974021200268db645">construct</a> (Alloc &amp;alloc, T *ptr, Args &amp;&amp;... args) noexcept(noexcept(allocator_traits::__construct_aux(alloc, ptr, _NEFORCE <a class="el" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt; Args &gt;(args)...)))</td></tr>
 <tr class="memdesc:ae806a2a73a74220974021200268db645"><td class="mdescLeft">&#160;</td><td class="mdescRight">在已分配内存上构造对象  <br /></td></tr>
 <tr class="memitem:ae2e2058c5770990e678430ddbf9544d7" id="r_ae2e2058c5770990e678430ddbf9544d7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ae2e2058c5770990e678430ddbf9544d7 template"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ae2e2058c5770990e678430ddbf9544d7">destroy</a> (Alloc &amp;alloc, T *ptr) noexcept(noexcept(allocator_traits::__destroy_aux(alloc, ptr, 0)))</td></tr>
@@ -248,7 +248,7 @@ template&lt;typename Alloc&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a> 第 <a class="el" href="allocator__traits_8hpp_source.html#l00182">182</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="allocated__ptr_8hpp_source.html#l00110">allocate_guarded()</a> , 以及 <a class="el" href="shared__ptr_8hpp_source.html#l00801">allocate_shared()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="allocated__ptr_8hpp_source.html#l00110">allocate_guarded()</a> , 以及 <a class="el" href="shared__ptr_8hpp_source.html#l00844">allocate_shared()</a>.</p>
 
 </div>
 </div>
@@ -307,7 +307,7 @@ template&lt;typename T, typename... Args&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a> 第 <a class="el" href="allocator__traits_8hpp_source.html#l00205">205</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00801">allocate_shared()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00844">allocate_shared()</a>.</p>
 
 </div>
 </div>
@@ -357,7 +357,7 @@ template&lt;typename Alloc&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a> 第 <a class="el" href="allocator__traits_8hpp_source.html#l00192">192</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00801">allocate_shared()</a> , 以及 <a class="el" href="allocated__ptr_8hpp_source.html#l00072">allocated_ptr&lt; Alloc &gt;::~allocated_ptr()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00844">allocate_shared()</a> , 以及 <a class="el" href="allocated__ptr_8hpp_source.html#l00072">allocated_ptr&lt; Alloc &gt;::~allocated_ptr()</a>.</p>
 
 </div>
 </div>
@@ -409,7 +409,7 @@ template&lt;typename T&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a> 第 <a class="el" href="allocator__traits_8hpp_source.html#l00217">217</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00801">allocate_shared()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00844">allocate_shared()</a>.</p>
 
 </div>
 </div>

@@ -1,10 +1,7 @@
 var structipackage =
 [
     [ "package_type", "structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816", null ],
-    [ "ipackage", "structipackage.html#a7aa989ea26f1dddba13c3bf018b51901", null ],
     [ "ipackage", "structipackage.html#a549625561e81e554b6552a292cf69aea", null ],
-    [ "ipackage", "structipackage.html#a4da02ab67ec801560ff02e4784324750", null ],
-    [ "ipackage", "structipackage.html#a129b2b663ac277c5f6d11bd1720e6ea7", null ],
     [ "~ipackage", "structipackage.html#aef48c710de7f2a81b1e238892b026f5f", null ],
     [ "operator package_type", "structipackage.html#a2070d73d6d864bd28fdb4fb21a557a2c", null ],
     [ "operator%=", "structipackage.html#a92ce2f75002df8eab6ade4cf29bc0b29", null ],

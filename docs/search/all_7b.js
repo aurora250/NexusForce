@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['队列_0',['队列',['../group___queue.html',1,'']]]
+  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
 ];

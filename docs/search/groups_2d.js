@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['对齐操作_0',['对齐操作',['../group___alignment.html',1,'']]],
-  ['对齐缓冲区_1',['对齐缓冲区',['../group___aligned_buffer.html',1,'']]]
+  ['平台检测_0',['平台检测',['../group___platform_detection.html',1,'']]],
+  ['平台相关类型_1',['平台相关类型',['../group___platform_dependent_types.html',1,'']]]
 ];

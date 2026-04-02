@@ -1,5 +1,16 @@
 var searchData=
 [
-  ['x64_0',['X64',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63af0851da0e02bf22830828822f578dc8f',1,'sysinfo']]],
-  ['x86_1',['X86',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63afd1a4608b5b463bc7a41d86a1662d3b7',1,'sysinfo']]]
+  ['wait_0',['wait',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b',1,'futex.hpp']]],
+  ['wait_5fbitset_1',['wait_bitset',['../group___futex.html#ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d',1,'futex.hpp']]],
+  ['wait_5fbitset_5fprivate_2',['wait_bitset_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945',1,'futex.hpp']]],
+  ['wait_5fprivate_3',['wait_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef',1,'futex.hpp']]],
+  ['wait_5frequeue_5fpi_4',['wait_requeue_pi',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba9cdb886c12fde5237565800cedbf0cc1',1,'futex.hpp']]],
+  ['wake_5',['wake',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae',1,'futex.hpp']]],
+  ['wake_5fbitset_6',['wake_bitset',['../group___futex.html#ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc',1,'futex.hpp']]],
+  ['wake_5fbitset_5fprivate_7',['wake_bitset_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49',1,'futex.hpp']]],
+  ['wake_5fop_8',['wake_op',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba0f74829cda07f2751c17564ecfb39a41',1,'futex.hpp']]],
+  ['wake_5fprivate_9',['wake_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95',1,'futex.hpp']]],
+  ['warn_10',['WARN',['../group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
+  ['write_11',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
+  ['write_5fthrough_12',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]]
 ];

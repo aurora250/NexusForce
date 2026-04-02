@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['命令行_0',['命令行',['../group___command_line.html',1,'']]],
-  ['命名空间宏_1',['命名空间宏',['../group___namespace_macros.html',1,'']]]
+  ['堆栈跟踪_0',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
+  ['堆算法_1',['堆算法',['../group___heap_algorithms.html',1,'']]]
 ];

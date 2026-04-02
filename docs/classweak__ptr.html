@@ -168,9 +168,17 @@ class weak_ptr&lt; T &gt;</div><p>弱智能指针类模板 </p>
   </table>
   </dd>
 </dl>
-<p>弱智能指针用于观察由共享智能指针管理的对象，但不拥有对象的所有权。 不会增加对象的引用计数，因此不会阻止对象被销毁。 </p>
+<p>弱智能指针用于观察由共享智能指针管理的对象，但不拥有对象的所有权。 不会增加对象的引用计数，因此不会阻止对象被销毁。</p>
+<p>特性：</p><ul>
+<li>不增加对象引用计数</li>
+<li>可检测对象是否已被销毁</li>
+<li>可安全地升级为shared_ptr</li>
+<li>支持所有权比较和排序</li>
+<li>线程安全的过期检测</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>弱指针本身是线程安全的，但升级后的共享指针需要单独管理 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00030">30</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00044">44</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a031a72800635e496d6874edd59a31d22" name="a031a72800635e496d6874edd59a31d22"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a031a72800635e496d6874edd59a31d22">&#9670;&#160;</a></span>weak_ptr() <span class="overload">[1/6]</span></h2>
@@ -206,7 +214,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>创建空的弱指针，不观察任何对象。 </p>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00051">51</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00068">68</a> 行定义.</p>
 
 </div>
 </div>
@@ -252,9 +260,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <p>创建观察sp管理的对象的弱指针。 </p>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00061">61</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00078">78</a> 行定义.</p>
 
 </div>
 </div>
@@ -291,7 +297,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00072">72</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00089">89</a> 行定义.</p>
 
 </div>
 </div>
@@ -336,7 +342,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00085">85</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00102">102</a> 行定义.</p>
 
 </div>
 </div>
@@ -373,7 +379,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00096">96</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00113">113</a> 行定义.</p>
 
 </div>
 </div>
@@ -418,7 +424,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00108">108</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00125">125</a> 行定义.</p>
 
 </div>
 </div>
@@ -450,9 +456,7 @@ template&lt;typename T&gt; </div>
 <p>析构函数 </p>
 <dl class="section note"><dt>注解</dt><dd>减少弱引用计数，当弱引用计数为0时删除控制块 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00118">118</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="weak__ptr_8hpp_source.html#l00202">reset()</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00135">135</a> 行定义.</p>
 
 </div>
 </div>
@@ -485,9 +489,7 @@ template&lt;typename T&gt; </div>
 <p>检查观察的对象是否已被销毁 </p>
 <dl class="section return"><dt>返回</dt><dd>对象是否已被销毁 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00232">232</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="weak__ptr_8hpp_source.html#l00224">use_count()</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00249">249</a> 行定义.</p>
 
 </div>
 </div>
@@ -520,7 +522,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果对象仍然存在，返回共享智能指针；否则返回空共享智能指针</dd></dl>
 <p>如果观察的对象仍然存在，则创建一个新的共享智能指针。 </p>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00242">242</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00259">259</a> 行定义.</p>
 
 </div>
 </div>
@@ -566,9 +568,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前弱指针的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00158">158</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00175">175</a> 行定义.</p>
 
 </div>
 </div>
@@ -606,9 +606,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前弱指针的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00127">127</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03100">addressof()</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00144">144</a> 行定义.</p>
 
 </div>
 </div>
@@ -654,7 +652,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前弱指针的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00143">143</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00160">160</a> 行定义.</p>
 
 </div>
 </div>
@@ -692,9 +690,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前弱指针的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00171">171</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03100">addressof()</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00188">188</a> 行定义.</p>
 
 </div>
 </div>
@@ -740,7 +736,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前弱指针的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00188">188</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00205">205</a> 行定义.</p>
 
 </div>
 </div>
@@ -786,7 +782,7 @@ template&lt;typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前控制块地址是否小于rhs的控制块地址 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00289">289</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00306">306</a> 行定义.</p>
 
 </div>
 </div>
@@ -832,7 +828,7 @@ template&lt;typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前控制块地址是否小于rhs的控制块地址 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00278">278</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00295">295</a> 行定义.</p>
 
 </div>
 </div>
@@ -878,9 +874,7 @@ template&lt;typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否共享同一控制块 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00267">267</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00284">284</a> 行定义.</p>
 
 </div>
 </div>
@@ -926,7 +920,7 @@ template&lt;typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否共享同一控制块 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00273">273</a> 行定义.</p>
 
 </div>
 </div>
@@ -958,9 +952,9 @@ template&lt;typename T&gt; </div>
 <p>重置弱指针 </p>
 <p>使弱指针不再观察任何对象，减少弱引用计数。 </p>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00202">202</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00219">219</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="weak__ptr_8hpp_source.html#l00118">~weak_ptr()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="weak__ptr_8hpp_source.html#l00135">weak_ptr&lt; node &gt;::~weak_ptr()</a>.</p>
 
 </div>
 </div>
@@ -997,9 +991,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00214">214</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="type__traits_8hpp_source.html#l03100">addressof()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00231">231</a> 行定义.</p>
 
 </div>
 </div>
@@ -1031,9 +1023,9 @@ template&lt;typename T&gt; </div>
 <p>获取观察对象的引用计数 </p>
 <dl class="section return"><dt>返回</dt><dd>强引用计数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00224">224</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00241">241</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="weak__ptr_8hpp_source.html#l00232">expired()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="weak__ptr_8hpp_source.html#l00249">weak_ptr&lt; node &gt;::expired()</a>.</p>
 
 </div>
 </div>

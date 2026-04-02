@@ -100,6 +100,12 @@ $(function(){initNavTree('group___f_n_v_hash.html','',''); });
 函数</h2></td></tr>
 <tr class="memitem:ga20409000240b9904721f7918223dc731" id="r_ga20409000240b9904721f7918223dc731"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga20409000240b9904721f7918223dc731">FNV_hash</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *first, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>) noexcept</td></tr>
 <tr class="memdesc:ga20409000240b9904721f7918223dc731"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV-1a哈希算法  <br /></td></tr>
+<tr class="memitem:ga7ba8ee96f866b11a393bb705b97132fe" id="r_ga7ba8ee96f866b11a393bb705b97132fe"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga7ba8ee96f866b11a393bb705b97132fe template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga7ba8ee96f866b11a393bb705b97132fe">FNV_hash_integer</a> (const T value) noexcept</td></tr>
+<tr class="memdesc:ga7ba8ee96f866b11a393bb705b97132fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">整数类型的FNV哈希  <br /></td></tr>
+<tr class="memitem:gacee153134b3c477f48bf2c7f20e82237" id="r_gacee153134b3c477f48bf2c7f20e82237"><td class="memTemplParams" colspan="2">template&lt;typename CharT&gt; </td></tr>
+<tr class="memitem:gacee153134b3c477f48bf2c7f20e82237 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gacee153134b3c477f48bf2c7f20e82237">FNV_hash_string</a> (const CharT *str, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len) noexcept</td></tr>
+<tr class="memdesc:gacee153134b3c477f48bf2c7f20e82237"><td class="mdescLeft">&#160;</td><td class="mdescRight">字符串类型的FNV哈希  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>Fowler-Noll-Vo非加密哈希算法实现 </p>
@@ -149,7 +155,108 @@ $(function(){initNavTree('group___f_n_v_hash.html','',''); });
 
 <p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00100">100</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00358">_CONSTANTS</a> , 以及 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00364">count()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00106">thread::id::to_hash()</a>.</p>
+
+</div>
+</div>
+<a id="ga7ba8ee96f866b11a393bb705b97132fe" name="ga7ba8ee96f866b11a393bb705b97132fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7ba8ee96f866b11a393bb705b97132fe">&#9670;&#160;</a></span>FNV_hash_integer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> FNV_hash_integer </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>整数类型的FNV哈希 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>整数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要哈希的整数值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>整数的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00116">116</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00031">integral_constant&lt; bool, Value &gt;::value</a>.</p>
+
+</div>
+</div>
+<a id="gacee153134b3c477f48bf2c7f20e82237" name="gacee153134b3c477f48bf2c7f20e82237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacee153134b3c477f48bf2c7f20e82237">&#9670;&#160;</a></span>FNV_hash_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CharT&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> FNV_hash_string </td>
+          <td>(</td>
+          <td class="paramtype">const CharT *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>字符串类型的FNV哈希 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CharT</td><td>字符类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>字符串指针 </td></tr>
+    <tr><td class="paramname">len</td><td>字符串长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>字符串的哈希值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00136">136</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00031">integral_constant&lt; bool, Value &gt;::value</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02728">basic_string&lt; char &gt;::to_hash()</a> , 以及 <a class="el" href="basic__string__view_8hpp_source.html#l01011">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash()</a>.</p>
 
 </div>
 </div>

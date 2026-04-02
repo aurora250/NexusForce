@@ -977,6 +977,13 @@ unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
     return nullptr;
 }
 
+/** @} */ // UniquePointer
+
+/**
+ * @defgroup HashPrimary 哈希模板
+ * @brief 哈希函数的模板和基础定义
+ * @{
+ */
 
 /**
  * @brief unique_ptr的哈希特化
@@ -985,17 +992,19 @@ unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
  */
 template <typename T, typename Deleter>
 struct hash<unique_ptr<T, Deleter>> {
-    /**
-     * @brief 哈希函数
-     * @param ptr 要哈希的unique_ptr
-     * @return 哈希值
-     */
     NEFORCE_CONSTEXPR20 size_t operator ()(const unique_ptr<T, Deleter>& ptr) const
     noexcept(noexcept(hash<T>()(ptr.get()))) {
         return hash<T>()(ptr.get());
     }
 };
 
+/** @} */ // HashPrimary
+
+/**
+ * @defgroup UniquePointer 独占智能指针
+ * @brief 独占智能指针类和辅助工具
+ * @{
+ */
 
 /**
  * @brief 创建unique_ptr

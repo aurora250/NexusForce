@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['闩锁_0',['闩锁',['../group___latches.html',1,'']]]
+  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
 ];

@@ -16,7 +16,7 @@ var atomic__base_8hpp =
       [ "memory_order_hle_release", "group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783", null ]
     ] ],
     [ "atomic_add_fetch", "group___atomic_operations.html#ga5b4755daf3f0c2c98dae41084f5bad65", null ],
-    [ "atomic_add_fetch_any", "group___atomic_operations.html#gaf89bda7acb4c6d7619df1189b8925930", null ],
+    [ "atomic_add_fetch_any", "group___atomic_operations.html#ga43ed57e1ebca17af575e229a1d6e333e", null ],
     [ "atomic_and_fetch", "group___atomic_operations.html#gaf978cddf75785ac79968e54064f629fd", null ],
     [ "atomic_cmpexch_strong", "group___atomic_operations.html#ga53e71ce4980e49652fa2787d1b3a7375", null ],
     [ "atomic_cmpexch_strong_any", "group___atomic_operations.html#gafc070ab9d97fede6cb57cfd8074219e1", null ],
@@ -38,7 +38,7 @@ var atomic__base_8hpp =
     [ "atomic_store", "group___atomic_operations.html#gaaa5c14a3bfaac1bdcf93e2292ba1608f", null ],
     [ "atomic_store_any", "group___atomic_operations.html#ga235411e03936c4aa90f209ab38cab492", null ],
     [ "atomic_sub_fetch", "group___atomic_operations.html#ga88203498c566079de5b0d3497abfb2ec", null ],
-    [ "atomic_sub_fetch_any", "group___atomic_operations.html#ga7f059ec3c65d292f4ef9377638ee216c", null ],
+    [ "atomic_sub_fetch_any", "group___atomic_operations.html#ga5f06a2fdc01cfa5e7180cdd87b8444d2", null ],
     [ "atomic_thread_fence", "group___memory_order.html#gad09904472351069bf4052ca1aa2cef7b", null ],
     [ "atomic_xor_fetch", "group___atomic_operations.html#ga7b991ea245c0d1d223ef0ea22b5d9c5c", null ],
     [ "cmpexch_failure_order", "group___memory_order.html#gafda3e5c6834532546b1eaef81affc2b2", null ],

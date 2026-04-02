@@ -11,11 +11,7 @@
 #include "NeForce/core/utility/reference_wrapper.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-/**
- * @defgroup InvokeTags 可调用标签
- * @brief 标识不同调用类型的标签结构
- * @{
- */
+/// @cond
 
 /**
  * @struct invoke_memfun_ref_tag
@@ -67,24 +63,6 @@ struct invoke_other_tag {
     constexpr invoke_other_tag() noexcept = default;
 };
 
-/** @} */ // InvokeTags
-
-/**
- * @defgroup InvokeResult 可调用结果类型
- * @brief 推导函数调用结果类型的工具
- * @{
- */
-
-/**
- * @struct invoke_result
- * @brief 推导函数调用结果类型的主模板
- * @tparam Sign 函数签名类型
- *
- * 使用特化形式F(Args...)指定函数和参数类型。
- * 推导调用F(Args...)的结果类型。
- */
-template <typename Sign>
-struct invoke_result;
 
 /**
  * @struct invoke_result_true
@@ -109,7 +87,6 @@ struct invoke_result_true {
 struct invoke_result_false {};
 
 
-/// @cond
 NEFORCE_BEGIN_INNER__
 
 /**
@@ -299,6 +276,22 @@ struct __invoke_result_aux : __invoke_result_dispatch<
 NEFORCE_END_INNER__
 /// @endcond
 
+/**
+ * @defgroup InvokeFunction 可调用函数
+ * @brief 可调用函数系列函数的实现
+ * @{
+ */
+
+/**
+ * @struct invoke_result
+ * @brief 推导函数调用结果类型的主模板
+ * @tparam Sign 函数签名类型
+ *
+ * 使用特化形式F(Args...)指定函数和参数类型。
+ * 推导调用F(Args...)的结果类型。
+ */
+template <typename Sign>
+struct invoke_result;
 
 /**
  * @brief invoke_result的特化版本
@@ -317,13 +310,6 @@ struct invoke_result<F(Args...)> : inner::__invoke_result_aux<F, Args...> {};
 template <typename F, typename... Args>
 using invoke_result_t = typename inner::__invoke_result_aux<F, Args...>::type;
 
-/** @} */ // InvokeResult
-
-/**
- * @defgroup InvocableChecks 可调用性检查
- * @brief 检查类型是否可调用以及调用特性
- * @{
- */
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -499,13 +485,6 @@ template <typename F, typename... Args>
 NEFORCE_INLINE17 constexpr bool is_nothrow_invocable_v = is_nothrow_invocable<F, Args...>::value;
 #endif
 
-/** @} */ // InvocableChecks
-
-/**
- * @defgroup InvokeFunction 可调用函数
- * @brief 可调用函数系列函数的实现
- * @{
- */
 
 /// @cond
 NEFORCE_BEGIN_INNER__

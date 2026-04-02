@@ -17,6 +17,7 @@ var classdatetime =
     [ "day", "classdatetime.html#a04f10a6dc48f5ab877988760b18a89db", null ],
     [ "has_timezone", "classdatetime.html#a28ca13617313dba59f2ac452f926e19d", null ],
     [ "hours", "classdatetime.html#a98de39d85c614840c0af1f9a9630cf7b", null ],
+    [ "is_valid", "classdatetime.html#a24a270280fb3a83beba963f5c723ade2", null ],
     [ "minutes", "classdatetime.html#a50142f37875e02d186f4726f9b2cd30e", null ],
     [ "month", "classdatetime.html#a175d458577b01d347dadc6f363144369", null ],
     [ "offset_seconds", "classdatetime.html#a1bafc56960f81c056ef4ea79a43464b2", null ],

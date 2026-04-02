@@ -13,6 +13,7 @@
 #include "NeForce/core/container/array.hpp"
 #include "NeForce/core/iterator/normal_iterator.hpp"
 #include "NeForce/core/iterator/reverse_iterator.hpp"
+#include "NeForce/core/exception/breakpoint.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
 NEFORCE_BEGIN_NAMESPACE__

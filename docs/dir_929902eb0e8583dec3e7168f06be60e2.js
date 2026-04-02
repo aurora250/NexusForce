@@ -2,7 +2,7 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
 [
     [ "async.hpp", "async_8hpp.html", "async_8hpp" ],
     [ "at_thread_exit.hpp", "at__thread__exit_8hpp.html", "at__thread__exit_8hpp" ],
-    [ "atomic.hpp", "atomic_8hpp.html", "atomic_8hpp" ],
+    [ "atomic.hpp", "atomic_8hpp.html", null ],
     [ "atomic_base.hpp", "atomic__base_8hpp.html", "atomic__base_8hpp" ],
     [ "atomic_futex.hpp", "atomic__futex_8hpp.html", null ],
     [ "atomic_timed_wait.hpp", "atomic__timed__wait_8hpp.html", "atomic__timed__wait_8hpp" ],
@@ -27,7 +27,8 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "stop_token.hpp", "stop__token_8hpp.html", null ],
     [ "this_thread.hpp", "this__thread_8hpp.html", "this__thread_8hpp" ],
     [ "thread.hpp", "thread_8hpp.html", "thread_8hpp" ],
-    [ "thread_pool.hpp", "thread__pool_8hpp_source.html", null ],
+    [ "thread_pool.hpp", "thread__pool_8hpp.html", "thread__pool_8hpp" ],
+    [ "thread_tracker.hpp", "thread__tracker_8hpp.html", "thread__tracker_8hpp" ],
     [ "timer.hpp", "timer_8hpp.html", "timer_8hpp" ],
     [ "virtual_thread.hpp", "virtual__thread_8hpp.html", null ]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['双向链表_0',['双向链表',['../group___list.html',1,'']]],
-  ['双端队列_1',['双端队列',['../group___deque.html',1,'']]]
+  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
 ];

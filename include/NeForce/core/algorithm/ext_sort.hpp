@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup StandardAlgorithms 标准算法
+ * @brief 基于迭代器的标准算法的实现
+ * @{
+ */
+
+/**
  * @defgroup SortAlgorithms 排序算法
  * @brief 排序算法的实现
  * @{
@@ -37,8 +43,10 @@ NEFORCE_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last, Compare comp
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
     if (first == last) return;
+    Iterator end = last;
+    --end;
     auto revend = _NEFORCE make_reverse_iterator(first);
-    auto revstart = _NEFORCE make_reverse_iterator(--last);
+    auto revstart = _NEFORCE make_reverse_iterator(end);
     for (auto iter = revstart; iter != revend; ++iter) {
         bool not_finished = false;
         Iterator curend = iter.base();
@@ -145,10 +153,11 @@ NEFORCE_CONSTEXPR20 void select_sort(Iterator first, Iterator last, Compare comp
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
     if (first == last) return;
-    Iterator min;
     for (Iterator i = first; i != last; ++i) {
-        min = i;
-        for (Iterator j = i + 1; j != last; ++j) {
+        Iterator min = i;
+        Iterator j = i;
+        ++j;
+        for (; j != last; ++j) {
             if (comp(*j, *min)) {
                 min = j;
             }
@@ -435,7 +444,11 @@ NEFORCE_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper m
         for(const auto& value : bucket) {
             *it++ = value;
         }
-        _NEFORCE transform(bucket.begin(), bucket.end(), mapped_values.begin(), mapper);
+
+        it = first;
+        for (auto& value : mapped_values) {
+            value = mapper(*it++);
+        }
     }
 }
 
@@ -467,7 +480,7 @@ NEFORCE_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mappe
     for (int d = 1; d <= inner::__max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
         _NEFORCE fill(count.begin(), count.end(), 0);
         for(const auto& num : mapped_values) {
-            ++count[inner::__get_number_aux(*num, d)];
+            ++count[inner::__get_number_aux(num, d)];
         }
 
         for (size_t i = count.size() - 1; i > 0; --i) {
@@ -483,7 +496,11 @@ NEFORCE_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mappe
         for(const auto& value : bucket) {
             *it++ = value;
         }
-        _NEFORCE transform(bucket.begin(), bucket.end(), mapped_values.begin(), mapper);
+
+        it = first;
+        for (auto& value : mapped_values) {
+            value = mapper(*it++);
+        }
     }
 }
 
@@ -597,6 +614,8 @@ void monkey_sort(Iterator first, Iterator last) {
 }
 
 /** @} */ // SortAlgorithms
+
+/** @} */ // StandardAlgorithms
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ALGORITHM_EXT_SORT_HPP__

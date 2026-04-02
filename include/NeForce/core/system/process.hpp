@@ -21,7 +21,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct process_exception
- * @extends system_exception
  * @brief 进程操作异常
  */
 struct process_exception final : system_exception {
@@ -55,7 +54,12 @@ public:
     /**
      * @brief 进程ID类型
      */
-    using native_id_type = _NEFORCE native_id_type;
+    using native_id_type =
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        unsigned long;
+#else
+        int;
+#endif
 
     /**
      * @struct state_info

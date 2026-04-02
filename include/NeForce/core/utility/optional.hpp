@@ -23,10 +23,20 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct optional_exception
- * @extends memory_exception
  * @brief optional访问异常
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(optional_exception, memory_exception, "Access the Null Value of Optional.")
+struct optional_exception final : memory_exception {
+    explicit optional_exception(const char* info = "Access the Null Value of Optional.",
+                                const char* type = static_type,
+                                const int code = 0) noexcept
+    : memory_exception(info, type, code) {}
+
+    explicit optional_exception(const exception& e)
+    : memory_exception(e) {}
+
+    ~optional_exception() override = default;
+    static constexpr auto static_type = "optional_exception";
+};
 
 /** @} */ // Exceptions
 

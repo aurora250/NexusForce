@@ -15,8 +15,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Bitmap 位图
- * @brief 基于位的紧凑型布尔容器
+ * @defgroup BitManipulation 位操作
+ * @brief 位操作类与函数的实现
  * @{
  */
 
@@ -1171,7 +1171,7 @@ public:
     }
 };
 
-/** @} */ // Bitmap
+/** @} */ // BitManipulation
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONTAINER_BITMAP_HPP__
