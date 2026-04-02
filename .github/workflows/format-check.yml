@@ -9,7 +9,6 @@ on:
       - 'tests/**'
       - 'examples/**'
       - '.clang-format'
-      - 'CMakeLists.txt'
   pull_request:
     branches: [ dev ]
     paths:
@@ -18,7 +17,6 @@ on:
       - 'tests/**'
       - 'examples/**'
       - '.clang-format'
-      - 'CMakeLists.txt'
 
 jobs:
   format-check:
@@ -33,13 +31,13 @@ jobs:
           sudo apt-get install -y clang-format-17
           sudo ln -sf /usr/bin/clang-format-17 /usr/bin/clang-format
 
-      - name: Configure CMake
+      - name: Run clang-format check
         run: |
-          cmake -B build \
-            -DNEXUSFORCE_FORMAT=ON \
-            -DNEXUSFORCE_BUILD_TESTS=OFF \
-            -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
-            -DNEXUSFORCE_BUILD_DOCS=OFF
-
-      - name: Run format check
-        run: cmake --build build --target format-check
+          find src include tests examples \
+            -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.h" \) \
+            ! -path "*/build/*" ! -path "*/vcpkg_installed/*" \
+            -print0 > filelist.txt
+          
+          xargs -0 clang-format --dry-run --Werror -style=file < filelist.txt
+          
+          echo "✅ All files are properly formatted!"
