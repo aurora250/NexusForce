@@ -279,7 +279,8 @@ private:
      *
      * 将普通函数包装为协程任务。
      */
-    template <typename Func> static virtual_thread_task create_task(Func func) {
+    template <typename Func>
+    static virtual_thread_task create_task(Func func) {
         co_await suspend_never{};
         func();
     }
@@ -299,7 +300,8 @@ public:
      *
      * 创建并启动新的虚拟线程执行指定函数。
      */
-    template <typename Func> static virtual_thread start(Func&& func) {
+    template <typename Func>
+    static virtual_thread start(Func&& func) {
         virtual_thread vt;
         vt.task_ = virtual_thread::create_task(_NEFORCE forward<Func>(func));
         return vt;

@@ -24,7 +24,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 为集合类型提供统一的接口，包括大小查询、空检查和哈希计算。
  */
-template <typename T> struct icollector : icomparable<T> {
+template <typename T>
+struct icollector : icomparable<T> {
 private:
     constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 

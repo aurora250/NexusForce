@@ -36,7 +36,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @note 要求 Iterator 满足随机访问迭代器概念
  * @note 使用默认的 random_lcd 线性同余随机数生成器
  */
-template <typename Iterator> void shuffle(Iterator first, Iterator last) {
+template <typename Iterator>
+void shuffle(Iterator first, Iterator last) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterators must be random_access_iterator");
 
     if (first == last) {
@@ -68,7 +69,8 @@ template <typename Iterator> void shuffle(Iterator first, Iterator last) {
  * @note 要求 Iterator 满足随机访问迭代器概念
  * @note 随机数生成器必须提供 operator()(integer) -> integer 方法
  */
-template <typename Iterator, typename Generator> void shuffle(Iterator first, Iterator last, Generator& rand) {
+template <typename Iterator, typename Generator>
+void shuffle(Iterator first, Iterator last, Generator& rand) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterators must be random_access_iterator");
 
     if (first == last) {

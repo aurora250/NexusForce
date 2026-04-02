@@ -25,9 +25,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * 将函数对象和其参数打包到一个元组中，可以延迟执行函数调用。
  * 当调用operator() 时，会展开元组并执行函数调用。
  */
-template <typename... Types> struct call_wrapper {
+template <typename... Types>
+struct call_wrapper {
 private:
-    template <typename Tuple> struct result_t;
+    template <typename Tuple>
+    struct result_t;
 
     template <typename Func, typename... Args>
     struct result_t<_NEFORCE tuple<Func, Args...>> : inner::__invoke_result_aux<Func, Args...> {};
@@ -44,7 +46,8 @@ private:
      *
      * 使用编译时索引序列展开元组中的元素，并调用函数。
      */
-    template <size_t... Index> typename result_t<Tuple>::type __invoke(index_tuple<Index...> idx) {
+    template <size_t... Index>
+    typename result_t<Tuple>::type __invoke(index_tuple<Index...> idx) {
         return _NEFORCE invoke(_NEFORCE get<Index>(_NEFORCE move(tup_))...);
     }
 
@@ -73,7 +76,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename... Types> call_wrapper(Types...) -> call_wrapper<Types...>;
+template <typename... Types>
+call_wrapper(Types...) -> call_wrapper<Types...>;
 #endif
 
 /** @} */ // CallWrapper

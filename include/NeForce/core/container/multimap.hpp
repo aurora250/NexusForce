@@ -303,7 +303,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace(Args&&... args) {
+    template <typename... Args>
+    iterator emplace(Args&&... args) {
         return tree_.emplace_equal(_NEFORCE forward<Args>(args)...);
     }
 
@@ -328,7 +329,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_hint(iterator position, Args&&... args) {
+    template <typename... Args>
+    iterator emplace_hint(iterator position, Args&&... args) {
         return tree_.emplace_equal_hint(position, _NEFORCE forward<Args>(args)...);
     }
 
@@ -356,7 +358,10 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> void insert(Iterator first, Iterator last) { tree_.insert_equal(first, last); }
+    template <typename Iterator>
+    void insert(Iterator first, Iterator last) {
+        tree_.insert_equal(first, last);
+    }
 
     /**
      * @brief 删除指定位置的元素

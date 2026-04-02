@@ -51,13 +51,17 @@ struct future_exception final : exception {
  * @{
  */
 
-template <typename Res> class future;
+template <typename Res>
+class future;
 
-template <typename Res> class shared_future;
+template <typename Res>
+class shared_future;
 
-template <typename Sign> class packaged_task;
+template <typename Sign>
+class packaged_task;
 
-template <typename Res> class promise;
+template <typename Res>
+class promise;
 
 
 /**
@@ -119,12 +123,14 @@ constexpr launch& operator^=(launch& left, const launch right) noexcept { return
  * @tparam Args 参数类型
  * @note 用于async函数返回类型的推导
  */
-template <typename Func, typename... Args> using async_result_t = invoke_result_t<decay_t<Func>, decay_t<Args>...>;
+template <typename Func, typename... Args>
+using async_result_t = invoke_result_t<decay_t<Func>, decay_t<Args>...>;
 
 template <typename Func, typename... Args>
 future<async_result_t<Func, Args...>> async(launch policy, Func&& function, Args&&... args);
 
-template <typename Func, typename... Args> future<async_result_t<Func, Args...>> async(Func&& function, Args&&... args);
+template <typename Func, typename... Args>
+future<async_result_t<Func, Args...>> async(Func&& function, Args&&... args);
 
 
 /// @cond
@@ -189,7 +195,8 @@ struct __future_base {
         };
     };
 
-    template <typename Res> using Ptr = unique_ptr<Res, result_base::Deleter>; ///< 结果指针类型定义
+    template <typename Res>
+    using Ptr = unique_ptr<Res, result_base::Deleter>; ///< 结果指针类型定义
 
     /**
      * @struct basic_result
@@ -198,7 +205,8 @@ struct __future_base {
      *
      * 使用对齐缓冲区存储结果值，支持异常传递。
      */
-    template <typename Res> struct basic_result : result_base {
+    template <typename Res>
+    struct basic_result : result_base {
     private:
         aligned_buffer<Res> storage; ///< 对齐存储缓冲区
         bool initialized;            ///< 是否已初始化标志
@@ -249,7 +257,8 @@ struct __future_base {
      *
      * 支持自定义分配器的结果存储。
      */
-    template <typename Res, typename Alloc> struct allocated_result final : basic_result<Res>, Alloc {
+    template <typename Res, typename Alloc>
+    struct allocated_result final : basic_result<Res>, Alloc {
         using allocator_type = inner::__allocator_traits_base::alloc_rebind_t<Alloc, allocated_result>;
 
         /**
@@ -294,7 +303,8 @@ struct __future_base {
      * @tparam T 分配器值类型
      * @return 结果对象指针
      */
-    template <typename Res, typename T> static Ptr<basic_result<Res>> allocate_result(const _NEFORCE allocator<T>&) {
+    template <typename Res, typename T>
+    static Ptr<basic_result<Res>> allocate_result(const _NEFORCE allocator<T>&) {
         return Ptr<basic_result<Res>>(new basic_result<Res>);
     }
 
@@ -352,7 +362,8 @@ struct __future_base {
          * @param relative_time 相对超时时间
          * @return 等待状态
          */
-        template <typename Rep, typename Period> future_status wait_for(const duration<Rep, Period>& relative_time) {
+        template <typename Rep, typename Period>
+        future_status wait_for(const duration<Rep, Period>& relative_time) {
             if (status.load(memory_order_acquire) == status::ready) {
                 return future_status::ready;
             }
@@ -376,7 +387,8 @@ struct __future_base {
          * @param absolute_time 绝对超时时间点
          * @return 等待状态
          */
-        template <typename Clock, typename Dur> future_status wait_until(const time_point<Clock, Dur>& absolute_time) {
+        template <typename Clock, typename Dur>
+        future_status wait_until(const time_point<Clock, Dur>& absolute_time) {
             static_assert(is_clock_v<Clock>, "Clock type must be clock_t");
             if (status.load(memory_order_acquire) == status::ready) {
                 return future_status::ready;
@@ -400,7 +412,8 @@ struct __future_base {
          * @param ignore_failure 是否忽略设置失败
          * @throw future_exception 如果设置失败且不忽略
          */
-        template <typename Callable> void set_result(Callable&& result_func, const bool ignore_failure = false) {
+        template <typename Callable>
+        void set_result(Callable&& result_func, const bool ignore_failure = false) {
             bool did_set = false;
             function<PtrType()> func = _NEFORCE forward<Callable>(result_func);
             call_once(flag, &state_base::do_set, this, _NEFORCE addressof(func), _NEFORCE addressof(did_set));
@@ -419,7 +432,8 @@ struct __future_base {
          * @throw future_exception 如果设置失败
          * @note 用于延迟执行的情况
          */
-        template <typename Callable> void set_delayed_result(Callable&& result_func, weak_ptr<state_base> self) {
+        template <typename Callable>
+        void set_delayed_result(Callable&& result_func, weak_ptr<state_base> self) {
             bool did_set = false;
             unique_ptr<make_ready> mr = make_unique<make_ready>();
             function<PtrType()> func = _NEFORCE forward<Callable>(result_func);
@@ -462,12 +476,14 @@ struct __future_base {
          *
          * 用于不同类型结果的设置器特化。
          */
-        template <typename Res, typename Arg> struct setter;
+        template <typename Res, typename Arg>
+        struct setter;
 
         /**
          * @brief 引用类型结果设置器特化
          */
-        template <typename Res, typename Arg> struct setter<Res, Arg&> {
+        template <typename Res, typename Arg>
+        struct setter<Res, Arg&> {
             static_assert(is_same_v<Res, Arg&> || is_same_v<const Res, Arg>, "Invalid specialisation");
 
             typename promise<Res>::PtrType operator()() const {
@@ -481,7 +497,8 @@ struct __future_base {
         /**
          * @brief 右值引用类型结果设置器特化
          */
-        template <typename Res> struct setter<Res, Res&&> {
+        template <typename Res>
+        struct setter<Res, Res&&> {
             typename promise<Res>::PtrType operator()() const {
                 promise_ptr->storage->set(_NEFORCE move(*arg_ptr));
                 return _NEFORCE move(promise_ptr->storage);
@@ -493,7 +510,8 @@ struct __future_base {
         /**
          * @brief void类型结果设置器特化
          */
-        template <typename Res> struct setter<Res, void> {
+        template <typename Res>
+        struct setter<Res, void> {
             static_assert(is_void_v<Res>, "Only used for promise<void>");
 
             typename promise<Res>::ptr_type operator()() const { return _NEFORCE move(promise_ptr->storage); }
@@ -505,7 +523,8 @@ struct __future_base {
         /**
          * @brief 异常类型结果设置器特化
          */
-        template <typename Res> struct setter<Res, exception_ptr_tag> {
+        template <typename Res>
+        struct setter<Res, exception_ptr_tag> {
             typename promise<Res>::ptr_type operator()() const {
                 promise_ptr->storage->error_ptr = *exp_ptr;
                 return _NEFORCE move(promise_ptr->storage);
@@ -545,7 +564,8 @@ struct __future_base {
          * @param ptr 要检查的指针
          * @throw future_exception 如果指针为空
          */
-        template <typename T> static void check(const shared_ptr<T>& ptr) {
+        template <typename T>
+        static void check(const shared_ptr<T>& ptr) {
             if (!static_cast<bool>(ptr)) {
                 NEFORCE_THROW_EXCEPTION(future_exception(future_errc_cstr(future_errc::no_state)));
             }
@@ -608,24 +628,31 @@ private:
      * @brief 结果类型提取器
      * @tparam Ptr 指针类型
      */
-    template <typename Ptr> struct get_result_type {
+    template <typename Ptr>
+    struct get_result_type {
         using type = typename Ptr::element_type::result_type;
     };
 
-    template <typename Ptr> using result_res_t = typename get_result_type<Ptr>::type;
+    template <typename Ptr>
+    using result_res_t = typename get_result_type<Ptr>::type;
 
 public:
     class async_state_common;
 
-    template <typename BoundFunc, typename Res = decltype(_NEFORCE declval<BoundFunc&>()())> class deferred_state;
+    template <typename BoundFunc, typename Res = decltype(_NEFORCE declval<BoundFunc&>()())>
+    class deferred_state;
 
-    template <typename BoundFunc, typename Res = decltype(_NEFORCE declval<BoundFunc&>()())> class async_state_impl;
+    template <typename BoundFunc, typename Res = decltype(_NEFORCE declval<BoundFunc&>()())>
+    class async_state_impl;
 
-    template <typename Sign> class task_state_base;
+    template <typename Sign>
+    class task_state_base;
 
-    template <typename Func, typename Alloc, typename Sign> class task_state;
+    template <typename Func, typename Alloc, typename Sign>
+    class task_state;
 
-    template <typename ResPtrT, typename Func, typename ResT = result_res_t<ResPtrT>> struct task_setter;
+    template <typename ResPtrT, typename Func, typename ResT = result_res_t<ResPtrT>>
+    struct task_setter;
 
     /**
      * @brief 创建任务设置器
@@ -640,7 +667,8 @@ public:
  * @brief 引用类型结果特化
  * @tparam Res 引用类型
  */
-template <typename Res> struct __future_base::basic_result<Res&> : __future_base::result_base {
+template <typename Res>
+struct __future_base::basic_result<Res&> : __future_base::result_base {
 private:
     Res* value_ptr; ///< 指向引用值的指针
 
@@ -671,7 +699,8 @@ public:
 /**
  * @brief void类型结果特化
  */
-template <> struct __future_base::basic_result<void> : __future_base::result_base {
+template <>
+struct __future_base::basic_result<void> : __future_base::result_base {
     using result_type = void; ///< 结果类型定义
 
 private:
@@ -685,7 +714,8 @@ private:
  *
  * 提供future的基础功能，包括等待、状态查询等。
  */
-template <typename Res> class __basic_future : public __future_base {
+template <typename Res>
+class __basic_future : public __future_base {
 protected:
     using state_type = shared_ptr<state_base>;             ///< 状态类型
     using result_type = __future_base::basic_result<Res>&; ///< 结果类型
@@ -720,7 +750,8 @@ public:
      * @return 等待状态
      * @throw future_exception 当future无效时抛出
      */
-    template <typename Rep, typename Period> future_status wait_for(const duration<Rep, Period>& relative_time) const {
+    template <typename Rep, typename Period>
+    future_status wait_for(const duration<Rep, Period>& relative_time) const {
         state_base::check(state_ptr);
         return state_ptr->wait_for(relative_time);
     }
@@ -819,14 +850,16 @@ struct is_location_invariant<inner::__future_base::task_setter<ResPtr, Func, Res
  * 表示一个异步计算的结果，结果只能被获取一次。
  * @note 不支持拷贝，仅支持移动
  */
-template <typename Res> class future : public inner::__basic_future<Res> {
+template <typename Res>
+class future : public inner::__basic_future<Res> {
     static_assert(!is_array_v<Res>, "result type must not be an array");
     static_assert(!is_function_v<Res>, "result type must not be a function");
     static_assert(is_destructible_v<Res>, "result type must be destructible");
 
     friend class promise<Res>;
 
-    template <typename Sign> friend class packaged_task;
+    template <typename Sign>
+    friend class packaged_task;
 
     template <typename Function, typename... Args>
     friend future<async_result_t<Function, Args...>> async(launch, Function&&, Args&&...);
@@ -888,10 +921,12 @@ public:
  * @brief 引用类型的future特化
  * @tparam Res 引用类型
  */
-template <typename Res> class future<Res&> : public inner::__basic_future<Res&> {
+template <typename Res>
+class future<Res&> : public inner::__basic_future<Res&> {
     friend class promise<Res&>;
 
-    template <typename Sign> friend class packaged_task;
+    template <typename Sign>
+    friend class packaged_task;
 
     template <typename Function, typename... Args>
     friend future<async_result_t<Function, Args...>> async(launch, Function&&, Args&&...);
@@ -932,10 +967,12 @@ public:
 /**
  * @brief void类型的future特化
  */
-template <> class future<void> : public inner::__basic_future<void> {
+template <>
+class future<void> : public inner::__basic_future<void> {
     friend class promise<void>;
 
-    template <typename> friend class packaged_task;
+    template <typename>
+    friend class packaged_task;
 
     template <typename Function, typename... Args>
     friend future<async_result_t<Function, Args...>> async(launch, Function&&, Args&&...);
@@ -978,7 +1015,8 @@ public:
  *
  * 表示一个异步计算的结果，结果可以被多次获取。
  */
-template <typename Res> class shared_future : public inner::__basic_future<Res> {
+template <typename Res>
+class shared_future : public inner::__basic_future<Res> {
     static_assert(!is_array_v<Res>, "result type must not be an array");
     static_assert(!is_function_v<Res>, "result type must not be a function");
     static_assert(is_destructible_v<Res>, "result type must be destructible");
@@ -1017,7 +1055,8 @@ public:
  * @brief 引用类型的共享future特化
  * @tparam Res 引用类型
  */
-template <typename Res> class shared_future<Res&> : public inner::__basic_future<Res&> {
+template <typename Res>
+class shared_future<Res&> : public inner::__basic_future<Res&> {
     using base_type = inner::__basic_future<Res&>;
 
 public:
@@ -1050,7 +1089,8 @@ public:
 /**
  * @brief void类型的共享future特化
  */
-template <> class shared_future<void> : public inner::__basic_future<void> {
+template <>
+class shared_future<void> : public inner::__basic_future<void> {
     using base_type = inner::__basic_future<void>;
 
 public:
@@ -1093,11 +1133,13 @@ inner::__basic_future<Res>::__basic_future(future<Res>&& other) noexcept :
 state_ptr(_NEFORCE move(other.state_ptr)) {}
 
 
-template <typename Result> shared_future<Result> future<Result>::share() noexcept {
+template <typename Result>
+shared_future<Result> future<Result>::share() noexcept {
     return shared_future<Result>(_NEFORCE move(*this));
 }
 
-template <typename Res> shared_future<Res&> future<Res&>::share() noexcept {
+template <typename Res>
+shared_future<Res&> future<Res&>::share() noexcept {
     return shared_future<Res&>(_NEFORCE move(*this));
 }
 
@@ -1111,14 +1153,16 @@ inline shared_future<void> future<void>::share() noexcept { return shared_future
  *
  * 将void类型转换为none_t，其他类型保持不变。
  */
-template <typename T> struct future_result {
+template <typename T>
+struct future_result {
     using type = T;
 };
 
 /**
  * @brief void类型的future结果转换特化
  */
-template <> struct future_result<void> {
+template <>
+struct future_result<void> {
     using type = none_t;
 };
 
@@ -1126,7 +1170,8 @@ template <> struct future_result<void> {
  * @brief future结果类型别名
  * @tparam T 原始类型
  */
-template <typename T> using future_result_t = typename future_result<T>::type;
+template <typename T>
+using future_result_t = typename future_result<T>::type;
 
 
 /**
@@ -1135,7 +1180,8 @@ template <typename T> using future_result_t = typename future_result<T>::type;
  * @param f future对象
  * @return none_t
  */
-template <typename T> NEFORCE_ALWAYS_INLINE enable_if_t<is_void_v<T>, future_result_t<T>> get(future<T>& f) {
+template <typename T>
+NEFORCE_ALWAYS_INLINE enable_if_t<is_void_v<T>, future_result_t<T>> get(future<T>& f) {
     f.get();
     return none;
 }
@@ -1146,7 +1192,8 @@ template <typename T> NEFORCE_ALWAYS_INLINE enable_if_t<is_void_v<T>, future_res
  * @param f future对象
  * @return 结果值
  */
-template <typename T> NEFORCE_ALWAYS_INLINE enable_if_t<!is_void_v<T>, future_result_t<T>> get(future<T>& f) {
+template <typename T>
+NEFORCE_ALWAYS_INLINE enable_if_t<!is_void_v<T>, future_result_t<T>> get(future<T>& f) {
     return f.get();
 }
 

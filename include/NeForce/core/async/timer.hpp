@@ -31,7 +31,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 管理所有定时任务的调度和执行。使用独立的线程运行调度循环，
  * 基于时间点对任务进行排序，并在任务到期时执行回调函数。
  */
-template <typename Clock> class timer_scheduler {
+template <typename Clock>
+class timer_scheduler {
 public:
     using clock_type = Clock;                           ///< 时钟类型
     using time_point = typename clock_type::time_point; ///< 时间点类型
@@ -232,7 +233,8 @@ public:
  * 封装一个定时任务，提供简单的设置和等待接口。
  * 支持一次性定时和取消操作。
  */
-template <typename Clock> class basic_timer {
+template <typename Clock>
+class basic_timer {
 public:
     using clock_type = Clock;                                           ///< 时钟类型
     using time_point = typename clock_type::time_point;                 ///< 时间点类型
@@ -327,7 +329,8 @@ public:
      * 如果之前有未完成的任务，会自动取消。
      * 回调函数会在调度线程中执行，不应包含耗时操作。
      */
-    template <typename WaitHandler> void async_wait(WaitHandler&& handler) {
+    template <typename WaitHandler>
+    void async_wait(WaitHandler&& handler) {
         cancel();
         task_id_ = scheduler_.add_task(expire_, handler_type(_NEFORCE forward<WaitHandler>(handler)));
     }

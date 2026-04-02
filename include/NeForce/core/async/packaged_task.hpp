@@ -26,7 +26,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 包装可调用对象，提供异步执行能力，并将执行结果或异常传递给关联的future。
  */
-template <typename Res, typename... Args> class packaged_task<Res(Args...)> {
+template <typename Res, typename... Args>
+class packaged_task<Res(Args...)> {
     using StateType = inner::__future_base::task_state_base<Res(Args...)>; ///< 状态类型
 
     shared_ptr<StateType> state_ptr; ///< 任务状态共享指针
@@ -141,7 +142,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Res, typename... Args> packaged_task(Res (*)(Args...)) -> packaged_task<Res(Args...)>;
+template <typename Res, typename... Args>
+packaged_task(Res (*)(Args...)) -> packaged_task<Res(Args...)>;
 
 template <typename Func, typename Sign = typename inner::__function_guide_helper<decltype(&Func::operator())>::type>
 packaged_task(Func) -> packaged_task<Sign>;

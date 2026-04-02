@@ -72,7 +72,8 @@ NEFORCE_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last, Compare comp
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last) {
     return _NEFORCE bubble_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -135,7 +136,8 @@ NEFORCE_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last, Compare co
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last) {
     return _NEFORCE cocktail_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -180,7 +182,8 @@ NEFORCE_CONSTEXPR20 void select_sort(Iterator first, Iterator last, Compare comp
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void select_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void select_sort(Iterator first, Iterator last) {
     return _NEFORCE select_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -225,7 +228,8 @@ NEFORCE_CONSTEXPR20 void shell_sort(Iterator first, Iterator last, Compare comp)
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void shell_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void shell_sort(Iterator first, Iterator last) {
     return _NEFORCE shell_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -290,7 +294,8 @@ NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare co
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last) {
     _NEFORCE counting_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>(),
                            _NEFORCE identity<iter_value_t<Iterator>>());
 }
@@ -307,7 +312,8 @@ template <typename Iterator> NEFORCE_CONSTEXPR20 void counting_sort(Iterator fir
  *
  * 适用于均匀分布的整数或浮点数。
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
     using T = iter_value_t<Iterator>;
@@ -337,7 +343,8 @@ template <typename Iterator> NEFORCE_CONSTEXPR20 void bucket_sort_less(Iterator 
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
     using T = iter_value_t<Iterator>;
@@ -367,14 +374,16 @@ template <typename Iterator> NEFORCE_CONSTEXPR20 void bucket_sort_greater(Iterat
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void bucket_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void bucket_sort(Iterator first, Iterator last) {
     _NEFORCE bucket_sort_less(first, last);
 }
 
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Iterator> int __max_bit_aux(Iterator first, Iterator last) {
+template <typename Iterator>
+int __max_bit_aux(Iterator first, Iterator last) {
     auto max_num = *_NEFORCE max_element(first, last, [](const auto& a, const auto& b) -> bool { return a < b; });
     int p = 0;
     while (max_num > 0) {
@@ -384,7 +393,8 @@ template <typename Iterator> int __max_bit_aux(Iterator first, Iterator last) {
     return p;
 }
 
-template <typename T> int __get_number_aux(T num, T d) {
+template <typename T>
+int __get_number_aux(T num, T d) {
     int p = 1;
     for (T i = 1; i < d; ++i) {
         p *= 10;
@@ -535,7 +545,8 @@ NEFORCE_CONSTEXPR20 void radix_sort(Iterator first, Iterator last, Mapper mapper
  * 基于莱昂纳多堆的排序算法，是堆排序的改进版本，
  * 在部分有序的序列上表现优异。
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void smooth_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void smooth_sort(Iterator first, Iterator last) {
     _NEFORCE make_leonardo_heap(first, last);
     _NEFORCE sort_leonardo_heap(first, last);
 }
@@ -579,7 +590,8 @@ NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last, Compare comp) {
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last) {
     return _NEFORCE tim_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -598,7 +610,8 @@ template <typename Iterator> NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, I
  * 通过随机打乱并检查是否有序来进行排序。
  * 仅用于教学和娱乐目的，切勿用于实际生产环境。
  */
-template <typename Iterator, typename Compare> void monkey_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+void monkey_sort(Iterator first, Iterator last, Compare comp) {
     while (!_NEFORCE is_sorted(first, last, comp)) {
         _NEFORCE shuffle(first, last);
     }
@@ -610,7 +623,8 @@ template <typename Iterator, typename Compare> void monkey_sort(Iterator first, 
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator> void monkey_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+void monkey_sort(Iterator first, Iterator last) {
     return _NEFORCE monkey_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

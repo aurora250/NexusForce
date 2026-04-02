@@ -275,7 +275,8 @@ private:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> NEFORCE_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
+    template <typename Iterator>
+    NEFORCE_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
         const size_type n = _NEFORCE distance(first, last);
 
 #ifdef NEFORCE_USING_SSO
@@ -1481,7 +1482,8 @@ public:
      * @param last 源结束
      * @return 指向插入起始的迭代器
      */
-    template <typename Iterator> NEFORCE_CONSTEXPR20 iterator insert(iterator position, Iterator first, Iterator last) {
+    template <typename Iterator>
+    NEFORCE_CONSTEXPR20 iterator insert(iterator position, Iterator first, Iterator last) {
         const size_type len = _NEFORCE distance(first, last);
         if (len == 0) {
             return position;
@@ -1875,7 +1877,8 @@ public:
      * @param last 源结束
      * @return 自身引用
      */
-    template <typename Iterator> NEFORCE_CONSTEXPR20 basic_string& assign(Iterator first, Iterator last) {
+    template <typename Iterator>
+    NEFORCE_CONSTEXPR20 basic_string& assign(Iterator first, Iterator last) {
         clear();
         return append(first, last);
     }
@@ -2611,7 +2614,8 @@ public:
      * @param pred 谓词函数
      * @return 自身引用
      */
-    template <typename Pred> NEFORCE_CONSTEXPR20 basic_string& trim_left_if(Pred pred) {
+    template <typename Pred>
+    NEFORCE_CONSTEXPR20 basic_string& trim_left_if(Pred pred) {
         if (empty()) {
             return *this;
         }
@@ -2633,7 +2637,8 @@ public:
      * @param pred 谓词函数
      * @return 自身引用
      */
-    template <typename Pred> NEFORCE_CONSTEXPR20 basic_string& trim_right_if(Pred pred) {
+    template <typename Pred>
+    NEFORCE_CONSTEXPR20 basic_string& trim_right_if(Pred pred) {
         if (empty()) {
             return *this;
         }
@@ -2655,7 +2660,8 @@ public:
      * @param pred 谓词函数
      * @return 自身引用
      */
-    template <typename Predicate> NEFORCE_CONSTEXPR20 basic_string& trim_if(Predicate pred) {
+    template <typename Predicate>
+    NEFORCE_CONSTEXPR20 basic_string& trim_if(Predicate pred) {
         return trim_left_if(pred).trim_right_if(pred);
     }
 

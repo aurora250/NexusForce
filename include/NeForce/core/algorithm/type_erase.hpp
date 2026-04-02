@@ -73,7 +73,8 @@ end(const Container& cont) noexcept(noexcept(cont.end())) {
  * @param arr 数组引用
  * @return 指向数组首元素的指针
  */
-template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* begin(T (&arr)[Size]) noexcept {
+template <typename T, size_t Size>
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* begin(T (&arr)[Size]) noexcept {
     return arr;
 }
 
@@ -85,7 +86,8 @@ template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE const
  * @return 指向数组末尾的指针
  * @note 末尾指针是最后一个元素之后的位置
  */
-template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* end(T (&arr)[Size]) noexcept {
+template <typename T, size_t Size>
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* end(T (&arr)[Size]) noexcept {
     return arr + Size;
 }
 
@@ -367,7 +369,8 @@ NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const Container& co
  * @param ptr 指针
  * @return 如果指针非空则返回true，否则返回false
  */
-template <typename T> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const T* ptr) noexcept {
+template <typename T>
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const T* ptr) noexcept {
     return ptr != nullptr;
 }
 
@@ -412,7 +415,8 @@ data(const Container& cont) noexcept(noexcept(cont.data())) {
  * @param arr 数组引用
  * @return 指向数组首元素的指针
  */
-template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* data(T (&arr)[Size]) noexcept {
+template <typename T, size_t Size>
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* data(T (&arr)[Size]) noexcept {
     return arr;
 }
 
@@ -422,7 +426,10 @@ template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE const
  * @param ptr 指针
  * @return 原指针
  */
-template <typename T> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* data(T* ptr) noexcept { return ptr; }
+template <typename T>
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* data(T* ptr) noexcept {
+    return ptr;
+}
 
 /**
  * @brief 获取初始化列表的底层数据指针

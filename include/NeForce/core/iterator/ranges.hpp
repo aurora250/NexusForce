@@ -20,7 +20,8 @@ template <typename V>
 concept View = Range<V> && move_constructible<V>;
 
 
-template <Range R, typename Adaptor> constexpr auto operator|(R&& range, Adaptor&& adaptor) {
+template <Range R, typename Adaptor>
+constexpr auto operator|(R&& range, Adaptor&& adaptor) {
     return _NEFORCE forward<Adaptor>(adaptor)(_NEFORCE forward<R>(range));
 }
 
@@ -46,7 +47,8 @@ private:
 };
 
 
-template <Range R> class owning_view : public view_base<owning_view<R>> {
+template <Range R>
+class owning_view : public view_base<owning_view<R>> {
 private:
     R obj_;
 
@@ -97,7 +99,8 @@ struct all_view_factory {
 NEFORCE_INLINE17 constexpr all_view_factory all{};
 
 
-template <input_iterator BaseIter, sentinel_for<BaseIter> Sentinel, typename Pred> class filter_iterator {
+template <input_iterator BaseIter, sentinel_for<BaseIter> Sentinel, typename Pred>
+class filter_iterator {
 public:
     using base_category = iter_category_t<BaseIter>;
     using iterator_category = conditional_t<is_base_of_v<bidirectional_iterator_tag, base_category>,
@@ -263,7 +266,8 @@ public:
 };
 
 
-template <View V, typename Pred> class filter_view : public view_base<filter_view<V, Pred>> {
+template <View V, typename Pred>
+class filter_view : public view_base<filter_view<V, Pred>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using base_sentinel = decltype(_NEFORCE declval<remove_const_t<V>>().end());
@@ -346,7 +350,8 @@ public:
 };
 
 
-template <input_iterator BaseIter, typename Func> class transform_iterator {
+template <input_iterator BaseIter, typename Func>
+class transform_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using base_reference = iter_reference_t<BaseIter>;
@@ -388,10 +393,12 @@ public:
         return !(current_ == s);
     }
 
-    template <typename Sentinel> friend constexpr bool operator==(const Sentinel& s, const transform_iterator& it) {
+    template <typename Sentinel>
+    friend constexpr bool operator==(const Sentinel& s, const transform_iterator& it) {
         return s == it.current_;
     }
-    template <typename Sentinel> friend constexpr bool operator!=(const Sentinel& s, const transform_iterator& it) {
+    template <typename Sentinel>
+    friend constexpr bool operator!=(const Sentinel& s, const transform_iterator& it) {
         return !(s == it.current_);
     }
 
@@ -401,7 +408,8 @@ private:
 };
 
 
-template <View V, typename Func> class transform_view : public view_base<transform_view<V, Func>> {
+template <View V, typename Func>
+class transform_view : public view_base<transform_view<V, Func>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using const_base_iterator = decltype(_NEFORCE declval<add_const_t<V>>().begin());
@@ -474,7 +482,8 @@ public:
 };
 
 
-template <input_iterator BaseIter> class take_iterator {
+template <input_iterator BaseIter>
+class take_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using value_type = iter_value_t<BaseIter>;
@@ -528,7 +537,8 @@ private:
 };
 
 
-template <View V> class take_view : public view_base<take_view<V>> {
+template <View V>
+class take_view : public view_base<take_view<V>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using iterator = take_iterator<base_iterator>;
@@ -591,10 +601,12 @@ public:
     constexpr V base() && { return _NEFORCE move(base_); }
 };
 
-template <typename V> take_view(V&&, iter_difference_t<decltype(_NEFORCE declval<V>().begin())>) -> take_view<V>;
+template <typename V>
+take_view(V&&, iter_difference_t<decltype(_NEFORCE declval<V>().begin())>) -> take_view<V>;
 
 
-template <input_iterator BaseIter, sentinel_for<BaseIter> Sentinel, typename Pred> class take_while_iterator {
+template <input_iterator BaseIter, sentinel_for<BaseIter> Sentinel, typename Pred>
+class take_while_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using value_type = iter_value_t<BaseIter>;
@@ -644,11 +656,13 @@ public:
         return !(*this == s);
     }
 
-    template <typename S> friend constexpr bool operator==(const S& s, const take_while_iterator& t) {
+    template <typename S>
+    friend constexpr bool operator==(const S& s, const take_while_iterator& t) {
         return t.done_ || t.current_ == s;
     }
 
-    template <typename S> friend constexpr bool operator!=(const S& s, const take_while_iterator& t) {
+    template <typename S>
+    friend constexpr bool operator!=(const S& s, const take_while_iterator& t) {
         return !(s == t);
     }
 
@@ -659,7 +673,8 @@ private:
     bool done_ = false;
 };
 
-template <View V, typename Pred> class take_while_view : public view_base<take_while_view<V, Pred>> {
+template <View V, typename Pred>
+class take_while_view : public view_base<take_while_view<V, Pred>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using base_sentinel = decltype(_NEFORCE declval<remove_const_t<V>>().end());
@@ -703,10 +718,12 @@ public:
     constexpr V base() && { return _NEFORCE move(base_); }
 };
 
-template <typename V, typename Pred> take_while_view(V&&, Pred) -> take_while_view<V, Pred>;
+template <typename V, typename Pred>
+take_while_view(V&&, Pred) -> take_while_view<V, Pred>;
 
 
-template <View V> class drop_view : public view_base<drop_view<V>> {
+template <View V>
+class drop_view : public view_base<drop_view<V>> {
 public:
     using iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using sentinel = decltype(_NEFORCE declval<remove_const_t<V>>().end());
@@ -779,10 +796,12 @@ public:
     constexpr V base() && { return _NEFORCE move(base_); }
 };
 
-template <typename V> drop_view(V&&, iter_difference_t<decltype(_NEFORCE declval<V>().begin())>) -> drop_view<V>;
+template <typename V>
+drop_view(V&&, iter_difference_t<decltype(_NEFORCE declval<V>().begin())>) -> drop_view<V>;
 
 
-template <input_iterator BaseIter, sentinel_for<BaseIter> Sentinel, typename Pred> class drop_while_iterator {
+template <input_iterator BaseIter, sentinel_for<BaseIter> Sentinel, typename Pred>
+class drop_while_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using value_type = iter_value_t<BaseIter>;
@@ -829,11 +848,13 @@ public:
         return !(*this == s);
     }
 
-    template <typename S> friend constexpr bool operator==(const S& s, const drop_while_iterator& t) {
+    template <typename S>
+    friend constexpr bool operator==(const S& s, const drop_while_iterator& t) {
         return t.current_ == s;
     }
 
-    template <typename S> friend constexpr bool operator!=(const S& s, const drop_while_iterator& t) {
+    template <typename S>
+    friend constexpr bool operator!=(const S& s, const drop_while_iterator& t) {
         return t.current_ != s;
     }
 
@@ -854,7 +875,8 @@ private:
     bool started_ = false;
 };
 
-template <View V, typename Pred> class drop_while_view : public view_base<drop_while_view<V, Pred>> {
+template <View V, typename Pred>
+class drop_while_view : public view_base<drop_while_view<V, Pred>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using base_sentinel = decltype(_NEFORCE declval<remove_const_t<V>>().end());
@@ -898,10 +920,12 @@ public:
     constexpr V base() && { return _NEFORCE move(base_); }
 };
 
-template <typename V, typename Pred> drop_while_view(V&&, Pred) -> drop_while_view<V, Pred>;
+template <typename V, typename Pred>
+drop_while_view(V&&, Pred) -> drop_while_view<V, Pred>;
 
 
-template <bidirectional_iterator Iter> class reverse_iterator {
+template <bidirectional_iterator Iter>
+class reverse_iterator {
 public:
     using iterator_category = bidirectional_iterator_tag;
     using value_type = iter_value_t<Iter>;
@@ -1006,10 +1030,12 @@ public:
     constexpr V base() && { return _NEFORCE move(base_); }
 };
 
-template <typename V> reverse_view(V&&) -> reverse_view<V>;
+template <typename V>
+reverse_view(V&&) -> reverse_view<V>;
 
 
-template <typename T> class iota_iterator {
+template <typename T>
+class iota_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using value_type = T;
@@ -1048,7 +1074,8 @@ private:
     T value_{};
 };
 
-template <typename T> class iota_view : public view_base<iota_view<T>> {
+template <typename T>
+class iota_view : public view_base<iota_view<T>> {
 public:
     using iterator = iota_iterator<T>;
 
@@ -1069,12 +1096,15 @@ private:
     bool has_bound_ = false;
 };
 
-template <typename T> iota_view(T) -> iota_view<T>;
+template <typename T>
+iota_view(T) -> iota_view<T>;
 
-template <typename T> iota_view(T, T) -> iota_view<T>;
+template <typename T>
+iota_view(T, T) -> iota_view<T>;
 
 
-template <typename T> class repeat_iterator {
+template <typename T>
+class repeat_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using value_type = T;
@@ -1111,7 +1141,8 @@ private:
     difference_type count_ = 0;
 };
 
-template <typename T> class repeat_view : public view_base<repeat_view<T>> {
+template <typename T>
+class repeat_view : public view_base<repeat_view<T>> {
 public:
     using iterator = repeat_iterator<T>;
     using difference_type = ptrdiff_t;
@@ -1135,12 +1166,15 @@ private:
     bool has_bound_ = false;
 };
 
-template <typename T> repeat_view(T) -> repeat_view<T>;
+template <typename T>
+repeat_view(T) -> repeat_view<T>;
 
-template <typename T, typename N> repeat_view(T, N) -> repeat_view<T>;
+template <typename T, typename N>
+repeat_view(T, N) -> repeat_view<T>;
 
 
-template <typename OuterIter, typename OuterSentinel> class join_iterator {
+template <typename OuterIter, typename OuterSentinel>
+class join_iterator {
 private:
     using outer_reference = iter_reference_t<OuterIter>;
     using inner_range = remove_cvref_t<outer_reference>;
@@ -1241,10 +1275,12 @@ private:
     V base_;
 };
 
-template <typename V> join_view(V&&) -> join_view<V>;
+template <typename V>
+join_view(V&&) -> join_view<V>;
 
 
-template <size_t N, typename BaseIter> class element_iterator {
+template <size_t N, typename BaseIter>
+class element_iterator {
 public:
     using base_reference = iter_reference_t<BaseIter>;
     using element_type = decltype(_NEFORCE get<N>(_NEFORCE declval<base_reference>()));
@@ -1291,7 +1327,8 @@ private:
     BaseIter current_{};
 };
 
-template <size_t N, View V> class element_view : public view_base<element_view<N, V>> {
+template <size_t N, View V>
+class element_view : public view_base<element_view<N, V>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<V>().begin());
     using base_sentinel = decltype(_NEFORCE declval<V>().end());
@@ -1380,10 +1417,12 @@ private:
     V base_;
 };
 
-template <typename V> common_view(V&&) -> common_view<V>;
+template <typename V>
+common_view(V&&) -> common_view<V>;
 
 
-template <typename Iter> class counted_iterator {
+template <typename Iter>
+class counted_iterator {
 public:
     using iterator_category = forward_iterator_tag;
     using value_type = iter_value_t<Iter>;
@@ -1422,7 +1461,8 @@ private:
     difference_type count_ = 0;
 };
 
-template <typename Iter> class counted_view : public view_base<counted_view<Iter>> {
+template <typename Iter>
+class counted_view : public view_base<counted_view<Iter>> {
 public:
     using iterator = counted_iterator<Iter>;
     using difference_type = iter_difference_t<Iter>;
@@ -1440,10 +1480,12 @@ private:
     difference_type count_ = 0;
 };
 
-template <typename Iter, typename N> counted_view(Iter, N) -> counted_view<Iter>;
+template <typename Iter, typename N>
+counted_view(Iter, N) -> counted_view<Iter>;
 
 
-template <bool IsConst, View V1, View V2> struct concat_iterator {
+template <bool IsConst, View V1, View V2>
+struct concat_iterator {
     using iter1_t = decltype(_NEFORCE declval<remove_const_t<V1>>().begin());
     using iter2_t = decltype(_NEFORCE declval<remove_const_t<V2>>().begin());
     using const_iter1_t = decltype(_NEFORCE declval<add_const_t<V1>>().begin());
@@ -1508,7 +1550,8 @@ template <bool IsConst, View V1, View V2> struct concat_iterator {
     bool operator!=(const concat_iterator& other) const { return !(*this == other); }
 };
 
-template <View V1, View V2> class concat_view : public view_base<concat_view<V1, V2>> {
+template <View V1, View V2>
+class concat_view : public view_base<concat_view<V1, V2>> {
     remove_const_t<V1> v1_;
     remove_const_t<V2> v2_;
 
@@ -1528,7 +1571,8 @@ public:
 };
 
 
-template <typename Iterator> class subrange_view : public view_base<subrange_view<Iterator>> {
+template <typename Iterator>
+class subrange_view : public view_base<subrange_view<Iterator>> {
     Iterator first_;
     Iterator last_;
 
@@ -1543,7 +1587,8 @@ public:
 };
 
 
-template <bool IsConst, View V, typename T> struct split_iterator {
+template <bool IsConst, View V, typename T>
+struct split_iterator {
 private:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using base_sentinel = decltype(_NEFORCE declval<remove_const_t<V>>().end());
@@ -1601,7 +1646,8 @@ public:
     bool operator!=(const split_iterator& other) const { return !(*this == other); }
 };
 
-template <View V, typename T> class split_view : public view_base<split_view<V, T>> {
+template <View V, typename T>
+class split_view : public view_base<split_view<V, T>> {
     V base_;
     T delimiter_;
 
@@ -1623,7 +1669,8 @@ public:
 };
 
 
-template <View V> class slice_view : public view_base<slice_view<V>> {
+template <View V>
+class slice_view : public view_base<slice_view<V>> {
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
     using const_base_iterator = decltype(_NEFORCE declval<add_const_t<V>>().begin());
     using iterator = conditional_t<is_const_v<V>, const_base_iterator, base_iterator>;
@@ -1694,7 +1741,8 @@ public:
 };
 
 
-template <typename Derived> struct range_adaptor_closure {
+template <typename Derived>
+struct range_adaptor_closure {
     template <typename OtherClosure>
     friend constexpr auto operator|(range_adaptor_closure<Derived> lhs, range_adaptor_closure<OtherClosure> rhs) {
         return [lhs = static_cast<const Derived&>(lhs), rhs = static_cast<const OtherClosure&>(rhs)](auto&& range) {
@@ -1707,29 +1755,36 @@ template <typename Derived> struct range_adaptor_closure {
 NEFORCE_BEGIN_RANGES_VIEWS__
 
 struct all_adaptor {
-    template <Range R> constexpr auto operator()(R&& range) const { return all(_NEFORCE forward<R>(range)); }
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
+        return all(_NEFORCE forward<R>(range));
+    }
 };
 
 NEFORCE_INLINE17 constexpr all_adaptor all;
 
 
-template <typename Pred> struct filter_adaptor_closure : range_adaptor_closure<filter_adaptor_closure<Pred>> {
+template <typename Pred>
+struct filter_adaptor_closure : range_adaptor_closure<filter_adaptor_closure<Pred>> {
     Pred pred;
 
     constexpr explicit filter_adaptor_closure(Pred p) :
     pred(_NEFORCE move(p)) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return filter_view{all(_NEFORCE forward<R>(range)), pred};
     }
 };
 
 struct filter_adaptor {
-    template <typename Pred> constexpr auto operator()(Pred pred) const {
+    template <typename Pred>
+    constexpr auto operator()(Pred pred) const {
         return filter_adaptor_closure<Pred>{_NEFORCE move(pred)};
     }
 
-    template <Range R, typename Pred> constexpr auto operator()(R&& range, Pred pred) const {
+    template <Range R, typename Pred>
+    constexpr auto operator()(R&& range, Pred pred) const {
         return filter_view{all(_NEFORCE forward<R>(range)), _NEFORCE move(pred)};
     }
 };
@@ -1737,23 +1792,27 @@ struct filter_adaptor {
 NEFORCE_INLINE17 constexpr filter_adaptor filter;
 
 
-template <typename Func> struct transform_adaptor_closure : range_adaptor_closure<transform_adaptor_closure<Func>> {
+template <typename Func>
+struct transform_adaptor_closure : range_adaptor_closure<transform_adaptor_closure<Func>> {
     Func func;
 
     constexpr explicit transform_adaptor_closure(Func f) :
     func(_NEFORCE move(f)) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return transform_view{all(_NEFORCE forward<R>(range)), func};
     }
 };
 
 struct transform_adaptor {
-    template <typename Func> constexpr auto operator()(Func func) const {
+    template <typename Func>
+    constexpr auto operator()(Func func) const {
         return transform_adaptor_closure<Func>{_NEFORCE move(func)};
     }
 
-    template <Range R, typename Func> constexpr auto operator()(R&& range, Func func) const {
+    template <Range R, typename Func>
+    constexpr auto operator()(R&& range, Func func) const {
         return transform_view{all(_NEFORCE forward<R>(range)), _NEFORCE move(func)};
     }
 };
@@ -1761,13 +1820,15 @@ struct transform_adaptor {
 NEFORCE_INLINE17 constexpr transform_adaptor transform;
 
 
-template <typename DiffType> struct take_adaptor_closure : range_adaptor_closure<take_adaptor_closure<DiffType>> {
+template <typename DiffType>
+struct take_adaptor_closure : range_adaptor_closure<take_adaptor_closure<DiffType>> {
     DiffType count;
 
     constexpr explicit take_adaptor_closure(DiffType n) :
     count(n) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return take_view{all(_NEFORCE forward<R>(range)), count};
     }
 };
@@ -1789,23 +1850,27 @@ struct take_adaptor {
 NEFORCE_INLINE17 constexpr take_adaptor take;
 
 
-template <typename Pred> struct take_while_adaptor_closure : range_adaptor_closure<take_while_adaptor_closure<Pred>> {
+template <typename Pred>
+struct take_while_adaptor_closure : range_adaptor_closure<take_while_adaptor_closure<Pred>> {
     Pred pred;
 
     constexpr explicit take_while_adaptor_closure(Pred p) :
     pred(_NEFORCE move(p)) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return take_while_view{all(_NEFORCE forward<R>(range)), pred};
     }
 };
 
 struct take_while_adaptor {
-    template <typename Pred> constexpr auto operator()(Pred pred) const {
+    template <typename Pred>
+    constexpr auto operator()(Pred pred) const {
         return take_while_adaptor_closure<Pred>{_NEFORCE move(pred)};
     }
 
-    template <Range R, typename Pred> constexpr auto operator()(R&& range, Pred pred) const {
+    template <Range R, typename Pred>
+    constexpr auto operator()(R&& range, Pred pred) const {
         return take_while_view{all(_NEFORCE forward<R>(range)), _NEFORCE move(pred)};
     }
 };
@@ -1813,13 +1878,15 @@ struct take_while_adaptor {
 NEFORCE_INLINE17 constexpr take_while_adaptor take_while;
 
 
-template <typename DiffType> struct drop_adaptor_closure : range_adaptor_closure<drop_adaptor_closure<DiffType>> {
+template <typename DiffType>
+struct drop_adaptor_closure : range_adaptor_closure<drop_adaptor_closure<DiffType>> {
     DiffType count;
 
     constexpr explicit drop_adaptor_closure(DiffType n) :
     count(n) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return drop_view{all(_NEFORCE forward<R>(range)), count};
     }
 };
@@ -1841,23 +1908,27 @@ struct drop_adaptor {
 NEFORCE_INLINE17 constexpr drop_adaptor drop;
 
 
-template <typename Pred> struct drop_while_adaptor_closure : range_adaptor_closure<drop_while_adaptor_closure<Pred>> {
+template <typename Pred>
+struct drop_while_adaptor_closure : range_adaptor_closure<drop_while_adaptor_closure<Pred>> {
     Pred pred;
 
     constexpr explicit drop_while_adaptor_closure(Pred p) :
     pred(_NEFORCE move(p)) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return drop_while_view{all(_NEFORCE forward<R>(range)), pred};
     }
 };
 
 struct drop_while_adaptor {
-    template <typename Pred> constexpr auto operator()(Pred pred) const {
+    template <typename Pred>
+    constexpr auto operator()(Pred pred) const {
         return drop_while_adaptor_closure<Pred>{_NEFORCE move(pred)};
     }
 
-    template <Range R, typename Pred> constexpr auto operator()(R&& range, Pred pred) const {
+    template <Range R, typename Pred>
+    constexpr auto operator()(R&& range, Pred pred) const {
         return drop_while_view{all(_NEFORCE forward<R>(range)), _NEFORCE move(pred)};
     }
 };
@@ -1887,16 +1958,25 @@ NEFORCE_INLINE17 constexpr reverse_adaptor reverse;
 
 
 struct iota_adaptor {
-    template <typename T> constexpr auto operator()(T start) const { return iota_view<T>{start}; }
+    template <typename T>
+    constexpr auto operator()(T start) const {
+        return iota_view<T>{start};
+    }
 
-    template <typename T> constexpr auto operator()(T start, T bound) const { return iota_view<T>{start, bound}; }
+    template <typename T>
+    constexpr auto operator()(T start, T bound) const {
+        return iota_view<T>{start, bound};
+    }
 };
 
 NEFORCE_INLINE17 constexpr iota_adaptor iota;
 
 
 struct repeat_adaptor {
-    template <typename T> constexpr auto operator()(T value) const { return repeat_view<T>{_NEFORCE move(value)}; }
+    template <typename T>
+    constexpr auto operator()(T value) const {
+        return repeat_view<T>{_NEFORCE move(value)};
+    }
 
     template <typename T, typename N>
         requires is_integral_v<N>
@@ -1929,28 +2009,34 @@ struct join_adaptor {
 NEFORCE_INLINE17 constexpr join_adaptor join;
 
 
-template <size_t N> struct elements_adaptor_closure : range_adaptor_closure<elements_adaptor_closure<N>> {
-    template <Range R> constexpr auto operator()(R&& range) const {
+template <size_t N>
+struct elements_adaptor_closure : range_adaptor_closure<elements_adaptor_closure<N>> {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return element_view<N, decltype(all(_NEFORCE forward<R>(range)))>{all(_NEFORCE forward<R>(range))};
     }
 };
 
-template <size_t N> struct elements_adaptor {
+template <size_t N>
+struct elements_adaptor {
     constexpr auto operator()() const { return elements_adaptor_closure<N>{}; }
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return element_view<N, decltype(all(_NEFORCE forward<R>(range)))>{all(_NEFORCE forward<R>(range))};
     }
 };
 
-template <size_t N> NEFORCE_INLINE17 constexpr elements_adaptor<N> elements;
+template <size_t N>
+NEFORCE_INLINE17 constexpr elements_adaptor<N> elements;
 
 NEFORCE_INLINE17 constexpr auto keys = elements<0>;
 NEFORCE_INLINE17 constexpr auto values = elements<1>;
 
 
 struct common_adaptor_closure : range_adaptor_closure<common_adaptor_closure> {
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         if constexpr (common_range<R>) {
             return all(_NEFORCE forward<R>(range));
         } else {
@@ -1962,7 +2048,8 @@ struct common_adaptor_closure : range_adaptor_closure<common_adaptor_closure> {
 struct common_adaptor {
     constexpr auto operator()() const { return common_adaptor_closure{}; }
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         if constexpr (common_range<R>) {
             return all(_NEFORCE forward<R>(range));
         } else {
@@ -1985,7 +2072,8 @@ struct counted_adaptor {
 NEFORCE_INLINE17 constexpr counted_adaptor counted;
 
 
-template <typename V2> struct concat_adaptor_closure : range_adaptor_closure<concat_adaptor_closure<V2>> {
+template <typename V2>
+struct concat_adaptor_closure : range_adaptor_closure<concat_adaptor_closure<V2>> {
     using view_type = decltype(all(_NEFORCE declval<V2>()));
     view_type view_;
 
@@ -2000,11 +2088,13 @@ template <typename V2> struct concat_adaptor_closure : range_adaptor_closure<con
 };
 
 struct concat_adaptor {
-    template <typename V2> constexpr auto operator()(V2&& v2) const {
+    template <typename V2>
+    constexpr auto operator()(V2&& v2) const {
         return concat_adaptor_closure<V2>{_NEFORCE forward<V2>(v2)};
     }
 
-    template <typename V1, typename V2> constexpr auto operator()(V1&& v1, V2&& v2) const {
+    template <typename V1, typename V2>
+    constexpr auto operator()(V1&& v1, V2&& v2) const {
         return concat_view{all(_NEFORCE forward<V1>(v1)), all(_NEFORCE forward<V2>(v2))};
     }
 };
@@ -2012,21 +2102,27 @@ struct concat_adaptor {
 NEFORCE_INLINE17 constexpr concat_adaptor concat;
 
 
-template <typename T> struct split_adaptor_closure : range_adaptor_closure<split_adaptor_closure<T>> {
+template <typename T>
+struct split_adaptor_closure : range_adaptor_closure<split_adaptor_closure<T>> {
     T delim_;
 
     constexpr explicit split_adaptor_closure(T d) :
     delim_(d) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return split_view{all(_NEFORCE forward<R>(range)), delim_};
     }
 };
 
 struct split_adaptor {
-    template <typename T> constexpr auto operator()(T delim) const { return split_adaptor_closure<T>{delim}; }
+    template <typename T>
+    constexpr auto operator()(T delim) const {
+        return split_adaptor_closure<T>{delim};
+    }
 
-    template <Range R, typename T> constexpr auto operator()(R&& range, T delim) const {
+    template <Range R, typename T>
+    constexpr auto operator()(R&& range, T delim) const {
         return split_view{all(_NEFORCE forward<R>(range)), delim};
     }
 };
@@ -2041,7 +2137,8 @@ struct slice_adaptor_closure : range_adaptor_closure<slice_adaptor_closure> {
     offset_(o),
     length_(l) {}
 
-    template <Range R> constexpr auto operator()(R&& range) const {
+    template <Range R>
+    constexpr auto operator()(R&& range) const {
         return slice_view{all(_NEFORCE forward<R>(range)), offset_, length_};
     }
 };
@@ -2051,7 +2148,8 @@ struct slice_adaptor {
         return slice_adaptor_closure{offset, length};
     }
 
-    template <Range R> constexpr auto operator()(R&& range, ptrdiff_t offset, ptrdiff_t length) const {
+    template <Range R>
+    constexpr auto operator()(R&& range, ptrdiff_t offset, ptrdiff_t length) const {
         return slice_view{all(_NEFORCE forward<R>(range)), offset, length};
     }
 };

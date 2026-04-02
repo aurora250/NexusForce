@@ -162,7 +162,10 @@ constexpr const T& max(const T& a, const T& b, Compare comp) noexcept(noexcept(c
  * @param b 第二个值
  * @return a和b中的较大者
  */
-template <typename T> constexpr const T& max(const T& a, const T& b) noexcept(noexcept(a < b)) { return a < b ? b : a; }
+template <typename T>
+constexpr const T& max(const T& a, const T& b) noexcept(noexcept(a < b)) {
+    return a < b ? b : a;
+}
 
 /**
  * @brief 返回两个值中的较小者
@@ -189,7 +192,10 @@ constexpr const T& min(const T& a, const T& b, Compare comp) noexcept(noexcept(c
  * @param b 第二个值
  * @return a和b中的较小者
  */
-template <typename T> constexpr const T& min(const T& a, const T& b) noexcept(noexcept(b < a)) { return b < a ? b : a; }
+template <typename T>
+constexpr const T& min(const T& a, const T& b) noexcept(noexcept(b < a)) {
+    return b < a ? b : a;
+}
 
 /**
  * @brief 返回三个值的中位数
@@ -318,7 +324,8 @@ constexpr Iterator max_element(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 指向最大元素的迭代器
  */
-template <typename Iterator> constexpr Iterator max_element(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr Iterator max_element(Iterator first, Iterator last) {
     return _NEFORCE max_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -328,7 +335,8 @@ template <typename Iterator> constexpr Iterator max_element(Iterator first, Iter
  * @param list 初始化列表
  * @return 列表中的最大值
  */
-template <typename T> constexpr const T& max(std::initializer_list<T> list) {
+template <typename T>
+constexpr const T& max(std::initializer_list<T> list) {
     auto iter = _NEFORCE max_element(list.begin(), list.end());
     return *iter;
 }
@@ -367,7 +375,8 @@ constexpr Iterator min_element(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 指向最小元素的迭代器
  */
-template <typename Iterator> constexpr Iterator min_element(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr Iterator min_element(Iterator first, Iterator last) {
     return _NEFORCE min_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -377,7 +386,8 @@ template <typename Iterator> constexpr Iterator min_element(Iterator first, Iter
  * @param list 初始化列表
  * @return 列表中的最小值
  */
-template <typename T> constexpr const T& min(std::initializer_list<T> list) {
+template <typename T>
+constexpr const T& min(std::initializer_list<T> list) {
     return *_NEFORCE min_element(list.begin(), list.end());
 }
 
@@ -408,7 +418,8 @@ constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last,
  * @param last 范围结束
  * @return pair<指向最小元素的迭代器, 指向最大元素的迭代器>
  */
-template <typename Iterator> constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last) {
     return _NEFORCE minmax_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

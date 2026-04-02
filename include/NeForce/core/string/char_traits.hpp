@@ -29,7 +29,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供字符类型的基本操作接口，包括复制、移动、比较、查找等。
  * 作为具体字符特征特化的基类。
  */
-template <typename CharT, typename IntT> struct base_char_traits {
+template <typename CharT, typename IntT>
+struct base_char_traits {
     using char_type = CharT; ///< 字符类型
     using int_type = IntT;   ///< 整数类型
 
@@ -150,7 +151,8 @@ template <typename CharT, typename IntT> struct base_char_traits {
  *
  * 为窄字符类型提供优化的内存操作实现。
  */
-template <typename CharT, typename IntT> struct narrow_char_traits : private base_char_traits<CharT, IntT> {
+template <typename CharT, typename IntT>
+struct narrow_char_traits : private base_char_traits<CharT, IntT> {
     static_assert(sizeof(CharT) == sizeof(byte_t), "size of CharT must be the same as byte type");
 
 private:
@@ -220,37 +222,45 @@ public:
  *
  * 默认使用base_char_traits，针对具体字符类型有特化。
  */
-template <typename CharT> struct char_traits : base_char_traits<CharT, int64_t> {};
+template <typename CharT>
+struct char_traits : base_char_traits<CharT, int64_t> {};
 
 /// char类型的特化
-template <> struct char_traits<char> : narrow_char_traits<char, int32_t> {};
+template <>
+struct char_traits<char> : narrow_char_traits<char, int32_t> {};
 
 /// wchar_t类型的特化
-template <> struct char_traits<wchar_t> : base_char_traits<wchar_t, uint32_t> {};
+template <>
+struct char_traits<wchar_t> : base_char_traits<wchar_t, uint32_t> {};
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /// char8_t类型的特化
-template <> struct char_traits<char8_t> : narrow_char_traits<char8_t, uint32_t> {};
+template <>
+struct char_traits<char8_t> : narrow_char_traits<char8_t, uint32_t> {};
 #endif
 
 /// char16_t类型的特化
-template <> struct char_traits<char16_t> : base_char_traits<char16_t, uint32_t> {};
+template <>
+struct char_traits<char16_t> : base_char_traits<char16_t, uint32_t> {};
 
 /// char32_t类型的特化
-template <> struct char_traits<char32_t> : base_char_traits<char32_t, uint32_t> {};
+template <>
+struct char_traits<char32_t> : base_char_traits<char32_t, uint32_t> {};
 
 
 /**
  * @brief 获取字符特征中的字符类型
  * @tparam Traits 字符特征类型
  */
-template <typename Traits> using char_traits_char_t = typename Traits::char_type;
+template <typename Traits>
+using char_traits_char_t = typename Traits::char_type;
 
 /**
  * @brief 获取字符特征中的字符指针类型
  * @tparam Traits 字符特征类型
  */
-template <typename Traits> using char_traits_ptr_t = const typename Traits::char_type*;
+template <typename Traits>
+using char_traits_ptr_t = const typename Traits::char_type*;
 
 
 /// @cond
@@ -264,7 +274,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 用于加速字符串查找操作，通过位图记录字符出现情况。
  */
-template <typename CharT, bool IsChar = is_character_v<CharT>> class __string_bitmap {
+template <typename CharT, bool IsChar = is_character_v<CharT>>
+class __string_bitmap {
 private:
     bool matches_[numeric_traits<byte_t>::max() + 1] = {}; ///< 字符匹配位图
 
@@ -295,7 +306,8 @@ public:
     constexpr bool match(const CharT chr) const noexcept { return matches_[static_cast<byte_t>(chr)]; }
 };
 
-template <typename CharT> class __string_bitmap<CharT, false> {};
+template <typename CharT>
+class __string_bitmap<CharT, false> {};
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -798,22 +810,26 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
 /** @} */ // CharTraits
 
 #define __NEFORCE_BUILD_CHAR_PTR_HASH(OPT)                                                  \
-    template <> struct hash<OPT*> {                                                         \
+    template <>                                                                             \
+    struct hash<OPT*> {                                                                     \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT* str) const noexcept {      \
             return FNV_hash_string(str, char_traits<OPT>::length(str));                     \
         }                                                                                   \
     };                                                                                      \
-    template <> struct hash<const OPT*> {                                                   \
+    template <>                                                                             \
+    struct hash<const OPT*> {                                                               \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT* str) const noexcept {      \
             return FNV_hash_string(str, char_traits<OPT>::length(str));                     \
         }                                                                                   \
     };                                                                                      \
-    template <size_t N> struct hash<OPT[N]> {                                               \
+    template <size_t N>                                                                     \
+    struct hash<OPT[N]> {                                                                   \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
             return FNV_hash_string(str, N - 1);                                             \
         }                                                                                   \
     };                                                                                      \
-    template <size_t N> struct hash<const OPT[N]> {                                         \
+    template <size_t N>                                                                     \
+    struct hash<const OPT[N]> {                                                             \
         NEFORCE_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
             return FNV_hash_string(str, N - 1);                                             \
         }                                                                                   \

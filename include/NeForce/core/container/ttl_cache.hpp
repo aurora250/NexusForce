@@ -40,7 +40,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此类不是线程安全的，多线程环境下需要外部同步
  */
-template <typename Key, typename Value> class ttl_cache {
+template <typename Key, typename Value>
+class ttl_cache {
 public:
     using clock = steady_clock;           ///< 时钟类型
     using time_point = clock::time_point; ///< 时间点类型

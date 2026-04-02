@@ -351,7 +351,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace(Args&&... args) {
+    template <typename... Args>
+    iterator emplace(Args&&... args) {
         return ht_.emplace_equal(_NEFORCE forward<Args>(args)...);
     }
 
@@ -375,7 +376,10 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> void insert(Iterator first, Iterator last) { ht_.insert_equal(first, last); }
+    template <typename Iterator>
+    void insert(Iterator first, Iterator last) {
+        ht_.insert_equal(first, last);
+    }
 
     /**
      * @brief 删除所有具有指定键的元素

@@ -12,9 +12,11 @@
 #include "NeForce/core/numeric/ratio.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-template <typename Rep, typename Period = ratio<1>> struct duration;
+template <typename Rep, typename Period = ratio<1>>
+struct duration;
 
-template <typename Clock, typename Dur> struct time_point;
+template <typename Clock, typename Dur>
+struct time_point;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -29,7 +31,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 计算两个持续时间类型的公共类型。
  */
-template <typename CommonT, typename Period1, typename Period2, typename Dummy = void> struct __duration_common_type {};
+template <typename CommonT, typename Period1, typename Period2, typename Dummy = void>
+struct __duration_common_type {};
 
 template <typename CommonT, typename Period1, typename Period2>
 struct __duration_common_type<CommonT, Period1, Period2, void_t<typename CommonT::type>> {
@@ -50,11 +53,13 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 struct common_type<duration<Rep1, Period1>, duration<Rep2, Period2>>
 : inner::__duration_common_type<common_type<Rep1, Rep2>, typename Period1::type, typename Period2::type> {};
 
-template <typename Rep, typename Period> struct common_type<duration<Rep, Period>, duration<Rep, Period>> {
+template <typename Rep, typename Period>
+struct common_type<duration<Rep, Period>, duration<Rep, Period>> {
     using type = duration<common_type_t<Rep>, typename Period::type>;
 };
 
-template <typename Rep, typename Period> struct common_type<duration<Rep, Period>> {
+template <typename Rep, typename Period>
+struct common_type<duration<Rep, Period>> {
     using type = duration<common_type_t<Rep>, typename Period::type>;
 };
 
@@ -63,7 +68,8 @@ NEFORCE_BEGIN_INNER__
 
 template <typename ToDur, typename ConvFactor, typename CommonRep, bool NumIsOne = false, bool DenIsOne = false>
 struct __duration_cast_impl {
-    template <typename Rep, typename Period> static constexpr ToDur __cast(const duration<Rep, Period>& value) {
+    template <typename Rep, typename Period>
+    static constexpr ToDur __cast(const duration<Rep, Period>& value) {
         return ToDur(static_cast<typename ToDur::rep>(static_cast<CommonRep>(value.count()) *
                                                       static_cast<CommonRep>(ConvFactor::num) /
                                                       static_cast<CommonRep>(ConvFactor::den)));
@@ -72,14 +78,16 @@ struct __duration_cast_impl {
 
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, true> {
-    template <typename Rep, typename Period> static constexpr ToDur __cast(const duration<Rep, Period>& value) {
+    template <typename Rep, typename Period>
+    static constexpr ToDur __cast(const duration<Rep, Period>& value) {
         return ToDur(static_cast<typename ToDur::rep>(value.count()));
     }
 };
 
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, false> {
-    template <typename Rep, typename Period> static constexpr ToDur __cast(const duration<Rep, Period>& value) {
+    template <typename Rep, typename Period>
+    static constexpr ToDur __cast(const duration<Rep, Period>& value) {
         return ToDur(static_cast<typename ToDur::rep>(static_cast<CommonRep>(value.count()) /
                                                       static_cast<CommonRep>(ConvFactor::den)));
     }
@@ -87,7 +95,8 @@ struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, false> {
 
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, false, true> {
-    template <typename Rep, typename Period> static constexpr ToDur __cast(const duration<Rep, Period>& value) {
+    template <typename Rep, typename Period>
+    static constexpr ToDur __cast(const duration<Rep, Period>& value) {
         return ToDur(static_cast<typename ToDur::rep>(static_cast<CommonRep>(value.count()) *
                                                       static_cast<CommonRep>(ConvFactor::num)));
     }
@@ -107,15 +116,18 @@ NEFORCE_END_INNER__
  * @brief 检查是否为持续时间类型
  * @tparam T 要检查的类型
  */
-template <typename T> struct is_duration : false_type {};
+template <typename T>
+struct is_duration : false_type {};
 
-template <typename Rep, typename Period> struct is_duration<duration<Rep, Period>> : true_type {};
+template <typename Rep, typename Period>
+struct is_duration<duration<Rep, Period>> : true_type {};
 
 /**
  * @var is_duration_v
  * @brief is_duration的便捷变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr bool is_duration_v = is_duration<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_duration_v = is_duration<T>::value;
 
 
 /**
@@ -160,7 +172,8 @@ using months = duration<int64_t, ratio<2629746>>; ///< 月持续时间（平均�
  *
  * 表示一个时间间隔，支持不同时间单位的转换和运算。
  */
-template <typename Rep, typename Period> struct duration {
+template <typename Rep, typename Period>
+struct duration {
     static_assert(!is_duration_v<Rep>, "rep cannot be a duration");
     static_assert(is_ratio_v<Period>, "period must be a specialization of ratio");
     static_assert(Period::num > 0, "period must be positive");
@@ -181,7 +194,8 @@ private:
      * @brief 检查时间单位是否和谐（分母为1）
      * @tparam Period2 要检查的时间单位比例
      */
-    template <typename Period2> using is_harmonic = bool_constant<divide<Period2, Period>::den == 1>;
+    template <typename Period2>
+    using is_harmonic = bool_constant<divide<Period2, Period>::den == 1>;
 
 public:
     using rep = Rep;                      ///< 数值类型
@@ -687,7 +701,8 @@ NEFORCE_BEGIN_INNER__
  * @tparam Digits 数字字符序列
  * @return 转换后的持续时间
  */
-template <typename Dur, char... Digits> constexpr Dur __check_overflow() noexcept {
+template <typename Dur, char... Digits>
+constexpr Dur __check_overflow() noexcept {
     using value_type = static_parse_int<Digits...>;
     constexpr typename Dur::rep rep = value_type::value;
     static_assert(rep >= 0 && rep == value_type::value, "literal value cannot be represented by duration type");
@@ -723,7 +738,8 @@ constexpr duration<decimal_t, ratio<3600, 1>> operator""_h(const decimal_t hours
  * @tparam Digits 数字字符序列
  * @return 小时持续时间
  */
-template <char... Digits> constexpr hours operator""_h() noexcept {
+template <char... Digits>
+constexpr hours operator""_h() noexcept {
     return inner::__check_overflow<hours, Digits...>();
 }
 
@@ -741,7 +757,8 @@ constexpr duration<decimal_t, ratio<60, 1>> operator""_min(const decimal_t mins)
  * @tparam Digits 数字字符序列
  * @return 分钟持续时间
  */
-template <char... Digits> constexpr minutes operator""_min() noexcept {
+template <char... Digits>
+constexpr minutes operator""_min() noexcept {
     return inner::__check_overflow<minutes, Digits...>();
 }
 
@@ -757,7 +774,8 @@ constexpr duration<decimal_t> operator""_s(const decimal_t secs) noexcept { retu
  * @tparam Digits 数字字符序列
  * @return 秒持续时间
  */
-template <char... Digits> constexpr seconds operator""_s() noexcept {
+template <char... Digits>
+constexpr seconds operator""_s() noexcept {
     return inner::__check_overflow<seconds, Digits...>();
 }
 
@@ -775,7 +793,8 @@ constexpr duration<decimal_t, milli> operator""_ms(const decimal_t msecs) noexce
  * @tparam Digits 数字字符序列
  * @return 毫秒持续时间
  */
-template <char... Digits> constexpr milliseconds operator""_ms() noexcept {
+template <char... Digits>
+constexpr milliseconds operator""_ms() noexcept {
     return inner::__check_overflow<milliseconds, Digits...>();
 }
 
@@ -793,7 +812,8 @@ constexpr duration<decimal_t, micro> operator""_us(const decimal_t usecs) noexce
  * @tparam Digits 数字字符序列
  * @return 微秒持续时间
  */
-template <char... Digits> constexpr microseconds operator""_us() noexcept {
+template <char... Digits>
+constexpr microseconds operator""_us() noexcept {
     return inner::__check_overflow<microseconds, Digits...>();
 }
 
@@ -811,7 +831,8 @@ constexpr duration<decimal_t, nano> operator""_ns(const decimal_t nsecs) noexcep
  * @tparam Digits 数字字符序列
  * @return 纳秒持续时间
  */
-template <char... Digits> constexpr nanoseconds operator""_ns() noexcept {
+template <char... Digits>
+constexpr nanoseconds operator""_ns() noexcept {
     return inner::__check_overflow<nanoseconds, Digits...>();
 }
 
@@ -841,7 +862,8 @@ NEFORCE_BEGIN_THIS_THREAD__
  * @tparam Period 时间单位比例
  * @param time 要睡眠的时间
  */
-template <typename Rep, typename Period> void sleep_for(const duration<Rep, Period> time) {
+template <typename Rep, typename Period>
+void sleep_for(const duration<Rep, Period> time) {
     if (time <= time.zero()) {
         return;
     }

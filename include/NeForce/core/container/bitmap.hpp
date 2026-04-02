@@ -170,7 +170,8 @@ public:
  *
  * 提供对位图元素的随机访问迭代器支持。
  */
-template <bool IsConst, typename BitMap> struct bitmap_iterator : iiterator<bitmap_iterator<IsConst, BitMap>> {
+template <bool IsConst, typename BitMap>
+struct bitmap_iterator : iiterator<bitmap_iterator<IsConst, BitMap>> {
 public:
     using container_type = BitMap;                                    ///< 容器类型
     using value_type = typename container_type::value_type;           ///< 值类型
@@ -188,7 +189,8 @@ private:
     const container_type* container_ = nullptr; ///< 关联容器指针
 
     friend class bitmap;
-    template <bool, typename> friend struct bitmap_iterator;
+    template <bool, typename>
+    friend struct bitmap_iterator;
 
 private:
     template <typename Ref>
@@ -614,7 +616,8 @@ private:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> enable_if_t<is_ranges_fwd_iter_v<Iterator>> range_init(Iterator first, Iterator last) {
+    template <typename Iterator>
+    enable_if_t<is_ranges_fwd_iter_v<Iterator>> range_init(Iterator first, Iterator last) {
         if (first == last) {
             return;
         }
@@ -995,7 +998,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> NEFORCE_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
+    template <typename Iterator>
+    NEFORCE_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
         bitmap::insert_range(position, first, last);
     }
 

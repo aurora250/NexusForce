@@ -145,11 +145,13 @@ struct character : icharacter<character, char> {
     }
 };
 
-template <> struct package<char> {
+template <>
+struct package<char> {
     using type = character;
 };
 
-template <> struct unpackage<character> {
+template <>
+struct unpackage<character> {
     using type = char;
 };
 
@@ -289,11 +291,13 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
     }
 };
 
-template <> struct package<wchar_t> {
+template <>
+struct package<wchar_t> {
     using type = wcharacter;
 };
 
-template <> struct unpackage<wcharacter> {
+template <>
+struct unpackage<wcharacter> {
     using type = wchar_t;
 };
 
@@ -424,11 +428,13 @@ struct u8character : icharacter<u8character, char8_t> {
     }
 };
 
-template <> struct package<char8_t> {
+template <>
+struct package<char8_t> {
     using type = u8character;
 };
 
-template <> struct unpackage<u8character> {
+template <>
+struct unpackage<u8character> {
     using type = char8_t;
 };
 
@@ -605,11 +611,13 @@ public:
     }
 };
 
-template <> struct package<char16_t> {
+template <>
+struct package<char16_t> {
     using type = u16character;
 };
 
-template <> struct unpackage<u16character> {
+template <>
+struct unpackage<u16character> {
     using type = char16_t;
 };
 
@@ -720,11 +728,13 @@ struct u32character : icharacter<u32character, char32_t> {
     }
 };
 
-template <> struct package<char32_t> {
+template <>
+struct package<char32_t> {
     using type = u32character;
 };
 
-template <> struct unpackage<u32character> {
+template <>
+struct unpackage<u32character> {
     using type = char32_t;
 };
 

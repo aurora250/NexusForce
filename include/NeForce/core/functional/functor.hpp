@@ -31,7 +31,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 提供标准的一元函数类型定义，用于旧式函数适配器。
  */
-template <typename Arg, typename Result> struct unary_function {
+template <typename Arg, typename Result>
+struct unary_function {
     using argument_type = Arg;  ///< 参数类型
     using result_type = Result; ///< 返回值类型
 };
@@ -45,7 +46,8 @@ template <typename Arg, typename Result> struct unary_function {
  *
  * 提供标准的二元函数类型定义，用于旧式函数适配器。
  */
-template <typename Arg1, typename Arg2, typename Result> struct binary_function {
+template <typename Arg1, typename Arg2, typename Result>
+struct binary_function {
     using first_argument_type = Arg1;  ///< 第一个参数类型
     using second_argument_type = Arg2; ///< 第二个参数类型
     using result_type = Result;        ///< 返回值类型
@@ -68,7 +70,8 @@ template <typename Arg1, typename Arg2, typename Result> struct binary_function 
  *
  * @note void特化支持透明操作，可以接受不同类型的参数。
  */
-template <typename T = void> struct plus {
+template <typename T = void>
+struct plus {
     NEFORCE_NODISCARD constexpr T operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<T>(x + y))) {
         return x + y;
@@ -78,7 +81,8 @@ template <typename T = void> struct plus {
 /**
  * @brief plus的void特化，支持透明操作
  */
-template <> struct plus<void> {
+template <>
+struct plus<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -97,7 +101,8 @@ template <> struct plus<void> {
  *
  * 执行减法运算：x - y。
  */
-template <typename T = void> struct minus {
+template <typename T = void>
+struct minus {
     NEFORCE_NODISCARD constexpr T operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<T>(x - y))) {
         return x - y;
@@ -107,7 +112,8 @@ template <typename T = void> struct minus {
 /**
  * @brief minus的void特化，支持透明操作
  */
-template <> struct minus<void> {
+template <>
+struct minus<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -125,7 +131,8 @@ template <> struct minus<void> {
  *
  * 执行乘法运算：x * y。
  */
-template <typename T = void> struct multiplies {
+template <typename T = void>
+struct multiplies {
     NEFORCE_NODISCARD constexpr T operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<T>(x * y))) {
         return x * y;
@@ -135,7 +142,8 @@ template <typename T = void> struct multiplies {
 /**
  * @brief multiplies的void特化，支持透明操作
  */
-template <> struct multiplies<void> {
+template <>
+struct multiplies<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -153,7 +161,8 @@ template <> struct multiplies<void> {
  *
  * 执行除法运算：x / y。
  */
-template <typename T = void> struct divides {
+template <typename T = void>
+struct divides {
     NEFORCE_NODISCARD constexpr T operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<T>(x / y))) {
         return x / y;
@@ -163,7 +172,8 @@ template <typename T = void> struct divides {
 /**
  * @brief divides的void特化，支持透明操作
  */
-template <> struct divides<void> {
+template <>
+struct divides<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -181,7 +191,8 @@ template <> struct divides<void> {
  *
  * 执行取模运算：x % y。
  */
-template <typename T = void> struct modulus {
+template <typename T = void>
+struct modulus {
     NEFORCE_NODISCARD constexpr T operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<T>(x % y))) {
         return x % y;
@@ -191,7 +202,8 @@ template <typename T = void> struct modulus {
 /**
  * @brief modulus的void特化，支持透明操作
  */
-template <> struct modulus<void> {
+template <>
+struct modulus<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -209,7 +221,8 @@ template <> struct modulus<void> {
  *
  * 执行取负运算：-x。
  */
-template <typename T = void> struct negate {
+template <typename T = void>
+struct negate {
     NEFORCE_NODISCARD constexpr T operator()(const T& x) const noexcept(noexcept(_NEFORCE declcopy<T>(-x))) {
         return -x;
     }
@@ -218,7 +231,8 @@ template <typename T = void> struct negate {
 /**
  * @brief negate的void特化，支持透明操作
  */
-template <> struct negate<void> {
+template <>
+struct negate<void> {
     using is_transparent = void;
 
     template <typename T1>
@@ -243,7 +257,8 @@ template <> struct negate<void> {
  *
  * 执行相等比较：x == y。
  */
-template <typename T = void> struct equal_to {
+template <typename T = void>
+struct equal_to {
     NEFORCE_NODISCARD constexpr bool operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<bool>(x == y))) {
         return x == y;
@@ -253,7 +268,8 @@ template <typename T = void> struct equal_to {
 /**
  * @brief equal_to的void特化，支持透明操作
  */
-template <> struct equal_to<void> {
+template <>
+struct equal_to<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -271,7 +287,8 @@ template <> struct equal_to<void> {
  *
  * 执行不等比较：x != y。
  */
-template <typename T = void> struct not_equal_to {
+template <typename T = void>
+struct not_equal_to {
     NEFORCE_NODISCARD constexpr bool operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<bool>(x != y))) {
         return x != y;
@@ -281,7 +298,8 @@ template <typename T = void> struct not_equal_to {
 /**
  * @brief not_equal_to的void特化，支持透明操作
  */
-template <> struct not_equal_to<void> {
+template <>
+struct not_equal_to<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -299,7 +317,8 @@ template <> struct not_equal_to<void> {
  *
  * 执行大于比较：x > y。
  */
-template <typename T = void> struct greater {
+template <typename T = void>
+struct greater {
     NEFORCE_NODISCARD constexpr bool operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<bool>(x > y))) {
         return x > y;
@@ -309,7 +328,8 @@ template <typename T = void> struct greater {
 /**
  * @brief greater的void特化，支持透明操作
  */
-template <> struct greater<void> {
+template <>
+struct greater<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -327,7 +347,8 @@ template <> struct greater<void> {
  *
  * 执行小于比较：x < y。
  */
-template <typename T = void> struct less {
+template <typename T = void>
+struct less {
     NEFORCE_NODISCARD constexpr bool operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<bool>(x < y))) {
         return x < y;
@@ -337,7 +358,8 @@ template <typename T = void> struct less {
 /**
  * @brief less的void特化，支持透明操作
  */
-template <> struct less<void> {
+template <>
+struct less<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -355,7 +377,8 @@ template <> struct less<void> {
  *
  * 执行大于等于比较：x >= y。
  */
-template <typename T = void> struct greater_equal {
+template <typename T = void>
+struct greater_equal {
     NEFORCE_NODISCARD constexpr bool operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<bool>(x >= y))) {
         return x >= y;
@@ -365,7 +388,8 @@ template <typename T = void> struct greater_equal {
 /**
  * @brief greater_equal的void特化，支持透明操作
  */
-template <> struct greater_equal<void> {
+template <>
+struct greater_equal<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -383,7 +407,8 @@ template <> struct greater_equal<void> {
  *
  * 执行小于等于比较：x <= y。
  */
-template <typename T = void> struct less_equal {
+template <typename T = void>
+struct less_equal {
     NEFORCE_NODISCARD constexpr bool operator()(const T& x, const T& y) const
             noexcept(noexcept(_NEFORCE declcopy<bool>(x <= y))) {
         return x <= y;
@@ -393,7 +418,8 @@ template <typename T = void> struct less_equal {
 /**
  * @brief less_equal的void特化，支持透明操作
  */
-template <> struct less_equal<void> {
+template <>
+struct less_equal<void> {
     using is_transparent = void;
 
     template <typename T1, typename T2>
@@ -419,8 +445,10 @@ template <> struct less_equal<void> {
  *
  * 返回输入参数本身。
  */
-template <typename T> struct identity {
-    template <typename U = T> NEFORCE_NODISCARD constexpr U&& operator()(U&& x) const noexcept {
+template <typename T>
+struct identity {
+    template <typename U = T>
+    NEFORCE_NODISCARD constexpr U&& operator()(U&& x) const noexcept {
         return _NEFORCE forward<U>(x);
     }
 };
@@ -433,7 +461,8 @@ template <typename T> struct identity {
  *
  * 从pair对象中选择并返回第一个元素。
  */
-template <typename Pair> struct select1st {
+template <typename Pair>
+struct select1st {
 #ifdef NEFORCE_STANDARD_20
     static_assert(is_pair_v<Pair>, "select1st requires pair type.");
 #endif // NEFORCE_STANDARD_20
@@ -450,7 +479,8 @@ template <typename Pair> struct select1st {
  *
  * 从pair对象中选择并返回第二个元素。
  */
-template <typename Pair> struct select2nd {
+template <typename Pair>
+struct select2nd {
 #ifdef NEFORCE_STANDARD_20
     static_assert(is_pair_v<Pair>, "select2nd requires pair type.");
 #endif // NEFORCE_STANDARD_20

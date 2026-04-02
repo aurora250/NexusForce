@@ -298,7 +298,8 @@ struct task_info {
  *
  * 包含任务的future和任务信息，用于跟踪任务执行状态。
  */
-template <typename T> struct submit_result {
+template <typename T>
+struct submit_result {
     _NEFORCE future<T> future;                ///< 任务的future
     shared_ptr<_NEFORCE task_info> task_info; ///< 任务信息
 
@@ -608,7 +609,8 @@ public:
      * @param futures 要等待的future
      * @return 包含所有结果的元组
      */
-    template <typename... Types> static tuple<future_result_t<Types>...> wait(future<Types>&&... futures) {
+    template <typename... Types>
+    static tuple<future_result_t<Types>...> wait(future<Types>&&... futures) {
         return _NEFORCE make_tuple(_NEFORCE get(futures)...);
     }
 };

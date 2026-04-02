@@ -23,23 +23,33 @@ struct unexpect_t {
 NEFORCE_INLINE17 constexpr unexpect_t unexpect{};
 
 
-template <typename T, typename ErrorT, typename = void> class expected;
+template <typename T, typename ErrorT, typename = void>
+class expected;
 
-template <typename ErrorT> class unexpected;
+template <typename ErrorT>
+class unexpected;
 
 
-template <typename T> NEFORCE_INLINE17 constexpr bool is_expected = false;
-template <typename T, typename ErrorT> NEFORCE_INLINE17 constexpr bool is_expected<expected<T, ErrorT>> = true;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_expected = false;
+template <typename T, typename ErrorT>
+NEFORCE_INLINE17 constexpr bool is_expected<expected<T, ErrorT>> = true;
 
-template <typename T> NEFORCE_INLINE17 constexpr bool is_unexpected = false;
-template <typename T> NEFORCE_INLINE17 constexpr bool is_unexpected<unexpected<T>> = true;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_unexpected = false;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_unexpected<unexpected<T>> = true;
 
 
 NEFORCE_BEGIN_INNER__
-template <typename Func, typename T> using expected_invoke_result = remove_cvref_t<invoke_result_t<Func&&, T&&>>;
-template <typename Func, typename T> using expected_transform_result = remove_cv_t<invoke_result_t<Func&&, T&&>>;
-template <typename Func> using expected_invoke_narg_result = remove_cvref_t<invoke_result_t<Func&&>>;
-template <typename Func> using expected_transform_narg_result = remove_cv_t<invoke_result_t<Func&&>>;
+template <typename Func, typename T>
+using expected_invoke_result = remove_cvref_t<invoke_result_t<Func&&, T&&>>;
+template <typename Func, typename T>
+using expected_transform_result = remove_cv_t<invoke_result_t<Func&&, T&&>>;
+template <typename Func>
+using expected_invoke_narg_result = remove_cvref_t<invoke_result_t<Func&&>>;
+template <typename Func>
+using expected_transform_narg_result = remove_cv_t<invoke_result_t<Func&&>>;
 
 template <typename ErrorT>
 NEFORCE_INLINE17 constexpr bool can_be_unexpected =
@@ -48,7 +58,8 @@ NEFORCE_INLINE17 constexpr bool can_be_unexpected =
 NEFORCE_END_INNER__
 
 
-template <typename ErrorT> class unexpected {
+template <typename ErrorT>
+class unexpected {
     static_assert(inner::can_be_unexpected<ErrorT>, "ErrorT should be non-array, unexpected, const or volatile type");
 
 private:
@@ -97,12 +108,14 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename ErrorT> unexpected(ErrorT) -> unexpected<ErrorT>;
+template <typename ErrorT>
+unexpected(ErrorT) -> unexpected<ErrorT>;
 #endif
 
 
-template <typename T> struct temporary_guard {
-    static_assert(is_nothrow_move_constructible_v<T>);
+template <typename T>
+struct temporary_guard {
+    static_assert(is_nothrow_move_constructible_v<T>, "T must be nothrow move constructible");
 
 private:
     T* guarded_ptr;
@@ -157,13 +170,14 @@ reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructi
 }
 
 
-template <typename T, typename ErrorT, typename Dummy> class expected {
-    static_assert(!is_reference_v<T>);
-    static_assert(!is_function_v<T>);
-    static_assert(!is_same_v<remove_cv_t<T>, inplace_construct_tag>);
-    static_assert(!is_same_v<remove_cv_t<T>, unexpect_t>);
-    static_assert(!is_unexpected<remove_cv_t<T>>);
-    static_assert(inner::can_be_unexpected<ErrorT>);
+template <typename T, typename ErrorT, typename Dummy>
+class expected {
+    static_assert(!is_reference_v<T>, "T must not be reference type");
+    static_assert(!is_function_v<T>, "T must not be function type");
+    static_assert(!is_same_v<remove_cv_t<T>, inplace_construct_tag>, "T must not be same with inplace_construct_tag");
+    static_assert(!is_same_v<remove_cv_t<T>, unexpect_t>, "T must not be same with unexpected_t");
+    static_assert(!is_unexpected<remove_cv_t<T>>, "T must not be unexpected");
+    static_assert(inner::can_be_unexpected<ErrorT>, "ErrorT must be unexpected");
 
     template <typename U, typename Err, typename UE = unexpected<ErrorT>>
     using constructible_from_expected =
@@ -178,16 +192,19 @@ template <typename T, typename ErrorT, typename Dummy> class expected {
     static constexpr bool explicit_conversion =
             disjunction_v<negation<is_convertible<U, T>>, negation<is_convertible<Err, ErrorT>>>;
 
-    template <typename U> static constexpr bool same_value = is_same_v<typename U::value_type, T>;
+    template <typename U>
+    static constexpr bool same_value = is_same_v<typename U::value_type, T>;
 
-    template <typename U> static constexpr bool same_error = is_same_v<typename U::error_type, ErrorT>;
+    template <typename U>
+    static constexpr bool same_error = is_same_v<typename U::error_type, ErrorT>;
 
 public:
     using value_type = T;
     using error_type = ErrorT;
     using unexpected_type = unexpected<ErrorT>;
 
-    template <typename U> using rebind = expected<U, error_type>;
+    template <typename U>
+    using rebind = expected<U, error_type>;
 
 private:
     union {
@@ -197,10 +214,12 @@ private:
 
     bool has_value_{false};
 
-    template <typename, typename, typename> friend class expected;
+    template <typename, typename, typename>
+    friend class expected;
 
 private:
-    template <typename U> constexpr void assign_value(U&& val) {
+    template <typename U>
+    constexpr void assign_value(U&& val) {
         if (has_value_) {
             value_ = _NEFORCE forward<U>(val);
         } else {
@@ -209,7 +228,8 @@ private:
         }
     }
 
-    template <typename U> constexpr void assign_error(U&& err) {
+    template <typename U>
+    constexpr void assign_error(U&& err) {
         if (has_value_) {
             _NEFORCE reinitialize(_NEFORCE addressof(error_), _NEFORCE addressof(value_), _NEFORCE forward<U>(err));
             has_value_ = false;
@@ -573,8 +593,8 @@ public:
     template <typename U>
     constexpr T
     value_or(U&& alt) const& noexcept(conjunction_v<is_nothrow_copy_constructible<T>, is_nothrow_convertible<U, T>>) {
-        static_assert(is_copy_constructible_v<T>);
-        static_assert(is_convertible_v<U, T>);
+        static_assert(is_copy_constructible_v<T>, "T must be copy constructible");
+        static_assert(is_convertible_v<U, T>, "U must be convertible to T");
 
         if (has_value_) {
             return value_;
@@ -585,8 +605,8 @@ public:
     template <typename U>
     constexpr T
     value_or(U&& alt) && noexcept(conjunction_v<is_nothrow_move_constructible<T>, is_nothrow_convertible<U, T>>) {
-        static_assert(is_move_constructible_v<T>);
-        static_assert(is_convertible_v<U, T>);
+        static_assert(is_move_constructible_v<T>, "T must be move constructible");
+        static_assert(is_convertible_v<U, T>, "U must be convertible to T");
 
         if (has_value_) {
             return _NEFORCE move(value_);
@@ -594,9 +614,10 @@ public:
         return static_cast<T>(_NEFORCE forward<U>(alt));
     }
 
-    template <typename Gr = ErrorT> constexpr ErrorT error_or(Gr&& alt) const& {
-        static_assert(is_copy_constructible_v<ErrorT>);
-        static_assert(is_convertible_v<Gr, ErrorT>);
+    template <typename Gr = ErrorT>
+    constexpr ErrorT error_or(Gr&& alt) const& {
+        static_assert(is_copy_constructible_v<ErrorT>, "ErrorT must be copy constructible");
+        static_assert(is_convertible_v<Gr, ErrorT>, "Gr must be convertible to ErrorT");
 
         if (has_value_) {
             return _NEFORCE forward<Gr>(alt);
@@ -604,9 +625,10 @@ public:
         return error_;
     }
 
-    template <typename Gr = ErrorT> constexpr ErrorT error_or(Gr&& alt) && {
-        static_assert(is_move_constructible_v<ErrorT>);
-        static_assert(is_convertible_v<Gr, ErrorT>);
+    template <typename Gr = ErrorT>
+    constexpr ErrorT error_or(Gr&& alt) && {
+        static_assert(is_move_constructible_v<ErrorT>, "ErrorT must be move constructible");
+        static_assert(is_convertible_v<Gr, ErrorT>, "Gr must be convertible to ErrorT");
 
         if (has_value_) {
             return _NEFORCE forward<Gr>(alt);
@@ -666,7 +688,8 @@ public:
         }
     }
 
-    template <typename Func, enable_if_t<is_constructible_v<T, T&>, int> = 0> constexpr auto or_else(Func&& func) & {
+    template <typename Func, enable_if_t<is_constructible_v<T, T&>, int> = 0>
+    constexpr auto or_else(Func&& func) & {
         using Res = inner::expected_invoke_result<Func, ErrorT&>;
         static_assert(is_expected<Res>, "Func must return an expected type");
         static_assert(is_same_v<typename Res::value_type, T>, "Func must return an expected with same value type");
@@ -691,7 +714,8 @@ public:
         }
     }
 
-    template <typename Func, enable_if_t<is_constructible_v<T, T>, int> = 0> constexpr auto or_else(Func&& func) && {
+    template <typename Func, enable_if_t<is_constructible_v<T, T>, int> = 0>
+    constexpr auto or_else(Func&& func) && {
         using Res = inner::expected_invoke_result<Func, ErrorT&&>;
         static_assert(is_expected<Res>, "Func must return an expected type");
         static_assert(is_same_v<typename Res::value_type, T>, "Func must return an expected with same value type");
@@ -825,34 +849,43 @@ public:
         }
     }
 
-    template <typename U> constexpr bool operator==(const U& value) { return has_value() && this == value; }
+    template <typename U>
+    constexpr bool operator==(const U& value) {
+        return has_value() && this == value;
+    }
 
-    template <typename Err2> constexpr bool operator==(const unexpected<Err2>& unex) {
+    template <typename Err2>
+    constexpr bool operator==(const unexpected<Err2>& unex) {
         return !has_value() && error() == unex.error();
     }
 };
 
 
-template <typename T, typename ErrorT> class expected<T, ErrorT, enable_if_t<is_void_v<T>>> {
-    static_assert(inner::can_be_unexpected<ErrorT>);
+template <typename T, typename ErrorT>
+class expected<T, ErrorT, enable_if_t<is_void_v<T>>> {
+    static_assert(inner::can_be_unexpected<ErrorT>, "ErrorT must be unexpected");
 
     template <typename U, typename Err, typename UE = unexpected<ErrorT>>
     static constexpr bool constructible_from_expected =
             disjunction_v<is_constructible<UE, expected<U, Err>&>, is_constructible<UE, expected<U, Err>>,
                           is_constructible<UE, const expected<U, Err>&>, is_constructible<UE, const expected<U, Err>>>;
 
-    template <typename U> static constexpr bool same_value = is_same_v<typename U::value_type, T>;
+    template <typename U>
+    static constexpr bool same_value = is_same_v<typename U::value_type, T>;
 
-    template <typename U> static constexpr bool same_error = is_same_v<typename U::error_type, ErrorT>;
+    template <typename U>
+    static constexpr bool same_error = is_same_v<typename U::error_type, ErrorT>;
 
-    template <typename, typename, typename> friend class expected;
+    template <typename, typename, typename>
+    friend class expected;
 
 public:
     using value_type = T;
     using error_type = ErrorT;
     using unexpected_type = unexpected<ErrorT>;
 
-    template <typename U> using rebind = expected<U, error_type>;
+    template <typename U>
+    using rebind = expected<U, error_type>;
 
 private:
     union {
@@ -863,7 +896,8 @@ private:
 
     bool has_value_;
 
-    template <typename U> constexpr void assign_error(U&& err) {
+    template <typename U>
+    constexpr void assign_error(U&& err) {
         if (has_value_) {
             _NEFORCE construct(_NEFORCE addressof(error_), _NEFORCE forward<U>(err));
             has_value_ = false;
@@ -1068,17 +1102,15 @@ public:
 
     constexpr void value() const& {
         if (has_value_) {
-            NEFORCE_LIKELY
+            return;
         }
-        return;
         NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr void value() && {
         if (has_value_) {
-            NEFORCE_LIKELY
+            return;
         }
-        return;
         NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
@@ -1102,9 +1134,10 @@ public:
         return _NEFORCE move(error_);
     }
 
-    template <typename Gr = ErrorT> constexpr ErrorT error_or(Gr&& alt) const& {
-        static_assert(is_copy_constructible_v<ErrorT>);
-        static_assert(is_convertible_v<Gr, ErrorT>);
+    template <typename Gr = ErrorT>
+    constexpr ErrorT error_or(Gr&& alt) const& {
+        static_assert(is_copy_constructible_v<ErrorT>, "ErrorT must be copy constructible");
+        static_assert(is_convertible_v<Gr, ErrorT>, "Gr must be convertible to ErrorT");
 
         if (has_value_) {
             return _NEFORCE forward<Gr>(alt);
@@ -1112,9 +1145,10 @@ public:
         return error_;
     }
 
-    template <typename Gr = ErrorT> constexpr ErrorT error_or(Gr&& alt) && {
-        static_assert(is_move_constructible_v<ErrorT>);
-        static_assert(is_convertible_v<Gr, ErrorT>);
+    template <typename Gr = ErrorT>
+    constexpr ErrorT error_or(Gr&& alt) && {
+        static_assert(is_move_constructible_v<ErrorT>, "ErrorT must be move constructible");
+        static_assert(is_convertible_v<Gr, ErrorT>, "Gr must be convertible to ErrorT");
 
         if (has_value_) {
             return _NEFORCE forward<Gr>(alt);
@@ -1125,8 +1159,8 @@ public:
     template <typename Func, enable_if_t<is_constructible_v<ErrorT, ErrorT&>, int> = 0>
     constexpr auto and_then(Func&& func) & {
         using Res = inner::expected_invoke_narg_result<Func>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::error_type, ErrorT>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return _NEFORCE invoke(_NEFORCE forward<Func>(func));
@@ -1138,8 +1172,8 @@ public:
     template <typename Func, enable_if_t<is_constructible_v<ErrorT, const ErrorT&>, int> = 0>
     constexpr auto and_then(Func&& func) const& {
         using Res = inner::expected_invoke_narg_result<Func>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::error_type, ErrorT>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return _NEFORCE invoke(_NEFORCE forward<Func>(func));
@@ -1151,8 +1185,8 @@ public:
     template <typename Func, enable_if_t<is_constructible_v<ErrorT, ErrorT>, int> = 0>
     constexpr auto and_then(Func&& func) && {
         using Res = inner::expected_invoke_narg_result<Func>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::error_type, ErrorT>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return _NEFORCE invoke(_NEFORCE forward<Func>(func));
@@ -1164,8 +1198,8 @@ public:
     template <typename Func, enable_if_t<is_constructible_v<ErrorT, const ErrorT>, int> = 0>
     constexpr auto and_then(Func&& func) const&& {
         using Res = inner::expected_invoke_narg_result<Func>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::error_type, ErrorT>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return _NEFORCE invoke(_NEFORCE forward<Func>(func));
@@ -1174,10 +1208,11 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto or_else(Func&& func) & {
+    template <typename Func>
+    constexpr auto or_else(Func&& func) & {
         using Res = inner::expected_invoke_result<Func, ErrorT&>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::value_type, T>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return Res();
@@ -1186,10 +1221,11 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto or_else(Func&& func) const& {
+    template <typename Func>
+    constexpr auto or_else(Func&& func) const& {
         using Res = inner::expected_invoke_result<Func, const ErrorT&>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::value_type, T>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return Res();
@@ -1198,10 +1234,11 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto or_else(Func&& func) && {
+    template <typename Func>
+    constexpr auto or_else(Func&& func) && {
         using Res = inner::expected_invoke_result<Func, ErrorT&&>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::value_type, T>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return Res();
@@ -1210,10 +1247,11 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto or_else(Func&& func) const&& {
+    template <typename Func>
+    constexpr auto or_else(Func&& func) const&& {
         using Res = inner::expected_invoke_result<Func, const ErrorT&&>;
-        static_assert(is_expected<Res>);
-        static_assert(is_same_v<typename Res::value_type, T>);
+        static_assert(is_expected<Res>, "Res must be expected");
+        static_assert(is_same_v<typename Res::value_type, T>, "Res value_type must be same with T");
 
         if (has_value()) {
             return Res();
@@ -1270,7 +1308,8 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto transform_error(Func&& func) & {
+    template <typename Func>
+    constexpr auto transform_error(Func&& func) & {
         using Gr = inner::expected_transform_result<Func, ErrorT&>;
         using Res = expected<T, Gr>;
 
@@ -1281,7 +1320,8 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto transform_error(Func&& func) const& {
+    template <typename Func>
+    constexpr auto transform_error(Func&& func) const& {
         using Gr = inner::expected_transform_result<Func, const ErrorT&>;
         using Res = expected<T, Gr>;
 
@@ -1292,7 +1332,8 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto transform_error(Func&& func) && {
+    template <typename Func>
+    constexpr auto transform_error(Func&& func) && {
         using Gr = inner::expected_transform_result<Func, ErrorT&&>;
         using Res = expected<T, Gr>;
 
@@ -1304,7 +1345,8 @@ public:
         }
     }
 
-    template <typename Func> constexpr auto transform_error(Func&& func) const&& {
+    template <typename Func>
+    constexpr auto transform_error(Func&& func) const&& {
         using Gr = inner::expected_transform_result<Func, const ErrorT&&>;
         using Res = expected<T, Gr>;
 
@@ -1325,7 +1367,8 @@ public:
         }
     }
 
-    template <typename Err2> constexpr bool operator==(const unexpected<Err2>& unex) {
+    template <typename Err2>
+    constexpr bool operator==(const unexpected<Err2>& unex) {
         return !has_value() && error() == unex.error();
     }
 };

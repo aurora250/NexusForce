@@ -27,7 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 基于FUTEX实现的用户态互斥锁，
  * 提供高效的线程同步机制，减少不必要的上下文切换。
  */
-template <uint32_t WaiterBit = 0x80000000> class atomic_futex {
+template <uint32_t WaiterBit = 0x80000000>
+class atomic_futex {
     atomic<uint32_t> data_; ///< 原子数据存储
 
     /**

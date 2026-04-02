@@ -27,7 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 结果类型不能是数组、函数，必须是可析构类型
  */
-template <typename Res> class promise {
+template <typename Res>
+class promise {
     static_assert(!is_array_v<Res>, "result type must not be an array");
     static_assert(!is_function_v<Res>, "result type must not be a function");
     static_assert(is_destructible_v<Res>, "result type must be destructible");
@@ -41,7 +42,8 @@ private:
     shared_ptr<state_type> future_ptr; ///< 共享状态指针
     ptr_type storage;                  ///< 结果存储
 
-    template <typename T, typename U> friend struct inner::__future_base::state_base::setter;
+    template <typename T, typename U>
+    friend struct inner::__future_base::state_base::setter;
 
     /**
      * @brief 获取内部状态引用
@@ -149,7 +151,8 @@ public:
  * @brief 引用类型的promise特化
  * @tparam Res 引用类型
  */
-template <typename Res> class promise<Res&> {
+template <typename Res>
+class promise<Res&> {
 public:
     using state_type = inner::__future_base::state_base;          ///< 状态类型
     using result_type = inner::__future_base::basic_result<Res&>; ///< 结果类型
@@ -159,7 +162,8 @@ private:
     shared_ptr<state_type> future_ptr; ///< 共享状态指针
     ptr_type storage;                  ///< 结果存储
 
-    template <typename T, typename U> friend struct inner::__future_base::state_base::setter;
+    template <typename T, typename U>
+    friend struct inner::__future_base::state_base::setter;
 
     NEFORCE_NODISCARD state_type& state() const {
         inner::__future_base::state_base::check(future_ptr);
@@ -251,7 +255,8 @@ public:
 /**
  * @brief void类型的promise特化
  */
-template <> class promise<void> {
+template <>
+class promise<void> {
 public:
     using state_type = inner::__future_base::state_base;          ///< 状态类型
     using result_type = inner::__future_base::basic_result<void>; ///< 结果类型
@@ -261,7 +266,8 @@ private:
     shared_ptr<state_type> future_ptr; ///< 共享状态指针
     ptr_type storage;                  ///< 结果存储
 
-    template <typename T, typename U> friend struct inner::__future_base::state_base::setter;
+    template <typename T, typename U>
+    friend struct inner::__future_base::state_base::setter;
 
     NEFORCE_NODISCARD state_type& state() const {
         inner::__future_base::state_base::check(future_ptr);
@@ -356,7 +362,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 用于执行任务并捕获异常，将结果设置到promise中。
  */
-template <typename PtrT, typename Func, typename> struct __future_base::task_setter {
+template <typename PtrT, typename Func, typename>
+struct __future_base::task_setter {
     PtrT* result_ptr;   ///< 结果指针
     Func* function_ptr; ///< 可调用对象指针
 
@@ -380,7 +387,8 @@ template <typename PtrT, typename Func, typename> struct __future_base::task_set
  * @tparam PtrT 结果指针类型
  * @tparam Func 可调用类型
  */
-template <typename PtrT, typename Func> struct __future_base::task_setter<PtrT, Func, void> {
+template <typename PtrT, typename Func>
+struct __future_base::task_setter<PtrT, Func, void> {
     PtrT* result_ptr;   ///< 结果指针
     Func* function_ptr; ///< 可调用对象指针
 

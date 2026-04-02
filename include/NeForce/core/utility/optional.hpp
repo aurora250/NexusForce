@@ -45,14 +45,18 @@ struct optional_exception final : memory_exception {
  * @{
  */
 
-template <typename T> class optional;
+template <typename T>
+class optional;
 
 
-template <typename T> struct is_optional : false_type {};
+template <typename T>
+struct is_optional : false_type {};
 
-template <typename T> struct is_optional<optional<T>> : true_type {};
+template <typename T>
+struct is_optional<optional<T>> : true_type {};
 
-template <typename T> NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
+template <typename T>
+NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
 
 
 /**
@@ -62,7 +66,8 @@ template <typename T> NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::valu
  *
  * 表示一个可能包含值也可能为空的对象。类似于指针，但拥有值语义。
  */
-template <typename T> class optional : icommon<optional<T>> {
+template <typename T>
+class optional : icommon<optional<T>> {
     static_assert(!is_any_of_v<remove_cv_t<T>, none_t, inplace_construct_tag>,
                   "optional do not contains none_t and inplace_construct_tag types.");
     static_assert(is_object_v<T> && !is_array_v<T>, "optional only contains non-array object types.");
@@ -591,7 +596,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) const& {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) const& {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -604,7 +610,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) & {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) & {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -617,7 +624,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) const&& {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) const&& {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*get_ptr()));
         }
@@ -630,7 +638,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) && {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) && {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*get_ptr()));
         }
@@ -643,7 +652,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回新的optional，或返回none的optional
      */
-    template <typename F> constexpr auto transform(F&& f) const& -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
+    template <typename F>
+    constexpr auto transform(F&& f) const& -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -656,7 +666,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回新的optional，或返回none的optional
      */
-    template <typename F> constexpr auto transform(F&& f) & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
+    template <typename F>
+    constexpr auto transform(F&& f) & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -807,7 +818,8 @@ public:
  * @note
  * 对存储引用的optional的任何赋值行为都被定义为更新引用位置，而非更新引用的地址的值，这是optional<T&>两种设计方式中的一种
  */
-template <typename T> class optional<T&> : icommon<optional<T&>> {
+template <typename T>
+class optional<T&> : icommon<optional<T&>> {
     static_assert(is_object_v<T> && !is_array_v<T>, "optional<T&> requires T to be an object type.");
 
 public:
@@ -953,7 +965,8 @@ public:
         return *this;
     }
 
-    template <typename... Types> constexpr optional(inplace_construct_tag, Types&&...) = delete;
+    template <typename... Types>
+    constexpr optional(inplace_construct_tag, Types&&...) = delete;
 
     /**
      * @brief 析构函数
@@ -1053,7 +1066,8 @@ public:
      * @param value 引用不存在时返回的值
      * @return 引用存在时返回其值的拷贝，不存在时返回参数value
      */
-    template <typename U> constexpr T value_or(U&& value) const& {
+    template <typename U>
+    constexpr T value_or(U&& value) const& {
         if (ptr_) {
             return *ptr_;
         }
@@ -1065,7 +1079,8 @@ public:
      * @param value 引用不存在时返回的值
      * @return 引用存在时返回其值的移动，不存在时返回参数value
      */
-    template <typename U> constexpr T value_or(U&& value) && {
+    template <typename U>
+    constexpr T value_or(U&& value) && {
         if (ptr_) {
             return _NEFORCE move(*ptr_);
         }
@@ -1078,7 +1093,8 @@ public:
      * @param f 函数对象
      * @return 引用存在时返回自身的拷贝，不存在时调用函数并返回结果
      */
-    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0> constexpr optional or_else(F&& f) const& {
+    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>
+    constexpr optional or_else(F&& f) const& {
         if (ptr_) {
             return *this;
         }
@@ -1091,7 +1107,8 @@ public:
      * @param f 函数对象
      * @return 引用存在时返回自身的移动，不存在时调用函数并返回结果
      */
-    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0> constexpr optional or_else(F&& f) && {
+    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>
+    constexpr optional or_else(F&& f) && {
         if (ptr_) {
             return _NEFORCE move(*this);
         }
@@ -1104,7 +1121,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) const& {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) const& {
         if (ptr_) {
             return _NEFORCE forward<F>(f)(*ptr_);
         }
@@ -1117,7 +1135,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) & {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) & {
         if (ptr_) {
             return _NEFORCE forward<F>(f)(*ptr_);
         }
@@ -1130,7 +1149,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值的移动并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) const&& {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) const&& {
         if (ptr_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
         }
@@ -1143,7 +1163,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值的移动并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F> constexpr decltype(auto) and_then(F&& f) && {
+    template <typename F>
+    constexpr decltype(auto) and_then(F&& f) && {
         if (ptr_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
         }
@@ -1170,7 +1191,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值并返回新的optional，或返回none的optional
      */
-    template <typename F> constexpr auto transform(F&& f) & -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
+    template <typename F>
+    constexpr auto transform(F&& f) & -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
         if (ptr_) {
             return _NEFORCE forward<F>(f)(*ptr_);
         }
@@ -1197,7 +1219,8 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值的移动并返回新的optional，或返回none的optional
      */
-    template <typename F> constexpr auto transform(F&& f) && -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
+    template <typename F>
+    constexpr auto transform(F&& f) && -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
         if (ptr_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
         }
@@ -1289,7 +1312,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T> optional(T) -> optional<T>;
+template <typename T>
+optional(T) -> optional<T>;
 #endif
 
 
@@ -1338,12 +1362,16 @@ make_optional(std::initializer_list<U> ilist,
  * @param value 引用值
  * @return 包装引用的可选值
  */
-template <typename T> constexpr optional<T&> make_optional(T& value) noexcept { return optional<T&>{value}; }
+template <typename T>
+constexpr optional<T&> make_optional(T& value) noexcept {
+    return optional<T&>{value};
+}
 
 /**
  * @note 禁用从右值创建引用可选值，防止悬垂引用
  */
-template <typename T> constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
+template <typename T>
+constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
 
 
 /**
@@ -1353,7 +1381,8 @@ template <typename T> constexpr optional<remove_reference_t<T>&> make_optional(T
  * @return 指定位置元素的常量左值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T> constexpr const T& get(const optional<T>& opt) {
+template <typename T>
+constexpr const T& get(const optional<T>& opt) {
     return static_cast<const T&>(static_cast<const optional<T>&>(opt).value());
 }
 
@@ -1364,7 +1393,8 @@ template <typename T> constexpr const T& get(const optional<T>& opt) {
  * @return 指定位置元素的左值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T> constexpr T& get(optional<T>& opt) {
+template <typename T>
+constexpr T& get(optional<T>& opt) {
     return static_cast<T&>(static_cast<optional<T>&>(opt).value());
 }
 
@@ -1375,7 +1405,8 @@ template <typename T> constexpr T& get(optional<T>& opt) {
  * @return 指定位置元素的常量右值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T> constexpr const T&& get(const optional<T>&& opt) {
+template <typename T>
+constexpr const T&& get(const optional<T>&& opt) {
     return static_cast<const T&&>(static_cast<const optional<T>&&>(opt).value());
 }
 
@@ -1386,7 +1417,8 @@ template <typename T> constexpr const T&& get(const optional<T>&& opt) {
  * @return 指定位置元素的右值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T> constexpr T&& get(optional<T>&& opt) {
+template <typename T>
+constexpr T&& get(optional<T>&& opt) {
     return static_cast<T&&>(static_cast<optional<T>&&>(opt).value());
 }
 

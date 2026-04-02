@@ -28,7 +28,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 哈希表节点包含数据和指向下一个节点的指针，形成链表。
  */
-template <typename T> struct hashtable_node {
+template <typename T>
+struct hashtable_node {
     hashtable_node* next = nullptr; ///< 指向下一个节点的指针
     T data;                         ///< 节点存储的数据
 
@@ -72,7 +73,8 @@ private:
     size_type bucket_ = 0;                      ///< 当前桶索引
     const container_type* container_ = nullptr; ///< 关联容器指针
 
-    template <typename, typename, typename, typename, typename, typename> friend class hashtable;
+    template <typename, typename, typename, typename, typename, typename>
+    friend class hashtable;
 
 public:
     hashtable_iterator() noexcept = default;
@@ -312,7 +314,8 @@ private:
     ExtractKey extracter_{};                                                     ///< 值提取键对象
     compressed_pair<allocator_type, float> pair_{default_construct_tag{}, 1.0f}; ///< 压缩存储分配器和最大负载因子
 
-    template <bool, typename> friend struct hashtable_iterator;
+    template <bool, typename>
+    friend struct hashtable_iterator;
 
 private:
     /**
@@ -366,7 +369,8 @@ private:
      * @param args 构造参数
      * @return 新节点指针
      */
-    template <typename... Args> link_type new_node(Args&&... args) {
+    template <typename... Args>
+    link_type new_node(Args&&... args) {
         link_type n = pair_.get_base().allocate();
         n->next = nullptr;
         try {
@@ -967,7 +971,8 @@ public:
      * @param args 构造参数
      * @return 插入结果（迭代器和是否成功）
      */
-    template <typename... Args> pair<iterator, bool> emplace_unique(Args&&... args) {
+    template <typename... Args>
+    pair<iterator, bool> emplace_unique(Args&&... args) {
         if (size_ + 1 > static_cast<size_type>(buckets_.size() * max_load_factor())) {
             rehash(size_ + 1);
         }
@@ -981,7 +986,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_equal(Args&&... args) {
+    template <typename... Args>
+    iterator emplace_equal(Args&&... args) {
         if (size_ + 1 > static_cast<size_type>(buckets_.size() * max_load_factor())) {
             rehash(size_ + 1);
         }
@@ -1023,7 +1029,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> enable_if_t<is_iter_v<Iterator>> insert_unique(Iterator first, Iterator last) {
+    template <typename Iterator>
+    enable_if_t<is_iter_v<Iterator>> insert_unique(Iterator first, Iterator last) {
         hashtable::insert_unique_aux(first, last);
         return;
     }
@@ -1042,7 +1049,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator> enable_if_t<is_iter_v<Iterator>> insert_equal(Iterator first, Iterator last) {
+    template <typename Iterator>
+    enable_if_t<is_iter_v<Iterator>> insert_equal(Iterator first, Iterator last) {
         hashtable::insert_equal_aux(first, last);
         return;
     }

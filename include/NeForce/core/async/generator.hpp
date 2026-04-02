@@ -140,7 +140,8 @@ public:
  * 使用协程实现的懒序列生成器，支持范围for循环和组合操作。
  * 每次co_yield产生一个值，协程暂停直到下一次迭代。
  */
-template <typename T> class generator {
+template <typename T>
+class generator {
 public:
     /**
      * @struct promise_type
@@ -338,7 +339,8 @@ public:
      * @param func 变换函数
      * @return 变换后的生成器
      */
-    template <typename F> invoke_result_t<F, T> map(F&& func) {
+    template <typename F>
+    invoke_result_t<F, T> map(F&& func) {
         for (auto&& value: *this) {
             co_yield func(_NEFORCE forward<decltype(value)>(value));
         }
@@ -350,7 +352,8 @@ public:
      * @param pred 谓词
      * @return 过滤后的生成器
      */
-    template <typename Pred> generator filter(Pred&& pred) {
+    template <typename Pred>
+    generator filter(Pred&& pred) {
         for (auto&& value: *this) {
             if (pred(value)) {
                 co_yield _NEFORCE forward<decltype(value)>(value);
@@ -409,7 +412,8 @@ public:
      * @tparam F 函数类型
      * @param func 要对每个元素执行的函数
      */
-    template <typename F> void for_each(F&& func) {
+    template <typename F>
+    void for_each(F&& func) {
         for (auto&& value: *this) {
             func(_NEFORCE forward<decltype(value)>(value));
         }
@@ -423,7 +427,8 @@ public:
      * @param func 折叠函数
      * @return 折叠结果
      */
-    template <typename Acc, typename F> Acc fold(Acc init, F&& func) {
+    template <typename Acc, typename F>
+    Acc fold(Acc init, F&& func) {
         Acc result = _NEFORCE move(init);
         for (auto&& value: *this) {
             result = func(_NEFORCE move(result), _NEFORCE forward<decltype(value)>(value));
@@ -441,7 +446,8 @@ public:
  * 表示一个可能产生结果的异步操作。
  * 支持co_await等待、取消、组合等操作。
  */
-template <typename T> class task {
+template <typename T>
+class task {
 public:
     /**
      * @struct promise_type
@@ -664,7 +670,8 @@ public:
 /**
  * @brief void特化的任务类
  */
-template <> class task<void> {
+template <>
+class task<void> {
 public:
     struct promise_type {
         exception_ptr exception;
@@ -781,7 +788,8 @@ public:
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename... Ts> struct when_all_result {
+template <typename... Ts>
+struct when_all_result {
     tuple<Ts...> values;
 };
 

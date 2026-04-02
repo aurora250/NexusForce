@@ -26,7 +26,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 使用CRTP模式为派生类提供算术运算符的通用实现。
  * 派生类只需实现复合赋值运算符，即可自动获得相应的二元运算符。
  */
-template <typename T> struct iarithmetic {
+template <typename T>
+struct iarithmetic {
 private:
     /**
      * @brief 获取派生类的常量引用
@@ -192,7 +193,8 @@ public:
  * 使用CRTP模式为派生类提供位运算运算符的通用实现。
  * 派生类只需实现复合赋值运算符，即可自动获得相应的二元运算符。
  */
-template <typename T> struct ibinary {
+template <typename T>
+struct ibinary {
 private:
     /**
      * @brief 获取派生类的常量引用

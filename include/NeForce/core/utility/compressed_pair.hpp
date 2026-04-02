@@ -286,7 +286,8 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename IfEmpty, typename T> compressed_pair(IfEmpty, T) -> compressed_pair<IfEmpty, T>;
+template <typename IfEmpty, typename T>
+compressed_pair(IfEmpty, T) -> compressed_pair<IfEmpty, T>;
 #endif
 
 /** @} */ // CompressedPair

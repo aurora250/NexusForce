@@ -178,37 +178,49 @@ NEFORCE_BEGIN_INNER__
 
 #ifdef NEFORCE_COMPILER_MSVC
 
-template <size_t Size> struct interlocked_exchange_impl;
+template <size_t Size>
+struct interlocked_exchange_impl;
 
-template <> struct interlocked_exchange_impl<1> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_exchange_impl<1> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedExchange8(reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
     }
 };
-template <> struct interlocked_exchange_impl<2> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_exchange_impl<2> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedExchange16(reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
     }
 };
-template <> struct interlocked_exchange_impl<4> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_exchange_impl<4> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedExchange(reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
     }
 };
-template <> struct interlocked_exchange_impl<8> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_exchange_impl<8> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_interlockedexchange64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 
-template <size_t Size> struct interlocked_compare_exchange_impl;
+template <size_t Size>
+struct interlocked_compare_exchange_impl;
 
-template <> struct interlocked_compare_exchange_impl<1> {
-    template <typename T> static bool call(volatile T* target, T* expected, T desired) {
+template <>
+struct interlocked_compare_exchange_impl<1> {
+    template <typename T>
+    static bool call(volatile T* target, T* expected, T desired) {
         const char old =
                 ::_InterlockedCompareExchange8(reinterpret_cast<volatile char*>(target),
                                                *reinterpret_cast<char*>(&desired), *reinterpret_cast<char*>(expected));
@@ -219,8 +231,10 @@ template <> struct interlocked_compare_exchange_impl<1> {
         return false;
     }
 };
-template <> struct interlocked_compare_exchange_impl<2> {
-    template <typename T> static bool call(volatile T* target, T* expected, T desired) {
+template <>
+struct interlocked_compare_exchange_impl<2> {
+    template <typename T>
+    static bool call(volatile T* target, T* expected, T desired) {
         const short old = ::_InterlockedCompareExchange16(reinterpret_cast<volatile short*>(target),
                                                           *reinterpret_cast<short*>(&desired),
                                                           *reinterpret_cast<short*>(expected));
@@ -231,8 +245,10 @@ template <> struct interlocked_compare_exchange_impl<2> {
         return false;
     }
 };
-template <> struct interlocked_compare_exchange_impl<4> {
-    template <typename T> static bool call(volatile T* target, T* expected, T desired) {
+template <>
+struct interlocked_compare_exchange_impl<4> {
+    template <typename T>
+    static bool call(volatile T* target, T* expected, T desired) {
         const long old =
                 ::_InterlockedCompareExchange(reinterpret_cast<volatile long*>(target),
                                               *reinterpret_cast<long*>(&desired), *reinterpret_cast<long*>(expected));
@@ -243,8 +259,10 @@ template <> struct interlocked_compare_exchange_impl<4> {
         return false;
     }
 };
-template <> struct interlocked_compare_exchange_impl<8> {
-    template <typename T> static bool call(volatile T* target, T* expected, T desired) {
+template <>
+struct interlocked_compare_exchange_impl<8> {
+    template <typename T>
+    static bool call(volatile T* target, T* expected, T desired) {
         const long long old = ::_InterlockedCompareExchange64(reinterpret_cast<volatile long long*>(target),
                                                               *reinterpret_cast<long long*>(&desired),
                                                               *reinterpret_cast<long long*>(expected));
@@ -255,8 +273,10 @@ template <> struct interlocked_compare_exchange_impl<8> {
         return false;
     }
 };
-template <> struct interlocked_compare_exchange_impl<16> {
-    template <typename T> static bool call(volatile T* target, T* expected, T desired) {
+template <>
+struct interlocked_compare_exchange_impl<16> {
+    template <typename T>
+    static bool call(volatile T* target, T* expected, T desired) {
         alignas(16) long long exp_arr[2];
         alignas(16) long long des_arr[2];
         memory_copy(exp_arr, expected, 16);
@@ -272,102 +292,138 @@ template <> struct interlocked_compare_exchange_impl<16> {
     }
 };
 
-template <size_t Size> struct interlocked_fetch_add_impl;
+template <size_t Size>
+struct interlocked_fetch_add_impl;
 
-template <> struct interlocked_fetch_add_impl<1> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_add_impl<1> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedExchangeAdd8(reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
     }
 };
-template <> struct interlocked_fetch_add_impl<2> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_add_impl<2> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedExchangeAdd16(reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
     }
 };
-template <> struct interlocked_fetch_add_impl<4> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_add_impl<4> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedExchangeAdd(reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
     }
 };
-template <> struct interlocked_fetch_add_impl<8> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_add_impl<8> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_interlockedexchangeadd64(reinterpret_cast<volatile long long*>(target),
                                                           static_cast<long long>(value)));
     }
 };
 
-template <size_t Size> struct interlocked_fetch_and_impl;
+template <size_t Size>
+struct interlocked_fetch_and_impl;
 
-template <> struct interlocked_fetch_and_impl<1> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_and_impl<1> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedAnd8(reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
     }
 };
-template <> struct interlocked_fetch_and_impl<2> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_and_impl<2> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedAnd16(reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
     }
 };
-template <> struct interlocked_fetch_and_impl<4> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_and_impl<4> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedAnd(reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
     }
 };
-template <> struct interlocked_fetch_and_impl<8> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_and_impl<8> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_interlockedand64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 
-template <size_t Size> struct interlocked_fetch_or_impl;
+template <size_t Size>
+struct interlocked_fetch_or_impl;
 
-template <> struct interlocked_fetch_or_impl<1> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_or_impl<1> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedOr8(reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
     }
 };
-template <> struct interlocked_fetch_or_impl<2> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_or_impl<2> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedOr16(reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
     }
 };
-template <> struct interlocked_fetch_or_impl<4> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_or_impl<4> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedOr(reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
     }
 };
-template <> struct interlocked_fetch_or_impl<8> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_or_impl<8> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_interlockedor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 
-template <size_t Size> struct interlocked_fetch_xor_impl;
+template <size_t Size>
+struct interlocked_fetch_xor_impl;
 
-template <> struct interlocked_fetch_xor_impl<1> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_xor_impl<1> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedXor8(reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
     }
 };
-template <> struct interlocked_fetch_xor_impl<2> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_xor_impl<2> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_InterlockedXor16(reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
     }
 };
-template <> struct interlocked_fetch_xor_impl<4> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_xor_impl<4> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(::_InterlockedXor(reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
     }
 };
-template <> struct interlocked_fetch_xor_impl<8> {
-    template <typename T> static T call(volatile T* target, T value) {
+template <>
+struct interlocked_fetch_xor_impl<8> {
+    template <typename T>
+    static T call(volatile T* target, T value) {
         return static_cast<T>(
                 ::_interlockedxor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
@@ -376,22 +432,28 @@ template <> struct interlocked_fetch_xor_impl<8> {
 #endif
 
 #ifdef NEFORCE_COMPILER_MSVC
-template <size_t Size> struct atomic_is_always_lock_free_impl {
+template <size_t Size>
+struct atomic_is_always_lock_free_impl {
     static constexpr bool value = false;
 };
-template <> struct atomic_is_always_lock_free_impl<1> {
+template <>
+struct atomic_is_always_lock_free_impl<1> {
     static constexpr bool value = true;
 };
-template <> struct atomic_is_always_lock_free_impl<2> {
+template <>
+struct atomic_is_always_lock_free_impl<2> {
     static constexpr bool value = true;
 };
-template <> struct atomic_is_always_lock_free_impl<4> {
+template <>
+struct atomic_is_always_lock_free_impl<4> {
     static constexpr bool value = true;
 };
-template <> struct atomic_is_always_lock_free_impl<8> {
+template <>
+struct atomic_is_always_lock_free_impl<8> {
     static constexpr bool value = true;
 };
-template <> struct atomic_is_always_lock_free_impl<16> {
+template <>
+struct atomic_is_always_lock_free_impl<16> {
 #    ifdef NEFORCE_ARCH_X86_64
     static constexpr bool value = true;
 #    else
@@ -413,7 +475,8 @@ NEFORCE_END_INNER__
  * @brief 原子操作的差值类型
  * @tparam T 原始类型
  */
-template <typename T> using atomic_diff_t = conditional_t<is_pointer_v<T>, ptrdiff_t, remove_volatile_t<T>>;
+template <typename T>
+using atomic_diff_t = conditional_t<is_pointer_v<T>, ptrdiff_t, remove_volatile_t<T>>;
 
 
 /**
@@ -1120,7 +1183,8 @@ NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t<T> atomic_exchange_any(T* ptr, re
  * @param mo 内存顺序
  * @return 添加前的值
  */
-template <typename T> T atomic_fetch_add_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
+template <typename T>
+T atomic_fetch_add_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
     remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
     remove_volatile_t<T> new_value;
     do {
@@ -1137,7 +1201,8 @@ template <typename T> T atomic_fetch_add_any(T* ptr, remove_volatile_t<T> value,
  * @param mo 内存顺序
  * @return 减去前的值
  */
-template <typename T> T atomic_fetch_sub_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
+template <typename T>
+T atomic_fetch_sub_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
     remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
     remove_volatile_t<T> new_value;
     do {
@@ -1154,7 +1219,8 @@ template <typename T> T atomic_fetch_sub_any(T* ptr, remove_volatile_t<T> value,
  * @param mo 内存顺序
  * @return 添加后的值
  */
-template <typename T> T atomic_add_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
+template <typename T>
+T atomic_add_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
     remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
     remove_volatile_t<T> new_value;
     do {
@@ -1171,7 +1237,8 @@ template <typename T> T atomic_add_fetch_any(T* ptr, remove_volatile_t<T> value,
  * @param mo 内存顺序
  * @return 减去后的值
  */
-template <typename T> T atomic_sub_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
+template <typename T>
+T atomic_sub_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
     remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
     remove_volatile_t<T> new_value;
     do {
@@ -1187,7 +1254,8 @@ template <typename T> T atomic_sub_fetch_any(T* ptr, remove_volatile_t<T> value,
  * @tparam Align 数据对齐要求
  * @return 是否支持无锁操作
  */
-template <size_t Size, size_t Align> constexpr bool is_always_lock_free() noexcept {
+template <size_t Size, size_t Align>
+NEFORCE_CONSTEXPR17 bool is_always_lock_free() noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_is_lock_free(Size, reinterpret_cast<void*>(-Align));
 #else
@@ -1370,7 +1438,8 @@ struct atomic_flag {
  *
  * 提供整数类型的原子操作实现。
  */
-template <typename T> struct atomic_base {
+template <typename T>
+struct atomic_base {
     using value_type = T;      ///< 值类型
     using difference_type = T; ///< 差值类型
 
@@ -1382,9 +1451,6 @@ private:
     alignas(align_inner) value_type value_; ///< 原子值存储
 
 public:
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(T), align_inner>();
-
     atomic_base() noexcept = default;
     ~atomic_base() noexcept = default;
     atomic_base(const atomic_base&) = delete;
@@ -1557,12 +1623,12 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(T), align_inner>(); }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return is_always_lock_free; }
+    bool is_lock_free() const volatile noexcept { return _NEFORCE is_always_lock_free<sizeof(T), align_inner>(); }
 
     /**
      * @brief 原子存储操作
@@ -1833,7 +1899,8 @@ public:
  *
  * 提供指针类型的原子操作实现，支持指针算术运算。
  */
-template <typename T> struct atomic_base<T*> {
+template <typename T>
+struct atomic_base<T*> {
     using value_type = T*;             ///< 指针类型
     using difference_type = ptrdiff_t; ///< 差值类型
 
@@ -1845,9 +1912,6 @@ private:
     }
 
 public:
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
-
     atomic_base() noexcept = default;
     atomic_base(const atomic_base&) = delete;
     atomic_base& operator=(const atomic_base&) = delete;
@@ -1964,12 +2028,16 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
+    }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return is_always_lock_free; }
+    bool is_lock_free() const volatile noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
+    }
 
     /**
      * @brief 原子存储指针操作
@@ -2258,7 +2326,8 @@ public:
  *
  * 提供浮点类型的原子操作实现，支持加减运算。
  */
-template <typename Float> struct atomic_float_base {
+template <typename Float>
+struct atomic_float_base {
     static_assert(is_floating_point_v<Float>, "atomic_ref_base need floating point T");
 
     using value_type = Float;           ///< 值类型
@@ -2268,9 +2337,6 @@ private:
     alignas(alignof(Float)) Float float_ = static_cast<Float>(0); ///< 浮点数值存储
 
 public:
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>();
-
     atomic_float_base() = default;
     atomic_float_base(const atomic_float_base&) = delete;
     atomic_float_base& operator=(const atomic_float_base&) = delete;
@@ -2304,12 +2370,14 @@ public:
     /**
      * @brief 检查是否支持无锁操作
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>(); }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return is_always_lock_free; }
+    bool is_lock_free() const volatile noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>();
+    }
 
     /**
      * @brief 原子存储操作
@@ -2529,7 +2597,8 @@ struct atomic_ref_base;
  * @brief 通用类型的原子引用特化
  * @tparam T 可平凡复制类型
  */
-template <typename T> struct atomic_ref_base<T, false, false> {
+template <typename T>
+struct atomic_ref_base<T, false, false> {
     static_assert(is_trivially_copyable_v<T>, "atomic_ref_base need trivially copyable T");
 
 private:
@@ -2542,8 +2611,6 @@ public:
 
     /// @brief 对齐需求
     static constexpr size_t required_alignment = align_inner > alignof(T) ? align_inner : alignof(T);
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(T), required_alignment>();
 
     /**
      * @brief 构造函数
@@ -2577,7 +2644,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(T), required_alignment>(); }
 
     /**
      * @brief 原子存储操作
@@ -2676,7 +2743,8 @@ public:
  * @brief 整数类型的原子引用特化
  * @tparam T 整数类型
  */
-template <typename T> struct atomic_ref_base<T, true, false> {
+template <typename T>
+struct atomic_ref_base<T, true, false> {
     static_assert(is_integral_like_v<T>, "atomic_ref need integral-like T");
 
 private:
@@ -2688,8 +2756,6 @@ public:
 
     /// @brief 对齐需求
     static constexpr size_t required_alignment = sizeof(T) > alignof(T) ? sizeof(T) : alignof(T);
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(T), required_alignment>();
 
     atomic_ref_base() = delete;
     atomic_ref_base(const atomic_ref_base&) noexcept = default;
@@ -2724,7 +2790,9 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept { return is_always_lock_free; }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(T), required_alignment>();
+    }
 
     /**
      * @brief 原子存储操作
@@ -2932,7 +3000,8 @@ public:
  * @brief 浮点类型的原子引用特化
  * @tparam Float 浮点类型
  */
-template <typename Float> struct atomic_ref_base<Float, false, true> {
+template <typename Float>
+struct atomic_ref_base<Float, false, true> {
     static_assert(is_floating_point_v<Float>, "atomic_ref_base need floating point T");
 
 private:
@@ -2944,8 +3013,6 @@ public:
 
     /// @brief 对齐需求
     static constexpr size_t required_alignment = alignof(Float);
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(Float), required_alignment>();
 
     atomic_ref_base() = delete;
     atomic_ref_base(const atomic_ref_base&) noexcept = default;
@@ -2980,7 +3047,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(Float), required_alignment>(); }
 
     /**
      * @brief 原子存储操作
@@ -3122,7 +3189,8 @@ public:
 #    pragma clang diagnostic ignored "-Watomic-alignment"
 #endif
 
-template <typename T> struct atomic_ref_base<T*, false, false> {
+template <typename T>
+struct atomic_ref_base<T*, false, false> {
 public:
     using value_type = T*;             ///< 指针类型
     using difference_type = ptrdiff_t; ///< 差值类型
@@ -3138,8 +3206,6 @@ private:
 public:
     /// @brief 对齐需求
     static constexpr size_t required_alignment = sizeof(T*) == 8 ? 8 : alignof(T*);
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(T*), required_alignment>();
 
     atomic_ref_base() = delete;
     atomic_ref_base(const atomic_ref_base&) noexcept = default;
@@ -3174,7 +3240,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(T*), required_alignment>(); }
 
     /**
      * @brief 原子存储指针操作

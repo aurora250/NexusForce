@@ -122,7 +122,8 @@ public:
  *
  * RAII共享锁管理器，专门用于管理共享互斥锁的读锁。
  */
-template <typename SharedMutex> class shared_lock {
+template <typename SharedMutex>
+class shared_lock {
 public:
     using mutex_type = SharedMutex; ///< 共享互斥锁类型
 

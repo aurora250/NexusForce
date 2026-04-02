@@ -167,7 +167,8 @@ constexpr bool next_permutation(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 如果存在下一个排列则返回true，否则返回false
  */
-template <typename Iterator> constexpr bool next_permutation(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr bool next_permutation(Iterator first, Iterator last) {
     return _NEFORCE next_permutation(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -228,7 +229,8 @@ constexpr bool prev_permutation(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 如果存在上一个排列则返回true，否则返回false
  */
-template <typename Iterator> constexpr bool prev_permutation(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr bool prev_permutation(Iterator first, Iterator last) {
     return _NEFORCE prev_permutation(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

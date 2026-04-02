@@ -24,7 +24,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 此类封装了一个分配的内存块及其对应的分配器。
  */
-template <typename Alloc> struct allocated_ptr {
+template <typename Alloc>
+struct allocated_ptr {
     using pointer = typename allocator_traits<Alloc>::pointer;       ///< 分配器指针类型
     using value_type = typename allocator_traits<Alloc>::value_type; ///< 元素类型
 
@@ -106,7 +107,8 @@ public:
  *
  * 使用分配器分配单个元素内存，并返回管理该内存的allocated_ptr。
  */
-template <typename Alloc> allocated_ptr<Alloc> allocate_guarded(Alloc& alloc) {
+template <typename Alloc>
+allocated_ptr<Alloc> allocate_guarded(Alloc& alloc) {
     return allocated_ptr<Alloc>{alloc, _NEFORCE allocator_traits<Alloc>::allocate(alloc, 1)};
 }
 

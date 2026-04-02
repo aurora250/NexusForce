@@ -28,7 +28,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 为vector提供迭代器支持，包含边界检查和调试验证。
  */
-template <bool IsConst, typename Vector> struct vector_iterator : iiterator<vector_iterator<IsConst, Vector>> {
+template <bool IsConst, typename Vector>
+struct vector_iterator : iiterator<vector_iterator<IsConst, Vector>> {
 public:
     using container_type = Vector;                                    ///< 容器类型
     using value_type = typename container_type::value_type;           ///< 值类型
@@ -162,7 +163,8 @@ public:
  * 动态增长的数组容器，提供连续的存储空间和随机访问能力。
  * 支持在末尾高效插入/删除元素，以及在任意位置插入/删除。
  */
-template <typename T, typename Alloc = allocator<T>> class vector : public icollector<vector<T, Alloc>> {
+template <typename T, typename Alloc = allocator<T>>
+class vector : public icollector<vector<T, Alloc>> {
     static_assert(is_object_v<T>, "vector only contains object types.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
@@ -187,7 +189,8 @@ private:
     compressed_pair<allocator_type, pointer> pair_{default_construct_tag{},
                                                    nullptr}; ///< 压缩存储的分配器和容量末尾指针
 
-    template <bool, typename> friend struct vector_iterator;
+    template <bool, typename>
+    friend struct vector_iterator;
 
 public:
     /// 特殊值，表示未找到或"直到末尾"
@@ -837,7 +840,8 @@ public:
      * @param position 插入位置
      * @param args 构造参数
      */
-    template <typename... Args> NEFORCE_CONSTEXPR20 void emplace(iterator position, Args&&... args) {
+    template <typename... Args>
+    NEFORCE_CONSTEXPR20 void emplace(iterator position, Args&&... args) {
         if (finish_ != pair_.value) {
             if (position == end()) {
                 _NEFORCE construct(finish_, _NEFORCE forward<Args>(args)...);
@@ -881,7 +885,8 @@ public:
      * @tparam Args 构造参数类型
      * @param args 构造参数
      */
-    template <typename... Args> NEFORCE_CONSTEXPR20 void emplace_back(Args&&... args) {
+    template <typename... Args>
+    NEFORCE_CONSTEXPR20 void emplace_back(Args&&... args) {
         if (finish_ != pair_.value) {
             _NEFORCE construct(finish_, _NEFORCE forward<Args>(args)...);
             ++finish_;
@@ -1233,7 +1238,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T, typename Alloc> vector(T, Alloc = Alloc()) -> vector<T, Alloc>;
+template <typename T, typename Alloc>
+vector(T, Alloc = Alloc()) -> vector<T, Alloc>;
 
 template <typename Iterator, typename Alloc>
 vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_value_t<Iterator>, Alloc>;

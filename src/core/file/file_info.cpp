@@ -13,7 +13,8 @@ namespace {
         ull.HighPart = ft.dwHighDateTime;
         constexpr uint64_t EPOCH_DIFF = 116444736000000000ULL;
         const uint64_t unix_100ns = ull.QuadPart - EPOCH_DIFF;
-        return timestamp(static_cast<int64_t>(unix_100ns / 10000000ULL)).to_datetime();
+        const datetime dt = timestamp(static_cast<int64_t>(unix_100ns / 10000000ULL)).to_datetime();
+        return datetime(dt.date(), dt.time(), 0);
     }
 
     ::FILETIME datetime_to_filetime(const datetime& dt) noexcept {
@@ -26,7 +27,8 @@ namespace {
     }
 #else
     datetime filetime_to_datetime(const ::time_t t) noexcept {
-        return timestamp(static_cast<int64_t>(t)).to_datetime();
+        const datetime dt = timestamp(static_cast<int64_t>(t)).to_datetime();
+        return datetime(dt.date(), dt.time(), 0);
     }
 #endif
 } // namespace
@@ -143,7 +145,7 @@ bool file_info::set_last_access_time(const datetime& dt) noexcept {
     return ::SetFileTime(handle_, nullptr, &ftA, nullptr) != 0;
 #else
     ::timespec times[2]{};
-    times[0].tv_sec = static_cast<::time_t>(dt.to_unix());
+    times[0].tv_sec = static_cast<::time_t>(timestamp(dt).value());
     times[0].tv_nsec = 0;
     times[1].tv_nsec = UTIME_OMIT;
     return ::futimens(handle_, times) == 0;
@@ -173,7 +175,7 @@ bool file_info::set_last_write_time(const datetime& dt) noexcept {
 #else
     ::timespec times[2]{};
     times[0].tv_nsec = UTIME_OMIT;
-    times[1].tv_sec = static_cast<::time_t>(dt.to_unix());
+    times[1].tv_sec = static_cast<::time_t>(timestamp(dt).value());
     times[1].tv_nsec = 0;
     return ::futimens(handle_, times) == 0;
 #endif
@@ -204,9 +206,9 @@ bool file_info::set_all_times(const datetime& create, const datetime& access, co
 #else
 bool file_info::set_all_times(const datetime& access, const datetime& write) noexcept {
     ::timespec times[2]{};
-    times[0].tv_sec = static_cast<::time_t>(access.to_unix());
+    times[0].tv_sec = static_cast<::time_t>(timestamp(access).value());
     times[0].tv_nsec = 0;
-    times[1].tv_sec = static_cast<::time_t>(write.to_unix());
+    times[1].tv_sec = static_cast<::time_t>(timestamp(write).value());
     times[1].tv_nsec = 0;
     return ::futimens(handle_, times) == 0;
 }

@@ -10,6 +10,7 @@
 
 #include "NeForce/core/algorithm/iterator.hpp"
 #include "NeForce/core/functional/functor.hpp"
+#include "NeForce/core/functional/invoke.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -62,7 +63,8 @@ NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last, Compar
  *
  * 默认使用小于比较，创建最大堆。
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
     return _NEFORCE is_heap_until(first, last, less<iter_value_t<Iterator>>());
 }
 
@@ -87,7 +89,8 @@ NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束迭代器
  * @return 如果范围是有效堆则返回 true，否则返回 false
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last) {
     return _NEFORCE is_heap_until(first, last) == last;
 }
 
@@ -158,7 +161,8 @@ NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last, Compare comp) 
 /**
  * @brief 向堆中插入元素
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last) {
     _NEFORCE push_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
@@ -262,7 +266,8 @@ NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last, Compare comp) {
 /**
  * @brief 删除堆顶元素
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last) {
     _NEFORCE pop_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
@@ -287,7 +292,8 @@ NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last, Compare comp) 
 /**
  * @brief 将堆转换为有序序列
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last) {
     _NEFORCE sort_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
@@ -325,7 +331,8 @@ NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp) 
 /**
  * @brief 创建堆
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
     _NEFORCE make_heap(first, last, less<iter_value_t<Iterator>>());
 }
 

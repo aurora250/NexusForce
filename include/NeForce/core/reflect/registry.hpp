@@ -52,7 +52,8 @@ public:
      *
      * 如果类型已注册，返回现有元数据；否则创建新的元数据。
      */
-    template <typename T> meta_type& register_type(string_view name) {
+    template <typename T>
+    meta_type& register_type(string_view name) {
         type_id id = name.to_hash();
 
         lock<mutex> lk(mutex_);
@@ -105,7 +106,8 @@ public:
      *
      * 对每个注册的类型调用回调函数。
      */
-    template <typename Func> void for_each(Func&& func) {
+    template <typename Func>
+    void for_each(Func&& func) {
         lock<mutex> lock(mutex_);
         for (auto& type: types_) {
             func(*type.second);

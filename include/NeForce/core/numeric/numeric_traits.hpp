@@ -137,7 +137,8 @@ NEFORCE_END_INNER__
  * 主模板提供默认实现，返回类型T的默认值。
  * 特定类型的特化将提供该类型的具体数值特性。
  */
-template <typename T, typename Dummy = void> class numeric_traits : public inner::numeric_base {
+template <typename T, typename Dummy = void>
+class numeric_traits : public inner::numeric_base {
 public:
     /**
      * @brief 获取类型的最小值
@@ -207,25 +208,29 @@ public:
  * @brief numeric_limits的const特化版本
  * @tparam T 数值类型
  */
-template <typename T> class numeric_traits<const T> : public numeric_traits<T> {};
+template <typename T>
+class numeric_traits<const T> : public numeric_traits<T> {};
 
 /**
  * @brief numeric_limits的volatile特化版本
  * @tparam T 数值类型
  */
-template <typename T> class numeric_traits<volatile T> : public numeric_traits<T> {};
+template <typename T>
+class numeric_traits<volatile T> : public numeric_traits<T> {};
 
 /**
  * @brief numeric_limits的const volatile特化版本
  * @tparam T 数值类型
  */
-template <typename T> class numeric_traits<const volatile T> : public numeric_traits<T> {};
+template <typename T>
+class numeric_traits<const volatile T> : public numeric_traits<T> {};
 
 
 /**
  * @brief bool类型的数值特征特化
  */
-template <> class numeric_traits<bool> : public inner::numeric_int_base {
+template <>
+class numeric_traits<bool> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr bool min() noexcept { return false; }
     NEFORCE_NODISCARD static constexpr bool max() noexcept { return true; }
@@ -245,7 +250,8 @@ public:
 /**
  * @brief int8_t类型的数值特征特化
  */
-template <> class numeric_traits<int8_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<int8_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr int8_t min() noexcept { return -128; }
     NEFORCE_NODISCARD static constexpr int8_t max() noexcept { return 127; }
@@ -267,7 +273,8 @@ public:
 /**
  * @brief int16_t类型的数值特征特化
  */
-template <> class numeric_traits<int16_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<int16_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr int16_t min() noexcept { return -32768; }
     NEFORCE_NODISCARD static constexpr int16_t max() noexcept { return 32767; }
@@ -289,7 +296,8 @@ public:
 /**
  * @brief int32_t类型的数值特征特化
  */
-template <> class numeric_traits<int32_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<int32_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr int32_t min() noexcept { return -2147483647 - 1; }
     NEFORCE_NODISCARD static constexpr int32_t max() noexcept { return 2147483647; }
@@ -311,7 +319,8 @@ public:
 /**
  * @brief int64_t类型的数值特征特化
  */
-template <> class numeric_traits<int64_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<int64_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr int64_t min() noexcept { return -9223372036854775807LL - 1; }
     NEFORCE_NODISCARD static constexpr int64_t max() noexcept { return 9223372036854775807LL; }
@@ -331,15 +340,18 @@ public:
 };
 
 #ifdef NEFORCE_PLATFORM_LINUX64
-template <> class numeric_traits<long long> : public numeric_traits<int64_t> {};
+template <>
+class numeric_traits<long long> : public numeric_traits<int64_t> {};
 #else
-template <> class numeric_traits<long> : public numeric_traits<int32_t> {};
+template <>
+class numeric_traits<long> : public numeric_traits<int32_t> {};
 #endif
 
 /**
  * @brief uint8_t类型的数值特征特化
  */
-template <> class numeric_traits<uint8_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<uint8_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr uint8_t min() noexcept { return 0; }
     NEFORCE_NODISCARD static constexpr uint8_t max() noexcept { return 0xffU; }
@@ -361,7 +373,8 @@ public:
 /**
  * @brief uint16_t类型的数值特征特化
  */
-template <> class numeric_traits<uint16_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<uint16_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr uint16_t min() noexcept { return 0; }
     NEFORCE_NODISCARD static constexpr uint16_t max() noexcept { return 0xffffU; }
@@ -383,7 +396,8 @@ public:
 /**
  * @brief uint32_t类型的数值特征特化
  */
-template <> class numeric_traits<uint32_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<uint32_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr uint32_t min() noexcept { return 0; }
     NEFORCE_NODISCARD static constexpr uint32_t max() noexcept { return 0xffffffffU; }
@@ -405,7 +419,8 @@ public:
 /**
  * @brief uint64_t类型的数值特征特化
  */
-template <> class numeric_traits<uint64_t> : public inner::numeric_int_base {
+template <>
+class numeric_traits<uint64_t> : public inner::numeric_int_base {
 public:
     NEFORCE_NODISCARD static constexpr uint64_t min() noexcept { return 0; }
     NEFORCE_NODISCARD static constexpr uint64_t max() noexcept { return 0xffffffffffffffffULL; }
@@ -425,51 +440,61 @@ public:
 };
 
 #ifdef NEFORCE_PLATFORM_LINUX64
-template <> class numeric_traits<unsigned long long> : public numeric_traits<uint64_t> {};
+template <>
+class numeric_traits<unsigned long long> : public numeric_traits<uint64_t> {};
 #else
-template <> class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
+template <>
+class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
 #endif
 
 
 /**
  * @brief char类型的数值特征特化
  */
-template <> class numeric_traits<char> : public numeric_traits<int8_t> {};
+template <>
+class numeric_traits<char> : public numeric_traits<int8_t> {};
 
 #ifdef NEFORCE_STANDARD_20
 /**
  * @brief char8_t类型的数值特征特化
  */
-template <> class numeric_traits<char8_t> : public numeric_traits<uint8_t> {};
+template <>
+class numeric_traits<char8_t> : public numeric_traits<uint8_t> {};
 #endif
 
 /**
  * @brief char16_t类型的数值特征特化
  */
-template <> class numeric_traits<char16_t> : public numeric_traits<uint16_t> {};
+template <>
+class numeric_traits<char16_t> : public numeric_traits<uint16_t> {};
 
 /**
  * @brief char32_t类型的数值特征特化
  */
-template <> class numeric_traits<char32_t> : public numeric_traits<uint32_t> {};
+template <>
+class numeric_traits<char32_t> : public numeric_traits<uint32_t> {};
 
 /**
  * @brief wchar_t类型的数值特征特化
  * @note wchar_t在Windows平台为16位，在Linux平台为32位
  */
-template <> class numeric_traits<wchar_t>;
+template <>
+class numeric_traits<wchar_t>;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-template <> class numeric_traits<wchar_t> : public numeric_traits<uint16_t> {};
+template <>
+class numeric_traits<wchar_t> : public numeric_traits<uint16_t> {};
 #elif defined(NEFORCE_PLATFORM_LINUX)
-template <> class numeric_traits<wchar_t> : public numeric_traits<int32_t> {};
+template <>
+class numeric_traits<wchar_t> : public numeric_traits<int32_t> {};
 #endif
 
 
 /**
  * @brief 单精度浮点数类型的数值特征特化
  */
-template <> class numeric_traits<float32_t> : public inner::numeric_float_base {
+template <>
+class numeric_traits<float32_t> : public inner::numeric_float_base {
 public:
     /**
      * @brief 获取最小正规范值
@@ -528,7 +553,8 @@ public:
 /**
  * @brief 双精度浮点数类型的数值特征特化
  */
-template <> class numeric_traits<float64_t> : public inner::numeric_float_base {
+template <>
+class numeric_traits<float64_t> : public inner::numeric_float_base {
 public:
     NEFORCE_NODISCARD static constexpr float64_t min_posi() noexcept { return 2.2250738585072014e-308; }
     NEFORCE_NODISCARD static constexpr float64_t max_posi() noexcept { return 1.7976931348623157e+308; }
@@ -573,7 +599,8 @@ public:
  * @brief 扩展精度浮点数类型的数值特征特化
  * @note MSVC的long double等同于double；GNUC则使用更大的数值范围特征。
  */
-template <> class numeric_traits<decimal_t> : public inner::numeric_float_base {
+template <>
+class numeric_traits<decimal_t> : public inner::numeric_float_base {
 public:
     NEFORCE_NODISCARD static constexpr decimal_t min_posi() noexcept {
         return 3.36210314311209350626267781732175260e-4932L;
@@ -609,7 +636,8 @@ public:
     static constexpr int min_exponent10 = -4931;
 };
 #else
-template <> class numeric_traits<decimal_t> : public numeric_traits<float64_t> {};
+template <>
+class numeric_traits<decimal_t> : public numeric_traits<float64_t> {};
 #endif
 
 /** @} */ // NumericTraits

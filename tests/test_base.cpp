@@ -46,11 +46,11 @@ void test_list() {
 void test_check() {
     println(check_type<string>());
     println(check_type<const volatile void* const*&>());
-    println(check_type<int(*)[]>());
+    println(check_type<int (*)[]>());
     println(check_type<const volatile void*(&) [10]>()); // void const volatile * (&) [10]
     println(check_type<int[1][2][3]>());                 // int [1] [2] [3]
-    println(check_type<char(*(*const) (const int(&)[10]))[10]>());
-    println(check_type<int(integer16::* const)[3]>());
+    println(check_type<char (*(*const) (const int (&)[10]))[10]>());
+    println(check_type<int (integer16::* const)[3]>());
     println(check_type<int (integer16::* const)(int, integer16&&, int) volatile>());
     string cstr("const string");
     const string* sr = new string("hai");

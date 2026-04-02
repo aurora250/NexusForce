@@ -28,7 +28,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供数值类型的通用接口，包括算术运算、位运算和比较操作。
  * @note PackageT必须是算术类型。
  */
-template <typename T, typename PackageT> struct ipackage : icommon<T>, iarithmetic<T>, ibinary<T> {
+template <typename T, typename PackageT>
+struct ipackage : icommon<T>, iarithmetic<T>, ibinary<T> {
     static_assert(is_arithmetic_v<PackageT>, "PackageT must be arithmetic.");
 
 private:

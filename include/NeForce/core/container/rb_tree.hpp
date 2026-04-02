@@ -370,7 +370,8 @@ NEFORCE_ALWAYS_INLINE_INLINE rb_tree_node_base* rb_tree_erase_rebalance(rb_tree_
  *
  * 继承自节点基类，添加数据成员。
  */
-template <typename T> struct rb_tree_node : rb_tree_node_base {
+template <typename T>
+struct rb_tree_node : rb_tree_node_base {
     T data; ///< 节点存储的数据
 
     /**
@@ -469,7 +470,8 @@ private:
 
     const container_type* container_ = nullptr; ///< 关联容器指针
 
-    template <typename, typename, typename, typename, typename> friend class rb_tree;
+    template <typename, typename, typename, typename, typename>
+    friend class rb_tree;
 
 public:
     rb_tree_iterator() noexcept = default;
@@ -590,7 +592,8 @@ private:
     KeyOfValue extracter_{};                                                        ///< 值提取键函数对象
     compressed_pair<allocator_type, size_t> size_pair_{default_construct_tag{}, 0}; ///< 压缩存储分配器和大小
 
-    template <bool, typename> friend struct rb_tree_iterator;
+    template <bool, typename>
+    friend struct rb_tree_iterator;
 
 private:
     struct node_guard {
@@ -689,7 +692,8 @@ private:
      * @param args 构造参数
      * @return 新创建的节点指针
      */
-    template <typename... Args> link_type create_node(Args&&... args) {
+    template <typename... Args>
+    link_type create_node(Args&&... args) {
         link_type tmp = size_pair_.get_base().allocate();
         try {
             _NEFORCE construct(&tmp->data, _NEFORCE forward<Args>(args)...);
@@ -1067,7 +1071,8 @@ public:
      * @param args 构造参数
      * @return 插入结果（迭代器和是否成功）
      */
-    template <typename... Args> pair<iterator, bool> emplace_unique(Args&&... args) {
+    template <typename... Args>
+    pair<iterator, bool> emplace_unique(Args&&... args) {
         const link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         return rb_tree::insert_unique(tmp);
     }
@@ -1093,7 +1098,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_unique_hint(iterator position, Args&&... args) {
+    template <typename... Args>
+    iterator emplace_unique_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         node_guard guard(this, tmp);
 
@@ -1173,7 +1179,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_equal(Args&&... args) {
+    template <typename... Args>
+    iterator emplace_equal(Args&&... args) {
         const link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         return rb_tree::insert_equal(tmp);
     }
@@ -1199,7 +1206,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_equal_hint(iterator position, Args&&... args) {
+    template <typename... Args>
+    iterator emplace_equal_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         node_guard guard(this, tmp);
 

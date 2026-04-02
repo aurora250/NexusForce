@@ -155,7 +155,10 @@ public:
      * @tparam T 目标类型
      * @return 类型转换后的地址
      */
-    template <typename T> T* data() const noexcept { return static_cast<T*>(mapped_addr_); }
+    template <typename T>
+    T* data() const noexcept {
+        return static_cast<T*>(mapped_addr_);
+    }
 
     /**
      * @brief 获取共享内存大小

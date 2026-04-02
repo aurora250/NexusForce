@@ -23,7 +23,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /// @cond
-template <typename CharT, typename Traits = char_traits<CharT>> class basic_string_view;
+template <typename CharT, typename Traits = char_traits<CharT>>
+class basic_string_view;
 /// @endcond
 
 
@@ -35,7 +36,8 @@ template <typename CharT, typename Traits = char_traits<CharT>> class basic_stri
  * 提供对字符串视图元素的随机访问迭代器支持。
  * 所有操作都是const的，因为string_view是只读的。
  */
-template <typename Traits> struct basic_string_view_iterator : iiterator<basic_string_view_iterator<Traits>> {
+template <typename Traits>
+struct basic_string_view_iterator : iiterator<basic_string_view_iterator<Traits>> {
 public:
     using container_type = basic_string_view<typename Traits::char_type, Traits>; ///< 容器类型
     using value_type = typename container_type::value_type;                       ///< 值类型
@@ -164,7 +166,8 @@ public:
  * 它不进行内存分配，不拥有所指向的字符串，因此生命周期必须由调用者保证。
  * 提供类似string的接口，但所有操作都是const的。
  */
-template <typename CharT, typename Traits> class basic_string_view : public icommon<basic_string_view<CharT, Traits>> {
+template <typename CharT, typename Traits>
+class basic_string_view : public icommon<basic_string_view<CharT, Traits>> {
     static_assert(is_same_v<CharT, typename Traits::char_type>,
                   "char type of basic string view should be same with char traits.");
     static_assert(!is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,

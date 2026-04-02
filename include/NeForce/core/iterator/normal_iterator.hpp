@@ -24,7 +24,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 将底层迭代器包装为标准迭代器接口，提供完整的迭代器操作和关系运算符，确保所有迭代器具有一致的接口。
  */
-template <typename Iterator> class normal_iterator {
+template <typename Iterator>
+class normal_iterator {
 public:
     using iterator_type = Iterator;                      ///< 底层迭代器类型
     using iterator_category = iter_category_t<Iterator>; ///< 迭代器类别

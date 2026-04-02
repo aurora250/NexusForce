@@ -227,7 +227,8 @@ public:
      *
      * 在底层容器末尾就地构造元素，并维护堆性质。
      */
-    template <typename... Args> void emplace(Args&&... args) {
+    template <typename... Args>
+    void emplace(Args&&... args) {
         pair_.value.emplace_back(_NEFORCE forward<Args>(args)...);
         _NEFORCE push_heap(pair_.value.begin(), pair_.value.end(), pair_.get_base());
     }

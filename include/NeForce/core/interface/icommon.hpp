@@ -26,7 +26,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 派生类需要实现to_hash()方法，即可通过此接口自动获得哈希支持。
  * 该接口会自动特化hash模板，使对象可用于哈希相关操作如哈希容器。
  */
-template <typename T> struct ihashable {
+template <typename T>
+struct ihashable {
 private:
     constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 
@@ -54,7 +55,8 @@ public:
  * @brief ihashable的哈希特化
  * @tparam T 子类类型
  */
-template <typename T> struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
+template <typename T>
+struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
     NEFORCE_NODISCARD constexpr size_t operator()(const T& obj) const noexcept(noexcept(obj.to_hash())) {
         return obj.to_hash();
     }
@@ -76,7 +78,8 @@ template <typename T> struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::va
  * 通过CRTP模式实现，派生类只需实现operator ==和operator <两个基本比较操作，
  * 即可自动获得所有比较运算符的完整实现。
  */
-template <typename T> struct icomparable {
+template <typename T>
+struct icomparable {
 private:
     constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 
@@ -158,7 +161,8 @@ public:
  * 为派生类提供完整的比较和哈希支持。派生类需实现三个核心方法：
  * operator ==, operator < 和 to_hash()。
  */
-template <typename T> struct icommon : icomparable<T>, ihashable<T> {};
+template <typename T>
+struct icommon : icomparable<T>, ihashable<T> {};
 
 /** @} */ // CRTPInterfaces
 

@@ -60,7 +60,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& ptr) {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Collector> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string collector_to_string(const Collector& c) {
+template <typename Collector>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string collector_to_string(const Collector& c) {
     if (_NEFORCE empty(c)) {
         return {"[]"};
     }
@@ -146,7 +147,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const compressed_pair<IfE
  * @param obj 对
  * @return 格式为"{ first, second }"的字符串
  */
-template <typename T1, typename T2> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
+template <typename T1, typename T2>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
     return "{ " + to_string(obj.first) + ", " + to_string(obj.second) + " }";
 }
 
@@ -188,7 +190,8 @@ NEFORCE_END_INNER__
  * @param tup 元组
  * @return 字符串表示
  */
-template <typename... Args> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup) {
+template <typename... Args>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup) {
     return inner::__to_string_tuple_dispatch(tup);
 }
 
@@ -196,8 +199,12 @@ template <typename... Args> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_stri
 #ifndef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T> string to_string_concat(T&& t) { return to_string(_NEFORCE forward<T>(t)); }
-template <typename First, typename... Rest> string to_string_concat(First&& first, Rest&&... rest) {
+template <typename T>
+string to_string_concat(T&& t) {
+    return to_string(_NEFORCE forward<T>(t));
+}
+template <typename First, typename... Rest>
+string to_string_concat(First&& first, Rest&&... rest) {
     return to_string(_NEFORCE forward<First>(first)) + to_string_concat(_NEFORCE forward<Rest>(rest)...);
 }
 NEFORCE_END_INNER__
@@ -249,7 +256,8 @@ constexpr enable_if_t<(sizeof(UT) <= 4)> __uint_to_buff_aux(CharT*, UT&) noexcep
  * @param ux 要转换的值
  * @return 指向转换后字符串起始位置的迭代器
  */
-template <typename CharT, typename UT> NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
+template <typename CharT, typename UT>
+NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
     static_assert(is_unsigned_v<UT>, "UT must be a unsigned integer type");
 
 #ifdef NEFORCE_ARCH_BITS_64
@@ -298,7 +306,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __int_to_string(const 
  * @param x 要转换的值
  * @return 字符串表示
  */
-template <typename CharT, typename T> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
+template <typename CharT, typename T>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     static_assert(is_unsigned_v<T>, "T must be a integral type");
 
     CharT buffer[numeric_traits<uintmax_t>::digits10 + 2]; // digits10 + sign + '\0'

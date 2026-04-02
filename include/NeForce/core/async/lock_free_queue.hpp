@@ -29,7 +29,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 采用ABA问题预防机制
  */
-template <typename T> class lock_free_queue {
+template <typename T>
+class lock_free_queue {
 private:
     /**
      * @struct node_counter
@@ -352,9 +353,11 @@ public:
     }
 };
 
-template <typename T> atomic<int> lock_free_queue<T>::destruct_count{0};
+template <typename T>
+atomic<int> lock_free_queue<T>::destruct_count{0};
 
-template <typename T> atomic<int> lock_free_queue<T>::construct_count{0};
+template <typename T>
+atomic<int> lock_free_queue<T>::construct_count{0};
 
 /** @} */ // LockFreeQueue
 

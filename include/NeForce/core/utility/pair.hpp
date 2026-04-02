@@ -19,9 +19,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-template <typename...> struct tuple;
+template <typename...>
+struct tuple;
 
-template <typename> struct tuple_size;
+template <typename>
+struct tuple_size;
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -31,11 +33,13 @@ template <typename> struct tuple_size;
  *
  * tuple_size的类型别名，便于获取tuple大小
  */
-template <typename T> constexpr size_t tuple_size_v = tuple_size<remove_cvref_t<T>>::value;
+template <typename T>
+constexpr size_t tuple_size_v = tuple_size<remove_cvref_t<T>>::value;
 #endif
 
 
-template <size_t Index, typename... Tuple> struct tuple_element;
+template <size_t Index, typename... Tuple>
+struct tuple_element;
 
 /**
  * @brief tuple_element的类型别名
@@ -44,7 +48,8 @@ template <size_t Index, typename... Tuple> struct tuple_element;
  *
  * tuple_element的类型别名，便于获取tuple元素类型
  */
-template <size_t Index, typename... Types> using tuple_element_t = typename tuple_element<Index, Types...>::type;
+template <size_t Index, typename... Types>
+using tuple_element_t = typename tuple_element<Index, Types...>::type;
 
 /**
  * @brief 获取tuple元素基类型的类型别名
@@ -87,7 +92,8 @@ NEFORCE_END_INNER__
  * pair是一个可以存储两个不同类型的值的模板类，常用于返回多个值。
  * 支持tuple-like接口，可用于结构化绑定。
  */
-template <typename T1, typename T2> struct pair : icommon<pair<T1, T2>> {
+template <typename T1, typename T2>
+struct pair : icommon<pair<T1, T2>> {
     using first_type = T1;  ///< 第一个元素的类型
     using second_type = T2; ///< 第二个元素的类型
 
@@ -448,7 +454,8 @@ template <typename T1, typename T2> struct pair : icommon<pair<T1, T2>> {
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T1, typename T2> pair(T1, T2) -> pair<T1, T2>;
+template <typename T1, typename T2>
+pair(T1, T2) -> pair<T1, T2>;
 #endif
 
 
@@ -483,21 +490,24 @@ make_pair(T1&& x, T2&& y) noexcept(conjunction<is_nothrow_constructible<unwrap_r
  * @brief 获取tuple大小的特化
  * @tparam Types tuple的元素类型
  */
-template <typename... Types> struct tuple_size<tuple<Types...>> : integral_constant<size_t, sizeof...(Types)> {};
+template <typename... Types>
+struct tuple_size<tuple<Types...>> : integral_constant<size_t, sizeof...(Types)> {};
 
 /**
  * @struct tuple_element
  * @brief 获取tuple元素类型的特化
  * @tparam Index 元素索引
  */
-template <size_t Index> struct tuple_element<Index, tuple<>> {};
+template <size_t Index>
+struct tuple_element<Index, tuple<>> {};
 
 /**
  * @brief 获取tuple第一个元素类型的特化
  * @tparam This 第一个元素的类型
  * @tparam Rest 剩余元素的类型
  */
-template <typename This, typename... Rest> struct tuple_element<0, tuple<This, Rest...>> {
+template <typename This, typename... Rest>
+struct tuple_element<0, tuple<This, Rest...>> {
     using type = This;
     using tuple_type = tuple<This, Rest...>;
 };
@@ -517,7 +527,8 @@ struct tuple_element<Index, tuple<This, Rest...>> : tuple_element<Index - 1, tup
  * @tparam Index 元素索引
  * @tparam Types tuple的元素类型
  */
-template <size_t Index, typename... Types> struct tuple_element : tuple_element<Index, tuple<Types...>> {};
+template <size_t Index, typename... Types>
+struct tuple_element : tuple_element<Index, tuple<Types...>> {};
 
 
 /**
@@ -525,7 +536,8 @@ template <size_t Index, typename... Types> struct tuple_element : tuple_element<
  * @tparam T1 第一个元素的类型
  * @tparam T2 第二个元素的类型
  */
-template <typename T1, typename T2> struct tuple_size<pair<T1, T2>> : integral_constant<size_t, 2> {};
+template <typename T1, typename T2>
+struct tuple_size<pair<T1, T2>> : integral_constant<size_t, 2> {};
 
 /**
  * @brief pair的tuple_element特化
@@ -533,7 +545,8 @@ template <typename T1, typename T2> struct tuple_size<pair<T1, T2>> : integral_c
  * @tparam T1 第一个元素的类型
  * @tparam T2 第二个元素的类型
  */
-template <size_t Index, typename T1, typename T2> struct tuple_element<Index, pair<T1, T2>> {
+template <size_t Index, typename T1, typename T2>
+struct tuple_element<Index, pair<T1, T2>> {
     static_assert(Index < 2, "pair element index out of range.");
 
     using type = conditional_t<Index == 0, T1, T2>; ///< 根据索引返回对应类型
@@ -552,8 +565,10 @@ template <size_t Index, typename T1, typename T2> struct tuple_element<Index, pa
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <size_t Index, typename T1, typename T2> struct __pair_get_helper;
-template <typename T1, typename T2> struct __pair_get_helper<0, T1, T2> {
+template <size_t Index, typename T1, typename T2>
+struct __pair_get_helper;
+template <typename T1, typename T2>
+struct __pair_get_helper<0, T1, T2> {
     NEFORCE_NODISCARD constexpr static tuple_element_t<0, pair<T1, T2>>& get(pair<T1, T2>& pir) noexcept {
         return pir.first;
     }
@@ -568,7 +583,8 @@ template <typename T1, typename T2> struct __pair_get_helper<0, T1, T2> {
     }
 };
 
-template <typename T1, typename T2> struct __pair_get_helper<1, T1, T2> {
+template <typename T1, typename T2>
+struct __pair_get_helper<1, T1, T2> {
     NEFORCE_NODISCARD constexpr static tuple_element_t<1, pair<T1, T2>>& get(pair<T1, T2>& pir) noexcept {
         return pir.second;
     }
@@ -612,14 +628,16 @@ NEFORCE_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>& get(pair<T1, T
 /**
  * @brief 按类型获取pair第一个元素的左值引用
  */
-template <typename T1, typename T2> NEFORCE_NODISCARD constexpr T1& get(pair<T1, T2>& pir) noexcept {
+template <typename T1, typename T2>
+NEFORCE_NODISCARD constexpr T1& get(pair<T1, T2>& pir) noexcept {
     return pir.first;
 }
 
 /**
  * @brief 按类型获取pair第二个元素的左值引用
  */
-template <typename T2, typename T1> NEFORCE_NODISCARD constexpr T2& get(pair<T1, T2>& pir) noexcept {
+template <typename T2, typename T1>
+NEFORCE_NODISCARD constexpr T2& get(pair<T1, T2>& pir) noexcept {
     return pir.second;
 }
 
@@ -649,14 +667,16 @@ NEFORCE_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>& get(cons
 /**
  * @brief 按类型获取pair第一个元素的const左值引用
  */
-template <typename T1, typename T2> NEFORCE_NODISCARD constexpr const T1& get(const pair<T1, T2>& pir) noexcept {
+template <typename T1, typename T2>
+NEFORCE_NODISCARD constexpr const T1& get(const pair<T1, T2>& pir) noexcept {
     return pir.first;
 }
 
 /**
  * @brief 按类型获取pair第二个元素的const左值引用
  */
-template <typename T2, typename T1> NEFORCE_NODISCARD constexpr const T2& get(const pair<T1, T2>& pir) noexcept {
+template <typename T2, typename T1>
+NEFORCE_NODISCARD constexpr const T2& get(const pair<T1, T2>& pir) noexcept {
     return pir.second;
 }
 
@@ -687,14 +707,16 @@ NEFORCE_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&& get(pair<T1, 
 /**
  * @brief 按类型获取pair第一个元素的右值引用
  */
-template <typename T1, typename T2> NEFORCE_NODISCARD constexpr T1&& get(pair<T1, T2>&& pir) noexcept {
+template <typename T1, typename T2>
+NEFORCE_NODISCARD constexpr T1&& get(pair<T1, T2>&& pir) noexcept {
     return _NEFORCE forward<T1>(pir.first);
 }
 
 /**
  * @brief 按类型获取pair第二个元素的右值引用
  */
-template <typename T2, typename T1> NEFORCE_NODISCARD constexpr T2&& get(pair<T1, T2>&& pir) noexcept {
+template <typename T2, typename T1>
+NEFORCE_NODISCARD constexpr T2&& get(pair<T1, T2>&& pir) noexcept {
     return _NEFORCE forward<T2>(pir.second);
 }
 
@@ -725,14 +747,16 @@ NEFORCE_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&& get(con
 /**
  * @brief 按类型获取pair第一个元素的const右值引用
  */
-template <typename T1, typename T2> NEFORCE_NODISCARD constexpr const T1&& get(const pair<T1, T2>&& pir) noexcept {
+template <typename T1, typename T2>
+NEFORCE_NODISCARD constexpr const T1&& get(const pair<T1, T2>&& pir) noexcept {
     return _NEFORCE forward<const T1>(pir.first);
 }
 
 /**
  * @brief 按类型获取pair第二个元素的const右值引用
  */
-template <typename T2, typename T1> NEFORCE_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
+template <typename T2, typename T1>
+NEFORCE_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
     return _NEFORCE forward<const T2>(pir.second);
 }
 
@@ -746,7 +770,8 @@ namespace std {
     template <typename T1, typename T2>
     struct tuple_size<_NEFORCE pair<T1, T2>> : _NEFORCE integral_constant<_NEFORCE size_t, 2> {};
 
-    template <_NEFORCE size_t I, typename T1, typename T2> struct tuple_element<I, _NEFORCE pair<T1, T2>> {
+    template <_NEFORCE size_t I, typename T1, typename T2>
+    struct tuple_element<I, _NEFORCE pair<T1, T2>> {
         using type = _NEFORCE tuple_element_t<I, _NEFORCE pair<T1, T2>>;
     };
 } // namespace std

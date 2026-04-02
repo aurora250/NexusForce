@@ -27,7 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @tparam Variant 变体类型
  * @tparam T 要查找的类型
  */
-template <typename Variant, typename T> struct variant_index;
+template <typename Variant, typename T>
+struct variant_index;
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -44,13 +45,15 @@ NEFORCE_INLINE17 constexpr size_t variant_index_v = variant_index<Variant, T>::v
  * @tparam Variant 变体类型
  * @tparam Idx 索引位置
  */
-template <typename Variant, size_t Idx> struct variant_alternative;
+template <typename Variant, size_t Idx>
+struct variant_alternative;
 
 /**
  * @typedef variant_alternative_t
  * @brief variant_alternative的便捷别名，获取变体中指定索引位置的类型
  */
-template <typename Variant, size_t Idx> using variant_alternative_t = typename variant_alternative<Variant, Idx>::type;
+template <typename Variant, size_t Idx>
+using variant_alternative_t = typename variant_alternative<Variant, Idx>::type;
 
 
 /**
@@ -61,7 +64,8 @@ template <typename Variant, size_t Idx> using variant_alternative_t = typename v
  * variant是一个类型安全的联合体，可以在运行时存储多种不同类型的值。
  * 使用函数指针表实现各种操作，支持构造、赋值、访问、销毁等操作。
  */
-template <typename... Types> struct variant : icommon<variant<Types...>> {
+template <typename... Types>
+struct variant : icommon<variant<Types...>> {
     static_assert(sizeof...(Types) > 0, "variant must have at least one type");
 
     static_assert(!is_any_of<none_t, Types...>::value ||
@@ -169,7 +173,8 @@ private:
      *
      * 为每个类型生成对应的常量访问者函数，存储在静态数组中。
      */
-    template <typename Lambda> static const_visitor_function<Lambda>* const_visitors_table() noexcept {
+    template <typename Lambda>
+    static const_visitor_function<Lambda>* const_visitors_table() noexcept {
         static const_visitor_function<Lambda> function_ptrs[sizeof...(Types)] = {
                 [](byte_t const* union_p, Lambda&& lambda) -> _NEFORCE invoke_result_t<Lambda, Types const&> {
                     return _NEFORCE invoke(_NEFORCE forward<Lambda>(lambda), *reinterpret_cast<Types const*>(union_p));
@@ -188,7 +193,8 @@ private:
      *
      * 为每个类型生成对应的访问者函数，存储在静态数组中。
      */
-    template <typename Lambda> static visitor_function<Lambda>* visitors_table() noexcept {
+    template <typename Lambda>
+    static visitor_function<Lambda>* visitors_table() noexcept {
         static visitor_function<Lambda> function_ptrs[sizeof...(Types)] = {
                 [](byte_t* union_p, Lambda&& lambda) -> common_type_t<_NEFORCE invoke_result_t<Lambda, Types&>...> {
                     return _NEFORCE invoke(_NEFORCE forward<Lambda>(lambda), *reinterpret_cast<Types*>(union_p));
@@ -220,11 +226,13 @@ private:
         return false;
     }
 
-    template <size_t I, typename... Args> constexpr bool try_construct_impl(Args&&... args) {
+    template <size_t I, typename... Args>
+    constexpr bool try_construct_impl(Args&&... args) {
         return variant::try_construct_impl_aux<I>(_NEFORCE forward<Args>(args)...);
     }
 
-    template <size_t I = 0, typename... Args> constexpr bool try_construct(Args&&... args) {
+    template <size_t I = 0, typename... Args>
+    constexpr bool try_construct(Args&&... args) {
         return variant::try_construct_impl<I>(_NEFORCE forward<Args>(args)...);
     }
 
@@ -429,7 +437,10 @@ public:
      * @return 指定类型值的引用
      * @throws value_exception 如果类型不匹配
      */
-    template <typename T> NEFORCE_CONSTEXPR20 T& get() { return variant::get<variant_index_v<variant, T>>(); }
+    template <typename T>
+    NEFORCE_CONSTEXPR20 T& get() {
+        return variant::get<variant_index_v<variant, T>>();
+    }
 
     /**
      * @brief 获取指定索引位置的常量引用
@@ -451,7 +462,10 @@ public:
      * @return 指定类型值的常量引用
      * @throws value_exception 如果类型不匹配
      */
-    template <typename T> NEFORCE_CONSTEXPR20 T const& get() const { return get<variant_index_v<variant, T>>(); }
+    template <typename T>
+    NEFORCE_CONSTEXPR20 T const& get() const {
+        return get<variant_index_v<variant, T>>();
+    }
 
     /**
      * @brief 如果存在，获取指定索引位置的指针
@@ -471,7 +485,10 @@ public:
      * @tparam T 类型
      * @return 指定类型值的指针，如果类型不匹配返回nullptr
      */
-    template <typename T> NEFORCE_CONSTEXPR20 T* get_if() noexcept { return get_if<variant_index_v<variant, T>>(); }
+    template <typename T>
+    NEFORCE_CONSTEXPR20 T* get_if() noexcept {
+        return get_if<variant_index_v<variant, T>>();
+    }
 
     /**
      * @brief 如果存在，获取指定索引位置的常量指针
@@ -491,7 +508,8 @@ public:
      * @tparam T 类型
      * @return 指定类型值的常量指针，如果类型不匹配返回nullptr
      */
-    template <typename T> NEFORCE_CONSTEXPR20 T const* get_if() const noexcept {
+    template <typename T>
+    NEFORCE_CONSTEXPR20 T const* get_if() const noexcept {
         return get_if<variant_index_v<variant, T>>();
     }
 
@@ -590,21 +608,26 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename... Args> variant(Args...) -> variant<Args...>;
+template <typename... Args>
+variant(Args...) -> variant<Args...>;
 #endif
 
 /// @cond
-template <typename T, typename... Types> struct variant_alternative<variant<T, Types...>, 0> {
+template <typename T, typename... Types>
+struct variant_alternative<variant<T, Types...>, 0> {
     using type = T;
 };
-template <typename T, typename... Types, size_t Idx> struct variant_alternative<variant<T, Types...>, Idx> {
+template <typename T, typename... Types, size_t Idx>
+struct variant_alternative<variant<T, Types...>, Idx> {
     using type = typename variant_alternative<variant<Types...>, Idx - 1>::type;
 };
 
-template <typename T, typename... Types> struct variant_index<variant<T, Types...>, T> {
+template <typename T, typename... Types>
+struct variant_index<variant<T, Types...>, T> {
     static constexpr size_t value = 0;
 };
-template <typename T0, typename T, typename... Types> struct variant_index<variant<T0, Types...>, T> {
+template <typename T0, typename T, typename... Types>
+struct variant_index<variant<T0, Types...>, T> {
     static constexpr size_t value = variant_index<variant<Types...>, T>::value + 1;
 };
 /// @endcond
@@ -670,11 +693,15 @@ NEFORCE_CONSTEXPR20 const variant_alternative_t<variant<Types...>, Idx>&& get(co
 
 NEFORCE_BEGIN_INNER__
 struct __variant_elem_hasher {
-    template <typename T> constexpr size_t operator()(const T& value) const { return hash<decay_t<T>>{}(value); }
+    template <typename T>
+    constexpr size_t operator()(const T& value) const {
+        return hash<decay_t<T>>{}(value);
+    }
 };
 NEFORCE_END_INNER__
 
-template <typename... Types> NEFORCE_CONSTEXPR20 size_t variant<Types...>::to_hash() const {
+template <typename... Types>
+NEFORCE_CONSTEXPR20 size_t variant<Types...>::to_hash() const {
     constexpr inner::__variant_elem_hasher hasher{};
     return variant::visit(hasher);
 }

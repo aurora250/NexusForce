@@ -5,7 +5,8 @@
 #include "NeForce/network/socket/tcp_acceptor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-template <typename SocketT> class basic_tcp_server {
+template <typename SocketT>
+class basic_tcp_server {
     static_assert(is_base_of_v<tcp_socket, SocketT>, "SocketT must derive from tcp_socket");
 
 public:

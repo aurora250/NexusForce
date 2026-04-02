@@ -14,9 +14,11 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Res, typename... Args> struct unary_or_binary_function {};
+template <typename Res, typename... Args>
+struct unary_or_binary_function {};
 
-template <typename Res, typename T1> struct unary_or_binary_function<Res, T1> : _NEFORCE unary_function<T1, Res> {};
+template <typename Res, typename T1>
+struct unary_or_binary_function<Res, T1> : _NEFORCE unary_function<T1, Res> {};
 
 template <typename Res, typename T1, typename T2>
 struct unary_or_binary_function<Res, T1, T2> : _NEFORCE binary_function<T1, T2, Res> {};
@@ -26,9 +28,11 @@ struct unary_or_binary_function<Res, T1, T2> : _NEFORCE binary_function<T1, T2, 
  * @brief 成员函数特性萃取
  * @tparam Sign 成员函数签名类型
  */
-template <typename Sign> struct mem_func_traits;
+template <typename Sign>
+struct mem_func_traits;
 
-template <typename Res, typename Class, typename... Args> struct mem_func_traits_base {
+template <typename Res, typename Class, typename... Args>
+struct mem_func_traits_base {
     using result_type = Res;                                           ///< 返回值类型
     using maybe_type = unary_or_binary_function<Res, Class*, Args...>; ///< 可能的基类类型
     using arity = integral_constant<size_t, sizeof...(Args)>;          ///< 参数数量
@@ -64,39 +68,50 @@ __NEFORCE_MEMFUNC_TRAITS(&& noexcept, )
 #undef __NEFORCE_MEMFUNC_TRAITS
 
 
-template <typename Func, typename = void_t<>> struct maybe_get_result_type {};
+template <typename Func, typename = void_t<>>
+struct maybe_get_result_type {};
 
-template <typename Func> struct maybe_get_result_type<Func, void_t<typename Func::result_type>> {
+template <typename Func>
+struct maybe_get_result_type<Func, void_t<typename Func::result_type>> {
     using result_type = typename Func::result_type;
 };
 
 
-template <typename Func> struct __weak_result_type_impl : maybe_get_result_type<Func> {};
+template <typename Func>
+struct __weak_result_type_impl : maybe_get_result_type<Func> {};
 
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res(Args...)> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res(Args...)> {
     using result_type = Res;
 };
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res(Args..., ...)> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res(Args..., ...)> {
     using result_type = Res;
 };
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res (*)(Args...)> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res (*)(Args...)> {
     using result_type = Res;
 };
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res (*)(Args..., ...)> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res (*)(Args..., ...)> {
     using result_type = Res;
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res(Args...) noexcept> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res(Args...) noexcept> {
     using result_type = Res;
 };
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res(Args..., ...) noexcept> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res(Args..., ...) noexcept> {
     using result_type = Res;
 };
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res (*)(Args...) noexcept> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res (*)(Args...) noexcept> {
     using result_type = Res;
 };
-template <typename Res, typename... Args> struct __weak_result_type_impl<Res (*)(Args..., ...) noexcept> {
+template <typename Res, typename... Args>
+struct __weak_result_type_impl<Res (*)(Args..., ...) noexcept> {
     using result_type = Res;
 };
 #endif
@@ -105,11 +120,13 @@ template <typename Res, typename... Args> struct __weak_result_type_impl<Res (*)
 template <typename Func, bool = is_member_function_pointer<Func>::value>
 struct __weak_result_type_memfun : __weak_result_type_impl<Func> {};
 
-template <typename MemFunPtr> struct __weak_result_type_memfun<MemFunPtr, true> {
+template <typename MemFunPtr>
+struct __weak_result_type_memfun<MemFunPtr, true> {
     using result_type = typename mem_func_traits<MemFunPtr>::result_type;
 };
 
-template <typename Func, typename Class> struct __weak_result_type_memfun<Func Class::*, false> {};
+template <typename Func, typename Class>
+struct __weak_result_type_memfun<Func Class::*, false> {};
 
 /**
  * @struct weak_result_type
@@ -118,7 +135,8 @@ template <typename Func, typename Class> struct __weak_result_type_memfun<Func C
  *
  * 提取函数的结果类型，支持函数指针、成员函数指针和函数对象。
  */
-template <typename Func> struct weak_result_type : __weak_result_type_memfun<remove_cv_t<Func>> {};
+template <typename Func>
+struct weak_result_type : __weak_result_type_memfun<remove_cv_t<Func>> {};
 
 
 /**
@@ -133,7 +151,8 @@ class mem_func_base : public inner::mem_func_traits<MemberPtr>::maybe_type {
     using Arity = typename Traits::arity;             ///< 参数数量
     using Varargs = typename Traits::vararg;          ///< 是否可变参数
 
-    template <typename Func, typename... BoundArgs> friend struct bind_check_arity;
+    template <typename Func, typename... BoundArgs>
+    friend struct bind_check_arity;
 
     MemberPtr ptr_; ///< 成员指针
 
@@ -164,11 +183,13 @@ public:
 /**
  * @brief 成员对象包装器特化
  */
-template <typename MemberObjPtr> class mem_func_base<MemberObjPtr, false> {
+template <typename MemberObjPtr>
+class mem_func_base<MemberObjPtr, false> {
     using Arity = integral_constant<size_t, 0>;
     using Varargs = false_type;
 
-    template <typename Func, typename... BoundArgs> friend struct bind_check_arity;
+    template <typename Func, typename... BoundArgs>
+    friend struct bind_check_arity;
 
     MemberObjPtr ptr_;
 
@@ -194,9 +215,11 @@ public:
     }
 };
 
-template <typename MemberPointer> struct mem_func;
+template <typename MemberPointer>
+struct mem_func;
 
-template <typename Res, typename Class> struct mem_func<Res Class::*> : mem_func_base<Res Class::*> {
+template <typename Res, typename Class>
+struct mem_func<Res Class::*> : mem_func_base<Res Class::*> {
     using mem_func_base<Res Class::*>::mem_func_base;
 };
 
@@ -215,13 +238,15 @@ NEFORCE_END_INNER__
  * @brief 判断是否为绑定表达式
  * @tparam T 待判断类型
  */
-template <typename T> struct is_bind_expression : false_type {};
+template <typename T>
+struct is_bind_expression : false_type {};
 
 /**
  * @var is_bind_expression_v
  * @brief is_bind_expression的便捷变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr bool is_bind_expression_v = is_bind_expression<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_bind_expression_v = is_bind_expression<T>::value;
 
 
 /**
@@ -229,13 +254,15 @@ template <typename T> NEFORCE_INLINE17 constexpr bool is_bind_expression_v = is_
  * @brief 占位符类型
  * @tparam Num 占位符编号
  */
-template <uint32_t Num> struct placeholder : uint32_constant<Num> {};
+template <uint32_t Num>
+struct placeholder : uint32_constant<Num> {};
 
 /**
  * @var placeholder_v
  * @brief placeholder值的便捷变量模板
  */
-template <uint32_t Num> NEFORCE_INLINE17 constexpr uint32_t placeholder_v = placeholder<Num>::value;
+template <uint32_t Num>
+NEFORCE_INLINE17 constexpr uint32_t placeholder_v = placeholder<Num>::value;
 
 
 /**
@@ -243,15 +270,18 @@ template <uint32_t Num> NEFORCE_INLINE17 constexpr uint32_t placeholder_v = plac
  * @brief 判断是否为占位符
  * @tparam T 待检查类型
  */
-template <typename T> struct is_placeholder;
+template <typename T>
+struct is_placeholder;
 
-template <uint32_t Num> struct is_placeholder<placeholder<Num>> : true_type {};
+template <uint32_t Num>
+struct is_placeholder<placeholder<Num>> : true_type {};
 
 /**
  * @var is_placeholder_v
  * @brief is_placeholder的便捷变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr bool is_placeholder_v = is_placeholder<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_placeholder_v = is_placeholder<T>::value;
 
 /**
  * @namespace placeholders
@@ -311,14 +341,17 @@ NEFORCE_BEGIN_INNER__
 template <typename Arg, bool IsBindExp = is_bind_expression_v<Arg>, bool IsPlaceholder = is_placeholder_v<Arg>>
 class bind_arg_mapper;
 
-template <typename T> class bind_arg_mapper<reference_wrapper<T>, false, false> {
+template <typename T>
+class bind_arg_mapper<reference_wrapper<T>, false, false> {
 public:
-    template <typename CVRef, typename Tuple> NEFORCE_CONSTEXPR20 T& operator()(CVRef& arg, Tuple&) const volatile {
+    template <typename CVRef, typename Tuple>
+    NEFORCE_CONSTEXPR20 T& operator()(CVRef& arg, Tuple&) const volatile {
         return arg.get();
     }
 };
 
-template <typename Arg> class bind_arg_mapper<Arg, true, false> {
+template <typename Arg>
+class bind_arg_mapper<Arg, true, false> {
 public:
     template <typename CVArg, typename... Args>
     NEFORCE_CONSTEXPR20 auto operator()(CVArg& arg, tuple<Args...>& tuple_ref) const volatile
@@ -336,7 +369,8 @@ private:
 };
 
 
-template <typename Arg> class bind_arg_mapper<Arg, false, true> {
+template <typename Arg>
+class bind_arg_mapper<Arg, false, true> {
     template <size_t I, typename Tuple>
     using safe_tuple_element_t = enable_if_t<(I < tuple_size_v<Tuple>), tuple_element_t<I, Tuple>>;
 
@@ -349,7 +383,8 @@ public:
     }
 };
 
-template <typename Arg> class bind_arg_mapper<Arg, false, false> {
+template <typename Arg>
+class bind_arg_mapper<Arg, false, false> {
 public:
     template <typename CVArg, typename Tuple>
     NEFORCE_CONSTEXPR20 CVArg&& operator()(CVArg&& arg, Tuple&) const volatile {
@@ -376,7 +411,8 @@ NEFORCE_END_INNER__
  * 实现通用的函数绑定功能，支持任意可调用对象和参数绑定。
  * 提供占位符参数重排、嵌套绑定等功能。
  */
-template <typename Sign> class binder;
+template <typename Sign>
+class binder;
 
 /**
  * @brief 通用函数绑定器的部分特化
@@ -401,7 +437,8 @@ private:
      * @tparam BoundArg 绑定参数类型
      * @tparam CallArgs 调用参数元组类型
      */
-    template <typename BoundArg, typename CallArgs> struct arg_mapper_result {
+    template <typename BoundArg, typename CallArgs>
+    struct arg_mapper_result {
         using type = decltype(inner::bind_arg_mapper<remove_cv_t<BoundArg>>()(_NEFORCE declval<BoundArg&>(),
                                                                               _NEFORCE declval<CallArgs&>()));
     };
@@ -444,7 +481,8 @@ private:
      * @brief 依赖类型，用于SFINAE
      * @tparam CallArgs 调用参数元组类型
      */
-    template <typename CallArgs> using dependent = enable_if_t<static_cast<bool>(tuple_size_v<CallArgs> + 1), Func>;
+    template <typename CallArgs>
+    using dependent = enable_if_t<static_cast<bool>(tuple_size_v<CallArgs> + 1), Func>;
 
 private:
     /**
@@ -498,7 +536,8 @@ public:
      * @param args 调用参数
      * @return 函数调用结果
      */
-    template <typename... Args> NEFORCE_CONSTEXPR20 auto operator()(Args&&... args) -> result_type<tuple<Args&&...>> {
+    template <typename... Args>
+    NEFORCE_CONSTEXPR20 auto operator()(Args&&... args) -> result_type<tuple<Args&&...>> {
         using Res = result_type<tuple<Args&&...>>;
         return binder::call<Res>(_NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...), BoundIndexes());
     }
@@ -515,7 +554,8 @@ public:
         return binder::call_const<Res>(_NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...), BoundIndexes());
     }
 
-    template <typename... Args> void operator()(Args&&... args) const volatile = delete;
+    template <typename... Args>
+    void operator()(Args&&... args) const volatile = delete;
 };
 
 
@@ -527,7 +567,8 @@ public:
  *
  * 与binder类似，用于强制类型转换。
  */
-template <typename Res, typename Sign> class bindrer;
+template <typename Res, typename Sign>
+class bindrer;
 
 /**
  * @brief 指定返回类型的函数绑定器部分特化
@@ -535,7 +576,8 @@ template <typename Res, typename Sign> class bindrer;
  * @tparam Func 可调用对象类型
  * @tparam BoundArgs 绑定的参数类型
  */
-template <typename Res, typename Func, typename... BoundArgs> class bindrer<Res, Func(BoundArgs...)> {
+template <typename Res, typename Func, typename... BoundArgs>
+class bindrer<Res, Func(BoundArgs...)> {
 private:
     using BoundIndexes = build_index_tuple_t<sizeof...(BoundArgs)>; ///< 绑定参数的索引序列
 
@@ -596,7 +638,8 @@ public:
      * @param args 调用参数
      * @return 转换为Res类型的函数调用结果
      */
-    template <typename... Args> NEFORCE_CONSTEXPR20 result_type operator()(Args&&... args) {
+    template <typename... Args>
+    NEFORCE_CONSTEXPR20 result_type operator()(Args&&... args) {
         return bindrer::call<Res>(_NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...), BoundIndexes());
     }
 
@@ -606,22 +649,28 @@ public:
      * @param args 调用参数
      * @return 转换为Res类型的函数调用结果
      */
-    template <typename... Args> NEFORCE_CONSTEXPR20 result_type operator()(Args&&... args) const {
+    template <typename... Args>
+    NEFORCE_CONSTEXPR20 result_type operator()(Args&&... args) const {
         return bindrer::call<Res>(_NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...), BoundIndexes());
     }
 
-    template <typename... Args> void operator()(Args&&... args) const volatile = delete;
+    template <typename... Args>
+    void operator()(Args&&... args) const volatile = delete;
 };
 
 
 /// @cond
 
-template <typename Sign> struct is_bind_expression<binder<Sign>> : true_type {};
-template <typename Res, typename Sign> struct is_bind_expression<bindrer<Res, Sign>> : true_type {};
+template <typename Sign>
+struct is_bind_expression<binder<Sign>> : true_type {};
+template <typename Res, typename Sign>
+struct is_bind_expression<bindrer<Res, Sign>> : true_type {};
 
-#define __NEFORCE_EXPAND_BIND_EXP(CV)                                                   \
-    template <typename Sign> struct is_bind_expression<CV binder<Sign>> : true_type {}; \
-    template <typename Res, typename Sign> struct is_bind_expression<CV bindrer<Res, Sign>> : true_type {};
+#define __NEFORCE_EXPAND_BIND_EXP(CV)                          \
+    template <typename Sign>                                   \
+    struct is_bind_expression<CV binder<Sign>> : true_type {}; \
+    template <typename Res, typename Sign>                     \
+    struct is_bind_expression<CV bindrer<Res, Sign>> : true_type {};
 
 NEFORCE_MACRO_RANGES_CV(__NEFORCE_EXPAND_BIND_EXP)
 #undef __NEFORCE_EXPAND_BIND_EXP
@@ -636,7 +685,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 检查绑定参数数量是否与函数期望的参数数量匹配。
  */
-template <typename Func, typename... BoundArgs> struct bind_check_arity {};
+template <typename Func, typename... BoundArgs>
+struct bind_check_arity {};
 
 template <typename Ret, typename... Args, typename... BoundArgs>
 struct bind_check_arity<Ret (*)(Args...), BoundArgs...> {
@@ -648,7 +698,8 @@ struct bind_check_arity<Ret (*)(Args..., ...), BoundArgs...> {
     static_assert(sizeof...(BoundArgs) >= sizeof...(Args), "Wrong number of arguments for function");
 };
 
-template <typename T, typename Class, typename... BoundArgs> struct bind_check_arity<T Class::*, BoundArgs...> {
+template <typename T, typename Class, typename... BoundArgs>
+struct bind_check_arity<T Class::*, BoundArgs...> {
     using Arity = typename mem_func<T Class::*>::Arity;
     using Varargs = typename mem_func<T Class::*>::Varargs;
     static_assert(Varargs::value ? sizeof...(BoundArgs) >= Arity::value + 1 : sizeof...(BoundArgs) == Arity::value + 1,
@@ -671,7 +722,8 @@ struct bind_helper : inner::bind_check_arity<decay_t<Func>, BoundArgs...> {
     using type = binder<func_type(decay_t<BoundArgs>...)>; ///< 推导出的binder类型
 };
 
-template <typename Func, typename... BoundArgs> struct bind_helper<true, Func, BoundArgs...> {};
+template <typename Func, typename... BoundArgs>
+struct bind_helper<true, Func, BoundArgs...> {};
 
 /**
  * @typedef bind_helper_t
@@ -745,7 +797,8 @@ NEFORCE_NODISCARD constexpr bindr_helper_t<Res, Func, BoundArgs...> bind(Func&& 
  *
  * 将参数绑定到函数的前几个位置，不支持占位符参数重排。
  */
-template <typename Func, typename... BoundArgs> struct binder_front {
+template <typename Func, typename... BoundArgs>
+struct binder_front {
     static_assert(is_move_constructible<Func>::value, "Func should be move constructible");
 #ifdef NEFORCE_STANDARD_17
     static_assert((is_move_constructible_v<BoundArgs> && ...), "Args should be move constructible");
@@ -854,7 +907,8 @@ public:
  * @tparam Func 函数类型
  * @tparam Args 绑定参数类型
  */
-template <typename Func, typename... Args> using binder_front_type = binder_front<decay_t<Func>, decay_t<Args>...>;
+template <typename Func, typename... Args>
+using binder_front_type = binder_front<decay_t<Func>, decay_t<Args>...>;
 
 /**
  * @brief bind_front函数

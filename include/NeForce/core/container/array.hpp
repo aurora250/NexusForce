@@ -168,7 +168,8 @@ public:
  * @note 大小在编译时确定，分配在栈上
  * @note 支持结构化绑定和元组接口
  */
-template <typename T, size_t Size> class array : public icollector<array<T, Size>> {
+template <typename T, size_t Size>
+class array : public icollector<array<T, Size>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
 
 public:
@@ -412,7 +413,8 @@ struct empty_array_element_tag {
  *
  * 处理空数组的特殊情况，优化存储和操作。
  */
-template <typename T> class array<T, 0> : public icollector<array<T, 0>> {
+template <typename T>
+class array<T, 0> : public icollector<array<T, 0>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
 
 public:
@@ -531,7 +533,8 @@ public:
 
 #ifdef NEFORCE_STANDARD_17
 NEFORCE_BEGIN_INNER__
-template <typename First, typename... Rest> struct __array_same {
+template <typename First, typename... Rest>
+struct __array_same {
     static_assert(conjunction_v<is_same<First, Rest>...>, "array types mismatch.");
     using type = First;
 };
@@ -550,7 +553,8 @@ array(First, Rest...) -> array<typename inner::__array_same<First, Rest...>::typ
  * @param arr 数组引用
  * @return 指定位置元素的引用
  */
-template <size_t Idx, typename T, size_t Size> NEFORCE_NODISCARD constexpr T& get(array<T, Size>& arr) noexcept {
+template <size_t Idx, typename T, size_t Size>
+NEFORCE_NODISCARD constexpr T& get(array<T, Size>& arr) noexcept {
     static_assert(Idx < Size, "array index out of bounds");
     return arr[Idx];
 }
@@ -577,7 +581,8 @@ NEFORCE_NODISCARD constexpr const T& get(const array<T, Size>& arr) noexcept {
  * @param arr 数组引用
  * @return 指定位置元素的右值引用
  */
-template <size_t Idx, typename T, size_t Size> NEFORCE_NODISCARD constexpr T&& get(array<T, Size>&& arr) noexcept {
+template <size_t Idx, typename T, size_t Size>
+NEFORCE_NODISCARD constexpr T&& get(array<T, Size>&& arr) noexcept {
     static_assert(Idx < Size, "array index out of bounds");
     return _NEFORCE move(arr[Idx]);
 }
@@ -610,7 +615,8 @@ NEFORCE_NODISCARD constexpr const T&& get(const array<T, Size>&& arr) noexcept {
  * @tparam Size 数组大小
  * @note 支持结构化绑定
  */
-template <typename T, size_t Size> struct tuple_size<array<T, Size>> : integral_constant<size_t, Size> {};
+template <typename T, size_t Size>
+struct tuple_size<array<T, Size>> : integral_constant<size_t, Size> {};
 
 /**
  * @brief 数组的元组元素类型特化
@@ -618,7 +624,8 @@ template <typename T, size_t Size> struct tuple_size<array<T, Size>> : integral_
  * @tparam T 元素类型
  * @tparam Size 数组大小
  */
-template <size_t Idx, typename T, size_t Size> struct tuple_element<Idx, array<T, Size>> {
+template <size_t Idx, typename T, size_t Size>
+struct tuple_element<Idx, array<T, Size>> {
     static_assert(Idx < Size, "array index is in range");
     using type = T;
 };

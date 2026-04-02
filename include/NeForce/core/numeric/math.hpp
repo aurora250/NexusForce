@@ -93,7 +93,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo(const uint32_t n) { 
  * @param angular 角度值
  * @return 对应的弧度值
  */
-template <typename T> NEFORCE_PURE_FUNCTION constexpr T angular2radian(const T angular) noexcept {
+template <typename T>
+NEFORCE_PURE_FUNCTION constexpr T angular2radian(const T angular) noexcept {
     static_assert(is_arithmetic_v<T>, "arithmetic required");
     return angular * constants::PI / constants::SEMI_CIRCLE;
 }
@@ -104,7 +105,8 @@ template <typename T> NEFORCE_PURE_FUNCTION constexpr T angular2radian(const T a
  * @param radian 弧度值
  * @return 对应的角度值
  */
-template <typename T> NEFORCE_PURE_FUNCTION constexpr T radian2angular(const T radian) noexcept {
+template <typename T>
+NEFORCE_PURE_FUNCTION constexpr T radian2angular(const T radian) noexcept {
     static_assert(is_arithmetic_v<T>, "arithmetic required");
     return radian * (constants::SEMI_CIRCLE / constants::PI);
 }
@@ -115,7 +117,8 @@ template <typename T> NEFORCE_PURE_FUNCTION constexpr T radian2angular(const T r
  * @param x 原数值
  * @return 绝对值
  */
-template <typename T> NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_signed_v<T>, T> absolute(const T x) noexcept {
+template <typename T>
+NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_signed_v<T>, T> absolute(const T x) noexcept {
     return x > T(0) ? x : -x;
 }
 
@@ -126,7 +129,8 @@ template <typename T> NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_signed_v<T
  * @return 原数值
  */
 
-template <typename T> NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_unsigned_v<T>, T> absolute(const T x) noexcept {
+template <typename T>
+NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_unsigned_v<T>, T> absolute(const T x) noexcept {
     return x;
 }
 
@@ -138,7 +142,10 @@ template <typename T> NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_unsigned_v
  *
  * 递归sum的终止位置
  */
-template <typename T> NEFORCE_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept { return x; }
+template <typename T>
+NEFORCE_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept {
+    return x;
+}
 
 /**
  * @brief 多参数求和
@@ -170,7 +177,8 @@ NEFORCE_CONST_FUNCTION constexpr decltype(auto) average(Args... args) {
  * @param value 原数值
  * @return 符号值：正数返回1，负数返回-1，零返回0
  */
-template <typename T> NEFORCE_CONSTEXPR14 int sign(const T& value) noexcept {
+template <typename T>
+NEFORCE_CONSTEXPR14 int sign(const T& value) noexcept {
     static_assert(is_arithmetic_v<T>, "arithmetic required");
     constexpr T zero = T(0);
     if (value > zero) {
@@ -189,7 +197,8 @@ template <typename T> NEFORCE_CONSTEXPR14 int sign(const T& value) noexcept {
  * @param n 第二个数
  * @return 最大公约数
  */
-template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
+template <typename T>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
     T x = _NEFORCE absolute(m), y = _NEFORCE absolute(n);
     constexpr T zero = T(0);
     while (y != zero) {
@@ -207,7 +216,8 @@ template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd(const T& 
  * @param n 第二个数
  * @return 最小公倍数
  */
-template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
+template <typename T>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
     return (m / _NEFORCE gcd(m, n)) * n;
 }
 
@@ -220,7 +230,8 @@ template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& 
  * @return x除以y的余数
  * @exception math_exception 除数为0时
  */
-template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y) {
+template <typename T>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y) {
     static_assert(is_arithmetic_v<T>, "arithmetic required");
     if (y == 0) {
         NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
@@ -238,7 +249,8 @@ template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(con
  *
  * 使用快速幂算法实现。
  */
-template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T power(const T& x, uint32_t n) noexcept {
+template <typename T>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T power(const T& x, uint32_t n) noexcept {
     static_assert(is_arithmetic_v<T>, "arithmetic required");
     if (n == 0) {
         return 1;
@@ -272,7 +284,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential(const uint32_t n
  *
  * 使用反正切泰勒展开计算。
  */
-template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_e(const T x) {
+template <typename T>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_e(const T x) {
     static_assert(is_floating_point_v<T>, "floating point required");
     if (x <= 0) {
         NEFORCE_THROW_EXCEPTION(math_exception("Logarithm domain error"));
@@ -296,7 +309,8 @@ template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_e(co
  * @param base 底数
  * @return 以base为底x的对数
  */
-template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(const T x, const uint32_t base) {
+template <typename T>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(const T x, const uint32_t base) {
     const auto under = logarithm_e(static_cast<float64_t>(base));
     if (under == 0) {
         NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
@@ -310,7 +324,8 @@ template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(cons
  * @param x 真数
  * @return log₂(x)
  */
-template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_2(const T x) {
+template <typename T>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_2(const T x) {
     return _NEFORCE logarithm(x, 2);
 }
 
@@ -320,7 +335,8 @@ template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_2(co
  * @param x 真数
  * @return log₁₀(x)
  */
-template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_10(const T x) {
+template <typename T>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_10(const T x) {
     return _NEFORCE logarithm(x, 10);
 }
 

@@ -35,7 +35,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此类不是线程安全的，多线程环境下需要外部同步
  */
-template <typename Key, typename Value> class lru_cache {
+template <typename Key, typename Value>
+class lru_cache {
 public:
     using key_type = Key;                 ///< 键类型
     using value_type = Value;             ///< 值类型
@@ -202,7 +203,8 @@ public:
      *
      * 遍历所有缓存项，删除满足谓词条件的项。
      */
-    template <typename Predicate> void remove_if(Predicate pred) {
+    template <typename Predicate>
+    void remove_if(Predicate pred) {
         for (auto it = list_.begin(); it != list_.end();) {
             if (pred(*it)) {
                 map_.erase(it->first);

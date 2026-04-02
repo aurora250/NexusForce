@@ -175,6 +175,7 @@ void http_server_base::session_manager::set_cleanup_interval(const seconds inter
 void http_server_base::session_manager::set_max_sessions(const size_t max) noexcept { max_sessions_ = max; }
 
 string http_server_base::compute_websocket_accept(const string_view key) {
+    constexpr string_view websocket_guid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
     const string combined = string(key) + websocket_guid;
     const string sha1_result = sha1(combined);
     return base64_encode(cbyte_view{reinterpret_cast<const byte_t*>(sha1_result.data()), sha1_result.size()});

@@ -142,39 +142,39 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         flags |= O_CREAT | O_EXCL;
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
         if (handle_ == invalid_handle) {
-            NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
         }
 
         if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
             ::close(handle_);
             handle_ = invalid_handle;
             ::shm_unlink(shm_name.data());
-            NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
         }
     } else if (mode == open_mode::open_only) {
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
         if (handle_ == invalid_handle) {
-            NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
         }
 
         struct ::stat stat_buf;
         if (::fstat(handle_, &stat_buf) == -1) {
             ::close(handle_);
             handle_ = invalid_handle;
-            NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
         }
         size_ = static_cast<size_t>(stat_buf.st_size);
     } else {
         handle_ = ::shm_open(shm_name.data(), flags | O_CREAT, 0666);
         if (handle_ == invalid_handle) {
-            NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
         }
 
         struct ::stat stat_buf;
         if (::fstat(handle_, &stat_buf) == -1) {
             ::close(handle_);
             handle_ = invalid_handle;
-            NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
         }
 
         if (stat_buf.st_size == 0) {
@@ -182,7 +182,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
                 ::close(handle_);
                 handle_ = invalid_handle;
                 ::shm_unlink(shm_name.data());
-                NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+                NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
             }
         } else {
             size_ = static_cast<size_t>(stat_buf.st_size);
@@ -235,7 +235,7 @@ void* share_memory::map(size_t offset, size_t length) {
 
     if (mapped_addr_ == MAP_FAILED) {
         mapped_addr_ = nullptr;
-        NEFORCE_THROW_EXCEPTION(shared_memory_exception(::strerror(errno)));
+        NEFORCE_THROW_EXCEPTION(share_memory_exception(::strerror(errno)));
     }
 #endif
 

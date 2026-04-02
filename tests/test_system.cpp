@@ -281,7 +281,6 @@ void test_atomic() {
     aptr.store(make_shared<int>(3));
     println(*aptr.load().get());
 
-    shared_ptr<int> p = make_shared<int>(4);
-    atomic<weak_ptr<int>> wptr{p};
+    atomic<weak_ptr<int>> wptr{aptr.load()};
     println(wptr.load().expired());
 }

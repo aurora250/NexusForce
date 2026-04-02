@@ -25,7 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 使用delete运算符释放单个对象的默认删除器。
  */
-template <typename T> struct default_delete {
+template <typename T>
+struct default_delete {
     constexpr default_delete() noexcept = default; ///< 默认构造函数
 
     /**
@@ -46,14 +47,18 @@ template <typename T> struct default_delete {
      * @tparam U 新的元素类型
      * @return 绑定到U的新删除器
      */
-    template <typename U> NEFORCE_CONSTEXPR20 default_delete<U> rebind() && noexcept { return default_delete<U>(); }
+    template <typename U>
+    NEFORCE_CONSTEXPR20 default_delete<U> rebind() && noexcept {
+        return default_delete<U>();
+    }
 };
 
 /**
  * @brief 数组特化的默认删除器
  * @tparam T 数组元素类型
  */
-template <typename T> struct default_delete<T[]> {
+template <typename T>
+struct default_delete<T[]> {
     constexpr default_delete() noexcept = default; ///< 默认构造函数
 
     /**
@@ -78,7 +83,10 @@ template <typename T> struct default_delete<T[]> {
      * @tparam U 新的数组元素类型
      * @return 绑定到U[]的新删除器
      */
-    template <typename U> NEFORCE_CONSTEXPR20 default_delete<U[]> rebind() && noexcept { return default_delete<U[]>(); }
+    template <typename U>
+    NEFORCE_CONSTEXPR20 default_delete<U[]> rebind() && noexcept {
+        return default_delete<U[]>();
+    }
 };
 
 /** @} */ // Deleter

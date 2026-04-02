@@ -4,11 +4,15 @@
 #    include <handleapi.h>
 #    include <windef.h>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <errno.h>
+#    include <time.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
-    template <typename Rep, typename Period> struct timespec relative_to_timespec(const nanoseconds relative) noexcept {
+    struct timespec relative_to_timespec(const nanoseconds relative) noexcept {
         struct ::timespec now{};
         ::clock_gettime(CLOCK_REALTIME, &now);
 

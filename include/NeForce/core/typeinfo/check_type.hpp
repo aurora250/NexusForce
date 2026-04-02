@@ -33,10 +33,14 @@ private:
     bool is_compact_; ///< 是否为紧凑模式
     string& str_;     ///< 目标字符串引用
 
-    template <typename T> static NEFORCE_CONSTEXPR20 bool check_empty(const T&) noexcept { return false; }
+    template <typename T>
+    static NEFORCE_CONSTEXPR20 bool check_empty(const T&) noexcept {
+        return false;
+    }
     static NEFORCE_CONSTEXPR20 bool check_empty(const char* value) noexcept { return !value || value[0] == 0; }
 
-    template <typename T> NEFORCE_CONSTEXPR20 void out(const T& value) {
+    template <typename T>
+    NEFORCE_CONSTEXPR20 void out(const T& value) {
         if (this->check_empty(value)) {
             return;
         }
@@ -59,7 +63,8 @@ public:
         return *this;
     }
 
-    template <typename T1, typename... T> NEFORCE_CONSTEXPR20 output& operator()(const T1& value, const T&... args) {
+    template <typename T1, typename... T>
+    NEFORCE_CONSTEXPR20 output& operator()(const T1& value, const T&... args) {
         this->out(value);
         return operator()(args...);
     }
@@ -72,7 +77,8 @@ public:
  *
  * 在构造时添加左括号，析构时添加右括号。
  */
-template <bool IsStart> struct bracket {
+template <bool IsStart>
+struct bracket {
     output& out_;
 
     NEFORCE_CONSTEXPR20 bracket(output& out, const char* = nullptr) :
@@ -83,7 +89,8 @@ template <bool IsStart> struct bracket {
     NEFORCE_CONSTEXPR20 ~bracket() { out_.compact()(")"); }
 };
 
-template <> struct bracket<false> {
+template <>
+struct bracket<false> {
     NEFORCE_CONSTEXPR20 bracket(output& out, const char* str = nullptr) { out(str); }
 };
 
@@ -94,14 +101,17 @@ template <> struct bracket<false> {
  *
  * 管理数组边界的添加，在析构时添加边界信息。
  */
-template <size_t N = 0> struct bound {
+template <size_t N = 0>
+struct bound {
 private:
-    template <size_t NN> NEFORCE_CONSTEXPR20 enable_if_t<NN == 0> __bound_dispatch() const {
+    template <size_t NN>
+    NEFORCE_CONSTEXPR20 enable_if_t<NN == 0> __bound_dispatch() const {
         out_("[]");
         return;
     }
 
-    template <size_t NN> NEFORCE_CONSTEXPR20 enable_if_t<NN != 0> __bound_dispatch() const {
+    template <size_t NN>
+    NEFORCE_CONSTEXPR20 enable_if_t<NN != 0> __bound_dispatch() const {
         out_("[").compact()(NN).compact()("]");
         return;
     }
@@ -155,7 +165,8 @@ string NEFORCE_API real_symbol_name(string name);
  *
  * 递归遍历类型结构，生成完整的类型名称字符串。
  */
-template <typename T, bool IsBase = false> struct check {
+template <typename T, bool IsBase = false>
+struct check {
     output out_;
 
     NEFORCE_CONSTEXPR20 check(const output& out) :
@@ -174,7 +185,8 @@ template <typename T, bool IsBase = false> struct check {
  * @tparam T 元素类型
  * @tparam IsBase 是否为基类部分
  */
-template <typename T, bool IsBase> struct check<T[], IsBase> : check<T, true> {
+template <typename T, bool IsBase>
+struct check<T[], IsBase> : check<T, true> {
     using base_t = check<T, true>;
     using base_t::out_;
 
@@ -187,15 +199,16 @@ template <typename T, bool IsBase> struct check<T[], IsBase> : check<T, true> {
     bracket_(out_) {}
 };
 
-#define CHECK_TYPE__(OPT)                                                             \
-    template <typename T, bool IsBase> struct check<T OPT, IsBase> : check<T, true> { \
-        using base_t = check<T, true>;                                                \
-        using base_t::out_;                                                           \
-                                                                                      \
-        NEFORCE_CONSTEXPR20 check(const output& out) :                                \
-        base_t(out) {                                                                 \
-            out_(#OPT);                                                               \
-        }                                                                             \
+#define CHECK_TYPE__(OPT)                              \
+    template <typename T, bool IsBase>                 \
+    struct check<T OPT, IsBase> : check<T, true> {     \
+        using base_t = check<T, true>;                 \
+        using base_t::out_;                            \
+                                                       \
+        NEFORCE_CONSTEXPR20 check(const output& out) : \
+        base_t(out) {                                  \
+            out_(#OPT);                                \
+        }                                              \
     };
 
 CHECK_TYPE__(const)
@@ -207,7 +220,8 @@ CHECK_TYPE__(*)
 #undef CHECK_TYPE__
 
 
-template <bool IsStart, typename... P> struct parameter;
+template <bool IsStart, typename... P>
+struct parameter;
 
 /**
  * @struct parameter
@@ -217,7 +231,8 @@ template <bool IsStart, typename... P> struct parameter;
  *
  * 递归处理函数参数列表。
  */
-template <bool IsStart, typename P1, typename... P> struct parameter<IsStart, P1, P...> {
+template <bool IsStart, typename P1, typename... P>
+struct parameter<IsStart, P1, P...> {
     output& out_;
 
     NEFORCE_CONSTEXPR20 parameter(output& out) noexcept :
@@ -235,7 +250,8 @@ template <bool IsStart, typename P1, typename... P> struct parameter<IsStart, P1
  * @brief 参数处理特化（无参数）
  * @tparam IsStart 是否为开始
  */
-template <bool IsStart> struct parameter<IsStart> {
+template <bool IsStart>
+struct parameter<IsStart> {
     output& out_;
 
     NEFORCE_CONSTEXPR20 parameter(output& out) noexcept :
@@ -283,7 +299,8 @@ CHECK_TYPE_ARRAY__(const volatile, , )
  * @tparam IsBase 是否为基类部分
  * @tparam P 参数类型包
  */
-template <typename T, bool IsBase, typename... P> struct check<T(P...), IsBase> : check<T, true> {
+template <typename T, bool IsBase, typename... P>
+struct check<T(P...), IsBase> : check<T, true> {
     using base_t = check<T, true>;
     using base_t::out_;
 
@@ -302,7 +319,8 @@ template <typename T, bool IsBase, typename... P> struct check<T(P...), IsBase> 
  * @tparam IsBase 是否为基类部分
  * @tparam C 类类型
  */
-template <typename T, bool IsBase, typename C> struct check<T C::*, IsBase> : check<T, true> {
+template <typename T, bool IsBase, typename C>
+struct check<T C::*, IsBase> : check<T, true> {
     using base_t = check<T, true>;
     using base_t::out_;
 
@@ -332,19 +350,20 @@ struct check<T (C::*)(P...), IsBase> : check<T(P...), true> {
     }
 };
 
-#define CHECK_TYPE_MEM_FUNC__(...)                                                                                   \
-    template <typename T, bool IsBase, typename C, typename... P> struct check<T (C::*)(P...) __VA_ARGS__, IsBase> { \
-        at_destruct cv_;                                                                                             \
-        check<T(P...), true> base_;                                                                                  \
-        output& out_ = base_.out_;                                                                                   \
-                                                                                                                     \
-        NEFORCE_CONSTEXPR20 check(const output& out) :                                                               \
-        cv_(base_.out_),                                                                                             \
-        base_(out) {                                                                                                 \
-            cv_.set_str(#__VA_ARGS__);                                                                               \
-            check<C>{out_};                                                                                          \
-            out_.compact()("::*");                                                                                   \
-        }                                                                                                            \
+#define CHECK_TYPE_MEM_FUNC__(...)                                \
+    template <typename T, bool IsBase, typename C, typename... P> \
+    struct check<T (C::*)(P...) __VA_ARGS__, IsBase> {            \
+        at_destruct cv_;                                          \
+        check<T(P...), true> base_;                               \
+        output& out_ = base_.out_;                                \
+                                                                  \
+        NEFORCE_CONSTEXPR20 check(const output& out) :            \
+        cv_(base_.out_),                                          \
+        base_(out) {                                              \
+            cv_.set_str(#__VA_ARGS__);                            \
+            check<C>{out_};                                       \
+            out_.compact()("::*");                                \
+        }                                                         \
     };
 
 CHECK_TYPE_MEM_FUNC__(const)
@@ -366,7 +385,8 @@ NEFORCE_END_INNER__
  * @tparam T 要检查的类型
  * @return 类型的可读字符串表示
  */
-template <typename T> NEFORCE_CONSTEXPR20 string check_type() {
+template <typename T>
+NEFORCE_CONSTEXPR20 string check_type() {
     string str;
     inner::check<T>{str};
     return _NEFORCE move(str);

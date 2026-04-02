@@ -59,15 +59,18 @@ public:
 };
 
 
-template <> struct neforce::reflect::type_name<shape> {
+template <>
+struct neforce::reflect::type_name<shape> {
     static constexpr string_view value = "shape";
 };
 
-template <> struct neforce::reflect::type_name<circle> {
+template <>
+struct neforce::reflect::type_name<circle> {
     static constexpr string_view value = "circle";
 };
 
-template <> struct neforce::reflect::type_name<rectangle> {
+template <>
+struct neforce::reflect::type_name<rectangle> {
     static constexpr string_view value = "rectangle";
 };
 

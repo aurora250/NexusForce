@@ -689,18 +689,6 @@ private:
     int64_t offset_seconds_ = 0; ///< 时区偏移
     bool has_timezone_ = false;  ///< 是否有时区信息
 
-public:
-    /**
-     * @brief 星期名称缩写
-     */
-    static constexpr string_view weekdays_string[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-
-    /**
-     * @brief 月份名称缩写
-     */
-    static constexpr string_view months_string[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-
 private:
     /**
      * @brief 将月份名称转换为月份数字
@@ -708,6 +696,8 @@ private:
      * @return 月份数字（1-12），失败返回0
      */
     static constexpr int months_to_int(const string_view view) {
+        constexpr string_view months_string[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         for (int i = 0; i < 12; ++i) {
             if (view == months_string[i]) {
                 return i + 1;
@@ -1108,9 +1098,12 @@ public:
      * @return 相差的秒数
      */
     constexpr time_type operator-(const datetime& other) const noexcept {
-        const time_type day_diff = date_ - other.date_;
+        const datetime lhs_utc = this->to_UTC();
+        const datetime rhs_utc = other.to_UTC();
+
+        const time_type day_diff = lhs_utc.date_ - rhs_utc.date_;
         time_type sec_diff = day_diff * 86400;
-        sec_diff += (time_ - other.time_);
+        sec_diff += (lhs_utc.time_ - rhs_utc.time_);
         return sec_diff;
     }
 
@@ -1237,6 +1230,11 @@ public:
      * @return 格式为 "Wed, 21 Dec 2022 10:00:00 GMT"
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_GMT() const noexcept {
+        constexpr string_view months_string[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+        constexpr string_view weekdays_string[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
         const _NEFORCE date utc_date = date();
         const _NEFORCE time utc_time = time();
 
@@ -1437,7 +1435,10 @@ public:
      * @brief 从日期时间构造
      * @param dt 日期时间
      */
-    constexpr explicit timestamp(const datetime& dt) noexcept { value_ = dt - datetime::epoch(); }
+    constexpr explicit timestamp(const datetime& dt) noexcept {
+        const datetime utc = dt.to_UTC();
+        value_ = utc - datetime::epoch().to_UTC();
+    }
 
     /**
      * @brief 获取当前时间戳

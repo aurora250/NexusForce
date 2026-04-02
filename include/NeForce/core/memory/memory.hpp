@@ -233,7 +233,10 @@ NEFORCE_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
  *
  * 清零内存区域。如果参数无效则不执行任何操作。
  */
-template <typename T> NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept { _NEFORCE memory_zero(dest, sizeof(T)); }
+template <typename T>
+NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept {
+    _NEFORCE memory_zero(dest, sizeof(T));
+}
 
 /**
  * @brief 在内存中搜索特定字节
@@ -302,7 +305,8 @@ NEFORCE_CONSTEXPR14 const void* memory_find_pattern(const void* data, const size
  *
  * 将源类型的位表示重新解释为目标类型的表示。
  */
-template <typename To, typename From> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 To memory_cast(const From& value) noexcept {
+template <typename To, typename From>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 To memory_cast(const From& value) noexcept {
     static_assert(sizeof(To) == sizeof(From), "types must have the same size");
     static_assert(is_trivially_copyable_v<To>, "To type must be trivially copyable");
     static_assert(is_trivially_copyable_v<From>, "From type must be trivially copyable");
@@ -334,7 +338,8 @@ template <typename To, typename From> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 To m
  *
  * 将A-Z转换为a-z，其他字符保持不变。
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_lowercase(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_lowercase(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     using UT = make_unsigned_t<CharT>;
     const auto uc = static_cast<UT>(c);
@@ -352,7 +357,8 @@ template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_lo
  *
  * 将a-z转换为A-Z，其他字符保持不变。
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_uppercase(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_uppercase(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     using UT = make_unsigned_t<CharT>;
     const auto uc = static_cast<UT>(c);
@@ -644,7 +650,8 @@ NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, 
  * @param str 字符串指针
  * @return 字符串长度，不包含终止空字符
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
     static_assert(is_character_v<CharT>, "CharT must be a character");
     if (str == nullptr) {
         return 0;
@@ -914,7 +921,8 @@ NEFORCE_PURE_FUNCTION constexpr size_t string_span_not_in(const CharT* str, cons
  * @param value 要设置的字符值
  * @return 原字符串指针
  */
-template <typename CharT> constexpr CharT* string_set(CharT* str, const CharT value) noexcept {
+template <typename CharT>
+constexpr CharT* string_set(CharT* str, const CharT value) noexcept {
     if (str == nullptr) {
         return nullptr;
     }
@@ -934,7 +942,8 @@ template <typename CharT> constexpr CharT* string_set(CharT* str, const CharT va
  * @param count 要设置的字符数
  * @return 原字符串指针
  */
-template <typename CharT> constexpr CharT* string_set(CharT* str, const CharT value, const size_t count) noexcept {
+template <typename CharT>
+constexpr CharT* string_set(CharT* str, const CharT value, const size_t count) noexcept {
     if (str == nullptr || count == 0) {
         return str;
     }
@@ -950,7 +959,8 @@ template <typename CharT> constexpr CharT* string_set(CharT* str, const CharT va
  * @param str 字符串指针
  * @return 反转后的字符串指针
  */
-template <typename CharT> constexpr CharT* string_reverse(CharT* str) noexcept {
+template <typename CharT>
+constexpr CharT* string_reverse(CharT* str) noexcept {
     if (str == nullptr || *str == static_cast<CharT>(0)) {
         return str;
     }

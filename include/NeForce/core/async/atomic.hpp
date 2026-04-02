@@ -17,7 +17,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-template <typename T> struct atomic;
+template <typename T>
+struct atomic;
 
 /**
  * @struct atomic
@@ -26,7 +27,8 @@ template <typename T> struct atomic;
  *
  * 提供通用类型的原子操作，支持任意可平凡复制的类型。
  */
-template <typename T> struct atomic {
+template <typename T>
+struct atomic {
     using value_type = T; ///< 值类型
 
 private:
@@ -43,9 +45,6 @@ private:
     static_assert(is_move_assignable_v<T>, "atomic need move assignable T");
 
 public:
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = _NEFORCE is_always_lock_free<sizeof(value_), align_inner>();
-
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
@@ -94,12 +93,12 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return is_always_lock_free; }
+    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>(); }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return is_always_lock_free; }
+    bool is_lock_free() const volatile noexcept { return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>(); }
 
     /**
      * @brief 原子存储操作
@@ -239,7 +238,8 @@ public:
  * @brief 指针类型的原子特化
  * @tparam T 指针指向的类型
  */
-template <typename T> struct atomic<T*> : atomic_base<T*> {
+template <typename T>
+struct atomic<T*> : atomic_base<T*> {
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
@@ -258,7 +258,8 @@ template <typename T> struct atomic<T*> : atomic_base<T*> {
  * @brief 引用类型的原子特化
  * @tparam T 引用指向的类型
  */
-template <typename T> struct atomic<T&> : atomic_ref_base<T> {
+template <typename T>
+struct atomic<T&> : atomic_ref_base<T> {
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
@@ -278,16 +279,14 @@ template <typename T> struct atomic<T&> : atomic_ref_base<T> {
  * @brief bool类型的原子特化
  * @note 提供bool类型的原子操作
  */
-template <> struct atomic<bool> {
+template <>
+struct atomic<bool> {
     using value_type = bool; ///< 值类型
 
 private:
     atomic_base<bool> base_; ///< 基础实例
 
 public:
-    /// @brief 是否总是无锁
-    static constexpr bool is_always_lock_free = true;
-
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
@@ -480,7 +479,8 @@ public:
 };
 
 /// @brief char类型的原子特化
-template <> struct atomic<char> : atomic_base<char> {
+template <>
+struct atomic<char> : atomic_base<char> {
     using integral_type = char;
     using base_type = atomic_base<char>;
 
@@ -502,7 +502,8 @@ template <> struct atomic<char> : atomic_base<char> {
 };
 
 /// @brief signed char类型的原子特化
-template <> struct atomic<signed char> : atomic_base<signed char> {
+template <>
+struct atomic<signed char> : atomic_base<signed char> {
     using integral_type = signed char;
     using base_type = atomic_base<signed char>;
 
@@ -524,7 +525,8 @@ template <> struct atomic<signed char> : atomic_base<signed char> {
 };
 
 /// @brief unsigned char类型的原子特化
-template <> struct atomic<unsigned char> : atomic_base<unsigned char> {
+template <>
+struct atomic<unsigned char> : atomic_base<unsigned char> {
     using integral_type = unsigned char;
     using base_type = atomic_base<unsigned char>;
 
@@ -546,7 +548,8 @@ template <> struct atomic<unsigned char> : atomic_base<unsigned char> {
 };
 
 /// @brief short类型的原子特化
-template <> struct atomic<short> : atomic_base<short> {
+template <>
+struct atomic<short> : atomic_base<short> {
     using integral_type = short;
     using base_type = atomic_base<short>;
 
@@ -568,7 +571,8 @@ template <> struct atomic<short> : atomic_base<short> {
 };
 
 /// @brief unsigned short类型的原子特化
-template <> struct atomic<unsigned short> : atomic_base<unsigned short> {
+template <>
+struct atomic<unsigned short> : atomic_base<unsigned short> {
     using integral_type = unsigned short;
     using base_type = atomic_base<unsigned short>;
 
@@ -590,7 +594,8 @@ template <> struct atomic<unsigned short> : atomic_base<unsigned short> {
 };
 
 /// @brief int类型的原子特化
-template <> struct atomic<int> : atomic_base<int> {
+template <>
+struct atomic<int> : atomic_base<int> {
     using integral_type = int;
     using base_type = atomic_base<int>;
 
@@ -612,7 +617,8 @@ template <> struct atomic<int> : atomic_base<int> {
 };
 
 /// @brief unsigned int类型的原子特化
-template <> struct atomic<unsigned int> : atomic_base<unsigned int> {
+template <>
+struct atomic<unsigned int> : atomic_base<unsigned int> {
     using integral_type = unsigned int;
     using base_type = atomic_base<unsigned int>;
 
@@ -634,7 +640,8 @@ template <> struct atomic<unsigned int> : atomic_base<unsigned int> {
 };
 
 /// @brief long类型的原子特化
-template <> struct atomic<long> : atomic_base<long> {
+template <>
+struct atomic<long> : atomic_base<long> {
     using integral_type = long;
     using base_type = atomic_base<long>;
 
@@ -656,7 +663,8 @@ template <> struct atomic<long> : atomic_base<long> {
 };
 
 /// @brief unsigned long类型的原子特化
-template <> struct atomic<unsigned long> : atomic_base<unsigned long> {
+template <>
+struct atomic<unsigned long> : atomic_base<unsigned long> {
     using integral_type = unsigned long;
     using base_type = atomic_base<unsigned long>;
 
@@ -678,7 +686,8 @@ template <> struct atomic<unsigned long> : atomic_base<unsigned long> {
 };
 
 /// @brief long long类型的原子特化
-template <> struct atomic<long long> : atomic_base<long long> {
+template <>
+struct atomic<long long> : atomic_base<long long> {
     using integral_type = long long;
     using base_type = atomic_base<long long>;
 
@@ -700,7 +709,8 @@ template <> struct atomic<long long> : atomic_base<long long> {
 };
 
 /// @brief unsigned long long类型的原子特化
-template <> struct atomic<unsigned long long> : atomic_base<unsigned long long> {
+template <>
+struct atomic<unsigned long long> : atomic_base<unsigned long long> {
     using integral_type = unsigned long long;
     using base_type = atomic_base<unsigned long long>;
 
@@ -722,7 +732,8 @@ template <> struct atomic<unsigned long long> : atomic_base<unsigned long long> 
 };
 
 /// @brief wchar_t类型的原子特化
-template <> struct atomic<wchar_t> : atomic_base<wchar_t> {
+template <>
+struct atomic<wchar_t> : atomic_base<wchar_t> {
     using integral_type = wchar_t;
     using base_type = atomic_base<wchar_t>;
 
@@ -745,7 +756,8 @@ template <> struct atomic<wchar_t> : atomic_base<wchar_t> {
 
 #ifdef NEFORCE_STANDARD_20
 /// @brief char8_t类型的原子特化
-template <> struct atomic<char8_t> : atomic_base<char8_t> {
+template <>
+struct atomic<char8_t> : atomic_base<char8_t> {
     using integral_type = char8_t;
     using base_type = atomic_base<char8_t>;
 
@@ -768,7 +780,8 @@ template <> struct atomic<char8_t> : atomic_base<char8_t> {
 #endif
 
 /// @brief char16_t类型的原子特化
-template <> struct atomic<char16_t> : atomic_base<char16_t> {
+template <>
+struct atomic<char16_t> : atomic_base<char16_t> {
     using integral_type = char16_t;
     using base_type = atomic_base<char16_t>;
 
@@ -790,7 +803,8 @@ template <> struct atomic<char16_t> : atomic_base<char16_t> {
 };
 
 /// @brief char32_t类型的原子特化
-template <> struct atomic<char32_t> : atomic_base<char32_t> {
+template <>
+struct atomic<char32_t> : atomic_base<char32_t> {
     using integral_type = char32_t;
     using base_type = atomic_base<char32_t>;
 
@@ -812,7 +826,8 @@ template <> struct atomic<char32_t> : atomic_base<char32_t> {
 };
 
 /// @brief float类型的原子特化
-template <> struct atomic<float> : atomic_float_base<float> {
+template <>
+struct atomic<float> : atomic_float_base<float> {
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
@@ -828,7 +843,8 @@ template <> struct atomic<float> : atomic_float_base<float> {
 };
 
 /// @brief double类型的原子特化
-template <> struct atomic<double> : atomic_float_base<double> {
+template <>
+struct atomic<double> : atomic_float_base<double> {
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
@@ -844,7 +860,8 @@ template <> struct atomic<double> : atomic_float_base<double> {
 };
 
 /// @brief long double类型的原子特化
-template <> struct atomic<long double> : atomic_float_base<long double> {
+template <>
+struct atomic<long double> : atomic_float_base<long double> {
     atomic() = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;

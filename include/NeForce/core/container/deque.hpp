@@ -71,8 +71,10 @@ private:
     pointer* node_ = nullptr;                   ///< 指向当前节点
     const container_type* container_ = nullptr; ///< 关联容器指针
 
-    template <typename, typename, size_t> friend class deque;
-    template <bool, typename, size_t> friend struct deque_iterator;
+    template <typename, typename, size_t>
+    friend class deque;
+    template <bool, typename, size_t>
+    friend struct deque_iterator;
 
 private:
     /**
@@ -573,7 +575,8 @@ private:
      * @param last 结束迭代器
      * @param n 元素数量
      */
-    template <typename Iterator> void insert_ranges_n(iterator position, Iterator first, Iterator last, size_type n) {
+    template <typename Iterator>
+    void insert_ranges_n(iterator position, Iterator first, Iterator last, size_type n) {
         difference_type dist_before = position - start_;
 
         if (dist_before < static_cast<difference_type>(size() / 2)) {
@@ -830,7 +833,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> deque(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    deque(Iterator first, Iterator last) {
         deque::copy_initialize(first, last);
     }
 
@@ -1078,7 +1082,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace(iterator position, Args&&... args) {
+    template <typename... Args>
+    iterator emplace(iterator position, Args&&... args) {
         if (position.current_ == start_.current_) {
             deque::emplace_front(_NEFORCE forward<Args>(args)...);
             return start_;
@@ -1095,7 +1100,8 @@ public:
      * @tparam Args 构造参数类型
      * @param args 构造参数
      */
-    template <typename... Args> void emplace_back(Args&&... args) {
+    template <typename... Args>
+    void emplace_back(Args&&... args) {
         if (finish_.current_ != finish_.last_ - 1) {
             _NEFORCE construct(finish_.current_, _NEFORCE forward<Args>(args)...);
             ++finish_.current_;
@@ -1111,7 +1117,8 @@ public:
      * @tparam Args 构造参数类型
      * @param args 构造参数
      */
-    template <typename... Args> void emplace_front(Args&&... args) {
+    template <typename... Args>
+    void emplace_front(Args&&... args) {
         if (start_.current_ != start_.first_) {
             _NEFORCE construct(start_.current_ - 1, _NEFORCE forward<Args>(args)...);
             --start_.current_;
@@ -1195,7 +1202,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> void assign(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    void assign(Iterator first, Iterator last) {
         deque::assign_ranges(first, last);
     }
 
@@ -1438,7 +1446,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T, typename Alloc> deque(T, Alloc = Alloc()) -> deque<T, Alloc>;
+template <typename T, typename Alloc>
+deque(T, Alloc = Alloc()) -> deque<T, Alloc>;
 
 template <typename Iterator, typename Alloc>
 deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_value_t<Iterator>, Alloc>;

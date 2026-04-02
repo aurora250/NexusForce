@@ -180,7 +180,8 @@ public:
  *
  * RAII风格的锁管理器，在构造时锁定互斥锁，在析构时解锁。
  */
-template <typename Mutex> class lock {
+template <typename Mutex>
+class lock {
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
 
@@ -246,7 +247,8 @@ NEFORCE_INLINE17 constexpr try_lock_tag try_lock{};
  *
  * 独占锁，支持延迟锁定、尝试锁定、转移所有权等特性。
  */
-template <typename Mutex> class unique_lock {
+template <typename Mutex>
+class unique_lock {
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
 

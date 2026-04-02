@@ -42,7 +42,8 @@ NEFORCE_CONSTEXPR20 T* construct(T* ptr, Args&&... args) noexcept(is_nothrow_con
  *
  * 显式调用对象的析构函数，但不释放内存。
  */
-template <typename T> NEFORCE_CONSTEXPR20 void destroy(T* pointer) noexcept(is_nothrow_destructible_v<T>) {
+template <typename T>
+NEFORCE_CONSTEXPR20 void destroy(T* pointer) noexcept(is_nothrow_destructible_v<T>) {
     pointer->~T();
 }
 

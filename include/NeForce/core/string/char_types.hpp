@@ -127,7 +127,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_ctype(const CharT c, uint64_t 
  * @param c 要检查的字符
  * @return 如果字符是标点符号则返回true，否则返回false
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct(const CharT c) noexcept {
     return _NEFORCE is_ctype(c, constants::PUNCT_MASK_LOW, constants::PUNCT_MASK_HIGH);
 }
 
@@ -139,7 +140,8 @@ template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punc
  *
  * 控制字符包括ASCII码0-31和127。
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntrl(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntrl(const CharT c) noexcept {
     return _NEFORCE is_ctype(c, constants::CNTRL_MASK_LOW, constants::CNTRL_MASK_HIGH);
 }
 
@@ -151,7 +153,8 @@ template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntr
  *
  * 可打印字符是非控制字符且ASCII码在0-127范围内的字符。
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_print(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_print(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc <= 127 && !_NEFORCE is_cntrl(c);
@@ -165,7 +168,8 @@ template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_prin
  *
  * 空白字符包括：制表符和空格。
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blank(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blank(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc < 64 && (constants::BLANK_MASK & (1ULL << uc)) != 0;
@@ -179,7 +183,8 @@ template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blan
  *
  * 图形字符是可打印字符但不是空白字符。
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_graph(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_graph(const CharT c) noexcept {
     return _NEFORCE is_print(c) && !_NEFORCE is_blank(c);
 }
 
@@ -191,7 +196,8 @@ template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_grap
  *
  * ASCII字符的编码在0-127范围内。
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_ascii(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_ascii(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc <= 127;
@@ -205,7 +211,8 @@ template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_asc
  *
  * 空白字符包括：水平制表符, 换行符, 垂直制表符, 换页符, 回车符, 空格。
  */
-template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc < 64 && (constants::SPACE_MASK & (1ULL << uc)) != 0;
@@ -219,7 +226,8 @@ template <typename CharT> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_spac
  *
  * 字母包括A-Z和a-z。
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
@@ -236,7 +244,8 @@ template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alp
  *
  * 数字包括0-9。
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
@@ -253,7 +262,8 @@ template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_dig
  *
  * 十六进制数字包括0-9, A-F, a-f。
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_xdigit(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_xdigit(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
@@ -271,7 +281,8 @@ template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_xdi
  * @param c 要检查的字符
  * @return 如果字符是字母或数字则返回true，否则返回false
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha_or_digit(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha_or_digit(const CharT c) noexcept {
     return _NEFORCE is_alpha(c) || _NEFORCE is_digit(c);
 }
 
@@ -281,7 +292,8 @@ template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alp
  * @param c 要检查的字符
  * @return 如果字符是数字或字母则返回true，否则返回false
  */
-template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit_or_alpha(const CharT c) noexcept {
+template <typename CharT>
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit_or_alpha(const CharT c) noexcept {
     return _NEFORCE is_digit(c) || _NEFORCE is_alpha(c);
 }
 

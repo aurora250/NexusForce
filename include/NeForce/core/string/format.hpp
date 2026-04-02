@@ -311,7 +311,8 @@ NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options
     return result;
 }
 
-template <typename T, bool Signed> struct integer_formatter_impl {
+template <typename T, bool Signed>
+struct integer_formatter_impl {
     NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
         using UT = conditional_t<Signed, make_unsigned_t<T>, T>;
 
@@ -363,13 +364,15 @@ NEFORCE_END_INNER__
  *
  * 通过特化实现不同类型值的格式化。
  */
-template <typename Number, typename Dummy = void> struct formatter;
+template <typename Number, typename Dummy = void>
+struct formatter;
 
 /**
  * @brief 浮点数类型的格式化器特化
  * @tparam T 浮点数类型
  */
-template <typename T> struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
+template <typename T>
+struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
     /**
      * @brief 格式化浮点数
      * @param value 要格式化的值
@@ -418,7 +421,8 @@ template <typename T> struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
  * @brief 有符号整数类型的格式化器特化
  * @tparam T 有符号整数类型
  */
-template <typename T> struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_signed_v<T>>> {
+template <typename T>
+struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_signed_v<T>>> {
     /**
      * @brief 格式化有符号整数
      * @param value 要格式化的值
@@ -434,7 +438,8 @@ template <typename T> struct formatter<T, enable_if_t<is_standard_integral_v<T> 
  * @brief 无符号整数类型的格式化器特化
  * @tparam T 无符号整数类型
  */
-template <typename T> struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> {
+template <typename T>
+struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> {
     /**
      * @brief 格式化无符号整数
      * @param value 要格式化的值
@@ -449,7 +454,8 @@ template <typename T> struct formatter<T, enable_if_t<is_standard_integral_v<T> 
 /**
  * @brief 单个字符的格式化器特化
  */
-template <> struct formatter<char> {
+template <>
+struct formatter<char> {
     NEFORCE_CONSTEXPR20 string operator()(const char value, const format_options& options) const {
         switch (options.type) {
             case format_type::BINARY:
@@ -476,7 +482,8 @@ struct formatter<T, enable_if_t<is_unpackaged_v<T> && is_base_of_v<ipackage<T, u
 /**
  * @brief 布尔类型的格式化器特化
  */
-template <> struct formatter<bool> {
+template <>
+struct formatter<bool> {
     NEFORCE_CONSTEXPR20 string operator()(const bool value, const format_options& options) const {
         switch (options.type) {
             case format_type::BINARY:
@@ -496,13 +503,8 @@ template <> struct formatter<bool> {
 /**
  * @brief 字符串类型的格式化器特化
  */
-template <> struct formatter<string> {
-    /**
-     * @brief 格式化字符串
-     * @param value 要格式化的字符串
-     * @param options 格式化选项
-     * @return 格式化后的字符串
-     */
+template <>
+struct formatter<string> {
     NEFORCE_CONSTEXPR20 string operator()(const string& value, const format_options& options) const {
         string raw = value;
         if (options.precision >= 0 && raw.size() > static_cast<size_t>(options.precision)) {
@@ -515,7 +517,8 @@ template <> struct formatter<string> {
 /**
  * @brief 字符串视图的格式化器特化
  */
-template <> struct formatter<string_view> {
+template <>
+struct formatter<string_view> {
     NEFORCE_CONSTEXPR20 string operator()(const string_view value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }
@@ -524,7 +527,8 @@ template <> struct formatter<string_view> {
 /**
  * @brief C风格字符串的格式化器特化
  */
-template <> struct formatter<const char*> {
+template <>
+struct formatter<const char*> {
     NEFORCE_CONSTEXPR20 string operator()(const char* value, const format_options& options) const {
         if (value == nullptr) {
             return inner::apply_format_options("nullptr", options, false);
@@ -536,7 +540,8 @@ template <> struct formatter<const char*> {
 /**
  * @brief nullptr_t 格式化器
  */
-template <> struct formatter<nullptr_t> {
+template <>
+struct formatter<nullptr_t> {
     NEFORCE_CONSTEXPR20 string operator()(nullptr_t, const format_options& options) const {
         return inner::apply_format_options("nullptr", options, false);
     }
@@ -545,7 +550,8 @@ template <> struct formatter<nullptr_t> {
 /**
  * @brief 指针格式化器
  */
-template <typename T> struct formatter<T*, enable_if_t<!is_cstring_v<T*>>> {
+template <typename T>
+struct formatter<T*, enable_if_t<!is_cstring_v<T*>>> {
     NEFORCE_CONSTEXPR20 string operator()(const T* ptr, const format_options& options) const {
         return inner::apply_format_options(_NEFORCE address_string(ptr), options, false);
     }
@@ -554,7 +560,8 @@ template <typename T> struct formatter<T*, enable_if_t<!is_cstring_v<T*>>> {
 /**
  * @brief 非const C风格字符串的格式化器特化
  */
-template <> struct formatter<char*> {
+template <>
+struct formatter<char*> {
     NEFORCE_CONSTEXPR20 string operator()(char* value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }

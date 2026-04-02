@@ -1,0 +1,45 @@
+name: "Format Check"
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'examples/**'
+      - '.clang-format'
+      - 'CMakeLists.txt'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'examples/**'
+      - '.clang-format'
+      - 'CMakeLists.txt'
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format-17
+          sudo ln -sf /usr/bin/clang-format-17 /usr/bin/clang-format
+
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -DNEXUSFORCE_FORMAT=ON \
+            -DNEXUSFORCE_BUILD_TESTS=OFF \
+            -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
+            -DNEXUSFORCE_BUILD_DOCS=OFF
+
+      - name: Run format check
+        run: cmake --build build --target format-check

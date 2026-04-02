@@ -38,7 +38,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 检查范围 [first, last) 是否按照比较函数 comp 排序。
  */
-template <typename Iterator, typename Compare> bool is_sorted(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+bool is_sorted(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
@@ -61,7 +62,8 @@ template <typename Iterator, typename Compare> bool is_sorted(Iterator first, It
  * @param last 范围结束
  * @return 如果范围已排序则返回true，否则返回false
  */
-template <typename Iterator> bool is_sorted(Iterator first, Iterator last) {
+template <typename Iterator>
+bool is_sorted(Iterator first, Iterator last) {
     return is_sorted(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -76,7 +78,8 @@ template <typename Iterator> bool is_sorted(Iterator first, Iterator last) {
  *
  * 在范围 [first, last) 中查找第一个使得序列不满足排序条件的位置。
  */
-template <typename Iterator, typename Compare> Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
@@ -99,7 +102,8 @@ template <typename Iterator, typename Compare> Iterator is_sorted_until(Iterator
  * @param last 范围结束
  * @return 指向首个破坏排序的元素的迭代器
  */
-template <typename Iterator> Iterator is_sorted_until(Iterator first, Iterator last) {
+template <typename Iterator>
+Iterator is_sorted_until(Iterator first, Iterator last) {
     return is_sorted_until(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -121,7 +125,8 @@ template <typename Iterator> Iterator is_sorted_until(Iterator first, Iterator l
  * 空间复杂度：O(N)
  * 稳定性：稳定
  */
-template <typename Iterator, typename Compare> void merge_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+void merge_sort(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
     const auto n = _NEFORCE distance(first, last);
@@ -140,7 +145,8 @@ template <typename Iterator, typename Compare> void merge_sort(Iterator first, I
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator> void merge_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+void merge_sort(Iterator first, Iterator last) {
     return _NEFORCE merge_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -180,7 +186,8 @@ void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) 
  * @param middle 部分排序的边界
  * @param last 范围结束
  */
-template <typename Iterator> void partial_sort(Iterator first, Iterator middle, Iterator last) {
+template <typename Iterator>
+void partial_sort(Iterator first, Iterator middle, Iterator last) {
     return _NEFORCE partial_sort(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -284,7 +291,8 @@ NEFORCE_END_INNER__
  * 空间复杂度：O(1)
  * 稳定性：稳定
  */
-template <typename Iterator, typename Compare> void insertion_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+void insertion_sort(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
@@ -308,7 +316,8 @@ template <typename Iterator, typename Compare> void insertion_sort(Iterator firs
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator> void insertion_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+void insertion_sort(Iterator first, Iterator last) {
     return _NEFORCE insertion_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -354,7 +363,8 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare 
  * @param last 范围结束
  * @param depth_limit 递归深度限制
  */
-template <typename Iterator> void introspective_sort(Iterator first, Iterator last, int depth_limit) {
+template <typename Iterator>
+void introspective_sort(Iterator first, Iterator last, int depth_limit) {
     return _NEFORCE introspective_sort(first, last, depth_limit, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -377,7 +387,8 @@ template <typename Iterator> void introspective_sort(Iterator first, Iterator la
  *
  * @note 此实现容易在已排序数据上出现最坏情况。
  */
-template <typename Iterator, typename Compare> void quick_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+void quick_sort(Iterator first, Iterator last, Compare comp) {
     if (first < last) {
         Iterator pov = last - 1;
         Iterator cut = _NEFORCE lomuto_partition(first, last, *pov, comp);
@@ -393,7 +404,8 @@ template <typename Iterator, typename Compare> void quick_sort(Iterator first, I
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator> void quick_sort(Iterator first, Iterator last) {
+template <typename Iterator>
+void quick_sort(Iterator first, Iterator last) {
     return _NEFORCE quick_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -461,7 +473,8 @@ NEFORCE_END_INNER__
  * 空间复杂度：O(log N)
  * 稳定性：不稳定
  */
-template <typename Iterator, typename Compare> void sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare>
+void sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) {
         return;
     }
@@ -485,7 +498,8 @@ template <typename Iterator, typename Compare> void sort(Iterator first, Iterato
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator> void sort(Iterator first, Iterator last) {
+template <typename Iterator>
+void sort(Iterator first, Iterator last) {
     return _NEFORCE sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -523,7 +537,8 @@ void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp) {
  * @param nth 目标位置
  * @param last 范围结束
  */
-template <typename Iterator> void nth_element(Iterator first, Iterator nth, Iterator last) {
+template <typename Iterator>
+void nth_element(Iterator first, Iterator nth, Iterator last) {
     return _NEFORCE nth_element(first, nth, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

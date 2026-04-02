@@ -270,7 +270,8 @@ public:
      *
      * 将对象添加到当前线程的退役列表，如果列表大小超过阈值则触发回收。
      */
-    template <typename T, typename Deleter = default_delete<T>> void retire(T* ptr, Deleter deleter = Deleter()) {
+    template <typename T, typename Deleter = default_delete<T>>
+    void retire(T* ptr, Deleter deleter = Deleter()) {
         if (!ptr) {
             return;
         }
@@ -368,7 +369,8 @@ public:
      *
      * 使用ABA预防算法：读取指针 -> 保护 -> 验证未改变。
      */
-    template <typename T> T* protect(const atomic<T*>& src) {
+    template <typename T>
+    T* protect(const atomic<T*>& src) {
         if (!record_) {
             return nullptr;
         }
@@ -391,7 +393,8 @@ public:
      * @param src 原子指针源
      * @return 是否成功保护
      */
-    template <typename T> bool try_protect(T*& ptr, const atomic<T*>& src) {
+    template <typename T>
+    bool try_protect(T*& ptr, const atomic<T*>& src) {
         if (!record_) {
             return false;
         }
@@ -452,7 +455,8 @@ inline hazard_pointer make_hazard_pointer(hazard_pointer_domain& domain = hazard
  *
  * 将险象指针与一个特定类型的指针绑定，提供类型安全的访问。
  */
-template <typename T> class hazard_pointer_holder {
+template <typename T>
+class hazard_pointer_holder {
 private:
     hazard_pointer hp_; ///< 险象指针
     T* ptr_{nullptr};   ///< 受保护的指针

@@ -14,7 +14,8 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <bool Same, typename Dest, typename... Srcs> struct __tuple_constructible_aux : false_type {};
+template <bool Same, typename Dest, typename... Srcs>
+struct __tuple_constructible_aux : false_type {};
 
 template <typename... Dests, typename... Srcs>
 struct __tuple_constructible_aux<true, tuple<Dests...>, Srcs...>
@@ -31,7 +32,8 @@ struct tuple_constructible
 : bool_constant<inner::__tuple_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
-template <bool Same, typename Dest, typename... Srcs> struct __tuple_explicitly_convertible_aux : false_type {};
+template <bool Same, typename Dest, typename... Srcs>
+struct __tuple_explicitly_convertible_aux : false_type {};
 
 template <typename... Dests, typename... Srcs>
 struct __tuple_explicitly_convertible_aux<true, tuple<Dests...>, Srcs...>
@@ -57,7 +59,8 @@ struct tuple_explicitly_convertible
  * @tparam Tuple2 源元组类型
  * @tparam U 源参数类型
  */
-template <typename Tuple1, typename Tuple2, typename... U> struct tuple_perfect_forward : true_type {};
+template <typename Tuple1, typename Tuple2, typename... U>
+struct tuple_perfect_forward : true_type {};
 
 template <typename Tuple1, typename Tuple2>
 struct tuple_perfect_forward<Tuple1, Tuple2> : bool_constant<!is_same<Tuple1, remove_cvref_t<Tuple2>>::value> {};
@@ -73,7 +76,8 @@ struct tuple_perfect_forward<tuple<T1, T2, T3>, U1, U2, U3>
                             is_same<remove_cvref_t<T1>, allocator_arg_tag>>::value> {};
 
 
-template <bool Same, typename Dest, typename... Srcs> struct __tuple_nothrow_constructible_aux : false_type {};
+template <bool Same, typename Dest, typename... Srcs>
+struct __tuple_nothrow_constructible_aux : false_type {};
 
 template <typename... Dests, typename... Srcs>
 struct __tuple_nothrow_constructible_aux<true, tuple<Dests...>, Srcs...>
@@ -92,7 +96,8 @@ struct tuple_nothrow_constructible
 };
 
 
-template <typename Self, typename Tuple, typename... U> struct __tuple_convertible_aux : true_type {};
+template <typename Self, typename Tuple, typename... U>
+struct __tuple_convertible_aux : true_type {};
 
 template <typename Self, typename Tuple, typename U>
 struct __tuple_convertible_aux<tuple<Self>, Tuple, U>
@@ -109,7 +114,8 @@ template <typename Self, typename Tuple, typename... U>
 struct tuple_convertible : bool_constant<inner::__tuple_convertible_aux<Self, Tuple, U...>::value> {};
 
 
-template <bool Same, typename Dest, typename... Srcs> struct __tuple_assignable_aux : false_type {};
+template <bool Same, typename Dest, typename... Srcs>
+struct __tuple_assignable_aux : false_type {};
 
 template <typename... Dests, typename... Srcs>
 struct __tuple_assignable_aux<true, tuple<Dests...>, Srcs...>
@@ -126,7 +132,8 @@ struct tuple_assignable
 : bool_constant<inner::__tuple_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
-template <bool Same, typename Dest, typename... Srcs> struct __tuple_nothrow_assignable_aux : false_type {};
+template <bool Same, typename Dest, typename... Srcs>
+struct __tuple_nothrow_assignable_aux : false_type {};
 
 template <typename... Dests, typename... Srcs>
 struct __tuple_nothrow_assignable_aux<true, tuple<Dests...>, Srcs...>
@@ -157,7 +164,8 @@ NEFORCE_END_INNER__
  *
  * 表示不包含任何元素的元组，作为递归基类。
  */
-template <> struct tuple<> : icommon<tuple<>> {
+template <>
+struct tuple<> : icommon<tuple<>> {
     constexpr tuple() noexcept = default;             ///< 默认构造函数
     constexpr tuple(const tuple&) noexcept = default; ///< 拷贝构造函数
 
@@ -598,7 +606,8 @@ public:
      * @param t 其他元组
      * @return 如果所有对应元素相等则返回true，否则返回false
      */
-    template <typename... U> NEFORCE_NODISCARD constexpr bool equal_to(const tuple<U...>& t) const {
+    template <typename... U>
+    NEFORCE_NODISCARD constexpr bool equal_to(const tuple<U...>& t) const {
         return data_ == t.data_ && base_type::equal_to(t.get_rest());
     }
 
@@ -608,7 +617,8 @@ public:
      * @param rhs 其他元组
      * @return 如果当前元组小于其他元组则返回true，否则返回false
      */
-    template <typename... U> NEFORCE_NODISCARD constexpr bool less_to(const tuple<U...>& rhs) const {
+    template <typename... U>
+    NEFORCE_NODISCARD constexpr bool less_to(const tuple<U...>& rhs) const {
         return data_ < rhs.data_ || (!(rhs.data_ < data_) && base_type::less_to(rhs.get_rest()));
     }
 
@@ -648,9 +658,11 @@ public:
     }
 };
 #ifdef NEFORCE_STANDARD_17
-template <typename... Types> tuple(Types...) -> tuple<Types...>;
+template <typename... Types>
+tuple(Types...) -> tuple<Types...>;
 
-template <typename T1, typename T2> tuple(pair<T1, T2>) -> tuple<T1, T2>;
+template <typename T1, typename T2>
+tuple(pair<T1, T2>) -> tuple<T1, T2>;
 #endif
 
 
@@ -753,7 +765,8 @@ NEFORCE_NODISCARD constexpr tuple<unwrap_ref_decay_t<Types>...> make_tuple(Types
  * @param args 引用参数
  * @return 创建的引用元组
  */
-template <typename... Types> NEFORCE_NODISCARD constexpr tuple<Types&...> tie(Types&... args) noexcept {
+template <typename... Types>
+NEFORCE_NODISCARD constexpr tuple<Types&...> tie(Types&... args) noexcept {
     using tuple_type = tuple<Types&...>;
     return tuple_type(args...);
 }
@@ -764,7 +777,8 @@ template <typename... Types> NEFORCE_NODISCARD constexpr tuple<Types&...> tie(Ty
  * @param args 转发引用参数
  * @return 创建的转发引用元组
  */
-template <typename... Types> NEFORCE_NODISCARD constexpr tuple<Types&&...> forward_as_tuple(Types&&... args) noexcept {
+template <typename... Types>
+NEFORCE_NODISCARD constexpr tuple<Types&&...> forward_as_tuple(Types&&... args) noexcept {
     using tuple_type = tuple<Types&&...>;
     return tuple_type(_NEFORCE forward<Types>(args)...);
 }
@@ -816,7 +830,8 @@ NEFORCE_NODISCARD constexpr T make_from_tuple(Tuple&& tup) noexcept(noexcept(inn
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename, typename, typename, size_t, typename...> struct __tuple_cat_aux;
+template <typename, typename, typename, size_t, typename...>
+struct __tuple_cat_aux;
 
 template <typename Tuple, size_t... ElementIdx, size_t... TupleIdx, size_t NextTuple>
 struct __tuple_cat_aux<Tuple, index_sequence<ElementIdx...>, index_sequence<TupleIdx...>, NextTuple> {
@@ -878,20 +893,23 @@ NEFORCE_NODISCARD constexpr typename inner::tuple_cat_bind_t<Tuples...>::Ret tup
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Tuple, size_t Index> struct __broadern_tuple_hash_aux {
+template <typename Tuple, size_t Index>
+struct __broadern_tuple_hash_aux {
     static constexpr size_t hash(const Tuple& tup) {
         using ElementType = remove_cvref_t<tuple_element_t<Index - 1, Tuple>>;
         return __broadern_tuple_hash_aux<Tuple, Index - 1>::hash(tup) ^
                _NEFORCE hash<ElementType>()(_NEFORCE get<Index - 1>(tup));
     }
 };
-template <typename Tuple> struct __broadern_tuple_hash_aux<Tuple, 1> {
+template <typename Tuple>
+struct __broadern_tuple_hash_aux<Tuple, 1> {
     static constexpr size_t hash(const Tuple& tup) {
         using ElementType = remove_cvref_t<tuple_element_t<0, Tuple>>;
         return _NEFORCE hash<ElementType>()(_NEFORCE get<0>(tup));
     }
 };
-template <typename Tuple> struct __broadern_tuple_hash_aux<Tuple, 0> {
+template <typename Tuple>
+struct __broadern_tuple_hash_aux<Tuple, 0> {
     static constexpr size_t hash(const Tuple&) { return 0; }
 };
 
@@ -917,7 +935,8 @@ namespace std {
     template <typename... Types>
     struct tuple_size<_NEFORCE tuple<Types...>> : _NEFORCE integral_constant<_NEFORCE size_t, sizeof...(Types)> {};
 
-    template <_NEFORCE size_t I, typename... Types> struct tuple_element<I, _NEFORCE tuple<Types...>> {
+    template <_NEFORCE size_t I, typename... Types>
+    struct tuple_element<I, _NEFORCE tuple<Types...>> {
         using type = _NEFORCE tuple_element_t<I, _NEFORCE tuple<Types...>>;
     };
 } // namespace std

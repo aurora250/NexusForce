@@ -34,7 +34,8 @@ struct __allocator_traits_base {
      * @tparam T 新的元素类型
      * @tparam U 原始分配器类型
      */
-    template <typename T, typename U, typename = void> struct alloc_rebind {
+    template <typename T, typename U, typename = void>
+    struct alloc_rebind {
         using type = replace_first_para_t<U, T>;
     };
 
@@ -43,18 +44,22 @@ struct __allocator_traits_base {
      * @tparam T 新的元素类型
      * @tparam U 原始分配器类型
      */
-    template <typename T, typename U> struct alloc_rebind<T, U, void_t<typename T::template rebind<U>::other>> {
+    template <typename T, typename U>
+    struct alloc_rebind<T, U, void_t<typename T::template rebind<U>::other>> {
         using type = typename T::template rebind<U>::other;
     };
 
     /**
      * @brief 分配器重新绑定类型别名
      */
-    template <typename T, typename U> using alloc_rebind_t = typename alloc_rebind<T, U>::type;
+    template <typename T, typename U>
+    using alloc_rebind_t = typename alloc_rebind<T, U>::type;
 
 protected:
-    template <typename T> using __pointer = typename T::pointer;
-    template <typename T> using __c_pointer = typename T::const_pointer;
+    template <typename T>
+    using __pointer = typename T::pointer;
+    template <typename T>
+    using __c_pointer = typename T::const_pointer;
 };
 
 NEFORCE_END_INNER__
@@ -73,31 +78,38 @@ NEFORCE_END_INNER__
  * 3. 为不完整的分配器接口提供默认实现
  * 4. 支持分配器的重新绑定
  */
-template <typename Alloc> struct allocator_traits : inner::__allocator_traits_base {
+template <typename Alloc>
+struct allocator_traits : inner::__allocator_traits_base {
     using allocator_type = Alloc;
     using value_type = typename Alloc::value_type;
     using pointer = detected_or_t<value_type*, __pointer, Alloc>;
 
 private:
-    template <template <typename> class Func, typename T, typename = void> struct real_ptr {
+    template <template <typename> class Func, typename T, typename = void>
+    struct real_ptr {
         using type = typename pointer_traits<pointer>::template rebind<T>;
     };
 
-    template <template <typename> class Func, typename T> struct real_ptr<Func, T, void_t<Func<Alloc>>> {
+    template <template <typename> class Func, typename T>
+    struct real_ptr<Func, T, void_t<Func<Alloc>>> {
         using type = Func<Alloc>;
     };
 
-    template <typename, typename Ptr, typename = void> struct real_diff {
+    template <typename, typename Ptr, typename = void>
+    struct real_diff {
         using type = typename pointer_traits<Ptr>::difference_type;
     };
 
-    template <typename AllocU, typename Ptr> struct real_diff<AllocU, Ptr, void_t<typename AllocU::difference_type>> {
+    template <typename AllocU, typename Ptr>
+    struct real_diff<AllocU, Ptr, void_t<typename AllocU::difference_type>> {
         using type = typename AllocU::difference_type;
     };
 
-    template <typename, typename Diff, typename = void> struct real_size : make_unsigned<Diff> {};
+    template <typename, typename Diff, typename = void>
+    struct real_size : make_unsigned<Diff> {};
 
-    template <typename AllocU, typename Diff> struct real_size<AllocU, Diff, void_t<typename AllocU::size_type>> {
+    template <typename AllocU, typename Diff>
+    struct real_size<AllocU, Diff, void_t<typename AllocU::size_type>> {
         using type = typename AllocU::size_type;
     };
 
@@ -110,13 +122,15 @@ public:
      * @brief 重新绑定分配器类型
      * @tparam T 新的元素类型
      */
-    template <typename T> using rebind_alloc = alloc_rebind<Alloc, T>;
+    template <typename T>
+    using rebind_alloc = alloc_rebind<Alloc, T>;
 
     /**
      * @brief 重新绑定分配器特性类型
      * @tparam T 新的元素类型
      */
-    template <typename T> using rebind_traits = allocator_traits<rebind_alloc<T>>;
+    template <typename T>
+    using rebind_traits = allocator_traits<rebind_alloc<T>>;
 
 private:
     template <typename T, typename... Args>
@@ -150,7 +164,8 @@ private:
         return alloc.max_size();
     }
 
-    template <typename Alloc2> static constexpr size_type __max_size_aux(Alloc2&, ...) noexcept {
+    template <typename Alloc2>
+    static constexpr size_type __max_size_aux(Alloc2&, ...) noexcept {
         return _NEFORCE numeric_traits<size_type>::max() / sizeof(value_type);
     }
 

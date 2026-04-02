@@ -27,7 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * - to_string() 方法
  * - 静态 parse 方法
  */
-template <typename T> struct iobject : istringify<T> {
+template <typename T>
+struct iobject : istringify<T> {
 public:
     /**
      * @brief 从字符串解析对象

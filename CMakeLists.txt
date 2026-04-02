@@ -213,7 +213,17 @@ if(NEXUSFORCE_FORMAT)
 
         add_custom_target(format
                 ${FORMAT_COMMANDS}
-                COMMENT "Formatting ${NUM_SOURCES} source files with clang-format"
+                COMMENT "Formatting ${NUM_SOURCES} files with ${CLANG_FORMAT_EXECUTABLE}..."
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                VERBATIM
+        )
+
+        add_custom_target(format-check
+                COMMAND ${CMAKE_COMMAND} -E echo "Checking code format with ${CLANG_FORMAT_EXECUTABLE}..."
+                COMMAND ${CLANG_FORMAT_EXECUTABLE} -style=file --dry-run --Werror
+                ${NEXUSFORCE_FORMAT_SOURCES}
+                COMMAND ${CMAKE_COMMAND} -E echo "✅ All ${NUM_SOURCES} files are properly formatted!"
+                COMMENT "Checking code format with clang-format (dry-run)"
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                 VERBATIM
         )

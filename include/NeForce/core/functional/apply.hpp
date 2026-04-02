@@ -15,7 +15,8 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <template <typename...> class, typename, typename> struct __apply_unpack_tuple : false_type {};
+template <template <typename...> class, typename, typename>
+struct __apply_unpack_tuple : false_type {};
 
 template <template <typename...> class Trait, typename T, typename... U>
 struct __apply_unpack_tuple<Trait, T, tuple<U...>> : bool_constant<Trait<T, U...>::value> {};

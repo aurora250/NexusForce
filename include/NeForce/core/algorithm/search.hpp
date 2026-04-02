@@ -73,7 +73,8 @@ constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value, Co
  *
  * 使用默认的less比较器执行lower_bound查找。
  */
-template <typename Iterator, typename T> constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value) {
+template <typename Iterator, typename T>
+constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value) {
     return _NEFORCE lower_bound(first, last, value, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -125,7 +126,8 @@ constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value, Co
  *
  * 使用默认的greater比较器执行upper_bound查找。
  */
-template <typename Iterator, typename T> constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value) {
+template <typename Iterator, typename T>
+constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value) {
     return _NEFORCE upper_bound(first, last, value, _NEFORCE greater<iter_value_t<Iterator>>());
 }
 
@@ -138,7 +140,8 @@ template <typename Iterator, typename T> constexpr Iterator upper_bound(Iterator
  * @param value 要查找的值
  * @return 如果找到value则返回true，否则返回false
  */
-template <typename Iterator, typename T> constexpr bool binary_search(Iterator first, Iterator last, const T& value) {
+template <typename Iterator, typename T>
+constexpr bool binary_search(Iterator first, Iterator last, const T& value) {
     Iterator i = _NEFORCE lower_bound(first, last, value);
     return i != last && !(value < *i);
 }
@@ -223,7 +226,8 @@ constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Ite
  * @param pred 谓词函数
  * @return 如果所有元素都满足谓词则返回true，否则返回false
  */
-template <typename Iterator, typename Predicate> constexpr bool all_of(Iterator first, Iterator last, Predicate pred) {
+template <typename Iterator, typename Predicate>
+constexpr bool all_of(Iterator first, Iterator last, Predicate pred) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
 
     for (; first != last; ++first) {
@@ -243,7 +247,8 @@ template <typename Iterator, typename Predicate> constexpr bool all_of(Iterator 
  * @param pred 谓词函数
  * @return 如果有任意元素满足谓词则返回true，否则返回false
  */
-template <typename Iterator, typename Predicate> constexpr bool any_of(Iterator first, Iterator last, Predicate pred) {
+template <typename Iterator, typename Predicate>
+constexpr bool any_of(Iterator first, Iterator last, Predicate pred) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
 
     for (; first != last; ++first) {
@@ -263,7 +268,8 @@ template <typename Iterator, typename Predicate> constexpr bool any_of(Iterator 
  * @param pred 谓词函数
  * @return 如果没有元素满足谓词则返回true，否则返回false
  */
-template <typename Iterator, typename Predicate> constexpr bool none_of(Iterator first, Iterator last, Predicate pred) {
+template <typename Iterator, typename Predicate>
+constexpr bool none_of(Iterator first, Iterator last, Predicate pred) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
 
     for (; first != last; ++first) {
@@ -315,7 +321,8 @@ constexpr Iterator adjacent_find(Iterator first, Iterator last, BinaryPredicate 
  * @param last 范围的终止迭代器
  * @return 指向第一对相等相邻元素中第一个元素的迭代器，或last如果未找到
  */
-template <typename Iterator> constexpr Iterator adjacent_find(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr Iterator adjacent_find(Iterator first, Iterator last) {
     return _NEFORCE adjacent_find(first, last, _NEFORCE equal_to<iter_value_t<Iterator>>());
 }
 

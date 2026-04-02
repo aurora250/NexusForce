@@ -256,7 +256,7 @@ public:
      * @brief 转换为字符串
      * @return 十六进制格式的字符串（带0x前缀）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return format("{:#x}", *this); }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const;
 
     /**
      * @brief 从字符串解析十六进制值
@@ -267,9 +267,16 @@ public:
     NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 hexadecimal parse(const string_view str) { return hexadecimal(str); }
 };
 
-template <> struct unpackage<hexadecimal> {
+template <>
+struct unpackage<hexadecimal> {
     using type = int64_t;
 };
+
+/// @cond
+
+NEFORCE_CONSTEXPR20 string hexadecimal::to_string() const { return format("{:#x}", *this); }
+
+/// @endcond
 
 /** @} */ // Packages
 

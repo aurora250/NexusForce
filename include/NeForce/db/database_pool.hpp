@@ -55,7 +55,8 @@ private:
     void replenish_task();
     void scanner_task();
 
-    template <typename T> shared_ptr<T> acquire_impl();
+    template <typename T>
+    shared_ptr<T> acquire_impl();
 
 public:
     database_pool(db_type type, const db_config& config) :
@@ -82,7 +83,8 @@ public:
 };
 
 
-template <typename T> shared_ptr<T> database_pool::acquire_impl() {
+template <typename T>
+shared_ptr<T> database_pool::acquire_impl() {
     unique_lock<mutex> lk(queue_mtx_);
 
     const bool got = cv_.wait_for(lk, pool_cfg_.acquire_timeout,

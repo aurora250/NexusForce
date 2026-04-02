@@ -123,7 +123,8 @@ class NEFORCE_API any {
      *
      * 管理栈存储的值，使用inplace new在缓冲区中构造对象。
      */
-    template <typename T> struct internal_manage {
+    template <typename T>
+    struct internal_manage {
         /**
          * @brief 管理函数
          * @param op 操作类型
@@ -138,7 +139,8 @@ class NEFORCE_API any {
          * @param storage 存储对象
          * @param args 构造参数
          */
-        template <typename... Args> static void create(storage_internal& storage, Args&&... args) {
+        template <typename... Args>
+        static void create(storage_internal& storage, Args&&... args) {
             void* ptr = &storage.buffer_;
             new (ptr) T(_NEFORCE forward<Args>(args)...);
         }
@@ -161,7 +163,8 @@ class NEFORCE_API any {
      *
      * 管理堆分配的值，在堆上分配内存存储对象。
      */
-    template <typename T> struct external_manage {
+    template <typename T>
+    struct external_manage {
         /**
          * @brief 管理函数
          * @param op 操作类型
@@ -176,7 +179,8 @@ class NEFORCE_API any {
          * @param storage 存储对象
          * @param args 构造参数
          */
-        template <typename... Args> static void create(storage_internal& storage, Args&&... args) {
+        template <typename... Args>
+        static void create(storage_internal& storage, Args&&... args) {
             storage.ptr_ = new T(_NEFORCE forward<Args>(args)...);
         }
 
@@ -214,7 +218,8 @@ class NEFORCE_API any {
      * @tparam Manager 管理器类型
      * @param args 构造参数
      */
-    template <typename T, typename... Args, typename Manager = manage_t<T>> void try_emplace(Args&&... args) {
+    template <typename T, typename... Args, typename Manager = manage_t<T>>
+    void try_emplace(Args&&... args) {
         any::reset();
         Manager::create(storage_, _NEFORCE forward<Args>(args)...);
         manage_ = &Manager::manage;
@@ -424,31 +429,36 @@ any make_any(std::initializer_list<U> ilist, Args&&... args) {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename T, typename U> const T* __any_cast_aux_dispatch_impl(const any* value, any_cast_true_tag) noexcept {
+template <typename T, typename U>
+const T* __any_cast_aux_dispatch_impl(const any* value, any_cast_true_tag) noexcept {
     if (value->manage_ == &any::manage_t<U>::manage) {
         return static_cast<const T*>(any::manage_t<U>::access(value->storage_));
     }
     return nullptr;
 }
 
-template <typename T, typename U> const T* __any_cast_aux_dispatch_impl(const any*, any_cast_false_tag) noexcept {
+template <typename T, typename U>
+const T* __any_cast_aux_dispatch_impl(const any*, any_cast_false_tag) noexcept {
     return nullptr;
 }
 
-template <typename T, typename U> const T* __any_cast_aux_dispatch(const any* value) noexcept {
+template <typename T, typename U>
+const T* __any_cast_aux_dispatch(const any* value) noexcept {
     using tag = conditional_t<(is_same_v<decay_t<U>, U> || is_copy_constructible_v<U>), any_cast_true_tag,
                               any_cast_false_tag>;
     return inner::__any_cast_aux_dispatch_impl<T, U>(value, tag{});
 }
 
-template <typename T, enable_if_t<is_object_v<T>, int> = 0> const T* __any_cast_aux(const any* value) noexcept {
+template <typename T, enable_if_t<is_object_v<T>, int> = 0>
+const T* __any_cast_aux(const any* value) noexcept {
     if (value) {
         return __any_cast_aux_dispatch<T, remove_cv_t<T>>(value);
     }
     return nullptr;
 }
 
-template <typename T, enable_if_t<!is_object_v<T>, int> = 0> const T* __any_cast_aux(const any*) noexcept {
+template <typename T, enable_if_t<!is_object_v<T>, int> = 0>
+const T* __any_cast_aux(const any*) noexcept {
     return nullptr;
 }
 
@@ -461,7 +471,10 @@ NEFORCE_END_INNER__
  * @param value 指向any的指针
  * @return 指向转换后值的常量指针，如果类型不匹配则返回nullptr
  */
-template <typename T> const T* any_cast(const any* value) noexcept { return inner::__any_cast_aux<T>(value); }
+template <typename T>
+const T* any_cast(const any* value) noexcept {
+    return inner::__any_cast_aux<T>(value);
+}
 
 /**
  * @brief 从any对象转换值
@@ -469,7 +482,8 @@ template <typename T> const T* any_cast(const any* value) noexcept { return inne
  * @param value 指向any的指针
  * @return 指向转换后值的指针，如果类型不匹配则返回nullptr
  */
-template <typename T> T* any_cast(any* value) noexcept {
+template <typename T>
+T* any_cast(any* value) noexcept {
     return const_cast<T*>(any_cast<T>(const_cast<const any*>(value)));
 }
 
@@ -480,7 +494,8 @@ template <typename T> T* any_cast(any* value) noexcept {
  * @return 转换后的值
  * @throw anycast_exception 如果类型转换失败
  */
-template <typename T> T any_cast(const any& value) {
+template <typename T>
+T any_cast(const any& value) {
     using U = remove_cvref_t<T>;
     static_assert(disjunction_v<is_reference<T>, is_copy_constructible<T>, is_constructible<T, const U&>>,
                   "type T must be valid to cast from any.");
@@ -496,7 +511,8 @@ template <typename T> T any_cast(const any& value) {
 
 /// @cond
 
-template <typename T> void any::internal_manage<T>::manage(const any_operation op, const any* value, ArgT* arg) {
+template <typename T>
+void any::internal_manage<T>::manage(const any_operation op, const any* value, ArgT* arg) {
     auto ptr = reinterpret_cast<const T*>(&value->storage_.buffer_);
     switch (op) {
         case ACCESS: {
@@ -529,7 +545,8 @@ template <typename T> void any::internal_manage<T>::manage(const any_operation o
     }
 }
 
-template <typename T> void any::external_manage<T>::manage(const any_operation op, const any* value, ArgT* arg) {
+template <typename T>
+void any::external_manage<T>::manage(const any_operation op, const any* value, ArgT* arg) {
     auto ptr = static_cast<const T*>(value->storage_.ptr_);
     switch (op) {
         case ACCESS: {

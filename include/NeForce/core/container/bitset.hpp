@@ -30,7 +30,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 以及常见的位操作（与、或、异或、移位等）。存储效率高，操作速度快。
  * 位数N在编译时确定，因此不能动态改变大小。
  */
-template <size_t N> class bitset : public icommon<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
+template <size_t N>
+class bitset : public icommon<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
 public:
     /**
      * @class reference

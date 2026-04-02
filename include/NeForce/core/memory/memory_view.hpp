@@ -35,7 +35,8 @@ NEFORCE_BEGIN_INNER__
  * @brief 范围存储（静态大小版本）
  * @tparam Extent 静态大小
  */
-template <size_t Extent> struct extent_storage {
+template <size_t Extent>
+struct extent_storage {
     constexpr extent_storage() noexcept = default;
 
     constexpr extent_storage(const extent_storage&) noexcept = default;
@@ -51,7 +52,8 @@ template <size_t Extent> struct extent_storage {
 /**
  * @brief 范围存储（动态大小版本）
  */
-template <> struct extent_storage<dynamic_extent> {
+template <>
+struct extent_storage<dynamic_extent> {
 private:
     size_t extent_value_ = 0;
 
@@ -84,7 +86,8 @@ NEFORCE_END_INNER__
  * 可以指向任意连续内存块。支持编译时和运行时大小确定。
  * 提供类似容器的接口，但不进行内存管理。
  */
-template <typename Element, size_t Extent = dynamic_extent> class memory_view {
+template <typename Element, size_t Extent = dynamic_extent>
+class memory_view {
 public:
     using element_type = Element; ///< 元素类型
 
@@ -102,12 +105,14 @@ private:
     template <typename U, size_t ArrayExtent, enable_if_t<Extent == dynamic_extent || ArrayExtent == Extent, int> = 0>
     using is_compatible_array = is_array_convertible<Element, U>;
 
-    template <typename Ref> using is_compatible_ref = is_array_convertible<Element, remove_reference_t<Ref>>;
+    template <typename Ref>
+    using is_compatible_ref = is_array_convertible<Element, remove_reference_t<Ref>>;
 
     /// 压缩存储：范围存储和指针
     compressed_pair<inner::extent_storage<Extent>, pointer> extent_pair_;
 
-    template <typename U, size_t OE> friend class memory_view;
+    template <typename U, size_t OE>
+    friend class memory_view;
 
 private:
     template <size_t, size_t Count, enable_if_t<Count != dynamic_extent, int> = 0>
@@ -372,7 +377,8 @@ public:
      * @tparam Count 元素数量
      * @return 新视图
      */
-    template <size_t Count> constexpr memory_view<element_type, Count> first() const noexcept {
+    template <size_t Count>
+    constexpr memory_view<element_type, Count> first() const noexcept {
         memory_view::check_count<Extent>(Count);
         using view = memory_view<element_type, Count>;
         return view{data(), Count};
@@ -393,7 +399,8 @@ public:
      * @tparam Count 元素数量
      * @return 新视图
      */
-    template <size_t Count> constexpr memory_view<element_type, Count> last() const noexcept {
+    template <size_t Count>
+    constexpr memory_view<element_type, Count> last() const noexcept {
         memory_view::check_count<Extent>(Count);
         using view = memory_view<element_type, Count>;
         return view{data() + (size() - Count), Count};
@@ -440,9 +447,11 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T, size_t ArrayExtent> memory_view(T (&)[ArrayExtent]) -> memory_view<T, ArrayExtent>;
+template <typename T, size_t ArrayExtent>
+memory_view(T (&)[ArrayExtent]) -> memory_view<T, ArrayExtent>;
 
-template <typename T, size_t ArrayExtent> memory_view(array<T, ArrayExtent>&) -> memory_view<T, ArrayExtent>;
+template <typename T, size_t ArrayExtent>
+memory_view(array<T, ArrayExtent>&) -> memory_view<T, ArrayExtent>;
 
 template <typename T, size_t ArrayExtent>
 memory_view(const array<T, ArrayExtent>&) -> memory_view<const T, ArrayExtent>;

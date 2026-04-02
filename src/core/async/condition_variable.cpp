@@ -5,6 +5,7 @@
 #    include <winerror.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/exception/breakpoint.hpp>
 #    include <bits/gthr.h>
 #    include <cerrno>
 #endif

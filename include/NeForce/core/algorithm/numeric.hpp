@@ -58,7 +58,8 @@ NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init, Binary
  *
  * 默认使用加法运算的累积计算。
  */
-template <typename Iterator, typename T> NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init) {
+template <typename Iterator, typename T>
+NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init) {
     return _NEFORCE accumulate(first, second, init, _NEFORCE plus<T>());
 }
 

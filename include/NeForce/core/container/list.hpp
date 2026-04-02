@@ -29,7 +29,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 作为list容器的基本节点单元，包含数据域和前后指针。
  */
-template <typename T> struct list_node {
+template <typename T>
+struct list_node {
     T data;                    ///< 节点存储的数据
     list_node* prev = nullptr; ///< 指向前一个节点的指针
     list_node* next = nullptr; ///< 指向后一个节点的指针
@@ -63,7 +64,8 @@ template <typename T> struct list_node {
  *
  * 为list提供双向迭代器支持，包含边界检查和调试验证。
  */
-template <bool IsConst, typename List> struct list_iterator : iiterator<list_iterator<IsConst, List>> {
+template <bool IsConst, typename List>
+struct list_iterator : iiterator<list_iterator<IsConst, List>> {
 public:
     using container_type = List;                                      ///< 容器类型
     using value_type = typename container_type::value_type;           ///< 值类型
@@ -160,7 +162,8 @@ public:
  * 双向链表容器，提供常数时间的插入和删除操作。
  * 不支持随机访问，但支持双向迭代。
  */
-template <typename T, typename Alloc = allocator<list_node<T>>> class list : public icollector<list<T, Alloc>> {
+template <typename T, typename Alloc = allocator<list_node<T>>>
+class list : public icollector<list<T, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "list only contains object types.");
@@ -186,7 +189,8 @@ private:
     link_type head_ = nullptr;                                                    ///< 头节点指针
     compressed_pair<allocator_type, size_type> pair_{default_construct_tag{}, 0}; ///< 压缩存储的分配器和大小
 
-    template <bool, typename> friend struct list_iterator;
+    template <bool, typename>
+    friend struct list_iterator;
 
 private:
     /**
@@ -197,7 +201,8 @@ private:
      *
      * 分配内存并构造节点，如果构造失败则释放内存。
      */
-    template <typename... Args> link_type create_node(Args&&... args) {
+    template <typename... Args>
+    link_type create_node(Args&&... args) {
         link_type p = pair_.get_base().allocate();
         try {
             _NEFORCE construct(&p->data, _NEFORCE forward<Args>(args)...);
@@ -274,7 +279,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> list(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    list(Iterator first, Iterator last) {
         list::init_header();
         iterator pos = end();
         try {
@@ -499,7 +505,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace(iterator position, Args&&... args) {
+    template <typename... Args>
+    iterator emplace(iterator position, Args&&... args) {
         link_type temp = list::create_node(_NEFORCE forward<Args>(args)...);
         temp->next = position.base();
         temp->prev = position.base()->prev;
@@ -515,7 +522,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_back(Args&&... args) {
+    template <typename... Args>
+    iterator emplace_back(Args&&... args) {
         return list::emplace(end(), _NEFORCE forward<Args>(args)...);
     }
 
@@ -525,7 +533,8 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args> iterator emplace_front(Args&&... args) {
+    template <typename... Args>
+    iterator emplace_front(Args&&... args) {
         return list::emplace(begin(), _NEFORCE forward<Args>(args)...);
     }
 
@@ -579,7 +588,8 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> void assign(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    void assign(Iterator first, Iterator last) {
         clear();
         list::insert(begin(), first, last);
     }
@@ -794,7 +804,8 @@ public:
      * @tparam Pred 谓词类型
      * @param pred 一元谓词，返回true的元素将被移除
      */
-    template <typename Pred> void remove_if(Pred pred) {
+    template <typename Pred>
+    void remove_if(Pred pred) {
         iterator iter = begin(), last = end();
         while (iter != last) {
             if (pred(*iter)) {
@@ -879,7 +890,8 @@ public:
      * 将有序链表other合并到当前有序链表中，合并后仍保持有序。
      * 使用pred作为比较准则。
      */
-    template <typename Pred> void merge_if(list& other, Pred pred) {
+    template <typename Pred>
+    void merge_if(list& other, Pred pred) {
         iterator first1 = begin(), first2 = other.begin();
         iterator last1 = end(), last2 = other.end();
 
@@ -931,7 +943,8 @@ public:
      *
      * 移除链表中所有连续重复的元素，只保留第一个。
      */
-    template <typename Pred> void unique_if(Pred pred) noexcept {
+    template <typename Pred>
+    void unique_if(Pred pred) noexcept {
         if (empty()) {
             return;
         }
@@ -959,7 +972,8 @@ public:
      *
      * 使用插入排序算法对链表进行排序。
      */
-    template <typename Pred> void sort_if(Pred pred) {
+    template <typename Pred>
+    void sort_if(Pred pred) {
         if (empty()) {
             return;
         }

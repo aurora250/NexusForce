@@ -97,7 +97,10 @@ public:
      * @return 符号地址，转换为指定类型
      * @throws dynamic_library_exception 符号不存在时抛出
      */
-    template <typename T> T to_symbol(const string& name) const { return reinterpret_cast<T>(symbol(name)); }
+    template <typename T>
+    T to_symbol(const string& name) const {
+        return reinterpret_cast<T>(symbol(name));
+    }
 
     /**
      * @brief 获取原始符号地址

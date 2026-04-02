@@ -96,11 +96,13 @@ struct boolean : ipackage<boolean, bool>, iobject<boolean> {
     constexpr boolean operator!() const noexcept { return boolean(!value_); }
 };
 
-template <> struct package<bool> {
+template <>
+struct package<bool> {
     using type = boolean;
 };
 
-template <> struct unpackage<boolean> {
+template <>
+struct unpackage<boolean> {
     using type = bool;
 };
 
@@ -143,10 +145,12 @@ template <> struct unpackage<boolean> {
             return SIGN##integer##BYTE{_NEFORCE to_##SIGN##int##BYTE(str)};                                         \
         }                                                                                                           \
     };                                                                                                              \
-    template <> struct package<SIGN##int##BYTE##_t> {                                                               \
+    template <>                                                                                                     \
+    struct package<SIGN##int##BYTE##_t> {                                                                           \
         using type = SIGN##integer##BYTE;                                                                           \
     };                                                                                                              \
-    template <> struct unpackage<SIGN##integer##BYTE> {                                                             \
+    template <>                                                                                                     \
+    struct unpackage<SIGN##integer##BYTE> {                                                                         \
         using type = SIGN##int##BYTE##_t;                                                                           \
     };
 
@@ -217,17 +221,21 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u, U, 64)
 #undef __NEFORCE_BUILD_INTEGER_STRUCT
 
 #ifdef NEFORCE_PLATFORM_LINUX64
-template <> struct package<long long> {
+template <>
+struct package<long long> {
     using type = integer64;
 };
-template <> struct package<unsigned long long> {
+template <>
+struct package<unsigned long long> {
     using type = uinteger64;
 };
 #else
-template <> struct package<long> {
+template <>
+struct package<long> {
     using type = integer32;
 };
-template <> struct package<unsigned long> {
+template <>
+struct package<unsigned long> {
     using type = uinteger32;
 };
 #endif
@@ -274,11 +282,13 @@ struct float32 : iobject<float32>, ipackage<float32, float32_t> {
     }
 };
 
-template <> struct package<float32_t> {
+template <>
+struct package<float32_t> {
     using type = float32;
 };
 
-template <> struct unpackage<float32> {
+template <>
+struct unpackage<float32> {
     using type = float32_t;
 };
 
@@ -324,11 +334,13 @@ struct float64 : iobject<float64>, ipackage<float64, float64_t> {
     }
 };
 
-template <> struct package<float64_t> {
+template <>
+struct package<float64_t> {
     using type = float64;
 };
 
-template <> struct unpackage<float64> {
+template <>
+struct unpackage<float64> {
     using type = float64_t;
 };
 
@@ -374,11 +386,13 @@ struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
     }
 };
 
-template <> struct package<decimal_t> {
+template <>
+struct package<decimal_t> {
     using type = decimal;
 };
 
-template <> struct unpackage<decimal> {
+template <>
+struct unpackage<decimal> {
     using type = decimal_t;
 };
 

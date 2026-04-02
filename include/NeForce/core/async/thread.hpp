@@ -197,7 +197,8 @@ private:
      * @brief 线程数据具体实现
      * @tparam Callable 可调用对象类型
      */
-    template <typename Callable> struct thread_data final : data_base {
+    template <typename Callable>
+    struct thread_data final : data_base {
         Callable func_;
 
         template <typename F>
@@ -262,11 +263,12 @@ private:
 #else
     static void*
 #endif
-            thread_entry(void* arg);
+    thread_entry(void* arg);
 
     void start_thread_impl(thread_startup_args* args);
 
-    template <typename F> void start_thread(F&& f) {
+    template <typename F>
+    void start_thread(F&& f) {
         auto data = _NEFORCE make_unique<thread_data<decay_t<F>>>(_NEFORCE forward<F>(f));
         this->start_thread_impl(new thread_startup_args{_NEFORCE move(data), id_});
     }

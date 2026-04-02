@@ -11,7 +11,8 @@
 #include "NeForce/core/time/duration.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-template <typename Clock, typename Dur = typename Clock::duration> struct time_point;
+template <typename Clock, typename Dur = typename Clock::duration>
+struct time_point;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -25,7 +26,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 计算两个时间点类型的公共类型。
  */
-template <typename CommonT, typename Clock, typename Dummy = void> struct __timepoint_common_type {};
+template <typename CommonT, typename Clock, typename Dummy = void>
+struct __timepoint_common_type {};
 
 template <typename CommonT, typename Clock>
 struct __timepoint_common_type<CommonT, Clock, void_t<typename CommonT::type>> {
@@ -39,11 +41,13 @@ template <typename Clock, typename Dur1, typename Dur2>
 struct common_type<time_point<Clock, Dur1>, time_point<Clock, Dur2>>
 : inner::__timepoint_common_type<common_type<Dur1, Dur2>, Clock> {};
 
-template <typename Clock, typename Dur> struct common_type<time_point<Clock, Dur>, time_point<Clock, Dur>> {
+template <typename Clock, typename Dur>
+struct common_type<time_point<Clock, Dur>, time_point<Clock, Dur>> {
     using type = time_point<Clock, Dur>;
 };
 
-template <typename Clock, typename Dur> struct common_type<time_point<Clock, Dur>> {
+template <typename Clock, typename Dur>
+struct common_type<time_point<Clock, Dur>> {
     using type = time_point<Clock, Dur>;
 };
 
@@ -76,7 +80,8 @@ constexpr time_point<Clock, ToDur> time_cast(const time_point<Clock, Dur>& time_
  *
  * 表示特定时钟的一个时间点，支持时间算术运算和比较。
  */
-template <typename Clock, typename Dur> struct time_point {
+template <typename Clock, typename Dur>
+struct time_point {
     static_assert(is_duration_v<Dur>, "duration must be a specialization of duration");
 
     using clock_type = Clock;                      ///< 时钟类型

@@ -25,7 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 提供类型安全的函数包装，支持任意可调用对象。
  */
-template <typename Sign> class function;
+template <typename Sign>
+class function;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -75,9 +76,13 @@ union storage_data {
     NEFORCE_NODISCARD void* access() noexcept { return &data_[0]; }
     NEFORCE_NODISCARD const void* access() const noexcept { return &data_[0]; }
 
-    template <typename T> NEFORCE_NODISCARD T& access() noexcept { return *static_cast<T*>(access()); }
+    template <typename T>
+    NEFORCE_NODISCARD T& access() noexcept {
+        return *static_cast<T*>(access());
+    }
 
-    template <typename T> NEFORCE_NODISCARD const T& access() const noexcept {
+    template <typename T>
+    NEFORCE_NODISCARD const T& access() const noexcept {
         return *static_cast<const T*>(access());
     }
 
@@ -103,22 +108,26 @@ public:
      *
      * 提供函数对象的存储、复制、销毁等基本管理功能。
      */
-    template <typename F> class __manager_base {
+    template <typename F>
+    class __manager_base {
     protected:
         static constexpr bool stored_ = is_location_invariant_v<F> && sizeof(F) <= max_size_ &&
                                         alignof(F) <= max_align_ && max_align_ % alignof(F) == 0;
 
     private:
-        template <typename U, bool = stored_> struct __get_pointer_impl;
+        template <typename U, bool = stored_>
+        struct __get_pointer_impl;
 
-        template <typename U> struct __get_pointer_impl<U, true> {
+        template <typename U>
+        struct __get_pointer_impl<U, true> {
             static U* get(const storage_data& src) noexcept {
                 const U& f = src.access<U>();
                 return const_cast<U*>(_NEFORCE addressof(f));
             }
         };
 
-        template <typename U> struct __get_pointer_impl<U, false> {
+        template <typename U>
+        struct __get_pointer_impl<U, false> {
             static U* get(const storage_data& src) noexcept { return src.access<U*>(); }
         };
 
@@ -128,10 +137,12 @@ public:
         static F* get_pointer(const storage_data& src) noexcept { return __get_pointer_impl<F>::get(src); }
 
     private:
-        template <typename Fn> static void create(storage_data& data, Fn&& f, true_type) {
+        template <typename Fn>
+        static void create(storage_data& data, Fn&& f, true_type) {
             ::new (data.access()) F(_NEFORCE forward<Fn>(f));
         }
-        template <typename Fn> static void create(storage_data& data, Fn&& f, false_type) {
+        template <typename Fn>
+        static void create(storage_data& data, Fn&& f, false_type) {
             data.access<F*>() = new F(_NEFORCE forward<Fn>(f));
         }
 
@@ -163,14 +174,22 @@ public:
             __manager_base::create(func, _NEFORCE forward<Fn>(f), storage_());
         }
 
-        template <typename Sign> static bool not_empty_function(const _NEFORCE function<Sign>& f) noexcept {
+        template <typename Sign>
+        static bool not_empty_function(const _NEFORCE function<Sign>& f) noexcept {
             return static_cast<bool>(f);
         }
-        template <typename T> static bool not_empty_function(T* fptr) noexcept { return fptr != nullptr; }
-        template <typename Class, typename T> static bool not_empty_function(T Class::* mptr) noexcept {
+        template <typename T>
+        static bool not_empty_function(T* fptr) noexcept {
+            return fptr != nullptr;
+        }
+        template <typename Class, typename T>
+        static bool not_empty_function(T Class::* mptr) noexcept {
             return mptr != nullptr;
         }
-        template <typename T> static bool not_empty_function(const T&) noexcept { return true; }
+        template <typename T>
+        static bool not_empty_function(const T&) noexcept {
+            return true;
+        }
     };
 
     using manage_type = bool (*)(storage_data&, const storage_data&, FUNCTION_OPERATE);
@@ -197,7 +216,8 @@ public:
  *
  * 提供特定函数签名的调用和管理功能。
  */
-template <typename Sign, typename F> class __function_manage_handler;
+template <typename Sign, typename F>
+class __function_manage_handler;
 
 template <typename Res, typename F, typename... Args>
 class __function_manage_handler<Res(Args...), F> : public __function_base::__manager_base<F> {
@@ -223,12 +243,14 @@ public:
         return _NEFORCE invoke_r<Res>(*base_type::get_pointer(f), _NEFORCE forward<Args>(args)...);
     }
 
-    template <typename Fn> static constexpr bool nothrow_init() noexcept {
+    template <typename Fn>
+    static constexpr bool nothrow_init() noexcept {
         return conjunction_v<typename base_type::storage_, is_nothrow_constructible<F, Fn>>;
     }
 };
 
-template <> class __function_manage_handler<void, void> {
+template <>
+class __function_manage_handler<void, void> {
 public:
     static bool manage(storage_data&, const storage_data&, FUNCTION_OPERATE) { return false; }
 };
@@ -249,7 +271,8 @@ NEFORCE_END_INNER__
  *
  * 提供类型安全的函数包装，支持存储、复制和调用任意可调用对象。
  */
-template <typename Res, typename... Args> class function<Res(Args...)> : inner::__function_base {
+template <typename Res, typename... Args>
+class function<Res(Args...)> : inner::__function_base {
 private:
     using invoker_type = Res (*)(const inner::storage_data&, Args&&...); ///< 调用器类型
 
@@ -260,14 +283,16 @@ private:
     template <typename F, bool IsSelf = is_same_v<remove_cvref_t<F>, function>>
     using enable_decay_t = typename enable_if_t<!IsSelf, decay<F>>::type;
 
-    template <typename F, typename = void> struct callable_t : false_type {};
+    template <typename F, typename = void>
+    struct callable_t : false_type {};
 
     template <typename F>
     struct callable_t<
             F, enable_if_t<!is_same_v<remove_cvref_t<F>, function> && is_invocable_r_v<Res, decay_t<F>&, Args...>>>
     : true_type {};
 
-    template <typename F> using handler_t = inner::__function_manage_handler<Res(Args...), decay_t<F>>;
+    template <typename F>
+    using handler_t = inner::__function_manage_handler<Res(Args...), decay_t<F>>;
 
     template <typename F, enable_if_t<is_object_v<F>, int> = 0>
     NEFORCE_ALWAYS_INLINE const F* __target_impl() const noexcept {
@@ -391,7 +416,8 @@ public:
      * @param wrapper 引用包装器
      * @return 当前对象的引用
      */
-    template <typename F> function& operator=(reference_wrapper<F> wrapper) noexcept {
+    template <typename F>
+    function& operator=(reference_wrapper<F> wrapper) noexcept {
         function(wrapper).swap(*this);
         return *this;
     }
@@ -445,14 +471,18 @@ public:
      * @tparam F 目标类型
      * @return 目标对象的常量指针，如果类型不匹配则返回nullptr
      */
-    template <typename F> const F* target() const noexcept { return __target_impl<F>(); }
+    template <typename F>
+    const F* target() const noexcept {
+        return __target_impl<F>();
+    }
 
     /**
      * @brief 获取目标对象的指针
      * @tparam F 目标类型
      * @return 目标对象的指针，如果类型不匹配则返回nullptr
      */
-    template <typename F> F* target() noexcept {
+    template <typename F>
+    F* target() noexcept {
         const F* f = const_cast<const function*>(this)->target<F>();
         return const_cast<F*>(f);
     }
@@ -462,7 +492,8 @@ public:
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename> struct __function_guide_helper;
+template <typename>
+struct __function_guide_helper;
 
 template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...)> {
@@ -472,7 +503,8 @@ struct __function_guide_helper<Result (Class::*)(Args...)> {
 NEFORCE_END_INNER__
 /// @endcond
 
-template <typename Res, typename... Args> function(Res (*)(Args...)) -> function<Res(Args...)>;
+template <typename Res, typename... Args>
+function(Res (*)(Args...)) -> function<Res(Args...)>;
 
 template <typename Func, typename Sign = typename inner::__function_guide_helper<
                                  remove_function_qualifiers_t<decltype(&Func::operator())>>::type>
@@ -489,7 +521,8 @@ function(Func) -> function<Sign>;
  * @param np 空指针字面量
  * @return function是否为空
  */
-template <typename Res, typename... Args> bool operator==(const function<Res(Args...)>& f, nullptr_t np) noexcept {
+template <typename Res, typename... Args>
+bool operator==(const function<Res(Args...)>& f, nullptr_t np) noexcept {
     return !static_cast<bool>(f);
 }
 
@@ -501,7 +534,8 @@ template <typename Res, typename... Args> bool operator==(const function<Res(Arg
  * @param f function对象
  * @return function是否为空
  */
-template <typename Res, typename... Args> bool operator==(nullptr_t np, const function<Res(Args...)>& f) noexcept {
+template <typename Res, typename... Args>
+bool operator==(nullptr_t np, const function<Res(Args...)>& f) noexcept {
     return !static_cast<bool>(f);
 }
 
@@ -513,7 +547,8 @@ template <typename Res, typename... Args> bool operator==(nullptr_t np, const fu
  * @param np 空指针字面量
  * @return function是否非空
  */
-template <typename Res, typename... Args> bool operator!=(const function<Res(Args...)>& f, nullptr_t np) noexcept {
+template <typename Res, typename... Args>
+bool operator!=(const function<Res(Args...)>& f, nullptr_t np) noexcept {
     return static_cast<bool>(f);
 }
 
@@ -525,7 +560,8 @@ template <typename Res, typename... Args> bool operator!=(const function<Res(Arg
  * @param f function对象
  * @return function是否非空
  */
-template <typename Res, typename... Args> bool operator!=(nullptr_t np, const function<Res(Args...)>& f) noexcept {
+template <typename Res, typename... Args>
+bool operator!=(nullptr_t np, const function<Res(Args...)>& f) noexcept {
     return static_cast<bool>(f);
 }
 

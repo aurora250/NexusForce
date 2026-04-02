@@ -184,7 +184,8 @@ struct waiter_pool : waiter_pool_base {
  *
  * 提供等待操作的基本框架，处理地址映射和自旋逻辑。
  */
-template <typename T> struct waiter_base {
+template <typename T>
+struct waiter_base {
 private:
     /**
      * @brief 检查类型是否适用于平台等待操作
@@ -310,7 +311,8 @@ public:
  *
  * 完整的等待器实现，根据EntersWait标签决定是否更新等待计数。
  */
-template <typename EntersWait> struct waiter : waiter_base<waiter_pool> {
+template <typename EntersWait>
+struct waiter : waiter_base<waiter_pool> {
 public:
     using base_type = waiter_base<waiter_pool>;
 
@@ -355,7 +357,8 @@ public:
      *
      * 循环执行：自旋等待 -> 如果条件不满足则进行FUTEX等待
      */
-    template <typename T, typename Func> void waiter_do_wait_v(T old, Func f) {
+    template <typename T, typename Func>
+    void waiter_do_wait_v(T old, Func f) {
         do {
             platform_wait_t value;
             if (base_type::waiter_do_spin_v(old, f, value)) {
@@ -370,7 +373,8 @@ public:
      * @tparam Pred 谓词类型
      * @param pred 等待条件谓词
      */
-    template <typename Pred> void waiter_do_wait(Pred pred) noexcept {
+    template <typename Pred>
+    void waiter_do_wait(Pred pred) noexcept {
         do {
             platform_wait_t value;
             if (base_type::waiter_do_spin(pred, value)) {
@@ -400,7 +404,8 @@ NEFORCE_END_INNER__
  *
  * 等待直到addr处的值不等于old。
  */
-template <typename T, typename Func> void atomic_wait_address_v(const T* addr, T old, Func f) noexcept {
+template <typename T, typename Func>
+void atomic_wait_address_v(const T* addr, T old, Func f) noexcept {
     inner::enters_wait waiter(addr);
     waiter.waiter_do_wait_v(old, f);
 }
@@ -414,7 +419,8 @@ template <typename T, typename Func> void atomic_wait_address_v(const T* addr, T
  *
  * 等待直到pred()返回true。
  */
-template <typename T, typename Pred> void atomic_wait_address(const T* addr, Pred pred) noexcept {
+template <typename T, typename Pred>
+void atomic_wait_address(const T* addr, Pred pred) noexcept {
     inner::enters_wait waiter(addr);
     waiter.waiter_do_wait(pred);
 }
@@ -428,7 +434,8 @@ template <typename T, typename Pred> void atomic_wait_address(const T* addr, Pre
  * 唤醒等待addr处值变化的线程。
  * 使用裸等待器。
  */
-template <typename T> void atomic_notify_address(const T* addr, const bool all) noexcept {
+template <typename T>
+void atomic_notify_address(const T* addr, const bool all) noexcept {
     inner::bare_wait waiter(addr);
     waiter.waiter_notify(all);
 }

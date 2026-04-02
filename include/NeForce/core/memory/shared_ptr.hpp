@@ -26,7 +26,8 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename T> class smart_pointer_atomic;
+template <typename T>
+class smart_pointer_atomic;
 
 
 /**
@@ -131,7 +132,8 @@ public:
  *
  * 对象和控制块分别分配内存的计数器实现。
  */
-template <typename T, typename Deleter> struct __smart_ptr_counter_impl final : __smart_ptr_counter {
+template <typename T, typename Deleter>
+struct __smart_ptr_counter_impl final : __smart_ptr_counter {
     compressed_pair<Deleter, T*> ptr_pair_{default_construct_tag{}, nullptr};
 
     explicit __smart_ptr_counter_impl(T* ptr) noexcept(is_nothrow_default_constructible_v<Deleter>) :
@@ -155,7 +157,8 @@ template <typename T, typename Deleter> struct __smart_ptr_counter_impl final : 
  *
  * 对象和控制块分配在同一块内存中的计数器实现，提高内存局部性。
  */
-template <typename T, typename Deleter> struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
+template <typename T, typename Deleter>
+struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     compressed_pair<Deleter, T*> ptr_pair_{default_construct_tag{}, nullptr};
     size_t align_;
     void* mem_;
@@ -216,28 +219,35 @@ NEFORCE_END_INNER__
 /// @endcond
 
 
-template <typename T> struct enable_shared_from_this;
+template <typename T>
+struct enable_shared_from_this;
 
-template <typename T> class shared_ptr;
+template <typename T>
+class shared_ptr;
 
-template <typename T> class weak_ptr;
+template <typename T>
+class weak_ptr;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename T> void __setup_enable_shared_from_impl(T* ptr, __smart_ptr_counter* owner, true_type) noexcept {
+template <typename T>
+void __setup_enable_shared_from_impl(T* ptr, __smart_ptr_counter* owner, true_type) noexcept {
     if (ptr) {
         static_cast<enable_shared_from_this<T>*>(ptr)->owner_ = owner;
     }
 }
 
-template <typename T> void __setup_enable_shared_from_impl(T*, __smart_ptr_counter*, false_type) noexcept {}
+template <typename T>
+void __setup_enable_shared_from_impl(T*, __smart_ptr_counter*, false_type) noexcept {}
 
-template <typename T> void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) noexcept {
+template <typename T>
+void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) noexcept {
     inner::__setup_enable_shared_from_impl(ptr, owner, is_base_of<enable_shared_from_this<T>, T>{});
 }
 
-template <typename T> shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
+template <typename T>
+shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
     return shared_ptr<T>(ptr, owner);
 }
 
@@ -253,16 +263,19 @@ NEFORCE_END_INNER__
  * 实现引用计数的智能指针，多个实例可以共享同一对象的所有权。
  * 当最后一个共享智能指针被销毁时，对象会被自动删除。
  */
-template <typename T> class shared_ptr {
+template <typename T>
+class shared_ptr {
 public:
     using element_type = T; ///< 元素类型
 
 private:
     using owner_type = inner::__smart_ptr_counter;
 
-    template <typename U, typename Deleter> using owner_deleter = inner::__smart_ptr_counter_impl<U, Deleter>;
+    template <typename U, typename Deleter>
+    using owner_deleter = inner::__smart_ptr_counter_impl<U, Deleter>;
 
-    template <typename U> using owner_default = inner::__smart_ptr_counter_impl<U, default_delete<U>>;
+    template <typename U>
+    using owner_default = inner::__smart_ptr_counter_impl<U, default_delete<U>>;
 
     element_type* ptr_ = nullptr; ///< 管理的对象指针
     owner_type* owner_ = nullptr; ///< 控制块指针
@@ -276,13 +289,17 @@ private:
     ptr_(ptr),
     owner_(owner) {}
 
-    template <typename U> friend class shared_ptr;
+    template <typename U>
+    friend class shared_ptr;
 
-    template <typename U> friend class weak_ptr;
+    template <typename U>
+    friend class weak_ptr;
 
-    template <typename U> friend class inner::smart_pointer_atomic;
+    template <typename U>
+    friend class inner::smart_pointer_atomic;
 
-    template <typename U> friend shared_ptr<U> inner::__make_shared_fused(U*, inner::__smart_ptr_counter*) noexcept;
+    template <typename U>
+    friend shared_ptr<U> inner::__make_shared_fused(U*, inner::__smart_ptr_counter*) noexcept;
 
 public:
     /**
@@ -498,7 +515,8 @@ public:
      * @tparam U 可转换为T*的类型
      * @param ptr 新的原始指针
      */
-    template <typename U> void reset(U* ptr) {
+    template <typename U>
+    void reset(U* ptr) {
         if (owner_) {
             owner_->decref_strong();
         }
@@ -516,7 +534,8 @@ public:
      * @param ptr 新的原始指针
      * @param deleter 删除器
      */
-    template <typename U, typename Deleter> void reset(U* ptr, Deleter deleter) {
+    template <typename U, typename Deleter>
+    void reset(U* ptr, Deleter deleter) {
         if (owner_) {
             owner_->decref_strong();
         }
@@ -581,14 +600,16 @@ public:
      * @param rhs 要比较的共享指针
      * @return 是否共享同一控制块
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
         return owner_ == rhs.owner_;
     }
 
     /**
      * @brief 与弱指针检查所有权是否相等
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
         return owner_ == rhs.owner_;
     }
 
@@ -598,14 +619,16 @@ public:
      * @param rhs 要比较的共享指针
      * @return 当前控制块地址是否小于rhs的控制块地址
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
         return owner_ < rhs.owner_;
     }
 
     /**
      * @brief 与弱指针比较所有权顺序
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
         return owner_ < rhs.owner_;
     }
 };
@@ -663,7 +686,8 @@ NEFORCE_NODISCARD bool operator>=(const shared_ptr<T>& lhs, const shared_ptr<U>&
  * @brief 数组特化的共享指针
  * @tparam T 数组元素类型
  */
-template <typename T> class shared_ptr<T[]> : shared_ptr<T> {
+template <typename T>
+class shared_ptr<T[]> : shared_ptr<T> {
 public:
     using shared_ptr<T>::shared_ptr;
 
@@ -683,18 +707,22 @@ public:
  *
  * 允许在类的成员函数中安全地获取指向自身的共享智能指针。
  */
-template <typename T> struct enable_shared_from_this {
+template <typename T>
+struct enable_shared_from_this {
 private:
     mutable inner::__smart_ptr_counter* owner_ = nullptr; ///< 控制块指针
 
     template <typename U>
     friend void inner::__setup_enable_shared_from_impl(U* ptr, inner::__smart_ptr_counter* owner, true_type) noexcept;
 
-    template <typename U> friend void inner::__setup_enable_shared_from(U*, inner::__smart_ptr_counter*) noexcept;
+    template <typename U>
+    friend void inner::__setup_enable_shared_from(U*, inner::__smart_ptr_counter*) noexcept;
 
-    template <typename U> friend class shared_ptr;
+    template <typename U>
+    friend class shared_ptr;
 
-    template <typename U> friend class weak_ptr;
+    template <typename U>
+    friend class weak_ptr;
 
 protected:
     /**
@@ -735,11 +763,14 @@ protected:
 /**
  * @brief 类型特征：是否为shared_ptr
  */
-template <typename T> struct is_shared_ptr : false_type {};
+template <typename T>
+struct is_shared_ptr : false_type {};
 
-template <typename T> struct is_shared_ptr<shared_ptr<T>> : true_type {};
+template <typename T>
+struct is_shared_ptr<shared_ptr<T>> : true_type {};
 
-template <typename T> NEFORCE_INLINE17 constexpr bool is_shared_ptr_v = is_shared_ptr<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_shared_ptr_v = is_shared_ptr<T>::value;
 
 
 /**
@@ -790,7 +821,8 @@ enable_if_t<!is_unbounded_array_v<T> && is_constructible_v<T, Args...>, shared_p
  * @return 共享指针
  * @throw memory_exception 如果构造对象时抛出错误
  */
-template <typename T> enable_if_t<is_unbounded_array_v<T>, shared_ptr<T>> make_shared(const size_t len) {
+template <typename T>
+enable_if_t<is_unbounded_array_v<T>, shared_ptr<T>> make_shared(const size_t len) {
     using value = remove_extent_t<T>;
     value* tmp = nullptr;
     try {
@@ -866,7 +898,8 @@ enable_if_t<!is_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>> all
  * @param ptr 源共享指针
  * @return 转换后的共享指针
  */
-template <typename T, typename U> shared_ptr<T> static_pointer_cast(const shared_ptr<U>& ptr) {
+template <typename T, typename U>
+shared_ptr<T> static_pointer_cast(const shared_ptr<U>& ptr) {
     return shared_ptr<T>(ptr, static_cast<T*>(ptr.get()));
 }
 
@@ -877,7 +910,8 @@ template <typename T, typename U> shared_ptr<T> static_pointer_cast(const shared
  * @param ptr 源共享指针
  * @return 转换后的共享指针
  */
-template <typename T, typename U> shared_ptr<T> const_pointer_cast(const shared_ptr<U>& ptr) {
+template <typename T, typename U>
+shared_ptr<T> const_pointer_cast(const shared_ptr<U>& ptr) {
     return shared_ptr<T>(ptr, const_cast<T*>(ptr.get()));
 }
 
@@ -888,7 +922,8 @@ template <typename T, typename U> shared_ptr<T> const_pointer_cast(const shared_
  * @param ptr 源共享指针
  * @return 转换后的共享指针
  */
-template <typename T, typename U> shared_ptr<T> reinterpret_pointer_cast(const shared_ptr<U>& ptr) {
+template <typename T, typename U>
+shared_ptr<T> reinterpret_pointer_cast(const shared_ptr<U>& ptr) {
     return shared_ptr<T>(ptr, reinterpret_cast<T*>(ptr.get()));
 }
 
@@ -899,7 +934,8 @@ template <typename T, typename U> shared_ptr<T> reinterpret_pointer_cast(const s
  * @param ptr 源共享指针
  * @return 转换后的共享指针
  */
-template <typename T, typename U> shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
+template <typename T, typename U>
+shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
     T* tmp = dynamic_cast<T*>(ptr.get());
     if (tmp != nullptr) {
         return shared_ptr<T>(ptr, tmp);
@@ -919,7 +955,8 @@ template <typename T, typename U> shared_ptr<T> dynamic_pointer_cast(const share
  * @brief shared_ptr的哈希特化
  * @tparam T 元素类型
  */
-template <typename T> struct hash<shared_ptr<T>> {
+template <typename T>
+struct hash<shared_ptr<T>> {
     NEFORCE_CONSTEXPR20 size_t operator()(const shared_ptr<T>& ptr) const
             noexcept(noexcept(_NEFORCE declval<_NEFORCE hash<T*>>()(_NEFORCE declval<T*>()))) {
         return hash<T*>()(ptr.get());
@@ -931,7 +968,8 @@ template <typename T> struct hash<shared_ptr<T>> {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename T> class smart_pointer_atomic {
+template <typename T>
+class smart_pointer_atomic {
 public:
     using value_type = T;
 
@@ -1113,7 +1151,8 @@ NEFORCE_END_INNER__
  *
  * 提供shared_ptr的原子操作支持，实现无锁的原子操作。
  */
-template <typename T> struct atomic<shared_ptr<T>> {
+template <typename T>
+struct atomic<shared_ptr<T>> {
 public:
     using value_type = shared_ptr<T>;
 

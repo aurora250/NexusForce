@@ -27,7 +27,8 @@ NEFORCE_BEGIN_REFLECT__
  * 提供链式API用于构建类型的反射信息。
  * 通过反射函数创建，用于注册基类、属性、函数和构造函数。
  */
-template <typename T> class type_builder {
+template <typename T>
+class type_builder {
 private:
     meta_type& meta_; ///< 关联的元数据对象
 
@@ -49,7 +50,8 @@ public:
      * @tparam Base 基类类型
      * @return 自身引用
      */
-    template <typename Base> type_builder& base() {
+    template <typename Base>
+    type_builder& base() {
         meta_.base_type(&registry::instance().register_type<Base>(type_name<Base>::value));
         return *this;
     }
@@ -71,7 +73,8 @@ public:
      * @param member 成员指针
      * @return 自身引用
      */
-    template <typename U> type_builder& property(string_view name, U T::* member) {
+    template <typename U>
+    type_builder& property(string_view name, U T::* member) {
         meta_property::getter getter = [member](void* obj) -> meta_any {
             auto* instance = static_cast<T*>(obj);
             return meta_any(instance->*member);
@@ -97,7 +100,8 @@ public:
      * @param func 成员函数指针
      * @return 自身引用
      */
-    template <typename Ret, typename... Args> type_builder& function(string_view name, Ret (T::*func)(Args...)) {
+    template <typename Ret, typename... Args>
+    type_builder& function(string_view name, Ret (T::*func)(Args...)) {
         auto invoker = inner::make_member_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         if (meta_func) {
@@ -114,7 +118,8 @@ public:
      * @param func 常量成员函数指针
      * @return 自身引用
      */
-    template <typename Ret, typename... Args> type_builder& function(string_view name, Ret (T::*func)(Args...) const) {
+    template <typename Ret, typename... Args>
+    type_builder& function(string_view name, Ret (T::*func)(Args...) const) {
         auto invoker = inner::make_const_member_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         if (meta_func) {
@@ -131,7 +136,8 @@ public:
      * @param func 函数指针
      * @return 自身引用
      */
-    template <typename Ret, typename... Args> type_builder& static_function(string_view name, Ret (*func)(Args...)) {
+    template <typename Ret, typename... Args>
+    type_builder& static_function(string_view name, Ret (*func)(Args...)) {
         auto invoker = inner::make_static_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
@@ -157,7 +163,8 @@ public:
      *
      * 要求类型可从Args类型列表构造。
      */
-    template <typename... Args> type_builder& constructor() {
+    template <typename... Args>
+    type_builder& constructor() {
         static_assert(is_constructible_v<T, Args...>, "Constructor must be constructible from Args");
         meta_.constructor([](const vector<meta_any>& args) -> meta_any {
             if (args.size() != sizeof...(Args)) {
@@ -187,7 +194,10 @@ public:
  * @param name 类型名称
  * @return 类型构建器
  */
-template <typename T> type_builder<T> reflect(string_view name) { return type_builder<T>(name); }
+template <typename T>
+type_builder<T> reflect(string_view name) {
+    return type_builder<T>(name);
+}
 
 
 /**

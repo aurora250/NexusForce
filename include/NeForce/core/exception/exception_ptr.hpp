@@ -59,7 +59,8 @@ public:
  *
  * 对特定异常类型的包装器实现，存储异常实例并提供类型特定的操作。
  */
-template <typename Ex> class typed_exception_wrapper final : public exception_wrapper {
+template <typename Ex>
+class typed_exception_wrapper final : public exception_wrapper {
     Ex exception_; ///< 存储的异常实例
 
 public:
@@ -151,13 +152,15 @@ private:
     explicit exception_ptr(ecb* cb) noexcept :
     ecb_(cb) {}
 
-    template <typename Ex> friend exception_ptr make_exception_ptr(Ex) noexcept;
+    template <typename Ex>
+    friend exception_ptr make_exception_ptr(Ex) noexcept;
 
     friend exception_ptr NEFORCE_API current_exception() noexcept;
 
     friend void NEFORCE_API rethrow_exception(const exception_ptr&);
 
-    template <typename Ex> friend exception_ptr make_exception_ptr(Ex ex) noexcept;
+    template <typename Ex>
+    friend exception_ptr make_exception_ptr(Ex ex) noexcept;
 
 public:
     /**
@@ -305,7 +308,8 @@ public:
  * 创建引用指定异常的异常指针。
  * 如果内存分配失败，返回空的异常指针。
  */
-template <typename Ex> exception_ptr make_exception_ptr(Ex ex) noexcept {
+template <typename Ex>
+exception_ptr make_exception_ptr(Ex ex) noexcept {
     try {
         auto wrapper = _NEFORCE make_unique<typed_exception_wrapper<decay_t<Ex>>>(_NEFORCE forward<Ex>(ex));
         unique_ptr<exception_ptr::ecb> control_block(new exception_ptr::ecb(_NEFORCE move(wrapper)));

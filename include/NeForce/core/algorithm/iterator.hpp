@@ -23,7 +23,8 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Ptr> constexpr enable_if_t<is_pointer_v<Ptr>, iter_pointer_t<Ptr>> __to_pointer_aux(Ptr iter) {
+template <typename Ptr>
+constexpr enable_if_t<is_pointer_v<Ptr>, iter_pointer_t<Ptr>> __to_pointer_aux(Ptr iter) {
     return iter;
 }
 
@@ -42,7 +43,8 @@ NEFORCE_END_INNER__
  * @param iter 迭代器
  * @return 原始指针
  */
-template <typename Iterator> constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
+template <typename Iterator>
+constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
 #ifdef NEFORCE_STANDARD_17
     if constexpr (is_pointer_v<Iterator>) {
         return iter;
@@ -100,7 +102,8 @@ NEFORCE_END_INNER__
  * - 双向迭代器：支持正负距离
  * - 前向迭代器：只支持非负距离
  */
-template <typename Iterator, typename Distance> constexpr void advance(Iterator& i, Distance n) {
+template <typename Iterator, typename Distance>
+constexpr void advance(Iterator& i, Distance n) {
     static_assert(is_iter_v<Iterator>, "Iterator must be iterator");
     static_assert(is_arithmetic_v<Distance>, "Distance must be arithmetic");
 
@@ -134,7 +137,8 @@ template <typename Iterator, typename Distance> constexpr void advance(Iterator&
  *
  * 将迭代器后退n个位置，n必须为非正数。
  */
-template <typename Iterator> constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
+template <typename Iterator>
+constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
     NEFORCE_DEBUG_VERIFY(n <= 0, "negative advance in previous operation function.");
     _NEFORCE advance(iter, n);
     return iter;
@@ -149,7 +153,8 @@ template <typename Iterator> constexpr Iterator prev(Iterator iter, iter_differe
  *
  * 将迭代器前进n个位置，n必须为非负数。
  */
-template <typename Iterator> constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
+template <typename Iterator>
+constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
     NEFORCE_DEBUG_VERIFY(n >= 0, "positive advance in next operation function.");
     _NEFORCE advance(iter, n);
     return iter;
@@ -192,7 +197,8 @@ NEFORCE_END_INNER__
  * - 随机访问迭代器：直接使用减法
  * - 其他迭代器：遍历计数
  */
-template <typename Iterator> constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
+template <typename Iterator>
+constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
     static_assert(is_iter_v<Iterator>, "Iterator must be iterator");
 
 #ifdef NEFORCE_STANDARD_17

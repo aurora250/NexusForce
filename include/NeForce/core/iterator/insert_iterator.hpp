@@ -24,7 +24,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 将元素插入到容器的尾部，通过调用容器的push_back()方法实现。
  */
-template <typename Container> class back_insert_iterator {
+template <typename Container>
+class back_insert_iterator {
 public:
     using iterator_category = output_iterator_tag; ///< 迭代器类别
     using value_type = void;                       ///< 值类型
@@ -89,7 +90,8 @@ NEFORCE_NODISCARD constexpr back_insert_iterator<Container> make_back_inserter(C
  *
  * 通过push_front方法向容器头部插入元素的输出迭代器。
  */
-template <typename Container> class front_insert_iterator {
+template <typename Container>
+class front_insert_iterator {
 public:
     using iterator_category = output_iterator_tag; ///< 迭代器类别
     using value_type = void;                       ///< 值类型
@@ -154,7 +156,8 @@ NEFORCE_NODISCARD constexpr front_insert_iterator<Container> make_front_inserter
  *
  * 在指定位置插入元素的输出迭代器，支持任意位置的插入。
  */
-template <typename Container> class insert_iterator {
+template <typename Container>
+class insert_iterator {
 public:
     using iterator_category = output_iterator_tag; ///< 迭代器类别
     using value_type = void;                       ///< 值类型

@@ -13,6 +13,10 @@
 
 #include "atomic_base.hpp"
 #include "atomic_timed_wait.hpp"
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <bits/local_lim.h>
+#    include <semaphore.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -34,7 +38,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此信号量不支持递归获取
  */
-template <platform_wait_t LeastMaxValue = numeric_traits<platform_wait_t>::max()> class counting_semaphore {
+template <platform_wait_t LeastMaxValue = numeric_traits<platform_wait_t>::max()>
+class counting_semaphore {
     static_assert(LeastMaxValue >= 0, "LeastMaxValue should be upper than zero.");
 
     alignas(alignof(platform_wait_t)) platform_wait_t counter_; ///< 信号量计数器
@@ -123,7 +128,8 @@ public:
      * 阻塞当前线程，直到成功获取信号量或超时。
      * 超时时间从调用开始计算。
      */
-    template <typename Rep, typename Period> bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
+    template <typename Rep, typename Period>
+    bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
         auto const pred = [this] { return this->do_try_acquire(); };
         return _NEFORCE atomic_wait_address_for(&counter_, pred, relative);
     }
@@ -137,7 +143,8 @@ public:
      *
      * 阻塞当前线程，直到成功获取信号量或到达指定时间点。
      */
-    template <typename Clock, typename Dur> bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
+    template <typename Clock, typename Dur>
+    bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
         auto const pred = [this] { return this->do_try_acquire(); };
         return _NEFORCE atomic_wait_address_until(&counter_, pred, timeout);
     }
@@ -228,7 +235,8 @@ public:
      * 阻塞当前线程，直到成功获取信号量或超时。
      * 超时时间从调用开始计算。
      */
-    template <typename Rep, typename Period> bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
+    template <typename Rep, typename Period>
+    bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return semaphore::try_acquire_for_impl(_NEFORCE time_cast<milliseconds>(relative));
 #else
@@ -246,7 +254,8 @@ public:
      * 阻塞当前线程，直到成功获取信号量或到达指定时间点。
      * 如果timeout <= now，则立即调用try_acquire()。
      */
-    template <typename Clock, typename Dur> bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
+    template <typename Clock, typename Dur>
+    bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
         auto now = Clock::now();
         if (timeout <= now) {
             return try_acquire();

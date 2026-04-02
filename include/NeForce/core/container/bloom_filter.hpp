@@ -36,7 +36,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 存在假阳性（可能误判不存在的元素存在）
  * - 支持合并和交集操作
  */
-template <typename T, typename Hash = hash<T>> class bloom_filter {
+template <typename T, typename Hash = hash<T>>
+class bloom_filter {
 private:
     size_t m_;    ///< 位数组大小
     size_t k_;    ///< 哈希函数数量

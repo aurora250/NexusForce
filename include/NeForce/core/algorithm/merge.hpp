@@ -289,7 +289,8 @@ NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator
  * @param middle 范围中间分割点
  * @param last 范围结束
  */
-template <typename Iterator> NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last) {
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last) {
     return _NEFORCE inplace_merge(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

@@ -27,7 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 表示编译期比率，自动进行约分，确保分子分母是最简形式。
  * 分母总是正的，符号由分子表示。
  */
-template <intmax_t Numerator, intmax_t Denominator = 1> struct ratio {
+template <intmax_t Numerator, intmax_t Denominator = 1>
+struct ratio {
     static_assert(Denominator != 0, "denominator cannot be zero"); ///< 分母不能为0
     static_assert(Numerator > numeric_traits<intmax_t>::min() && Denominator > numeric_traits<intmax_t>::min(),
                   "out of range"); ///< 值必须在范围内
@@ -40,9 +41,11 @@ template <intmax_t Numerator, intmax_t Denominator = 1> struct ratio {
     using type = ratio<num, den>; ///< 自身的类型
 };
 
-template <intmax_t Numerator, intmax_t Denominator> constexpr intmax_t ratio<Numerator, Denominator>::num;
+template <intmax_t Numerator, intmax_t Denominator>
+constexpr intmax_t ratio<Numerator, Denominator>::num;
 
-template <intmax_t Numerator, intmax_t Denominator> constexpr intmax_t ratio<Numerator, Denominator>::den;
+template <intmax_t Numerator, intmax_t Denominator>
+constexpr intmax_t ratio<Numerator, Denominator>::den;
 
 
 /**
@@ -50,10 +53,12 @@ template <intmax_t Numerator, intmax_t Denominator> constexpr intmax_t ratio<Num
  * @brief 检查类型是否为ratio
  * @tparam Ratio 要检查的类型
  */
-template <typename Ratio> struct is_ratio : false_type {};
+template <typename Ratio>
+struct is_ratio : false_type {};
 
 /// @cond
-template <intmax_t Numerator, intmax_t Denominator> struct is_ratio<ratio<Numerator, Denominator>> : true_type {};
+template <intmax_t Numerator, intmax_t Denominator>
+struct is_ratio<ratio<Numerator, Denominator>> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -61,7 +66,8 @@ template <intmax_t Numerator, intmax_t Denominator> struct is_ratio<ratio<Numera
  * @var is_ratio_v
  * @brief is_ratio的便捷变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr bool is_ratio_v = is_ratio<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_ratio_v = is_ratio<T>::value;
 #endif
 
 
@@ -76,7 +82,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 实现比率乘法：(a/b) * (c/d) = (a*c)/(b*d)，并进行约分。
  */
-template <typename ratio1, typename ratio2> struct __ratio_multiply_impl {
+template <typename ratio1, typename ratio2>
+struct __ratio_multiply_impl {
 private:
     static const intmax_t gcd1 = static_gcd<ratio1::num, ratio2::den>::value; ///< 分子1和分母2的最大公约数
     static const intmax_t gcd2 = static_gcd<ratio2::num, ratio1::den>::value; ///< 分子2和分母1的最大公约数
@@ -89,9 +96,11 @@ public:
     static constexpr intmax_t den = type::den; ///< 乘积的分母
 };
 
-template <typename ratio1, typename ratio2> constexpr intmax_t __ratio_multiply_impl<ratio1, ratio2>::num;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t __ratio_multiply_impl<ratio1, ratio2>::num;
 
-template <typename ratio1, typename ratio2> constexpr intmax_t __ratio_multiply_impl<ratio1, ratio2>::den;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t __ratio_multiply_impl<ratio1, ratio2>::den;
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -116,7 +125,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 实现比率除法：(a/b) / (c/d) = (a*d)/(b*c)。
  */
-template <typename ratio1, typename ratio2> struct __ratio_divide_impl {
+template <typename ratio1, typename ratio2>
+struct __ratio_divide_impl {
     static_assert(ratio2::num != 0, "division by 0");
 
     using type = typename __ratio_multiply_impl<ratio1, ratio<ratio2::den, ratio2::num>>::type; ///< 乘以倒数
@@ -125,9 +135,11 @@ template <typename ratio1, typename ratio2> struct __ratio_divide_impl {
     static constexpr intmax_t den = type::den; ///< 商的分母
 };
 
-template <typename ratio1, typename ratio2> constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::num;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::num;
 
-template <typename ratio1, typename ratio2> constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::den;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::den;
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -211,7 +223,8 @@ NEFORCE_END_INNER__
  * @tparam ratio1 第一个比率
  * @tparam ratio2 第二个比率
  */
-template <typename ratio1, typename ratio2> struct ratio_less : inner::__ratio_less_impl<ratio1, ratio2>::type {};
+template <typename ratio1, typename ratio2>
+struct ratio_less : inner::__ratio_less_impl<ratio1, ratio2>::type {};
 
 /**
  * @struct ratio_less_equal
@@ -228,7 +241,8 @@ struct ratio_less_equal : bool_constant<!ratio_less<ratio2, ratio1>::value> {};
  * @tparam ratio1 第一个比率
  * @tparam ratio2 第二个比率
  */
-template <typename ratio1, typename ratio2> struct ratio_greater : bool_constant<ratio_less<ratio2, ratio1>::value> {};
+template <typename ratio1, typename ratio2>
+struct ratio_greater : bool_constant<ratio_less<ratio2, ratio1>::value> {};
 
 /**
  * @struct ratio_greater_equal
@@ -362,7 +376,8 @@ struct __ratio_add_impl<ratio1, ratio2, false, true, true> : __ratio_add_impl<ra
 /**
  * @brief __ratio_add_impl的特化，处理正数+负数且绝对值较大的情况
  */
-template <typename ratio1, typename ratio2> struct __ratio_add_impl<ratio1, ratio2, true, false, false> {
+template <typename ratio1, typename ratio2>
+struct __ratio_add_impl<ratio1, ratio2, true, false, false> {
 private:
     static constexpr uintmax_t gcd_val = static_gcd<ratio1::den, ratio2::den>::value;
     static constexpr uintmax_t den2_scaled = ratio2::den / gcd_val;
@@ -399,15 +414,18 @@ public:
  * @tparam ratio1 第一个比率
  * @tparam ratio2 第二个比率
  */
-template <typename ratio1, typename ratio2> struct ratio_add {
+template <typename ratio1, typename ratio2>
+struct ratio_add {
     using type = typename __ratio_add_impl<ratio1, ratio2>::type; ///< 和的类型
     static constexpr intmax_t num = type::num;                    ///< 和的分子
     static constexpr intmax_t den = type::den;                    ///< 和的分母
 };
 
-template <typename ratio1, typename ratio2> constexpr intmax_t ratio_add<ratio1, ratio2>::num;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t ratio_add<ratio1, ratio2>::num;
 
-template <typename ratio1, typename ratio2> constexpr intmax_t ratio_add<ratio1, ratio2>::den;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t ratio_add<ratio1, ratio2>::den;
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -418,7 +436,8 @@ NEFORCE_END_INNER__
  * @tparam ratio1 第一个比率
  * @tparam ratio2 第二个比率
  */
-template <typename ratio1, typename ratio2> using ratio_add = typename inner::ratio_add<ratio1, ratio2>::type;
+template <typename ratio1, typename ratio2>
+using ratio_add = typename inner::ratio_add<ratio1, ratio2>::type;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -431,16 +450,19 @@ NEFORCE_BEGIN_INNER__
  *
  * 通过加法实现减法：a - b = a + (-b)
  */
-template <typename ratio1, typename ratio2> struct ratio_subtract {
+template <typename ratio1, typename ratio2>
+struct ratio_subtract {
     using type = typename ratio_add<ratio1, ratio<-ratio2::num, ratio2::den>>::type; ///< 差的类型
 
     static constexpr intmax_t num = type::num; ///< 差的分子
     static constexpr intmax_t den = type::den; ///< 差的分母
 };
 
-template <typename ratio1, typename ratio2> constexpr intmax_t ratio_subtract<ratio1, ratio2>::num;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t ratio_subtract<ratio1, ratio2>::num;
 
-template <typename ratio1, typename ratio2> constexpr intmax_t ratio_subtract<ratio1, ratio2>::den;
+template <typename ratio1, typename ratio2>
+constexpr intmax_t ratio_subtract<ratio1, ratio2>::den;
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -451,7 +473,8 @@ NEFORCE_END_INNER__
  * @tparam ratio1 被减数比率
  * @tparam ratio2 减数比率
  */
-template <typename ratio1, typename ratio2> using ratio_subtract = typename inner::ratio_subtract<ratio1, ratio2>::type;
+template <typename ratio1, typename ratio2>
+using ratio_subtract = typename inner::ratio_subtract<ratio1, ratio2>::type;
 
 /** @} */ // RatioClass
 

@@ -53,12 +53,14 @@ struct websocket_frame_header {
 #pragma pack(pop)
 
 
-template <typename SocketType> class websocket_session;
+template <typename SocketType>
+class websocket_session;
 
 
 class NEFORCE_API websocket_session_base {
 protected:
-    template <typename SocketType> static bool receive_exact(SocketType& socket, void* buf, size_t n) {
+    template <typename SocketType>
+    static bool receive_exact(SocketType& socket, void* buf, size_t n) {
         auto* ptr = static_cast<char*>(buf);
         size_t remaining = n;
         while (remaining > 0) {
@@ -78,7 +80,8 @@ protected:
 };
 
 
-template <typename SocketType> class websocket_server {
+template <typename SocketType>
+class websocket_server {
 public:
     using socket_type = SocketType;
     using session_type = websocket_session<SocketType>;

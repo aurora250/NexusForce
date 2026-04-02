@@ -141,7 +141,8 @@ public:
      * - 0：快速压缩（默认）
      * - 1-12：HC（高压缩率）模式，级别越高压缩率越高但速度越慢
      */
-    template <typename T> NEFORCE_NODISCARD static byte_vector compress(const vector<T>& data, const int level = 0) {
+    template <typename T>
+    NEFORCE_NODISCARD static byte_vector compress(const vector<T>& data, const int level = 0) {
         static_assert(sizeof(T) == 1, "Iterator must point to byte-sized elements");
 
         return lz4_compressor::compress_data(reinterpret_cast<const byte_t*>(data.data()), data.size() * sizeof(T),

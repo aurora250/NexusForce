@@ -65,9 +65,9 @@ public:
         friend class path_tree;
 
     public:
-        using ptr = shared_ptr<node>;      ///< 节点共享指针
-        using weak_ptr = weak_ptr<node>;   ///< 节点弱指针
-        using children_list = vector<ptr>; ///< 子节点列表
+        using ptr = shared_ptr<node>;             ///< 节点共享指针
+        using weak_ptr = _NEFORCE weak_ptr<node>; ///< 节点弱指针
+        using children_list = vector<ptr>;        ///< 子节点列表
 
     private:
         path path_;              ///< 节点对应路径

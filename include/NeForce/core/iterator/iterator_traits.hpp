@@ -24,7 +24,8 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename, typename = void> struct iterator_traits_base {};
+template <typename, typename = void>
+struct iterator_traits_base {};
 
 template <typename Iterator>
 struct iterator_traits_base<Iterator, void_t<typename Iterator::iterator_category, typename Iterator::value_type,
@@ -51,7 +52,8 @@ NEFORCE_END_INNER__
  *
  * 这是迭代器特性的主要接口，算法应通过此模板查询迭代器属性。
  */
-template <typename Iterator> struct iterator_traits : inner::iterator_traits_base<Iterator> {};
+template <typename Iterator>
+struct iterator_traits : inner::iterator_traits_base<Iterator> {};
 
 /**
  * @brief 原始指针的迭代器特性特化
@@ -62,7 +64,8 @@ template <typename Iterator> struct iterator_traits : inner::iterator_traits_bas
  *
  * @note 要求T必须是对象类型（满足is_object<T>）。
  */
-template <typename T> struct iterator_traits<T*> {
+template <typename T>
+struct iterator_traits<T*> {
     static_assert(is_object<T>::value, "iterator traits requires object types.");
 
     using iterator_category = contiguous_iterator_tag; ///< 迭代器类别
@@ -77,35 +80,40 @@ template <typename T> struct iterator_traits<T*> {
  * @brief 获取迭代器的类别标签
  * @tparam Iterator 迭代器类型
  */
-template <typename Iterator> using iter_category_t = typename iterator_traits<Iterator>::iterator_category;
+template <typename Iterator>
+using iter_category_t = typename iterator_traits<Iterator>::iterator_category;
 
 /**
  * @typedef iter_value_t
  * @brief 获取迭代器的值类型
  * @tparam Iterator 迭代器类型
  */
-template <typename Iterator> using iter_value_t = typename iterator_traits<Iterator>::value_type;
+template <typename Iterator>
+using iter_value_t = typename iterator_traits<Iterator>::value_type;
 
 /**
  * @typedef iter_difference_t
  * @brief 获取迭代器的差值类型
  * @tparam Iterator 迭代器类型
  */
-template <typename Iterator> using iter_difference_t = typename iterator_traits<Iterator>::difference_type;
+template <typename Iterator>
+using iter_difference_t = typename iterator_traits<Iterator>::difference_type;
 
 /**
  * @typedef iter_pointer_t
  * @brief 获取迭代器的指针类型
  * @tparam Iterator 迭代器类型
  */
-template <typename Iterator> using iter_pointer_t = typename iterator_traits<Iterator>::pointer;
+template <typename Iterator>
+using iter_pointer_t = typename iterator_traits<Iterator>::pointer;
 
 /**
  * @typedef iter_reference_t
  * @brief 获取迭代器的引用类型
  * @tparam Iterator 迭代器类型
  */
-template <typename Iterator> using iter_reference_t = typename iterator_traits<Iterator>::reference;
+template <typename Iterator>
+using iter_reference_t = typename iterator_traits<Iterator>::reference;
 
 
 /**
@@ -177,7 +185,8 @@ static constexpr decltype(auto) __to_address(const Ptr& ptr) noexcept {
  * - rebind: 重新绑定到其他元素类型的模板
  * - pointer_to: 从引用创建指针的静态方法
  */
-template <typename Ptr, typename Elem> struct pointer_traits_base {
+template <typename Ptr, typename Elem>
+struct pointer_traits_base {
     using pointer = Ptr;                                                ///< 指针类型
     using element_type = Elem;                                          ///< 元素类型
     using difference_type = get_ptr_difference_t<Ptr>;                  ///< 差值类型
@@ -187,7 +196,8 @@ template <typename Ptr, typename Elem> struct pointer_traits_base {
      * @brief 重新绑定到其他元素类型的模板
      * @tparam U 新元素类型
      */
-    template <typename U> using rebind = typename get_rebind_type<Ptr, U>::type;
+    template <typename U>
+    using rebind = typename get_rebind_type<Ptr, U>::type;
 
     /**
      * @brief 从引用创建指针
@@ -208,7 +218,8 @@ template <typename Ptr, typename Elem> struct pointer_traits_base {
     }
 };
 
-template <typename, typename = void, typename = void> struct pointer_traits_extract {};
+template <typename, typename = void, typename = void>
+struct pointer_traits_extract {};
 
 template <typename T, typename U>
 struct pointer_traits_extract<T, U, void_t<get_first_temp_para_t<T>>>
@@ -233,7 +244,8 @@ NEFORCE_END_INNER__
  * 3. 重新绑定能力
  * 4. 从引用创建指针
  */
-template <typename T> struct pointer_traits : inner::pointer_traits_extract<T> {
+template <typename T>
+struct pointer_traits : inner::pointer_traits_extract<T> {
     /**
      * @brief 获取指针指向的原始地址
      * @param ptr 指针对象
@@ -249,7 +261,8 @@ template <typename T> struct pointer_traits : inner::pointer_traits_extract<T> {
  * @brief 原始指针的特化版本
  * @tparam T 元素类型
  */
-template <typename T> struct pointer_traits<T*> {
+template <typename T>
+struct pointer_traits<T*> {
     using pointer = T*;                                           ///< 指针类型
     using element_type = T;                                       ///< 元素类型
     using difference_type = ptrdiff_t;                            ///< 差值类型
@@ -259,7 +272,8 @@ template <typename T> struct pointer_traits<T*> {
      * @brief 重新绑定到其他元素类型的模板
      * @tparam U 新元素类型
      */
-    template <typename U> using rebind = U*;
+    template <typename U>
+    using rebind = U*;
 
     /**
      * @brief 从引用创建指针
@@ -282,7 +296,8 @@ template <typename T> struct pointer_traits<T*> {
  *
  * 将指针Ptr重新绑定到新元素类型T。
  */
-template <typename Ptr, typename T> using pointer_rebind = typename pointer_traits<Ptr>::template rebind<T>;
+template <typename Ptr, typename T>
+using pointer_rebind = typename pointer_traits<Ptr>::template rebind<T>;
 
 /**
  * @brief 移除指针的const限定符
@@ -290,7 +305,8 @@ template <typename Ptr, typename T> using pointer_rebind = typename pointer_trai
  * @param ptr 要转换的指针
  * @return 移除了const限定符的指针
  */
-template <typename Ptr> constexpr decltype(auto) ptr_const_cast(Ptr ptr) noexcept {
+template <typename Ptr>
+constexpr decltype(auto) ptr_const_cast(Ptr ptr) noexcept {
     using T = typename pointer_traits<Ptr>::element_type;
     using NonConst = remove_const_t<T>;
     using Dest = typename pointer_traits<Ptr>::template rebind<NonConst>;
@@ -304,7 +320,8 @@ template <typename Ptr> constexpr decltype(auto) ptr_const_cast(Ptr ptr) noexcep
  * @param ptr 要转换的原始指针
  * @return 移除了const限定符的原始指针
  */
-template <typename T> constexpr decltype(auto) ptr_const_cast(T* ptr) noexcept {
+template <typename T>
+constexpr decltype(auto) ptr_const_cast(T* ptr) noexcept {
     return const_cast<remove_const_t<T>*>(ptr);
 }
 
@@ -314,7 +331,8 @@ template <typename T> constexpr decltype(auto) ptr_const_cast(T* ptr) noexcept {
  * @param ptr 指针对象
  * @return 指针指向的地址
  */
-template <typename Ptr> constexpr decltype(auto) to_address(const Ptr& ptr) noexcept {
+template <typename Ptr>
+constexpr decltype(auto) to_address(const Ptr& ptr) noexcept {
     return pointer_traits<Ptr>::to_address(ptr);
 }
 
@@ -334,12 +352,14 @@ template <typename Ptr> constexpr decltype(auto) to_address(const Ptr& ptr) noex
  *
  * 如果分配器定义了pointer类型，则使用该类型，否则使用value_type*。
  */
-template <typename T, typename Dummy = void> struct get_pointer_type {
+template <typename T, typename Dummy = void>
+struct get_pointer_type {
     using type = typename T::value_type*;
 };
 
 /// @cond
-template <typename T> struct get_pointer_type<T, void_t<typename T::pointer>> {
+template <typename T>
+struct get_pointer_type<T, void_t<typename T::pointer>> {
     using type = typename T::pointer;
 };
 /// @endcond
@@ -351,13 +371,15 @@ template <typename T> struct get_pointer_type<T, void_t<typename T::pointer>> {
  * @tparam T 分配器类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename T, typename Dummy = void> struct get_difference_type {
+template <typename T, typename Dummy = void>
+struct get_difference_type {
     using pointer = typename get_pointer_type<T>::type;
     using type = typename pointer_traits<pointer>::difference_type;
 };
 
 /// @cond
-template <typename T> struct get_difference_type<T, void_t<typename T::difference_type>> {
+template <typename T>
+struct get_difference_type<T, void_t<typename T::difference_type>> {
     using type = typename T::difference_type;
 };
 /// @endcond
@@ -369,12 +391,14 @@ template <typename T> struct get_difference_type<T, void_t<typename T::differenc
  * @tparam T 分配器类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename T, typename Dummy = void> struct get_size_type {
+template <typename T, typename Dummy = void>
+struct get_size_type {
     using type = make_unsigned_t<typename get_difference_type<T>::type>;
 };
 
 /// @cond
-template <typename T> struct get_size_type<T, void_t<typename T::size_type>> {
+template <typename T>
+struct get_size_type<T, void_t<typename T::size_type>> {
     using type = typename T::size_type;
 };
 /// @endcond

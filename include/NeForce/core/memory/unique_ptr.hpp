@@ -32,13 +32,16 @@ NEFORCE_BEGIN_INNER__
  *
  * 封装指针和删除器的底层实现，提供基本的内存管理功能。
  */
-template <typename T, typename Deleter> class __unique_ptr_impl {
+template <typename T, typename Deleter>
+class __unique_ptr_impl {
 private:
-    template <typename U, typename E, typename = void> struct inner_ptr {
+    template <typename U, typename E, typename = void>
+    struct inner_ptr {
         using type = U*;
     };
 
-    template <typename U, typename E> struct inner_ptr<U, E, void_t<typename remove_reference_t<E>::pointer>> {
+    template <typename U, typename E>
+    struct inner_ptr<U, E, void_t<typename remove_reference_t<E>::pointer>> {
         using type = typename remove_reference<E>::type::pointer;
     };
 
@@ -205,7 +208,8 @@ NEFORCE_END_INNER__
  *
  * 管理动态分配对象的独占所有权，确保对象在离开作用域时被正确删除。
  */
-template <typename T, typename Deleter = default_delete<T>> class unique_ptr {
+template <typename T, typename Deleter = default_delete<T>>
+class unique_ptr {
 private:
     template <typename U>
     using DeleterConstraint = typename inner::__unique_ptr_impl<T, U>::DeleterConstraint::type; ///< 删除器约束类型
@@ -385,7 +389,8 @@ public:
  * @tparam T 数组元素类型
  * @tparam Deleter 删除器类型
  */
-template <typename T, typename Deleter> class unique_ptr<T[], Deleter> {
+template <typename T, typename Deleter>
+class unique_ptr<T[], Deleter> {
     template <typename U>
     using DeleterConstraint = typename inner::__unique_ptr_impl<T, U>::DeleterConstraint::type; ///< 删除器约束类型
 
@@ -833,7 +838,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(nullptr_t, const unique_pt
  * @param ptr 源unique_ptr
  * @note 由于unique_ptr是独占所有权，不能从const引用转换
  */
-template <typename T, typename U> unique_ptr<T> static_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> static_pointer_cast(const unique_ptr<U>& ptr) = delete;
 
 /**
  * @brief 禁止的const_pointer_cast
@@ -842,7 +848,8 @@ template <typename T, typename U> unique_ptr<T> static_pointer_cast(const unique
  * @param ptr 源unique_ptr
  * @note 由于unique_ptr是独占所有权，不能从const引用转换
  */
-template <typename T, typename U> unique_ptr<T> const_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> const_pointer_cast(const unique_ptr<U>& ptr) = delete;
 
 /**
  * @brief 禁止的reinterpret_pointer_cast
@@ -851,7 +858,8 @@ template <typename T, typename U> unique_ptr<T> const_pointer_cast(const unique_
  * @param ptr 源unique_ptr
  * @note 由于unique_ptr是独占所有权，不能从const引用转换
  */
-template <typename T, typename U> unique_ptr<T> reinterpret_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> reinterpret_pointer_cast(const unique_ptr<U>& ptr) = delete;
 
 /**
  * @brief 禁止的dynamic_pointer_cast
@@ -860,7 +868,8 @@ template <typename T, typename U> unique_ptr<T> reinterpret_pointer_cast(const u
  * @param ptr 源unique_ptr
  * @note 由于unique_ptr是独占所有权，不能从const引用转换
  */
-template <typename T, typename U> unique_ptr<T> dynamic_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> dynamic_pointer_cast(const unique_ptr<U>& ptr) = delete;
 
 
 /**
@@ -870,7 +879,8 @@ template <typename T, typename U> unique_ptr<T> dynamic_pointer_cast(const uniqu
  * @param ptr 源unique_ptr
  * @return 转换后的unique_ptr
  */
-template <typename T, typename U> NEFORCE_CONSTEXPR20 unique_ptr<T> static_pointer_cast(unique_ptr<U>&& ptr) {
+template <typename T, typename U>
+NEFORCE_CONSTEXPR20 unique_ptr<T> static_pointer_cast(unique_ptr<U>&& ptr) {
     return unique_ptr<T>(static_cast<T*>(ptr.release()), ptr.get_deleter());
 }
 
@@ -881,7 +891,8 @@ template <typename T, typename U> NEFORCE_CONSTEXPR20 unique_ptr<T> static_point
  * @param ptr 源unique_ptr
  * @return 转换后的unique_ptr
  */
-template <typename T, typename U> NEFORCE_CONSTEXPR20 unique_ptr<T> const_pointer_cast(unique_ptr<U>&& ptr) {
+template <typename T, typename U>
+NEFORCE_CONSTEXPR20 unique_ptr<T> const_pointer_cast(unique_ptr<U>&& ptr) {
     return unique_ptr<T>(const_cast<T*>(ptr.release()), ptr.get_deleter());
 }
 
@@ -892,7 +903,8 @@ template <typename T, typename U> NEFORCE_CONSTEXPR20 unique_ptr<T> const_pointe
  * @param ptr 源unique_ptr
  * @return 转换后的unique_ptr
  */
-template <typename T, typename U> unique_ptr<T> reinterpret_pointer_cast(unique_ptr<U>&& ptr) {
+template <typename T, typename U>
+unique_ptr<T> reinterpret_pointer_cast(unique_ptr<U>&& ptr) {
     return unique_ptr<T>(reinterpret_cast<T*>(ptr.release()), ptr.get_deleter());
 }
 
@@ -903,7 +915,8 @@ template <typename T, typename U> unique_ptr<T> reinterpret_pointer_cast(unique_
  * @param ptr 源unique_ptr
  * @return 转换后的unique_ptr
  */
-template <typename T, typename U> unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
+template <typename T, typename U>
+unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
     T* tmp = dynamic_cast<T*>(ptr.release());
     if (tmp != nullptr) {
         return unique_ptr<T>(tmp, _NEFORCE move(ptr.get_deleter()).template rebind<T>());
@@ -924,7 +937,8 @@ template <typename T, typename U> unique_ptr<T> dynamic_pointer_cast(unique_ptr<
  * @tparam T 元素类型
  * @tparam Deleter 删除器类型
  */
-template <typename T, typename Deleter> struct hash<unique_ptr<T, Deleter>> {
+template <typename T, typename Deleter>
+struct hash<unique_ptr<T, Deleter>> {
     NEFORCE_CONSTEXPR20 size_t operator()(const unique_ptr<T, Deleter>& ptr) const
             noexcept(noexcept(hash<T>()(ptr.get()))) {
         return hash<T>()(ptr.get());

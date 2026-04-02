@@ -2,15 +2,23 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    template <typename T> void append_utf8_char_aux(T&) {}
+    template <typename T>
+    void append_utf8_char_aux(T&) {}
 
-    template <> void append_utf8_char_aux<string>(string& result) { result.append("\xEF\xBF\xBD", 3); }
+    template <>
+    void append_utf8_char_aux<string>(string& result) {
+        result.append("\xEF\xBF\xBD", 3);
+    }
 
 #ifdef NEFORCE_STANDARD_20
-    template <> void append_utf8_char_aux<u8string>(u8string& result) { result.append(u8"\xEF\xBF\xBD", 3); }
+    template <>
+    void append_utf8_char_aux<u8string>(u8string& result) {
+        result.append(u8"\xEF\xBF\xBD", 3);
+    }
 #endif
 
-    template <typename T> void append_utf8_char(basic_string<T>& result, uint32_t cp) {
+    template <typename T>
+    void append_utf8_char(basic_string<T>& result, uint32_t cp) {
         if (cp > 0x10FFFF || codepoint::is_high_surrogate(cp) || codepoint::is_low_surrogate(cp)) {
             append_utf8_char_aux(result);
             return;

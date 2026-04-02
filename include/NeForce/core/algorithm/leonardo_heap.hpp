@@ -97,7 +97,8 @@ void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, 
  *
  * 将最后一个元素插入到莱昂纳多堆中，并调整堆以维持堆性质。
  */
-template <typename Iterator> void push_leonardo_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+void push_leonardo_heap(Iterator first, Iterator last) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
     if (first == last) {
@@ -139,7 +140,8 @@ template <typename Iterator> void push_leonardo_heap(Iterator first, Iterator la
  *
  * 移除堆顶元素，并重新调整堆。
  */
-template <typename Iterator> void pop_leonardo_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+void pop_leonardo_heap(Iterator first, Iterator last) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
     if (first == last) {
@@ -180,7 +182,8 @@ template <typename Iterator> void pop_leonardo_heap(Iterator first, Iterator las
  *
  * 实现平滑排序算法，时间复杂度O(n log n)，在接近有序的序列上表现优异。
  */
-template <typename Iterator> void sort_leonardo_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+void sort_leonardo_heap(Iterator first, Iterator last) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
     if (first == last) {
@@ -224,7 +227,8 @@ template <typename Iterator> void sort_leonardo_heap(Iterator first, Iterator la
  *
  * 将指定范围内的元素构建成一个莱昂纳多堆。
  */
-template <typename Iterator> void make_leonardo_heap(Iterator first, Iterator last) {
+template <typename Iterator>
+void make_leonardo_heap(Iterator first, Iterator last) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
     if (first == last) {

@@ -8,7 +8,6 @@ NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API http_server_base {
 public:
-    static constexpr string_view websocket_guid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
     static constexpr size_t max_header_size = 16 * 1024;
     static constexpr size_t max_body_size = 100 * 1024 * 1024; // 100MB
     static constexpr int max_forward_count = 5;
@@ -60,7 +59,8 @@ protected:
 };
 
 
-template <typename SocketType> class basic_http_server final : public http_server_base {
+template <typename SocketType>
+class basic_http_server final : public http_server_base {
     static_assert(is_base_of_v<tcp_socket, SocketType>, "SocketType must be a tcp_socket");
 
 public:

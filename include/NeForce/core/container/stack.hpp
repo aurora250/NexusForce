@@ -31,7 +31,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 默认使用deque作为底层容器，也可指定其他支持back、push_back
  * 和pop_back操作的容器（如vector、list）。
  */
-template <typename T, typename Sequence = deque<T>> class stack : public icollector<stack<T, Sequence>> {
+template <typename T, typename Sequence = deque<T>>
+class stack : public icollector<stack<T, Sequence>> {
     static_assert(is_object_v<T>, "stack only contains object types.");
     static_assert(is_same_v<T, typename Sequence::value_type>, "stack require consistent types.");
 
@@ -102,7 +103,8 @@ public:
      * @param args 构造参数
      * @return 新构造元素的引用
      */
-    template <typename... Args> decltype(auto) emplace(Args&&... args) {
+    template <typename... Args>
+    decltype(auto) emplace(Args&&... args) {
         return seq_.emplace(_NEFORCE forward<Args>(args)...);
     }
 
@@ -155,7 +157,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Sequence> stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
+template <typename Sequence>
+stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
 #endif
 
 /** @} */ // Container

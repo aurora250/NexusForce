@@ -90,19 +90,23 @@ public:
     }
 
 private:
-    template <typename T> static constexpr enable_if_t<is_big_endian, T> host_to_network_impl1(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<is_big_endian, T> host_to_network_impl1(T value) noexcept {
         return value;
     }
 
-    template <typename T> static constexpr enable_if_t<sizeof(T) == 2, T> host_to_network_impl2(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<sizeof(T) == 2, T> host_to_network_impl2(T value) noexcept {
         return endian::byteswap16(value);
     }
 
-    template <typename T> static constexpr enable_if_t<sizeof(T) == 4, T> host_to_network_impl2(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<sizeof(T) == 4, T> host_to_network_impl2(T value) noexcept {
         return endian::byteswap32(value);
     }
 
-    template <typename T> static constexpr enable_if_t<sizeof(T) == 8, T> host_to_network_impl2(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<sizeof(T) == 8, T> host_to_network_impl2(T value) noexcept {
         return endian::byteswap64(value);
     }
 
@@ -113,15 +117,18 @@ private:
         return value;
     }
 
-    template <typename T> static constexpr enable_if_t<!is_big_endian, T> host_to_network_impl1(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<!is_big_endian, T> host_to_network_impl1(T value) noexcept {
         return endian::host_to_network_impl2(value);
     }
 
-    template <typename T> static constexpr enable_if_t<is_little_endian, T> host_to_network_impl3(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<is_little_endian, T> host_to_network_impl3(T value) noexcept {
         return value;
     }
 
-    template <typename T> static constexpr enable_if_t<!is_little_endian, T> host_to_network_impl3(T value) noexcept {
+    template <typename T>
+    static constexpr enable_if_t<!is_little_endian, T> host_to_network_impl3(T value) noexcept {
         return endian::host_to_network_impl2(value);
     }
 
@@ -135,7 +142,8 @@ public:
      * 网络字节序为大端序。
      * 大端序系统直接返回，小端序系统执行字节序反转。
      */
-    template <typename T> static constexpr T host_to_network(T value) noexcept {
+    template <typename T>
+    static constexpr T host_to_network(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl1(value);
     }
@@ -148,7 +156,8 @@ public:
      *
      * 网络序转主机序与主机序转网络序相同（对称操作）。
      */
-    template <typename T> static constexpr T network_to_host(T value) noexcept {
+    template <typename T>
+    static constexpr T network_to_host(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network(value);
     }
@@ -161,7 +170,8 @@ public:
      *
      * 小端序系统直接返回，大端序系统执行字节序反转。
      */
-    template <typename T> static constexpr T host_to_le(T value) noexcept {
+    template <typename T>
+    static constexpr T host_to_le(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl3(value);
     }
@@ -174,7 +184,8 @@ public:
      *
      * 小端序转主机序与主机序转小端序相同（对称操作）。
      */
-    template <typename T> static constexpr T le_to_host(T value) noexcept {
+    template <typename T>
+    static constexpr T le_to_host(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_le(value);
     }
@@ -187,7 +198,8 @@ public:
      *
      * 大端序系统直接返回，小端序系统执行字节序反转。
      */
-    template <typename T> static constexpr T host_to_be(T value) noexcept {
+    template <typename T>
+    static constexpr T host_to_be(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl1(value);
     }
@@ -200,7 +212,8 @@ public:
      *
      * 大端序转主机序与主机序转大端序相同（对称操作）。
      */
-    template <typename T> static constexpr T be_to_host(T value) noexcept {
+    template <typename T>
+    static constexpr T be_to_host(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_be(value);
     }
@@ -213,7 +226,8 @@ public:
      *
      * 强制反转字节序，不关心当前平台字节序。
      */
-    template <typename T> static constexpr T swap_endian(T value) noexcept {
+    template <typename T>
+    static constexpr T swap_endian(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl2(value);
     }

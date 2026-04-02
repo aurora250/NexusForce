@@ -84,7 +84,8 @@ private:
      * - 数组中：作为新元素添加
      * - 对象中：与当前键名配对添加
      */
-    template <typename T> json_builder& value_impl(unique_ptr<T> value) {
+    template <typename T>
+    json_builder& value_impl(unique_ptr<T> value) {
         if (contexts_.empty()) {
             if (root_) {
                 NEFORCE_THROW_EXCEPTION(json_exception("Multiple root values not allowed"));
@@ -122,7 +123,8 @@ private:
      * @param maplike 映射表对象
      * @return 自身引用
      */
-    template <typename Map> enable_if_t<is_maplike_v<Map>, json_builder&> value_iterable_impl(const Map& maplike) {
+    template <typename Map>
+    enable_if_t<is_maplike_v<Map>, json_builder&> value_iterable_impl(const Map& maplike) {
         begin_object();
         for (const auto& pair: maplike) {
             this->key(pair.first).value(pair.second);
@@ -295,7 +297,8 @@ public:
      * - 映射表类型转换为对象
      * - 其他可迭代类型转换为数组
      */
-    template <typename Iterable> json_builder& value(const Iterable& iterable) {
+    template <typename Iterable>
+    json_builder& value(const Iterable& iterable) {
         return this->value_iterable_dispatch(iterable);
     }
 

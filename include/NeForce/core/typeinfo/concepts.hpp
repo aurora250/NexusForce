@@ -433,7 +433,8 @@ NEFORCE_BEGIN_RANGES__
  * 为范围视图提供统一的begin()和end()接口。
  * 派生类只需实现自己的begin()和end()方法。
  */
-template <typename Derived> struct view_base {
+template <typename Derived>
+struct view_base {
 private:
     constexpr const Derived& derived() const noexcept { return static_cast<const Derived&>(*this); }
 
@@ -469,19 +470,22 @@ NEFORCE_END_RANGES__
  * @brief 检查类型是否为视图
  * @tparam T 要检查的类型
  */
-template <typename T> struct is_view : false_type {};
+template <typename T>
+struct is_view : false_type {};
 
 /**
  * @brief view_base特化的视图检查
  * @tparam D 派生类类型
  */
-template <typename D> struct is_view<ranges::view_base<D>> : true_type {};
+template <typename D>
+struct is_view<ranges::view_base<D>> : true_type {};
 
 /**
  * @var is_view_v
  * @brief is_view的便捷变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<ranges::view_base<T>, T>;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<ranges::view_base<T>, T>;
 
 /** @} */ // View
 
@@ -495,7 +499,8 @@ template <typename T> NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<r
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename, typename = void> NEFORCE_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
+template <typename, typename = void>
+NEFORCE_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool __is_iterator_with_cate_v<Iterator, void_t<iter_category_t<Iterator>>> = true;
 NEFORCE_END_INNER__

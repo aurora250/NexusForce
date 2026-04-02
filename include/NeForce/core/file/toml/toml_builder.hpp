@@ -89,7 +89,8 @@ private:
      * - 数组中：作为新元素添加
      * - 表格中：与当前键名配对添加
      */
-    template <typename T> toml_builder& value_impl(unique_ptr<T> value) {
+    template <typename T>
+    toml_builder& value_impl(unique_ptr<T> value) {
         if (contexts_.empty()) {
             NEFORCE_THROW_EXCEPTION(toml_exception("Cannot add value to root (root must be a table)"));
         }
@@ -127,7 +128,8 @@ private:
      * @param maplike 映射表对象
      * @return 自身引用
      */
-    template <typename Map> enable_if_t<is_maplike_v<Map>, toml_builder&> value_iterable_impl(const Map& maplike) {
+    template <typename Map>
+    enable_if_t<is_maplike_v<Map>, toml_builder&> value_iterable_impl(const Map& maplike) {
         begin_inline_table();
         for (const auto& pair: maplike) {
             this->key(pair.first).value(pair.second);
@@ -395,7 +397,8 @@ public:
      * - 映射表类型（如unordered_map）转换为内联表格
      * - 其他可迭代类型转换为数组
      */
-    template <typename Iterable> toml_builder& value(const Iterable& iterable) {
+    template <typename Iterable>
+    toml_builder& value(const Iterable& iterable) {
         return this->value_iterable_dispatch(iterable);
     }
 

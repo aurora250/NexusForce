@@ -25,7 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 将双向迭代器包装为反向迭代器，使得递增操作变为递减，递减操作变为递增。
  * 用于从容器末尾向开头反向遍历。
  */
-template <typename Iterator> class reverse_iterator {
+template <typename Iterator>
+class reverse_iterator {
     static_assert(is_ranges_bid_iter_v<Iterator>, "reverse iterator requires bidirectional iterator.");
 
 public:

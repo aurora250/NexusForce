@@ -58,7 +58,8 @@ public:
  *
  * @note 如果函数抛出异常，则视为未执行，后续线程将尝试重新执行
  */
-template <typename Callable, typename... Args> void call_once(once_flag& flag, Callable&& func, Args&&... args) {
+template <typename Callable, typename... Args>
+void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     if (flag.state_.load(memory_order_acquire) == 2) {
         return;
     }

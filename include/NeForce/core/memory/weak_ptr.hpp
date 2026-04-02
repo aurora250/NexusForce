@@ -40,7 +40,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 弱指针本身是线程安全的，但升级后的共享指针需要单独管理
  */
-template <typename T> class weak_ptr {
+template <typename T>
+class weak_ptr {
 public:
     using element_type = T; ///< 元素类型
 
@@ -48,11 +49,14 @@ private:
     element_type* ptr_ = nullptr;                 ///< 观察的对象指针
     inner::__smart_ptr_counter* owner_ = nullptr; ///< 控制块指针
 
-    template <typename U> friend class weak_ptr;
+    template <typename U>
+    friend class weak_ptr;
 
-    template <typename U> friend class shared_ptr;
+    template <typename U>
+    friend class shared_ptr;
 
-    template <typename U> friend class inner::smart_pointer_atomic;
+    template <typename U>
+    friend class inner::smart_pointer_atomic;
 
 public:
     /**
@@ -286,7 +290,8 @@ public:
      * @param rhs 要比较的弱指针
      * @return 是否共享同一控制块
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
         return owner_ == rhs.owner_;
     }
 
@@ -296,7 +301,8 @@ public:
      * @param rhs 要比较的共享指针
      * @return 是否共享同一控制块
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
         return owner_ == reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 
@@ -306,7 +312,8 @@ public:
      * @param rhs 要比较的弱指针
      * @return 当前控制块地址是否小于rhs的控制块地址
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
         return owner_ < rhs.owner_;
     }
 
@@ -316,7 +323,8 @@ public:
      * @param rhs 要比较的共享指针
      * @return 当前控制块地址是否小于rhs的控制块地址
      */
-    template <typename U> NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
+    template <typename U>
+    NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
         return owner_ < reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 };
@@ -327,7 +335,8 @@ public:
  * @brief 智能指针的所有权比较器
  * @tparam T 智能指针的类型
  */
-template <typename T> struct owner_less;
+template <typename T>
+struct owner_less;
 
 /**
  * @brief 共享指针的所有权比较器特化
@@ -335,7 +344,8 @@ template <typename T> struct owner_less;
  *
  * 提供基于控制块地址的智能指针比较，用于关联容器中的排序。
  */
-template <typename T> struct owner_less<shared_ptr<T>> {
+template <typename T>
+struct owner_less<shared_ptr<T>> {
     using is_transparent = void; ///< 支持透明比较
 
     /**
@@ -364,7 +374,8 @@ template <typename T> struct owner_less<shared_ptr<T>> {
  * @brief 弱指针的所有权比较器特化
  * @tparam T 弱指针的类型
  */
-template <typename T> struct owner_less<weak_ptr<T>> {
+template <typename T>
+struct owner_less<weak_ptr<T>> {
     using is_transparent = void; ///< 支持透明比较
 
     /**
@@ -394,7 +405,8 @@ template <typename T> struct owner_less<weak_ptr<T>> {
  *
  * 支持不同类型智能指针之间的透明比较。
  */
-template <> struct owner_less<void> {
+template <>
+struct owner_less<void> {
     using is_transparent = void; ///< 支持透明比较
 
     /**
@@ -444,7 +456,8 @@ template <> struct owner_less<void> {
  *
  * 提供weak_ptr的原子操作支持，实现无锁的原子操作。
  */
-template <typename T> struct atomic<weak_ptr<T>> {
+template <typename T>
+struct atomic<weak_ptr<T>> {
 public:
     using value_type = weak_ptr<T>;
 

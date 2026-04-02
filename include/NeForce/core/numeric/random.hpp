@@ -73,7 +73,8 @@ public:
      * @param max 上限（不包含）
      * @return [0, max) 范围内的随机整数
      */
-    template <typename T> T next_int(T max) noexcept {
+    template <typename T>
+    T next_int(T max) noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
 
         if (max <= 0) {
@@ -95,7 +96,8 @@ public:
      * @param max 上限（不包含）
      * @return [min, max) 范围内的随机整数
      */
-    template <typename T> T next_int(T min, T max) noexcept {
+    template <typename T>
+    T next_int(T min, T max) noexcept {
         if (min >= max) {
             return min;
         }
@@ -107,7 +109,8 @@ public:
      * @tparam T 整形类型
      * @return 完整范围的随机整数
      */
-    template <typename T> T next_int() noexcept {
+    template <typename T>
+    T next_int() noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
         return static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
     }
@@ -140,7 +143,8 @@ public:
      * @tparam T 浮点类型
      * @return [0, 1) 范围内的随机浮点数
      */
-    template <typename T> T next_float() noexcept {
+    template <typename T>
+    T next_float() noexcept {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         auto gen = static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
         using IntT = decay_t<decltype(gen)>;
@@ -154,7 +158,8 @@ public:
      * @param max 上限（不包含）
      * @return [min, max) 范围内的随机浮点数
      */
-    template <typename T> T next_float(T min, T max) noexcept {
+    template <typename T>
+    T next_float(T min, T max) noexcept {
         if (min >= max) {
             return min;
         }
@@ -167,7 +172,10 @@ public:
      * @param max 上限（不包含）
      * @return [0, max) 范围内的随机浮点数
      */
-    template <typename T> T next_float(T max) noexcept { return this->next_float(static_cast<T>(0), max); }
+    template <typename T>
+    T next_float(T max) noexcept {
+        return this->next_float(static_cast<T>(0), max);
+    }
 };
 
 
@@ -230,7 +238,8 @@ public:
      * @param max 上限（不包含）
      * @return [0, max) 范围内的随机整数
      */
-    template <typename T> T next_int(T max) noexcept {
+    template <typename T>
+    T next_int(T max) noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
 
         if (max <= 0) {
@@ -252,7 +261,8 @@ public:
      * @param max 上限（不包含）
      * @return [min, max)范围内的随机整数
      */
-    template <typename T> T next_int(T min, T max) noexcept {
+    template <typename T>
+    T next_int(T min, T max) noexcept {
         if (min >= max) {
             return min;
         }
@@ -264,7 +274,8 @@ public:
      * @tparam T 整形类型
      * @return 完整范围的随机整数
      */
-    template <typename T> T next_int() noexcept {
+    template <typename T>
+    T next_int() noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
         return static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
     }
@@ -297,7 +308,8 @@ public:
      * @tparam T 浮点类型
      * @return [0, 1) 范围内的随机浮点数
      */
-    template <typename T> T next_float() noexcept {
+    template <typename T>
+    T next_float() noexcept {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         auto gen = static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
         using IntT = decay_t<decltype(gen)>;
@@ -311,7 +323,8 @@ public:
      * @param max 上限（不包含）
      * @return [min, max) 范围内的随机浮点数
      */
-    template <typename T> T next_float(T min, T max) noexcept {
+    template <typename T>
+    T next_float(T min, T max) noexcept {
         if (min >= max) {
             return min;
         }
@@ -324,7 +337,10 @@ public:
      * @param max 上限（不包含）
      * @return [0, max) 范围内的随机浮点数
      */
-    template <typename T> T next_float(T max) noexcept { return this->next_float(static_cast<T>(0), max); }
+    template <typename T>
+    T next_float(T max) noexcept {
+        return this->next_float(static_cast<T>(0), max);
+    }
 };
 
 
@@ -362,7 +378,8 @@ public:
      * @param max 上限（不包含）
      * @return [0, max) 范围内的随机整数
      */
-    template <typename T> static T next_int(T max) {
+    template <typename T>
+    static T next_int(T max) {
         static_assert(is_integral_v<T>, "only integral types are supported");
 
         if (max <= 0) {
@@ -384,7 +401,8 @@ public:
      * @param max 上限（不包含）
      * @return [min, max) 范围内的随机整数
      */
-    template <typename T> static T next_int(T min, T max) {
+    template <typename T>
+    static T next_int(T min, T max) {
         if (min >= max) {
             return min;
         }
@@ -396,7 +414,8 @@ public:
      * @tparam T 整形类型
      * @return 完整范围的随机整数
      */
-    template <typename T> static T next_int() {
+    template <typename T>
+    static T next_int() {
         static_assert(is_integral_v<T>, "only integral types are supported");
         return static_cast<T>(secret::generate(bool_constant<sizeof(T) <= 4>()));
     }
@@ -429,7 +448,8 @@ public:
      * @tparam T 浮点类型
      * @return [0, 1) 范围内的随机浮点数
      */
-    template <typename T> static T next_float() {
+    template <typename T>
+    static T next_float() {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         auto gen = static_cast<T>(secret::generate(bool_constant<sizeof(T) <= 4>()));
         using IntT = decay_t<decltype(gen)>;
@@ -443,7 +463,8 @@ public:
      * @param max 上限（不包含）
      * @return [min, max) 范围内的随机浮点数
      */
-    template <typename T> static T next_float(T min, T max) {
+    template <typename T>
+    static T next_float(T min, T max) {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         if (min >= max) {
             return min;
@@ -457,7 +478,8 @@ public:
      * @param max 上限（不包含）
      * @return [0, max) 范围内的随机浮点数
      */
-    template <typename T> static T next_float(T max) {
+    template <typename T>
+    static T next_float(T max) {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         return next_float(static_cast<T>(0), max);
     }

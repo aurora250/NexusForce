@@ -99,7 +99,8 @@ public:
      * @param value 要设置的值
      * @return 设置成功返回true
      */
-    template <typename T, enable_if_t<!is_same_v<meta_any, decay_t<T>>, int> = 0> bool set(void* obj, T&& value) const {
+    template <typename T, enable_if_t<!is_same_v<meta_any, decay_t<T>>, int> = 0>
+    bool set(void* obj, T&& value) const {
         return this->set(obj, meta_any{_NEFORCE forward<T>(value)});
     }
 };

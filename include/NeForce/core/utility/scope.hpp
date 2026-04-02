@@ -41,7 +41,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @note 守卫对象的析构函数不应抛出异常。
  *       如果函数可能抛出异常，建议使用scope_fail或scope_success。
  */
-template <typename Func> class scope_exit {
+template <typename Func>
+class scope_exit {
 private:
     compressed_pair<Func, bool> func_pair_; ///< 函数对象和激活标志
 
@@ -112,7 +113,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Func> scope_exit(Func) -> scope_exit<Func>;
+template <typename Func>
+scope_exit(Func) -> scope_exit<Func>;
 #endif
 
 
@@ -124,7 +126,8 @@ template <typename Func> scope_exit(Func) -> scope_exit<Func>;
  * 仅在作用域因异常退出时执行指定的函数。
  * 用于实现事务回滚等异常安全机制。
  */
-template <typename Func> class scope_fail {
+template <typename Func>
+class scope_fail {
 private:
     compressed_pair<Func, int> func_pair_; ///< 函数对象和异常计数快照
 
@@ -191,7 +194,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Func> scope_fail(Func) -> scope_fail<Func>;
+template <typename Func>
+scope_fail(Func) -> scope_fail<Func>;
 #endif
 
 
@@ -205,7 +209,8 @@ template <typename Func> scope_fail(Func) -> scope_fail<Func>;
  *
  * @note 函数对象的执行不能抛出异常。
  */
-template <typename Func> class scope_success {
+template <typename Func>
+class scope_success {
 private:
     compressed_pair<Func, int> func_pair_; ///< 函数对象和异常计数快照
 
@@ -270,7 +275,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Func> scope_success(Func) -> scope_success<Func>;
+template <typename Func>
+scope_success(Func) -> scope_success<Func>;
 #endif
 
 /** @} */ // ScopeGuard

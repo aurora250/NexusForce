@@ -14,11 +14,14 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_INNER__
 /// @cond
 
-template <typename T> void __ref_wrapper_construct_aux(type_identity_t<T&>) noexcept;
-template <typename T> void __ref_wrapper_construct_aux(type_identity_t<T&&>) = delete;
+template <typename T>
+void __ref_wrapper_construct_aux(type_identity_t<T&>) noexcept;
+template <typename T>
+void __ref_wrapper_construct_aux(type_identity_t<T&&>) = delete;
 
 
-template <typename T, typename U, typename Dummy = void> struct ref_wrapper_constructable_from : false_type {};
+template <typename T, typename U, typename Dummy = void>
+struct ref_wrapper_constructable_from : false_type {};
 
 template <typename T, typename U>
 struct ref_wrapper_constructable_from<T, U,
@@ -26,12 +29,14 @@ struct ref_wrapper_constructable_from<T, U,
 : true_type {};
 
 
-template <typename F, typename... Args> struct __invoke_result_aux;
+template <typename F, typename... Args>
+struct __invoke_result_aux;
 
 /// @endcond
 NEFORCE_END_INNER__
 
-template <typename F, typename... Args> struct is_nothrow_invocable;
+template <typename F, typename... Args>
+struct is_nothrow_invocable;
 
 template <typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 typename inner::__invoke_result_aux<Callable, Args...>::type
@@ -52,7 +57,8 @@ invoke(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Arg
  *
  * 支持隐式转换为原始引用，以及函数调用运算符。
  */
-template <typename T> class reference_wrapper {
+template <typename T>
+class reference_wrapper {
 public:
     static_assert(is_object<T>::value || is_function<T>::value,
                   "reference_wrapper requires an object or function type.");
@@ -110,7 +116,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T> reference_wrapper(T&) -> reference_wrapper<T>;
+template <typename T>
+reference_wrapper(T&) -> reference_wrapper<T>;
 #endif
 
 
@@ -121,7 +128,8 @@ template <typename T> reference_wrapper(T&) -> reference_wrapper<T>;
  * @return reference_wrapper<T>包装器
  * @note 禁止对右值使用
  */
-template <typename T> NEFORCE_NODISCARD constexpr reference_wrapper<T> ref(T& val) noexcept {
+template <typename T>
+NEFORCE_NODISCARD constexpr reference_wrapper<T> ref(T& val) noexcept {
     return reference_wrapper<T>(val);
 }
 
@@ -130,7 +138,8 @@ template <typename T> NEFORCE_NODISCARD constexpr reference_wrapper<T> ref(T& va
  * @tparam T 类型
  * @note 防止对const右值创建引用包装器
  */
-template <typename T> void ref(const T&&) = delete;
+template <typename T>
+void ref(const T&&) = delete;
 
 /**
  * @brief 重新包装已存在的引用包装器
@@ -138,7 +147,8 @@ template <typename T> void ref(const T&&) = delete;
  * @param wrapper 已存在的引用包装器
  * @return 相同的引用包装器
  */
-template <typename T> NEFORCE_NODISCARD constexpr reference_wrapper<T> ref(reference_wrapper<T> wrapper) noexcept {
+template <typename T>
+NEFORCE_NODISCARD constexpr reference_wrapper<T> ref(reference_wrapper<T> wrapper) noexcept {
     return wrapper;
 }
 
@@ -151,7 +161,8 @@ template <typename T> NEFORCE_NODISCARD constexpr reference_wrapper<T> ref(refer
  *
  * 用于创建只读引用包装
  */
-template <typename T> NEFORCE_NODISCARD constexpr reference_wrapper<const T> cref(const T& val) noexcept {
+template <typename T>
+NEFORCE_NODISCARD constexpr reference_wrapper<const T> cref(const T& val) noexcept {
     return reference_wrapper<const T>(val);
 }
 
@@ -160,7 +171,8 @@ template <typename T> NEFORCE_NODISCARD constexpr reference_wrapper<const T> cre
  * @tparam T 类型
  * @note 防止对const右值创建只读引用包装器
  */
-template <typename T> void cref(const T&&) = delete;
+template <typename T>
+void cref(const T&&) = delete;
 
 /**
  * @brief 重新包装为const引用包装器
@@ -181,7 +193,8 @@ NEFORCE_NODISCARD constexpr reference_wrapper<const T> cref(reference_wrapper<T>
  * @brief 解包引用包装器，获取原始引用类型
  * @tparam T 要解包的类型
  */
-template <typename T> struct unwrap_reference {
+template <typename T>
+struct unwrap_reference {
     using type = T;
 };
 
@@ -189,7 +202,8 @@ template <typename T> struct unwrap_reference {
  * @brief reference_wrapper的特化版本
  * @tparam T 包装的类型
  */
-template <typename T> struct unwrap_reference<reference_wrapper<T>> {
+template <typename T>
+struct unwrap_reference<reference_wrapper<T>> {
     using type = T&;
 };
 
@@ -197,7 +211,8 @@ template <typename T> struct unwrap_reference<reference_wrapper<T>> {
  * @typedef unwrap_reference_t
  * @brief unwrap_reference的便捷别名
  */
-template <typename T> using unwrap_reference_t = typename unwrap_reference<T>::type;
+template <typename T>
+using unwrap_reference_t = typename unwrap_reference<T>::type;
 
 
 /**
@@ -205,7 +220,8 @@ template <typename T> using unwrap_reference_t = typename unwrap_reference<T>::t
  * @brief 先退化类型，再解包引用包装器
  * @tparam T 输入类型
  */
-template <typename T> struct unwrap_ref_decay {
+template <typename T>
+struct unwrap_ref_decay {
     using type = unwrap_reference_t<decay_t<T>>;
 };
 
@@ -213,7 +229,8 @@ template <typename T> struct unwrap_ref_decay {
  * @typedef unwrap_ref_decay_t
  * @brief unwrap_ref_decay的便捷别名
  */
-template <typename T> using unwrap_ref_decay_t = typename unwrap_ref_decay<T>::type;
+template <typename T>
+using unwrap_ref_decay_t = typename unwrap_ref_decay<T>::type;
 
 /** @} */ // ReferenceWrapper
 

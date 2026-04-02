@@ -25,7 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 提供类型安全的对齐内存缓冲区，确保内存的对齐方式与类型T一致。
  */
-template <typename T> struct aligned_buffer : aligned_storage<sizeof(T), alignof(T)> {
+template <typename T>
+struct aligned_buffer : aligned_storage<sizeof(T), alignof(T)> {
     /**
      * @brief 实际的存储缓冲区
      *

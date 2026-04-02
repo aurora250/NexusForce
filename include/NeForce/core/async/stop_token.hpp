@@ -383,7 +383,8 @@ private:
 
     friend class stop_source;
 
-    template <typename Callback> friend class stop_callback;
+    template <typename Callback>
+    friend class stop_callback;
 
     /**
      * @brief 私有构造函数
@@ -561,7 +562,8 @@ public:
  * @note 回调函数应该不抛异常
  * @note 回调函数应该快速执行，避免阻塞
  */
-template <typename Callback> class NEFORCE_NODISCARD stop_callback {
+template <typename Callback>
+class NEFORCE_NODISCARD stop_callback {
     static_assert(is_nothrow_destructible_v<Callback>, "Callback should be nothrow destructible.");
     static_assert(is_invocable_v<Callback>, "Callback should be invocable.");
 
@@ -637,7 +639,8 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Callback> stop_callback(stop_token, Callback) -> stop_callback<Callback>;
+template <typename Callback>
+stop_callback(stop_token, Callback) -> stop_callback<Callback>;
 #endif
 
 /** @} */ // StopTokens

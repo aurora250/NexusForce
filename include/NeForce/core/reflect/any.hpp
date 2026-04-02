@@ -30,18 +30,21 @@ using type_id = size_t; ///< 类型标识符
  *
  * 提供编译期类型名称字符串。可对自定义类型进行特化。
  */
-template <typename T> struct type_name {
+template <typename T>
+struct type_name {
     static constexpr string_view value = "unknown";
 };
 
 /**
  * @brief type_name的便捷访问变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr string_view type_name_v = type_name<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr string_view type_name_v = type_name<T>::value;
 
 /// @cond
 #define __NEFORCE_SPECIALIZE_TYPE_NAME(T)        \
-    template <> struct type_name<T> {            \
+    template <>                                  \
+    struct type_name<T> {                        \
         static constexpr string_view value = #T; \
     };
 
@@ -63,7 +66,8 @@ private:
         virtual reflect::type_id type_id() const noexcept = 0;
     };
 
-    template <typename T> struct model final : concepts {
+    template <typename T>
+    struct model final : concepts {
         T value_;
 
         explicit model(T value) :
@@ -143,7 +147,8 @@ public:
      * @tparam T 目标类型
      * @return 类型匹配返回指针，否则返回nullptr
      */
-    template <typename T> NEFORCE_NODISCARD T* cast() noexcept {
+    template <typename T>
+    NEFORCE_NODISCARD T* cast() noexcept {
         if (!storage_) {
             return nullptr;
         }
@@ -159,7 +164,8 @@ public:
      * @tparam T 目标类型
      * @return 类型匹配返回指针，否则返回nullptr
      */
-    template <typename T> NEFORCE_NODISCARD const T* cast() const noexcept {
+    template <typename T>
+    NEFORCE_NODISCARD const T* cast() const noexcept {
         if (!storage_) {
             return nullptr;
         }
@@ -176,7 +182,8 @@ public:
      * @return 存储值的引用
      * @throws typecast_exception 类型不匹配时抛出
      */
-    template <typename T> NEFORCE_NODISCARD T& get() {
+    template <typename T>
+    NEFORCE_NODISCARD T& get() {
         if (auto* ptr = cast<T>()) {
             return *ptr;
         }
@@ -190,7 +197,8 @@ public:
      * @return 存储值的常量引用
      * @throws typecast_exception 类型不匹配时抛出
      */
-    template <typename T> NEFORCE_NODISCARD const T& get() const {
+    template <typename T>
+    NEFORCE_NODISCARD const T& get() const {
         if (auto* ptr = cast<T>()) {
             return *ptr;
         }
@@ -203,7 +211,10 @@ public:
      * @tparam T 目标类型
      * @return 可以转换返回true
      */
-    template <typename T> NEFORCE_NODISCARD bool can_cast() const noexcept { return cast<T>() != nullptr; }
+    template <typename T>
+    NEFORCE_NODISCARD bool can_cast() const noexcept {
+        return cast<T>() != nullptr;
+    }
 
     /**
      * @brief 转换为指定类型的值
@@ -213,7 +224,8 @@ public:
      *
      * 返回存储值的副本，而非引用。
      */
-    template <typename T> NEFORCE_NODISCARD T convert() const {
+    template <typename T>
+    NEFORCE_NODISCARD T convert() const {
         if (auto* ptr = cast<T>()) {
             return *ptr;
         }

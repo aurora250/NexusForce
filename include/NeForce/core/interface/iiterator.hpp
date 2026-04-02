@@ -25,7 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 为迭代器类型提供完整的操作接口，包括解引用、递增、递减、算术运算和比较运算。
  * 基于CRTP模式，要求派生类实现核心操作方法。
  */
-template <typename Iterator> struct iiterator {
+template <typename Iterator>
+struct iiterator {
 private:
     constexpr Iterator& derived() noexcept { return static_cast<Iterator&>(*this); }
 
@@ -87,7 +88,8 @@ public:
      * @param n 要前进的距离
      * @return 前进后的迭代器引用
      */
-    template <typename Distance> constexpr Iterator& operator+=(Distance n) noexcept {
+    template <typename Distance>
+    constexpr Iterator& operator+=(Distance n) noexcept {
         derived().advance(n);
         return derived();
     }
@@ -97,7 +99,8 @@ public:
      * @param n 要前进的距离
      * @return 前进后的新迭代器
      */
-    template <typename Distance> NEFORCE_NODISCARD constexpr Iterator operator+(Distance n) const noexcept {
+    template <typename Distance>
+    NEFORCE_NODISCARD constexpr Iterator operator+(Distance n) const noexcept {
         Iterator temp = derived();
         temp.advance(n);
         return temp;
@@ -119,7 +122,8 @@ public:
      * @param n 要后退的距离
      * @return 后退后的迭代器引用
      */
-    template <typename Distance> constexpr Iterator& operator-=(Distance n) noexcept {
+    template <typename Distance>
+    constexpr Iterator& operator-=(Distance n) noexcept {
         derived().advance(-n);
         return derived();
     }

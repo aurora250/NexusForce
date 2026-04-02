@@ -28,13 +28,16 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 用于确定协程的promise类型，返回类型必须包含promise_type成员。
  */
-template <typename Res, typename... Args> struct coroutine_traits;
+template <typename Res, typename... Args>
+struct coroutine_traits;
 
 NEFORCE_BEGIN_INNER__
 
-template <typename, typename = void> struct coroutine_traits_impl {};
+template <typename, typename = void>
+struct coroutine_traits_impl {};
 
-template <typename Res> struct coroutine_traits_impl<Res, void_t<typename Res::promise_type>> {
+template <typename Res>
+struct coroutine_traits_impl<Res, void_t<typename Res::promise_type>> {
     using promise_type = typename Res::promise_type;
 };
 
@@ -45,7 +48,8 @@ NEFORCE_END_INNER__
  * @tparam Res 协程返回类型
  * @tparam Args 协程参数类型
  */
-template <typename Res, typename... Args> struct coroutine_traits : inner::coroutine_traits_impl<Res> {};
+template <typename Res, typename... Args>
+struct coroutine_traits : inner::coroutine_traits_impl<Res> {};
 
 
 /**
@@ -56,7 +60,8 @@ template <typename Res, typename... Args> struct coroutine_traits : inner::corou
  * 故对std::coroutine_handle重新导出，用于管理协程的生命周期。
  * 提供恢复、销毁等操作。
  */
-template <typename Promise = void> using coroutine_handle = std::coroutine_handle<Promise>;
+template <typename Promise = void>
+using coroutine_handle = std::coroutine_handle<Promise>;
 
 /** @} */ // Coroutine
 
@@ -70,7 +75,8 @@ template <typename Promise = void> using coroutine_handle = std::coroutine_handl
  * @brief coroutine_handle的哈希特化
  * @tparam Promise handle持有的保证类型
  */
-template <typename Promise> struct hash<coroutine_handle<Promise>> {
+template <typename Promise>
+struct hash<coroutine_handle<Promise>> {
     size_t operator()(const coroutine_handle<Promise>& handle) const noexcept {
         return reinterpret_cast<size_t>(handle.address());
     }

@@ -174,7 +174,8 @@ public:
 };
 
 
-template <typename... Types> struct signal;
+template <typename... Types>
+struct signal;
 
 /**
  * @class signal_blocker
@@ -182,7 +183,8 @@ template <typename... Types> struct signal;
  *
  * 信号阻塞管理器，在作用域内临时阻塞信号触发。
  */
-template <typename... Types> class signal_blocker {
+template <typename... Types>
+class signal_blocker {
 private:
     shared_ptr<bool> blocked_flag_; ///< 阻塞标志
     bool old_value_;                ///< 原值
@@ -232,7 +234,8 @@ public:
  *
  * 多播委托实现。
  */
-template <typename... Types> struct signal {
+template <typename... Types>
+struct signal {
 private:
     /**
      * @struct slot_entry
@@ -255,16 +258,27 @@ private:
     shared_ptr<bool> blocked_flag_{_NEFORCE make_shared<bool>(false)}; ///< 阻塞标志
     mutable mutex mutex_;                                              ///< 互斥锁
 
-    template <typename T> static shared_ptr<T> lock_if_weak(const weak_ptr<T>& self) { return self.lock(); }
-    template <typename T> static const shared_ptr<T>& lock_if_weak(const shared_ptr<T>& self) noexcept { return self; }
-    template <typename T> static T* lock_if_weak(T* self) noexcept { return self; }
+    template <typename T>
+    static shared_ptr<T> lock_if_weak(const weak_ptr<T>& self) {
+        return self.lock();
+    }
+    template <typename T>
+    static const shared_ptr<T>& lock_if_weak(const shared_ptr<T>& self) noexcept {
+        return self;
+    }
+    template <typename T>
+    static T* lock_if_weak(T* self) noexcept {
+        return self;
+    }
 
-    template <typename Func> auto with_lock(Func&& func) const {
+    template <typename Func>
+    auto with_lock(Func&& func) const {
         lock<mutex> lock(mutex_);
         return _NEFORCE forward<Func>(func)();
     }
 
-    template <typename Func> auto with_lock(Func&& func) {
+    template <typename Func>
+    auto with_lock(Func&& func) {
         lock<mutex> lock(mutex_);
         return _NEFORCE forward<Func>(func)();
     }
@@ -277,7 +291,8 @@ private:
      * @param memfn 成员函数指针
      * @return 包装后的可调用对象
      */
-    template <typename Self, typename MemFn> auto bind(Self self, MemFn memfn) {
+    template <typename Self, typename MemFn>
+    auto bind(Self self, MemFn memfn) {
         return [self = _NEFORCE move(self), memfn](Types... args) {
             auto ptr = signal::lock_if_weak(self);
             if (ptr == nullptr) {
@@ -297,7 +312,8 @@ private:
      * @param one 一次性标签
      * @return 包装后的可调用对象
      */
-    template <typename Self, typename MemFn> auto bind(Self self, MemFn memfn, oneshot_t one) {
+    template <typename Self, typename MemFn>
+    auto bind(Self self, MemFn memfn, oneshot_t one) {
         return [self = _NEFORCE move(self), memfn](Types... args) {
             auto ptr = signal::lock_if_weak(self);
             if (ptr == nullptr) {
@@ -317,7 +333,8 @@ private:
      * @param n nshot_t标签
      * @return 包装后的可调用对象
      */
-    template <typename Self, typename MemFn> auto bind(Self self, MemFn memfn, nshot_t n) {
+    template <typename Self, typename MemFn>
+    auto bind(Self self, MemFn memfn, nshot_t n) {
         return [self = _NEFORCE move(self), memfn, n = static_cast<size_t>(n)](Types... args) mutable {
             if (n == 0) {
                 return callback_result::erase;
@@ -409,7 +426,8 @@ public:
      * @param tag 连接标签（可选）
      * @return 连接句柄
      */
-    template <typename Self, typename MemFn, typename... Tag> connection connect(Self self, MemFn memfn, Tag... tag) {
+    template <typename Self, typename MemFn, typename... Tag>
+    connection connect(Self self, MemFn memfn, Tag... tag) {
         return this->connect(_NEFORCE move(self), memfn, 0, tag...);
     }
 
@@ -420,7 +438,8 @@ public:
      * @param priority 优先级（值越大优先级越高）
      * @return 连接句柄
      */
-    template <typename Func> connection connect(Func callback, int priority = 0) {
+    template <typename Func>
+    connection connect(Func callback, int priority = 0) {
         return this->with_lock([this, callback = _NEFORCE move(callback), priority] {
             return this->connect_impl(_NEFORCE move(callback), priority);
         });
@@ -499,7 +518,8 @@ public:
      *
      * 在指定的执行器上异步调用emit。
      */
-    template <typename Executor> void emit_executor(Executor& executor, Types... args) {
+    template <typename Executor>
+    void emit_executor(Executor& executor, Types... args) {
         auto weak_flag = weak_ptr<bool>(blocked_flag_);
         auto args_tuple = _NEFORCE make_tuple(_NEFORCE forward<Types>(args)...);
 
@@ -517,7 +537,10 @@ public:
      * @brief 函数调用操作符
      * @param args 信号参数
      */
-    template <typename... Args> void operator()(Args&&... args) { this->emit(_NEFORCE forward<Args>(args)...); }
+    template <typename... Args>
+    void operator()(Args&&... args) {
+        this->emit(_NEFORCE forward<Args>(args)...);
+    }
 
     /**
      * @brief 断开所有连接

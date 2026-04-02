@@ -30,7 +30,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 在分配内存时记录调用栈，在释放内存时清除记录。
  * 析构时检查是否有未释放的内存，并输出详细的泄漏信息。
  */
-template <typename T> class trace_allocator {
+template <typename T>
+class trace_allocator {
     static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
 
 public:
@@ -49,7 +50,8 @@ public:
      *
      * 提供将当前分配器重新绑定到其他类型的能力。
      */
-    template <typename U> struct rebind {
+    template <typename U>
+    struct rebind {
         using other = trace_allocator<U>;
     };
 

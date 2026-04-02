@@ -214,7 +214,8 @@ struct timed_waiter_pool : waiter_pool_base {
  *
  * 支持超时等待的等待器，根据EntersWait标签决定是否更新等待计数。
  */
-template <typename EntersWait> struct timed_waiter : waiter_base<timed_waiter_pool> {
+template <typename EntersWait>
+struct timed_waiter : waiter_base<timed_waiter_pool> {
     using base_type = waiter_base<timed_waiter_pool>;
 
 private:

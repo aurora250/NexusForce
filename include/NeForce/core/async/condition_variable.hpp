@@ -42,9 +42,9 @@ NEFORCE_BEGIN_INNER__
 class NEFORCE_API condition_variable_base {
 public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using native_handle_type = ::CONDITION_VARIABLE;
+    using native_handle_type = ::CONDITION_VARIABLE; ///< 条件变量句柄类型
 #else
-    using native_handle_type = ::pthread_cond_t;
+    using native_handle_type = ::pthread_cond_t; ///< 条件变量句柄类型
 #endif
 
 private:
@@ -209,7 +209,8 @@ public:
      *
      * 等待直到谓词返回true。防止虚假唤醒。
      */
-    template <typename Pred> void wait(unique_lock<mutex>& lock, Pred pred) {
+    template <typename Pred>
+    void wait(unique_lock<mutex>& lock, Pred pred) {
         while (!pred()) {
             wait(lock);
         }
@@ -222,7 +223,8 @@ public:
      * @param util 目标时间点
      * @return 等待结果状态
      */
-    template <typename Dur> cv_status wait_until(unique_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
+    template <typename Dur>
+    cv_status wait_until(unique_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 
@@ -233,7 +235,8 @@ public:
      * @param util 目标时间点
      * @return 等待结果状态
      */
-    template <typename Dur> cv_status wait_until(unique_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
+    template <typename Dur>
+    cv_status wait_until(unique_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 

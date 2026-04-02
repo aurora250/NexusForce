@@ -183,7 +183,8 @@ NEFORCE_END_LITERALS__
 /**
  * @brief uuid的哈希特化
  */
-template <> struct hash<uuid> {
+template <>
+struct hash<uuid> {
     size_t operator()(const uuid& uuid) const noexcept {
         const auto& bytes = uuid.bytes();
         size_t hash = 0;

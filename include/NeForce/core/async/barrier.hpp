@@ -40,7 +40,8 @@ struct empty_completion {
  * 基于树形算法的屏障实现，使用分层的票证机制减少竞争。
  * 提供高性能的多线程同步，支持动态调整参与线程数。
  */
-template <typename CmplFunc> class tree_barrier {
+template <typename CmplFunc>
+class tree_barrier {
     using phase_ref_t = atomic_ref_base<byte_t>;        ///< 阶段引用类型
     using phase_cref_t = atomic_ref_base<const byte_t>; ///< 阶段常量引用类型
 
@@ -194,7 +195,8 @@ public:
  * 屏障的用户友好接口，包装树形屏障实现。
  * 提供类型安全的到达令牌和简化API。
  */
-template <typename CmplFunc = empty_completion> class barrier {
+template <typename CmplFunc = empty_completion>
+class barrier {
     using algorithm_type = tree_barrier<CmplFunc>; ///< 底层算法类型
     algorithm_type barrier_impl_;                  ///< 屏障实现实例
 

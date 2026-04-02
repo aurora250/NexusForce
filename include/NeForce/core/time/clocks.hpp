@@ -134,17 +134,21 @@ milliseconds NEFORCE_API relative_time(int64_t sec, int64_t nsec, bool is_monoto
  * @brief 检查是否为时钟类型
  * @tparam T 要检查的类型
  */
-template <typename T> struct is_clock;
+template <typename T>
+struct is_clock;
 
-template <> struct is_clock<system_clock> : true_type {};
+template <>
+struct is_clock<system_clock> : true_type {};
 
-template <> struct is_clock<steady_clock> : true_type {};
+template <>
+struct is_clock<steady_clock> : true_type {};
 
 /**
  * @var is_clock_v
  * @brief is_clock的便捷变量模板
  */
-template <typename T> NEFORCE_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
 
 /** @} */ // Clocks
 
@@ -166,7 +170,8 @@ NEFORCE_BEGIN_THIS_THREAD__
  *  - 对于稳定时钟，计算一次睡眠时间；
  *  - 对于非稳定时钟，循环检查直到达到目标时间。
  */
-template <typename Clock, typename Dur> void sleep_until(const time_point<Clock, Dur>& time) {
+template <typename Clock, typename Dur>
+void sleep_until(const time_point<Clock, Dur>& time) {
     auto current = Clock::now();
     if (Clock::is_steady) {
         if (current < time) {

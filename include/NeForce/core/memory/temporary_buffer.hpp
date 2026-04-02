@@ -28,7 +28,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 管理临时内存缓冲区的RAII包装器，用于算法中需要临时存储的场景。
  * 自动管理内存分配和释放，确保异常安全。
  */
-template <typename Iterator> struct temporary_buffer {
+template <typename Iterator>
+struct temporary_buffer {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "temporary buffer requires forward iterator types.");
 
 public:
