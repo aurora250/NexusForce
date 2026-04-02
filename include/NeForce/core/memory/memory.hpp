@@ -26,20 +26,24 @@ NEFORCE_BEGIN_NAMESPACE__
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
-NEFORCE_CONSTEXPR14 void*
-memory_copy(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src, size_t count) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
-	if (count == 0) return dest;
+NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src,
+                                      size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    if (count == 0) {
+        return dest;
+    }
 
-	void* res = dest;
-	auto dest_v = static_cast<volatile byte_t*>(dest);
-	auto src_v = static_cast<const volatile byte_t*>(src);
-	while (count--) {
-		*dest_v = *src_v;
-		dest_v++;
-		src_v++;
-	}
-	return res;
+    void* res = dest;
+    auto dest_v = static_cast<volatile byte_t*>(dest);
+    auto src_v = static_cast<const volatile byte_t*>(src);
+    while (count--) {
+        *dest_v = *src_v;
+        dest_v++;
+        src_v++;
+    }
+    return res;
 }
 
 /**
@@ -51,9 +55,8 @@ memory_copy(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src, size_
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
 template <typename T>
-NEFORCE_CONSTEXPR14 void*
-memory_copy(T* NEFORCE_RESTRICT dest, const T* NEFORCE_RESTRICT src) noexcept {
-	return _NEFORCE memory_copy(dest, src, sizeof(T));
+NEFORCE_CONSTEXPR14 void* memory_copy(T* NEFORCE_RESTRICT dest, const T* NEFORCE_RESTRICT src) noexcept {
+    return _NEFORCE memory_copy(dest, src, sizeof(T));
 }
 
 /**
@@ -64,18 +67,20 @@ memory_copy(T* NEFORCE_RESTRICT dest, const T* NEFORCE_RESTRICT src) noexcept {
  * @return 目标内存复制结束后的下一个位置指针，如果参数无效则返回nullptr
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
-NEFORCE_CONSTEXPR14 void*
-memory_copy_offset(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src, size_t count) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
+NEFORCE_CONSTEXPR14 void* memory_copy_offset(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src,
+                                             size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
 
-	auto dest_v = static_cast<volatile byte_t*>(dest);
-	auto src_v = static_cast<const volatile byte_t*>(src);
-	while (count--) {
-		*dest_v = *src_v;
-		dest_v++;
-		src_v++;
-	}
-	return (void*) dest_v;
+    auto dest_v = static_cast<volatile byte_t*>(dest);
+    auto src_v = static_cast<const volatile byte_t*>(src);
+    while (count--) {
+        *dest_v = *src_v;
+        dest_v++;
+        src_v++;
+    }
+    return (void*) dest_v;
 }
 
 /**
@@ -86,9 +91,10 @@ memory_copy_offset(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src
  * @param count 最大复制字节数
  * @return 目标内存中停止字符后的下一个位置指针，如果没有找到字节则返回nullptr
  */
-NEFORCE_CONSTEXPR14 void*
-memory_copy_until(void* dest, const void* src, const byte_t value, size_t count) noexcept {
-    if (dest == nullptr || src == nullptr) return nullptr;
+NEFORCE_CONSTEXPR14 void* memory_copy_until(void* dest, const void* src, const byte_t value, size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
 
     auto dest_v = static_cast<volatile byte_t*>(dest);
     auto src_v = static_cast<const volatile byte_t*>(src);
@@ -115,19 +121,25 @@ memory_copy_until(void* dest, const void* src, const byte_t value, size_t count)
  *         - 负数：左侧内存小于右侧内存
  *         - 0：两个内存区域相等
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int
-memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
-	if (lhs == nullptr && rhs == nullptr) return 0;
-	if (lhs == nullptr) return -1;
-    if (rhs == nullptr) return 1;
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
+    if (lhs == nullptr && rhs == nullptr) {
+        return 0;
+    }
+    if (lhs == nullptr) {
+        return -1;
+    }
+    if (rhs == nullptr) {
+        return 1;
+    }
 
-	while (count--) {
-		if (*static_cast<const byte_t*>(lhs) != *static_cast<const byte_t*>(rhs))
-			return *static_cast<const byte_t*>(lhs) - *static_cast<const byte_t*>(rhs);
-		lhs = static_cast<const byte_t*>(lhs) + 1;
-		rhs = static_cast<const byte_t*>(rhs) + 1;
-	}
-	return 0;
+    while (count--) {
+        if (*static_cast<const byte_t*>(lhs) != *static_cast<const byte_t*>(rhs)) {
+            return *static_cast<const byte_t*>(lhs) - *static_cast<const byte_t*>(rhs);
+        }
+        lhs = static_cast<const byte_t*>(lhs) + 1;
+        rhs = static_cast<const byte_t*>(rhs) + 1;
+    }
+    return 0;
 }
 
 /**
@@ -141,9 +153,8 @@ memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
  *         - 0：两个内存区域相等
  */
 template <typename T>
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int
-memory_compare(const T& lhs, const T& rhs) noexcept {
-	return _NEFORCE memory_compare(&lhs, &rhs, sizeof(T));
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const T& lhs, const T& rhs) noexcept {
+    return _NEFORCE memory_compare(&lhs, &rhs, sizeof(T));
 }
 
 /**
@@ -154,25 +165,26 @@ memory_compare(const T& lhs, const T& rhs) noexcept {
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  * @note 支持重叠区域，当dest < src时从前向后复制，当dest > src时从后向前复制。
  */
-NEFORCE_CONSTEXPR14 void*
-memory_move(void* dest, const void* src, size_t count) noexcept {
-	if(dest == nullptr || src == nullptr) return nullptr;
+NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
 
-	void* res = dest;
-	auto dest_v = static_cast<volatile byte_t*>(dest);
-	auto src_v = static_cast<const volatile byte_t*>(src);
-	if (dest_v < src_v) {
-		while (count--) {
-			*dest_v = *src_v;
-			dest_v = dest_v + 1;
-			src_v = src_v + 1;
-		}
-	} else if (dest_v > src_v) {
-		while (count--) {
-			*(dest_v + count) = *(src_v + count);
-		}
-	}
-	return res;
+    void* res = dest;
+    auto dest_v = static_cast<volatile byte_t*>(dest);
+    auto src_v = static_cast<const volatile byte_t*>(src);
+    if (dest_v < src_v) {
+        while (count--) {
+            *dest_v = *src_v;
+            dest_v = dest_v + 1;
+            src_v = src_v + 1;
+        }
+    } else if (dest_v > src_v) {
+        while (count--) {
+            *(dest_v + count) = *(src_v + count);
+        }
+    }
+    return res;
 }
 
 /**
@@ -182,17 +194,18 @@ memory_move(void* dest, const void* src, size_t count) noexcept {
  * @param count 要填充的字节数
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  */
-NEFORCE_CONSTEXPR14 void*
-memory_set(void* dest, const byte_t value, size_t count) noexcept {
-	if(dest == nullptr) return nullptr;
+NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t count) noexcept {
+    if (dest == nullptr) {
+        return nullptr;
+    }
 
-	void* ret = static_cast<byte_t*>(dest);
-	auto dest_v = static_cast<volatile byte_t*>(dest);
-	while (count--) {
-		*dest_v = value;
-		dest_v = dest_v + 1;
-	}
-	return ret;
+    void* ret = static_cast<byte_t*>(dest);
+    auto dest_v = static_cast<volatile byte_t*>(dest);
+    while (count--) {
+        *dest_v = value;
+        dest_v = dest_v + 1;
+    }
+    return ret;
 }
 
 /**
@@ -203,12 +216,14 @@ memory_set(void* dest, const byte_t value, size_t count) noexcept {
  * 清零内存区域。如果参数无效则不执行任何操作。
  */
 NEFORCE_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
-	if (dest == nullptr) return;
+    if (dest == nullptr) {
+        return;
+    }
 
-	const auto dest_v = static_cast<volatile byte_t*>(dest);
-	for (size_t i = 0; i < count; ++i) {
-		dest_v[i] = static_cast<byte_t>(0);
-	}
+    const auto dest_v = static_cast<volatile byte_t*>(dest);
+    for (size_t i = 0; i < count; ++i) {
+        dest_v[i] = static_cast<byte_t>(0);
+    }
 }
 
 /**
@@ -218,10 +233,7 @@ NEFORCE_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
  *
  * 清零内存区域。如果参数无效则不执行任何操作。
  */
-template <typename T>
-NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept {
-	_NEFORCE memory_zero(dest, sizeof(T));
-}
+template <typename T> NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept { _NEFORCE memory_zero(dest, sizeof(T)); }
 
 /**
  * @brief 在内存中搜索特定字节
@@ -230,17 +242,19 @@ NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept {
  * @param count 要搜索的字节数
  * @return 指向第一个匹配字节的指针，如果没有找到则返回nullptr
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void*
-memory_find(const void* dest, const byte_t value, size_t count) noexcept {
-	if(dest == nullptr) return nullptr;
-	auto p = static_cast<const byte_t*>(dest);
-	while (count--) {
-		if (*p == value) {
-			return p;
-		}
-		p++;
-	}
-	return nullptr;
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void* memory_find(const void* dest, const byte_t value,
+                                                                  size_t count) noexcept {
+    if (dest == nullptr) {
+        return nullptr;
+    }
+    auto p = static_cast<const byte_t*>(dest);
+    while (count--) {
+        if (*p == value) {
+            return p;
+        }
+        p++;
+    }
+    return nullptr;
 }
 
 /**
@@ -251,33 +265,31 @@ memory_find(const void* dest, const byte_t value, size_t count) noexcept {
  * @param pattern_len 模式长度
  * @return 指向第一个匹配模式起始位置的指针，如果没有找到则返回nullptr
  */
-NEFORCE_CONSTEXPR14 const void*
-memory_find_pattern(const void* data, const size_t data_len,
-	                const void* pattern, const size_t pattern_len) noexcept {
-	if (data == nullptr || pattern == nullptr ||
-		data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
-		return nullptr;
-	}
+NEFORCE_CONSTEXPR14 const void* memory_find_pattern(const void* data, const size_t data_len, const void* pattern,
+                                                    const size_t pattern_len) noexcept {
+    if (data == nullptr || pattern == nullptr || data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
+        return nullptr;
+    }
 
-	const auto data_ptr = static_cast<const byte_t*>(data);
-	const auto pattern_ptr = static_cast<const byte_t*>(pattern);
-	const size_t last_possible = data_len - pattern_len + 1;
+    const auto data_ptr = static_cast<const byte_t*>(data);
+    const auto pattern_ptr = static_cast<const byte_t*>(pattern);
+    const size_t last_possible = data_len - pattern_len + 1;
 
-	for (size_t i = 0; i < last_possible; ++i) {
-		if (data_ptr[i] == pattern_ptr[0]) {
-			bool match = true;
-			for (size_t j = 1; j < pattern_len; ++j) {
-				if (data_ptr[i + j] != pattern_ptr[j]) {
-					match = false;
-					break;
-				}
-			}
-			if (match) {
-				return data_ptr + i;
-			}
-		}
-	}
-	return nullptr;
+    for (size_t i = 0; i < last_possible; ++i) {
+        if (data_ptr[i] == pattern_ptr[0]) {
+            bool match = true;
+            for (size_t j = 1; j < pattern_len; ++j) {
+                if (data_ptr[i + j] != pattern_ptr[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return data_ptr + i;
+            }
+        }
+    }
+    return nullptr;
 }
 
 /**
@@ -290,21 +302,19 @@ memory_find_pattern(const void* data, const size_t data_len,
  *
  * 将源类型的位表示重新解释为目标类型的表示。
  */
-template <typename To, typename From>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 To
-memory_cast(const From& value) noexcept {
-	static_assert(sizeof(To) == sizeof(From), "types must have the same size");
-	static_assert(is_trivially_copyable_v<To>, "To type must be trivially copyable");
-	static_assert(is_trivially_copyable_v<From>, "From type must be trivially copyable");
+template <typename To, typename From> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 To memory_cast(const From& value) noexcept {
+    static_assert(sizeof(To) == sizeof(From), "types must have the same size");
+    static_assert(is_trivially_copyable_v<To>, "To type must be trivially copyable");
+    static_assert(is_trivially_copyable_v<From>, "From type must be trivially copyable");
 
 #ifdef NEFORCE_STANDARD_20
-	return __builtin_bit_cast(To, value);
+    return __builtin_bit_cast(To, value);
 #else
-	static_assert(is_default_constructible_v<To>, "To type must be default constructible");
+    static_assert(is_default_constructible_v<To>, "To type must be default constructible");
 
-	To result{};
-	_NEFORCE memory_copy(&result, &value, sizeof(To));
-	return result;
+    To result{};
+    _NEFORCE memory_copy(&result, &value, sizeof(To));
+    return result;
 #endif
 }
 
@@ -324,15 +334,14 @@ memory_cast(const From& value) noexcept {
  *
  * 将A-Z转换为a-z，其他字符保持不变。
  */
-template <typename CharT>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_lowercase(const CharT c) noexcept {
-	static_assert(is_character_v<CharT>, "character type is necessary");
-	using UT = make_unsigned_t<CharT>;
-	const auto uc = static_cast<UT>(c);
-	if (uc >= static_cast<UT>('A') && uc <= static_cast<UT>('Z')) {
-		return static_cast<CharT>(uc | 0x20);
-	}
-	return c;
+template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_lowercase(const CharT c) noexcept {
+    static_assert(is_character_v<CharT>, "character type is necessary");
+    using UT = make_unsigned_t<CharT>;
+    const auto uc = static_cast<UT>(c);
+    if (uc >= static_cast<UT>('A') && uc <= static_cast<UT>('Z')) {
+        return static_cast<CharT>(uc | 0x20);
+    }
+    return c;
 }
 
 /**
@@ -343,15 +352,14 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_lowercase(const CharT c) noe
  *
  * 将a-z转换为A-Z，其他字符保持不变。
  */
-template <typename CharT>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_uppercase(const CharT c) noexcept {
-	static_assert(is_character_v<CharT>, "character type is necessary");
-	using UT = make_unsigned_t<CharT>;
-	const auto uc = static_cast<UT>(c);
-	if (uc >= static_cast<UT>('a') && uc <= static_cast<UT>('z')) {
-		return static_cast<CharT>(uc & 0xDF);
-	}
-	return c;
+template <typename CharT> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_uppercase(const CharT c) noexcept {
+    static_assert(is_character_v<CharT>, "character type is necessary");
+    using UT = make_unsigned_t<CharT>;
+    const auto uc = static_cast<UT>(c);
+    if (uc >= static_cast<UT>('a') && uc <= static_cast<UT>('z')) {
+        return static_cast<CharT>(uc & 0xDF);
+    }
+    return c;
 }
 
 /** @} */ // CharCaseConversion
@@ -374,18 +382,18 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 CharT to_uppercase(const CharT c) noe
  * 如果任一指针为空，返回空指针。
  */
 template <typename CharT>
-constexpr CharT*
-string_copy(CharT* NEFORCE_RESTRICT dest,
-			const CharT* NEFORCE_RESTRICT src) noexcept {
-	if(dest == nullptr || src == nullptr) return nullptr;
-	CharT* ret = dest;
-	while (*src != static_cast<CharT>(0)) {
-		*dest = *src;
-		++dest;
-		++src;
-	}
-	*dest = *src;
-	return ret;
+constexpr CharT* string_copy(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    CharT* ret = dest;
+    while (*src != static_cast<CharT>(0)) {
+        *dest = *src;
+        ++dest;
+        ++src;
+    }
+    *dest = *src;
+    return ret;
 }
 
 /**
@@ -402,27 +410,27 @@ string_copy(CharT* NEFORCE_RESTRICT dest,
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
 template <typename CharT>
-constexpr CharT*
-string_copy(CharT* NEFORCE_RESTRICT dest,
-			const CharT* NEFORCE_RESTRICT src,
-			const size_t count) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
+constexpr CharT* string_copy(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src,
+                             const size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
 
-	CharT* ret = dest;
-	size_t i = 0;
-	while (i < count && *src != static_cast<CharT>(0)) {
-		*dest = *src;
-		++dest;
-		++src;
-		i++;
-	}
+    CharT* ret = dest;
+    size_t i = 0;
+    while (i < count && *src != static_cast<CharT>(0)) {
+        *dest = *src;
+        ++dest;
+        ++src;
+        i++;
+    }
 
-	while (i < count) {
-		*dest = static_cast<CharT>(0);
-		++dest;
-		i++;
-	}
-	return ret;
+    while (i < count) {
+        *dest = static_cast<CharT>(0);
+        ++dest;
+        i++;
+    }
+    return ret;
 }
 
 /**
@@ -434,17 +442,17 @@ string_copy(CharT* NEFORCE_RESTRICT dest,
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
 template <typename CharT>
-constexpr CharT*
-string_copy_offset(CharT* NEFORCE_RESTRICT dest,
-				   const CharT* NEFORCE_RESTRICT src) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
-	while (*src != static_cast<CharT>(0)) {
-		*dest = *src;
-		++dest;
-		++src;
-	}
-	*dest = *src;
-	return dest - 1;
+constexpr CharT* string_copy_offset(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    while (*src != static_cast<CharT>(0)) {
+        *dest = *src;
+        ++dest;
+        ++src;
+    }
+    *dest = *src;
+    return dest - 1;
 }
 
 /**
@@ -457,26 +465,26 @@ string_copy_offset(CharT* NEFORCE_RESTRICT dest,
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
 template <typename CharT>
-constexpr CharT*
-string_copy_offset(CharT* NEFORCE_RESTRICT dest,
-				   const CharT* NEFORCE_RESTRICT src,
-				   const size_t count) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
+constexpr CharT* string_copy_offset(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src,
+                                    const size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
 
-	size_t i = 0;
-	while (i < count && *src != static_cast<CharT>(0)) {
-		*dest = *src;
-		++dest;
-		++src;
-		i++;
-	}
+    size_t i = 0;
+    while (i < count && *src != static_cast<CharT>(0)) {
+        *dest = *src;
+        ++dest;
+        ++src;
+        i++;
+    }
 
-	while (i < count) {
-		*dest = static_cast<CharT>(0);
-		++dest;
-		i++;
-	}
-	return dest;
+    while (i < count) {
+        *dest = static_cast<CharT>(0);
+        ++dest;
+        i++;
+    }
+    return dest;
 }
 
 /**
@@ -490,21 +498,28 @@ string_copy_offset(CharT* NEFORCE_RESTRICT dest,
  *          - 零：两个字符串相等
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int
-string_compare(const CharT* dest, const CharT* src) noexcept {
-	if (dest == nullptr && src == nullptr) return 0;
-	if (dest == nullptr) return -1;
-	if (src == nullptr) return 1;
+NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const CharT* src) noexcept {
+    if (dest == nullptr && src == nullptr) {
+        return 0;
+    }
+    if (dest == nullptr) {
+        return -1;
+    }
+    if (src == nullptr) {
+        return 1;
+    }
 
-	while (*dest == *src) {
-		if (*dest == static_cast<CharT>(0)) {
-			return 0;
-		}
-		++dest;
-		++src;
-	}
-	if (*dest > *src) return 1;
-	return -1;
+    while (*dest == *src) {
+        if (*dest == static_cast<CharT>(0)) {
+            return 0;
+        }
+        ++dest;
+        ++src;
+    }
+    if (*dest > *src) {
+        return 1;
+    }
+    return -1;
 }
 
 /**
@@ -516,23 +531,30 @@ string_compare(const CharT* dest, const CharT* src) noexcept {
  * @return 比较结果
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int
-string_compare(const CharT* dest, const CharT* src, const size_t count) noexcept {
-	if (dest == nullptr && src == nullptr) return 0;
-	if (dest == nullptr) return -1;
-	if (src == nullptr) return 1;
+NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const CharT* src, const size_t count) noexcept {
+    if (dest == nullptr && src == nullptr) {
+        return 0;
+    }
+    if (dest == nullptr) {
+        return -1;
+    }
+    if (src == nullptr) {
+        return 1;
+    }
 
-	if (count == 0) return 0;
-	size_t i = 0;
-	while (*dest == *src &&
-		   *dest != static_cast<CharT>(0) &&
-		   i < count - 1) {
-		++dest;
-		++src;
-		++i;
-	}
-	if (i == count - 1) return 0;
-	return *dest < *src ? -1 : *dest > *src ? 1 : 0;
+    if (count == 0) {
+        return 0;
+    }
+    size_t i = 0;
+    while (*dest == *src && *dest != static_cast<CharT>(0) && i < count - 1) {
+        ++dest;
+        ++src;
+        ++i;
+    }
+    if (i == count - 1) {
+        return 0;
+    }
+    return *dest < *src ? -1 : *dest > *src ? 1 : 0;
 }
 
 /**
@@ -546,21 +568,30 @@ string_compare(const CharT* dest, const CharT* src, const size_t count) noexcept
  *          - 零：两个字符串相等
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int
-string_compare_ignore_case(const CharT* s1, const CharT* s2) {
-	if (s1 == nullptr && s2 == nullptr) return 0;
-	if (s1 == nullptr) return -1;
-	if (s2 == nullptr) return 1;
+NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, const CharT* s2) {
+    if (s1 == nullptr && s2 == nullptr) {
+        return 0;
+    }
+    if (s1 == nullptr) {
+        return -1;
+    }
+    if (s2 == nullptr) {
+        return 1;
+    }
 
-	while (*s1 && *s2) {
-		const CharT c1 = _NEFORCE to_lowercase(*s1);
-		const CharT c2 = _NEFORCE to_lowercase(*s2);
-		if (c1 < c2) return -1;
-		if (c1 > c2) return 1;
-		++s1;
-		++s2;
-	}
-	return *s1 == *s2 ? 0 : *s1 < *s2 ? -1 : 1;
+    while (*s1 && *s2) {
+        const CharT c1 = _NEFORCE to_lowercase(*s1);
+        const CharT c2 = _NEFORCE to_lowercase(*s2);
+        if (c1 < c2) {
+            return -1;
+        }
+        if (c1 > c2) {
+            return 1;
+        }
+        ++s1;
+        ++s2;
+    }
+    return *s1 == *s2 ? 0 : *s1 < *s2 ? -1 : 1;
 }
 
 /**
@@ -572,27 +603,39 @@ string_compare_ignore_case(const CharT* s1, const CharT* s2) {
  * @return 比较结果
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int
-string_compare_ignore_case(const CharT* s1, const CharT* s2, const size_t count) noexcept {
-	if ((s1 == nullptr && s2 == nullptr) || count == 0) return 0;
-	if (s1 == nullptr) return -1;
-	if (s2 == nullptr) return 1;
+NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, const CharT* s2,
+                                                               const size_t count) noexcept {
+    if ((s1 == nullptr && s2 == nullptr) || count == 0) {
+        return 0;
+    }
+    if (s1 == nullptr) {
+        return -1;
+    }
+    if (s2 == nullptr) {
+        return 1;
+    }
 
-	size_t i = 0;
-	while (*s1 && *s2 && i < count - 1) {
-		const CharT c1 = _NEFORCE to_lowercase(*s1);
-		const CharT c2 = _NEFORCE to_lowercase(*s2);
-		if (c1 < c2) return -1;
-		if (c1 > c2) return 1;
-		++s1;
-		++s2;
-		++i;
-	}
-	if (i == count - 1) return 0;
+    size_t i = 0;
+    while (*s1 && *s2 && i < count - 1) {
+        const CharT c1 = _NEFORCE to_lowercase(*s1);
+        const CharT c2 = _NEFORCE to_lowercase(*s2);
+        if (c1 < c2) {
+            return -1;
+        }
+        if (c1 > c2) {
+            return 1;
+        }
+        ++s1;
+        ++s2;
+        ++i;
+    }
+    if (i == count - 1) {
+        return 0;
+    }
 
-	const CharT c1 = _NEFORCE to_lowercase(*s1);
-	const CharT c2 = _NEFORCE to_lowercase(*s2);
-	return c1 < c2 ? -1 : c1 > c2 ? 1 : 0;
+    const CharT c1 = _NEFORCE to_lowercase(*s1);
+    const CharT c2 = _NEFORCE to_lowercase(*s2);
+    return c1 < c2 ? -1 : c1 > c2 ? 1 : 0;
 }
 
 /**
@@ -601,16 +644,16 @@ string_compare_ignore_case(const CharT* s1, const CharT* s2, const size_t count)
  * @param str 字符串指针
  * @return 字符串长度，不包含终止空字符
  */
-template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr size_t
-string_length(const CharT* str) noexcept {
-	static_assert(is_character_v<CharT>, "CharT must be a character");
-	if (str == nullptr) return 0;
-	const CharT* p = str;
-	while (*p != static_cast<CharT>(0)) {
-	    ++p;
-	}
-	return static_cast<size_t>(p - str);
+template <typename CharT> NEFORCE_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
+    static_assert(is_character_v<CharT>, "CharT must be a character");
+    if (str == nullptr) {
+        return 0;
+    }
+    const CharT* p = str;
+    while (*p != static_cast<CharT>(0)) {
+        ++p;
+    }
+    return static_cast<size_t>(p - str);
 }
 
 /**
@@ -623,15 +666,14 @@ string_length(const CharT* str) noexcept {
  * 计算字符串长度，但最多检查max_len个字符。
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr size_t
-string_length(const CharT* str, const size_t max_len) noexcept {
-	const CharT* p = str;
-	ptrdiff_t len = 0;
-	while (*p != static_cast<CharT>(0) && len < max_len) {
-		++p;
-		++len;
-	}
-	return len;
+NEFORCE_PURE_FUNCTION constexpr size_t string_length(const CharT* str, const size_t max_len) noexcept {
+    const CharT* p = str;
+    ptrdiff_t len = 0;
+    while (*p != static_cast<CharT>(0) && len < max_len) {
+        ++p;
+        ++len;
+    }
+    return len;
 }
 
 /**
@@ -642,19 +684,20 @@ string_length(const CharT* str, const size_t max_len) noexcept {
  * @return 指向首次出现位置的指针，未找到或输入为空时返回空指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT*
-string_find(const CharT* str, const CharT chr) noexcept {
-	if (str == nullptr) return nullptr;
-	while (*str != static_cast<CharT>(0)) {
-		if (*str == chr) {
-			return str;
-		}
-		++str;
-	}
-	if (*str == chr) {
-		return str;
-	}
-	return nullptr;
+NEFORCE_PURE_FUNCTION constexpr const CharT* string_find(const CharT* str, const CharT chr) noexcept {
+    if (str == nullptr) {
+        return nullptr;
+    }
+    while (*str != static_cast<CharT>(0)) {
+        if (*str == chr) {
+            return str;
+        }
+        ++str;
+    }
+    if (*str == chr) {
+        return str;
+    }
+    return nullptr;
 }
 
 /**
@@ -666,19 +709,21 @@ string_find(const CharT* str, const CharT chr) noexcept {
  * @return 指向首次出现位置的指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT*
-string_find(const CharT* str, const CharT chr, const size_t count) noexcept {
-	if (str == nullptr || count == 0) return nullptr;
+NEFORCE_PURE_FUNCTION constexpr const CharT* string_find(const CharT* str, const CharT chr,
+                                                         const size_t count) noexcept {
+    if (str == nullptr || count == 0) {
+        return nullptr;
+    }
 
-	for (size_t i = 0; i < count; ++i) {
-		if (str[i] == chr) {
-			return str + i;
-		}
-		if (str[i] == static_cast<CharT>(0)) {
-			break;
-		}
-	}
-	return nullptr;
+    for (size_t i = 0; i < count; ++i) {
+        if (str[i] == chr) {
+            return str + i;
+        }
+        if (str[i] == static_cast<CharT>(0)) {
+            break;
+        }
+    }
+    return nullptr;
 }
 
 /**
@@ -689,18 +734,19 @@ string_find(const CharT* str, const CharT chr, const size_t count) noexcept {
  * @return 指向最后出现位置的指针，未找到或输入为空时返回空指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT*
-string_find_last(const CharT* str, const CharT chr) noexcept {
-	if (str == nullptr) return nullptr;
-	const CharT* last = nullptr;
+NEFORCE_PURE_FUNCTION constexpr const CharT* string_find_last(const CharT* str, const CharT chr) noexcept {
+    if (str == nullptr) {
+        return nullptr;
+    }
+    const CharT* last = nullptr;
 
-	while (*str != static_cast<CharT>(0)) {
-		if (*str == chr) {
-			last = str;
-		}
-		++str;
-	}
-	return last;
+    while (*str != static_cast<CharT>(0)) {
+        if (*str == chr) {
+            last = str;
+        }
+        ++str;
+    }
+    return last;
 }
 
 /**
@@ -711,23 +757,22 @@ string_find_last(const CharT* str, const CharT chr) noexcept {
  * @return 指向第一个匹配字符的指针，未找到时返回空指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr CharT*
-string_find_any(CharT* str, const CharT* accept) noexcept {
-	if (str == nullptr || *str == static_cast<CharT>(0) ||
-		accept == nullptr || *accept == static_cast<CharT>(0))
-		return nullptr;
+NEFORCE_PURE_FUNCTION constexpr CharT* string_find_any(CharT* str, const CharT* accept) noexcept {
+    if (str == nullptr || *str == static_cast<CharT>(0) || accept == nullptr || *accept == static_cast<CharT>(0)) {
+        return nullptr;
+    }
 
-	while (*str != static_cast<CharT>(0)) {
-		const CharT* a = accept;
-		while (*a != static_cast<CharT>(0)) {
-			if (*str == *a) {
-				return str;
-			}
-			++a;
-		}
-		++str;
-	}
-	return nullptr;
+    while (*str != static_cast<CharT>(0)) {
+        const CharT* a = accept;
+        while (*a != static_cast<CharT>(0)) {
+            if (*str == *a) {
+                return str;
+            }
+            ++a;
+        }
+        ++str;
+    }
+    return nullptr;
 }
 
 /**
@@ -738,21 +783,24 @@ string_find_any(CharT* str, const CharT* accept) noexcept {
  * @return 指向子字符串首次出现位置的指针，未找到时返回空指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT*
-string_find_pattern(const CharT* dest, const CharT* src) noexcept {
-	if(dest == nullptr || src == nullptr) return nullptr;
-	const CharT* cur = dest;
-	while (*cur) {
-		const CharT *str1 = cur;
-		const CharT *str2 = src;
-		while (*str1 && *str2 && *str1 == *str2) {
-			++str1;
-			++str2;
-		}
-		if (*str2 == static_cast<CharT>(0)) return cur;
-		++cur;
-	}
-	return nullptr;
+NEFORCE_PURE_FUNCTION constexpr const CharT* string_find_pattern(const CharT* dest, const CharT* src) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    const CharT* cur = dest;
+    while (*cur) {
+        const CharT* str1 = cur;
+        const CharT* str2 = src;
+        while (*str1 && *str2 && *str1 == *str2) {
+            ++str1;
+            ++str2;
+        }
+        if (*str2 == static_cast<CharT>(0)) {
+            return cur;
+        }
+        ++cur;
+    }
+    return nullptr;
 }
 
 /**
@@ -763,28 +811,34 @@ string_find_pattern(const CharT* dest, const CharT* src) noexcept {
  * @return 指向子字符串首次出现位置的指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT*
-string_find_pattern_ignored_case(const CharT* dest, const CharT* src) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
-	if (*src == static_cast<CharT>(0)) return dest;
+NEFORCE_PURE_FUNCTION constexpr const CharT* string_find_pattern_ignored_case(const CharT* dest,
+                                                                              const CharT* src) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    if (*src == static_cast<CharT>(0)) {
+        return dest;
+    }
 
-	const CharT* cur = dest;
-	while (*cur) {
-		const CharT* str1 = cur;
-		const CharT* str2 = src;
-		while (*str1 && *str2) {
-			const CharT c1 = _NEFORCE to_lowercase(*str1);
-			const CharT c2 = _NEFORCE to_lowercase(*str2);
-			if (c1 != c2) break;
-			++str1;
-			++str2;
-		}
-		if (*str2 == static_cast<CharT>(0)) {
-			return cur;
-		}
-		++cur;
-	}
-	return nullptr;
+    const CharT* cur = dest;
+    while (*cur) {
+        const CharT* str1 = cur;
+        const CharT* str2 = src;
+        while (*str1 && *str2) {
+            const CharT c1 = _NEFORCE to_lowercase(*str1);
+            const CharT c2 = _NEFORCE to_lowercase(*str2);
+            if (c1 != c2) {
+                break;
+            }
+            ++str1;
+            ++str2;
+        }
+        if (*str2 == static_cast<CharT>(0)) {
+            return cur;
+        }
+        ++cur;
+    }
+    return nullptr;
 }
 
 /**
@@ -795,30 +849,28 @@ string_find_pattern_ignored_case(const CharT* dest, const CharT* src) noexcept {
  * @return 开头连续出现在字符集中的字符数
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr size_t
-string_span_in(const CharT* str, const CharT* accept) noexcept {
-	if (str == nullptr || *str == static_cast<CharT>(0) ||
-		accept == nullptr || *accept == static_cast<CharT>(0)) {
-		return 0;
-	}
+NEFORCE_PURE_FUNCTION constexpr size_t string_span_in(const CharT* str, const CharT* accept) noexcept {
+    if (str == nullptr || *str == static_cast<CharT>(0) || accept == nullptr || *accept == static_cast<CharT>(0)) {
+        return 0;
+    }
 
-	const CharT* original_str = str;
-	while (*str != static_cast<CharT>(0)) {
-		const CharT* a = accept;
-		bool found = false;
-		while (*a != static_cast<CharT>(0)) {
-			if (*str == *a) {
-				found = true;
-				break;
-			}
-			++a;
-		}
-		if (!found) {
-			return static_cast<size_t>(str - original_str);
-		}
-		++str;
-	}
-	return static_cast<size_t>(str - original_str);
+    const CharT* original_str = str;
+    while (*str != static_cast<CharT>(0)) {
+        const CharT* a = accept;
+        bool found = false;
+        while (*a != static_cast<CharT>(0)) {
+            if (*str == *a) {
+                found = true;
+                break;
+            }
+            ++a;
+        }
+        if (!found) {
+            return static_cast<size_t>(str - original_str);
+        }
+        ++str;
+    }
+    return static_cast<size_t>(str - original_str);
 }
 
 /**
@@ -829,27 +881,30 @@ string_span_in(const CharT* str, const CharT* accept) noexcept {
  * @return 开头连续不出现在排除字符集中的字符数
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr size_t
-string_span_not_in(const CharT* str, const CharT* reject) noexcept {
-	if (str == nullptr || *str == static_cast<CharT>(0)) return 0;
-	if (reject == nullptr || *reject == static_cast<CharT>(0)) {
-		size_t len = 0;
-		while (str[len] != static_cast<CharT>(0)) ++len;
-		return len;
-	}
+NEFORCE_PURE_FUNCTION constexpr size_t string_span_not_in(const CharT* str, const CharT* reject) noexcept {
+    if (str == nullptr || *str == static_cast<CharT>(0)) {
+        return 0;
+    }
+    if (reject == nullptr || *reject == static_cast<CharT>(0)) {
+        size_t len = 0;
+        while (str[len] != static_cast<CharT>(0)) {
+            ++len;
+        }
+        return len;
+    }
 
-	const CharT* original_str = str;
-	while (*str != static_cast<CharT>(0)) {
-		const CharT* r = reject;
-		while (*r != static_cast<CharT>(0)) {
-			if (*str == *r) {
-				return static_cast<size_t>(str - original_str);
-			}
-			++r;
-		}
-		++str;
-	}
-	return static_cast<size_t>(str - original_str);
+    const CharT* original_str = str;
+    while (*str != static_cast<CharT>(0)) {
+        const CharT* r = reject;
+        while (*r != static_cast<CharT>(0)) {
+            if (*str == *r) {
+                return static_cast<size_t>(str - original_str);
+            }
+            ++r;
+        }
+        ++str;
+    }
+    return static_cast<size_t>(str - original_str);
 }
 
 /**
@@ -859,16 +914,16 @@ string_span_not_in(const CharT* str, const CharT* reject) noexcept {
  * @param value 要设置的字符值
  * @return 原字符串指针
  */
-template <typename CharT>
-constexpr CharT*
-string_set(CharT* str, const CharT value) noexcept {
-	if (str == nullptr) return nullptr;
-	CharT* original = str;
-	while (*str != static_cast<CharT>(0)) {
-		*str = value;
-		++str;
-	}
-	return original;
+template <typename CharT> constexpr CharT* string_set(CharT* str, const CharT value) noexcept {
+    if (str == nullptr) {
+        return nullptr;
+    }
+    CharT* original = str;
+    while (*str != static_cast<CharT>(0)) {
+        *str = value;
+        ++str;
+    }
+    return original;
 }
 
 /**
@@ -879,10 +934,10 @@ string_set(CharT* str, const CharT value) noexcept {
  * @param count 要设置的字符数
  * @return 原字符串指针
  */
-template <typename CharT>
-constexpr CharT*
-string_set(CharT* str, const CharT value, const size_t count) noexcept {
-    if (str == nullptr || count == 0) return str;
+template <typename CharT> constexpr CharT* string_set(CharT* str, const CharT value, const size_t count) noexcept {
+    if (str == nullptr || count == 0) {
+        return str;
+    }
     for (size_t i = 0; i < count; ++i) {
         str[i] = value;
     }
@@ -895,24 +950,24 @@ string_set(CharT* str, const CharT value, const size_t count) noexcept {
  * @param str 字符串指针
  * @return 反转后的字符串指针
  */
-template <typename CharT>
-constexpr CharT*
-string_reverse(CharT* str) noexcept {
-	if (str == nullptr || *str == static_cast<CharT>(0)) return str;
+template <typename CharT> constexpr CharT* string_reverse(CharT* str) noexcept {
+    if (str == nullptr || *str == static_cast<CharT>(0)) {
+        return str;
+    }
 
-	CharT* end = str;
-	while (*end != static_cast<CharT>(0)) {
-		++end;
-	}
-	--end;
-	while (str < end) {
-		const CharT temp = *str;
-		*str = *end;
-		*end = temp;
-		++str;
-		--end;
-	}
-	return str;
+    CharT* end = str;
+    while (*end != static_cast<CharT>(0)) {
+        ++end;
+    }
+    --end;
+    while (str < end) {
+        const CharT temp = *str;
+        *str = *end;
+        *end = temp;
+        ++str;
+        --end;
+    }
+    return str;
 }
 
 /**
@@ -924,20 +979,22 @@ string_reverse(CharT* str) noexcept {
  * @note 目标字符串指针必须有足够空间
  */
 template <typename CharT>
-constexpr CharT*
-string_concatenate(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
-	CharT* original_dest = dest;
-	while (*dest != static_cast<CharT>(0))
-		++dest;
+constexpr CharT* string_concatenate(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    CharT* original_dest = dest;
+    while (*dest != static_cast<CharT>(0)) {
+        ++dest;
+    }
 
-	while (*src != static_cast<CharT>(0)) {
-		*dest = *src;
-		++dest;
-		++src;
-	}
-	*dest = static_cast<CharT>(0);
-	return original_dest;
+    while (*src != static_cast<CharT>(0)) {
+        *dest = *src;
+        ++dest;
+        ++src;
+    }
+    *dest = static_cast<CharT>(0);
+    return original_dest;
 }
 
 /**
@@ -950,26 +1007,26 @@ string_concatenate(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT s
  * @note 目标字符串指针必须有足够空间
  */
 template <typename CharT>
-constexpr CharT*
-string_concatenate(CharT* NEFORCE_RESTRICT dest,
-				   const CharT* NEFORCE_RESTRICT src,
-				   const size_t count) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
+constexpr CharT* string_concatenate(CharT* NEFORCE_RESTRICT dest, const CharT* NEFORCE_RESTRICT src,
+                                    const size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
 
-	CharT* original_dest = dest;
-	while (*dest != static_cast<CharT>(0)) {
-		++dest;
-	}
+    CharT* original_dest = dest;
+    while (*dest != static_cast<CharT>(0)) {
+        ++dest;
+    }
 
-	size_t copied = 0;
-	while (*src != static_cast<CharT>(0) && copied < count) {
-		*dest = *src;
-		++dest;
-		++src;
-		++copied;
-	}
-	*dest = static_cast<CharT>(0);
-	return original_dest;
+    size_t copied = 0;
+    while (*src != static_cast<CharT>(0) && copied < count) {
+        *dest = *src;
+        ++dest;
+        ++src;
+        ++copied;
+    }
+    *dest = static_cast<CharT>(0);
+    return original_dest;
 }
 
 /** @} */ // StringOperations

@@ -1,5 +1,5 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/ini/ini_builder.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void ini_builder::test_exception() const {
@@ -87,8 +87,6 @@ ini_builder& ini_builder::value_section(const string& name, function<void(ini_bu
     return *this;
 }
 
-unique_ptr<ini_document> ini_builder::build() noexcept {
-    return move(root_);
-}
+unique_ptr<ini_document> ini_builder::build() noexcept { return move(root_); }
 
 NEFORCE_END_NAMESPACE__

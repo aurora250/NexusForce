@@ -25,10 +25,15 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 仅在调试模式下检查条件，发布模式下不产生任何代码。
  */
-#define NEFORCE_DEBUG_VERIFY(CON, MESG) \
-    { if (CON) {} else { assert(false && MESG); } }
+#    define NEFORCE_DEBUG_VERIFY(CON, MESG) \
+        {                                   \
+            if (CON) {                      \
+            } else {                        \
+                assert(false && MESG);      \
+            }                               \
+        }
 #else
-#define NEFORCE_DEBUG_VERIFY(CON, MESG)
+#    define NEFORCE_DEBUG_VERIFY(CON, MESG)
 #endif
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
@@ -39,14 +44,14 @@ NEFORCE_BEGIN_NAMESPACE__
  * 在常量求值上下文中进行断言，如果条件为false则触发不可达代码。
  * 仅在C++20及以上版本有效。
  */
-#define NEFORCE_CONSTEXPR_ASSERT(COND) \
-do { \
-    if (_NEFORCE is_constant_evaluated() && !bool(COND)) { \
-    _NEFORCE unreachable(); \
-    } \
-} while (false);
+#    define NEFORCE_CONSTEXPR_ASSERT(COND)                         \
+        do {                                                       \
+            if (_NEFORCE is_constant_evaluated() && !bool(COND)) { \
+                _NEFORCE unreachable();                            \
+            }                                                      \
+        } while (false);
 #else
-#define NEFORCE_CONSTEXPR_ASSERT(COND)
+#    define NEFORCE_CONSTEXPR_ASSERT(COND)
 #endif
 
 
@@ -60,8 +65,7 @@ do { \
  * @note 此函数永远不会返回，调用后程序行为未定义。
  * @warning 仅在确定代码路径绝对不可达时使用，否则会导致严重的运行时问题。
  */
-NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE
-void unreachable() noexcept {
+NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable() noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
     __builtin_unreachable();
 #else
@@ -76,8 +80,7 @@ void unreachable() noexcept {
  *
  * 用于区分编译时和运行时
  */
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE
-constexpr bool is_constant_evaluated() noexcept {
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE constexpr bool is_constant_evaluated() noexcept {
     return __builtin_is_constant_evaluated();
 }
 #endif
@@ -107,21 +110,21 @@ NEFORCE_ALWAYS_INLINE_INLINE void breakpoint() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     __debugbreak();
 #else
-#ifdef NEFORCE_COMPILER_CLANG
+#    ifdef NEFORCE_COMPILER_CLANG
     __builtin_debugtrap();
-#elif defined(NEFORCE_ARCH_X86)
+#    elif defined(NEFORCE_ARCH_X86)
     asm volatile("int3");
-#elif defined(NEFORCE_ARCH_AARCH64)
+#    elif defined(NEFORCE_ARCH_AARCH64)
     asm volatile(".inst 0xd4200000");
-#elif defined(NEFORCE_ARCH_ARM32)
+#    elif defined(NEFORCE_ARCH_ARM32)
     asm volatile(".inst 0xe7f001f0");
-#elif defined(NEFORCE_ARCH_RISCV)
+#    elif defined(NEFORCE_ARCH_RISCV)
     asm volatile("ebreak");
-#elif defined(NEFORCE_ARCH_LOONGARCH)
+#    elif defined(NEFORCE_ARCH_LOONGARCH)
     asm volatile("break 0");
-#else
+#    else
     __builtin_trap();
-#endif
+#    endif
 #endif
 }
 

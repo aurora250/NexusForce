@@ -31,9 +31,9 @@ struct NEFORCE_API environment {
      */
     static constexpr char delimiter =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        ';';
+            ';';
 #else
-        ':';
+            ':';
 #endif
 
     /**

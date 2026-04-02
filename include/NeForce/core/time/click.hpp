@@ -48,9 +48,7 @@ struct click {
      *
      * 更新最后时间点为当前时间，用于记录中间时间点。
      */
-    void update() noexcept {
-        last_time = system_clock::now();
-    }
+    void update() noexcept { last_time = system_clock::now(); }
 
     /**
      * @brief 停止计时
@@ -113,7 +111,7 @@ struct click {
  * 用于在指定作用域内自动测量代码块执行时间。
  */
 class scoped_click {
-    click& clk_;  ///< 引用的计时器
+    click& clk_; ///< 引用的计时器
 
 public:
     /**
@@ -123,7 +121,8 @@ public:
      *
      * 构造时自动开始计时。
      */
-    explicit scoped_click(click& clk) noexcept : clk_(clk) {
+    explicit scoped_click(click& clk) noexcept :
+    clk_(clk) {
         clk_.start();
     }
 
@@ -135,7 +134,7 @@ public:
     /**
      * @brief 禁止复制赋值
      */
-    scoped_click& operator =(const scoped_click&) = delete;
+    scoped_click& operator=(const scoped_click&) = delete;
 
     /**
      * @brief 析构函数
@@ -143,9 +142,7 @@ public:
      *
      * 析构时自动停止计时。
      */
-    ~scoped_click() noexcept {
-        clk_.stop();
-    }
+    ~scoped_click() noexcept { clk_.stop(); }
 };
 
 /** @} */ // Click

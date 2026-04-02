@@ -86,25 +86,19 @@ public:
      * @brief 获取UUID版本号
      * @return 版本号（4或7）
      */
-    NEFORCE_NODISCARD int version() const noexcept {
-        return (data_[6] >> 4) & 0x0F;
-    }
+    NEFORCE_NODISCARD int version() const noexcept { return (data_[6] >> 4) & 0x0F; }
 
     /**
      * @brief 检查是否为版本4
      * @return 是版本4返回true
      */
-    NEFORCE_NODISCARD bool is_v4() const noexcept {
-        return version() == 4;
-    }
+    NEFORCE_NODISCARD bool is_v4() const noexcept { return version() == 4; }
 
     /**
      * @brief 检查是否为版本7
      * @return 是版本7返回true
      */
-    NEFORCE_NODISCARD bool is_v7() const noexcept {
-        return version() == 7;
-    }
+    NEFORCE_NODISCARD bool is_v7() const noexcept { return version() == 7; }
 
     /**
      * @brief 获取UUID版本7的时间戳
@@ -134,22 +128,18 @@ public:
      * @brief 获取起始迭代器
      * @return 指向第一个字节的迭代器
      */
-    NEFORCE_NODISCARD auto begin() const noexcept {
-        return data_.begin();
-    }
+    NEFORCE_NODISCARD auto begin() const noexcept { return data_.begin(); }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向最后一个字节之后的迭代器
      */
-    NEFORCE_NODISCARD auto end() const noexcept {
-        return data_.end();
-    }
+    NEFORCE_NODISCARD auto end() const noexcept { return data_.end(); }
 
- /**
-  * @brief 静态方法：生成版本4 UUID
-  * @return 新生成的版本4 UUID
-  */
+    /**
+     * @brief 静态方法：生成版本4 UUID
+     * @return 新生成的版本4 UUID
+     */
     static uuid v4() noexcept;
 
     /**
@@ -177,9 +167,7 @@ NEFORCE_BEGIN_LITERALS__
  * @return 解析后的UUID对象
  * @throws value_exception 字符串格式无效时抛出
  */
-NEFORCE_NODISCARD inline uuid operator ""_uuid(const char* str, size_t len) {
-    return uuid(string_view(str, len));
-}
+NEFORCE_NODISCARD inline uuid operator""_uuid(const char* str, size_t len) { return uuid(string_view(str, len)); }
 
 /** @} */ // UserLiterals
 
@@ -195,9 +183,8 @@ NEFORCE_END_LITERALS__
 /**
  * @brief uuid的哈希特化
  */
-template <>
-struct hash<uuid> {
-    size_t operator ()(const uuid& uuid) const noexcept {
+template <> struct hash<uuid> {
+    size_t operator()(const uuid& uuid) const noexcept {
         const auto& bytes = uuid.bytes();
         size_t hash = 0;
         for (size_t i = 0; i < 16; i += sizeof(size_t)) {

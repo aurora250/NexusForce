@@ -16,9 +16,9 @@ void test_print() {
     int pair<int, char>::* mop = &pair<int, char>::first;
     int pair<int, char>::* null_mop = nullptr;
 #ifdef NEFORCE_STANDARD_14
-    void (bit_reference::* mfp)() const = &bit_reference::flip;
+    void (bit_reference::*mfp)() const = &bit_reference::flip;
 #else
-    void (bit_reference::* mfp)() const noexcept = &bit_reference::flip;
+    void (bit_reference::*mfp)() const noexcept = &bit_reference::flip;
 #endif
     compressed_pair<io_base<int>, int> cp;
     tuple<int, char, decimal_t, int*> tup{1, 't', f, nullptr};
@@ -26,25 +26,30 @@ void test_print() {
     vector<int> v{1, 2, 3};
     vector<int>::iterator iter = v.begin();
     vector<pair<int, char>> pir_vec{{1, '1'}, {2, '2'}, {3, '3'}};
-    array<int, 5> arr{1,2,3,4,5};
+    array<int, 5> arr{1, 2, 3, 4, 5};
     variant<int, char> var{v[0]};
     var.emplace<1>('c');
     list<int> lls{arr.begin(), arr.end()};
-    map<int, int> mmi{{1,2}};
-    unordered_map<int, int> umi{{1,2}};
-    set<int> s{1,2,3};
-    unordered_set<int> us{1,2,3};
+    map<int, int> mmi{{1, 2}};
+    unordered_map<int, int> umi{{1, 2}};
+    set<int> s{1, 2, 3};
+    unordered_set<int> us{1, 2, 3};
     bitmap bm{10, false};
     string str = "胡";
     string_view sv = cs;
     wstring ws = L"WSTRING胡";
     // ensure you used external utf-8 console
-    const char* emoji = "\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
-    const wchar_t* wemoji = L"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
-    const char16_t* u16emoji = u"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
-    const char32_t* u32emoji = U"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
+    const char* emoji =
+            "\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
+    const wchar_t* wemoji =
+            L"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
+    const char16_t* u16emoji =
+            u"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
+    const char32_t* u32emoji =
+            U"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
 #ifdef NEFORCE_STANDARD_20
-    const char8_t* u8emoji = u8"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
+    const char8_t* u8emoji =
+            u8"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
     println(u8emoji);
 #endif
 
@@ -113,9 +118,7 @@ void test_console() {
     println(fp);
 }
 
-void test_device() {
-
-}
+void test_device() {}
 
 void test_sysinfo() {
     auto& sysinfo = sysinfo::instance();
@@ -126,21 +129,18 @@ void test_sysinfo() {
     const auto& cpu_info = sysinfo.get_CPU_info();
     printfln("CPU: {} ({} cores)", cpu_info.brand, cpu_info.cores);
 
-    const auto &mem_info = sysinfo.get_memory_info();
+    const auto& mem_info = sysinfo.get_memory_info();
     printfln("Memory: {:.1f}% used", mem_info.physical_memory_usage());
-    printfln("RAM: {} / {}",
-        sysinfo::format_bytes(mem_info.total_physical - mem_info.available_physical),
-        sysinfo::format_bytes(mem_info.total_physical));
+    printfln("RAM: {} / {}", sysinfo::format_bytes(mem_info.total_physical - mem_info.available_physical),
+             sysinfo::format_bytes(mem_info.total_physical));
 
     const auto arch = sysinfo.get_architecture();
-    printfln("Architecture: {}",
-        arch == sysinfo::architecture::X64 ? "x64" :
-        arch == sysinfo::architecture::X86 ? "x86" : "Other");
+    printfln("Architecture: {}", arch == sysinfo::architecture::X64   ? "x64"
+                                 : arch == sysinfo::architecture::X86 ? "x86"
+                                                                      : "Other");
 }
 
-void test_env_var() {
-    println(environment::all_envs());
-}
+void test_env_var() { println(environment::all_envs()); }
 
 bool signal_handler(signal_event event, void* context) {
     printcln(color::green(), "处理信号: ", static_cast<int>(event));
@@ -177,20 +177,10 @@ void test_signal() {
     {
         signal_guard guard;
 
-        signal_manager::instance().register_handler(
-            signal_event::INTERRUPT,
-            signal_handler
-        );
+        signal_manager::instance().register_handler(signal_event::INTERRUPT, signal_handler);
 
-        vector<signal_event> signals = {
-            signal_event::TERMINATE,
-            signal_event::USER1,
-            signal_event::USER2
-        };
-        signal_manager::instance().register_handlers(
-            signals,
-            signal_handler
-        );
+        vector<signal_event> signals = {signal_event::TERMINATE, signal_event::USER1, signal_event::USER2};
+        signal_manager::instance().register_handlers(signals, signal_handler);
 
         signal_manager::instance().set_force_exit_timeout(10000);
 
@@ -210,10 +200,7 @@ void test_signal() {
 
             if (i == 5) {
                 int context_data = 42;
-                signal_manager::instance().send_signal(
-                    signal_event::USER1,
-                    &context_data
-                );
+                signal_manager::instance().send_signal(signal_event::USER1, &context_data);
             }
         }
     }
@@ -254,7 +241,7 @@ void test_cmd(int argc, char* argv[]) {
         auto positional = parser.positional_args();
         if (!positional.empty()) {
             println("Positional arguments:");
-            for (const auto& arg : positional) {
+            for (const auto& arg: positional) {
                 println("  ", arg);
             }
         }
@@ -266,11 +253,12 @@ void test_cmd(int argc, char* argv[]) {
 void test_process() {
     auto pi = process::create(
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        "python"
+            "python"
 #else
-        "python3"
+            "python3"
 #endif
-        , {(res_root() / "test.py").str()}, true);
+            ,
+            {(res_root() / "test.py").str()}, true);
     int res = process::wait_for(pi);
     println(res);
     if (res == 0) {

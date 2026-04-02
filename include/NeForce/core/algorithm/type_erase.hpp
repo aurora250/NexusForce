@@ -9,8 +9,8 @@
  * 用于统一访问不同容器的迭代器、大小、数据等接口。
  */
 
-#include "NeForce/core/iterator/reverse_iterator.hpp"
 #include <initializer_list>
+#include "NeForce/core/iterator/reverse_iterator.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -26,10 +26,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * @return 容器的起始迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) begin(Container& cont)
-noexcept(noexcept(cont.begin())) {
-	return cont.begin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+begin(Container& cont) noexcept(noexcept(cont.begin())) {
+    return cont.begin();
 }
 
 /**
@@ -39,10 +38,8 @@ noexcept(noexcept(cont.begin())) {
  * @return 容器的结束迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) end(Container& cont)
-noexcept(noexcept(cont.end())) {
-	return cont.end();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) end(Container& cont) noexcept(noexcept(cont.end())) {
+    return cont.end();
 }
 
 /**
@@ -52,10 +49,9 @@ noexcept(noexcept(cont.end())) {
  * @return const容器的起始迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) begin(const Container& cont)
-noexcept(noexcept(cont.begin())) {
-	return cont.begin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+begin(const Container& cont) noexcept(noexcept(cont.begin())) {
+    return cont.begin();
 }
 
 /**
@@ -65,10 +61,9 @@ noexcept(noexcept(cont.begin())) {
  * @return const容器的结束迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) end(const Container& cont)
-noexcept(noexcept(cont.end())) {
-	return cont.end();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+end(const Container& cont) noexcept(noexcept(cont.end())) {
+    return cont.end();
 }
 
 /**
@@ -78,10 +73,8 @@ noexcept(noexcept(cont.end())) {
  * @param arr 数组引用
  * @return 指向数组首元素的指针
  */
-template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-T* begin(T (&arr)[Size]) noexcept {
-	return arr;
+template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* begin(T (&arr)[Size]) noexcept {
+    return arr;
 }
 
 /**
@@ -92,10 +85,8 @@ T* begin(T (&arr)[Size]) noexcept {
  * @return 指向数组末尾的指针
  * @note 末尾指针是最后一个元素之后的位置
  */
-template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-T* end(T (&arr)[Size]) noexcept {
-	return arr + Size;
+template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* end(T (&arr)[Size]) noexcept {
+    return arr + Size;
 }
 
 /**
@@ -105,9 +96,9 @@ T* end(T (&arr)[Size]) noexcept {
  * @return const容器的const起始迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) cbegin(const Container& cont) noexcept(noexcept(cont.cbegin())) {
-	return cont.cbegin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+cbegin(const Container& cont) noexcept(noexcept(cont.cbegin())) {
+    return cont.cbegin();
 }
 
 /**
@@ -117,9 +108,9 @@ decltype(auto) cbegin(const Container& cont) noexcept(noexcept(cont.cbegin())) {
  * @return const容器的const结束迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) cend(const Container& cont) noexcept(noexcept(cont.cend())) {
-	return cont.cend();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+cend(const Container& cont) noexcept(noexcept(cont.cend())) {
+    return cont.cend();
 }
 
 /**
@@ -130,8 +121,7 @@ decltype(auto) cend(const Container& cont) noexcept(noexcept(cont.cend())) {
  * @return 指向数组首元素的const指针
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-const T* cbegin(T (&arr)[Size]) noexcept {
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr const T* cbegin(T (&arr)[Size]) noexcept {
     return arr;
 }
 
@@ -144,8 +134,7 @@ const T* cbegin(T (&arr)[Size]) noexcept {
  * @note 末尾指针是最后一个元素之后的位置
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-const T* cend(T (&arr)[Size]) noexcept {
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr const T* cend(T (&arr)[Size]) noexcept {
     return arr + Size;
 }
 
@@ -156,9 +145,9 @@ const T* cend(T (&arr)[Size]) noexcept {
  * @return 容器的反向起始迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) rbegin(Container& cont) noexcept(noexcept(cont.rbegin())) {
-	return cont.rbegin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+rbegin(Container& cont) noexcept(noexcept(cont.rbegin())) {
+    return cont.rbegin();
 }
 
 /**
@@ -168,9 +157,8 @@ decltype(auto) rbegin(Container& cont) noexcept(noexcept(cont.rbegin())) {
  * @return const容器的反向起始迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) rend(Container& cont) noexcept(noexcept(cont.rend())) {
-	return cont.rend();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) rend(Container& cont) noexcept(noexcept(cont.rend())) {
+    return cont.rend();
 }
 
 /**
@@ -180,9 +168,9 @@ decltype(auto) rend(Container& cont) noexcept(noexcept(cont.rend())) {
  * @return 容器的反向结束迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) rbegin(const Container& cont) noexcept(noexcept(cont.rbegin())) {
-	return cont.rbegin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+rbegin(const Container& cont) noexcept(noexcept(cont.rbegin())) {
+    return cont.rbegin();
 }
 
 /**
@@ -192,9 +180,9 @@ decltype(auto) rbegin(const Container& cont) noexcept(noexcept(cont.rbegin())) {
  * @return const容器的反向结束迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) rend(const Container& cont) noexcept(noexcept(cont.rend())) {
-	return cont.rend();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+rend(const Container& cont) noexcept(noexcept(cont.rend())) {
+    return cont.rend();
 }
 
 /**
@@ -205,9 +193,8 @@ decltype(auto) rend(const Container& cont) noexcept(noexcept(cont.rend())) {
  * @return 数组的反向起始迭代器
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-reverse_iterator<T*> rbegin(T (&arr)[Size]) noexcept {
-	return reverse_iterator<T*>(arr + Size);
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr reverse_iterator<T*> rbegin(T (&arr)[Size]) noexcept {
+    return reverse_iterator<T*>(arr + Size);
 }
 
 /**
@@ -218,9 +205,8 @@ reverse_iterator<T*> rbegin(T (&arr)[Size]) noexcept {
  * @return 数组的反向结束迭代器
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-reverse_iterator<T*> rend(T (&arr)[Size]) noexcept {
-	return reverse_iterator<T*>(arr);
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr reverse_iterator<T*> rend(T (&arr)[Size]) noexcept {
+    return reverse_iterator<T*>(arr);
 }
 
 /**
@@ -230,9 +216,8 @@ reverse_iterator<T*> rend(T (&arr)[Size]) noexcept {
  * @return 初始化列表的反向起始迭代器
  */
 template <typename T>
-NEFORCE_NODISCARD constexpr
-reverse_iterator<const T*> rbegin(std::initializer_list<T> lls) noexcept {
-	return reverse_iterator<const T*>(lls.end());
+NEFORCE_NODISCARD constexpr reverse_iterator<const T*> rbegin(std::initializer_list<T> lls) noexcept {
+    return reverse_iterator<const T*>(lls.end());
 }
 
 /**
@@ -242,9 +227,8 @@ reverse_iterator<const T*> rbegin(std::initializer_list<T> lls) noexcept {
  * @return 初始化列表的反向结束迭代器
  */
 template <typename T>
-NEFORCE_NODISCARD constexpr
-reverse_iterator<const T*> rend(std::initializer_list<T> lls) noexcept {
-	return reverse_iterator<const T*>(lls.begin());
+NEFORCE_NODISCARD constexpr reverse_iterator<const T*> rend(std::initializer_list<T> lls) noexcept {
+    return reverse_iterator<const T*>(lls.begin());
 }
 
 /**
@@ -254,9 +238,9 @@ reverse_iterator<const T*> rend(std::initializer_list<T> lls) noexcept {
  * @return const容器的const反向起始迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) crbegin(const Container& cont) noexcept(noexcept(cont.crbegin())) {
-	return cont.crbegin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+crbegin(const Container& cont) noexcept(noexcept(cont.crbegin())) {
+    return cont.crbegin();
 }
 
 /**
@@ -266,9 +250,9 @@ decltype(auto) crbegin(const Container& cont) noexcept(noexcept(cont.crbegin()))
  * @return const容器的const反向结束迭代器
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) crend(const Container& cont) noexcept(noexcept(cont.crend())) {
-	return cont.crend();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+crend(const Container& cont) noexcept(noexcept(cont.crend())) {
+    return cont.crend();
 }
 
 /**
@@ -279,8 +263,7 @@ decltype(auto) crend(const Container& cont) noexcept(noexcept(cont.crend())) {
  * @return const数组的const反向起始迭代器
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-reverse_iterator<const T*> crbegin(T (&arr)[Size]) noexcept {
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr reverse_iterator<const T*> crbegin(T (&arr)[Size]) noexcept {
     return reverse_iterator<const T*>(arr + Size);
 }
 
@@ -292,8 +275,7 @@ reverse_iterator<const T*> crbegin(T (&arr)[Size]) noexcept {
  * @return const数组的const反向结束迭代器
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-reverse_iterator<const T*> crend(T (&arr)[Size]) noexcept {
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr reverse_iterator<const T*> crend(T (&arr)[Size]) noexcept {
     return reverse_iterator<const T*>(arr);
 }
 
@@ -304,9 +286,9 @@ reverse_iterator<const T*> crend(T (&arr)[Size]) noexcept {
  * @return 容器中元素的数量
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) size(const Container& cont) noexcept(noexcept(cont.size())) {
-	return cont.size();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+size(const Container& cont) noexcept(noexcept(cont.size())) {
+    return cont.size();
 }
 
 /**
@@ -317,9 +299,8 @@ decltype(auto) size(const Container& cont) noexcept(noexcept(cont.size())) {
  * @return 数组的大小
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-size_t size(T (& arr)[Size]) noexcept {
-	return Size;
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t size(T (&arr)[Size]) noexcept {
+    return Size;
 }
 
 /**
@@ -329,9 +310,8 @@ size_t size(T (& arr)[Size]) noexcept {
  * @return 初始化列表的大小
  */
 template <typename T>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-size_t size(std::initializer_list<T> lls) noexcept {
-	return lls.size();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t size(std::initializer_list<T> lls) noexcept {
+    return lls.size();
 }
 
 /**
@@ -341,10 +321,10 @@ size_t size(std::initializer_list<T> lls) noexcept {
  * @return 容器中元素的数量
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) ssize(const Container& cont) noexcept(noexcept(cont.size())) {
-	using type = make_signed_t<decltype(cont.size())>;
-	return static_cast<common_type_t<ptrdiff_t, type>>(cont.size());
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+ssize(const Container& cont) noexcept(noexcept(cont.size())) {
+    using type = make_signed_t<decltype(cont.size())>;
+    return static_cast<common_type_t<ptrdiff_t, type>>(cont.size());
 }
 
 /**
@@ -355,9 +335,8 @@ decltype(auto) ssize(const Container& cont) noexcept(noexcept(cont.size())) {
  * @return 数组的大小
  */
 template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-ptrdiff_t ssize(T (& arr)[Size]) noexcept {
-	return Size;
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr ptrdiff_t ssize(T (&arr)[Size]) noexcept {
+    return Size;
 }
 
 /**
@@ -367,9 +346,8 @@ ptrdiff_t ssize(T (& arr)[Size]) noexcept {
  * @return 初始化列表的大小
  */
 template <typename T>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-ptrdiff_t ssize(std::initializer_list<T> lls) noexcept {
-	return lls.size();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr ptrdiff_t ssize(std::initializer_list<T> lls) noexcept {
+    return lls.size();
 }
 
 /**
@@ -379,9 +357,8 @@ ptrdiff_t ssize(std::initializer_list<T> lls) noexcept {
  * @return 如果容器为空则返回true，否则返回false
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-bool empty(const Container& cont) noexcept(noexcept(cont.empty())) {
-	return cont.empty();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const Container& cont) noexcept(noexcept(cont.empty())) {
+    return cont.empty();
 }
 
 /**
@@ -390,10 +367,8 @@ bool empty(const Container& cont) noexcept(noexcept(cont.empty())) {
  * @param ptr 指针
  * @return 如果指针非空则返回true，否则返回false
  */
-template <typename T>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-bool empty(const T* ptr) noexcept {
-	return ptr != nullptr;
+template <typename T> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const T* ptr) noexcept {
+    return ptr != nullptr;
 }
 
 /**
@@ -403,9 +378,8 @@ bool empty(const T* ptr) noexcept {
  * @return 如果初始化列表为空则返回true，否则返回false
  */
 template <typename T>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-bool empty(std::initializer_list<T> lls) noexcept {
-	return lls.size() == 0;
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(std::initializer_list<T> lls) noexcept {
+    return lls.size() == 0;
 }
 
 /**
@@ -415,10 +389,8 @@ bool empty(std::initializer_list<T> lls) noexcept {
  * @return 指向容器底层数据的指针
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) data(Container& cont)
-noexcept(noexcept(cont.data())) {
-	return cont.data();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container& cont) noexcept(noexcept(cont.data())) {
+    return cont.data();
 }
 
 /**
@@ -428,10 +400,9 @@ noexcept(noexcept(cont.data())) {
  * @return 指向const容器底层数据的const指针
  */
 template <typename Container>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-decltype(auto) data(const Container& cont)
-noexcept(noexcept(cont.data())) {
-	return cont.data();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto)
+data(const Container& cont) noexcept(noexcept(cont.data())) {
+    return cont.data();
 }
 
 /**
@@ -441,10 +412,8 @@ noexcept(noexcept(cont.data())) {
  * @param arr 数组引用
  * @return 指向数组首元素的指针
  */
-template <typename T, size_t Size>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-T* data(T (& arr)[Size]) noexcept {
-	return arr;
+template <typename T, size_t Size> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* data(T (&arr)[Size]) noexcept {
+    return arr;
 }
 
 /**
@@ -453,11 +422,7 @@ T* data(T (& arr)[Size]) noexcept {
  * @param ptr 指针
  * @return 原指针
  */
-template <typename T>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-T* data(T* ptr) noexcept {
-	return ptr;
-}
+template <typename T> NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr T* data(T* ptr) noexcept { return ptr; }
 
 /**
  * @brief 获取初始化列表的底层数据指针
@@ -466,9 +431,8 @@ T* data(T* ptr) noexcept {
  * @return 指向初始化列表数据的const指针
  */
 template <typename T>
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr
-const T* data(std::initializer_list<T> lls) noexcept {
-	return lls.begin();
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr const T* data(std::initializer_list<T> lls) noexcept {
+    return lls.begin();
 }
 
 /** @} */ // TypeErasureFunctions

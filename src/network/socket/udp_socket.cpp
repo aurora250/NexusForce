@@ -1,9 +1,7 @@
 #include <NeForce/network/socket/udp_socket.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-void udp_socket::open(const int family) {
-    open_ip(family, SOCK_DGRAM, IPPROTO_UDP);
-}
+void udp_socket::open(const int family) { open_ip(family, SOCK_DGRAM, IPPROTO_UDP); }
 
 ssize_t udp_socket::send_to(memory_view<const char> data, const ip_address& endpoint, const int flags) {
     if (!is_open()) {
@@ -17,13 +15,8 @@ ssize_t udp_socket::send_to(memory_view<const char> data, const ip_address& endp
         return 0;
     }
 
-    const ssize_t result = ::sendto(
-        fd_,
-        data.data(),
-        static_cast<int>(data.size()),
-        flags,
-        endpoint.data(),
-        endpoint.size());
+    const ssize_t result =
+            ::sendto(fd_, data.data(), static_cast<int>(data.size()), flags, endpoint.data(), endpoint.size());
 
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send UDP datagram to specified endpoint"));
@@ -55,12 +48,8 @@ pair<ssize_t, ip_address> udp_socket::receive_from(memory_view<char> buffer, con
     ::sockaddr_storage addr_storage;
     ::socklen_t addrlen = sizeof(addr_storage);
 
-    ssize_t result = ::recvfrom(
-        fd_,
-        buffer.data(), buffer.size(),
-        flags,
-        reinterpret_cast<struct sockaddr*>(&addr_storage),
-        &addrlen);
+    ssize_t result = ::recvfrom(fd_, buffer.data(), buffer.size(), flags,
+                                reinterpret_cast<struct sockaddr*>(&addr_storage), &addrlen);
 
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to receive UDP datagram"));

@@ -5,27 +5,27 @@
 #include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/string/utf.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/async/call_once.hpp>
-#include <windef.h>
-#include <process.h>
-#include <WinBase.h>
+#    include <NeForce/core/async/call_once.hpp>
+#    include <WinBase.h>
+#    include <process.h>
+#    include <windef.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
-    ::HRESULT (WINAPI* pSetThreadDescription)(::HANDLE, ::PCWSTR) = nullptr;
-    ::HRESULT (WINAPI* pGetThreadDescription)(::HANDLE, ::PWSTR*) = nullptr;
+    ::HRESULT(WINAPI* pSetThreadDescription)(::HANDLE, ::PCWSTR) = nullptr;
+    ::HRESULT(WINAPI* pGetThreadDescription)(::HANDLE, ::PWSTR*) = nullptr;
 
-#pragma pack(push,8)
+#    pragma pack(push, 8)
     struct THREADNAME_INFO {
         DWORD dwType;
         LPCSTR szName;
         DWORD dwThreadID;
         DWORD dwFlags;
     };
-#pragma pack(pop)
+#    pragma pack(pop)
 
     void init_thread_name_funcs() {
         static once_flag init_module_flag;
@@ -33,15 +33,15 @@ namespace {
             const auto kernel32 = ::GetModuleHandle("kernel32.dll");
             if (kernel32) {
                 pSetThreadDescription = reinterpret_cast<decltype(pSetThreadDescription)>(
-                    ::GetProcAddress(kernel32, "SetThreadDescription"));
+                        ::GetProcAddress(kernel32, "SetThreadDescription"));
                 pGetThreadDescription = reinterpret_cast<decltype(pGetThreadDescription)>(
-                    ::GetProcAddress(kernel32, "GetThreadDescription"));
+                        ::GetProcAddress(kernel32, "GetThreadDescription"));
             }
         };
         call_once(init_module_flag, init_thread_name);
     }
 
-#ifdef NEFORCE_COMPILER_MSVC
+#    ifdef NEFORCE_COMPILER_MSVC
     void set_thread_name_by_exception(const char* name) {
         constexpr ::DWORD MSVC_EXCEPTION = 0x406D1388;
         THREADNAME_INFO info;
@@ -50,14 +50,12 @@ namespace {
         info.dwThreadID = ::GetCurrentThreadId();
         info.dwFlags = 0;
         __try {
-            ::RaiseException(
-                MSVC_EXCEPTION,
-                0,
-                sizeof(info) / sizeof(::ULONG_PTR),
-                reinterpret_cast<::ULONG_PTR*>(&info));
-        } __except(EXCEPTION_EXECUTE_HANDLER) {}
+            ::RaiseException(MSVC_EXCEPTION, 0, sizeof(info) / sizeof(::ULONG_PTR),
+                             reinterpret_cast<::ULONG_PTR*>(&info));
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+        }
     }
-#endif
+#    endif
 
 #endif
 
@@ -70,7 +68,7 @@ namespace {
         static mutex mtx;
         return mtx;
     }
-}
+} // namespace
 
 
 atomic<int> thread_tracker::count_{0};
@@ -84,18 +82,20 @@ void thread::hook::add_hook(callback_t hook) {
 void thread::hook::remove_hook(callback_t hook) {
     lock<mutex> lock(thread_hook_mutex());
     auto it = find(thread_hook_hooks().begin(), thread_hook_hooks().end(), _NEFORCE move(hook));
-    if (it != thread_hook_hooks().end()) thread_hook_hooks().erase(it);
+    if (it != thread_hook_hooks().end()) {
+        thread_hook_hooks().erase(it);
+    }
 }
 
 void thread::hook::invoke(const point point, const id thread_id) {
     lock<mutex> lock(thread_hook_mutex());
-    for (auto& hook : thread_hook_hooks()) {
+    for (auto& hook: thread_hook_hooks()) {
         hook(point, thread_id);
     }
 }
 
-thread::thread_monitor::thread_monitor(const id thread_id)
-: thread_id_(thread_id) {
+thread::thread_monitor::thread_monitor(const id thread_id) :
+thread_id_(thread_id) {
     thread_tracker::instance().on_thread_create();
     hook::invoke(hook::point::thread_start, thread_id_);
 }
@@ -108,9 +108,9 @@ thread::thread_monitor::~thread_monitor() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
 unsigned int __stdcall
 #else
-void*
+void *
 #endif
-thread::thread_entry(void* arg) {
+        thread::thread_entry(void* arg) {
     auto* args = static_cast<thread_startup_args*>(arg);
     const unique_ptr<data_base> data = _NEFORCE move(args->data);
     thread_monitor monitor(args->thread_id);
@@ -134,9 +134,7 @@ void thread::start_thread_impl(thread_startup_args* args) {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     unsigned int thread_id;
-    handle_ = reinterpret_cast<native_handle_type>(
-        ::_beginthreadex(nullptr, 0, thread_entry, args, 0, &thread_id)
-    );
+    handle_ = reinterpret_cast<native_handle_type>(::_beginthreadex(nullptr, 0, thread_entry, args, 0, &thread_id));
     if (handle_ == nullptr) {
         delete args;
         NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
@@ -158,8 +156,10 @@ void thread::start_thread_impl(thread_startup_args* args) {
     hook::invoke(hook::point::after_create, id_);
 }
 
-thread::thread(thread&& other) noexcept
-: handle_(other.handle_), id_(other.id_), state_(other.state_) {
+thread::thread(thread&& other) noexcept :
+handle_(other.handle_),
+id_(other.id_),
+state_(other.state_) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     other.handle_ = nullptr;
 #else
@@ -169,7 +169,7 @@ thread::thread(thread&& other) noexcept
     other.state_ = NOT_A_THREAD;
 }
 
-thread& thread::operator =(thread&& other) noexcept {
+thread& thread::operator=(thread&& other) noexcept {
     if (this != &other) {
         if (joinable()) {
             hook::invoke(hook::point::before_destroy, id_);
@@ -243,7 +243,9 @@ bool thread::set_name(const char* name) {
 }
 
 bool thread::name(char* buffer, const size_t size) const {
-    if (!joinable()) return false;
+    if (!joinable()) {
+        return false;
+    }
     return name(handle_, buffer, size);
 }
 
@@ -261,13 +263,12 @@ bool thread::set_name(native_handle_type handle, const char* name) {
         HRESULT hr = pSetThreadDescription(handle, wstr.data());
         return SUCCEEDED(hr);
     } else {
-#ifdef NEFORCE_COMPILER_MSVC
+#    ifdef NEFORCE_COMPILER_MSVC
         if (handle == ::GetCurrentThread()) {
             set_thread_name_by_exception(name);
             return true;
-        }
-        else
-#endif
+        } else
+#    endif
         {
             return false;
         }
@@ -298,7 +299,9 @@ bool thread::name(native_handle_type handle, char* buffer, size_t size) {
     }
     return false;
 #else
-    if (size < 16) return false;
+    if (size < 16) {
+        return false;
+    }
     return ::pthread_getname_np(handle, buffer, size) == 0;
 #endif
 }

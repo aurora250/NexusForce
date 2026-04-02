@@ -20,9 +20,7 @@ toml_builder& toml_builder::key(string key) {
     return *this;
 }
 
-toml_builder& toml_builder::begin_table(const string& name) {
-    return begin_table(vector<string>{name});
-}
+toml_builder& toml_builder::begin_table(const string& name) { return begin_table(vector<string>{name}); }
 
 toml_builder& toml_builder::begin_table(const vector<string>& path) {
     if (path.empty()) {
@@ -143,9 +141,7 @@ toml_builder& toml_builder::end_array() {
     return *this;
 }
 
-toml_builder& toml_builder::begin_array_table(const string& name) {
-    return begin_array_table(vector<string>{name});
-}
+toml_builder& toml_builder::begin_array_table(const string& name) { return begin_array_table(vector<string>{name}); }
 
 toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
     if (path.empty()) {
@@ -164,9 +160,7 @@ toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
     return *this;
 }
 
-toml_builder& toml_builder::end_array_table() {
-    return end_table();
-}
+toml_builder& toml_builder::end_array_table() { return end_table(); }
 
 toml_builder& toml_builder::value_table(function<void(toml_builder&)>&& build_func) {
     if (contexts_.empty()) {
@@ -222,13 +216,12 @@ unique_ptr<toml_table> toml_builder::build() {
 toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) const {
     toml_table* current = root_.get();
 
-    for (const string& key : path) {
+    for (const string& key: path) {
         const toml_value* existing = current->get_member(key);
 
         if (existing) {
             if (!existing->is_table()) {
-                NEFORCE_THROW_EXCEPTION(toml_exception(
-                    ("Key '" + key + "' already exists and is not a table").data()));
+                NEFORCE_THROW_EXCEPTION(toml_exception(("Key '" + key + "' already exists and is not a table").data()));
             }
             current = const_cast<toml_table*>(existing->as_table());
         } else {
@@ -242,7 +235,7 @@ toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) c
     return current;
 }
 
-toml_array* toml_builder::get_or_create_array_for_array_table(const vector<string>& path)const {
+toml_array* toml_builder::get_or_create_array_for_array_table(const vector<string>& path) const {
     if (path.empty()) {
         NEFORCE_THROW_EXCEPTION(toml_exception("Array table path cannot be empty"));
     }
@@ -254,8 +247,8 @@ toml_array* toml_builder::get_or_create_array_for_array_table(const vector<strin
 
     if (existing) {
         if (!existing->is_array()) {
-            NEFORCE_THROW_EXCEPTION(toml_exception(
-                ("Key '" + array_name + "' already exists and is not an array").data()));
+            NEFORCE_THROW_EXCEPTION(
+                    toml_exception(("Key '" + array_name + "' already exists and is not an array").data()));
         }
         return const_cast<toml_array*>(existing->as_array());
     } else {

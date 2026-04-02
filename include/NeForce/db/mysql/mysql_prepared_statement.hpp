@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_MYSQL_PREPARED_STATEMENT_HPP__
 #define NEFORCE_DATABASE_MYSQL_PREPARED_STATEMENT_HPP__
 #ifdef NEFORCE_SUPPORT_MYSQL
-#include "NeForce/db/db_interface.hpp"
-#include <mysql/mysql.h>
+#    include <mysql/mysql.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API mysql_prepared_statement final : public idb_prepared_statement {
@@ -18,10 +18,10 @@ public:
     mysql_prepared_statement(::MYSQL* conn, string_view sql);
 
     mysql_prepared_statement(mysql_prepared_statement&& other) noexcept;
-    mysql_prepared_statement& operator =(mysql_prepared_statement&& other) noexcept;
+    mysql_prepared_statement& operator=(mysql_prepared_statement&& other) noexcept;
 
     mysql_prepared_statement(const mysql_prepared_statement&) = delete;
-    mysql_prepared_statement& operator =(const mysql_prepared_statement&) = delete;
+    mysql_prepared_statement& operator=(const mysql_prepared_statement&) = delete;
 
     ~mysql_prepared_statement() override;
 

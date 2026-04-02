@@ -17,17 +17,15 @@ struct NEFORCE_API ssl_exception final : thirdparty_exception {
     static int last_error() noexcept;
     static string last_error_message();
 
-    explicit ssl_exception(
-        const char* info = "SSL Operation Failed.",
-        const char* type = static_type,
-        const int code = last_error()) noexcept
-    : thirdparty_exception(info, type, code) {}
+    explicit ssl_exception(const char* info = "SSL Operation Failed.", const char* type = static_type,
+                           const int code = last_error()) noexcept :
+    thirdparty_exception(info, type, code) {}
 
-    explicit ssl_exception(const int code) noexcept
-    : thirdparty_exception(last_error_message().data(), static_type, code) {}
+    explicit ssl_exception(const int code) noexcept :
+    thirdparty_exception(last_error_message().data(), static_type, code) {}
 
-    explicit ssl_exception(const exception& e)
-    : thirdparty_exception(e) {}
+    explicit ssl_exception(const exception& e) :
+    thirdparty_exception(e) {}
 
     ~ssl_exception() override = default;
 

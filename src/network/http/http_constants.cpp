@@ -2,7 +2,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef DELETE
-#undef DELETE
+#    undef DELETE
 #endif
 
 const HTTP_CONTENT HTTP_CONTENT::HTML_TEXT{"text/html"};

@@ -10,14 +10,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /// 字符字符串视图
-using string_view    = basic_string_view<char>;
+using string_view = basic_string_view<char>;
 
 /// 宽字符字符串视图
-using wstring_view   = basic_string_view<wchar_t>;
+using wstring_view = basic_string_view<wchar_t>;
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /// UTF-8字符串视图
-using u8string_view  = basic_string_view<char8_t>;
+using u8string_view = basic_string_view<char8_t>;
 #endif // NEFORCE_STANDARD_20
 
 /// UTF-16字符串视图
@@ -43,9 +43,7 @@ NEFORCE_BEGIN_LITERALS__
  * @param len 字符串长度
  * @return string_view对象
  */
-NEFORCE_NODISCARD constexpr string_view operator ""_sv(const char* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD constexpr string_view operator""_sv(const char* str, size_t len) noexcept { return {str, len}; }
 
 /**
  * @brief 创建wchar_t字符串视图的字面量操作符
@@ -53,9 +51,7 @@ NEFORCE_NODISCARD constexpr string_view operator ""_sv(const char* str, size_t l
  * @param len 字符串长度
  * @return wstring_view对象
  */
-NEFORCE_NODISCARD constexpr wstring_view operator ""_sv(const wchar_t* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD constexpr wstring_view operator""_sv(const wchar_t* str, size_t len) noexcept { return {str, len}; }
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /**
@@ -64,9 +60,7 @@ NEFORCE_NODISCARD constexpr wstring_view operator ""_sv(const wchar_t* str, size
  * @param len 字符串长度
  * @return u8string_view对象
  */
-NEFORCE_NODISCARD constexpr u8string_view operator ""_sv(const char8_t* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD constexpr u8string_view operator""_sv(const char8_t* str, size_t len) noexcept { return {str, len}; }
 #endif // NEFORCE_STANDARD_20
 
 /**
@@ -75,7 +69,7 @@ NEFORCE_NODISCARD constexpr u8string_view operator ""_sv(const char8_t* str, siz
  * @param len 字符串长度
  * @return u16string_view对象
  */
-NEFORCE_NODISCARD constexpr u16string_view operator ""_sv(const char16_t* str, size_t len) noexcept {
+NEFORCE_NODISCARD constexpr u16string_view operator""_sv(const char16_t* str, size_t len) noexcept {
     return {str, len};
 }
 
@@ -85,7 +79,7 @@ NEFORCE_NODISCARD constexpr u16string_view operator ""_sv(const char16_t* str, s
  * @param len 字符串长度
  * @return u32string_view对象
  */
-NEFORCE_NODISCARD constexpr u32string_view operator ""_sv(const char32_t* str, size_t len) noexcept {
+NEFORCE_NODISCARD constexpr u32string_view operator""_sv(const char32_t* str, size_t len) noexcept {
     return {str, len};
 }
 
@@ -110,8 +104,8 @@ NEFORCE_END_LITERALS__
  * @return 是否成功提取到行（false表示已到达末尾）
  */
 template <typename CharT>
-constexpr bool getline(const basic_string_view<CharT> data, size_t& pos,
-    basic_string_view<CharT>& str, CharT delim = static_cast<CharT>('\n')) {
+constexpr bool getline(const basic_string_view<CharT> data, size_t& pos, basic_string_view<CharT>& str,
+                       CharT delim = static_cast<CharT>('\n')) {
 
     if (pos >= data.size()) {
         str = basic_string_view<CharT>();
@@ -142,10 +136,9 @@ constexpr bool getline(const basic_string_view<CharT> data, size_t& pos,
  * 使用自定义谓词判断分隔符，可以处理复杂的行分割逻辑。
  */
 template <typename CharT, typename Pred>
-constexpr bool getline(const basic_string_view<CharT> data, size_t& pos,
-    basic_string_view<CharT>& str, Pred split = [](const CharT ch) {
-        return ch == static_cast<CharT>('\n');
-    }) {
+constexpr bool getline(
+        const basic_string_view<CharT> data, size_t& pos, basic_string_view<CharT>& str,
+        Pred split = [](const CharT ch) { return ch == static_cast<CharT>('\n'); }) {
 
     if (pos >= data.size()) {
         str = basic_string_view<CharT>();

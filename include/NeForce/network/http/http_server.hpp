@@ -10,7 +10,7 @@ struct NEFORCE_API http_server_base {
 public:
     static constexpr string_view websocket_guid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
     static constexpr size_t max_header_size = 16 * 1024;
-    static constexpr size_t max_body_size = 100 * 1024 * 1024;  // 100MB
+    static constexpr size_t max_body_size = 100 * 1024 * 1024; // 100MB
     static constexpr int max_forward_count = 5;
 
 protected:
@@ -45,32 +45,22 @@ protected:
     static void parse_parameters(http_request& request);
     static string build_response_str(const http_response& response);
 
-    static http_request parse_request(
-        tcp_socket* client_socket,
-        session_manager& manager,
-        const HTTP_COOKIE_NAME& name,
-        size_t max_header_size = http_server_base::max_header_size,
-        size_t max_body_size = http_server_base::max_body_size);
+    static http_request parse_request(tcp_socket* client_socket, session_manager& manager, const HTTP_COOKIE_NAME& name,
+                                      size_t max_header_size = http_server_base::max_header_size,
+                                      size_t max_body_size = http_server_base::max_body_size);
 
-    static void add_session_cookie(
-        const http_request& request,
-        http_response& response,
-        http_session* session,
-        const HTTP_COOKIE_NAME& name);
+    static void add_session_cookie(const http_request& request, http_response& response, http_session* session,
+                                   const HTTP_COOKIE_NAME& name);
 
-    static http_session* get_or_create_session(
-        http_request& request,
-        bool create,
-        session_manager& manager,
-        const HTTP_COOKIE_NAME& name);
+    static http_session* get_or_create_session(http_request& request, bool create, session_manager& manager,
+                                               const HTTP_COOKIE_NAME& name);
 
     static void send_response(tcp_socket* client_socket, const http_response& response);
     static void send_error_response(tcp_socket* client_socket, HTTP_STATUS status, const string& message);
 };
 
 
-template <typename SocketType>
-class basic_http_server final : public http_server_base {
+template <typename SocketType> class basic_http_server final : public http_server_base {
     static_assert(is_base_of_v<tcp_socket, SocketType>, "SocketType must be a tcp_socket");
 
 public:
@@ -91,14 +81,10 @@ public:
     bool enable_websocket_{true};
 
 private:
-    void handle_client(socket_type client_socket)  {
+    void handle_client(socket_type client_socket) {
         try {
-            http_request request = this->parse_request(
-                static_cast<tcp_socket*>(&client_socket),
-                session_manager_,
-                cookie_name_,
-                max_header_size_,
-                max_body_size_);
+            http_request request = this->parse_request(static_cast<tcp_socket*>(&client_socket), session_manager_,
+                                                       cookie_name_, max_header_size_, max_body_size_);
 
             if (client_socket.is_ssl()) {
                 request.set_header(HTTP_KEY::X_Forwarded_Proto, "https");
@@ -111,20 +97,13 @@ private:
             http_session* sess = this->get_or_create_session(request, true, session_manager_, cookie_name_);
             this->handle_request_with_forward(client_socket, request, sess);
         } catch (const http_exception& e) {
-            this->send_error_response(
-                static_cast<tcp_socket*>(&client_socket),
-                HTTP_STATUS::S4_BAD_REQUEST,
-                e.what());
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S4_BAD_REQUEST, e.what());
         } catch (const exception& e) {
-            this->send_error_response(
-                static_cast<tcp_socket*>(&client_socket),
-                HTTP_STATUS::S5_INTERNAL_ERROR,
-                e.what());
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S5_INTERNAL_ERROR,
+                                      e.what());
         } catch (...) {
-            this->send_error_response(
-                static_cast<tcp_socket*>(&client_socket),
-                HTTP_STATUS::S5_INTERNAL_ERROR,
-                "Unknown internal error");
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S5_INTERNAL_ERROR,
+                                      "Unknown internal error");
         }
     }
 
@@ -178,19 +157,15 @@ private:
         }
 
         if (forward_count >= max_forward_count) {
-            this->send_error_response(
-                static_cast<tcp_socket*>(&client_socket),
-                HTTP_STATUS::S5_INTERNAL_ERROR,
-                "Too many forwards");
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S5_INTERNAL_ERROR,
+                                      "Too many forwards");
         }
     }
 
 public:
-    explicit basic_http_server(uint16_t port, int backlog = 128)
-    : server_(port, backlog) {
-        server_.set_client_handler([this](socket_type sock) {
-            this->handle_client(_NEFORCE move(sock));
-        });
+    explicit basic_http_server(uint16_t port, int backlog = 128) :
+    server_(port, backlog) {
+        server_.set_client_handler([this](socket_type sock) { this->handle_client(_NEFORCE move(sock)); });
     }
 
     ~basic_http_server() = default;
@@ -199,7 +174,7 @@ public:
     basic_http_server& operator=(const basic_http_server&) = delete;
 
     basic_http_server(basic_http_server&&) noexcept = default;
-    basic_http_server& operator =(basic_http_server&&) noexcept = default;
+    basic_http_server& operator=(basic_http_server&&) noexcept = default;
 
     bool load_certificate(const string& cert_file, const string& key_file) {
         return server_.load_certificate(cert_file, key_file);
@@ -211,41 +186,27 @@ public:
     NEFORCE_NODISCARD websocket_server<socket_type>& websocket() noexcept { return ws_server_; }
     NEFORCE_NODISCARD const websocket_server<socket_type>& websocket() const noexcept { return ws_server_; }
 
-    void set_cookie_name(HTTP_COOKIE_NAME name) noexcept {
-        cookie_name_ = move(name);
-    }
+    void set_cookie_name(HTTP_COOKIE_NAME name) noexcept { cookie_name_ = move(name); }
 
-    NEFORCE_NODISCARD const HTTP_COOKIE_NAME& cookie_name() const noexcept {
-        return cookie_name_;
-    }
+    NEFORCE_NODISCARD const HTTP_COOKIE_NAME& cookie_name() const noexcept { return cookie_name_; }
 
     void set_session_cleanup_interval(const seconds interval) noexcept {
         session_manager_.set_cleanup_interval(interval);
     }
 
-    void set_max_sessions(const size_t max) noexcept {
-        session_manager_.set_max_sessions(max);
-    }
+    void set_max_sessions(const size_t max) noexcept { session_manager_.set_max_sessions(max); }
 
-    NEFORCE_NODISCARD uint16_t port() const noexcept {
-        return server_.port();
-    }
+    NEFORCE_NODISCARD uint16_t port() const noexcept { return server_.port(); }
 
-    NEFORCE_NODISCARD bool is_running() const noexcept {
-        return server_.is_running();
-    }
+    NEFORCE_NODISCARD bool is_running() const noexcept { return server_.is_running(); }
 
     NEFORCE_NODISCARD http_session* get_session(http_request& request, bool create = false) {
         return get_or_create_session(request, create, session_manager_, cookie_name_);
     }
 
-    bool start(int backlog = SOMAXCONN) {
-        return server_.start(backlog);
-    }
+    bool start(int backlog = SOMAXCONN) { return server_.start(backlog); }
 
-    void stop() noexcept {
-        server_.stop();
-    }
+    void stop() noexcept { server_.stop(); }
 };
 
 using http_server = basic_http_server<tcp_socket>;

@@ -11,11 +11,11 @@ private:
 public:
     ssl_socket() = default;
 
-    explicit ssl_socket(const native_handle_type fd)
-    : tcp_socket(fd) {}
+    explicit ssl_socket(const native_handle_type fd) :
+    tcp_socket(fd) {}
 
-    explicit ssl_socket(tcp_socket sock)
-    : tcp_socket(move(sock)) {}
+    explicit ssl_socket(tcp_socket sock) :
+    tcp_socket(move(sock)) {}
 
     ssl_socket(ssl_socket&& other) noexcept = default;
     ssl_socket& operator=(ssl_socket&& other) noexcept = default;
@@ -30,17 +30,11 @@ public:
     ssize_t send(memory_view<const char> data, int flags = 0) override;
     ssize_t receive(memory_view<char> buffer, int flags = 0) override;
 
-    NEFORCE_NODISCARD bool is_ssl() const noexcept override {
-        return ssl_.has_value();
-    }
+    NEFORCE_NODISCARD bool is_ssl() const noexcept override { return ssl_.has_value(); }
 
-    NEFORCE_NODISCARD ssl_stream& ssl() noexcept {
-        return *ssl_;
-    }
+    NEFORCE_NODISCARD ssl_stream& ssl() noexcept { return *ssl_; }
 
-    NEFORCE_NODISCARD const ssl_stream& ssl() const noexcept {
-        return *ssl_;
-    }
+    NEFORCE_NODISCARD const ssl_stream& ssl() const noexcept { return *ssl_; }
 };
 
 NEFORCE_END_NAMESPACE__

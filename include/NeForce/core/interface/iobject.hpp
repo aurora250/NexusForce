@@ -27,8 +27,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * - to_string() 方法
  * - 静态 parse 方法
  */
-template <typename T>
-struct iobject : istringify<T> {
+template <typename T> struct iobject : istringify<T> {
 public:
     /**
      * @brief 从字符串解析对象
@@ -37,9 +36,7 @@ public:
      *
      * 静态方法，调用派生类的parse实现。
      */
-    NEFORCE_NODISCARD static constexpr T parse(const string_view str) {
-        return T::parse(str);
-    }
+    NEFORCE_NODISCARD static constexpr T parse(const string_view str) { return T::parse(str); }
 
     /**
      * @brief 尝试从字符串解析对象

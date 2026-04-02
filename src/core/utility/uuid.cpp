@@ -9,9 +9,7 @@ random_mt& uuid::tl_rng() noexcept {
     return rng;
 }
 
-uuid::uuid(memory_view<const byte_t, 16> bytes) noexcept {
-    copy(bytes.begin(), bytes.end(), data_.begin());
-}
+uuid::uuid(memory_view<const byte_t, 16> bytes) noexcept { copy(bytes.begin(), bytes.end(), data_.begin()); }
 
 uuid::uuid(const string_view bytes) {
     if (bytes.size() == 16) {
@@ -90,7 +88,9 @@ void uuid::generate_v7() noexcept {
 }
 
 optional<uint64_t> uuid::timestamp_v7() const noexcept {
-    if (!is_v7()) return {};
+    if (!is_v7()) {
+        return {};
+    }
 
     uint64_t ts = 0;
     for (int i = 0; i < 6; ++i) {
@@ -100,15 +100,12 @@ optional<uint64_t> uuid::timestamp_v7() const noexcept {
 }
 
 string uuid::to_string() const {
-    auto to_hex = [](byte_t b) {
-        return format("{:02x}", b);
-    };
+    auto to_hex = [](byte_t b) { return format("{:02x}", b); };
 
-    return format("{}{}{}{}-{}{}-{}{}-{}{}-{}{}{}{}{}{}",
-        to_hex(data_[0]), to_hex(data_[1]), to_hex(data_[2]), to_hex(data_[3]),
-        to_hex(data_[4]), to_hex(data_[5]), to_hex(data_[6]), to_hex(data_[7]),
-        to_hex(data_[8]), to_hex(data_[9]), to_hex(data_[10]), to_hex(data_[11]),
-        to_hex(data_[12]), to_hex(data_[13]), to_hex(data_[14]), to_hex(data_[15]));
+    return format("{}{}{}{}-{}{}-{}{}-{}{}-{}{}{}{}{}{}", to_hex(data_[0]), to_hex(data_[1]), to_hex(data_[2]),
+                  to_hex(data_[3]), to_hex(data_[4]), to_hex(data_[5]), to_hex(data_[6]), to_hex(data_[7]),
+                  to_hex(data_[8]), to_hex(data_[9]), to_hex(data_[10]), to_hex(data_[11]), to_hex(data_[12]),
+                  to_hex(data_[13]), to_hex(data_[14]), to_hex(data_[15]));
 }
 
 uuid uuid::v4() noexcept {

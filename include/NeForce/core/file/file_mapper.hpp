@@ -9,8 +9,8 @@
  * 从而可以像访问内存一样高效地读写文件。
  */
 
-#include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/async/mutex.hpp"
+#include "NeForce/core/file/file_constants.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -45,9 +45,9 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API file_mapper {
 public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD;  ///< 大小类型
+    using size_type = ::DWORD; ///< 大小类型
 #else
-    using size_type = size_t;   ///< 大小类型
+    using size_type = size_t; ///< 大小类型
 #endif
 
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
@@ -59,11 +59,11 @@ public:
      * 提供当前映射状态的完整信息，用于调试和状态查询。
      */
     struct map_info {
-        void* address = nullptr;    ///< 映射起始地址
-        size_type size = 0;         ///< 映射大小（字节）
-        size_type offset = 0;       ///< 映射起始偏移
+        void* address = nullptr;                ///< 映射起始地址
+        size_type size = 0;                     ///< 映射大小（字节）
+        size_type offset = 0;                   ///< 映射起始偏移
         file_access access = file_access::READ; ///< 访问权限
-        bool is_mapped = false;     ///< 是否已映射
+        bool is_mapped = false;                 ///< 是否已映射
     };
 
 private:
@@ -96,7 +96,7 @@ public:
     ~file_mapper();
 
     file_mapper(const file_mapper&) = delete;
-    file_mapper& operator =(const file_mapper&) = delete;
+    file_mapper& operator=(const file_mapper&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -109,7 +109,7 @@ public:
      * @param other 要移动的对象
      * @return 自身引用
      */
-    file_mapper& operator =(file_mapper&& other) noexcept;
+    file_mapper& operator=(file_mapper&& other) noexcept;
 
     /**
      * @brief 映射文件到内存
@@ -126,8 +126,7 @@ public:
      * @note 映射后可以通过data()指针直接访问文件内容。
      * @note 写操作可能需要权限。
      */
-    bool map(size_type offset = 0, size_type size = 0,
-             file_access access = file_access::READ,
+    bool map(size_type offset = 0, size_type size = 0, file_access access = file_access::READ,
              file_map_hint hint = file_map_hint::SEQUENTIAL);
 
     /**

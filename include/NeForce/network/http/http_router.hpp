@@ -58,34 +58,24 @@ public:
 
     void route(const HTTP_METHOD& method, const string& path, http_handler_t handler);
 
-    void use(unique_ptr<http_filter> middleware) {
-        middleware_chain_.add_filter(_NEFORCE move(middleware));
-    }
+    void use(unique_ptr<http_filter> middleware) { middleware_chain_.add_filter(_NEFORCE move(middleware)); }
 
-    http_filter_chain& middleware_chain() noexcept {
-        return middleware_chain_;
-    }
+    http_filter_chain& middleware_chain() noexcept { return middleware_chain_; }
 
-    void set_not_found_handler(http_handler_t handler) {
-        not_found_handler_ = _NEFORCE move(handler);
-    }
+    void set_not_found_handler(http_handler_t handler) { not_found_handler_ = _NEFORCE move(handler); }
 
     void set_method_not_allowed_handler(http_handler_t handler) {
         method_not_allowed_handler_ = _NEFORCE move(handler);
     }
 
-    void set_exception_handler(exception_handler_t handler) {
-        exception_handler_ = _NEFORCE move(handler);
-    }
+    void set_exception_handler(exception_handler_t handler) { exception_handler_ = _NEFORCE move(handler); }
 
     http_response handle_request(http_request& request);
 
     NEFORCE_NODISCARD bool has_route(const HTTP_METHOD& method, const string& path) const;
     NEFORCE_NODISCARD size_t route_count() const noexcept;
 
-    void clear_routes() noexcept {
-        routes_.clear();
-    }
+    void clear_routes() noexcept { routes_.clear(); }
 };
 
 NEFORCE_END_NAMESPACE__

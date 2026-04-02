@@ -59,27 +59,21 @@ NEFORCE_ALWAYS_INLINE_INLINE string sha1(const string_view data) {
  * @param data 输入字符串
  * @return 20字节的哈希值（原始字节）
  */
-NEFORCE_ALWAYS_INLINE_INLINE string sha1(const string& data) {
-    return _NEFORCE sha1(data.view());
-}
+NEFORCE_ALWAYS_INLINE_INLINE string sha1(const string& data) { return _NEFORCE sha1(data.view()); }
 
 /**
  * @brief SHA-1哈希便捷函数（字节视图版本）
  * @param data 输入数据
  * @return 20字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const cbyte_view data) {
-    return SHA1::hash(data);
-}
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const cbyte_view data) { return SHA1::hash(data); }
 
 /**
  * @brief SHA-1哈希便捷函数（字节向量版本）
  * @param data 输入数据
  * @return 20字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const byte_vector& data) {
-    return SHA1::hash(data.view());
-}
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const byte_vector& data) { return SHA1::hash(data.view()); }
 
 /** @} */ // Encryption
 

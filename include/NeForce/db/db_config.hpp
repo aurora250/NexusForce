@@ -4,7 +4,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 NEFORCE_ERROR_BUILD_FINAL_CLASS(database_typecast_exception, database_exception, "Database Type Cast Failed.")
-NEFORCE_ERROR_BUILD_FINAL_CLASS(database_prepared_stmt_exception, database_exception, "Database Prepared Statement Operations Error.")
+NEFORCE_ERROR_BUILD_FINAL_CLASS(database_prepared_stmt_exception, database_exception,
+                                "Database Prepared Statement Operations Error.")
 
 
 enum class db_type : uint8_t {

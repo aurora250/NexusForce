@@ -24,7 +24,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 定义终止处理函数的签名，用于定义程序终止触发的事件。
  */
-using terminate_handler = void(*)();
+using terminate_handler = void (*)();
 
 /**
  * @brief 设置终止处理函数
@@ -60,7 +60,7 @@ NEFORCE_NORETURN void NEFORCE_API abort();
  *
  * 定义退出处理函数的签名，用于注册在程序正常退出时调用的函数。
  */
-using exit_handler = void(*)();
+using exit_handler = void (*)();
 
 /**
  * @brief 注册退出处理函数

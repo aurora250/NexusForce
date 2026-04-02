@@ -36,14 +36,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API ini_parser {
 private:
-    string text_;           ///< 待解析的文本内容
-    size_t len_;            ///< 文本长度
-    size_t pos_ = 0;        ///< 当前解析位置
-    size_t line_ = 1;       ///< 当前行号
-    size_t column_ = 1;     ///< 当前列号
+    string text_;       ///< 待解析的文本内容
+    size_t len_;        ///< 文本长度
+    size_t pos_ = 0;    ///< 当前解析位置
+    size_t line_ = 1;   ///< 当前行号
+    size_t column_ = 1; ///< 当前列号
 
-    unique_ptr<ini_document> root_;  ///< 解析结果文档
-    ini_section* current_section_ = nullptr;  ///< 当前正在解析的节
+    unique_ptr<ini_document> root_;          ///< 解析结果文档
+    ini_section* current_section_ = nullptr; ///< 当前正在解析的节
 
     /**
      * @brief 跳过空白字符
@@ -134,8 +134,9 @@ public:
      *
      * 初始化解析器，创建空的文档对象，并将当前节设置为全局节。
      */
-    explicit ini_parser(string text)
-    : text_(_NEFORCE move(text)), len_(text_.size()) {
+    explicit ini_parser(string text) :
+    text_(_NEFORCE move(text)),
+    len_(text_.size()) {
         root_ = make_unique<ini_document>();
         current_section_ = root_->get_global_section();
     }

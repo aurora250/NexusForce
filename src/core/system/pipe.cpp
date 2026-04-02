@@ -1,19 +1,19 @@
 #include <NeForce/core/system/pipe.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <windef.h>
-#include <WinBase.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <NeForce/core/config/windef.hpp>
+#    include <WinBase.h>
+#    include <windef.h>
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #else
-#include <unistd.h>
-#include <fcntl.h>
-#include <cstring>
-#include <cerrno>
+#    include <cerrno>
+#    include <cstring>
+#    include <fcntl.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -47,24 +47,25 @@ pipe::pipe(bool inheritable) {
 #endif
 }
 
-pipe::~pipe() {
-    close();
-}
+pipe::~pipe() { close(); }
 
 pipe::pipe(pipe&& other) noexcept
 #ifdef NEFORCE_PLATFORM_WINDOWS
-: read_handle_(other.read_handle_), write_handle_(other.write_handle_) {
+:
+read_handle_(other.read_handle_),
+write_handle_(other.write_handle_) {
     other.read_handle_ = nullptr;
     other.write_handle_ = nullptr;
 }
 #else
-: fds_{other.fds_[0], other.fds_[1]} {
+:
+fds_{other.fds_[0], other.fds_[1]} {
     other.fds_[0] = -1;
     other.fds_[1] = -1;
 }
 #endif
 
-pipe& pipe::operator =(pipe&& other) noexcept {
+pipe& pipe::operator=(pipe&& other) noexcept {
     if (this != &other) {
         close();
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -84,7 +85,9 @@ pipe& pipe::operator =(pipe&& other) noexcept {
 
 int pipe::read(void* buffer, size_t size) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (read_handle_ == nullptr) return -1;
+    if (read_handle_ == nullptr) {
+        return -1;
+    }
 
     ::DWORD bytes_read;
     if (!::ReadFile(read_handle_, buffer, static_cast<::DWORD>(size), &bytes_read, nullptr)) {
@@ -92,7 +95,9 @@ int pipe::read(void* buffer, size_t size) noexcept {
     }
     return static_cast<int>(bytes_read);
 #else
-    if (fds_[0] < 0) return -1;
+    if (fds_[0] < 0) {
+        return -1;
+    }
 
     const ssize_t result = ::read(fds_[0], buffer, size);
     return static_cast<int>(result);
@@ -103,7 +108,9 @@ string pipe::read_available() noexcept {
     string output;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (read_handle_ == nullptr) return output;
+    if (read_handle_ == nullptr) {
+        return output;
+    }
 
     constexpr ::DWORD buffer_size = MEMORY_BIG_ALLOC_THRESHHOLD;
     char buffer[buffer_size];
@@ -114,7 +121,9 @@ string pipe::read_available() noexcept {
         if (!::PeekNamedPipe(read_handle_, nullptr, 0, nullptr, &bytes_available, nullptr)) {
             break;
         }
-        if (bytes_available == 0) break;
+        if (bytes_available == 0) {
+            break;
+        }
 
         if (!::ReadFile(read_handle_, buffer, buffer_size - 1, &bytes_read, nullptr)) {
             break;
@@ -126,7 +135,9 @@ string pipe::read_available() noexcept {
         }
     }
 #else
-    if (fds_[0] < 0) return output;
+    if (fds_[0] < 0) {
+        return output;
+    }
 
     char buffer[MEMORY_BIG_ALLOC_THRESHHOLD];
     const int flags = ::fcntl(fds_[0], F_GETFL, 0);
@@ -150,7 +161,9 @@ string pipe::read_available() noexcept {
 
 int pipe::write(const void* data, size_t size) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (write_handle_ == nullptr) return -1;
+    if (write_handle_ == nullptr) {
+        return -1;
+    }
 
     ::DWORD bytes_written;
     if (!::WriteFile(write_handle_, data, static_cast<::DWORD>(size), &bytes_written, nullptr)) {
@@ -158,7 +171,9 @@ int pipe::write(const void* data, size_t size) noexcept {
     }
     return static_cast<int>(bytes_written);
 #else
-    if (fds_[1] < 0) return -1;
+    if (fds_[1] < 0) {
+        return -1;
+    }
 
     const ssize_t result = ::write(fds_[1], data, size);
     return static_cast<int>(result);

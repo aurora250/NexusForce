@@ -1,10 +1,10 @@
 #ifndef NEFORCE_DATABASE_DATABASE_POOL_HPP__
 #define NEFORCE_DATABASE_DATABASE_POOL_HPP__
+#include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/async/condition_variable.hpp"
+#include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
-#include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/async/atomic.hpp"
-#include "NeForce/core/async/thread.hpp"
 #include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -25,16 +25,13 @@ private:
 
         connection_entry() noexcept = default;
 
-        explicit connection_entry(idb_connect* c)
-        : conn(c), idle_at(current_ms()) {}
+        explicit connection_entry(idb_connect* c) :
+        conn(c),
+        idle_at(current_ms()) {}
 
-        milliseconds idle_duration() const noexcept {
-            return current_ms() - idle_at;
-        }
+        milliseconds idle_duration() const noexcept { return current_ms() - idle_at; }
 
-        static milliseconds current_ms() noexcept {
-            return time_cast<milliseconds>(steady_clock::now().since_epoch());
-        }
+        static milliseconds current_ms() noexcept { return time_cast<milliseconds>(steady_clock::now().since_epoch()); }
     };
 
     db_config config_;
@@ -58,21 +55,20 @@ private:
     void replenish_task();
     void scanner_task();
 
-    template <typename T>
-    shared_ptr<T> acquire_impl();
+    template <typename T> shared_ptr<T> acquire_impl();
 
 public:
-    database_pool(db_type type, const db_config& config)
-    : database_pool(type, config, pool_config()) {}
+    database_pool(db_type type, const db_config& config) :
+    database_pool(type, config, pool_config()) {}
 
     database_pool(db_type type, const db_config& config, const pool_config& pool_config);
 
     ~database_pool();
 
     database_pool(const database_pool&) = delete;
-    database_pool& operator =(const database_pool&) = delete;
+    database_pool& operator=(const database_pool&) = delete;
     database_pool(database_pool&&) = delete;
-    database_pool& operator =(database_pool&&) = delete;
+    database_pool& operator=(database_pool&&) = delete;
 
     shared_ptr<idb_connect> get_connect();
     shared_ptr<idb_tb_connect> get_tb_connect();
@@ -86,13 +82,11 @@ public:
 };
 
 
-template <typename T>
-shared_ptr<T> database_pool::acquire_impl() {
+template <typename T> shared_ptr<T> database_pool::acquire_impl() {
     unique_lock<mutex> lk(queue_mtx_);
 
-    const bool got = cv_.wait_for(lk, pool_cfg_.acquire_timeout, [this] {
-        return !idle_queue_.empty() || !running_.load(memory_order_relaxed);
-    });
+    const bool got = cv_.wait_for(lk, pool_cfg_.acquire_timeout,
+                                  [this] { return !idle_queue_.empty() || !running_.load(memory_order_relaxed); });
 
     if (!running_.load(memory_order_relaxed)) {
         return nullptr;
@@ -115,10 +109,7 @@ shared_ptr<T> database_pool::acquire_impl() {
             total_count_.fetch_sub(1, memory_order_relaxed);
             return nullptr;
         }
-        return shared_ptr<T>(typed,
-            [this](T* p) {
-                this->return_connect(p);
-            });
+        return shared_ptr<T>(typed, [this](T* p) { this->return_connect(p); });
     }
 
     const connection_entry entry = idle_queue_.front();
@@ -142,10 +133,7 @@ shared_ptr<T> database_pool::acquire_impl() {
         return nullptr;
     }
 
-    return shared_ptr<T>(typed,
-        [this](T* p) {
-            this->return_connect(p);
-        });
+    return shared_ptr<T>(typed, [this](T* p) { this->return_connect(p); });
 }
 
 NEFORCE_END_NAMESPACE__

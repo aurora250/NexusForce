@@ -8,8 +8,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API idb_result {
-    using size_type         = size_t;
-    using difference_type   = ptrdiff_t;
+    using size_type = size_t;
+    using difference_type = ptrdiff_t;
 
     virtual ~idb_result() = default;
     virtual bool empty() const = 0;
@@ -106,9 +106,7 @@ public:
     virtual bool connected() const = 0;
     virtual bool is_valid() const = 0;
 
-    void refresh_alive() noexcept {
-        alive_time_ = time_cast<milliseconds>(steady_clock::now().since_epoch());
-    }
+    void refresh_alive() noexcept { alive_time_ = time_cast<milliseconds>(steady_clock::now().since_epoch()); }
     NEFORCE_NODISCARD clock_type get_alive() const noexcept {
         return time_cast<milliseconds>(steady_clock::now().since_epoch()) - alive_time_;
     }
@@ -151,7 +149,8 @@ protected:
     db_config config_;
 
 public:
-    explicit idb_factory(db_config config) : config_(move(config)) {}
+    explicit idb_factory(db_config config) :
+    config_(move(config)) {}
     virtual ~idb_factory() = default;
 
     virtual idb_connect* create_connect() = 0;

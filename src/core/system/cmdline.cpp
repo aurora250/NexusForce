@@ -1,29 +1,28 @@
 #include <NeForce/core/system/cmdline.hpp>
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/string/to_string.hpp>
-#include <processthreadsapi.h>
-#include <windef.h>
-#include <shellapi.h>
-#include <WinBase.h>
+#    include <NeForce/core/string/to_string.hpp>
+#    include <WinBase.h>
+#    include <processthreadsapi.h>
+#    include <shellapi.h>
+#    include <windef.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <NeForce/core/file/file.hpp>
+#    include <NeForce/core/file/file.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-cmdline::option::option(string lname, const char sname, string desc,
-    const bool req_val, const bool allow_multi, string def_val)
-    : long_name(move(lname)),
-    short_name(sname),
-    description(move(desc)),
-    requires_value(req_val),
-    allow_multiple(allow_multi),
-    default_value(move(def_val)) {}
+cmdline::option::option(string lname, const char sname, string desc, const bool req_val, const bool allow_multi,
+                        string def_val) :
+long_name(move(lname)),
+short_name(sname),
+description(move(desc)),
+requires_value(req_val),
+allow_multiple(allow_multi),
+default_value(move(def_val)) {}
 
-void cmdline::add_option(const string& long_name, const char short_name,
-    const string& description, const bool requires_value,
-    const bool allow_multiple, const string& default_value) {
+void cmdline::add_option(const string& long_name, const char short_name, const string& description,
+                         const bool requires_value, const bool allow_multiple, const string& default_value) {
     if (long_name.empty() && short_name == 0) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception("Option must have at least one name"));
     }
@@ -37,8 +36,12 @@ void cmdline::add_option(const string& long_name, const char short_name,
     const option opt(long_name, short_name, description, requires_value, allow_multiple, default_value);
     options_.push_back(move(opt));
 
-    if (!long_name.empty()) options_long_[long_name] = &options_.back();
-    if (short_name != 0) options_short_[short_name] = &options_.back();
+    if (!long_name.empty()) {
+        options_long_[long_name] = &options_.back();
+    }
+    if (short_name != 0) {
+        options_short_[short_name] = &options_.back();
+    }
 }
 
 void cmdline::parse_os_args() {
@@ -55,7 +58,9 @@ void cmdline::parse(const int argc, char* argv[]) {
 }
 
 void cmdline::parse(const vector<string>& args) {
-    if (args.empty()) return;
+    if (args.empty()) {
+        return;
+    }
 
     program_name_ = args[0];
     bool end_of_options = false;
@@ -70,14 +75,11 @@ void cmdline::parse(const vector<string>& args) {
 
         if (arg == "--") {
             end_of_options = true;
-        }
-        else if (arg.compare(0, 2, "--") == 0) {
+        } else if (arg.compare(0, 2, "--") == 0) {
             parse_long_option(arg, args, i);
-        }
-        else if (arg.size() > 1 && arg[0] == '-') {
+        } else if (arg.size() > 1 && arg[0] == '-') {
             parse_short_options(arg, args, i);
-        }
-        else {
+        } else {
             positional_.push_back(arg);
         }
     }
@@ -96,20 +98,24 @@ string cmdline::get(const string& long_name, const size_t index) const {
 
 bool cmdline::has(const string& name) const {
     const auto it = options_long_.find(name);
-    if (it == options_long_.end()) return false;
+    if (it == options_long_.end()) {
+        return false;
+    }
     return !it->second->values.empty();
 }
 
 size_t cmdline::count(const string& name) const {
     const auto it = options_long_.find(name);
-    if (it == options_long_.end()) return 0;
+    if (it == options_long_.end()) {
+        return 0;
+    }
     return it->second->values.size();
 }
 
 void cmdline::print_help() const {
     println("Usage: ", program_name_, " [options] [positional...]\n\nOptions:");
 
-    for (const auto& opt : options_) {
+    for (const auto& opt: options_) {
         string str;
 
         if (opt.short_name != 0) {
@@ -129,8 +135,7 @@ void cmdline::print_help() const {
 
         if (opt_str.length() < 30) {
             print(string(30 - opt_str.length(), ' '));
-        }
-        else {
+        } else {
             print("\n", string(30, ' '));
         }
 
@@ -210,8 +215,7 @@ void cmdline::parse_long_option(const string& arg, const vector<string>& args, s
         string value;
         if (eq_pos != string::npos) {
             value = arg.substr(eq_pos + 1);
-        }
-        else {
+        } else {
             if (index + 1 >= args.size()) {
                 NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option requires a value: --" + name).data()));
             }
@@ -220,17 +224,14 @@ void cmdline::parse_long_option(const string& arg, const vector<string>& args, s
 
         if (opt->allow_multiple) {
             opt->values.push_back(move(value));
-        }
-        else {
+        } else {
             opt->values.clear();
             opt->values.push_back(move(value));
         }
-    }
-    else {
+    } else {
         if (opt->allow_multiple) {
             opt->values.push_back("1");
-        }
-        else {
+        } else {
             opt->values.clear();
             opt->values.push_back("1");
         }
@@ -254,29 +255,24 @@ void cmdline::parse_short_options(const string& arg, const vector<string>& args,
                 const string value = args[++index];
                 if (opt->allow_multiple) {
                     opt->values.push_back(move(value));
-                }
-                else {
+                } else {
                     opt->values.clear();
                     opt->values.push_back(move(value));
                 }
-            }
-            else {
+            } else {
                 const string value = arg.substr(j + 1);
                 if (opt->allow_multiple) {
                     opt->values.push_back(move(value));
-                }
-                else {
+                } else {
                     opt->values.clear();
                     opt->values.push_back(move(value));
                 }
                 break;
             }
-        }
-        else {
+        } else {
             if (opt->allow_multiple) {
                 opt->values.push_back("1");
-            }
-            else {
+            } else {
                 opt->values.clear();
                 opt->values.push_back("1");
             }

@@ -1,7 +1,7 @@
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/ftp_client.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <arpa/inet.h>
+#    include <arpa/inet.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -11,7 +11,9 @@ namespace {
         char buf[8192];
         while (true) {
             const ssize_t n = ::recv(sock.native_handle(), buf, sizeof(buf), 0);
-            if (n <= 0) break;
+            if (n <= 0) {
+                break;
+            }
             result.insert(result.end(), buf, buf + n);
         }
         return result;
@@ -22,7 +24,9 @@ namespace {
         char buf[8192];
         while (true) {
             const ssize_t n = stream.read(buf, sizeof(buf));
-            if (n <= 0) break;
+            if (n <= 0) {
+                break;
+            }
             result.insert(result.end(), buf, buf + n);
         }
         return result;
@@ -31,10 +35,7 @@ namespace {
     void write_data_channel(tcp_socket& sock, const char* data, const size_t len) {
         size_t total = 0;
         while (total < len) {
-            const ssize_t n = ::send(
-                sock.native_handle(),
-                data + total,
-                len - total, 0);
+            const ssize_t n = ::send(sock.native_handle(), data + total, len - total, 0);
             if (n <= 0) {
                 NEFORCE_THROW_EXCEPTION(ftp_exception("Data channel write failed"));
             }
@@ -52,7 +53,7 @@ namespace {
             total += static_cast<size_t>(n);
         }
     }
-}
+} // namespace
 
 
 ssize_t ftp_client::ctrl_send(const char* data, const size_t len) {
@@ -74,9 +75,15 @@ bool ftp_client::ctrl_read_line(string& out) {
     char ch;
     while (true) {
         const ssize_t n = ctrl_recv(&ch, 1);
-        if (n <= 0) return false;
-        if (ch == '\r') continue;
-        if (ch == '\n') return true;
+        if (n <= 0) {
+            return false;
+        }
+        if (ch == '\r') {
+            continue;
+        }
+        if (ch == '\n') {
+            return true;
+        }
         out += ch;
     }
 }
@@ -102,7 +109,9 @@ ftp_client::response ftp_client::read_response() {
         }
 
         if (line.size() > 3 && line[3] == '-') {
-            if (!resp.message.empty()) resp.message += '\n';
+            if (!resp.message.empty()) {
+                resp.message += '\n';
+            }
             resp.message += line.substr(4);
             resp.code = code;
             continue;
@@ -110,7 +119,9 @@ ftp_client::response ftp_client::read_response() {
 
         resp.code = code;
         if (line.size() > 4) {
-            if (!resp.message.empty()) resp.message += '\n';
+            if (!resp.message.empty()) {
+                resp.message += '\n';
+            }
             resp.message += line.substr(4);
         }
         break;
@@ -135,20 +146,20 @@ ftp_client::response ftp_client::send_command(const string& cmd) {
 void ftp_client::expect_code(const int expected, const string& cmd) {
     const auto resp = send_command(cmd);
     if (resp.code != expected) {
-        const string err = "FTP command failed [" + cmd + "] expected=" +
-                           to_string(expected) + " got=" +
-                           to_string(resp.code) + " " + resp.message;
+        const string err = "FTP command failed [" + cmd + "] expected=" + to_string(expected) +
+                           " got=" + to_string(resp.code) + " " + resp.message;
         NEFORCE_THROW_EXCEPTION(ftp_exception(err.data()));
     }
 }
 
 void ftp_client::expect_codes(const std::initializer_list<int> codes, const string& cmd) {
     const auto resp = send_command(cmd);
-    for (const int c : codes) {
-        if (resp.code == c) return;
+    for (const int c: codes) {
+        if (resp.code == c) {
+            return;
+        }
     }
-    const string err = "FTP command failed [" + cmd + "] got=" +
-                       to_string(resp.code) + " " + resp.message;
+    const string err = "FTP command failed [" + cmd + "] got=" + to_string(resp.code) + " " + resp.message;
     NEFORCE_THROW_EXCEPTION(ftp_exception(err.data()));
 }
 
@@ -187,19 +198,19 @@ tcp_socket ftp_client::open_data_channel() {
         int idx = 0;
         while (idx < 6 && pos < nums_str.size()) {
             const size_t comma = nums_str.find(',', pos);
-            const auto token = (comma == string::npos)
-                ? nums_str.substr(pos)
-                : nums_str.substr(pos, comma - pos);
+            const auto token = (comma == string::npos) ? nums_str.substr(pos) : nums_str.substr(pos, comma - pos);
             nums[idx++] = integer32::parse(token).value();
-            if (comma == string::npos) break;
+            if (comma == string::npos) {
+                break;
+            }
             pos = comma + 1;
         }
         if (idx != 6) {
             NEFORCE_THROW_EXCEPTION(ftp_exception("Invalid PASV address format"));
         }
 
-        const string data_ip = to_string(nums[0]) + "." + to_string(nums[1]) + "." +
-                               to_string(nums[2]) + "." + to_string(nums[3]);
+        const string data_ip =
+                to_string(nums[0]) + "." + to_string(nums[1]) + "." + to_string(nums[2]) + "." + to_string(nums[3]);
         const ports data_port{static_cast<uint16_t>(nums[4] * 256 + nums[5])};
 
         auto data_addr = ip_address::parse(data_ip, data_port);
@@ -211,7 +222,6 @@ tcp_socket ftp_client::open_data_channel() {
         data_sock.open();
         static_cast<ip_socket&>(data_sock).connect(*data_addr);
         return data_sock;
-
     }
     const auto local = local_endpoint();
     if (!local) {
@@ -238,7 +248,11 @@ tcp_socket ftp_client::open_data_channel() {
 
     const uint16_t bp = static_cast<uint16_t>(bound->port());
     string ip_comma = local_ip;
-    for (char& c : ip_comma) if (c == '.') c = ',';
+    for (char& c: ip_comma) {
+        if (c == '.') {
+            c = ',';
+        }
+    }
 
     const string port_cmd = "PORT " + ip_comma + "," + to_string(bp >> 8) + "," + to_string(bp & 0xFF);
     expect_code(200, port_cmd);
@@ -248,7 +262,7 @@ tcp_socket ftp_client::open_data_channel() {
         ::fd_set fds;
         FD_ZERO(&fds);
         FD_SET(lfd, &fds);
-        ::timeval tv { kActiveAcceptTimeoutSec, 0 };
+        ::timeval tv{kActiveAcceptTimeoutSec, 0};
         const int sel = ::select(lfd + 1, &fds, nullptr, nullptr, &tv);
         if (sel < 0) {
             NEFORCE_THROW_EXCEPTION(socket_exception("PORT: select failed"));
@@ -294,9 +308,7 @@ void ftp_client::do_post_connect() {
     connected_ = true;
 }
 
-vector<char> ftp_client::download_impl(const string& remote_path,
-                                       tcp_socket& data_sock,
-                                       const uint64_t offset) {
+vector<char> ftp_client::download_impl(const string& remote_path, tcp_socket& data_sock, const uint64_t offset) {
     if (offset > 0) {
         expect_code(350, "REST " + to_string(offset));
     }
@@ -316,9 +328,7 @@ vector<char> ftp_client::download_impl(const string& remote_path,
     return data;
 }
 
-void ftp_client::upload_impl(const string& remote_path,
-                             tcp_socket& data_sock,
-                             const char* data, const size_t len,
+void ftp_client::upload_impl(const string& remote_path, tcp_socket& data_sock, const char* data, const size_t len,
                              const uint64_t offset) {
     if (offset > 0) {
         expect_code(350, "REST " + to_string(offset));
@@ -349,28 +359,40 @@ ftp_client::entry ftp_client::parse_list_entry(const string& line) {
     entry e;
     e.raw = line;
 
-    if (line.empty()) return e;
+    if (line.empty()) {
+        return e;
+    }
 
     if (line[0] >= '0' && line[0] <= '9') {
         size_t pos = 0;
         for (int field = 0; field < 2; ++field) {
-            while (pos < line.size() && line[pos] == ' ') ++pos;
-            while (pos < line.size() && line[pos] != ' ') ++pos;
+            while (pos < line.size() && line[pos] == ' ') {
+                ++pos;
+            }
+            while (pos < line.size() && line[pos] != ' ') {
+                ++pos;
+            }
         }
 
-        while (pos < line.size() && line[pos] == ' ') ++pos;
+        while (pos < line.size() && line[pos] == ' ') {
+            ++pos;
+        }
         if (line.substr(pos, 5) == "<DIR>") {
             e.is_directory = true;
             pos += 5;
         } else {
             e.is_directory = false;
             size_t size_end = pos;
-            while (size_end < line.size() && line[size_end] != ' ') ++size_end;
+            while (size_end < line.size() && line[size_end] != ' ') {
+                ++size_end;
+            }
             e.size = static_cast<uint64_t>(to_int64(line.substr(pos, size_end - pos).view()));
             pos = size_end;
         }
 
-        while (pos < line.size() && line[pos] == ' ') ++pos;
+        while (pos < line.size() && line[pos] == ' ') {
+            ++pos;
+        }
         e.name = line.substr(pos);
         return e;
     }
@@ -380,19 +402,24 @@ ftp_client::entry ftp_client::parse_list_entry(const string& line) {
     size_t pos = 0;
     int fields = 0;
     while (fields < 8 && pos < line.size()) {
-        while (pos < line.size() && line[pos] == ' ') ++pos;
+        while (pos < line.size() && line[pos] == ' ') {
+            ++pos;
+        }
 
         const size_t start = pos;
-        while (pos < line.size() && line[pos] != ' ') ++pos;
+        while (pos < line.size() && line[pos] != ' ') {
+            ++pos;
+        }
 
         if (fields == 4 && pos > start) {
-            e.size = static_cast<uint64_t>(
-                to_int64(line.substr(start, pos - start).view()));
+            e.size = static_cast<uint64_t>(to_int64(line.substr(start, pos - start).view()));
         }
         ++fields;
     }
 
-    while (pos < line.size() && line[pos] == ' ') ++pos;
+    while (pos < line.size() && line[pos] == ' ') {
+        ++pos;
+    }
     e.name = line.substr(pos);
 
     return e;
@@ -404,8 +431,7 @@ ftp_client::~ftp_client() {
     }
 }
 
-void ftp_client::connect(const ip_address& addr, const tls_mode mode,
-                         ssl_context* ctx, const string& sni_hostname) {
+void ftp_client::connect(const ip_address& addr, const tls_mode mode, ssl_context* ctx, const string& sni_hostname) {
     if (!addr.is_valid()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid FTP server address"));
     }
@@ -431,8 +457,8 @@ void ftp_client::connect(const ip_address& addr, const tls_mode mode,
     }
 }
 
-void ftp_client::connect(const string& hostname, const ports port, const tls_mode mode,
-                         dns_client* dns, ssl_context* ctx, const string& sni) {
+void ftp_client::connect(const string& hostname, const ports port, const tls_mode mode, dns_client* dns,
+                         ssl_context* ctx, const string& sni) {
     if (hostname.empty()) {
         NEFORCE_THROW_EXCEPTION(value_exception("FTP hostname cannot be empty"));
     }
@@ -458,9 +484,11 @@ void ftp_client::connect(const string& hostname, const ports port, const tls_mod
         NEFORCE_THROW_EXCEPTION(ftp_exception(("DNS resolution failed for FTP host: " + hostname).data()));
     }
 
-    for (const auto& ip_str : ips) {
+    for (const auto& ip_str: ips) {
         auto addr = ip_address::parse(ip_str, port);
-        if (!addr) continue;
+        if (!addr) {
+            continue;
+        }
 
         try {
             connected_ = false;
@@ -546,9 +574,7 @@ void ftp_client::login(const string& username, const string& password) {
     set_transfer_mode(transfer_mode::binary);
 }
 
-void ftp_client::login_anonymous() {
-    login("anonymous", "anonymous@");
-}
+void ftp_client::login_anonymous() { login("anonymous", "anonymous@"); }
 
 void ftp_client::set_transfer_mode(const transfer_mode mode) {
     transfer_mode_ = mode;
@@ -578,21 +604,13 @@ string ftp_client::pwd() {
     return msg;
 }
 
-void ftp_client::cwd(const string& path) {
-    expect_code(250, "CWD " + path);
-}
+void ftp_client::cwd(const string& path) { expect_code(250, "CWD " + path); }
 
-void ftp_client::cdup() {
-    expect_code(250, "CDUP");
-}
+void ftp_client::cdup() { expect_code(250, "CDUP"); }
 
-void ftp_client::mkdir(const string& path) {
-    expect_codes({257}, "MKD " + path);
-}
+void ftp_client::mkdir(const string& path) { expect_codes({257}, "MKD " + path); }
 
-void ftp_client::rmdir(const string& path) {
-    expect_code(250, "RMD " + path);
-}
+void ftp_client::rmdir(const string& path) { expect_code(250, "RMD " + path); }
 
 vector<ftp_client::entry> ftp_client::list(const string& path) {
     auto data_sock = open_data_channel();
@@ -615,7 +633,9 @@ vector<ftp_client::entry> ftp_client::list(const string& path) {
     string line;
     for (size_t i = 0; i <= raw.size(); ++i) {
         if (i == raw.size() || raw[i] == '\n') {
-            if (!line.empty() && line.back() == '\r') line.pop_back();
+            if (!line.empty() && line.back() == '\r') {
+                line.pop_back();
+            }
             if (!line.empty()) {
                 entries.push_back(parse_list_entry(line));
             }
@@ -648,8 +668,12 @@ vector<string> ftp_client::nlst(const string& path) {
     string line;
     for (size_t i = 0; i <= raw.size(); ++i) {
         if (i == raw.size() || raw[i] == '\n') {
-            if (!line.empty() && line.back() == '\r') line.pop_back();
-            if (!line.empty()) names.push_back(move(line));
+            if (!line.empty() && line.back() == '\r') {
+                line.pop_back();
+            }
+            if (!line.empty()) {
+                names.push_back(move(line));
+            }
             line.clear();
         } else {
             line += raw[i];
@@ -671,9 +695,7 @@ void ftp_client::rename(const string& from, const string& to) {
     expect_code(250, "RNTO " + to);
 }
 
-void ftp_client::remove(const string& remote_path) {
-    expect_code(250, "DELE " + remote_path);
-}
+void ftp_client::remove(const string& remote_path) { expect_code(250, "DELE " + remote_path); }
 
 vector<char> ftp_client::download(const string& remote_path) {
     auto data_sock = open_data_channel();
@@ -690,25 +712,21 @@ vector<char> ftp_client::download_resume(const string& remote_path, const uint64
     return download_impl(remote_path, data_sock, offset);
 }
 
-void ftp_client::upload_resume(const string& remote_path,
-                               const char* data, const size_t len,
-                               const uint64_t offset) {
+void ftp_client::upload_resume(const string& remote_path, const char* data, const size_t len, const uint64_t offset) {
     auto data_sock = open_data_channel();
     upload_impl(remote_path, data_sock, data, len, offset);
 }
 
-void ftp_client::noop() {
-    expect_code(200, "NOOP");
-}
+void ftp_client::noop() { expect_code(200, "NOOP"); }
 
 ftp_client::tls_info ftp_client::get_tls_info() const noexcept {
     tls_info info;
     info.active = tls_active_;
     if (tls_active_) {
-        info.cipher_name   = ctrl_ssl_.get_cipher_name();
-        info.tls_version   = ctrl_ssl_.get_version();
+        info.cipher_name = ctrl_ssl_.get_cipher_name();
+        info.tls_version = ctrl_ssl_.get_version();
         info.peer_verified = ctrl_ssl_.verify_peer();
-        info.data_channel  = data_tls_;
+        info.data_channel = data_tls_;
     }
     return info;
 }

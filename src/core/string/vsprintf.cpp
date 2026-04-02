@@ -1,11 +1,11 @@
-#include <NeForce/core/string/vsprintf.hpp>
-#include <NeForce/core/numeric/numeric_types.hpp>
 #include <NeForce/core/memory/standard_allocator.hpp>
+#include <NeForce/core/numeric/numeric_types.hpp>
 #include <NeForce/core/string/char_types.hpp>
+#include <NeForce/core/string/vsprintf.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    NEFORCE_CONST_FUNCTION constexpr int skip_atoi(const char **s) {
+    NEFORCE_CONST_FUNCTION constexpr int skip_atoi(const char** s) {
         int i = 0;
         while (is_digit(**s)) {
             i = i * 10 + *((*s)++) - '0';
@@ -27,16 +27,17 @@ namespace {
         return remainder;
     }
 
-    NEFORCE_CONSTEXPR20 char* number(
-        char* str, const int64_t num,
-        const int base, int size,
-        int precision, int type) {
+    NEFORCE_CONSTEXPR20 char* number(char* str, const int64_t num, const int base, int size, int precision, int type) {
 
         char sign = 0, tmp[66];
         auto digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        if (type & SMALL) digits = "0123456789abcdefghijklmnopqrstuvwxyz";
-        if (type & LEFT) type &= ~ZEROPAD;
+        if (type & SMALL) {
+            digits = "0123456789abcdefghijklmnopqrstuvwxyz";
+        }
+        if (type & LEFT) {
+            type &= ~ZEROPAD;
+        }
         if (base < 2 || base > 36) {
             *str++ = '[';
             *str++ = 'E';
@@ -55,11 +56,16 @@ namespace {
             unum = static_cast<unsigned long long>(num);
         }
 
-        if (sign) size--;
+        if (sign) {
+            size--;
+        }
 
         if (type & SPECIAL) {
-            if (base == 16) size -= 2;
-            else if (base == 8) size--;
+            if (base == 16) {
+                size -= 2;
+            } else if (base == 8) {
+                size--;
+            }
         }
 
         int i = 0;
@@ -73,14 +79,20 @@ namespace {
             }
         }
 
-        if (i > precision) precision = i;
+        if (i > precision) {
+            precision = i;
+        }
         size -= precision;
 
         if (!(type & (ZEROPAD + LEFT))) {
-            while(size-- > 0) *str++ = ' ';
+            while (size-- > 0) {
+                *str++ = ' ';
+            }
         }
 
-        if (sign) *str++ = sign;
+        if (sign) {
+            *str++ = sign;
+        }
 
         if (type & SPECIAL) {
             if (base == 8) {
@@ -92,19 +104,25 @@ namespace {
         }
 
         if (!(type & LEFT)) {
-            while(size-- > 0) *str++ = c;
+            while (size-- > 0) {
+                *str++ = c;
+            }
         }
-        while(i < precision--) *str++ = '0';
-        while(i-- > 0) *str++ = tmp[i];
-        while(size-- > 0) *str++ = ' ';
+        while (i < precision--) {
+            *str++ = '0';
+        }
+        while (i-- > 0) {
+            *str++ = tmp[i];
+        }
+        while (size-- > 0) {
+            *str++ = ' ';
+        }
 
         return str;
     }
 
-    NEFORCE_CONSTEXPR20 char* float_number(
-        char* str, double num,
-        const int field_width, int precision,
-        const int flags) {
+    NEFORCE_CONSTEXPR20 char* float_number(char* str, double num, const int field_width, int precision,
+                                           const int flags) {
 
         char sign = 0;
         char int_buf[64];
@@ -124,7 +142,9 @@ namespace {
                 sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : 0);
             }
 
-            if (sign) *str++ = sign;
+            if (sign) {
+                *str++ = sign;
+            }
             return string_copy(str, inf_str);
         }
 
@@ -135,8 +155,12 @@ namespace {
             sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : 0);
         }
 
-        if (precision < 0) precision = 6;
-        if (precision > 20) precision = 20;
+        if (precision < 0) {
+            precision = 6;
+        }
+        if (precision > 20) {
+            precision = 20;
+        }
 
         auto int_part = static_cast<long long>(num);
         double fractional = num - static_cast<double>(int_part);
@@ -197,13 +221,19 @@ namespace {
         int pad = field_width > total_len ? field_width - total_len : 0;
 
         if (!(flags & LEFT) && !(flags & ZEROPAD)) {
-            while (pad-- > 0) *str++ = ' ';
+            while (pad-- > 0) {
+                *str++ = ' ';
+            }
         }
 
-        if (sign) *str++ = sign;
+        if (sign) {
+            *str++ = sign;
+        }
 
         if (!(flags & LEFT) && (flags & ZEROPAD)) {
-            while (pad-- > 0) *str++ = '0';
+            while (pad-- > 0) {
+                *str++ = '0';
+            }
         }
 
         for (int i = 0; i < int_len; ++i) {
@@ -218,152 +248,180 @@ namespace {
         }
 
         if (flags & LEFT) {
-            while (pad-- > 0) *str++ = ' ';
+            while (pad-- > 0) {
+                *str++ = ' ';
+            }
         }
 
         return str;
     }
-}
+} // namespace
 
 
-int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
-    if (!buf || !fmt) return -1;
+int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
+    if (!buf || !fmt) {
+        return -1;
+    }
 
     char* str;
     char* end = buf + MEMORY_BIG_ALLOC_THRESHHOLD - 1;
 
     for (str = buf; *fmt; ++fmt) {
-		if (*fmt != '%') {
-			*str++ = *fmt;
-			continue;
-		}
+        if (*fmt != '%') {
+            *str++ = *fmt;
+            continue;
+        }
 
-		int flags = 0;
-		bool break_flag = false;
-		while(!break_flag) {
-			++fmt;
-			switch (*fmt) {
-				case '-': flags |= LEFT; break;
-				case '+': flags |= PLUS; break;
-				case ' ': flags |= SPACE; break;
-				case '#': flags |= SPECIAL; break;
-				case '0': flags |= ZEROPAD; break;
-				default: break_flag = true; break;
-			}
-		}
+        int flags = 0;
+        bool break_flag = false;
+        while (!break_flag) {
+            ++fmt;
+            switch (*fmt) {
+                case '-':
+                    flags |= LEFT;
+                    break;
+                case '+':
+                    flags |= PLUS;
+                    break;
+                case ' ':
+                    flags |= SPACE;
+                    break;
+                case '#':
+                    flags |= SPECIAL;
+                    break;
+                case '0':
+                    flags |= ZEROPAD;
+                    break;
+                default:
+                    break_flag = true;
+                    break;
+            }
+        }
 
-		int field_width = -1;
-		if (is_digit(*fmt))
-			field_width = skip_atoi(&fmt);
-		else if (*fmt == '*') {
-			field_width = va_arg(args, int);
-			if (field_width < 0) {
-				field_width = -field_width;
-				flags |= LEFT;
-			}
-		}
+        int field_width = -1;
+        if (is_digit(*fmt)) {
+            field_width = skip_atoi(&fmt);
+        } else if (*fmt == '*') {
+            field_width = va_arg(args, int);
+            if (field_width < 0) {
+                field_width = -field_width;
+                flags |= LEFT;
+            }
+        }
 
-		int precision = -1;
-		if (*fmt == '.') {
-			++fmt;
-			if (is_digit(*fmt))
-				precision = skip_atoi(&fmt);
-			else if (*fmt == '*') {
-				precision = va_arg(args, int);
-			}
-			if (precision < 0) precision = 0;
-		}
+        int precision = -1;
+        if (*fmt == '.') {
+            ++fmt;
+            if (is_digit(*fmt)) {
+                precision = skip_atoi(&fmt);
+            } else if (*fmt == '*') {
+                precision = va_arg(args, int);
+            }
+            if (precision < 0) {
+                precision = 0;
+            }
+        }
 
-		int qualifier = -1;
-		if (*fmt == 'h' || *fmt == 'l' || *fmt == 'L') {
-			qualifier = *fmt;
-			++fmt;
-		}
+        int qualifier = -1;
+        if (*fmt == 'h' || *fmt == 'l' || *fmt == 'L') {
+            qualifier = *fmt;
+            ++fmt;
+        }
 
-		switch (*fmt) {
-		    case 'c': {
-		        if (!(flags & LEFT)) {
-		            while (--field_width > 0) *str++ = ' ';
-		        }
-		        *str++ = static_cast<byte_t>(va_arg(args, int));
-		        while (--field_width > 0) *str++ = ' ';
-		        break;
-		    }
-		    case 's': {
-                const char *s = va_arg(args, char *);
-		        if (!s) s = "(null)";
-		        int len = string_length(s);
-		        if (precision < 0) {
-		            precision = len;
-		        } else if (len > precision) {
-		            len = precision;
-		        }
+        switch (*fmt) {
+            case 'c': {
+                if (!(flags & LEFT)) {
+                    while (--field_width > 0) {
+                        *str++ = ' ';
+                    }
+                }
+                *str++ = static_cast<byte_t>(va_arg(args, int));
+                while (--field_width > 0) {
+                    *str++ = ' ';
+                }
+                break;
+            }
+            case 's': {
+                const char* s = va_arg(args, char*);
+                if (!s) {
+                    s = "(null)";
+                }
+                int len = string_length(s);
+                if (precision < 0) {
+                    precision = len;
+                } else if (len > precision) {
+                    len = precision;
+                }
 
-		        if (!(flags & LEFT)) {
-		            while (len < field_width--) *str++ = ' ';
-		        }
+                if (!(flags & LEFT)) {
+                    while (len < field_width--) {
+                        *str++ = ' ';
+                    }
+                }
 
-		        for (int i = 0; i < len; ++i) *str++ = *s++;
-		        while (len < field_width--) *str++ = ' ';
-		        break;
-		    }
-		    case 'o': {
-		        str = number(str, va_arg(args, unsigned long), 8,
-                    field_width, precision, flags);
-		        break;
-		    }
-		    case 'p': {
-		        if (field_width == -1) {
-		            field_width = 8;
-		            flags |= ZEROPAD;
-		        }
-		        str = number(str,
-                    reinterpret_cast<size_t>(va_arg(args, void *)), 16,
-                    field_width, precision, flags);
-		        break;
-		    }
-		    case 'x': {
-		        flags |= SMALL;
-		    }
-		    case 'X': {
-		        str = number(str, va_arg(args, unsigned long), 16,
-                    field_width, precision, flags);
-		        break;
-		    }
-		    case 'd': case 'i': {
-		        flags |= SIGN;
-		    }
-		    case 'u': {
-		        str = number(str, va_arg(args, unsigned long), 10,
-                    field_width, precision, flags);
-		        break;
-		    }
-		    case 'f': {
-		        if (qualifier == 'L') {
-		            const long double ld = va_arg(args, long double);
-		            str = float_number(str, static_cast<double>(ld), field_width, precision, flags);
-		        } else {
-		            const double d = va_arg(args, double);
-		            str = float_number(str, d, field_width, precision, flags);
-		        }
-		        break;
-		    }
-		    case 'n': {
-		        int* ip = va_arg(args, int *);
-		        *ip = (str - buf);
-		        break;
-		    }
-		    default: {
-		        if (*fmt != '%')
-		            *str++ = '%';
-		        if (*fmt)
-		            *str++ = *fmt;
-		        else
-		            --fmt;
-		        break;
-		    }
-		}
-	}
+                for (int i = 0; i < len; ++i) {
+                    *str++ = *s++;
+                }
+                while (len < field_width--) {
+                    *str++ = ' ';
+                }
+                break;
+            }
+            case 'o': {
+                str = number(str, va_arg(args, unsigned long), 8, field_width, precision, flags);
+                break;
+            }
+            case 'p': {
+                if (field_width == -1) {
+                    field_width = 8;
+                    flags |= ZEROPAD;
+                }
+                str = number(str, reinterpret_cast<size_t>(va_arg(args, void*)), 16, field_width, precision, flags);
+                break;
+            }
+            case 'x': {
+                flags |= SMALL;
+            }
+            case 'X': {
+                str = number(str, va_arg(args, unsigned long), 16, field_width, precision, flags);
+                break;
+            }
+            case 'd':
+            case 'i': {
+                flags |= SIGN;
+            }
+            case 'u': {
+                str = number(str, va_arg(args, unsigned long), 10, field_width, precision, flags);
+                break;
+            }
+            case 'f': {
+                if (qualifier == 'L') {
+                    const long double ld = va_arg(args, long double);
+                    str = float_number(str, static_cast<double>(ld), field_width, precision, flags);
+                } else {
+                    const double d = va_arg(args, double);
+                    str = float_number(str, d, field_width, precision, flags);
+                }
+                break;
+            }
+            case 'n': {
+                int* ip = va_arg(args, int*);
+                *ip = (str - buf);
+                break;
+            }
+            default: {
+                if (*fmt != '%') {
+                    *str++ = '%';
+                }
+                if (*fmt) {
+                    *str++ = *fmt;
+                } else {
+                    --fmt;
+                }
+                break;
+            }
+        }
+    }
 
     if (str < end) {
         *str = '\0';
@@ -371,11 +429,13 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
         *(end - 1) = '\0';
     }
 
-	return static_cast<int>(str - buf);
+    return static_cast<int>(str - buf);
 }
 
-int vsnprintf(char *buf, const size_t size, const char *fmt, std::va_list args) noexcept {
-    if (!buf || size == 0 || !fmt) return -1;
+int vsnprintf(char* buf, const size_t size, const char* fmt, std::va_list args) noexcept {
+    if (!buf || size == 0 || !fmt) {
+        return -1;
+    }
 
     char temp[MEMORY_BIG_ALLOC_THRESHHOLD];
     int len = vsprintf(temp, fmt, args);
@@ -398,7 +458,7 @@ int vsnprintf(char *buf, const size_t size, const char *fmt, std::va_list args) 
     return len;
 }
 
-int sprintf(char *buf, const char *fmt, ...) noexcept {
+int sprintf(char* buf, const char* fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);
@@ -408,7 +468,7 @@ int sprintf(char *buf, const char *fmt, ...) noexcept {
     return result;
 }
 
-int snprintf(char *buf, const size_t size, const char *fmt, ...) noexcept {
+int snprintf(char* buf, const size_t size, const char* fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);
@@ -418,7 +478,7 @@ int snprintf(char *buf, const size_t size, const char *fmt, ...) noexcept {
     return result;
 }
 
-int scprintf(const char *fmt, ...) noexcept {
+int scprintf(const char* fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);

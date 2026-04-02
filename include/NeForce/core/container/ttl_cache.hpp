@@ -40,22 +40,21 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此类不是线程安全的，多线程环境下需要外部同步
  */
-template <typename Key, typename Value>
-class ttl_cache {
+template <typename Key, typename Value> class ttl_cache {
 public:
-    using clock           = steady_clock;          ///< 时钟类型
-    using time_point      = clock::time_point;     ///< 时间点类型
-    using duration        = clock::duration;       ///< 持续时间类型
-    using size_type       = size_t;                ///< 大小类型
+    using clock = steady_clock;           ///< 时钟类型
+    using time_point = clock::time_point; ///< 时间点类型
+    using duration = clock::duration;     ///< 持续时间类型
+    using size_type = size_t;             ///< 大小类型
 
     /**
      * @enum refresh_policy
      * @brief 过期时间刷新策略
      */
     enum class refresh_policy : uint8_t {
-        never,              ///< 不刷新，保持原始过期时间
-        on_access,          ///< 访问时刷新，每次访问都重置过期时间
-        sliding_window      ///< 滑动窗口，每次访问延长TTL
+        never,         ///< 不刷新，保持原始过期时间
+        on_access,     ///< 访问时刷新，每次访问都重置过期时间
+        sliding_window ///< 滑动窗口，每次访问延长TTL
     };
 
 private:
@@ -66,17 +65,17 @@ private:
      * 存储缓存的值及其过期时间。
      */
     struct entry {
-        Value value;        ///< 缓存的值
-        time_point expiry;  ///< 过期时间点
+        Value value;       ///< 缓存的值
+        time_point expiry; ///< 过期时间点
     };
 
-    lru_cache<Key, entry> cache_;           ///< 底层LRU缓存
-    duration default_ttl_;                  ///< 默认生存时间
+    lru_cache<Key, entry> cache_; ///< 底层LRU缓存
+    duration default_ttl_;        ///< 默认生存时间
 
-    atomic<bool> running_{false};           ///< 清理线程运行标志
+    atomic<bool> running_{false};                          ///< 清理线程运行标志
     refresh_policy refresh_policy_{refresh_policy::never}; ///< 刷新策略
-    duration cleanup_interval_{seconds(1)}; ///< 清理间隔
-    thread cleanup_thread_;                 ///< 后台清理线程
+    duration cleanup_interval_{seconds(1)};                ///< 清理间隔
+    thread cleanup_thread_;                                ///< 后台清理线程
 
 public:
     /**
@@ -86,17 +85,16 @@ public:
      *
      * 创建一个指定容量和默认TTL的缓存。
      */
-    explicit ttl_cache(size_type capacity, duration default_ttl = seconds(60))
-    : cache_(capacity), default_ttl_(default_ttl) {}
+    explicit ttl_cache(size_type capacity, duration default_ttl = seconds(60)) :
+    cache_(capacity),
+    default_ttl_(default_ttl) {}
 
     /**
      * @brief 析构函数
      *
      * 自动停止并等待清理线程结束。
      */
-    ~ttl_cache() {
-        disable_cleanup();
-    }
+    ~ttl_cache() { disable_cleanup(); }
 
     /**
      * @brief 启用后台清理线程
@@ -106,7 +104,9 @@ public:
      * 如果清理线程已运行，此操作无效。
      */
     void enable_cleanup(duration interval = seconds(1)) {
-        if (running_) return;
+        if (running_) {
+            return;
+        }
 
         cleanup_interval_ = interval;
         running_ = true;
@@ -137,9 +137,7 @@ public:
      *
      * 决定访问缓存项时如何影响其过期时间。
      */
-    void set_refresh_policy(refresh_policy policy) {
-        refresh_policy_ = policy;
-    }
+    void set_refresh_policy(refresh_policy policy) { refresh_policy_ = policy; }
 
     /**
      * @brief 插入缓存项（使用默认TTL）
@@ -185,8 +183,7 @@ public:
             return none;
         }
 
-        if (refresh_policy_ == refresh_policy::on_access ||
-            refresh_policy_ == refresh_policy::sliding_window) {
+        if (refresh_policy_ == refresh_policy::on_access || refresh_policy_ == refresh_policy::sliding_window) {
             entry updated_entry = e;
             updated_entry.expiry = clock::now() + default_ttl_;
             cache_.put(key, updated_entry);
@@ -220,32 +217,24 @@ public:
      * @param key 键
      * @return 如果键存在并成功删除返回true，否则返回false
      */
-    bool erase(const Key& key) {
-        return cache_.erase(key);
-    }
+    bool erase(const Key& key) { return cache_.erase(key); }
 
     /**
      * @brief 清空所有缓存项
      */
-    void clear() {
-        cache_.clear();
-    }
+    void clear() { cache_.clear(); }
 
     /**
      * @brief 获取当前缓存大小
      * @return 缓存中的元素数量
      */
-    NEFORCE_NODISCARD size_type size() const noexcept {
-        return cache_.size();
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept { return cache_.size(); }
 
     /**
      * @brief 获取缓存容量
      * @return 缓存的最大容量
      */
-    NEFORCE_NODISCARD size_type capacity() const noexcept {
-        return cache_.capacity();
-    }
+    NEFORCE_NODISCARD size_type capacity() const noexcept { return cache_.capacity(); }
 
     /**
      * @brief 手动清理过期项
@@ -255,9 +244,7 @@ public:
      */
     void cleanup() {
         auto now = clock::now();
-        cache_.remove_if([now](const auto& pair) {
-            return pair.second.expiry < now;
-        });
+        cache_.remove_if([now](const auto& pair) { return pair.second.expiry < now; });
     }
 };
 

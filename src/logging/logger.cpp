@@ -1,5 +1,5 @@
-#include <NeForce/logging/logger.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/logging/logger.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void logger::enqueue(log_event&& event) {
@@ -50,10 +50,8 @@ void logger::worker_loop() {
 
         {
             unique_lock<mutex> lock(queue_mutex_);
-            cv_.wait_for(lock, milliseconds(100), [this] {
-                return !queue_.empty() ||
-                       flush_requested_.load(memory_order_acquire);
-            });
+            cv_.wait_for(lock, milliseconds(100),
+                         [this] { return !queue_.empty() || flush_requested_.load(memory_order_acquire); });
 
             while (!queue_.empty()) {
                 events.push_back(_NEFORCE move(queue_.front()));
@@ -67,8 +65,8 @@ void logger::worker_loop() {
 
         if (!events.empty()) {
             lock<mutex> sl(sinks_mutex_);
-            for (const auto& ev : events) {
-                for (const auto& sink : sinks_) {
+            for (const auto& ev: events) {
+                for (const auto& sink: sinks_) {
                     sink->log(ev);
                 }
             }
@@ -76,7 +74,7 @@ void logger::worker_loop() {
 
         if (should_flush) {
             lock<mutex> sl(sinks_mutex_);
-            for (const auto& sink : sinks_) {
+            for (const auto& sink: sinks_) {
                 sink->flush();
             }
             lock<mutex> fl(flush_mutex_);
@@ -85,8 +83,10 @@ void logger::worker_loop() {
     }
 }
 
-logger::logger(const LOG_LEVEL level, const bool async)
-: level_(level), async_(async), running_(false) {
+logger::logger(const LOG_LEVEL level, const bool async) :
+level_(level),
+async_(async),
+running_(false) {
     if (async_) {
         start_worker();
     }
@@ -120,9 +120,7 @@ void logger::add_sink(shared_ptr<log_sink> sink) {
     sinks_.push_back(move(sink));
 }
 
-void logger::set_level(const LOG_LEVEL level) {
-    level_ = level;
-}
+void logger::set_level(const LOG_LEVEL level) { level_ = level; }
 
 void logger::set_filter(function<bool(const log_event&)> filter) {
     lock<mutex> lock(filter_mutex_);
@@ -159,7 +157,7 @@ void logger::enable_async(const bool async) {
             log_event ev = _NEFORCE move(queue_.front());
             queue_.pop();
             lock<mutex> slk(sinks_mutex_);
-            for (const auto& sink : sinks_) {
+            for (const auto& sink: sinks_) {
                 sink->log(ev);
             }
         }
@@ -168,7 +166,9 @@ void logger::enable_async(const bool async) {
 }
 
 void logger::log(const LOG_LEVEL level, string msg, string file, string func, const int line) {
-    if (level < level_) return;
+    if (level < level_) {
+        return;
+    }
 
     log_event ev;
     ev.dt = datetime::now();
@@ -194,7 +194,7 @@ void logger::log(const LOG_LEVEL level, string msg, string file, string func, co
         enqueue(ev);
     } else {
         lock<mutex> lock(sinks_mutex_);
-        for (const auto& sink : sinks_) {
+        for (const auto& sink: sinks_) {
             sink->log(ev);
         }
     }
@@ -206,12 +206,10 @@ void logger::flush() {
         cv_.notify_one();
 
         unique_lock<mutex> lock(flush_mutex_);
-        flush_cv_.wait(lock, [this] {
-            return !flush_requested_.load(memory_order_acquire);
-        });
+        flush_cv_.wait(lock, [this] { return !flush_requested_.load(memory_order_acquire); });
     } else {
         lock<mutex> lock(sinks_mutex_);
-        for (const auto& sink : sinks_) {
+        for (const auto& sink: sinks_) {
             sink->flush();
         }
     }

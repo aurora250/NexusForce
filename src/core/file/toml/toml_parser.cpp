@@ -1,7 +1,7 @@
-#include <NeForce/core/utility/hexadecimal.hpp>
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/algorithm/remove.hpp>
 #include <NeForce/core/file/toml/toml_parser.hpp>
+#include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void toml_parser::skip_whitespace() noexcept {
@@ -53,18 +53,20 @@ void toml_parser::skip_whitespace_no_newline() noexcept {
 }
 
 char toml_parser::current() const noexcept {
-    if (pos_ < len_) return text_[pos_];
+    if (pos_ < len_) {
+        return text_[pos_];
+    }
     return '\0';
 }
 
 char toml_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) return text_[pos_ + offset];
+    if (pos_ + offset < len_) {
+        return text_[pos_ + offset];
+    }
     return '\0';
 }
 
-bool toml_parser::eof() const noexcept {
-    return pos_ >= len_;
-}
+bool toml_parser::eof() const noexcept { return pos_ >= len_; }
 
 void toml_parser::advance() noexcept {
     if (pos_ < len_) {
@@ -97,8 +99,7 @@ bool toml_parser::match(const char ch) noexcept {
 
 void toml_parser::throw_parse_error(string message) const {
     const string error_msg =
-        "Line " + _NEFORCE to_string(line_) +
-        ", Column " + _NEFORCE to_string(column_) + ": " + move(message);
+            "Line " + _NEFORCE to_string(line_) + ", Column " + _NEFORCE to_string(column_) + ": " + move(message);
     NEFORCE_THROW_EXCEPTION(toml_exception(error_msg.data()));
 }
 
@@ -151,16 +152,32 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
 
         if (current() == '\\') {
             advance();
-            if (eof()) throw_parse_error("Unexpected end in string escape");
+            if (eof()) {
+                throw_parse_error("Unexpected end in string escape");
+            }
 
             switch (current()) {
-                case 'b': result += '\b'; break;
-                case 't': result += '\t'; break;
-                case 'n': result += '\n'; break;
-                case 'f': result += '\f'; break;
-                case 'r': result += '\r'; break;
-                case '"': result += '"'; break;
-                case '\\': result += '\\'; break;
+                case 'b':
+                    result += '\b';
+                    break;
+                case 't':
+                    result += '\t';
+                    break;
+                case 'n':
+                    result += '\n';
+                    break;
+                case 'f':
+                    result += '\f';
+                    break;
+                case 'r':
+                    result += '\r';
+                    break;
+                case '"':
+                    result += '"';
+                    break;
+                case '\\':
+                    result += '\\';
+                    break;
                 case 'u': {
                     advance();
                     if (eof()) {
@@ -210,31 +227,40 @@ unique_ptr<toml_string> toml_parser::parse_literal_string() {
 }
 
 unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
-    expect('"'); expect('"'); expect('"');
+    expect('"');
+    expect('"');
+    expect('"');
 
-    if (current() == '\n') advance();
-    else if (current() == '\r' && peek() == '\n') {
-        advance(); advance();
+    if (current() == '\n') {
+        advance();
+    } else if (current() == '\r' && peek() == '\n') {
+        advance();
+        advance();
     }
 
     string result;
 
     while (!eof()) {
         if (current() == '"' && peek() == '"' && peek(2) == '"') {
-            advance(); advance(); advance();
+            advance();
+            advance();
+            advance();
             break;
         }
 
         if (current() == '\\') {
             advance();
-            if (eof()) throw_parse_error("Unexpected end in string escape");
+            if (eof()) {
+                throw_parse_error("Unexpected end in string escape");
+            }
 
             if (current() == '\n') {
                 advance();
                 skip_whitespace();
                 continue;
             } else if (current() == '\r' && peek() == '\n') {
-                advance(); advance();
+                advance();
+                advance();
                 skip_whitespace();
                 continue;
             } else if (current() == ' ' || current() == '\t') {
@@ -244,20 +270,35 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                     skip_whitespace();
                     continue;
                 } else if (current() == '\r' && peek() == '\n') {
-                    advance(); advance();
+                    advance();
+                    advance();
                     skip_whitespace();
                     continue;
                 }
             }
 
             switch (current()) {
-                case 'b': result += '\b'; break;
-                case 't': result += '\t'; break;
-                case 'n': result += '\n'; break;
-                case 'f': result += '\f'; break;
-                case 'r': result += '\r'; break;
-                case '"': result += '"'; break;
-                case '\\': result += '\\'; break;
+                case 'b':
+                    result += '\b';
+                    break;
+                case 't':
+                    result += '\t';
+                    break;
+                case 'n':
+                    result += '\n';
+                    break;
+                case 'f':
+                    result += '\f';
+                    break;
+                case 'r':
+                    result += '\r';
+                    break;
+                case '"':
+                    result += '"';
+                    break;
+                case '\\':
+                    result += '\\';
+                    break;
                 case 'u': {
                     advance();
                     const char32_t cp = parse_unicode_escape(4);
@@ -284,19 +325,24 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
 }
 
 unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
-    expect('\''); expect('\''); expect('\'');
+    expect('\'');
+    expect('\'');
+    expect('\'');
 
     if (current() == '\n') {
         advance();
     } else if (current() == '\r' && peek() == '\n') {
-        advance(); advance();
+        advance();
+        advance();
     }
 
     string result;
 
     while (!eof()) {
         if (current() == '\'' && peek() == '\'' && peek(2) == '\'') {
-            advance(); advance(); advance();
+            advance();
+            advance();
+            advance();
             break;
         }
         result += current();
@@ -331,20 +377,25 @@ unique_ptr<toml_value> toml_parser::parse_number() {
     if (current() == '0' && !eof()) {
         const char next = peek();
         if (next == 'x' || next == 'X') {
-            advance(); advance();
+            advance();
+            advance();
             return parse_integer(16);
         } else if (next == 'o' || next == 'O') {
-            advance(); advance();
+            advance();
+            advance();
             return parse_integer(8);
         } else if (next == 'b' || next == 'B') {
-            advance(); advance();
+            advance();
+            advance();
             return parse_integer(2);
         }
     }
 
     bool has_digits = false;
     while (!eof() && (is_digit(current()) || current() == '_')) {
-        if (is_digit(current())) has_digits = true;
+        if (is_digit(current())) {
+            has_digits = true;
+        }
         advance();
     }
 
@@ -366,7 +417,9 @@ unique_ptr<toml_value> toml_parser::parse_number() {
     if (current() == 'e' || current() == 'E') {
         is_float = true;
         advance();
-        if (current() == '+' || current() == '-') advance();
+        if (current() == '+' || current() == '-') {
+            advance();
+        }
         if (!is_digit(current())) {
             throw_parse_error("Expected digit in exponent");
         }
@@ -445,12 +498,18 @@ unique_ptr<toml_integer> toml_parser::parse_integer(const int base) {
 
 unique_ptr<toml_boolean> toml_parser::parse_boolean() {
     if (current() == 't' && peek() == 'r' && peek(2) == 'u' && peek(3) == 'e') {
-        advance(); advance(); advance(); advance();
+        advance();
+        advance();
+        advance();
+        advance();
         return make_unique<toml_boolean>(true);
     }
-    if (current() == 'f' && peek() == 'a' && peek(2) == 'l' &&
-        peek(3) == 's' && peek(4) == 'e') {
-        advance(); advance(); advance(); advance(); advance();
+    if (current() == 'f' && peek() == 'a' && peek(2) == 'l' && peek(3) == 's' && peek(4) == 'e') {
+        advance();
+        advance();
+        advance();
+        advance();
+        advance();
         return make_unique<toml_boolean>(false);
     }
     throw_parse_error("Expected boolean value");
@@ -460,9 +519,8 @@ unique_ptr<toml_boolean> toml_parser::parse_boolean() {
 unique_ptr<toml_datetime> toml_parser::parse_datetime() {
     const size_t start_pos = pos_;
 
-    while (!eof() && (is_digit(current()) || current() == '-' || current() == ':' ||
-        current() == 'T' || current() == 'Z' || current() == '+' ||
-        current() == '.' || current() == ' ')) {
+    while (!eof() && (is_digit(current()) || current() == '-' || current() == ':' || current() == 'T' ||
+                      current() == 'Z' || current() == '+' || current() == '.' || current() == ' ')) {
         advance();
     }
 
@@ -470,9 +528,7 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
 
     const bool has_date_sep = dt_str.find('-') != string::npos;
     const bool has_time_sep = dt_str.find(':') != string::npos;
-    const bool has_datetime_sep =
-        dt_str.find('T') != string::npos ||
-        dt_str.find(' ') != string::npos;
+    const bool has_datetime_sep = dt_str.find('T') != string::npos || dt_str.find(' ') != string::npos;
 
     if (!has_date_sep && !has_time_sep) {
         throw_parse_error("Not a valid datetime format");
@@ -480,12 +536,11 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
 
     toml_datetime::datetime_type dt_type;
     if (has_datetime_sep) {
-        if (dt_str.find('Z') != string::npos || dt_str.find('+') != string::npos ||
-            dt_str.rfind('-') > 10) {
+        if (dt_str.find('Z') != string::npos || dt_str.find('+') != string::npos || dt_str.rfind('-') > 10) {
             dt_type = toml_datetime::OffsetDateTime;
-            } else {
-                dt_type = toml_datetime::LocalDateTime;
-            }
+        } else {
+            dt_type = toml_datetime::LocalDateTime;
+        }
     } else if (has_time_sep) {
         dt_type = toml_datetime::LocalTime;
     } else {
@@ -518,7 +573,9 @@ unique_ptr<toml_array> toml_parser::parse_array() {
         if (current() == ',') {
             advance();
             skip_whitespace_and_comments();
-            if (current() == ']') break;
+            if (current() == ']') {
+                break;
+            }
         } else if (current() != ']') {
             throw_parse_error("Expected ',' or ']' in array");
         }
@@ -741,7 +798,7 @@ void toml_parser::parse_array_table_header() {
 
 toml_table* toml_parser::get_or_create_table(const vector<string>& path) const {
     toml_table* tbl = root_.get();
-    for (const string& key : path) {
+    for (const string& key: path) {
         const auto member = tbl->get_member(key);
         if (member && member->is_table()) {
             tbl = const_cast<toml_table*>(member->as_table());
@@ -759,7 +816,7 @@ toml_table* toml_parser::get_or_create_table(const vector<string>& path) const {
 
 toml_table* toml_parser::navigate_to_table(const vector<string>& path) const {
     toml_table* tbl = root_.get();
-    for (const string& key : path) {
+    for (const string& key: path) {
         const toml_value* member = tbl->get_member(key);
         if (!member || !member->is_table()) {
             return nullptr;
@@ -777,7 +834,9 @@ void toml_parser::set_current_table(const vector<string>& path) {
 unique_ptr<toml_table> toml_parser::parse() {
     while (!eof()) {
         skip_whitespace_and_comments();
-        if (eof()) break;
+        if (eof()) {
+            break;
+        }
 
         if (current() == '[') {
             if (is_in_array_table_ && !context_stack_.empty()) {

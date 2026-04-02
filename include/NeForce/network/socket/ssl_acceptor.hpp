@@ -1,7 +1,7 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_ACCEPTOR_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_ACCEPTOR_HPP__
-#include "NeForce/network/socket/tcp_acceptor.hpp"
 #include "NeForce/network/socket/ssl_socket.hpp"
+#include "NeForce/network/socket/tcp_acceptor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API ssl_acceptor final : public tcp_acceptor {
@@ -15,13 +15,9 @@ public:
 
     NEFORCE_NODISCARD ssl_socket accept_ssl();
 
-    NEFORCE_NODISCARD ssl_context& context() noexcept {
-        return ctx_;
-    }
+    NEFORCE_NODISCARD ssl_context& context() noexcept { return ctx_; }
 
-    NEFORCE_NODISCARD const ssl_context& context() const noexcept {
-        return ctx_;
-    }
+    NEFORCE_NODISCARD const ssl_context& context() const noexcept { return ctx_; }
 };
 
 NEFORCE_END_NAMESPACE__

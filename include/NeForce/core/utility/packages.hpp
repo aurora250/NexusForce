@@ -10,8 +10,8 @@
  */
 
 #include "NeForce/core/interface/iobject.hpp"
-#include "NeForce/core/string/to_numerics.hpp"
 #include "NeForce/core/string/format.hpp"
+#include "NeForce/core/string/to_numerics.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -36,13 +36,13 @@ struct boolean : ipackage<boolean, bool>, iobject<boolean> {
     constexpr boolean(const boolean&) noexcept = default;
     constexpr boolean(boolean&&) noexcept = default;
 
-    constexpr boolean& operator =(const boolean& other) noexcept = default;
-    constexpr boolean& operator =(boolean&& other) noexcept = default;
+    constexpr boolean& operator=(const boolean& other) noexcept = default;
+    constexpr boolean& operator=(boolean&& other) noexcept = default;
 
-    explicit constexpr boolean(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr boolean(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr boolean& operator =(const value_type value) noexcept {
+    constexpr boolean& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -60,9 +60,7 @@ struct boolean : ipackage<boolean, bool>, iobject<boolean> {
      * @brief 将当前对象转换为字符串
      * @return 字符串表示（"true"或"false"）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return value_ ? "true" : "false";
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return value_ ? "true" : "false"; }
 
     /**
      * @brief 从字符串解析布尔值
@@ -95,68 +93,62 @@ struct boolean : ipackage<boolean, bool>, iobject<boolean> {
      * @brief 逻辑非操作符
      * @return 取反后的布尔对象
      */
-    constexpr boolean operator !() const noexcept {
-        return boolean(!value_);
-    }
+    constexpr boolean operator!() const noexcept { return boolean(!value_); }
 };
 
-template <>
-struct package<bool> {
+template <> struct package<bool> {
     using type = boolean;
 };
 
-template <>
-struct unpackage<boolean> {
+template <> struct unpackage<boolean> {
     using type = bool;
 };
 
 
-#define __NEFORCE_BUILD_INTEGER_STRUCT(SIGN, UPPER, BYTE) \
-struct SIGN## integer## BYTE : iobject<SIGN## integer## BYTE>, ipackage<SIGN## integer## BYTE, SIGN## int## BYTE## _t> { \
-    using value_type = SIGN## int## BYTE## _t; \
-    using base = ipackage<SIGN## integer## BYTE, SIGN## int## BYTE## _t>; \
-    \
-    constexpr SIGN## integer## BYTE() noexcept = default; \
-    NEFORCE_CONSTEXPR20 ~SIGN## integer## BYTE() = default; \
-    \
-    constexpr SIGN## integer## BYTE(const SIGN## integer## BYTE&) noexcept = default; \
-    constexpr SIGN## integer## BYTE(SIGN## integer## BYTE&&) noexcept = default; \
-    \
-    constexpr SIGN## integer## BYTE& operator =(const SIGN## integer## BYTE& other) noexcept = default; \
-    constexpr SIGN## integer## BYTE& operator =(SIGN## integer## BYTE&& other) noexcept = default; \
-    \
-    explicit constexpr SIGN## integer## BYTE(const value_type value) noexcept \
-    : base(value) {} \
-    \
-    constexpr SIGN## integer## BYTE& operator =(const value_type value) noexcept { \
-        value_ = value; \
-        return *this; \
-    } \
-    \
-    NEFORCE_NODISCARD constexpr explicit operator bool() const noexcept { \
-        return value_ != _NEFORCE initialize<value_type>(); \
-    } \
-    \
-    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) { \
-        return inner::__int_to_string_dispatch(value); \
-    } \
-    \
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { \
-        return inner::__int_to_string_dispatch(value_); \
-    } \
-    \
-    NEFORCE_NODISCARD static constexpr SIGN## integer## BYTE parse(const string_view str) { \
-        return SIGN## integer## BYTE{_NEFORCE to_## SIGN## int## BYTE (str)}; \
-    } \
-}; \
-template <> \
-struct package<SIGN## int## BYTE## _t> { \
-    using type = SIGN## integer## BYTE; \
-}; \
-template <> \
-struct unpackage<SIGN## integer## BYTE> { \
-    using type = SIGN## int## BYTE## _t; \
-};
+#define __NEFORCE_BUILD_INTEGER_STRUCT(SIGN, UPPER, BYTE)                                                           \
+    struct SIGN##integer##BYTE : iobject<SIGN##integer##BYTE>, ipackage<SIGN##integer##BYTE, SIGN##int##BYTE##_t> { \
+        using value_type = SIGN##int##BYTE##_t;                                                                     \
+        using base = ipackage<SIGN##integer##BYTE, SIGN##int##BYTE##_t>;                                            \
+                                                                                                                    \
+        constexpr SIGN##integer##BYTE() noexcept = default;                                                         \
+        NEFORCE_CONSTEXPR20 ~SIGN##integer##BYTE() = default;                                                       \
+                                                                                                                    \
+        constexpr SIGN##integer##BYTE(const SIGN##integer##BYTE&) noexcept = default;                               \
+        constexpr SIGN##integer##BYTE(SIGN##integer##BYTE&&) noexcept = default;                                    \
+                                                                                                                    \
+        constexpr SIGN##integer##BYTE& operator=(const SIGN##integer##BYTE& other) noexcept = default;              \
+        constexpr SIGN##integer##BYTE& operator=(SIGN##integer##BYTE&& other) noexcept = default;                   \
+                                                                                                                    \
+        explicit constexpr SIGN##integer##BYTE(const value_type value) noexcept :                                   \
+        base(value) {}                                                                                              \
+                                                                                                                    \
+        constexpr SIGN##integer##BYTE& operator=(const value_type value) noexcept {                                 \
+            value_ = value;                                                                                         \
+            return *this;                                                                                           \
+        }                                                                                                           \
+                                                                                                                    \
+        NEFORCE_NODISCARD constexpr explicit operator bool() const noexcept {                                       \
+            return value_ != _NEFORCE initialize<value_type>();                                                     \
+        }                                                                                                           \
+                                                                                                                    \
+        NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {                     \
+            return inner::__int_to_string_dispatch(value);                                                          \
+        }                                                                                                           \
+                                                                                                                    \
+        NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {                                            \
+            return inner::__int_to_string_dispatch(value_);                                                         \
+        }                                                                                                           \
+                                                                                                                    \
+        NEFORCE_NODISCARD static constexpr SIGN##integer##BYTE parse(const string_view str) {                       \
+            return SIGN##integer##BYTE{_NEFORCE to_##SIGN##int##BYTE(str)};                                         \
+        }                                                                                                           \
+    };                                                                                                              \
+    template <> struct package<SIGN##int##BYTE##_t> {                                                               \
+        using type = SIGN##integer##BYTE;                                                                           \
+    };                                                                                                              \
+    template <> struct unpackage<SIGN##integer##BYTE> {                                                             \
+        using type = SIGN##int##BYTE##_t;                                                                           \
+    };
 
 /**
  * @struct integer8
@@ -164,7 +156,7 @@ struct unpackage<SIGN## integer## BYTE> { \
  *
  * 提供8位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(,,8)
+__NEFORCE_BUILD_INTEGER_STRUCT(, , 8)
 
 /**
  * @struct integer16
@@ -172,7 +164,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(,,8)
  *
  * 提供16位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(,,16)
+__NEFORCE_BUILD_INTEGER_STRUCT(, , 16)
 
 /**
  * @struct integer32
@@ -180,7 +172,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(,,16)
  *
  * 提供32位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(,,32)
+__NEFORCE_BUILD_INTEGER_STRUCT(, , 32)
 
 /**
  * @struct integer64
@@ -188,7 +180,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(,,32)
  *
  * 提供64位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(,,64)
+__NEFORCE_BUILD_INTEGER_STRUCT(, , 64)
 
 /**
  * @struct uinteger8
@@ -196,7 +188,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(,,64)
  *
  * 提供无符号8位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(u,U,8)
+__NEFORCE_BUILD_INTEGER_STRUCT(u, U, 8)
 
 /**
  * @struct uinteger16
@@ -204,7 +196,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u,U,8)
  *
  * 提供无符号16位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(u,U,16)
+__NEFORCE_BUILD_INTEGER_STRUCT(u, U, 16)
 
 /**
  * @struct uinteger32
@@ -212,7 +204,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u,U,16)
  *
  * 提供无符号32位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(u,U,32)
+__NEFORCE_BUILD_INTEGER_STRUCT(u, U, 32)
 
 /**
  * @struct uinteger64
@@ -220,26 +212,22 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u,U,32)
  *
  * 提供无符号64位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
-__NEFORCE_BUILD_INTEGER_STRUCT(u,U,64)
+__NEFORCE_BUILD_INTEGER_STRUCT(u, U, 64)
 
 #undef __NEFORCE_BUILD_INTEGER_STRUCT
 
 #ifdef NEFORCE_PLATFORM_LINUX64
-template <>
-struct package<long long> {
+template <> struct package<long long> {
     using type = integer64;
 };
-template <>
-struct package<unsigned long long> {
+template <> struct package<unsigned long long> {
     using type = uinteger64;
 };
 #else
-template <>
-struct package<long> {
+template <> struct package<long> {
     using type = integer32;
 };
-template <>
-struct package<unsigned long> {
+template <> struct package<unsigned long> {
     using type = uinteger32;
 };
 #endif
@@ -261,13 +249,13 @@ struct float32 : iobject<float32>, ipackage<float32, float32_t> {
     constexpr float32(const float32&) noexcept = default;
     constexpr float32(float32&&) noexcept = default;
 
-    constexpr float32& operator =(const float32& other) noexcept = default;
-    constexpr float32& operator =(float32&& other) noexcept = default;
+    constexpr float32& operator=(const float32& other) noexcept = default;
+    constexpr float32& operator=(float32&& other) noexcept = default;
 
-    explicit constexpr float32(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr float32(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr float32& operator =(const value_type value) noexcept {
+    constexpr float32& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -279,22 +267,18 @@ struct float32 : iobject<float32>, ipackage<float32, float32_t> {
     NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
         return float32(value).to_string();
     }
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return inner::__float_to_string<char>(value_);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__float_to_string<char>(value_); }
 
     NEFORCE_NODISCARD static constexpr float32 parse(const string_view str) {
         return float32{_NEFORCE to_float32(str)};
     }
 };
 
-template <>
-struct package<float32_t> {
+template <> struct package<float32_t> {
     using type = float32;
 };
 
-template <>
-struct unpackage<float32> {
+template <> struct unpackage<float32> {
     using type = float32_t;
 };
 
@@ -315,13 +299,13 @@ struct float64 : iobject<float64>, ipackage<float64, float64_t> {
     constexpr float64(const float64&) noexcept = default;
     constexpr float64(float64&&) noexcept = default;
 
-    constexpr float64& operator =(const float64& other) noexcept = default;
-    constexpr float64& operator =(float64&& other) noexcept = default;
+    constexpr float64& operator=(const float64& other) noexcept = default;
+    constexpr float64& operator=(float64&& other) noexcept = default;
 
-    explicit constexpr float64(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr float64(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr float64& operator =(const value_type value) noexcept {
+    constexpr float64& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -333,22 +317,18 @@ struct float64 : iobject<float64>, ipackage<float64, float64_t> {
     NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
         return float64(value).to_string();
     }
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return inner::__float_to_string<char>(value_);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__float_to_string<char>(value_); }
 
     NEFORCE_NODISCARD static constexpr float64 parse(const string_view str) {
         return float64{_NEFORCE to_float64(str)};
     }
 };
 
-template <>
-struct package<float64_t> {
+template <> struct package<float64_t> {
     using type = float64;
 };
 
-template <>
-struct unpackage<float64> {
+template <> struct unpackage<float64> {
     using type = float64_t;
 };
 
@@ -369,13 +349,13 @@ struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
     constexpr decimal(const decimal&) noexcept = default;
     constexpr decimal(decimal&&) noexcept = default;
 
-    constexpr decimal& operator =(const decimal& other) noexcept = default;
-    constexpr decimal& operator =(decimal&& other) noexcept = default;
+    constexpr decimal& operator=(const decimal& other) noexcept = default;
+    constexpr decimal& operator=(decimal&& other) noexcept = default;
 
-    explicit constexpr decimal(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr decimal(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr decimal& operator =(const value_type value) noexcept {
+    constexpr decimal& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -387,22 +367,18 @@ struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
     NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
         return decimal(value).to_string();
     }
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return inner::__float_to_string<char>(value_);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__float_to_string<char>(value_); }
 
     NEFORCE_NODISCARD static constexpr decimal parse(const string_view str) {
         return decimal{_NEFORCE to_decimal(str)};
     }
 };
 
-template <>
-struct package<decimal_t> {
+template <> struct package<decimal_t> {
     using type = decimal;
 };
 
-template <>
-struct unpackage<decimal> {
+template <> struct unpackage<decimal> {
     using type = decimal_t;
 };
 

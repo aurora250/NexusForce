@@ -9,7 +9,7 @@ namespace {
         string result;
         result.reserve(str.size() * 3);
 
-        for (const auto c : str) {
+        for (const auto c: str) {
             if (is_alpha_or_digit(c) || c == '-' || c == '_' || c == '.' || c == '~') {
                 result += c;
             } else if (c == ' ') {
@@ -96,7 +96,9 @@ namespace {
         tokens.push_back(str.substr(start).trim());
 
         http_cookie c{};
-        if (tokens.empty()) return c;
+        if (tokens.empty()) {
+            return c;
+        }
 
         const size_t eq_pos = tokens[0].find('=');
         if (eq_pos == string::npos) {
@@ -141,8 +143,8 @@ namespace {
         return c;
     }
 
-    bool parse_response(const string_view resp_str, http_client_response& resp,
-                        const string& request_host, const string& request_path) {
+    bool parse_response(const string_view resp_str, http_client_response& resp, const string& request_host,
+                        const string& request_path) {
         const size_t line_end = resp_str.find("\r\n");
         if (line_end == string::npos) {
             return false;
@@ -196,10 +198,11 @@ namespace {
 
         while (hpos < headers_block.size()) {
             const auto hline_end = headers_block.find("\r\n", hpos);
-            string_view line = headers_block.substr(
-                hpos, hline_end == string::npos ?
-                      headers_block.size() - hpos : hline_end - hpos);
-            if (line.empty()) break;
+            string_view line = headers_block.substr(hpos, hline_end == string::npos ? headers_block.size() - hpos
+                                                                                    : hline_end - hpos);
+            if (line.empty()) {
+                break;
+            }
 
             const size_t colon = line.find(':');
 
@@ -259,7 +262,7 @@ namespace {
         string result;
         bool first = true;
 
-        for (const auto& pair : params) {
+        for (const auto& pair: params) {
             const auto& key = pair.first;
             const auto& value = pair.second;
             if (!first) {
@@ -271,7 +274,7 @@ namespace {
 
         return result;
     }
-}
+} // namespace
 
 
 string http_client_request::build_full_path() const {
@@ -280,7 +283,7 @@ string http_client_request::build_full_path() const {
     if (!query_params.empty()) {
         full_path += "?";
         bool first = true;
-        for (const auto& pair : query_params) {
+        for (const auto& pair: query_params) {
             const auto& key = pair.first;
             const auto& value = pair.second;
             if (!first) {
@@ -303,8 +306,7 @@ string http_client::build_request_str(const http_client_request& req, const url&
     req_str += req.method.method() + " " + full_path + " " + req.version + "\r\n";
 
     req_str += "Host: " + req.host;
-    if ((req_url.scheme == "http" && req.port != 80) ||
-        (req_url.scheme == "https" && req.port != 443)) {
+    if ((req_url.scheme == "http" && req.port != 80) || (req_url.scheme == "https" && req.port != 443)) {
         req_str += ":" + to_string(req.port);
     }
     req_str += "\r\n";
@@ -316,7 +318,7 @@ string http_client::build_request_str(const http_client_request& req, const url&
     }
 
     // Persistent headers
-    for (const auto& kv : persistent_headers_) {
+    for (const auto& kv: persistent_headers_) {
         const string& key = kv.first;
         const string& value = kv.second;
         if (req.headers.find(key) == req.headers.end() && key != "Host" && key != "Cookie") {
@@ -326,13 +328,15 @@ string http_client::build_request_str(const http_client_request& req, const url&
 
     // Request headers
     bool has_content_type = false;
-    for (const auto& kv : req.headers) {
+    for (const auto& kv: req.headers) {
         const string& key = kv.first;
         const string& value = kv.second;
         string key_lower = key;
         key_lower.lowercase();
 
-        if (key_lower == "content-type") has_content_type = true;
+        if (key_lower == "content-type") {
+            has_content_type = true;
+        }
         if (key_lower != "host" && key_lower != "cookie") {
             req_str += key + ": " + value + "\r\n";
         }
@@ -375,10 +379,8 @@ bool http_client::send_request(const string_view request_str, time_point& send_s
     }
 }
 
-optional<http_client_response> http_client::read_response(
-    time_point& receive_start,
-    const string& request_host,
-    const string& request_path) {
+optional<http_client_response> http_client::read_response(time_point& receive_start, const string& request_host,
+                                                          const string& request_path) {
 
     receive_start = steady_clock::now();
 
@@ -389,7 +391,9 @@ optional<http_client_response> http_client::read_response(
         size_t header_end_pos = string::npos;
         while (header_end_pos == string::npos) {
             const ssize_t n = client_.receive(buffer.data(), buffer.size());
-            if (n <= 0) break;
+            if (n <= 0) {
+                break;
+            }
             response_data.append(buffer.data(), n);
             header_end_pos = response_data.find("\r\n\r\n");
         }
@@ -413,7 +417,9 @@ optional<http_client_response> http_client::read_response(
 
             while (body_received < meta.content_length) {
                 const ssize_t n = client_.receive(buffer.data(), buffer.size());
-                if (n <= 0) break;
+                if (n <= 0) {
+                    break;
+                }
                 response_data.append(buffer.data(), n);
                 body_received += n;
 
@@ -430,16 +436,22 @@ optional<http_client_response> http_client::read_response(
                 if (response_data.find("0\r\n\r\n", body_start) != string::npos) {
                     break;
                 }
-                if (response_data.size() >= config_.max_response_size) break;
+                if (response_data.size() >= config_.max_response_size) {
+                    break;
+                }
 
                 const ssize_t n = client_.receive(buffer.data(), buffer.size());
-                if (n <= 0) break;
+                if (n <= 0) {
+                    break;
+                }
                 response_data.append(buffer.data(), n);
             }
         } else {
             while (response_data.size() < config_.max_response_size) {
                 const ssize_t n = client_.receive(buffer.data(), buffer.size());
-                if (n <= 0) break;
+                if (n <= 0) {
+                    break;
+                }
                 response_data.append(buffer.data(), n);
             }
         }
@@ -581,14 +593,13 @@ http_client_response http_client::do_request(http_client_request&& request, int 
 void http_client::update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url) {
     lock<mutex> lk(mutex_);
 
-    for (const auto &c : resp_cookies) {
+    for (const auto& c: resp_cookies) {
         string domain = c.domain.empty() ? request_url.host : c.domain;
         string path = c.path;
         string key = c.name.cookie_name() + "@" + domain + path;
 
         const bool should_delete =
-            (c.max_age == 0) ||
-            (c.max_age > 0 && c.is_valid() && c.expires.is_valid() && c.is_expired());
+                (c.max_age == 0) || (c.max_age > 0 && c.is_valid() && c.expires.is_valid() && c.is_expired());
 
         if (should_delete) {
             cookie_jar_.erase(key);
@@ -601,7 +612,7 @@ void http_client::update_cookies(const vector<http_cookie>& resp_cookies, const 
 string http_client::build_cookie_header(const url& request_url) const {
     string cookie_header;
 
-    for (const auto& pair : cookie_jar_) {
+    for (const auto& pair: cookie_jar_) {
         const auto& c = pair.second;
         if (c.max_age == 0) {
             continue;
@@ -643,8 +654,8 @@ void http_client::set_cookie(const http_cookie& c, const string& domain, const s
     cookie_jar_[key] = c;
 }
 
-http_client::http_client(config config)
-: config_(move(config)) {
+http_client::http_client(config config) :
+config_(move(config)) {
     persistent_headers_["User-Agent"] = config_.user_agent;
     persistent_headers_["Accept"] = "*/*";
 
@@ -653,8 +664,9 @@ http_client::http_client(config config)
     client_.set_recv_timeout(config_.receive_timeout);
 }
 
-http_client::http_client(ssl_context ctx, config config)
-: client_(_NEFORCE move(ctx)), config_(_NEFORCE move(config)) {
+http_client::http_client(ssl_context ctx, config config) :
+client_(_NEFORCE move(ctx)),
+config_(_NEFORCE move(config)) {
     persistent_headers_["User-Agent"] = config_.user_agent;
     persistent_headers_["Accept"] = "*/*";
 
@@ -664,9 +676,7 @@ http_client::http_client(ssl_context ctx, config config)
     client_.set_verify_peer(config_.verify_ssl);
 }
 
-void http_client::set_ssl_context(ssl_context ctx) {
-    client_.set_ssl_context(move(ctx));
-}
+void http_client::set_ssl_context(ssl_context ctx) { client_.set_ssl_context(move(ctx)); }
 
 void http_client::set_verify_ssl(const bool verify) {
     config_.verify_ssl = verify;
@@ -690,11 +700,8 @@ http_client_response http_client::get(const string& url, const unordered_map<str
     return request(move(req));
 }
 
-http_client_response http_client::post(
-    const string& url,
-    const string& body,
-    const string& content_type,
-    const unordered_map<string, string>& headers) {
+http_client_response http_client::post(const string& url, const string& body, const string& content_type,
+                                       const unordered_map<string, string>& headers) {
 
     _NEFORCE url parsed_url(url::parse(url.view()));
 
@@ -715,28 +722,21 @@ http_client_response http_client::post(
     return request(move(req));
 }
 
-http_client_response http_client::post_json(
-    const string& url_str,
-    const string& json_body,
-    const unordered_map<string, string>& headers) {
+http_client_response http_client::post_json(const string& url_str, const string& json_body,
+                                            const unordered_map<string, string>& headers) {
 
     return post(url_str, json_body, "application/json", headers);
 }
 
-http_client_response http_client::post_form(
-    const string& url_str,
-    const unordered_map<string, string>& form_data,
-    const unordered_map<string, string>& headers) {
+http_client_response http_client::post_form(const string& url_str, const unordered_map<string, string>& form_data,
+                                            const unordered_map<string, string>& headers) {
 
     const string body = build_query_string(form_data);
     return post(url_str, body, "application/x-www-form-urlencoded", headers);
 }
 
-http_client_response http_client::put(
-    const string& url,
-    const string& body,
-    const string& content_type,
-    const unordered_map<string, string>& headers) {
+http_client_response http_client::put(const string& url, const string& body, const string& content_type,
+                                      const unordered_map<string, string>& headers) {
 
     _NEFORCE url parsed_url(url::parse(url.view()));
 
@@ -811,11 +811,8 @@ http_client_response http_client::options(const string& url, const unordered_map
     return request(move(req));
 }
 
-http_client_response http_client::patch(
-    const string& url,
-    const string& body,
-    const string& content_type,
-    const unordered_map<string, string>& headers) {
+http_client_response http_client::patch(const string& url, const string& body, const string& content_type,
+                                        const unordered_map<string, string>& headers) {
 
     _NEFORCE url parsed_url(url::parse(url.view()));
 
@@ -869,18 +866,12 @@ bool http_client::download_file(const string& url, path output, const bool is_bi
     }
 }
 
-http_client_response http_client::request(http_client_request req) {
-    return do_request(move(req), 0);
-}
+http_client_response http_client::request(http_client_request req) { return do_request(move(req), 0); }
 
 future<http_client_response> http_client::request_async(http_client_request req) {
-    return _NEFORCE async(launch::async, [this, req = move(req)]() mutable {
-        return request(move(req));
-    });
+    return _NEFORCE async(launch::async, [this, req = move(req)]() mutable { return request(move(req)); });
 }
 
-void http_client::close() {
-    client_.disconnect();
-}
+void http_client::close() { client_.disconnect(); }
 
 NEFORCE_END_NAMESPACE__

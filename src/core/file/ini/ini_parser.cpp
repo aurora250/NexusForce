@@ -1,5 +1,5 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/ini/ini_parser.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void ini_parser::skip_whitespace() noexcept {
@@ -18,18 +18,20 @@ void ini_parser::skip_line() noexcept {
 }
 
 char ini_parser::current() const noexcept {
-    if (pos_ < len_) return text_[pos_];
+    if (pos_ < len_) {
+        return text_[pos_];
+    }
     return '\0';
 }
 
 char ini_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) return text_[pos_ + offset];
+    if (pos_ + offset < len_) {
+        return text_[pos_ + offset];
+    }
     return '\0';
 }
 
-bool ini_parser::eof() const noexcept {
-    return pos_ >= len_;
-}
+bool ini_parser::eof() const noexcept { return pos_ >= len_; }
 
 void ini_parser::advance() noexcept {
     if (pos_ < len_) {
@@ -61,13 +63,15 @@ bool ini_parser::is_section_line(const string& line, string& section_name) const
 
 bool ini_parser::parse_key_value(const string& line, string& key, string& value) const {
     const size_t pos = line.find('=');
-    if (pos == string::npos) return false;
+    if (pos == string::npos) {
+        return false;
+    }
 
     key = line.substr(0, pos).trim();
     value = line.substr(pos + 1).trim();
 
-    if (value.size() >= 2 && ((value.front() == '"' && value.back() == '"') ||
-        (value.front() == '\'' && value.back() == '\''))) {
+    if (value.size() >= 2 &&
+        ((value.front() == '"' && value.back() == '"') || (value.front() == '\'' && value.back() == '\''))) {
         value = value.substr(1, value.size() - 2);
     }
 

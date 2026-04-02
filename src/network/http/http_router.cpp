@@ -25,12 +25,9 @@ namespace {
             } else if (pattern[pos] == '*') {
                 regex_pattern += "(.*)";
                 ++pos;
-            } else if (pattern[pos] == '/' || pattern[pos] == '.' ||
-                       pattern[pos] == '?' || pattern[pos] == '+' ||
-                       pattern[pos] == '(' || pattern[pos] == ')' ||
-                       pattern[pos] == '[' || pattern[pos] == ']' ||
-                       pattern[pos] == '{' || pattern[pos] == '}' ||
-                       pattern[pos] == '^' || pattern[pos] == '$' ||
+            } else if (pattern[pos] == '/' || pattern[pos] == '.' || pattern[pos] == '?' || pattern[pos] == '+' ||
+                       pattern[pos] == '(' || pattern[pos] == ')' || pattern[pos] == '[' || pattern[pos] == ']' ||
+                       pattern[pos] == '{' || pattern[pos] == '}' || pattern[pos] == '^' || pattern[pos] == '$' ||
                        pattern[pos] == '|' || pattern[pos] == '\\') {
                 regex_pattern += '\\';
                 regex_pattern += pattern[pos];
@@ -68,12 +65,10 @@ namespace {
 
         return result;
     }
-}
+} // namespace
 
 
-http_router::http_router() {
-    setup_default_handlers();
-}
+http_router::http_router() { setup_default_handlers(); }
 
 void http_router::get(const string& path, http_handler_t handler) {
     route(HTTP_METHOD::GET, path, _NEFORCE move(handler));
@@ -147,7 +142,7 @@ void http_router::route(const HTTP_METHOD& method, const string& path, http_hand
         methods.push_back(method_str);
     }
 
-    for (auto& m : methods) {
+    for (auto& m: methods) {
         m.trim();
         if (m.empty()) {
             continue;
@@ -167,17 +162,19 @@ void http_router::route(const HTTP_METHOD& method, const string& path, http_hand
     }
 }
 
-http_router::route_entry*
-http_router::find_handler(const HTTP_METHOD& method, const string& path, http_request& request) {
+http_router::route_entry* http_router::find_handler(const HTTP_METHOD& method, const string& path,
+                                                    http_request& request) {
     auto method_it = routes_.find(method.method());
-    if (method_it == routes_.end()) return nullptr;
+    if (method_it == routes_.end()) {
+        return nullptr;
+    }
 
     string search_path = path;
     if (!strict_routing && search_path.length() > 1 && search_path.ends_with("/")) {
         search_path = search_path.substr(0, search_path.length() - 1);
     }
 
-    for (auto& entry : method_it->second) {
+    for (auto& entry: method_it->second) {
         if (entry.is_regex) {
             match_result matches = entry.regex_pattern->search(search_path);
             if (matches.matched()) {
@@ -192,9 +189,7 @@ http_router::find_handler(const HTTP_METHOD& method, const string& path, http_re
                 pattern = pattern.substr(0, pattern.length() - 1);
             }
 
-            bool match = case_sensitive ?
-                search_path == pattern :
-                search_path.lowercase() == pattern.lowercase();
+            bool match = case_sensitive ? search_path == pattern : search_path.lowercase() == pattern.lowercase();
 
             if (match) {
                 return &entry;
@@ -210,37 +205,40 @@ void http_router::setup_default_handlers() {
         response.status = HTTP_STATUS::S4_NOT_FOUNT;
         response.status_message = "Not Found";
         response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-        response.body =
-            "<!DOCTYPE html>"
-            "<html><head><title>404 Not Found</title></head>"
-            "<body><h1>404 - Not Found</h1>"
-            "<p>The requested resource was not found: " + request.path + "</p>"
-            "</body></html>";
+        response.body = "<!DOCTYPE html>"
+                        "<html><head><title>404 Not Found</title></head>"
+                        "<body><h1>404 - Not Found</h1>"
+                        "<p>The requested resource was not found: " +
+                        request.path +
+                        "</p>"
+                        "</body></html>";
     };
 
     method_not_allowed_handler_ = [](http_request& request, http_response& response) {
         response.status = HTTP_STATUS::S4_METHOD_NOT_ALLOWED;
         response.status_message = "Method Not Allowed";
         response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-        response.body =
-            "<!DOCTYPE html>"
-            "<html><head><title>405 Method Not Allowed</title></head>"
-            "<body><h1>405 - Method Not Allowed</h1>"
-            "<p>The method " + request.method.to_string() + " is not allowed for this resource.</p>"
-            "</body></html>";
+        response.body = "<!DOCTYPE html>"
+                        "<html><head><title>405 Method Not Allowed</title></head>"
+                        "<body><h1>405 - Method Not Allowed</h1>"
+                        "<p>The method " +
+                        request.method.to_string() +
+                        " is not allowed for this resource.</p>"
+                        "</body></html>";
     };
 
     exception_handler_ = [](http_request& request, http_response& response, const exception& e) {
         response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
         response.status_message = "Internal Server Error";
         response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-        response.body =
-            "<!DOCTYPE html>"
-            "<html><head><title>500 Internal Server Error</title></head>"
-            "<body><h1>500 - Internal Server Error</h1>"
-            "<p>An error occurred while processing your request.</p>"
-            "<p>Error: " + string(e.what()) + "</p>"
-            "</body></html>";
+        response.body = "<!DOCTYPE html>"
+                        "<html><head><title>500 Internal Server Error</title></head>"
+                        "<body><h1>500 - Internal Server Error</h1>"
+                        "<p>An error occurred while processing your request.</p>"
+                        "<p>Error: " +
+                        string(e.what()) +
+                        "</p>"
+                        "</body></html>";
     };
 }
 
@@ -268,9 +266,9 @@ http_response http_router::handle_request(http_request& request) {
             }
         } else {
             bool path_exists = false;
-            for (const auto& route : routes_) {
+            for (const auto& route: routes_) {
                 const auto& entries = route.second;
-                for (const auto& entry : entries) {
+                for (const auto& entry: entries) {
                     if (entry.is_regex) {
                         if (entry.regex_pattern->match(request.path)) {
                             path_exists = true;
@@ -283,7 +281,9 @@ http_response http_router::handle_request(http_request& request) {
                         }
                     }
                 }
-                if (path_exists) break;
+                if (path_exists) {
+                    break;
+                }
             }
 
             if (path_exists) {
@@ -310,7 +310,7 @@ http_response http_router::handle_request(http_request& request) {
 
 size_t http_router::route_count() const noexcept {
     size_t count = 0;
-    for (const auto& route : routes_) {
+    for (const auto& route: routes_) {
         const auto& entries = route.second;
         count += entries.size();
     }
@@ -322,7 +322,7 @@ bool http_router::has_route(const HTTP_METHOD& method, const string& path) const
     if (method_it == routes_.end()) {
         return false;
     }
-    for (const auto& entry : method_it->second) {
+    for (const auto& entry: method_it->second) {
         if (entry.pattern == path) {
             return true;
         }

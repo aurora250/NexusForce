@@ -1,12 +1,13 @@
 #include <NeForce/db/pgsql/pgsql_prepared_statement.hpp>
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#include <NeForce/core/utility/packages.hpp>
-#include <NeForce/core/async/atomic.hpp>
-#include <NeForce/db/pgsql/pgsql_prepared_result.hpp>
+#    include <NeForce/core/async/atomic.hpp>
+#    include <NeForce/core/utility/packages.hpp>
+#    include <NeForce/db/pgsql/pgsql_prepared_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, const string& sql)
-: conn_(conn), sql_(sql) {
+pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, const string& sql) :
+conn_(conn),
+sql_(sql) {
     static _NEFORCE atomic<uint64_t> stmt_counter{0};
     stmt_name_ = "pstmt_" + _NEFORCE to_string(stmt_counter++);
 
@@ -30,7 +31,8 @@ pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, const string&
     data_->param_values.resize(param_count_);
     data_->param_ptrs.resize(param_count_, nullptr);
     data_->param_lengths.resize(param_count_, 0);
-    data_->param_formats.resize(param_count_, 0);;
+    data_->param_formats.resize(param_count_, 0);
+    ;
 
     last_error_.clear();
     last_errno_ = 0;
@@ -107,9 +109,7 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const void* data
         param_buffers_.resize(idx + 1);
     }
 
-    param_buffers_[idx].assign(
-        static_cast<const char*>(data),
-        static_cast<const char*>(data) + length);
+    param_buffers_[idx].assign(static_cast<const char*>(data), static_cast<const char*>(data) + length);
 
     data_->param_ptrs[idx] = param_buffers_[idx].data();
     data_->param_lengths[idx] = static_cast<int>(length);
@@ -122,10 +122,8 @@ bool pgsql_prepared_statement::execute() {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQexecPrepared(
-        conn_, stmt_name_.data(), param_count_,
-        data_->param_ptrs.data(), data_->param_lengths.data(),
-        data_->param_formats.data(), 0);
+    ::PGresult* result = ::PQexecPrepared(conn_, stmt_name_.data(), param_count_, data_->param_ptrs.data(),
+                                          data_->param_lengths.data(), data_->param_formats.data(), 0);
 
     if (!result) {
         set_error("Failed to execute prepared statement", 4);
@@ -147,12 +145,10 @@ unique_ptr<idb_prepared_result> pgsql_prepared_statement::execute_query() {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQexecPrepared(
-        conn_, stmt_name_.data(), param_count_,
-        data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
-        data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
-        data_->param_formats.empty() ? nullptr : data_->param_formats.data(),
-        0);
+    ::PGresult* result = ::PQexecPrepared(conn_, stmt_name_.data(), param_count_,
+                                          data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
+                                          data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
+                                          data_->param_formats.empty() ? nullptr : data_->param_formats.data(), 0);
 
     if (!result) {
         set_error("Failed to execute prepared statement query", 6);

@@ -58,11 +58,11 @@ public:
      * 包含物理内存和虚拟内存的使用情况。
      */
     struct NEFORCE_API memory_info {
-        uint64_t total_physical{0};     ///< 物理内存总量
-        uint64_t available_physical{0}; ///< 可用物理内存
-        uint64_t total_virtual{0};      ///< 虚拟内存总量
-        uint64_t available_virtual{0};  ///< 可用虚拟内存
-        uint64_t total_page_file{0};    ///< 页面文件总量
+        uint64_t total_physical{0};      ///< 物理内存总量
+        uint64_t available_physical{0};  ///< 可用物理内存
+        uint64_t total_virtual{0};       ///< 虚拟内存总量
+        uint64_t available_virtual{0};   ///< 可用虚拟内存
+        uint64_t total_page_file{0};     ///< 页面文件总量
         uint64_t available_page_file{0}; ///< 可用页面文件
 
         /**
@@ -70,7 +70,9 @@ public:
          * @return 内存使用百分比（0.0-100.0）
          */
         NEFORCE_NODISCARD float64_t physical_memory_usage() const noexcept {
-            if (total_physical == 0) return 0.0;
+            if (total_physical == 0) {
+                return 0.0;
+            }
             return 100.0 * (1.0 - static_cast<float64_t>(available_physical) / total_physical);
         }
 
@@ -88,21 +90,19 @@ public:
      * 包含处理器的型号、频率、核心数等信息。
      */
     struct CPU_info {
-        string vendor{};          ///< 厂商名称
-        string brand{};           ///< 型号名称
-        uint32_t max_MHz{0};      ///< 最大频率
-        uint32_t current_MHZ{0};  ///< 当前频率
-        uint32_t cores{0};        ///< 物理核心数
+        string vendor{};                ///< 厂商名称
+        string brand{};                 ///< 型号名称
+        uint32_t max_MHz{0};            ///< 最大频率
+        uint32_t current_MHZ{0};        ///< 当前频率
+        uint32_t cores{0};              ///< 物理核心数
         uint32_t logical_processors{0}; ///< 逻辑处理器数
-        string features{};        ///< 支持的指令集特性
+        string features{};              ///< 支持的指令集特性
 
         /**
          * @brief 检查是否支持超线程
          * @return 如果逻辑处理器数大于物理核心数返回true
          */
-        NEFORCE_NODISCARD bool hyperthreading() const noexcept {
-            return logical_processors > cores;
-        }
+        NEFORCE_NODISCARD bool hyperthreading() const noexcept { return logical_processors > cores; }
     };
 
     /**
@@ -110,12 +110,12 @@ public:
      * @brief 操作系统版本信息
      */
     struct NEFORCE_API os_version_info {
-        uint32_t major{0};      ///< 主版本号
-        uint32_t minor{0};      ///< 次版本号
-        uint32_t build{0};      ///< 构建号
+        uint32_t major{0};       ///< 主版本号
+        uint32_t minor{0};       ///< 次版本号
+        uint32_t build{0};       ///< 构建号
         uint32_t platform_id{0}; ///< 平台ID
-        string csd_version{};   ///< 补丁版本
-        string product_name{};  ///< 产品名称
+        string csd_version{};    ///< 补丁版本
+        string product_name{};   ///< 产品名称
 
         /**
          * @brief 获取版本字符串
@@ -138,12 +138,12 @@ public:
     };
 
 private:
-    system_info system_info_{};        ///< 系统信息
-    memory_info memory_info_{};        ///< 内存信息
-    CPU_info cpu_info_{};              ///< CPU信息
-    os_version_info os_version_info_{}; ///< 操作系统信息
+    system_info system_info_{};                         ///< 系统信息
+    memory_info memory_info_{};                         ///< 内存信息
+    CPU_info cpu_info_{};                               ///< CPU信息
+    os_version_info os_version_info_{};                 ///< 操作系统信息
     architecture architecture_ = architecture::UNKNOWN; ///< 系统架构
-    atomic<bool> initialized_{false};   ///< 初始化标志
+    atomic<bool> initialized_{false};                   ///< 初始化标志
 
     /**
      * @brief 私有构造函数
@@ -173,9 +173,9 @@ public:
     }
 
     sysinfo(const sysinfo&) = delete;
-    sysinfo& operator =(const sysinfo&) = delete;
+    sysinfo& operator=(const sysinfo&) = delete;
     sysinfo(sysinfo&&) = delete;
-    sysinfo& operator =(sysinfo&&) = delete;
+    sysinfo& operator=(sysinfo&&) = delete;
 
     /**
      * @brief 刷新系统信息
@@ -188,49 +188,37 @@ public:
      * @brief 获取系统底层信息
      * @return 系统信息结构引用
      */
-    const system_info& get_system_info() const noexcept {
-        return system_info_;
-    }
+    const system_info& get_system_info() const noexcept { return system_info_; }
 
     /**
      * @brief 获取内存信息
      * @return 内存信息结构引用
      */
-    const memory_info& get_memory_info() const noexcept {
-        return memory_info_;
-    }
+    const memory_info& get_memory_info() const noexcept { return memory_info_; }
 
     /**
      * @brief 获取CPU信息
      * @return CPU信息结构引用
      */
-    const CPU_info& get_CPU_info() const noexcept {
-        return cpu_info_;
-    }
+    const CPU_info& get_CPU_info() const noexcept { return cpu_info_; }
 
     /**
      * @brief 获取操作系统版本信息
      * @return 操作系统版本信息结构引用
      */
-    const os_version_info& get_os_version_info() const noexcept {
-        return os_version_info_;
-    }
+    const os_version_info& get_os_version_info() const noexcept { return os_version_info_; }
 
     /**
      * @brief 获取系统架构
      * @return 架构枚举值
      */
-    architecture get_architecture() const noexcept {
-        return architecture_;
-    }
+    architecture get_architecture() const noexcept { return architecture_; }
 
     /**
      * @brief 检查是否已初始化
      * @return 是否已成功初始化
      */
-    NEFORCE_NODISCARD bool is_initialized() const noexcept {
-        return initialized_.load(memory_order_acquire);
-    }
+    NEFORCE_NODISCARD bool is_initialized() const noexcept { return initialized_.load(memory_order_acquire); }
 
     /**
      * @brief 格式化字节数为可读字符串

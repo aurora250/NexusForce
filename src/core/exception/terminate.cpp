@@ -4,243 +4,153 @@
 #include <NeForce/core/exception/terminate.hpp>
 #include <stdio.h> // ::fflush
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <errhandlingapi.h>
+#    include <errhandlingapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <csignal>
+#    include <csignal>
 
-#ifndef SYS_exit
-#if defined(NEFORCE_ARCH_X86_32)
-    #define SYS_exit 1
-    #define SYS_exit_group 252
-    #define SYS_close 6
-#elif defined(NEFORCE_ARCH_X86_64)
-    #define SYS_exit 60
-    #define SYS_exit_group 231
-    #define SYS_close 3
-#elif defined(NEFORCE_ARCH_ARM32)
-    #define SYS_exit 1
-    #define SYS_exit_group 248
-    #define SYS_close 6
-#elif defined(NEFORCE_ARCH_AARCH64)
-    #define SYS_exit 93
-    #define SYS_exit_group 94
-    #define SYS_close 57
-#elif defined(NEFORCE_ARCH_RISCV32) || defined(NEFORCE_ARCH_RISCV64)
-    #define SYS_exit 93
-    #define SYS_exit_group 94
-    #define SYS_close 57
-#elif defined(NEFORCE_ARCH_LOONGARCH32) || defined(NEFORCE_ARCH_LOONGARCH64)
-    #define SYS_exit 93
-    #define SYS_exit_group 94
-    #define SYS_close 57
-#endif
-#endif
+#    ifndef SYS_exit
+#        if defined(NEFORCE_ARCH_X86_32)
+#            define SYS_exit 1
+#            define SYS_exit_group 252
+#            define SYS_close 6
+#        elif defined(NEFORCE_ARCH_X86_64)
+#            define SYS_exit 60
+#            define SYS_exit_group 231
+#            define SYS_close 3
+#        elif defined(NEFORCE_ARCH_ARM32)
+#            define SYS_exit 1
+#            define SYS_exit_group 248
+#            define SYS_close 6
+#        elif defined(NEFORCE_ARCH_AARCH64)
+#            define SYS_exit 93
+#            define SYS_exit_group 94
+#            define SYS_close 57
+#        elif defined(NEFORCE_ARCH_RISCV32) || defined(NEFORCE_ARCH_RISCV64)
+#            define SYS_exit 93
+#            define SYS_exit_group 94
+#            define SYS_close 57
+#        elif defined(NEFORCE_ARCH_LOONGARCH32) || defined(NEFORCE_ARCH_LOONGARCH64)
+#            define SYS_exit 93
+#            define SYS_exit_group 94
+#            define SYS_close 57
+#        endif
+#    endif
 
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
-#if defined(NEFORCE_ARCH_X86_64)
+#    if defined(NEFORCE_ARCH_X86_64)
     long syscall_exit(int status) {
         long ret;
-        __asm__ volatile (
-            "syscall"
-            : "=a"(ret)
-            : "a"(SYS_exit), "D"(status)
-            : "rcx", "r11", "memory"
-        );
+        __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_exit), "D"(status) : "rcx", "r11", "memory");
         return ret;
     }
     long syscall_exit_group(int status) {
         long ret;
-        __asm__ volatile (
-            "syscall"
-            : "=a"(ret)
-            : "a"(SYS_exit_group), "D"(status)
-            : "rcx", "r11", "memory"
-        );
+        __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_exit_group), "D"(status) : "rcx", "r11", "memory");
         return ret;
     }
     long syscall_close(int fd) {
         long ret;
-        __asm__ volatile (
-            "syscall"
-            : "=a"(ret)
-            : "a"(SYS_close), "D"(fd)
-            : "rcx", "r11", "memory"
-        );
+        __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_close), "D"(fd) : "rcx", "r11", "memory");
         return ret;
     }
-#elif defined(NEFORCE_ARCH_X86_32)
+#    elif defined(NEFORCE_ARCH_X86_32)
     long syscall_exit(int status) {
         long ret;
-        __asm__ volatile (
-            "int $0x80"
-            : "=a"(ret)
-            : "a"(SYS_exit), "b"(status)
-            : "memory"
-        );
+        __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_exit), "b"(status) : "memory");
         return ret;
     }
     long syscall_exit_group(int status) {
         long ret;
-        __asm__ volatile (
-            "int $0x80"
-            : "=a"(ret)
-            : "a"(SYS_exit_group), "b"(status)
-            : "memory"
-        );
+        __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_exit_group), "b"(status) : "memory");
         return ret;
     }
     long syscall_close(int fd) {
         long ret;
-        __asm__ volatile (
-            "int $0x80"
-            : "=a"(ret)
-            : "a"(SYS_close), "b"(fd)
-            : "memory"
-        );
+        __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_close), "b"(fd) : "memory");
         return ret;
     }
-#elif defined(NEFORCE_ARCH_ARM32)
+#    elif defined(NEFORCE_ARCH_ARM32)
     long syscall_exit(int status) {
         register long r7 __asm__("r7") = SYS_exit;
         register long r0 __asm__("r0") = status;
-        __asm__ volatile (
-            "swi 0x0"
-            : "=r"(r0)
-            : "r"(r0), "r"(r7)
-            : "memory"
-        );
+        __asm__ volatile("swi 0x0" : "=r"(r0) : "r"(r0), "r"(r7) : "memory");
         return r0;
     }
     long syscall_exit_group(int status) {
         register long r7 __asm__("r7") = SYS_exit_group;
         register long r0 __asm__("r0") = status;
-        __asm__ volatile (
-            "swi 0x0"
-            : "=r"(r0)
-            : "r"(r0), "r"(r7)
-            : "memory"
-        );
+        __asm__ volatile("swi 0x0" : "=r"(r0) : "r"(r0), "r"(r7) : "memory");
         return r0;
     }
     long syscall_close(int fd) {
         register long r7 __asm__("r7") = SYS_close;
         register long r0 __asm__("r0") = fd;
-        __asm__ volatile (
-            "swi 0x0"
-            : "=r"(r0)
-            : "r"(r0), "r"(r7)
-            : "memory"
-        );
+        __asm__ volatile("swi 0x0" : "=r"(r0) : "r"(r0), "r"(r7) : "memory");
         return r0;
     }
-#elif defined(NEFORCE_ARCH_AARCH64)
+#    elif defined(NEFORCE_ARCH_AARCH64)
     long syscall_exit(int status) {
         register long x8 __asm__("x8") = SYS_exit;
         register long x0 __asm__("x0") = status;
-        __asm__ volatile (
-            "svc #0"
-            : "=r"(x0)
-            : "r"(x0), "r"(x8)
-            : "memory"
-        );
+        __asm__ volatile("svc #0" : "=r"(x0) : "r"(x0), "r"(x8) : "memory");
         return x0;
     }
     long syscall_exit_group(int status) {
         register long x8 __asm__("x8") = SYS_exit_group;
         register long x0 __asm__("x0") = status;
-        __asm__ volatile (
-            "svc #0"
-            : "=r"(x0)
-            : "r"(x0), "r"(x8)
-            : "memory"
-        );
+        __asm__ volatile("svc #0" : "=r"(x0) : "r"(x0), "r"(x8) : "memory");
         return x0;
     }
     long syscall_close(int fd) {
         register long x8 __asm__("x8") = SYS_close;
         register long x0 __asm__("x0") = fd;
-        __asm__ volatile (
-            "svc #0"
-            : "=r"(x0)
-            : "r"(x0), "r"(x8)
-            : "memory"
-        );
+        __asm__ volatile("svc #0" : "=r"(x0) : "r"(x0), "r"(x8) : "memory");
         return x0;
     }
-#elif defined(NEFORCE_ARCH_RISCV)
+#    elif defined(NEFORCE_ARCH_RISCV)
     long syscall_exit(int status) {
         register long a7 __asm__("a7") = SYS_exit;
         register long a0 __asm__("a0") = status;
-        __asm__ volatile (
-            "ecall"
-            : "=r"(a0)
-            : "r"(a0), "r"(a7)
-            : "memory"
-        );
+        __asm__ volatile("ecall" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
     long syscall_exit_group(int status) {
         register long a7 __asm__("a7") = SYS_exit_group;
         register long a0 __asm__("a0") = status;
-        __asm__ volatile (
-            "ecall"
-            : "=r"(a0)
-            : "r"(a0), "r"(a7)
-            : "memory"
-        );
+        __asm__ volatile("ecall" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
     long syscall_close(int fd) {
         register long a7 __asm__("a7") = SYS_close;
         register long a0 __asm__("a0") = fd;
-        __asm__ volatile (
-            "ecall"
-            : "=r"(a0)
-            : "r"(a0), "r"(a7)
-            : "memory"
-        );
+        __asm__ volatile("ecall" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
-#elif defined(NEFORCE_ARCH_LOONGARCH)
+#    elif defined(NEFORCE_ARCH_LOONGARCH)
     long syscall_exit(int status) {
         register long a7 __asm__("a7") = SYS_exit;
         register long a0 __asm__("a0") = status;
-        __asm__ volatile (
-            "syscall 0"
-            : "=r"(a0)
-            : "r"(a0), "r"(a7)
-            : "memory"
-        );
+        __asm__ volatile("syscall 0" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
     long syscall_exit_group(int status) {
         register long a7 __asm__("a7") = SYS_exit_group;
         register long a0 __asm__("a0") = status;
-        __asm__ volatile (
-            "syscall 0"
-            : "=r"(a0)
-            : "r"(a0), "r"(a7)
-            : "memory"
-        );
+        __asm__ volatile("syscall 0" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
     long syscall_close(int fd) {
         register long a7 __asm__("a7") = SYS_close;
         register long a0 __asm__("a0") = fd;
-        __asm__ volatile (
-            "syscall 0"
-            : "=r"(a0)
-            : "r"(a0), "r"(a7)
-            : "memory"
-        );
+        __asm__ volatile("syscall 0" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
-#endif
+#    endif
 #endif
 
     atomic<terminate_handler>& get_terminate_handler() noexcept {
@@ -275,12 +185,16 @@ namespace {
         }
 
         int register_atexit(const exit_handler handler) {
-            if (!handler) return -1;
+            if (!handler) {
+                return -1;
+            }
 
             lock<mutex> lock(mtx);
-            if (atexit_count >= max_handler_threshhold) return -1;
+            if (atexit_count >= max_handler_threshhold) {
+                return -1;
+            }
 
-            for (auto& entry : atexit_handlers) {
+            for (auto& entry: atexit_handlers) {
                 if (!entry.is_used) {
                     entry.func = handler;
                     entry.is_used = true;
@@ -292,12 +206,16 @@ namespace {
         }
 
         int register_quick_exit(const exit_handler handler) {
-            if (!handler) return -1;
+            if (!handler) {
+                return -1;
+            }
 
             lock<mutex> lock(mtx);
-            if (quick_exit_count >= max_handler_threshhold) return -1;
+            if (quick_exit_count >= max_handler_threshhold) {
+                return -1;
+            }
 
-            for (auto& entry : quick_exit_handlers) {
+            for (auto& entry: quick_exit_handlers) {
                 if (!entry.is_used) {
                     entry.func = handler;
                     entry.is_used = true;
@@ -328,7 +246,7 @@ namespace {
             quick_exit_count = 0;
         }
     };
-}
+} // namespace
 
 
 void set_terminate(const terminate_handler handler) noexcept {
@@ -337,7 +255,9 @@ void set_terminate(const terminate_handler handler) noexcept {
 
 void terminate() {
     const auto handler = get_terminate_handler().load(memory_order_acquire);
-    if (handler) handler();
+    if (handler) {
+        handler();
+    }
     abort();
 }
 
@@ -351,11 +271,13 @@ void abort() {
     ::PVOID handlers[1];
     handlers[0] = ::AddVectoredExceptionHandler(1, nullptr);
 
-    constexpr ::ULONG_PTR args[1] = { 0xC0000409 }; // STATUS_STACK_BUFFER_OVERRUN
+    constexpr ::ULONG_PTR args[1] = {0xC0000409}; // STATUS_STACK_BUFFER_OVERRUN
 
     ::RaiseException(0xC0000409, EXCEPTION_NONCONTINUABLE, 1, args);
     ::TerminateProcess(::GetCurrentProcess(), 3);
-    if (handlers[0]) ::RemoveVectoredExceptionHandler(handlers[0]);
+    if (handlers[0]) {
+        ::RemoveVectoredExceptionHandler(handlers[0]);
+    }
 #else
     ::sigset_t mask;
     ::sigemptyset(&mask);
@@ -372,7 +294,7 @@ void abort() {
     // SIGABRT
     ::kill(::getpid(), SIGABRT);
 
-    constexpr ::timespec ts = { .tv_sec = 0, .tv_nsec = 1000000 }; // 1ms
+    constexpr ::timespec ts = {.tv_sec = 0, .tv_nsec = 1000000}; // 1ms
     ::nanosleep(&ts, nullptr);
 
     sa.sa_handler = SIG_IGN;
@@ -384,9 +306,7 @@ void abort() {
     unreachable();
 }
 
-int set_exit(const exit_handler handler) noexcept {
-    return exit_handler_manager::instance().register_atexit(handler);
-}
+int set_exit(const exit_handler handler) noexcept { return exit_handler_manager::instance().register_atexit(handler); }
 
 int set_quick_exit(const exit_handler handler) noexcept {
     return exit_handler_manager::instance().register_quick_exit(handler);

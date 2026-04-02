@@ -20,16 +20,16 @@ NEFORCE_BEGIN_CONSTANTS__
  * @{
  */
 
-NEFORCE_INLINE17 constexpr decimal_t EULER = 2.718281828459045L;      ///< 自然常数 e
-NEFORCE_INLINE17 constexpr decimal_t PI = 3.141592653589793L;        ///< 圆周率 π（弧度制）
-NEFORCE_INLINE17 constexpr decimal_t PHI = 1.618033988749895L;       ///< 黄金分割比 φ
-NEFORCE_INLINE17 constexpr decimal_t SEMI_CIRCLE = 180.0;           ///< 半圆角度 180°（角度制）
-NEFORCE_INLINE17 constexpr decimal_t CIRCLE = 360.0;                ///< 全圆角度 360°（角度制）
-NEFORCE_INLINE17 constexpr decimal_t EPSILON = 1e-15L;              ///< 浮点数精度容差
+NEFORCE_INLINE17 constexpr decimal_t EULER = 2.718281828459045L; ///< 自然常数 e
+NEFORCE_INLINE17 constexpr decimal_t PI = 3.141592653589793L;    ///< 圆周率 π（弧度制）
+NEFORCE_INLINE17 constexpr decimal_t PHI = 1.618033988749895L;   ///< 黄金分割比 φ
+NEFORCE_INLINE17 constexpr decimal_t SEMI_CIRCLE = 180.0;        ///< 半圆角度 180°（角度制）
+NEFORCE_INLINE17 constexpr decimal_t CIRCLE = 360.0;             ///< 全圆角度 360°（角度制）
+NEFORCE_INLINE17 constexpr decimal_t EPSILON = 1e-15L;           ///< 浮点数精度容差
 
-NEFORCE_INLINE17 constexpr uint32_t TAYLOR_CONVERGENCE = 10000U;    ///< 泰勒展开收敛项数
-NEFORCE_INLINE17 constexpr decimal_t PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * EPSILON;      ///< 精确容差
-NEFORCE_INLINE17 constexpr decimal_t LOW_PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * PRECISE_TOLERANCE;  ///< 低精度容差
+NEFORCE_INLINE17 constexpr uint32_t TAYLOR_CONVERGENCE = 10000U;                       ///< 泰勒展开收敛项数
+NEFORCE_INLINE17 constexpr decimal_t PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * EPSILON; ///< 精确容差
+NEFORCE_INLINE17 constexpr decimal_t LOW_PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * PRECISE_TOLERANCE; ///< 低精度容差
 
 /**
  * @brief 预计算的斐波那契数列
@@ -37,19 +37,14 @@ NEFORCE_INLINE17 constexpr decimal_t LOW_PRECISE_TOLERANCE = TAYLOR_CONVERGENCE 
  * 包含前50个斐波那契数，用于快速查找。
  */
 NEFORCE_INLINE17 constexpr uint64_t FIBONACCI_LIST[] = {
-	0,			1,			1,			2,			3,
-	5,			8,			13,			21,			34,
-	55,			89,			144,		233,		377,
-	610,		987,		1597,		2584,		4181,
-	6765,		10946,		17711,		28657,		46368,
-	75025,		121393,		196418,		317811,		514229,
-	832040,		1346269,	2178309,	3524578,	5702887,
-	9227465,	14930352,	24157817,	39088169,	63245986,
-	102334155,	165580141,	267914296,	433494437,	701408733,
-	1134903170, 1836311903, 2971215073, 4807526976, 7778742049
-};
+        0,          1,          1,          2,          3,         5,         8,         13,        21,
+        34,         55,         89,         144,        233,       377,       610,       987,       1597,
+        2584,       4181,       6765,       10946,      17711,     28657,     46368,     75025,     121393,
+        196418,     317811,     514229,     832040,     1346269,   2178309,   3524578,   5702887,   9227465,
+        14930352,   24157817,   39088169,   63245986,   102334155, 165580141, 267914296, 433494437, 701408733,
+        1134903170, 1836311903, 2971215073, 4807526976, 7778742049};
 
-NEFORCE_INLINE17 constexpr uint32_t FIBONACCI_COUNT = extent_v<decltype(FIBONACCI_LIST)>;   ///< 斐波那契数列预计算数量
+NEFORCE_INLINE17 constexpr uint32_t FIBONACCI_COUNT = extent_v<decltype(FIBONACCI_LIST)>; ///< 斐波那契数列预计算数量
 
 /** @} */ // MathConstants
 
@@ -70,15 +65,17 @@ NEFORCE_END_CONSTANTS__
  * 否则递归计算。
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t fibonacci(const uint32_t n) {
-	if (n < constants::FIBONACCI_COUNT) {
-		return constants::FIBONACCI_LIST[n];
-	}
-	uint64_t a = constants::FIBONACCI_LIST[constants::FIBONACCI_COUNT - 2];
-	uint64_t b = constants::FIBONACCI_LIST[constants::FIBONACCI_COUNT - 1];
-	for (uint32_t i = constants::FIBONACCI_COUNT; i <= n; ++i) {
-		const uint64_t c = a + b; a = b; b = c;
-	}
-	return b;
+    if (n < constants::FIBONACCI_COUNT) {
+        return constants::FIBONACCI_LIST[n];
+    }
+    uint64_t a = constants::FIBONACCI_LIST[constants::FIBONACCI_COUNT - 2];
+    uint64_t b = constants::FIBONACCI_LIST[constants::FIBONACCI_COUNT - 1];
+    for (uint32_t i = constants::FIBONACCI_COUNT; i <= n; ++i) {
+        const uint64_t c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
 }
 
 /**
@@ -88,9 +85,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t fibonacci(const uint32_t n) {
  *
  * 莱昂纳多数：L(n) = 2 * F(n+1) - 1
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo(const uint32_t n) {
-	return 2 * fibonacci(n + 1) - 1;
-}
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo(const uint32_t n) { return 2 * fibonacci(n + 1) - 1; }
 
 /**
  * @brief 角度转弧度
@@ -98,10 +93,9 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo(const uint32_t n) {
  * @param angular 角度值
  * @return 对应的弧度值
  */
-template <typename T>
-NEFORCE_PURE_FUNCTION constexpr T angular2radian(const T angular) noexcept {
-	static_assert(is_arithmetic_v<T>, "arithmetic required");
-	return angular * constants::PI / constants::SEMI_CIRCLE;
+template <typename T> NEFORCE_PURE_FUNCTION constexpr T angular2radian(const T angular) noexcept {
+    static_assert(is_arithmetic_v<T>, "arithmetic required");
+    return angular * constants::PI / constants::SEMI_CIRCLE;
 }
 
 /**
@@ -110,10 +104,9 @@ NEFORCE_PURE_FUNCTION constexpr T angular2radian(const T angular) noexcept {
  * @param radian 弧度值
  * @return 对应的角度值
  */
-template <typename T>
-NEFORCE_PURE_FUNCTION constexpr T radian2angular(const T radian) noexcept {
-	static_assert(is_arithmetic_v<T>, "arithmetic required");
-	return radian * (constants::SEMI_CIRCLE / constants::PI);
+template <typename T> NEFORCE_PURE_FUNCTION constexpr T radian2angular(const T radian) noexcept {
+    static_assert(is_arithmetic_v<T>, "arithmetic required");
+    return radian * (constants::SEMI_CIRCLE / constants::PI);
 }
 
 /**
@@ -122,10 +115,8 @@ NEFORCE_PURE_FUNCTION constexpr T radian2angular(const T radian) noexcept {
  * @param x 原数值
  * @return 绝对值
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_signed_v<T>, T>
-absolute(const T x) noexcept {
-	return x > T(0) ? x : -x;
+template <typename T> NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_signed_v<T>, T> absolute(const T x) noexcept {
+    return x > T(0) ? x : -x;
 }
 
 /**
@@ -135,10 +126,8 @@ absolute(const T x) noexcept {
  * @return 原数值
  */
 
-template <typename T>
-NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_unsigned_v<T>, T>
-absolute(const T x) noexcept {
-	return x;
+template <typename T> NEFORCE_CONST_FUNCTION constexpr enable_if_t<is_unsigned_v<T>, T> absolute(const T x) noexcept {
+    return x;
 }
 
 /**
@@ -149,10 +138,7 @@ absolute(const T x) noexcept {
  *
  * 递归sum的终止位置
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept {
-	return x;
-}
+template <typename T> NEFORCE_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept { return x; }
 
 /**
  * @brief 多参数求和
@@ -164,7 +150,7 @@ NEFORCE_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept {
  */
 template <typename First, typename... Rests, enable_if_t<(sizeof...(Rests) > 0), int> = 0>
 NEFORCE_CONST_FUNCTION constexpr decltype(auto) sum(First first, Rests... args) {
-	return first + _NEFORCE sum(args...);
+    return first + _NEFORCE sum(args...);
 }
 
 /**
@@ -175,7 +161,7 @@ NEFORCE_CONST_FUNCTION constexpr decltype(auto) sum(First first, Rests... args) 
  */
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
 NEFORCE_CONST_FUNCTION constexpr decltype(auto) average(Args... args) {
-	return _NEFORCE sum(args...) / sizeof...(Args);
+    return _NEFORCE sum(args...) / sizeof...(Args);
 }
 
 /**
@@ -184,13 +170,16 @@ NEFORCE_CONST_FUNCTION constexpr decltype(auto) average(Args... args) {
  * @param value 原数值
  * @return 符号值：正数返回1，负数返回-1，零返回0
  */
-template <typename T>
-NEFORCE_CONSTEXPR14 int sign(const T& value) noexcept {
-	static_assert(is_arithmetic_v<T>, "arithmetic required");
-	constexpr T zero = T(0);
-	if (value > zero) return 1;
-	if (value < zero) return -1;
-	return 0;
+template <typename T> NEFORCE_CONSTEXPR14 int sign(const T& value) noexcept {
+    static_assert(is_arithmetic_v<T>, "arithmetic required");
+    constexpr T zero = T(0);
+    if (value > zero) {
+        return 1;
+    }
+    if (value < zero) {
+        return -1;
+    }
+    return 0;
 }
 
 /**
@@ -200,16 +189,15 @@ NEFORCE_CONSTEXPR14 int sign(const T& value) noexcept {
  * @param n 第二个数
  * @return 最大公约数
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
-	T x = _NEFORCE absolute(m), y = _NEFORCE absolute(n);
-	constexpr T zero = T(0);
-	while (y != zero) {
-		T t = x % y;
-		x = y;
-		y = t;
-	}
-	return x;
+template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
+    T x = _NEFORCE absolute(m), y = _NEFORCE absolute(n);
+    constexpr T zero = T(0);
+    while (y != zero) {
+        T t = x % y;
+        x = y;
+        y = t;
+    }
+    return x;
 }
 
 /**
@@ -219,9 +207,8 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd(const T& m, const T& n) noexcep
  * @param n 第二个数
  * @return 最小公倍数
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
-	return (m / _NEFORCE gcd(m, n)) * n;
+template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
+    return (m / _NEFORCE gcd(m, n)) * n;
 }
 
 
@@ -233,12 +220,13 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcep
  * @return x除以y的余数
  * @exception math_exception 除数为0时
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y) {
-	static_assert(is_arithmetic_v<T>, "arithmetic required");
-	if (y == 0) NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
-	const T result = x - static_cast<make_integer_t<sizeof(T)>>(x / y) * y;
-	return result;
+template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y) {
+    static_assert(is_arithmetic_v<T>, "arithmetic required");
+    if (y == 0) {
+        NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
+    }
+    const T result = x - static_cast<make_integer_t<sizeof(T)>>(x / y) * y;
+    return result;
 }
 
 /**
@@ -250,20 +238,21 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y) {
  *
  * 使用快速幂算法实现。
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T power(const T& x, uint32_t n) noexcept {
-	static_assert(is_arithmetic_v<T>, "arithmetic required");
-	if (n == 0) return 1;
-	T result(1);
-	T base = x;
-	while (n > 0) {
-		if (n % 2 == 1) {
-			result *= base;
-		}
-		base *= base;
-		n /= 2;
-	}
-	return result;
+template <typename T> NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T power(const T& x, uint32_t n) noexcept {
+    static_assert(is_arithmetic_v<T>, "arithmetic required");
+    if (n == 0) {
+        return 1;
+    }
+    T result(1);
+    T base = x;
+    while (n > 0) {
+        if (n % 2 == 1) {
+            result *= base;
+        }
+        base *= base;
+        n /= 2;
+    }
+    return result;
 }
 
 /**
@@ -272,7 +261,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T power(const T& x, uint32_t n) noexc
  * @return e^n
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential(const uint32_t n) noexcept {
-	return power(constants::EULER, n);
+    return power(constants::EULER, n);
 }
 
 /**
@@ -283,22 +272,21 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential(const uint32_t n
  *
  * 使用反正切泰勒展开计算。
  */
-template <typename T>
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_e(const T x) {
-	static_assert(is_floating_point_v<T>, "floating point required");
-	if (x <= 0) {
-		NEFORCE_THROW_EXCEPTION(math_exception("Logarithm domain error"));
-	}
-	uint32_t N = constants::TAYLOR_CONVERGENCE;
-	const T a = (x - 1) / (x + 1);
-	const T a_sqrt = a * a;
-	T nk = 2 * N + 1;
-	T y = 1.0 / nk;
-	while (N--) {
-		nk -= 2;
-		y = 1.0 / nk + a_sqrt * y;
-	}
-	return 2.0 * a * y;
+template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_e(const T x) {
+    static_assert(is_floating_point_v<T>, "floating point required");
+    if (x <= 0) {
+        NEFORCE_THROW_EXCEPTION(math_exception("Logarithm domain error"));
+    }
+    uint32_t N = constants::TAYLOR_CONVERGENCE;
+    const T a = (x - 1) / (x + 1);
+    const T a_sqrt = a * a;
+    T nk = 2 * N + 1;
+    T y = 1.0 / nk;
+    while (N--) {
+        nk -= 2;
+        y = 1.0 / nk + a_sqrt * y;
+    }
+    return 2.0 * a * y;
 }
 
 /**
@@ -308,13 +296,12 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_e(const T x) {
  * @param base 底数
  * @return 以base为底x的对数
  */
-template <typename T>
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(const T x, const uint32_t base) {
-	const auto under = logarithm_e(static_cast<float64_t>(base));
-	if (under == 0) {
-		NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
-	}
-	return _NEFORCE logarithm_e(x) / under;
+template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(const T x, const uint32_t base) {
+    const auto under = logarithm_e(static_cast<float64_t>(base));
+    if (under == 0) {
+        NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
+    }
+    return _NEFORCE logarithm_e(x) / under;
 }
 
 /**
@@ -323,9 +310,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(const T x, const uint32_t 
  * @param x 真数
  * @return log₂(x)
  */
-template <typename T>
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_2(const T x) {
-	return _NEFORCE logarithm(x, 2);
+template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_2(const T x) {
+    return _NEFORCE logarithm(x, 2);
 }
 
 /**
@@ -334,9 +320,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_2(const T x) {
  * @param x 真数
  * @return log₁₀(x)
  */
-template <typename T>
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_10(const T x) {
-	return _NEFORCE logarithm(x, 10);
+template <typename T> NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_10(const T x) {
+    return _NEFORCE logarithm(x, 10);
 }
 
 /**
@@ -349,13 +334,13 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm_10(const T x) {
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t
 square_root(const decimal_t x, const decimal_t precise = constants::PRECISE_TOLERANCE) noexcept {
-	decimal_t t = 0.0;
-	decimal_t result = x;
-	while (absolute(result - t) > precise) {
-		t = result;
-		result = 0.5 * (t + x / t);
-	}
-	return result;
+    decimal_t t = 0.0;
+    decimal_t result = x;
+    while (absolute(result - t) > precise) {
+        t = result;
+        result = 0.5 * (t + x / t);
+    }
+    return result;
 }
 
 /**
@@ -368,13 +353,13 @@ square_root(const decimal_t x, const decimal_t precise = constants::PRECISE_TOLE
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t
 cube_root(const decimal_t x, const decimal_t precise = constants::PRECISE_TOLERANCE) noexcept {
-	decimal_t t = 0.0;
-	decimal_t result = x;
-	while (absolute(result - t) > precise) {
-		t = result;
-		result = (2 * t + x / (t * t)) / 3;
-	}
-	return result;
+    decimal_t t = 0.0;
+    decimal_t result = x;
+    while (absolute(result - t) > precise) {
+        t = result;
+        result = (2 * t + x / (t * t)) / 3;
+    }
+    return result;
 }
 
 /**
@@ -383,11 +368,11 @@ cube_root(const decimal_t x, const decimal_t precise = constants::PRECISE_TOLERA
  * @return n!
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 uint64_t factorial(const uint32_t n) noexcept {
-	uint64_t h = 1;
-	for (uint32_t i = 1; i <= n; i++) {
-		h *= i;
-	}
-	return h;
+    uint64_t h = 1;
+    for (uint32_t i = 1; i <= n; i++) {
+        h *= i;
+    }
+    return h;
 }
 
 
@@ -398,11 +383,12 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 uint64_t factorial(const uint32_t n) 
  * @return 向下舍入后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor_bit(const decimal_t x, const uint32_t bit) noexcept {
-	const decimal_t times = power(10.0, bit);
-	const auto int_part = x * times;
-	if (x < 0 && x * times * 10 / 10.0 != int_part)
-		return (int_part - 1) / times;
-	return int_part / times;
+    const decimal_t times = power(10.0, bit);
+    const auto int_part = x * times;
+    if (x < 0 && x * times * 10 / 10.0 != int_part) {
+        return (int_part - 1) / times;
+    }
+    return int_part / times;
 }
 
 /**
@@ -412,11 +398,12 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor_bit(const decimal_t x
  * @return 向上舍入后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil_bit(const decimal_t x, const uint32_t bit) noexcept {
-	const decimal_t times = power(10.0, bit);
-	const auto int_part = x * times;
-	if (x > 0 && x * times * 10 / 10.0 != int_part)
-		return (int_part + 1) / times;
-	return int_part / times;
+    const decimal_t times = power(10.0, bit);
+    const auto int_part = x * times;
+    if (x > 0 && x * times * 10 / 10.0 != int_part) {
+        return (int_part + 1) / times;
+    }
+    return int_part / times;
 }
 
 /**
@@ -426,9 +413,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil_bit(const decimal_t x,
  * @return 四舍五入后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round_bit(const decimal_t x, const uint32_t bit) noexcept {
-	return x < 0 ?
-		ceil_bit(x - 0.5 / power(10.0, bit), bit) :
-		floor_bit(x + 0.5 / power(10.0, bit), bit);
+    return x < 0 ? ceil_bit(x - 0.5 / power(10.0, bit), bit) : floor_bit(x + 0.5 / power(10.0, bit), bit);
 }
 
 /**
@@ -438,7 +423,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round_bit(const decimal_t x
  * @return 截断后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate_bit(const decimal_t x, const uint32_t bit) noexcept {
-	return x < 0 ? ceil_bit(x, bit) : floor_bit(x, bit);
+    return x < 0 ? ceil_bit(x, bit) : floor_bit(x, bit);
 }
 
 
@@ -448,8 +433,8 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate_bit(const decimal_
  * @return 向下取整后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x) noexcept {
-	const int64_t i = static_cast<int64_t>(x);
-	return (x < 0 && x != static_cast<decimal_t>(i)) ? i - 1 : i;
+    const int64_t i = static_cast<int64_t>(x);
+    return (x < 0 && x != static_cast<decimal_t>(i)) ? i - 1 : i;
 }
 
 /**
@@ -469,8 +454,8 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x, co
  * @return 向上取整后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil(const decimal_t x) noexcept {
-	const int64_t i = static_cast<int64_t>(x);
-	return (x > 0 && x != static_cast<decimal_t>(i)) ? i + 1 : i;
+    const int64_t i = static_cast<int64_t>(x);
+    return (x > 0 && x != static_cast<decimal_t>(i)) ? i + 1 : i;
 }
 
 /**
@@ -511,7 +496,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round(const decimal_t x, co
  * @return 截断后的值
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x, const int bit) noexcept {
-	return x < 0 ? ceil(x, bit) : floor(x, bit);
+    return x < 0 ? ceil(x, bit) : floor(x, bit);
 }
 
 /**
@@ -519,9 +504,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x,
  * @param x 原数值
  * @return 截断后的整数值
  */
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x) noexcept {
-    return truncate(x, 0);
-}
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x) noexcept { return truncate(x, 0); }
 
 
 /**
@@ -533,12 +516,12 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x)
  * @exception math_exception 当axis为0时抛出
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_multiple(const decimal_t x, const decimal_t axis,
-	const decimal_t toler = constants::PRECISE_TOLERANCE) {
-	if (absolute(axis) < constants::PRECISE_TOLERANCE) {
-		NEFORCE_THROW_EXCEPTION(math_exception("Axis Cannot be 0"));
-	}
-	const decimal_t multi = round(x / axis) * axis;
-	return absolute(x - multi) < toler;
+                                                                const decimal_t toler = constants::PRECISE_TOLERANCE) {
+    if (absolute(axis) < constants::PRECISE_TOLERANCE) {
+        NEFORCE_THROW_EXCEPTION(math_exception("Axis Cannot be 0"));
+    }
+    const decimal_t multi = round(x / axis) * axis;
+    return absolute(x - multi) < toler;
 }
 
 /**
@@ -548,8 +531,8 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_multiple(const decimal_t 
  * @return 如果x接近π的整数倍则返回true
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_pi(const decimal_t x,
-	const decimal_t toler = constants::LOW_PRECISE_TOLERANCE) {
-	return around_multiple(x, constants::PI, toler);
+                                                          const decimal_t toler = constants::LOW_PRECISE_TOLERANCE) {
+    return around_multiple(x, constants::PI, toler);
 }
 
 /**
@@ -559,8 +542,8 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_pi(const decimal_t x,
  * @return 如果|x| < toler则返回true
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_zero(const decimal_t x,
-	const decimal_t toler = constants::PRECISE_TOLERANCE) {
-	return absolute(x) < toler;
+                                                            const decimal_t toler = constants::PRECISE_TOLERANCE) {
+    return absolute(x) < toler;
 }
 
 
@@ -582,7 +565,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t remainder(const decimal_t x
  * @return x的小数部分
  */
 NEFORCE_CONST_FUNCTION constexpr decimal_t float_part(const decimal_t x) noexcept {
-	return x - static_cast<int64_t>(x);
+    return x - static_cast<int64_t>(x);
 }
 
 /**
@@ -594,9 +577,9 @@ NEFORCE_CONST_FUNCTION constexpr decimal_t float_part(const decimal_t x) noexcep
  * 将x的整数部分存入int_ptr，返回小数部分。
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t float_apart(decimal_t x, int64_t* int_ptr) noexcept {
-	*int_ptr = static_cast<int64_t>(x);
-	x -= *int_ptr;
-	return x;
+    *int_ptr = static_cast<int64_t>(x);
+    x -= *int_ptr;
+    return x;
 }
 
 
@@ -613,7 +596,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t sine(decimal_t x) noexcept {
         sign = -1.0;
         x = -x;
     }
-     constexpr decimal_t twoPi = 2 * constants::PI;
+    constexpr decimal_t twoPi = 2 * constants::PI;
     x = x - twoPi * floor(x / twoPi);
 
     if (x > constants::PI) {
@@ -650,7 +633,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t sine(decimal_t x) noexcept {
  * 利用恒等式 cos(x) = sin(π/2 - x) 计算。
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cosine(const decimal_t x) noexcept {
-	return sine(constants::PI / 2.0 - x);
+    return sine(constants::PI / 2.0 - x);
 }
 
 /**
@@ -660,12 +643,11 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cosine(const decimal_t x) no
  * @exception math_exception 当x接近π/2的奇数倍时抛出
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t tangent(const decimal_t x) {
-    const decimal_t multiple = (2 * round((2 * x - constants::PI)
-        / (2 * constants::PI)) + 1) * (constants::PI / 2);
+    const decimal_t multiple = (2 * round((2 * x - constants::PI) / (2 * constants::PI)) + 1) * (constants::PI / 2);
     if (absolute(x - multiple) < constants::LOW_PRECISE_TOLERANCE) {
         NEFORCE_THROW_EXCEPTION(math_exception("Tangent Range Exceeded"));
     }
-	return sine(x) / cosine(x);
+    return sine(x) / cosine(x);
 }
 
 /**
@@ -674,9 +656,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t tangent(const decimal_t x) {
  * @return cot(x)
  * @exception math_exception 当x接近π的整数倍时抛出
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cotangent(const decimal_t x) {
-	return 1 / tangent(x);
-}
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cotangent(const decimal_t x) { return 1 / tangent(x); }
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -716,7 +696,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arctangent(const decimal_t x
         const decimal_t sign = x > 0 ? 1.0 : -1.0;
         return sign * (constants::PI / 2 - inner::__arctangent_taylor(1 / absolute(x)));
     }
-	return inner::__arctangent_taylor(x);
+    return inner::__arctangent_taylor(x);
 }
 
 /**
@@ -726,13 +706,13 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arctangent(const decimal_t x
  * @exception math_exception 当|x| > 1时抛出
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arcsine(const decimal_t x) {
-	if (absolute(x) > 1) {
-		NEFORCE_THROW_EXCEPTION(math_exception("Arcsine Range Exceeded"));
-	}
-	if (absolute(x) >= 1 - constants::EPSILON) {
-		return x > 0 ? constants::PI / 2 : -constants::PI / 2;
-	}
-	return arctangent(x / square_root(1 - x * x));
+    if (absolute(x) > 1) {
+        NEFORCE_THROW_EXCEPTION(math_exception("Arcsine Range Exceeded"));
+    }
+    if (absolute(x) >= 1 - constants::EPSILON) {
+        return x > 0 ? constants::PI / 2 : -constants::PI / 2;
+    }
+    return arctangent(x / square_root(1 - x * x));
 }
 
 /**
@@ -743,7 +723,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arcsine(const decimal_t x) {
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arccosine(const decimal_t x) {
     if (absolute(x) > 1) {
-	    NEFORCE_THROW_EXCEPTION(math_exception("Arccosine Range Exceeded"));
+        NEFORCE_THROW_EXCEPTION(math_exception("Arccosine Range Exceeded"));
     }
     return constants::PI / 2.0 - arcsine(x);
 }

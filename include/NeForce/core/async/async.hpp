@@ -9,8 +9,8 @@
  * 用于异步执行函数并返回关联的future对象。
  */
 
-#include "NeForce/core/functional/call_wrapper.hpp"
 #include "NeForce/core/async/packaged_task.hpp"
+#include "NeForce/core/functional/call_wrapper.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -34,24 +34,17 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 混合策略: 实现定义的行为，通常优先选择异步执行
  */
 template <typename Func, typename... Args>
-NEFORCE_NODISCARD future<async_result_t<Func, Args...>>
-async(launch policy, Func&& function, Args&&... args) {
+NEFORCE_NODISCARD future<async_result_t<Func, Args...>> async(launch policy, Func&& function, Args&&... args) {
     using Wrapper = call_wrapper<Func, Args...>;
     using AsyncState = inner::__future_base::async_state_impl<Wrapper, async_result_t<Func, Args...>>;
     using DeferredState = inner::__future_base::deferred_state<Wrapper, async_result_t<Func, Args...>>;
 
     shared_ptr<inner::__future_base::state_base> state;
     if ((policy & launch::async) == launch::async) {
-        state = _NEFORCE make_shared<AsyncState>(
-            _NEFORCE forward<Func>(function),
-            _NEFORCE forward<Args>(args)...
-        );
+        state = _NEFORCE make_shared<AsyncState>(_NEFORCE forward<Func>(function), _NEFORCE forward<Args>(args)...);
     }
     if (!state) {
-        state = _NEFORCE make_shared<DeferredState>(
-            _NEFORCE forward<Func>(function),
-            _NEFORCE forward<Args>(args)...
-        );
+        state = _NEFORCE make_shared<DeferredState>(_NEFORCE forward<Func>(function), _NEFORCE forward<Args>(args)...);
     }
     return _NEFORCE future<async_result_t<Func, Args...>>(_NEFORCE move(state));
 }
@@ -68,13 +61,9 @@ async(launch policy, Func&& function, Args&&... args) {
  * 允许实现根据系统资源和函数特性选择最佳执行方式。
  */
 template <typename Func, typename... Args>
-NEFORCE_NODISCARD future<async_result_t<Func, Args...>>
-async(Func&& function, Args&&... args) {
-    return _NEFORCE async(
-        launch::async | launch::deferred,
-        _NEFORCE forward<Func>(function),
-        _NEFORCE forward<Args>(args)...
-    );
+NEFORCE_NODISCARD future<async_result_t<Func, Args...>> async(Func&& function, Args&&... args) {
+    return _NEFORCE async(launch::async | launch::deferred, _NEFORCE forward<Func>(function),
+                          _NEFORCE forward<Args>(args)...);
 }
 
 /** @} */ // Async

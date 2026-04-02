@@ -41,7 +41,7 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API file_locker {
 public:
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
-    using difference_type    = int64_t;                     ///< 偏移量类型
+    using difference_type = int64_t;                        ///< 偏移量类型
 
 private:
     native_handle_type handle_; ///< 文件句柄
@@ -56,7 +56,7 @@ public:
     explicit file_locker(native_handle_type handle) noexcept;
 
     file_locker(const file_locker&) = delete;
-    file_locker& operator =(const file_locker&) = delete;
+    file_locker& operator=(const file_locker&) = delete;
 
     /**
      * @brief 锁定文件区域
@@ -68,8 +68,7 @@ public:
      * 阻塞等待直到获得锁。
      * 如果length为0，锁定从offset到文件末尾的所有区域。
      */
-    bool lock(difference_type offset, difference_type length,
-              file_lock mode = file_lock::EXCLUSIVE) const noexcept;
+    bool lock(difference_type offset, difference_type length, file_lock mode = file_lock::EXCLUSIVE) const noexcept;
 
     /**
      * @brief 解锁文件区域
@@ -137,10 +136,10 @@ public:
     using difference_type = file_locker::difference_type; ///< 偏移量类型
 
 private:
-    file_locker& locker_;          ///< 文件锁管理器引用
-    difference_type offset_;       ///< 锁定的起始偏移
-    difference_type length_;       ///< 锁定的长度
-    bool locked_ = false;          ///< 是否持有锁
+    file_locker& locker_;    ///< 文件锁管理器引用
+    difference_type offset_; ///< 锁定的起始偏移
+    difference_type length_; ///< 锁定的长度
+    bool locked_ = false;    ///< 是否持有锁
 
 public:
     /**
@@ -162,7 +161,7 @@ public:
     ~file_lock_guard();
 
     file_lock_guard(const file_lock_guard&) = delete;
-    file_lock_guard& operator =(const file_lock_guard&) = delete;
+    file_lock_guard& operator=(const file_lock_guard&) = delete;
 
     /**
      * @brief 检查是否持有锁

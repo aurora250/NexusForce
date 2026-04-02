@@ -15,9 +15,7 @@ public:
 
     virtual double area() const { return 0.0; }
 
-    string position() const {
-        return "(" + to_string(x) + ", " + to_string(y) + ")";
-    }
+    string position() const { return "(" + to_string(x) + ", " + to_string(y) + ")"; }
 };
 
 class circle : public shape {
@@ -25,25 +23,20 @@ public:
     double radius = 1.0;
 
     circle() = default;
-    circle(double r, double px, double py) : radius(r) {
+    circle(double r, double px, double py) :
+    radius(r) {
         x = px;
         y = py;
         name = "circle";
     }
 
-    double area() const override {
-        return 3.14159 * radius * radius;
-    }
+    double area() const override { return 3.14159 * radius * radius; }
 
-    double circumference() const {
-        return 2.0 * 3.14159 * radius;
-    }
+    double circumference() const { return 2.0 * 3.14159 * radius; }
 
     void set_radius(double r) { radius = r; }
 
-    void scale(double factor_x, double factor_y) {
-        radius *= square_root(factor_x * factor_y);
-    }
+    void scale(double factor_x, double factor_y) { radius *= square_root(factor_x * factor_y); }
 };
 
 class rectangle : public shape {
@@ -52,20 +45,17 @@ public:
     double height = 1.0;
 
     rectangle() = default;
-    rectangle(double w, double h, double px, double py)
-        : width(w), height(h) {
+    rectangle(double w, double h, double px, double py) :
+    width(w),
+    height(h) {
         x = px;
         y = py;
         name = "rectangle";
     }
 
-    double area() const override {
-        return width * height;
-    }
+    double area() const override { return width * height; }
 
-    double perimeter() const {
-        return 2.0 * (width + height);
-    }
+    double perimeter() const { return 2.0 * (width + height); }
 };
 
 
@@ -83,29 +73,29 @@ template <> struct neforce::reflect::type_name<rectangle> {
 
 
 NEFORCE_REFLECT_REGISTER(shape)
-    .constructor()
-    .property("name", &shape::name)
-    .property("x", &shape::x)
-    .property("y", &shape::y)
-    .function("move", &shape::move)
-    .function("area", &shape::area)
-    .function("position", &shape::position);
+        .constructor()
+        .property("name", &shape::name)
+        .property("x", &shape::x)
+        .property("y", &shape::y)
+        .function("move", &shape::move)
+        .function("area", &shape::area)
+        .function("position", &shape::position);
 
 NEFORCE_REFLECT_REGISTER_DERIVED(circle, shape)
-    .constructor()
-    // .constructor<double, double, double>()
-    .property("radius", &circle::radius)
-    .function("area", &circle::area)
-    .function("circumference", &circle::circumference)
-    .function("set_radius", &circle::set_radius)
-    .function("scale", &circle::scale);
+        .constructor()
+        // .constructor<double, double, double>()
+        .property("radius", &circle::radius)
+        .function("area", &circle::area)
+        .function("circumference", &circle::circumference)
+        .function("set_radius", &circle::set_radius)
+        .function("scale", &circle::scale);
 
 NEFORCE_REFLECT_REGISTER_DERIVED(rectangle, shape)
-    .constructor()
-    .property("width", &rectangle::width)
-    .property("height", &rectangle::height)
-    .function("area", &rectangle::area)
-    .function("perimeter", &rectangle::perimeter);
+        .constructor()
+        .property("width", &rectangle::width)
+        .property("height", &rectangle::height)
+        .function("area", &rectangle::area)
+        .function("perimeter", &rectangle::perimeter);
 
 
 void test_reflect() {
@@ -136,12 +126,12 @@ void test_reflect() {
     }
 
     println("\nAll properties of circle (including base):");
-    for (const auto& property : circle_meta->all_properties()) {
+    for (const auto& property: circle_meta->all_properties()) {
         println("  -", property.first);
     }
 
     println("\nAll functions of circle (including base):");
-    for (const auto& f : circle_meta->all_functions()) {
+    for (const auto& f: circle_meta->all_functions()) {
         println("  -", f.first);
     }
 

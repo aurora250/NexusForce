@@ -24,12 +24,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 进程操作异常
  */
 struct process_exception final : system_exception {
-    explicit process_exception(
-        const char* info = "Process Operation Failed.", const char* type = static_type,
-        const int code = 0) noexcept : system_exception(info, type, code) {}
+    explicit process_exception(const char* info = "Process Operation Failed.", const char* type = static_type,
+                               const int code = 0) noexcept :
+    system_exception(info, type, code) {}
 
-    explicit process_exception(const exception& e)
-    : system_exception(e) {}
+    explicit process_exception(const exception& e) :
+    system_exception(e) {}
 
     ~process_exception() override = default;
     static constexpr auto static_type = "process_exception";
@@ -56,9 +56,9 @@ public:
      */
     using native_id_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        unsigned long;
+            unsigned long;
 #else
-        int;
+            int;
 #endif
 
     /**
@@ -69,17 +69,17 @@ public:
      * 不同平台包含不同的实现细节。
      */
     struct state_info {
-        native_id_type process_id;  ///< 进程ID
+        native_id_type process_id; ///< 进程ID
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        native_id_type thread_id;   ///< 主线程ID
-        void* process_handle;       ///< 进程句柄
-        void* thread_handle;        ///< 主线程句柄
+        native_id_type thread_id; ///< 主线程ID
+        void* process_handle;     ///< 进程句柄
+        void* thread_handle;      ///< 主线程句柄
 #endif
 
-        pipe stdout_pipe;           ///< 标准输出管道
-        bool is_running;            ///< 进程是否正在运行
-        string stdout_output;       ///< 捕获的标准输出内容
+        pipe stdout_pipe;     ///< 标准输出管道
+        bool is_running;      ///< 进程是否正在运行
+        string stdout_output; ///< 捕获的标准输出内容
     };
 
     /**
@@ -114,12 +114,12 @@ public:
      * 用于检查对进程的访问权限。
      */
     enum class permission {
-        read = 0x01,        ///< 读取权限
-        write = 0x02,       ///< 写入权限
-        execute = 0x04,     ///< 执行权限
-        terminate = 0x08,   ///< 终止权限
-        query_info = 0x10,  ///< 查询信息权限
-        all = 0xFF          ///< 所有权限
+        read = 0x01,       ///< 读取权限
+        write = 0x02,      ///< 写入权限
+        execute = 0x04,    ///< 执行权限
+        terminate = 0x08,  ///< 终止权限
+        query_info = 0x10, ///< 查询信息权限
+        all = 0xFF         ///< 所有权限
     };
 
     /**
@@ -127,11 +127,11 @@ public:
      * @brief 进程状态枚举
      */
     enum class state {
-        running,    ///< 进程正在运行
-        suspended,  ///< 进程被挂起
-        stopped,    ///< 进程被停止
-        exited,     ///< 进程已退出
-        unknown     ///< 未知状态
+        running,   ///< 进程正在运行
+        suspended, ///< 进程被挂起
+        stopped,   ///< 进程被停止
+        exited,    ///< 进程已退出
+        unknown    ///< 未知状态
     };
 
     /**

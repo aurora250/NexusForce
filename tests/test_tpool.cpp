@@ -1,7 +1,7 @@
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/file/file.hpp>
-#include <NeForce/core/time/click.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/core/time/click.hpp>
 
 using namespace neforce;
 
@@ -20,19 +20,19 @@ auto io_intensive = [] {
 };
 
 auto mixed_workload = [](bool is_long) {
-    if(is_long) {
+    if (is_long) {
         this_thread::sleep_for(seconds(1));
     } else {
         volatile int sum = 0;
-        for(int i = 0; i < 1000; ++i) sum += i;
+        for (int i = 0; i < 1000; ++i) {
+            sum += i;
+        }
     }
 };
 
 auto burst_test = [] {
-    for(int i = 0; i < 10000; ++i) {
-        pool().submit_task([]() {
-            this_thread::sleep_for(milliseconds(10));
-        });
+    for (int i = 0; i < 10000; ++i) {
+        pool().submit_task([]() { this_thread::sleep_for(milliseconds(10)); });
     }
     this_thread::sleep_for(seconds(5));
 };
@@ -40,7 +40,7 @@ auto burst_test = [] {
 int main() {
     auto cpu_intensive = [](int n) {
         double result = 0.0;
-        for(int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i) {
             result += square_root(i) * sine(i);
         }
         return result;

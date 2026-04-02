@@ -25,8 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 表示条件变量等待操作的结果状态。
  */
 enum class cv_status {
-    success,    ///< 等待成功
-    timeout     ///< 等待超时
+    success, ///< 等待成功
+    timeout  ///< 等待超时
 };
 
 
@@ -48,17 +48,17 @@ public:
 #endif
 
 private:
-    native_handle_type cond_;   ///< 条件变量句柄
+    native_handle_type cond_; ///< 条件变量句柄
 
 public:
     condition_variable_base();
-    
+
     condition_variable_base(const condition_variable_base&) = delete;
-    condition_variable_base& operator =(const condition_variable_base&) = delete;
+    condition_variable_base& operator=(const condition_variable_base&) = delete;
 
     condition_variable_base(condition_variable_base&&) = default;
-    condition_variable_base& operator =(condition_variable_base&&) = default;
-    
+    condition_variable_base& operator=(condition_variable_base&&) = default;
+
     ~condition_variable_base();
 
     native_handle_type* native_handle() noexcept { return &cond_; }
@@ -123,12 +123,12 @@ NEFORCE_END_INNER__
  */
 class condition_variable {
 public:
-    using base_type = inner::condition_variable_base;  ///< 基类类型
-    using native_handle_type = base_type::native_handle_type;  ///< 原生句柄类型
-    using clock_type = _NEFORCE steady_clock;  ///< 默认时钟类型
+    using base_type = inner::condition_variable_base;         ///< 基类类型
+    using native_handle_type = base_type::native_handle_type; ///< 原生句柄类型
+    using clock_type = _NEFORCE steady_clock;                 ///< 默认时钟类型
 
 private:
-    base_type cond_;   ///< 底层条件变量
+    base_type cond_; ///< 底层条件变量
 
     /**
      * @brief 等待直到稳定时钟时间点的实现
@@ -138,14 +138,11 @@ private:
      * @return 等待状态
      */
     template <typename Dur>
-    cv_status __wait_until_impl(unique_lock<mutex>& lock,
-        const time_point<steady_clock, Dur>& util) {
+    cv_status __wait_until_impl(unique_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
         auto s = util.to_sec();
         const nanoseconds ns(util - s);
         cond_.wait_until(*lock.mutex(), true, s.since_epoch().count(), ns.count());
-        return steady_clock::now() < util ?
-            cv_status::success :
-            cv_status::timeout;
+        return steady_clock::now() < util ? cv_status::success : cv_status::timeout;
     }
 
     /**
@@ -156,14 +153,11 @@ private:
      * @return 等待状态
      */
     template <typename Dur>
-    cv_status __wait_until_impl(unique_lock<mutex>& lock,
-        const time_point<system_clock, Dur>& util) {
+    cv_status __wait_until_impl(unique_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
         auto sec = util.to_sec();
         const nanoseconds nanosec(util - sec);
         cond_.wait_until(*lock.mutex(), sec.since_epoch().count(), nanosec.count());
-        return system_clock::now() < util ?
-            cv_status::success :
-            cv_status::timeout;
+        return system_clock::now() < util ? cv_status::success : cv_status::timeout;
     }
 
 public:
@@ -178,32 +172,26 @@ public:
     ~condition_variable() = default;
 
     condition_variable(const condition_variable&) = delete;
-    condition_variable& operator =(const condition_variable&) = delete;
-    
+    condition_variable& operator=(const condition_variable&) = delete;
+
     condition_variable(condition_variable&& other) = default;
-    condition_variable& operator =(condition_variable&& other) = default;
+    condition_variable& operator=(condition_variable&& other) = default;
 
     /**
      * @brief 获取原生句柄
      * @return 指向条件变量原生句柄的指针
      */
-    native_handle_type* native_handle() noexcept {
-        return cond_.native_handle();
-    }
+    native_handle_type* native_handle() noexcept { return cond_.native_handle(); }
 
     /**
      * @brief 通知一个等待线程
      */
-    void notify_one() noexcept {
-        cond_.notify_one();
-    }
+    void notify_one() noexcept { cond_.notify_one(); }
 
     /**
      * @brief 通知所有等待线程
      */
-    void notify_all() noexcept {
-        cond_.notify_all();
-    }
+    void notify_all() noexcept { cond_.notify_all(); }
 
     /**
      * @brief 无限期等待
@@ -211,9 +199,7 @@ public:
      *
      * 原子地解锁互斥锁并等待条件变量，被唤醒后重新锁定互斥锁。
      */
-    void wait(unique_lock<mutex>& lock) {
-        cond_.wait(*lock.mutex());
-    }
+    void wait(unique_lock<mutex>& lock) { cond_.wait(*lock.mutex()); }
 
     /**
      * @brief 带谓词的无限期等待
@@ -223,9 +209,10 @@ public:
      *
      * 等待直到谓词返回true。防止虚假唤醒。
      */
-    template <typename Pred>
-    void wait(unique_lock<mutex>& lock, Pred pred) {
-        while (!pred()) wait(lock);
+    template <typename Pred> void wait(unique_lock<mutex>& lock, Pred pred) {
+        while (!pred()) {
+            wait(lock);
+        }
     }
 
     /**
@@ -235,8 +222,7 @@ public:
      * @param util 目标时间点
      * @return 等待结果状态
      */
-    template <typename Dur>
-    cv_status wait_until(unique_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
+    template <typename Dur> cv_status wait_until(unique_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 
@@ -247,8 +233,7 @@ public:
      * @param util 目标时间点
      * @return 等待结果状态
      */
-    template <typename Dur>
-    cv_status wait_until(unique_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
+    template <typename Dur> cv_status wait_until(unique_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 

@@ -7,7 +7,7 @@
 #include <NeForce/network/socket/tcp_socket.hpp>
 #include <NeForce/network/socket/udp_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <arpa/inet.h>
+#    include <arpa/inet.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -16,9 +16,7 @@ namespace {
         thread_local random_mt tls_random;
         thread_local bool seeded = false;
         if (!seeded) {
-            const auto seed =
-                steady_clock::now().since_epoch().count() ^
-                this_thread::id().native_handle();
+            const auto seed = steady_clock::now().since_epoch().count() ^ this_thread::id().native_handle();
             tls_random.set_seed(seed);
             seeded = true;
         }
@@ -81,14 +79,10 @@ namespace {
         const uint16_t qtype = endian::host_to_network(static_cast<uint16_t>(type));
         const uint16_t qclass_val = endian::host_to_network(static_cast<uint16_t>(qclass));
 
-        query.insert(
-            query.end(),
-            reinterpret_cast<const byte_t*>(&qtype),
-            reinterpret_cast<const byte_t*>(&qtype) + sizeof(qtype));
-        query.insert(
-            query.end(),
-            reinterpret_cast<const byte_t*>(&qclass_val),
-            reinterpret_cast<const byte_t*>(&qclass_val) + sizeof(qclass_val));
+        query.insert(query.end(), reinterpret_cast<const byte_t*>(&qtype),
+                     reinterpret_cast<const byte_t*>(&qtype) + sizeof(qtype));
+        query.insert(query.end(), reinterpret_cast<const byte_t*>(&qclass_val),
+                     reinterpret_cast<const byte_t*>(&qclass_val) + sizeof(qclass_val));
 
         return query;
     }
@@ -229,11 +223,11 @@ namespace {
         }
 
         record.type = static_cast<dns_record::raw>(
-            endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
+                endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
         offset += 2;
 
-        record.class_type = static_cast<dns_query>(
-            endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
+        record.class_type =
+                static_cast<dns_query>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
         offset += 2;
 
         record.ttl = endian::network_to_host(*reinterpret_cast<const uint32_t*>(&data[offset]));
@@ -275,7 +269,7 @@ namespace {
                 }
                 default: {
                     record.data = "";
-                    for (const byte_t byte : rdata) {
+                    for (const byte_t byte: rdata) {
                         record.data += format("{:02x}", byte);
                     }
                     break;
@@ -341,7 +335,7 @@ namespace {
     string create_cache_key(const string_view domain, const dns_record::raw type, dns_query qclass) {
         return domain + "_"_s + to_string(static_cast<int>(type)) + "_" + to_string(static_cast<int>(qclass));
     }
-}
+} // namespace
 
 
 byte_vector dns_client::send_udp_query(const byte_vector& query) const {
@@ -378,19 +372,15 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
     }
 
     const ssize_t sent = tls_udp_state.socket.send_to(
-        memory_view<const char>{
-            reinterpret_cast<const char*>(query.data()),
-            query.size()
-        },
-        *endpoint);
+            memory_view<const char>{reinterpret_cast<const char*>(query.data()), query.size()}, *endpoint);
 
     if (sent < 0 || static_cast<size_t>(sent) != query.size()) {
         NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to send UDP query"));
     }
 
     byte_vector buffer(512);
-    const auto received = tls_udp_state.socket.receive_from(
-        memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
+    const auto received =
+            tls_udp_state.socket.receive_from(memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
 
     if (received.first < 0) {
         NEFORCE_THROW_EXCEPTION(dns_exception::timeout());
@@ -448,15 +438,12 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
         }
 
         const auto length = endian::host_to_network<uint16_t>(query.size());
-        if (tls_tcp_state.socket.send(memory_view<const char>{
-            reinterpret_cast<const char*>(&length), 2
-        }) != 2) {
+        if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(&length), 2}) != 2) {
             return false;
         }
 
-        if (tls_tcp_state.socket.send(memory_view<const char>{
-                reinterpret_cast<const char*>(query.data()), query.size()
-        }) != query.size()) {
+        if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(query.data()),
+                                                              query.size()}) != query.size()) {
             return false;
         }
 
@@ -488,10 +475,8 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     size_t total = 0;
 
     while (total < res_len) {
-        const ssize_t received = tls_tcp_state.socket.receive(memory_view<char>{
-            reinterpret_cast<char*>(buffer.data() + total),
-            res_len - total
-        });
+        const ssize_t received = tls_tcp_state.socket.receive(
+                memory_view<char>{reinterpret_cast<char*>(buffer.data() + total), res_len - total});
 
         if (received <= 0) {
             NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to receive complete response"));
@@ -503,8 +488,9 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     return buffer;
 }
 
-dns_client::dns_client(config cfg, const bool use_tcp)
-: config_(move(cfg)), use_tcp_(use_tcp) {
+dns_client::dns_client(config cfg, const bool use_tcp) :
+config_(move(cfg)),
+use_tcp_(use_tcp) {
     if (config_.server.empty()) {
         NEFORCE_THROW_EXCEPTION(dns_exception("DNS server address cannot be empty"));
     }
@@ -555,9 +541,7 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
 }
 
 future<dns_query_result> dns_client::query_async(const string& domain, dns_record::raw type, dns_query qclass) {
-    return async(launch::async, [this, domain, type, qclass] {
-        return query(domain.view(), type, qclass);
-    });
+    return async(launch::async, [this, domain, type, qclass] { return query(domain.view(), type, qclass); });
 }
 
 vector<string> dns_client::resolve_a(const string_view domain) {
@@ -565,7 +549,7 @@ vector<string> dns_client::resolve_a(const string_view domain) {
     vector<string> ips;
     ips.reserve(result.answers.size());
 
-    for (const auto& record : result.answers) {
+    for (const auto& record: result.answers) {
         if (record.type == dns_record::A) {
             ips.push_back(record.data);
         }
@@ -579,7 +563,7 @@ vector<string> dns_client::resolve_aaaa(const string_view domain) {
     vector<string> ips;
     ips.reserve(result.answers.size());
 
-    for (const auto& record : result.answers) {
+    for (const auto& record: result.answers) {
         if (record.type == dns_record::AAAA) {
             ips.push_back(record.data);
         }
@@ -593,7 +577,7 @@ vector<string> dns_client::resolve_cname(const string_view domain) {
     vector<string> cnames;
     cnames.reserve(result.answers.size());
 
-    for (const auto& record : result.answers) {
+    for (const auto& record: result.answers) {
         if (record.type == dns_record::CNAME) {
             cnames.push_back(record.data);
         }
@@ -607,7 +591,7 @@ vector<string> dns_client::resolve_mx(const string_view domain) {
     vector<string> mx_records;
     mx_records.reserve(result.answers.size());
 
-    for (const auto& record : result.answers) {
+    for (const auto& record: result.answers) {
         if (record.type == dns_record::MX) {
             mx_records.push_back(record.data);
         }
@@ -621,7 +605,7 @@ vector<string> dns_client::resolve_txt(const string_view domain) {
     vector<string> txt_records;
     txt_records.reserve(result.answers.size());
 
-    for (const auto& record : result.answers) {
+    for (const auto& record: result.answers) {
         if (record.type == dns_record::TXT) {
             txt_records.push_back(record.data);
         }
@@ -677,14 +661,14 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
     vector<future<dns_query_result>> futures;
     futures.reserve(domains.size());
 
-    for (const auto& domain : domains) {
+    for (const auto& domain: domains) {
         futures.push_back(query_async(domain, type));
     }
 
     vector<dns_query_result> results;
     results.reserve(futures.size());
 
-    for (auto& future : futures) {
+    for (auto& future: futures) {
         try {
             results.push_back(future.get());
         } catch (...) {

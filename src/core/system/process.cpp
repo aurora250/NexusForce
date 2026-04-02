@@ -1,23 +1,23 @@
 #include <NeForce/core/system/process.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <windef.h>
-#include <WinBase.h>
-#include <Psapi.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <NeForce/core/config/windef.hpp>
+#    include <Psapi.h>
+#    include <WinBase.h>
+#    include <windef.h>
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <NeForce/core/system/console.hpp>
-#include <NeForce/core/file/file.hpp>
-#include <sys/wait.h>
-#include <cerrno>
-#include <cstring>
-#include <csignal>
+#    include <NeForce/core/file/file.hpp>
+#    include <NeForce/core/system/console.hpp>
+#    include <cerrno>
+#    include <csignal>
+#    include <cstring>
+#    include <sys/wait.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -25,7 +25,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string build_command_line(const string& executable, const vector<string>& args) {
         string cmd_line = "\"" + executable + "\"";
-        for (const auto& arg : args) {
+        for (const auto& arg: args) {
             cmd_line += " \"" + arg + "\"";
         }
         return cmd_line;
@@ -48,19 +48,19 @@ namespace {
         argv[argc - 1] = nullptr;
         return argv;
     }
-    void free_argv(char** argv) noexcept{
+    void free_argv(char** argv) noexcept {
         if (argv) {
-            for (int i = 0; argv[i] != nullptr; ++i)
+            for (int i = 0; argv[i] != nullptr; ++i) {
                 delete[] argv[i];
+            }
             delete[] argv;
         }
     }
 #endif
-}
+} // namespace
 
 
-process::state_info process::create(
-    const string& executable, const vector<string>& args, bool capture_output) {
+process::state_info process::create(const string& executable, const vector<string>& args, bool capture_output) {
     state_info info{};
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -78,12 +78,8 @@ process::state_info process::create(
     string cmd_line = build_command_line(executable, args);
 
     ::PROCESS_INFORMATION pi;
-    const ::BOOL success = ::CreateProcessA(
-        nullptr, cmd_line.data(),
-        nullptr, nullptr,
-        capture_output ? TRUE : FALSE,
-        0, nullptr, nullptr, &si, &pi
-    );
+    const ::BOOL success = ::CreateProcessA(nullptr, cmd_line.data(), nullptr, nullptr, capture_output ? TRUE : FALSE,
+                                            0, nullptr, nullptr, &si, &pi);
 
     if (!success) {
         NEFORCE_THROW_EXCEPTION(process_exception("CreateProcess failed"));
@@ -144,9 +140,7 @@ process::state_info process::create(
 
 int process::wait_for(state_info& info, int timeout_ms) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::DWORD timeout = (timeout_ms < 0) ?
-        numeric_traits<::DWORD>::max() :
-        static_cast<::DWORD>(timeout_ms);
+    const ::DWORD timeout = (timeout_ms < 0) ? numeric_traits<::DWORD>::max() : static_cast<::DWORD>(timeout_ms);
     ::DWORD result = ::WaitForSingleObject(info.process_handle, timeout);
 
     if (result == WAIT_TIMEOUT) {
@@ -178,7 +172,9 @@ int process::wait_for(state_info& info, int timeout_ms) {
             if (result == -1) {
                 NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
             }
-            if (result > 0) break;
+            if (result > 0) {
+                break;
+            }
 
             ::usleep(sleep_interval * 1000);
             elapsed += sleep_interval;
@@ -222,7 +218,9 @@ bool process::terminate(const state_info& info) noexcept {
 
 bool process::suspend(const state_info& info) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (info.thread_handle == nullptr) return false;
+    if (info.thread_handle == nullptr) {
+        return false;
+    }
     return ::SuspendThread(info.thread_handle) != static_cast<::DWORD>(-1);
 #else
     return ::kill(info.process_id, SIGSTOP) == 0;
@@ -231,7 +229,9 @@ bool process::suspend(const state_info& info) noexcept {
 
 bool process::resume(const state_info& info) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (info.thread_handle == nullptr) return false;
+    if (info.thread_handle == nullptr) {
+        return false;
+    }
     return ::ResumeThread(info.thread_handle) != static_cast<::DWORD>(-1);
 #else
     return ::kill(info.process_id, SIGCONT) == 0;
@@ -311,8 +311,12 @@ process::state process::get_state(const state_info& info) noexcept {
         string state;
         size_t pos = 0;
         getline(stat.read(), pos, state, [](char c) { return is_space(c); });
-        if (state == "T") return state::suspended;
-        if (state == "Z") return state::exited;
+        if (state == "T") {
+            return state::suspended;
+        }
+        if (state == "Z") {
+            return state::exited;
+        }
         return state::running;
     }
 #endif
@@ -367,10 +371,7 @@ bool process::check_permission(const state_info& info, permission permission) no
 
 string process::name(native_id_type process_id) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::HANDLE hProcess = ::OpenProcess(
-        PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-        FALSE,
-        process_id);
+    const ::HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
 
     if (hProcess == nullptr) {
         return "";

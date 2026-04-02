@@ -22,9 +22,7 @@ struct http_request {
         return it != parameters.end() ? it->second.view() : "";
     }
 
-    void set_parameter(const string& name, string value) {
-        parameters[name] = move(value);
-    }
+    void set_parameter(const string& name, string value) { parameters[name] = move(value); }
 
     NEFORCE_NODISCARD bool has_parameter(const string& name) const noexcept {
         return parameters.find(name) != parameters.end();
@@ -35,34 +33,22 @@ struct http_request {
         return it != cookies.end() ? it->second.view() : "";
     }
 
-    void set_cookie(const string& name, string value) {
-        cookies[name] = move(value);
-    }
+    void set_cookie(const string& name, string value) { cookies[name] = move(value); }
 
-    NEFORCE_NODISCARD bool has_cookie(const string& name) const noexcept {
-        return cookies.find(name) != cookies.end();
-    }
+    NEFORCE_NODISCARD bool has_cookie(const string& name) const noexcept { return cookies.find(name) != cookies.end(); }
 
     NEFORCE_NODISCARD string_view header(const string& name) const noexcept {
         const auto it = headers.find(name);
         return it != headers.end() ? it->second.view() : "";
     }
 
-    void set_header(const string& name, string value) {
-        headers[name] = move(value);
-    }
+    void set_header(const string& name, string value) { headers[name] = move(value); }
 
-    NEFORCE_NODISCARD bool has_header(const string& name) const noexcept {
-        return headers.find(name) != headers.end();
-    }
+    NEFORCE_NODISCARD bool has_header(const string& name) const noexcept { return headers.find(name) != headers.end(); }
 
-    NEFORCE_NODISCARD bool has_session() const noexcept {
-        return session != nullptr && session->is_valid();
-    }
+    NEFORCE_NODISCARD bool has_session() const noexcept { return session != nullptr && session->is_valid(); }
 
-    NEFORCE_NODISCARD string_view content_type() const noexcept {
-        return header(HTTP_KEY::Content_Type);
-    }
+    NEFORCE_NODISCARD string_view content_type() const noexcept { return header(HTTP_KEY::Content_Type); }
 
     NEFORCE_NODISCARD bool is_keep_alive() const noexcept {
         const auto conn = header(HTTP_KEY::Connection);
@@ -82,13 +68,9 @@ struct http_request {
         return "";
     }
 
-    NEFORCE_NODISCARD string_view user_agent() const noexcept {
-        return header("User-Agent");
-    }
+    NEFORCE_NODISCARD string_view user_agent() const noexcept { return header("User-Agent"); }
 
-    NEFORCE_NODISCARD string_view referer() const noexcept {
-        return header("Referer");
-    }
+    NEFORCE_NODISCARD string_view referer() const noexcept { return header("Referer"); }
 
     NEFORCE_NODISCARD bool is_ajax() const noexcept {
         const auto xhr = header("X-Requested-With");
@@ -129,21 +111,13 @@ struct NEFORCE_API http_response {
         return it != headers.end() ? it->second.view() : "";
     }
 
-    void set_header(const string& name, string value) {
-        headers[name] = move(value);
-    }
+    void set_header(const string& name, string value) { headers[name] = move(value); }
 
-    NEFORCE_NODISCARD bool has_header(const string& name) const noexcept {
-        return headers.find(name) != headers.end();
-    }
+    NEFORCE_NODISCARD bool has_header(const string& name) const noexcept { return headers.find(name) != headers.end(); }
 
-    void set_content_type(HTTP_CONTENT value) {
-        headers[HTTP_KEY::Content_Type] = move(value).content();
-    }
+    void set_content_type(HTTP_CONTENT value) { headers[HTTP_KEY::Content_Type] = move(value).content(); }
 
-    void set_content_type(string value) {
-        headers[HTTP_KEY::Content_Type] = move(value);
-    }
+    void set_content_type(string value) { headers[HTTP_KEY::Content_Type] = move(value); }
 };
 
 NEFORCE_END_NAMESPACE__

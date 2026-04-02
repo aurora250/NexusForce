@@ -58,9 +58,8 @@ wait_clock_t::time_point to_wait_clock(const time_point<wait_clock_t, Dur>& time
  * 定时等待实现，处理超时逻辑和时钟转换。
  */
 template <typename Dur>
-bool __platform_wait_until_impl(
-    const platform_wait_t* addr, const platform_wait_t old,
-    const time_point<wait_clock_t, Dur>& timeout) noexcept {
+bool __platform_wait_until_impl(const platform_wait_t* addr, const platform_wait_t old,
+                                const time_point<wait_clock_t, Dur>& timeout) noexcept {
     const bool has_timeout = (timeout != wait_clock_t::time_point::max());
 
     if (!has_timeout) {
@@ -88,24 +87,25 @@ bool __platform_wait_until_impl(
     const auto ns = time_cast<nanoseconds>(sys_dur - sec);
 #endif
 
-    return _NEFORCE futex_wait_until(
-        const_cast<void*>(static_cast<const void*>(addr)),
-        old, true, sec.count(), ns.count(), true);
+    return _NEFORCE futex_wait_until(const_cast<void*>(static_cast<const void*>(addr)), old, true, sec.count(),
+                                     ns.count(), true);
 }
 
 template <typename Clock, typename Dur>
 enable_if_t<is_same_v<wait_clock_t, Clock>, bool>
 __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t old,
-    const time_point<Clock, Dur>& timeout) {
+                               const time_point<Clock, Dur>& timeout) {
     return inner::__platform_wait_until_impl(addr, old, timeout);
 }
 
 template <typename Clock, typename Dur>
 enable_if_t<!is_same_v<wait_clock_t, Clock>, bool>
 __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t old,
-    const time_point<Clock, Dur>& timeout) {
+                               const time_point<Clock, Dur>& timeout) {
     if (!inner::__platform_wait_until_impl(addr, old, inner::to_wait_clock(timeout))) {
-        if (Clock::now() < timeout) return true;
+        if (Clock::now() < timeout) {
+            return true;
+        }
     }
     return false;
 }
@@ -131,9 +131,7 @@ NEFORCE_END_INNER__
  * 公共的FUTEX定时等待接口，支持任意时钟类型。
  */
 template <typename Clock, typename Dur>
-bool futex_wait_until(
-    const platform_wait_t* addr, platform_wait_t old,
-    const time_point<Clock, Dur>& timeout) {
+bool futex_wait_until(const platform_wait_t* addr, platform_wait_t old, const time_point<Clock, Dur>& timeout) {
     return inner::__platform_wait_until_dispatch(addr, old, timeout);
 }
 
@@ -159,18 +157,17 @@ struct timed_backoff_spin_policy {
     inner::wait_clock_t::time_point start_time;
 
     template <typename Clock, typename Dur>
-    timed_backoff_spin_policy(
-        time_point<Clock, Dur> deadline_time = Clock::time_point::max(),
-        time_point<Clock, Dur> start_time_point = Clock::now()) noexcept
-    : deadline(inner::to_wait_clock(deadline_time)),
-      start_time(inner::to_wait_clock(start_time_point)) {}
+    timed_backoff_spin_policy(time_point<Clock, Dur> deadline_time = Clock::time_point::max(),
+                              time_point<Clock, Dur> start_time_point = Clock::now()) noexcept :
+    deadline(inner::to_wait_clock(deadline_time)),
+    start_time(inner::to_wait_clock(start_time_point)) {}
 
-    bool operator ()() const noexcept {
+    bool operator()() const noexcept {
         const auto now = inner::wait_clock_t::now();
         if (deadline <= now) {
             return false;
         }
-        
+
         const auto elapsed = now - start_time;
         if (elapsed > 128_ms) {
             this_thread::sleep_for(64_ms);
@@ -205,8 +202,7 @@ struct timed_waiter_pool : waiter_pool_base {
      * @return 等待是否成功
      */
     template <typename Clock, typename Dur>
-    bool do_wait_until(platform_wait_t* addr, platform_wait_t old,
-        const time_point<Clock, Dur>& timeout) {
+    bool do_wait_until(platform_wait_t* addr, platform_wait_t old, const time_point<Clock, Dur>& timeout) {
         return _NEFORCE futex_wait_until(addr, old, timeout);
     }
 };
@@ -218,8 +214,7 @@ struct timed_waiter_pool : waiter_pool_base {
  *
  * 支持超时等待的等待器，根据EntersWait标签决定是否更新等待计数。
  */
-template <typename EntersWait>
-struct timed_waiter : waiter_base<timed_waiter_pool> {
+template <typename EntersWait> struct timed_waiter : waiter_base<timed_waiter_pool> {
     using base_type = waiter_base<timed_waiter_pool>;
 
 private:
@@ -244,17 +239,15 @@ public:
      * @param addr 原子变量地址
      */
     template <typename T>
-    explicit timed_waiter(const T* addr) noexcept
-    : base_type(addr) {
+    explicit timed_waiter(const T* addr) noexcept :
+    base_type(addr) {
         enter();
     }
 
     /**
      * @brief 析构函数
      */
-    ~timed_waiter() {
-        leave();
-    }
+    ~timed_waiter() { leave(); }
 
     /**
      * @brief 执行带值的定时等待
@@ -268,11 +261,9 @@ public:
      * @return 是否在超时前条件满足
      */
     template <typename T, typename Func, typename Clock, typename Dur>
-    bool waiter_do_wait_until_v(T old, Func func,
-        const time_point<Clock, Dur>& timeout) noexcept {
+    bool waiter_do_wait_until_v(T old, Func func, const time_point<Clock, Dur>& timeout) noexcept {
         platform_wait_t value;
-        if (base_type::waiter_do_spin(old, _NEFORCE move(func), value,
-            timed_backoff_spin_policy(timeout))) {
+        if (base_type::waiter_do_spin(old, _NEFORCE move(func), value, timed_backoff_spin_policy(timeout))) {
             return true;
         }
         return base_type::waiter_.do_wait_until(base_type::addr_, value, timeout);
@@ -289,14 +280,14 @@ public:
      * @return 是否在超时前条件满足
      */
     template <typename Pred, typename Clock, typename Dur>
-    bool waiter_do_wait_until(Pred pred, platform_wait_t value,
-        const time_point<Clock, Dur>& timeout) noexcept {
+    bool waiter_do_wait_until(Pred pred, platform_wait_t value, const time_point<Clock, Dur>& timeout) noexcept {
         for (auto now = Clock::now(); now < timeout; now = Clock::now()) {
             if (base_type::waiter_.do_wait_until(base_type::addr_, value, timeout) && pred()) {
                 return true;
             }
-            if (base_type::waiter_do_spin(pred, value, timed_backoff_spin_policy(timeout, now)))
+            if (base_type::waiter_do_spin(pred, value, timed_backoff_spin_policy(timeout, now))) {
                 return true;
+            }
         }
         return false;
     }
@@ -390,8 +381,7 @@ NEFORCE_END_INNER__
  * 等待直到addr处的值不等于old或超时。
  */
 template <typename T, typename Func, typename Clock, typename Dur>
-bool atomic_wait_address_until_v(const T* addr, T&& old,
-    Func&& func, const time_point<Clock, Dur>& timeout) noexcept {
+bool atomic_wait_address_until_v(const T* addr, T&& old, Func&& func, const time_point<Clock, Dur>& timeout) noexcept {
     inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until_v(old, func, timeout);
 }
@@ -410,8 +400,7 @@ bool atomic_wait_address_until_v(const T* addr, T&& old,
  * 等待直到pred()返回true或超时。
  */
 template <typename T, typename Pred, typename Clock, typename Dur>
-bool atomic_wait_address_until(const T* addr, Pred pred,
-    const time_point<Clock, Dur>& timeout) noexcept {
+bool atomic_wait_address_until(const T* addr, Pred pred, const time_point<Clock, Dur>& timeout) noexcept {
     inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until(pred, timeout);
 }
@@ -429,8 +418,7 @@ bool atomic_wait_address_until(const T* addr, Pred pred,
  * 针对平台等待类型的特化版本，使用裸等待器。
  */
 template <typename Pred, typename Clock, typename Dur>
-bool atomic_wait_address_until(const platform_wait_t* addr, Pred pred,
-    const time_point<Clock, Dur>& timeout) noexcept {
+bool atomic_wait_address_until(const platform_wait_t* addr, Pred pred, const time_point<Clock, Dur>& timeout) noexcept {
     inner::bare_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until(pred, timeout);
 }
@@ -450,8 +438,7 @@ bool atomic_wait_address_until(const platform_wait_t* addr, Pred pred,
  * 等待直到addr处的值不等于old或经过指定时间。
  */
 template <typename T, typename Func, typename Rep, typename Period>
-bool atomic_wait_address_for_v(const T* addr, T&& old, Func&& func,
-    const duration<Rep, Period>& rt) noexcept {
+bool atomic_wait_address_for_v(const T* addr, T&& old, Func&& func, const duration<Rep, Period>& rt) noexcept {
     inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for_v(old, func, rt);
 }
@@ -470,8 +457,7 @@ bool atomic_wait_address_for_v(const T* addr, T&& old, Func&& func,
  * 等待直到pred()返回true或经过指定时间。
  */
 template <typename T, typename Pred, typename Rep, typename Period>
-bool atomic_wait_address_for(const T* addr, Pred pred,
-    const duration<Rep, Period>& rt) noexcept {
+bool atomic_wait_address_for(const T* addr, Pred pred, const duration<Rep, Period>& rt) noexcept {
     inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for(pred, rt);
 }
@@ -489,8 +475,7 @@ bool atomic_wait_address_for(const T* addr, Pred pred,
  * 针对平台等待类型的特化版本，使用裸等待器。
  */
 template <typename Pred, typename Rep, typename Period>
-bool atomic_wait_address_for(const platform_wait_t* addr, Pred pred,
-    const duration<Rep, Period>& rt) noexcept {
+bool atomic_wait_address_for(const platform_wait_t* addr, Pred pred, const duration<Rep, Period>& rt) noexcept {
     inner::bare_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for(pred, rt);
 }

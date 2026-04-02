@@ -24,20 +24,16 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 为集合类型提供统一的接口，包括大小查询、空检查和哈希计算。
  */
-template <typename T>
-struct icollector : icomparable<T> {
+template <typename T> struct icollector : icomparable<T> {
 private:
-    constexpr const T& derived() const noexcept {
-        return static_cast<const T&>(*this);
-    }
+    constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 
 public:
     /**
      * @brief 获取集合大小
      * @return 集合中元素的数量
      */
-    NEFORCE_NODISCARD constexpr decltype(auto) size() const
-    noexcept(noexcept(derived().size())) {
+    NEFORCE_NODISCARD constexpr decltype(auto) size() const noexcept(noexcept(derived().size())) {
         return derived().size();
     }
 
@@ -45,10 +41,7 @@ public:
      * @brief 检查集合是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD constexpr bool empty() const
-    noexcept(noexcept(derived().empty())) {
-        return derived().empty();
-    }
+    NEFORCE_NODISCARD constexpr bool empty() const noexcept(noexcept(derived().empty())) { return derived().empty(); }
 };
 
 /** @} */ // CRTPInterfaces

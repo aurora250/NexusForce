@@ -9,9 +9,15 @@ namespace {
         char ch;
         while (true) {
             const ssize_t n = ::recv(fd, &ch, 1, 0);
-            if (n <= 0) return false;
-            if (ch == '\r') continue;
-            if (ch == '\n') return true;
+            if (n <= 0) {
+                return false;
+            }
+            if (ch == '\r') {
+                continue;
+            }
+            if (ch == '\n') {
+                return true;
+            }
             out_line += ch;
         }
     }
@@ -19,8 +25,7 @@ namespace {
     void send_all(smtp_socket::native_handle_type fd, const string& data) {
         size_t total = 0;
         while (total < data.size()) {
-            const ssize_t n = ::send(fd, data.data() + total,
-                static_cast<int>(data.size() - total), 0);
+            const ssize_t n = ::send(fd, data.data() + total, static_cast<int>(data.size() - total), 0);
             if (n <= 0) {
                 NEFORCE_THROW_EXCEPTION(smtp_exception("send failed"));
             }
@@ -35,7 +40,9 @@ namespace {
         result += "From: " + msg.from + "\r\n";
         result += "To: ";
         for (size_t i = 0; i < msg.to.size(); ++i) {
-            if (i > 0) result += ", ";
+            if (i > 0) {
+                result += ", ";
+            }
             result += msg.to[i];
         }
         result += "\r\n";
@@ -43,7 +50,9 @@ namespace {
         if (!msg.cc.empty()) {
             result += "Cc: ";
             for (size_t i = 0; i < msg.cc.size(); ++i) {
-                if (i > 0) result += ", ";
+                if (i > 0) {
+                    result += ", ";
+                }
                 result += msg.cc[i];
             }
             result += "\r\n";
@@ -59,7 +68,7 @@ namespace {
 
         result += "MIME-Version: 1.0\r\n";
 
-        for (const auto& header : msg.extra_headers) {
+        for (const auto& header: msg.extra_headers) {
             const auto& key = header.first;
             const auto& value = header.second;
             result += key + ": " + value + "\r\n";
@@ -71,7 +80,7 @@ namespace {
 
         return result;
     }
-}
+} // namespace
 
 ssize_t smtp_socket::raw_send(const char* data, const size_t len) {
     if (tls_active_) {
@@ -92,9 +101,15 @@ bool smtp_socket::read_line(string& out) {
     char ch;
     while (true) {
         const ssize_t n = raw_recv(&ch, 1);
-        if (n <= 0) return false;
-        if (ch == '\r') continue;
-        if (ch == '\n') return true;
+        if (n <= 0) {
+            return false;
+        }
+        if (ch == '\r') {
+            continue;
+        }
+        if (ch == '\n') {
+            return true;
+        }
         out += ch;
     }
 }
@@ -120,11 +135,17 @@ smtp_socket::response smtp_socket::read_response() {
         }
 
         const bool multi = (line.size() > 3 && line[3] == '-');
-        if (!resp.message.empty()) resp.message += '\n';
-        if (line.size() > 4) resp.message += line.substr(4);
+        if (!resp.message.empty()) {
+            resp.message += '\n';
+        }
+        if (line.size() > 4) {
+            resp.message += line.substr(4);
+        }
         resp.code = code;
 
-        if (!multi) break;
+        if (!multi) {
+            break;
+        }
     }
     return resp;
 }
@@ -145,11 +166,8 @@ smtp_socket::response smtp_socket::send_command(const string& cmd) {
 void smtp_socket::expect_code(const int expected, const string& cmd) {
     const auto resp = send_command(cmd);
     if (resp.code != expected) {
-        const string err =
-            "SMTP command failed: " + cmd.substr(0, cmd.find(' ')) +
-            " expected " + to_string(expected) +
-            " got "      + to_string(resp.code) +
-            ": "         + resp.message;
+        const string err = "SMTP command failed: " + cmd.substr(0, cmd.find(' ')) + " expected " + to_string(expected) +
+                           " got " + to_string(resp.code) + ": " + resp.message;
         NEFORCE_THROW_EXCEPTION(smtp_exception(err.data()));
     }
 }
@@ -160,7 +178,9 @@ vector<string> smtp_socket::do_ehlo(const string& domain) {
     size_t total = 0;
     while (total < cmd.size()) {
         const ssize_t n = raw_send(cmd.data() + total, cmd.size() - total);
-        if (n <= 0) NEFORCE_THROW_EXCEPTION(smtp_exception("EHLO send failed"));
+        if (n <= 0) {
+            NEFORCE_THROW_EXCEPTION(smtp_exception("EHLO send failed"));
+        }
         total += static_cast<size_t>(n);
     }
 
@@ -174,7 +194,9 @@ vector<string> smtp_socket::do_ehlo(const string& domain) {
         }
 
         int code = 0;
-        for (int i = 0; i < 3; ++i) code = code * 10 + (line[i] - '0');
+        for (int i = 0; i < 3; ++i) {
+            code = code * 10 + (line[i] - '0');
+        }
 
         if (code != 250) {
             const auto helo = send_command("HELO " + domain);
@@ -188,18 +210,16 @@ vector<string> smtp_socket::do_ehlo(const string& domain) {
             caps.push_back(line.substr(4));
         }
 
-        if (line.size() <= 3 || line[3] != '-') break;
+        if (line.size() <= 3 || line[3] != '-') {
+            break;
+        }
     }
     return caps;
 }
 
-void smtp_socket::do_post_connect(
-    const string& domain,
-    const tls_mode mode,
-    const ssl_context* ctx,
-    const string& sni_hostname
-) {
-    tls_mode_   = mode;
+void smtp_socket::do_post_connect(const string& domain, const tls_mode mode, const ssl_context* ctx,
+                                  const string& sni_hostname) {
+    tls_mode_ = mode;
     tls_active_ = false;
 
     if (mode == tls_mode::implicit) {
@@ -241,8 +261,7 @@ void smtp_socket::open_and_connect(const ip_address& addr) {
     }
 }
 
-void smtp_socket::connect(const ip_address& addr, const string& domain,
-                          const tls_mode mode, const ssl_context* ctx,
+void smtp_socket::connect(const ip_address& addr, const string& domain, const tls_mode mode, const ssl_context* ctx,
                           const string& sni_hostname) {
     if (!addr.is_valid()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid SMTP server address"));
@@ -251,9 +270,8 @@ void smtp_socket::connect(const ip_address& addr, const string& domain,
     do_post_connect(domain, mode, ctx, sni_hostname);
 }
 
-void smtp_socket::connect(const string& hostname, const ports port,
-                          const string& domain, const tls_mode mode, dns_client* dns,
-                          const ssl_context* ctx, const string& sni_hostname) {
+void smtp_socket::connect(const string& hostname, const ports port, const string& domain, const tls_mode mode,
+                          dns_client* dns, const ssl_context* ctx, const string& sni_hostname) {
     if (hostname.empty()) {
         NEFORCE_THROW_EXCEPTION(value_exception("SMTP hostname cannot be empty"));
     }
@@ -277,9 +295,11 @@ void smtp_socket::connect(const string& hostname, const ports port,
         NEFORCE_THROW_EXCEPTION(smtp_exception(("DNS resolution failed for host: " + hostname).data()));
     }
 
-    for (const auto& ip_str : ips) {
+    for (const auto& ip_str: ips) {
         auto addr = ip_address::parse(ip_str, port);
-        if (!addr) continue;
+        if (!addr) {
+            continue;
+        }
 
         try {
             open_and_connect(*addr);
@@ -301,7 +321,7 @@ void smtp_socket::disconnect() {
         NEFORCE_IGNORE raw_send(quit.data(), quit.size());
         read_response();
     }
-    connected_  = false;
+    connected_ = false;
     tls_active_ = false;
     close();
 }
@@ -330,8 +350,7 @@ smtp_socket::starttls_result smtp_socket::starttls(const ssl_context& ctx, const
     return result;
 }
 
-void smtp_socket::authenticate(
-    const string& username, const string& password, const auth_method method) {
+void smtp_socket::authenticate(const string& username, const string& password, const auth_method method) {
 
     if (!is_connected()) {
         NEFORCE_THROW_EXCEPTION(smtp_exception("Not connected to SMTP server"));
@@ -377,9 +396,15 @@ void smtp_socket::send(const smtp_message& msg) {
 
     expect_code(250, "MAIL FROM:<" + msg.from + ">");
 
-    for (const auto& addr : msg.to)  expect_code(250, "RCPT TO:<" + addr + ">");
-    for (const auto& addr : msg.cc)  expect_code(250, "RCPT TO:<" + addr + ">");
-    for (const auto& addr : msg.bcc) expect_code(250, "RCPT TO:<" + addr + ">");
+    for (const auto& addr: msg.to) {
+        expect_code(250, "RCPT TO:<" + addr + ">");
+    }
+    for (const auto& addr: msg.cc) {
+        expect_code(250, "RCPT TO:<" + addr + ">");
+    }
+    for (const auto& addr: msg.bcc) {
+        expect_code(250, "RCPT TO:<" + addr + ">");
+    }
 
     const auto data_resp = send_command("DATA");
     if (data_resp.code != 354) {
@@ -400,7 +425,9 @@ void smtp_socket::send(const smtp_message& msg) {
     size_t total = 0;
     while (total < escaped.size()) {
         const ssize_t n = raw_send(escaped.data() + total, escaped.size() - total);
-        if (n <= 0) NEFORCE_THROW_EXCEPTION(smtp_exception("Failed to send mail body"));
+        if (n <= 0) {
+            NEFORCE_THROW_EXCEPTION(smtp_exception("Failed to send mail body"));
+        }
         total += static_cast<size_t>(n);
     }
 
@@ -410,8 +437,6 @@ void smtp_socket::send(const smtp_message& msg) {
     }
 }
 
-void smtp_socket::noop() {
-    expect_code(250, "NOOP");
-}
+void smtp_socket::noop() { expect_code(250, "NOOP"); }
 
 NEFORCE_END_NAMESPACE__

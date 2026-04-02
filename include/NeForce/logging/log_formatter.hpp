@@ -44,14 +44,15 @@ private:
      * 将格式模式解析为文本段和占位符段。
      */
     struct part {
-        bool is_placeholder;  ///< 是否为占位符
-        string text;          ///< 文本内容或占位符名称
+        bool is_placeholder; ///< 是否为占位符
+        string text;         ///< 文本内容或占位符名称
 
-        part(const bool is_ph, string t) noexcept
-        : is_placeholder(is_ph), text(_NEFORCE move(t)) {}
+        part(const bool is_ph, string t) noexcept :
+        is_placeholder(is_ph),
+        text(_NEFORCE move(t)) {}
     };
-    string pattern_;          ///< 原始格式模式
-    vector<part> parts_;      ///< 解析后的各部分
+    string pattern_;     ///< 原始格式模式
+    vector<part> parts_; ///< 解析后的各部分
 
     /**
      * @brief 解析格式模式

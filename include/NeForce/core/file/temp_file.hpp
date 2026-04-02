@@ -38,8 +38,8 @@ public:
     };
 
 private:
-    _NEFORCE file file_;   ///< 内部文件对象
-    delete_policy delete_policy_ = delete_policy::AUTO_DELETE;   ///< 删除策略
+    _NEFORCE file file_;                                       ///< 内部文件对象
+    delete_policy delete_policy_ = delete_policy::AUTO_DELETE; ///< 删除策略
 
 public:
     /**
@@ -65,8 +65,7 @@ public:
      *
      * 将指定的现有文件作为临时文件管理，不会生成新文件。
      */
-    explicit temp_file(const path& existing_path,
-                       delete_policy policy = delete_policy::AUTO_DELETE);
+    explicit temp_file(const path& existing_path, delete_policy policy = delete_policy::AUTO_DELETE);
 
     /**
      * @brief 析构函数
@@ -78,7 +77,7 @@ public:
     ~temp_file();
 
     temp_file(const temp_file&) = delete;
-    temp_file& operator =(const temp_file&) = delete;
+    temp_file& operator=(const temp_file&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -95,48 +94,38 @@ public:
      *
      * 先清理当前资源，再转移所有权。
      */
-    temp_file& operator =(temp_file&& other) noexcept;
+    temp_file& operator=(temp_file&& other) noexcept;
 
     /**
      * @brief 获取内部文件对象
      * @return 文件对象引用
      */
-    NEFORCE_NODISCARD _NEFORCE file& file() noexcept {
-        return file_;
-    }
+    NEFORCE_NODISCARD _NEFORCE file& file() noexcept { return file_; }
 
     /**
      * @brief 获取内部常量文件对象
      * @return 文件对象常量引用
      */
-    NEFORCE_NODISCARD const _NEFORCE file& file() const noexcept {
-        return file_;
-    }
+    NEFORCE_NODISCARD const _NEFORCE file& file() const noexcept { return file_; }
 
     /**
      * @brief 设置删除策略为 KEEP_ON_EXIT
      *
      * 调用后，析构时不会删除文件，也不从全局注册表中移除。
      */
-    void keep() noexcept {
-        delete_policy_ = delete_policy::KEEP_ON_EXIT;
-    }
+    void keep() noexcept { delete_policy_ = delete_policy::KEEP_ON_EXIT; }
 
     /**
      * @brief 设置删除策略
      * @param policy 新的删除策略
      */
-    void set_delete_policy(const delete_policy policy) noexcept {
-        delete_policy_ = policy;
-    }
+    void set_delete_policy(const delete_policy policy) noexcept { delete_policy_ = policy; }
 
     /**
      * @brief 获取当前删除策略
      * @return 删除策略
      */
-    NEFORCE_NODISCARD delete_policy policy() const noexcept {
-        return delete_policy_;
-    }
+    NEFORCE_NODISCARD delete_policy policy() const noexcept { return delete_policy_; }
 
     /**
      * @brief 手动清理临时文件
@@ -165,9 +154,8 @@ public:
      *
      * 等价于调用带 AUTO_DELETE 策略的构造函数。
      */
-    NEFORCE_NODISCARD static temp_file create_temp_file(
-        const string& prefix = "tmp", const string& suffix = ".tmp",
-        file_creation mode = file_creation::CREATE_FORCE);
+    NEFORCE_NODISCARD static temp_file create_temp_file(const string& prefix = "tmp", const string& suffix = ".tmp",
+                                                        file_creation mode = file_creation::CREATE_FORCE);
 
     /**
      * @brief 清理所有已注册的临时文件

@@ -30,8 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 仅当T可以从Args...构造时才启用此重载。
  */
 template <typename T, typename... Args>
-NEFORCE_CONSTEXPR20 T* construct(T* ptr, Args&&... args)
-noexcept(is_nothrow_constructible_v<T, Args...>) {
+NEFORCE_CONSTEXPR20 T* construct(T* ptr, Args&&... args) noexcept(is_nothrow_constructible_v<T, Args...>) {
     static_assert(is_constructible_v<T, Args...>, "T must be constructible with arguments");
     return static_cast<T*>(new (static_cast<void*>(ptr)) T(_NEFORCE forward<Args>(args)...));
 }
@@ -43,9 +42,7 @@ noexcept(is_nothrow_constructible_v<T, Args...>) {
  *
  * 显式调用对象的析构函数，但不释放内存。
  */
-template <typename T>
-NEFORCE_CONSTEXPR20 void destroy(T* pointer)
-noexcept(is_nothrow_destructible_v<T>) {
+template <typename T> NEFORCE_CONSTEXPR20 void destroy(T* pointer) noexcept(is_nothrow_destructible_v<T>) {
     pointer->~T();
 }
 
@@ -59,10 +56,8 @@ noexcept(is_nothrow_destructible_v<T>) {
  * 仅当迭代器值类型非平凡可析构时才启用此重载。
  */
 template <typename Iterator>
-NEFORCE_CONSTEXPR20
-enable_if_t<is_iter_v<Iterator> && !is_trivially_destructible_v<iter_value_t<Iterator>>>
-destroy(Iterator first, Iterator last)
-noexcept(is_nothrow_destructible_v<iter_value_t<Iterator>>) {
+NEFORCE_CONSTEXPR20 enable_if_t<is_iter_v<Iterator> && !is_trivially_destructible_v<iter_value_t<Iterator>>>
+destroy(Iterator first, Iterator last) noexcept(is_nothrow_destructible_v<iter_value_t<Iterator>>) {
     for (; first < last; ++first) {
         _NEFORCE destroy(&*first);
     }
@@ -79,8 +74,7 @@ noexcept(is_nothrow_destructible_v<iter_value_t<Iterator>>) {
  * 这是对平凡可析构类型的优化。
  */
 template <typename Iterator>
-NEFORCE_CONSTEXPR20
-enable_if_t<is_iter_v<Iterator> && is_trivially_destructible_v<iter_value_t<Iterator>>>
+NEFORCE_CONSTEXPR20 enable_if_t<is_iter_v<Iterator> && is_trivially_destructible_v<iter_value_t<Iterator>>>
 destroy(Iterator first, Iterator last) noexcept {
     return;
 }

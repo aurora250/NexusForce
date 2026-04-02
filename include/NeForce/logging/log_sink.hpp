@@ -28,7 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API log_sink {
 protected:
-    unique_ptr<log_formatter> formatter_;  ///< 日志格式化器
+    unique_ptr<log_formatter> formatter_; ///< 日志格式化器
 
 public:
     virtual ~log_sink() = default;

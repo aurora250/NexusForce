@@ -36,13 +36,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 存在假阳性（可能误判不存在的元素存在）
  * - 支持合并和交集操作
  */
-template <typename T, typename Hash = hash<T>>
-class bloom_filter {
+template <typename T, typename Hash = hash<T>> class bloom_filter {
 private:
-    size_t m_;           ///< 位数组大小
-    size_t k_;           ///< 哈希函数数量
-    bitmap bits_;        ///< 位数组
-    Hash hasher_;        ///< 哈希函数对象
+    size_t m_;    ///< 位数组大小
+    size_t k_;    ///< 哈希函数数量
+    bitmap bits_; ///< 位数组
+    Hash hasher_; ///< 哈希函数对象
 
     /**
      * @brief 计算最优位数组大小
@@ -54,7 +53,7 @@ private:
      */
     static size_t compute_m(const size_t n, const double p) noexcept {
         const double ln2 = logarithm_e(2.);
-        const double m = - static_cast<double>(n) * logarithm_e(p) / (ln2 * ln2);
+        const double m = -static_cast<double>(n) * logarithm_e(p) / (ln2 * ln2);
         return static_cast<size_t>(ceil(m));
     }
 
@@ -81,7 +80,9 @@ private:
     pair<size_t, size_t> hash_values(const T& key) const noexcept {
         size_t h1 = hasher_(key);
         size_t h2 = rotate_l(h1, 17);
-        if (h2 == 0) h2 = 1;
+        if (h2 == 0) {
+            h2 = 1;
+        }
         return {h1, h2};
     }
 
@@ -94,15 +95,13 @@ private:
      *
      * 公式：g_i(x) = h1(x) + i * h2(x) (mod m)
      */
-    size_t nth_hash(const size_t i, const size_t h1, const size_t h2) const noexcept {
-        return (h1 + i * h2) % m_;
-    }
+    size_t nth_hash(const size_t i, const size_t h1, const size_t h2) const noexcept { return (h1 + i * h2) % m_; }
 
 public:
     bloom_filter(const bloom_filter&) noexcept = default;
     bloom_filter(bloom_filter&&) noexcept = default;
-    bloom_filter& operator =(const bloom_filter&) = default;
-    bloom_filter& operator =(bloom_filter&&) = default;
+    bloom_filter& operator=(const bloom_filter&) = default;
+    bloom_filter& operator=(bloom_filter&&) = default;
 
     /**
      * @brief 析构函数
@@ -117,11 +116,14 @@ public:
      *
      * 根据预期插入数量和期望误报率自动计算最优参数。
      */
-    bloom_filter(const size_t expected_insertions, const double false_positive_prob)
-    : m_(compute_m(expected_insertions, false_positive_prob)),
-      k_(compute_k(expected_insertions, m_)), bits_(m_, false), hasher_(Hash()) {
+    bloom_filter(const size_t expected_insertions, const double false_positive_prob) :
+    m_(compute_m(expected_insertions, false_positive_prob)),
+    k_(compute_k(expected_insertions, m_)),
+    bits_(m_, false),
+    hasher_(Hash()) {
         if (expected_insertions == 0 || false_positive_prob <= 0.0 || false_positive_prob >= 1.0) {
-            NEFORCE_THROW_EXCEPTION(value_exception("expected_insertions must be positive and false_positive_prob in (0,1)"));
+            NEFORCE_THROW_EXCEPTION(
+                    value_exception("expected_insertions must be positive and false_positive_prob in (0,1)"));
         }
     }
 
@@ -133,8 +135,11 @@ public:
      *
      * 直接指定位数组大小和哈希函数数量。
      */
-    bloom_filter(const size_t m, const size_t k)
-    : m_(m), k_(k), bits_(m_, false), hasher_(Hash()) {
+    bloom_filter(const size_t m, const size_t k) :
+    m_(m),
+    k_(k),
+    bits_(m_, false),
+    hasher_(Hash()) {
         if (m == 0 || k == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("m and k must be positive"));
         }
@@ -156,7 +161,9 @@ public:
      */
     NEFORCE_NODISCARD bool empty() const noexcept {
         for (size_t i = 0; i < m_; ++i) {
-            if (bits_[i]) return false;
+            if (bits_[i]) {
+                return false;
+            }
         }
         return true;
     }
@@ -165,17 +172,13 @@ public:
      * @brief 获取位数组大小
      * @return 位数
      */
-    NEFORCE_NODISCARD size_t bit_size() const noexcept {
-        return m_;
-    }
+    NEFORCE_NODISCARD size_t bit_size() const noexcept { return m_; }
 
     /**
      * @brief 获取哈希函数数量
      * @return k值
      */
-    NEFORCE_NODISCARD size_t hash_count() const noexcept {
-        return k_;
-    }
+    NEFORCE_NODISCARD size_t hash_count() const noexcept { return k_; }
 
     /**
      * @brief 估计当前元素数量
@@ -186,7 +189,9 @@ public:
     NEFORCE_NODISCARD size_t approximate_count() const noexcept {
         size_t bits_set = 0;
         for (size_t i = 0; i < m_; ++i) {
-            if (bits_[i]) ++bits_set;
+            if (bits_[i]) {
+                ++bits_set;
+            }
         }
         const double x = static_cast<double>(bits_set) / m_;
         return static_cast<size_t>(-(static_cast<double>(m_) / k_) * logarithm_e(1 - x));
@@ -201,7 +206,9 @@ public:
     NEFORCE_NODISCARD double false_positive_rate() const noexcept {
         size_t bits_set = 0;
         for (size_t i = 0; i < m_; ++i) {
-            if (bits_[i]) ++bits_set;
+            if (bits_[i]) {
+                ++bits_set;
+            }
         }
         const double x = static_cast<double>(bits_set) / m_;
         return power(x, k_);
@@ -219,7 +226,9 @@ public:
         auto h = this->hash_values(key);
         for (size_t i = 0; i < k_; ++i) {
             const size_t index = this->nth_hash(i, h.first, h.second);
-            if (!bits_[index]) return false;
+            if (!bits_[index]) {
+                return false;
+            }
         }
         return true;
     }
@@ -243,9 +252,7 @@ public:
      *
      * 将所有位重置为0。
      */
-    void clear() noexcept {
-        fill(bits_.begin(), bits_.end(), false);
-    }
+    void clear() noexcept { fill(bits_.begin(), bits_.end(), false); }
 
     /**
      * @brief 合并另一个过滤器
@@ -262,7 +269,9 @@ public:
         }
 
         for (size_t i = 0; i < m_; ++i) {
-            if (other.bits_[i]) bits_[i] = true;
+            if (other.bits_[i]) {
+                bits_[i] = true;
+            }
         }
         return *this;
     }

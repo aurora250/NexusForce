@@ -22,13 +22,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 共享内存操作异常
  */
 struct share_memory_exception final : system_exception {
-    explicit share_memory_exception(
-        const char* info = "Shared Memory Operation Failed.",
-        const char* type = static_type,
-        const int code = 0) noexcept : system_exception(info, type, code) {}
+    explicit share_memory_exception(const char* info = "Shared Memory Operation Failed.",
+                                    const char* type = static_type, const int code = 0) noexcept :
+    system_exception(info, type, code) {}
 
-    explicit share_memory_exception(const exception& e)
-    : system_exception(e) {}
+    explicit share_memory_exception(const exception& e) :
+    system_exception(e) {}
 
     ~share_memory_exception() override = default;
     static constexpr auto static_type = "shared_memory_exception";
@@ -55,8 +54,8 @@ public:
      * @brief 访问模式枚举
      */
     enum class access_mode {
-        read_only = 0x01,   ///< 只读模式
-        read_write = 0x02,  ///< 读写模式
+        read_only = 0x01,  ///< 只读模式
+        read_write = 0x02, ///< 读写模式
     };
 
     /**
@@ -64,21 +63,21 @@ public:
      * @brief 打开模式枚举
      */
     enum class open_mode {
-        create_only,        ///< 仅创建（已存在则失败）
-        open_only,          ///< 仅打开（不存在则失败）
-        open_or_create      ///< 打开或创建
+        create_only,   ///< 仅创建（已存在则失败）
+        open_only,     ///< 仅打开（不存在则失败）
+        open_or_create ///< 打开或创建
     };
 
     using native_handle_type = _NEFORCE native_handle_type;
 
 private:
-    native_handle_type handle_;    ///< 映射句柄
-    string name_;                  ///< 共享内存名称
-    size_t size_{0};               ///< 共享内存大小
-    size_t mapped_size_{0};        ///< 映射大小
-    void* mapped_addr_{nullptr};   ///< 映射地址
-    access_mode access_mode_{access_mode::read_write};   ///< 访问模式
-    bool is_open_{false};          ///< 是否已打开
+    native_handle_type handle_;                        ///< 映射句柄
+    string name_;                                      ///< 共享内存名称
+    size_t size_{0};                                   ///< 共享内存大小
+    size_t mapped_size_{0};                            ///< 映射大小
+    void* mapped_addr_{nullptr};                       ///< 映射地址
+    access_mode access_mode_{access_mode::read_write}; ///< 访问模式
+    bool is_open_{false};                              ///< 是否已打开
 
 public:
     /**
@@ -94,14 +93,11 @@ public:
      * @param access 访问模式
      * @throws share_memory_exception 创建或打开失败时抛出
      */
-    explicit share_memory(
-        const string& name,
-        size_t size,
-        open_mode mode = open_mode::open_or_create,
-        access_mode access = access_mode::read_write);
+    explicit share_memory(const string& name, size_t size, open_mode mode = open_mode::open_or_create,
+                          access_mode access = access_mode::read_write);
 
     share_memory(const share_memory&) = delete;
-    share_memory& operator =(const share_memory&) = delete;
+    share_memory& operator=(const share_memory&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -111,7 +107,7 @@ public:
     /**
      * @brief 移动赋值运算符
      */
-    share_memory& operator =(share_memory&& other) noexcept;
+    share_memory& operator=(share_memory&& other) noexcept;
 
     /**
      * @brief 析构函数
@@ -126,11 +122,8 @@ public:
      * @param access 访问模式
      * @throws share_memory_exception 操作失败时抛出
      */
-    void open(
-        const string& name,
-        size_t size,
-        open_mode mode = open_mode::open_or_create,
-        access_mode access = access_mode::read_write);
+    void open(const string& name, size_t size, open_mode mode = open_mode::open_or_create,
+              access_mode access = access_mode::read_write);
 
     /**
      * @brief 关闭共享内存
@@ -162,8 +155,7 @@ public:
      * @tparam T 目标类型
      * @return 类型转换后的地址
      */
-    template<typename T>
-    T* data() const noexcept { return static_cast<T*>(mapped_addr_); }
+    template <typename T> T* data() const noexcept { return static_cast<T*>(mapped_addr_); }
 
     /**
      * @brief 获取共享内存大小

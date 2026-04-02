@@ -33,9 +33,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API ini_builder {
 private:
-    unique_ptr<ini_document> root_;   ///< 正在构建的文档对象
-    ini_section* current_section_ = nullptr;   ///< 当前正在操作的节
-    string current_key_;   ///< 当前正在设置的键名
+    unique_ptr<ini_document> root_;          ///< 正在构建的文档对象
+    ini_section* current_section_ = nullptr; ///< 当前正在操作的节
+    string current_key_;                     ///< 当前正在设置的键名
 
     /**
      * @brief 测试当前上下文是否有效
@@ -56,7 +56,7 @@ public:
     ini_builder();
 
     ini_builder(const ini_builder&) = delete;
-    ini_builder& operator =(const ini_builder&) = delete;
+    ini_builder& operator=(const ini_builder&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -69,7 +69,7 @@ public:
      * @param other 源构建器
      * @return 自身引用
      */
-    ini_builder& operator =(ini_builder&& other) = default;
+    ini_builder& operator=(ini_builder&& other) = default;
 
     /**
      * @brief 开始一个新节

@@ -1,7 +1,7 @@
 #include <NeForce/db/sqlite/sqlite_connect.hpp>
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#include <NeForce/db/sqlite/sqlite_prepared_statement.hpp>
-#include <NeForce/db/sqlite/sqlite_result.hpp>
+#    include <NeForce/db/sqlite/sqlite_prepared_statement.hpp>
+#    include <NeForce/db/sqlite/sqlite_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 bool sqlite_connect::connect(const db_config& config) {
@@ -49,12 +49,16 @@ string_view sqlite_connect::get_character_set() const {
 }
 
 string_view sqlite_connect::get_error() const {
-    if (link_) last_error_ = ::sqlite3_errmsg(link_);
+    if (link_) {
+        last_error_ = ::sqlite3_errmsg(link_);
+    }
     return last_error_.view();
 }
 
 bool sqlite_connect::update(const string& sql) const {
-    if (!connected()) return false;
+    if (!connected()) {
+        return false;
+    }
 
     char* error_msg = nullptr;
     if (::sqlite3_exec(link_, sql.data(), nullptr, nullptr, &error_msg) != SQLITE_OK) {
@@ -68,7 +72,9 @@ bool sqlite_connect::update(const string& sql) const {
 }
 
 unique_ptr<idb_tb_result> sqlite_connect::query(const string& sql) const {
-    if (!connected()) return {};
+    if (!connected()) {
+        return {};
+    }
 
     ::sqlite3_stmt* stmt = nullptr;
     if (::sqlite3_prepare_v2(link_, sql.data(), -1, &stmt, nullptr) != SQLITE_OK) {
@@ -82,7 +88,9 @@ unique_ptr<idb_prepared_statement> sqlite_connect::prepare_statement(const strin
 }
 
 bool sqlite_connect::is_valid() const {
-    if (!connected()) return false;
+    if (!connected()) {
+        return false;
+    }
     ::sqlite3_stmt* stmt = nullptr;
     if (::sqlite3_prepare_v2(link_, "SELECT 1;", -1, &stmt, nullptr) == SQLITE_OK) {
         ::sqlite3_finalize(stmt);

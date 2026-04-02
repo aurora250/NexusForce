@@ -26,11 +26,10 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 包装可调用对象，提供异步执行能力，并将执行结果或异常传递给关联的future。
  */
-template <typename Res, typename... Args>
-class packaged_task<Res(Args...)> {
-    using StateType = inner::__future_base::task_state_base<Res(Args...)>;  ///< 状态类型
+template <typename Res, typename... Args> class packaged_task<Res(Args...)> {
+    using StateType = inner::__future_base::task_state_base<Res(Args...)>; ///< 状态类型
 
-    shared_ptr<StateType> state_ptr;  ///< 任务状态共享指针
+    shared_ptr<StateType> state_ptr; ///< 任务状态共享指针
 
 public:
     /**
@@ -49,9 +48,8 @@ public:
      * 函数签名必须与模板参数Res Args...兼容。
      */
     template <typename Func, typename = enable_if_t<!is_same_v<packaged_task, remove_cvref_t<Func>>>>
-    explicit packaged_task(Func&& function)
-    : state_ptr(inner::create_task_state<Res(Args...)>(_NEFORCE forward<Func>(function)))
-    {}
+    explicit packaged_task(Func&& function) :
+    state_ptr(inner::create_task_state<Res(Args...)>(_NEFORCE forward<Func>(function))) {}
 
     /**
      * @brief 析构函数
@@ -64,23 +62,21 @@ public:
         }
     }
 
-    packaged_task(const packaged_task&) = delete;  ///< 禁止拷贝构造
-    packaged_task& operator =(const packaged_task&) = delete;  ///< 禁止拷贝赋值
+    packaged_task(const packaged_task&) = delete;            ///< 禁止拷贝构造
+    packaged_task& operator=(const packaged_task&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 移动构造函数
      * @param other 要移动的packaged_task对象
      */
-    packaged_task(packaged_task&& other) noexcept {
-        this->swap(other);
-    }
+    packaged_task(packaged_task&& other) noexcept { this->swap(other); }
 
     /**
      * @brief 移动赋值运算符
      * @param other 要移动的packaged_task对象
      * @return 当前对象的引用
      */
-    packaged_task& operator =(packaged_task&& other) noexcept {
+    packaged_task& operator=(packaged_task&& other) noexcept {
         packaged_task(_NEFORCE move(other)).swap(*this);
         return *this;
     }
@@ -89,26 +85,20 @@ public:
      * @brief 交换两个packaged_task对象
      * @param other 要交换的packaged_task对象
      */
-    void swap(packaged_task& other) noexcept {
-        state_ptr.swap(other.state_ptr);
-    }
+    void swap(packaged_task& other) noexcept { state_ptr.swap(other.state_ptr); }
 
     /**
      * @brief 检查任务是否有效
      * @return 是否关联了有效的可调用对象
      */
-    bool valid() const noexcept {
-        return static_cast<bool>(state_ptr);
-    }
+    bool valid() const noexcept { return static_cast<bool>(state_ptr); }
 
     /**
      * @brief 获取关联的future对象
      * @return future对象
      * @throw future_exception 如果future已被获取
      */
-    future<Res> get_future() {
-        return future<Res>(state_ptr);
-    }
+    future<Res> get_future() { return future<Res>(state_ptr); }
 
     /**
      * @brief 执行任务
@@ -117,7 +107,7 @@ public:
      *
      * 同步执行包装的任务，结果或异常会传递给关联的future。
      */
-    void operator ()(Args... args) {
+    void operator()(Args... args) {
         inner::__future_base::state_base::check(state_ptr);
         state_ptr->run(_NEFORCE forward<Args>(args)...);
     }
@@ -151,11 +141,9 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Res, typename... Args>
-packaged_task(Res(*)(Args...)) -> packaged_task<Res(Args...)>;
+template <typename Res, typename... Args> packaged_task(Res (*)(Args...)) -> packaged_task<Res(Args...)>;
 
-template <typename Func, typename Sign = typename
-    inner::__function_guide_helper<decltype(&Func::operator ())>::type>
+template <typename Func, typename Sign = typename inner::__function_guide_helper<decltype(&Func::operator())>::type>
 packaged_task(Func) -> packaged_task<Sign>;
 #endif
 
@@ -171,28 +159,22 @@ NEFORCE_BEGIN_INNER__
  * 用于实现延迟执行的异步任务状态管理。
  */
 template <typename BoundFunc, typename Res>
-class __future_base::deferred_state final
-    : public __future_base::state_base {
+class __future_base::deferred_state final : public __future_base::state_base {
 private:
     using PtrType = __future_base::Ptr<basic_result<Res>>;
 
     PtrType result_storage;
     BoundFunc function;
 
-    void complete_async() override {
-        state_base::set_result(create_task_setter(result_storage, function), true);
-    }
+    void complete_async() override { state_base::set_result(create_task_setter(result_storage, function), true); }
 
-    bool is_deferred_future() const override {
-        return true;
-    }
+    bool is_deferred_future() const override { return true; }
 
 public:
     template <typename... Args>
-    explicit deferred_state(Args&&... args)
-    : result_storage(new basic_result<Res>()),
+    explicit deferred_state(Args&&... args) :
+    result_storage(new basic_result<Res>()),
     function(_NEFORCE forward<Args>(args)...) {}
-
 };
 
 /**
@@ -200,21 +182,16 @@ public:
  *
  * 异步执行任务的公共基类，管理线程生命周期。
  */
-class __future_base::async_state_common
-    : public __future_base::state_base {
+class __future_base::async_state_common : public __future_base::state_base {
 protected:
     _NEFORCE thread thread;
     _NEFORCE once_flag once_flag;
 
     ~async_state_common() override = default;
 
-    void complete_async() override {
-        join();
-    }
+    void complete_async() override { join(); }
 
-    void join() {
-        _NEFORCE call_once(once_flag, &_NEFORCE thread::join, &thread);
-    }
+    void join() { _NEFORCE call_once(once_flag, &_NEFORCE thread::join, &thread); }
 };
 
 /**
@@ -225,8 +202,7 @@ protected:
  * 具体实现异步任务执行的类，管理函数执行和异常处理。
  */
 template <typename Func, typename Res>
-class __future_base::async_state_impl final
-    : public __future_base::async_state_common {
+class __future_base::async_state_impl final : public __future_base::async_state_common {
 private:
     using PtrType = __future_base::Ptr<basic_result<Res>>;
 
@@ -246,9 +222,9 @@ private:
 
 public:
     template <typename... Args>
-    explicit async_state_impl(Args&&... args)
-    : result_storage(new basic_result<Res>()),
-      function(_NEFORCE forward<Args>(args)...) {
+    explicit async_state_impl(Args&&... args) :
+    result_storage(new basic_result<Res>()),
+    function(_NEFORCE forward<Args>(args)...) {
         thread = _NEFORCE thread{&async_state_impl::run, this};
     }
 

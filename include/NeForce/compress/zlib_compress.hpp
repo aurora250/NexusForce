@@ -11,9 +11,9 @@
  */
 
 #if defined(NEFORCE_SUPPORT_ZLIB) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-#include <zlib.h>
+#    include <zlib.h>
+#    include "NeForce/core/container/vector.hpp"
+#    include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -29,12 +29,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * zlib操作异常。
  */
 struct zlib_exception final : thirdparty_exception {
-    explicit zlib_exception(const char* info = "Zlib Operation Failed.",
-                            const char* type = static_type,
-                            const int code = 0) noexcept
-    : thirdparty_exception(info, type, code) {}
+    explicit zlib_exception(const char* info = "Zlib Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    thirdparty_exception(info, type, code) {}
 
-    explicit zlib_exception(const exception& e) : thirdparty_exception(e) {}
+    explicit zlib_exception(const exception& e) :
+    thirdparty_exception(e) {}
 
     ~zlib_exception() override = default;
     static constexpr auto static_type = "zlib_exception";
@@ -55,8 +55,8 @@ struct zlib_exception final : thirdparty_exception {
  * 定义不同的压缩级别，在压缩速度和压缩率之间进行权衡。
  */
 enum class compress_level {
-    none = Z_NO_COMPRESSION,      ///< 无压缩
-    best_speed = Z_BEST_SPEED,    ///< 最快速度，压缩率最低
+    none = Z_NO_COMPRESSION,               ///< 无压缩
+    best_speed = Z_BEST_SPEED,             ///< 最快速度，压缩率最低
     default_level = Z_DEFAULT_COMPRESSION, ///< 默认压缩级别
     best_compression = Z_BEST_COMPRESSION  ///< 最佳压缩率，速度最慢
 };
@@ -82,9 +82,9 @@ enum class compress_strategy {
  * 定义不同的压缩格式。
  */
 enum class compress_format {
-    zlib,      ///< ZLIB格式（RFC 1950）
-    gzip,      ///< GZIP格式（RFC 1952）
-    deflate    ///< 原始Deflate流（无头尾）
+    zlib,   ///< ZLIB格式（RFC 1950）
+    gzip,   ///< GZIP格式（RFC 1952）
+    deflate ///< 原始Deflate流（无头尾）
 };
 
 
@@ -107,11 +107,8 @@ private:
      * @return 压缩后的字节向量
      * @throws zlib_exception 当压缩失败时抛出
      */
-    NEFORCE_NODISCARD static byte_vector compress_data(
-        const byte_t* data, size_t size,
-        compress_level level,
-        compress_strategy strategy,
-        compress_format format);
+    NEFORCE_NODISCARD static byte_vector compress_data(const byte_t* data, size_t size, compress_level level,
+                                                       compress_strategy strategy, compress_format format);
 
     /**
      * @brief 解压缩数据的内部实现
@@ -124,10 +121,8 @@ private:
      *
      * 如果预估大小不足，会自动调整缓冲区大小重试。
      */
-    NEFORCE_NODISCARD static byte_vector decompress_data(
-        byte_t* data, size_t size,
-        size_t estimated_original_size,
-        compress_format format);
+    NEFORCE_NODISCARD static byte_vector decompress_data(byte_t* data, size_t size, size_t estimated_original_size,
+                                                         compress_format format);
 
 public:
     /**
@@ -144,13 +139,13 @@ public:
      * 要求迭代器指向的元素大小为1字节。
      */
     template <typename Iterator>
-    NEFORCE_NODISCARD static byte_vector compress(
-        Iterator begin, Iterator end, const compress_level level = compress_level::default_level,
-        const compress_strategy strategy = compress_strategy::default_strategy,
-        const compress_format format = compress_format::zlib) {
+    NEFORCE_NODISCARD static byte_vector
+    compress(Iterator begin, Iterator end, const compress_level level = compress_level::default_level,
+             const compress_strategy strategy = compress_strategy::default_strategy,
+             const compress_format format = compress_format::zlib) {
         static_assert(is_ranges_cot_iter_v<Iterator>, "Iterator must be contiguous_iterator");
         static_assert(sizeof(iter_value_t<Iterator>) == 1, "Iterator must point to byte-sized elements");
-        
+
         const auto* data = reinterpret_cast<const byte_t*>(&*begin);
         const size_t data_size = _NEFORCE distance(begin, end);
         return compress_data(data, data_size, level, strategy, format);
@@ -165,19 +160,12 @@ public:
      * @return 压缩后的字节向量
      * @throws zlib_exception 当压缩失败时抛出
      */
-    NEFORCE_NODISCARD static byte_vector compress(
-        const string_view data,
-        const compress_level level = compress_level::default_level,
-        const compress_strategy strategy = compress_strategy::default_strategy,
-        const compress_format format = compress_format::zlib) {
-        
-        return compress_data(
-            reinterpret_cast<const byte_t*>(data.data()),
-            data.size(),
-            level,
-            strategy,
-            format
-        );
+    NEFORCE_NODISCARD static byte_vector
+    compress(const string_view data, const compress_level level = compress_level::default_level,
+             const compress_strategy strategy = compress_strategy::default_strategy,
+             const compress_format format = compress_format::zlib) {
+
+        return compress_data(reinterpret_cast<const byte_t*>(data.data()), data.size(), level, strategy, format);
     }
 
     /**
@@ -193,20 +181,14 @@ public:
      * 要求向量元素大小为1字节。
      */
     template <typename T>
-    NEFORCE_NODISCARD static byte_vector compress(
-        const vector<T>& data,
-        const compress_level level = compress_level::default_level,
-        const compress_strategy strategy = compress_strategy::default_strategy,
-        const compress_format format = compress_format::zlib) {
+    NEFORCE_NODISCARD static byte_vector
+    compress(const vector<T>& data, const compress_level level = compress_level::default_level,
+             const compress_strategy strategy = compress_strategy::default_strategy,
+             const compress_format format = compress_format::zlib) {
         static_assert(sizeof(T) == 1, "Vector must contain byte-sized elements");
-        
-        return zlib_compressor::compress_data(
-            reinterpret_cast<const byte_t*>(data.data()),
-            data.size() * sizeof(T),
-            level,
-            strategy,
-            format
-        );
+
+        return zlib_compressor::compress_data(reinterpret_cast<const byte_t*>(data.data()), data.size() * sizeof(T),
+                                              level, strategy, format);
     }
 
     /**
@@ -220,17 +202,16 @@ public:
      * @throws zlib_exception 当解压缩失败或超出最大缓冲区限制时抛出
      */
     template <typename Iterator>
-    NEFORCE_NODISCARD static byte_vector decompress(
-        Iterator begin, Iterator end,
-        const size_t estimated_original_size = 0,
-        const compress_format format = compress_format::zlib) {
+    NEFORCE_NODISCARD static byte_vector decompress(Iterator begin, Iterator end,
+                                                    const size_t estimated_original_size = 0,
+                                                    const compress_format format = compress_format::zlib) {
 
         static_assert(is_ranges_cot_iter_v<Iterator>, "Iterator must be contiguous_iterator");
         static_assert(sizeof(iter_value_t<Iterator>) == 1, "Iterator must point to byte-sized elements");
 
         auto* data = reinterpret_cast<byte_t*>(&*begin);
         const size_t data_size = _NEFORCE distance(begin, end);
-        
+
         return decompress_data(data, data_size, estimated_original_size, format);
     }
 
@@ -242,10 +223,8 @@ public:
      * @return 解压缩后的字节向量
      * @throws zlib_exception 当解压缩失败或超出最大缓冲区限制时抛出
      */
-    NEFORCE_NODISCARD static byte_vector decompress(
-        const byte_view& data,
-        const size_t estimated_original_size = 0,
-        const compress_format format = compress_format::zlib) {
+    NEFORCE_NODISCARD static byte_vector decompress(const byte_view& data, const size_t estimated_original_size = 0,
+                                                    const compress_format format = compress_format::zlib) {
         return decompress_data(data.data(), data.size(), estimated_original_size, format);
     }
 
@@ -271,10 +250,9 @@ public:
          * @param format 压缩格式，默认为zlib
          * @throws zlib_exception 当重置失败时抛出
          */
-        explicit stream_compressor(
-            compress_level level = compress_level::default_level,
-            compress_strategy strategy = compress_strategy::default_strategy,
-            compress_format format = compress_format::zlib);
+        explicit stream_compressor(compress_level level = compress_level::default_level,
+                                   compress_strategy strategy = compress_strategy::default_strategy,
+                                   compress_format format = compress_format::zlib);
 
         /**
          * @brief 析构函数
@@ -282,7 +260,7 @@ public:
         ~stream_compressor();
 
         stream_compressor(const stream_compressor&) = delete;
-        stream_compressor& operator =(const stream_compressor&) = delete;
+        stream_compressor& operator=(const stream_compressor&) = delete;
 
         /**
          * @brief 移动构造函数
@@ -295,7 +273,7 @@ public:
          * @param other 源对象
          * @return 自身引用
          */
-        stream_compressor& operator =(stream_compressor&& other) noexcept;
+        stream_compressor& operator=(stream_compressor&& other) noexcept;
 
         /**
          * @brief 压缩数据
@@ -329,26 +307,21 @@ public:
          * @param format 新压缩格式，默认为zlib
          * @throws zlib_exception 当重置失败时抛出
          */
-        void reset(
-            compress_level level = compress_level::default_level,
-            compress_strategy strategy = compress_strategy::default_strategy,
-            compress_format format = compress_format::zlib);
+        void reset(compress_level level = compress_level::default_level,
+                   compress_strategy strategy = compress_strategy::default_strategy,
+                   compress_format format = compress_format::zlib);
 
         /**
          * @brief 获取输入字节数
          * @return 已处理的输入字节数
          */
-        NEFORCE_NODISCARD size_t bytes_input() const noexcept {
-            return bytes_input_;
-        }
+        NEFORCE_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
 
         /**
          * @brief 获取输出字节数
          * @return 已产生的输出字节数
          */
-        NEFORCE_NODISCARD size_t bytes_output() const noexcept {
-            return bytes_output_;
-        }
+        NEFORCE_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
 
         /**
          * @brief 获取压缩率
@@ -387,7 +360,7 @@ public:
         ~stream_decompressor();
 
         stream_decompressor(const stream_decompressor&) = delete;
-        stream_decompressor& operator =(const stream_decompressor&) = delete;
+        stream_decompressor& operator=(const stream_decompressor&) = delete;
 
         /**
          * @brief 移动构造函数
@@ -400,7 +373,7 @@ public:
          * @param other 源对象
          * @return 自身引用
          */
-        stream_decompressor& operator =(stream_decompressor&& other) noexcept;
+        stream_decompressor& operator=(stream_decompressor&& other) noexcept;
 
         /**
          * @brief 解压缩数据
@@ -429,17 +402,13 @@ public:
          * @brief 获取输入字节数
          * @return 已处理的输入字节数
          */
-        NEFORCE_NODISCARD size_t bytes_input() const noexcept {
-            return bytes_input_;
-        }
+        NEFORCE_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
 
         /**
          * @brief 获取输出字节数
          * @return 已产生的输出字节数
          */
-        NEFORCE_NODISCARD size_t bytes_output() const noexcept {
-            return bytes_output_;
-        }
+        NEFORCE_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
 
         /**
          * @brief 获取扩展率

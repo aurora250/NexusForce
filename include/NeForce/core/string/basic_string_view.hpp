@@ -23,8 +23,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /// @cond
-template <typename CharT, typename Traits = char_traits<CharT>>
-class basic_string_view;
+template <typename CharT, typename Traits = char_traits<CharT>> class basic_string_view;
 /// @endcond
 
 
@@ -36,30 +35,29 @@ class basic_string_view;
  * 提供对字符串视图元素的随机访问迭代器支持。
  * 所有操作都是const的，因为string_view是只读的。
  */
-template <typename Traits>
-struct basic_string_view_iterator : iiterator<basic_string_view_iterator<Traits>> {
+template <typename Traits> struct basic_string_view_iterator : iiterator<basic_string_view_iterator<Traits>> {
 public:
-    using container_type	= basic_string_view<typename Traits::char_type, Traits>;  ///< 容器类型
-    using value_type		= typename container_type::value_type;  ///< 值类型
-    using size_type			= typename container_type::size_type;  ///< 大小类型
-    using difference_type	= typename container_type::difference_type;  ///< 差值类型
-    using iterator_category = contiguous_iterator_tag;  ///< 迭代器类别
-    using reference			= typename container_type::const_reference;  ///< 引用类型
-    using pointer			= typename container_type::const_pointer;  ///< 指针类型
+    using container_type = basic_string_view<typename Traits::char_type, Traits>; ///< 容器类型
+    using value_type = typename container_type::value_type;                       ///< 值类型
+    using size_type = typename container_type::size_type;                         ///< 大小类型
+    using difference_type = typename container_type::difference_type;             ///< 差值类型
+    using iterator_category = contiguous_iterator_tag;                            ///< 迭代器类别
+    using reference = typename container_type::const_reference;                   ///< 引用类型
+    using pointer = typename container_type::const_pointer;                       ///< 指针类型
 
 private:
-    pointer data_ = nullptr;  ///< 数据指针
-    size_t size_ = 0;  ///< 总大小
-    size_t idx_ = 0;  ///< 当前索引
+    pointer data_ = nullptr; ///< 数据指针
+    size_t size_ = 0;        ///< 总大小
+    size_t idx_ = 0;         ///< 当前索引
 
 public:
     constexpr basic_string_view_iterator() noexcept = default;
     NEFORCE_CONSTEXPR20 ~basic_string_view_iterator() = default;
 
     constexpr basic_string_view_iterator(const basic_string_view_iterator&) noexcept = default;
-    constexpr basic_string_view_iterator& operator =(const basic_string_view_iterator&) noexcept = default;
+    constexpr basic_string_view_iterator& operator=(const basic_string_view_iterator&) noexcept = default;
     constexpr basic_string_view_iterator(basic_string_view_iterator&&) noexcept = default;
-    constexpr basic_string_view_iterator& operator =(basic_string_view_iterator&&) noexcept = default;
+    constexpr basic_string_view_iterator& operator=(basic_string_view_iterator&&) noexcept = default;
 
     /**
      * @brief 构造函数
@@ -67,8 +65,10 @@ public:
      * @param size 总大小
      * @param off 初始偏移
      */
-    constexpr basic_string_view_iterator(const pointer data, const size_t size, const size_t off) noexcept
-    : data_(data), size_(size), idx_(off) {}
+    constexpr basic_string_view_iterator(const pointer data, const size_t size, const size_t off) noexcept :
+    data_(data),
+    size_(size),
+    idx_(off) {}
 
     /**
      * @brief 解引用操作
@@ -104,9 +104,7 @@ public:
      */
     constexpr void advance(difference_type off) noexcept {
         NEFORCE_DEBUG_VERIFY(data_ || off == 0, "Attempting to advance a null pointer");
-        NEFORCE_DEBUG_VERIFY(
-            (off < 0 ? idx_ >= -off : size_ - idx_ >= off),
-            "Attempting to advance out of boundary");
+        NEFORCE_DEBUG_VERIFY((off < 0 ? idx_ >= -off : size_ - idx_ >= off), "Attempting to advance out of boundary");
         idx_ += off;
     }
 
@@ -116,9 +114,8 @@ public:
      * @return 两个迭代器之间的距离
      */
     NEFORCE_NODISCARD constexpr difference_type distance_to(const basic_string_view_iterator& other) const noexcept {
-        NEFORCE_DEBUG_VERIFY(
-            data_ == other.data_ && size_ == other.size_,
-            "Attempting to distance to a different container");
+        NEFORCE_DEBUG_VERIFY(data_ == other.data_ && size_ == other.size_,
+                             "Attempting to distance to a different container");
         return static_cast<difference_type>(idx_ - other.idx_);
     }
 
@@ -127,9 +124,7 @@ public:
      * @param n 偏移量
      * @return 偏移位置元素的引用
      */
-    NEFORCE_NODISCARD constexpr reference operator [](const difference_type n) const noexcept {
-        return *(*this + n);
-    }
+    NEFORCE_NODISCARD constexpr reference operator[](const difference_type n) const noexcept { return *(*this + n); }
 
     /**
      * @brief 相等比较
@@ -147,9 +142,7 @@ public:
      * @return 当前迭代器是否在rhs之前
      */
     NEFORCE_NODISCARD constexpr bool less_than(const basic_string_view_iterator& rhs) const noexcept {
-        NEFORCE_DEBUG_VERIFY(
-            data_ == rhs.data_ && size_ == rhs.size_,
-            "Attempting to less than a different container");
+        NEFORCE_DEBUG_VERIFY(data_ == rhs.data_ && size_ == rhs.size_, "Attempting to less than a different container");
         return idx_ < rhs.idx_;
     }
 
@@ -157,9 +150,7 @@ public:
      * @brief 获取底层指针
      * @return 当前元素指针
      */
-    NEFORCE_NODISCARD constexpr pointer base() const noexcept {
-        return data_ + idx_;
-    }
+    NEFORCE_NODISCARD constexpr pointer base() const noexcept { return data_ + idx_; }
 };
 
 
@@ -173,35 +164,32 @@ public:
  * 它不进行内存分配，不拥有所指向的字符串，因此生命周期必须由调用者保证。
  * 提供类似string的接口，但所有操作都是const的。
  */
-template <typename CharT, typename Traits>
-class basic_string_view : public icommon<basic_string_view<CharT, Traits>> {
-    static_assert(
-        is_same_v<CharT, typename Traits::char_type>,
-        "char type of basic string view should be same with char traits.");
-    static_assert(
-        !is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,
-        "basic string view only contains non-array trivial standard-layout types.");
+template <typename CharT, typename Traits> class basic_string_view : public icommon<basic_string_view<CharT, Traits>> {
+    static_assert(is_same_v<CharT, typename Traits::char_type>,
+                  "char type of basic string view should be same with char traits.");
+    static_assert(!is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,
+                  "basic string view only contains non-array trivial standard-layout types.");
 
 public:
-    using value_type        = CharT;  ///< 值类型
-    using pointer           = const CharT*;  ///< 指针类型
-    using reference         = const CharT&;  ///< 引用类型
-    using const_pointer     = const CharT*;  ///< 常量指针类型
-    using const_reference   = const CharT&;  ///< 常量引用类型
-    using size_type         = size_t;  ///< 大小类型
-    using difference_type   = ptrdiff_t;  ///< 差值类型
-    using const_iterator            = basic_string_view_iterator<Traits>;  ///< 常量迭代器类型
-    using iterator                  = const_iterator;  ///< 迭代器类型
-    using const_reverse_iterator    = _NEFORCE reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
-    using reverse_iterator          = const_reverse_iterator;  ///< 反向迭代器类型
-    using traits_type               = Traits;  ///< 字符特征类型
+    using value_type = CharT;                                                 ///< 值类型
+    using pointer = const CharT*;                                             ///< 指针类型
+    using reference = const CharT&;                                           ///< 引用类型
+    using const_pointer = const CharT*;                                       ///< 常量指针类型
+    using const_reference = const CharT&;                                     ///< 常量引用类型
+    using size_type = size_t;                                                 ///< 大小类型
+    using difference_type = ptrdiff_t;                                        ///< 差值类型
+    using const_iterator = basic_string_view_iterator<Traits>;                ///< 常量迭代器类型
+    using iterator = const_iterator;                                          ///< 迭代器类型
+    using const_reverse_iterator = _NEFORCE reverse_iterator<const_iterator>; ///< 常量反向迭代器类型
+    using reverse_iterator = const_reverse_iterator;                          ///< 反向迭代器类型
+    using traits_type = Traits;                                               ///< 字符特征类型
 
     /// 特殊值，表示未找到或直到末尾
     static constexpr auto npos = static_cast<size_type>(-1);
 
 private:
-    const_pointer data_ = "";  ///< 数据指针
-    size_type size_ = 0;  ///< 字符串长度
+    const_pointer data_ = ""; ///< 数据指针
+    size_type size_ = 0;      ///< 字符串长度
 
     /**
      * @brief 限制大小不超过可用范围
@@ -209,15 +197,15 @@ private:
      * @param size 请求大小
      * @return 实际可用大小
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE
-    constexpr size_type clamp_size(const size_type position, const size_type size) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_type clamp_size(const size_type position,
+                                                                           const size_type size) const noexcept {
         return _NEFORCE min(size, size_ - position);
     }
 
 public:
     constexpr basic_string_view() noexcept = default;
     constexpr basic_string_view(const basic_string_view&) noexcept = default;
-    constexpr basic_string_view& operator =(const basic_string_view&) noexcept = default;
+    constexpr basic_string_view& operator=(const basic_string_view&) noexcept = default;
 
     /**
      * @brief 从C风格字符串构造
@@ -225,8 +213,9 @@ public:
      *
      * 注意：字符串长度通过Traits::length计算，要求字符串以空字符结尾。
      */
-    constexpr basic_string_view(const_pointer str) noexcept
-    : data_(str), size_(Traits::length(str)) {}
+    constexpr basic_string_view(const_pointer str) noexcept :
+    data_(str),
+    size_(Traits::length(str)) {}
 
     /**
      * @brief 从字符数组构造（指定长度）
@@ -235,8 +224,9 @@ public:
      *
      * 不要求字符串以空字符结尾，可以包含空字符。
      */
-    constexpr basic_string_view(const_pointer str, const size_type n) noexcept
-    : data_(str), size_(n) {}
+    constexpr basic_string_view(const_pointer str, const size_type n) noexcept :
+    data_(str),
+    size_(n) {}
 
     /**
      * @brief 从迭代器范围构造
@@ -247,8 +237,9 @@ public:
      * 要求迭代器指向的值为value_type类型。
      */
     template <typename Iterator, enable_if_t<is_same_v<iter_value_t<Iterator>, value_type>, int> = 0>
-    constexpr basic_string_view(Iterator start, Iterator finish)
-    : data_(&*start), size_(_NEFORCE distance(start, finish)) {}
+    constexpr basic_string_view(Iterator start, Iterator finish) :
+    data_(&*start),
+    size_(_NEFORCE distance(start, finish)) {}
 
     /**
      * @brief 析构函数
@@ -259,73 +250,55 @@ public:
      * @brief 获取起始迭代器
      * @return 指向第一个字符的迭代器
      */
-    NEFORCE_NODISCARD constexpr const_iterator begin() const noexcept {
-        return const_iterator(data_, size_, 0);
-    }
+    NEFORCE_NODISCARD constexpr const_iterator begin() const noexcept { return const_iterator(data_, size_, 0); }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向最后一个字符之后位置的迭代器
      */
-    NEFORCE_NODISCARD constexpr const_iterator end() const noexcept {
-        return const_iterator(data_, size_, size_);
-    }
+    NEFORCE_NODISCARD constexpr const_iterator end() const noexcept { return const_iterator(data_, size_, size_); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个字符的常量迭代器
      */
-    NEFORCE_NODISCARD constexpr const_iterator cbegin() const noexcept {
-        return begin();
-    }
+    NEFORCE_NODISCARD constexpr const_iterator cbegin() const noexcept { return begin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个字符之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD constexpr const_iterator cend() const noexcept {
-        return end();
-    }
+    NEFORCE_NODISCARD constexpr const_iterator cend() const noexcept { return end(); }
 
     /**
      * @brief 获取反向起始迭代器
      * @return 指向最后一个字符的反向迭代器
      */
-    NEFORCE_NODISCARD constexpr const_reverse_iterator rbegin() const noexcept {
-        return const_reverse_iterator(end());
-    }
+    NEFORCE_NODISCARD constexpr const_reverse_iterator rbegin() const noexcept { return const_reverse_iterator(end()); }
 
     /**
      * @brief 获取反向结束迭代器
      * @return 指向第一个字符之前位置的反向迭代器
      */
-    NEFORCE_NODISCARD constexpr const_reverse_iterator rend() const noexcept {
-        return const_reverse_iterator(begin());
-    }
+    NEFORCE_NODISCARD constexpr const_reverse_iterator rend() const noexcept { return const_reverse_iterator(begin()); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向最后一个字符的常量反向迭代器
      */
-    NEFORCE_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept {
-        return rbegin();
-    }
+    NEFORCE_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept { return rbegin(); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个字符之前位置的常量反向迭代器
      */
-    NEFORCE_NODISCARD constexpr const_reverse_iterator crend() const noexcept {
-        return rend();
-    }
+    NEFORCE_NODISCARD constexpr const_reverse_iterator crend() const noexcept { return rend(); }
 
     /**
      * @brief 获取字符串长度
      * @return 字符数量
      */
-    NEFORCE_NODISCARD constexpr size_type size() const noexcept {
-        return size_;
-    }
+    NEFORCE_NODISCARD constexpr size_type size() const noexcept { return size_; }
 
     /**
      * @brief 获取最大可能长度
@@ -339,17 +312,13 @@ public:
      * @brief 获取字符串长度
      * @return 字符数量
      */
-    NEFORCE_NODISCARD constexpr size_type length() const noexcept {
-        return size_;
-    }
+    NEFORCE_NODISCARD constexpr size_type length() const noexcept { return size_; }
 
     /**
      * @brief 检查是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD constexpr bool empty() const noexcept {
-        return size_ == 0;
-    }
+    NEFORCE_NODISCARD constexpr bool empty() const noexcept { return size_ == 0; }
 
     /**
      * @brief 获取底层数据指针
@@ -357,9 +326,7 @@ public:
      *
      * 注意：返回的指针不保证以空字符结尾，不应作为C风格字符串使用。
      */
-    NEFORCE_NODISCARD constexpr const_pointer data() const noexcept {
-        return data_;
-    }
+    NEFORCE_NODISCARD constexpr const_pointer data() const noexcept { return data_; }
 
     /**
      * @brief 访问第一个字符
@@ -384,7 +351,7 @@ public:
      * @param n 索引
      * @return 指定位置的字符引用
      */
-    NEFORCE_NODISCARD constexpr const_reference operator [](const size_type n) const noexcept {
+    NEFORCE_NODISCARD constexpr const_reference operator[](const size_type n) const noexcept {
         NEFORCE_DEBUG_VERIFY(n <= size_, "basic string view index out of ranges.");
         return data_[n];
     }
@@ -464,7 +431,7 @@ public:
      * @return 负值（*this<view）、0（相等）、正值（*this>view）
      */
     NEFORCE_NODISCARD constexpr int compare(const basic_string_view view) const noexcept {
-        return (char_traits_compare<Traits>)(data_, size_, view.data_, view.size_);
+        return (char_traits_compare<Traits>) (data_, size_, view.data_, view.size_);
     }
 
     /**
@@ -474,7 +441,8 @@ public:
      * @param view 要比较的字符串视图
      * @return 比较结果
      */
-    NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n, const basic_string_view view) const {
+    NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n,
+                                            const basic_string_view view) const {
         return substr(off, n).compare(view);
     }
 
@@ -488,7 +456,7 @@ public:
      * @return 比较结果
      */
     NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n, const basic_string_view view,
-        const size_type roff, const size_type count) const {
+                                            const size_type roff, const size_type count) const {
         return substr(off, n).compare(view.substr(roff, count));
     }
 
@@ -520,8 +488,8 @@ public:
      * @param count 字符数组长度
      * @return 比较结果
      */
-    NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n,
-        const CharT* const str, const size_type count) const {
+    NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n, const CharT* const str,
+                                            const size_type count) const {
         return substr(off, n).compare(basic_string_view(str, count));
     }
 
@@ -532,7 +500,7 @@ public:
      * @return 子串首次出现的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find(const basic_string_view view, const size_type n = 0) const noexcept {
-        return (char_traits_find<Traits>)(data_, size_, n, view.data_, view.size_);
+        return (char_traits_find<Traits>) (data_, size_, n, view.data_, view.size_);
     }
 
     /**
@@ -542,7 +510,7 @@ public:
      * @return 字符首次出现的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find(const CharT chr, const size_type n = 0) const noexcept {
-        return (char_traits_find_char<Traits>)(data_, size_, n, chr);
+        return (char_traits_find_char<Traits>) (data_, size_, n, chr);
     }
 
     /**
@@ -552,9 +520,9 @@ public:
      * @param count 子串长度
      * @return 子串首次出现的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type find(const CharT* const str,
-        const size_type off, const size_type count) const noexcept {
-        return (char_traits_find<Traits>)(data_, size_, off, str, count);
+    NEFORCE_NODISCARD constexpr size_type find(const CharT* const str, const size_type off,
+                                               const size_type count) const noexcept {
+        return (char_traits_find<Traits>) (data_, size_, off, str, count);
     }
 
     /**
@@ -564,7 +532,7 @@ public:
      * @return 子串首次出现的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find(const CharT* const str, const size_type off = 0) const noexcept {
-        return (char_traits_find<Traits>)(data_, size_, off, str, Traits::length(str));
+        return (char_traits_find<Traits>) (data_, size_, off, str, Traits::length(str));
     }
 
     /**
@@ -573,8 +541,9 @@ public:
      * @param off 起始位置，默认为npos
      * @return 子串最后一次出现的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type rfind(const basic_string_view view, const size_type off = npos) const noexcept {
-        return (char_traits_rfind<Traits>)(data_, size_, off, view.data_, view.size_);
+    NEFORCE_NODISCARD constexpr size_type rfind(const basic_string_view view,
+                                                const size_type off = npos) const noexcept {
+        return (char_traits_rfind<Traits>) (data_, size_, off, view.data_, view.size_);
     }
 
     /**
@@ -584,7 +553,7 @@ public:
      * @return 字符最后一次出现的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type rfind(const CharT chr, const size_type n = npos) const noexcept {
-        return (char_traits_rfind_char<Traits>)(data_, size_, n, chr);
+        return (char_traits_rfind_char<Traits>) (data_, size_, n, chr);
     }
 
     /**
@@ -595,8 +564,8 @@ public:
      * @return 子串最后一次出现的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type rfind(const CharT* const str, const size_type off,
-        const size_type n) const noexcept {
-        return (char_traits_rfind<Traits>)(data_, size_, off, str, n);
+                                                const size_type n) const noexcept {
+        return (char_traits_rfind<Traits>) (data_, size_, off, str, n);
     }
 
     /**
@@ -606,7 +575,7 @@ public:
      * @return 子串最后一次出现的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type rfind(const CharT* const str, const size_type off = npos) const noexcept {
-        return (char_traits_rfind<Traits>)(data_, size_, off, str, Traits::length(str));
+        return (char_traits_rfind<Traits>) (data_, size_, off, str, Traits::length(str));
     }
 
     /**
@@ -615,8 +584,9 @@ public:
      * @param off 起始位置
      * @return 第一个匹配字符的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type find_first_of(const basic_string_view view, const size_type off = 0) const noexcept {
-        return (char_traits_find_first_of<Traits>)(data_, size_, off, view.data_, view.size_);
+    NEFORCE_NODISCARD constexpr size_type find_first_of(const basic_string_view view,
+                                                        const size_type off = 0) const noexcept {
+        return (char_traits_find_first_of<Traits>) (data_, size_, off, view.data_, view.size_);
     }
 
     /**
@@ -626,7 +596,7 @@ public:
      * @return 第一个匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_first_of(const CharT chr, const size_type off = 0) const noexcept {
-        return (char_traits_find_char<Traits>)(data_, size_, off, chr);
+        return (char_traits_find_char<Traits>) (data_, size_, off, chr);
     }
 
     /**
@@ -637,8 +607,8 @@ public:
      * @return 第一个匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_first_of(const CharT* const str, const size_type off,
-        const size_type n) const noexcept {
-        return (char_traits_find_first_of<Traits>)(data_, size_, off, str, n);
+                                                        const size_type n) const noexcept {
+        return (char_traits_find_first_of<Traits>) (data_, size_, off, str, n);
     }
 
     /**
@@ -647,8 +617,9 @@ public:
      * @param off 起始位置
      * @return 第一个匹配字符的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type find_first_of(const CharT* const str, const size_type off = 0) const noexcept {
-        return (char_traits_find_first_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    NEFORCE_NODISCARD constexpr size_type find_first_of(const CharT* const str,
+                                                        const size_type off = 0) const noexcept {
+        return (char_traits_find_first_of<Traits>) (data_, size_, off, str, Traits::length(str));
     }
 
     /**
@@ -657,8 +628,9 @@ public:
      * @param off 起始位置
      * @return 最后一个匹配字符的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type find_last_of(const basic_string_view view, const size_type off = npos) const noexcept {
-        return (char_traits_find_last_of<Traits>)(data_, size_, off, view.data_, view.size_);
+    NEFORCE_NODISCARD constexpr size_type find_last_of(const basic_string_view view,
+                                                       const size_type off = npos) const noexcept {
+        return (char_traits_find_last_of<Traits>) (data_, size_, off, view.data_, view.size_);
     }
 
     /**
@@ -668,7 +640,7 @@ public:
      * @return 最后一个匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_last_of(const CharT chr, const size_type off = npos) const noexcept {
-        return (char_traits_rfind_char<Traits>)(data_, size_, off, chr);
+        return (char_traits_rfind_char<Traits>) (data_, size_, off, chr);
     }
 
     /**
@@ -679,8 +651,8 @@ public:
      * @return 最后一个匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_last_of(const CharT* const str, const size_type off,
-        const size_type n) const noexcept {
-        return (char_traits_find_last_of<Traits>)(data_, size_, off, str, n);
+                                                       const size_type n) const noexcept {
+        return (char_traits_find_last_of<Traits>) (data_, size_, off, str, n);
     }
 
     /**
@@ -689,8 +661,9 @@ public:
      * @param off 起始位置
      * @return 最后一个匹配字符的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type find_last_of(const CharT* const str, const size_type off = npos) const noexcept {
-        return (char_traits_find_last_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    NEFORCE_NODISCARD constexpr size_type find_last_of(const CharT* const str,
+                                                       const size_type off = npos) const noexcept {
+        return (char_traits_find_last_of<Traits>) (data_, size_, off, str, Traits::length(str));
     }
 
     /**
@@ -700,8 +673,8 @@ public:
      * @return 第一个不匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_first_not_of(const basic_string_view view,
-        const size_type off = 0) const noexcept {
-        return (char_traits_find_first_not_of<Traits>)(data_, size_, off, view.data_, view.size_);
+                                                            const size_type off = 0) const noexcept {
+        return (char_traits_find_first_not_of<Traits>) (data_, size_, off, view.data_, view.size_);
     }
 
     /**
@@ -711,7 +684,7 @@ public:
      * @return 第一个不等于chr的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_first_not_of(const CharT chr, const size_type off = 0) const noexcept {
-        return (char_traits_find_not_char<Traits>)(data_, size_, off, chr);
+        return (char_traits_find_not_char<Traits>) (data_, size_, off, chr);
     }
 
     /**
@@ -722,8 +695,8 @@ public:
      * @return 第一个不匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_first_not_of(const CharT* const str, const size_type off,
-        const size_type n) const noexcept {
-        return (char_traits_find_first_not_of<Traits>)(data_, size_, off, str, n);
+                                                            const size_type n) const noexcept {
+        return (char_traits_find_first_not_of<Traits>) (data_, size_, off, str, n);
     }
 
     /**
@@ -732,8 +705,9 @@ public:
      * @param off 起始位置
      * @return 第一个不匹配字符的位置，未找到则返回npos
      */
-    NEFORCE_NODISCARD constexpr size_type find_first_not_of(const CharT* const str, const size_type off = 0) const noexcept {
-        return (char_traits_find_first_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    NEFORCE_NODISCARD constexpr size_type find_first_not_of(const CharT* const str,
+                                                            const size_type off = 0) const noexcept {
+        return (char_traits_find_first_not_of<Traits>) (data_, size_, off, str, Traits::length(str));
     }
 
     /**
@@ -743,8 +717,8 @@ public:
      * @return 最后一个不匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_last_not_of(const basic_string_view view,
-        const size_type off = npos) const noexcept {
-        return (char_traits_find_last_not_of<Traits>)(data_, size_, off, view.data_, view.size_);
+                                                           const size_type off = npos) const noexcept {
+        return (char_traits_find_last_not_of<Traits>) (data_, size_, off, view.data_, view.size_);
     }
 
     /**
@@ -754,7 +728,7 @@ public:
      * @return 最后一个不等于chr的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_last_not_of(const CharT chr, const size_type off = npos) const noexcept {
-        return (char_traits_rfind_not_char<Traits>)(data_, size_, off, chr);
+        return (char_traits_rfind_not_char<Traits>) (data_, size_, off, chr);
     }
 
     /**
@@ -765,8 +739,8 @@ public:
      * @return 最后一个不匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_last_not_of(const CharT* const str, const size_type off,
-        const size_type n) const noexcept {
-        return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, n);
+                                                           const size_type n) const noexcept {
+        return (char_traits_find_last_not_of<Traits>) (data_, size_, off, str, n);
     }
 
     /**
@@ -776,8 +750,8 @@ public:
      * @return 最后一个不匹配字符的位置，未找到则返回npos
      */
     NEFORCE_NODISCARD constexpr size_type find_last_not_of(const CharT* const str,
-        const size_type off = npos) const noexcept {
-        return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
+                                                           const size_type off = npos) const noexcept {
+        return (char_traits_find_last_not_of<Traits>) (data_, size_, off, str, Traits::length(str));
     }
 
     /**
@@ -789,7 +763,9 @@ public:
     NEFORCE_CONSTEXPR20 size_type count(value_type chr, const size_type position = 0) const noexcept {
         size_type n = 0;
         for (size_type idx = position; idx < size_; ++idx) {
-            if (*(data() + idx) == chr) ++n;
+            if (*(data() + idx) == chr) {
+                ++n;
+            }
         }
         return n;
     }
@@ -908,8 +884,10 @@ public:
      */
     template <typename Predicate>
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_left_if(Predicate pred) const
-    noexcept(noexcept(pred(*cbegin()))) {
-        if (empty()) return *this;
+            noexcept(noexcept(pred(*cbegin()))) {
+        if (empty()) {
+            return *this;
+        }
 
         const_iterator it = cbegin();
         while (it != cend() && pred(*it)) {
@@ -931,8 +909,10 @@ public:
      */
     template <typename Predicate>
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_right_if(Predicate pred) const
-    noexcept(noexcept(pred(*crbegin()))) {
-        if (empty()) return *this;
+            noexcept(noexcept(pred(*crbegin()))) {
+        if (empty()) {
+            return *this;
+        }
 
         const_reverse_iterator rit = crbegin();
         while (rit != crend() && pred(*rit)) {
@@ -954,7 +934,7 @@ public:
      */
     template <typename Predicate>
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view trim_if(Predicate pred) const
-    noexcept(noexcept(this->trim_right_if(pred)) && noexcept(this->trim_left_if(pred))) {
+            noexcept(noexcept(this->trim_right_if(pred)) && noexcept(this->trim_left_if(pred))) {
         return this->trim_left_if(pred).trim_right_if(pred);
     }
 
@@ -964,7 +944,7 @@ public:
      * @return 是否相等
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const basic_string_view str) const noexcept {
-        return (char_traits_equal<Traits>)(data_, size_, str.data_, str.size_);
+        return (char_traits_equal<Traits>) (data_, size_, str.data_, str.size_);
     }
 
     /**
@@ -991,7 +971,7 @@ public:
      * @param rhs 右侧字符串视图
      * @return 是否相等
      */
-    NEFORCE_NODISCARD constexpr bool operator ==(const basic_string_view& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool operator==(const basic_string_view& rhs) const noexcept {
         return this->equal_to(rhs);
     }
 
@@ -1000,7 +980,7 @@ public:
      * @param rhs 右侧字符串视图
      * @return 是否小于
      */
-    NEFORCE_NODISCARD constexpr bool operator <(const basic_string_view& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool operator<(const basic_string_view& rhs) const noexcept {
         return this->compare(rhs) < 0;
     }
 

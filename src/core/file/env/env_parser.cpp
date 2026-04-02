@@ -1,5 +1,5 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/env/env_parser.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void env_parser::skip_whitespace() noexcept {
@@ -18,18 +18,20 @@ void env_parser::skip_line() noexcept {
 }
 
 char env_parser::current() const noexcept {
-    if (pos_ < len_) return text_[pos_];
+    if (pos_ < len_) {
+        return text_[pos_];
+    }
     return '\0';
 }
 
 char env_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) return text_[pos_ + offset];
+    if (pos_ + offset < len_) {
+        return text_[pos_ + offset];
+    }
     return '\0';
 }
 
-bool env_parser::eof() const noexcept {
-    return pos_ >= len_;
-}
+bool env_parser::eof() const noexcept { return pos_ >= len_; }
 
 void env_parser::advance() noexcept {
     if (pos_ < len_) {
@@ -75,10 +77,7 @@ string env_parser::parse_single_quoted_value(const string& line, size_t& pos) co
     while (pos < line.size()) {
         char c = line[pos];
         if (c == '\'') {
-            if (pos + 3 < line.size() &&
-                line[pos + 1] == '\\' &&
-                line[pos + 2] == '\'' &&
-                line[pos + 3] == '\'') {
+            if (pos + 3 < line.size() && line[pos + 1] == '\\' && line[pos + 2] == '\'' && line[pos + 3] == '\'') {
                 result += '\'';
                 pos += 4;
             } else {
@@ -104,13 +103,27 @@ string env_parser::parse_double_quoted_value(const string& line, size_t& pos) co
             pos++;
             const char next = line[pos];
             switch (next) {
-                case 'n': result += '\n'; break;
-                case 'r': result += '\r'; break;
-                case 't': result += '\t'; break;
-                case '\\': result += '\\'; break;
-                case '"': result += '"'; break;
-                case '$': result += '$'; break;
-                case '`': result += '`'; break;
+                case 'n':
+                    result += '\n';
+                    break;
+                case 'r':
+                    result += '\r';
+                    break;
+                case 't':
+                    result += '\t';
+                    break;
+                case '\\':
+                    result += '\\';
+                    break;
+                case '"':
+                    result += '"';
+                    break;
+                case '$':
+                    result += '$';
+                    break;
+                case '`':
+                    result += '`';
+                    break;
                 default:
                     result += '\\';
                     result += next;
@@ -129,8 +142,7 @@ string env_parser::parse_double_quoted_value(const string& line, size_t& pos) co
     return result;
 }
 
-bool env_parser::parse_variable_line(const string& line, string& name,
-    unique_ptr<env_variable> &variable)const {
+bool env_parser::parse_variable_line(const string& line, string& name, unique_ptr<env_variable>& variable) const {
     size_t pos = 0;
     string trimmed = line;
     trimmed.trim();

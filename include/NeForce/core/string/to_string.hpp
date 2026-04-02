@@ -9,9 +9,9 @@
  * 支持基本类型、容器、元组、枚举、异常等多种类型的字符串表示。
  */
 
-#include "NeForce/core/interface/istringify.hpp"
-#include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/algorithm/type_erase.hpp"
+#include "NeForce/core/interface/icollector.hpp"
+#include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/numeric/math.hpp"
 #include "NeForce/core/numeric/numeric_types.hpp"
 #include "NeForce/core/string/utf.hpp"
@@ -31,7 +31,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 通过包装类型进行字符串转换，要求包装类型实现了istringify接口。
  */
-template <typename T, typename P = package_t<T>, enable_if_t<is_packaged_v<T> && is_base_of_v<istringify<P>, P>, int> = 0>
+template <typename T, typename P = package_t<T>,
+          enable_if_t<is_packaged_v<T> && is_base_of_v<istringify<P>, P>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& value) {
     return to_string(package_t<T>(value));
 }
@@ -41,9 +42,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& value) {
  * @param np 空指针
  * @return 字符串"nullptr"
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(nullptr_t np) {
-    return {"nullptr"};
-}
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(nullptr_t np) { return {"nullptr"}; }
 
 /**
  * @brief 将指针转换为字符串
@@ -61,16 +60,19 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& ptr) {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Collector>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string collector_to_string(const Collector& c) {
-    if (_NEFORCE empty(c)) return {"[]"};
+template <typename Collector> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string collector_to_string(const Collector& c) {
+    if (_NEFORCE empty(c)) {
+        return {"[]"};
+    }
 
     string result;
     result += "[ ";
 
     auto begin = _NEFORCE cbegin(c);
     for (auto iter = begin; iter != _NEFORCE cend(c); ++iter) {
-        if (iter != begin) result += ", ";
+        if (iter != begin) {
+            result += ", ";
+        }
         result += to_string(*iter);
     }
 
@@ -144,8 +146,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const compressed_pair<IfE
  * @param obj 对
  * @return 格式为"{ first, second }"的字符串
  */
-template <typename T1, typename T2>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
+template <typename T1, typename T2> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
     return "{ " + to_string(obj.first) + ", " + to_string(obj.second) + " }";
 }
 
@@ -157,8 +158,9 @@ NEFORCE_CONSTEXPR20 void __to_string_tuple_elements(const Tuple& t, string& resu
     result += to_string(_NEFORCE get<I>(t));
 }
 
-template <typename Tuple, size_t I, enable_if_t<I < tuple_size_v<Tuple> - 1, int> = 0>
-NEFORCE_CONSTEXPR20 void __to_string_tuple_elements(const Tuple& t, string& result) {
+template <typename Tuple, size_t I,
+          enable_if_t<I<tuple_size_v<Tuple> - 1, int> = 0> NEFORCE_CONSTEXPR20 void __to_string_tuple_elements(
+                  const Tuple& t, string& result) {
     result += to_string(_NEFORCE get<I>(t)) + ", ";
     inner::__to_string_tuple_elements<Tuple, I + 1>(t, result);
 }
@@ -186,8 +188,7 @@ NEFORCE_END_INNER__
  * @param tup 元组
  * @return 字符串表示
  */
-template <typename... Args>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup) {
+template <typename... Args> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup) {
     return inner::__to_string_tuple_dispatch(tup);
 }
 
@@ -195,12 +196,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup
 #ifndef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T>
-string to_string_concat(T&& t) {
-    return to_string(_NEFORCE forward<T>(t));
-}
-template <typename First, typename... Rest>
-string to_string_concat(First&& first, Rest&&... rest) {
+template <typename T> string to_string_concat(T&& t) { return to_string(_NEFORCE forward<T>(t)); }
+template <typename First, typename... Rest> string to_string_concat(First&& first, Rest&&... rest) {
     return to_string(_NEFORCE forward<First>(first)) + to_string_concat(_NEFORCE forward<Rest>(rest)...);
 }
 NEFORCE_END_INNER__
@@ -228,8 +225,7 @@ NEFORCE_BEGIN_INNER__
 #ifdef NEFORCE_ARCH_BITS_32
 
 template <typename CharT, typename UT>
-constexpr enable_if_t<(sizeof(UT) > 4)>
-__uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
+constexpr enable_if_t<(sizeof(UT) > 4)> __uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
     while (ux > static_cast<UT>(0xFFFFFFFFU)) {
         auto chunk = static_cast<uint32_t>(ux % static_cast<UT>(1000000000));
         ux /= static_cast<UT>(1000000000);
@@ -241,8 +237,7 @@ __uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
 }
 
 template <typename CharT, typename UT>
-constexpr enable_if_t<(sizeof(UT) <= 4)>
-__uint_to_buff_aux(CharT*, UT&) noexcept {}
+constexpr enable_if_t<(sizeof(UT) <= 4)> __uint_to_buff_aux(CharT*, UT&) noexcept {}
 
 #endif
 
@@ -254,8 +249,7 @@ __uint_to_buff_aux(CharT*, UT&) noexcept {}
  * @param ux 要转换的值
  * @return 指向转换后字符串起始位置的迭代器
  */
-template <typename CharT, typename UT>
-NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
+template <typename CharT, typename UT> NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
     static_assert(is_unsigned_v<UT>, "UT must be a unsigned integer type");
 
 #ifdef NEFORCE_ARCH_BITS_64
@@ -304,8 +298,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __int_to_string(const 
  * @param x 要转换的值
  * @return 字符串表示
  */
-template <typename CharT, typename T>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
+template <typename CharT, typename T> NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     static_assert(is_unsigned_v<T>, "T must be a integral type");
 
     CharT buffer[numeric_traits<uintmax_t>::digits10 + 2]; // digits10 + sign + '\0'
@@ -324,7 +317,9 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) 
  * @return 进制字符串
  */
 NEFORCE_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
-    if (value == 0) return "0";
+    if (value == 0) {
+        return "0";
+    }
 
     string result;
     result.reserve(20);
@@ -343,13 +338,11 @@ NEFORCE_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base,
     return result;
 }
 
-template <typename T, enable_if_t<
-    disjunction_v<conjunction<is_standard_integral<T>, is_signed<T>>>, int> = 0>
+template <typename T, enable_if_t<disjunction_v<conjunction<is_standard_integral<T>, is_signed<T>>>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
     return inner::__int_to_string<char>(x);
 }
-template <typename T, enable_if_t<
-    disjunction_v<conjunction<is_standard_integral<T>, is_unsigned<T>>>, int> = 0>
+template <typename T, enable_if_t<disjunction_v<conjunction<is_standard_integral<T>, is_unsigned<T>>>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
     return inner::__uint_to_string<char>(x);
 }
@@ -365,15 +358,22 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x)
  * @return 字符串表示
  */
 template <typename CharT, typename T>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with_precision(
-    T x, int precision = 6, const bool force_scientific = false, const bool force_fixed = false) {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT>
+__float_to_string_with_precision(T x, int precision = 6, const bool force_scientific = false,
+                                 const bool force_fixed = false) {
     static_assert(is_floating_point_v<T>, "T must be a floating point type");
 
-    if (_NEFORCE is_nan(x)) return basic_string<CharT>{"nan"};
+    if (_NEFORCE is_nan(x)) {
+        return basic_string<CharT>{"nan"};
+    }
 
     constexpr T inf = numeric_traits<T>::infinity();
-    if (x == inf)  return basic_string<CharT>{"inf"};
-    if (x == -inf) return basic_string<CharT>{"-inf"};
+    if (x == inf) {
+        return basic_string<CharT>{"inf"};
+    }
+    if (x == -inf) {
+        return basic_string<CharT>{"-inf"};
+    }
 
     basic_string<CharT> result;
 
@@ -383,7 +383,9 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
         x = -x;
     }
 
-    if (precision < 0) precision = 0;
+    if (precision < 0) {
+        precision = 0;
+    }
 
     bool use_scientific = false;
     int exponent = 0;
@@ -398,14 +400,16 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
 
     if (use_scientific && x != 0) {
         const double log_val = logarithm_10(static_cast<double>(x));
-        exponent = static_cast<int>(log_val >= 0
-            ? log_val
-            : log_val - 1.0);
+        exponent = static_cast<int>(log_val >= 0 ? log_val : log_val - 1.0);
 
         if (exponent >= 0) {
-            for (int i = 0; i < exponent; ++i) x /= static_cast<T>(10);
+            for (int i = 0; i < exponent; ++i) {
+                x /= static_cast<T>(10);
+            }
         } else {
-            for (int i = 0; i < -exponent; ++i) x *= static_cast<T>(10);
+            for (int i = 0; i < -exponent; ++i) {
+                x *= static_cast<T>(10);
+            }
         }
 
         if (x >= static_cast<T>(10)) {
@@ -429,9 +433,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
             frac_scale *= 10;
         }
 
-        frac_int = static_cast<uint64_t>(
-            fractional_part * static_cast<T>(frac_scale) + static_cast<T>(0.5)
-        );
+        frac_int = static_cast<uint64_t>(fractional_part * static_cast<T>(frac_scale) + static_cast<T>(0.5));
 
         if (frac_int >= frac_scale) {
             frac_int -= frac_scale;

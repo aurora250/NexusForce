@@ -1,8 +1,8 @@
 #include <NeForce/db/pgsql/pgsql_connect.hpp>
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#include <NeForce/core/utility/packages.hpp>
-#include <NeForce/db/pgsql/pgsql_prepared_statement.hpp>
-#include <NeForce/db/pgsql/pgsql_result.hpp>
+#    include <NeForce/core/utility/packages.hpp>
+#    include <NeForce/db/pgsql/pgsql_prepared_statement.hpp>
+#    include <NeForce/db/pgsql/pgsql_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -29,7 +29,7 @@ namespace {
         }
         return result;
     }
-}
+} // namespace
 
 bool pgsql_connect::connect(const db_config& config) {
     last_error_.clear();
@@ -65,10 +65,14 @@ void pgsql_connect::close() {
 }
 
 bool pgsql_connect::set_character_set(const string& encoding) const {
-    if (!link_) return false;
+    if (!link_) {
+        return false;
+    }
 
     ::PGresult* res = ::PQexec(link_, ("SET client_encoding TO " + encoding).data());
-    if (!res) return false;
+    if (!res) {
+        return false;
+    }
 
     const ::ExecStatusType status = ::PQresultStatus(res);
     ::PQclear(res);
@@ -76,10 +80,14 @@ bool pgsql_connect::set_character_set(const string& encoding) const {
 }
 
 string_view pgsql_connect::get_character_set() const {
-    if (!link_) return {};
+    if (!link_) {
+        return {};
+    }
 
     ::PGresult* res = ::PQexec(link_, "SHOW client_encoding");
-    if (!res) return {};
+    if (!res) {
+        return {};
+    }
 
     if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
         ::PQclear(res);
@@ -93,25 +101,31 @@ string_view pgsql_connect::get_character_set() const {
 }
 
 bool pgsql_connect::update(const string& sql) const {
-    if (!link_) return false;
+    if (!link_) {
+        return false;
+    }
 
     ::PGresult* res = ::PQexec(link_, sql.data());
-    if (!res) return false;
+    if (!res) {
+        return false;
+    }
 
     const ::ExecStatusType status = ::PQresultStatus(res);
     ::PQclear(res);
     return status == ::PGRES_COMMAND_OK;
 }
 
-bool pgsql_connect::connected() const {
-    return link_ != nullptr && ::PQstatus(link_) == ::CONNECTION_OK;
-}
+bool pgsql_connect::connected() const { return link_ != nullptr && ::PQstatus(link_) == ::CONNECTION_OK; }
 
 unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
-    if (!link_) return nullptr;
+    if (!link_) {
+        return nullptr;
+    }
 
     ::PGresult* res = ::PQexec(link_, sql.data());
-    if (!res) return nullptr;
+    if (!res) {
+        return nullptr;
+    }
 
     if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
         ::PQclear(res);
@@ -121,7 +135,9 @@ unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
 }
 
 unique_ptr<idb_prepared_statement> pgsql_connect::prepare_statement(const string& sql) const {
-    if (!link_) return nullptr;
+    if (!link_) {
+        return nullptr;
+    }
 
     const auto stmt = new pgsql_prepared_statement(link_, sql);
 
@@ -142,7 +158,9 @@ idb_connect* pgsql_factory::create_connect() {
 }
 
 idb_result* pgsql_factory::create_result(void* native_result) {
-    if (!native_result) return nullptr;
+    if (!native_result) {
+        return nullptr;
+    }
     const auto res = static_cast<::PGresult*>(native_result);
     return new pgsql_tb_result(res, false);
 }

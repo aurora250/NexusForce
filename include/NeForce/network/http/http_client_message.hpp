@@ -27,7 +27,9 @@ public:
 
     NEFORCE_NODISCARD string_view header(const string& key) const noexcept {
         const auto it = headers.find(key);
-        if (it == headers.end() || it->second.empty()) return "";
+        if (it == headers.end() || it->second.empty()) {
+            return "";
+        }
         return it->second[0].view();
     }
 
@@ -37,9 +39,7 @@ public:
         return it != headers.end() ? it->second : empty;
     }
 
-    NEFORCE_NODISCARD bool has_header(const string& key) const noexcept {
-        return headers.find(key) != headers.end();
-    }
+    NEFORCE_NODISCARD bool has_header(const string& key) const noexcept { return headers.find(key) != headers.end(); }
 
     NEFORCE_NODISCARD bool is_success() const noexcept {
         const auto code = static_cast<uint16_t>(status);
@@ -61,9 +61,7 @@ public:
         return code >= 500 && code < 600;
     }
 
-    NEFORCE_NODISCARD string_view content_type() const noexcept {
-        return header("Content-Type");
-    }
+    NEFORCE_NODISCARD string_view content_type() const noexcept { return header("Content-Type"); }
 };
 
 
@@ -79,17 +77,15 @@ struct http_client_request {
 
     NEFORCE_NODISCARD string_view header(const string& key) const noexcept {
         const auto it = headers.find(key);
-        if (it == headers.end() || it->second.empty()) return "";
+        if (it == headers.end() || it->second.empty()) {
+            return "";
+        }
         return it->second.view();
     }
 
-    void set_header(const string& key, string value) {
-        headers[key] = _NEFORCE move(value);
-    }
+    void set_header(const string& key, string value) { headers[key] = _NEFORCE move(value); }
 
-    void add_query_param(const string& key, string value) {
-        query_params[key] = _NEFORCE move(value);
-    }
+    void add_query_param(const string& key, string value) { query_params[key] = _NEFORCE move(value); }
 
     NEFORCE_NODISCARD string build_full_path() const;
 };

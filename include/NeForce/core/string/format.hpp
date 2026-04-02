@@ -23,11 +23,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 对齐方式枚举
  */
 enum class format_align {
-    DEFAULT,   ///< 默认（数字右对齐，其他左对齐）
-    LEFT,      ///< 左对齐 '<'
-    RIGHT,     ///< 右对齐 '>'
-    CENTER,    ///< 居中 '^'
-    NUMERIC    ///< 符号感知填充 '='
+    DEFAULT, ///< 默认（数字右对齐，其他左对齐）
+    LEFT,    ///< 左对齐 '<'
+    RIGHT,   ///< 右对齐 '>'
+    CENTER,  ///< 居中 '^'
+    NUMERIC  ///< 符号感知填充 '='
 };
 
 /**
@@ -35,15 +35,15 @@ enum class format_align {
  * @brief 数值类型格式枚举
  */
 enum class format_type : uint8_t {
-    DEFAULT,      ///< 默认（由类型决定）
-    DECIMAL,      ///< 十进制 'd' / 'f' / 'g'
-    BINARY,       ///< 二进制 'b'
-    OCTAL,        ///< 八进制 'o'
-    HEX,          ///< 十六进制 'x' / 'X'
-    SCIENTIFIC,   ///< 科学计数法 'e' / 'E'
-    FIXED,        ///< 固定小数 'f'
-    GENERAL,      ///< 通用浮点 'g' / 'G'
-    CHAR,         ///< 字符 'c'
+    DEFAULT,    ///< 默认（由类型决定）
+    DECIMAL,    ///< 十进制 'd' / 'f' / 'g'
+    BINARY,     ///< 二进制 'b'
+    OCTAL,      ///< 八进制 'o'
+    HEX,        ///< 十六进制 'x' / 'X'
+    SCIENTIFIC, ///< 科学计数法 'e' / 'E'
+    FIXED,      ///< 固定小数 'f'
+    GENERAL,    ///< 通用浮点 'g' / 'G'
+    CHAR,       ///< 字符 'c'
 };
 
 /**
@@ -53,16 +53,16 @@ enum class format_type : uint8_t {
  * 对应格式规范：[[fill]align][sign][#][0][width][.precision][type]
  */
 struct format_options {
-    char         fill       = ' ';             ///< 填充字符
-    format_align align      = format_align::DEFAULT; ///< 对齐方式
-    format_type  type       = format_type::DEFAULT;  ///< 类型
-    int          width      = 0;               ///< 最小宽度（0表示不限制）
-    int          precision  = -1;              ///< 精度（-1表示默认）
-    bool         uppercase  = false;           ///< 是否大写
-    bool         alternate  = false;           ///< 是否备用格式（# 前缀）
-    bool         zero_pad   = false;           ///< 是否零填充
-    bool         show_sign  = false;           ///< 是否强制显示符号 '+'
-    bool         space_sign = false;           ///< 是否空格占位符号 ' '
+    char fill = ' ';                            ///< 填充字符
+    format_align align = format_align::DEFAULT; ///< 对齐方式
+    format_type type = format_type::DEFAULT;    ///< 类型
+    int width = 0;                              ///< 最小宽度（0表示不限制）
+    int precision = -1;                         ///< 精度（-1表示默认）
+    bool uppercase = false;                     ///< 是否大写
+    bool alternate = false;                     ///< 是否备用格式（# 前缀）
+    bool zero_pad = false;                      ///< 是否零填充
+    bool show_sign = false;                     ///< 是否强制显示符号 '+'
+    bool space_sign = false;                    ///< 是否空格占位符号 ' '
 };
 
 /// @cond
@@ -70,30 +70,49 @@ NEFORCE_BEGIN_INNER__
 
 constexpr format_align to_number_alignment(const char c) {
     switch (c) {
-        case '<': return format_align::LEFT;
-        case '>': return format_align::RIGHT;
-        case '^': return format_align::CENTER;
-        case '=': return format_align::NUMERIC;
-        default:  return format_align::DEFAULT;
+        case '<':
+            return format_align::LEFT;
+        case '>':
+            return format_align::RIGHT;
+        case '^':
+            return format_align::CENTER;
+        case '=':
+            return format_align::NUMERIC;
+        default:
+            return format_align::DEFAULT;
     }
 }
 
 constexpr format_type to_number_type(const char c) {
     switch (c) {
-        case 'd': return format_type::DECIMAL;
-        case 'b': return format_type::BINARY;
-        case 'B': return format_type::BINARY;
-        case 'o': return format_type::OCTAL;
-        case 'x': return format_type::HEX;
-        case 'X': return format_type::HEX;
-        case 'e': return format_type::SCIENTIFIC;
-        case 'E': return format_type::SCIENTIFIC;
-        case 'f': return format_type::FIXED;
-        case 'F': return format_type::FIXED;
-        case 'g': return format_type::GENERAL;
-        case 'G': return format_type::GENERAL;
-        case 'c': return format_type::CHAR;
-        default:  return format_type::DEFAULT;
+        case 'd':
+            return format_type::DECIMAL;
+        case 'b':
+            return format_type::BINARY;
+        case 'B':
+            return format_type::BINARY;
+        case 'o':
+            return format_type::OCTAL;
+        case 'x':
+            return format_type::HEX;
+        case 'X':
+            return format_type::HEX;
+        case 'e':
+            return format_type::SCIENTIFIC;
+        case 'E':
+            return format_type::SCIENTIFIC;
+        case 'f':
+            return format_type::FIXED;
+        case 'F':
+            return format_type::FIXED;
+        case 'g':
+            return format_type::GENERAL;
+        case 'G':
+            return format_type::GENERAL;
+        case 'c':
+            return format_type::CHAR;
+        default:
+            return format_type::DEFAULT;
     }
 }
 
@@ -101,16 +120,18 @@ constexpr format_options parse_number_format(const string_view& fmt_str) {
     format_options options;
     size_t pos = 0;
 
-    if (fmt_str.empty()) return options;
+    if (fmt_str.empty()) {
+        return options;
+    }
 
     bool found_align = false;
     if (pos + 1 < fmt_str.size()) {
-        const char first_char  = fmt_str[pos];
+        const char first_char = fmt_str[pos];
         const char second_char = fmt_str[pos + 1];
 
         if (second_char == '<' || second_char == '>' || second_char == '^' || second_char == '=') {
             if (first_char != '+' && first_char != '-' && first_char != ' ') {
-                options.fill  = first_char;
+                options.fill = first_char;
                 options.align = to_number_alignment(second_char);
                 pos += 2;
                 found_align = true;
@@ -151,10 +172,9 @@ constexpr format_options parse_number_format(const string_view& fmt_str) {
         ++pos;
     }
 
-    if (pos < fmt_str.size() && fmt_str[pos] == '0'
-        && options.fill == ' ' && options.align == format_align::DEFAULT) {
+    if (pos < fmt_str.size() && fmt_str[pos] == '0' && options.fill == ' ' && options.align == format_align::DEFAULT) {
         options.zero_pad = true;
-        options.fill     = '0';
+        options.fill = '0';
         ++pos;
     }
 
@@ -190,9 +210,8 @@ constexpr format_options parse_number_format(const string_view& fmt_str) {
 }
 
 
-NEFORCE_CONSTEXPR20 string apply_format_options(
-    string raw, const format_options& options, const bool is_numeric = false)
-{
+NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options& options,
+                                                const bool is_numeric = false) {
     char existing_sign = '\0';
     if (!raw.empty() && (raw[0] == '-' || raw[0] == '+' || raw[0] == ' ')) {
         char sign = raw[0];
@@ -212,7 +231,9 @@ NEFORCE_CONSTEXPR20 string apply_format_options(
                 break;
             }
             case format_type::OCTAL: {
-                if (raw.empty() || raw[0] != '0') prefix = "0";
+                if (raw.empty() || raw[0] != '0') {
+                    prefix = "0";
+                }
                 break;
             }
             default: {
@@ -231,13 +252,9 @@ NEFORCE_CONSTEXPR20 string apply_format_options(
     }
 
     const size_t content_len = sign_str.size() + prefix.size() + raw.size();
-    const size_t target_width = (options.width > 0)
-        ? static_cast<size_t>(options.width)
-        : 0;
+    const size_t target_width = (options.width > 0) ? static_cast<size_t>(options.width) : 0;
 
-    const size_t pad_total = (content_len < target_width)
-        ? target_width - content_len
-        : 0;
+    const size_t pad_total = (content_len < target_width) ? target_width - content_len : 0;
 
     format_align align = options.align;
     if (align == format_align::DEFAULT) {
@@ -254,7 +271,9 @@ NEFORCE_CONSTEXPR20 string apply_format_options(
         result.reserve(target_width > 0 ? target_width : content_len);
         result += sign_str;
         result += prefix;
-        for (size_t i = 0; i < pad_total; ++i) result += fill_char;
+        for (size_t i = 0; i < pad_total; ++i) {
+            result += fill_char;
+        }
         result += raw;
         return result;
     }
@@ -269,9 +288,9 @@ NEFORCE_CONSTEXPR20 string apply_format_options(
             break;
         }
         case format_align::CENTER: {
-            const size_t left_count  = pad_total / 2;
+            const size_t left_count = pad_total / 2;
             const size_t right_count = pad_total - left_count;
-            left_pad  = string(left_count,  fill_char);
+            left_pad = string(left_count, fill_char);
             right_pad = string(right_count, fill_char);
             break;
         }
@@ -292,15 +311,12 @@ NEFORCE_CONSTEXPR20 string apply_format_options(
     return result;
 }
 
-template <typename T, bool Signed>
-struct integer_formatter_impl {
-    NEFORCE_CONSTEXPR20 string operator ()(const T value, const format_options& options) const {
+template <typename T, bool Signed> struct integer_formatter_impl {
+    NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
         using UT = conditional_t<Signed, make_unsigned_t<T>, T>;
 
         const bool is_negative = Signed && (value < 0);
-        const UT abs_value = is_negative
-            ? static_cast<UT>(0 - static_cast<UT>(value))
-            : static_cast<UT>(value);
+        const UT abs_value = is_negative ? static_cast<UT>(0 - static_cast<UT>(value)) : static_cast<UT>(value);
         const uint64_t compatible = static_cast<uint64_t>(abs_value);
 
         string raw;
@@ -329,7 +345,9 @@ struct integer_formatter_impl {
             }
         }
 
-        if (is_negative) raw = "-" + raw;
+        if (is_negative) {
+            raw = "-" + raw;
+        }
         return inner::apply_format_options(_NEFORCE move(raw), options, true);
     }
 };
@@ -345,22 +363,20 @@ NEFORCE_END_INNER__
  *
  * 通过特化实现不同类型值的格式化。
  */
-template <typename Number, typename Dummy = void>
-struct formatter;
+template <typename Number, typename Dummy = void> struct formatter;
 
 /**
  * @brief 浮点数类型的格式化器特化
  * @tparam T 浮点数类型
  */
-template <typename T>
-struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
+template <typename T> struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
     /**
      * @brief 格式化浮点数
      * @param value 要格式化的值
      * @param options 格式化选项
      * @return 格式化后的字符串
      */
-    NEFORCE_CONSTEXPR20 string operator ()(const T& value, const format_options& options) const {
+    NEFORCE_CONSTEXPR20 string operator()(const T& value, const format_options& options) const {
         const int prec = (options.precision >= 0) ? options.precision : 6;
         string raw;
 
@@ -386,8 +402,11 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
         }
 
         if (options.uppercase) {
-            for (auto& c : raw) {
-                if (c == 'e') { c = 'E'; break; }
+            for (auto& c: raw) {
+                if (c == 'e') {
+                    c = 'E';
+                    break;
+                }
             }
         }
 
@@ -399,15 +418,14 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
  * @brief 有符号整数类型的格式化器特化
  * @tparam T 有符号整数类型
  */
-template <typename T>
-struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_signed_v<T>>> {
+template <typename T> struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_signed_v<T>>> {
     /**
      * @brief 格式化有符号整数
      * @param value 要格式化的值
      * @param options 格式化选项
      * @return 格式化后的字符串
      */
-    NEFORCE_CONSTEXPR20 string operator ()(const T value, const format_options& options) const {
+    NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
         return inner::integer_formatter_impl<T, true>{}(value, options);
     }
 };
@@ -416,15 +434,14 @@ struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_signed_v<T>>> {
  * @brief 无符号整数类型的格式化器特化
  * @tparam T 无符号整数类型
  */
-template <typename T>
-struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> {
+template <typename T> struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> {
     /**
      * @brief 格式化无符号整数
      * @param value 要格式化的值
      * @param options 格式化选项
      * @return 格式化后的字符串
      */
-    NEFORCE_CONSTEXPR20 string operator ()(const T value, const format_options& options) const {
+    NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
         return inner::integer_formatter_impl<T, false>{}(value, options);
     }
 };
@@ -432,9 +449,8 @@ struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> 
 /**
  * @brief 单个字符的格式化器特化
  */
-template <>
-struct formatter<char> {
-    NEFORCE_CONSTEXPR20 string operator ()(const char value, const format_options& options) const {
+template <> struct formatter<char> {
+    NEFORCE_CONSTEXPR20 string operator()(const char value, const format_options& options) const {
         switch (options.type) {
             case format_type::BINARY:
             case format_type::OCTAL:
@@ -452,7 +468,7 @@ struct formatter<char> {
 
 template <typename T>
 struct formatter<T, enable_if_t<is_unpackaged_v<T> && is_base_of_v<ipackage<T, unpackage_t<T>>, T>>> {
-    NEFORCE_CONSTEXPR20 string operator ()(const T value, const format_options& options) const {
+    NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
         return formatter<unpackage_t<T>>()(value.value(), options);
     }
 };
@@ -460,9 +476,8 @@ struct formatter<T, enable_if_t<is_unpackaged_v<T> && is_base_of_v<ipackage<T, u
 /**
  * @brief 布尔类型的格式化器特化
  */
-template <>
-struct formatter<bool> {
-    NEFORCE_CONSTEXPR20 string operator ()(const bool value, const format_options& options) const {
+template <> struct formatter<bool> {
+    NEFORCE_CONSTEXPR20 string operator()(const bool value, const format_options& options) const {
         switch (options.type) {
             case format_type::BINARY:
             case format_type::OCTAL:
@@ -481,15 +496,14 @@ struct formatter<bool> {
 /**
  * @brief 字符串类型的格式化器特化
  */
-template <>
-struct formatter<string> {
+template <> struct formatter<string> {
     /**
      * @brief 格式化字符串
      * @param value 要格式化的字符串
      * @param options 格式化选项
      * @return 格式化后的字符串
      */
-    NEFORCE_CONSTEXPR20 string operator ()(const string& value, const format_options& options) const {
+    NEFORCE_CONSTEXPR20 string operator()(const string& value, const format_options& options) const {
         string raw = value;
         if (options.precision >= 0 && raw.size() > static_cast<size_t>(options.precision)) {
             raw = raw.substr(0, static_cast<size_t>(options.precision));
@@ -501,9 +515,8 @@ struct formatter<string> {
 /**
  * @brief 字符串视图的格式化器特化
  */
-template <>
-struct formatter<string_view> {
-    NEFORCE_CONSTEXPR20 string operator ()(const string_view value, const format_options& options) const {
+template <> struct formatter<string_view> {
+    NEFORCE_CONSTEXPR20 string operator()(const string_view value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }
 };
@@ -511,8 +524,7 @@ struct formatter<string_view> {
 /**
  * @brief C风格字符串的格式化器特化
  */
-template <>
-struct formatter<const char*> {
+template <> struct formatter<const char*> {
     NEFORCE_CONSTEXPR20 string operator()(const char* value, const format_options& options) const {
         if (value == nullptr) {
             return inner::apply_format_options("nullptr", options, false);
@@ -524,8 +536,7 @@ struct formatter<const char*> {
 /**
  * @brief nullptr_t 格式化器
  */
-template <>
-struct formatter<nullptr_t> {
+template <> struct formatter<nullptr_t> {
     NEFORCE_CONSTEXPR20 string operator()(nullptr_t, const format_options& options) const {
         return inner::apply_format_options("nullptr", options, false);
     }
@@ -534,8 +545,7 @@ struct formatter<nullptr_t> {
 /**
  * @brief 指针格式化器
  */
-template <typename T>
-struct formatter<T*, enable_if_t<!is_cstring_v<T*>>> {
+template <typename T> struct formatter<T*, enable_if_t<!is_cstring_v<T*>>> {
     NEFORCE_CONSTEXPR20 string operator()(const T* ptr, const format_options& options) const {
         return inner::apply_format_options(_NEFORCE address_string(ptr), options, false);
     }
@@ -544,9 +554,8 @@ struct formatter<T*, enable_if_t<!is_cstring_v<T*>>> {
 /**
  * @brief 非const C风格字符串的格式化器特化
  */
-template <>
-struct formatter<char*> {
-    NEFORCE_CONSTEXPR20 string operator ()(char* value, const format_options& options) const {
+template <> struct formatter<char*> {
+    NEFORCE_CONSTEXPR20 string operator()(char* value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }
 };
@@ -597,8 +606,7 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
  * @throws value_exception 如果格式错误
  */
 template <typename First, typename... Rest>
-NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out,
-                                     First&& first, Rest&&... rest) {
+NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out, First&& first, Rest&&... rest) {
     while (pos < fmt.size()) {
         if (fmt[pos] == '{') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '{') {
@@ -615,7 +623,9 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
                 } else if (fmt[end_pos] == '}') {
                     --depth;
                 }
-                if (depth > 0) ++end_pos;
+                if (depth > 0) {
+                    ++end_pos;
+                }
             }
             if (depth != 0) {
                 NEFORCE_THROW_EXCEPTION(value_exception("Unmatched '{' in format string"));

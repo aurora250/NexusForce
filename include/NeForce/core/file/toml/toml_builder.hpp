@@ -52,26 +52,30 @@ private:
      * 保存当前构建的上下文信息，用于维护表格/数组的嵌套关系。
      */
     struct frame {
-        range_type type = table;  ///< 上下文类型
+        range_type type = table; ///< 上下文类型
         union {
-            toml_table* table_ptr = nullptr;  ///< 当前表格指针
-            toml_array* array_ptr;             ///< 当前数组指针
+            toml_table* table_ptr = nullptr; ///< 当前表格指针
+            toml_array* array_ptr;           ///< 当前数组指针
         };
 
         frame() = default;
-        frame(const range_type t, toml_table* tbl) : type(t), table_ptr(tbl) {}
-        frame(const range_type t, toml_array* arr) : type(t), array_ptr(arr) {}
+        frame(const range_type t, toml_table* tbl) :
+        type(t),
+        table_ptr(tbl) {}
+        frame(const range_type t, toml_array* arr) :
+        type(t),
+        array_ptr(arr) {}
 
         frame(const frame&) = default;
-        frame& operator =(const frame&) = default;
+        frame& operator=(const frame&) = default;
         frame(frame&&) = default;
-        frame& operator =(frame&&) = default;
+        frame& operator=(frame&&) = default;
         ~frame() = default;
     };
 
-    stack<frame> contexts_;        ///< 上下文栈
-    unique_ptr<toml_table> root_;  ///< 根表格
-    string current_key_;           ///< 当前键名
+    stack<frame> contexts_;       ///< 上下文栈
+    unique_ptr<toml_table> root_; ///< 根表格
+    string current_key_;          ///< 当前键名
 
 private:
     /**
@@ -85,8 +89,7 @@ private:
      * - 数组中：作为新元素添加
      * - 表格中：与当前键名配对添加
      */
-    template <typename T>
-    toml_builder& value_impl(unique_ptr<T> value) {
+    template <typename T> toml_builder& value_impl(unique_ptr<T> value) {
         if (contexts_.empty()) {
             NEFORCE_THROW_EXCEPTION(toml_exception("Cannot add value to root (root must be a table)"));
         }
@@ -114,8 +117,7 @@ private:
      * @return 自身引用
      */
     template <typename Iterable>
-    enable_if_t<is_iterable_v<Iterable>, toml_builder&>
-    value_iterable_dispatch(const Iterable& iterable) {
+    enable_if_t<is_iterable_v<Iterable>, toml_builder&> value_iterable_dispatch(const Iterable& iterable) {
         return this->value_iterable_impl(iterable);
     }
 
@@ -125,11 +127,9 @@ private:
      * @param maplike 映射表对象
      * @return 自身引用
      */
-    template <typename Map>
-    enable_if_t<is_maplike_v<Map>, toml_builder&>
-    value_iterable_impl(const Map& maplike) {
+    template <typename Map> enable_if_t<is_maplike_v<Map>, toml_builder&> value_iterable_impl(const Map& maplike) {
         begin_inline_table();
-        for (const auto& pair : maplike) {
+        for (const auto& pair: maplike) {
             this->key(pair.first).value(pair.second);
         }
         end_inline_table();
@@ -143,10 +143,9 @@ private:
      * @return 自身引用
      */
     template <typename Iterable>
-    enable_if_t<!is_maplike_v<Iterable>, toml_builder&>
-    value_iterable_impl(const Iterable& iterable) {
+    enable_if_t<!is_maplike_v<Iterable>, toml_builder&> value_iterable_impl(const Iterable& iterable) {
         begin_array();
-        for (const auto& element : iterable) {
+        for (const auto& element: iterable) {
             this->value(element);
         }
         end_array();
@@ -182,7 +181,7 @@ public:
     toml_builder();
 
     toml_builder(const toml_builder&) = delete;
-    toml_builder& operator =(const toml_builder&) = delete;
+    toml_builder& operator=(const toml_builder&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -195,7 +194,7 @@ public:
      * @param other 源构建器
      * @return 自身引用
      */
-    toml_builder& operator =(toml_builder&& other) = default;
+    toml_builder& operator=(toml_builder&& other) = default;
 
     /**
      * @brief 设置当前键名
@@ -296,9 +295,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(nullptr_t np) {
-        return value_impl(make_unique<toml_boolean>(false));
-    }
+    toml_builder& value(nullptr_t np) { return value_impl(make_unique<toml_boolean>(false)); }
 
     /**
      * @brief 设置布尔值
@@ -306,9 +303,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const bool value) {
-        return value_impl(make_unique<toml_boolean>(value));
-    }
+    toml_builder& value(const bool value) { return value_impl(make_unique<toml_boolean>(value)); }
 
     /**
      * @brief 设置64位整数值
@@ -316,9 +311,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const int64_t value) {
-        return value_impl(make_unique<toml_integer>(value));
-    }
+    toml_builder& value(const int64_t value) { return value_impl(make_unique<toml_integer>(value)); }
 
     /**
      * @brief 设置整数值
@@ -326,9 +319,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const int value) {
-        return this->value(static_cast<int64_t>(value));
-    }
+    toml_builder& value(const int value) { return this->value(static_cast<int64_t>(value)); }
 
     /**
      * @brief 设置双精度浮点数值
@@ -336,9 +327,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const double value) {
-        return value_impl(make_unique<toml_float>(value));
-    }
+    toml_builder& value(const double value) { return value_impl(make_unique<toml_float>(value)); }
 
     /**
      * @brief 设置字符串值（基本字符串类型）
@@ -356,9 +345,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const char* value) {
-        return this->value(string(value));
-    }
+    toml_builder& value(const char* value) { return this->value(string(value)); }
 
     /**
      * @brief 设置字符串视图值
@@ -366,9 +353,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const string_view value) {
-        return this->value(string(value));
-    }
+    toml_builder& value(const string_view value) { return this->value(string(value)); }
 
     /**
      * @brief 设置已构建的toml值
@@ -376,9 +361,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(unique_ptr<toml_value>&& value) {
-        return value_impl(_NEFORCE move(value));
-    }
+    toml_builder& value(unique_ptr<toml_value>&& value) { return value_impl(_NEFORCE move(value)); }
 
     /**
      * @brief 设置指定类型的字符串值
@@ -412,8 +395,7 @@ public:
      * - 映射表类型（如unordered_map）转换为内联表格
      * - 其他可迭代类型转换为数组
      */
-    template <typename Iterable>
-    toml_builder& value(const Iterable& iterable) {
+    template <typename Iterable> toml_builder& value(const Iterable& iterable) {
         return this->value_iterable_dispatch(iterable);
     }
 

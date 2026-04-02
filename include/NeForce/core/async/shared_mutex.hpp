@@ -31,13 +31,13 @@ public:
      */
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        ::SRWLOCK;
+            ::SRWLOCK;
 #else
-        ::pthread_rwlock_t;
+            ::pthread_rwlock_t;
 #endif
 
 private:
-    mutable native_handle_type shared_mutex_;  ///< 共享互斥锁系统句柄
+    mutable native_handle_type shared_mutex_; ///< 共享互斥锁系统句柄
 
 public:
     /**
@@ -51,26 +51,22 @@ public:
     ~shared_mutex();
 
     shared_mutex(const shared_mutex&) = delete;
-    shared_mutex& operator =(const shared_mutex&) = delete;
+    shared_mutex& operator=(const shared_mutex&) = delete;
 
     shared_mutex(shared_mutex&&) = default;
-    shared_mutex& operator =(shared_mutex&&) = default;
+    shared_mutex& operator=(shared_mutex&&) = default;
 
     /**
      * @brief 获取原生句柄
      * @return 指向互斥锁原生句柄的指针
      */
-    native_handle_type* native_handle() noexcept {
-        return &shared_mutex_;
-    }
+    native_handle_type* native_handle() noexcept { return &shared_mutex_; }
 
     /**
      * @brief 获取常量原生句柄
      * @return 指向互斥锁原生句柄的常量指针
      */
-    const native_handle_type* native_handle() const noexcept {
-        return &shared_mutex_;
-    }
+    const native_handle_type* native_handle() const noexcept { return &shared_mutex_; }
 
     /**
      * @brief 获取写锁
@@ -126,14 +122,13 @@ public:
  *
  * RAII共享锁管理器，专门用于管理共享互斥锁的读锁。
  */
-template <typename SharedMutex>
-class shared_lock {
+template <typename SharedMutex> class shared_lock {
 public:
-    using mutex_type = SharedMutex;  ///< 共享互斥锁类型
+    using mutex_type = SharedMutex; ///< 共享互斥锁类型
 
 private:
-    mutex_type* mutex_ = nullptr;  ///< 指向共享互斥锁的指针
-    bool owns_lock_ = false;       ///< 是否拥有共享锁的所有权
+    mutex_type* mutex_ = nullptr; ///< 指向共享互斥锁的指针
+    bool owns_lock_ = false;      ///< 是否拥有共享锁的所有权
 
 public:
     /**
@@ -149,8 +144,9 @@ public:
      *
      * 构造时立即获取共享互斥锁的读锁。
      */
-    explicit shared_lock(mutex_type& m)
-    : mutex_(&m), owns_lock_(true) {
+    explicit shared_lock(mutex_type& m) :
+    mutex_(&m),
+    owns_lock_(true) {
         mutex_->lock_shared();
     }
 
@@ -161,8 +157,8 @@ public:
      *
      * 构造时不锁定共享互斥锁，稍后可以手动获取读锁。
      */
-    shared_lock(mutex_type& m, defer_lock_tag tag) noexcept
-    : mutex_(&m) {}
+    shared_lock(mutex_type& m, defer_lock_tag tag) noexcept :
+    mutex_(&m) {}
 
     /**
      * @brief 尝试锁定构造函数
@@ -171,11 +167,12 @@ public:
      *
      * 构造时尝试获取共享互斥锁的读锁，如果失败不会阻塞。
      */
-    shared_lock(mutex_type& m, try_lock_tag tag) noexcept
-    : mutex_(&m), owns_lock_(m.try_lock_shared()) {}
+    shared_lock(mutex_type& m, try_lock_tag tag) noexcept :
+    mutex_(&m),
+    owns_lock_(m.try_lock_shared()) {}
 
     shared_lock(const shared_lock&) = delete;
-    shared_lock& operator =(const shared_lock&) = delete;
+    shared_lock& operator=(const shared_lock&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -183,8 +180,9 @@ public:
      *
      * 转移共享互斥锁的所有权和锁定状态。
      */
-    shared_lock(shared_lock&& other) noexcept
-    : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {
+    shared_lock(shared_lock&& other) noexcept :
+    mutex_(other.mutex_),
+    owns_lock_(other.owns_lock_) {
         other.mutex_ = nullptr;
         other.owns_lock_ = false;
     }
@@ -196,9 +194,13 @@ public:
      *
      * 释放当前锁，然后转移所有权。
      */
-    shared_lock& operator =(shared_lock&& other) noexcept {
-        if (_NEFORCE addressof(other) == this) return *this;
-        if (owns_lock_) mutex_->unlock_shared();
+    shared_lock& operator=(shared_lock&& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
+        if (owns_lock_) {
+            mutex_->unlock_shared();
+        }
         mutex_ = other.mutex_;
         owns_lock_ = other.owns_lock_;
         other.mutex_ = nullptr;
@@ -212,7 +214,9 @@ public:
      * 如果拥有共享锁的所有权，则释放读锁。
      */
     ~shared_lock() {
-        if (owns_lock_) mutex_->unlock_shared();
+        if (owns_lock_) {
+            mutex_->unlock_shared();
+        }
     }
 
     /**
@@ -239,8 +243,12 @@ public:
      * 如果已拥有锁或未管理共享互斥锁，则不执行任何操作。
      */
     void lock() {
-        if (!mutex_) return;
-        if (owns_lock_) return;
+        if (!mutex_) {
+            return;
+        }
+        if (owns_lock_) {
+            return;
+        }
         mutex_->lock_shared();
         owns_lock_ = true;
     }
@@ -251,8 +259,12 @@ public:
      * 如果未拥有锁或未管理共享互斥锁，则不执行任何操作。
      */
     void unlock() {
-        if (!mutex_) return;
-        if (!owns_lock_) return;
+        if (!mutex_) {
+            return;
+        }
+        if (!owns_lock_) {
+            return;
+        }
         mutex_->unlock_shared();
         owns_lock_ = false;
     }
@@ -264,8 +276,12 @@ public:
      * 非阻塞地尝试获取共享互斥锁的读锁。
      */
     bool try_lock() noexcept {
-        if (!mutex_) return false;
-        if (owns_lock_) return true;
+        if (!mutex_) {
+            return false;
+        }
+        if (owns_lock_) {
+            return true;
+        }
         owns_lock_ = mutex_->try_lock_shared();
         return owns_lock_;
     }

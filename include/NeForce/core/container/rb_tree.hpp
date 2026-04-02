@@ -40,13 +40,13 @@ NEFORCE_INLINE17 constexpr bool RB_TREE_BLACK = true;
  * 提供最小值和最大值的静态辅助函数。
  */
 struct rb_tree_node_base {
-    using color_type = bool;  ///< 颜色类型
-    using base_ptr = rb_tree_node_base*;  ///< 基类指针类型
+    using color_type = bool;             ///< 颜色类型
+    using base_ptr = rb_tree_node_base*; ///< 基类指针类型
 
-    color_type color_ = RB_TREE_RED;  ///< 节点颜色，默认为红色
-    base_ptr parent_ = nullptr;       ///< 父节点指针
-    base_ptr left_ = nullptr;         ///< 左子节点指针
-    base_ptr right_ = nullptr;        ///< 右子节点指针
+    color_type color_ = RB_TREE_RED; ///< 节点颜色，默认为红色
+    base_ptr parent_ = nullptr;      ///< 父节点指针
+    base_ptr left_ = nullptr;        ///< 左子节点指针
+    base_ptr right_ = nullptr;       ///< 右子节点指针
 
     /**
      * @brief 获取子树中的最小节点
@@ -81,8 +81,7 @@ struct rb_tree_node_base {
  *
  * 执行左旋转操作，保持红黑树性质。
  */
-NEFORCE_ALWAYS_INLINE_INLINE void
-rb_tree_rotate_left(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE void rb_tree_rotate_left(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept {
     rb_tree_node_base* y = axis->right_;
     axis->right_ = y->left_;
     if (y->left_ != nullptr) {
@@ -110,8 +109,7 @@ rb_tree_rotate_left(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept 
  *
  * 执行右旋转操作，保持红黑树性质。
  */
-NEFORCE_ALWAYS_INLINE_INLINE void
-rb_tree_rotate_right(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE void rb_tree_rotate_right(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept {
     rb_tree_node_base* y = axis->left_;
     axis->left_ = y->right_;
     if (y->right_ != nullptr) {
@@ -138,8 +136,8 @@ rb_tree_rotate_right(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept
  *
  * 通过旋转和重新着色恢复红黑树的平衡性质。
  */
-NEFORCE_ALWAYS_INLINE_INLINE void
-rb_tree_insert_rebalance(rb_tree_node_base* insert, rb_tree_node_base*& root) noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE void rb_tree_insert_rebalance(rb_tree_node_base* insert,
+                                                           rb_tree_node_base*& root) noexcept {
     insert->color_ = RB_TREE_RED;
 
     while (insert != root && insert->parent_->color_ == RB_TREE_RED) {
@@ -191,9 +189,10 @@ rb_tree_insert_rebalance(rb_tree_node_base* insert, rb_tree_node_base*& root) no
  *
  * 执行节点删除后的重新平衡操作，并更新最左最右节点。
  */
-NEFORCE_ALWAYS_INLINE_INLINE rb_tree_node_base*
-rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
-                        rb_tree_node_base*& leftmost, rb_tree_node_base*& rightmost) noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE rb_tree_node_base* rb_tree_erase_rebalance(rb_tree_node_base* erase,
+                                                                        rb_tree_node_base*& root,
+                                                                        rb_tree_node_base*& leftmost,
+                                                                        rb_tree_node_base*& rightmost) noexcept {
     rb_tree_node_base* y = erase;
     rb_tree_node_base* x;
     rb_tree_node_base* x_parent;
@@ -298,14 +297,18 @@ rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
                     x_parent = x_parent->parent_;
                 } else {
                     if (w->right_ == nullptr || w->right_->color_ == RB_TREE_BLACK) {
-                        if (w->left_ != nullptr) w->left_->color_ = RB_TREE_BLACK;
+                        if (w->left_ != nullptr) {
+                            w->left_->color_ = RB_TREE_BLACK;
+                        }
                         w->color_ = RB_TREE_RED;
                         _NEFORCE rb_tree_rotate_right(w, root);
                         w = x_parent->right_;
                     }
                     w->color_ = x_parent->color_;
                     x_parent->color_ = RB_TREE_BLACK;
-                    if (w->right_ != nullptr) w->right_->color_ = RB_TREE_BLACK;
+                    if (w->right_ != nullptr) {
+                        w->right_->color_ = RB_TREE_BLACK;
+                    }
                     _NEFORCE rb_tree_rotate_left(x_parent, root);
                     break;
                 }
@@ -367,16 +370,14 @@ rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
  *
  * 继承自节点基类，添加数据成员。
  */
-template <typename T>
-struct rb_tree_node : rb_tree_node_base {
-    T data;  ///< 节点存储的数据
+template <typename T> struct rb_tree_node : rb_tree_node_base {
+    T data; ///< 节点存储的数据
 
     /**
      * @brief 默认构造函数
      */
-    rb_tree_node()
-    noexcept(is_nothrow_default_constructible_v<T>)
-    : data() {}
+    rb_tree_node() noexcept(is_nothrow_default_constructible_v<T>) :
+    data() {}
 };
 
 
@@ -388,12 +389,12 @@ struct rb_tree_node : rb_tree_node_base {
  */
 struct rb_tree_base_iterator {
 public:
-    using iterator_category = bidirectional_iterator_tag;  ///< 双向迭代器
+    using iterator_category = bidirectional_iterator_tag; ///< 双向迭代器
 
 protected:
-    using base_ptr = rb_tree_node_base::base_ptr;  ///< 基类指针类型
+    using base_ptr = rb_tree_node_base::base_ptr; ///< 基类指针类型
 
-    base_ptr node_ = nullptr;  ///< 当前节点指针
+    base_ptr node_ = nullptr; ///< 当前节点指针
 
     /**
      * @brief 递增操作（移动到中序遍历的后继节点）
@@ -420,9 +421,7 @@ protected:
      * @brief 递减操作（移动到中序遍历的前驱节点）
      */
     void decrement() noexcept {
-        if (node_->color_ == RB_TREE_RED &&
-            node_->parent_ != nullptr &&
-            node_->parent_->parent_ == node_) {
+        if (node_->color_ == RB_TREE_RED && node_->parent_ != nullptr && node_->parent_->parent_ == node_) {
             node_ = node_->right_;
         } else if (node_->left_ != nullptr) {
             base_ptr y = node_->left_;
@@ -453,40 +452,43 @@ protected:
 template <bool IsConst, typename RbTree>
 struct rb_tree_iterator : rb_tree_base_iterator, iiterator<rb_tree_iterator<IsConst, RbTree>> {
 public:
-    using container_type	= RbTree;  ///< 容器类型
-    using value_type		= typename container_type::value_type;  ///< 值类型
-    using size_type			= typename container_type::size_type;  ///< 大小类型
-    using difference_type	= typename container_type::difference_type;  ///< 差值类型
-    using iterator_category = rb_tree_base_iterator::iterator_category;  ///< 迭代器类别（双向）
-    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;  ///< 引用类型
-    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;  ///< 指针类型
+    using container_type = RbTree;                                      ///< 容器类型
+    using value_type = typename container_type::value_type;             ///< 值类型
+    using size_type = typename container_type::size_type;               ///< 大小类型
+    using difference_type = typename container_type::difference_type;   ///< 差值类型
+    using iterator_category = rb_tree_base_iterator::iterator_category; ///< 迭代器类别（双向）
+    using reference = conditional_t<IsConst, typename container_type::const_reference,
+                                    typename container_type::reference>; ///< 引用类型
+    using pointer = conditional_t<IsConst, typename container_type::const_pointer,
+                                  typename container_type::pointer>; ///< 指针类型
 
 private:
-    using base_type = rb_tree_base_iterator;  ///< 基类类型
-    using node_type = rb_tree_node<value_type>;  ///< 节点类型
-    using link_type = node_type*;  ///< 节点指针类型
+    using base_type = rb_tree_base_iterator;    ///< 基类类型
+    using node_type = rb_tree_node<value_type>; ///< 节点类型
+    using link_type = node_type*;               ///< 节点指针类型
 
-    const container_type* container_ = nullptr;  ///< 关联容器指针
+    const container_type* container_ = nullptr; ///< 关联容器指针
 
-    template <typename, typename, typename, typename, typename>
-    friend class rb_tree;
+    template <typename, typename, typename, typename, typename> friend class rb_tree;
 
 public:
     rb_tree_iterator() noexcept = default;
     ~rb_tree_iterator() = default;
 
     rb_tree_iterator(const rb_tree_iterator&) noexcept = default;
-    rb_tree_iterator& operator =(const rb_tree_iterator&) noexcept = default;
+    rb_tree_iterator& operator=(const rb_tree_iterator&) noexcept = default;
     rb_tree_iterator(rb_tree_iterator&&) noexcept = default;
-    rb_tree_iterator& operator =(rb_tree_iterator&&) noexcept = default;
+    rb_tree_iterator& operator=(rb_tree_iterator&&) noexcept = default;
 
     /**
      * @brief 构造函数
      * @param ptr 节点指针
      * @param tree 容器指针
      */
-    rb_tree_iterator(node_type* ptr, const container_type* tree) noexcept
-    : container_(tree) { node_ = ptr; }
+    rb_tree_iterator(node_type* ptr, const container_type* tree) noexcept :
+    container_(tree) {
+        node_ = ptr;
+    }
 
     /**
      * @brief 解引用操作
@@ -495,9 +497,8 @@ public:
     NEFORCE_NODISCARD reference dereference() const noexcept {
         NEFORCE_DEBUG_VERIFY(node_ && container_, "Attempting to dereference on a null pointer");
         link_type link = link_type(node_);
-        NEFORCE_DEBUG_VERIFY(
-            node_ != container_->header_ && node_->parent_ != nullptr,
-            "Attempting to dereference out of boundary");
+        NEFORCE_DEBUG_VERIFY(node_ != container_->header_ && node_->parent_ != nullptr,
+                             "Attempting to dereference out of boundary");
         return link->data;
     }
 
@@ -533,17 +534,13 @@ public:
      * @brief 获取底层指针
      * @return 当前节点指针
      */
-    NEFORCE_NODISCARD pointer base() const noexcept {
-        return node_;
-    }
+    NEFORCE_NODISCARD pointer base() const noexcept { return node_; }
 
     /**
      * @brief 获取关联容器
      * @return 关联容器指针
      */
-    NEFORCE_NODISCARD const container_type* container() const noexcept {
-        return container_;
-    }
+    NEFORCE_NODISCARD const container_type* container() const noexcept { return container_; }
 };
 
 
@@ -558,41 +555,40 @@ public:
  *
  * 红黑树是一种自平衡二叉搜索树，作为关联式容器的底层实现。
  */
-template <typename Key, typename Value,
-    typename KeyOfValue, typename Compare,
-    typename Alloc = allocator<rb_tree_node<Value>>>
+template <typename Key, typename Value, typename KeyOfValue, typename Compare,
+          typename Alloc = allocator<rb_tree_node<Value>>>
 class rb_tree : icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "list only contains object types.");
 
 public:
-    using key_type = Key;  ///< 键类型
-    using color_type = bool;  ///< 颜色类型
+    using key_type = Key;    ///< 键类型
+    using color_type = bool; ///< 颜色类型
 
-    using value_type = Value;  ///< 值类型
-    using pointer = Value*;  ///< 指针类型
-    using reference = Value&;  ///< 引用类型
-    using const_pointer = const Value*;  ///< 常量指针类型
-    using const_reference = const Value&;  ///< 常量引用类型
-    using size_type = size_t;  ///< 大小类型
-    using difference_type = ptrdiff_t;  ///< 差值类型
-    using iterator                  = rb_tree_iterator<false, rb_tree>;  ///< 迭代器类型
-    using const_iterator            = rb_tree_iterator<true, rb_tree>;   ///< 常量迭代器类型
-    using reverse_iterator          = _NEFORCE reverse_iterator<iterator>;  ///< 反向迭代器类型
-    using const_reverse_iterator    = _NEFORCE reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
-    using allocator_type            = Alloc;  ///< 分配器类型
+    using value_type = Value;                                                 ///< 值类型
+    using pointer = Value*;                                                   ///< 指针类型
+    using reference = Value&;                                                 ///< 引用类型
+    using const_pointer = const Value*;                                       ///< 常量指针类型
+    using const_reference = const Value&;                                     ///< 常量引用类型
+    using size_type = size_t;                                                 ///< 大小类型
+    using difference_type = ptrdiff_t;                                        ///< 差值类型
+    using iterator = rb_tree_iterator<false, rb_tree>;                        ///< 迭代器类型
+    using const_iterator = rb_tree_iterator<true, rb_tree>;                   ///< 常量迭代器类型
+    using reverse_iterator = _NEFORCE reverse_iterator<iterator>;             ///< 反向迭代器类型
+    using const_reverse_iterator = _NEFORCE reverse_iterator<const_iterator>; ///< 常量反向迭代器类型
+    using allocator_type = Alloc;                                             ///< 分配器类型
 
 private:
-    using base_node = rb_tree_node_base;  ///< 节点基类类型
-    using link_node = rb_tree_node<Value>;  ///< 数据节点类型
-    using base_ptr  = base_node*;  ///< 基类指针类型
-    using link_type = link_node*;  ///< 数据节点指针类型
+    using base_node = rb_tree_node_base;   ///< 节点基类类型
+    using link_node = rb_tree_node<Value>; ///< 数据节点类型
+    using base_ptr = base_node*;           ///< 基类指针类型
+    using link_type = link_node*;          ///< 数据节点指针类型
 
-    link_type header_ = nullptr;  ///< 头节点
-    Compare key_compare_{};  ///< 键比较函数对象
-    KeyOfValue extracter_{};  ///< 值提取键函数对象
-    compressed_pair<allocator_type, size_t> size_pair_{ default_construct_tag{}, 0 };  ///< 压缩存储分配器和大小
+    link_type header_ = nullptr;                                                    ///< 头节点
+    Compare key_compare_{};                                                         ///< 键比较函数对象
+    KeyOfValue extracter_{};                                                        ///< 值提取键函数对象
+    compressed_pair<allocator_type, size_t> size_pair_{default_construct_tag{}, 0}; ///< 压缩存储分配器和大小
 
     template <bool, typename> friend struct rb_tree_iterator;
 
@@ -604,8 +600,9 @@ private:
         bool released_ = false;
 
     public:
-        node_guard(rb_tree* t, link_type n) noexcept
-        : tree_(t), node_(n) {}
+        node_guard(rb_tree* t, link_type n) noexcept :
+        tree_(t),
+        node_(n) {}
 
         ~node_guard() {
             if (!released_) {
@@ -614,7 +611,8 @@ private:
         }
 
         link_type release() noexcept {
-            released_ = true; return node_;
+            released_ = true;
+            return node_;
         }
     };
 
@@ -622,88 +620,68 @@ private:
      * @brief 获取根节点
      * @return 根节点引用
      */
-    link_type& root() const noexcept {
-        return reinterpret_cast<link_type&>(header_->parent_);
-    }
+    link_type& root() const noexcept { return reinterpret_cast<link_type&>(header_->parent_); }
 
     /**
      * @brief 获取最左节点
      * @return 最左节点引用
      */
-    link_type& leftmost() const noexcept {
-        return reinterpret_cast<link_type&>(header_->left_);
-    }
+    link_type& leftmost() const noexcept { return reinterpret_cast<link_type&>(header_->left_); }
 
     /**
      * @brief 获取最右节点
      * @return 最右节点引用
      */
-    link_type& rightmost() const noexcept {
-        return reinterpret_cast<link_type&>(header_->right_);
-    }
+    link_type& rightmost() const noexcept { return reinterpret_cast<link_type&>(header_->right_); }
 
     /**
      * @brief 获取节点的左子节点
      * @param ptr 节点指针
      * @return 左子节点引用
      */
-    static link_type& left(link_type ptr) noexcept {
-        return reinterpret_cast<link_type&>(ptr->left_);
-    }
+    static link_type& left(link_type ptr) noexcept { return reinterpret_cast<link_type&>(ptr->left_); }
 
     /**
      * @brief 获取节点的右子节点
      * @param ptr 节点指针
      * @return 右子节点引用
      */
-    static link_type& right(link_type ptr) noexcept {
-        return reinterpret_cast<link_type&>(ptr->right_);
-    }
+    static link_type& right(link_type ptr) noexcept { return reinterpret_cast<link_type&>(ptr->right_); }
 
     /**
      * @brief 获取节点的父节点
      * @param ptr 节点指针
      * @return 父节点引用
      */
-    static link_type& parent(link_type ptr) noexcept {
-        return reinterpret_cast<link_type&>(ptr->parent_);
-    }
+    static link_type& parent(link_type ptr) noexcept { return reinterpret_cast<link_type&>(ptr->parent_); }
 
     /**
      * @brief 从节点提取键
      * @param ptr 节点指针
      * @return 节点的键
      */
-    static const Key& key(link_type ptr) noexcept {
-        return KeyOfValue()(ptr->data);
-    }
+    static const Key& key(link_type ptr) noexcept { return KeyOfValue()(ptr->data); }
 
     /**
      * @brief 从基类指针节点提取键
      * @param ptr 基类指针
      * @return 节点的键
      */
-    static const Key& key(base_ptr ptr) noexcept {
-        return rb_tree::key(reinterpret_cast<link_type>(ptr));
-    }
+    static const Key& key(base_ptr ptr) noexcept { return rb_tree::key(reinterpret_cast<link_type>(ptr)); }
 
     /**
      * @brief 获取子树的最小节点
      * @param ptr 子树根节点
      * @return 最小节点指针
      */
-    static link_type minimum(link_type ptr) noexcept {
-        return static_cast<link_type>(base_node::minimum(ptr));
-    }
+    static link_type minimum(link_type ptr) noexcept { return static_cast<link_type>(base_node::minimum(ptr)); }
 
     /**
      * @brief 获取子树的最大节点
      * @param ptr 子树根节点
      * @return 最大节点指针
      */
-    static link_type maximum(link_type ptr) noexcept {
-        return static_cast<link_type>(base_node::maximum(ptr));
-    }
+    static link_type maximum(link_type ptr) noexcept { return static_cast<link_type>(base_node::maximum(ptr)); }
 
     /**
      * @brief 创建节点
@@ -711,8 +689,7 @@ private:
      * @param args 构造参数
      * @return 新创建的节点指针
      */
-    template <typename... Args>
-    link_type create_node(Args&&... args) {
+    template <typename... Args> link_type create_node(Args&&... args) {
         link_type tmp = size_pair_.get_base().allocate();
         try {
             _NEFORCE construct(&tmp->data, _NEFORCE forward<Args>(args)...);
@@ -740,9 +717,10 @@ private:
      * @brief 销毁节点
      * @param ptr 要销毁的节点指针
      */
-    void destroy_node(link_type ptr)
-    noexcept(is_nothrow_destructible_v<link_node>) {
-        if (ptr == nullptr) return;
+    void destroy_node(link_type ptr) noexcept(is_nothrow_destructible_v<link_node>) {
+        if (ptr == nullptr) {
+            return;
+        }
         _NEFORCE destroy(&ptr->data);
         size_pair_.get_base().deallocate(ptr);
     }
@@ -766,8 +744,7 @@ private:
             } else if (y == leftmost()) {
                 leftmost() = ptr;
             }
-        }
-        else {
+        } else {
             rb_tree::right(y) = ptr;
             if (y == rightmost()) {
                 rightmost() = ptr;
@@ -817,9 +794,10 @@ private:
      * @brief 递归销毁子树
      * @param root 子树根节点
      */
-    void erase_under(link_type root)
-    noexcept(is_nothrow_destructible_v<link_node>) {
-        if (root == nullptr) return;
+    void erase_under(link_type root) noexcept(is_nothrow_destructible_v<link_node>) {
+        if (root == nullptr) {
+            return;
+        }
         rb_tree::erase_under(rb_tree::right(root));
         rb_tree::erase_under(rb_tree::left(root));
         rb_tree::destroy_node(root);
@@ -847,7 +825,7 @@ private:
             rightmost() = header_;
         } else {
             try {
-              root() = rb_tree::copy_under(other.root(), header_);
+                root() = rb_tree::copy_under(other.root(), header_);
             } catch (...) {
                 size_pair_.get_base().deallocate(header_);
                 header_ = nullptr;
@@ -899,9 +877,7 @@ private:
         link_type x = root();
         while (x != nullptr) {
             y = x;
-            x = key_compare_(rb_tree::key(node), rb_tree::key(x)) ?
-                rb_tree::left(x) :
-                rb_tree::right(x);
+            x = key_compare_(rb_tree::key(node), rb_tree::key(x)) ? rb_tree::left(x) : rb_tree::right(x);
         }
         return rb_tree::insert_into(x, y, node);
     }
@@ -910,16 +886,14 @@ public:
     /**
      * @brief 默认构造函数
      */
-    rb_tree() {
-        header_init();
-    }
+    rb_tree() { header_init(); }
 
     /**
      * @brief 构造函数，指定比较函数
      * @param comp 比较函数对象
      */
-    explicit rb_tree(const Compare& comp)
-    : key_compare_(comp) {
+    explicit rb_tree(const Compare& comp) :
+    key_compare_(comp) {
         header_init();
     }
 
@@ -927,10 +901,10 @@ public:
      * @brief 拷贝构造函数
      * @param other 源红黑树
      */
-    rb_tree(const rb_tree& other)
-    : key_compare_(other.key_compare_),
-      extracter_(other.extracter_),
-      size_pair_(other.size_pair_) {
+    rb_tree(const rb_tree& other) :
+    key_compare_(other.key_compare_),
+    extracter_(other.extracter_),
+    size_pair_(other.size_pair_) {
         header_init();
         rb_tree::copy_from(other);
     }
@@ -940,8 +914,10 @@ public:
      * @param other 源红黑树
      * @return 自身引用
      */
-    rb_tree& operator =(const rb_tree& other) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    rb_tree& operator=(const rb_tree& other) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         rb_tree tmp(other);
         rb_tree::swap(tmp);
         return *this;
@@ -951,13 +927,13 @@ public:
      * @brief 移动构造函数
      * @param other 源红黑树
      */
-    rb_tree(rb_tree&& other)
-    noexcept(
-        is_nothrow_move_constructible_v<Compare> &&
-        is_nothrow_move_constructible_v<KeyOfValue> &&
-        is_nothrow_move_constructible_v<allocator_type>)
-    : header_(_NEFORCE move(other.header_)), key_compare_(_NEFORCE move(other.key_compare_)),
-      extracter_(_NEFORCE move(other.extracter_)), size_pair_(_NEFORCE move(other.size_pair_)) {
+    rb_tree(rb_tree&& other) noexcept(is_nothrow_move_constructible_v<Compare> &&
+                                      is_nothrow_move_constructible_v<KeyOfValue> &&
+                                      is_nothrow_move_constructible_v<allocator_type>) :
+    header_(_NEFORCE move(other.header_)),
+    key_compare_(_NEFORCE move(other.key_compare_)),
+    extracter_(_NEFORCE move(other.extracter_)),
+    size_pair_(_NEFORCE move(other.size_pair_)) {
         other.header_ = nullptr;
         other.size_pair_.value = 0;
     }
@@ -967,11 +943,11 @@ public:
      * @param other 源红黑树
      * @return 自身引用
      */
-    rb_tree& operator =(rb_tree&& other)
-    noexcept(
-        is_nothrow_move_constructible_v<rb_tree> &&
-        is_nothrow_swappable_v<rb_tree>) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    rb_tree& operator=(rb_tree&& other) noexcept(is_nothrow_move_constructible_v<rb_tree> &&
+                                                 is_nothrow_swappable_v<rb_tree>) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         rb_tree tmp(_NEFORCE move(other));
         rb_tree::swap(tmp);
         return *this;
@@ -991,128 +967,97 @@ public:
      * @brief 获取起始迭代器
      * @return 指向最小元素的迭代器
      */
-    NEFORCE_NODISCARD iterator begin() noexcept {
-        return {leftmost(), this};
-    }
+    NEFORCE_NODISCARD iterator begin() noexcept { return {leftmost(), this}; }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向头节点的迭代器
      */
-    NEFORCE_NODISCARD iterator end() noexcept {
-        return {header_, this};
-    }
+    NEFORCE_NODISCARD iterator end() noexcept { return {header_, this}; }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向最小元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator begin() const noexcept {
-        return cbegin();
-    }
+    NEFORCE_NODISCARD const_iterator begin() const noexcept { return cbegin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向头节点的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator end() const noexcept {
-        return cend();
-    }
+    NEFORCE_NODISCARD const_iterator end() const noexcept { return cend(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向最小元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cbegin() const noexcept {
-        return {leftmost(), this};
-    }
+    NEFORCE_NODISCARD const_iterator cbegin() const noexcept { return {leftmost(), this}; }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向头节点的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cend() const noexcept {
-        return {header_, this};
-    }
+    NEFORCE_NODISCARD const_iterator cend() const noexcept { return {header_, this}; }
 
     /**
      * @brief 获取反向起始迭代器
      * @return 指向最大元素的反向迭代器
      */
-    NEFORCE_NODISCARD reverse_iterator rbegin() noexcept {
-        return reverse_iterator(end());
-    }
+    NEFORCE_NODISCARD reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
 
     /**
      * @brief 获取反向结束迭代器
      * @return 指向最小元素之前位置的反向迭代器
      */
-    NEFORCE_NODISCARD reverse_iterator rend() noexcept {
-        return reverse_iterator(begin());
-    }
+    NEFORCE_NODISCARD reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向最大元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept {
-        return crbegin();
-    }
+    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept { return crbegin(); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向最小元素之前位置的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept {
-        return crend();
-    }
+    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept { return crend(); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向最大元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator crbegin() const noexcept {
-        return const_reverse_iterator(cend());
-    }
+    NEFORCE_NODISCARD const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(cend()); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向最小元素之前位置的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator crend() const noexcept {
-        return const_reverse_iterator(cbegin());
-    }
+    NEFORCE_NODISCARD const_reverse_iterator crend() const noexcept { return const_reverse_iterator(cbegin()); }
 
     /**
      * @brief 获取元素数量
      * @return 树中元素数量
      */
-    NEFORCE_NODISCARD size_type size() const noexcept {
-        return size_pair_.value;
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept { return size_pair_.value; }
 
     /**
      * @brief 获取最大可能大小
      * @return 最大元素数量
      */
-    NEFORCE_NODISCARD size_type max_size() const noexcept {
-        return static_cast<size_type>(-1);
-    }
+    NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
 
     /**
      * @brief 检查是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD bool empty() const noexcept {
-        return size_pair_.value == 0;
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept { return size_pair_.value == 0; }
 
     /**
      * @brief 获取键比较函数对象
      * @return 键比较函数对象的副本
      */
-    NEFORCE_NODISCARD Compare key_compare() const
-    noexcept(is_nothrow_copy_constructible_v<Compare>) {
+    NEFORCE_NODISCARD Compare key_compare() const noexcept(is_nothrow_copy_constructible_v<Compare>) {
         return key_compare_;
     }
 
@@ -1122,8 +1067,7 @@ public:
      * @param args 构造参数
      * @return 插入结果（迭代器和是否成功）
      */
-    template <typename... Args>
-    pair<iterator, bool> emplace_unique(Args&&... args) {
+    template <typename... Args> pair<iterator, bool> emplace_unique(Args&&... args) {
         const link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         return rb_tree::insert_unique(tmp);
     }
@@ -1133,18 +1077,14 @@ public:
      * @param value 要插入的值
      * @return 插入结果（迭代器和是否成功）
      */
-    pair<iterator, bool> insert_unique(const value_type& value) {
-        return rb_tree::emplace_unique(value);
-    }
+    pair<iterator, bool> insert_unique(const value_type& value) { return rb_tree::emplace_unique(value); }
 
     /**
      * @brief 移动插入元素（唯一键版本）
      * @param value 要插入的值
      * @return 插入结果（迭代器和是否成功）
      */
-    pair<iterator, bool> insert_unique(value_type&& value) {
-        return rb_tree::emplace_unique(_NEFORCE move(value));
-    }
+    pair<iterator, bool> insert_unique(value_type&& value) { return rb_tree::emplace_unique(_NEFORCE move(value)); }
 
     /**
      * @brief 在提示位置附近构造元素（唯一键版本）
@@ -1153,8 +1093,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace_unique_hint(iterator position, Args&&... args) {
+    template <typename... Args> iterator emplace_unique_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         node_guard guard(this, tmp);
 
@@ -1234,8 +1173,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace_equal(Args&&... args) {
+    template <typename... Args> iterator emplace_equal(Args&&... args) {
         const link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         return rb_tree::insert_equal(tmp);
     }
@@ -1245,18 +1183,14 @@ public:
      * @param value 要插入的值
      * @return 指向插入元素的迭代器
      */
-    iterator insert_equal(const value_type& value) {
-        return rb_tree::emplace_equal(value);
-    }
+    iterator insert_equal(const value_type& value) { return rb_tree::emplace_equal(value); }
 
     /**
      * @brief 移动插入元素（允许重复键版本）
      * @param value 要插入的值
      * @return 指向插入元素的迭代器
      */
-    iterator insert_equal(value_type&& value) {
-        return rb_tree::emplace_equal(_NEFORCE move(value));
-    }
+    iterator insert_equal(value_type&& value) { return rb_tree::emplace_equal(_NEFORCE move(value)); }
 
     /**
      * @brief 在提示位置附近构造元素（允许重复键版本）
@@ -1265,8 +1199,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace_equal_hint(iterator position, Args&&... args) {
+    template <typename... Args> iterator emplace_equal_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         node_guard guard(this, tmp);
 
@@ -1343,8 +1276,7 @@ public:
      * @param key 要删除的键
      * @return 删除的元素数量
      */
-    size_type erase(const key_type& key)
-    noexcept(is_nothrow_destructible_v<link_node>) {
+    size_type erase(const key_type& key) noexcept(is_nothrow_destructible_v<link_node>) {
         pair<iterator, iterator> p = rb_tree::equal_range(key);
         const size_type n = _NEFORCE distance(p.first, p.second);
         rb_tree::erase(p.first, p.second);
@@ -1355,10 +1287,9 @@ public:
      * @brief 删除指定位置的元素
      * @param position 要删除的位置
      */
-    void erase(iterator position)
-    noexcept(is_nothrow_destructible_v<link_node>) {
-        auto y = reinterpret_cast<link_type>(_NEFORCE rb_tree_erase_rebalance(
-            position.node_, header_->parent_, header_->left_, header_->right_));
+    void erase(iterator position) noexcept(is_nothrow_destructible_v<link_node>) {
+        auto y = reinterpret_cast<link_type>(
+                _NEFORCE rb_tree_erase_rebalance(position.node_, header_->parent_, header_->left_, header_->right_));
         rb_tree::destroy_node(y);
         --size_pair_.value;
     }
@@ -1368,8 +1299,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    void erase(iterator first, iterator last)
-    noexcept(is_nothrow_destructible_v<link_node>) {
+    void erase(iterator first, iterator last) noexcept(is_nothrow_destructible_v<link_node>) {
         if (first == begin() && last == end()) {
             clear();
         } else {
@@ -1382,10 +1312,13 @@ public:
     /**
      * @brief 清空树
      */
-    void clear()
-    noexcept(is_nothrow_destructible_v<link_node>) {
-        if (header_ == nullptr) return;
-        if (size_pair_.value == 0) return;
+    void clear() noexcept(is_nothrow_destructible_v<link_node>) {
+        if (header_ == nullptr) {
+            return;
+        }
+        if (size_pair_.value == 0) {
+            return;
+        }
         rb_tree::erase_under(root());
         leftmost() = header_;
         root() = nullptr;
@@ -1560,11 +1493,8 @@ public:
      * @brief 交换两个红黑树的内容
      * @param other 要交换的另一个红黑树
      */
-    void swap(rb_tree& other)
-    noexcept(
-        is_nothrow_swappable_v<Compare> &&
-        is_nothrow_swappable_v<KeyOfValue> &&
-        is_nothrow_swappable_v<allocator_type>) {
+    void swap(rb_tree& other) noexcept(is_nothrow_swappable_v<Compare> && is_nothrow_swappable_v<KeyOfValue> &&
+                                       is_nothrow_swappable_v<allocator_type>) {
         _NEFORCE swap(header_, other.header_);
         _NEFORCE swap(size_pair_, other.size_pair_);
         _NEFORCE swap(key_compare_, other.key_compare_);
@@ -1576,8 +1506,8 @@ public:
      * @param rhs 右侧红黑树
      * @return 如果两个红黑树大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const rb_tree& rhs) const
-    noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
+    NEFORCE_NODISCARD bool operator==(const rb_tree& rhs) const
+            noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
         return size() == rhs.size() && _NEFORCE equal(cbegin(), cend(), rhs.cbegin());
     }
 
@@ -1586,8 +1516,8 @@ public:
      * @param rhs 右侧红黑树
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator <(const rb_tree& rhs) const
-    noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
+    NEFORCE_NODISCARD bool operator<(const rb_tree& rhs) const
+            noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }
 };

@@ -35,25 +35,24 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此类不是线程安全的，多线程环境下需要外部同步
  */
-template <typename Key, typename Value>
-class lru_cache {
+template <typename Key, typename Value> class lru_cache {
 public:
-    using key_type        = Key;      ///< 键类型
-    using value_type      = Value;    ///< 值类型
-    using size_type       = size_t;   ///< 大小类型
-    using clock           = steady_clock;      ///< 时钟类型
-    using time_point      = clock::time_point; ///< 时间点类型
-    using duration        = clock::duration;   ///< 持续时间类型
+    using key_type = Key;                 ///< 键类型
+    using value_type = Value;             ///< 值类型
+    using size_type = size_t;             ///< 大小类型
+    using clock = steady_clock;           ///< 时钟类型
+    using time_point = clock::time_point; ///< 时间点类型
+    using duration = clock::duration;     ///< 持续时间类型
 
 private:
     using list_type = list<pair<Key, Value>>;           ///< 底层列表类型
     using list_iterator = typename list_type::iterator; ///< 列表迭代器类型
 
-    size_type capacity_;                                 ///< 缓存容量
-    list_type list_;                                     ///< 双向链表，头部为最近使用，尾部为最久未使用
-    unordered_map<Key, list_iterator> map_;              ///< 键到链表节点的映射
-    unordered_map<Key, time_point> access_times_;        ///< 键到最后访问时间的映射
-    
+    size_type capacity_;                          ///< 缓存容量
+    list_type list_;                              ///< 双向链表，头部为最近使用，尾部为最久未使用
+    unordered_map<Key, list_iterator> map_;       ///< 键到链表节点的映射
+    unordered_map<Key, time_point> access_times_; ///< 键到最后访问时间的映射
+
 public:
     /**
      * @brief 构造函数
@@ -62,8 +61,8 @@ public:
      *
      * 创建一个指定容量的LRU缓存。
      */
-    explicit lru_cache(size_type capacity)
-    : capacity_(capacity) {
+    explicit lru_cache(size_type capacity) :
+    capacity_(capacity) {
         if (capacity_ == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("lru_cache capacity must be positive"));
         }
@@ -72,7 +71,7 @@ public:
     lru_cache(const lru_cache&) = delete;
     lru_cache& operator=(const lru_cache&) = delete;
     lru_cache(lru_cache&&) = default;
-    lru_cache& operator =(lru_cache&&) = default;
+    lru_cache& operator=(lru_cache&&) = default;
 
     /**
      * @brief 插入或更新缓存项
@@ -181,26 +180,20 @@ public:
      * @brief 获取当前缓存大小
      * @return 缓存中的元素数量
      */
-    NEFORCE_NODISCARD size_type size() const noexcept {
-        return list_.size();
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept { return list_.size(); }
 
     /**
      * @brief 获取缓存容量
      * @return 缓存的最大容量
      */
-    NEFORCE_NODISCARD size_type capacity() const noexcept {
-        return capacity_;
-    }
+    NEFORCE_NODISCARD size_type capacity() const noexcept { return capacity_; }
 
     /**
      * @brief 检查缓存是否包含指定键
      * @param key 键
      * @return 如果存在返回true，否则返回false
      */
-    NEFORCE_NODISCARD bool contains(const Key& key) const noexcept {
-        return map_.find(key) != map_.end();
-    }
+    NEFORCE_NODISCARD bool contains(const Key& key) const noexcept { return map_.find(key) != map_.end(); }
 
     /**
      * @brief 按条件删除缓存项
@@ -209,9 +202,8 @@ public:
      *
      * 遍历所有缓存项，删除满足谓词条件的项。
      */
-    template <typename Predicate>
-    void remove_if(Predicate pred) {
-        for (auto it = list_.begin(); it != list_.end(); ) {
+    template <typename Predicate> void remove_if(Predicate pred) {
+        for (auto it = list_.begin(); it != list_.end();) {
             if (pred(*it)) {
                 map_.erase(it->first);
                 it = list_.erase(it);

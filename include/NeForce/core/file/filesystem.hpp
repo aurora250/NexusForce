@@ -9,8 +9,8 @@
  * 包括创建、删除、复制、移动、重命名等。
  */
 
-#include "NeForce/core/file/path.hpp"
 #include "NeForce/core/file/file_constants.hpp"
+#include "NeForce/core/file/path.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

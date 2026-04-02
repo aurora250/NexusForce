@@ -29,16 +29,14 @@ NEFORCE_BEGIN_NAMESPACE__
  * 为特定类型提供哈希函数的通用接口。需要为具体类型进行特化。
  * 默认实现要求用户为自定义类型提供特化版本。
  */
-template <typename Key, typename Dummy = void>
-struct hash;
+template <typename Key, typename Dummy = void> struct hash;
 
 /**
  * @brief 指针类型的哈希特化
  * @tparam T 指针指向的类型
  */
-template <typename T>
-struct hash<T*> {
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t operator ()(const T* ptr) const noexcept {
+template <typename T> struct hash<T*> {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t operator()(const T* ptr) const noexcept {
         return static_cast<size_t>(reinterpret_cast<uintptr_t>(ptr));
     }
 };
@@ -60,9 +58,9 @@ NEFORCE_BEGIN_CONSTANTS__
  */
 NEFORCE_INLINE17 constexpr size_t FNV_OFFSET_BASIS =
 #ifdef NEFORCE_ARCH_BITS_64
-    14695981039346656037ULL;
+        14695981039346656037ULL;
 #else
-    2166136261U;
+        2166136261U;
 #endif
 
 /**
@@ -72,9 +70,9 @@ NEFORCE_INLINE17 constexpr size_t FNV_OFFSET_BASIS =
  */
 NEFORCE_INLINE17 constexpr size_t FNV_PRIME
 #ifdef NEFORCE_ARCH_BITS_64
-     = 1099511628211ULL;
+        = 1099511628211ULL;
 #else
-     = 16777619U;
+        = 16777619U;
 #endif
 
 /** @} */ // HashPrimary
@@ -115,8 +113,7 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash(const byte_t* first, const size_t count) noe
  * @param value 要哈希的整数值
  * @return 整数的哈希值
  */
-template <typename T>
-NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T value) noexcept {
+template <typename T> NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T value) noexcept {
     static_assert(is_integral<T>::value, "T must be integral");
 
     size_t result = constants::FNV_OFFSET_BASIS;
@@ -135,8 +132,7 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T value) noexcept {
  * @param len 字符串长度
  * @return 字符串的哈希值
  */
-template <typename CharT>
-NEFORCE_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) noexcept {
+template <typename CharT> NEFORCE_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) noexcept {
     static_assert(is_character<CharT>::value, "CharT must be character types");
 
     size_t result = constants::FNV_OFFSET_BASIS;
@@ -151,38 +147,38 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) n
 
 /// @cond
 
-template <>
-struct hash<bool> {
-    NEFORCE_NODISCARD constexpr size_t operator ()(const bool x) const noexcept {
-        return x ? 0x9e3779b9 : 0x7f4a7c15;
-    }
+template <> struct hash<bool> {
+    NEFORCE_NODISCARD constexpr size_t operator()(const bool x) const noexcept { return x ? 0x9e3779b9 : 0x7f4a7c15; }
 };
 
-#define __NEFORCE_BUILD_INTEGER_HASH_STRUCT(OPT) \
-template <> struct hash<OPT> { \
-    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT x) const noexcept { \
-        return x == 0.0f ? 0 : FNV_hash_integer(x); \
-    } \
-};
+#define __NEFORCE_BUILD_INTEGER_HASH_STRUCT(OPT)                                    \
+    template <> struct hash<OPT> {                                                  \
+        NEFORCE_NODISCARD constexpr size_t operator()(const OPT x) const noexcept { \
+            return x == 0.0f ? 0 : FNV_hash_integer(x);                             \
+        }                                                                           \
+    };
 
 NEFORCE_MACRO_RANGE_CHARS(__NEFORCE_BUILD_INTEGER_HASH_STRUCT)
 NEFORCE_MACRO_RANGE_INT(__NEFORCE_BUILD_INTEGER_HASH_STRUCT)
 #undef __NEFORCE_BUILD_INTEGER_HASH_STRUCT
 
-#define __NEFORCE_BUILD_FLOAT_HASH_STRUCT(OPT) \
-template <> \
-struct hash<OPT> { \
-private: \
-    union __float_converter { OPT f; uint64_t i; }; \
-    \
-public: \
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 size_t operator ()(const OPT x) const noexcept { \
-        if (x == 0.0f) return 0; \
-        __float_converter converter{}; \
-        converter.f = x; \
-        return FNV_hash_integer(converter.i); \
-    } \
-};
+#define __NEFORCE_BUILD_FLOAT_HASH_STRUCT(OPT)                                                \
+    template <> struct hash<OPT> {                                                            \
+    private:                                                                                  \
+        union __float_converter {                                                             \
+            OPT f;                                                                            \
+            uint64_t i;                                                                       \
+        };                                                                                    \
+                                                                                              \
+    public:                                                                                   \
+        NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 size_t operator()(const OPT x) const noexcept { \
+            if (x == 0.0f)                                                                    \
+                return 0;                                                                     \
+            __float_converter converter{};                                                    \
+            converter.f = x;                                                                  \
+            return FNV_hash_integer(converter.i);                                             \
+        }                                                                                     \
+    };
 
 NEFORCE_MACRO_RANGE_FLOAT(__NEFORCE_BUILD_FLOAT_HASH_STRUCT)
 #undef __NEFORCE_BUILD_FLOAT_HASH_STRUCT
@@ -199,9 +195,8 @@ NEFORCE_MACRO_RANGE_FLOAT(__NEFORCE_BUILD_FLOAT_HASH_STRUCT)
  * @brief 枚举类型的哈希特化
  * @tparam T 枚举类型
  */
-template <typename T>
-struct hash<T, enable_if_t<is_enum_v<T>>> {
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 size_t operator ()(const T e) const {
+template <typename T> struct hash<T, enable_if_t<is_enum_v<T>>> {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 size_t operator()(const T e) const {
         using UT = underlying_type_t<T>;
         return hash<UT>()(static_cast<UT>(e));
     }
@@ -249,8 +244,9 @@ struct murmur_hash {
      * @param l 哈希值的低64位
      * @param h 哈希值的高64位
      */
-    murmur_hash(const size_t l, const size_t h) noexcept
-    : low(l), high(h) {}
+    murmur_hash(const size_t l, const size_t h) noexcept :
+    low(l),
+    high(h) {}
 };
 
 /**
@@ -291,13 +287,12 @@ uint32_t NEFORCE_API MurmurHash_x32(const void* key, size_t len, uint32_t seed) 
  * @tparam Key 要检查的类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename Key, typename Dummy = void>
-struct is_nothrow_hashable : false_type {};
+template <typename Key, typename Dummy = void> struct is_nothrow_hashable : false_type {};
 
 /// @cond
 template <typename Key>
 struct is_nothrow_hashable<Key, void_t<decltype(_NEFORCE hash<Key>{}(_NEFORCE declval<const Key&>()))>>
-    : bool_constant<noexcept(_NEFORCE hash<Key>{}(_NEFORCE declval<const Key&>()))> {};
+: bool_constant<noexcept(_NEFORCE hash<Key>{}(_NEFORCE declval<const Key&>()))> {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -305,8 +300,7 @@ struct is_nothrow_hashable<Key, void_t<decltype(_NEFORCE hash<Key>{}(_NEFORCE de
  * @var is_nothrow_hashable_v
  * @brief is_nothrow_hashable的便捷变量模板
  */
-template <typename Key>
-NEFORCE_INLINE17 constexpr bool is_nothrow_hashable_v = is_nothrow_hashable<Key>::value;
+template <typename Key> NEFORCE_INLINE17 constexpr bool is_nothrow_hashable_v = is_nothrow_hashable<Key>::value;
 #endif
 
 
@@ -319,14 +313,13 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_hashable_v = is_nothrow_hashable<Key>
  *
  * 检查类型是否可以作为哈希函数使用，即是否可调用并返回可转换为size_t的类型。
  */
-template <typename Func, typename Arg, typename Dummy = void>
-struct is_hash : false_type {};
+template <typename Func, typename Arg, typename Dummy = void> struct is_hash : false_type {};
 
 /// @cond
 template <typename Func, typename Arg>
-struct is_hash<Func, Arg, enable_if_t<
-    is_convertible<decltype(_NEFORCE declval<Func>()(_NEFORCE declval<Arg>())), size_t>::value
->> : true_type {};
+struct is_hash<Func, Arg,
+               enable_if_t<is_convertible<decltype(_NEFORCE declval<Func>()(_NEFORCE declval<Arg>())), size_t>::value>>
+: true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -334,8 +327,7 @@ struct is_hash<Func, Arg, enable_if_t<
  * @var is_hash_v
  * @brief is_hash的便捷变量模板
  */
-template <typename Func, typename Arg>
-constexpr bool is_hash_v = is_hash<Func, Arg>::value;
+template <typename Func, typename Arg> constexpr bool is_hash_v = is_hash<Func, Arg>::value;
 #endif
 
 /** @} */ // HashPrimary

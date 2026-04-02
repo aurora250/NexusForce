@@ -3,7 +3,7 @@
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/mac_address.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
-#include "NeForce/network/socket/socket_base.hpp"
+#    include "NeForce/network/socket/socket_base.hpp"
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

@@ -1,10 +1,10 @@
 #include <NeForce/core/memory/endian.hpp>
-#include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/system/process.hpp>
+#include <NeForce/core/time/clocks.hpp>
 #include <NeForce/network/socket/icmp_socket.hpp>
 #include <NeForce/network/socket/ip_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <errno.h>
+#    include <errno.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -24,12 +24,11 @@ namespace {
         }
         return static_cast<uint16_t>(~sum);
     }
-}
+} // namespace
 
 
-void icmp_socket::send_echo_request(
-    const ip_address& dest, const uint16_t id, const uint16_t seq,
-    const uint8_t ttl, const void* data, const size_t data_len) {
+void icmp_socket::send_echo_request(const ip_address& dest, const uint16_t id, const uint16_t seq, const uint8_t ttl,
+                                    const void* data, const size_t data_len) {
 
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(value_exception("ICMP socket not opened"));
@@ -65,10 +64,9 @@ void icmp_socket::send_echo_request(
     }
 }
 
-bool icmp_socket::receive_reply(
-    const milliseconds timeout, const uint16_t expected_id, const uint16_t expected_seq,
-    ip_address& sender, icmp_header& out_header,
-    vector<char>& out_data, uint8_t& recv_ttl) {
+bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expected_id, const uint16_t expected_seq,
+                                ip_address& sender, icmp_header& out_header, vector<char>& out_data,
+                                uint8_t& recv_ttl) {
 
     const auto start = steady_clock::now();
     auto remaining = timeout;
@@ -117,9 +115,8 @@ bool icmp_socket::receive_reply(
         }
 
         peer_len = sizeof(peer_addr);
-        const ssize_t recv_len = ::recvfrom(
-            fd_, recv_buffer, sizeof(recv_buffer), 0,
-            reinterpret_cast<::sockaddr*>(&peer_addr), &peer_len);
+        const ssize_t recv_len = ::recvfrom(fd_, recv_buffer, sizeof(recv_buffer), 0,
+                                            reinterpret_cast<::sockaddr*>(&peer_addr), &peer_len);
         if (recv_len < 0) {
             const int err = socket_exception::last_error();
             if (socket_exception::is_would_block(err)) {
@@ -145,7 +142,9 @@ bool icmp_socket::receive_reply(
             continue;
         }
         const auto* ip = reinterpret_cast<const ip_header*>(recv_buffer);
-        if (ip->version != 4) continue;
+        if (ip->version != 4) {
+            continue;
+        }
         ip_header_len = ip->ihl * 4;
         if (ip_header_len < 20 || ip_header_len > static_cast<size_t>(recv_len)) {
             continue;
@@ -183,13 +182,12 @@ bool icmp_socket::receive_reply(
                 continue;
             }
 
-            const auto* orig_icmp = reinterpret_cast<const icmp_header*>(
-                reinterpret_cast<const uint8_t*>(orig_ip) + orig_ip_header_len);
+            const auto* orig_icmp = reinterpret_cast<const icmp_header*>(reinterpret_cast<const uint8_t*>(orig_ip) +
+                                                                         orig_ip_header_len);
 
-            if (reinterpret_cast<const uint8_t*>(orig_icmp) + sizeof(icmp_header) >
-                icmp_start + icmp_len) {
+            if (reinterpret_cast<const uint8_t*>(orig_icmp) + sizeof(icmp_header) > icmp_start + icmp_len) {
                 continue;
-                }
+            }
 
             auto orig_id = endian::network_to_host<uint16_t>(orig_icmp->id);
             auto orig_seq = endian::network_to_host<uint16_t>(orig_icmp->sequence);
@@ -228,9 +226,8 @@ void icmp_socket::open(const int family) {
 #endif
 }
 
-icmp_socket::ping_result icmp_socket::ping(
-    const ip_address& dest, const milliseconds timeout,
-    const uint16_t sequence, const void* data, const size_t data_len) {
+icmp_socket::ping_result icmp_socket::ping(const ip_address& dest, const milliseconds timeout, const uint16_t sequence,
+                                           const void* data, const size_t data_len) {
 
     if (!dest.is_valid() || !dest.is_ipv4()) {
         NEFORCE_THROW_EXCEPTION(value_exception("ping target must be valid IPv4 address"));
@@ -259,9 +256,9 @@ icmp_socket::ping_result icmp_socket::ping(
     return result;
 }
 
-vector<icmp_socket::traceroute_hop> icmp_socket::traceroute(
-    const ip_address& dest, const int max_hops,
-    const milliseconds probe_timeout, const int probes_per_hop) {
+vector<icmp_socket::traceroute_hop> icmp_socket::traceroute(const ip_address& dest, const int max_hops,
+                                                            const milliseconds probe_timeout,
+                                                            const int probes_per_hop) {
 
     if (!dest.is_valid() || !dest.is_ipv4()) {
         NEFORCE_THROW_EXCEPTION(value_exception("traceroute target must be valid IPv4 address"));

@@ -33,10 +33,10 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API env_builder {
 private:
-    unique_ptr<env_document> root_;    ///< 正在构建的文档对象
-    string current_key_;               ///< 当前正在设置的键名
-    env_variable::quote_type current_quote_type_ = env_variable::None;  ///< 当前值的引号类型
-    bool current_exported_ = false;    ///< 当前变量是否导出
+    unique_ptr<env_document> root_;                                    ///< 正在构建的文档对象
+    string current_key_;                                               ///< 当前正在设置的键名
+    env_variable::quote_type current_quote_type_ = env_variable::None; ///< 当前值的引号类型
+    bool current_exported_ = false;                                    ///< 当前变量是否导出
 
 public:
     /**
@@ -47,7 +47,7 @@ public:
     env_builder();
 
     env_builder(const env_builder&) = delete;
-    env_builder& operator =(const env_builder&) = delete;
+    env_builder& operator=(const env_builder&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -60,7 +60,7 @@ public:
      * @param other 源构建器
      * @return 自身引用
      */
-    env_builder& operator =(env_builder&& other) noexcept = default;
+    env_builder& operator=(env_builder&& other) noexcept = default;
 
     /**
      * @brief 设置当前键名

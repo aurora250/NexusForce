@@ -73,7 +73,7 @@ string NEFORCE_API join_fast(const vector<string>& vec, const string& delimiter 
  *
  * 使用accumulate算法进行字符串连接，适合函数式编程风格。
  */
-string NEFORCE_API join_accumulate(const vector<string> &vec, const string& delimiter = "");
+string NEFORCE_API join_accumulate(const vector<string>& vec, const string& delimiter = "");
 
 /**
  * @brief 字符串去重

@@ -31,20 +31,19 @@ NEFORCE_BEGIN_NAMESPACE__
  * 默认使用deque作为底层容器，也可指定其他支持back、push_back
  * 和pop_back操作的容器（如vector、list）。
  */
-template <typename T, typename Sequence = deque<T>>
-class stack : public icollector<stack<T, Sequence>> {
+template <typename T, typename Sequence = deque<T>> class stack : public icollector<stack<T, Sequence>> {
     static_assert(is_object_v<T>, "stack only contains object types.");
     static_assert(is_same_v<T, typename Sequence::value_type>, "stack require consistent types.");
 
 public:
-    using value_type        = typename Sequence::value_type;  ///< 值类型
-    using difference_type   = typename Sequence::difference_type;  ///< 差值类型
-    using size_type         = typename Sequence::size_type;  ///< 大小类型
-    using reference         = typename Sequence::reference;  ///< 引用类型
-    using const_reference   = typename Sequence::const_reference;  ///< 常量引用类型
+    using value_type = typename Sequence::value_type;           ///< 值类型
+    using difference_type = typename Sequence::difference_type; ///< 差值类型
+    using size_type = typename Sequence::size_type;             ///< 大小类型
+    using reference = typename Sequence::reference;             ///< 引用类型
+    using const_reference = typename Sequence::const_reference; ///< 常量引用类型
 
 private:
-    Sequence seq_{};  ///< 底层容器实例
+    Sequence seq_{}; ///< 底层容器实例
 
 public:
     /**
@@ -58,16 +57,15 @@ public:
      * @brief 构造函数，使用指定的底层容器副本
      * @param seq 底层容器副本
      */
-    explicit stack(const Sequence& seq)
-    : seq_(seq) {}
+    explicit stack(const Sequence& seq) :
+    seq_(seq) {}
 
     /**
      * @brief 移动构造函数，使用指定的底层容器
      * @param seq 要移动的底层容器
      */
-    explicit stack(Sequence&& seq)
-    noexcept(is_nothrow_move_constructible_v<Sequence>)
-    : seq_(_NEFORCE move(seq)) {}
+    explicit stack(Sequence&& seq) noexcept(is_nothrow_move_constructible_v<Sequence>) :
+    seq_(_NEFORCE move(seq)) {}
 
     /**
      * @brief 析构函数
@@ -78,37 +76,25 @@ public:
      * @brief 获取栈的大小
      * @return 栈中的元素数量
      */
-    NEFORCE_NODISCARD size_type size() const
-    noexcept(noexcept(seq_.size())) {
-        return seq_.size();
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept(noexcept(seq_.size())) { return seq_.size(); }
 
     /**
      * @brief 检查栈是否为空
      * @return 栈为空返回true，否则返回false
      */
-    NEFORCE_NODISCARD bool empty() const
-    noexcept(noexcept(seq_.empty())) {
-        return seq_.empty();
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept(noexcept(seq_.empty())) { return seq_.empty(); }
 
     /**
      * @brief 访问栈顶元素
      * @return 栈顶元素的引用
      */
-    NEFORCE_NODISCARD reference top()
-    noexcept(noexcept(seq_.back())) {
-        return seq_.back();
-    }
+    NEFORCE_NODISCARD reference top() noexcept(noexcept(seq_.back())) { return seq_.back(); }
 
     /**
      * @brief 常量访问栈顶元素
      * @return 栈顶元素的常量引用
      */
-    NEFORCE_NODISCARD const_reference top()
-    const noexcept(noexcept(seq_.back())) {
-        return seq_.back();
-    }
+    NEFORCE_NODISCARD const_reference top() const noexcept(noexcept(seq_.back())) { return seq_.back(); }
 
     /**
      * @brief 在栈顶就地构造元素
@@ -116,8 +102,7 @@ public:
      * @param args 构造参数
      * @return 新构造元素的引用
      */
-    template <typename... Args>
-    decltype(auto) emplace(Args&&... args) {
+    template <typename... Args> decltype(auto) emplace(Args&&... args) {
         return seq_.emplace(_NEFORCE forward<Args>(args)...);
     }
 
@@ -127,9 +112,7 @@ public:
      *
      * 将元素添加到栈顶。
      */
-    void push(const value_type& value) {
-        seq_.push_back(value);
-    }
+    void push(const value_type& value) { seq_.push_back(value); }
 
     /**
      * @brief 压栈操作（移动版本）
@@ -137,36 +120,27 @@ public:
      *
      * 将元素移动到栈顶。
      */
-    void push(value_type&& value) {
-        seq_.push_back(_NEFORCE move(value));
-    }
+    void push(value_type&& value) { seq_.push_back(_NEFORCE move(value)); }
 
     /**
      * @brief 弹栈操作
      *
      * 移除栈顶元素。
      */
-    void pop()
-    noexcept(noexcept(seq_.pop_back())) {
-        seq_.pop_back();
-    }
+    void pop() noexcept(noexcept(seq_.pop_back())) { seq_.pop_back(); }
 
     /**
      * @brief 交换两个栈的内容
      * @param other 要交换的另一个栈
      */
-    void swap(stack& other)
-    noexcept(is_nothrow_swappable_v<Sequence>) {
-        _NEFORCE swap(seq_, other.seq_);
-    }
+    void swap(stack& other) noexcept(is_nothrow_swappable_v<Sequence>) { _NEFORCE swap(seq_, other.seq_); }
 
     /**
      * @brief 相等比较操作符
      * @param rhs 右侧栈
      * @return 如果两个栈大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const stack& rhs) const
-     noexcept(noexcept(seq_ == rhs.seq_)) {
+    NEFORCE_NODISCARD bool operator==(const stack& rhs) const noexcept(noexcept(seq_ == rhs.seq_)) {
         return seq_ == rhs.seq_;
     }
 
@@ -175,15 +149,13 @@ public:
      * @param rhs 右侧栈
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator <(const stack& rhs) const
-    noexcept(noexcept(seq_ < rhs.seq_)) {
+    NEFORCE_NODISCARD bool operator<(const stack& rhs) const noexcept(noexcept(seq_ < rhs.seq_)) {
         return seq_ < rhs.seq_;
     }
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Sequence>
-stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
+template <typename Sequence> stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
 #endif
 
 /** @} */ // Container

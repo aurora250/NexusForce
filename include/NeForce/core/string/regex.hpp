@@ -10,11 +10,11 @@
  * 并提供迭代器接口用于遍历匹配结果。
  */
 
+#include <pcre2.h>
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/string/string.hpp"
-#include <pcre2.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -28,13 +28,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 正则操作异常
  */
 struct regex_exception final : value_exception {
-    explicit regex_exception(const char* info = "Regex Operation Failed",
-                             const char* type = static_type,
-                             const int code = 0) noexcept
-    : value_exception(info, type, code) {}
+    explicit regex_exception(const char* info = "Regex Operation Failed", const char* type = static_type,
+                             const int code = 0) noexcept :
+    value_exception(info, type, code) {}
 
-    explicit regex_exception(const exception& e)
-    : value_exception(e) {}
+    explicit regex_exception(const exception& e) :
+    value_exception(e) {}
 
     ~regex_exception() override = default;
 
@@ -58,14 +57,14 @@ struct regex_exception final : value_exception {
  */
 class NEFORCE_API match_result {
 public:
-    using iterator = vector<string>::const_iterator;    ///< 捕获组迭代器类型
+    using iterator = vector<string>::const_iterator; ///< 捕获组迭代器类型
 
 private:
-    vector<string> groups_;                              ///< 捕获组文本
-    vector<pair<size_t, size_t>> group_positions_;       ///< 捕获组位置和长度
-    size_t position_ = string::npos;                     ///< 匹配起始位置
-    size_t length_ = 0;                                  ///< 匹配长度
-    string subject_;                                     ///< 原始字符串
+    vector<string> groups_;                        ///< 捕获组文本
+    vector<pair<size_t, size_t>> group_positions_; ///< 捕获组位置和长度
+    size_t position_ = string::npos;               ///< 匹配起始位置
+    size_t length_ = 0;                            ///< 匹配长度
+    string subject_;                               ///< 原始字符串
 
 public:
     /**
@@ -81,58 +80,45 @@ public:
      * @param groups 捕获组文本列表
      * @param group_positions 捕获组位置列表
      */
-    match_result(
-        const string& subject,
-        size_t pos, size_t len,
-        const vector<string>& groups,
-        const vector<pair<size_t, size_t>>& group_positions);
+    match_result(const string& subject, size_t pos, size_t len, const vector<string>& groups,
+                 const vector<pair<size_t, size_t>>& group_positions);
 
     /**
      * @brief 检查是否匹配成功
      * @return 匹配成功返回true
      */
-    NEFORCE_NODISCARD bool matched() const noexcept {
-        return position_ != string::npos;
-    }
+    NEFORCE_NODISCARD bool matched() const noexcept { return position_ != string::npos; }
 
     /**
      * @brief 获取匹配起始位置
      * @return 匹配在字符串中的起始索引
      */
-    NEFORCE_NODISCARD size_t position() const noexcept {
-        return position_;
-    }
+    NEFORCE_NODISCARD size_t position() const noexcept { return position_; }
 
     /**
      * @brief 获取匹配长度
      * @return 匹配的字符长度
      */
-    NEFORCE_NODISCARD size_t length() const noexcept {
-        return length_;
-    }
+    NEFORCE_NODISCARD size_t length() const noexcept { return length_; }
 
     /**
      * @brief 获取完整匹配的文本
      * @return 匹配到的完整字符串
      */
-    NEFORCE_NODISCARD string_view data() const noexcept {
-        return matched() ? groups_[0].view() : "";
-    }
+    NEFORCE_NODISCARD string_view data() const noexcept { return matched() ? groups_[0].view() : ""; }
 
     /**
      * @brief 获取捕获组数量
      * @return 捕获组总数（包括第0组完整匹配）
      */
-    NEFORCE_NODISCARD size_t size() const noexcept {
-        return groups_.size();
-    }
+    NEFORCE_NODISCARD size_t size() const noexcept { return groups_.size(); }
 
     /**
      * @brief 获取指定捕获组
      * @param idx 捕获组索引（0表示完整匹配）
      * @return 捕获组文本，越界返回空字符串
      */
-    NEFORCE_NODISCARD string_view operator [](const size_t idx) const noexcept {
+    NEFORCE_NODISCARD string_view operator[](const size_t idx) const noexcept {
         return idx < groups_.size() ? groups_[idx].view() : "";
     }
 
@@ -149,9 +135,7 @@ public:
      * @brief 获取匹配前的前缀
      * @return 匹配位置之前的字符串
      */
-    NEFORCE_NODISCARD string_view prefix() const noexcept {
-        return matched() ? subject_.view(0, position_) : "";
-    }
+    NEFORCE_NODISCARD string_view prefix() const noexcept { return matched() ? subject_.view(0, position_) : ""; }
 
     /**
      * @brief 获取匹配后的后缀
@@ -180,17 +164,13 @@ public:
      * @brief 获取捕获组迭代器起始位置
      * @return 捕获组迭代器
      */
-    NEFORCE_NODISCARD iterator begin() const noexcept {
-        return groups_.begin();
-    }
+    NEFORCE_NODISCARD iterator begin() const noexcept { return groups_.begin(); }
 
     /**
      * @brief 获取捕获组迭代器结束位置
      * @return 捕获组迭代器
      */
-    NEFORCE_NODISCARD iterator end() const noexcept {
-        return groups_.end();
-    }
+    NEFORCE_NODISCARD iterator end() const noexcept { return groups_.end(); }
 };
 
 
@@ -208,21 +188,25 @@ class NEFORCE_API regex_token_iterator;
 class NEFORCE_API regex {
 private:
     struct pcre2_code_deleter {
-        void operator ()(pcre2_code* code) const noexcept {
-            if (code) pcre2_code_free(code);
+        void operator()(pcre2_code* code) const noexcept {
+            if (code) {
+                pcre2_code_free(code);
+            }
         }
     };
 
     struct pcre2_match_data_deleter {
-        void operator ()(pcre2_match_data* data) const noexcept {
-            if (data) pcre2_match_data_free(data);
+        void operator()(pcre2_match_data* data) const noexcept {
+            if (data) {
+                pcre2_match_data_free(data);
+            }
         }
     };
 
-    unique_ptr<pcre2_code, pcre2_code_deleter> code_;  ///< PCRE2编译后的正则表达式
-    string pattern_;                                   ///< 原始正则表达式模式
-    uint32_t options_;                                 ///< 编译选项
-    int capture_count_ = 0;                            ///< 捕获组数量
+    unique_ptr<pcre2_code, pcre2_code_deleter> code_; ///< PCRE2编译后的正则表达式
+    string pattern_;                                  ///< 原始正则表达式模式
+    uint32_t options_;                                ///< 编译选项
+    int capture_count_ = 0;                           ///< 捕获组数量
 
     friend class regex_iterator;
     friend class regex_token_iterator;
@@ -230,11 +214,10 @@ private:
 private:
     void compile(const string& pattern, uint32_t options = 0);
     void compile(string&& pattern, uint32_t options = 0);
-    
-    match_result do_match(PCRE2_SPTR subject, size_t length,
-                          size_t start_offset, uint32_t options,
+
+    match_result do_match(PCRE2_SPTR subject, size_t length, size_t start_offset, uint32_t options,
                           const string& subject_str) const;
-    
+
 public:
     /**
      * @brief 从字符串构造正则表达式
@@ -251,12 +234,12 @@ public:
      * @throws regex_exception 编译失败时抛出
      */
     explicit regex(string&& pattern, uint32_t options = 0);
-    
+
     regex(regex&& other) noexcept;
-    regex& operator =(regex&& other) noexcept;
-    
+    regex& operator=(regex&& other) noexcept;
+
     regex(const regex&) = delete;
-    regex& operator =(const regex&) = delete;
+    regex& operator=(const regex&) = delete;
 
     /**
      * @brief 执行完整匹配
@@ -325,25 +308,19 @@ public:
      * @brief 获取捕获组数量
      * @return 正则表达式中定义的捕获组数量
      */
-    NEFORCE_NODISCARD int capture_count() const noexcept {
-        return capture_count_;
-    }
+    NEFORCE_NODISCARD int capture_count() const noexcept { return capture_count_; }
 
     /**
      * @brief 获取正则表达式模式
      * @return 原始正则表达式字符串
      */
-    NEFORCE_NODISCARD const string& pattern() const noexcept {
-        return pattern_;
-    }
+    NEFORCE_NODISCARD const string& pattern() const noexcept { return pattern_; }
 
     /**
      * @brief 检查正则表达式是否有效
      * @return 已编译成功返回true
      */
-    NEFORCE_NODISCARD bool valid() const noexcept {
-        return code_ != nullptr;
-    }
+    NEFORCE_NODISCARD bool valid() const noexcept { return code_ != nullptr; }
 
     /**
      * @brief 获取匹配结果迭代器起始位置
@@ -370,19 +347,19 @@ public:
 class NEFORCE_API regex_iterator {
 public:
     using iterator_category = bidirectional_iterator_tag; ///< 迭代器类型
-    using value_type        = match_result;               ///< 元素类型
-    using difference_type   = ptrdiff_t;                  ///< 差值类型
-    using pointer           = const match_result*;        ///< 指针类型
-    using reference         = const match_result&;        ///< 引用类型
+    using value_type = match_result;                      ///< 元素类型
+    using difference_type = ptrdiff_t;                    ///< 差值类型
+    using pointer = const match_result*;                  ///< 指针类型
+    using reference = const match_result&;                ///< 引用类型
 
 private:
-    const regex* regex_ = nullptr;        ///< 关联的正则表达式
-    string subject_;                      ///< 待遍历的字符串
+    const regex* regex_ = nullptr; ///< 关联的正则表达式
+    string subject_;               ///< 待遍历的字符串
 
     mutable vector<match_result> cached_matches_; ///< 缓存的匹配结果
     mutable bool cache_built_ = false;            ///< 缓存是否已构建
 
-    mutable ptrdiff_t current_index_ = -1;        ///< 当前索引
+    mutable ptrdiff_t current_index_ = -1; ///< 当前索引
 
     void build_cache() const;
 
@@ -419,21 +396,19 @@ public:
      * @brief 解引用操作符
      * @return 当前匹配结果
      */
-    NEFORCE_NODISCARD reference operator *() const noexcept;
+    NEFORCE_NODISCARD reference operator*() const noexcept;
 
     /**
      * @brief 成员访问操作符
      * @return 当前匹配结果指针
      */
-    NEFORCE_NODISCARD pointer operator ->() const noexcept {
-        return &(operator*());
-    }
+    NEFORCE_NODISCARD pointer operator->() const noexcept { return &(operator*()); }
 
     /**
      * @brief 前置递增操作符
      * @return 递增后的迭代器
      */
-    regex_iterator& operator ++() {
+    regex_iterator& operator++() {
         move_next();
         return *this;
     }
@@ -442,7 +417,7 @@ public:
      * @brief 后置递增操作符
      * @return 递增前的迭代器
      */
-    regex_iterator operator ++(int) {
+    regex_iterator operator++(int) {
         regex_iterator tmp = *this;
         ++(*this);
         return tmp;
@@ -452,7 +427,7 @@ public:
      * @brief 前置递减操作符
      * @return 递减后的迭代器
      */
-    regex_iterator& operator --() {
+    regex_iterator& operator--() {
         if (current_index_ == -1 && cache_built_) {
             if (!cached_matches_.empty()) {
                 current_index_ = static_cast<ptrdiff_t>(cached_matches_.size()) - 1;
@@ -467,7 +442,7 @@ public:
      * @brief 后置递减操作符
      * @return 递减前的迭代器
      */
-    regex_iterator operator --(int) {
+    regex_iterator operator--(int) {
         regex_iterator tmp = *this;
         --(*this);
         return tmp;
@@ -478,16 +453,14 @@ public:
      * @param other 另一个迭代器
      * @return 相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const regex_iterator& other) const noexcept;
+    NEFORCE_NODISCARD bool operator==(const regex_iterator& other) const noexcept;
 
     /**
      * @brief 不等比较操作符
      * @param other 另一个迭代器
      * @return 不等返回true
      */
-    NEFORCE_NODISCARD bool operator !=(const regex_iterator& other) const noexcept {
-        return !(*this == other);
-    }
+    NEFORCE_NODISCARD bool operator!=(const regex_iterator& other) const noexcept { return !(*this == other); }
 
     /**
      * @brief 获取起始迭代器
@@ -495,9 +468,7 @@ public:
      * @param str 待遍历的字符串
      * @return 起始迭代器
      */
-    static regex_iterator begin(const regex* re, const string& str) {
-        return regex_iterator(re, str, 0);
-    }
+    static regex_iterator begin(const regex* re, const string& str) { return regex_iterator(re, str, 0); }
 
     /**
      * @brief 获取结束迭代器
@@ -538,14 +509,14 @@ public:
     };
 
 private:
-    const regex* regex_ = nullptr;           ///< 关联的正则表达式
-    string subject_;                         ///< 待遍历的字符串
-    regex_iterator match_iterator_;          ///< 匹配迭代器
-    regex_iterator end_iterator_;             ///< 结束迭代器
-    string_view current_;                    ///< 当前令牌
-    int index_ = 0;                          ///< 捕获组索引（负数表示分隔符模式）
-    state state_ = state::END;               ///< 当前状态
-    size_t last_pos_ = 0;                    ///< 最后处理位置
+    const regex* regex_ = nullptr;  ///< 关联的正则表达式
+    string subject_;                ///< 待遍历的字符串
+    regex_iterator match_iterator_; ///< 匹配迭代器
+    regex_iterator end_iterator_;   ///< 结束迭代器
+    string_view current_;           ///< 当前令牌
+    int index_ = 0;                 ///< 捕获组索引（负数表示分隔符模式）
+    state state_ = state::END;      ///< 当前状态
+    size_t last_pos_ = 0;           ///< 最后处理位置
 
 private:
     void find_next() noexcept;
@@ -568,21 +539,19 @@ public:
      * @brief 解引用操作符
      * @return 当前令牌字符串
      */
-    NEFORCE_NODISCARD string operator *() const noexcept {
-        return current_;
-    }
+    NEFORCE_NODISCARD string operator*() const noexcept { return current_; }
 
     /**
      * @brief 前置递增操作符
      * @return 递增后的迭代器
      */
-    regex_token_iterator& operator ++() noexcept;
+    regex_token_iterator& operator++() noexcept;
 
     /**
      * @brief 后置递增操作符
      * @return 递增前的迭代器
      */
-    regex_token_iterator operator ++(int) noexcept {
+    regex_token_iterator operator++(int) noexcept {
         regex_token_iterator tmp = *this;
         ++(*this);
         return tmp;
@@ -593,26 +562,20 @@ public:
      * @param other 另一个迭代器
      * @return 相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const regex_token_iterator& other) const noexcept;
+    NEFORCE_NODISCARD bool operator==(const regex_token_iterator& other) const noexcept;
 
     /**
      * @brief 不等比较操作符
      * @param other 另一个迭代器
      * @return 不等返回true
      */
-    NEFORCE_NODISCARD bool operator !=(const regex_token_iterator& other) const noexcept {
-        return !(*this == other);
-    }
+    NEFORCE_NODISCARD bool operator!=(const regex_token_iterator& other) const noexcept { return !(*this == other); }
 };
 
 /// @cond
-inline regex_iterator regex::begin(const string& str) const {
-    return regex_iterator::begin(this, str);
-}
+inline regex_iterator regex::begin(const string& str) const { return regex_iterator::begin(this, str); }
 
-inline regex_iterator regex::end(const string& str) const {
-    return regex_iterator::end(this, str);
-}
+inline regex_iterator regex::end(const string& str) const { return regex_iterator::end(this, str); }
 /// @endcond
 
 /** @} */ // Regex

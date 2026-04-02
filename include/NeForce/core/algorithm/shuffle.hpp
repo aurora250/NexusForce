@@ -21,7 +21,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @defgroup ShuffleAlgorithms 随机重排算法
  * @brief 随机重排算法的实现
  * @{
-*/
+ */
 
 /**
  * @brief 随机重排序列
@@ -36,12 +36,13 @@ NEFORCE_BEGIN_NAMESPACE__
  * @note 要求 Iterator 满足随机访问迭代器概念
  * @note 使用默认的 random_lcd 线性同余随机数生成器
  */
-template <typename Iterator>
-void shuffle(Iterator first, Iterator last) {
+template <typename Iterator> void shuffle(Iterator first, Iterator last) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterators must be random_access_iterator");
 
-	if (first == last) return;
-	random_lcd rand;
+    if (first == last) {
+        return;
+    }
+    random_lcd rand;
     for (Iterator i = _NEFORCE next(first); i != last; ++i) {
         auto distance = _NEFORCE distance(first, i);
         Iterator j = _NEFORCE next(first, rand.next_int(0, static_cast<int>(distance)));
@@ -67,15 +68,16 @@ void shuffle(Iterator first, Iterator last) {
  * @note 要求 Iterator 满足随机访问迭代器概念
  * @note 随机数生成器必须提供 operator()(integer) -> integer 方法
  */
-template <typename Iterator, typename Generator>
-void shuffle(Iterator first, Iterator last, Generator& rand) {
+template <typename Iterator, typename Generator> void shuffle(Iterator first, Iterator last, Generator& rand) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterators must be random_access_iterator");
 
-	if (first == last) return;
-	for (Iterator i = _NEFORCE next(first); i != last; ++i) {
-		Iterator j = _NEFORCE next(first, rand(i - first + 1));
-		_NEFORCE iter_swap(i, j);
-	}
+    if (first == last) {
+        return;
+    }
+    for (Iterator i = _NEFORCE next(first); i != last; ++i) {
+        Iterator j = _NEFORCE next(first, rand(i - first + 1));
+        _NEFORCE iter_swap(i, j);
+    }
 }
 
 /** @} */ // ShuffleAlgorithms

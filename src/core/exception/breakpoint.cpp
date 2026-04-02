@@ -1,10 +1,10 @@
 #include <NeForce/core/exception/breakpoint.hpp>
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <debugapi.h>
+#    include <debugapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <NeForce/core/file/file.hpp>
+#    include <NeForce/core/file/file.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

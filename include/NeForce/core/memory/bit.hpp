@@ -28,15 +28,13 @@ NEFORCE_BEGIN_CONSTANTS__
  * 包含0-255所有可能字节值的popcount值。
  */
 NEFORCE_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
-    0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
-    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-    3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
-};
+        0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2,
+        3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3,
+        3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5,
+        6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4,
+        3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4,
+        5, 5, 6, 5, 6, 6, 7, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6,
+        6, 7, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8};
 
 /** @} */ // BitManipulation
 
@@ -58,15 +56,14 @@ NEFORCE_END_CONSTANTS__
  * 使用查表法分别计算8个字节的popcount，然后求和。
  */
 constexpr int popcount64(const uint64_t x) noexcept {
-    return
-        constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 32) & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 40) & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 48) & 0xFFULL)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
+    return constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 32) & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 40) & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 48) & 0xFFULL)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
 }
 
 /**
@@ -77,14 +74,33 @@ constexpr int popcount64(const uint64_t x) noexcept {
  * 使用二分查找法优化前导零计数。
  */
 NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
-    if (x == 0) return 64;
+    if (x == 0) {
+        return 64;
+    }
     int n = 0;
-    if (x <= 0x00000000FFFFFFFFULL) { n += 32; x <<= 32; }
-    if (x <= 0x0000FFFFFFFFFFFFULL) { n += 16; x <<= 16; }
-    if (x <= 0x00FFFFFFFFFFFFFFULL) { n += 8; x <<= 8; }
-    if (x <= 0x0FFFFFFFFFFFFFFFULL) { n += 4; x <<= 4; }
-    if (x <= 0x3FFFFFFFFFFFFFFFULL) { n += 2; x <<= 2; }
-    if (x <= 0x7FFFFFFFFFFFFFFFULL) { n += 1; }
+    if (x <= 0x00000000FFFFFFFFULL) {
+        n += 32;
+        x <<= 32;
+    }
+    if (x <= 0x0000FFFFFFFFFFFFULL) {
+        n += 16;
+        x <<= 16;
+    }
+    if (x <= 0x00FFFFFFFFFFFFFFULL) {
+        n += 8;
+        x <<= 8;
+    }
+    if (x <= 0x0FFFFFFFFFFFFFFFULL) {
+        n += 4;
+        x <<= 4;
+    }
+    if (x <= 0x3FFFFFFFFFFFFFFFULL) {
+        n += 2;
+        x <<= 2;
+    }
+    if (x <= 0x7FFFFFFFFFFFFFFFULL) {
+        n += 1;
+    }
     return n;
 }
 
@@ -98,11 +114,10 @@ NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
  * 使用查表法分别计算4个字节的popcount，然后求和。
  */
 constexpr int popcount32(const uint32_t x) noexcept {
-    return
-        constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFU)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFU)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFU)] +
-        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
+    return constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFU)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFU)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFU)] +
+           constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
 }
 
 /**
@@ -113,13 +128,29 @@ constexpr int popcount32(const uint32_t x) noexcept {
  * 使用二分查找法优化前导零计数。
  */
 NEFORCE_CONSTEXPR14 int clz32(uint32_t x) noexcept {
-    if (x == 0) return 32;
+    if (x == 0) {
+        return 32;
+    }
     int n = 0;
-    if (x <= 0x0000FFFFU) { n += 16; x <<= 16; }
-    if (x <= 0x00FFFFFFU) { n += 8; x <<= 8; }
-    if (x <= 0x0FFFFFFFU) { n += 4; x <<= 4; }
-    if (x <= 0x3FFFFFFFU) { n += 2; x <<= 2; }
-    if (x <= 0x7FFFFFFFU) { n += 1; }
+    if (x <= 0x0000FFFFU) {
+        n += 16;
+        x <<= 16;
+    }
+    if (x <= 0x00FFFFFFU) {
+        n += 8;
+        x <<= 8;
+    }
+    if (x <= 0x0FFFFFFFU) {
+        n += 4;
+        x <<= 4;
+    }
+    if (x <= 0x3FFFFFFFU) {
+        n += 2;
+        x <<= 2;
+    }
+    if (x <= 0x7FFFFFFFU) {
+        n += 1;
+    }
     return n;
 }
 
@@ -160,9 +191,7 @@ constexpr int countl_zero(const uintptr_t x) noexcept {
  *
  * 通过对x按位取反后计算前导零个数。
  */
-constexpr int countl_one(const uintptr_t x) noexcept {
-    return countl_zero(~x);
-}
+constexpr int countl_one(const uintptr_t x) noexcept { return countl_zero(~x); }
 
 /**
  * @brief 计算整数尾随零的个数
@@ -171,9 +200,7 @@ constexpr int countl_one(const uintptr_t x) noexcept {
  *
  * 使用位运算技巧得到最低有效位的掩码。
  */
-constexpr int countr_zero(const uintptr_t x) noexcept {
-    return popcount((x & (~x + 1)) - 1);
-}
+constexpr int countr_zero(const uintptr_t x) noexcept { return popcount((x & (~x + 1)) - 1); }
 
 /**
  * @brief 计算整数尾随1的个数
@@ -182,9 +209,7 @@ constexpr int countr_zero(const uintptr_t x) noexcept {
  *
  * 通过对x按位取反后计算尾随零个数。
  */
-constexpr int countr_one(const uintptr_t x) noexcept {
-    return countr_zero(~x);
-}
+constexpr int countr_one(const uintptr_t x) noexcept { return countr_zero(~x); }
 
 
 /**
@@ -192,9 +217,7 @@ constexpr int countr_one(const uintptr_t x) noexcept {
  * @param x 有符号整数
  * @return 最低设置位的位置，如果没有设置位则返回-1
  */
-constexpr int lowest_set_bit_pos(const intptr_t x) noexcept {
-    return x == 0 ? -1 : countr_zero(x);
-}
+constexpr int lowest_set_bit_pos(const intptr_t x) noexcept { return x == 0 ? -1 : countr_zero(x); }
 
 /**
  * @brief 获取最高设置位的位置
@@ -202,7 +225,9 @@ constexpr int lowest_set_bit_pos(const intptr_t x) noexcept {
  * @return 最高设置位的位置，如果没有设置位则返回-1
  */
 NEFORCE_CONSTEXPR14 int highest_set_bit_pos(const intptr_t x) noexcept {
-    if (x == 0) return -1;
+    if (x == 0) {
+        return -1;
+    }
 #ifdef NEFORCE_ARCH_BITS_64
     return 63 - clz64(x);
 #else
@@ -280,9 +305,7 @@ constexpr int bit_width(const uintptr_t x) noexcept {
  * @param x 无符号整数
  * @return 不大于x的最大2的幂，如果x为0则返回0
  */
-constexpr uintptr_t bit_floor(const uintptr_t x) noexcept {
-    return x == 0 ? 0 : uintptr_t{1} << (bit_width(x) - 1);
-}
+constexpr uintptr_t bit_floor(const uintptr_t x) noexcept { return x == 0 ? 0 : uintptr_t{1} << (bit_width(x) - 1); }
 
 /**
  * @brief 获取不小于x的最小2的幂
@@ -290,7 +313,9 @@ constexpr uintptr_t bit_floor(const uintptr_t x) noexcept {
  * @return 不小于x的最小2的幂，如果x为0则返回1
  */
 NEFORCE_CONSTEXPR14 uint64_t bit_ceil(const uintptr_t x) noexcept {
-    if (x <= 1) return 1;
+    if (x <= 1) {
+        return 1;
+    }
     const uint64_t floor = bit_floor(x);
     return floor == x ? x : floor << 1;
 }
@@ -300,9 +325,7 @@ NEFORCE_CONSTEXPR14 uint64_t bit_ceil(const uintptr_t x) noexcept {
  * @param x 无符号整数
  * @return 如果x是2的幂则返回true，否则返回false
  */
-constexpr bool has_single_bit(const uintptr_t x) noexcept {
-    return x != 0 && (x & (x - 1)) == 0;
-}
+constexpr bool has_single_bit(const uintptr_t x) noexcept { return x != 0 && (x & (x - 1)) == 0; }
 
 /**
  * @brief 32位整数循环左移
@@ -313,7 +336,9 @@ constexpr bool has_single_bit(const uintptr_t x) noexcept {
 NEFORCE_CONSTEXPR14 uint32_t rotate_l32(const uint32_t x, const int s) noexcept {
     constexpr int bits = 32;
     const int shift = ((s % bits) + bits) % bits;
-    if (shift == 0) return x;
+    if (shift == 0) {
+        return x;
+    }
     return (x << shift) | (x >> (bits - shift));
 }
 
@@ -323,9 +348,7 @@ NEFORCE_CONSTEXPR14 uint32_t rotate_l32(const uint32_t x, const int s) noexcept 
  * @param s 旋转位数
  * @return 循环右移后的结果
  */
-NEFORCE_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept {
-    return rotate_l32(x, -s);
-}
+NEFORCE_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept { return rotate_l32(x, -s); }
 
 #ifdef NEFORCE_ARCH_BITS_64
 
@@ -338,7 +361,9 @@ NEFORCE_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept 
 NEFORCE_CONSTEXPR14 uint64_t rotate_l64(const uint64_t x, const int s) noexcept {
     constexpr int bits = 64;
     const int shift = ((s % bits) + bits) % bits;
-    if (shift == 0) return x;
+    if (shift == 0) {
+        return x;
+    }
     return (x << shift) | (x >> (bits - shift));
 }
 
@@ -348,9 +373,7 @@ NEFORCE_CONSTEXPR14 uint64_t rotate_l64(const uint64_t x, const int s) noexcept 
  * @param s 旋转位数
  * @return 循环右移后的结果
  */
-NEFORCE_CONSTEXPR14 uint64_t rotate_r64(const uint64_t x, const int s) noexcept {
-    return rotate_l64(x, -s);
-}
+NEFORCE_CONSTEXPR14 uint64_t rotate_r64(const uint64_t x, const int s) noexcept { return rotate_l64(x, -s); }
 
 #endif
 
@@ -406,7 +429,8 @@ constexpr uintptr_t bit_extract(const uintptr_t x, const int pos, const int len)
  * @param len 要插入的位数
  * @return 插入后的整数
  */
-NEFORCE_CONSTEXPR14 uintptr_t bit_insert(const uintptr_t x, const uintptr_t bits, const int pos, const int len) noexcept {
+NEFORCE_CONSTEXPR14 uintptr_t bit_insert(const uintptr_t x, const uintptr_t bits, const int pos,
+                                         const int len) noexcept {
     const uintptr_t mask = ((uintptr_t{1} << len) - 1) << pos;
     return (x & ~mask) | ((bits << pos) & mask);
 }

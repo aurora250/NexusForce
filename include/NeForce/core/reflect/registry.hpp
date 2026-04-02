@@ -29,8 +29,8 @@ NEFORCE_BEGIN_REFLECT__
  */
 class registry {
 private:
-    mutex mutex_;   ///< 保护类型映射的互斥锁
-    unordered_map<type_id, unique_ptr<meta_type>> types_;   ///< 类型ID到元数据的映射
+    mutex mutex_;                                         ///< 保护类型映射的互斥锁
+    unordered_map<type_id, unique_ptr<meta_type>> types_; ///< 类型ID到元数据的映射
 
     registry() = default;
 
@@ -52,8 +52,7 @@ public:
      *
      * 如果类型已注册，返回现有元数据；否则创建新的元数据。
      */
-    template <typename T>
-    meta_type& register_type(string_view name) {
+    template <typename T> meta_type& register_type(string_view name) {
         type_id id = name.to_hash();
 
         lock<mutex> lk(mutex_);
@@ -106,10 +105,9 @@ public:
      *
      * 对每个注册的类型调用回调函数。
      */
-    template <typename Func>
-    void for_each(Func&& func) {
+    template <typename Func> void for_each(Func&& func) {
         lock<mutex> lock(mutex_);
-        for (auto& type : types_) {
+        for (auto& type: types_) {
             func(*type.second);
         }
     }
@@ -122,7 +120,7 @@ public:
      */
     void resolve_all_bases() {
         lock<mutex> lk(mutex_);
-        for (auto& type : types_) {
+        for (auto& type: types_) {
             type.second->resolve_bases_unlocked(this);
         }
     }
@@ -133,7 +131,7 @@ public:
 /// @cond
 
 inline void meta_type::resolve_bases(registry* registry) {
-    for (auto& base_name : pending_base_names_) {
+    for (auto& base_name: pending_base_names_) {
         if (registry) {
             auto* base = registry->find(base_name.view());
             if (base) {
@@ -145,7 +143,7 @@ inline void meta_type::resolve_bases(registry* registry) {
 }
 
 inline void meta_type::resolve_bases_unlocked(registry* registry) {
-    for (auto& base_name : pending_base_names_) {
+    for (auto& base_name: pending_base_names_) {
         if (registry) {
             auto* base = registry->find_unlocked(base_name.view());
             if (base) {

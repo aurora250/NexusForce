@@ -1,7 +1,7 @@
-#include <NeForce/network/http/http_server.hpp>
-#include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/encrypt/base64.hpp>
 #include <NeForce/core/encrypt/sha1.hpp>
+#include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/network/http/http_server.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -27,8 +27,10 @@ namespace {
         return result;
     }
 
-    void parse_url_encoded(const string_view data, unordered_map<string, string>& params)  {
-        if (data.empty()) return;
+    void parse_url_encoded(const string_view data, unordered_map<string, string>& params) {
+        if (data.empty()) {
+            return;
+        }
 
         size_t start = 0;
         while (start < data.length()) {
@@ -53,20 +55,28 @@ namespace {
 
     string get_status_message(const HTTP_STATUS status) {
         switch (status) {
-            case HTTP_STATUS::S4_BAD_REQUEST: return "Bad Request";
-            case HTTP_STATUS::S4_UNAUTHORIZED: return "Unauthorized";
-            case HTTP_STATUS::S4_FORBIDDEN: return "Forbidden";
-            case HTTP_STATUS::S4_NOT_FOUNT: return "Not Found";
-            case HTTP_STATUS::S4_METHOD_NOT_ALLOWED: return "Method Not Allowed";
-            case HTTP_STATUS::S5_INTERNAL_ERROR: return "Internal Server Error";
-            case HTTP_STATUS::S5_SERVICE_UNAVAILABLE: return "Service Unavailable";
-            default: return "Error";
+            case HTTP_STATUS::S4_BAD_REQUEST:
+                return "Bad Request";
+            case HTTP_STATUS::S4_UNAUTHORIZED:
+                return "Unauthorized";
+            case HTTP_STATUS::S4_FORBIDDEN:
+                return "Forbidden";
+            case HTTP_STATUS::S4_NOT_FOUNT:
+                return "Not Found";
+            case HTTP_STATUS::S4_METHOD_NOT_ALLOWED:
+                return "Method Not Allowed";
+            case HTTP_STATUS::S5_INTERNAL_ERROR:
+                return "Internal Server Error";
+            case HTTP_STATUS::S5_SERVICE_UNAVAILABLE:
+                return "Service Unavailable";
+            default:
+                return "Error";
         }
     }
-}
+} // namespace
 
 
-string http_server_base::session_manager::generate_session_id()  {
+string http_server_base::session_manager::generate_session_id() {
     string str;
     str.reserve(32);
     for (int i = 0; i < 32; ++i) {
@@ -130,7 +140,7 @@ void http_server_base::session_manager::remove_session(const string& session_id)
     sessions_.erase(session_id);
 }
 
-void http_server_base::session_manager::cleanup_expired_sessions()  {
+void http_server_base::session_manager::cleanup_expired_sessions() {
     while (cleanup_running_) {
         {
             lock<mutex> lock(mutex_);
@@ -162,21 +172,18 @@ void http_server_base::session_manager::set_cleanup_interval(const seconds inter
     cleanup_interval_ = interval;
 }
 
-void http_server_base::session_manager::set_max_sessions(const size_t max) noexcept {
-    max_sessions_ = max;
-}
+void http_server_base::session_manager::set_max_sessions(const size_t max) noexcept { max_sessions_ = max; }
 
 string http_server_base::compute_websocket_accept(const string_view key) {
     const string combined = string(key) + websocket_guid;
     const string sha1_result = sha1(combined);
-    return base64_encode(cbyte_view{
-        reinterpret_cast<const byte_t*>(sha1_result.data()),
-        sha1_result.size()
-    });
+    return base64_encode(cbyte_view{reinterpret_cast<const byte_t*>(sha1_result.data()), sha1_result.size()});
 }
 
 void http_server_base::parse_cookies(const string_view cookie_header, http_request& request) {
-    if (cookie_header.empty()) return;
+    if (cookie_header.empty()) {
+        return;
+    }
 
     size_t start = 0;
     while (start < cookie_header.length()) {
@@ -210,12 +217,9 @@ void http_server_base::parse_parameters(http_request& request) {
     }
 }
 
-http_request http_server_base::parse_request(
-    tcp_socket* client_socket,
-    session_manager& manager,
-    const HTTP_COOKIE_NAME& name,
-    const size_t max_header_size,
-    const size_t max_body_size) {
+http_request http_server_base::parse_request(tcp_socket* client_socket, session_manager& manager,
+                                             const HTTP_COOKIE_NAME& name, const size_t max_header_size,
+                                             const size_t max_body_size) {
 
     http_request request;
     string request_data;
@@ -308,7 +312,9 @@ http_request http_server_base::parse_request(
     // Parse headers
     while (getline(request_data.view(), pos, line)) {
         line = line.trim();
-        if (line.empty()) break;
+        if (line.empty()) {
+            break;
+        }
 
         const size_t colon_pos = line.find(':');
         if (colon_pos != string::npos) {
@@ -340,14 +346,13 @@ http_request http_server_base::parse_request(
     return request;
 }
 
-http_session* http_server_base::get_or_create_session(
-    http_request& request,
-    const bool create,
-    session_manager& manager,
-    const HTTP_COOKIE_NAME& name) {
+http_session* http_server_base::get_or_create_session(http_request& request, const bool create,
+                                                      session_manager& manager, const HTTP_COOKIE_NAME& name) {
 
     http_session* sess = request.session;
-    if (sess) return sess;
+    if (sess) {
+        return sess;
+    }
 
     const string& session_id = request.cookie(name.cookie_name());
     if (!session_id.empty()) {
@@ -370,13 +375,12 @@ string http_server_base::build_response_str(const http_response& response) {
         result += response.version + " 302 Found\r\n";
         result += "Location: " + response.redirect_url + "\r\n";
     } else {
-        result += response.version + " " +
-            _NEFORCE to_string(static_cast<uint16_t>(response.status)) + " " +
-            response.status_message + "\r\n";
+        result += response.version + " " + _NEFORCE to_string(static_cast<uint16_t>(response.status)) + " " +
+                  response.status_message + "\r\n";
     }
 
     // Cookies
-    for (const auto& cookie : response.cookies) {
+    for (const auto& cookie: response.cookies) {
         result += "Set-Cookie: " + cookie.to_string() + "\r\n";
     }
 
@@ -385,7 +389,7 @@ string http_server_base::build_response_str(const http_response& response) {
         result += HTTP_KEY::Content_Length + ": " + _NEFORCE to_string(response.body.size()) + "\r\n";
     }
 
-    for (const auto& pair : response.headers) {
+    for (const auto& pair: response.headers) {
         const auto key = pair.first;
         const auto value = pair.second;
         result += move(key) + ": " + move(value) + "\r\n";
@@ -403,11 +407,8 @@ void http_server_base::send_response(tcp_socket* client_socket, const http_respo
     client_socket->send_all(memory_view<const char>(res_str.data(), res_str.size()));
 }
 
-void http_server_base::add_session_cookie(
-    const http_request& request,
-    http_response& response,
-    http_session* session,
-    const HTTP_COOKIE_NAME& name) {
+void http_server_base::add_session_cookie(const http_request& request, http_response& response, http_session* session,
+                                          const HTTP_COOKIE_NAME& name) {
 
     if (!session || !session->is_new) {
         return;
@@ -432,12 +433,15 @@ void http_server_base::send_error_response(tcp_socket* client_socket, const HTTP
         error_response.status = status;
         error_response.status_message = get_status_message(status);
         error_response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-        error_response.body =
-            "<!DOCTYPE html>"
-            "<html><head><title>Error</title></head>"
-            "<body><h1>" + error_response.status_message + "</h1>"
-            "<p>" + message + "</p>"
-            "</body></html>";
+        error_response.body = "<!DOCTYPE html>"
+                              "<html><head><title>Error</title></head>"
+                              "<body><h1>" +
+                              error_response.status_message +
+                              "</h1>"
+                              "<p>" +
+                              message +
+                              "</p>"
+                              "</body></html>";
         send_response(client_socket, error_response);
     } catch (...) {
         // ignore

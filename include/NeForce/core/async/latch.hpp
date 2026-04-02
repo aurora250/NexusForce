@@ -28,16 +28,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class latch {
 private:
-    alignas(alignof(platform_wait_t)) platform_wait_t counter_;   ///< 计数器值
+    alignas(alignof(platform_wait_t)) platform_wait_t counter_; ///< 计数器值
 
 public:
     /**
      * @brief 获取闩锁的最大计数值
      * @return 最大可能的计数值
      */
-    static constexpr platform_wait_t max() noexcept {
-        return numeric_traits<platform_wait_t>::max();
-    }
+    static constexpr platform_wait_t max() noexcept { return numeric_traits<platform_wait_t>::max(); }
 
     /**
      * @brief 构造函数
@@ -45,14 +43,14 @@ public:
      *
      * 创建闩锁并设置初始计数值。计数值必须为非负。
      */
-    constexpr explicit latch(const platform_wait_t expected) noexcept
-    : counter_(expected) {
+    constexpr explicit latch(const platform_wait_t expected) noexcept :
+    counter_(expected) {
         NEFORCE_CONSTEXPR_ASSERT(expected >= 0);
     }
 
-    ~latch() = default;  ///< 析构函数
-    latch(const latch&) = delete;  ///< 禁止拷贝构造
-    latch& operator =(const latch&) = delete;  ///< 禁止拷贝赋值
+    ~latch() = default;                      ///< 析构函数
+    latch(const latch&) = delete;            ///< 禁止拷贝构造
+    latch& operator=(const latch&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 减少计数器
@@ -65,7 +63,7 @@ public:
     NEFORCE_ALWAYS_INLINE void count_down(const platform_wait_t update = 1) {
         auto const old_value = _NEFORCE atomic_fetch_sub(&counter_, update, memory_order_release);
         if (old_value == update) {
-	        _NEFORCE atomic_notify_address(&counter_, true);
+            _NEFORCE atomic_notify_address(&counter_, true);
         }
     }
 

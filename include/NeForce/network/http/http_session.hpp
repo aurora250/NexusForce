@@ -30,11 +30,11 @@ struct NEFORCE_API http_session : istringify<http_session> {
     unordered_map<string, string> data;
     datetime last_access{datetime::now()};
     datetime create_time{datetime::now()};
-    int max_age = 1800;  // 30 minutes default
+    int max_age = 1800; // 30 minutes default
     bool is_new = true;
     bool invalidated = false;
 
-    NEFORCE_NODISCARD string& operator [](const string& key);
+    NEFORCE_NODISCARD string& operator[](const string& key);
 
     NEFORCE_NODISCARD string_view get(const string& key) const;
     void set(const string& key, string value);
@@ -52,13 +52,9 @@ struct NEFORCE_API http_session : istringify<http_session> {
 
     NEFORCE_NODISCARD bool expired(int max_inactive = 0) const noexcept;
 
-    NEFORCE_NODISCARD int64_t age() const noexcept {
-        return datetime::now() - create_time;
-    }
+    NEFORCE_NODISCARD int64_t age() const noexcept { return datetime::now() - create_time; }
 
-    NEFORCE_NODISCARD int64_t idle_time() const noexcept {
-        return datetime::now() - last_access;
-    }
+    NEFORCE_NODISCARD int64_t idle_time() const noexcept { return datetime::now() - last_access; }
 
     NEFORCE_NODISCARD string to_string() const;
 };

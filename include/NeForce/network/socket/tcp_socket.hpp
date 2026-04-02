@@ -11,8 +11,8 @@ public:
     tcp_socket(tcp_socket&&) = default;
     tcp_socket& operator=(tcp_socket&&) = default;
 
-    explicit tcp_socket(native_handle_type fd)
-    : ip_socket(fd) {}
+    explicit tcp_socket(native_handle_type fd) :
+    ip_socket(fd) {}
 
     ~tcp_socket() override = default;
 
@@ -27,9 +27,7 @@ public:
     virtual ssize_t receive(memory_view<char> buffer, int flags = 0);
     vector<char> receive_all(size_t expected_size);
 
-    NEFORCE_NODISCARD virtual bool is_ssl() const noexcept {
-        return false;
-    }
+    NEFORCE_NODISCARD virtual bool is_ssl() const noexcept { return false; }
 };
 
 NEFORCE_END_NAMESPACE__

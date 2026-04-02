@@ -9,8 +9,8 @@
  * 无需使用互斥锁即可实现线程安全的队列操作。
  */
 
-#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -29,8 +29,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 采用ABA问题预防机制
  */
-template <typename T>
-class lock_free_queue {
+template <typename T> class lock_free_queue {
 private:
     /**
      * @struct node_counter
@@ -52,8 +51,8 @@ private:
      * 包含节点指针和外部引用计数，用于原子操作。
      */
     struct counted_node_ptr {
-        int external_count = 0;   ///< 外部引用计数
-        node* ptr = nullptr;      ///< 节点指针
+        int external_count = 0; ///< 外部引用计数
+        node* ptr = nullptr;    ///< 节点指针
 
         /**
          * @brief 默认构造函数
@@ -68,9 +67,9 @@ private:
      * 存储数据和维护引用计数，通过原子操作保证线程安全。
      */
     struct node {
-        atomic<T*> data;  ///< 数据指针原子变量
-        atomic<node_counter> count;  ///< 节点计数器原子变量
-        atomic<counted_node_ptr> next;  ///< 下一个节点原子变量
+        atomic<T*> data;               ///< 数据指针原子变量
+        atomic<node_counter> count;    ///< 节点计数器原子变量
+        atomic<counted_node_ptr> next; ///< 下一个节点原子变量
 
         /**
          * @brief 构造函数
@@ -83,8 +82,8 @@ private:
             count.store(new_count);
 
             counted_node_ptr node_ptr;
-			node_ptr.ptr = nullptr;
-			node_ptr.external_count = 0;
+            node_ptr.ptr = nullptr;
+            node_ptr.external_count = 0;
 
             next.store(node_ptr);
         }
@@ -100,10 +99,8 @@ private:
             do {
                 new_counter = old_counter;
                 --new_counter.internal_count;
-            }
-            while (!count.compare_exchange_strong(
-                old_counter, new_counter,
-                memory_order_acquire, memory_order_relaxed));
+            } while (!count.compare_exchange_strong(old_counter, new_counter, memory_order_acquire,
+                                                    memory_order_relaxed));
             if (!new_counter.internal_count && !new_counter.external_counters) {
                 delete this;
                 destruct_count.fetch_add(1);
@@ -115,10 +112,10 @@ private:
     static atomic<int> destruct_count;
     static atomic<int> construct_count;
 
-    atomic<counted_node_ptr> head;  ///< 队列头指针原子变量
-    atomic<counted_node_ptr> tail;  ///< 队列尾指针原子变量
-    atomic<size_t> push_count_{0};  ///< 入队计数器
-    atomic<size_t> pop_count_{0};   ///< 出队计数器
+    atomic<counted_node_ptr> head; ///< 队列头指针原子变量
+    atomic<counted_node_ptr> tail; ///< 队列尾指针原子变量
+    atomic<size_t> push_count_{0}; ///< 入队计数器
+    atomic<size_t> pop_count_{0};  ///< 出队计数器
 
 private:
     /**
@@ -130,8 +127,7 @@ private:
      */
     void set_new_tail(counted_node_ptr& old_tail, counted_node_ptr const& new_tail) {
         node* const current_tail_ptr = old_tail.ptr;
-        while (!tail.compare_exchange_weak(old_tail, new_tail) &&
-               old_tail.ptr == current_tail_ptr) {
+        while (!tail.compare_exchange_weak(old_tail, new_tail) && old_tail.ptr == current_tail_ptr) {
             this_thread::relax();
         }
         if (old_tail.ptr == current_tail_ptr) {
@@ -157,10 +153,8 @@ private:
             new_counter = old_counter;
             --new_counter.external_counters;
             new_counter.internal_count += count_increase;
-        }
-        while (!ptr->count.compare_exchange_strong(
-            old_counter, new_counter,
-            memory_order_acquire, memory_order_relaxed));
+        } while (!ptr->count.compare_exchange_strong(old_counter, new_counter, memory_order_acquire,
+                                                     memory_order_relaxed));
         if (!new_counter.internal_count && !new_counter.external_counters) {
             destruct_count.fetch_add(1);
             delete ptr;
@@ -175,16 +169,13 @@ private:
      *
      * 原子增加外部引用计数，防止ABA问题。
      */
-    static void increase_external_count(
-        atomic<counted_node_ptr>& counter,
-        counted_node_ptr& old_counter) {
+    static void increase_external_count(atomic<counted_node_ptr>& counter, counted_node_ptr& old_counter) {
         counted_node_ptr new_counter;
         do {
             new_counter = old_counter;
             ++new_counter.external_count;
-        } while (!counter.compare_exchange_strong(
-            old_counter, new_counter,
-            memory_order_acquire, memory_order_relaxed));
+        } while (
+                !counter.compare_exchange_strong(old_counter, new_counter, memory_order_acquire, memory_order_relaxed));
         old_counter.external_count = new_counter.external_count;
     }
 
@@ -195,11 +186,11 @@ public:
      * 初始化队列，创建哨兵节点作为初始的头尾节点。
      */
     lock_free_queue() {
-		counted_node_ptr new_next;
-		new_next.ptr = new node();
-		new_next.external_count = 1;
-		tail.store(new_next);
-		head.store(new_next);
+        counted_node_ptr new_next;
+        new_next.ptr = new node();
+        new_next.external_count = 1;
+        tail.store(new_next);
+        head.store(new_next);
     }
 
     /**
@@ -208,7 +199,9 @@ public:
      * 清空队列并删除哨兵节点。
      */
     ~lock_free_queue() {
-        while (pop()) { this_thread::relax(); }
+        while (pop()) {
+            this_thread::relax();
+        }
         auto head_counted_node = head.load();
         delete head_counted_node.ptr;
     }
@@ -359,11 +352,9 @@ public:
     }
 };
 
-template <typename T>
-atomic<int> lock_free_queue<T>::destruct_count{0};
+template <typename T> atomic<int> lock_free_queue<T>::destruct_count{0};
 
-template <typename T>
-atomic<int> lock_free_queue<T>::construct_count{0};
+template <typename T> atomic<int> lock_free_queue<T>::construct_count{0};
 
 /** @} */ // LockFreeQueue
 

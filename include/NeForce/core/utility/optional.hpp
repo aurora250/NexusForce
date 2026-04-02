@@ -8,11 +8,11 @@
  * 此文件提供了可选值类型，用于表示可能存在或可能不存在的值。
  */
 
+#include <initializer_list>
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/utility/none.hpp"
-#include <initializer_list>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -26,13 +26,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief optional访问异常
  */
 struct optional_exception final : memory_exception {
-    explicit optional_exception(const char* info = "Access the Null Value of Optional.",
-                                const char* type = static_type,
-                                const int code = 0) noexcept
-    : memory_exception(info, type, code) {}
+    explicit optional_exception(const char* info = "Access the Null Value of Optional.", const char* type = static_type,
+                                const int code = 0) noexcept :
+    memory_exception(info, type, code) {}
 
-    explicit optional_exception(const exception& e)
-    : memory_exception(e) {}
+    explicit optional_exception(const exception& e) :
+    memory_exception(e) {}
 
     ~optional_exception() override = default;
     static constexpr auto static_type = "optional_exception";
@@ -46,18 +45,14 @@ struct optional_exception final : memory_exception {
  * @{
  */
 
-template <typename T>
-class optional;
+template <typename T> class optional;
 
 
-template <typename T>
-struct is_optional : false_type {};
+template <typename T> struct is_optional : false_type {};
 
-template <typename T>
-struct is_optional<optional<T>> : true_type {};
+template <typename T> struct is_optional<optional<T>> : true_type {};
 
-template <typename T>
-NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
+template <typename T> NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
 
 
 /**
@@ -67,10 +62,9 @@ NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
  *
  * 表示一个可能包含值也可能为空的对象。类似于指针，但拥有值语义。
  */
-template <typename T>
-class optional : icommon<optional<T>> {
+template <typename T> class optional : icommon<optional<T>> {
     static_assert(!is_any_of_v<remove_cv_t<T>, none_t, inplace_construct_tag>,
-        "optional do not contains none_t and inplace_construct_tag types.");
+                  "optional do not contains none_t and inplace_construct_tag types.");
     static_assert(is_object_v<T> && !is_array_v<T>, "optional only contains non-array object types.");
     static_assert(!is_reference_v<T>, "optional of reference type should use optional<T&> specialization.");
 
@@ -83,37 +77,26 @@ public:
 
 private:
     template <typename U>
-    using is_valid_optional = bool_constant<
-        !is_any_of_v<remove_cv_t<U>, none_t, inplace_construct_tag> &&
-        is_object_v<U> && !is_array_v<U>>;
+    using is_valid_optional = bool_constant<!is_any_of_v<remove_cv_t<U>, none_t, inplace_construct_tag> &&
+                                            is_object_v<U> && !is_array_v<U>>;
 
     template <typename U>
-    using convertible_from_optional = disjunction<
-        is_constructible<T, const optional<U>&>,
-        is_constructible<T, optional<U>&>,
-        is_constructible<T, const optional<U>&&>,
-        is_constructible<T, optional<U>&&>,
-        is_convertible<const optional<U>&, T>,
-        is_convertible<optional<U>&, T>,
-        is_convertible<const optional<U>&&, T>,
-        is_convertible<optional<U>&&, T>>;
+    using convertible_from_optional =
+            disjunction<is_constructible<T, const optional<U>&>, is_constructible<T, optional<U>&>,
+                        is_constructible<T, const optional<U>&&>, is_constructible<T, optional<U>&&>,
+                        is_convertible<const optional<U>&, T>, is_convertible<optional<U>&, T>,
+                        is_convertible<const optional<U>&&, T>, is_convertible<optional<U>&&, T>>;
 
     template <typename U>
-    using assignable_from_optional = disjunction<
-        is_assignable<T&, const optional<U>&>,
-        is_assignable<T&, optional<U>&>,
-        is_assignable<T&, const optional<U>&&>,
-        is_assignable<T&, optional<U>&&>>;
+    using assignable_from_optional =
+            disjunction<is_assignable<T&, const optional<U>&>, is_assignable<T&, optional<U>&>,
+                        is_assignable<T&, const optional<U>&&>, is_assignable<T&, optional<U>&&>>;
 
     bool have_value_ = false;
     aligned_storage_t<sizeof(T), alignof(T)> storage_;
 
-    constexpr T* get_ptr() noexcept {
-        return reinterpret_cast<T*>(&storage_);
-    }
-    constexpr const T* get_ptr() const noexcept {
-        return reinterpret_cast<const T*>(&storage_);
-    }
+    constexpr T* get_ptr() noexcept { return reinterpret_cast<T*>(&storage_); }
+    constexpr const T* get_ptr() const noexcept { return reinterpret_cast<const T*>(&storage_); }
 
 public:
     /**
@@ -129,7 +112,7 @@ public:
      * @param n 空值标签
      * @return 当前对象的引用
      */
-    NEFORCE_CONSTEXPR20 optional& operator =(none_t n) noexcept {
+    NEFORCE_CONSTEXPR20 optional& operator=(none_t n) noexcept {
         reset();
         return *this;
     }
@@ -139,12 +122,11 @@ public:
      * @tparam U 源值类型
      * @param value 源值
      */
-    template <typename U, enable_if_t<
-        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
-            is_constructible_v<T, U> && is_convertible_v<U, T>, int
-    > = 0>
-    constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
-    : have_value_(true) {
+    template <typename U, enable_if_t<is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
+                                              is_constructible_v<T, U> && is_convertible_v<U, T>,
+                                      int> = 0>
+    constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>) :
+    have_value_(true) {
         _NEFORCE construct(get_ptr(), _NEFORCE forward<U>(value));
     }
 
@@ -153,12 +135,11 @@ public:
      * @tparam U 源值类型
      * @param value 源值
      */
-    template <typename U, enable_if_t<
-        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
-            is_constructible_v<T, U> && !is_convertible_v<U, T>, int
-    > = 0>
-    explicit constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
-    : have_value_(true) {
+    template <typename U, enable_if_t<is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
+                                              is_constructible_v<T, U> && !is_convertible_v<U, T>,
+                                      int> = 0>
+    explicit constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>) :
+    have_value_(true) {
         _NEFORCE construct(get_ptr(), _NEFORCE forward<U>(value));
     }
 
@@ -166,8 +147,8 @@ public:
      * @brief 从值拷贝构造
      * @param value 源值
      */
-    explicit constexpr optional(const T& value) noexcept(is_nothrow_copy_constructible_v<T>)
-    : have_value_(true) {
+    explicit constexpr optional(const T& value) noexcept(is_nothrow_copy_constructible_v<T>) :
+    have_value_(true) {
         _NEFORCE construct(get_ptr(), value);
     }
 
@@ -175,8 +156,8 @@ public:
      * @brief 从值移动构造
      * @param value 源值
      */
-    explicit constexpr optional(T&& value) noexcept(is_nothrow_move_constructible_v<T>)
-    : have_value_(true) {
+    explicit constexpr optional(T&& value) noexcept(is_nothrow_move_constructible_v<T>) :
+    have_value_(true) {
         _NEFORCE construct(get_ptr(), _NEFORCE move(value));
     }
 
@@ -186,11 +167,12 @@ public:
      * @param value 源值
      * @return 当前对象的引用
      */
-    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
-        && negation_v<conjunction<is_scalar<T>, is_same<T, decay_t<U>>>>
-        && is_constructible_v<T, U> && is_assignable_v<T&, U>, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator =(U&& value)
-    noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
+    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional> &&
+                                                  negation_v<conjunction<is_scalar<T>, is_same<T, decay_t<U>>>> &&
+                                                  is_constructible_v<T, U> && is_assignable_v<T&, U>,
+                                          int> = 0>
+    NEFORCE_CONSTEXPR20 optional& operator=(U&& value) noexcept(is_nothrow_constructible_v<T, U> &&
+                                                                is_nothrow_assignable_v<T&, U>) {
         if (have_value_) {
             auto temp = T(_NEFORCE forward<U>(value));
             *get_ptr() = _NEFORCE move(temp);
@@ -207,7 +189,8 @@ public:
      * @param other 源可选值
      */
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
-        is_convertible_v<const U&, T> && convertible_from_optional<U>::value, int> = 0>
+                                              is_convertible_v<const U&, T> && convertible_from_optional<U>::value,
+                                      int> = 0>
     constexpr optional(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (other) {
             _NEFORCE construct(get_ptr(), *other);
@@ -221,7 +204,8 @@ public:
      * @param other 源可选值
      */
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
-        !is_convertible_v<const U&, T> && convertible_from_optional<U>::value, int> = 0>
+                                              !is_convertible_v<const U&, T> && convertible_from_optional<U>::value,
+                                      int> = 0>
     constexpr explicit optional(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (other) {
             _NEFORCE construct(get_ptr(), *other);
@@ -235,12 +219,17 @@ public:
      * @param other 源可选值
      * @return 当前对象的引用
      */
-    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
-        && is_constructible_v<T, const U&> && is_assignable_v<T&, const U&>
-        && !convertible_from_optional<U>::value && !assignable_from_optional<U>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator =(const optional<U>& other)
-    noexcept(is_nothrow_constructible_v<T, const U&> && is_nothrow_assignable_v<T&, const U&>) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    template <typename U = T,
+              enable_if_t<!is_same_v<remove_cvref_t<U>, optional> && is_constructible_v<T, const U&> &&
+                                  is_assignable_v<T&, const U&> && !convertible_from_optional<U>::value &&
+                                  !assignable_from_optional<U>::value,
+                          int> = 0>
+    NEFORCE_CONSTEXPR20 optional&
+    operator=(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&> &&
+                                                 is_nothrow_assignable_v<T&, const U&>) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         if (other) {
             if (have_value_) {
                 *get_ptr() = *other;
@@ -270,8 +259,10 @@ public:
      * @param other 源可选值
      * @return 当前对象的引用
      */
-    optional& operator =(const optional& other) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    optional& operator=(const optional& other) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         if (other.have_value_) {
             if (have_value_) {
                 *get_ptr() = *other;
@@ -290,8 +281,9 @@ public:
      * @tparam U 源可选值类型
      * @param other 源可选值
      */
-    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
-        is_convertible_v<U, T> && convertible_from_optional<U>::value, int> = 0>
+    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> && is_convertible_v<U, T> &&
+                                              convertible_from_optional<U>::value,
+                                      int> = 0>
     constexpr optional(optional<U>&& other) noexcept(is_nothrow_constructible_v<T, U>) {
         if (other) {
             _NEFORCE construct(get_ptr(), _NEFORCE move(*other));
@@ -304,8 +296,9 @@ public:
      * @tparam U 源可选值类型
      * @param other 源可选值
      */
-    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
-        !is_convertible_v<U, T> && convertible_from_optional<U>::value, int> = 0>
+    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> && !is_convertible_v<U, T> &&
+                                              convertible_from_optional<U>::value,
+                                      int> = 0>
     constexpr optional(optional<U>&& other) noexcept(is_nothrow_constructible_v<T, U>) {
         if (other) {
             _NEFORCE construct(get_ptr(), _NEFORCE move(*other));
@@ -319,12 +312,15 @@ public:
      * @param other 源可选值
      * @return 当前对象的引用
      */
-    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
-        && is_constructible_v<T, U> && is_assignable_v<T&, U>
-        && !convertible_from_optional<U>::value && !assignable_from_optional<U>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator =(optional<U>&& other)
-    noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional> && is_constructible_v<T, U> &&
+                                                  is_assignable_v<T&, U> && !convertible_from_optional<U>::value &&
+                                                  !assignable_from_optional<U>::value,
+                                          int> = 0>
+    NEFORCE_CONSTEXPR20 optional& operator=(optional<U>&& other) noexcept(is_nothrow_constructible_v<T, U> &&
+                                                                          is_nothrow_assignable_v<T&, U>) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         if (other) {
             if (have_value_) {
                 *get_ptr() = _NEFORCE move(*other);
@@ -355,7 +351,7 @@ public:
      * @param other 源可选值
      * @return 当前对象的引用
      */
-    optional& operator =(optional&& other) noexcept {
+    optional& operator=(optional&& other) noexcept {
         if (this != &other) {
             if (other.have_value_) {
                 if (have_value_) {
@@ -392,7 +388,7 @@ public:
      * @return 当前对象的引用
      */
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator =(const optional<U&>& other) {
+    NEFORCE_CONSTEXPR20 optional& operator=(const optional<U&>& other) {
         if (other) {
             if (have_value_) {
                 *get_ptr() = *other;
@@ -411,10 +407,10 @@ public:
      * @tparam Types 参数类型
      * @param args 构造参数
      */
-    template <typename ...Types, enable_if_t<is_constructible_v<T, Types...>, int> = 0>
-    constexpr explicit optional(inplace_construct_tag, Types&&... args)
-    noexcept(is_nothrow_constructible_v<T, Types...>)
-    : have_value_(true) {
+    template <typename... Types, enable_if_t<is_constructible_v<T, Types...>, int> = 0>
+    constexpr explicit optional(inplace_construct_tag,
+                                Types&&... args) noexcept(is_nothrow_constructible_v<T, Types...>) :
+    have_value_(true) {
         _NEFORCE construct(get_ptr(), _NEFORCE forward<Types>(args)...);
     }
 
@@ -425,19 +421,18 @@ public:
      * @param ilist 初始化列表
      * @param args 构造参数
      */
-    template <typename U, typename ...Types, enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
-    constexpr explicit optional(inplace_construct_tag, std::initializer_list<U> ilist, Types &&...args)
-    noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>)
-    : have_value_(true) {
+    template <typename U, typename... Types,
+              enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
+    constexpr explicit optional(inplace_construct_tag, std::initializer_list<U> ilist, Types&&... args) noexcept(
+            is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>) :
+    have_value_(true) {
         _NEFORCE construct(get_ptr(), ilist, _NEFORCE forward<Types>(args)...);
     }
 
     /**
      * @brief 析构函数
      */
-    NEFORCE_CONSTEXPR20 ~optional() noexcept {
-        reset();
-    }
+    NEFORCE_CONSTEXPR20 ~optional() noexcept { reset(); }
 
     /**
      * @brief 原位构造值
@@ -445,8 +440,7 @@ public:
      * @param args 构造参数
      */
     template <typename... Types, enable_if_t<is_constructible_v<T, Types...>, int> = 0>
-    NEFORCE_CONSTEXPR20 void emplace(Types&&... args)
-    noexcept(is_nothrow_constructible_v<T, Types...>) {
+    NEFORCE_CONSTEXPR20 void emplace(Types&&... args) noexcept(is_nothrow_constructible_v<T, Types...>) {
         reset();
         _NEFORCE construct(get_ptr(), _NEFORCE forward<Types>(args)...);
         have_value_ = true;
@@ -460,9 +454,10 @@ public:
      * @param args 构造参数
      */
     template <typename U, typename... Types,
-        enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
-    NEFORCE_CONSTEXPR20 void emplace(std::initializer_list<U> ilist, Types&&... args)
-    noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>) {
+              enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
+    NEFORCE_CONSTEXPR20 void
+    emplace(std::initializer_list<U> ilist,
+            Types&&... args) noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>) {
         reset();
         _NEFORCE construct(get_ptr(), ilist, _NEFORCE forward<Types>(args)...);
         have_value_ = true;
@@ -482,24 +477,20 @@ public:
      * @brief 检查是否包含值
      * @return 是否包含值
      */
-    NEFORCE_NODISCARD constexpr bool has_value() const noexcept {
-        return have_value_;
-    }
+    NEFORCE_NODISCARD constexpr bool has_value() const noexcept { return have_value_; }
 
     /**
      * @brief 转换为布尔值
      * @return 是否包含值
      */
-    constexpr explicit operator bool() const noexcept {
-        return have_value_;
-    }
+    constexpr explicit operator bool() const noexcept { return have_value_; }
 
     /**
      * @brief 取出存储的值
      * @return 存储的值的常量左值引用
      * @throws optional_exception 如果值未存储
      */
-    constexpr const_reference value() const & {
+    constexpr const_reference value() const& {
         if (!have_value_) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no value"));
         }
@@ -523,7 +514,7 @@ public:
      * @return 存储的值的常量右值引用
      * @throws optional_exception 如果值未存储
      */
-    constexpr const value_type&& value() const && {
+    constexpr const value_type&& value() const&& {
         if (!have_value_) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no value"));
         }
@@ -547,8 +538,7 @@ public:
      * @param value 值不存在时返回的值
      * @return 值存在时返回其值的拷贝，不存在时返回参数value
      */
-    constexpr value_type value_or(value_type value) const &
-    noexcept(is_nothrow_copy_constructible_v<value_type>) {
+    constexpr value_type value_or(value_type value) const& noexcept(is_nothrow_copy_constructible_v<value_type>) {
         if (!have_value_) {
             return value;
         }
@@ -560,8 +550,7 @@ public:
      * @param value 值不存在时返回的值
      * @return 值存在时返回其值的引用，不存在时返回参数value
      */
-    constexpr value_type value_or(value_type value) &&
-    noexcept(is_nothrow_move_constructible_v<value_type>) {
+    constexpr value_type value_or(value_type value) && noexcept(is_nothrow_move_constructible_v<value_type>) {
         if (!have_value_) {
             return value;
         }
@@ -574,9 +563,8 @@ public:
      * @param f 函数对象
      * @return 值存在时返回自身的拷贝，不存在时调用函数并返回结果
      */
-    template <typename F, enable_if_t<
-        is_invocable_v<F> && is_copy_constructible_v<T>, int> = 0>
-    constexpr optional or_else(F&& f) const & {
+    template <typename F, enable_if_t<is_invocable_v<F> && is_copy_constructible_v<T>, int> = 0>
+    constexpr optional or_else(F&& f) const& {
         if (have_value_) {
             return *this;
         }
@@ -589,8 +577,7 @@ public:
      * @param f 函数对象
      * @return 值存在时返回自身的移动，不存在时调用函数并返回结果
      */
-    template <typename F, enable_if_t<
-        is_invocable_v<F> && is_move_constructible_v<T>, int> = 0>
+    template <typename F, enable_if_t<is_invocable_v<F> && is_move_constructible_v<T>, int> = 0>
     constexpr optional or_else(F&& f) && {
         if (have_value_) {
             return _NEFORCE move(*this);
@@ -604,8 +591,7 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) const & {
+    template <typename F> constexpr decltype(auto) and_then(F&& f) const& {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -618,8 +604,7 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) & {
+    template <typename F> constexpr decltype(auto) and_then(F&& f) & {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -632,8 +617,7 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) const && {
+    template <typename F> constexpr decltype(auto) and_then(F&& f) const&& {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*get_ptr()));
         }
@@ -646,8 +630,7 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) && {
+    template <typename F> constexpr decltype(auto) and_then(F&& f) && {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*get_ptr()));
         }
@@ -660,8 +643,7 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回新的optional，或返回none的optional
      */
-    template <typename F>
-    constexpr auto transform(F&& f) const & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
+    template <typename F> constexpr auto transform(F&& f) const& -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -674,8 +656,7 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的值并返回新的optional，或返回none的optional
      */
-    template <typename F>
-    constexpr auto transform(F&& f) & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
+    template <typename F> constexpr auto transform(F&& f) & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(*get_ptr());
         }
@@ -689,7 +670,7 @@ public:
      * @return 函数处理存储的值的移动并返回新的optional，或返回none的optional
      */
     template <typename F>
-    constexpr auto transform(F&& f) const && -> optional<remove_cvref_t<decltype(f(_NEFORCE move(*get_ptr())))>> {
+    constexpr auto transform(F&& f) const&& -> optional<remove_cvref_t<decltype(f(_NEFORCE move(*get_ptr())))>> {
         if (have_value_) {
             return _NEFORCE forward<F>(f)(_NEFORCE move(*get_ptr()));
         }
@@ -714,44 +695,44 @@ public:
      * @brief 常量箭头运算符
      * @return 指向值的常量指针
      */
-    constexpr const_pointer operator ->() const noexcept { return get_ptr(); }
+    constexpr const_pointer operator->() const noexcept { return get_ptr(); }
 
     /**
      * @brief 箭头运算符
      * @return 指向值的常量指针
      */
-    constexpr pointer operator ->() noexcept { return get_ptr(); }
+    constexpr pointer operator->() noexcept { return get_ptr(); }
 
     /**
      * @brief 常量左值解引用运算符
      * @return 值的常量左值引用
      */
-    constexpr const_reference operator *() const & noexcept { return *get_ptr(); }
+    constexpr const_reference operator*() const& noexcept { return *get_ptr(); }
 
     /**
      * @brief 左值解引用运算符
      * @return 值的左值引用
      */
-    constexpr reference operator *() & noexcept { return *get_ptr(); }
+    constexpr reference operator*() & noexcept { return *get_ptr(); }
 
     /**
      * @brief 常量右值解引用运算符
      * @return 值的常量右值引用
      */
-    constexpr const value_type&& operator *() const && noexcept { return _NEFORCE move(*get_ptr()); }
+    constexpr const value_type&& operator*() const&& noexcept { return _NEFORCE move(*get_ptr()); }
 
     /**
      * @brief 右值解引用运算符
      * @return 值的右值引用
      */
-    constexpr value_type&& operator *() && noexcept { return _NEFORCE move(*get_ptr()); }
+    constexpr value_type&& operator*() && noexcept { return _NEFORCE move(*get_ptr()); }
 
     /**
      * @brief 等于比较运算符
      * @param rhs 右操作数
      * @return 两个可选值是否相等
      */
-    constexpr bool operator ==(const optional& rhs) const noexcept {
+    constexpr bool operator==(const optional& rhs) const noexcept {
         if (have_value_ != rhs.have_value_) {
             return false;
         }
@@ -766,38 +747,26 @@ public:
      * @param rhs 右操作数
      * @return 当前值是否小于右操作数值
      */
-    constexpr bool operator <(const optional& rhs) const noexcept {
+    constexpr bool operator<(const optional& rhs) const noexcept {
         if (!have_value_ || !rhs.have_value_) {
             return false;
         }
         return *get_ptr() < *rhs.get_ptr();
     }
 
-    constexpr bool operator ==(none_t) const noexcept { return !have_value_; }
-    constexpr bool operator !=(none_t) const noexcept { return have_value_; }
-    constexpr bool operator >(none_t) const noexcept { return have_value_; }
-    constexpr bool operator <(none_t) const noexcept { return false; }
-    constexpr bool operator >=(none_t) const noexcept { return true; }
-    constexpr bool operator <=(none_t) const noexcept { return !have_value_; }
+    constexpr bool operator==(none_t) const noexcept { return !have_value_; }
+    constexpr bool operator!=(none_t) const noexcept { return have_value_; }
+    constexpr bool operator>(none_t) const noexcept { return have_value_; }
+    constexpr bool operator<(none_t) const noexcept { return false; }
+    constexpr bool operator>=(none_t) const noexcept { return true; }
+    constexpr bool operator<=(none_t) const noexcept { return !have_value_; }
 
-    friend constexpr bool operator ==(none_t, const optional& rhs) noexcept {
-        return !rhs.have_value_;
-    }
-    friend constexpr bool operator !=(none_t, const optional& rhs) noexcept {
-        return rhs.have_value_;
-    }
-    friend constexpr bool operator >(none_t, const optional&) noexcept {
-        return false;
-    }
-    friend constexpr bool operator <(none_t, const optional& rhs) noexcept {
-        return rhs.have_value_;
-    }
-    friend constexpr bool operator >=(none_t, const optional& rhs) noexcept {
-        return !rhs.have_value_;
-    }
-    friend constexpr bool operator <=(none_t, const optional&) noexcept {
-        return true;
-    }
+    friend constexpr bool operator==(none_t, const optional& rhs) noexcept { return !rhs.have_value_; }
+    friend constexpr bool operator!=(none_t, const optional& rhs) noexcept { return rhs.have_value_; }
+    friend constexpr bool operator>(none_t, const optional&) noexcept { return false; }
+    friend constexpr bool operator<(none_t, const optional& rhs) noexcept { return rhs.have_value_; }
+    friend constexpr bool operator>=(none_t, const optional& rhs) noexcept { return !rhs.have_value_; }
+    friend constexpr bool operator<=(none_t, const optional&) noexcept { return true; }
 
     /**
      * @brief 计算哈希值
@@ -811,9 +780,11 @@ public:
      * @brief 交换两个可选值
      * @param other 要交换的可选值
      */
-    NEFORCE_CONSTEXPR20 void swap(optional& other)
-    noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_swappable_v<T>) {
-        if(_NEFORCE addressof(other) == this) return;
+    NEFORCE_CONSTEXPR20 void swap(optional& other) noexcept(is_nothrow_move_constructible_v<T> &&
+                                                            is_nothrow_swappable_v<T>) {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
         if (have_value_ && other.have_value_) {
             _NEFORCE swap(*this, other);
         } else if (have_value_) {
@@ -833,26 +804,24 @@ public:
  *
  * 引用类型的可选值，存储对现有对象的引用。
  *
- * @note 对存储引用的optional的任何赋值行为都被定义为更新引用位置，而非更新引用的地址的值，这是optional<T&>两种设计方式中的一种
+ * @note
+ * 对存储引用的optional的任何赋值行为都被定义为更新引用位置，而非更新引用的地址的值，这是optional<T&>两种设计方式中的一种
  */
-template <typename T>
-class optional<T&> : icommon<optional<T&>> {
+template <typename T> class optional<T&> : icommon<optional<T&>> {
     static_assert(is_object_v<T> && !is_array_v<T>, "optional<T&> requires T to be an object type.");
 
 public:
-    using value_type    = T&;           ///< 值类型
-    using reference     = T&;           ///< 引用类型
-    using const_reference = const T&;   ///< 常量引用类型
-    using pointer       = T*;           ///< 指针类型
-    using const_pointer = const T*;     ///< 常量指针类型
+    using value_type = T&;            ///< 值类型
+    using reference = T&;             ///< 引用类型
+    using const_reference = const T&; ///< 常量引用类型
+    using pointer = T*;               ///< 指针类型
+    using const_pointer = const T*;   ///< 常量指针类型
 
 private:
-    T* ptr_ = nullptr;  ///< 指向引用的指针
+    T* ptr_ = nullptr; ///< 指向引用的指针
 
     template <typename U>
-    using convertible_from_optional_ref = disjunction<
-        is_convertible<U&, T&>,
-        is_convertible<const U&, T&>>;
+    using convertible_from_optional_ref = disjunction<is_convertible<U&, T&>, is_convertible<const U&, T&>>;
 
 public:
     /**
@@ -865,7 +834,8 @@ public:
      * @brief 从引用构造
      * @param value 引用值
      */
-    constexpr optional(T& value) noexcept : ptr_(_NEFORCE addressof(value)) {}
+    constexpr optional(T& value) noexcept :
+    ptr_(_NEFORCE addressof(value)) {}
 
     /**
      * @brief 从可转换引用隐式转换构造
@@ -873,7 +843,8 @@ public:
      * @param value 引用值
      */
     template <typename U, enable_if_t<is_convertible_v<U&, T&>, int> = 0>
-    constexpr optional(U& value) noexcept : ptr_(_NEFORCE addressof(value)) {}
+    constexpr optional(U& value) noexcept :
+    ptr_(_NEFORCE addressof(value)) {}
 
     /**
      * @brief 从可转换引用显式转换构造
@@ -881,25 +852,26 @@ public:
      * @param value 引用值
      */
     template <typename U, enable_if_t<!is_convertible_v<U&, T&> && is_constructible_v<T&, U&>, int> = 0>
-    constexpr explicit optional(U& value) noexcept : ptr_(_NEFORCE addressof(value)) {}
+    constexpr explicit optional(U& value) noexcept :
+    ptr_(_NEFORCE addressof(value)) {}
 
     /**
      * @brief 从引用可选值隐式转换复制构造
      * @tparam U 源引用类型
      * @param other 源可选值
      */
-    template <typename U, enable_if_t<
-        convertible_from_optional_ref<U>::value, int> = 0>
-    constexpr optional(const _NEFORCE optional<U&>& other) noexcept : ptr_(other.ptr_) {}
+    template <typename U, enable_if_t<convertible_from_optional_ref<U>::value, int> = 0>
+    constexpr optional(const _NEFORCE optional<U&>& other) noexcept :
+    ptr_(other.ptr_) {}
 
     /**
      * @brief 从引用可选值显式转换复制构造
      * @tparam U 源引用类型
      * @param other 源可选值
      */
-    template <typename U, enable_if_t<
-        !convertible_from_optional_ref<U>::value && is_constructible_v<T&, U&>, int> = 0>
-    constexpr explicit optional(const _NEFORCE optional<U&>& other) noexcept : ptr_(other.ptr_) {}
+    template <typename U, enable_if_t<!convertible_from_optional_ref<U>::value && is_constructible_v<T&, U&>, int> = 0>
+    constexpr explicit optional(const _NEFORCE optional<U&>& other) noexcept :
+    ptr_(other.ptr_) {}
 
     /**
      * @brief 空值赋值运算符
@@ -908,7 +880,7 @@ public:
      *
      * 取消对目标的引用
      */
-    NEFORCE_CONSTEXPR20 optional& operator =(none_t n) noexcept {
+    NEFORCE_CONSTEXPR20 optional& operator=(none_t n) noexcept {
         ptr_ = nullptr;
         return *this;
     }
@@ -920,7 +892,7 @@ public:
      * @return 当前对象的引用
      */
     template <typename U = T, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator =(U& value) {
+    NEFORCE_CONSTEXPR20 optional& operator=(U& value) {
         if (ptr_) {
             *ptr_ = value;
         } else {
@@ -936,7 +908,7 @@ public:
      * @return 当前对象的引用
      */
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator =(const _NEFORCE optional<U&>& other) {
+    NEFORCE_CONSTEXPR20 optional& operator=(const _NEFORCE optional<U&>& other) {
         if (this != _NEFORCE addressof(other)) {
             if (other.ptr_) {
                 if (ptr_) {
@@ -962,33 +934,31 @@ public:
      * @param other 源可选值
      * @return 当前对象的引用
      */
-    NEFORCE_CONSTEXPR20 optional& operator =(const optional& other) noexcept = default;
+    NEFORCE_CONSTEXPR20 optional& operator=(const optional& other) noexcept = default;
 
     /**
      * @brief 移动构造函数
      * @param other 源可选值
      */
-    constexpr optional(optional&& other) noexcept : ptr_(other.ptr_) {}
+    constexpr optional(optional&& other) noexcept :
+    ptr_(other.ptr_) {}
 
     /**
      * @brief 移动赋值运算符
      * @param other 源可选值
      * @return 当前对象的引用
      */
-    NEFORCE_CONSTEXPR20 optional& operator =(optional&& other) noexcept {
+    NEFORCE_CONSTEXPR20 optional& operator=(optional&& other) noexcept {
         ptr_ = other.ptr_;
         return *this;
     }
 
-    template <typename... Types>
-    constexpr optional(inplace_construct_tag, Types&&...) = delete;
+    template <typename... Types> constexpr optional(inplace_construct_tag, Types&&...) = delete;
 
     /**
      * @brief 析构函数
      */
-    ~optional() noexcept {
-        ptr_ = nullptr;
-    }
+    ~optional() noexcept { ptr_ = nullptr; }
 
     /**
      * @brief 隐式转换原位构造引用
@@ -1035,7 +1005,7 @@ public:
      * @return 存储的常量左值引用
      * @throws optional_exception 如果引用未存储
      */
-    constexpr const T& value() const & {
+    constexpr const T& value() const& {
         if (!ptr_) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
@@ -1059,7 +1029,7 @@ public:
      * @return 存储的常量右值引用
      * @throws optional_exception 如果引用未存储
      */
-    constexpr const T&& value() const && {
+    constexpr const T&& value() const&& {
         if (!ptr_) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
@@ -1083,9 +1053,10 @@ public:
      * @param value 引用不存在时返回的值
      * @return 引用存在时返回其值的拷贝，不存在时返回参数value
      */
-    template <typename U>
-    constexpr T value_or(U&& value) const & {
-        if (ptr_) return *ptr_;
+    template <typename U> constexpr T value_or(U&& value) const& {
+        if (ptr_) {
+            return *ptr_;
+        }
         return _NEFORCE forward<U>(value);
     }
 
@@ -1094,9 +1065,10 @@ public:
      * @param value 引用不存在时返回的值
      * @return 引用存在时返回其值的移动，不存在时返回参数value
      */
-    template <typename U>
-    constexpr T value_or(U&& value) && {
-        if (ptr_) return _NEFORCE move(*ptr_);
+    template <typename U> constexpr T value_or(U&& value) && {
+        if (ptr_) {
+            return _NEFORCE move(*ptr_);
+        }
         return _NEFORCE forward<U>(value);
     }
 
@@ -1106,9 +1078,10 @@ public:
      * @param f 函数对象
      * @return 引用存在时返回自身的拷贝，不存在时调用函数并返回结果
      */
-    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>
-    constexpr optional or_else(F&& f) const & {
-        if (ptr_) return *this;
+    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0> constexpr optional or_else(F&& f) const& {
+        if (ptr_) {
+            return *this;
+        }
         return _NEFORCE forward<F>(f)();
     }
 
@@ -1118,9 +1091,10 @@ public:
      * @param f 函数对象
      * @return 引用存在时返回自身的移动，不存在时调用函数并返回结果
      */
-    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>
-    constexpr optional or_else(F&& f) && {
-        if (ptr_) return _NEFORCE move(*this);
+    template <typename F, enable_if_t<is_invocable_v<F>, int> = 0> constexpr optional or_else(F&& f) && {
+        if (ptr_) {
+            return _NEFORCE move(*this);
+        }
         return _NEFORCE forward<F>(f)();
     }
 
@@ -1130,9 +1104,10 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) const & {
-        if (ptr_) return _NEFORCE forward<F>(f)(*ptr_);
+    template <typename F> constexpr decltype(auto) and_then(F&& f) const& {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(*ptr_);
+        }
         return remove_cvref_t<decltype(f(*ptr_))>{};
     }
 
@@ -1142,9 +1117,10 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) & {
-        if (ptr_) return _NEFORCE forward<F>(f)(*ptr_);
+    template <typename F> constexpr decltype(auto) and_then(F&& f) & {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(*ptr_);
+        }
         return remove_cvref_t<decltype(f(*ptr_))>{};
     }
 
@@ -1154,9 +1130,10 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值的移动并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) const && {
-        if (ptr_) return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+    template <typename F> constexpr decltype(auto) and_then(F&& f) const&& {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+        }
         return remove_cvref_t<decltype(f(*ptr_))>{};
     }
 
@@ -1166,9 +1143,10 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值的移动并返回函数结果，或返回函数返回类型的默认构造类型
      */
-    template <typename F>
-    constexpr decltype(auto) and_then(F&& f) && {
-        if (ptr_) return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+    template <typename F> constexpr decltype(auto) and_then(F&& f) && {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+        }
         return remove_cvref_t<decltype(f(*ptr_))>{};
     }
 
@@ -1179,8 +1157,10 @@ public:
      * @return 函数处理存储的引用值并返回新的optional，或返回none的optional
      */
     template <typename F>
-    constexpr auto transform(F&& f) const & -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
-        if (ptr_) return _NEFORCE forward<F>(f)(*ptr_);
+    constexpr auto transform(F&& f) const& -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(*ptr_);
+        }
         return none;
     }
 
@@ -1190,9 +1170,10 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值并返回新的optional，或返回none的optional
      */
-    template <typename F>
-    constexpr auto transform(F&& f) & -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
-        if (ptr_) return _NEFORCE forward<F>(f)(*ptr_);
+    template <typename F> constexpr auto transform(F&& f) & -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(*ptr_);
+        }
         return none;
     }
 
@@ -1203,8 +1184,10 @@ public:
      * @return 函数处理存储的引用值的移动并返回新的optional，或返回none的optional
      */
     template <typename F>
-    constexpr auto transform(F&& f) const && -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
-        if (ptr_) return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+    constexpr auto transform(F&& f) const&& -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+        }
         return none;
     }
 
@@ -1214,9 +1197,10 @@ public:
      * @param f 函数对象
      * @return 函数处理存储的引用值的移动并返回新的optional，或返回none的optional
      */
-    template <typename F>
-    constexpr auto transform(F&& f) && -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
-        if (ptr_) return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+    template <typename F> constexpr auto transform(F&& f) && -> _NEFORCE optional<remove_cvref_t<decltype(f(*ptr_))>> {
+        if (ptr_) {
+            return _NEFORCE forward<F>(f)(_NEFORCE move(*ptr_));
+        }
         return none;
     }
 
@@ -1224,44 +1208,44 @@ public:
      * @brief 常量箭头运算符
      * @return 指向值的常量指针
      */
-    constexpr const T* operator ->() const noexcept { return ptr_; }
+    constexpr const T* operator->() const noexcept { return ptr_; }
 
     /**
      * @brief 箭头运算符
      * @return 指向值的指针
      */
-    constexpr T* operator ->() noexcept { return ptr_; }
+    constexpr T* operator->() noexcept { return ptr_; }
 
     /**
      * @brief 常量左值解引用运算符
      * @return 值的常量左值引用
      */
-    constexpr const T& operator *() const & noexcept { return *ptr_; }
+    constexpr const T& operator*() const& noexcept { return *ptr_; }
 
     /**
      * @brief 左值解引用运算符
      * @return 值的左值引用
      */
-    constexpr T& operator *() & noexcept { return *ptr_; }
+    constexpr T& operator*() & noexcept { return *ptr_; }
 
     /**
      * @brief 常量右值解引用运算符
      * @return 值的常量右值引用
      */
-    constexpr const T&& operator *() const && noexcept { return *ptr_; }
+    constexpr const T&& operator*() const&& noexcept { return *ptr_; }
 
     /**
      * @brief 右值解引用运算符
      * @return 值的右值引用
      */
-    constexpr T&& operator *() && noexcept { return *ptr_; }
+    constexpr T&& operator*() && noexcept { return *ptr_; }
 
     /**
      * @brief 等于比较运算符
      * @param rhs 右操作数
      * @return 两个可选值是否相等
      */
-    constexpr bool operator ==(const optional& rhs) const noexcept {
+    constexpr bool operator==(const optional& rhs) const noexcept {
         if (ptr_ == nullptr || rhs.ptr_ == nullptr) {
             return ptr_ == rhs.ptr_;
         }
@@ -1273,35 +1257,21 @@ public:
      * @param rhs 右操作数
      * @return 当前值是否小于右操作数值
      */
-    constexpr bool operator <(const optional& rhs) const noexcept {
-        return ptr_ && rhs.ptr_ && *ptr_ < *rhs.ptr_;
-    }
+    constexpr bool operator<(const optional& rhs) const noexcept { return ptr_ && rhs.ptr_ && *ptr_ < *rhs.ptr_; }
 
-    constexpr bool operator ==(none_t) const noexcept { return ptr_ == nullptr; }
-    constexpr bool operator !=(none_t) const noexcept { return ptr_ != nullptr; }
-    constexpr bool operator >(none_t) const noexcept { return ptr_ != nullptr; }
-    constexpr bool operator <(none_t) const noexcept { return false; }
-    constexpr bool operator >=(none_t) const noexcept { return true; }
-    constexpr bool operator <=(none_t) const noexcept { return ptr_ == nullptr; }
+    constexpr bool operator==(none_t) const noexcept { return ptr_ == nullptr; }
+    constexpr bool operator!=(none_t) const noexcept { return ptr_ != nullptr; }
+    constexpr bool operator>(none_t) const noexcept { return ptr_ != nullptr; }
+    constexpr bool operator<(none_t) const noexcept { return false; }
+    constexpr bool operator>=(none_t) const noexcept { return true; }
+    constexpr bool operator<=(none_t) const noexcept { return ptr_ == nullptr; }
 
-    friend constexpr bool operator ==(none_t, const optional& rhs) noexcept {
-        return rhs.ptr_ == nullptr;
-    }
-    friend constexpr bool operator !=(none_t, const optional& rhs) noexcept {
-        return rhs.ptr_ != nullptr;
-    }
-    friend constexpr bool operator >(none_t, const optional&) noexcept {
-        return false;
-    }
-    friend constexpr bool operator <(none_t, const optional& rhs) noexcept {
-        return rhs.ptr_ != nullptr;
-    }
-    friend constexpr bool operator >=(none_t, const optional& rhs) noexcept {
-        return rhs.ptr_ == nullptr;
-    }
-    friend constexpr bool operator <=(none_t, const optional&) noexcept {
-        return true;
-    }
+    friend constexpr bool operator==(none_t, const optional& rhs) noexcept { return rhs.ptr_ == nullptr; }
+    friend constexpr bool operator!=(none_t, const optional& rhs) noexcept { return rhs.ptr_ != nullptr; }
+    friend constexpr bool operator>(none_t, const optional&) noexcept { return false; }
+    friend constexpr bool operator<(none_t, const optional& rhs) noexcept { return rhs.ptr_ != nullptr; }
+    friend constexpr bool operator>=(none_t, const optional& rhs) noexcept { return rhs.ptr_ == nullptr; }
+    friend constexpr bool operator<=(none_t, const optional&) noexcept { return true; }
 
     /**
      * @brief 计算哈希值
@@ -1315,14 +1285,11 @@ public:
      * @brief 交换两个可选值
      * @param other 要交换的可选值
      */
-    NEFORCE_CONSTEXPR20 void swap(optional& other) noexcept {
-        _NEFORCE swap(ptr_, other.ptr_);
-    }
+    NEFORCE_CONSTEXPR20 void swap(optional& other) noexcept { _NEFORCE swap(ptr_, other.ptr_); }
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T>
-optional(T) -> optional<T>;
+template <typename T> optional(T) -> optional<T>;
 #endif
 
 
@@ -1333,9 +1300,8 @@ optional(T) -> optional<T>;
  * @return 包装值的可选值
  */
 template <typename T, enable_if_t<is_constructible_v<decay_t<T>, T>, int> = 0>
-constexpr optional<decay_t<T>> make_optional(T&& value)
-noexcept(is_nothrow_constructible_v<optional<decay_t<T>>, T>) {
-    return optional<decay_t<T>>{ _NEFORCE forward<T>(value) };
+constexpr optional<decay_t<T>> make_optional(T&& value) noexcept(is_nothrow_constructible_v<optional<decay_t<T>>, T>) {
+    return optional<decay_t<T>>{_NEFORCE forward<T>(value)};
 }
 
 /**
@@ -1346,9 +1312,8 @@ noexcept(is_nothrow_constructible_v<optional<decay_t<T>>, T>) {
  * @return 构造的可选值
  */
 template <typename T, typename... Args, enable_if_t<is_constructible_v<T, Args...>, int> = 0>
-constexpr optional<T> make_optional(Args&&... args)
-noexcept(is_nothrow_constructible_v<T, Args...>) {
-    return optional<T>{ inplace_construct_tag{}, _NEFORCE forward<Args>(args)... };
+constexpr optional<T> make_optional(Args&&... args) noexcept(is_nothrow_constructible_v<T, Args...>) {
+    return optional<T>{inplace_construct_tag{}, _NEFORCE forward<Args>(args)...};
 }
 
 /**
@@ -1361,10 +1326,10 @@ noexcept(is_nothrow_constructible_v<T, Args...>) {
  * @return 构造的可选值
  */
 template <typename T, typename U, typename... Args>
-constexpr enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Args...>,
-optional<T>> make_optional(std::initializer_list<U> ilist, Args&&... args)
-noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
-    return optional<T>{ inplace_construct_tag{}, ilist, _NEFORCE forward<Args>(args)... };
+constexpr enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Args...>, optional<T>>
+make_optional(std::initializer_list<U> ilist,
+              Args&&... args) noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
+    return optional<T>{inplace_construct_tag{}, ilist, _NEFORCE forward<Args>(args)...};
 }
 
 /**
@@ -1373,16 +1338,12 @@ noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
  * @param value 引用值
  * @return 包装引用的可选值
  */
-template <typename T>
-constexpr optional<T&> make_optional(T& value) noexcept {
-    return optional<T&>{value};
-}
+template <typename T> constexpr optional<T&> make_optional(T& value) noexcept { return optional<T&>{value}; }
 
 /**
  * @note 禁用从右值创建引用可选值，防止悬垂引用
  */
-template <typename T>
-constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
+template <typename T> constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
 
 
 /**
@@ -1392,8 +1353,7 @@ constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
  * @return 指定位置元素的常量左值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T>
-constexpr const T& get(const optional<T>& opt) {
+template <typename T> constexpr const T& get(const optional<T>& opt) {
     return static_cast<const T&>(static_cast<const optional<T>&>(opt).value());
 }
 
@@ -1404,8 +1364,7 @@ constexpr const T& get(const optional<T>& opt) {
  * @return 指定位置元素的左值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T>
-constexpr T& get(optional<T>& opt) {
+template <typename T> constexpr T& get(optional<T>& opt) {
     return static_cast<T&>(static_cast<optional<T>&>(opt).value());
 }
 
@@ -1416,8 +1375,7 @@ constexpr T& get(optional<T>& opt) {
  * @return 指定位置元素的常量右值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T>
-constexpr const T&& get(const optional<T>&& opt) {
+template <typename T> constexpr const T&& get(const optional<T>&& opt) {
     return static_cast<const T&&>(static_cast<const optional<T>&&>(opt).value());
 }
 
@@ -1428,8 +1386,7 @@ constexpr const T&& get(const optional<T>&& opt) {
  * @return 指定位置元素的右值引用
  * @throws optional_exception 如果值未存储
  */
-template <typename T>
-constexpr T&& get(optional<T>&& opt) {
+template <typename T> constexpr T&& get(optional<T>&& opt) {
     return static_cast<T&&>(static_cast<optional<T>&&>(opt).value());
 }
 

@@ -44,8 +44,7 @@ private:
     string build_request_str(const http_client_request& req, const url& req_url) const;
     bool send_request(string_view request_str, time_point& send_start);
 
-    optional<http_client_response> read_response(time_point& receive_start,
-                                                 const string& request_host,
+    optional<http_client_response> read_response(time_point& receive_start, const string& request_host,
                                                  const string& request_path);
 
     void update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url);
@@ -55,8 +54,8 @@ private:
     bool ensure_connected(const string& host, ports port);
 
 public:
-    http_client()
-    : http_client(config()) {}
+    http_client() :
+    http_client(config()) {}
 
     explicit http_client(config config);
     explicit http_client(ssl_context ctx, config config);
@@ -64,26 +63,20 @@ public:
     ~http_client() = default;
 
     http_client(const http_client&) = delete;
-    http_client& operator =(const http_client&) = delete;
+    http_client& operator=(const http_client&) = delete;
 
     http_client(http_client&&) noexcept = default;
-    http_client& operator =(http_client&&) noexcept = default;
+    http_client& operator=(http_client&&) noexcept = default;
 
     void set_config(config cfg) {
         lock<mutex> lk(mutex_);
         config_ = move(cfg);
     }
 
-    const config& get_config() const noexcept {
-        return config_;
-    }
+    const config& get_config() const noexcept { return config_; }
 
-    const client_type& get_client() const noexcept {
-        return client_;
-    }
-    client_type& get_client() noexcept {
-        return client_;
-    }
+    const client_type& get_client() const noexcept { return client_; }
+    client_type& get_client() noexcept { return client_; }
 
     void set_default_header(const string& key, string value) {
         lock<mutex> lk(mutex_);
@@ -95,13 +88,9 @@ public:
         persistent_headers_.erase(key);
     }
 
-    void set_max_redirects(uint16_t max) {
-        config_.max_redirects = max;
-    }
+    void set_max_redirects(uint16_t max) { config_.max_redirects = max; }
 
-    void set_follow_redirects(bool follow) {
-        config_.follow_redirects = follow;
-    }
+    void set_follow_redirects(bool follow) { config_.follow_redirects = follow; }
 
     void set_timeout(milliseconds timeout) {
         config_.connect_timeout = timeout;
@@ -119,13 +108,9 @@ public:
         config_.proxy_port = ports::undef;
     }
 
-    void set_progress_callback(progress_callback_t callback) {
-        progress_callback_ = move(callback);
-    }
+    void set_progress_callback(progress_callback_t callback) { progress_callback_ = move(callback); }
 
-    void set_error_callback(error_callback_t callback) {
-        error_callback_ = move(callback);
-    }
+    void set_error_callback(error_callback_t callback) { error_callback_ = move(callback); }
 
     void set_ssl_context(ssl_context ctx);
     void set_verify_ssl(bool verify);
@@ -144,27 +129,19 @@ public:
 
     http_client_response get(const string& url, const unordered_map<string, string>& headers = {});
 
-    http_client_response post(
-        const string& url,
-        const string& body = "",
-        const string& content_type = "application/x-www-form-urlencoded",
-        const unordered_map<string, string>& headers = {});
+    http_client_response post(const string& url, const string& body = "",
+                              const string& content_type = "application/x-www-form-urlencoded",
+                              const unordered_map<string, string>& headers = {});
 
-    http_client_response post_json(
-        const string& url_str,
-        const string& json_body,
-        const unordered_map<string, string>& headers);
+    http_client_response post_json(const string& url_str, const string& json_body,
+                                   const unordered_map<string, string>& headers);
 
-    http_client_response post_form(
-        const string& url_str,
-        const unordered_map<string, string>& form_data,
-        const unordered_map<string, string>& headers);
+    http_client_response post_form(const string& url_str, const unordered_map<string, string>& form_data,
+                                   const unordered_map<string, string>& headers);
 
-    http_client_response put(
-        const string& url,
-        const string& body = "",
-        const string& content_type = "application/x-www-form-urlencoded",
-        const unordered_map<string, string>& headers = {});
+    http_client_response put(const string& url, const string& body = "",
+                             const string& content_type = "application/x-www-form-urlencoded",
+                             const unordered_map<string, string>& headers = {});
 
     http_client_response del(const string& url, const unordered_map<string, string>& headers = {});
 
@@ -172,11 +149,9 @@ public:
 
     http_client_response options(const string& url, const unordered_map<string, string>& headers = {});
 
-    http_client_response patch(
-        const string& url,
-        const string& body = "",
-        const string& content_type = "application/x-www-form-urlencoded",
-        const unordered_map<string, string>& headers = {});
+    http_client_response patch(const string& url, const string& body = "",
+                               const string& content_type = "application/x-www-form-urlencoded",
+                               const unordered_map<string, string>& headers = {});
 
     http_client_response request(http_client_request req);
 
@@ -186,9 +161,7 @@ public:
 
     void close();
 
-    NEFORCE_NODISCARD bool is_connected() const noexcept {
-        return client_.is_connected();
-    }
+    NEFORCE_NODISCARD bool is_connected() const noexcept { return client_.is_connected(); }
 };
 
 NEFORCE_END_NAMESPACE__

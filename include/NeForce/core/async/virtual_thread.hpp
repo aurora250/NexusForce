@@ -10,11 +10,11 @@
  */
 
 #ifdef NEFORCE_STANDARD_20
-#include "NeForce/core/container/queue.hpp"
-#include "NeForce/core/utility/optional.hpp"
-#include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/async/atomic.hpp"
-#include "NeForce/core/async/coroutine.hpp"
+#    include "NeForce/core/async/atomic.hpp"
+#    include "NeForce/core/async/condition_variable.hpp"
+#    include "NeForce/core/async/coroutine.hpp"
+#    include "NeForce/core/container/queue.hpp"
+#    include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -37,33 +37,27 @@ struct virtual_thread_task {
      * 定义协程的行为和状态管理。
      */
     struct promise_type {
-        exception_ptr exception_;  ///< 异常存储
+        exception_ptr exception_; ///< 异常存储
 
         /**
          * @brief 获取返回对象
          * @return 虚拟线程任务对象
          */
         virtual_thread_task get_return_object() {
-            return virtual_thread_task{
-                coroutine_handle<promise_type>::from_promise(*this)
-            };
+            return virtual_thread_task{coroutine_handle<promise_type>::from_promise(*this)};
         }
 
         /**
          * @brief 初始挂起点
          * @return 立即恢复的挂起器
          */
-        suspend_never initial_suspend() {
-            return suspend_never{};
-        }
+        suspend_never initial_suspend() { return suspend_never{}; }
 
         /**
          * @brief 最终挂起点
          * @return 总是挂起的挂起器
          */
-        suspend_always final_suspend() noexcept {
-            return suspend_always{};
-        }
+        suspend_always final_suspend() noexcept { return suspend_always{}; }
 
         /**
          * @brief 返回void
@@ -75,19 +69,17 @@ struct virtual_thread_task {
          *
          * 捕获协程中未处理的异常。
          */
-        void unhandled_exception() {
-            exception_ = _NEFORCE current_exception();
-        }
+        void unhandled_exception() { exception_ = _NEFORCE current_exception(); }
     };
 
-    coroutine_handle<promise_type> handle_;  ///< 协程句柄
+    coroutine_handle<promise_type> handle_; ///< 协程句柄
 
     /**
      * @brief 构造函数
      * @param h 协程句柄
      */
-    virtual_thread_task(coroutine_handle<promise_type> h)
-    : handle_(h) {}
+    virtual_thread_task(coroutine_handle<promise_type> h) :
+    handle_(h) {}
 
     /**
      * @brief 析构函数
@@ -100,22 +92,22 @@ struct virtual_thread_task {
         }
     }
 
-    virtual_thread_task(const virtual_thread_task&) = delete;  ///< 禁止拷贝构造
-    virtual_thread_task& operator =(const virtual_thread_task&) = delete;  ///< 禁止拷贝赋值
+    virtual_thread_task(const virtual_thread_task&) = delete;            ///< 禁止拷贝构造
+    virtual_thread_task& operator=(const virtual_thread_task&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 移动构造函数
      * @param other 要移动的虚拟线程任务
      */
-    virtual_thread_task(virtual_thread_task&& other) noexcept
-    : handle_(_NEFORCE exchange(other.handle_, nullptr)) {}
+    virtual_thread_task(virtual_thread_task&& other) noexcept :
+    handle_(_NEFORCE exchange(other.handle_, nullptr)) {}
 
     /**
      * @brief 移动赋值运算符
      * @param other 要移动的虚拟线程任务
      * @return 当前对象的引用
      */
-    virtual_thread_task& operator =(virtual_thread_task&& other) noexcept {
+    virtual_thread_task& operator=(virtual_thread_task&& other) noexcept {
         if (this != &other) {
             if (handle_ && !handle_.done()) {
                 handle_.destroy();
@@ -134,17 +126,17 @@ struct virtual_thread_task {
  */
 class virtual_thread_scheduler {
 private:
-    queue<coroutine_handle<>> task_queue_;  ///< 任务队列
-    vector<thread> workers_;  ///< 工作线程集合
-    mutex mutex_;  ///< 队列保护互斥锁
-    condition_variable cv_;  ///< 条件变量
-    atomic<bool> shutdown_;  ///< 关闭标志
+    queue<coroutine_handle<>> task_queue_; ///< 任务队列
+    vector<thread> workers_;               ///< 工作线程集合
+    mutex mutex_;                          ///< 队列保护互斥锁
+    condition_variable cv_;                ///< 条件变量
+    atomic<bool> shutdown_;                ///< 关闭标志
 
     /**
      * @brief 默认构造函数
      */
-    virtual_thread_scheduler()
-    : shutdown_(false) {}
+    virtual_thread_scheduler() :
+    shutdown_(false) {}
 
     /**
      * @brief 工作线程循环
@@ -157,9 +149,7 @@ private:
 
             {
                 unique_lock<mutex> lock(mutex_);
-                cv_.wait(lock, [this] {
-                    return shutdown_ || !task_queue_.empty();
-                });
+                cv_.wait(lock, [this] { return shutdown_ || !task_queue_.empty(); });
 
                 if (shutdown_ && task_queue_.empty()) {
                     return;
@@ -225,7 +215,7 @@ public:
         }
         cv_.notify_all();
 
-        for (auto& worker : workers_) {
+        for (auto& worker: workers_) {
             if (worker.joinable()) {
                 worker.join();
             }
@@ -237,9 +227,7 @@ public:
      *
      * 自动关闭调度器。
      */
-    ~virtual_thread_scheduler() {
-        shutdown();
-    }
+    ~virtual_thread_scheduler() { shutdown(); }
 };
 
 /**
@@ -249,15 +237,13 @@ public:
  * 用于协程挂起和调度的等待器类型。
  */
 struct virtual_thread_awaiter {
-    coroutine_handle<> handle_;  ///< 协程句柄
+    coroutine_handle<> handle_; ///< 协程句柄
 
     /**
      * @brief 检查是否准备就绪
      * @return 总是返回false，表示需要挂起
      */
-    bool await_ready() const noexcept {
-        return false;
-    }
+    bool await_ready() const noexcept { return false; }
 
     /**
      * @brief 挂起协程
@@ -265,9 +251,7 @@ struct virtual_thread_awaiter {
      *
      * 将协程提交给调度器执行。
      */
-    void await_suspend(coroutine_handle<> handle) {
-        virtual_thread_scheduler::get_instance().schedule(handle);
-    }
+    void await_suspend(coroutine_handle<> handle) { virtual_thread_scheduler::get_instance().schedule(handle); }
 
     /**
      * @brief 恢复协程
@@ -285,7 +269,7 @@ struct virtual_thread_awaiter {
  */
 class virtual_thread {
 private:
-    optional<virtual_thread_task> task_;  ///< 关联的任务对象
+    optional<virtual_thread_task> task_; ///< 关联的任务对象
 
     /**
      * @brief 创建任务
@@ -295,18 +279,17 @@ private:
      *
      * 将普通函数包装为协程任务。
      */
-    template<typename Func>
-    static virtual_thread_task create_task(Func func) {
+    template <typename Func> static virtual_thread_task create_task(Func func) {
         co_await suspend_never{};
         func();
     }
 
 public:
-    virtual_thread() = default;  ///< 默认构造函数
-    virtual_thread(const virtual_thread&) = delete;  ///< 禁止拷贝构造
-    virtual_thread& operator =(const virtual_thread&) = delete;  ///< 禁止拷贝赋值
-    virtual_thread(virtual_thread&& other) noexcept = default;  ///< 移动构造函数
-    virtual_thread& operator =(virtual_thread&& other) noexcept = default;  ///< 移动赋值运算符
+    virtual_thread() = default;                                           ///< 默认构造函数
+    virtual_thread(const virtual_thread&) = delete;                       ///< 禁止拷贝构造
+    virtual_thread& operator=(const virtual_thread&) = delete;            ///< 禁止拷贝赋值
+    virtual_thread(virtual_thread&& other) noexcept = default;            ///< 移动构造函数
+    virtual_thread& operator=(virtual_thread&& other) noexcept = default; ///< 移动赋值运算符
 
     /**
      * @brief 启动虚拟线程
@@ -316,8 +299,7 @@ public:
      *
      * 创建并启动新的虚拟线程执行指定函数。
      */
-    template <typename Func>
-    static virtual_thread start(Func&& func) {
+    template <typename Func> static virtual_thread start(Func&& func) {
         virtual_thread vt;
         vt.task_ = virtual_thread::create_task(_NEFORCE forward<Func>(func));
         return vt;
@@ -329,9 +311,7 @@ public:
      *
      * 挂起当前协程，将执行权交给调度器。
      */
-    static virtual_thread_awaiter yield() {
-        return virtual_thread_awaiter{};
-    }
+    static virtual_thread_awaiter yield() { return virtual_thread_awaiter{}; }
 
     /**
      * @brief 睡眠指定毫秒数
@@ -351,18 +331,14 @@ public:
      *
      * 启动指定数量的工作线程处理协程任务。
      */
-    static void initialize(size_t num_threads) {
-        virtual_thread_scheduler::get_instance().start_workers(num_threads);
-    }
+    static void initialize(size_t num_threads) { virtual_thread_scheduler::get_instance().start_workers(num_threads); }
 
     /**
      * @brief 关闭调度器
      *
      * 关闭所有工作线程，清理资源。
      */
-    static void shutdown() {
-        virtual_thread_scheduler::get_instance().shutdown();
-    }
+    static void shutdown() { virtual_thread_scheduler::get_instance().shutdown(); }
 };
 
 /** @} */ // Coroutine

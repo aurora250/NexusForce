@@ -9,17 +9,17 @@
  * 包括相等性比较、范围比较、极值查找、字典序比较等功能。
  */
 
+#include <initializer_list>
+#include "NeForce/core/algorithm/search.hpp"
 #include "NeForce/core/memory/memory.hpp"
 #include "NeForce/core/utility/pair.hpp"
-#include "NeForce/core/algorithm/search.hpp"
-#include <initializer_list>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -51,13 +51,17 @@ NEFORCE_BEGIN_NAMESPACE__
  * 要求第二个范围至少与第一个范围一样长。
  */
 template <typename Iterator1, typename Iterator2, typename BinaryPredicate>
-NEFORCE_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred)
-noexcept(noexcept(++first1) && noexcept(++first2) && noexcept(binary_pred(*first1, *first2))) {
-    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
-	for (; first1 != last1; ++first1, ++first2) {
-		if (!binary_pred(*first1, *first2)) return false;
-	}
-	return true;
+NEFORCE_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2,
+                                       BinaryPredicate binary_pred) noexcept(noexcept(++first1) && noexcept(++first2) &&
+                                                                             noexcept(binary_pred(*first1, *first2))) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>,
+                  "Iterator must be input_iterator");
+    for (; first1 != last1; ++first1, ++first2) {
+        if (!binary_pred(*first1, *first2)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -70,9 +74,9 @@ noexcept(noexcept(++first1) && noexcept(++first2) && noexcept(binary_pred(*first
  * @return 如果两个范围相等则返回true，否则返回false
  */
 template <typename Iterator1, typename Iterator2>
-NEFORCE_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2)
-noexcept(noexcept(_NEFORCE equal(first1, last1, first2, _NEFORCE equal_to<iter_value_t<Iterator1>>()))) {
-	return _NEFORCE equal(first1, last1, first2, _NEFORCE equal_to<iter_value_t<Iterator1>>());
+NEFORCE_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(
+        noexcept(_NEFORCE equal(first1, last1, first2, _NEFORCE equal_to<iter_value_t<Iterator1>>()))) {
+    return _NEFORCE equal(first1, last1, first2, _NEFORCE equal_to<iter_value_t<Iterator1>>());
 }
 
 /**
@@ -93,29 +97,29 @@ template <typename Iterator, typename T, typename Compare>
 constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, const T& value, Compare comp) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
-	auto len = _NEFORCE distance(first, last);
-	auto half = len;
-	Iterator middle, left, right;
+    auto len = _NEFORCE distance(first, last);
+    auto half = len;
+    Iterator middle, left, right;
 
-	while (len > 0) {
-		half = len >> 1;
-		middle = first;
-		_NEFORCE advance(middle, half);
+    while (len > 0) {
+        half = len >> 1;
+        middle = first;
+        _NEFORCE advance(middle, half);
 
-		if (comp(*middle, value)) {
-			first = middle;
-			++first;
-			len = len - half - 1;
-		} else if (comp(value, *middle)) {
-			len = half;
-		} else {
-			left = _NEFORCE lower_bound(first, middle, value, comp);
-			_NEFORCE advance(first, len);
-			right = _NEFORCE upper_bound(++middle, first, value, comp);
-			return pair<Iterator, Iterator>(left, right);
-		}
-	}
-	return pair<Iterator, Iterator>(first, first);
+        if (comp(*middle, value)) {
+            first = middle;
+            ++first;
+            len = len - half - 1;
+        } else if (comp(value, *middle)) {
+            len = half;
+        } else {
+            left = _NEFORCE lower_bound(first, middle, value, comp);
+            _NEFORCE advance(first, len);
+            right = _NEFORCE upper_bound(++middle, first, value, comp);
+            return pair<Iterator, Iterator>(left, right);
+        }
+    }
+    return pair<Iterator, Iterator>(first, first);
 }
 
 /**
@@ -129,7 +133,7 @@ constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, co
  */
 template <typename Iterator, typename T>
 constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, const T& value) {
-	return _NEFORCE equal_range(first, last, value, _NEFORCE less<iter_value_t<Iterator>>());
+    return _NEFORCE equal_range(first, last, value, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 
@@ -147,9 +151,8 @@ constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, co
  * - 否则 a 较大
  */
 template <typename T, typename Compare>
-constexpr const T& max(const T& a, const T& b, Compare comp)
-noexcept(noexcept(comp(a, b))) {
-	return comp(a, b) ? b : a;
+constexpr const T& max(const T& a, const T& b, Compare comp) noexcept(noexcept(comp(a, b))) {
+    return comp(a, b) ? b : a;
 }
 
 /**
@@ -159,11 +162,7 @@ noexcept(noexcept(comp(a, b))) {
  * @param b 第二个值
  * @return a和b中的较大者
  */
-template <typename T>
-constexpr const T& max(const T& a, const T& b)
-noexcept(noexcept(a < b)) {
-	return a < b ? b : a;
-}
+template <typename T> constexpr const T& max(const T& a, const T& b) noexcept(noexcept(a < b)) { return a < b ? b : a; }
 
 /**
  * @brief 返回两个值中的较小者
@@ -179,9 +178,8 @@ noexcept(noexcept(a < b)) {
  * - 否则 a 较小
  */
 template <typename T, typename Compare>
-constexpr const T& min(const T& a, const T& b, Compare comp)
-noexcept(noexcept(comp(b, a))) {
-	return comp(b, a) ? b : a;
+constexpr const T& min(const T& a, const T& b, Compare comp) noexcept(noexcept(comp(b, a))) {
+    return comp(b, a) ? b : a;
 }
 
 /**
@@ -191,11 +189,7 @@ noexcept(noexcept(comp(b, a))) {
  * @param b 第二个值
  * @return a和b中的较小者
  */
-template <typename T>
-constexpr const T& min(const T& a, const T& b)
-noexcept(noexcept(b < a)) {
-	return b < a ? b : a;
-}
+template <typename T> constexpr const T& min(const T& a, const T& b) noexcept(noexcept(b < a)) { return b < a ? b : a; }
 
 /**
  * @brief 返回三个值的中位数
@@ -211,22 +205,22 @@ noexcept(noexcept(b < a)) {
  * 最多进行3次比较。
  */
 template <typename T, typename Compare>
-constexpr const T& median(const T& a, const T& b, const T& c, Compare comp)
-noexcept(noexcept(comp(a, b))) {
-	if (comp(a, b)) {
-		if (comp(b, c))
-			return b;
-		else if (comp(a, c))
-			return c;
-		else
-			return a;
-	}
-	else if (comp(a, c))
-		return a;
-	else if (comp(b, c))
-		return c;
-	else
-		return b;
+constexpr const T& median(const T& a, const T& b, const T& c, Compare comp) noexcept(noexcept(comp(a, b))) {
+    if (comp(a, b)) {
+        if (comp(b, c)) {
+            return b;
+        } else if (comp(a, c)) {
+            return c;
+        } else {
+            return a;
+        }
+    } else if (comp(a, c)) {
+        return a;
+    } else if (comp(b, c)) {
+        return c;
+    } else {
+        return b;
+    }
 }
 
 /**
@@ -238,9 +232,9 @@ noexcept(noexcept(comp(a, b))) {
  * @return a、b、c中的中位数
  */
 template <typename T>
-constexpr const T& median(const T& a, const T& b, const T& c)
-noexcept(noexcept(_NEFORCE median(a, b, c, _NEFORCE less<T>()))) {
-	return _NEFORCE median(a, b, c, _NEFORCE less<T>());
+constexpr const T& median(const T& a, const T& b,
+                          const T& c) noexcept(noexcept(_NEFORCE median(a, b, c, _NEFORCE less<T>()))) {
+    return _NEFORCE median(a, b, c, _NEFORCE less<T>());
 }
 
 
@@ -257,24 +251,24 @@ noexcept(noexcept(_NEFORCE median(a, b, c, _NEFORCE less<T>()))) {
  * 如果范围为空，返回默认构造的pair。
  */
 template <typename Iterator, typename Compare>
-pair<iter_value_t<Iterator>, iter_value_t<Iterator>>
-constexpr minmax(Iterator first, Iterator last, Compare comp) {
+pair<iter_value_t<Iterator>, iter_value_t<Iterator>> constexpr minmax(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
-	using T = iter_value_t<Iterator>;
-	if (first == last) {
-		return _NEFORCE make_pair(T(), T());
-	}
-	T min_val = *first;
-	T max_val = *first;
+    using T = iter_value_t<Iterator>;
+    if (first == last) {
+        return _NEFORCE make_pair(T(), T());
+    }
+    T min_val = *first;
+    T max_val = *first;
 
-	++first;
-	for (; first != last; ++first) {
-		if (comp(*first, min_val))
-			min_val = *first;
-		else if (!comp(*first, max_val))
-			max_val = *first;
-	}
-	return _NEFORCE make_pair(min_val, max_val);
+    ++first;
+    for (; first != last; ++first) {
+        if (comp(*first, min_val)) {
+            min_val = *first;
+        } else if (!comp(*first, max_val)) {
+            max_val = *first;
+        }
+    }
+    return _NEFORCE make_pair(min_val, max_val);
 }
 
 /**
@@ -286,7 +280,7 @@ constexpr minmax(Iterator first, Iterator last, Compare comp) {
  */
 template <typename Iterator>
 constexpr pair<iter_value_t<Iterator>, iter_value_t<Iterator>> minmax(Iterator first, Iterator last) {
-	return _NEFORCE minmax(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+    return _NEFORCE minmax(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 
@@ -305,11 +299,16 @@ constexpr pair<iter_value_t<Iterator>, iter_value_t<Iterator>> minmax(Iterator f
 template <typename Iterator, typename Compare>
 constexpr Iterator max_element(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
-	if (first == last) return first;
-	Iterator result = first;
-	while (++first != last)
-		if (comp(*result, *first)) result = first;
-	return result;
+    if (first == last) {
+        return first;
+    }
+    Iterator result = first;
+    while (++first != last) {
+        if (comp(*result, *first)) {
+            result = first;
+        }
+    }
+    return result;
 }
 
 /**
@@ -319,9 +318,8 @@ constexpr Iterator max_element(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 指向最大元素的迭代器
  */
-template <typename Iterator>
-constexpr Iterator max_element(Iterator first, Iterator last) {
-	return _NEFORCE max_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+template <typename Iterator> constexpr Iterator max_element(Iterator first, Iterator last) {
+    return _NEFORCE max_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -330,10 +328,9 @@ constexpr Iterator max_element(Iterator first, Iterator last) {
  * @param list 初始化列表
  * @return 列表中的最大值
  */
-template <typename T>
-constexpr const T& max(std::initializer_list<T> list) {
-	auto iter = _NEFORCE max_element(list.begin(), list.end());
-	return *iter;
+template <typename T> constexpr const T& max(std::initializer_list<T> list) {
+    auto iter = _NEFORCE max_element(list.begin(), list.end());
+    return *iter;
 }
 
 /**
@@ -351,11 +348,16 @@ constexpr const T& max(std::initializer_list<T> list) {
 template <typename Iterator, typename Compare>
 constexpr Iterator min_element(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
-	if (first == last) return first;
-	Iterator result = first;
-	while (++first != last)
-		if (comp(*first, *result)) result = first;
-	return result;
+    if (first == last) {
+        return first;
+    }
+    Iterator result = first;
+    while (++first != last) {
+        if (comp(*first, *result)) {
+            result = first;
+        }
+    }
+    return result;
 }
 
 /**
@@ -365,9 +367,8 @@ constexpr Iterator min_element(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 指向最小元素的迭代器
  */
-template <typename Iterator>
-constexpr Iterator min_element(Iterator first, Iterator last) {
-	return _NEFORCE min_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+template <typename Iterator> constexpr Iterator min_element(Iterator first, Iterator last) {
+    return _NEFORCE min_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -376,9 +377,8 @@ constexpr Iterator min_element(Iterator first, Iterator last) {
  * @param list 初始化列表
  * @return 列表中的最小值
  */
-template <typename T>
-constexpr const T& min(std::initializer_list<T> list) {
-	return *_NEFORCE min_element(list.begin(), list.end());
+template <typename T> constexpr const T& min(std::initializer_list<T> list) {
+    return *_NEFORCE min_element(list.begin(), list.end());
 }
 
 /**
@@ -396,9 +396,9 @@ constexpr const T& min(std::initializer_list<T> list) {
 template <typename Iterator, typename Compare>
 constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
-	Iterator min = _NEFORCE min_element(first, last, comp);
-	Iterator max = _NEFORCE max_element(first, last, comp);
-	return _NEFORCE make_pair(min, max);
+    Iterator min = _NEFORCE min_element(first, last, comp);
+    Iterator max = _NEFORCE max_element(first, last, comp);
+    return _NEFORCE make_pair(min, max);
 }
 
 /**
@@ -408,9 +408,8 @@ constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last,
  * @param last 范围结束
  * @return pair<指向最小元素的迭代器, 指向最大元素的迭代器>
  */
-template <typename Iterator>
-constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last) {
-	return _NEFORCE minmax_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+template <typename Iterator> constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last) {
+    return _NEFORCE minmax_element(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 
@@ -432,13 +431,14 @@ constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last)
  * 要求 lower <= upper
  */
 template <typename T, typename Compare>
-constexpr const T& clamp(const T& value, const T& lower, const T& upper, Compare comp)
-noexcept(noexcept(comp(value, lower))) {
-	if (comp(value, lower))
-		return lower;
-	else if (comp(upper, value))
-		return upper;
-	return value;
+constexpr const T& clamp(const T& value, const T& lower, const T& upper,
+                         Compare comp) noexcept(noexcept(comp(value, lower))) {
+    if (comp(value, lower)) {
+        return lower;
+    } else if (comp(upper, value)) {
+        return upper;
+    }
+    return value;
 }
 
 /**
@@ -450,9 +450,9 @@ noexcept(noexcept(comp(value, lower))) {
  * @return 限制后的值
  */
 template <typename T>
-constexpr const T& clamp(const T& value, const T& lower, const T& upper)
-noexcept(noexcept(_NEFORCE clamp(value, lower, upper, _NEFORCE less<T>()))) {
-	return _NEFORCE clamp(value, lower, upper, _NEFORCE less<T>());
+constexpr const T& clamp(const T& value, const T& lower,
+                         const T& upper) noexcept(noexcept(_NEFORCE clamp(value, lower, upper, _NEFORCE less<T>()))) {
+    return _NEFORCE clamp(value, lower, upper, _NEFORCE less<T>());
 }
 
 
@@ -474,14 +474,22 @@ noexcept(noexcept(_NEFORCE clamp(value, lower, upper, _NEFORCE less<T>()))) {
  * 3. 所有对应元素都相等，但第一个范围较短时返回true
  */
 template <typename Iterator1, typename Iterator2, typename Compare>
-NEFORCE_NODISCARD constexpr bool lexicographical_compare(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp)
-noexcept(noexcept(++first1) && noexcept(++first2) && noexcept(comp(*first1, *first2)) && noexcept(first1 == last1 && first2 != last2)) {
-    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
-	for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
-		if (comp(*first1, *first2)) return true;
-		if (comp(*first2, *first1)) return false;
-	}
-	return first1 == last1 && first2 != last2;
+NEFORCE_NODISCARD constexpr bool
+lexicographical_compare(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,
+                        Compare comp) noexcept(noexcept(++first1) && noexcept(++first2) &&
+                                               noexcept(comp(*first1, *first2)) &&
+                                               noexcept(first1 == last1 && first2 != last2)) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>,
+                  "Iterator must be input_iterator");
+    for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
+        if (comp(*first1, *first2)) {
+            return true;
+        }
+        if (comp(*first2, *first1)) {
+            return false;
+        }
+    }
+    return first1 == last1 && first2 != last2;
 }
 
 /// @cond
@@ -500,18 +508,15 @@ NEFORCE_BEGIN_INNER__
  * 对连续迭代器使用内存比较优化。
  */
 template <typename Iterator1, typename Iterator2>
-NEFORCE_NODISCARD constexpr
-enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>, bool>
-__lexicographical_compare_aux(
-	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept {
-	const auto len1 = static_cast<size_t>(last1 - first1);
-	const auto len2 = static_cast<size_t>(last2 - first2);
-	const size_t clp = _NEFORCE min(len1, len2);
+NEFORCE_NODISCARD constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>, bool>
+__lexicographical_compare_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept {
+    const auto len1 = static_cast<size_t>(last1 - first1);
+    const auto len2 = static_cast<size_t>(last2 - first2);
+    const size_t clp = _NEFORCE min(len1, len2);
 
-	const int result = _NEFORCE memory_compare(
-		_NEFORCE addressof(*first1), _NEFORCE addressof(*first2),
-		clp * sizeof(iter_value_t<Iterator1>));
-	return result != 0 ? result < 0 : len1 < len2;
+    const int result = _NEFORCE memory_compare(_NEFORCE addressof(*first1), _NEFORCE addressof(*first2),
+                                               clp * sizeof(iter_value_t<Iterator1>));
+    return result != 0 ? result < 0 : len1 < len2;
 }
 
 /**
@@ -525,11 +530,10 @@ __lexicographical_compare_aux(
  * @return 比较结果
  */
 template <typename Iterator1, typename Iterator2>
-NEFORCE_NODISCARD constexpr
-enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>), bool>
-__lexicographical_compare_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)
-noexcept(noexcept(_NEFORCE lexicographical_compare(first1, last1, first2, last2, _NEFORCE less<iter_value_t<Iterator1>>()))) {
-	return _NEFORCE lexicographical_compare(first1, last1, first2, last2, _NEFORCE less<iter_value_t<Iterator1>>());
+NEFORCE_NODISCARD constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>), bool>
+__lexicographical_compare_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept(noexcept(
+        _NEFORCE lexicographical_compare(first1, last1, first2, last2, _NEFORCE less<iter_value_t<Iterator1>>()))) {
+    return _NEFORCE lexicographical_compare(first1, last1, first2, last2, _NEFORCE less<iter_value_t<Iterator1>>());
 }
 
 NEFORCE_END_INNER__
@@ -548,10 +552,12 @@ NEFORCE_END_INNER__
  * 对连续迭代器进行优化，使用内存比较提高性能。
  */
 template <typename Iterator1, typename Iterator2>
-NEFORCE_NODISCARD constexpr bool lexicographical_compare(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)
-noexcept(noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, last2))) {
-    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
-	return inner::__lexicographical_compare_aux(first1, last1, first2, last2);
+NEFORCE_NODISCARD constexpr bool lexicographical_compare(
+        Iterator1 first1, Iterator1 last1, Iterator2 first2,
+        Iterator2 last2) noexcept(noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, last2))) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>,
+                  "Iterator must be input_iterator");
+    return inner::__lexicographical_compare_aux(first1, last1, first2, last2);
 }
 
 
@@ -572,11 +578,13 @@ noexcept(noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, la
  */
 template <typename Iterator1, typename Iterator2, typename Compare>
 pair<Iterator1, Iterator2> constexpr mismatch(Iterator1 first1, Iterator1 last1, Iterator2 first2, Compare comp) {
-    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
-	while (first1 != last1 && comp(*first1, *first2)) {
-		++first1; ++first2;
-	}
-	return _NEFORCE make_pair<Iterator1, Iterator2>(first1, first2);
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>,
+                  "Iterator must be input_iterator");
+    while (first1 != last1 && comp(*first1, *first2)) {
+        ++first1;
+        ++first2;
+    }
+    return _NEFORCE make_pair<Iterator1, Iterator2>(first1, first2);
 }
 
 /**
@@ -590,7 +598,7 @@ pair<Iterator1, Iterator2> constexpr mismatch(Iterator1 first1, Iterator1 last1,
  */
 template <typename Iterator1, typename Iterator2>
 constexpr pair<Iterator1, Iterator2> mismatch(Iterator1 first1, Iterator1 last1, Iterator2 first2) {
-	return _NEFORCE mismatch(first1, last1, first2, _NEFORCE equal_to<iter_value_t<Iterator1>>());
+    return _NEFORCE mismatch(first1, last1, first2, _NEFORCE equal_to<iter_value_t<Iterator1>>());
 }
 
 /** @} */ // CompareAlgorithms

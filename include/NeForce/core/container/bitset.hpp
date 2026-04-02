@@ -30,8 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 以及常见的位操作（与、或、异或、移位等）。存储效率高，操作速度快。
  * 位数N在编译时确定，因此不能动态改变大小。
  */
-template <size_t N>
-class bitset : public icommon<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
+template <size_t N> class bitset : public icommon<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
 public:
     /**
      * @class reference
@@ -41,8 +40,8 @@ public:
      */
     class reference {
     private:
-        bitset& set_;  ///< 关联的bitset对象
-        size_t position_;  ///< 位位置
+        bitset& set_;     ///< 关联的bitset对象
+        size_t position_; ///< 位位置
 
     public:
         /**
@@ -50,15 +49,16 @@ public:
          * @param set bitset引用
          * @param position 位位置
          */
-        constexpr reference(bitset& set, const size_t position) noexcept
-        : set_(set), position_(position) {}
+        constexpr reference(bitset& set, const size_t position) noexcept :
+        set_(set),
+        position_(position) {}
 
         /**
          * @brief 赋值操作符（bool版本）
          * @param value 要赋的值
          * @return 自身引用
          */
-        constexpr reference& operator =(const bool value) noexcept {
+        constexpr reference& operator=(const bool value) noexcept {
             set_.set(position_, value);
             return *this;
         }
@@ -68,17 +68,13 @@ public:
          * @param value 另一个引用
          * @return 自身引用
          */
-        constexpr reference& operator =(const reference& value) noexcept {
-            return *this = static_cast<bool>(value);
-        }
+        constexpr reference& operator=(const reference& value) noexcept { return *this = static_cast<bool>(value); }
 
         /**
          * @brief 转换为bool
          * @return 位的值
          */
-        explicit constexpr operator bool() const noexcept {
-            return set_.test(position_);
-        }
+        explicit constexpr operator bool() const noexcept { return set_.test(position_); }
 
         /**
          * @brief 翻转该位
@@ -91,16 +87,18 @@ public:
     };
 
 private:
-    using block_type = size_t;  ///< 底层存储单元类型
-    static constexpr size_t bits_per_block = sizeof(block_type) * 8;  ///< 每个存储单元的位数
-    static constexpr size_t block_count = (N + bits_per_block - 1) / bits_per_block;  ///< 所需存储单元数量
+    using block_type = size_t;                                                       ///< 底层存储单元类型
+    static constexpr size_t bits_per_block = sizeof(block_type) * 8;                 ///< 每个存储单元的位数
+    static constexpr size_t block_count = (N + bits_per_block - 1) / bits_per_block; ///< 所需存储单元数量
 
-    array<block_type, block_count> blocks{};  ///< 存储单元的数组
+    array<block_type, block_count> blocks{}; ///< 存储单元的数组
 
 private:
     static constexpr block_type last_block_mask() noexcept {
         const size_t excess = block_count * bits_per_block - N;
-        if (excess == 0) return static_cast<block_type>(~0ULL);
+        if (excess == 0) {
+            return static_cast<block_type>(~0ULL);
+        }
         return (static_cast<block_type>(1ULL) << (bits_per_block - excess)) - 1;
     }
 
@@ -108,21 +106,15 @@ private:
         NEFORCE_DEBUG_VERIFY(pos < N, "bitset position out of range");
     }
 
-    NEFORCE_ALWAYS_INLINE constexpr size_t block_index(const size_t pos) const noexcept {
-        return pos / bits_per_block;
-    }
+    NEFORCE_ALWAYS_INLINE constexpr size_t block_index(const size_t pos) const noexcept { return pos / bits_per_block; }
 
-    NEFORCE_ALWAYS_INLINE constexpr size_t bit_index(const size_t pos) const noexcept {
-        return pos % bits_per_block;
-    }
+    NEFORCE_ALWAYS_INLINE constexpr size_t bit_index(const size_t pos) const noexcept { return pos % bits_per_block; }
 
 public:
     /**
      * @brief 默认构造函数，所有位初始化为0
      */
-    constexpr bitset() noexcept {
-        blocks.fill(0);
-    }
+    constexpr bitset() noexcept { blocks.fill(0); }
 
     /**
      * @brief 整数初始化
@@ -132,9 +124,7 @@ public:
      */
     constexpr explicit bitset(const block_type value) noexcept {
         blocks.fill(0);
-        NEFORCE_IF_CONSTEXPR (block_count > 0) {
-            blocks[0] = value & last_block_mask();
-        }
+        NEFORCE_IF_CONSTEXPR(block_count > 0) { blocks[0] = value & last_block_mask(); }
     }
 
     /**
@@ -147,9 +137,7 @@ public:
      * 字符串从左到右对应从高位到低位。如果字符串长度小于N，高位补0；
      * 如果长度大于N，只使用前N个字符。
      */
-    constexpr explicit bitset(const string_view str,
-                              const char zero = '0',
-                              const char one = '1') {
+    constexpr explicit bitset(const string_view str, const char zero = '0', const char one = '1') {
         blocks.fill(0);
         const size_t str_len = str.length();
         const size_t M = (str_len < N) ? str_len : N;
@@ -173,8 +161,8 @@ public:
      * @param zero 表示0的字符
      * @param one 表示1的字符
      */
-    constexpr explicit bitset(const string& str, const char zero = '0', const char one = '1')
-    : bitset(str.view(), zero, one) {}
+    constexpr explicit bitset(const string& str, const char zero = '0', const char one = '1') :
+    bitset(str.view(), zero, one) {}
 
     /**
      * @brief C风格字符串初始化
@@ -182,15 +170,17 @@ public:
      * @param zero 表示0的字符
      * @param one 表示1的字符
      */
-    constexpr explicit bitset(const char* str, const char zero = '0', const char one = '1')
-    : bitset(string_view{str}, zero, one) {}
+    constexpr explicit bitset(const char* str, const char zero = '0', const char one = '1') :
+    bitset(string_view{str}, zero, one) {}
 
     /**
      * @brief 将所有位设置为1
      * @return 自身引用
      */
     constexpr bitset& set() noexcept {
-        for (auto& b : blocks) b = ~static_cast<block_type>(0ULL);
+        for (auto& b: blocks) {
+            b = ~static_cast<block_type>(0ULL);
+        }
         blocks[block_count - 1] &= last_block_mask();
         return *this;
     }
@@ -240,7 +230,7 @@ public:
      * @return 自身引用
      */
     constexpr bitset& flip() noexcept {
-        for (auto& b : blocks) {
+        for (auto& b: blocks) {
             b = ~b;
         }
         blocks[block_count - 1] &= last_block_mask();
@@ -265,16 +255,14 @@ public:
      * @param pos 位位置
      * @return 该位的bool值
      */
-    NEFORCE_NODISCARD constexpr bool operator [](const size_t pos) const noexcept {
-        return test(pos);
-    }
+    NEFORCE_NODISCARD constexpr bool operator[](const size_t pos) const noexcept { return test(pos); }
 
     /**
      * @brief 非常量下标访问
      * @param pos 位位置
      * @return 位引用对象，可用于修改
      */
-    NEFORCE_NODISCARD constexpr reference operator [](size_t pos) noexcept {
+    NEFORCE_NODISCARD constexpr reference operator[](size_t pos) noexcept {
         check_range(pos);
         return reference(*this, pos);
     }
@@ -283,17 +271,13 @@ public:
      * @brief 获取位数
      * @return 模板参数N
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t size() const noexcept {
-        return N;
-    }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t size() const noexcept { return N; }
 
     /**
      * @brief 检查是否为空
      * @return 如果N为0返回true
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty() const noexcept {
-        return N == 0;
-    }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty() const noexcept { return N == 0; }
 
     /**
      * @brief 测试指定位置的位
@@ -312,7 +296,7 @@ public:
      * @param other 另一个bitset
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator &=(const bitset& other) noexcept {
+    NEFORCE_NODISCARD constexpr bitset& operator&=(const bitset& other) noexcept {
         for (size_t i = 0; i < block_count; ++i) {
             blocks[i] &= other.blocks[i];
         }
@@ -324,9 +308,10 @@ public:
      * @param other 另一个bitset
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator |=(const bitset& other) noexcept {
-        for (size_t i = 0; i < block_count; ++i)
+    NEFORCE_NODISCARD constexpr bitset& operator|=(const bitset& other) noexcept {
+        for (size_t i = 0; i < block_count; ++i) {
             blocks[i] |= other.blocks[i];
+        }
         return *this;
     }
 
@@ -335,7 +320,7 @@ public:
      * @param other 另一个bitset
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator ^=(const bitset& other) noexcept {
+    NEFORCE_NODISCARD constexpr bitset& operator^=(const bitset& other) noexcept {
         for (size_t i = 0; i < block_count; ++i) {
             blocks[i] ^= other.blocks[i];
         }
@@ -346,7 +331,7 @@ public:
      * @brief 按位取反
      * @return 取反后的新bitset
      */
-    NEFORCE_NODISCARD constexpr bitset operator ~() const noexcept {
+    NEFORCE_NODISCARD constexpr bitset operator~() const noexcept {
         bitset res = *this;
         res.flip();
         return res;
@@ -357,7 +342,7 @@ public:
      * @param pos 左移位数
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator <<=(const uint32_t pos) noexcept {
+    NEFORCE_NODISCARD constexpr bitset& operator<<=(const uint32_t pos) noexcept {
         if (pos >= N) {
             reset();
             return *this;
@@ -389,7 +374,7 @@ public:
      * @param pos 右移位数
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator >>=(const uint32_t pos) noexcept {
+    NEFORCE_NODISCARD constexpr bitset& operator>>=(const uint32_t pos) noexcept {
         if (pos >= N) {
             reset();
             return *this;
@@ -433,7 +418,9 @@ public:
      */
     NEFORCE_NODISCARD constexpr bool all() const noexcept {
         for (size_t i = 0; i < block_count - 1; ++i) {
-            if (blocks[i] != ~static_cast<block_type>(0ULL)) return false;
+            if (blocks[i] != ~static_cast<block_type>(0ULL)) {
+                return false;
+            }
         }
         return blocks[block_count - 1] == last_block_mask();
     }
@@ -443,8 +430,11 @@ public:
      * @return 如果至少有一个1返回true
      */
     NEFORCE_NODISCARD constexpr bool any() const noexcept {
-        for (auto b : blocks)
-            if (b != 0) return true;
+        for (auto b: blocks) {
+            if (b != 0) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -452,9 +442,7 @@ public:
      * @brief 检查是否所有位都是0
      * @return 如果没有1返回true
      */
-    NEFORCE_NODISCARD constexpr bool none() const noexcept {
-        return !any();
-    }
+    NEFORCE_NODISCARD constexpr bool none() const noexcept { return !any(); }
 
     /**
      * @brief 转换为unsigned long
@@ -462,7 +450,7 @@ public:
      * @throw value_exception 如果值超出unsigned long范围
      */
     NEFORCE_NODISCARD constexpr unsigned long to_ulong() const noexcept {
-        NEFORCE_IF_CONSTEXPR (N > sizeof(unsigned long) * 8) {
+        NEFORCE_IF_CONSTEXPR(N > sizeof(unsigned long) * 8) {
             constexpr size_t ulong_blocks = (sizeof(unsigned long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ulong_blocks; i < block_count; ++i) {
                 if (blocks[i] != 0) {
@@ -472,7 +460,7 @@ public:
 
             constexpr size_t ulong_bits = sizeof(unsigned long) * 8;
             constexpr size_t remainder_bits = ulong_bits % bits_per_block;
-            NEFORCE_IF_CONSTEXPR (remainder_bits != 0) {
+            NEFORCE_IF_CONSTEXPR(remainder_bits != 0) {
                 constexpr size_t last_ulong_block = ulong_bits / bits_per_block;
                 block_type mask = (~static_cast<block_type>(0ULL)) << remainder_bits;
                 if ((blocks[last_ulong_block] & mask) != 0) {
@@ -481,9 +469,10 @@ public:
             }
         }
 
-        NEFORCE_IF_CONSTEXPR (sizeof(unsigned long) >= sizeof(block_type)) {
+        NEFORCE_IF_CONSTEXPR(sizeof(unsigned long) >= sizeof(block_type)) {
             return static_cast<unsigned long>(blocks[0]);
-        } else {
+        }
+        else {
             unsigned long result = 0;
             constexpr size_t ulong_blocks = (sizeof(unsigned long) * 8 + bits_per_block - 1) / bits_per_block;
             constexpr size_t blocks_to_use = ulong_blocks < block_count ? ulong_blocks : block_count;
@@ -500,7 +489,7 @@ public:
      * @throw value_exception 如果值超出unsigned long long范围
      */
     NEFORCE_NODISCARD constexpr unsigned long long to_ullong() const noexcept {
-        NEFORCE_IF_CONSTEXPR (N > sizeof(unsigned long long) * 8) {
+        NEFORCE_IF_CONSTEXPR(N > sizeof(unsigned long long) * 8) {
             constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ullong_blocks; i < block_count; ++i) {
                 if (blocks[i] != 0) {
@@ -510,7 +499,7 @@ public:
 
             constexpr size_t ullong_bits = sizeof(unsigned long long) * 8;
             constexpr size_t remainder_bits = ullong_bits % bits_per_block;
-            NEFORCE_IF_CONSTEXPR (remainder_bits != 0) {
+            NEFORCE_IF_CONSTEXPR(remainder_bits != 0) {
                 constexpr size_t last_ullong_block = ullong_bits / bits_per_block;
                 block_type mask = (~static_cast<block_type>(0ULL)) << remainder_bits;
                 if ((blocks[last_ullong_block] & mask) != 0) {
@@ -519,9 +508,10 @@ public:
             }
         }
 
-        NEFORCE_IF_CONSTEXPR (sizeof(unsigned long long) >= sizeof(block_type)) {
+        NEFORCE_IF_CONSTEXPR(sizeof(unsigned long long) >= sizeof(block_type)) {
             return static_cast<unsigned long long>(blocks[0]);
-        } else {
+        }
+        else {
             unsigned long long result = 0;
             constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
             constexpr size_t blocks_to_use = ullong_blocks < block_count ? ullong_blocks : block_count;
@@ -537,26 +527,20 @@ public:
      * @param other 另一个bitset
      * @return 如果所有位相等返回true
      */
-    NEFORCE_NODISCARD constexpr bool operator ==(const bitset& other) const noexcept {
-        return blocks == other.blocks;
-    }
+    NEFORCE_NODISCARD constexpr bool operator==(const bitset& other) const noexcept { return blocks == other.blocks; }
 
     /**
      * @brief 小于比较操作符（按字典序）
      * @param other 另一个bitset
      * @return 比较结果
      */
-    NEFORCE_NODISCARD constexpr bool operator <(const bitset& other) const noexcept {
-        return blocks < other.blocks;
-    }
+    NEFORCE_NODISCARD constexpr bool operator<(const bitset& other) const noexcept { return blocks < other.blocks; }
 
     /**
      * @brief 计算哈希值
      * @return 哈希值
      */
-    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
-        return blocks.to_hash();
-    }
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept { return blocks.to_hash(); }
 
     /**
      * @brief 转换为字符串
@@ -577,17 +561,13 @@ public:
      * @brief 转换为字符串（默认使用'0'和'1'）
      * @return 字符串表示
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return bitset::to_string('0', '1');
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return bitset::to_string('0', '1'); }
 
     /**
      * @brief 交换两个bitset的内容
      * @param other 另一个bitset
      */
-    constexpr void swap(bitset& other) noexcept {
-        blocks.swap(other.blocks);
-    }
+    constexpr void swap(bitset& other) noexcept { blocks.swap(other.blocks); }
 };
 
 /** @} */ // BitManipulation

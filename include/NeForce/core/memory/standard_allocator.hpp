@@ -9,9 +9,9 @@
  * 用于管理动态内存分配和释放，支持不同对齐要求和编译器优化。
  */
 
-#include "NeForce/core/exception/exception.hpp"
-#include "NeForce/core/exception/breakpoint.hpp"
 #include <new>
+#include "NeForce/core/exception/breakpoint.hpp"
+#include "NeForce/core/exception/exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -25,13 +25,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 内存分配异常
  */
 struct allocate_exception final : memory_exception {
-    explicit allocate_exception(const char* info = "Memory Allocation Failed.",
-                                const char* type = static_type,
-                                const int code = 0) noexcept
-    : memory_exception(info, type, code) {}
+    explicit allocate_exception(const char* info = "Memory Allocation Failed.", const char* type = static_type,
+                                const int code = 0) noexcept :
+    memory_exception(info, type, code) {}
 
-    explicit allocate_exception(const exception& e)
-    : memory_exception(e) {}
+    explicit allocate_exception(const exception& e) :
+    memory_exception(e) {}
 
     ~allocate_exception() override = default;
     static constexpr auto static_type = "allocate_exception";
@@ -72,9 +71,9 @@ NEFORCE_BEGIN_INNER__
 using alloc_size_t =
 /// @cond
 #ifdef NEFORCE_COMPILER_GCC
-    uint32_t;
+        uint32_t;
 #else
-    size_t;
+        size_t;
 #endif
 /// @endcond
 
@@ -95,12 +94,12 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32;
  *
  * 大内存分配时在用户数据前后添加的额外空间大小，用于存储元数据。
  */
-NEFORCE_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE =
-    sizeof(void*) + MEMORY_BIG_ALLOC_ALIGN - 1
-#ifdef NEFORCE_STATE_DEBUG
-    * 2
-#endif
-;
+NEFORCE_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = sizeof(void*) + MEMORY_BIG_ALLOC_ALIGN -
+                                                        1
+#    ifdef NEFORCE_STATE_DEBUG
+                                                                * 2
+#    endif
+        ;
 
 /**
  * @def MEMORY_BIG_ALLOC_SENTINEL
@@ -109,11 +108,11 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE =
  * 用于调试模式下检测内存破坏。
  */
 NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL =
-#ifdef NEFORCE_ARCH_BITS_64
-    0xFAFAFAFAFAFAFAFAUL;
-#else
-    0xFAFAFAFAUL;
-#endif
+#    ifdef NEFORCE_ARCH_BITS_64
+        0xFAFAFAFAFAFAFAFAUL;
+#    else
+        0xFAFAFAFAUL;
+#    endif
 
 #endif // NEFORCE_COMPILER_MSVC
 
@@ -126,8 +125,7 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL =
  *
  * 处理内存分配的基础函数，包含编译器特定的优化。
  */
-template <size_t Align>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size_t bytes) {
+template <size_t Align> NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size_t bytes) {
 #ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
@@ -138,9 +136,9 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
         NEFORCE_DEBUG_VERIFY(holder != 0, "invalid argument");
         const auto ptr = reinterpret_cast<void*>((holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1));
         static_cast<uintptr_t*>(ptr)[-1] = holder;
-#ifdef NEFORCE_STATE_DEBUG
+#    ifdef NEFORCE_STATE_DEBUG
         static_cast<uintptr_t*>(ptr)[-2] = MEMORY_BIG_ALLOC_SENTINEL;
-#endif
+#    endif
         return ptr;
     }
 #endif
@@ -157,20 +155,20 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
  *
  * 使用对齐分配操作符，支持大于阈值的高对齐要求。
  */
-template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD) ,int> = 0>
+template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
 NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
     size_t align = Align;
-#ifdef NEFORCE_COMPILER_MSVC
+#    ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
     }
-#endif
-#if defined(NEFORCE_COMPILER_CLANG) && defined(NEFORCE_STANDARD_20)
+#    endif
+#    if defined(NEFORCE_COMPILER_CLANG) && defined(NEFORCE_STANDARD_20)
     if (_NEFORCE is_constant_evaluated()) {
         return operator new(bytes);
     }
-#endif
-    return operator new(bytes, std::align_val_t{ align });
+#    endif
+    return operator new(bytes, std::align_val_t{align});
 }
 
 /**
@@ -199,9 +197,10 @@ NEFORCE_END_INNER__
  *
  * 内存分配的统一入口。
  */
-template <size_t Align>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const inner::alloc_size_t bytes) {
-    if (bytes == 0) return nullptr;
+template <size_t Align> NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const inner::alloc_size_t bytes) {
+    if (bytes == 0) {
+        return nullptr;
+    }
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
         return operator new(bytes);
@@ -227,19 +226,18 @@ NEFORCE_BEGIN_INNER__
  *
  * 处理内存释放的基础函数，包含编译器特定的优化。
  */
-template <size_t Align>
-void __deallocate_aux(void*& ptr, inner::alloc_size_t& bytes) noexcept {
+template <size_t Align> void __deallocate_aux(void*& ptr, inner::alloc_size_t& bytes) noexcept {
 #ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         bytes += MEMORY_NO_USER_SIZE;
         const uintptr_t* const user_ptr = static_cast<uintptr_t*>(ptr);
         const uintptr_t holder = user_ptr[-1];
         NEFORCE_DEBUG_VERIFY(user_ptr[-2] == MEMORY_BIG_ALLOC_SENTINEL, "invalid sentinel.");
-#ifdef NEFORCE_STATE_DEBUG
+#    ifdef NEFORCE_STATE_DEBUG
         constexpr uintptr_t min_shift = 2 * sizeof(void*);
-#else
+#    else
         constexpr uintptr_t min_shift = sizeof(void*);
-#endif
+#    endif
         const uintptr_t shift = reinterpret_cast<uintptr_t>(ptr) - holder;
         NEFORCE_DEBUG_VERIFY(shift >= min_shift && shift <= MEMORY_NO_USER_SIZE, "invalid argument.");
         ptr = reinterpret_cast<void*>(holder);
@@ -265,16 +263,16 @@ void __deallocate_aux(void*& ptr, inner::alloc_size_t& bytes) noexcept {
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
 NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, inner::alloc_size_t& bytes) noexcept {
     size_t align = Align;
-#ifdef NEFORCE_COMPILER_MSVC
+#    ifdef NEFORCE_COMPILER_MSVC
     if (bytes > MEMORY_BIG_ALLOC_THRESHHOLD) {
         align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
     }
-#endif
-#if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
-    operator delete(ptr, bytes, std::align_val_t{ align });
-#else
-    operator delete(ptr, std::align_val_t{ align });
-#endif
+#    endif
+#    if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
+    operator delete(ptr, bytes, std::align_val_t{align});
+#    else
+    operator delete(ptr, std::align_val_t{align});
+#    endif
 }
 
 /**
@@ -301,8 +299,7 @@ NEFORCE_END_INNER__
  *
  * 内存释放的统一入口。
  */
-template <size_t Align>
-NEFORCE_CONSTEXPR20 void deallocate(void* ptr, inner::alloc_size_t bytes) noexcept {
+template <size_t Align> NEFORCE_CONSTEXPR20 void deallocate(void* ptr, inner::alloc_size_t bytes) noexcept {
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
         operator delete(ptr);
@@ -325,14 +322,13 @@ NEFORCE_CONSTEXPR20 void deallocate(void* ptr, inner::alloc_size_t bytes) noexce
  *
  * 提供类型安全的内存分配和释放，支持对齐优化。
  */
-template <typename T>
-class standard_allocator {
+template <typename T> class standard_allocator {
     static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
 
 public:
-    using value_type = T;       ///< 元素类型
-    using pointer    = T*;      ///< 指针类型
-    using size_type  = inner::alloc_size_t;  ///< 大小类型
+    using value_type = T;                  ///< 元素类型
+    using pointer = T*;                    ///< 指针类型
+    using size_type = inner::alloc_size_t; ///< 大小类型
 
     /**
      * @struct rebind
@@ -341,31 +337,27 @@ public:
      *
      * 允许容器重新绑定分配器到其他类型。
      */
-    template <typename U>
-    struct rebind {
+    template <typename U> struct rebind {
         using other = standard_allocator<U>;
     };
 
 private:
     /// 最终对齐大小：取类型对齐要求和阈值中的较大值
-    static constexpr inner::alloc_size_t align_size =
-        alignof(T) > MEMORY_ALIGN_THRESHHOLD ?
-        alignof(T) :
-        MEMORY_ALIGN_THRESHHOLD;
+    static constexpr inner::alloc_size_t align_size = alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T)
+                                                                                           : MEMORY_ALIGN_THRESHHOLD;
 
 public:
-    NEFORCE_CONSTEXPR20 standard_allocator() noexcept = default;  ///< 默认构造函数
+    NEFORCE_CONSTEXPR20 standard_allocator() noexcept = default; ///< 默认构造函数
 
     /**
      * @brief 从其他分配器类型转换构造
      * @tparam U 源分配器元素类型
      */
-    template <typename U>
-    NEFORCE_CONSTEXPR20 standard_allocator(const standard_allocator<U>&) noexcept {}
+    template <typename U> NEFORCE_CONSTEXPR20 standard_allocator(const standard_allocator<U>&) noexcept {}
 
-    NEFORCE_CONSTEXPR20 ~standard_allocator() noexcept = default;  ///< 析构函数
+    NEFORCE_CONSTEXPR20 ~standard_allocator() noexcept = default; ///< 析构函数
 
-    NEFORCE_CONSTEXPR20 standard_allocator& operator =(const standard_allocator&) noexcept = default;  ///< 赋值运算符
+    NEFORCE_CONSTEXPR20 standard_allocator& operator=(const standard_allocator&) noexcept = default; ///< 赋值运算符
 
     /**
      * @brief 分配指定数量的元素内存
@@ -377,9 +369,7 @@ public:
      */
     NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 NEFORCE_ALLOC_OPTIMIZE static pointer allocate(const size_type n) {
         const size_type alloc_size = sizeof(value_type) * n;
-        NEFORCE_DEBUG_VERIFY(
-            alloc_size <= static_cast<size_type>(-1),
-            "allocation will cause memory overflow.");
+        NEFORCE_DEBUG_VERIFY(alloc_size <= static_cast<size_type>(-1), "allocation will cause memory overflow.");
         try {
             return static_cast<T*>(_NEFORCE allocate<align_size>(alloc_size));
         } catch (...) {
@@ -412,9 +402,7 @@ public:
      * @brief 释放单个元素内存
      * @param p 要释放的内存指针
      */
-    NEFORCE_CONSTEXPR20 static void deallocate(pointer p) noexcept {
-        standard_allocator::deallocate(p, 1);
-    }
+    NEFORCE_CONSTEXPR20 static void deallocate(pointer p) noexcept { standard_allocator::deallocate(p, 1); }
 };
 
 /**
@@ -424,8 +412,8 @@ public:
  * @return 总是返回 true
  */
 template <typename T, typename U>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator ==(
-    const standard_allocator<T>&, const standard_allocator<U>&) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const standard_allocator<T>&,
+                                                      const standard_allocator<U>&) noexcept {
     return true;
 }
 
@@ -436,8 +424,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator ==(
  * @return 总是返回 false
  */
 template <typename T, typename U>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator !=(
-    const standard_allocator<T>&, const standard_allocator<U>&) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=(const standard_allocator<T>&,
+                                                      const standard_allocator<U>&) noexcept {
     return false;
 }
 
@@ -449,8 +437,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator !=(
  *
  * 为 standard_allocator 提供的类型别名，用于统一接口。
  */
-template <typename T>
-using allocator = standard_allocator<T>;
+template <typename T> using allocator = standard_allocator<T>;
 
 /** @} */ // MemoryAllocator
 

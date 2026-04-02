@@ -28,16 +28,13 @@ NEFORCE_BEGIN_NAMESPACE__
  * 继承该接口的派生类需要实现 to_string() 成员函数，
  * 该函数返回对象的字符串表示。通过此接口可以获得统一的字符串转换能力。
  */
-template <typename T>
-struct istringify {
+template <typename T> struct istringify {
 private:
     /**
      * @brief 获取派生类常量引用
      * @return 派生类常量引用
      */
-    constexpr const T& derived() const noexcept {
-        return static_cast<const T&>(*this);
-    }
+    constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 
 public:
     /**
@@ -46,9 +43,7 @@ public:
      *
      * 此函数调用派生类的to_string()实现。
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return derived().to_string();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return derived().to_string(); }
 };
 
 /** @} */ // CRTPInterfaces

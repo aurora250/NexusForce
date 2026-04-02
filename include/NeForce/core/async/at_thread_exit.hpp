@@ -26,8 +26,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 使用链表结构存储所有注册的回调，按照注册的逆序执行。
  */
 struct at_thread_exit_elt {
-    at_thread_exit_elt* next;  ///< 指向下一个回调元素的指针
-    void (*cb)(void*);         ///< 回调函数指针
+    at_thread_exit_elt* next; ///< 指向下一个回调元素的指针
+    void (*cb)(void*);        ///< 回调函数指针
 };
 
 /**

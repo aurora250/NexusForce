@@ -8,8 +8,8 @@
  * 此文件提供了单次调用的实现，确保某个函数在多个线程中只被执行一次。
  */
 
-#include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/functional/invoke.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -39,9 +39,9 @@ private:
 public:
     once_flag() noexcept = default;
     once_flag(const once_flag&) = delete;
-    once_flag& operator =(const once_flag&) = delete;
+    once_flag& operator=(const once_flag&) = delete;
     once_flag(once_flag&&) = delete;
-    once_flag& operator =(once_flag&&) = delete;
+    once_flag& operator=(once_flag&&) = delete;
 };
 
 /**
@@ -58,8 +58,7 @@ public:
  *
  * @note 如果函数抛出异常，则视为未执行，后续线程将尝试重新执行
  */
-template <typename Callable, typename... Args>
-void call_once(once_flag& flag, Callable&& func, Args&&... args) {
+template <typename Callable, typename... Args> void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     if (flag.state_.load(memory_order_acquire) == 2) {
         return;
     }
@@ -67,19 +66,16 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     uint32_t spin_count = 0;
     while (true) {
         const uint32_t state = flag.state_.load(memory_order_acquire);
-        if (state == 2) return;
+        if (state == 2) {
+            return;
+        }
 
         if (state == 0) {
             uint32_t expected = 0;
-            if (flag.state_.compare_exchange_strong(
-                    expected, 1,
-                    memory_order_acq_rel,
-                    memory_order_relaxed)) {
+            if (flag.state_.compare_exchange_strong(expected, 1, memory_order_acq_rel, memory_order_relaxed)) {
                 try {
-                    _NEFORCE invoke<Callable, Args...>(
-                        _NEFORCE forward<Callable>(func),
-                        _NEFORCE forward<Args>(args)...
-                    );
+                    _NEFORCE invoke<Callable, Args...>(_NEFORCE forward<Callable>(func),
+                                                       _NEFORCE forward<Args>(args)...);
                     flag.state_.store(2, memory_order_release);
                     return;
                 } catch (...) {

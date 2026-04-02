@@ -47,23 +47,33 @@ constexpr Iterator partition(Iterator first, Iterator last, Predicate pred) {
     static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be bidirectional_iterator");
     static_assert(is_invocable_v<Predicate, decltype(*first)>, "Predicate must be invocable");
 
-	while (true) {
-		while (true) {
-			if (first == last) return first;
+    while (true) {
+        while (true) {
+            if (first == last) {
+                return first;
+            }
 
-			if (pred(*first)) ++first;
-			else break;
-		}
-		--last;
-		while (true) {
-			if (first == last) return first;
+            if (pred(*first)) {
+                ++first;
+            } else {
+                break;
+            }
+        }
+        --last;
+        while (true) {
+            if (first == last) {
+                return first;
+            }
 
-			if (!pred(*last)) --last;
-			else break;
-		}
-		_NEFORCE iter_swap(first, last);
-		++first;
-	}
+            if (!pred(*last)) {
+                --last;
+            } else {
+                break;
+            }
+        }
+        _NEFORCE iter_swap(first, last);
+        ++first;
+    }
 }
 
 /**
@@ -93,15 +103,21 @@ constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivo
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-	while (first < last) {
-		while (comp(*first, pivot)) ++first;
-		--last;
-		while (comp(pivot, *last)) --last;
-		if (!(first < last)) break;
-		_NEFORCE iter_swap(first, last);
-		++first;
-	}
-	return first;
+    while (first < last) {
+        while (comp(*first, pivot)) {
+            ++first;
+        }
+        --last;
+        while (comp(pivot, *last)) {
+            --last;
+        }
+        if (!(first < last)) {
+            break;
+        }
+        _NEFORCE iter_swap(first, last);
+        ++first;
+    }
+    return first;
 }
 
 /**
@@ -115,7 +131,7 @@ constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivo
  */
 template <typename Iterator, typename T>
 constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivot) {
-	return _NEFORCE lomuto_partition(first, last, pivot);
+    return _NEFORCE lomuto_partition(first, last, pivot);
 }
 
 /** @} */ // PartitionAlgorithms

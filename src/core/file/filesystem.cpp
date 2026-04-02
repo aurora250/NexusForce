@@ -1,17 +1,21 @@
-#include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/file/file.hpp>
+#include <NeForce/core/file/filesystem.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/stat.h>
-#include <errno.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <stdio.h>
+#    include <dirent.h>
+#    include <errno.h>
+#    include <stdio.h>
+#    include <sys/stat.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 bool filesystem::create_directories(const path& p) {
-    if (p.empty()) return false;
-    if (p.is_directory()) return true;
+    if (p.empty()) {
+        return false;
+    }
+    if (p.is_directory()) {
+        return true;
+    }
 
     const string& ps = p.str();
     size_t pos = 0;
@@ -21,9 +25,9 @@ bool filesystem::create_directories(const path& p) {
     while ((pos = ps.find_first_of(path::spliter, pos + 1)) != string::npos) {
         subdir = ps.substr(0, pos);
         if (!subdir.empty() && !path(subdir).is_directory()) {
-            if (!::CreateDirectoryA(subdir.data(), nullptr) &&
-                ::GetLastError() != ERROR_ALREADY_EXISTS)
+            if (!::CreateDirectoryA(subdir.data(), nullptr) && ::GetLastError() != ERROR_ALREADY_EXISTS) {
                 return false;
+            }
         }
     }
     return ::CreateDirectoryA(ps.data(), nullptr) || ::GetLastError() == ERROR_ALREADY_EXISTS;
@@ -40,7 +44,9 @@ bool filesystem::create_directories(const path& p) {
 }
 
 bool filesystem::remove(const path& p) noexcept {
-    if (!p.is_file()) return false;
+    if (!p.is_file()) {
+        return false;
+    }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::DeleteFileA(p.data()) != 0;
 #else
@@ -49,7 +55,9 @@ bool filesystem::remove(const path& p) noexcept {
 }
 
 bool filesystem::remove_directory(const path& p) noexcept {
-    if (!p.is_directory()) return false;
+    if (!p.is_directory()) {
+        return false;
+    }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::RemoveDirectoryA(p.data()) != 0;
 #else
@@ -58,18 +66,24 @@ bool filesystem::remove_directory(const path& p) noexcept {
 }
 
 bool filesystem::remove_all_in_directory(const path& p, const bool recursive) noexcept {
-    if (!p.is_directory()) return false;
+    if (!p.is_directory()) {
+        return false;
+    }
     bool success = true;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const string pattern = p.str() + "\\*";
     ::WIN32_FIND_DATAA fd{};
     const ::HANDLE hFind = ::FindFirstFileA(pattern.data(), &fd);
-    if (hFind == INVALID_HANDLE_VALUE) return false;
+    if (hFind == INVALID_HANDLE_VALUE) {
+        return false;
+    }
 
     do {
         const string name = fd.cFileName;
-        if (name == "." || name == "..") continue;
+        if (name == "." || name == "..") {
+            continue;
+        }
         const path full = p / path{name};
 
         if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
@@ -97,12 +111,16 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) no
 
 #else
     ::DIR* dir = ::opendir(p.data());
-    if (!dir) return false;
+    if (!dir) {
+        return false;
+    }
 
     ::dirent* entry;
     while ((entry = ::readdir(dir)) != nullptr) {
         const string name = entry->d_name;
-        if (name == "." || name == "..") continue;
+        if (name == "." || name == "..") {
+            continue;
+        }
         const path full = p / path{name};
 
         if (full.is_directory()) {
@@ -136,25 +154,39 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) no
 }
 
 bool filesystem::remove_all(const path& p) noexcept {
-    if (p.is_file()) return remove(p);
-    if (!p.is_directory()) return false;
+    if (p.is_file()) {
+        return remove(p);
+    }
+    if (!p.is_directory()) {
+        return false;
+    }
 
     bool ok = remove_all_in_directory(p, true);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!::RemoveDirectoryA(p.data())) ok = false;
+    if (!::RemoveDirectoryA(p.data())) {
+        ok = false;
+    }
 #else
-    if (::rmdir(p.data()) != 0) ok = false;
+    if (::rmdir(p.data()) != 0) {
+        ok = false;
+    }
 #endif
     return ok;
 }
 
 bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
-    if (!from.exists() || from.is_directory()) return false;
-    if (!overwrite && to.exists()) return false;
+    if (!from.exists() || from.is_directory()) {
+        return false;
+    }
+    if (!overwrite && to.exists()) {
+        return false;
+    }
 
     const path dest_parent = to.parent_path();
     if (!dest_parent.empty() && !dest_parent.exists()) {
-        if (!create_directories(dest_parent)) return false;
+        if (!create_directories(dest_parent)) {
+            return false;
+        }
     }
 
     path actual_to = to;
@@ -173,7 +205,9 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 
 #else
     const int src_fd = ::open(from.data(), O_RDONLY);
-    if (src_fd == -1) return false;
+    if (src_fd == -1) {
+        return false;
+    }
 
     struct ::stat st{};
     if (::fstat(src_fd, &st) == -1) {
@@ -198,11 +232,13 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
             break;
         }
     }
-    if (r < 0) ok = false;
+    if (r < 0) {
+        ok = false;
+    }
 
     if (ok) {
         ::fchmod(dst_fd, st.st_mode & 0777);
-        struct ::timespec times[2] = { st.st_atim, st.st_mtim };
+        struct ::timespec times[2] = {st.st_atim, st.st_mtim};
         ::futimens(dst_fd, times);
     }
 
@@ -217,8 +253,12 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 }
 
 bool filesystem::copy_directory(const path& src, const path& dest, const bool overwrite) {
-    if (!src.is_directory()) return false;
-    if (!dest.exists() && !create_directories(dest)) return false;
+    if (!src.is_directory()) {
+        return false;
+    }
+    if (!dest.exists() && !create_directories(dest)) {
+        return false;
+    }
 
     bool success = true;
 
@@ -233,33 +273,47 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
 
     do {
         const string item = fd.cFileName;
-        if (item == "." || item == "..") continue;
-        const path sp = src  / path{item};
+        if (item == "." || item == "..") {
+            continue;
+        }
+        const path sp = src / path{item};
         const path dp = dest / path{item};
         if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-            if (!copy_directory(sp, dp, overwrite)) success = false;
+            if (!copy_directory(sp, dp, overwrite)) {
+                success = false;
+            }
         } else {
-            if (!copy(sp, dp, overwrite)) success = false;
+            if (!copy(sp, dp, overwrite)) {
+                success = false;
+            }
         }
     } while (::FindNextFileA(hFind, &fd) != 0);
     ::FindClose(hFind);
 
 #else
     ::DIR* dir = ::opendir(src.data());
-    if (!dir) return false;
+    if (!dir) {
+        return false;
+    }
     ::dirent* entry;
 
     while ((entry = ::readdir(dir)) != nullptr) {
         const string item = entry->d_name;
-        if (item == "." || item == "..") continue;
+        if (item == "." || item == "..") {
+            continue;
+        }
 
-        const path sp = src  / path{item};
+        const path sp = src / path{item};
         const path dp = dest / path{item};
 
         if (sp.is_directory()) {
-            if (!copy_directory(sp, dp, overwrite)) success = false;
+            if (!copy_directory(sp, dp, overwrite)) {
+                success = false;
+            }
         } else {
-            if (!copy(sp, dp, overwrite)) success = false;
+            if (!copy(sp, dp, overwrite)) {
+                success = false;
+            }
         }
     }
     ::closedir(dir);
@@ -269,19 +323,23 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
 }
 
 bool filesystem::move(const path& from, const path& to, const bool overwrite) noexcept {
-    if (!from.exists()) return false;
+    if (!from.exists()) {
+        return false;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD flags = MOVEFILE_COPY_ALLOWED;
-    if (overwrite) flags |= MOVEFILE_REPLACE_EXISTING;
+    if (overwrite) {
+        flags |= MOVEFILE_REPLACE_EXISTING;
+    }
 
-    if (::MoveFileExA(from.data(), to.data(), flags)) return true;
+    if (::MoveFileExA(from.data(), to.data(), flags)) {
+        return true;
+    }
 
     if (::GetLastError() == ERROR_NOT_SAME_DEVICE) {
         if (from.is_directory()) {
-            return copy_directory(from, to, overwrite) &&
-                   remove_all_in_directory(from, true) &&
-                   remove_directory(from);
+            return copy_directory(from, to, overwrite) && remove_all_in_directory(from, true) && remove_directory(from);
         }
         return copy(from, to, overwrite) && remove(from);
     }
@@ -294,17 +352,19 @@ bool filesystem::move(const path& from, const path& to, const bool overwrite) no
                 return false;
             }
         } else {
-            if (!remove(to)) return false;
+            if (!remove(to)) {
+                return false;
+            }
         }
     }
 
-    if (::rename(from.data(), to.data()) == 0) return true;
+    if (::rename(from.data(), to.data()) == 0) {
+        return true;
+    }
 
     if (errno == EXDEV) {
         if (from.is_directory()) {
-            return copy_directory(from, to, overwrite) &&
-                   remove_all_in_directory(from, true) &&
-                   remove_directory(from);
+            return copy_directory(from, to, overwrite) && remove_all_in_directory(from, true) && remove_directory(from);
         }
         return copy(from, to, overwrite) && remove(from);
     }
@@ -312,9 +372,7 @@ bool filesystem::move(const path& from, const path& to, const bool overwrite) no
 #endif
 }
 
-bool filesystem::rename(const path& old_name, const path& new_name) noexcept {
-    return move(old_name, new_name, true);
-}
+bool filesystem::rename(const path& old_name, const path& new_name) noexcept { return move(old_name, new_name, true); }
 
 bool filesystem::create_and_write(const path& p, const string& content, const bool append) {
     const path parent = p.parent_path();
@@ -326,11 +384,8 @@ bool filesystem::create_and_write(const path& p, const string& content, const bo
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     file f;
-    if (!f.open(p, append,
-                append ? file_access::APPEND : file_access::WRITE,
-                file_shared::NO_SHARE,
-                file_creation::OPEN_FORCE,
-                file_attri::NORMAL)) {
+    if (!f.open(p, append, append ? file_access::APPEND : file_access::WRITE, file_shared::NO_SHARE,
+                file_creation::OPEN_FORCE, file_attri::NORMAL)) {
         return false;
     }
     const file::size_type written = f.write(content, content.size());
@@ -341,7 +396,9 @@ bool filesystem::create_and_write(const path& p, const string& content, const bo
     flags |= append ? O_APPEND : O_TRUNC;
 
     const int fd = ::open(p.data(), flags, 0644);
-    if (fd == -1) return false;
+    if (fd == -1) {
+        return false;
+    }
 
     const ::ssize_t written = ::write(fd, content.data(), content.size());
     ::close(fd);
@@ -361,7 +418,9 @@ size_t filesystem::size(const path& p) noexcept {
     return static_cast<size_t>(ul.QuadPart);
 #else
     struct ::stat64 st{};
-    if (::stat64(p.data(), &st) == -1) return 0;
+    if (::stat64(p.data(), &st) == -1) {
+        return 0;
+    }
     return static_cast<size_t>(st.st_size);
 #endif
 }

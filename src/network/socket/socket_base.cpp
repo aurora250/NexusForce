@@ -1,12 +1,12 @@
 #include <NeForce/network/socket/socket_base.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/async/atomic.hpp>
+#    include <NeForce/core/async/atomic.hpp>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <netinet/tcp.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
+#    include <errno.h>
+#    include <fcntl.h>
+#    include <netinet/tcp.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -35,7 +35,7 @@ namespace {
     };
 
     atomic<int> winsock_initializer::ref_count{0};
-}
+} // namespace
 #endif
 
 
@@ -61,7 +61,7 @@ socket_base::socket_base() {
 #endif
 }
 
-socket_base& socket_base::operator =(socket_base&& other) noexcept {
+socket_base& socket_base::operator=(socket_base&& other) noexcept {
     if (this != &other) {
         close();
         fd_ = exchange(other.fd_, invalid_handle);
@@ -118,7 +118,9 @@ bool socket_base::set_nonblocking(const bool enable) noexcept {
     return ::ioctlsocket(fd_, FIONBIO, &mode) == 0;
 #else
     int flags = ::fcntl(fd_, F_GETFL, 0);
-    if (flags == -1) return false;
+    if (flags == -1) {
+        return false;
+    }
 
     if (enable) {
         flags |= O_NONBLOCK;

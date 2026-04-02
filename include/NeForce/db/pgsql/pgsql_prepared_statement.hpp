@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_PGSQL_PREPARED_STATEMENT_HPP__
 #define NEFORCE_DATABASE_PGSQL_PREPARED_STATEMENT_HPP__
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#include "NeForce/db/db_interface.hpp"
-#include <libpq-fe.h>
+#    include <libpq-fe.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API pgsql_prepared_statement final : public idb_prepared_statement {

@@ -1,10 +1,12 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/toml/toml_value.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     string toml_value_to_string(const toml_value* value) {
-        if (!value) return "";
+        if (!value) {
+            return "";
+        }
 
         switch (value->type()) {
             case toml_value::Boolean: {
@@ -28,9 +30,12 @@ namespace {
                     case toml_string::Literal: {
                         string lit;
                         lit += '\'';
-                        for (const char c : str) {
-                            if (c == '\'') lit += "''";
-                            else lit += c;
+                        for (const char c: str) {
+                            if (c == '\'') {
+                                lit += "''";
+                            } else {
+                                lit += c;
+                            }
                         }
                         lit += '\'';
                         return lit;
@@ -58,7 +63,9 @@ namespace {
                 const toml_array* arr = value->as_array();
                 string result = "[";
                 for (size_t i = 0; i < arr->size(); ++i) {
-                    if (i > 0) result += ", ";
+                    if (i > 0) {
+                        result += ", ";
+                    }
                     result += toml_value_to_string(arr->get_element(i));
                 }
                 result += "]";
@@ -69,14 +76,17 @@ namespace {
                 if (table->is_inline()) {
                     string result = "{ ";
                     bool first = true;
-                    for (const auto& elm : table->get_members()) {
+                    for (const auto& elm: table->get_members()) {
                         const auto& key = elm.first;
                         const auto& val = elm.second;
-                        if (!first) result += ", ";
-                        else first = false;
+                        if (!first) {
+                            result += ", ";
+                        } else {
+                            first = false;
+                        }
 
                         bool needs_quotes = false;
-                        for (const char c : key) {
+                        for (const char c: key) {
                             if (!is_alpha_or_digit(c) && c != '_' && c != '-') {
                                 needs_quotes = true;
                                 break;
@@ -104,7 +114,7 @@ namespace {
 
     string toml_quote_key_if_needed(const string& key) {
         bool needs_quotes = false;
-        for (const char c : key) {
+        for (const char c: key) {
             if (!is_alpha_or_digit(c) && c != '_' && c != '-') {
                 needs_quotes = true;
                 break;
@@ -120,14 +130,16 @@ namespace {
     string toml_value_document(const toml_value* value);
 
     string toml_table_to_string_with_path(const toml_table* table, const string& path_prefix = "") {
-        if (!table) return "";
+        if (!table) {
+            return "";
+        }
 
         string result;
         vector<pair<string, const toml_value*>> ordinary_members;
         vector<pair<string, const toml_table*>> nested_tables;
         vector<pair<string, const toml_array*>> array_tables;
 
-        for (const auto& elm : table->get_members()) {
+        for (const auto& elm: table->get_members()) {
             const auto& key = elm.first;
             const auto& val = elm.second;
 
@@ -162,7 +174,7 @@ namespace {
             ordinary_members.emplace_back(key, val.get());
         }
 
-        for (const auto& elm : ordinary_members) {
+        for (const auto& elm: ordinary_members) {
             const auto& key = elm.first;
             const auto& val = elm.second;
             result += toml_quote_key_if_needed(key);
@@ -171,7 +183,7 @@ namespace {
             result += "\n";
         }
 
-        for (const auto& elm : nested_tables) {
+        for (const auto& elm: nested_tables) {
             const auto& key = elm.first;
             const auto& nested = elm.second;
             if (!result.empty() && result.back() != '\n') {
@@ -185,7 +197,7 @@ namespace {
             result += toml_table_to_string_with_path(nested, full_path);
         }
 
-        for (const auto& elm : array_tables) {
+        for (const auto& elm: array_tables) {
             const auto& key = elm.first;
             const auto& arr = elm.second;
             string key_str = toml_quote_key_if_needed(key);
@@ -205,7 +217,9 @@ namespace {
     }
 
     string toml_value_document(const toml_value* value) {
-        if (!value) return "";
+        if (!value) {
+            return "";
+        }
 
         switch (value->type()) {
             case toml_value::Boolean: {
@@ -235,9 +249,12 @@ namespace {
                     }
                     case toml_string::Literal: {
                         string lit = "'";
-                        for (char c : str) {
-                            if (c == '\'') lit += "''";
-                            else lit += c;
+                        for (char c: str) {
+                            if (c == '\'') {
+                                lit += "''";
+                            } else {
+                                lit += c;
+                            }
                         }
                         lit += "'";
                         return lit;
@@ -265,7 +282,9 @@ namespace {
                 const toml_array* arr = value->as_array();
                 string result = "[";
                 for (size_t i = 0; i < arr->size(); ++i) {
-                    if (i > 0) result += ", ";
+                    if (i > 0) {
+                        result += ", ";
+                    }
                     result += toml_value_document(arr->get_element(i));
                 }
                 result += "]";
@@ -277,11 +296,14 @@ namespace {
                 if (table->is_inline()) {
                     string result = "{ ";
                     bool first = true;
-                    for (const auto& elm : table->get_members()) {
+                    for (const auto& elm: table->get_members()) {
                         const auto& key = elm.first;
                         const auto& val = elm.second;
-                        if (!first) result += ", ";
-                        else first = false;
+                        if (!first) {
+                            result += ", ";
+                        } else {
+                            first = false;
+                        }
 
                         result += toml_quote_key_if_needed(key);
                         result += " = " + toml_value_document(val.get());
@@ -297,15 +319,11 @@ namespace {
             }
         }
     }
-}
+} // namespace
 
 
-string toml_value::to_string() const {
-    return toml_value_to_string(this);
-}
+string toml_value::to_string() const { return toml_value_to_string(this); }
 
-string toml_value::to_document() const {
-    return toml_value_document(this);
-}
+string toml_value::to_document() const { return toml_value_document(this); }
 
 NEFORCE_END_NAMESPACE__

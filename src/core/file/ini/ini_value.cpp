@@ -1,5 +1,5 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/ini/ini_value.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -14,7 +14,7 @@ namespace {
                 if (!section->get_name().empty()) {
                     result += "[" + section->get_name() + "]\n";
                 }
-                for (const auto& prop : section->get_properties()) {
+                for (const auto& prop: section->get_properties()) {
                     result += prop.first + " = " + prop.second->get_value() + "\n";
                 }
                 return result;
@@ -24,7 +24,7 @@ namespace {
             }
         }
     }
-}
+} // namespace
 
 
 int ini_property::get_int(const int default_value) const noexcept {
@@ -51,27 +51,23 @@ bool ini_property::get_bool(const bool default_value) const noexcept {
     }
 }
 
-string ini_value::to_string() const {
-    return ini_value_to_string(this);
-}
+string ini_value::to_string() const { return ini_value_to_string(this); }
 
-string ini_value::to_document() const {
-    return ini_value_to_string(this);
-}
+string ini_value::to_document() const { return ini_value_to_string(this); }
 
 string ini_document::to_string() const {
     string result;
     const ini_section* global = get_global_section();
     if (global && !global->get_properties().empty()) {
-        for (const auto& prop : global->get_properties()) {
+        for (const auto& prop: global->get_properties()) {
             result += prop.first + " = " + prop.second->get_value() + "\n";
         }
         result += "\n";
     }
 
-    for (const auto& sec : get_sections()) {
+    for (const auto& sec: get_sections()) {
         result += "[" + sec.first + "]\n";
-        for (const auto& prop : sec.second->get_properties()) {
+        for (const auto& prop: sec.second->get_properties()) {
             result += prop.first + " = " + prop.second->get_value() + "\n";
         }
         result += "\n";

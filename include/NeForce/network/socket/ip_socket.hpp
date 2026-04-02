@@ -39,8 +39,8 @@ protected:
 public:
     ip_socket() = default;
 
-    explicit ip_socket(const native_handle_type fd) noexcept
-    : socket_base(fd) {}
+    explicit ip_socket(const native_handle_type fd) noexcept :
+    socket_base(fd) {}
 
     ip_socket(ip_socket&&) noexcept = default;
     ip_socket& operator=(ip_socket&&) noexcept = default;
@@ -50,17 +50,11 @@ public:
 
     ~ip_socket() override = default;
 
-    NEFORCE_NODISCARD int address_family() const noexcept {
-        return family_;
-    }
+    NEFORCE_NODISCARD int address_family() const noexcept { return family_; }
 
-    NEFORCE_NODISCARD bool is_ipv4() const noexcept {
-        return family_ == AF_INET;
-    }
+    NEFORCE_NODISCARD bool is_ipv4() const noexcept { return family_ == AF_INET; }
 
-    NEFORCE_NODISCARD bool is_ipv6() const noexcept {
-        return family_ == AF_INET6;
-    }
+    NEFORCE_NODISCARD bool is_ipv6() const noexcept { return family_ == AF_INET6; }
 
     virtual void connect(const ip_address& endpoint);
 

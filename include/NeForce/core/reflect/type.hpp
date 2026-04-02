@@ -10,9 +10,9 @@
  */
 
 #include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/string/string.hpp"
-#include "NeForce/core/reflect/property.hpp"
 #include "NeForce/core/reflect/function.hpp"
+#include "NeForce/core/reflect/property.hpp"
+#include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_REFLECT__
 
@@ -40,32 +40,34 @@ public:
     using constructor_func = _NEFORCE function<meta_any(const vector<meta_any>&)>; ///< 构造函数调用器类型
 
 private:
-    reflect::type_id type_id_;                          ///< 类型ID
-    string_view name_;                                  ///< 类型名称
-    size_t size_;                                       ///< 类型大小
-    constructor_func constructor_;                      ///< 构造函数调用器
-    vector<meta_type*> base_types_;                     ///< 直接基类列表
-    vector<string> pending_base_names_;                 ///< 待解析的基类名称
+    reflect::type_id type_id_;                                    ///< 类型ID
+    string_view name_;                                            ///< 类型名称
+    size_t size_;                                                 ///< 类型大小
+    constructor_func constructor_;                                ///< 构造函数调用器
+    vector<meta_type*> base_types_;                               ///< 直接基类列表
+    vector<string> pending_base_names_;                           ///< 待解析的基类名称
     unordered_map<string, unique_ptr<meta_property>> properties_; ///< 属性映射
-    unordered_map<string, unique_ptr<meta_function>> functions_;   ///< 函数映射
+    unordered_map<string, unique_ptr<meta_function>> functions_;  ///< 函数映射
 
     void collect_properties(vector<pair<string, const meta_property*>>& result,
                             vector<reflect::type_id>* visited = nullptr) const {
         vector<reflect::type_id> local_visited;
-        if (!visited) visited = &local_visited;
+        if (!visited) {
+            visited = &local_visited;
+        }
 
         if (find(visited->begin(), visited->end(), type_id_) != visited->end()) {
             return;
         }
         visited->push_back(type_id_);
 
-        for (const auto* base : base_types_) {
+        for (const auto* base: base_types_) {
             if (base) {
                 base->collect_properties(result, visited);
             }
         }
 
-        for (const auto& property : properties_) {
+        for (const auto& property: properties_) {
             const auto& name = property.first;
             const auto& prop = property.second;
             result.emplace_back(name, prop.get());
@@ -75,20 +77,22 @@ private:
     void collect_functions(vector<pair<string, const meta_function*>>& result,
                            vector<reflect::type_id>* visited = nullptr) const {
         vector<reflect::type_id> local_visited;
-        if (!visited) visited = &local_visited;
+        if (!visited) {
+            visited = &local_visited;
+        }
 
         if (find(visited->begin(), visited->end(), type_id_) != visited->end()) {
             return;
         }
         visited->push_back(type_id_);
 
-        for (const auto* base : base_types_) {
+        for (const auto* base: base_types_) {
             if (base) {
                 base->collect_functions(result, visited);
             }
         }
 
-        for (const auto& f : functions_) {
+        for (const auto& f: functions_) {
             const auto& name = f.first;
             const auto& func = f.second;
             result.emplace_back(name, func.get());
@@ -102,8 +106,10 @@ public:
      * @param id 类型ID
      * @param size 类型大小
      */
-    meta_type(string_view name, reflect::type_id id, size_t size)
-    : type_id_(id), name_(name), size_(size) {}
+    meta_type(string_view name, reflect::type_id id, size_t size) :
+    type_id_(id),
+    name_(name),
+    size_(size) {}
 
     /**
      * @brief 获取类型ID
@@ -131,7 +137,9 @@ public:
      * @return 自身引用
      */
     meta_type& base_type(meta_type* base) {
-        if (base) base_types_.push_back(base);
+        if (base) {
+            base_types_.push_back(base);
+        }
         return *this;
     }
 
@@ -151,9 +159,13 @@ public:
      * @return 是派生类返回true
      */
     NEFORCE_NODISCARD bool is_derived_from(reflect::type_id base_id) const {
-        if (type_id_ == base_id) return true;
-        for (auto* base : base_types_) {
-            if (base && base->is_derived_from(base_id)) return true;
+        if (type_id_ == base_id) {
+            return true;
+        }
+        for (auto* base: base_types_) {
+            if (base && base->is_derived_from(base_id)) {
+                return true;
+            }
         }
         return false;
     }
@@ -163,9 +175,7 @@ public:
      * @param base_name 基类名称
      * @return 是派生类返回true
      */
-    NEFORCE_NODISCARD bool is_derived_from(string_view base_name) const {
-        return is_derived_from(base_name.to_hash());
-    }
+    NEFORCE_NODISCARD bool is_derived_from(string_view base_name) const { return is_derived_from(base_name.to_hash()); }
 
     /**
      * @brief 添加属性
@@ -175,10 +185,8 @@ public:
      * @param setter 写入器
      * @return 自身引用
      */
-    meta_type& property(string_view name,
-                       reflect::type_id prop_type_id,
-                       meta_property::getter getter,
-                       meta_property::setter setter) {
+    meta_type& property(string_view name, reflect::type_id prop_type_id, meta_property::getter getter,
+                        meta_property::setter setter) {
         properties_.emplace(name, make_unique<meta_property>(name, prop_type_id, move(getter), move(setter)));
         return *this;
     }
@@ -215,7 +223,7 @@ public:
             return it->second.get();
         }
 
-        for (const auto* base : base_types_) {
+        for (const auto* base: base_types_) {
             if (base) {
                 if (auto* prop = base->get_property(name)) {
                     return prop;
@@ -236,7 +244,7 @@ public:
             return it->second.get();
         }
 
-        for (const auto* base : base_types_) {
+        for (const auto* base: base_types_) {
             if (base) {
                 if (auto* func = base->get_function(name)) {
                     return func;
@@ -250,9 +258,7 @@ public:
      * @brief 创建对象（无参构造）
      * @return 创建的对象
      */
-    NEFORCE_NODISCARD meta_any create() const {
-        return constructor_ ? constructor_({}) : meta_any{};
-    }
+    NEFORCE_NODISCARD meta_any create() const { return constructor_ ? constructor_({}) : meta_any{}; }
 
     /**
      * @brief 创建对象（带参数）

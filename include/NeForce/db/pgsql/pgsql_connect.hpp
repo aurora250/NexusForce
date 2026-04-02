@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_PGSQL_CONNECT_HPP__
 #define NEFORCE_DATABASE_PGSQL_CONNECT_HPP__
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#include "NeForce/db/db_interface.hpp"
-#include <libpq-fe.h>
+#    include <libpq-fe.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API pgsql_connect final : public idb_tb_connect {
@@ -16,7 +16,7 @@ public:
     ~pgsql_connect() override { close(); }
 
     pgsql_connect(const pgsql_connect&) = delete;
-    pgsql_connect& operator =(const pgsql_connect&) = delete;
+    pgsql_connect& operator=(const pgsql_connect&) = delete;
 
     NEFORCE_NODISCARD bool connect(const db_config& config) override;
     bool reconnect(const db_config& config) override;
@@ -39,7 +39,8 @@ public:
 
 class NEFORCE_API pgsql_factory final : public idb_factory {
 public:
-    explicit pgsql_factory(db_config config) : idb_factory(_NEFORCE move(config)) {}
+    explicit pgsql_factory(db_config config) :
+    idb_factory(_NEFORCE move(config)) {}
     ~pgsql_factory() override = default;
 
     idb_connect* create_connect() override;

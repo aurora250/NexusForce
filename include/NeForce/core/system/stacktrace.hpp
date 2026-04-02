@@ -36,7 +36,7 @@ public:
      */
     class frame : public istringify<frame> {
     private:
-        void* address_ = nullptr;  ///< 返回地址
+        void* address_ = nullptr; ///< 返回地址
 
     public:
         /**
@@ -55,9 +55,7 @@ public:
          * @brief 获取返回地址
          * @return 返回地址指针
          */
-        NEFORCE_NODISCARD void* address() const noexcept {
-            return address_;
-        }
+        NEFORCE_NODISCARD void* address() const noexcept { return address_; }
 
         /**
          * @brief 获取函数符号名称
@@ -72,18 +70,14 @@ public:
          * @param other 另一个堆栈帧
          * @return 是否相等
          */
-        NEFORCE_NODISCARD bool operator ==(const frame& other) const noexcept {
-            return address_ == other.address_;
-        }
+        NEFORCE_NODISCARD bool operator==(const frame& other) const noexcept { return address_ == other.address_; }
 
         /**
          * @brief 不等比较
          * @param other 另一个堆栈帧
          * @return 是否不等
          */
-        NEFORCE_NODISCARD bool operator !=(const frame& other) const noexcept {
-            return !(*this == other);
-        }
+        NEFORCE_NODISCARD bool operator!=(const frame& other) const noexcept { return !(*this == other); }
 
         /**
          * @brief 转换为字符串
@@ -95,7 +89,7 @@ public:
     };
 
 private:
-    vector<frame> frames_;  ///< 堆栈帧列表
+    vector<frame> frames_; ///< 堆栈帧列表
 
 public:
     /**
@@ -111,67 +105,51 @@ public:
      * @brief 获取堆栈深度
      * @return 堆栈帧数量
      */
-    NEFORCE_NODISCARD size_t size() const noexcept {
-        return frames_.size();
-    }
+    NEFORCE_NODISCARD size_t size() const noexcept { return frames_.size(); }
 
     /**
      * @brief 检查堆栈是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD bool empty() const noexcept {
-        return frames_.empty();
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept { return frames_.empty(); }
 
     /**
      * @brief 常量索引访问
      * @param idx 索引位置
      * @return 对应位置的堆栈帧常量引用
      */
-    NEFORCE_NODISCARD const frame& operator [](const size_t idx) const noexcept {
-        return frames_[idx];
-    }
+    NEFORCE_NODISCARD const frame& operator[](const size_t idx) const noexcept { return frames_[idx]; }
 
     /**
      * @brief 索引访问
      * @param idx 索引位置
      * @return 对应位置的堆栈帧引用
      */
-    NEFORCE_NODISCARD frame& operator [](const size_t idx) noexcept {
-        return frames_[idx];
-    }
+    NEFORCE_NODISCARD frame& operator[](const size_t idx) noexcept { return frames_[idx]; }
 
     /**
      * @brief 获取起始常量迭代器
      * @return 常量迭代器
      */
-    NEFORCE_NODISCARD auto begin() const noexcept {
-        return frames_.begin();
-    }
+    NEFORCE_NODISCARD auto begin() const noexcept { return frames_.begin(); }
 
     /**
      * @brief 获取结束常量迭代器
      * @return 常量迭代器
      */
-    NEFORCE_NODISCARD auto end() const noexcept {
-        return frames_.end();
-    }
+    NEFORCE_NODISCARD auto end() const noexcept { return frames_.end(); }
 
     /**
      * @brief 获取起始常量迭代器
      * @return 常量迭代器
      */
-    NEFORCE_NODISCARD auto cbegin() const noexcept {
-        return frames_.cbegin();
-    }
+    NEFORCE_NODISCARD auto cbegin() const noexcept { return frames_.cbegin(); }
 
     /**
      * @brief 获取结束常量迭代器
      * @return 常量迭代器
      */
-    NEFORCE_NODISCARD auto cend() const noexcept {
-        return frames_.cend();
-    }
+    NEFORCE_NODISCARD auto cend() const noexcept { return frames_.cend(); }
 
     /**
      * @brief 转换为字符串

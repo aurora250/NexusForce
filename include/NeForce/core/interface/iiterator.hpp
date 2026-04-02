@@ -25,39 +25,30 @@ NEFORCE_BEGIN_NAMESPACE__
  * 为迭代器类型提供完整的操作接口，包括解引用、递增、递减、算术运算和比较运算。
  * 基于CRTP模式，要求派生类实现核心操作方法。
  */
-template <typename Iterator>
-struct iiterator {
+template <typename Iterator> struct iiterator {
 private:
-    constexpr Iterator& derived() noexcept {
-        return static_cast<Iterator&>(*this);
-    }
+    constexpr Iterator& derived() noexcept { return static_cast<Iterator&>(*this); }
 
-    constexpr const Iterator& derived() const noexcept {
-        return static_cast<const Iterator&>(*this);
-    }
+    constexpr const Iterator& derived() const noexcept { return static_cast<const Iterator&>(*this); }
 
 public:
     /**
      * @brief 解引用操作符
      * @return 迭代器指向的元素引用或值
      */
-    NEFORCE_NODISCARD constexpr decltype(auto) operator *() const noexcept {
-        return derived().dereference();
-    }
+    NEFORCE_NODISCARD constexpr decltype(auto) operator*() const noexcept { return derived().dereference(); }
 
     /**
      * @brief 成员访问操作符
      * @return 指向元素的指针
      */
-    NEFORCE_NODISCARD constexpr decltype(auto) operator ->() const noexcept {
-        return &(derived().dereference());
-    }
+    NEFORCE_NODISCARD constexpr decltype(auto) operator->() const noexcept { return &(derived().dereference()); }
 
     /**
      * @brief 前置递增操作符
      * @return 递增后的迭代器引用
      */
-    constexpr Iterator& operator ++() noexcept {
+    constexpr Iterator& operator++() noexcept {
         derived().increment();
         return derived();
     }
@@ -66,7 +57,7 @@ public:
      * @brief 后置递增操作符
      * @return 递增前的迭代器副本
      */
-    constexpr Iterator operator ++(int) noexcept {
+    constexpr Iterator operator++(int) noexcept {
         Iterator temp = derived();
         derived().increment();
         return temp;
@@ -76,7 +67,7 @@ public:
      * @brief 前置递减操作符
      * @return 递减后的迭代器引用
      */
-    constexpr Iterator& operator --() noexcept {
+    constexpr Iterator& operator--() noexcept {
         derived().decrement();
         return derived();
     }
@@ -85,7 +76,7 @@ public:
      * @brief 后置递减操作符
      * @return 递减前的迭代器副本
      */
-    constexpr Iterator operator --(int) noexcept {
+    constexpr Iterator operator--(int) noexcept {
         Iterator temp = derived();
         derived().decrement();
         return temp;
@@ -96,8 +87,7 @@ public:
      * @param n 要前进的距离
      * @return 前进后的迭代器引用
      */
-    template <typename Distance>
-    constexpr Iterator& operator +=(Distance n) noexcept {
+    template <typename Distance> constexpr Iterator& operator+=(Distance n) noexcept {
         derived().advance(n);
         return derived();
     }
@@ -107,8 +97,7 @@ public:
      * @param n 要前进的距离
      * @return 前进后的新迭代器
      */
-    template <typename Distance>
-    NEFORCE_NODISCARD constexpr Iterator operator +(Distance n) const noexcept {
+    template <typename Distance> NEFORCE_NODISCARD constexpr Iterator operator+(Distance n) const noexcept {
         Iterator temp = derived();
         temp.advance(n);
         return temp;
@@ -121,7 +110,7 @@ public:
      * @return 前进后的新迭代器
      */
     template <typename Distance>
-    NEFORCE_NODISCARD friend constexpr Iterator operator +(Distance n, const iiterator& it) noexcept {
+    NEFORCE_NODISCARD friend constexpr Iterator operator+(Distance n, const iiterator& it) noexcept {
         return it.derived() + n;
     }
 
@@ -130,8 +119,7 @@ public:
      * @param n 要后退的距离
      * @return 后退后的迭代器引用
      */
-    template <typename Distance>
-    constexpr Iterator& operator -=(Distance n) noexcept {
+    template <typename Distance> constexpr Iterator& operator-=(Distance n) noexcept {
         derived().advance(-n);
         return derived();
     }
@@ -143,8 +131,7 @@ public:
      * @return 后退后的新迭代器
      */
     template <typename T>
-    NEFORCE_NODISCARD constexpr enable_if_t<!is_same_v<T, Iterator>, Iterator>
-    operator -(const T n) const noexcept {
+    NEFORCE_NODISCARD constexpr enable_if_t<!is_same_v<T, Iterator>, Iterator> operator-(const T n) const noexcept {
         Iterator temp = derived();
         temp.advance(-n);
         return temp;
@@ -155,8 +142,7 @@ public:
      * @param other 另一个迭代器
      * @return 两个迭代器之间的距离
      */
-    NEFORCE_NODISCARD constexpr decltype(auto)
-    operator -(const Iterator& other) const noexcept {
+    NEFORCE_NODISCARD constexpr decltype(auto) operator-(const Iterator& other) const noexcept {
         return derived().distance_to(other);
     }
 
@@ -165,54 +151,42 @@ public:
      * @param rhs 右侧迭代器
      * @return 如果迭代器相等返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool operator ==(const Iterator& rhs) const noexcept {
-        return derived().equal(rhs);
-    }
+    NEFORCE_NODISCARD constexpr bool operator==(const Iterator& rhs) const noexcept { return derived().equal(rhs); }
 
     /**
      * @brief 不等比较操作符
      * @param rhs 右侧迭代器
      * @return 如果迭代器不相等返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool operator !=(const Iterator& rhs) const noexcept {
-        return !(*this == rhs);
-    }
+    NEFORCE_NODISCARD constexpr bool operator!=(const Iterator& rhs) const noexcept { return !(*this == rhs); }
 
     /**
      * @brief 小于比较操作符
      * @param rhs 右侧迭代器
      * @return 如果当前迭代器在rhs之前返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool operator <(const Iterator& rhs) const noexcept {
-        return derived().less_than(rhs);
-    }
+    NEFORCE_NODISCARD constexpr bool operator<(const Iterator& rhs) const noexcept { return derived().less_than(rhs); }
 
     /**
      * @brief 大于比较操作符
      * @param rhs 右侧迭代器
      * @return 如果当前迭代器在rhs之后返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool operator >(const Iterator& rhs) const noexcept {
-        return rhs < derived();
-    }
+    NEFORCE_NODISCARD constexpr bool operator>(const Iterator& rhs) const noexcept { return rhs < derived(); }
 
     /**
      * @brief 小于等于比较操作符
      * @param rhs 右侧迭代器
      * @return 如果当前迭代器不在rhs之后返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool operator <=(const Iterator& rhs) const noexcept {
-        return !(derived() > rhs);
-    }
+    NEFORCE_NODISCARD constexpr bool operator<=(const Iterator& rhs) const noexcept { return !(derived() > rhs); }
 
     /**
      * @brief 大于等于比较操作符
      * @param rhs 右侧迭代器
      * @return 如果当前迭代器不在rhs之前返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool operator >=(const Iterator& rhs) const noexcept {
-        return !(derived() < rhs);
-    }
+    NEFORCE_NODISCARD constexpr bool operator>=(const Iterator& rhs) const noexcept { return !(derived() < rhs); }
 };
 
 /** @} */ // CRTPInterfaces

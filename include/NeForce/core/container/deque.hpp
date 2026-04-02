@@ -36,13 +36,15 @@ NEFORCE_BEGIN_NAMESPACE__
 template <bool IsConst, typename Deque, size_t BufSize = 0>
 struct deque_iterator : iiterator<deque_iterator<IsConst, Deque, BufSize>> {
 public:
-    using container_type	= Deque;  ///< 容器类型
-    using value_type		= typename container_type::value_type;  ///< 值类型
-    using size_type			= typename container_type::size_type;  ///< 大小类型
-    using difference_type	= typename container_type::difference_type;  ///< 差值类型
-    using iterator_category = random_access_iterator_tag;  ///< 迭代器类别（随机访问）
-    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;  ///< 引用类型
-    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;  ///< 指针类型
+    using container_type = Deque;                                     ///< 容器类型
+    using value_type = typename container_type::value_type;           ///< 值类型
+    using size_type = typename container_type::size_type;             ///< 大小类型
+    using difference_type = typename container_type::difference_type; ///< 差值类型
+    using iterator_category = random_access_iterator_tag;             ///< 迭代器类别（随机访问）
+    using reference = conditional_t<IsConst, typename container_type::const_reference,
+                                    typename container_type::reference>; ///< 引用类型
+    using pointer = conditional_t<IsConst, typename container_type::const_pointer,
+                                  typename container_type::pointer>; ///< 指针类型
 
     /**
      * @brief 计算双端队列缓冲区大小
@@ -63,11 +65,11 @@ public:
     static constexpr difference_type buffer_size = deque_buf_size(BufSize, sizeof(value_type));
 
 private:
-    pointer current_ = nullptr;  ///< 指向当前元素
-    pointer first_ = nullptr;    ///< 指向当前缓冲区的起始位置
-    pointer last_ = nullptr;     ///< 指向当前缓冲区的结束位置
-    pointer* node_ = nullptr;    ///< 指向当前节点
-    const container_type* container_ = nullptr;  ///< 关联容器指针
+    pointer current_ = nullptr;                 ///< 指向当前元素
+    pointer first_ = nullptr;                   ///< 指向当前缓冲区的起始位置
+    pointer last_ = nullptr;                    ///< 指向当前缓冲区的结束位置
+    pointer* node_ = nullptr;                   ///< 指向当前节点
+    const container_type* container_ = nullptr; ///< 关联容器指针
 
     template <typename, typename, size_t> friend class deque;
     template <bool, typename, size_t> friend struct deque_iterator;
@@ -90,9 +92,9 @@ public:
     ~deque_iterator() = default;
 
     deque_iterator(const deque_iterator&) noexcept = default;
-    deque_iterator& operator =(const deque_iterator&) noexcept = default;
+    deque_iterator& operator=(const deque_iterator&) noexcept = default;
     deque_iterator(deque_iterator&&) noexcept = default;
-    deque_iterator& operator =(deque_iterator&&) noexcept = default;
+    deque_iterator& operator=(deque_iterator&&) noexcept = default;
 
     /**
      * @brief 构造函数
@@ -100,8 +102,12 @@ public:
      * @param map 节点指针
      * @param deq 容器指针
      */
-    deque_iterator(pointer cur, pointer* map, const container_type* deq)
-    : current_(cur), first_(*map), last_(*map + buffer_size), node_(map), container_(deq) {}
+    deque_iterator(pointer cur, pointer* map, const container_type* deq) :
+    current_(cur),
+    first_(*map),
+    last_(*map + buffer_size),
+    node_(map),
+    container_(deq) {}
 
     /**
      * @brief 构造函数
@@ -111,8 +117,12 @@ public:
      * @param node 节点指针
      * @param deq 容器指针
      */
-    deque_iterator(pointer cur, pointer first, pointer last, pointer* node, const container_type* deq) noexcept
-    : current_(cur), first_(first), last_(last), node_(node), container_(deq) {}
+    deque_iterator(pointer cur, pointer first, pointer last, pointer* node, const container_type* deq) noexcept :
+    current_(cur),
+    first_(first),
+    last_(last),
+    node_(node),
+    container_(deq) {}
 
     /**
      * @brief 从另一个迭代器转换构造（常量/非常量转换）
@@ -120,12 +130,12 @@ public:
      * @param other 源迭代器
      */
     template <bool IsConst2>
-    explicit deque_iterator(const deque_iterator<IsConst2, Deque, BufSize>& other) noexcept
-    : current_(const_cast<pointer>(other.current_)),
-      first_(const_cast<pointer>(other.first_)),
-      last_(const_cast<pointer>(other.last_)),
-      node_(const_cast<pointer*>(other.node_)),
-      container_(other.container_) {}
+    explicit deque_iterator(const deque_iterator<IsConst2, Deque, BufSize>& other) noexcept :
+    current_(const_cast<pointer>(other.current_)),
+    first_(const_cast<pointer>(other.first_)),
+    last_(const_cast<pointer>(other.last_)),
+    node_(const_cast<pointer*>(other.node_)),
+    container_(other.container_) {}
 
     /**
      * @brief 解引用操作
@@ -177,9 +187,8 @@ public:
         if (offset >= 0 && offset < buffer_size) {
             current_ += off;
         } else {
-            difference_type node_offset = offset > 0 ?
-                offset / buffer_size :
-                -static_cast<difference_type>((-offset - 1) / buffer_size) - 1;
+            difference_type node_offset =
+                    offset > 0 ? offset / buffer_size : -static_cast<difference_type>((-offset - 1) / buffer_size) - 1;
             deque_iterator::change_buff(node_ + node_offset);
             current_ = first_ + (offset - node_offset * buffer_size);
         }
@@ -202,9 +211,7 @@ public:
      * @param n 偏移量
      * @return 偏移位置元素的引用
      */
-    NEFORCE_NODISCARD reference operator [](const difference_type n) noexcept {
-        return *(*this + n);
-    }
+    NEFORCE_NODISCARD reference operator[](const difference_type n) noexcept { return *(*this + n); }
 
     /**
      * @brief 相等比较
@@ -230,17 +237,13 @@ public:
      * @brief 获取底层指针
      * @return 当前元素指针
      */
-    NEFORCE_NODISCARD pointer base() const noexcept {
-        return current_;
-    }
+    NEFORCE_NODISCARD pointer base() const noexcept { return current_; }
 
     /**
      * @brief 获取关联容器
      * @return 关联容器指针
      */
-    NEFORCE_NODISCARD const container_type* container() const noexcept {
-        return container_;
-    }
+    NEFORCE_NODISCARD const container_type* container() const noexcept { return container_; }
 };
 
 
@@ -263,25 +266,25 @@ class deque : public icollector<deque<T, Alloc>> {
     static_assert(is_object_v<T>, "deque only contains object types.");
 
 public:
-    using pointer			= T*;  ///< 指针类型
-    using reference			= T&;  ///< 引用类型
-    using const_pointer		= const T*;  ///< 常量指针类型
-    using const_reference	= const T&;  ///< 常量引用类型
-    using value_type		= T;  ///< 值类型
-    using size_type			= size_t;  ///< 大小类型
-    using difference_type	= ptrdiff_t;  ///< 差值类型
-    using iterator                  = deque_iterator<false, deque, BufSize>;  ///< 迭代器类型
-    using const_iterator            = deque_iterator<true, deque, BufSize>;   ///< 常量迭代器类型
-    using reverse_iterator          = _NEFORCE reverse_iterator<iterator>;       ///< 反向迭代器类型
-    using const_reverse_iterator    = _NEFORCE reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
-    using allocator_type            = Alloc;  ///< 分配器类型
+    using pointer = T*;                                                       ///< 指针类型
+    using reference = T&;                                                     ///< 引用类型
+    using const_pointer = const T*;                                           ///< 常量指针类型
+    using const_reference = const T&;                                         ///< 常量引用类型
+    using value_type = T;                                                     ///< 值类型
+    using size_type = size_t;                                                 ///< 大小类型
+    using difference_type = ptrdiff_t;                                        ///< 差值类型
+    using iterator = deque_iterator<false, deque, BufSize>;                   ///< 迭代器类型
+    using const_iterator = deque_iterator<true, deque, BufSize>;              ///< 常量迭代器类型
+    using reverse_iterator = _NEFORCE reverse_iterator<iterator>;             ///< 反向迭代器类型
+    using const_reverse_iterator = _NEFORCE reverse_iterator<const_iterator>; ///< 常量反向迭代器类型
+    using allocator_type = Alloc;                                             ///< 分配器类型
 
     /// 缓冲区大小
     static constexpr difference_type buffer_size = iterator::buffer_size;
 
 private:
-    using map_pointer   = pointer*;  ///< 中控器指针类型
-    using map_allocator = typename Alloc::template rebind<pointer>::other;  ///< 中控器分配器类型
+    using map_pointer = pointer*;                                          ///< 中控器指针类型
+    using map_allocator = typename Alloc::template rebind<pointer>::other; ///< 中控器分配器类型
 
     iterator start_{};  ///< 起始迭代器
     iterator finish_{}; ///< 结束迭代器
@@ -337,10 +340,11 @@ private:
      *
      * 释放指定范围内节点的缓冲区内存。
      */
-    void destroy_nodes(map_pointer start, map_pointer finish)
-    noexcept(is_nothrow_destructible_v<value_type>) {
+    void destroy_nodes(map_pointer start, map_pointer finish) noexcept(is_nothrow_destructible_v<value_type>) {
         for (map_pointer cur = start; cur <= finish; ++cur) {
-            if (*cur == nullptr) continue;
+            if (*cur == nullptr) {
+                continue;
+            }
             map_size_pair_.get_base().deallocate(*cur, buffer_size);
             *cur = nullptr;
         }
@@ -380,9 +384,7 @@ private:
         start_.change_buff(nstart);
         finish_.change_buff(nfinish);
         start_.current_ = start_.first_;
-        finish_.current_ = n == 0 ?
-            start_.first_ :
-            finish_.first_ + (n % buffer_size ? n % buffer_size : buffer_size);
+        finish_.current_ = n == 0 ? start_.first_ : finish_.first_ + (n % buffer_size ? n % buffer_size : buffer_size);
         start_.container_ = this;
         finish_.container_ = this;
     }
@@ -394,7 +396,9 @@ private:
      */
     void fill_initialize(const size_type n, const T& value) {
         deque::create_map_and_nodes(n);
-        if (n == 0) return;
+        if (n == 0) {
+            return;
+        }
 
         for (map_pointer cur = start_.node_; cur < finish_.node_; ++cur) {
             _NEFORCE uninitialized_fill(*cur, *cur + buffer_size, value);
@@ -409,8 +413,7 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
-    copy_initialize(Iterator first, Iterator last) {
+    enable_if_t<!is_ranges_fwd_iter_v<Iterator>> copy_initialize(Iterator first, Iterator last) {
         deque::create_map_and_nodes(0);
         deque::insert(end(), first, last);
         return;
@@ -423,8 +426,7 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<is_ranges_fwd_iter_v<Iterator>>
-    copy_initialize(Iterator first, Iterator last) {
+    enable_if_t<is_ranges_fwd_iter_v<Iterator>> copy_initialize(Iterator first, Iterator last) {
         deque::create_map_and_nodes(_NEFORCE distance(first, last));
 
         for (map_pointer cur = start_.node_; cur < finish_.node_; ++cur) {
@@ -445,8 +447,7 @@ private:
         if (n > size()) {
             _NEFORCE fill(begin(), end(), value);
             deque::insert(end(), n - size(), value);
-        }
-        else {
+        } else {
             deque::erase(begin() + n, end());
             _NEFORCE fill(begin(), end(), value);
         }
@@ -459,8 +460,7 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
-    assign_ranges(Iterator first, Iterator last) {
+    enable_if_t<!is_ranges_fwd_iter_v<Iterator>> assign_ranges(Iterator first, Iterator last) {
         clear();
         deque::insert(end(), first, last);
         return;
@@ -473,8 +473,7 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<is_ranges_fwd_iter_v<Iterator>>
-    assign_ranges(Iterator first, Iterator last) {
+    enable_if_t<is_ranges_fwd_iter_v<Iterator>> assign_ranges(Iterator first, Iterator last) {
         auto first1 = begin();
         auto last1 = end();
 
@@ -505,9 +504,8 @@ private:
             const size_t needed = (n - begin_left) / buffer_size + 1;
 
             if (needed > static_cast<size_type>(start_.node_ - map_pair_.value)) {
-                const size_type new_size = _NEFORCE max(
-                    map_size_pair_.value << 1,
-                    map_size_pair_.value + needed + init_map_size);
+                const size_type new_size =
+                        _NEFORCE max(map_size_pair_.value << 1, map_size_pair_.value + needed + init_map_size);
                 map_pointer map = deque::create_map(new_size);
                 const size_type old_buf = finish_.node_ - start_.node_ + 1;
                 const size_type new_buf = needed + old_buf;
@@ -517,8 +515,7 @@ private:
                 auto end = mid + old_buf;
 
                 deque::create_nodes(begin, mid - 1);
-                for (auto begin1 = mid, begin2 = start_.node_;
-                    begin1 != end; ++begin1, ++begin2) {
+                for (auto begin1 = mid, begin2 = start_.node_; begin1 != end; ++begin1, ++begin2) {
                     *begin1 = *begin2;
                 }
 
@@ -541,9 +538,8 @@ private:
             const size_type needed = (n - end_left) / buffer_size + 1;
 
             if (needed > static_cast<size_type>((map_pair_.value + map_size_pair_.value) - finish_.node_ - 1)) {
-                const size_type new_size = _NEFORCE max(
-                    map_size_pair_.value << 1,
-                    map_size_pair_.value + needed + init_map_size);
+                const size_type new_size =
+                        _NEFORCE max(map_size_pair_.value << 1, map_size_pair_.value + needed + init_map_size);
                 map_pointer map = deque::create_map(new_size);
                 const size_type old_buf = finish_.node_ - start_.node_ + 1;
                 const size_type new_buf = needed + old_buf;
@@ -552,8 +548,7 @@ private:
                 auto mid = begin + old_buf;
                 auto end = mid + needed;
 
-                for (auto begin1 = begin, begin2 = start_.node_;
-                    begin1 != mid; ++begin1, ++begin2) {
+                for (auto begin1 = begin, begin2 = start_.node_; begin1 != mid; ++begin1, ++begin2) {
                     *begin1 = *begin2;
                 }
                 deque::create_nodes(mid, end - 1);
@@ -578,8 +573,7 @@ private:
      * @param last 结束迭代器
      * @param n 元素数量
      */
-    template <typename Iterator>
-    void insert_ranges_n(iterator position, Iterator first, Iterator last, size_type n) {
+    template <typename Iterator> void insert_ranges_n(iterator position, Iterator first, Iterator last, size_type n) {
         difference_type dist_before = position - start_;
 
         if (dist_before < static_cast<difference_type>(size() / 2)) {
@@ -597,8 +591,7 @@ private:
                     _NEFORCE copy(first, last, position - n);
                 } else {
                     auto mid = _NEFORCE next(first, n - dist_before);
-                    _NEFORCE uninitialized_copy(first, mid,
-                        _NEFORCE uninitialized_copy(start_, position, new_start));
+                    _NEFORCE uninitialized_copy(first, mid, _NEFORCE uninitialized_copy(start_, position, new_start));
                     start_ = new_start;
                     _NEFORCE copy(mid, last, old_start);
                 }
@@ -624,8 +617,7 @@ private:
                     _NEFORCE copy(first, last, position);
                 } else {
                     auto mid = _NEFORCE next(first, dist_after);
-                    _NEFORCE uninitialized_copy(position, finish_,
-                        _NEFORCE uninitialized_copy(mid, last, finish_));
+                    _NEFORCE uninitialized_copy(position, finish_, _NEFORCE uninitialized_copy(mid, last, finish_));
                     finish_ = new_finish;
                     _NEFORCE copy(first, mid, position);
                 }
@@ -646,9 +638,10 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
-    insert_ranges(iterator position, Iterator first, Iterator last) {
-        if (last <= first) return;
+    enable_if_t<!is_ranges_fwd_iter_v<Iterator>> insert_ranges(iterator position, Iterator first, Iterator last) {
+        if (last <= first) {
+            return;
+        }
 
         const size_type n = _NEFORCE distance(first, last);
         const size_type dist_before = position - start_;
@@ -656,13 +649,13 @@ private:
         if (dist_before < size() / 2) {
             deque::reallocate_map(n, true);
         } else {
-             deque::reallocate_map(n, false);
+            deque::reallocate_map(n, false);
         }
 
         position = start_ + dist_before;
         auto cur = --last;
 
-        for(size_type i = 0; i < n; ++i, --cur) {
+        for (size_type i = 0; i < n; ++i, --cur) {
             deque::insert(position, *cur);
         }
         return;
@@ -676,9 +669,10 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<is_ranges_fwd_iter_v<Iterator>>
-    insert_ranges(iterator position, Iterator first, Iterator last) {
-        if (last <= first) return;
+    enable_if_t<is_ranges_fwd_iter_v<Iterator>> insert_ranges(iterator position, Iterator first, Iterator last) {
+        if (last <= first) {
+            return;
+        }
         const size_type n = _NEFORCE distance(first, last);
 
         if (position.current_ == start_.current_) {
@@ -699,8 +693,7 @@ private:
             try {
                 _NEFORCE uninitialized_copy(first, last, finish_);
                 finish_ = new_finish;
-            }
-            catch (...) {
+            } catch (...) {
                 if (new_finish.node_ != finish_.node_) {
                     deque::destroy_nodes(finish_.node_ + 1, new_finish.node_);
                 }
@@ -734,8 +727,8 @@ private:
                     _NEFORCE copy(start_n, position, old_start);
                     _NEFORCE fill(position - n, position, value);
                 } else {
-                    _NEFORCE uninitialized_fill(
-                        _NEFORCE uninitialized_copy(start_, position, new_start), start_, value);
+                    _NEFORCE uninitialized_fill(_NEFORCE uninitialized_copy(start_, position, new_start), start_,
+                                                value);
                     start_ = new_start;
                     _NEFORCE fill(old_start, position, value);
                 }
@@ -782,8 +775,7 @@ private:
      * @return 指向插入元素的迭代器
      */
     template <typename... Args>
-    iterator insert_aux(iterator position, Args&&... args)
-    noexcept(is_nothrow_move_assignable_v<value_type>) {
+    iterator insert_aux(iterator position, Args&&... args) noexcept(is_nothrow_move_assignable_v<value_type>) {
         size_type index = position - start_;
 
         if (index < size() / 2) {
@@ -817,26 +809,20 @@ public:
      *
      * 构造一个空双端队列。
      */
-    deque() {
-        deque::fill_initialize(0, _NEFORCE initialize<T>());
-    }
+    deque() { deque::fill_initialize(0, _NEFORCE initialize<T>()); }
 
     /**
      * @brief 构造包含n个默认构造元素的双端队列
      * @param n 元素数量
      */
-    explicit deque(const size_type n) {
-        deque::fill_initialize(n, _NEFORCE initialize<T>());
-    }
+    explicit deque(const size_type n) { deque::fill_initialize(n, _NEFORCE initialize<T>()); }
 
     /**
      * @brief 构造包含n个指定值元素的双端队列
      * @param n 元素数量
      * @param value 初始值
      */
-    deque(const size_type n, const T& value) {
-        deque::fill_initialize(n, value);
-    }
+    deque(const size_type n, const T& value) { deque::fill_initialize(n, value); }
 
     /**
      * @brief 范围构造函数
@@ -844,8 +830,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
-    deque(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> deque(Iterator first, Iterator last) {
         deque::copy_initialize(first, last);
     }
 
@@ -853,16 +838,14 @@ public:
      * @brief 初始化列表构造函数
      * @param ilist 初始化列表
      */
-    deque(std::initializer_list<T> ilist) {
-        deque::copy_initialize(ilist.begin(), ilist.end());
-    }
+    deque(std::initializer_list<T> ilist) { deque::copy_initialize(ilist.begin(), ilist.end()); }
 
     /**
      * @brief 初始化列表赋值运算符
      * @param ilist 初始化列表
      * @return 自身引用
      */
-    deque& operator =(std::initializer_list<T> ilist) {
+    deque& operator=(std::initializer_list<T> ilist) {
         deque tmp(ilist);
         deque::swap(tmp);
         return *this;
@@ -872,17 +855,17 @@ public:
      * @brief 拷贝构造函数
      * @param other 源双端队列
      */
-    deque(const deque& other) {
-        deque::copy_initialize(other.cbegin(), other.cend());
-    }
+    deque(const deque& other) { deque::copy_initialize(other.cbegin(), other.cend()); }
 
     /**
      * @brief 拷贝赋值运算符
      * @param other 源双端队列
      * @return 自身引用
      */
-    deque& operator =(const deque& other) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    deque& operator=(const deque& other) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
 
         const size_t len = size();
         if (len >= other.size()) {
@@ -899,17 +882,17 @@ public:
      * @brief 移动构造函数
      * @param other 源双端队列
      */
-    deque(deque&& other) noexcept {
-        deque::swap(other);
-    }
+    deque(deque&& other) noexcept { deque::swap(other); }
 
     /**
      * @brief 移动赋值运算符
      * @param other 源双端队列
      * @return 自身引用
      */
-    deque& operator =(deque&& other) noexcept {
-        if (_NEFORCE addressof(other) == this) return *this;
+    deque& operator=(deque&& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         clear();
         deque::swap(other);
         return *this;
@@ -921,7 +904,9 @@ public:
      * 销毁所有元素并释放所有内存。
      */
     ~deque() {
-        if (map_pair_.value == nullptr) return;
+        if (map_pair_.value == nullptr) {
+            return;
+        }
         clear();
 
         if (map_pair_.value != nullptr) {
@@ -941,121 +926,91 @@ public:
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
-    NEFORCE_NODISCARD iterator begin() noexcept {
-        return iterator(start_);
-    }
+    NEFORCE_NODISCARD iterator begin() noexcept { return iterator(start_); }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向最后一个元素之后位置的迭代器
      */
-    NEFORCE_NODISCARD iterator end() noexcept {
-        return iterator(finish_);
-    }
+    NEFORCE_NODISCARD iterator end() noexcept { return iterator(finish_); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator begin() const noexcept {
-        return cbegin();
-    }
+    NEFORCE_NODISCARD const_iterator begin() const noexcept { return cbegin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个元素之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator end() const noexcept {
-        return cend();
-    }
+    NEFORCE_NODISCARD const_iterator end() const noexcept { return cend(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cbegin() const noexcept {
-        return const_iterator(start_);
-    }
+    NEFORCE_NODISCARD const_iterator cbegin() const noexcept { return const_iterator(start_); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个元素之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cend() const noexcept {
-        return const_iterator(finish_);
-    }
+    NEFORCE_NODISCARD const_iterator cend() const noexcept { return const_iterator(finish_); }
 
     /**
      * @brief 获取反向起始迭代器
      * @return 指向最后一个元素的反向迭代器
      */
-    NEFORCE_NODISCARD reverse_iterator rbegin() noexcept {
-        return reverse_iterator(end());
-    }
+    NEFORCE_NODISCARD reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
 
     /**
      * @brief 获取反向结束迭代器
      * @return 指向第一个元素之前位置的反向迭代器
      */
-    NEFORCE_NODISCARD reverse_iterator rend() noexcept {
-        return reverse_iterator(begin());
-    }
+    NEFORCE_NODISCARD reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向最后一个元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept {
-        return crbegin();
-    }
+    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept { return crbegin(); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个元素之前位置的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept {
-        return crend();
-    }
+    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept { return crend(); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向最后一个元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator crbegin() const noexcept {
-        return const_reverse_iterator(cend());
-    }
+    NEFORCE_NODISCARD const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(cend()); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个元素之前位置的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator crend() const noexcept {
-        return const_reverse_iterator(cbegin());
-    }
+    NEFORCE_NODISCARD const_reverse_iterator crend() const noexcept { return const_reverse_iterator(cbegin()); }
 
     /**
      * @brief 获取当前元素数量
      * @return 元素数量
      */
-    NEFORCE_NODISCARD size_type size() const noexcept {
-        return finish_ - start_;
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept { return finish_ - start_; }
 
     /**
      * @brief 获取最大可能大小
      * @return 最大元素数量
      */
-    NEFORCE_NODISCARD size_type max_size() const noexcept {
-        return static_cast<size_type>(-1);
-    }
+    NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
 
     /**
      * @brief 检查是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD bool empty() const noexcept {
-        return finish_ == start_;
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept { return finish_ == start_; }
 
     /**
      * @brief 访问第一个元素
@@ -1114,9 +1069,7 @@ public:
      * @brief 使用默认构造的元素调整大小
      * @param n 新的大小
      */
-    void resize(const size_type n) {
-        deque::resize(n, _NEFORCE initialize<T>());
-    }
+    void resize(const size_type n) { deque::resize(n, _NEFORCE initialize<T>()); }
 
     /**
      * @brief 在指定位置构造元素
@@ -1125,8 +1078,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace(iterator position, Args&&... args) {
+    template <typename... Args> iterator emplace(iterator position, Args&&... args) {
         if (position.current_ == start_.current_) {
             deque::emplace_front(_NEFORCE forward<Args>(args)...);
             return start_;
@@ -1143,8 +1095,7 @@ public:
      * @tparam Args 构造参数类型
      * @param args 构造参数
      */
-    template <typename... Args>
-    void emplace_back(Args&&... args) {
+    template <typename... Args> void emplace_back(Args&&... args) {
         if (finish_.current_ != finish_.last_ - 1) {
             _NEFORCE construct(finish_.current_, _NEFORCE forward<Args>(args)...);
             ++finish_.current_;
@@ -1160,8 +1111,7 @@ public:
      * @tparam Args 构造参数类型
      * @param args 构造参数
      */
-    template <typename... Args>
-    void emplace_front(Args&&... args) {
+    template <typename... Args> void emplace_front(Args&&... args) {
         if (start_.current_ != start_.first_) {
             _NEFORCE construct(start_.current_ - 1, _NEFORCE forward<Args>(args)...);
             --start_.current_;
@@ -1176,39 +1126,30 @@ public:
      * @brief 在末尾拷贝插入元素
      * @param value 要插入的值
      */
-    void push_back(const T& value) {
-        deque::emplace_back(value);
-    }
+    void push_back(const T& value) { deque::emplace_back(value); }
 
     /**
      * @brief 在开头拷贝插入元素
      * @param value 要插入的值
      */
-    void push_front(const T& value) {
-        deque::emplace_front(value);
-    }
+    void push_front(const T& value) { deque::emplace_front(value); }
 
     /**
      * @brief 在末尾移动插入元素
      * @param value 要插入的值
      */
-    void push_back(T&& value) {
-        deque::emplace_back(_NEFORCE move(value));
-    }
+    void push_back(T&& value) { deque::emplace_back(_NEFORCE move(value)); }
 
     /**
      * @brief 在开头移动插入元素
      * @param value 要插入的值
      */
-    void push_front(T&& value) {
-        deque::emplace_front(_NEFORCE move(value));
-    }
+    void push_front(T&& value) { deque::emplace_front(_NEFORCE move(value)); }
 
     /**
      * @brief 移除末尾元素
      */
-    void pop_back()
-    noexcept(is_nothrow_destructible_v<value_type>) {
+    void pop_back() noexcept(is_nothrow_destructible_v<value_type>) {
         NEFORCE_DEBUG_VERIFY(!empty(), "pop_back called on empty deque");
 
         if (finish_.current_ != finish_.first_) {
@@ -1226,8 +1167,7 @@ public:
     /**
      * @brief 移除开头元素
      */
-    void pop_front()
-    noexcept(is_nothrow_destructible_v<value_type>) {
+    void pop_front() noexcept(is_nothrow_destructible_v<value_type>) {
         NEFORCE_DEBUG_VERIFY(!empty(), "pop_front called on empty deque");
 
         if (start_.current_ != start_.last_ - 1) {
@@ -1247,9 +1187,7 @@ public:
      * @param count 元素数量
      * @param value 要赋的值
      */
-    void assign(const size_type count, const T& value) {
-        deque::assign_aux_n(count, value);
-    }
+    void assign(const size_type count, const T& value) { deque::assign_aux_n(count, value); }
 
     /**
      * @brief 范围赋值
@@ -1257,8 +1195,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
-    void assign(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> void assign(Iterator first, Iterator last) {
         deque::assign_ranges(first, last);
     }
 
@@ -1266,9 +1203,7 @@ public:
      * @brief 初始化列表赋值
      * @param ilist 初始化列表
      */
-    void assign(std::initializer_list<T> ilist) {
-        deque::assign_ranges(ilist.begin(), ilist.end());
-    }
+    void assign(std::initializer_list<T> ilist) { deque::assign_ranges(ilist.begin(), ilist.end()); }
 
     /**
      * @brief 在指定位置拷贝插入元素
@@ -1400,15 +1335,18 @@ public:
      *
      * 释放两端未使用的缓冲区，但保留中控器。
      */
-    void shrink_to_fit()
-    noexcept(is_nothrow_destructible_v<value_type>) {
+    void shrink_to_fit() noexcept(is_nothrow_destructible_v<value_type>) {
         for (map_pointer cur = map_pair_.value; cur < start_.node_; ++cur) {
-            if (*cur == nullptr) continue;
+            if (*cur == nullptr) {
+                continue;
+            }
             map_size_pair_.get_base().deallocate(*cur, buffer_size);
             *cur = nullptr;
         }
         for (map_pointer cur = finish_.node_ + 1; cur < map_pair_.value + map_size_pair_.value; ++cur) {
-            if (*cur == nullptr) continue;
+            if (*cur == nullptr) {
+                continue;
+            }
             map_size_pair_.get_base().deallocate(*cur, buffer_size);
             *cur = nullptr;
         }
@@ -1419,8 +1357,7 @@ public:
      *
      * 销毁所有元素，释放所有缓冲区，重置迭代器。
      */
-    void clear()
-    noexcept(is_nothrow_destructible_v<value_type>) {
+    void clear() noexcept(is_nothrow_destructible_v<value_type>) {
         for (map_pointer cur = start_.node_ + 1; cur < finish_.node_; ++cur) {
             _NEFORCE destroy(*cur, *cur + buffer_size);
         }
@@ -1441,44 +1378,37 @@ public:
      * @param position 索引位置
      * @return 指定位置元素的常量引用
      */
-    NEFORCE_NODISCARD const_reference at(size_type position) const noexcept {
-        return start_[position];
-    }
+    NEFORCE_NODISCARD const_reference at(size_type position) const noexcept { return start_[position]; }
 
     /**
      * @brief 带边界检查的索引访问
      * @param position 索引位置
      * @return 指定位置元素的引用
      */
-    NEFORCE_NODISCARD reference at(const size_type position) noexcept {
-        return start_[position];
-    }
+    NEFORCE_NODISCARD reference at(const size_type position) noexcept { return start_[position]; }
 
     /**
      * @brief 常量下标访问操作符
      * @param position 索引位置
      * @return 指定位置元素的常量引用
      */
-    NEFORCE_NODISCARD const_reference operator [](const size_type position) const noexcept {
-        return at(position);
-    }
+    NEFORCE_NODISCARD const_reference operator[](const size_type position) const noexcept { return at(position); }
 
     /**
      * @brief 下标访问操作符
      * @param position 索引位置
      * @return 指定位置元素的引用
      */
-    NEFORCE_NODISCARD reference operator [](const size_type position) noexcept {
-        return at(position);
-    }
+    NEFORCE_NODISCARD reference operator[](const size_type position) noexcept { return at(position); }
 
     /**
      * @brief 交换两个双端队列的内容
      * @param other 要交换的另一个双端队列
      */
-    void swap(deque& other)
-    noexcept(is_nothrow_swappable_v<map_allocator> && is_nothrow_swappable_v<allocator_type>) {
-        if (_NEFORCE addressof(other) == this) return;
+    void swap(deque& other) noexcept(is_nothrow_swappable_v<map_allocator> && is_nothrow_swappable_v<allocator_type>) {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
 
         _NEFORCE swap(start_, other.start_);
         _NEFORCE swap(finish_, other.finish_);
@@ -1491,8 +1421,8 @@ public:
      * @param rhs 右侧双端队列
      * @return 如果两个双端队列大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const deque& rhs) const
-    noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
+    NEFORCE_NODISCARD bool operator==(const deque& rhs) const
+            noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
         return size() == rhs.size() && _NEFORCE equal(cbegin(), cend(), rhs.cbegin());
     }
 
@@ -1501,15 +1431,14 @@ public:
      * @param rhs 右侧双端队列
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator <(const deque& rhs) const
-    noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
+    NEFORCE_NODISCARD bool operator<(const deque& rhs) const
+            noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T, typename Alloc>
-deque(T, Alloc = Alloc()) -> deque<T, Alloc>;
+template <typename T, typename Alloc> deque(T, Alloc = Alloc()) -> deque<T, Alloc>;
 
 template <typename Iterator, typename Alloc>
 deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_value_t<Iterator>, Alloc>;

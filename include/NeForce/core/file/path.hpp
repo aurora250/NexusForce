@@ -49,9 +49,9 @@ public:
      */
     static constexpr auto spliter =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        "\\/";
+            "\\/";
 #elif defined(NEFORCE_PLATFORM_LINUX)
-        "/";
+            "/";
 #endif
 
     /**
@@ -75,14 +75,14 @@ public:
      */
     class split_iterator {
     public:
-        using value_type = string_view;           ///< 值类型
-        using reference = value_type;             ///< 引用类型
-        using pointer = void;                     ///< 指针类型
+        using value_type = string_view;                 ///< 值类型
+        using reference = value_type;                   ///< 引用类型
+        using pointer = void;                           ///< 指针类型
         using iterator_category = forward_iterator_tag; ///< 迭代器类别
-        using difference_type = ptrdiff_t;        ///< 差值类型
+        using difference_type = ptrdiff_t;              ///< 差值类型
 
     private:
-        const string* path_ = nullptr;    ///< 被遍历的路径字符串
+        const string* path_ = nullptr; ///< 被遍历的路径字符串
         size_t start_ = 0;             ///< 当前组件的起始位置
         size_t end_ = 0;               ///< 当前组件的结束位置
         bool done_ = true;             ///< 是否已完成遍历
@@ -111,8 +111,10 @@ public:
          * 构造一个从指定位置开始遍历路径的迭代器。
          * 如果路径为空或起始位置无效，则构造为结束迭代器。
          */
-        explicit split_iterator(const string* path, const size_t pos = 0) noexcept
-        : path_(path), start_(pos), done_(false) {
+        explicit split_iterator(const string* path, const size_t pos = 0) noexcept :
+        path_(path),
+        start_(pos),
+        done_(false) {
             if (!path_ || path_->empty() || start_ >= path_->size()) {
                 done_ = true;
                 return;
@@ -126,9 +128,7 @@ public:
          *
          * 返回当前组件的字符串视图，不包含路径分隔符。
          */
-        reference operator *() const noexcept {
-            return current_part_.view();
-        }
+        reference operator*() const noexcept { return current_part_.view(); }
 
         /**
          * @brief 前置递增操作符
@@ -136,8 +136,10 @@ public:
          *
          * 移动到下一个路径组件。
          */
-        split_iterator& operator ++() {
-            if (done_) return *this;
+        split_iterator& operator++() {
+            if (done_) {
+                return *this;
+            }
             start_ = end_ + 1;
             if (start_ >= path_->size()) {
                 done_ = true;
@@ -152,7 +154,7 @@ public:
          * @brief 后置递增操作符
          * @return 递增前的迭代器副本
          */
-        split_iterator operator ++(int) {
+        split_iterator operator++(int) {
             split_iterator tmp = *this;
             ++*this;
             return tmp;
@@ -167,9 +169,13 @@ public:
          * - 两者都处于结束状态，或者
          * - 指向同一个路径且当前位置相同
          */
-        NEFORCE_NODISCARD bool operator ==(const split_iterator& b) const noexcept {
-            if (done_ && b.done_) return true;
-            if (path_ != b.path_) return false;
+        NEFORCE_NODISCARD bool operator==(const split_iterator& b) const noexcept {
+            if (done_ && b.done_) {
+                return true;
+            }
+            if (path_ != b.path_) {
+                return false;
+            }
             return start_ == b.start_;
         }
 
@@ -178,13 +184,11 @@ public:
          * @param b 另一个迭代器
          * @return 两个迭代器是否不等
          */
-        NEFORCE_NODISCARD bool operator !=(const split_iterator& b) const noexcept {
-            return !(*this == b);
-        }
+        NEFORCE_NODISCARD bool operator!=(const split_iterator& b) const noexcept { return !(*this == b); }
     };
 
 private:
-    string path_{};  ///< 存储的路径字符串
+    string path_{}; ///< 存储的路径字符串
 
 public:
     /**
@@ -196,75 +200,63 @@ public:
      * @brief 从字符串构造路径
      * @param path 路径字符串
      */
-    explicit path(string path) noexcept
-    : path_(_NEFORCE move(path)) {}
+    explicit path(string path) noexcept :
+    path_(_NEFORCE move(path)) {}
 
     /**
      * @brief 从字符串视图构造路径
      * @param path 路径字符串视图
      */
-    explicit path(const string_view path)
-    : path_(path) {}
+    explicit path(const string_view path) :
+    path_(path) {}
 
     /**
      * @brief 从C风格字符串构造路径
      * @param path 路径C字符串
      */
-    explicit path(const char* path)
-    : path_(path) {}
+    explicit path(const char* path) :
+    path_(path) {}
 
     path(const path&) = default;
     path(path&&) noexcept = default;
-    path& operator =(const path&) = default;
-    path& operator =(path&&) noexcept = default;
+    path& operator=(const path&) = default;
+    path& operator=(path&&) noexcept = default;
 
     /**
      * @brief 获取路径字符串
      * @return 路径字符串常量引用
      */
-    NEFORCE_NODISCARD const string& str() const noexcept {
-        return path_;
-    }
+    NEFORCE_NODISCARD const string& str() const noexcept { return path_; }
 
     /**
      * @brief 获取路径字符串视图
      * @return 路径字符串视图
      */
-    NEFORCE_NODISCARD string_view view() const noexcept {
-        return path_.view();
-    }
+    NEFORCE_NODISCARD string_view view() const noexcept { return path_.view(); }
 
     /**
      * @brief 获取C风格字符串
      * @return 路径C字符串指针
      */
-    NEFORCE_NODISCARD const char* data() const noexcept {
-        return path_.data();
-    }
+    NEFORCE_NODISCARD const char* data() const noexcept { return path_.data(); }
 
     /**
      * @brief 检查路径是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD bool empty() const noexcept {
-        return path_.empty();
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept { return path_.empty(); }
 
     /**
      * @brief 获取起始路径组件迭代器
      * @return 指向第一个组件的迭代器
      */
-    NEFORCE_NODISCARD split_iterator begin() const noexcept {
-        return split_iterator(&path_, 0);
-    }
+    NEFORCE_NODISCARD split_iterator begin() const noexcept { return split_iterator(&path_, 0); }
 
     /**
      * @brief 获取结束路径组件迭代器
      * @return 结束迭代器
      */
-    NEFORCE_NODISCARD split_iterator end() const noexcept {
-        return split_iterator();
-    }
+    NEFORCE_NODISCARD split_iterator end() const noexcept { return split_iterator(); }
 
     /**
      * @brief 获取父路径
@@ -341,28 +333,28 @@ public:
      *
      * 将另一个路径连接到当前路径，自动处理分隔符。
      */
-    path& operator /=(const path& other);
+    path& operator/=(const path& other);
 
     /**
      * @brief 路径连接赋值操作符（字符串视图版本）
      * @param other 要连接的路径字符串视图
      * @return 自身引用
      */
-    path& operator /=(string_view other);
+    path& operator/=(string_view other);
 
     /**
      * @brief 路径连接操作符
      * @param other 要连接的路径
      * @return 连接后的新路径
      */
-    path operator /(const path& other) const;
+    path operator/(const path& other) const;
 
     /**
      * @brief 路径连接操作符（字符串视图版本）
      * @param pth 要连接的路径字符串视图
      * @return 连接后的新路径
      */
-    path operator /(string_view pth) const;
+    path operator/(string_view pth) const;
 
     /**
      * @brief 扫描此路径（必须为目录）并返回路径树
@@ -440,23 +432,21 @@ public:
     /**
      * @brief 转换为字符串视图
      */
-    explicit operator string_view() const noexcept {
-        return path_.view();
-    }
+    explicit operator string_view() const noexcept { return path_.view(); }
 
     /**
      * @brief 相等比较
      * @param rhs 另一个路径
      * @return 是否相等
      */
-    NEFORCE_NODISCARD bool operator ==(const path& rhs) const noexcept;
+    NEFORCE_NODISCARD bool operator==(const path& rhs) const noexcept;
 
     /**
      * @brief 小于比较
      * @param rhs 另一个路径
      * @return 是否小于
      */
-    NEFORCE_NODISCARD bool operator <(const path& rhs) const noexcept;
+    NEFORCE_NODISCARD bool operator<(const path& rhs) const noexcept;
 
     /**
      * @brief 计算哈希值
@@ -468,17 +458,13 @@ public:
      * @brief 转换为字符串
      * @return 规范化后的路径字符串
      */
-    NEFORCE_NODISCARD string to_string() const {
-        return lexically_normal().str();
-    }
+    NEFORCE_NODISCARD string to_string() const { return lexically_normal().str(); }
 
     /**
      * @brief 交换两个路径
      * @param other 要交换的路径
      */
-    void swap(path& other) noexcept {
-        path_.swap(other.path_);
-    }
+    void swap(path& other) noexcept { path_.swap(other.path_); }
 };
 
 /** @} */ // File

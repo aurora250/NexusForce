@@ -20,7 +20,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 #ifdef DELETE
-#undef DELETE
+#    undef DELETE
 #endif
 
 /**
@@ -28,10 +28,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief SQL操作类型枚举
  */
 enum class sql_operate {
-    SELECT,  ///< SELECT查询
-    INSERT,  ///< INSERT插入
-    UPDATE,  ///< UPDATE更新
-    DELETE   ///< DELETE删除
+    SELECT, ///< SELECT查询
+    INSERT, ///< INSERT插入
+    UPDATE, ///< UPDATE更新
+    DELETE  ///< DELETE删除
 };
 
 /**
@@ -39,10 +39,10 @@ enum class sql_operate {
  * @brief JOIN类型枚举
  */
 enum class sql_join {
-    INNER,  ///< INNER JOIN
-    LEFT,   ///< LEFT JOIN
-    RIGHT,  ///< RIGHT JOIN
-    FULL    ///< FULL JOIN
+    INNER, ///< INNER JOIN
+    LEFT,  ///< LEFT JOIN
+    RIGHT, ///< RIGHT JOIN
+    FULL   ///< FULL JOIN
 };
 
 /**
@@ -50,8 +50,8 @@ enum class sql_join {
  * @brief 排序方向枚举
  */
 enum class sql_order {
-    ASC,   ///< 升序
-    DESC   ///< 降序
+    ASC, ///< 升序
+    DESC ///< 降序
 };
 
 
@@ -73,14 +73,14 @@ public:
      * @brief SELECT语句的数据结构
      */
     struct select_data {
-        vector<string> fields;              ///< 查询字段列表
-        vector<string> join_clauses;        ///< JOIN子句列表
-        vector<string> group_by_fields;     ///< GROUP BY字段列表
-        vector<string> having_conditions;   ///< HAVING条件列表
-        vector<string> order_by_clauses;    ///< ORDER BY子句列表
-        int limit_count = -1;               ///< LIMIT数量
-        int offset_count = -1;              ///< OFFSET数量
-        bool distinct = false;              ///< 是否DISTINCT
+        vector<string> fields;            ///< 查询字段列表
+        vector<string> join_clauses;      ///< JOIN子句列表
+        vector<string> group_by_fields;   ///< GROUP BY字段列表
+        vector<string> having_conditions; ///< HAVING条件列表
+        vector<string> order_by_clauses;  ///< ORDER BY子句列表
+        int limit_count = -1;             ///< LIMIT数量
+        int offset_count = -1;            ///< OFFSET数量
+        bool distinct = false;            ///< 是否DISTINCT
     };
 
     /**
@@ -88,8 +88,8 @@ public:
      * @brief INSERT语句的数据结构
      */
     struct insert_data {
-        vector<string> fields;          ///< 插入字段列表
-        vector<string> placeholders;    ///< 值占位符列表
+        vector<string> fields;       ///< 插入字段列表
+        vector<string> placeholders; ///< 值占位符列表
     };
 
     /**
@@ -97,18 +97,18 @@ public:
      * @brief UPDATE语句的数据结构
      */
     struct update_data {
-        vector<string> assignments;     ///< 赋值表达式列表
+        vector<string> assignments; ///< 赋值表达式列表
     };
 
 private:
-    sql_operate sql_type_ = sql_operate::SELECT;   ///< 当前SQL操作类型
-    string table_;                                 ///< 主表名
-    string table_alias_;                           ///< 主表别名
-    vector<string> where_conditions_;              ///< WHERE条件列表
+    sql_operate sql_type_ = sql_operate::SELECT; ///< 当前SQL操作类型
+    string table_;                               ///< 主表名
+    string table_alias_;                         ///< 主表别名
+    vector<string> where_conditions_;            ///< WHERE条件列表
 
-    unique_ptr<select_data> select_data_;          ///< SELECT专用数据
-    unique_ptr<insert_data> insert_data_;          ///< INSERT专用数据
-    unique_ptr<update_data> update_data_;          ///< UPDATE专用数据
+    unique_ptr<select_data> select_data_; ///< SELECT专用数据
+    unique_ptr<insert_data> insert_data_; ///< INSERT专用数据
+    unique_ptr<update_data> update_data_; ///< UPDATE专用数据
 
 private:
     select_data* ensure_select_data();
@@ -139,10 +139,10 @@ public:
      * @param other 源对象
      * @return 自身引用
      */
-    sql_builder& operator =(const sql_builder& other);
+    sql_builder& operator=(const sql_builder& other);
 
     sql_builder(sql_builder&&) noexcept = default;
-    sql_builder& operator =(sql_builder&&) noexcept = default;
+    sql_builder& operator=(sql_builder&&) noexcept = default;
 
     /**
      * @brief 列表设置SELECT字段
@@ -528,21 +528,21 @@ public:
      */
     sql_builder& delete_from(string table);
 
-    sql_builder& select_count(string field, string alias);   ///< COUNT聚合
-    sql_builder& select_count(string field);                 ///< COUNT聚合（无别名）
-    sql_builder& select_count();                             ///< COUNT(*)
+    sql_builder& select_count(string field, string alias); ///< COUNT聚合
+    sql_builder& select_count(string field);               ///< COUNT聚合（无别名）
+    sql_builder& select_count();                           ///< COUNT(*)
 
-    sql_builder& select_sum(string field, string alias);     ///< SUM聚合
-    sql_builder& select_sum(string field);                   ///< SUM聚合（无别名）
+    sql_builder& select_sum(string field, string alias); ///< SUM聚合
+    sql_builder& select_sum(string field);               ///< SUM聚合（无别名）
 
-    sql_builder& select_avg(string field, string alias);     ///< AVG聚合
-    sql_builder& select_avg(string field);                   ///< AVG聚合（无别名）
+    sql_builder& select_avg(string field, string alias); ///< AVG聚合
+    sql_builder& select_avg(string field);               ///< AVG聚合（无别名）
 
-    sql_builder& select_max(string field, string alias);     ///< MAX聚合
-    sql_builder& select_max(string field);                   ///< MAX聚合（无别名）
+    sql_builder& select_max(string field, string alias); ///< MAX聚合
+    sql_builder& select_max(string field);               ///< MAX聚合（无别名）
 
-    sql_builder& select_min(string field, string alias);     ///< MIN聚合
-    sql_builder& select_min(string field);                   ///< MIN聚合（无别名）
+    sql_builder& select_min(string field, string alias); ///< MIN聚合
+    sql_builder& select_min(string field);               ///< MIN聚合（无别名）
 
     /**
      * @brief 添加DISTINCT字段

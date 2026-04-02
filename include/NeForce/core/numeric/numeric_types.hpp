@@ -31,11 +31,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool signbit(const T x) noexcept {
-	using UInt = make_integer_t<sizeof(T), false>;
+    using UInt = make_integer_t<sizeof(T), false>;
 
-	const UInt bits = *reinterpret_cast<const UInt*>(&x);
-	constexpr UInt sign_mask = static_cast<UInt>(1) << (8 * sizeof(UInt) - 1);
-	return (bits & sign_mask) != 0;
+    const UInt bits = *reinterpret_cast<const UInt*>(&x);
+    constexpr UInt sign_mask = static_cast<UInt>(1) << (8 * sizeof(UInt) - 1);
+    return (bits & sign_mask) != 0;
 }
 
 
@@ -49,7 +49,7 @@ NEFORCE_CONST_FUNCTION constexpr bool signbit(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_nan(const T x) noexcept {
-	return x != x;
+    return x != x;
 }
 
 /**
@@ -60,7 +60,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_nan(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_pos_infinity(const T x) noexcept {
-	return x == numeric_traits<T>::infinity();
+    return x == numeric_traits<T>::infinity();
 }
 
 /**
@@ -71,7 +71,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_pos_infinity(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_neg_infinity(const T x) noexcept {
-	return x == -numeric_traits<T>::infinity();
+    return x == -numeric_traits<T>::infinity();
 }
 
 /**
@@ -83,7 +83,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_neg_infinity(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_infinity(const T x) noexcept {
-	return _NEFORCE is_pos_infinity(x) || _NEFORCE is_neg_infinity(x);
+    return _NEFORCE is_pos_infinity(x) || _NEFORCE is_neg_infinity(x);
 }
 
 /**
@@ -96,7 +96,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_infinity(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_finite(const T x) noexcept {
-	return !_NEFORCE is_infinity(x) && !_NEFORCE is_nan(x);
+    return !_NEFORCE is_infinity(x) && !_NEFORCE is_nan(x);
 }
 
 /**
@@ -110,10 +110,14 @@ NEFORCE_CONST_FUNCTION constexpr bool is_finite(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_normal(const T x) noexcept {
-	if (!_NEFORCE is_finite(x)) return false;
-	if (x == 0) return false;
+    if (!_NEFORCE is_finite(x)) {
+        return false;
+    }
+    if (x == 0) {
+        return false;
+    }
     const T abs = x < 0 ? -x : x;
-	return abs >= numeric_traits<T>::min();
+    return abs >= numeric_traits<T>::min();
 }
 
 /**
@@ -127,10 +131,14 @@ NEFORCE_CONST_FUNCTION constexpr bool is_normal(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_subnormal(const T x) noexcept {
-	if (!_NEFORCE is_finite(x)) return false;
-	if (x == 0) return false;
+    if (!_NEFORCE is_finite(x)) {
+        return false;
+    }
+    if (x == 0) {
+        return false;
+    }
     const T abs = x < 0 ? -x : x;
-	return abs < numeric_traits<T>::min();
+    return abs < numeric_traits<T>::min();
 }
 
 /**
@@ -145,7 +153,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_subnormal(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_positive(const T x) noexcept {
-	return x > 0 || (x == 0 && !_NEFORCE signbit(x));
+    return x > 0 || (x == 0 && !_NEFORCE signbit(x));
 }
 
 /**
@@ -160,7 +168,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_positive(const T x) noexcept {
  */
 template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_negative(const T x) noexcept {
-	return x < 0 || (x == 0 && _NEFORCE signbit(x));
+    return x < 0 || (x == 0 && _NEFORCE signbit(x));
 }
 
 /** @} */ // NumericTypeChecks

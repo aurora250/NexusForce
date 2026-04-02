@@ -27,8 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * char字符串被视为UTF-8编码。
  */
 struct character : icharacter<character, char> {
-    using value_type = char;                    ///< 值类型
-    using base = icharacter<character, char>;   ///< 基类类型
+    using value_type = char;                  ///< 值类型
+    using base = icharacter<character, char>; ///< 基类类型
 
     constexpr character() noexcept = default;
     NEFORCE_CONSTEXPR20 ~character() = default;
@@ -36,13 +36,13 @@ struct character : icharacter<character, char> {
     constexpr character(const character&) noexcept = default;
     constexpr character(character&&) noexcept = default;
 
-    constexpr character& operator =(const character& other) noexcept = default;
-    constexpr character& operator =(character&& other) noexcept = default;
+    constexpr character& operator=(const character& other) noexcept = default;
+    constexpr character& operator=(character&& other) noexcept = default;
 
-    explicit constexpr character(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr character(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr character& operator =(const value_type value) noexcept {
+    constexpr character& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -52,9 +52,7 @@ struct character : icharacter<character, char> {
      * @param obj 字符视图
      * @return 普通字符串
      */
-    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
-        return string{obj};
-    }
+    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) { return string{obj}; }
 
     /**
      * @brief 转换为宽字符串
@@ -62,7 +60,9 @@ struct character : icharacter<character, char> {
      * @return 宽字符串（UTF-8转wchar_t）
      */
     static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         wstring result;
         result.reserve(obj.size());
 
@@ -83,7 +83,9 @@ struct character : icharacter<character, char> {
      * @return UTF-8字符串
      */
     static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u8string result;
         result.reserve(obj.size());
 
@@ -104,7 +106,9 @@ struct character : icharacter<character, char> {
      * @return UTF-16字符串（UTF-8转UTF-16）
      */
     static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u16string result;
         result.reserve(obj.size() * 2);
 
@@ -124,7 +128,9 @@ struct character : icharacter<character, char> {
      * @return UTF-32字符串（UTF-8转UTF-32）
      */
     static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u32string result;
         result.reserve(obj.size());
 
@@ -139,13 +145,11 @@ struct character : icharacter<character, char> {
     }
 };
 
-template <>
-struct package<char> {
+template <> struct package<char> {
     using type = character;
 };
 
-template <>
-struct unpackage<character> {
+template <> struct unpackage<character> {
     using type = char;
 };
 
@@ -157,8 +161,8 @@ struct unpackage<character> {
  * 根据平台特性处理编码转换。
  */
 struct wcharacter : icharacter<wcharacter, wchar_t> {
-    using value_type = wchar_t;                       ///< 值类型
-    using base = icharacter<wcharacter, wchar_t>;     ///< 基类类型
+    using value_type = wchar_t;                   ///< 值类型
+    using base = icharacter<wcharacter, wchar_t>; ///< 基类类型
 
     constexpr wcharacter() noexcept = default;
     NEFORCE_CONSTEXPR20 ~wcharacter() = default;
@@ -166,13 +170,13 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
     constexpr wcharacter(const wcharacter&) noexcept = default;
     constexpr wcharacter(wcharacter&&) noexcept = default;
 
-    constexpr wcharacter& operator =(const wcharacter& other) noexcept = default;
-    constexpr wcharacter& operator =(wcharacter&& other) noexcept = default;
+    constexpr wcharacter& operator=(const wcharacter& other) noexcept = default;
+    constexpr wcharacter& operator=(wcharacter&& other) noexcept = default;
 
-    explicit constexpr wcharacter(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr wcharacter(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr wcharacter& operator =(const value_type value) noexcept {
+    constexpr wcharacter& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -183,7 +187,9 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @return 普通字符串（wchar_t转UTF-8）
      */
     static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         string result;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -192,7 +198,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
             codepoint::decode_utf16(obj.data(), i, obj.size(), false).append_to(result);
         }
 #else
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint(static_cast<uint32_t>(c)).append_to(result);
         }
 #endif
@@ -204,9 +210,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @param obj 字符视图
      * @return 宽字符串
      */
-    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
-        return wstring{obj};
-    }
+    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) { return wstring{obj}; }
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
     /**
@@ -215,19 +219,21 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @return UTF-8字符串（wchar_t转UTF-8）
      */
     static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u8string result;
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#    ifdef NEFORCE_PLATFORM_WINDOWS
         size_t i = 0;
         while (i < obj.size()) {
             codepoint::decode_utf16(obj.data(), i, obj.size(), false).append_to(result);
         }
-#else
-        for (const value_type c : obj) {
+#    else
+        for (const value_type c: obj) {
             codepoint(static_cast<uint32_t>(c)).append_to(result);
         }
-#endif
+#    endif
         return result;
     }
 #endif
@@ -238,7 +244,9 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @return UTF-16字符串（wchar_t转UTF-16）
      */
     static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u16string result;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -248,7 +256,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         }
 #else
         result.reserve(obj.size() * 2);
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint(static_cast<uint32_t>(c)).append_to(result);
         }
 #endif
@@ -261,7 +269,9 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @return UTF-32字符串（wchar_t转UTF-32）
      */
     static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u32string result;
         result.reserve(obj.size());
 
@@ -271,7 +281,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
             codepoint::decode_utf16(obj.data(), i, obj.size(), false).append_to(result);
         }
 #else
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint(static_cast<uint32_t>(c)).append_to(result);
         }
 #endif
@@ -279,13 +289,11 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
     }
 };
 
-template <>
-struct package<wchar_t> {
+template <> struct package<wchar_t> {
     using type = wcharacter;
 };
 
-template <>
-struct unpackage<wcharacter> {
+template <> struct unpackage<wcharacter> {
     using type = wchar_t;
 };
 
@@ -300,8 +308,8 @@ struct unpackage<wcharacter> {
  * char8_t字符串为UTF-8编码。
  */
 struct u8character : icharacter<u8character, char8_t> {
-    using value_type = char8_t;                       ///< 值类型
-    using base = icharacter<u8character, char8_t>;    ///< 基类类型
+    using value_type = char8_t;                    ///< 值类型
+    using base = icharacter<u8character, char8_t>; ///< 基类类型
 
     constexpr u8character() noexcept = default;
     NEFORCE_CONSTEXPR20 ~u8character() = default;
@@ -309,13 +317,13 @@ struct u8character : icharacter<u8character, char8_t> {
     constexpr u8character(const u8character&) noexcept = default;
     constexpr u8character(u8character&&) noexcept = default;
 
-    constexpr u8character& operator =(const u8character& other) noexcept = default;
-    constexpr u8character& operator =(u8character&& other) noexcept = default;
+    constexpr u8character& operator=(const u8character& other) noexcept = default;
+    constexpr u8character& operator=(u8character&& other) noexcept = default;
 
-    explicit constexpr u8character(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr u8character(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr u8character& operator =(const value_type value) noexcept {
+    constexpr u8character& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -326,7 +334,9 @@ struct u8character : icharacter<u8character, char8_t> {
      * @return 普通字符串
      */
     static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         string result;
         result.reserve(obj.size());
 
@@ -346,7 +356,9 @@ struct u8character : icharacter<u8character, char8_t> {
      * @return 宽字符串（UTF-8转wchar_t）
      */
     static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         wstring result;
         result.reserve(obj.size());
 
@@ -365,9 +377,7 @@ struct u8character : icharacter<u8character, char8_t> {
      * @param obj 字符视图
      * @return UTF-8字符串
      */
-    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
-        return u8string{obj};
-    }
+    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) { return u8string{obj}; }
 
     /**
      * @brief 转换为UTF-16字符串
@@ -375,7 +385,9 @@ struct u8character : icharacter<u8character, char8_t> {
      * @return UTF-16字符串（UTF-8转UTF-16）
      */
     static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u16string result;
         result.reserve(obj.size());
 
@@ -395,7 +407,9 @@ struct u8character : icharacter<u8character, char8_t> {
      * @return UTF-32字符串（UTF-8转UTF-32）
      */
     static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u32string result;
         result.reserve(obj.size());
 
@@ -410,13 +424,11 @@ struct u8character : icharacter<u8character, char8_t> {
     }
 };
 
-template <>
-struct package<char8_t> {
+template <> struct package<char8_t> {
     using type = u8character;
 };
 
-template <>
-struct unpackage<u8character> {
+template <> struct unpackage<u8character> {
     using type = char8_t;
 };
 
@@ -431,8 +443,8 @@ struct unpackage<u8character> {
  */
 struct u16character : icharacter<u16character, char16_t> {
 public:
-    using value_type = char16_t;                      ///< 值类型
-    using base = icharacter<u16character, char16_t>;  ///< 基类类型
+    using value_type = char16_t;                     ///< 值类型
+    using base = icharacter<u16character, char16_t>; ///< 基类类型
 
 private:
     template <typename T>
@@ -440,7 +452,9 @@ private:
         start_pos = 0;
         need_swap = false;
 
-        if (obj.empty()) return;
+        if (obj.empty()) {
+            return;
+        }
 
         if (static_cast<uint16_t>(obj[0]) == 0xFEFF) {
             start_pos = 1;
@@ -458,13 +472,13 @@ public:
     constexpr u16character(const u16character&) noexcept = default;
     constexpr u16character(u16character&&) noexcept = default;
 
-    constexpr u16character& operator =(const u16character& other) noexcept = default;
-    constexpr u16character& operator =(u16character&& other) noexcept = default;
+    constexpr u16character& operator=(const u16character& other) noexcept = default;
+    constexpr u16character& operator=(u16character&& other) noexcept = default;
 
-    explicit constexpr u16character(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr u16character(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr u16character& operator =(const value_type value) noexcept {
+    constexpr u16character& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -475,7 +489,9 @@ public:
      * @return 普通字符串（UTF-16转UTF-8）
      */
     static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         string result;
 
         size_t start_pos;
@@ -495,7 +511,9 @@ public:
      * @return 宽字符串（UTF-16转wchar_t）
      */
     static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         wstring result;
         result.reserve(obj.size());
 
@@ -517,7 +535,9 @@ public:
      * @return UTF-8字符串（UTF-16转UTF-8）
      */
     static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u8string result;
         result.reserve(obj.size() * 3);
 
@@ -539,7 +559,9 @@ public:
      * @return UTF-16字符串
      */
     static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
 
         size_t start_pos;
         bool need_swap;
@@ -565,7 +587,9 @@ public:
      * @return UTF-32字符串（UTF-16转UTF-32）
      */
     static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u32string result;
         result.reserve(obj.size());
 
@@ -581,13 +605,11 @@ public:
     }
 };
 
-template <>
-struct package<char16_t> {
+template <> struct package<char16_t> {
     using type = u16character;
 };
 
-template <>
-struct unpackage<u16character> {
+template <> struct unpackage<u16character> {
     using type = char16_t;
 };
 
@@ -599,8 +621,8 @@ struct unpackage<u16character> {
  * char32_t字符串为UTF-32编码。
  */
 struct u32character : icharacter<u32character, char32_t> {
-    using value_type = char32_t;                      ///< 值类型
-    using base = icharacter<u32character, char32_t>;  ///< 基类类型
+    using value_type = char32_t;                     ///< 值类型
+    using base = icharacter<u32character, char32_t>; ///< 基类类型
 
     constexpr u32character() noexcept = default;
     NEFORCE_CONSTEXPR20 ~u32character() = default;
@@ -608,13 +630,13 @@ struct u32character : icharacter<u32character, char32_t> {
     constexpr u32character(const u32character&) noexcept = default;
     constexpr u32character(u32character&&) noexcept = default;
 
-    constexpr u32character& operator =(const u32character& other) noexcept = default;
-    constexpr u32character& operator =(u32character&& other) noexcept = default;
+    constexpr u32character& operator=(const u32character& other) noexcept = default;
+    constexpr u32character& operator=(u32character&& other) noexcept = default;
 
-    explicit constexpr u32character(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr u32character(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr u32character& operator =(const value_type value) noexcept {
+    constexpr u32character& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -625,9 +647,11 @@ struct u32character : icharacter<u32character, char32_t> {
      * @return 普通字符串（UTF-32转UTF-8）
      */
     static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         string result;
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint::from_utf32(c).append_to(result);
         }
         return result;
@@ -639,10 +663,12 @@ struct u32character : icharacter<u32character, char32_t> {
      * @return 宽字符串（UTF-32转wchar_t）
      */
     static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         wstring result;
         result.reserve(obj.size());
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint::from_utf32(c).append_to(result);
         }
         return result;
@@ -655,10 +681,12 @@ struct u32character : icharacter<u32character, char32_t> {
      * @return UTF-8字符串（UTF-32转UTF-8）
      */
     static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u8string result;
         result.reserve(obj.size() * 4);
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint::from_utf32(c).append_to(result);
         }
         return result;
@@ -671,10 +699,12 @@ struct u32character : icharacter<u32character, char32_t> {
      * @return UTF-16字符串（UTF-32转UTF-16）
      */
     static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
-        if (obj.empty()) return {};
+        if (obj.empty()) {
+            return {};
+        }
         u16string result;
         result.reserve(obj.size() * 2);
-        for (const value_type c : obj) {
+        for (const value_type c: obj) {
             codepoint::from_utf32(c).append_to(result);
         }
         return result;
@@ -690,13 +720,11 @@ struct u32character : icharacter<u32character, char32_t> {
     }
 };
 
-template <>
-struct package<char32_t> {
+template <> struct package<char32_t> {
     using type = u32character;
 };
 
-template <>
-struct unpackage<u32character> {
+template <> struct unpackage<u32character> {
     using type = char32_t;
 };
 

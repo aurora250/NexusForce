@@ -6,10 +6,10 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API ssl_stream {
 public:
     using native_handle_type =
-    #ifdef NEFORCE_PLATFORM_WINDOWS
-        uintptr_t;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            uintptr_t;
 #else
-        int;
+            int;
 #endif
 
 private:
@@ -21,7 +21,7 @@ private:
             }
         }
     };
-    
+
     unique_ptr<::SSL, ssl_deleter> ssl_;
     string last_error_;
 
@@ -30,9 +30,7 @@ private:
 public:
     ssl_stream() = default;
 
-    explicit ssl_stream(const ssl_context& ctx) {
-        reset(ctx);
-    }
+    explicit ssl_stream(const ssl_context& ctx) { reset(ctx); }
 
     ssl_stream(ssl_stream&& other) noexcept = default;
     ssl_stream& operator=(ssl_stream&& other) noexcept = default;
@@ -66,25 +64,15 @@ public:
 
     NEFORCE_NODISCARD string get_version() const;
 
-    NEFORCE_NODISCARD const string& last_error() const {
-        return last_error_;
-    }
+    NEFORCE_NODISCARD const string& last_error() const { return last_error_; }
 
-    NEFORCE_NODISCARD bool is_valid() const noexcept {
-        return ssl_ != nullptr;
-    }
+    NEFORCE_NODISCARD bool is_valid() const noexcept { return ssl_ != nullptr; }
 
-    explicit operator bool() const noexcept {
-        return is_valid();
-    }
+    explicit operator bool() const noexcept { return is_valid(); }
 
-    NEFORCE_NODISCARD ::SSL* native_handle() const noexcept {
-        return ssl_.get();
-    }
+    NEFORCE_NODISCARD ::SSL* native_handle() const noexcept { return ssl_.get(); }
 
-    NEFORCE_NODISCARD ::SSL* release() noexcept {
-        return ssl_.release();
-    }
+    NEFORCE_NODISCARD ::SSL* release() noexcept { return ssl_.release(); }
 };
 
 NEFORCE_END_NAMESPACE__

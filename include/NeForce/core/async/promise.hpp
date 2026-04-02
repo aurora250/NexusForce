@@ -27,23 +27,21 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 结果类型不能是数组、函数，必须是可析构类型
  */
-template <typename Res>
-class promise {
+template <typename Res> class promise {
     static_assert(!is_array_v<Res>, "result type must not be an array");
     static_assert(!is_function_v<Res>, "result type must not be a function");
     static_assert(is_destructible_v<Res>, "result type must be destructible");
 
 public:
-    using state_type = inner::__future_base::state_base;   ///< 状态类型
-    using result_type = inner::__future_base::basic_result<Res>;   ///< 结果类型
-    using ptr_type = inner::__future_base::Ptr<result_type>;   ///< 结果指针类型
+    using state_type = inner::__future_base::state_base;         ///< 状态类型
+    using result_type = inner::__future_base::basic_result<Res>; ///< 结果类型
+    using ptr_type = inner::__future_base::Ptr<result_type>;     ///< 结果指针类型
 
 private:
-    shared_ptr<state_type> future_ptr;  ///< 共享状态指针
-    ptr_type storage;  ///< 结果存储
+    shared_ptr<state_type> future_ptr; ///< 共享状态指针
+    ptr_type storage;                  ///< 结果存储
 
-    template <typename T, typename U>
-    friend struct inner::__future_base::state_base::setter;
+    template <typename T, typename U> friend struct inner::__future_base::state_base::setter;
 
     /**
      * @brief 获取内部状态引用
@@ -61,30 +59,30 @@ public:
      *
      * 创建新的promise对象，初始化共享状态和结果存储。
      */
-    promise()
-    : future_ptr(_NEFORCE make_shared<state_type>()),
-      storage(new result_type()) {}
+    promise() :
+    future_ptr(_NEFORCE make_shared<state_type>()),
+    storage(new result_type()) {}
 
     /**
      * @brief 移动构造函数
      * @param other 要移动的promise对象
      */
-    promise(promise&& other) noexcept
-    : future_ptr(_NEFORCE move(other.future_ptr)),
-      storage(_NEFORCE move(other.storage)) {}
+    promise(promise&& other) noexcept :
+    future_ptr(_NEFORCE move(other.future_ptr)),
+    storage(_NEFORCE move(other.storage)) {}
 
     /**
      * @brief 移动赋值运算符
      * @param other 要移动的promise对象
      * @return 当前对象的引用
      */
-    promise& operator =(promise&& other) noexcept {
+    promise& operator=(promise&& other) noexcept {
         promise(_NEFORCE move(other)).swap(*this);
         return *this;
     }
 
-    promise(const promise&) = delete;  ///< 禁止拷贝构造
-    promise& operator =(const promise&) = delete;  ///< 禁止拷贝赋值
+    promise(const promise&) = delete;            ///< 禁止拷贝构造
+    promise& operator=(const promise&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 析构函数
@@ -111,27 +109,21 @@ public:
      * @return future对象
      * @throw future_exception 如果future已被获取
      */
-    future<Res> get_future() {
-        return future<Res>(future_ptr);
-    }
+    future<Res> get_future() { return future<Res>(future_ptr); }
 
     /**
      * @brief 设置结果值
      * @param value 要设置的结果值
      * @throw future_exception 如果结果已被设置
      */
-    void set_value(Res&& value) {
-        state().set_result(state_type::create_setter(this, _NEFORCE forward<Res>(value)));
-    }
+    void set_value(Res&& value) { state().set_result(state_type::create_setter(this, _NEFORCE forward<Res>(value))); }
 
     /**
      * @brief 设置异常
      * @param exception 异常指针
      * @throw future_exception 如果结果已被设置
      */
-    void set_exception(exception_ptr exception) {
-        state().set_result(state_type::create_setter(exception, this));
-    }
+    void set_exception(exception_ptr exception) { state().set_result(state_type::create_setter(exception, this)); }
 
     /**
      * @brief 在线程退出时设置结果值
@@ -157,19 +149,17 @@ public:
  * @brief 引用类型的promise特化
  * @tparam Res 引用类型
  */
-template <typename Res>
-class promise<Res&> {
+template <typename Res> class promise<Res&> {
 public:
-    using state_type = inner::__future_base::state_base;   ///< 状态类型
-    using result_type = inner::__future_base::basic_result<Res&>;   ///< 结果类型
-    using ptr_type = inner::__future_base::Ptr<result_type>;   ///< 结果指针类型
+    using state_type = inner::__future_base::state_base;          ///< 状态类型
+    using result_type = inner::__future_base::basic_result<Res&>; ///< 结果类型
+    using ptr_type = inner::__future_base::Ptr<result_type>;      ///< 结果指针类型
 
 private:
-    shared_ptr<state_type> future_ptr;  ///< 共享状态指针
-    ptr_type storage;   ///< 结果存储
+    shared_ptr<state_type> future_ptr; ///< 共享状态指针
+    ptr_type storage;                  ///< 结果存储
 
-    template <typename T, typename U>
-    friend struct inner::__future_base::state_base::setter;
+    template <typename T, typename U> friend struct inner::__future_base::state_base::setter;
 
     NEFORCE_NODISCARD state_type& state() const {
         inner::__future_base::state_base::check(future_ptr);
@@ -180,27 +170,27 @@ public:
     /**
      * @brief 默认构造函数
      */
-    promise()
-    : future_ptr(_NEFORCE make_shared<state_type>()),
-      storage(new result_type()) {}
+    promise() :
+    future_ptr(_NEFORCE make_shared<state_type>()),
+    storage(new result_type()) {}
 
     /**
      * @brief 移动构造函数
      */
-    promise(promise&& other) noexcept
-    : future_ptr(_NEFORCE move(other.future_ptr)),
-      storage(_NEFORCE move(other.storage)) {}
+    promise(promise&& other) noexcept :
+    future_ptr(_NEFORCE move(other.future_ptr)),
+    storage(_NEFORCE move(other.storage)) {}
 
     /**
      * @brief 移动赋值运算符
      */
-    promise& operator =(promise&& other) noexcept {
+    promise& operator=(promise&& other) noexcept {
         promise(_NEFORCE move(other)).swap(*this);
         return *this;
     }
 
-    promise(const promise&) = delete;  ///< 禁止拷贝构造
-    promise& operator =(const promise&) = delete;  ///< 禁止拷贝赋值
+    promise(const promise&) = delete;            ///< 禁止拷贝构造
+    promise& operator=(const promise&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 析构函数
@@ -223,27 +213,21 @@ public:
      * @brief 获取关联的future对象
      * @return future对象
      */
-    future<Res&> get_future() {
-        return future<Res&>(future_ptr);
-    }
+    future<Res&> get_future() { return future<Res&>(future_ptr); }
 
     /**
      * @brief 设置结果引用
      * @param value 要引用的对象
      * @throw future_exception 如果结果已被设置
      */
-    void set_value(Res& value) {
-        state().set_result(state_type::create_setter(this, value));
-    }
+    void set_value(Res& value) { state().set_result(state_type::create_setter(this, value)); }
 
     /**
      * @brief 设置异常
      * @param exception 异常指针
      * @throw future_exception 如果结果已被设置
      */
-    void set_exception(exception_ptr exception) {
-        state().set_result(state_type::create_setter(exception, this));
-    }
+    void set_exception(exception_ptr exception) { state().set_result(state_type::create_setter(exception, this)); }
 
     /**
      * @brief 在线程退出时设置结果引用
@@ -267,19 +251,17 @@ public:
 /**
  * @brief void类型的promise特化
  */
-template <>
-class promise<void> {
+template <> class promise<void> {
 public:
-    using state_type = inner::__future_base::state_base;   ///< 状态类型
-    using result_type = inner::__future_base::basic_result<void>;   ///< 结果类型
-    using ptr_type = inner::__future_base::Ptr<result_type>;   ///< 结果指针类型
+    using state_type = inner::__future_base::state_base;          ///< 状态类型
+    using result_type = inner::__future_base::basic_result<void>; ///< 结果类型
+    using ptr_type = inner::__future_base::Ptr<result_type>;      ///< 结果指针类型
 
 private:
-    shared_ptr<state_type> future_ptr;   ///< 共享状态指针
-    ptr_type storage;   ///< 结果存储
+    shared_ptr<state_type> future_ptr; ///< 共享状态指针
+    ptr_type storage;                  ///< 结果存储
 
-    template <typename T, typename U>
-    friend struct inner::__future_base::state_base::setter;
+    template <typename T, typename U> friend struct inner::__future_base::state_base::setter;
 
     NEFORCE_NODISCARD state_type& state() const {
         inner::__future_base::state_base::check(future_ptr);
@@ -290,27 +272,27 @@ public:
     /**
      * @brief 默认构造函数
      */
-    promise()
-    : future_ptr(_NEFORCE make_shared<state_type>()),
-      storage(new result_type()) {}
+    promise() :
+    future_ptr(_NEFORCE make_shared<state_type>()),
+    storage(new result_type()) {}
 
     /**
      * @brief 移动构造函数
      */
-    promise(promise&& other) noexcept
-    : future_ptr(_NEFORCE move(other.future_ptr)),
-      storage(_NEFORCE move(other.storage)) {}
+    promise(promise&& other) noexcept :
+    future_ptr(_NEFORCE move(other.future_ptr)),
+    storage(_NEFORCE move(other.storage)) {}
 
     /**
      * @brief 移动赋值运算符
      */
-    promise& operator =(promise&& other) noexcept {
+    promise& operator=(promise&& other) noexcept {
         promise(_NEFORCE move(other)).swap(*this);
         return *this;
     }
 
-    promise(const promise&) = delete;  ///< 禁止拷贝构造
-    promise& operator =(const promise&) = delete;  ///< 禁止拷贝赋值
+    promise(const promise&) = delete;            ///< 禁止拷贝构造
+    promise& operator=(const promise&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 析构函数
@@ -333,34 +315,26 @@ public:
      * @brief 获取关联的future对象
      * @return future对象
      */
-    NEFORCE_NODISCARD future<void> get_future() const {
-        return future<void>(future_ptr);
-    }
+    NEFORCE_NODISCARD future<void> get_future() const { return future<void>(future_ptr); }
 
     /**
      * @brief 设置void结果
      * @throw future_exception 如果结果已被设置
      */
-    void set_value() {
-        state().set_result(state_type::create_setter(this));
-    }
+    void set_value() { state().set_result(state_type::create_setter(this)); }
 
     /**
      * @brief 设置异常
      * @param exception 异常指针
      * @throw future_exception 如果结果已被设置
      */
-    void set_exception(exception_ptr exception) {
-        state().set_result(state_type::create_setter(exception, this));
-    }
+    void set_exception(exception_ptr exception) { state().set_result(state_type::create_setter(exception, this)); }
 
     /**
      * @brief 在线程退出时设置void结果
      * @throw future_exception 如果结果已被设置
      */
-    void set_value_at_thread_exit() {
-        state().set_delayed_result(state_type::create_setter(this), future_ptr);
-    }
+    void set_value_at_thread_exit() { state().set_delayed_result(state_type::create_setter(this), future_ptr); }
 
     /**
      * @brief 在线程退出时设置异常
@@ -382,9 +356,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 用于执行任务并捕获异常，将结果设置到promise中。
  */
-template <typename PtrT, typename Func, typename>
-struct __future_base::task_setter {
-    PtrT* result_ptr;  ///< 结果指针
+template <typename PtrT, typename Func, typename> struct __future_base::task_setter {
+    PtrT* result_ptr;   ///< 结果指针
     Func* function_ptr; ///< 可调用对象指针
 
     /**
@@ -392,7 +365,7 @@ struct __future_base::task_setter {
      * @return 结果指针
      * @note 自动捕获异常并存储到结果中
      */
-    PtrT operator ()() const noexcept {
+    PtrT operator()() const noexcept {
         try {
             (*result_ptr)->set((*function_ptr)());
         } catch (...) {
@@ -407,12 +380,11 @@ struct __future_base::task_setter {
  * @tparam PtrT 结果指针类型
  * @tparam Func 可调用类型
  */
-template <typename PtrT, typename Func>
-struct __future_base::task_setter<PtrT, Func, void> {
-    PtrT* result_ptr;  ///< 结果指针
+template <typename PtrT, typename Func> struct __future_base::task_setter<PtrT, Func, void> {
+    PtrT* result_ptr;   ///< 结果指针
     Func* function_ptr; ///< 可调用对象指针
 
-    PtrT operator ()() const noexcept {
+    PtrT operator()() const noexcept {
         try {
             (*function_ptr)();
         } catch (...) {
@@ -432,10 +404,10 @@ struct __future_base::task_setter<PtrT, Func, void> {
 template <typename Res, typename... Args>
 class __future_base::task_state_base<Res(Args...)> : public __future_base::state_base {
 public:
-    using result_type = Res;  ///< 结果类型
-    using PtrType = __future_base::Ptr<basic_result<Res>>;  ///< 结果指针类型
+    using result_type = Res;                               ///< 结果类型
+    using PtrType = __future_base::Ptr<basic_result<Res>>; ///< 结果指针类型
 
-    PtrType result_storage;  ///< 结果存储
+    PtrType result_storage; ///< 结果存储
 
     /**
      * @brief 构造函数
@@ -443,8 +415,8 @@ public:
      * @param alloc 分配器实例
      */
     template <typename Alloc>
-    task_state_base(const Alloc& alloc)
-    : result_storage(allocate_result<Res>(alloc)) {}
+    task_state_base(const Alloc& alloc) :
+    result_storage(allocate_result<Res>(alloc)) {}
 
     /**
      * @brief 执行任务
@@ -479,8 +451,7 @@ public:
  * 管理具体的任务函数和分配器。
  */
 template <typename Func, typename Alloc, typename Res, typename... Args>
-class __future_base::task_state<Func, Alloc, Res(Args...)> final
-    : public __future_base::task_state_base<Res(Args...)> {
+class __future_base::task_state<Func, Alloc, Res(Args...)> final : public __future_base::task_state_base<Res(Args...)> {
 public:
     /**
      * @brief 构造函数
@@ -489,29 +460,27 @@ public:
      * @param alloc 分配器实例
      */
     template <typename Func2>
-    task_state(Func2&& func, const Alloc& alloc)
-    : task_state_base<Res(Args...)>(alloc)
-    , impl(_NEFORCE forward<Func2>(func), alloc) {}
+    task_state(Func2&& func, const Alloc& alloc) :
+    task_state_base<Res(Args...)>(alloc),
+    impl(_NEFORCE forward<Func2>(func), alloc) {}
 
 private:
     void run(Args&&... args) override {
         auto bound_func = [&]() -> Res {
             return _NEFORCE invoke_r<Res>(impl.function_ptr, _NEFORCE forward<Args>(args)...);
         };
-        state_base::set_result(
-            __future_base::create_task_setter(this->result_storage, bound_func));
+        state_base::set_result(__future_base::create_task_setter(this->result_storage, bound_func));
     }
 
     void run_delayed(Args&&... args, weak_ptr<state_base> self) override {
         auto bound_function = [&]() -> Res {
             return _NEFORCE invoke_r<Res>(impl.function_ptr, _NEFORCE forward<Args>(args)...);
         };
-        state_base::set_delayed_result(
-            __future_base::create_task_setter(this->result_storage, bound_function), _NEFORCE move(self));
+        state_base::set_delayed_result(__future_base::create_task_setter(this->result_storage, bound_function),
+                                       _NEFORCE move(self));
     }
 
-    shared_ptr<task_state_base<Res(Args...)>>
-    reset() override;
+    shared_ptr<task_state_base<Res(Args...)>> reset() override;
 
     /**
      * @brief 实现结构体
@@ -522,8 +491,9 @@ private:
         Func function_ptr;
 
         template <typename Func2>
-        Impl(Func2&& func, const Alloc& alloc)
-        : Alloc(alloc), function_ptr(_NEFORCE forward<Func2>(func)) {}
+        Impl(Func2&& func, const Alloc& alloc) :
+        Alloc(alloc),
+        function_ptr(_NEFORCE forward<Func2>(func)) {}
     } impl;
 };
 
@@ -537,8 +507,7 @@ private:
  * @return 任务状态共享指针
  */
 template <typename Sign, typename Func, typename Alloc = _NEFORCE allocator<int>>
-static shared_ptr<__future_base::task_state_base<Sign>>
-create_task_state(Func&& func, const Alloc& alloc = Alloc()) {
+static shared_ptr<__future_base::task_state_base<Sign>> create_task_state(Func&& func, const Alloc& alloc = Alloc()) {
     using State = __future_base::task_state<decay_t<Func>, Alloc, Sign>;
     return _NEFORCE allocate_shared<State>(alloc, _NEFORCE forward<Func>(func), alloc);
 }
@@ -550,8 +519,7 @@ create_task_state(Func&& func, const Alloc& alloc = Alloc()) {
  * 创建新的任务状态，移动原有函数对象。
  */
 template <typename Func, typename Alloc, typename Res, typename... Args>
-shared_ptr<__future_base::task_state_base<Res(Args...)>>
-__future_base::task_state<Func, Alloc, Res(Args...)>::reset() {
+shared_ptr<__future_base::task_state_base<Res(Args...)>> __future_base::task_state<Func, Alloc, Res(Args...)>::reset() {
     return inner::create_task_state<Res(Args...)>(_NEFORCE move(impl.function_ptr), static_cast<Alloc&>(impl));
 }
 

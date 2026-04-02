@@ -24,9 +24,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 此类封装了一个分配的内存块及其对应的分配器。
  */
-template <typename Alloc>
-struct allocated_ptr {
-    using pointer = typename allocator_traits<Alloc>::pointer;   ///< 分配器指针类型
+template <typename Alloc> struct allocated_ptr {
+    using pointer = typename allocator_traits<Alloc>::pointer;       ///< 分配器指针类型
     using value_type = typename allocator_traits<Alloc>::value_type; ///< 元素类型
 
 private:
@@ -42,8 +41,9 @@ public:
      *
      * 从分配器和内存指针构造allocated_ptr。
      */
-    allocated_ptr(Alloc& alloc, pointer ptr) noexcept
-    : alloc_(_NEFORCE addressof(alloc)), ptr_(ptr) {}
+    allocated_ptr(Alloc& alloc, pointer ptr) noexcept :
+    alloc_(_NEFORCE addressof(alloc)),
+    ptr_(ptr) {}
 
     /**
      * @brief 原始指针转换
@@ -54,15 +54,17 @@ public:
      * 从原始指针构造，转换为分配器的指针类型。
      */
     template <typename Ptr, typename = enable_if_t<is_same_v<Ptr, value_type*>>>
-    allocated_ptr(Alloc& alloc, Ptr ptr)
-    : alloc_(_NEFORCE addressof(alloc)), ptr_(pointer_traits<pointer>::pointer_to(*ptr)) {}
+    allocated_ptr(Alloc& alloc, Ptr ptr) :
+    alloc_(_NEFORCE addressof(alloc)),
+    ptr_(pointer_traits<pointer>::pointer_to(*ptr)) {}
 
     /**
      * @brief 移动构造函数
      * @param guard 要移动的allocated_ptr
      */
-    allocated_ptr(allocated_ptr&& guard) noexcept
-    : alloc_(guard.alloc_), ptr_(guard.ptr_) {
+    allocated_ptr(allocated_ptr&& guard) noexcept :
+    alloc_(guard.alloc_),
+    ptr_(guard.ptr_) {
         guard.ptr_ = nullptr;
     }
 
@@ -71,7 +73,7 @@ public:
      */
     ~allocated_ptr() {
         if (ptr_ != nullptr) {
-          _NEFORCE allocator_traits<Alloc>::deallocate(*alloc_, ptr_, 1);
+            _NEFORCE allocator_traits<Alloc>::deallocate(*alloc_, ptr_, 1);
         }
     }
 
@@ -82,7 +84,7 @@ public:
      *
      * 放弃内存所有权，不会释放内存。
      */
-    allocated_ptr& operator =(nullptr_t null) noexcept {
+    allocated_ptr& operator=(nullptr_t null) noexcept {
         ptr_ = nullptr;
         return *this;
     }
@@ -93,9 +95,7 @@ public:
      *
      * 返回可访问的原始指针，用于直接访问内存。
      */
-    value_type* get() {
-        return _NEFORCE to_address(ptr_);
-    }
+    value_type* get() { return _NEFORCE to_address(ptr_); }
 };
 
 /**
@@ -106,8 +106,7 @@ public:
  *
  * 使用分配器分配单个元素内存，并返回管理该内存的allocated_ptr。
  */
-template <typename Alloc>
-allocated_ptr<Alloc> allocate_guarded(Alloc& alloc) {
+template <typename Alloc> allocated_ptr<Alloc> allocate_guarded(Alloc& alloc) {
     return allocated_ptr<Alloc>{alloc, _NEFORCE allocator_traits<Alloc>::allocate(alloc, 1)};
 }
 

@@ -1,12 +1,11 @@
 #ifndef NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__
 #define NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__
 #include "NeForce/core/async/thread_pool.hpp"
-#include "NeForce/network/socket/tcp_acceptor.hpp"
 #include "NeForce/network/socket/ssl_socket.hpp"
+#include "NeForce/network/socket/tcp_acceptor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-template <typename SocketT>
-class basic_tcp_server {
+template <typename SocketT> class basic_tcp_server {
     static_assert(is_base_of_v<tcp_socket, SocketT>, "SocketT must derive from tcp_socket");
 
 public:
@@ -74,8 +73,8 @@ protected:
     }
 
 public:
-    explicit basic_tcp_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold)
-    : port_(port) {
+    explicit basic_tcp_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold) :
+    port_(port) {
         if (worker_count == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
         }
@@ -83,16 +82,14 @@ public:
         client_pool_.start();
     }
 
-    virtual ~basic_tcp_server() {
-        stop();
-    }
+    virtual ~basic_tcp_server() { stop(); }
 
     basic_tcp_server(const basic_tcp_server&) = delete;
-    basic_tcp_server& operator =(const basic_tcp_server&) = delete;
+    basic_tcp_server& operator=(const basic_tcp_server&) = delete;
 
     basic_tcp_server(basic_tcp_server&&) noexcept = default;
-    basic_tcp_server& operator =(basic_tcp_server&&) noexcept = default;
-    
+    basic_tcp_server& operator=(basic_tcp_server&&) noexcept = default;
+
     bool set_client_handler(client_handler_t handler) {
         if (running_) {
             return false;
@@ -109,9 +106,7 @@ public:
         return true;
     }
 
-    virtual bool load_certificate(const string&, const string&) {
-        return false;
-    }
+    virtual bool load_certificate(const string&, const string&) { return false; }
 
     virtual bool start(const int backlog = SOMAXCONN) noexcept {
         if (running_) {
@@ -147,21 +142,19 @@ public:
         running_ = false;
         acceptor_.close();
 
-        for (auto& t : worker_threads_) {
-            if (t.joinable()) t.join();
+        for (auto& t: worker_threads_) {
+            if (t.joinable()) {
+                t.join();
+            }
         }
         worker_threads_.clear();
 
         client_pool_.stop();
     }
 
-    NEFORCE_NODISCARD bool is_running() const noexcept {
-        return running_;
-    }
+    NEFORCE_NODISCARD bool is_running() const noexcept { return running_; }
 
-    NEFORCE_NODISCARD ports port() const noexcept {
-        return port_;
-    }
+    NEFORCE_NODISCARD ports port() const noexcept { return port_; }
 };
 
 
@@ -193,8 +186,9 @@ protected:
     }
 
 public:
-    explicit ssl_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold)
-    : basic_tcp_server<ssl_socket>(port, worker_count), ssl_ctx_(ssl_method::TLS_SERVER) {}
+    explicit ssl_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold) :
+    basic_tcp_server<ssl_socket>(port, worker_count),
+    ssl_ctx_(ssl_method::TLS_SERVER) {}
 
     bool load_certificate(const string& cert_file, const string& key_file) override {
         if (is_running()) {
@@ -216,13 +210,9 @@ public:
         ssl_ctx_ = _NEFORCE move(ctx);
     }
 
-    NEFORCE_NODISCARD ssl_context& get_ssl_context() noexcept {
-        return ssl_ctx_;
-    }
+    NEFORCE_NODISCARD ssl_context& get_ssl_context() noexcept { return ssl_ctx_; }
 
-    NEFORCE_NODISCARD const ssl_context& get_ssl_context() const noexcept {
-        return ssl_ctx_;
-    }
+    NEFORCE_NODISCARD const ssl_context& get_ssl_context() const noexcept { return ssl_ctx_; }
 
     bool start(const int backlog = SOMAXCONN) noexcept override {
         if (!ssl_ctx_.is_valid()) {

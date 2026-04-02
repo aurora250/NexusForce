@@ -33,39 +33,39 @@ enum class websocket_status : uint16_t {
 
 enum class websocket_opcode : uint8_t {
     CONTINUATION = 0x0,
-    TEXT         = 0x1,
-    BINARY       = 0x2,
-    CLOSE        = 0x8,
-    PING         = 0x9,
-    PONG         = 0xA
+    TEXT = 0x1,
+    BINARY = 0x2,
+    CLOSE = 0x8,
+    PING = 0x9,
+    PONG = 0xA
 };
 
 #pragma pack(push, 1)
 struct websocket_frame_header {
-    byte_t fin    : 1;
-    byte_t rsv1   : 1;
-    byte_t rsv2   : 1;
-    byte_t rsv3   : 1;
+    byte_t fin : 1;
+    byte_t rsv1 : 1;
+    byte_t rsv2 : 1;
+    byte_t rsv3 : 1;
     byte_t opcode : 4;
-    byte_t masked      : 1;
+    byte_t masked : 1;
     byte_t payload_len : 7;
 };
 #pragma pack(pop)
 
 
-template <typename SocketType>
-class websocket_session;
+template <typename SocketType> class websocket_session;
 
 
 class NEFORCE_API websocket_session_base {
 protected:
-    template <typename SocketType>
-    static bool receive_exact(SocketType& socket, void* buf, size_t n) {
+    template <typename SocketType> static bool receive_exact(SocketType& socket, void* buf, size_t n) {
         auto* ptr = static_cast<char*>(buf);
         size_t remaining = n;
         while (remaining > 0) {
             const ssize_t got = socket.receive(memory_view<char>(ptr, remaining));
-            if (got <= 0) return false;
+            if (got <= 0) {
+                return false;
+            }
             ptr += got;
             remaining -= static_cast<size_t>(got);
         }
@@ -78,13 +78,12 @@ protected:
 };
 
 
-template <typename SocketType>
-class websocket_server {
+template <typename SocketType> class websocket_server {
 public:
-    using socket_type       = SocketType;
-    using session_type      = websocket_session<SocketType>;
-    using session_ptr       = shared_ptr<session_type>;
-    using session_handler   = function<void(session_ptr)>;
+    using socket_type = SocketType;
+    using session_type = websocket_session<SocketType>;
+    using session_ptr = shared_ptr<session_type>;
+    using session_handler = function<void(session_ptr)>;
 
 private:
     unordered_map<string, session_handler> route_handlers_;
@@ -92,13 +91,13 @@ private:
     mutable mutex sessions_mutex_;
 
 public:
-    void route(const string& path, session_handler handler) {
-        route_handlers_[path] = _NEFORCE move(handler);
-    }
+    void route(const string& path, session_handler handler) { route_handlers_[path] = _NEFORCE move(handler); }
 
     bool handle_upgrade(const http_request& request, socket_type sock) {
         const auto it = route_handlers_.find(request.path);
-        if (it == route_handlers_.end()) return false;
+        if (it == route_handlers_.end()) {
+            return false;
+        }
 
         auto session = make_shared<session_type>(_NEFORCE move(sock), this);
         {
@@ -113,13 +112,17 @@ public:
     void remove_session(const session_ptr& session) {
         lock<mutex> lk(sessions_mutex_);
         auto it = find(sessions_.begin(), sessions_.end(), session);
-        if (it != sessions_.end()) sessions_.erase(it);
+        if (it != sessions_.end()) {
+            sessions_.erase(it);
+        }
     }
 
     void broadcast(const string& data, websocket_opcode opcode = websocket_opcode::TEXT) {
         lock<mutex> lk(sessions_mutex_);
-        for (auto& s : sessions_) {
-            if (s->is_open()) s->send(data, opcode);
+        for (auto& s: sessions_) {
+            if (s->is_open()) {
+                s->send(data, opcode);
+            }
         }
     }
 
@@ -131,19 +134,17 @@ public:
 
 
 template <typename SocketType>
-class websocket_session :
-    public websocket_session_base,
-    public enable_shared_from_this<websocket_session<SocketType>> {
+class websocket_session : public websocket_session_base, public enable_shared_from_this<websocket_session<SocketType>> {
 
 public:
     using message_handler = function<void(const string&, websocket_opcode)>;
-    using close_handler   = function<void(websocket_status, const string&)>;
-    using error_handler   = function<void(const exception&)>;
+    using close_handler = function<void(websocket_status, const string&)>;
+    using error_handler = function<void(const exception&)>;
 
     static constexpr size_t MAX_WRITE_QUEUE_SIZE = 1024;
-    static constexpr uint64_t MAX_PAYLOAD_SIZE   = 64ULL * 1024 * 1024;
-    static constexpr int HEARTBEAT_INTERVAL_SEC  = 30;
-    static constexpr int HEARTBEAT_TIMEOUT_SEC   = 10;
+    static constexpr uint64_t MAX_PAYLOAD_SIZE = 64ULL * 1024 * 1024;
+    static constexpr int HEARTBEAT_INTERVAL_SEC = 30;
+    static constexpr int HEARTBEAT_TIMEOUT_SEC = 10;
 
 private:
     SocketType socket_;
@@ -172,13 +173,14 @@ private:
     close_handler on_close_;
     error_handler on_error_;
 
-    static int64_t now_ms() noexcept {
-        return time_cast<milliseconds>(steady_clock::now().since_epoch()).count();
-    }
+    static int64_t now_ms() noexcept { return time_cast<milliseconds>(steady_clock::now().since_epoch()).count(); }
 
     void notify_error(const exception& e) noexcept {
         if (on_error_) {
-            try { on_error_(e); } catch (...) {}
+            try {
+                on_error_(e);
+            } catch (...) {
+            }
         }
     }
 
@@ -203,10 +205,10 @@ private:
             byte_vector frame;
             {
                 unique_lock<mutex> lk(write_mutex_);
-                write_cv_.wait(lk, [this] {
-                    return !running_ || !ctrl_queue_.empty() || !write_queue_.empty();
-                });
-                if (!running_ && ctrl_queue_.empty() && write_queue_.empty()) break;
+                write_cv_.wait(lk, [this] { return !running_ || !ctrl_queue_.empty() || !write_queue_.empty(); });
+                if (!running_ && ctrl_queue_.empty() && write_queue_.empty()) {
+                    break;
+                }
 
                 if (!ctrl_queue_.empty()) {
                     frame = ctrl_queue_.front();
@@ -220,9 +222,7 @@ private:
             }
 
             try {
-                socket_.send_all(memory_view<const char>(
-                    reinterpret_cast<const char*>(frame.data()),
-                    frame.size()));
+                socket_.send_all(memory_view<const char>(reinterpret_cast<const char*>(frame.data()), frame.size()));
             } catch (const exception& e) {
                 notify_error(e);
                 break;
@@ -233,16 +233,18 @@ private:
             lock<mutex> lk(write_mutex_);
             while (!ctrl_queue_.empty()) {
                 auto& f = ctrl_queue_.front();
-                socket_.send_all(memory_view<const char>(
-                    reinterpret_cast<const char*>(f.data()), f.size()));
+                socket_.send_all(memory_view<const char>(reinterpret_cast<const char*>(f.data()), f.size()));
                 ctrl_queue_.pop();
             }
-        } catch (...) {}
+        } catch (...) {
+        }
     }
 
     void read_loop() noexcept {
         while (running_) {
-            if (!read_frame()) break;
+            if (!read_frame()) {
+                break;
+            }
         }
         do_stop(websocket_status::ABNORMAL_CLOSURE, "Connection lost");
     }
@@ -250,7 +252,9 @@ private:
     bool read_frame() noexcept {
         try {
             websocket_frame_header hdr{};
-            if (!receive_exact(socket_, &hdr, 2)) return false;
+            if (!receive_exact(socket_, &hdr, 2)) {
+                return false;
+            }
 
             if (hdr.rsv1 || hdr.rsv2 || hdr.rsv3) {
                 send_close_frame(websocket_status::PROTOCOL_ERROR, "Reserved bits set");
@@ -268,11 +272,15 @@ private:
             uint64_t payload_len = hdr.payload_len;
             if (payload_len == 126) {
                 uint16_t ext{};
-                if (!receive_exact(socket_, &ext, 2)) return false;
+                if (!receive_exact(socket_, &ext, 2)) {
+                    return false;
+                }
                 payload_len = endian::network_to_host<uint16_t>(ext);
             } else if (payload_len == 127) {
                 uint64_t ext{};
-                if (!receive_exact(socket_, &ext, 8)) return false;
+                if (!receive_exact(socket_, &ext, 8)) {
+                    return false;
+                }
                 payload_len = endian::network_to_host<uint64_t>(ext);
             }
 
@@ -288,7 +296,9 @@ private:
 
             uint32_t masking_key = 0;
             if (hdr.masked) {
-                if (!receive_exact(socket_, &masking_key, 4)) return false;
+                if (!receive_exact(socket_, &masking_key, 4)) {
+                    return false;
+                }
             }
 
             string payload;
@@ -319,14 +329,13 @@ private:
             case websocket_opcode::TEXT:
             case websocket_opcode::BINARY: {
                 if (in_fragment_) {
-                    send_close_frame(websocket_status::PROTOCOL_ERROR,
-                                     "New data frame before fragment complete");
+                    send_close_frame(websocket_status::PROTOCOL_ERROR, "New data frame before fragment complete");
                     return false;
                 }
                 if (!hdr.fin) {
-                    fragment_opcode_  = opcode;
-                    fragment_buffer_  = payload;
-                    in_fragment_      = true;
+                    fragment_opcode_ = opcode;
+                    fragment_buffer_ = payload;
+                    in_fragment_ = true;
                 } else {
                     deliver_message(payload, opcode);
                 }
@@ -334,8 +343,7 @@ private:
             }
             case websocket_opcode::CONTINUATION: {
                 if (!in_fragment_) {
-                    send_close_frame(websocket_status::PROTOCOL_ERROR,
-                                     "Unexpected continuation frame");
+                    send_close_frame(websocket_status::PROTOCOL_ERROR, "Unexpected continuation frame");
                     return false;
                 }
                 fragment_buffer_ += payload;
@@ -368,8 +376,11 @@ private:
 
     void deliver_message(const string& data, websocket_opcode opcode) {
         if (on_message_) {
-            try { on_message_(data, move(opcode)); }
-            catch (const exception& e) { notify_error(e); }
+            try {
+                on_message_(data, move(opcode));
+            } catch (const exception& e) {
+                notify_error(e);
+            }
         }
     }
 
@@ -383,11 +394,11 @@ private:
         string reason;
 
         if (payload.size() >= 2) {
-            const uint16_t code =
-                (static_cast<uint8_t>(payload[0]) << 8) |
-                 static_cast<uint8_t>(payload[1]);
+            const uint16_t code = (static_cast<uint8_t>(payload[0]) << 8) | static_cast<uint8_t>(payload[1]);
             status = static_cast<websocket_status>(code);
-            if (payload.size() > 2) reason = payload.substr(2);
+            if (payload.size() > 2) {
+                reason = payload.substr(2);
+            }
         }
 
         send_close_frame(status, reason);
@@ -402,7 +413,9 @@ private:
             for (int i = 0; i < HEARTBEAT_INTERVAL_SEC * 10 && running_; ++i) {
                 this_thread::sleep_for(milliseconds(100));
             }
-            if (!running_) break;
+            if (!running_) {
+                break;
+            }
 
             const int64_t elapsed_ms = now_ms() - last_pong_ms_.load();
             constexpr int64_t timeout_ms = static_cast<int64_t>(HEARTBEAT_TIMEOUT_SEC) * 1000;
@@ -420,7 +433,9 @@ private:
     }
 
     void do_stop(websocket_status status, const string& reason) noexcept {
-        if (closed_once_.test_and_set()) return;
+        if (closed_once_.test_and_set()) {
+            return;
+        }
 
         running_ = false;
         write_cv_.notify_all();
@@ -441,7 +456,8 @@ private:
         if (on_close_) {
             try {
                 on_close_(move(status), reason);
-            } catch (...) {}
+            } catch (...) {
+            }
         }
 
         if (server_) {
@@ -450,18 +466,19 @@ private:
     }
 
 public:
-    explicit websocket_session(SocketType sock, websocket_server<SocketType>* server = nullptr)
-    : socket_(_NEFORCE move(sock)), server_(server) {}
+    explicit websocket_session(SocketType sock, websocket_server<SocketType>* server = nullptr) :
+    socket_(_NEFORCE move(sock)),
+    server_(server) {}
 
-    ~websocket_session() {
-        do_stop(websocket_status::NORMAL_CLOSURE, "Session destroyed");
-    }
+    ~websocket_session() { do_stop(websocket_status::NORMAL_CLOSURE, "Session destroyed"); }
 
     websocket_session(const websocket_session&) = delete;
     websocket_session& operator=(const websocket_session&) = delete;
 
     void start() {
-        if (running_.exchange(true)) return;
+        if (running_.exchange(true)) {
+            return;
+        }
         last_pong_ms_ = now_ms();
         read_thread_ = thread(&websocket_session::read_loop, this);
         write_thread_ = thread(&websocket_session::write_loop, this);
@@ -469,48 +486,42 @@ public:
     }
 
     void close(websocket_status status = websocket_status::NORMAL_CLOSURE, const string& reason = "") {
-        if (!running_) return;
+        if (!running_) {
+            return;
+        }
         send_close_frame(status, reason);
 
         const auto deadline = steady_clock::now() + seconds(2);
         while (steady_clock::now() < deadline) {
             {
                 lock<mutex> lk(write_mutex_);
-                if (ctrl_queue_.empty() && write_queue_.empty()) break;
+                if (ctrl_queue_.empty() && write_queue_.empty()) {
+                    break;
+                }
             }
             this_thread::sleep_for(milliseconds(10));
         }
         do_stop(status, reason);
     }
 
-    void stop() {
-        do_stop(websocket_status::NORMAL_CLOSURE, "Stopped");
-    }
+    void stop() { do_stop(websocket_status::NORMAL_CLOSURE, "Stopped"); }
 
     bool send(const string& data, websocket_opcode opcode = websocket_opcode::TEXT) {
-        if (!running_) return false;
+        if (!running_) {
+            return false;
+        }
         return queue_frame(build_frame(opcode, data, false));
     }
 
-    bool send_binary(const string& data) {
-        return send(data, websocket_opcode::BINARY);
-    }
+    bool send_binary(const string& data) { return send(data, websocket_opcode::BINARY); }
 
-    bool is_open() const noexcept {
-        return running_ && socket_.is_open();
-    }
+    bool is_open() const noexcept { return running_ && socket_.is_open(); }
 
-    void set_message_handler(message_handler handler) {
-        on_message_ = _NEFORCE move(handler);
-    }
+    void set_message_handler(message_handler handler) { on_message_ = _NEFORCE move(handler); }
 
-    void set_close_handler(close_handler handler) {
-        on_close_ = _NEFORCE move(handler);
-    }
+    void set_close_handler(close_handler handler) { on_close_ = _NEFORCE move(handler); }
 
-    void set_error_handler(error_handler handler) {
-        on_error_ = _NEFORCE move(handler);
-    }
+    void set_error_handler(error_handler handler) { on_error_ = _NEFORCE move(handler); }
 
     SocketType& socket() noexcept { return socket_; }
     const SocketType& socket() const noexcept { return socket_; }

@@ -31,13 +31,9 @@ private:
 
     friend class thread;
 
-    static NEFORCE_ALWAYS_INLINE void on_thread_create() noexcept {
-        ++count_;
-    }
+    static NEFORCE_ALWAYS_INLINE void on_thread_create() noexcept { ++count_; }
 
-    static NEFORCE_ALWAYS_INLINE void on_thread_destroy() noexcept {
-        --count_;
-    }
+    static NEFORCE_ALWAYS_INLINE void on_thread_destroy() noexcept { --count_; }
 
     thread_tracker() {
         on_thread_create(); // main thread
@@ -65,9 +61,7 @@ public:
      *
      * 当线程计数为1时表示当前只有主线程在运行。
      */
-    static NEFORCE_ALWAYS_INLINE bool is_single_threaded() noexcept {
-        return instance().count_.load() == 1;
-    }
+    static NEFORCE_ALWAYS_INLINE bool is_single_threaded() noexcept { return instance().count_.load() == 1; }
 
     /**
      * @brief 获取当前活动线程数量
@@ -75,9 +69,7 @@ public:
      *
      * 返回由NexusForce线程库创建且尚未销毁的线程数量。
      */
-    static NEFORCE_ALWAYS_INLINE int thread_count() noexcept {
-        return instance().count_.load();
-    }
+    static NEFORCE_ALWAYS_INLINE int thread_count() noexcept { return instance().count_.load(); }
 };
 
 
@@ -85,17 +77,13 @@ public:
  * @brief 检查当前是否处于单线程模式
  * @return 如果只有主线程运行则返回true，否则返回false
  */
-NEFORCE_ALWAYS_INLINE_INLINE bool is_single_threaded() noexcept {
-    return thread_tracker::is_single_threaded();
-}
+NEFORCE_ALWAYS_INLINE_INLINE bool is_single_threaded() noexcept { return thread_tracker::is_single_threaded(); }
 
 /**
  * @brief 获取当前活动线程数量
  * @return 活动的NexusForce线程数量
  */
-NEFORCE_ALWAYS_INLINE_INLINE int thread_count() noexcept {
-    return thread_tracker::thread_count();
-}
+NEFORCE_ALWAYS_INLINE_INLINE int thread_count() noexcept { return thread_tracker::thread_count(); }
 
 /** @} */ // Thread
 

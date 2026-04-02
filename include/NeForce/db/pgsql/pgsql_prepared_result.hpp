@@ -1,7 +1,7 @@
 #ifndef NEFORCE_DATABASE_PGSQL_PREPARED_RESULT_HPP__
 #define NEFORCE_DATABASE_PGSQL_PREPARED_RESULT_HPP__
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#include "pgsql_result.hpp"
+#    include "pgsql_result.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API pgsql_prepared_result final : public idb_prepared_result {
@@ -9,8 +9,8 @@ private:
     pgsql_tb_result impl_;
 
 public:
-    explicit pgsql_prepared_result(::PGresult* result) noexcept
-    : impl_(result, true) {}
+    explicit pgsql_prepared_result(::PGresult* result) noexcept :
+    impl_(result, true) {}
 
     ~pgsql_prepared_result() override = default;
 
@@ -36,8 +36,12 @@ public:
 
     NEFORCE_NODISCARD _NEFORCE date get_date(size_type index) const override { return impl_.get_date(index); }
     NEFORCE_NODISCARD _NEFORCE time get_time(size_type index) const override { return impl_.get_time(index); }
-    NEFORCE_NODISCARD _NEFORCE datetime get_datetime(size_type index) const override { return impl_.get_datetime(index); }
-    NEFORCE_NODISCARD _NEFORCE timestamp get_timestamp(size_type index) const override { return impl_.get_timestamp(index); }
+    NEFORCE_NODISCARD _NEFORCE datetime get_datetime(size_type index) const override {
+        return impl_.get_datetime(index);
+    }
+    NEFORCE_NODISCARD _NEFORCE timestamp get_timestamp(size_type index) const override {
+        return impl_.get_timestamp(index);
+    }
 };
 
 NEFORCE_END_NAMESPACE__

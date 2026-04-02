@@ -22,7 +22,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @typedef nullptr_t
  * @brief 空指针类型
  */
-using nullptr_t	  = decltype(nullptr);
+using nullptr_t = decltype(nullptr);
 
 /**
  * @typedef max_align_t
@@ -34,7 +34,7 @@ using max_align_t = double;
  * @typedef byte_t
  * @brief 字节类型，定义为无符号字符
  */
-using byte_t      = unsigned char;
+using byte_t = unsigned char;
 
 
 /**
@@ -43,9 +43,9 @@ using byte_t      = unsigned char;
  */
 using native_size_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    unsigned long;
+        unsigned long;
 #else
-    int;
+        int;
 #endif
 
 /**
@@ -54,9 +54,9 @@ using native_size_type =
  */
 using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    void*;
+        void*;
 #else
-    int;
+        int;
 #endif
 
 
@@ -64,19 +64,19 @@ using native_handle_type =
  * @typedef int8_t
  * @brief 8位有符号整数类型
  */
-using int8_t	= signed char;
+using int8_t = signed char;
 
 /**
  * @typedef int16_t
  * @brief 16位有符号整数类型
  */
-using int16_t	= short;
+using int16_t = short;
 
 /**
  * @typedef int32_t
  * @brief 32位有符号整数类型
  */
-using int32_t	= int;
+using int32_t = int;
 
 /**
  * @typedef int64_t
@@ -84,30 +84,30 @@ using int32_t	= int;
  *
  * Linux为long，Windows为long long
  */
-using int64_t	=
+using int64_t =
 #ifdef NEFORCE_PLATFORM_LINUX64
-    long;
+        long;
 #else
-    long long;
+        long long;
 #endif
 
 /**
  * @typedef uint8_t
  * @brief 8位无符号整数类型
  */
-using uint8_t	= unsigned char;
+using uint8_t = unsigned char;
 
 /**
  * @typedef uint16_t
  * @brief 16位无符号整数类型
  */
-using uint16_t	= unsigned short;
+using uint16_t = unsigned short;
 
 /**
  * @typedef uint32_t
  * @brief 32位无符号整数类型
  */
-using uint32_t	= unsigned int;
+using uint32_t = unsigned int;
 
 /**
  * @typedef uint64_t
@@ -115,11 +115,11 @@ using uint32_t	= unsigned int;
  *
  * Linux为unsigned long，Windows为unsigned long long
  */
-using uint64_t	=
+using uint64_t =
 #ifdef NEFORCE_PLATFORM_LINUX64
-    unsigned long;
+        unsigned long;
 #else
-    unsigned long long;
+        unsigned long long;
 #endif
 
 
@@ -127,13 +127,13 @@ using uint64_t	=
  * @typedef float32_t
  * @brief 32位单精度浮点数类型
  */
-using float32_t	= float;
+using float32_t = float;
 
 /**
  * @typedef float64_t
  * @brief 64位双精度浮点数类型
  */
-using float64_t	= double;
+using float64_t = double;
 
 /**
  * @typedef decimal_t
@@ -159,7 +159,7 @@ using decimal_t = long double;
  *
  * 64位下为为uint64_t，32位下为uint32_t。文档以64位平台为例。
  */
-using size_t	= uint64_t;
+using size_t = uint64_t;
 
 /**
  * @typedef ssize_t
@@ -167,7 +167,7 @@ using size_t	= uint64_t;
  *
  * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
  */
-using ssize_t	= int64_t;
+using ssize_t = int64_t;
 
 /**
  * @typedef ptrdiff_t
@@ -183,7 +183,7 @@ using ptrdiff_t = int64_t;
  *
  * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
  */
-using intptr_t	= int64_t;
+using intptr_t = int64_t;
 
 /**
  * @typedef uintptr_t
@@ -199,13 +199,13 @@ using uintptr_t = uint64_t;
  * @typedef size_t
  * @brief 无符号大小类型
  */
-using size_t	= uint32_t;
+using size_t = uint32_t;
 
 /**
  * @typedef ssize_t
  * @brief 有符号大小类型
  */
-using ssize_t	= int32_t;
+using ssize_t = int32_t;
 
 /**
  * @typedef ptrdiff_t
@@ -217,7 +217,7 @@ using ptrdiff_t = int32_t;
  * @typedef intptr_t
  * @brief 可容纳指针的有符号整数类型
  */
-using intptr_t	= int32_t;
+using intptr_t = int32_t;
 
 /**
  * @typedef uintptr_t
@@ -232,31 +232,31 @@ using uintptr_t = uint32_t;
  * @typedef int_least8_t
  * @brief 至少8位的有符号整数类型
  */
-using int_least8_t   = int8_t;
+using int_least8_t = int8_t;
 
 /**
  * @typedef int_least16_t
  * @brief 至少16位的有符号整数类型
  */
-using int_least16_t  = int16_t;
+using int_least16_t = int16_t;
 
 /**
  * @typedef int_least32_t
  * @brief 至少32位的有符号整数类型
  */
-using int_least32_t  = int32_t;
+using int_least32_t = int32_t;
 
 /**
  * @typedef int_least64_t
  * @brief 至少64位的有符号整数类型
  */
-using int_least64_t  = int64_t;
+using int_least64_t = int64_t;
 
 /**
  * @typedef uint_least8_t
  * @brief 至少8位的无符号整数类型
  */
-using uint_least8_t  = uint8_t;
+using uint_least8_t = uint8_t;
 
 /**
  * @typedef uint_least16_t
@@ -280,56 +280,56 @@ using uint_least64_t = uint64_t;
  * @typedef int_fast8_t
  * @brief 快速8位有符号整数类型
  */
-using int_fast8_t    = int8_t;
+using int_fast8_t = int8_t;
 
 /**
  * @typedef int_fast16_t
  * @brief 快速16位有符号整数类型
  */
-using int_fast16_t   = ssize_t;
+using int_fast16_t = ssize_t;
 
 /**
  * @typedef int_fast32_t
  * @brief 快速32位有符号整数类型
  */
-using int_fast32_t   = ssize_t;
+using int_fast32_t = ssize_t;
 
 /**
  * @typedef int_fast64_t
  * @brief 快速64位有符号整数类型
  */
-using int_fast64_t   = int64_t;
+using int_fast64_t = int64_t;
 
 /**
  * @typedef uint_fast8_t
  * @brief 快速8位无符号整数类型
  */
-using uint_fast8_t   = uint8_t;
+using uint_fast8_t = uint8_t;
 
 /**
  * @typedef uint_fast16_t
  * @brief 快速16位无符号整数类型
  */
-using uint_fast16_t  = size_t;
+using uint_fast16_t = size_t;
 
 /**
  * @typedef uint_fast32_t
  * @brief 快速32位无符号整数类型
  */
-using uint_fast32_t  = size_t;
+using uint_fast32_t = size_t;
 
 /**
  * @typedef uint_fast64_t
  * @brief 快速64位无符号整数类型
  */
-using uint_fast64_t  = uint64_t;
+using uint_fast64_t = uint64_t;
 
 
 /**
  * @typedef intmax_t
  * @brief 最大有符号整数类型
  */
-using intmax_t	= int64_t;
+using intmax_t = int64_t;
 
 /**
  * @typedef uintmax_t
@@ -482,7 +482,7 @@ struct default_construct_tag {
  * 表示使用提供的参数精确构造对象，直接传递参数给构造函数。
  */
 struct exact_arg_construct_tag {
-    constexpr explicit exact_arg_construct_tag() noexcept  = default;
+    constexpr explicit exact_arg_construct_tag() noexcept = default;
 };
 
 /**
@@ -493,7 +493,7 @@ struct exact_arg_construct_tag {
  * 通常用于容器中的元素构造。
  */
 struct inplace_construct_tag {
-    constexpr explicit inplace_construct_tag() noexcept  = default;
+    constexpr explicit inplace_construct_tag() noexcept = default;
 };
 
 /**

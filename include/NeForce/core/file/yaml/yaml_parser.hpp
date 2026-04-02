@@ -99,8 +99,9 @@ private:
     void throw_parse_error(const string& message) const;
 
 public:
-    explicit yaml_parser(string yaml_str) noexcept
-    : yaml_(_NEFORCE move(yaml_str)), len_(yaml_.size()) {}
+    explicit yaml_parser(string yaml_str) noexcept :
+    yaml_(_NEFORCE move(yaml_str)),
+    len_(yaml_.size()) {}
 
     yaml_ptr parse();
     optional<yaml_ptr> try_parse();

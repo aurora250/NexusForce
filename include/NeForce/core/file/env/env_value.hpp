@@ -24,13 +24,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief env格式操作失败
  */
 struct env_exception final : value_exception {
-    explicit env_exception(const char* info = "ENV Operation Failed.",
-                           const char* type = static_type,
-                           const int code = 0) noexcept
-    : value_exception(info, type, code) {}
+    explicit env_exception(const char* info = "ENV Operation Failed.", const char* type = static_type,
+                           const int code = 0) noexcept :
+    value_exception(info, type, code) {}
 
-    explicit env_exception(const exception& e)
-    : value_exception(e) {}
+    explicit env_exception(const exception& e) :
+    value_exception(e) {}
 
     ~env_exception() override = default;
     static constexpr auto static_type = "env_exception";
@@ -60,7 +59,7 @@ public:
      * @brief 环境值类型枚举
      */
     enum types {
-        Variable  ///< 变量类型
+        Variable ///< 变量类型
     };
 
     /**
@@ -120,9 +119,9 @@ public:
     };
 
 private:
-    string value_;                  ///< 变量值
-    quote_type quote_type_ = None;  ///< 引号类型
-    bool is_exported_ = false;      ///< 是否导出
+    string value_;                 ///< 变量值
+    quote_type quote_type_ = None; ///< 引号类型
+    bool is_exported_ = false;     ///< 是否导出
 
 public:
     /**
@@ -131,8 +130,10 @@ public:
      * @param quote 引号类型，默认为无引号
      * @param exported 是否导出，默认为false
      */
-    explicit env_variable(string value, const quote_type quote = None, const bool exported = false) noexcept
-    : value_(_NEFORCE move(value)), quote_type_(quote), is_exported_(exported) {}
+    explicit env_variable(string value, const quote_type quote = None, const bool exported = false) noexcept :
+    value_(_NEFORCE move(value)),
+    quote_type_(quote),
+    is_exported_(exported) {}
 
     /**
      * @brief 获取类型
@@ -221,8 +222,8 @@ public:
  */
 class NEFORCE_API env_document final : public istringify<env_document> {
 private:
-    unordered_map<string, unique_ptr<env_variable>> variables_;  ///< 变量映射表
-    vector<string> comments_;  ///< 注释列表
+    unordered_map<string, unique_ptr<env_variable>> variables_; ///< 变量映射表
+    vector<string> comments_;                                   ///< 注释列表
 
 public:
     /**
@@ -231,7 +232,7 @@ public:
     env_document() = default;
 
     env_document(const env_document&) = delete;
-    env_document& operator =(const env_document&) = delete;
+    env_document& operator=(const env_document&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -244,7 +245,7 @@ public:
      * @param other 源文档
      * @return 自身引用
      */
-    env_document& operator =(env_document&& other) noexcept = default;
+    env_document& operator=(env_document&& other) noexcept = default;
 
     /**
      * @brief 添加变量
@@ -262,8 +263,7 @@ public:
      * @param quote 引号类型，默认为无引号
      * @param exported 是否导出，默认为false
      */
-    void set_variable(const string& name, string value,
-                      env_variable::quote_type quote = env_variable::None,
+    void set_variable(const string& name, string value, env_variable::quote_type quote = env_variable::None,
                       bool exported = false) {
         variables_[name] = make_unique<env_variable>(_NEFORCE move(value), quote, exported);
     }
@@ -275,7 +275,9 @@ public:
      */
     NEFORCE_NODISCARD const env_variable* get_variable(const string& name) const {
         const auto it = variables_.find(name);
-        if (it != variables_.end()) return it->second.get();
+        if (it != variables_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -286,7 +288,9 @@ public:
      */
     NEFORCE_NODISCARD env_variable* get_variable(const string& name) {
         const auto it = variables_.find(name);
-        if (it != variables_.end()) return it->second.get();
+        if (it != variables_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -295,17 +299,13 @@ public:
      * @param name 变量名
      * @return 是否存在
      */
-    NEFORCE_NODISCARD bool has_variable(const string& name) const {
-        return variables_.find(name) != variables_.end();
-    }
+    NEFORCE_NODISCARD bool has_variable(const string& name) const { return variables_.find(name) != variables_.end(); }
 
     /**
      * @brief 移除变量
      * @param name 要移除的变量名
      */
-    void remove_variable(const string& name) {
-        variables_.erase(name);
-    }
+    void remove_variable(const string& name) { variables_.erase(name); }
 
     /**
      * @brief 获取所有变量的常量引用
@@ -319,17 +319,13 @@ public:
      * @brief 添加注释
      * @param comment 注释内容
      */
-    void add_comment(string comment) noexcept {
-        comments_.emplace_back(move(comment));
-    }
+    void add_comment(string comment) noexcept { comments_.emplace_back(move(comment)); }
 
     /**
      * @brief 获取所有注释
      * @return 注释列表的常量引用
      */
-    NEFORCE_NODISCARD const vector<string>& get_comments() const noexcept {
-        return comments_;
-    }
+    NEFORCE_NODISCARD const vector<string>& get_comments() const noexcept { return comments_; }
 
     /**
      * @brief 获取字符串值

@@ -4,8 +4,7 @@
 #include "NeForce/network/socket/ssl_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-template <typename SocketT>
-class basic_tcp_client {
+template <typename SocketT> class basic_tcp_client {
     static_assert(is_base_of_v<tcp_socket, SocketT>, "SocketT must derive from tcp_socket");
 
 public:
@@ -48,8 +47,7 @@ private:
 
             sockp->open(is_ipv6_conn ? AF_INET6 : AF_INET);
 
-            if (!sockp->set_send_timeout(send_timeout_) ||
-                !sockp->set_receive_timeout(recv_timeout_)) {
+            if (!sockp->set_send_timeout(send_timeout_) || !sockp->set_receive_timeout(recv_timeout_)) {
                 sockp->close();
                 return false;
             }
@@ -127,18 +125,16 @@ protected:
 public:
     basic_tcp_client() = default;
 
-    explicit basic_tcp_client(dns_client dns)
-    : dns_(_NEFORCE move(dns)) {}
+    explicit basic_tcp_client(dns_client dns) :
+    dns_(_NEFORCE move(dns)) {}
 
-    virtual ~basic_tcp_client() {
-        disconnect();
-    }
+    virtual ~basic_tcp_client() { disconnect(); }
 
     basic_tcp_client(const basic_tcp_client&) = delete;
-    basic_tcp_client& operator =(const basic_tcp_client&) = delete;
+    basic_tcp_client& operator=(const basic_tcp_client&) = delete;
 
     basic_tcp_client(basic_tcp_client&&) noexcept = default;
-    basic_tcp_client& operator =(basic_tcp_client&&) noexcept = default;
+    basic_tcp_client& operator=(basic_tcp_client&&) noexcept = default;
 
     void set_connect_timeout(const duration timeout) {
         if (timeout <= duration(0)) {
@@ -147,9 +143,7 @@ public:
         connect_timeout_ = timeout;
     }
 
-    NEFORCE_NODISCARD duration connect_timeout() const noexcept {
-        return connect_timeout_;
-    }
+    NEFORCE_NODISCARD duration connect_timeout() const noexcept { return connect_timeout_; }
 
     void set_send_timeout(const duration timeout) {
         if (timeout <= duration(0)) {
@@ -158,9 +152,7 @@ public:
         send_timeout_ = timeout;
     }
 
-    NEFORCE_NODISCARD duration send_timeout() const noexcept {
-        return send_timeout_;
-    }
+    NEFORCE_NODISCARD duration send_timeout() const noexcept { return send_timeout_; }
 
     void set_recv_timeout(const duration timeout) {
         if (timeout <= duration(0)) {
@@ -169,9 +161,7 @@ public:
         recv_timeout_ = timeout;
     }
 
-    NEFORCE_NODISCARD duration recv_timeout() const noexcept {
-        return recv_timeout_;
-    }
+    NEFORCE_NODISCARD duration recv_timeout() const noexcept { return recv_timeout_; }
 
     void set_auto_reconnect(const bool enable, const int max_attempts = 3) {
         if (max_attempts <= 0) {
@@ -181,17 +171,11 @@ public:
         reconnect_attempts_ = max_attempts;
     }
 
-    NEFORCE_NODISCARD bool is_auto_reconnect() const noexcept {
-        return auto_reconnect_;
-    }
+    NEFORCE_NODISCARD bool is_auto_reconnect() const noexcept { return auto_reconnect_; }
 
-    NEFORCE_NODISCARD int reconnect_attempts() const noexcept {
-        return reconnect_attempts_;
-    }
+    NEFORCE_NODISCARD int reconnect_attempts() const noexcept { return reconnect_attempts_; }
 
-    NEFORCE_NODISCARD int current_reconnect_attempt() const noexcept {
-        return current_reconnect_attempt_;
-    }
+    NEFORCE_NODISCARD int current_reconnect_attempt() const noexcept { return current_reconnect_attempt_; }
 
     void set_reconnect_delay(const duration delay) {
         if (delay < duration(0)) {
@@ -200,33 +184,19 @@ public:
         reconnect_delay_ = delay;
     }
 
-    NEFORCE_NODISCARD duration reconnect_delay() const noexcept {
-        return reconnect_delay_;
-    }
+    NEFORCE_NODISCARD duration reconnect_delay() const noexcept { return reconnect_delay_; }
 
-    void set_prefer_ipv6(const bool prefer) noexcept {
-        prefer_ipv6_ = prefer;
-    }
+    void set_prefer_ipv6(const bool prefer) noexcept { prefer_ipv6_ = prefer; }
 
-    NEFORCE_NODISCARD bool prefer_ipv6() const noexcept {
-        return prefer_ipv6_;
-    }
+    NEFORCE_NODISCARD bool prefer_ipv6() const noexcept { return prefer_ipv6_; }
 
-    void set_dns_server(dns_client::config cfg) {
-        dns_.set_config(move(cfg));
-    }
+    void set_dns_server(dns_client::config cfg) { dns_.set_config(move(cfg)); }
 
-    void set_exception_handler(exception_handler_t handler) {
-        exception_handler_ = move(handler);
-    }
+    void set_exception_handler(exception_handler_t handler) { exception_handler_ = move(handler); }
 
-    void set_connect_callback(connect_callback_t callback) {
-        connect_callback_ = move(callback);
-    }
+    void set_connect_callback(connect_callback_t callback) { connect_callback_ = move(callback); }
 
-    void set_disconnect_callback(disconnect_callback_t callback) {
-        disconnect_callback_ = move(callback);
-    }
+    void set_disconnect_callback(disconnect_callback_t callback) { disconnect_callback_ = move(callback); }
 
     virtual bool connect(const string& host, ports port) {
         if (host.empty()) {
@@ -283,7 +253,7 @@ public:
             return false;
         }
 
-        for (const auto& ip : ips) {
+        for (const auto& ip: ips) {
             if (try_connect_to_ip(ip, port)) {
                 connected_host_ = host;
                 connected_port_ = port;
@@ -353,9 +323,7 @@ public:
         }
     }
 
-    ssize_t send(const string_view data) {
-        return send(data.data(), data.size());
-    }
+    ssize_t send(const string_view data) { return send(data.data(), data.size()); }
 
     bool send_all(const void* data, const size_t length) {
         if (data == nullptr && length > 0) {
@@ -381,9 +349,7 @@ public:
         return true;
     }
 
-    bool send_all(const string_view data) {
-        return send_all(data.data(), data.size());
-    }
+    bool send_all(const string_view data) { return send_all(data.data(), data.size()); }
 
     ssize_t receive(void* buffer, const size_t length) {
         if (buffer == nullptr && length > 0) {
@@ -542,21 +508,13 @@ public:
         }
     }
 
-    NEFORCE_NODISCARD bool is_connected() const noexcept {
-        return socket_.has_value() && socket_->is_open();
-    }
+    NEFORCE_NODISCARD bool is_connected() const noexcept { return socket_.has_value() && socket_->is_open(); }
 
-    NEFORCE_NODISCARD bool is_reconnecting() const noexcept {
-        return is_reconnecting_;
-    }
+    NEFORCE_NODISCARD bool is_reconnecting() const noexcept { return is_reconnecting_; }
 
-    NEFORCE_NODISCARD const string& connected_host() const noexcept {
-        return connected_host_;
-    }
+    NEFORCE_NODISCARD const string& connected_host() const noexcept { return connected_host_; }
 
-    NEFORCE_NODISCARD ports connected_port() const noexcept {
-        return connected_port_;
-    }
+    NEFORCE_NODISCARD ports connected_port() const noexcept { return connected_port_; }
 
     NEFORCE_NODISCARD socket_type& socket() {
         if (!socket_.has_value()) {
@@ -572,13 +530,9 @@ public:
         return *socket_;
     }
 
-    NEFORCE_NODISCARD dns_client& get_dns_client() noexcept {
-        return dns_;
-    }
+    NEFORCE_NODISCARD dns_client& get_dns_client() noexcept { return dns_; }
 
-    NEFORCE_NODISCARD const dns_client& get_dns_client() const noexcept {
-        return dns_;
-    }
+    NEFORCE_NODISCARD const dns_client& get_dns_client() const noexcept { return dns_; }
 };
 
 
@@ -623,22 +577,15 @@ protected:
         }
     }
 
-    void pre_disconnect() override {
-        ssl_initialized_ = false;
-    }
+    void pre_disconnect() override { ssl_initialized_ = false; }
 
 public:
     ssl_client() = default;
 
-    explicit ssl_client(ssl_context ctx)
-    : ssl_ctx_(move(ctx)) {
+    explicit ssl_client(ssl_context ctx) :
+    ssl_ctx_(move(ctx)) {
         if (ssl_ctx_) {
-            ssl_ctx_->set_options(
-                SSL_OP_NO_SSLv2 |
-                SSL_OP_NO_SSLv3 |
-                SSL_OP_NO_TLSv1 |
-                SSL_OP_NO_TLSv1_1
-            );
+            ssl_ctx_->set_options(SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1);
         }
     }
 
@@ -650,12 +597,7 @@ public:
             NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
         }
 
-        ctx.set_options(
-            SSL_OP_NO_SSLv2 |
-            SSL_OP_NO_SSLv3 |
-            SSL_OP_NO_TLSv1 |
-            SSL_OP_NO_TLSv1_1
-        );
+        ctx.set_options(SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1);
 
         ssl_ctx_ = move(ctx);
     }
@@ -670,9 +612,7 @@ public:
         }
     }
 
-    NEFORCE_NODISCARD bool get_verify_peer() const noexcept {
-        return verify_peer_;
-    }
+    NEFORCE_NODISCARD bool get_verify_peer() const noexcept { return verify_peer_; }
 
     void set_sni_hostname(string hostname) {
         if (is_connected()) {
@@ -681,9 +621,7 @@ public:
         sni_hostname_ = _NEFORCE move(hostname);
     }
 
-    NEFORCE_NODISCARD const string& sni_hostname() const noexcept {
-        return sni_hostname_;
-    }
+    NEFORCE_NODISCARD const string& sni_hostname() const noexcept { return sni_hostname_; }
 
     bool load_ca_file(const string& ca_file) {
         if (!ssl_ctx_) {
@@ -720,13 +658,9 @@ public:
         return socket().ssl().get_version().view();
     }
 
-    NEFORCE_NODISCARD bool has_ssl_context() const noexcept {
-        return ssl_ctx_.has_value() && ssl_ctx_->is_valid();
-    }
+    NEFORCE_NODISCARD bool has_ssl_context() const noexcept { return ssl_ctx_.has_value() && ssl_ctx_->is_valid(); }
 
-    NEFORCE_NODISCARD bool is_ssl_initialized() const noexcept {
-        return ssl_initialized_;
-    }
+    NEFORCE_NODISCARD bool is_ssl_initialized() const noexcept { return ssl_initialized_; }
 };
 
 NEFORCE_END_NAMESPACE__

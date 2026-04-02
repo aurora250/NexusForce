@@ -27,14 +27,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API file_sink final : public log_sink {
 private:
-    file file_;                     ///< 当前日志文件
-    mutex mutex_;                   ///< 互斥锁，保证线程安全
-    path base_filename_;            ///< 基础文件名
-    string current_date_;           ///< 当前日期
-    size_t max_file_size_;          ///< 文件大小上限（字节）
-    size_t current_size_;           ///< 当前文件大小
-    int file_index_;                ///< 当前文件索引
-    bool enable_date_rotation_;     ///< 是否启用日期轮转
+    file file_;                 ///< 当前日志文件
+    mutex mutex_;               ///< 互斥锁，保证线程安全
+    path base_filename_;        ///< 基础文件名
+    string current_date_;       ///< 当前日期
+    size_t max_file_size_;      ///< 文件大小上限（字节）
+    size_t current_size_;       ///< 当前文件大小
+    int file_index_;            ///< 当前文件索引
+    bool enable_date_rotation_; ///< 是否启用日期轮转
 
     /**
      * @brief 打开新的日志文件
@@ -62,20 +62,17 @@ private:
     void rotate_by_date(string today);
 
 public:
- /**
-  * @brief 构造函数
-  * @param filename 基础文件名
-  * @param max_file_size 文件大小上限（默认10MB）
-  * @param enable_date_rotation 是否启用日期轮转（默认true）
-  *
-  * 创建文件日志输出目标，并立即打开日志文件。
-  *
-  * @throws file_exception 文件创建失败时抛出
-  */
-    explicit file_sink(
-        path filename,
-        size_t max_file_size = 10 * 1024 * 1024,
-        bool enable_date_rotation = true);
+    /**
+     * @brief 构造函数
+     * @param filename 基础文件名
+     * @param max_file_size 文件大小上限（默认10MB）
+     * @param enable_date_rotation 是否启用日期轮转（默认true）
+     *
+     * 创建文件日志输出目标，并立即打开日志文件。
+     *
+     * @throws file_exception 文件创建失败时抛出
+     */
+    explicit file_sink(path filename, size_t max_file_size = 10 * 1024 * 1024, bool enable_date_rotation = true);
 
     /**
      * @brief 写入日志事件

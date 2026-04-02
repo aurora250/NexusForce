@@ -11,9 +11,9 @@
  */
 
 #if defined(NEFORCE_SUPPORT_LZ4) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-#include <lz4.h>
+#    include <lz4.h>
+#    include "NeForce/core/container/vector.hpp"
+#    include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -29,12 +29,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * lz4操作异常。
  */
 struct lz4_exception final : thirdparty_exception {
-    explicit lz4_exception(const char* info = "LZ4 Operation Failed.",
-                           const char* type = static_type,
-                           const int code = 0) noexcept
-    : thirdparty_exception(info, type, code) {}
+    explicit lz4_exception(const char* info = "LZ4 Operation Failed.", const char* type = static_type,
+                           const int code = 0) noexcept :
+    thirdparty_exception(info, type, code) {}
 
-    explicit lz4_exception(const exception& e) : thirdparty_exception(e) {}
+    explicit lz4_exception(const exception& e) :
+    thirdparty_exception(e) {}
 
     ~lz4_exception() override = default;
     static constexpr auto static_type = "lz4_exception";
@@ -73,8 +73,7 @@ private:
      * @return 压缩后的字节向量
      * @throws lz4_exception 当压缩失败时抛出
      */
-    NEFORCE_NODISCARD static byte_vector compress_data(
-        const byte_t* data, size_t size, int level);
+    NEFORCE_NODISCARD static byte_vector compress_data(const byte_t* data, size_t size, int level);
 
     /**
      * @brief 解压缩数据的内部实现
@@ -86,8 +85,8 @@ private:
      *
      * 如果预估大小不足，会自动调整缓冲区大小重试，最多尝试5次。
      */
-    NEFORCE_NODISCARD static byte_vector decompress_data(
-        const byte_t* data, size_t size, size_t estimated_original_size);
+    NEFORCE_NODISCARD static byte_vector decompress_data(const byte_t* data, size_t size,
+                                                         size_t estimated_original_size);
 
 public:
     /**
@@ -126,11 +125,7 @@ public:
      * - 1-12：HC（高压缩率）模式，级别越高压缩率越高但速度越慢
      */
     NEFORCE_NODISCARD static byte_vector compress(const string_view data, const int level = 0) {
-        return compress_data(
-            reinterpret_cast<const byte_t*>(data.data()),
-            data.size(),
-            level
-        );
+        return compress_data(reinterpret_cast<const byte_t*>(data.data()), data.size(), level);
     }
 
     /**
@@ -146,15 +141,11 @@ public:
      * - 0：快速压缩（默认）
      * - 1-12：HC（高压缩率）模式，级别越高压缩率越高但速度越慢
      */
-    template <typename T>
-    NEFORCE_NODISCARD static byte_vector compress(const vector<T>& data, const int level = 0) {
+    template <typename T> NEFORCE_NODISCARD static byte_vector compress(const vector<T>& data, const int level = 0) {
         static_assert(sizeof(T) == 1, "Iterator must point to byte-sized elements");
 
-        return lz4_compressor::compress_data(
-            reinterpret_cast<const byte_t*>(data.data()),
-            data.size() * sizeof(T),
-            level
-        );
+        return lz4_compressor::compress_data(reinterpret_cast<const byte_t*>(data.data()), data.size() * sizeof(T),
+                                             level);
     }
 
     /**
@@ -225,7 +216,7 @@ public:
         ~stream_compressor();
 
         stream_compressor(const stream_compressor&) = delete;
-        stream_compressor& operator =(const stream_compressor&) = delete;
+        stream_compressor& operator=(const stream_compressor&) = delete;
 
         /**
          * @brief 移动构造函数
@@ -238,7 +229,7 @@ public:
          * @param other 源对象
          * @return 自身引用
          */
-        stream_compressor& operator =(stream_compressor&& other) noexcept;
+        stream_compressor& operator=(stream_compressor&& other) noexcept;
 
         /**
          * @brief 压缩数据
@@ -282,17 +273,13 @@ public:
          * @brief 获取输入字节数
          * @return 已处理的输入字节数
          */
-        NEFORCE_NODISCARD size_t bytes_input() const noexcept {
-            return bytes_input_;
-        }
+        NEFORCE_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
 
         /**
          * @brief 获取输出字节数
          * @return 已产生的输出字节数
          */
-        NEFORCE_NODISCARD size_t bytes_output() const noexcept {
-            return bytes_output_;
-        }
+        NEFORCE_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
 
         /**
          * @brief 获取压缩率
@@ -330,7 +317,7 @@ public:
         ~stream_decompressor();
 
         stream_decompressor(const stream_decompressor&) = delete;
-        stream_decompressor& operator =(const stream_decompressor&) = delete;
+        stream_decompressor& operator=(const stream_decompressor&) = delete;
 
         /**
          * @brief 移动构造函数
@@ -343,7 +330,7 @@ public:
          * @param other 源对象
          * @return 自身引用
          */
-        stream_decompressor& operator =(stream_decompressor&& other) noexcept;
+        stream_decompressor& operator=(stream_decompressor&& other) noexcept;
 
         /**
          * @brief 解压缩数据
@@ -371,17 +358,13 @@ public:
          * @brief 获取输入字节数
          * @return 已处理的输入字节数
          */
-        NEFORCE_NODISCARD size_t bytes_input() const noexcept {
-            return bytes_input_;
-        }
+        NEFORCE_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
 
         /**
          * @brief 获取输出字节数
          * @return 已产生的输出字节数
          */
-        NEFORCE_NODISCARD size_t bytes_output() const noexcept {
-            return bytes_output_;
-        }
+        NEFORCE_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
 
         /**
          * @brief 获取扩展率

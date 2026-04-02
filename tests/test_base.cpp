@@ -1,7 +1,7 @@
 #include "test.h"
 
 void test_list() {
-    list<int> lls{ 1,2,3,4,5,6,7 };
+    list<int> lls{1, 2, 3, 4, 5, 6, 7};
     println(lls);
     lls.push_back(3);
     lls.push_back(4);
@@ -13,7 +13,7 @@ void test_list() {
     lls.pop_back();
     lls.pop_front();
     println(lls);
-    list<int> lls2 = { 5,3,2,1,1 };
+    list<int> lls2 = {5, 3, 2, 1, 1};
     println(lls2);
     lls2.remove(5);
     lls2.sort();
@@ -47,10 +47,10 @@ void test_check() {
     println(check_type<string>());
     println(check_type<const volatile void* const*&>());
     println(check_type<int(*)[]>());
-    println(check_type<const volatile void* (&)[10]>()); // void const volatile * (&) [10]
-    println(check_type<int[1][2][3]>());              // int [1] [2] [3]
-    println(check_type<char(*(* const)(const int(&)[10]))[10]>());
-    println(check_type<int (integer16::* const)[3]>());
+    println(check_type<const volatile void*(&) [10]>()); // void const volatile * (&) [10]
+    println(check_type<int[1][2][3]>());                 // int [1] [2] [3]
+    println(check_type<char(*(*const) (const int(&)[10]))[10]>());
+    println(check_type<int(integer16::* const)[3]>());
     println(check_type<int (integer16::* const)(int, integer16&&, int) volatile>());
     string cstr("const string");
     const string* sr = new string("hai");
@@ -61,7 +61,7 @@ void test_check() {
 }
 
 void test_deque() {
-    deque<int> a{1,2,3,4,5,6,7,8,9,10};
+    deque<int> a{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     println(a);
     a.push_back(2);
     a.push_front(10);
@@ -76,7 +76,7 @@ void test_deque() {
     println(a);
     a.assign(10, 5);
     println(a);
-    deque<int> b{ 1,2,3,4,5 };
+    deque<int> b{1, 2, 3, 4, 5};
     println(b);
     deque<int> c(move(b));
     c.resize(10, 6);
@@ -122,8 +122,8 @@ void test_stack() {
 }
 
 void test_vector() {
-    try{
-        vector<int> v{ 1,2,3,4 };
+    try {
+        vector<int> v{1, 2, 3, 4};
         v.push_back(3);
         v.push_back(4);
         println(v);
@@ -137,7 +137,7 @@ void test_vector() {
         println(v);
         const auto v3 = move(v2);
         println(v3);
-        vector<int> v4 = { 3,2,1 };
+        vector<int> v4 = {3, 2, 1};
         v4.shrink_to_fit();
         v4.emplace(v4.begin() + 1, 5);
         v4.erase(--v4.end());
@@ -146,9 +146,9 @@ void test_vector() {
         vector<int> vec;
         vec.assign(5, 10);
         println(vec);
-        vec.assign({ 1, 2, 3, 4, 5 });
+        vec.assign({1, 2, 3, 4, 5});
         println(vec);
-        vector<int> anotherVec = { 6, 7, 8 };
+        vector<int> anotherVec = {6, 7, 8};
         vec.assign(anotherVec.begin(), anotherVec.end());
         println(vec);
     } catch (exception& error) {
@@ -168,8 +168,13 @@ void test_vector() {
 
 void test_pqueue() {
     priority_queue<int> q;
-    q.push(6); q.push(9); q.push(1); q.push(5);
-    q.push(8); q.push(4); q.emplace(7); // 9 8 7 5 6 1 4
+    q.push(6);
+    q.push(9);
+    q.push(1);
+    q.push(5);
+    q.push(8);
+    q.push(4);
+    q.emplace(7); // 9 8 7 5 6 1 4
     q.pop();
 
     priority_queue<int> long_pque;
@@ -229,7 +234,7 @@ void test_rbtree() {
     // println(long_multimap);
 
 
-    set<int> s{ 1,2,3,4,5 };
+    set<int> s{1, 2, 3, 4, 5};
     s.insert(s.begin(), 1);
     s.emplace(2);
     println(s);
@@ -248,7 +253,7 @@ void test_rbtree() {
     // println(long_set);
 
 
-    multiset<int> ms{ 4,5,6,7,8,8 };
+    multiset<int> ms{4, 5, 6, 7, 8, 8};
     ms.insert(ms.begin(), 9);
     ms.emplace(10);
     println(ms);
@@ -293,9 +298,7 @@ void test_tuple() {
     println(av, bv, cv);
 #endif
 
-    int sum = apply([](int a, int b, int c) {
-        return a + b + c;
-    }, args);
+    int sum = apply([](int a, int b, int c) { return a + b + c; }, args);
     println("Sum:", sum);
 
     tuple<int, int> mulArgs(4, 5);
@@ -401,40 +404,40 @@ void test_math() {
 }
 
 void test_sort() {
-    vector<int> vec{ 6,9,1,5,8,4,7 };
-    //insertion_sort(vec.begin(), vec.end());
-    //bubble_sort(vec.begin(), vec.end());
-    //select_sort(vec.begin(), vec.end());
-    //shell_sort(vec.begin(), vec.end());
-    //partial_sort(vec.begin(), vec.end(), vec.end());
-    //counting_sort(vec.begin(), vec.end());
-    //sort(vec.begin(), vec.end());
-    //introspective_sort(vec.begin(), vec.end(), (size_t)logarithm_2(vec.end() - vec.begin()) * 2);
-    //quick_sort(vec.begin(), vec.end());
-    //merge_sort(vec.begin(), vec.end());
-    //bucket_sort(vec.begin(), vec.end());
+    vector<int> vec{6, 9, 1, 5, 8, 4, 7};
+    // insertion_sort(vec.begin(), vec.end());
+    // bubble_sort(vec.begin(), vec.end());
+    // select_sort(vec.begin(), vec.end());
+    // shell_sort(vec.begin(), vec.end());
+    // partial_sort(vec.begin(), vec.end(), vec.end());
+    // counting_sort(vec.begin(), vec.end());
+    // sort(vec.begin(), vec.end());
+    // introspective_sort(vec.begin(), vec.end(), (size_t)logarithm_2(vec.end() - vec.begin()) * 2);
+    // quick_sort(vec.begin(), vec.end());
+    // merge_sort(vec.begin(), vec.end());
+    // bucket_sort(vec.begin(), vec.end());
     radix_sort(vec.begin(), vec.end());
-    //tim_sort(vec.begin(), vec.end());
-    //monkey_sort(vec.begin(), vec.end());
-    //smooth_sort(vec.begin(), vec.end());
-    //cocktail_sort(vec.begin(), vec.end());
+    // tim_sort(vec.begin(), vec.end());
+    // monkey_sort(vec.begin(), vec.end());
+    // smooth_sort(vec.begin(), vec.end());
+    // cocktail_sort(vec.begin(), vec.end());
     println(vec);
-    //vector<Person> people = {
+    // vector<Person> people = {
     //{"Alice", 25},
     //{"Bob", 20},
     //{"Charlie", 30},
     //{"David", 20}
-    //};
-    //counting_sort(people.begin(), people.end(),
-    //    [](const Person& a, const Person& b) -> bool { return a.age < b.age; },
-    //    [](const Person& p) -> int { return p.age; });
-    //radix_sort_greater(people.begin(), people.end(), [](const Person& x) -> int { return x.age; });
-    //println(people);
+    // };
+    // counting_sort(people.begin(), people.end(),
+    //     [](const Person& a, const Person& b) -> bool { return a.age < b.age; },
+    //     [](const Person& p) -> int { return p.age; });
+    // radix_sort_greater(people.begin(), people.end(), [](const Person& x) -> int { return x.age; });
+    // println(people);
 }
 
 struct var_visitor {
-    int operator ()(int arg) const { return arg * 2; }
-    int operator ()(const string& arg) const { return arg.length(); }
+    int operator()(int arg) const { return arg * 2; }
+    int operator()(const string& arg) const { return arg.length(); }
 };
 
 void test_variant() {
@@ -479,8 +482,9 @@ void test_short_strings(size_t count, size_t length) {
     strings.reserve(count);
 
     for (size_t i = 0; i < count; ++i) {
-        if (i % 10000 == 0)
+        if (i % 10000 == 0) {
             print(i, " ");
+        }
         strings.emplace_back(generate_random_string(length));
     }
 
@@ -498,8 +502,8 @@ void test_long_string_concat(size_t iterations, size_t chunk_size) {
         long_str += generate_random_string(chunk_size);
     }
 
-    println("Test 2: Long string concat (", iterations, "chunks,"
-              , chunk_size, "chars each, total: ", long_str.size(), " chars)");
+    println("Test 2: Long string concat (", iterations, "chunks,", chunk_size, "chars each, total: ", long_str.size(),
+            " chars)");
 }
 
 void test_string_modification(size_t initial_length, size_t operations) {
@@ -510,14 +514,16 @@ void test_string_modification(size_t initial_length, size_t operations) {
             size_t pos = rand.next_int<int>() % (str.size() + 1);
             str.insert(pos, 1, 'X');
         } else {
-            if (str.empty()) break;
+            if (str.empty()) {
+                break;
+            }
             size_t pos = rand.next_int<int>() % str.size();
             str.erase(pos, 1);
         }
     }
 
-    println("Test 3: ", operations, " modify operations (initial: "
-              , initial_length, " chars, final: ", str.size(), " chars)");
+    println("Test 3: ", operations, " modify operations (initial: ", initial_length, " chars, final: ", str.size(),
+            " chars)");
 }
 
 void test_string_search_replace(size_t str_length, size_t pattern_count) {
@@ -538,21 +544,19 @@ void test_string_search_replace(size_t str_length, size_t pattern_count) {
         replace_count++;
     }
 
-    println("Test 4: Search & replace (str length: ", str_length
-              , ", patterns found: ", replace_count, ")");
+    println("Test 4: Search & replace (str length: ", str_length, ", patterns found: ", replace_count, ")");
 }
 
 void test_max_memory_string() {
     try {
-        size_t available_memory = sysinfo::instance()
-            .get_memory_info().available_memory();
+        size_t available_memory = sysinfo::instance().get_memory_info().available_memory();
         size_t max_test_size = available_memory / 2;
 
         const size_t upper_limit =
 #ifdef NEFORCE_ARCH_BITS_64
-            4ULL * 1024 * 1024 * 1024;  // 4GB
+                4ULL * 1024 * 1024 * 1024; // 4GB
 #else
-            1ULL * 1024 * 1024 * 1024;  // 1GB
+                1ULL * 1024 * 1024 * 1024; // 1GB
 #endif
         max_test_size = min(max_test_size, upper_limit);
 
@@ -566,8 +570,7 @@ void test_max_memory_string() {
         size_t chunk = 1024 * 1024;
         size_t total_written = 0;
 
-        println("Testing max memory string (target size: "
-                  , max_test_size / (1024 * 1024), " MB)");
+        println("Testing max memory string (target size: ", max_test_size / (1024 * 1024), " MB)");
 
         while (total_written < max_test_size) {
             size_t write = min(chunk, max_test_size - total_written);
@@ -578,8 +581,7 @@ void test_max_memory_string() {
                 println("Allocated ", total_written / (1024 * 1024), " MB...");
             }
         }
-        println("Test 5: Success. Allocated "
-                  , total_written / (1024 * 1024), " MB string.");
+        println("Test 5: Success. Allocated ", total_written / (1024 * 1024), " MB string.");
     } catch (const exception& e) {
         println("Test 5: ", e.what());
     }
@@ -652,7 +654,7 @@ void test_option() {
     println(result3.value());
 }
 
-void test_st(){
+void test_st() {
     trace_allocator<int> alloc;
     auto* ptr = alloc.allocate();
 }

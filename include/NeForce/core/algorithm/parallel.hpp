@@ -8,8 +8,8 @@
  * 此文件提供了并行版本的算法，利用多线程加速计算。
  */
 
-#include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/algorithm/iterator.hpp"
+#include "NeForce/core/async/thread.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -44,12 +44,14 @@ void reduce(Iterator first, Iterator last, BinaryOperation op, Result& res) {
 
     const size_t dist = _NEFORCE distance(first, last);
     if (dist <= Threshhold) {
-        for (Iterator it = first; it != last; ++it)
+        for (Iterator it = first; it != last; ++it) {
             res = op(res, *it);
+        }
     } else {
         Iterator mid = _NEFORCE next(first, dist / 2);
         Result l_res = res, r_res = res;
-        _NEFORCE thread r_thd(reduce<Iterator, BinaryOperation, Result, Threshhold>, mid, last, op, _NEFORCE ref(r_res));
+        _NEFORCE thread r_thd(reduce<Iterator, BinaryOperation, Result, Threshhold>, mid, last, op,
+                              _NEFORCE ref(r_res));
         _NEFORCE reduce(first, mid, op, l_res);
         r_thd.join();
         res = op(l_res, r_res);
@@ -78,13 +80,14 @@ void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, B
 
     const size_t dist = _NEFORCE distance(first, last);
     if (dist <= Threshhold) {
-        for (Iterator it = first; it != last; ++it)
+        for (Iterator it = first; it != last; ++it) {
             res = reduce(res, transform(*it));
+        }
     } else {
         Iterator mid = _NEFORCE next(first, dist / 2);
         Result l_res = _NEFORCE initialize<Result>(), r_res = _NEFORCE initialize<Result>();
-        _NEFORCE thread r_thd(transform_reduce<Iterator, UnaryOperation, BinaryOp, Result, Threshhold>,
-            mid, last, transform, reduce, _NEFORCE ref(r_res));
+        _NEFORCE thread r_thd(transform_reduce<Iterator, UnaryOperation, BinaryOp, Result, Threshhold>, mid, last,
+                              transform, reduce, _NEFORCE ref(r_res));
         _NEFORCE transform_reduce(first, mid, transform, reduce, l_res);
         r_thd.join();
         res = reduce(res, reduce(l_res, r_res));

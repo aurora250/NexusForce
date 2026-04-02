@@ -30,13 +30,13 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API plugin_manager {
 public:
-    using library_ptr = unique_ptr<dynamic_library>;  ///< 动态库指针类型
+    using library_ptr = unique_ptr<dynamic_library>; ///< 动态库指针类型
 
 private:
-    mutable mutex mutex_{};                           ///< 互斥锁
-    unordered_map<string, plugin_ptr> plugins_{};     ///< 插件名称到实例的映射
-    unordered_map<string, library_ptr> libraries_{};  ///< 库路径到动态库的映射
-    unordered_map<string, string> plugin_to_library_{};  ///< 插件名称到库路径的映射
+    mutable mutex mutex_{};                             ///< 互斥锁
+    unordered_map<string, plugin_ptr> plugins_{};       ///< 插件名称到实例的映射
+    unordered_map<string, library_ptr> libraries_{};    ///< 库路径到动态库的映射
+    unordered_map<string, string> plugin_to_library_{}; ///< 插件名称到库路径的映射
 
     /**
      * @brief 私有构造函数
@@ -45,9 +45,9 @@ private:
 
 public:
     plugin_manager(const plugin_manager&) = delete;
-    plugin_manager& operator =(const plugin_manager&) = delete;
+    plugin_manager& operator=(const plugin_manager&) = delete;
     plugin_manager(plugin_manager&&) = delete;
-    plugin_manager& operator =(plugin_manager&&) = delete;
+    plugin_manager& operator=(plugin_manager&&) = delete;
 
     /**
      * @brief 析构函数，关闭所有插件

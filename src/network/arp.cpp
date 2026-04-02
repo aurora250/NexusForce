@@ -1,24 +1,24 @@
-#include <NeForce/network/arp.hpp>
 #include <NeForce/core/memory/endian.hpp>
+#include <NeForce/network/arp.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <iphlpapi.h>
-#include <ws2tcpip.h>
+#    include <iphlpapi.h>
+#    include <ws2tcpip.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <NeForce/core/time/clocks.hpp>
-#include <linux/if_packet.h>
-#include <linux/if_ether.h>
-#include <net/if.h>
-#include <sys/ioctl.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <unistd.h>
+#    include <NeForce/core/time/clocks.hpp>
+#    include <errno.h>
+#    include <fcntl.h>
+#    include <linux/if_ether.h>
+#    include <linux/if_packet.h>
+#    include <net/if.h>
+#    include <sys/ioctl.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_PLATFORM_LINUX
 namespace {
-#pragma pack(push, 1)
+#    pragma pack(push, 1)
 
     struct arp_ether_header {
         uint8_t dest_mac[6];
@@ -38,13 +38,13 @@ namespace {
         uint8_t target_ip[4];
     };
 
-#pragma pack(pop)
+#    pragma pack(pop)
 
     constexpr uint16_t ARP_ETHER_TYPE = 0x0806;
     constexpr uint16_t ARP_REQUEST = 1;
     constexpr uint16_t ARP_REPLY = 2;
     constexpr byte_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-}
+} // namespace
 #endif
 
 
@@ -53,7 +53,9 @@ bool arp::local_info(const char* iface) noexcept {
     socket_base query_sock;
 
     const bool res = query_sock.try_open(AF_INET, SOCK_DGRAM, 0);
-    if (!res) return false;
+    if (!res) {
+        return false;
+    }
 
     const int fd = query_sock.native_handle();
     ::ifreq ifr;
@@ -74,10 +76,18 @@ bool arp::local_info(const char* iface) noexcept {
             string_copy(ifr.ifr_name, it->ifr_name, IFNAMSIZ - 1);
             ifr.ifr_name[IFNAMSIZ - 1] = '\0';
 
-            if (::ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) continue;
-            if (!(ifr.ifr_flags & IFF_UP)) continue;
-            if (ifr.ifr_flags & IFF_LOOPBACK) continue;
-            if (::ioctl(fd, SIOCGIFADDR, &ifr) < 0) continue;
+            if (::ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
+                continue;
+            }
+            if (!(ifr.ifr_flags & IFF_UP)) {
+                continue;
+            }
+            if (ifr.ifr_flags & IFF_LOOPBACK) {
+                continue;
+            }
+            if (::ioctl(fd, SIOCGIFADDR, &ifr) < 0) {
+                continue;
+            }
 
             if (ifr.ifr_addr.sa_family == AF_INET) {
                 found = true;
@@ -85,7 +95,9 @@ bool arp::local_info(const char* iface) noexcept {
                 break;
             }
         }
-        if (!found) return false;
+        if (!found) {
+            return false;
+        }
     } else {
         iface_ = iface;
     }
@@ -114,15 +126,23 @@ bool arp::local_info(const char* iface) noexcept {
 
 bool arp::open(const char* iface) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (opened_) return true;
+    if (opened_) {
+        return true;
+    }
 
-    if (iface) iface_ = iface;
+    if (iface) {
+        iface_ = iface;
+    }
     opened_ = true;
     return true;
 
 #else
-    if (sock_.is_open()) return true;
-    if (!local_info(iface)) return false;
+    if (sock_.is_open()) {
+        return true;
+    }
+    if (!local_info(iface)) {
+        return false;
+    }
 
     const bool res = sock_.try_open(AF_PACKET, SOCK_RAW, endian::host_to_network<int>(ETH_P_ARP));
     if (!res) {
@@ -158,14 +178,14 @@ void arp::close() noexcept {
 }
 
 optional<mac_address> arp::resolve(const ip_address& target, const milliseconds timeout) noexcept {
-    if (!target.is_valid() || !target.is_ipv4()) return none;
+    if (!target.is_valid() || !target.is_ipv4()) {
+        return none;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6;
-    const ::DWORD ip_addr = endian::network_to_host<::DWORD>(
-        target.address().get<::sockaddr_in>().sin_addr.s_addr
-    );
+    const ::DWORD ip_addr = endian::network_to_host<::DWORD>(target.address().get<::sockaddr_in>().sin_addr.s_addr);
 
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {
@@ -176,7 +196,9 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     return none;
 
 #else
-    if (!sock_.is_open() && !open(nullptr)) return none;
+    if (!sock_.is_open() && !open(nullptr)) {
+        return none;
+    }
     int fd = sock_.native_handle();
 
     byte_t packet[sizeof(arp_ether_header) + sizeof(arp_packet)];
@@ -200,7 +222,9 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     memory_copy(arp->target_ip, &target_ip, 4);
 
     const ssize_t sent = ::send(fd, packet, sizeof(packet), 0);
-    if (sent != static_cast<ssize_t>(sizeof(packet))) return none;
+    if (sent != static_cast<ssize_t>(sizeof(packet))) {
+        return none;
+    }
 
     const auto start = steady_clock::now();
     auto remaining = timeout;
@@ -222,14 +246,15 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
             }
             return none;
         }
-        if (sel == 0) break;
+        if (sel == 0) {
+            break;
+        }
 
         byte_t recv_buf[2048];
         ::sockaddr_ll from;
         ::socklen_t from_len = sizeof(from);
-        const auto recv_len = ::recvfrom(
-            fd, recv_buf, sizeof(recv_buf), 0,
-            reinterpret_cast<::sockaddr*>(&from), &from_len);
+        const auto recv_len =
+                ::recvfrom(fd, recv_buf, sizeof(recv_buf), 0, reinterpret_cast<::sockaddr*>(&from), &from_len);
 
         if (recv_len < 0) {
             if (errno == EAGAIN || errno == EWOULDBLOCK) {
@@ -240,20 +265,30 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
             return none;
         }
 
-        if (static_cast<size_t>(recv_len) < sizeof(arp_ether_header) + sizeof(arp_packet)) continue;
+        if (static_cast<size_t>(recv_len) < sizeof(arp_ether_header) + sizeof(arp_packet)) {
+            continue;
+        }
         const auto* recv_eth = reinterpret_cast<arp_ether_header*>(recv_buf);
-        if (endian::network_to_host<uint16_t>(recv_eth->ether_type) != ARP_ETHER_TYPE) continue;
+        if (endian::network_to_host<uint16_t>(recv_eth->ether_type) != ARP_ETHER_TYPE) {
+            continue;
+        }
 
         const auto* recv_arp = reinterpret_cast<arp_packet*>(recv_buf + sizeof(arp_ether_header));
-        if (endian::network_to_host<uint16_t>(recv_arp->opcode) != ARP_REPLY) continue;
+        if (endian::network_to_host<uint16_t>(recv_arp->opcode) != ARP_REPLY) {
+            continue;
+        }
 
         uint32_t recv_target_ip;
         memory_copy(&recv_target_ip, recv_arp->target_ip, 4);
-        if (recv_target_ip != local_ip_) continue;
+        if (recv_target_ip != local_ip_) {
+            continue;
+        }
 
         uint32_t recv_sender_ip;
         memory_copy(&recv_sender_ip, recv_arp->sender_ip, 4);
-        if (recv_sender_ip != target_ip) continue;
+        if (recv_sender_ip != target_ip) {
+            continue;
+        }
 
         byte_t mac_bytes[6];
         memory_copy(mac_bytes, recv_arp->sender_mac, 6);

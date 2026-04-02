@@ -8,15 +8,14 @@
  * 此文件提供了元组应用函数的实现，用于将元组中的元素解包作为参数调用函数。
  */
 
-#include "NeForce/core/utility/tuple.hpp"
 #include "NeForce/core/functional/invoke.hpp"
+#include "NeForce/core/utility/tuple.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <template <typename...> class, typename, typename>
-struct __apply_unpack_tuple : false_type {};
+template <template <typename...> class, typename, typename> struct __apply_unpack_tuple : false_type {};
 
 template <template <typename...> class Trait, typename T, typename... U>
 struct __apply_unpack_tuple<Trait, T, tuple<U...>> : bool_constant<Trait<T, U...>::value> {};
@@ -34,9 +33,8 @@ struct __apply_unpack_tuple<Trait, T, const tuple<U...>&> : bool_constant<Trait<
 template <typename F, typename Tuple, size_t... Idx>
 constexpr auto __apply_impl(F&& f, Tuple&& t, _NEFORCE index_sequence<Idx...>) {
     return _NEFORCE invoke(_NEFORCE forward<F>(f),
-        _NEFORCE forward<decltype(_NEFORCE get<Idx>(_NEFORCE forward<Tuple>(t)))>
-            (_NEFORCE get<Idx>(_NEFORCE forward<Tuple>(t)))...
-        );
+                           _NEFORCE forward<decltype(_NEFORCE get<Idx>(_NEFORCE forward<Tuple>(t)))>(
+                                   _NEFORCE get<Idx>(_NEFORCE forward<Tuple>(t)))...);
 }
 
 NEFORCE_END_INNER__
@@ -60,8 +58,8 @@ NEFORCE_END_INNER__
  * 支持完美转发，可以处理元组的不同引用和常量限定。
  */
 template <typename Func, typename Tuple>
-constexpr decltype(auto) apply(Func&& f, Tuple&& t)
-noexcept(inner::__apply_unpack_tuple<_NEFORCE is_nothrow_invocable, Func, Tuple>::value) {
+constexpr decltype(auto)
+apply(Func&& f, Tuple&& t) noexcept(inner::__apply_unpack_tuple<_NEFORCE is_nothrow_invocable, Func, Tuple>::value) {
     using Indices = make_index_sequence<tuple_size<remove_reference_t<Tuple>>::value>;
     return inner::__apply_impl(_NEFORCE forward<Func>(f), _NEFORCE forward<Tuple>(t), Indices{});
 }

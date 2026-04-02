@@ -1,5 +1,5 @@
-#include <NeForce/core/file/file_diff.hpp>
 #include <NeForce/core/file/file.hpp>
+#include <NeForce/core/file/file_diff.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -23,8 +23,12 @@ bool file_diff::compare_binary(const path& file1, const path& file2) {
 
     const uint64_t size1 = f1.size64();
     const uint64_t size2 = f2.size64();
-    if (size1 != size2) return false;
-    if (size1 == 0) return true;
+    if (size1 != size2) {
+        return false;
+    }
+    if (size1 == 0) {
+        return true;
+    }
 
     string buf1(buffer_size, '\0');
     string buf2(buffer_size, '\0');
@@ -34,15 +38,19 @@ bool file_diff::compare_binary(const path& file1, const path& file2) {
         const size_type chunk = min(remaining, static_cast<size_type>(buffer_size));
         const size_type r1 = f1.read_binary(buf1, chunk);
         const size_type r2 = f2.read_binary(buf2, chunk);
-        if (r1 != chunk || r2 != chunk) return false;
-        if (memory_compare(buf1.data(), buf2.data(), chunk) != 0) return false;
+        if (r1 != chunk || r2 != chunk) {
+            return false;
+        }
+        if (memory_compare(buf1.data(), buf2.data(), chunk) != 0) {
+            return false;
+        }
         remaining -= chunk;
     }
     return true;
 }
 
-bool file_diff::compare_text(const path& file1, const path& file2,
-                             const bool ignore_case, const bool ignore_whitespace) {
+bool file_diff::compare_text(const path& file1, const path& file2, const bool ignore_case,
+                             const bool ignore_whitespace) {
     if (!ignore_case && !ignore_whitespace) {
         return compare_binary(file1, file2);
     }
@@ -62,25 +70,35 @@ bool file_diff::compare_text(const path& file1, const path& file2,
         const size_type sz2 = f2.info().size();
         content1.resize(sz1);
         content2.resize(sz2);
-        if (f1.read_binary(content1, sz1) != sz1) return false;
-        if (f2.read_binary(content2, sz2) != sz2) return false;
+        if (f1.read_binary(content1, sz1) != sz1) {
+            return false;
+        }
+        if (f2.read_binary(content2, sz2) != sz2) {
+            return false;
+        }
     }
 
     auto split_lines = [](const string& content, vector<string>& lines) {
-        if (content.empty()) return;
+        if (content.empty()) {
+            return;
+        }
         size_t start = 0;
 
         while (start < content.size()) {
             const size_t end = content.find('\n', start);
             if (end == string::npos) {
                 string line = content.substr(start);
-                if (!line.empty() && line.back() == '\r') line.pop_back();
+                if (!line.empty() && line.back() == '\r') {
+                    line.pop_back();
+                }
                 lines.emplace_back(move(line));
                 break;
             }
 
             string line = content.substr(start, end - start);
-            if (!line.empty() && line.back() == '\r') line.pop_back();
+            if (!line.empty() && line.back() == '\r') {
+                line.pop_back();
+            }
             lines.emplace_back(move(line));
             start = end + 1;
         }
@@ -90,13 +108,19 @@ bool file_diff::compare_text(const path& file1, const path& file2,
     split_lines(content1, lines1);
     split_lines(content2, lines2);
 
-    if (lines1.size() != lines2.size()) return false;
+    if (lines1.size() != lines2.size()) {
+        return false;
+    }
 
     auto normalize = [ignore_case, ignore_whitespace](string& s) {
         if (ignore_whitespace) {
             size_t lo = 0, hi = s.size();
-            while (lo < hi && is_space(s[lo])) ++lo;
-            while (hi > lo && is_space(s[hi-1])) --hi;
+            while (lo < hi && is_space(s[lo])) {
+                ++lo;
+            }
+            while (hi > lo && is_space(s[hi - 1])) {
+                --hi;
+            }
 
             string result;
             result.reserve(hi - lo);
@@ -114,19 +138,22 @@ bool file_diff::compare_text(const path& file1, const path& file2,
             }
             s = move(result);
         }
-        if (ignore_case) s.lowercase();
+        if (ignore_case) {
+            s.lowercase();
+        }
     };
 
     for (size_t i = 0; i < lines1.size(); ++i) {
         normalize(lines1[i]);
         normalize(lines2[i]);
-        if (lines1[i] != lines2[i]) return false;
+        if (lines1[i] != lines2[i]) {
+            return false;
+        }
     }
     return true;
 }
 
-vector<file_diff::binary_diff_entry> file_diff::binary_diff(const path& file1,
-                                                            const path& file2,
+vector<file_diff::binary_diff_entry> file_diff::binary_diff(const path& file1, const path& file2,
                                                             const size_type max_diffs) {
     vector<binary_diff_entry> diffs;
     diffs.reserve(min(max_diffs, static_cast<size_type>(256)));
@@ -152,20 +179,22 @@ vector<file_diff::binary_diff_entry> file_diff::binary_diff(const path& file1,
     }
 
     const size_type min_size = min(size1, size2);
-    if (min_size == 0) return diffs;
+    if (min_size == 0) {
+        return diffs;
+    }
 
     string buf1(buffer_size, '\0');
     string buf2(buffer_size, '\0');
     difference_type offset = 0;
 
     while (static_cast<size_type>(offset) < min_size && diffs.size() < max_diffs) {
-        const size_type chunk = min(
-            min_size - static_cast<size_type>(offset),
-            static_cast<size_type>(buffer_size));
+        const size_type chunk = min(min_size - static_cast<size_type>(offset), static_cast<size_type>(buffer_size));
 
         const size_type r1 = f1.read_binary(buf1, chunk);
         const size_type r2 = f2.read_binary(buf2, chunk);
-        if (r1 != chunk || r2 != chunk) break;
+        if (r1 != chunk || r2 != chunk) {
+            break;
+        }
 
         if (memory_compare(buf1.data(), buf2.data(), chunk) != 0) {
             for (size_type i = 0; i < chunk && diffs.size() < max_diffs; ++i) {

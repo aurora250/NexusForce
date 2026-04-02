@@ -1,7 +1,7 @@
 #include <NeForce/core/file/file_info.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/stat.h>
-#include <sys/time.h>
+#    include <sys/stat.h>
+#    include <sys/time.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -29,11 +29,11 @@ namespace {
         return timestamp(static_cast<int64_t>(t)).to_datetime();
     }
 #endif
-}
+} // namespace
 
 
-file_info::file_info(const native_handle_type handle) noexcept
-: handle_(handle) {}
+file_info::file_info(const native_handle_type handle) noexcept :
+handle_(handle) {}
 
 file_attri file_info::attributes() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -54,20 +54,22 @@ file_attri file_info::attributes() const noexcept {
 bool file_info::set_attributes(const file_attri attr) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     char path_buf[MAX_PATH]{};
-    if (::GetFinalPathNameByHandleA(
-            handle_, path_buf, MAX_PATH,
-            FILE_NAME_NORMALIZED | VOLUME_NAME_DOS) == 0) {
+    if (::GetFinalPathNameByHandleA(handle_, path_buf, MAX_PATH, FILE_NAME_NORMALIZED | VOLUME_NAME_DOS) == 0) {
         return false;
     }
     const char* p = path_buf;
-    if (string_compare(p, "\\\\?\\", 4) == 0) p += 4;
+    if (string_compare(p, "\\\\?\\", 4) == 0) {
+        p += 4;
+    }
     return ::SetFileAttributesA(p, static_cast<::DWORD>(attr)) != 0;
 #else
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return false;
+    if (::fstat64(handle_, &st) == -1) {
+        return false;
+    }
     constexpr ::mode_t perm_mask = S_IRWXU | S_IRWXG | S_IRWXO;
-    const ::mode_t new_perm  = static_cast<::mode_t>(attr) & perm_mask;
-    const ::mode_t new_mode  = (st.st_mode & ~perm_mask) | new_perm;
+    const ::mode_t new_perm = static_cast<::mode_t>(attr) & perm_mask;
+    const ::mode_t new_mode = (st.st_mode & ~perm_mask) | new_perm;
     return ::fchmod(handle_, new_mode) == 0;
 #endif
 }
@@ -81,11 +83,15 @@ file_info::size_type file_info::size() const noexcept {
 uint64_t file_info::size64() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
-    if (!::GetFileSizeEx(handle_, &li)) return 0;
+    if (!::GetFileSizeEx(handle_, &li)) {
+        return 0;
+    }
     return static_cast<uint64_t>(li.QuadPart);
 #else
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return 0;
+    if (::fstat64(handle_, &st) == -1) {
+        return 0;
+    }
     return static_cast<uint64_t>(st.st_size);
 #endif
 }
@@ -94,7 +100,9 @@ bool file_info::size(size_type& out_size) const noexcept {
     out_size = 0;
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
-    if (!::GetFileSizeEx(handle_, &li)) return false;
+    if (!::GetFileSizeEx(handle_, &li)) {
+        return false;
+    }
     if (li.QuadPart > static_cast<::LONGLONG>(numeric_traits<size_type>::max())) {
         return false;
     }
@@ -102,7 +110,9 @@ bool file_info::size(size_type& out_size) const noexcept {
     return true;
 #else
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return false;
+    if (::fstat64(handle_, &st) == -1) {
+        return false;
+    }
     if (static_cast<uint64_t>(st.st_size) > numeric_traits<size_type>::max()) {
         return false;
     }
@@ -114,11 +124,15 @@ bool file_info::size(size_type& out_size) const noexcept {
 datetime file_info::last_access_time() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FILETIME ftCreate{}, ftAccess{}, ftWrite{};
-    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) return datetime::epoch();
+    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) {
+        return datetime::epoch();
+    }
     return filetime_to_datetime(ftAccess);
 #else
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return datetime::epoch();
+    if (::fstat64(handle_, &st) == -1) {
+        return datetime::epoch();
+    }
     return filetime_to_datetime(st.st_atime);
 #endif
 }
@@ -139,11 +153,15 @@ bool file_info::set_last_access_time(const datetime& dt) noexcept {
 datetime file_info::last_write_time() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FILETIME ftCreate{}, ftAccess{}, ftWrite{};
-    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) return datetime::epoch();
+    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) {
+        return datetime::epoch();
+    }
     return filetime_to_datetime(ftWrite);
 #else
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return datetime::epoch();
+    if (::fstat64(handle_, &st) == -1) {
+        return datetime::epoch();
+    }
     return filetime_to_datetime(st.st_mtime);
 #endif
 }

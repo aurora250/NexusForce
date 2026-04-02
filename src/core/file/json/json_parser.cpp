@@ -1,5 +1,5 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/json/json_parser.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void json_parser::skip_space() noexcept {
@@ -9,13 +9,13 @@ void json_parser::skip_space() noexcept {
 }
 
 char json_parser::current() const noexcept {
-    if (pos_ < len_) return text_[pos_];
+    if (pos_ < len_) {
+        return text_[pos_];
+    }
     return '\0';
 }
 
-bool json_parser::eof() const noexcept {
-    return pos_ >= len_;
-}
+bool json_parser::eof() const noexcept { return pos_ >= len_; }
 
 unique_ptr<json_string> json_parser::parse_string() {
     pos_++;
@@ -197,10 +197,20 @@ unique_ptr<json_value> json_parser::parse_value() {
         case '"':
             return parse_string();
         case '-':
-        case '0': case '1': case '2': case '3': case '4':
-        case '5': case '6': case '7': case '8': case '9':
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
             return parse_number();
-        case 't': case 'f': case 'n':
+        case 't':
+        case 'f':
+        case 'n':
             return parse_keyword();
         default:
             NEFORCE_THROW_EXCEPTION(json_exception("Unexpected character"));

@@ -2,8 +2,8 @@
 #define NEFORCE_CORE_FILE_YAML_YAML_VALUE_HPP__
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/interface/istringify.hpp"
+#include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -26,16 +26,7 @@ public:
     string anchor;
     string tag;
 
-    enum types {
-        Null,
-        Boolean,
-        Integer,
-        Float,
-        String,
-        Timestamp,
-        Sequence,
-        Mapping
-    };
+    enum types { Null, Boolean, Integer, Float, String, Timestamp, Sequence, Mapping };
 
     virtual ~yaml_value() = default;
     NEFORCE_NODISCARD virtual types type() const noexcept = 0;
@@ -80,7 +71,8 @@ private:
     bool value;
 
 public:
-    explicit yaml_boolean(const bool v) noexcept : value(v) {}
+    explicit yaml_boolean(const bool v) noexcept :
+    value(v) {}
     NEFORCE_NODISCARD types type() const noexcept override { return Boolean; }
     NEFORCE_NODISCARD const yaml_boolean* as_boolean() const noexcept override { return this; }
     NEFORCE_NODISCARD bool get_value() const noexcept { return value; }
@@ -91,7 +83,8 @@ private:
     int64_t value;
 
 public:
-    explicit yaml_integer(const int64_t v) noexcept : value(v) {}
+    explicit yaml_integer(const int64_t v) noexcept :
+    value(v) {}
     NEFORCE_NODISCARD types type() const noexcept override { return Integer; }
     NEFORCE_NODISCARD const yaml_integer* as_integer() const noexcept override { return this; }
     NEFORCE_NODISCARD int64_t get_value() const noexcept { return value; }
@@ -102,7 +95,8 @@ private:
     double value;
 
 public:
-    explicit yaml_float(const double v) noexcept : value(v) {}
+    explicit yaml_float(const double v) noexcept :
+    value(v) {}
     NEFORCE_NODISCARD types type() const noexcept override { return Float; }
     NEFORCE_NODISCARD const yaml_float* as_float() const noexcept override { return this; }
     NEFORCE_NODISCARD double get_value() const noexcept { return value; }
@@ -110,21 +104,16 @@ public:
 
 class NEFORCE_API yaml_string final : public yaml_value {
 public:
-    enum string_style {
-        Plain,
-        SingleQuoted,
-        DoubleQuoted,
-        Literal,
-        Folded
-    };
+    enum string_style { Plain, SingleQuoted, DoubleQuoted, Literal, Folded };
 
 private:
     string value;
     string_style style;
 
 public:
-    explicit yaml_string(string v, const string_style s = Plain) noexcept
-    : value(_NEFORCE move(v)), style(s) {}
+    explicit yaml_string(string v, const string_style s = Plain) noexcept :
+    value(_NEFORCE move(v)),
+    style(s) {}
 
     NEFORCE_NODISCARD types type() const noexcept override { return String; }
     NEFORCE_NODISCARD const yaml_string* as_string() const noexcept override { return this; }
@@ -146,50 +135,49 @@ public:
         }
     }
 
-    explicit yaml_timestamp(const datetime& dt) noexcept : value(dt) {}
+    explicit yaml_timestamp(const datetime& dt) noexcept :
+    value(dt) {}
 
     NEFORCE_NODISCARD types type() const noexcept override { return Timestamp; }
     NEFORCE_NODISCARD const yaml_timestamp* as_timestamp() const noexcept override { return this; }
     NEFORCE_NODISCARD const datetime& get_value() const noexcept { return value; }
 
-    NEFORCE_NODISCARD string get_string_value() const noexcept {
-        return value.to_string_ISO_UTC();
-    }
+    NEFORCE_NODISCARD string get_string_value() const noexcept { return value.to_string_ISO_UTC(); }
 };
 
 class NEFORCE_API yaml_sequence final : public yaml_value {
 public:
-    enum sequence_style {
-        Block,
-        Flow
-    };
+    enum sequence_style { Block, Flow };
 
 private:
     vector<yaml_ptr> elements;
     sequence_style style;
 
 public:
-    explicit yaml_sequence(const sequence_style s = Block) : style(s) {}
+    explicit yaml_sequence(const sequence_style s = Block) :
+    style(s) {}
 
     yaml_sequence(const yaml_sequence&) = delete;
-    yaml_sequence& operator =(const yaml_sequence&) = delete;
+    yaml_sequence& operator=(const yaml_sequence&) = delete;
     yaml_sequence(yaml_sequence&&) = default;
-    yaml_sequence& operator =(yaml_sequence&&) = default;
+    yaml_sequence& operator=(yaml_sequence&&) = default;
 
     NEFORCE_NODISCARD types type() const noexcept override { return Sequence; }
     NEFORCE_NODISCARD const yaml_sequence* as_sequence() const noexcept override { return this; }
 
-    void add_element(yaml_ptr value) {
-        elements.emplace_back(_NEFORCE move(value));
-    }
+    void add_element(yaml_ptr value) { elements.emplace_back(_NEFORCE move(value)); }
 
     NEFORCE_NODISCARD const yaml_value* get_element(const size_t index) const noexcept {
-        if (index < elements.size()) return elements[index].get();
+        if (index < elements.size()) {
+            return elements[index].get();
+        }
         return nullptr;
     }
 
     NEFORCE_NODISCARD yaml_value* get_element(const size_t index) noexcept {
-        if (index < elements.size()) return elements[index].get();
+        if (index < elements.size()) {
+            return elements[index].get();
+        }
         return nullptr;
     }
 
@@ -201,56 +189,54 @@ public:
 
 class NEFORCE_API yaml_mapping final : public yaml_value {
 public:
-    enum mapping_style {
-        Block,
-        Flow
-    };
+    enum mapping_style { Block, Flow };
 
 private:
     unordered_map<string, yaml_ptr> members;
     mapping_style style;
 
 public:
-    explicit yaml_mapping(const mapping_style s = Block) : style(s) {}
+    explicit yaml_mapping(const mapping_style s = Block) :
+    style(s) {}
 
     yaml_mapping(const yaml_mapping&) = delete;
-    yaml_mapping& operator =(const yaml_mapping&) = delete;
+    yaml_mapping& operator=(const yaml_mapping&) = delete;
     yaml_mapping(yaml_mapping&&) = default;
-    yaml_mapping& operator =(yaml_mapping&&) = default;
+    yaml_mapping& operator=(yaml_mapping&&) = default;
 
     NEFORCE_NODISCARD types type() const noexcept override { return Mapping; }
     NEFORCE_NODISCARD const yaml_mapping* as_mapping() const noexcept override { return this; }
 
-    void add_member(const string& key, yaml_ptr value) {
-        members[key] = _NEFORCE move(value);
-    }
+    void add_member(const string& key, yaml_ptr value) { members[key] = _NEFORCE move(value); }
 
     NEFORCE_NODISCARD const yaml_value* get_member(const string& key) const {
         const auto it = members.find(key);
-        if (it != members.end()) return it->second.get();
+        if (it != members.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
     NEFORCE_NODISCARD yaml_value* get_member(const string& key) {
         const auto it = members.find(key);
-        if (it != members.end()) return it->second.get();
+        if (it != members.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
-    NEFORCE_NODISCARD bool has_member(const string& key) const {
-        return members.find(key) != members.end();
-    }
+    NEFORCE_NODISCARD bool has_member(const string& key) const { return members.find(key) != members.end(); }
 
-    NEFORCE_NODISCARD const unordered_map<string, yaml_ptr>& get_members() const noexcept {
-        return members;
-    }
+    NEFORCE_NODISCARD const unordered_map<string, yaml_ptr>& get_members() const noexcept { return members; }
 
     NEFORCE_NODISCARD mapping_style get_style() const noexcept { return style; }
     void set_style(const mapping_style s) noexcept { style = s; }
 
     void merge_from(const yaml_mapping* other) {
-        if (!other) return;
-        for (const auto& pair : other->get_members()) {
+        if (!other) {
+            return;
+        }
+        for (const auto& pair: other->get_members()) {
             if (members.find(pair.first) == members.end()) {
                 members[pair.first] = pair.second;
             }

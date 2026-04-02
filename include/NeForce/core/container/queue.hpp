@@ -32,22 +32,21 @@ NEFORCE_BEGIN_NAMESPACE__
  * 默认使用deque作为底层容器，也可指定其他支持front、back、
  * push_back和pop_front操作的容器（如list）。
  */
-template <typename T, typename Sequence = deque<T>>
-class queue : public icollector<queue<T, Sequence>> {
+template <typename T, typename Sequence = deque<T>> class queue : public icollector<queue<T, Sequence>> {
     static_assert(is_object_v<T>, "queue only contains object types.");
     static_assert(is_same_v<T, typename Sequence::value_type>, "queue require consistent types.");
 
 public:
-    using value_type        = typename Sequence::value_type;  ///< 值类型
-    using difference_type   = typename Sequence::difference_type;  ///< 差值类型
-    using size_type         = typename Sequence::size_type;  ///< 大小类型
-    using reference         = typename Sequence::reference;  ///< 引用类型
-    using const_reference   = typename Sequence::const_reference;  ///< 常量引用类型
-    using iterator          = typename Sequence::iterator;  ///< 迭代器类型
-    using const_iterator    = typename Sequence::const_iterator;  ///< 常量迭代器类型
+    using value_type = typename Sequence::value_type;           ///< 值类型
+    using difference_type = typename Sequence::difference_type; ///< 差值类型
+    using size_type = typename Sequence::size_type;             ///< 大小类型
+    using reference = typename Sequence::reference;             ///< 引用类型
+    using const_reference = typename Sequence::const_reference; ///< 常量引用类型
+    using iterator = typename Sequence::iterator;               ///< 迭代器类型
+    using const_iterator = typename Sequence::const_iterator;   ///< 常量迭代器类型
 
 private:
-    Sequence seq_{};  ///< 底层容器实例
+    Sequence seq_{}; ///< 底层容器实例
 
 public:
     /**
@@ -61,16 +60,15 @@ public:
      * @brief 构造函数，使用指定的底层容器副本
      * @param other 底层容器副本
      */
-    explicit queue(const Sequence& other)
-    : seq_(other) {}
+    explicit queue(const Sequence& other) :
+    seq_(other) {}
 
     /**
      * @brief 移动构造函数，使用指定的底层容器
      * @param other 要移动的底层容器
      */
-    explicit queue(Sequence&& other)
-    noexcept(is_nothrow_move_constructible_v<Sequence>)
-    : seq_(_NEFORCE move(other)) {}
+    explicit queue(Sequence&& other) noexcept(is_nothrow_move_constructible_v<Sequence>) :
+    seq_(_NEFORCE move(other)) {}
 
     /**
      * @brief 析构函数
@@ -81,109 +79,73 @@ public:
      * @brief 获取队列大小
      * @return 队列中的元素数量
      */
-    NEFORCE_NODISCARD size_type size() const
-    noexcept(noexcept(seq_.size())) {
-        return seq_.size();
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept(noexcept(seq_.size())) { return seq_.size(); }
 
     /**
      * @brief 检查队列是否为空
      * @return 队列为空返回true，否则返回false
      */
-    NEFORCE_NODISCARD bool empty() const
-    noexcept(noexcept(seq_.empty())) {
-        return seq_.empty();
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept(noexcept(seq_.empty())) { return seq_.empty(); }
 
     /**
      * @brief 访问队首元素
      * @return 队首元素的引用
      */
-    NEFORCE_NODISCARD reference front()
-    noexcept(noexcept(seq_.front())) {
-        return seq_.front();
-    }
+    NEFORCE_NODISCARD reference front() noexcept(noexcept(seq_.front())) { return seq_.front(); }
 
     /**
      * @brief 常量版本，访问队首元素
      * @return 队首元素的常量引用
      */
-    NEFORCE_NODISCARD const_reference front() const
-    noexcept(noexcept(seq_.front())) {
-        return seq_.front();
-    }
+    NEFORCE_NODISCARD const_reference front() const noexcept(noexcept(seq_.front())) { return seq_.front(); }
 
     /**
      * @brief 访问队尾元素
      * @return 队尾元素的引用
      */
-    NEFORCE_NODISCARD reference back()
-    noexcept(noexcept(seq_.back())) {
-        return seq_.back();
-    }
+    NEFORCE_NODISCARD reference back() noexcept(noexcept(seq_.back())) { return seq_.back(); }
 
     /**
      * @brief 常量版本，访问队尾元素
      * @return 队尾元素的常量引用
      */
-    NEFORCE_NODISCARD const_reference back() const
-    noexcept(noexcept(seq_.back())) {
-        return seq_.back();
-    }
+    NEFORCE_NODISCARD const_reference back() const noexcept(noexcept(seq_.back())) { return seq_.back(); }
 
     /**
      * @brief 获取起始迭代器
      * @return 指向队首的迭代器
      */
-    NEFORCE_NODISCARD iterator begin()
-    noexcept(noexcept(seq_.begin())) {
-        return seq_.begin();
-    }
+    NEFORCE_NODISCARD iterator begin() noexcept(noexcept(seq_.begin())) { return seq_.begin(); }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向队尾之后位置的迭代器
      */
-    NEFORCE_NODISCARD iterator end()
-    noexcept(noexcept(seq_.end())) {
-        return seq_.end();
-    }
+    NEFORCE_NODISCARD iterator end() noexcept(noexcept(seq_.end())) { return seq_.end(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向队首的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator begin() const
-    noexcept(noexcept(seq_.begin())) {
-        return seq_.begin();
-    }
+    NEFORCE_NODISCARD const_iterator begin() const noexcept(noexcept(seq_.begin())) { return seq_.begin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向队尾之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator end() const
-    noexcept(noexcept(seq_.end())) {
-        return seq_.end();
-    }
+    NEFORCE_NODISCARD const_iterator end() const noexcept(noexcept(seq_.end())) { return seq_.end(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向队首的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cbegin() const
-    noexcept(noexcept(seq_.cbegin())) {
-        return seq_.cbegin();
-    }
+    NEFORCE_NODISCARD const_iterator cbegin() const noexcept(noexcept(seq_.cbegin())) { return seq_.cbegin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向队尾之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cend() const
-    noexcept(noexcept(seq_.cend())) {
-        return seq_.cend();
-    }
+    NEFORCE_NODISCARD const_iterator cend() const noexcept(noexcept(seq_.cend())) { return seq_.cend(); }
 
     /**
      * @brief 入队操作（拷贝版本）
@@ -191,9 +153,7 @@ public:
      *
      * 将元素添加到队尾。
      */
-    void push(const T& value) {
-        seq_.push_back(value);
-    }
+    void push(const T& value) { seq_.push_back(value); }
 
     /**
      * @brief 入队操作（移动版本）
@@ -201,19 +161,14 @@ public:
      *
      * 将元素移动到队尾。
      */
-    void push(T&& value) {
-        seq_.push_back(_NEFORCE move(value));
-    }
+    void push(T&& value) { seq_.push_back(_NEFORCE move(value)); }
 
     /**
      * @brief 出队操作
      *
      * 移除队首元素。
      */
-    void pop()
-    noexcept(noexcept(seq_.pop_front())) {
-        seq_.pop_front();
-    }
+    void pop() noexcept(noexcept(seq_.pop_front())) { seq_.pop_front(); }
 
     /**
      * @brief 在队尾就地构造元素
@@ -221,8 +176,7 @@ public:
      * @param args 构造参数
      * @return 新构造元素的引用
      */
-    template <typename... Args>
-    decltype(auto) emplace(Args&&... args) {
+    template <typename... Args> decltype(auto) emplace(Args&&... args) {
         return seq_.emplace_back(_NEFORCE forward<Args>(args)...);
     }
 
@@ -230,18 +184,14 @@ public:
      * @brief 交换两个队列的内容
      * @param other 要交换的另一个队列
      */
-    void swap(queue& other)
-    noexcept(is_nothrow_swappable_v<Sequence>) {
-        _NEFORCE swap(seq_, other.seq_);
-    }
+    void swap(queue& other) noexcept(is_nothrow_swappable_v<Sequence>) { _NEFORCE swap(seq_, other.seq_); }
 
     /**
      * @brief 相等比较操作符
      * @param rhs 右侧队列
      * @return 如果两个队列大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const queue& rhs) const
-    noexcept(noexcept(seq_ == rhs.seq_)) {
+    NEFORCE_NODISCARD bool operator==(const queue& rhs) const noexcept(noexcept(seq_ == rhs.seq_)) {
         return seq_ == rhs.seq_;
     }
 
@@ -250,15 +200,13 @@ public:
      * @param rhs 右侧队列
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator <(const queue& rhs) const
-    noexcept(noexcept(seq_ < rhs.seq_)) {
+    NEFORCE_NODISCARD bool operator<(const queue& rhs) const noexcept(noexcept(seq_ < rhs.seq_)) {
         return seq_ < rhs.seq_;
     }
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Sequence>
-queue(Sequence) -> queue<typename Sequence::value_type, Sequence>;
+template <typename Sequence> queue(Sequence) -> queue<typename Sequence::value_type, Sequence>;
 #endif
 
 /** @} */ // Container

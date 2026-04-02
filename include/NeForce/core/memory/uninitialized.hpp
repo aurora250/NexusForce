@@ -33,8 +33,8 @@ NEFORCE_BEGIN_INNER__
  *
  * 对于平凡可复制类型，可以直接使用copy算法。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+template <typename Iterator1, typename Iterator2,
+          enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     return _NEFORCE copy(first, last, result);
 }
@@ -52,8 +52,8 @@ NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator
  * 对于非平凡类型，需要构造每个元素并在异常时清理已构造的元素。
  * 如果发生异常，已构造的对象会被销毁。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    !is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+template <typename Iterator1, typename Iterator2,
+          enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     Iterator2 cur = result;
     try {
@@ -87,7 +87,9 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 uninitialized_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
-    if (first == last) return result;
+    if (first == last) {
+        return result;
+    }
     return inner::__uninitialized_copy_aux(first, last, result);
 }
 
@@ -105,8 +107,8 @@ NEFORCE_BEGIN_INNER__
  * @throws memory_exception 如果构造过程中发生异常
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, int> = 0>
-NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
-    Iterator1 first, size_t count, Iterator2 result) {
+NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(Iterator1 first, size_t count,
+                                                                          Iterator2 result) {
     Iterator2 cur = result;
     try {
         for (; count > 0; --count, ++first, ++cur) {
@@ -131,8 +133,8 @@ NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
  * @return pair<输入结束迭代器, 输出结束迭代器>
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_rnd_iter_v<Iterator1>, int> = 0>
-NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
-    Iterator1 first, size_t count, Iterator2 result) {
+NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(Iterator1 first, size_t count,
+                                                                          Iterator2 result) {
     Iterator1 last = first + count;
     return _NEFORCE make_pair(last, _NEFORCE uninitialized_copy(first, last, result));
 }
@@ -153,8 +155,7 @@ NEFORCE_END_INNER__
  * 从 first 开始复制 count 个元素到未初始化的内存区域。
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
-NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_copy_n(
-    Iterator1 first, size_t count, Iterator2 result) {
+NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_copy_n(Iterator1 first, size_t count, Iterator2 result) {
     return inner::__uninitialized_copy_n_aux(first, count, result);
 }
 
@@ -169,8 +170,7 @@ NEFORCE_BEGIN_INNER__
  * @param last 范围结束
  * @param x 要填充的值
  */
-template <typename Iterator, typename T, enable_if_t<
-    is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, const T& x) {
     _NEFORCE fill(first, last, x);
 }
@@ -184,8 +184,7 @@ NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last,
  * @param x 要填充的值
  * @throws memory_exception 如果构造过程中发生异常
  */
-template <typename Iterator, typename T, enable_if_t<
-    !is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, const T& x) {
     Iterator cur = first;
     try {
@@ -217,7 +216,9 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 NEFORCE_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, const T& x) {
-    if (first == last) return;
+    if (first == last) {
+        return;
+    }
     inner::__uninitialized_fill_aux(first, last, x);
 }
 
@@ -233,8 +234,7 @@ NEFORCE_BEGIN_INNER__
  * @param x 要填充的值
  * @return 填充后的结束迭代器
  */
-template <typename Iterator, typename T, enable_if_t<
-    is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
     return _NEFORCE fill_n(first, n, x);
 }
@@ -249,11 +249,10 @@ NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n
  * @return 填充后的结束迭代器
  * @throws memory_exception 如果构造过程中发生异常
  */
-template <typename Iterator, typename T, enable_if_t<
-    !is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
     Iterator cur = first;
-    try{
+    try {
         for (; n > 0; --n, ++cur) {
             _NEFORCE construct(&*cur, x);
         }
@@ -298,8 +297,8 @@ NEFORCE_BEGIN_INNER__
  * @param result 输出范围起始
  * @return 输出范围结束
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+template <typename Iterator1, typename Iterator2,
+          enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     return _NEFORCE move(first, last, result);
 }
@@ -316,11 +315,11 @@ NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator
  *
  * 使用移动构造函数构造对象，并可能使源对象处于有效但未指定的状态。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    !is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+template <typename Iterator1, typename Iterator2,
+          enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     Iterator2 cur = result;
-    try{
+    try {
         for (; first != last; ++first, ++cur) {
             _NEFORCE construct(&*cur, _NEFORCE move(*first));
         }
@@ -348,10 +347,12 @@ NEFORCE_END_INNER__
  * 将范围 [first, last) 的元素移动到以 result 开始的未初始化内存区域。
  * 使用移动构造函数构造对象，可能使源对象处于有效但未指定的状态。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2,
+          enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 uninitialized_move(Iterator1 first, Iterator1 last, Iterator2 result) {
-    if (first == last) return result;
+    if (first == last) {
+        return result;
+    }
     return inner::__uninitialized_move_aux(first, last, result);
 }
 
@@ -369,10 +370,10 @@ NEFORCE_BEGIN_INNER__
  * @throws memory_exception 如果构造过程中发生异常
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, int> = 0>
-NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
-    Iterator1 first, size_t count, Iterator2 result) {
+NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(Iterator1 first, size_t count,
+                                                                          Iterator2 result) {
     Iterator2 cur = result;
-    try{
+    try {
         for (; count > 0; --count, ++first, ++cur) {
             _NEFORCE construct(&*cur, _NEFORCE move(*first));
         }
@@ -395,8 +396,8 @@ NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
  * @return pair<输入结束迭代器, 输出结束迭代器>
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_rnd_iter_v<Iterator1>, int> = 0>
-NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
-    Iterator1 first, size_t count, Iterator2 result) {
+NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(Iterator1 first, size_t count,
+                                                                          Iterator2 result) {
     Iterator1 last = first + count;
     return _NEFORCE make_pair(last, _NEFORCE uninitialized_move(first, last, result));
 }
@@ -414,10 +415,9 @@ NEFORCE_END_INNER__
  * @return pair<输入结束迭代器, 输出结束迭代器>
  * @throws memory_exception 当值类型为非平凡类型时，如果构造过程中发生异常
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
-NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_move_n(
-    Iterator1 first, size_t count, Iterator2 result) {
+template <typename Iterator1, typename Iterator2,
+          enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_move_n(Iterator1 first, size_t count, Iterator2 result) {
     return inner::__uninitialized_move_n_aux(first, count, result);
 }
 

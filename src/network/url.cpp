@@ -16,7 +16,7 @@ namespace {
         }
         return true;
     }
-}
+} // namespace
 
 
 bool url::is_valid() const noexcept {
@@ -60,9 +60,15 @@ url url::parse(const string_view str) {
     const size_t fragment_pos = str.find('#', pos);
 
     size_t host_end = len;
-    if (path_pos != string::npos) host_end = min(host_end, path_pos);
-    if (query_pos != string::npos) host_end = min(host_end, query_pos);
-    if (fragment_pos != string::npos) host_end = min(host_end, fragment_pos);
+    if (path_pos != string::npos) {
+        host_end = min(host_end, path_pos);
+    }
+    if (query_pos != string::npos) {
+        host_end = min(host_end, query_pos);
+    }
+    if (fragment_pos != string::npos) {
+        host_end = min(host_end, fragment_pos);
+    }
 
     const string_view host_port = str.substr(pos, host_end - pos);
     size_t colon_pos = string::npos;
@@ -101,8 +107,12 @@ url url::parse(const string_view str) {
     pos = host_end;
 
     size_t path_end = len;
-    if (query_pos != string::npos) path_end = min(path_end, query_pos);
-    if (fragment_pos != string::npos) path_end = min(path_end, fragment_pos);
+    if (query_pos != string::npos) {
+        path_end = min(path_end, query_pos);
+    }
+    if (fragment_pos != string::npos) {
+        path_end = min(path_end, fragment_pos);
+    }
 
     if (pos < path_end && str[pos] == '/') {
         target.path = str.substr(pos, path_end - pos);
@@ -152,7 +162,7 @@ string url::encode(const string_view str, const bool encode_slash) noexcept {
     string result;
     result.reserve(str.size() * 3);
 
-    for (const char c : str) {
+    for (const char c: str) {
         if (should_encode(c, encode_slash)) {
             result += '%';
             const auto uc = static_cast<unsigned char>(c);

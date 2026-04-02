@@ -25,9 +25,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 使用delete运算符释放单个对象的默认删除器。
  */
-template <typename T>
-struct default_delete {
-    constexpr default_delete() noexcept = default;  ///< 默认构造函数
+template <typename T> struct default_delete {
+    constexpr default_delete() noexcept = default; ///< 默认构造函数
 
     /**
      * @brief 从其他default_delete转换构造
@@ -40,34 +39,28 @@ struct default_delete {
      * @brief 删除操作符
      * @param ptr 要删除的指针
      */
-    NEFORCE_CONSTEXPR20 void operator ()(const T* ptr) const noexcept {
-        delete ptr;
-    }
+    NEFORCE_CONSTEXPR20 void operator()(const T* ptr) const noexcept { delete ptr; }
 
     /**
      * @brief 重新绑定到其他类型的删除器
      * @tparam U 新的元素类型
      * @return 绑定到U的新删除器
      */
-    template <typename U>
-    NEFORCE_CONSTEXPR20 default_delete<U> rebind() && noexcept {
-        return default_delete<U>();
-    }
+    template <typename U> NEFORCE_CONSTEXPR20 default_delete<U> rebind() && noexcept { return default_delete<U>(); }
 };
 
 /**
  * @brief 数组特化的默认删除器
  * @tparam T 数组元素类型
  */
-template <typename T>
-struct default_delete<T[]> {
-    constexpr default_delete() noexcept = default;  ///< 默认构造函数
+template <typename T> struct default_delete<T[]> {
+    constexpr default_delete() noexcept = default; ///< 默认构造函数
 
     /**
      * @brief 从其他数组删除器转换构造
      * @tparam U 可转换为T的数组类型
      */
-    template <typename U, enable_if_t<is_convertible<U(*)[], T(*)[]>::value, int> = 0>
+    template <typename U, enable_if_t<is_convertible<U (*)[], T (*)[]>::value, int> = 0>
     NEFORCE_CONSTEXPR20 default_delete(const default_delete<U[]>&) noexcept {}
 
     /**
@@ -75,9 +68,9 @@ struct default_delete<T[]> {
      * @tparam U 数组元素类型
      * @param ptr 要删除的数组指针
      */
-    template <typename U, enable_if_t<is_convertible<U(*)[], T(*)[]>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 void operator ()(U* ptr) const noexcept {
-        delete [] ptr;
+    template <typename U, enable_if_t<is_convertible<U (*)[], T (*)[]>::value, int> = 0>
+    NEFORCE_CONSTEXPR20 void operator()(U* ptr) const noexcept {
+        delete[] ptr;
     }
 
     /**
@@ -85,10 +78,7 @@ struct default_delete<T[]> {
      * @tparam U 新的数组元素类型
      * @return 绑定到U[]的新删除器
      */
-    template <typename U>
-    NEFORCE_CONSTEXPR20 default_delete<U[]> rebind() && noexcept {
-        return default_delete<U[]>();
-    }
+    template <typename U> NEFORCE_CONSTEXPR20 default_delete<U[]> rebind() && noexcept { return default_delete<U[]>(); }
 };
 
 /** @} */ // Deleter

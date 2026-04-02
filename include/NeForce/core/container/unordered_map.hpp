@@ -34,35 +34,35 @@ NEFORCE_BEGIN_NAMESPACE__
  * 支持快速的键查找。底层使用哈希表实现。
  */
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
-    typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
+          typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
 class unordered_map : public icollector<unordered_map<Key, T, HashFcn, EqualKey, Alloc>> {
     static_assert(is_hash_v<HashFcn, Key>, "unordered map requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
-    static_assert(
-        is_same_v<hashtable_node<pair<const Key, T>>, typename Alloc::value_type>,
-        "allocator type mismatch.");
+    static_assert(is_same_v<hashtable_node<pair<const Key, T>>, typename Alloc::value_type>,
+                  "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered map only contains object types.");
 
-    using base_type = hashtable<pair<const Key, T>, Key, HashFcn, select1st<pair<const Key, T>>, EqualKey, Alloc>;  ///< 底层哈希表类型
+    using base_type = hashtable<pair<const Key, T>, Key, HashFcn, select1st<pair<const Key, T>>, EqualKey,
+                                Alloc>; ///< 底层哈希表类型
 
 public:
-    using key_type          = typename base_type::key_type;  ///< 键类型
-    using value_type        = typename base_type::value_type;  ///< 值类型
-    using hasher            = typename base_type::hasher;  ///< 哈希函数类型
-    using key_equal         = typename base_type::key_equal;  ///< 键相等比较函数类型
+    using key_type = typename base_type::key_type;     ///< 键类型
+    using value_type = typename base_type::value_type; ///< 值类型
+    using hasher = typename base_type::hasher;         ///< 哈希函数类型
+    using key_equal = typename base_type::key_equal;   ///< 键相等比较函数类型
 
-    using size_type         = typename base_type::size_type;  ///< 大小类型
-    using difference_type   = typename base_type::difference_type;  ///< 差值类型
-    using pointer           = typename base_type::pointer;  ///< 指针类型
-    using const_pointer     = typename base_type::const_pointer;  ///< 常量指针类型
-    using reference         = typename base_type::reference;  ///< 引用类型
-    using const_reference   = typename base_type::const_reference;  ///< 常量引用类型
-    using iterator          = typename base_type::iterator;  ///< 迭代器类型
-    using const_iterator    = typename base_type::const_iterator;  ///< 常量迭代器类型
-    using allocator_type    = typename base_type::allocator_type;  ///< 分配器类型
+    using size_type = typename base_type::size_type;             ///< 大小类型
+    using difference_type = typename base_type::difference_type; ///< 差值类型
+    using pointer = typename base_type::pointer;                 ///< 指针类型
+    using const_pointer = typename base_type::const_pointer;     ///< 常量指针类型
+    using reference = typename base_type::reference;             ///< 引用类型
+    using const_reference = typename base_type::const_reference; ///< 常量引用类型
+    using iterator = typename base_type::iterator;               ///< 迭代器类型
+    using const_iterator = typename base_type::const_iterator;   ///< 常量迭代器类型
+    using allocator_type = typename base_type::allocator_type;   ///< 分配器类型
 
 private:
-    base_type ht_{100};  ///< 底层哈希表实例
+    base_type ht_{100}; ///< 底层哈希表实例
 
 public:
     /**
@@ -76,16 +76,16 @@ public:
      * @brief 构造函数，指定初始桶数
      * @param n 初始桶数
      */
-    explicit unordered_map(size_type n)
-    : ht_(n) {}
+    explicit unordered_map(size_type n) :
+    ht_(n) {}
 
     /**
      * @brief 构造函数，指定初始桶数和哈希函数
      * @param n 初始桶数
      * @param hf 哈希函数
      */
-    unordered_map(size_type n, const hasher& hf)
-    : ht_(n, hf, key_equal()) {}
+    unordered_map(size_type n, const hasher& hf) :
+    ht_(n, hf, key_equal()) {}
 
     /**
      * @brief 构造函数，指定初始桶数、哈希函数和键相等比较函数
@@ -93,22 +93,22 @@ public:
      * @param hf 哈希函数
      * @param eql 键相等比较函数
      */
-    unordered_map(size_type n, const hasher& hf, const key_equal& eql)
-    : ht_(n, hf, eql) {}
+    unordered_map(size_type n, const hasher& hf, const key_equal& eql) :
+    ht_(n, hf, eql) {}
 
     /**
      * @brief 拷贝构造函数
      * @param other 源unordered_map
      */
-    unordered_map(const unordered_map& other)
-    : ht_(other.ht_) {}
+    unordered_map(const unordered_map& other) :
+    ht_(other.ht_) {}
 
     /**
      * @brief 拷贝赋值运算符
      * @param other 源unordered_map
      * @return 自身引用
      */
-    unordered_map& operator =(const unordered_map& other) {
+    unordered_map& operator=(const unordered_map& other) {
         ht_ = other.ht_;
         return *this;
     }
@@ -117,17 +117,15 @@ public:
      * @brief 移动构造函数
      * @param other 源unordered_map
      */
-    unordered_map(unordered_map&& other)
-    noexcept(is_nothrow_move_constructible_v<base_type>)
-    : ht_(_NEFORCE move(other.ht_)) {}
+    unordered_map(unordered_map&& other) noexcept(is_nothrow_move_constructible_v<base_type>) :
+    ht_(_NEFORCE move(other.ht_)) {}
 
     /**
      * @brief 移动赋值运算符
      * @param other 源unordered_map
      * @return 自身引用
      */
-    unordered_map& operator =(unordered_map&& other)
-    noexcept(is_nothrow_move_assignable_v<base_type>) {
+    unordered_map& operator=(unordered_map&& other) noexcept(is_nothrow_move_assignable_v<base_type>) {
         ht_ = _NEFORCE move(other.ht_);
         return *this;
     }
@@ -139,8 +137,8 @@ public:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    unordered_map(Iterator first, Iterator last)
-    : ht_(100, hasher(), key_equal()) {
+    unordered_map(Iterator first, Iterator last) :
+    ht_(100, hasher(), key_equal()) {
         ht_.insert_unique(first, last);
     }
 
@@ -152,8 +150,8 @@ public:
      * @param n 初始桶数
      */
     template <typename Iterator>
-    unordered_map(Iterator first, Iterator list, size_type n)
-    : ht_(n, hasher(), key_equal()) {
+    unordered_map(Iterator first, Iterator list, size_type n) :
+    ht_(n, hasher(), key_equal()) {
         ht_.insert_unique(first, list);
     }
 
@@ -166,8 +164,8 @@ public:
      * @param hf 哈希函数
      */
     template <typename Iterator>
-    unordered_map(Iterator first, Iterator last, size_type n, const hasher& hf)
-    : ht_(n, hf, key_equal()) {
+    unordered_map(Iterator first, Iterator last, size_type n, const hasher& hf) :
+    ht_(n, hf, key_equal()) {
         ht_.insert_unique(first, last);
     }
 
@@ -181,8 +179,8 @@ public:
      * @param eql 键相等比较函数
      */
     template <typename Iterator>
-    unordered_map(Iterator first, Iterator last, size_type n, const hasher& hf, const key_equal& eql)
-    : ht_(n, hf, eql) {
+    unordered_map(Iterator first, Iterator last, size_type n, const hasher& hf, const key_equal& eql) :
+    ht_(n, hf, eql) {
         ht_.insert_unique(first, last);
     }
 
@@ -190,16 +188,16 @@ public:
      * @brief 初始化列表构造函数
      * @param ilist 初始化列表
      */
-    unordered_map(std::initializer_list<value_type> ilist)
-    : unordered_map(ilist.begin(), ilist.end()) {}
+    unordered_map(std::initializer_list<value_type> ilist) :
+    unordered_map(ilist.begin(), ilist.end()) {}
 
     /**
      * @brief 初始化列表构造函数，指定初始桶数
      * @param ilist 初始化列表
      * @param n 初始桶数
      */
-    unordered_map(std::initializer_list<value_type> ilist, size_type n)
-    : unordered_map(ilist.begin(), ilist.end(), n) {}
+    unordered_map(std::initializer_list<value_type> ilist, size_type n) :
+    unordered_map(ilist.begin(), ilist.end(), n) {}
 
     /**
      * @brief 初始化列表构造函数，指定初始桶数和哈希函数
@@ -207,8 +205,8 @@ public:
      * @param n 初始桶数
      * @param hf 哈希函数
      */
-    unordered_map(std::initializer_list<value_type> ilist, size_type n, const hasher& hf)
-    : unordered_map(ilist.begin(), ilist.end(), n, hf) {}
+    unordered_map(std::initializer_list<value_type> ilist, size_type n, const hasher& hf) :
+    unordered_map(ilist.begin(), ilist.end(), n, hf) {}
 
     /**
      * @brief 初始化列表构造函数，指定初始桶数、哈希函数和键相等比较函数
@@ -217,88 +215,69 @@ public:
      * @param hf 哈希函数
      * @param eql 键相等比较函数
      */
-    unordered_map(std::initializer_list<value_type> ilist, size_type n, const hasher& hf, const key_equal& eql)
-    : unordered_map(ilist.begin(), ilist.end(), n, hf, eql) {}
+    unordered_map(std::initializer_list<value_type> ilist, size_type n, const hasher& hf, const key_equal& eql) :
+    unordered_map(ilist.begin(), ilist.end(), n, hf, eql) {}
 
     /**
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
-    NEFORCE_NODISCARD iterator begin() noexcept {
-        return ht_.begin();
-    }
+    NEFORCE_NODISCARD iterator begin() noexcept { return ht_.begin(); }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向最后一个元素之后位置的迭代器
      */
-    NEFORCE_NODISCARD iterator end() noexcept {
-        return ht_.end();
-    }
+    NEFORCE_NODISCARD iterator end() noexcept { return ht_.end(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator begin() const noexcept {
-        return ht_.begin();
-    }
+    NEFORCE_NODISCARD const_iterator begin() const noexcept { return ht_.begin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个元素之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator end() const noexcept {
-        return ht_.end();
-    }
+    NEFORCE_NODISCARD const_iterator end() const noexcept { return ht_.end(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cbegin() const noexcept {
-        return ht_.cbegin();
-    }
+    NEFORCE_NODISCARD const_iterator cbegin() const noexcept { return ht_.cbegin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个元素之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cend() const noexcept {
-        return ht_.cend();
-    }
+    NEFORCE_NODISCARD const_iterator cend() const noexcept { return ht_.cend(); }
 
     /**
      * @brief 获取元素数量
      * @return unordered_map中的元素数量
      */
-    NEFORCE_NODISCARD size_type size() const noexcept {
-        return ht_.size();
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept { return ht_.size(); }
 
     /**
      * @brief 获取最大可能大小
      * @return 最大元素数量
      */
-    NEFORCE_NODISCARD size_type max_size() const noexcept {
-        return ht_.max_size();
-    }
+    NEFORCE_NODISCARD size_type max_size() const noexcept { return ht_.max_size(); }
 
     /**
      * @brief 检查是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD bool empty() const noexcept {
-        return ht_.empty();
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept { return ht_.empty(); }
 
     /**
      * @brief 统计具有指定键的元素数量
      * @param key 要统计的键
      * @return 匹配的元素数量（0或1，因为键唯一）
      */
-    NEFORCE_NODISCARD size_type count(const key_type& key) const
-    noexcept(noexcept(ht_.count(key))) {
+    NEFORCE_NODISCARD size_type count(const key_type& key) const noexcept(noexcept(ht_.count(key))) {
         return ht_.count(key);
     }
 
@@ -306,76 +285,56 @@ public:
      * @brief 获取桶数量
      * @return 桶数量
      */
-    NEFORCE_NODISCARD size_type buckets_size() const noexcept {
-        return ht_.buckets_size();
-    }
+    NEFORCE_NODISCARD size_type buckets_size() const noexcept { return ht_.buckets_size(); }
 
     /**
      * @brief 获取最大桶数量
      * @return 最大桶数量
      */
-    NEFORCE_NODISCARD size_type buckets_max_count() const noexcept {
-        return ht_.buckets_max_size();
-    }
+    NEFORCE_NODISCARD size_type buckets_max_count() const noexcept { return ht_.buckets_max_size(); }
 
     /**
      * @brief 获取指定桶的大小
      * @param n 桶索引
      * @return 桶中的元素数量
      */
-    NEFORCE_NODISCARD size_type bucket_size(size_type n) const noexcept {
-        return ht_.bucket_size(n);
-    }
+    NEFORCE_NODISCARD size_type bucket_size(size_type n) const noexcept { return ht_.bucket_size(n); }
 
     /**
      * @brief 获取哈希函数对象
      * @return 哈希函数对象的副本
      */
-    NEFORCE_NODISCARD hasher hash_func() const
-    noexcept(noexcept(ht_.hash_func())) {
-        return ht_.hash_func();
-    }
+    NEFORCE_NODISCARD hasher hash_func() const noexcept(noexcept(ht_.hash_func())) { return ht_.hash_func(); }
 
     /**
      * @brief 获取键相等比较函数对象
      * @return 键相等比较函数对象的副本
      */
-    NEFORCE_NODISCARD key_equal key_eql() const
-    noexcept(noexcept(ht_.key_eql())) {
-        return ht_.key_eql();
-    }
+    NEFORCE_NODISCARD key_equal key_eql() const noexcept(noexcept(ht_.key_eql())) { return ht_.key_eql(); }
 
     /**
      * @brief 获取当前负载因子
      * @return 负载因子（元素数量/桶数量）
      */
-    NEFORCE_NODISCARD float load_factor() const noexcept {
-        return ht_.load_factor();
-    }
+    NEFORCE_NODISCARD float load_factor() const noexcept { return ht_.load_factor(); }
 
     /**
      * @brief 获取最大负载因子
      * @return 最大负载因子
      */
-    NEFORCE_NODISCARD float max_load_factor() const noexcept {
-        return ht_.max_load_factor();
-    }
+    NEFORCE_NODISCARD float max_load_factor() const noexcept { return ht_.max_load_factor(); }
 
     /**
      * @brief 设置最大负载因子
      * @param lf 新的最大负载因子
      */
-    void max_load_factor(float lf) noexcept {
-        ht_.max_load_factor(lf);
-    }
+    void max_load_factor(float lf) noexcept { ht_.max_load_factor(lf); }
 
     /**
      * @brief 重新哈希，调整桶数量
      * @param n 目标桶数量
      */
-    void rehash(size_type n) {
-        ht_.rehash(n);
-    }
+    void rehash(size_type n) { ht_.rehash(n); }
 
     /**
      * @brief 预留空间
@@ -383,9 +342,7 @@ public:
      *
      * 确保unordered_map至少能容纳n个元素而不触发rehash。
      */
-    void reserve(size_type n) {
-        ht_.reserve(n);
-    }
+    void reserve(size_type n) { ht_.reserve(n); }
 
     /**
      * @brief 在unordered_map中就地构造元素
@@ -393,8 +350,7 @@ public:
      * @param args 构造参数
      * @return 插入结果（迭代器和是否成功）
      */
-    template <typename... Args>
-    pair<iterator, bool> emplace(Args&&... args) {
+    template <typename... Args> pair<iterator, bool> emplace(Args&&... args) {
         return ht_.emplace_unique(_NEFORCE forward<Args>(args)...);
     }
 
@@ -403,18 +359,14 @@ public:
      * @param value 要插入的值
      * @return 插入结果（迭代器和是否成功）
      */
-    pair<iterator, bool> insert(const value_type& value) {
-        return ht_.insert_unique(value);
-    }
+    pair<iterator, bool> insert(const value_type& value) { return ht_.insert_unique(value); }
 
     /**
      * @brief 移动插入元素
      * @param value 要插入的值
      * @return 插入结果（迭代器和是否成功）
      */
-    pair<iterator, bool> insert(value_type&& value) {
-        return ht_.insert_unique(_NEFORCE forward<value_type>(value));
-    }
+    pair<iterator, bool> insert(value_type&& value) { return ht_.insert_unique(_NEFORCE forward<value_type>(value)); }
 
     /**
      * @brief 范围插入元素
@@ -422,10 +374,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator>
-    void insert(Iterator first, Iterator last) {
-        ht_.insert_unique(first, last);
-    }
+    template <typename Iterator> void insert(Iterator first, Iterator last) { ht_.insert_unique(first, last); }
 
     /**
      * @brief 删除所有具有指定键的元素
@@ -506,10 +455,11 @@ public:
      *
      * 如果键不存在，则插入一个默认构造的值并返回其引用。
      */
-    NEFORCE_NODISCARD T& operator [](const key_type& key) {
+    NEFORCE_NODISCARD T& operator[](const key_type& key) {
         auto iter = ht_.find(key);
-        if (iter == ht_.end())
+        if (iter == ht_.end()) {
             iter = ht_.emplace_unique(key, T()).first;
+        }
         return iter->second;
     }
 
@@ -545,18 +495,14 @@ public:
      * @brief 交换两个unordered_map的内容
      * @param other 要交换的另一个unordered_map
      */
-    void swap(unordered_map& other)
-    noexcept(is_nothrow_swappable_v<base_type>) {
-        ht_.swap(other.ht_);
-    }
+    void swap(unordered_map& other) noexcept(is_nothrow_swappable_v<base_type>) { ht_.swap(other.ht_); }
 
     /**
      * @brief 相等比较操作符
      * @param rhs 右侧unordered_map
      * @return 如果两个unordered_map大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const unordered_map& rhs) const
-     noexcept(noexcept(ht_ == rhs.ht_)) {
+    NEFORCE_NODISCARD bool operator==(const unordered_map& rhs) const noexcept(noexcept(ht_ == rhs.ht_)) {
         return ht_ == rhs.ht_;
     }
 
@@ -565,38 +511,37 @@ public:
      * @param rhs 右侧unordered_map
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator <(const unordered_map& rhs) const
-    noexcept(noexcept(ht_ < rhs.ht_)) {
+    NEFORCE_NODISCARD bool operator<(const unordered_map& rhs) const noexcept(noexcept(ht_ < rhs.ht_)) {
         return ht_ < rhs.ht_;
     }
 };
 
 #ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename HashFcn = hash<iter_map_key_t<Iterator>>,
-    typename Compare = equal_to<iter_map_key_t<Iterator>>, typename Alloc>
+          typename Compare = equal_to<iter_map_key_t<Iterator>>, typename Alloc>
 unordered_map(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
--> unordered_map<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, HashFcn, Compare, Alloc>;
+        -> unordered_map<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, HashFcn, Compare, Alloc>;
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename Compare = equal_to<Key>,
-    typename Alloc = allocator<pair<const Key, T>>>
+          typename Alloc = allocator<pair<const Key, T>>>
 unordered_map(std::initializer_list<pair<Key, T>>, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
--> unordered_map<Key, T, HashFcn, Compare, Alloc>;
+        -> unordered_map<Key, T, HashFcn, Compare, Alloc>;
 
 template <typename Iterator, typename Alloc>
-unordered_map(Iterator, Iterator, Alloc) -> unordered_map<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>,
-    hash<iter_map_key_t<Iterator>>, equal_to<iter_map_key_t<Iterator>>, Alloc>;
+unordered_map(Iterator, Iterator, Alloc)
+        -> unordered_map<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, hash<iter_map_key_t<Iterator>>,
+                         equal_to<iter_map_key_t<Iterator>>, Alloc>;
 
 template <typename Iterator, typename HashFcn, typename Alloc>
-unordered_map(Iterator, Iterator, HashFcn, Alloc) -> unordered_map<iter_map_key_t<Iterator>,
-    iter_map_value_t<Iterator>, HashFcn, equal_to<iter_map_key_t<Iterator>>, Alloc>;
+unordered_map(Iterator, Iterator, HashFcn, Alloc) -> unordered_map<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>,
+                                                                   HashFcn, equal_to<iter_map_key_t<Iterator>>, Alloc>;
 
 template <typename Key, typename T, typename Alloc>
-unordered_map(std::initializer_list<pair<Key, T>>, Alloc)
--> unordered_map<Key, T, hash<Key>, equal_to<Key>, Alloc>;
+unordered_map(std::initializer_list<pair<Key, T>>, Alloc) -> unordered_map<Key, T, hash<Key>, equal_to<Key>, Alloc>;
 
 template <typename Key, typename T, typename HashFcn, typename Alloc>
 unordered_map(std::initializer_list<pair<Key, T>>, HashFcn, Alloc)
--> unordered_map<Key, T, HashFcn, equal_to<Key>, Alloc>;
+        -> unordered_map<Key, T, HashFcn, equal_to<Key>, Alloc>;
 #endif
 
 /** @} */ // Container

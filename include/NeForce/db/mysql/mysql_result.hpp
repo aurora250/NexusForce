@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_MYSQL_RESULT_HPP__
 #define NEFORCE_DATABASE_MYSQL_RESULT_HPP__
 #ifdef NEFORCE_SUPPORT_MYSQL
-#include "NeForce/db/db_interface.hpp"
-#include <mysql/mysql.h>
+#    include <mysql/mysql.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API mysql_result final : idb_tb_result {

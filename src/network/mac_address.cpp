@@ -3,18 +3,20 @@
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/mac_address.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <iphlpapi.h>
+#    include <iphlpapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <linux/if.h>
-#include <net/if_arp.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
+#    include <linux/if.h>
+#    include <net/if_arp.h>
+#    include <sys/ioctl.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 optional<mac_address> mac_address::parse(const string_view str) noexcept {
-    if (str.size() != 17) return none;
+    if (str.size() != 17) {
+        return none;
+    }
 
     mac_address result;
     byte_t* ptr = result.bytes_.data();
@@ -23,9 +25,13 @@ optional<mac_address> mac_address::parse(const string_view str) noexcept {
     for (int i = 0; i < 6; ++i) {
         if (i > 0) {
             const char sep = str[pos++];
-            if (sep != ':' && sep != '-') return none;
+            if (sep != ':' && sep != '-') {
+                return none;
+            }
         }
-        if (pos + 2 > str.size()) return none;
+        if (pos + 2 > str.size()) {
+            return none;
+        }
 
         const auto xpair = hexadecimal::xdigit_value(str[pos], str[pos + 1]);
         if (!xpair.first) {
@@ -39,15 +45,15 @@ optional<mac_address> mac_address::parse(const string_view str) noexcept {
 
 
 optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface) noexcept {
-    if (!ip.is_valid() || !ip.is_ipv4()) return none;
+    if (!ip.is_valid() || !ip.is_ipv4()) {
+        return none;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6; // byte count SendARP expected
 
-    const ::ULONG ip_addr = endian::network_to_host<::ULONG>(
-            ip.address().get<::sockaddr_in>().sin_addr.s_addr
-        );
+    const ::ULONG ip_addr = endian::network_to_host<::ULONG>(ip.address().get<::sockaddr_in>().sin_addr.s_addr);
 
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {
@@ -70,7 +76,9 @@ optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface
     }
 
     const int fd = ::socket(AF_INET, SOCK_DGRAM, 0);
-    if (fd < 0) return none;
+    if (fd < 0) {
+        return none;
+    }
 
     const int ret = ::ioctl(fd, SIOCGARP, &req);
     ::close(fd);
@@ -85,8 +93,8 @@ optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface
 }
 
 string mac_address::to_string() const {
-    return format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}",
-                  bytes_[0], bytes_[1], bytes_[2], bytes_[3], bytes_[4], bytes_[5]);
+    return format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", bytes_[0], bytes_[1], bytes_[2], bytes_[3], bytes_[4],
+                  bytes_[5]);
 }
 
 NEFORCE_END_NAMESPACE__

@@ -10,14 +10,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief FTP操作异常
  */
 struct NEFORCE_API ftp_exception final : network_exception {
-    explicit ftp_exception(
-        const char* info = "FTP Operation Failed.",
-        const char* type = static_type,
-        const int code = 0) noexcept
-    : network_exception(info, type, code) {}
+    explicit ftp_exception(const char* info = "FTP Operation Failed.", const char* type = static_type,
+                           const int code = 0) noexcept :
+    network_exception(info, type, code) {}
 
-    explicit ftp_exception(const exception& e)
-    : network_exception(e) {}
+    explicit ftp_exception(const exception& e) :
+    network_exception(e) {}
 
     ~ftp_exception() override = default;
 
@@ -27,21 +25,11 @@ struct NEFORCE_API ftp_exception final : network_exception {
 
 class NEFORCE_API ftp_client final : public ip_socket {
 public:
-    enum class transfer_mode {
-        ascii,
-        binary
-    };
+    enum class transfer_mode { ascii, binary };
 
-    enum class passive_mode {
-        active,
-        passive
-    };
+    enum class passive_mode { active, passive };
 
-    enum class tls_mode {
-        none,
-        implicit_,
-        explicit_
-    };
+    enum class tls_mode { none, implicit_, explicit_ };
 
     struct entry {
         string name;
@@ -54,12 +42,8 @@ public:
         int code;
         string message;
 
-        NEFORCE_NODISCARD bool is_success() const noexcept {
-            return code >= 200 && code < 400;
-        }
-        NEFORCE_NODISCARD bool is_positive_preliminary() const noexcept {
-            return code >= 100 && code < 200;
-        }
+        NEFORCE_NODISCARD bool is_success() const noexcept { return code >= 200 && code < 400; }
+        NEFORCE_NODISCARD bool is_positive_preliminary() const noexcept { return code >= 100 && code < 200; }
     };
 
     struct tls_info {
@@ -103,14 +87,9 @@ private:
     void do_ctrl_tls_handshake();
     void do_post_connect();
 
-    vector<char> download_impl(const string& remote_path,
-                               tcp_socket& data_sock,
-                               uint64_t offset);
+    vector<char> download_impl(const string& remote_path, tcp_socket& data_sock, uint64_t offset);
 
-    void upload_impl(const string& remote_path,
-                     tcp_socket& data_sock,
-                     const char* data, size_t len,
-                     uint64_t offset);
+    void upload_impl(const string& remote_path, tcp_socket& data_sock, const char* data, size_t len, uint64_t offset);
 
     void open_and_connect(const ip_address& addr);
 
@@ -120,19 +99,18 @@ public:
     ftp_client() = default;
 
     ftp_client(ftp_client&& other) = default;
-    ftp_client& operator =(ftp_client&& other) = default;
+    ftp_client& operator=(ftp_client&& other) = default;
 
     ftp_client(const ftp_client&) = delete;
-    ftp_client& operator =(const ftp_client&) = delete;
+    ftp_client& operator=(const ftp_client&) = delete;
 
     ~ftp_client() override;
 
-    void connect(const ip_address& addr, tls_mode mode = tls_mode::none,
-                 ssl_context* ctx = nullptr, const string& sni_hostname = "");
+    void connect(const ip_address& addr, tls_mode mode = tls_mode::none, ssl_context* ctx = nullptr,
+                 const string& sni_hostname = "");
 
-    void connect(const string& hostname, ports port = ports::ftp,
-                 tls_mode mode = tls_mode::none, dns_client* dns = nullptr,
-                 ssl_context* ctx = nullptr, const string& sni = "");
+    void connect(const string& hostname, ports port = ports::ftp, tls_mode mode = tls_mode::none,
+                 dns_client* dns = nullptr, ssl_context* ctx = nullptr, const string& sni = "");
 
     tls_info upgrade_tls(ssl_context& ctx, const string& sni_hostname = "");
 
@@ -165,13 +143,9 @@ public:
 
     void noop();
 
-    NEFORCE_NODISCARD bool is_connected() const noexcept {
-        return connected_ && is_open();
-    }
+    NEFORCE_NODISCARD bool is_connected() const noexcept { return connected_ && is_open(); }
 
-    NEFORCE_NODISCARD bool is_tls_active() const noexcept {
-        return tls_active_;
-    }
+    NEFORCE_NODISCARD bool is_tls_active() const noexcept { return tls_active_; }
 
     NEFORCE_NODISCARD tls_info get_tls_info() const noexcept;
 };

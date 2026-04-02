@@ -33,21 +33,18 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API date : public iobject<date>, public icommon<date> {
 public:
-    using date_type = int32_t;  ///< 日期分量类型
+    using date_type = int32_t; ///< 日期分量类型
 
 private:
-    date_type year_ = 1970;   ///< 年份
-    date_type month_ = 1;     ///< 月份（1-12）
-    date_type day_ = 1;       ///< 日期（1-31）
+    date_type year_ = 1970; ///< 年份
+    date_type month_ = 1;   ///< 月份（1-12）
+    date_type day_ = 1;     ///< 日期（1-31）
 
 public:
     /**
      * @brief 每月天数表（非闰年）
      */
-    static constexpr int32_t month_days[12] = {
-        31, 28, 31, 30, 31, 30,
-        31, 31, 30, 31, 30, 31
-    };
+    static constexpr int32_t month_days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 public:
     /**
@@ -74,33 +71,27 @@ public:
     }
 
     constexpr date(const date&) noexcept = default;
-    constexpr date& operator =(const date&) noexcept = default;
+    constexpr date& operator=(const date&) noexcept = default;
     constexpr date(date&&) noexcept = default;
-    constexpr date& operator =(date&&) noexcept = default;
+    constexpr date& operator=(date&&) noexcept = default;
 
     /**
      * @brief 获取年份
      * @return 年份
      */
-    NEFORCE_NODISCARD constexpr date_type year() const noexcept {
-        return year_;
-    }
+    NEFORCE_NODISCARD constexpr date_type year() const noexcept { return year_; }
 
     /**
      * @brief 获取月份
      * @return 月份
      */
-    NEFORCE_NODISCARD constexpr date_type month() const noexcept {
-        return month_;
-    }
+    NEFORCE_NODISCARD constexpr date_type month() const noexcept { return month_; }
 
     /**
      * @brief 获取日期
      * @return 日期
      */
-    NEFORCE_NODISCARD constexpr date_type day() const noexcept {
-        return day_;
-    }
+    NEFORCE_NODISCARD constexpr date_type day() const noexcept { return day_; }
 
     /**
      * @brief 检查日期是否有效
@@ -110,8 +101,12 @@ public:
      * @return 是否有效
      */
     static constexpr bool is_valid(date_type year, date_type month, date_type day) noexcept {
-        if (year < 1900 || year > 9999) return false;
-        if (month < 1 || month > 12) return false;
+        if (year < 1900 || year > 9999) {
+            return false;
+        }
+        if (month < 1 || month > 12) {
+            return false;
+        }
         return day > 0 && day <= days_of_month(year, month);
     }
 
@@ -119,17 +114,13 @@ public:
      * @brief 检查日期是否有效
      * @return 是否有效
      */
-    constexpr bool is_valid() const noexcept {
-        return is_valid(year_, month_, day_);
-    }
+    constexpr bool is_valid() const noexcept { return is_valid(year_, month_, day_); }
 
     /**
      * @brief 获取纪元起始日期（1970-01-01）
      * @return 纪元起始日期
      */
-    static constexpr date epoch() noexcept {
-        return date{};
-    }
+    static constexpr date epoch() noexcept { return date{}; }
 
     /**
      * @brief 检查是否为闰年
@@ -227,17 +218,23 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator ==(const date& rhs) const noexcept {
+    constexpr bool operator==(const date& rhs) const noexcept {
         return year_ == rhs.year_ && month_ == rhs.month_ && day_ == rhs.day_;
     }
 
     /**
      * @brief 小于比较
      */
-    constexpr bool operator <(const date& rhs) const noexcept {
-        if (year_ < rhs.year_) return true;
-        if (year_ == rhs.year_ && month_ < rhs.month_) return true;
-        if (year_ == rhs.year_ && month_ == rhs.month_ && day_ < rhs.day_) return true;
+    constexpr bool operator<(const date& rhs) const noexcept {
+        if (year_ < rhs.year_) {
+            return true;
+        }
+        if (year_ == rhs.year_ && month_ < rhs.month_) {
+            return true;
+        }
+        if (year_ == rhs.year_ && month_ == rhs.month_ && day_ < rhs.day_) {
+            return true;
+        }
         return false;
     }
 
@@ -246,9 +243,13 @@ public:
      * @param day 要加的天数
      * @return 自身引用
      */
-    constexpr date& operator +=(const date_type day) noexcept {
-        if (day == 0) return *this;
-        if (day < 0) return *this -= -day;
+    constexpr date& operator+=(const date_type day) noexcept {
+        if (day == 0) {
+            return *this;
+        }
+        if (day < 0) {
+            return *this -= -day;
+        }
 
         if (day > 365) {
             const int64_t jd = to_julian_day(year_, month_, day_) + day;
@@ -281,8 +282,10 @@ public:
      * @param day 要减的天数
      * @return 自身引用
      */
-    constexpr date& operator -=(const date_type day) noexcept {
-        if (day < 0) return *this += -day;
+    constexpr date& operator-=(const date_type day) noexcept {
+        if (day < 0) {
+            return *this += -day;
+        }
 
         day_ -= day;
         while (day_ <= 0) {
@@ -300,7 +303,7 @@ public:
      * @param day 天数
      * @return 新日期
      */
-    constexpr date operator +(const date_type day) const noexcept {
+    constexpr date operator+(const date_type day) const noexcept {
         date ret(*this);
         ret += day;
         return ret;
@@ -311,7 +314,7 @@ public:
      * @param day 天数
      * @return 新日期
      */
-    constexpr date operator -(const date_type day) const noexcept {
+    constexpr date operator-(const date_type day) const noexcept {
         date ret(*this);
         ret -= day;
         return ret;
@@ -320,7 +323,7 @@ public:
     /**
      * @brief 前置递增（加1天）
      */
-    constexpr date& operator ++() {
+    constexpr date& operator++() {
         *this += 1;
         return *this;
     }
@@ -328,7 +331,7 @@ public:
     /**
      * @brief 后置递增（加1天）
      */
-    constexpr date operator ++(int) {
+    constexpr date operator++(int) {
         const date ret(*this);
         *this += 1;
         return ret;
@@ -339,9 +342,9 @@ public:
      * @param other 另一个日期
      * @return 相差的天数
      */
-    constexpr date_type operator -(const date& other) const noexcept {
+    constexpr date_type operator-(const date& other) const noexcept {
         return static_cast<date_type>(to_julian_day(year_, month_, day_) -
-               to_julian_day(other.year_, other.month_, other.day_));
+                                      to_julian_day(other.year_, other.month_, other.day_));
     }
 
     /**
@@ -397,12 +400,12 @@ public:
  */
 class NEFORCE_API time : public iobject<time>, public icommon<time> {
 public:
-    using time_type = int32_t;  ///< 时间分量类型
+    using time_type = int32_t; ///< 时间分量类型
 
 private:
-    time_type hours_ = 0;    ///< 小时（0-23）
-    time_type minutes_ = 0;  ///< 分钟（0-59）
-    time_type seconds_ = 0;  ///< 秒（0-59）
+    time_type hours_ = 0;   ///< 小时（0-23）
+    time_type minutes_ = 0; ///< 分钟（0-59）
+    time_type seconds_ = 0; ///< 秒（0-59）
 
 public:
     /**
@@ -430,33 +433,27 @@ public:
     }
 
     constexpr time(const time&) noexcept = default;
-    constexpr time& operator =(const time&) noexcept = default;
+    constexpr time& operator=(const time&) noexcept = default;
     constexpr time(time&&) noexcept = default;
-    constexpr time& operator =(time&&) noexcept = default;
+    constexpr time& operator=(time&&) noexcept = default;
 
     /**
      * @brief 获取小时
      * @return 小时
      */
-    NEFORCE_NODISCARD constexpr time_type hours() const noexcept {
-        return hours_;
-    }
+    NEFORCE_NODISCARD constexpr time_type hours() const noexcept { return hours_; }
 
     /**
      * @brief 获取分钟
      * @return 分钟
      */
-    NEFORCE_NODISCARD constexpr time_type minutes() const noexcept {
-        return minutes_;
-    }
+    NEFORCE_NODISCARD constexpr time_type minutes() const noexcept { return minutes_; }
 
     /**
      * @brief 获取秒
      * @return 秒
      */
-    NEFORCE_NODISCARD constexpr time_type seconds() const noexcept {
-        return seconds_;
-    }
+    NEFORCE_NODISCARD constexpr time_type seconds() const noexcept { return seconds_; }
 
     /**
      * @brief 检查时间是否有效
@@ -473,9 +470,7 @@ public:
      * @brief 检查时间是否有效
      * @return 是否有效
      */
-    constexpr bool is_valid() const noexcept {
-        return is_valid(hours_, minutes_, seconds_);
-    }
+    constexpr bool is_valid() const noexcept { return is_valid(hours_, minutes_, seconds_); }
 
     /**
      * @brief 重置为00:00:00
@@ -497,18 +492,24 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator ==(const time& other) const noexcept {
+    constexpr bool operator==(const time& other) const noexcept {
         return hours_ == other.hours_ && minutes_ == other.minutes_ && seconds_ == other.seconds_;
     }
 
     /**
      * @brief 小于比较
      */
-    constexpr bool operator <(const time& other) const noexcept {
-        if (hours_ < other.hours_) return true;
+    constexpr bool operator<(const time& other) const noexcept {
+        if (hours_ < other.hours_) {
+            return true;
+        }
         if (hours_ == other.hours_) {
-            if (minutes_ < other.minutes_) return true;
-            if (minutes_ == other.minutes_ && seconds_ < other.seconds_) return true;
+            if (minutes_ < other.minutes_) {
+                return true;
+            }
+            if (minutes_ == other.minutes_ && seconds_ < other.seconds_) {
+                return true;
+            }
         }
         return false;
     }
@@ -518,8 +519,10 @@ public:
      * @param seconds 要加的秒数
      * @return 自身引用
      */
-    constexpr time& operator +=(const time_type seconds) {
-        if (seconds < 0) return *this -= -seconds;
+    constexpr time& operator+=(const time_type seconds) {
+        if (seconds < 0) {
+            return *this -= -seconds;
+        }
 
         seconds_ += seconds;
         const time_type extra_min = seconds_ / 60;
@@ -540,14 +543,18 @@ public:
      * @param seconds 要减的秒数
      * @return 自身引用
      */
-    constexpr time& operator -=(const time_type seconds) noexcept {
-        if (seconds < 0) return *this += -seconds;
+    constexpr time& operator-=(const time_type seconds) noexcept {
+        if (seconds < 0) {
+            return *this += -seconds;
+        }
 
         int64_t total_sec = to_seconds() - seconds;
         total_sec %= 86400;
-        if (total_sec < 0) total_sec += 86400;
+        if (total_sec < 0) {
+            total_sec += 86400;
+        }
 
-        hours_   = static_cast<time_type>(total_sec / 3600);
+        hours_ = static_cast<time_type>(total_sec / 3600);
         minutes_ = static_cast<time_type>((total_sec % 3600) / 60);
         seconds_ = static_cast<time_type>(total_sec % 60);
         return *this;
@@ -558,7 +565,7 @@ public:
      * @param seconds 秒数
      * @return 新时间
      */
-    constexpr time operator +(const time_type seconds) const noexcept {
+    constexpr time operator+(const time_type seconds) const noexcept {
         time ret(*this);
         ret += seconds;
         return ret;
@@ -569,7 +576,7 @@ public:
      * @param seconds 秒数
      * @return 新时间
      */
-    constexpr time operator -(const time_type seconds) const noexcept {
+    constexpr time operator-(const time_type seconds) const noexcept {
         time ret(*this);
         ret -= seconds;
         return ret;
@@ -578,14 +585,12 @@ public:
     /**
      * @brief 前置递增（加1秒）
      */
-    constexpr time& operator ++() {
-        return *this += 1;
-    }
+    constexpr time& operator++() { return *this += 1; }
 
     /**
      * @brief 后置递增（加1秒）
      */
-    constexpr time operator ++(int) {
+    constexpr time operator++(int) {
         const time ret(*this);
         *this += 1;
         return ret;
@@ -594,14 +599,12 @@ public:
     /**
      * @brief 前置递减（减1秒）
      */
-    constexpr time& operator --() {
-        return *this -= 1;
-    }
+    constexpr time& operator--() { return *this -= 1; }
 
     /**
      * @brief 后置递减（减1秒）
      */
-    constexpr time operator --(int) {
+    constexpr time operator--(int) {
         const time ret(*this);
         *this -= 1;
         return ret;
@@ -612,7 +615,7 @@ public:
      * @param other 另一个时间
      * @return 相差的秒数
      */
-    constexpr time_type operator -(const time& other) const noexcept {
+    constexpr time_type operator-(const time& other) const noexcept {
         time_type sec_diff = (hours_ - other.hours_) * 3600;
         sec_diff += (minutes_ - other.minutes_) * 60;
         sec_diff += (seconds_ - other.seconds_);
@@ -677,27 +680,26 @@ public:
  */
 class NEFORCE_API datetime : public iobject<datetime>, public icommon<datetime> {
 public:
-    using date_type = _NEFORCE date::date_type;  ///< 日期分量类型
-    using time_type = _NEFORCE time::time_type;  ///< 时间分量类型
+    using date_type = _NEFORCE date::date_type; ///< 日期分量类型
+    using time_type = _NEFORCE time::time_type; ///< 时间分量类型
 
 private:
-    _NEFORCE date date_{};           ///< 日期部分
-    _NEFORCE time time_{};           ///< 时间部分
-    int64_t offset_seconds_ = 0;  ///< 时区偏移
-    bool has_timezone_ = false;   ///< 是否有时区信息
+    _NEFORCE date date_{};       ///< 日期部分
+    _NEFORCE time time_{};       ///< 时间部分
+    int64_t offset_seconds_ = 0; ///< 时区偏移
+    bool has_timezone_ = false;  ///< 是否有时区信息
 
 public:
     /**
      * @brief 星期名称缩写
      */
-    static constexpr string_view weekdays_string[] =
-        {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    static constexpr string_view weekdays_string[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     /**
      * @brief 月份名称缩写
      */
-    static constexpr string_view months_string[] =
-        {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    static constexpr string_view months_string[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 private:
     /**
@@ -707,7 +709,9 @@ private:
      */
     static constexpr int months_to_int(const string_view view) {
         for (int i = 0; i < 12; ++i) {
-            if (view == months_string[i]) return i + 1;
+            if (view == months_string[i]) {
+                return i + 1;
+            }
         }
         return 0;
     }
@@ -718,9 +722,9 @@ public:
     NEFORCE_CONSTEXPR20 ~datetime() = default;
 
     constexpr datetime(const datetime&) noexcept = default;
-    constexpr datetime& operator =(const datetime&) noexcept = default;
+    constexpr datetime& operator=(const datetime&) noexcept = default;
     constexpr datetime(datetime&&) noexcept = default;
-    constexpr datetime& operator =(datetime&&) noexcept = default;
+    constexpr datetime& operator=(datetime&&) noexcept = default;
 
     /**
      * @brief 从日期和时间构造
@@ -731,9 +735,10 @@ public:
      * @param minute 分钟
      * @param second 秒
      */
-    constexpr explicit datetime(const date_type year, const date_type month, const date_type day,
-                                const time_type hour, const time_type minute, const time_type second) noexcept
-    : date_(year, month, day), time_(hour, minute, second) {}
+    constexpr explicit datetime(const date_type year, const date_type month, const date_type day, const time_type hour,
+                                const time_type minute, const time_type second) noexcept :
+    date_(year, month, day),
+    time_(hour, minute, second) {}
 
     /**
      * @brief 从日期、时间和时区构造
@@ -745,18 +750,21 @@ public:
      * @param second 秒
      * @param offset 时区偏移（秒）
      */
-    constexpr explicit datetime(const date_type year, const date_type month, const date_type day,
-                                const time_type hour, const time_type minute, const time_type second,
-                                const int64_t offset) noexcept
-    : date_(year, month, day), time_(hour, minute, second), offset_seconds_(offset), has_timezone_(true) {}
+    constexpr explicit datetime(const date_type year, const date_type month, const date_type day, const time_type hour,
+                                const time_type minute, const time_type second, const int64_t offset) noexcept :
+    date_(year, month, day),
+    time_(hour, minute, second),
+    offset_seconds_(offset),
+    has_timezone_(true) {}
 
     /**
      * @brief 从日期和时间对象构造
      * @param date 日期对象
      * @param time 时间对象
      */
-    constexpr explicit datetime(const _NEFORCE date& date, const _NEFORCE time& time) noexcept
-    : date_(date), time_(time) {}
+    constexpr explicit datetime(const _NEFORCE date& date, const _NEFORCE time& time) noexcept :
+    date_(date),
+    time_(time) {}
 
     /**
      * @brief 从日期、时间对象和时区构造
@@ -764,29 +772,32 @@ public:
      * @param time 时间对象
      * @param offset 时区偏移（秒）
      */
-    constexpr explicit datetime(const _NEFORCE date& date, const _NEFORCE time& time, const int64_t offset) noexcept
-    : date_(date), time_(time), offset_seconds_(offset), has_timezone_(true) {}
+    constexpr explicit datetime(const _NEFORCE date& date, const _NEFORCE time& time, const int64_t offset) noexcept :
+    date_(date),
+    time_(time),
+    offset_seconds_(offset),
+    has_timezone_(true) {}
 
     /**
      * @brief 从日期构造（时间部分为00:00:00）
      * @param date 日期对象
      */
-    constexpr explicit datetime(const _NEFORCE date& date) noexcept
-    : date_(date) {}
+    constexpr explicit datetime(const _NEFORCE date& date) noexcept :
+    date_(date) {}
 
     /**
      * @brief 从时间构造（日期部分为1970-01-01）
      * @param time 时间对象
      */
-    constexpr explicit datetime(const _NEFORCE time& time) noexcept
-    : time_(time) {}
+    constexpr explicit datetime(const _NEFORCE time& time) noexcept :
+    time_(time) {}
 
     /**
      * @brief 从日期构造（时间部分为00:00:00）
      * @param date 日期对象
      */
-    constexpr explicit datetime(_NEFORCE date&& date) noexcept
-    : date_(date) {
+    constexpr explicit datetime(_NEFORCE date&& date) noexcept :
+    date_(date) {
         date.clear();
     }
 
@@ -794,8 +805,8 @@ public:
      * @brief 从时间构造（日期部分为1970-01-01）
      * @param time 时间对象
      */
-    constexpr explicit datetime(_NEFORCE time&& time) noexcept
-    : time_(time) {
+    constexpr explicit datetime(_NEFORCE time&& time) noexcept :
+    time_(time) {
         time.clear();
     }
 
@@ -804,8 +815,9 @@ public:
      * @param date 日期对象
      * @param time 时间对象
      */
-    constexpr explicit datetime(_NEFORCE date&& date, _NEFORCE time&& time) noexcept
-    : date_(date), time_(time) {
+    constexpr explicit datetime(_NEFORCE date&& date, _NEFORCE time&& time) noexcept :
+    date_(date),
+    time_(time) {
         date.clear();
         time.clear();
     }
@@ -816,8 +828,11 @@ public:
      * @param time 时间对象
      * @param offset 时区偏移（秒）
      */
-    constexpr explicit datetime(_NEFORCE date&& date, _NEFORCE time&& time, const int64_t offset) noexcept
-    : date_(date), time_(time), offset_seconds_(offset), has_timezone_(true) {
+    constexpr explicit datetime(_NEFORCE date&& date, _NEFORCE time&& time, const int64_t offset) noexcept :
+    date_(date),
+    time_(time),
+    offset_seconds_(offset),
+    has_timezone_(true) {
         date.clear();
         time.clear();
     }
@@ -826,16 +841,14 @@ public:
      * @brief 检查时间是否有效
      * @return 是否有效
      */
-    constexpr bool is_valid() const noexcept {
-        return date_.is_valid() && time_.is_valid();
-    }
+    constexpr bool is_valid() const noexcept { return date_.is_valid() && time_.is_valid(); }
 
     /**
      * @brief 从日期赋值
      * @param date 日期对象
      * @return 自身引用
      */
-    constexpr datetime& operator =(const _NEFORCE date& date) noexcept {
+    constexpr datetime& operator=(const _NEFORCE date& date) noexcept {
         date_ = date;
         return *this;
     }
@@ -845,7 +858,7 @@ public:
      * @param date 日期对象
      * @return 自身引用
      */
-    constexpr datetime& operator =(_NEFORCE date&& date) noexcept {
+    constexpr datetime& operator=(_NEFORCE date&& date) noexcept {
         date_ = date;
         date.clear();
         return *this;
@@ -856,7 +869,7 @@ public:
      * @param time 时间对象
      * @return 自身引用
      */
-    constexpr datetime& operator =(const _NEFORCE time& time) noexcept {
+    constexpr datetime& operator=(const _NEFORCE time& time) noexcept {
         time_ = time;
         return *this;
     }
@@ -866,7 +879,7 @@ public:
      * @param time 时间对象
      * @return 自身引用
      */
-    constexpr datetime& operator =(_NEFORCE time&& time) noexcept {
+    constexpr datetime& operator=(_NEFORCE time&& time) noexcept {
         time_ = time;
         time.clear();
         return *this;
@@ -876,89 +889,67 @@ public:
      * @brief 获取日期部分
      * @return 日期对象
      */
-    NEFORCE_NODISCARD constexpr const _NEFORCE date& date() const noexcept {
-        return date_;
-    }
+    NEFORCE_NODISCARD constexpr const _NEFORCE date& date() const noexcept { return date_; }
 
     /**
      * @brief 获取时间部分
      * @return 时间对象
      */
-    NEFORCE_NODISCARD constexpr const _NEFORCE time& time() const noexcept {
-        return time_;
-    }
+    NEFORCE_NODISCARD constexpr const _NEFORCE time& time() const noexcept { return time_; }
 
     /**
      * @brief 获取小时
      * @return 小时
      */
-    NEFORCE_NODISCARD constexpr time_type hours() const noexcept {
-        return time_.hours();
-    }
+    NEFORCE_NODISCARD constexpr time_type hours() const noexcept { return time_.hours(); }
 
     /**
      * @brief 获取分钟
      * @return 分钟
      */
-    NEFORCE_NODISCARD constexpr time_type minutes() const noexcept {
-        return time_.minutes();
-    }
+    NEFORCE_NODISCARD constexpr time_type minutes() const noexcept { return time_.minutes(); }
 
     /**
      * @brief 获取秒
      * @return 秒
      */
-    NEFORCE_NODISCARD constexpr time_type seconds() const noexcept {
-        return time_.seconds();
-    }
+    NEFORCE_NODISCARD constexpr time_type seconds() const noexcept { return time_.seconds(); }
 
     /**
      * @brief 获取年份
      * @return 年份
      */
-    NEFORCE_NODISCARD constexpr date_type year() const noexcept {
-        return date_.year();
-    }
+    NEFORCE_NODISCARD constexpr date_type year() const noexcept { return date_.year(); }
 
     /**
      * @brief 获取月份
      * @return 月份
      */
-    NEFORCE_NODISCARD constexpr date_type month() const noexcept {
-        return date_.month();
-    }
+    NEFORCE_NODISCARD constexpr date_type month() const noexcept { return date_.month(); }
 
     /**
      * @brief 获取日期
      * @return 日期
      */
-    NEFORCE_NODISCARD constexpr date_type day() const noexcept {
-        return date_.day();
-    }
+    NEFORCE_NODISCARD constexpr date_type day() const noexcept { return date_.day(); }
 
     /**
      * @brief 检查是否有时区信息
      * @return 是否有时区
      */
-    NEFORCE_NODISCARD constexpr bool has_timezone() const noexcept {
-        return has_timezone_;
-    }
+    NEFORCE_NODISCARD constexpr bool has_timezone() const noexcept { return has_timezone_; }
 
     /**
      * @brief 获取时区偏移
      * @return 时区偏移（秒）
      */
-    NEFORCE_NODISCARD constexpr int64_t offset_seconds() const noexcept {
-        return offset_seconds_;
-    }
+    NEFORCE_NODISCARD constexpr int64_t offset_seconds() const noexcept { return offset_seconds_; }
 
     /**
      * @brief 获取纪元起始时间（1970-01-01 00:00:00 UTC）
      * @return 纪元起始时间
      */
-    NEFORCE_NODISCARD static constexpr datetime epoch() noexcept {
-        return datetime{};
-    }
+    NEFORCE_NODISCARD static constexpr datetime epoch() noexcept { return datetime{}; }
 
     /**
      * @brief 获取当前本地时间
@@ -979,24 +970,22 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator ==(const datetime& other) const noexcept {
-        return date_ == other.date_ && time_ == other.time_
-            && has_timezone_ == other.has_timezone_
-            && offset_seconds_ == other.offset_seconds_;
+    constexpr bool operator==(const datetime& other) const noexcept {
+        return date_ == other.date_ && time_ == other.time_ && has_timezone_ == other.has_timezone_ &&
+               offset_seconds_ == other.offset_seconds_;
     }
 
     /**
      * @brief 小于比较
      */
-    constexpr bool operator <(const datetime& other) const noexcept {
+    constexpr bool operator<(const datetime& other) const noexcept {
         if (date_ < other.date_) {
             return true;
         } else if (date_ == other.date_) {
             if (time_ < other.time_) {
                 return true;
             } else if (time_ == other.time_) {
-                if (has_timezone_ && other.has_timezone_ &&
-                    offset_seconds_ < other.offset_seconds_) {
+                if (has_timezone_ && other.has_timezone_ && offset_seconds_ < other.offset_seconds_) {
                     return true;
                 }
             }
@@ -1009,13 +998,14 @@ public:
      * @param seconds 秒数
      * @return 自身引用
      */
-    constexpr datetime& operator +=(const int64_t seconds) {
-        if (seconds < 0) return *this -= -seconds;
+    constexpr datetime& operator+=(const int64_t seconds) {
+        if (seconds < 0) {
+            return *this -= -seconds;
+        }
 
-        const int64_t current_total_sec =
-            static_cast<int64_t>(time_.hours()) * 3600 +
-            static_cast<int64_t>(time_.minutes()) * 60 +
-            static_cast<int64_t>(time_.seconds());
+        const int64_t current_total_sec = static_cast<int64_t>(time_.hours()) * 3600 +
+                                          static_cast<int64_t>(time_.minutes()) * 60 +
+                                          static_cast<int64_t>(time_.seconds());
 
         int64_t new_total_sec = current_total_sec + seconds;
         int64_t days_to_add = new_total_sec / 86400;
@@ -1027,11 +1017,9 @@ public:
         }
 
         date_ += static_cast<date_type>(days_to_add);
-        time_ = _NEFORCE time(
-            static_cast<time_type>(new_total_sec / 3600),
-            static_cast<time_type>((new_total_sec % 3600) / 60),
-            static_cast<time_type>(new_total_sec % 60)
-        );
+        time_ = _NEFORCE time(static_cast<time_type>(new_total_sec / 3600),
+                              static_cast<time_type>((new_total_sec % 3600) / 60),
+                              static_cast<time_type>(new_total_sec % 60));
         return *this;
     }
 
@@ -1040,13 +1028,14 @@ public:
      * @param seconds 秒数
      * @return 自身引用
      */
-    constexpr datetime& operator -=(const int64_t seconds) noexcept {
-        if (seconds < 0) return *this += -seconds;
+    constexpr datetime& operator-=(const int64_t seconds) noexcept {
+        if (seconds < 0) {
+            return *this += -seconds;
+        }
 
-        const int64_t current_total_sec =
-            static_cast<int64_t>(time_.hours()) * 3600 +
-            static_cast<int64_t>(time_.minutes()) * 60 +
-            static_cast<int64_t>(time_.seconds());
+        const int64_t current_total_sec = static_cast<int64_t>(time_.hours()) * 3600 +
+                                          static_cast<int64_t>(time_.minutes()) * 60 +
+                                          static_cast<int64_t>(time_.seconds());
 
         int64_t new_total_sec = current_total_sec - seconds;
         int64_t days_to_subtract = 0;
@@ -1057,11 +1046,9 @@ public:
         }
 
         date_ -= static_cast<date_type>(days_to_subtract);
-        time_ = _NEFORCE time(
-            static_cast<time_type>(new_total_sec / 3600),
-            static_cast<time_type>((new_total_sec % 3600) / 60),
-            static_cast<time_type>(new_total_sec % 60)
-        );
+        time_ = _NEFORCE time(static_cast<time_type>(new_total_sec / 3600),
+                              static_cast<time_type>((new_total_sec % 3600) / 60),
+                              static_cast<time_type>(new_total_sec % 60));
         return *this;
     }
 
@@ -1070,7 +1057,7 @@ public:
      * @param seconds 秒数
      * @return 新时间
      */
-    constexpr datetime operator +(const int64_t seconds) const noexcept {
+    constexpr datetime operator+(const int64_t seconds) const noexcept {
         datetime ret(*this);
         ret += seconds;
         return ret;
@@ -1081,7 +1068,7 @@ public:
      * @param seconds 秒数
      * @return 新时间
      */
-    constexpr datetime operator -(const int64_t seconds) const noexcept {
+    constexpr datetime operator-(const int64_t seconds) const noexcept {
         datetime ret(*this);
         ret -= seconds;
         return ret;
@@ -1090,14 +1077,12 @@ public:
     /**
      * @brief 前置递增（加1秒）
      */
-    constexpr datetime& operator ++() {
-        return *this += 1;
-    }
+    constexpr datetime& operator++() { return *this += 1; }
 
     /**
      * @brief 后置递增（加1秒）
      */
-    constexpr datetime operator ++(int) {
+    constexpr datetime operator++(int) {
         const datetime ret(*this);
         *this += 1;
         return ret;
@@ -1106,14 +1091,12 @@ public:
     /**
      * @brief 前置递减（减1秒）
      */
-    constexpr datetime& operator --() {
-        return *this -= 1;
-    }
+    constexpr datetime& operator--() { return *this -= 1; }
 
     /**
      * @brief 后置递减（减1秒）
      */
-    constexpr datetime operator --(int) {
+    constexpr datetime operator--(int) {
         const datetime ret(*this);
         *this -= 1;
         return ret;
@@ -1124,7 +1107,7 @@ public:
      * @param other 另一个时间
      * @return 相差的秒数
      */
-    constexpr time_type operator -(const datetime& other) const noexcept {
+    constexpr time_type operator-(const datetime& other) const noexcept {
         const time_type day_diff = date_ - other.date_;
         time_type sec_diff = day_diff * 86400;
         sec_diff += (time_ - other.time_);
@@ -1136,8 +1119,12 @@ public:
      * @return 格式为 ±HH:MM 或 "Z"
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_offset_string() const {
-        if (!has_timezone_) return {};
-        if (offset_seconds_ == 0) return "Z";
+        if (!has_timezone_) {
+            return {};
+        }
+        if (offset_seconds_ == 0) {
+            return "Z";
+        }
         int64_t total_sec = offset_seconds_;
         const char sign = total_sec >= 0 ? '+' : '-';
         total_sec = total_sec >= 0 ? total_sec : -total_sec;
@@ -1222,7 +1209,9 @@ public:
             }
 
             int32_t total_offset = hours * 3600 + minutes * 60;
-            if (sign == '-') total_offset = -total_offset;
+            if (sign == '-') {
+                total_offset = -total_offset;
+            }
             return datetime(d, t, total_offset);
         }
         return datetime(d, t);
@@ -1252,18 +1241,17 @@ public:
         const _NEFORCE time utc_time = time();
 
         int wday = utc_date.days_of_week();
-        if (wday < 0 || wday >= 7) wday = 0;
+        if (wday < 0 || wday >= 7) {
+            wday = 0;
+        }
 
         int mon_idx = utc_date.month() - 1;
-        if (mon_idx < 0 || mon_idx >= 12) mon_idx = 0;
+        if (mon_idx < 0 || mon_idx >= 12) {
+            mon_idx = 0;
+        }
 
-        return _NEFORCE format("{}, {:02d} {} {} {} GMT",
-            weekdays_string[wday],
-            utc_date.day(),
-            months_string[mon_idx],
-            utc_date.year(),
-            utc_time.to_string()
-        );
+        return _NEFORCE format("{}, {:02d} {} {} {} GMT", weekdays_string[wday], utc_date.day(), months_string[mon_idx],
+                               utc_date.year(), utc_time.to_string());
     }
 
     /**
@@ -1284,7 +1272,9 @@ public:
         const int day = integer32::parse(view.substr(0, 2)).value();
         view.remove_prefix(3);
         const int mon = months_to_int(view.substr(0, 3));
-        if (mon == 0) NEFORCE_THROW_EXCEPTION(value_exception("Invalid month in date"));
+        if (mon == 0) {
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid month in date"));
+        }
         view.remove_prefix(4);
         const int year = integer32::parse(view.substr(0, 4)).value();
         view.remove_prefix(5);
@@ -1386,8 +1376,7 @@ public:
      * @return 哈希值
      */
     NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
-        return date_.to_hash() ^ time_.to_hash() ^
-            hash<bool>()(has_timezone_) ^ hash<int64_t>()(offset_seconds_);
+        return date_.to_hash() ^ time_.to_hash() ^ hash<bool>()(has_timezone_) ^ hash<int64_t>()(offset_seconds_);
     }
 
     /**
@@ -1412,26 +1401,26 @@ public:
  */
 class NEFORCE_API timestamp : public iobject<timestamp>, public ipackage<timestamp, int64_t> {
 public:
-    using value_type = int64_t;  ///< 值类型
+    using value_type = int64_t; ///< 值类型
 
     constexpr timestamp() noexcept = default;
 
     NEFORCE_CONSTEXPR20 ~timestamp() = default;
 
-    constexpr timestamp(const timestamp& other) noexcept
-    : ipackage(other.value_) {}
+    constexpr timestamp(const timestamp& other) noexcept :
+    ipackage(other.value_) {}
 
-    constexpr timestamp& operator =(const timestamp& other) noexcept {
+    constexpr timestamp& operator=(const timestamp& other) noexcept {
         value_ = other.value_;
         return *this;
     }
 
-    constexpr timestamp(timestamp&& other) noexcept
-    : ipackage(other.value_) {
+    constexpr timestamp(timestamp&& other) noexcept :
+    ipackage(other.value_) {
         other.clear();
     }
 
-    constexpr timestamp& operator =(timestamp&& other) noexcept {
+    constexpr timestamp& operator=(timestamp&& other) noexcept {
         value_ = other.value_;
         other.clear();
         return *this;
@@ -1441,40 +1430,32 @@ public:
      * @brief 从秒数构造
      * @param value 秒数
      */
-    constexpr explicit timestamp(const value_type value) noexcept
-    : ipackage(value) {}
+    constexpr explicit timestamp(const value_type value) noexcept :
+    ipackage(value) {}
 
     /**
      * @brief 从日期时间构造
      * @param dt 日期时间
      */
-    constexpr explicit timestamp(const datetime& dt) noexcept {
-        value_ = dt - datetime::epoch();
-    }
+    constexpr explicit timestamp(const datetime& dt) noexcept { value_ = dt - datetime::epoch(); }
 
     /**
      * @brief 获取当前时间戳
      * @return 当前时间戳
      */
-    NEFORCE_NODISCARD static timestamp now() noexcept {
-        return timestamp(datetime::now());
-    }
+    NEFORCE_NODISCARD static timestamp now() noexcept { return timestamp(datetime::now()); }
 
     /**
      * @brief 转换为日期时间
      * @return 对应的日期时间
      */
-    NEFORCE_NODISCARD constexpr datetime to_datetime() const noexcept {
-        return datetime::epoch() + value_;
-    }
+    NEFORCE_NODISCARD constexpr datetime to_datetime() const noexcept { return datetime::epoch() + value_; }
 
     /**
      * @brief 转换为字符串
      * @return 数字字符串
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return integer64(value_).to_string();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return integer64(value_).to_string(); }
 
     /**
      * @brief 从字符串解析
@@ -1488,9 +1469,7 @@ public:
     /**
      * @brief 重置为0
      */
-    constexpr void clear() noexcept {
-        value_ = 0;
-    }
+    constexpr void clear() noexcept { value_ = 0; }
 };
 
 /** @} */ // DateTime

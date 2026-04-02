@@ -3,9 +3,9 @@
 const path& res_root() {
     static path res_root
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        {R"(D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
+            {R"(D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
 #elif defined(NEFORCE_PLATFORM_LINUX)
-        {R"(/media/huenqi/Programming/Workspace/Cpp Workspace/CLine Workspace/NexusForce-Linux/tests/resource)"};
+            {R"(/media/huenqi/Programming/Workspace/Cpp Workspace/CLine Workspace/NexusForce-Linux/tests/resource)"};
 #endif
     return res_root;
 }
@@ -183,7 +183,9 @@ void test_pathtree() {
     println(compress_tree);
 
     path_tree large_files = tree.prune([](const path_tree::node& n) {
-        if (!n.is_file()) return true;
+        if (!n.is_file()) {
+            return true;
+        }
         return filesystem::size(n.get_path()) > 1024;
     });
     println(large_files);
@@ -241,11 +243,11 @@ void test_time() {
     NEFORCE_ASSERTION(time(1, 2, 3).to_seconds() == 3600 + 120 + 3);
 
     time t3(23, 59, 59);
-    t3 += 2;  // 00:00:01
+    t3 += 2; // 00:00:01
     NEFORCE_ASSERTION(t3.hours() == 0 && t3.seconds() == 1);
 
     time t4(0, 0, 1);
-    t4 -= 2;  // 23:59:59
+    t4 -= 2; // 23:59:59
     NEFORCE_ASSERTION(t4.hours() == 23 && t4.seconds() == 59);
 
     NEFORCE_ASSERTION(time(12, 0, 0) < time(13, 0, 0));

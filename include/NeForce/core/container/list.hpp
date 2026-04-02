@@ -29,8 +29,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 作为list容器的基本节点单元，包含数据域和前后指针。
  */
-template <typename T>
-struct list_node {
+template <typename T> struct list_node {
     T data;                    ///< 节点存储的数据
     list_node* prev = nullptr; ///< 指向前一个节点的指针
     list_node* next = nullptr; ///< 指向后一个节点的指针
@@ -40,9 +39,8 @@ struct list_node {
      *
      * 使用默认构造方式初始化数据成员。
      */
-    list_node()
-    noexcept(is_nothrow_default_constructible_v<T>)
-    : data() {}
+    list_node() noexcept(is_nothrow_default_constructible_v<T>) :
+    data() {}
 
     /**
      * @brief 参数构造
@@ -52,9 +50,8 @@ struct list_node {
      * 使用参数初始化节点数据。
      */
     template <typename... Args>
-    explicit list_node(Args&&... args)
-    noexcept(is_nothrow_constructible_v<T, Args...>)
-    : data(_NEFORCE forward<Args>(args)...) {}
+    explicit list_node(Args&&... args) noexcept(is_nothrow_constructible_v<T, Args...>) :
+    data(_NEFORCE forward<Args>(args)...) {}
 };
 
 
@@ -66,39 +63,41 @@ struct list_node {
  *
  * 为list提供双向迭代器支持，包含边界检查和调试验证。
  */
-template <bool IsConst, typename List>
-struct list_iterator : iiterator<list_iterator<IsConst, List>> {
+template <bool IsConst, typename List> struct list_iterator : iiterator<list_iterator<IsConst, List>> {
 public:
-    using container_type    = List;                                    ///< 容器类型
-    using value_type        = typename container_type::value_type;    ///< 值类型
-    using size_type         = typename container_type::size_type;     ///< 大小类型
-    using difference_type   = typename container_type::difference_type; ///< 差值类型
+    using container_type = List;                                      ///< 容器类型
+    using value_type = typename container_type::value_type;           ///< 值类型
+    using size_type = typename container_type::size_type;             ///< 大小类型
+    using difference_type = typename container_type::difference_type; ///< 差值类型
     using iterator_category = bidirectional_iterator_tag;             ///< 迭代器类别
-    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>; ///< 引用类型
-    using pointer   = conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;   ///< 指针类型
+    using reference = conditional_t<IsConst, typename container_type::const_reference,
+                                    typename container_type::reference>; ///< 引用类型
+    using pointer = conditional_t<IsConst, typename container_type::const_pointer,
+                                  typename container_type::pointer>; ///< 指针类型
 
 private:
-    using node_type = list_node<value_type>;  ///< 节点类型别名
+    using node_type = list_node<value_type>; ///< 节点类型别名
 
-    node_type* current_ = nullptr;  ///< 当前指向的节点指针
-    const container_type* container_ = nullptr;  ///< 关联容器指针
+    node_type* current_ = nullptr;              ///< 当前指向的节点指针
+    const container_type* container_ = nullptr; ///< 关联容器指针
 
 public:
     list_iterator() noexcept = default;
     ~list_iterator() = default;
 
     list_iterator(const list_iterator&) noexcept = default;
-    list_iterator& operator =(const list_iterator&) noexcept = default;
+    list_iterator& operator=(const list_iterator&) noexcept = default;
     list_iterator(list_iterator&&) noexcept = default;
-    list_iterator& operator =(list_iterator&&) noexcept = default;
+    list_iterator& operator=(list_iterator&&) noexcept = default;
 
     /**
      * @brief 构造函数
      * @param ptr 初始节点指针
      * @param list 关联容器指针
      */
-    list_iterator(node_type* ptr, const container_type* list) noexcept
-    : current_(ptr), container_(list) {}
+    list_iterator(node_type* ptr, const container_type* list) noexcept :
+    current_(ptr),
+    container_(list) {}
 
     /**
      * @brief 解引用操作实现
@@ -142,17 +141,13 @@ public:
      * @brief 获取底层节点指针
      * @return 当前节点指针
      */
-    NEFORCE_NODISCARD node_type* base() const noexcept {
-        return current_;
-    }
+    NEFORCE_NODISCARD node_type* base() const noexcept { return current_; }
 
     /**
      * @brief 获取关联容器
      * @return 关联容器指针
      */
-    NEFORCE_NODISCARD const container_type* container() const noexcept {
-        return container_;
-    }
+    NEFORCE_NODISCARD const container_type* container() const noexcept { return container_; }
 };
 
 
@@ -165,32 +160,31 @@ public:
  * 双向链表容器，提供常数时间的插入和删除操作。
  * 不支持随机访问，但支持双向迭代。
  */
-template <typename T, typename Alloc = allocator<list_node<T>>>
-class list : public icollector<list<T, Alloc>> {
+template <typename T, typename Alloc = allocator<list_node<T>>> class list : public icollector<list<T, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "list only contains object types.");
 
 public:
-    using pointer			= T*;  ///< 指针类型
-    using reference			= T&;  ///< 引用类型
-    using const_pointer		= const T*;  ///< 常量指针类型
-    using const_reference	= const T&;  ///< 常量引用类型
-    using value_type		= T;  ///< 值类型
-    using size_type			= size_t;  ///< 大小类型
-    using difference_type	= ptrdiff_t;  ///< 差值类型
-    using iterator                  = list_iterator<false, list>; ///< 迭代器类型
-    using const_iterator            = list_iterator<true, list>;  ///< 常量迭代器类型
-    using reverse_iterator          = _NEFORCE reverse_iterator<iterator>;        ///< 反向迭代器类型
-    using const_reverse_iterator    = _NEFORCE reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
-    using allocator_type            = Alloc;  ///< 分配器类型
+    using pointer = T*;                                                       ///< 指针类型
+    using reference = T&;                                                     ///< 引用类型
+    using const_pointer = const T*;                                           ///< 常量指针类型
+    using const_reference = const T&;                                         ///< 常量引用类型
+    using value_type = T;                                                     ///< 值类型
+    using size_type = size_t;                                                 ///< 大小类型
+    using difference_type = ptrdiff_t;                                        ///< 差值类型
+    using iterator = list_iterator<false, list>;                              ///< 迭代器类型
+    using const_iterator = list_iterator<true, list>;                         ///< 常量迭代器类型
+    using reverse_iterator = _NEFORCE reverse_iterator<iterator>;             ///< 反向迭代器类型
+    using const_reverse_iterator = _NEFORCE reverse_iterator<const_iterator>; ///< 常量反向迭代器类型
+    using allocator_type = Alloc;                                             ///< 分配器类型
 
 private:
     using node_type = list_node<T>; ///< 节点类型
     using link_type = node_type*;   ///< 节点指针类型
 
-    link_type head_ = nullptr;  ///< 头节点指针
-    compressed_pair<allocator_type, size_type> pair_{ default_construct_tag{}, 0 };  ///< 压缩存储的分配器和大小
+    link_type head_ = nullptr;                                                    ///< 头节点指针
+    compressed_pair<allocator_type, size_type> pair_{default_construct_tag{}, 0}; ///< 压缩存储的分配器和大小
 
     template <bool, typename> friend struct list_iterator;
 
@@ -203,8 +197,7 @@ private:
      *
      * 分配内存并构造节点，如果构造失败则释放内存。
      */
-    template <typename... Args>
-    link_type create_node(Args&&... args) {
+    template <typename... Args> link_type create_node(Args&&... args) {
         link_type p = pair_.get_base().allocate();
         try {
             _NEFORCE construct(&p->data, _NEFORCE forward<Args>(args)...);
@@ -221,8 +214,7 @@ private:
      *
      * 析构节点数据并释放内存。
      */
-    void destroy_node(link_type p)
-    noexcept(is_nothrow_destructible_v<node_type>) {
+    void destroy_node(link_type p) noexcept(is_nothrow_destructible_v<node_type>) {
         _NEFORCE destroy(p);
         pair_.get_base().deallocate(p);
     }
@@ -249,16 +241,14 @@ public:
      *
      * 构造一个空链表。
      */
-    list() {
-        list::init_header();
-    }
+    list() { list::init_header(); }
 
     /**
      * @brief 构造包含n个默认构造元素的链表
      * @param n 元素数量
      */
-    explicit list(size_type n)
-    : list(n, _NEFORCE initialize<T>()) {}
+    explicit list(size_type n) :
+    list(n, _NEFORCE initialize<T>()) {}
 
     /**
      * @brief 构造包含n个指定值元素的链表
@@ -284,8 +274,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
-    list(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> list(Iterator first, Iterator last) {
         list::init_header();
         iterator pos = end();
         try {
@@ -303,15 +292,15 @@ public:
      * @brief 初始化列表构造函数
      * @param ilist 初始化列表
      */
-    list(std::initializer_list<T> ilist)
-    : list(ilist.begin(), ilist.end()) {}
+    list(std::initializer_list<T> ilist) :
+    list(ilist.begin(), ilist.end()) {}
 
     /**
      * @brief 初始化列表赋值运算符
      * @param ilist 初始化列表
      * @return 自身引用
      */
-    list& operator =(std::initializer_list<T> ilist) {
+    list& operator=(std::initializer_list<T> ilist) {
         clear();
         list::insert(begin(), ilist.begin(), ilist.end());
         return *this;
@@ -321,16 +310,18 @@ public:
      * @brief 拷贝构造函数
      * @param other 源链表
      */
-    list(const list& other)
-    : list(other.begin(), other.end()) {}
+    list(const list& other) :
+    list(other.begin(), other.end()) {}
 
     /**
      * @brief 拷贝赋值运算符
      * @param other 源链表
      * @return 自身引用
      */
-    list& operator =(const list& other) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    list& operator=(const list& other) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         list tmp(other);
         list::swap(tmp);
         return *this;
@@ -340,8 +331,7 @@ public:
      * @brief 移动构造函数
      * @param other 源链表
      */
-    list(list&& other)
-    noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
+    list(list&& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
         init_header();
         list::swap(other);
     }
@@ -351,11 +341,11 @@ public:
      * @param other 源链表
      * @return 自身引用
      */
-    list& operator =(list&& other)
-    noexcept(
-        is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
-        is_nothrow_destructible_v<node_type>) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    list& operator=(list&& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
+                                           is_nothrow_destructible_v<node_type>) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         clear();
         list::swap(other);
         return *this;
@@ -380,121 +370,91 @@ public:
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
-    NEFORCE_NODISCARD iterator begin() noexcept {
-        return iterator{head_->next, this};
-    }
+    NEFORCE_NODISCARD iterator begin() noexcept { return iterator{head_->next, this}; }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向无效元素的迭代器
      */
-    NEFORCE_NODISCARD iterator end() noexcept {
-        return iterator{head_, this};
-    }
+    NEFORCE_NODISCARD iterator end() noexcept { return iterator{head_, this}; }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator begin() const noexcept {
-        return cbegin();
-    }
+    NEFORCE_NODISCARD const_iterator begin() const noexcept { return cbegin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向无效元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator end() const noexcept {
-        return cend();
-    }
+    NEFORCE_NODISCARD const_iterator end() const noexcept { return cend(); }
 
     /**
      * @brief 获取反向起始迭代器
      * @return 指向无效元素的反向迭代器
      */
-    NEFORCE_NODISCARD reverse_iterator rbegin() noexcept {
-        return reverse_iterator(end());
-    }
+    NEFORCE_NODISCARD reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
 
     /**
      * @brief 获取反向结束迭代器
      * @return 指向第一个元素的反向迭代器
      */
-    NEFORCE_NODISCARD reverse_iterator rend() noexcept {
-        return reverse_iterator(begin());
-    }
+    NEFORCE_NODISCARD reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向无效元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept {
-        return crbegin();
-    }
+    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept { return crbegin(); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept {
-        return crend();
-    }
+    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept { return crend(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cbegin() const noexcept {
-        return const_iterator{head_->next, this};
-    }
+    NEFORCE_NODISCARD const_iterator cbegin() const noexcept { return const_iterator{head_->next, this}; }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向无效元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cend() const noexcept {
-        return const_iterator{head_, this};
-    }
+    NEFORCE_NODISCARD const_iterator cend() const noexcept { return const_iterator{head_, this}; }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向无效元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator crbegin() const noexcept {
-        return const_reverse_iterator(cend());
-    }
+    NEFORCE_NODISCARD const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(cend()); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD const_reverse_iterator crend() const noexcept {
-        return const_reverse_iterator(cbegin());
-    }
+    NEFORCE_NODISCARD const_reverse_iterator crend() const noexcept { return const_reverse_iterator(cbegin()); }
 
     /**
      * @brief 获取当前元素数量
      * @return 元素数量
      */
-    NEFORCE_NODISCARD size_type size() const noexcept {
-        return pair_.value;
-    }
+    NEFORCE_NODISCARD size_type size() const noexcept { return pair_.value; }
 
     /**
      * @brief 获取最大可能大小
      * @return 最大元素数量
      */
-    NEFORCE_NODISCARD size_type max_size() const noexcept {
-        return static_cast<size_type>(-1);
-    }
+    NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
 
     /**
      * @brief 检查是否为空
      * @return 是否为空
      */
-    NEFORCE_NODISCARD bool empty() const noexcept {
-        return head_->next == head_;
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept { return head_->next == head_; }
 
     /**
      * @brief 访问第一个元素
@@ -539,8 +499,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace(iterator position, Args&&... args) {
+    template <typename... Args> iterator emplace(iterator position, Args&&... args) {
         link_type temp = list::create_node(_NEFORCE forward<Args>(args)...);
         temp->next = position.base();
         temp->prev = position.base()->prev;
@@ -556,8 +515,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace_back(Args&&... args) {
+    template <typename... Args> iterator emplace_back(Args&&... args) {
         return list::emplace(end(), _NEFORCE forward<Args>(args)...);
     }
 
@@ -567,8 +525,7 @@ public:
      * @param args 构造参数
      * @return 指向插入元素的迭代器
      */
-    template <typename... Args>
-    iterator emplace_front(Args&&... args) {
+    template <typename... Args> iterator emplace_front(Args&&... args) {
         return list::emplace(begin(), _NEFORCE forward<Args>(args)...);
     }
 
@@ -576,47 +533,35 @@ public:
      * @brief 在开头拷贝插入元素
      * @param value 要插入的值
      */
-    void push_front(const T& value) {
-        list::insert(begin(), value);
-    }
+    void push_front(const T& value) { list::insert(begin(), value); }
 
     /**
      * @brief 在开头移动插入元素
      * @param value 要插入的值
      */
-    void push_front(T&& value) {
-        list::insert(begin(), _NEFORCE forward<T>(value));
-    }
+    void push_front(T&& value) { list::insert(begin(), _NEFORCE forward<T>(value)); }
 
     /**
      * @brief 在末尾拷贝插入元素
      * @param value 要插入的值
      */
-    void push_back(const T& value) {
-        list::insert(end(), value);
-    }
+    void push_back(const T& value) { list::insert(end(), value); }
 
     /**
      * @brief 在末尾移动插入元素
      * @param value 要插入的值
      */
-    void push_back(T&& value) {
-        list::insert(end(), _NEFORCE forward<T>(value));
-    }
+    void push_back(T&& value) { list::insert(end(), _NEFORCE forward<T>(value)); }
 
     /**
      * @brief 移除开头元素
      */
-    void pop_front() noexcept {
-        list::erase(begin());
-    }
+    void pop_front() noexcept { list::erase(begin()); }
 
     /**
      * @brief 移除末尾元素
      */
-    void pop_back() noexcept {
-        list::erase({head_->prev, this});
-    }
+    void pop_back() noexcept { list::erase({head_->prev, this}); }
 
     /**
      * @brief 赋值n个指定值的元素
@@ -634,8 +579,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
-    void assign(Iterator first, Iterator last) {
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0> void assign(Iterator first, Iterator last) {
         clear();
         list::insert(begin(), first, last);
     }
@@ -644,9 +588,7 @@ public:
      * @brief 初始化列表赋值
      * @param ilist 初始化列表
      */
-    void assign(std::initializer_list<T> ilist) {
-        list::assign(ilist.begin(), ilist.end());
-    }
+    void assign(std::initializer_list<T> ilist) { list::assign(ilist.begin(), ilist.end()); }
 
     /**
      * @brief 在指定位置拷贝插入元素
@@ -654,9 +596,7 @@ public:
      * @param value 要插入的值
      * @return 指向插入元素的迭代器
      */
-    iterator insert(iterator position, const T& value) {
-        return list::emplace(position, value);
-    }
+    iterator insert(iterator position, const T& value) { return list::emplace(position, value); }
 
     /**
      * @brief 在指定位置移动插入元素
@@ -664,9 +604,7 @@ public:
      * @param value 要插入的值
      * @return 指向插入元素的迭代器
      */
-    iterator insert(iterator position, T&& value) {
-        return list::emplace(position, _NEFORCE move(value));
-    }
+    iterator insert(iterator position, T&& value) { return list::emplace(position, _NEFORCE move(value)); }
 
     /**
      * @brief 范围插入
@@ -680,7 +618,9 @@ public:
      */
     template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
     void insert(iterator position, Iterator first, Iterator last) {
-        if (first == last) return;
+        if (first == last) {
+            return;
+        }
 
         link_type original_prev = position.base()->prev;
         link_type current_prev = original_prev;
@@ -734,7 +674,9 @@ public:
      * 如果插入过程中发生异常，会回滚已插入的元素。
      */
     void insert(iterator position, size_type n, const T& value) {
-        if (n == 0) return;
+        if (n == 0) {
+            return;
+        }
 
         link_type original_prev = position.base()->prev;
         link_type current_prev = original_prev;
@@ -774,9 +716,10 @@ public:
      * @param position 要删除的位置
      * @return 指向被删除元素之后位置的迭代器
      */
-    iterator erase(iterator position)
-    noexcept(is_nothrow_destructible_v<node_type>) {
-        if (empty()) return end();
+    iterator erase(iterator position) noexcept(is_nothrow_destructible_v<node_type>) {
+        if (empty()) {
+            return end();
+        }
         link_type ret = position.base()->next;
         position.base()->prev->next = position.base()->next;
         position.base()->next->prev = position.base()->prev;
@@ -791,8 +734,7 @@ public:
      * @param last 结束迭代器
      * @return 指向最后一个被删除元素之后位置的迭代器
      */
-    iterator erase(iterator first, iterator last)
-    noexcept(is_nothrow_destructible_v<node_type>) {
+    iterator erase(iterator first, iterator last) noexcept(is_nothrow_destructible_v<node_type>) {
         while (first != last) {
             first = list::erase(first);
         }
@@ -804,8 +746,7 @@ public:
      *
      * 销毁所有元素，但保留哨兵节点。
      */
-    void clear()
-    noexcept(is_nothrow_destructible_v<node_type>) {
+    void clear() noexcept(is_nothrow_destructible_v<node_type>) {
         link_type cur = head_->next;
         while (cur != head_) {
             link_type temp = cur;
@@ -821,8 +762,7 @@ public:
      * @brief 交换两个链表的内容
      * @param other 要交换的另一个链表
      */
-    void swap(list& other)
-	noexcept(is_nothrow_swappable_v<allocator_type>) {
+    void swap(list& other) noexcept(is_nothrow_swappable_v<allocator_type>) {
         _NEFORCE swap(head_, other.head_);
         _NEFORCE swap(pair_, other.pair_);
     }
@@ -837,7 +777,9 @@ public:
      * 此操作为常数时间，不涉及元素构造和析构。
      */
     void transfer(iterator position, iterator first, iterator last) {
-        if (position == last) return;
+        if (position == last) {
+            return;
+        }
         last.base()->prev->next = position.base();
         first.base()->prev->next = last.base();
         position.base()->prev->next = first.base();
@@ -852,8 +794,7 @@ public:
      * @tparam Pred 谓词类型
      * @param pred 一元谓词，返回true的元素将被移除
      */
-    template <typename Pred>
-    void remove_if(Pred pred) {
+    template <typename Pred> void remove_if(Pred pred) {
         iterator iter = begin(), last = end();
         while (iter != last) {
             if (pred(*iter)) {
@@ -869,9 +810,7 @@ public:
      * @param value 要移除的值
      */
     void remove(const T& value) {
-        return list::remove_if([&](const T& other) -> bool {
-            return other == value;
-        });
+        return list::remove_if([&](const T& other) -> bool { return other == value; });
     }
 
     /**
@@ -901,7 +840,9 @@ public:
     void splice(iterator position, list& other, iterator iter) {
         iterator j = iter;
         ++j;
-        if (iter == position || j == position) return;
+        if (iter == position || j == position) {
+            return;
+        }
         list::transfer(position, iter, j);
         ++pair_.value;
         --other.pair_.value;
@@ -917,9 +858,13 @@ public:
      * 将other链表中[first, last)范围内的元素拼接到position之前。
      */
     void splice(iterator position, list& other, iterator first, iterator last) {
-        if (first == last) return;
+        if (first == last) {
+            return;
+        }
         size_type n = 0;
-        for (iterator it = first; it != last; ++it) ++n;
+        for (iterator it = first; it != last; ++it) {
+            ++n;
+        }
         list::transfer(position, first, last);
         pair_.value += n;
         other.pair_.value -= n;
@@ -934,8 +879,7 @@ public:
      * 将有序链表other合并到当前有序链表中，合并后仍保持有序。
      * 使用pred作为比较准则。
      */
-    template <typename Pred>
-    void merge_if(list& other, Pred pred) {
+    template <typename Pred> void merge_if(list& other, Pred pred) {
         iterator first1 = begin(), first2 = other.begin();
         iterator last1 = end(), last2 = other.end();
 
@@ -964,15 +908,15 @@ public:
      * @brief 合并两个有序链表（默认使用小于比较）
      * @param other 要合并的链表
      */
-    void merge(list& other) {
-        list::merge_if(other, _NEFORCE less<T>());
-    }
+    void merge(list& other) { list::merge_if(other, _NEFORCE less<T>()); }
 
     /**
      * @brief 反转链表
      */
     void reverse() noexcept {
-        if (empty()) return;
+        if (empty()) {
+            return;
+        }
         link_type current = head_;
         do {
             _NEFORCE swap(current->prev, current->next);
@@ -987,9 +931,10 @@ public:
      *
      * 移除链表中所有连续重复的元素，只保留第一个。
      */
-    template <typename Pred>
-    void unique_if(Pred pred) noexcept {
-        if (empty()) return;
+    template <typename Pred> void unique_if(Pred pred) noexcept {
+        if (empty()) {
+            return;
+        }
         iterator current = begin();
         iterator next = current;
         while (++next != end()) {
@@ -1005,9 +950,7 @@ public:
     /**
      * @brief 移除连续的重复元素（默认使用等于比较）
      */
-    void unique() noexcept {
-        list::unique_if(_NEFORCE equal_to<T>());
-    }
+    void unique() noexcept { list::unique_if(_NEFORCE equal_to<T>()); }
 
     /**
      * @brief 对链表进行排序
@@ -1016,9 +959,10 @@ public:
      *
      * 使用插入排序算法对链表进行排序。
      */
-    template <typename Pred>
-    void sort_if(Pred pred) {
-        if (empty()) return;
+    template <typename Pred> void sort_if(Pred pred) {
+        if (empty()) {
+            return;
+        }
         link_type p = head_->next->next;
         while (p != head_) {
             T temp = p->data;
@@ -1035,9 +979,7 @@ public:
     /**
      * @brief 对链表进行排序（默认使用小于比较）
      */
-    void sort() {
-        list::sort_if(_NEFORCE less<T>());
-    }
+    void sort() { list::sort_if(_NEFORCE less<T>()); }
 
     /**
      * @brief 常量索引访问
@@ -1046,7 +988,9 @@ public:
      */
     NEFORCE_NODISCARD const_reference at(size_type position) const {
         const_iterator iter = cbegin();
-        while (position--) ++iter;
+        while (position--) {
+            ++iter;
+        }
         return iter.base()->data;
     }
 
@@ -1057,7 +1001,9 @@ public:
      */
     NEFORCE_NODISCARD reference at(size_type position) {
         const_iterator iter = cbegin();
-        while (position--) ++iter;
+        while (position--) {
+            ++iter;
+        }
         return iter.base()->data;
     }
 
@@ -1066,26 +1012,22 @@ public:
      * @param position 索引位置
      * @return 指定位置元素的常量引用
      */
-    NEFORCE_NODISCARD const_reference operator [](const size_type position) const {
-        return at(position);
-    }
+    NEFORCE_NODISCARD const_reference operator[](const size_type position) const { return at(position); }
 
     /**
      * @brief 下标访问操作符
      * @param position 索引位置
      * @return 指定位置元素的引用
      */
-    NEFORCE_NODISCARD reference operator [](const size_type position) {
-        return at(position);
-    }
+    NEFORCE_NODISCARD reference operator[](const size_type position) { return at(position); }
 
     /**
      * @brief 相等比较操作符
      * @param rhs 右侧链表
      * @return 如果两个链表大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator ==(const list& rhs) const
-    noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
+    NEFORCE_NODISCARD bool operator==(const list& rhs) const
+            noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
         return size() == rhs.size() && _NEFORCE equal(cbegin(), cend(), rhs.cbegin());
     }
 
@@ -1094,8 +1036,8 @@ public:
      * @param rhs 右侧链表
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator <(const list& rhs) const
-    noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
+    NEFORCE_NODISCARD bool operator<(const list& rhs) const
+            noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }
 };

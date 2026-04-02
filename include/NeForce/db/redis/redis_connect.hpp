@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_REDIS_CONNECT_HPP__
 #define NEFORCE_DATABASE_REDIS_CONNECT_HPP__
 #ifdef NEFORCE_SUPPORT_HIREDIS
-#include "NeForce/db/db_interface.hpp"
-#include <hiredis/hiredis.h>
+#    include <hiredis/hiredis.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API redis_connect final : idb_kv_connect {
@@ -58,8 +58,8 @@ public:
 
 class NEFORCE_API redis_factory final : public idb_factory {
 public:
-    explicit redis_factory(db_config config)
-    : idb_factory(_NEFORCE move(config)) {}
+    explicit redis_factory(db_config config) :
+    idb_factory(_NEFORCE move(config)) {}
 
     idb_connect* create_connect() override;
     idb_result* create_result(void* native_result) override;

@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_SQLITE_RESULT_HPP__
 #define NEFORCE_DATABASE_SQLITE_RESULT_HPP__
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#include "NeForce/db/db_interface.hpp"
-#include <sqlite3.h>
+#    include <sqlite3.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API sqlite_result final : idb_tb_result {
@@ -19,8 +19,10 @@ public:
     explicit sqlite_result(::sqlite3_stmt* statement) noexcept;
     ~sqlite_result() override;
 
-    NEFORCE_NODISCARD NEFORCE_DEPRECATED_FOR("use COUNT * instead of using this function")
-    size_type row_count() const noexcept override { return 0; }
+    NEFORCE_NODISCARD NEFORCE_DEPRECATED_FOR("use COUNT * instead of using this function") size_type
+            row_count() const noexcept override {
+        return 0;
+    }
 
     NEFORCE_NODISCARD size_type column_count() const noexcept override { return columns_; }
 

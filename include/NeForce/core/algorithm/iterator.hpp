@@ -23,17 +23,12 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename Ptr>
-constexpr
-enable_if_t<is_pointer_v<Ptr>, iter_pointer_t<Ptr>>
-__to_pointer_aux(Ptr iter) {
+template <typename Ptr> constexpr enable_if_t<is_pointer_v<Ptr>, iter_pointer_t<Ptr>> __to_pointer_aux(Ptr iter) {
     return iter;
 }
 
 template <typename Iterator>
-constexpr
-enable_if_t<!is_pointer_v<Iterator>, iter_pointer_t<Iterator>>
-__to_pointer_aux(Iterator iter) {
+constexpr enable_if_t<!is_pointer_v<Iterator>, iter_pointer_t<Iterator>> __to_pointer_aux(Iterator iter) {
     return iter.operator->();
 }
 
@@ -47,13 +42,12 @@ NEFORCE_END_INNER__
  * @param iter 迭代器
  * @return 原始指针
  */
-template <typename Iterator>
-constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
+template <typename Iterator> constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
 #ifdef NEFORCE_STANDARD_17
     if constexpr (is_pointer_v<Iterator>) {
         return iter;
     } else {
-        return iter.operator ->();
+        return iter.operator->();
     }
 #else
     return inner::__to_pointer_aux(iter);
@@ -66,26 +60,28 @@ constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
 NEFORCE_BEGIN_INNER__
 
 template <typename Iterator, typename Distance>
-constexpr
-enable_if_t<is_rnd_iter_v<Iterator>>
-__advance_aux(Iterator& i, Distance n) {
+constexpr enable_if_t<is_rnd_iter_v<Iterator>> __advance_aux(Iterator& i, Distance n) {
     i += n;
 }
 
 template <typename Iterator, typename Distance>
-constexpr
-enable_if_t<!is_rnd_iter_v<Iterator> && is_ranges_bid_iter_v<Iterator>>
-__advance_aux(Iterator& i, Distance n) {
-    for (; n < 0; ++n) --i;
-    for (; 0 < n; --n) ++i;
+constexpr enable_if_t<!is_rnd_iter_v<Iterator> && is_ranges_bid_iter_v<Iterator>> __advance_aux(Iterator& i,
+                                                                                                Distance n) {
+    for (; n < 0; ++n) {
+        --i;
+    }
+    for (; 0 < n; --n) {
+        ++i;
+    }
 }
 
 template <typename Iterator, typename Distance>
-constexpr
-enable_if_t<!is_rnd_iter_v<Iterator> && !is_ranges_bid_iter_v<Iterator>>
-__advance_aux(Iterator& i, Distance n) {
+constexpr enable_if_t<!is_rnd_iter_v<Iterator> && !is_ranges_bid_iter_v<Iterator>> __advance_aux(Iterator& i,
+                                                                                                 Distance n) {
     NEFORCE_DEBUG_VERIFY__(is_signed_v<Distance> && n >= 0, "negative advance of non-bidirectional iterator");
-    for (; 0 < n; --n) ++i;
+    for (; 0 < n; --n) {
+        ++i;
+    }
 }
 
 NEFORCE_END_INNER__
@@ -104,8 +100,7 @@ NEFORCE_END_INNER__
  * - 双向迭代器：支持正负距离
  * - 前向迭代器：只支持非负距离
  */
-template <typename Iterator, typename Distance>
-constexpr void advance(Iterator& i, Distance n) {
+template <typename Iterator, typename Distance> constexpr void advance(Iterator& i, Distance n) {
     static_assert(is_iter_v<Iterator>, "Iterator must be iterator");
     static_assert(is_arithmetic_v<Distance>, "Distance must be arithmetic");
 
@@ -117,9 +112,13 @@ constexpr void advance(Iterator& i, Distance n) {
             NEFORCE_DEBUG_VERIFY(n >= 0, "negative advance of non-bidirectional iterator");
         }
         if constexpr (is_signed_v<Distance> && is_bid_iter_v<Iterator>) {
-            for (; n < 0; ++n) --i;
+            for (; n < 0; ++n) {
+                --i;
+            }
         }
-        for (; 0 < n; --n) ++i;
+        for (; 0 < n; --n) {
+            ++i;
+        }
     }
 #else
     inner::__advance_aux(i, n);
@@ -135,8 +134,7 @@ constexpr void advance(Iterator& i, Distance n) {
  *
  * 将迭代器后退n个位置，n必须为非正数。
  */
-template <typename Iterator>
-constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
+template <typename Iterator> constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
     NEFORCE_DEBUG_VERIFY(n <= 0, "negative advance in previous operation function.");
     _NEFORCE advance(iter, n);
     return iter;
@@ -151,8 +149,7 @@ constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
  *
  * 将迭代器前进n个位置，n必须为非负数。
  */
-template <typename Iterator>
-constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
+template <typename Iterator> constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
     NEFORCE_DEBUG_VERIFY(n >= 0, "positive advance in next operation function.");
     _NEFORCE advance(iter, n);
     return iter;
@@ -164,18 +161,19 @@ constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
 NEFORCE_BEGIN_INNER__
 
 template <typename Iterator>
-constexpr
-enable_if_t<is_rnd_iter_v<Iterator>, iter_difference_t<Iterator>>
-__distance_aux(Iterator first, Iterator last) {
+constexpr enable_if_t<is_rnd_iter_v<Iterator>, iter_difference_t<Iterator>> __distance_aux(Iterator first,
+                                                                                           Iterator last) {
     return last - first;
 }
 
 template <typename Iterator>
-constexpr
-enable_if_t<!is_rnd_iter_v<Iterator>, iter_difference_t<Iterator>>
-__distance_aux(Iterator first, Iterator last) {
+constexpr enable_if_t<!is_rnd_iter_v<Iterator>, iter_difference_t<Iterator>> __distance_aux(Iterator first,
+                                                                                            Iterator last) {
     iter_difference_t<Iterator> n = 0;
-    while (first != last) { ++first; ++n; }
+    while (first != last) {
+        ++first;
+        ++n;
+    }
     return n;
 }
 
@@ -194,8 +192,7 @@ NEFORCE_END_INNER__
  * - 随机访问迭代器：直接使用减法
  * - 其他迭代器：遍历计数
  */
-template <typename Iterator>
-constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
+template <typename Iterator> constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
     static_assert(is_iter_v<Iterator>, "Iterator must be iterator");
 
 #ifdef NEFORCE_STANDARD_17
@@ -203,7 +200,10 @@ constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
         return last - first;
     } else {
         iter_difference_t<Iterator> n = 0;
-        while (first != last) { ++first; ++n; }
+        while (first != last) {
+            ++first;
+            ++n;
+        }
         return n;
     }
 #else

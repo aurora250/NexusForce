@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_REDIS_RESULT_HPP__
 #define NEFORCE_DATABASE_REDIS_RESULT_HPP__
 #ifdef NEFORCE_SUPPORT_HIREDIS
-#include "NeForce/db/db_interface.hpp"
-#include <hiredis/hiredis.h>
+#    include <hiredis/hiredis.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API redis_result final : idb_kv_result {
@@ -24,9 +24,7 @@ public:
     explicit redis_result(::redisReply* reply) noexcept;
     ~redis_result() override;
 
-    NEFORCE_NODISCARD bool empty() const noexcept override {
-        return !result_ || (rows_ == 0 && kv_pairs_->empty());
-    }
+    NEFORCE_NODISCARD bool empty() const noexcept override { return !result_ || (rows_ == 0 && kv_pairs_->empty()); }
     NEFORCE_NODISCARD bool next() noexcept override;
 
     NEFORCE_NODISCARD string_view key() const noexcept override;
@@ -38,12 +36,8 @@ public:
     NEFORCE_NODISCARD vector<string> value_array() const override;
     NEFORCE_NODISCARD const vector<pair<string, string>>& value_hash() const override { return *kv_pairs_; }
 
-    NEFORCE_NODISCARD int type() const noexcept {
-        return result_ ? result_->type : -1;
-    }
-    NEFORCE_NODISCARD bool is_nil() const noexcept {
-        return result_ && result_->type == REDIS_REPLY_NIL;
-    }
+    NEFORCE_NODISCARD int type() const noexcept { return result_ ? result_->type : -1; }
+    NEFORCE_NODISCARD bool is_nil() const noexcept { return result_ && result_->type == REDIS_REPLY_NIL; }
 };
 
 NEFORCE_END_NAMESPACE__

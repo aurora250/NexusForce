@@ -1,23 +1,23 @@
 #include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <handleapi.h>
-#include <profileapi.h>
-#include <synchapi.h>
-#include <sysinfoapi.h>
-#ifdef NEFORCE_COMPILER_MINGW
-#include <windef.h>
-#include <winbase.h>
-#endif
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <NeForce/core/config/windef.hpp>
+#    include <handleapi.h>
+#    include <profileapi.h>
+#    include <synchapi.h>
+#    include <sysinfoapi.h>
+#    ifdef NEFORCE_COMPILER_MINGW
+#        include <winbase.h>
+#        include <windef.h>
+#    endif
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <ctime>
+#    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -36,7 +36,8 @@ void sleep_for_aux(const ssize_t s, const ssize_t ns) {
     }
 #elif defined(NEFORCE_PLATFORM_LINUX)
     ::timespec ts{s, ns};
-    while (::nanosleep(&ts, &ts) == -1) {}
+    while (::nanosleep(&ts, &ts) == -1) {
+    }
 #endif
 }
 
@@ -106,7 +107,9 @@ milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_
         const auto abs_time = system_clock::time_point(abs_ns);
         diff_ns = abs_time - system_clock::now();
     }
-    if (diff_ns <= 0_ns) return 0_ms;
+    if (diff_ns <= 0_ns) {
+        return 0_ms;
+    }
 
     const milliseconds diff_ms = diff_ns.to_milli();
     constexpr int64_t max_uint32 = numeric_traits<uint32_t>::max();
@@ -117,4 +120,3 @@ milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_
 }
 
 NEFORCE_END_NAMESPACE__
-

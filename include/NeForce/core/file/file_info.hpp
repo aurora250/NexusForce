@@ -9,8 +9,8 @@
  * 权限属性、访问时间、修改时间等信息。支持跨平台的属性操作。
  */
 
-#include "NeForce/core/time/datetime.hpp"
 #include "NeForce/core/file/file_constants.hpp"
+#include "NeForce/core/time/datetime.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -32,9 +32,9 @@ public:
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD;  ///< 大小类型
+    using size_type = ::DWORD; ///< 大小类型
 #else
-    using size_type = size_t;   ///< 大小类型
+    using size_type = size_t; ///< 大小类型
 #endif
 
 private:
@@ -50,7 +50,7 @@ public:
     explicit file_info(native_handle_type handle) noexcept;
 
     file_info(const file_info&) = delete;
-    file_info& operator =(const file_info&) = delete;
+    file_info& operator=(const file_info&) = delete;
 
     /**
      * @brief 获取文件属性

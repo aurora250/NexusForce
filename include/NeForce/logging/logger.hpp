@@ -36,28 +36,28 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API logger {
 private:
-    LOG_LEVEL level_;         ///< 当前日志级别
-    atomic<bool> async_;      ///< 是否异步模式
+    LOG_LEVEL level_;    ///< 当前日志级别
+    atomic<bool> async_; ///< 是否异步模式
 
-    vector<shared_ptr<log_sink>> sinks_;  ///< 输出目标列表
-    mutex sinks_mutex_;       ///< 输出目标互斥锁
+    vector<shared_ptr<log_sink>> sinks_; ///< 输出目标列表
+    mutex sinks_mutex_;                  ///< 输出目标互斥锁
 
-    queue<log_event> queue_;  ///< 异步日志队列
-    mutex queue_mutex_;       ///< 队列互斥锁
-    condition_variable cv_;   ///< 条件变量
+    queue<log_event> queue_; ///< 异步日志队列
+    mutex queue_mutex_;      ///< 队列互斥锁
+    condition_variable cv_;  ///< 条件变量
 
-    thread worker_;           ///< 异步工作线程
-    atomic<bool> running_;    ///< 工作线程运行标志
+    thread worker_;        ///< 异步工作线程
+    atomic<bool> running_; ///< 工作线程运行标志
 
-    atomic<bool> flush_requested_{false};   ///< 刷新请求标志
-    mutex flush_mutex_;                     ///< 刷新互斥锁
-    condition_variable flush_cv_;           ///< 刷新条件变量
+    atomic<bool> flush_requested_{false}; ///< 刷新请求标志
+    mutex flush_mutex_;                   ///< 刷新互斥锁
+    condition_variable flush_cv_;         ///< 刷新条件变量
 
-    function<bool(const log_event&)> filter_;  ///< 日志过滤器
-    mutex filter_mutex_;                       ///< 过滤器互斥锁
+    function<bool(const log_event&)> filter_; ///< 日志过滤器
+    mutex filter_mutex_;                      ///< 过滤器互斥锁
 
-    unordered_map<string, string> context_;    ///< 全局上下文信息
-    mutex context_mutex_;                      ///< 上下文互斥锁
+    unordered_map<string, string> context_; ///< 全局上下文信息
+    mutex context_mutex_;                   ///< 上下文互斥锁
 
     /**
      * @brief 将日志事件加入异步队列
@@ -106,9 +106,9 @@ public:
     }
 
     logger(const logger&) = delete;
-    logger& operator =(const logger&) = delete;
+    logger& operator=(const logger&) = delete;
     logger(logger&&) = delete;
-    logger& operator =(logger&&) = delete;
+    logger& operator=(logger&&) = delete;
 
     /**
      * @brief 析构函数
@@ -260,10 +260,10 @@ public:
 #define NEFORCE_LOG_DEBUG(msg) _NEFORCE logger::instance().debug(msg, __FILE__, __func__, __LINE__)
 
 /** @brief 记录INFO级别日志 */
-#define NEFORCE_LOG_INFO(msg)  _NEFORCE logger::instance().info(msg,  __FILE__, __func__, __LINE__)
+#define NEFORCE_LOG_INFO(msg) _NEFORCE logger::instance().info(msg, __FILE__, __func__, __LINE__)
 
 /** @brief 记录WARN级别日志 */
-#define NEFORCE_LOG_WARN(msg)  _NEFORCE logger::instance().warn(msg,  __FILE__, __func__, __LINE__)
+#define NEFORCE_LOG_WARN(msg) _NEFORCE logger::instance().warn(msg, __FILE__, __func__, __LINE__)
 
 /** @brief 记录ERROR级别日志 */
 #define NEFORCE_LOG_ERROR(msg) _NEFORCE logger::instance().error(msg, __FILE__, __func__, __LINE__)
@@ -273,22 +273,28 @@ public:
 
 
 /** @brief 格式化TRACE级别日志 */
-#define NEFORCE_LOGF_TRACE(msg, ...) _NEFORCE logger::instance().trace(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define NEFORCE_LOGF_TRACE(msg, ...) \
+    _NEFORCE logger::instance().trace(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 /** @brief 格式化DEBUG级别日志 */
-#define NEFORCE_LOGF_DEBUG(msg, ...) _NEFORCE logger::instance().debug(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define NEFORCE_LOGF_DEBUG(msg, ...) \
+    _NEFORCE logger::instance().debug(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 /** @brief 格式化INFO级别日志 */
-#define NEFORCE_LOGF_INFO(msg, ...)  _NEFORCE logger::instance().info(_NEFORCE format(msg, __VA_ARGS__),  __FILE__, __func__, __LINE__)
+#define NEFORCE_LOGF_INFO(msg, ...) \
+    _NEFORCE logger::instance().info(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 /** @brief 格式化WARN级别日志 */
-#define NEFORCE_LOGF_WARN(msg, ...)  _NEFORCE logger::instance().warn(_NEFORCE format(msg, __VA_ARGS__),  __FILE__, __func__, __LINE__)
+#define NEFORCE_LOGF_WARN(msg, ...) \
+    _NEFORCE logger::instance().warn(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 /** @brief 格式化ERROR级别日志 */
-#define NEFORCE_LOGF_ERROR(msg, ...) _NEFORCE logger::instance().error(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define NEFORCE_LOGF_ERROR(msg, ...) \
+    _NEFORCE logger::instance().error(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 /** @brief 格式化FATAL级别日志 */
-#define NEFORCE_LOGF_FATAL(msg, ...) _NEFORCE logger::instance().fatal(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define NEFORCE_LOGF_FATAL(msg, ...) \
+    _NEFORCE logger::instance().fatal(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 /** @} */ // Logging
 

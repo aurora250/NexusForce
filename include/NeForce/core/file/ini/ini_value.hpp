@@ -24,13 +24,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief ini格式操作失败
  */
 struct ini_exception final : value_exception {
-    explicit ini_exception(const char* info = "INI Operation Failed.",
-                           const char* type = static_type,
-                           const int code = 0) noexcept
-    : value_exception(info, type, code) {}
+    explicit ini_exception(const char* info = "INI Operation Failed.", const char* type = static_type,
+                           const int code = 0) noexcept :
+    value_exception(info, type, code) {}
 
-    explicit ini_exception(const exception& e)
-    : value_exception(e) {}
+    explicit ini_exception(const exception& e) :
+    value_exception(e) {}
 
     ~ini_exception() override = default;
     static constexpr auto static_type = "ini_exception";
@@ -62,8 +61,8 @@ public:
      * @brief ini值类型枚举
      */
     enum types {
-        Section,  ///< 节类型
-        Property  ///< 属性类型
+        Section, ///< 节类型
+        Property ///< 属性类型
     };
 
     /**
@@ -124,15 +123,15 @@ public:
  */
 class NEFORCE_API ini_property final : public ini_value {
 private:
-    string value_;  ///< 属性值
+    string value_; ///< 属性值
 
 public:
     /**
      * @brief 构造函数
      * @param value 属性值
      */
-    explicit ini_property(string value) noexcept
-    : value_(_NEFORCE move(value)) {}
+    explicit ini_property(string value) noexcept :
+    value_(_NEFORCE move(value)) {}
 
     /**
      * @brief 获取类型
@@ -190,8 +189,8 @@ public:
  */
 class NEFORCE_API ini_section final : public ini_value {
 private:
-    unordered_map<string, unique_ptr<ini_property>> properties_;  ///< 属性映射表
-    string name_{};   ///< 节名称
+    unordered_map<string, unique_ptr<ini_property>> properties_; ///< 属性映射表
+    string name_{};                                              ///< 节名称
 
 public:
     ini_section() = default;
@@ -200,11 +199,11 @@ public:
      * @brief 构造函数
      * @param name 节名称，默认为空（全局节）
      */
-    explicit ini_section(string name) noexcept
-    : name_(_NEFORCE move(name)) {}
+    explicit ini_section(string name) noexcept :
+    name_(_NEFORCE move(name)) {}
 
     ini_section(const ini_section&) = delete;
-    ini_section& operator =(const ini_section&) = delete;
+    ini_section& operator=(const ini_section&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -217,7 +216,7 @@ public:
      * @param other 源节对象
      * @return 自身引用
      */
-    ini_section& operator =(ini_section&& other) noexcept = default;
+    ini_section& operator=(ini_section&& other) noexcept = default;
 
     /**
      * @brief 获取类型
@@ -257,9 +256,7 @@ public:
      * @param key 属性键名
      * @param value 属性值
      */
-    void set_property(const string& key, string value) {
-        properties_[key] = make_unique<ini_property>(move(value));
-    }
+    void set_property(const string& key, string value) { properties_[key] = make_unique<ini_property>(move(value)); }
 
     /**
      * @brief 获取常量属性指针
@@ -268,7 +265,9 @@ public:
      */
     NEFORCE_NODISCARD const ini_property* get_property(const string& key) const {
         const auto it = properties_.find(key);
-        if (it != properties_.end()) return it->second.get();
+        if (it != properties_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -279,7 +278,9 @@ public:
      */
     NEFORCE_NODISCARD ini_property* get_property(const string& key) {
         const auto it = properties_.find(key);
-        if (it != properties_.end()) return it->second.get();
+        if (it != properties_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -288,9 +289,7 @@ public:
      * @param key 属性键名
      * @return 是否存在
      */
-    NEFORCE_NODISCARD bool has_property(const string& key) const {
-        return properties_.find(key) != properties_.end();
-    }
+    NEFORCE_NODISCARD bool has_property(const string& key) const { return properties_.find(key) != properties_.end(); }
 
     /**
      * @brief 获取所有属性的常量引用
@@ -355,8 +354,8 @@ public:
  */
 class NEFORCE_API ini_document final : public istringify<ini_document> {
 private:
-    unordered_map<string, unique_ptr<ini_section>> sections_;  ///< 节映射表
-    unique_ptr<ini_section> global_section_;  ///< 全局节（无名节）
+    unordered_map<string, unique_ptr<ini_section>> sections_; ///< 节映射表
+    unique_ptr<ini_section> global_section_;                  ///< 全局节（无名节）
 
 public:
     /**
@@ -364,11 +363,11 @@ public:
      *
      * 创建空文档，初始化全局节。
      */
-    ini_document()
-    : global_section_(make_unique<ini_section>("")) {}
+    ini_document() :
+    global_section_(make_unique<ini_section>("")) {}
 
     ini_document(const ini_document&) = delete;
-    ini_document& operator =(const ini_document&) = delete;
+    ini_document& operator=(const ini_document&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -381,7 +380,7 @@ public:
      * @param other 源文档
      * @return 自身引用
      */
-    ini_document& operator =(ini_document&& other) noexcept = default;
+    ini_document& operator=(ini_document&& other) noexcept = default;
 
     /**
      * @brief 添加节
@@ -404,9 +403,13 @@ public:
      * @return 节的常量指针，不存在返回nullptr
      */
     NEFORCE_NODISCARD const ini_section* get_section(const string& name) const {
-        if (name.empty()) return global_section_.get();
+        if (name.empty()) {
+            return global_section_.get();
+        }
         const auto it = sections_.find(name);
-        if (it != sections_.end()) return it->second.get();
+        if (it != sections_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -416,9 +419,13 @@ public:
      * @return 节的指针，不存在返回nullptr
      */
     NEFORCE_NODISCARD ini_section* get_section(const string& name) {
-        if (name.empty()) return global_section_.get();
+        if (name.empty()) {
+            return global_section_.get();
+        }
         const auto it = sections_.find(name);
-        if (it != sections_.end()) return it->second.get();
+        if (it != sections_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -428,7 +435,9 @@ public:
      * @return 是否存在
      */
     NEFORCE_NODISCARD bool has_section(const string& name) const {
-        if (name.empty()) return global_section_ != nullptr;
+        if (name.empty()) {
+            return global_section_ != nullptr;
+        }
         return sections_.find(name) != sections_.end();
     }
 
@@ -444,17 +453,13 @@ public:
      * @brief 获取全局节的常量指针
      * @return 全局节的常量指针
      */
-    NEFORCE_NODISCARD const ini_section* get_global_section() const noexcept {
-        return global_section_.get();
-    }
+    NEFORCE_NODISCARD const ini_section* get_global_section() const noexcept { return global_section_.get(); }
 
     /**
      * @brief 获取全局节的指针
      * @return 全局节的指针
      */
-    NEFORCE_NODISCARD ini_section* get_global_section() noexcept {
-        return global_section_.get();
-    }
+    NEFORCE_NODISCARD ini_section* get_global_section() noexcept { return global_section_.get(); }
 
     /**
      * @brief 获取字符串值
@@ -463,7 +468,8 @@ public:
      * @param default_value 默认值
      * @return 指定属性的字符串值
      */
-    NEFORCE_NODISCARD string get_string(const string& section, const string& key, const string& default_value = "") const {
+    NEFORCE_NODISCARD string get_string(const string& section, const string& key,
+                                        const string& default_value = "") const {
         const ini_section* sec = get_section(section);
         return sec ? sec->get_string(key, default_value) : default_value;
     }

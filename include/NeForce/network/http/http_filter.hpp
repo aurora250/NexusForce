@@ -27,14 +27,14 @@ private:
 public:
     http_filter_chain() = default;
 
-    explicit http_filter_chain(const bool owns_filters)
-    : owns_filters_(owns_filters) {}
+    explicit http_filter_chain(const bool owns_filters) :
+    owns_filters_(owns_filters) {}
 
     http_filter_chain(const http_filter_chain&) = delete;
-    http_filter_chain& operator =(const http_filter_chain&) = delete;
+    http_filter_chain& operator=(const http_filter_chain&) = delete;
 
     http_filter_chain(http_filter_chain&&) noexcept = default;
-    http_filter_chain& operator =(http_filter_chain&&) noexcept = default;
+    http_filter_chain& operator=(http_filter_chain&&) noexcept = default;
 
     void add_filter(unique_ptr<http_filter> filter);
     void add_filter_ref(http_filter* filter);
@@ -51,7 +51,7 @@ public:
 
 
 #ifdef DELETE
-#undef DELETE
+#    undef DELETE
 #endif
 
 class NEFORCE_API cors_filter final : public http_filter {
@@ -64,8 +64,8 @@ public:
 
     cors_filter() = default;
 
-    explicit cors_filter(string origins)
-    : allowed_origins(_NEFORCE move(origins)) {}
+    explicit cors_filter(string origins) :
+    allowed_origins(_NEFORCE move(origins)) {}
 
     bool pre_filter(http_request& request, http_response& response) override;
     void do_filter(http_request& request, http_response& response) override {}
@@ -98,7 +98,7 @@ public:
     void do_filter(http_request& request, http_response& response) override {}
     NEFORCE_NODISCARD string name() const override { return "static_file_filter"; }
 
-    NEFORCE_NODISCARD static bool is_safe_path(const string& path) ;
+    NEFORCE_NODISCARD static bool is_safe_path(const string& path);
 
     NEFORCE_NODISCARD optional<HTTP_CONTENT> get_mime_type(const string& path) const;
     void add_mime_type(const string& extension, HTTP_CONTENT content_type);
@@ -118,16 +118,13 @@ public:
     seconds window_seconds{60};
 
 public:
-    explicit rate_limit_filter(const size_t max_requests = 100, const seconds window = seconds(60))
-    : max_requests(max_requests), window_seconds(window) {}
+    explicit rate_limit_filter(const size_t max_requests = 100, const seconds window = seconds(60)) :
+    max_requests(max_requests),
+    window_seconds(window) {}
 
-    void set_max_requests(const size_t max_request) {
-        max_requests = max_request;
-    }
+    void set_max_requests(const size_t max_request) { max_requests = max_request; }
 
-    void set_window(const seconds window) {
-        window_seconds = window;
-    }
+    void set_window(const seconds window) { window_seconds = window; }
 
     bool pre_filter(http_request& request, http_response& response) override;
     void do_filter(http_request& request, http_response& response) override {}
@@ -146,20 +143,16 @@ private:
 public:
     authentication_filter() = default;
 
-    explicit authentication_filter(function<bool(const http_request&)> validator)
-    : auth_validator_(_NEFORCE move(validator)) {}
+    explicit authentication_filter(function<bool(const http_request&)> validator) :
+    auth_validator_(_NEFORCE move(validator)) {}
 
     void set_auth_validator(function<bool(const http_request&)> validator) {
         auth_validator_ = _NEFORCE move(validator);
     }
 
-    void add_excluded_path(string path) {
-        excluded_paths_.push_back(_NEFORCE move(path));
-    }
+    void add_excluded_path(string path) { excluded_paths_.push_back(_NEFORCE move(path)); }
 
-    void clear_excluded_paths() {
-        excluded_paths_.clear();
-    }
+    void clear_excluded_paths() { excluded_paths_.clear(); }
 
     bool pre_filter(http_request& request, http_response& response) override;
     void do_filter(http_request& request, http_response& response) override {}

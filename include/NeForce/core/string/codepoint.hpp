@@ -66,8 +66,10 @@ public:
      *
      * 根据UTF-16编码规则将两个代理项组合为完整的码点。
      */
-    NEFORCE_CONST_FUNCTION static constexpr codepoint combine_surrogates(const char16_t high, const char16_t low) noexcept {
-        return codepoint{0x10000 + ((static_cast<uint32_t>(high) - 0xD800) << 10) + (static_cast<uint32_t>(low) - 0xDC00)};
+    NEFORCE_CONST_FUNCTION static constexpr codepoint combine_surrogates(const char16_t high,
+                                                                         const char16_t low) noexcept {
+        return codepoint{0x10000 + ((static_cast<uint32_t>(high) - 0xD800) << 10) +
+                         (static_cast<uint32_t>(low) - 0xDC00)};
     }
 
     /**
@@ -100,9 +102,7 @@ public:
      * @brief 构造空字符U+0000
      * @return 空字符码点对象
      */
-    static constexpr codepoint null() noexcept {
-        return codepoint(0u);
-    }
+    static constexpr codepoint null() noexcept { return codepoint(0u); }
 
     /**
      * @brief 从UTF-8字节流解码一个码点，并推进索引
@@ -133,7 +133,9 @@ public:
         uint32_t cp;
         size_t consumed;
         const bool ok = codepoint::utf16_codepoint(data, index, len, cp, consumed, need_swap);
-        if (consumed == 0) return replacement();
+        if (consumed == 0) {
+            return replacement();
+        }
         index += consumed;
         return ok ? codepoint(cp) : replacement();
     }
@@ -145,17 +147,15 @@ public:
      *
      * UTF-32编码直接对应Unicode码点值。
      */
-    static constexpr codepoint from_utf32(char32_t value) noexcept {
-        return codepoint(static_cast<uint32_t>(value));
-    }
+    static constexpr codepoint from_utf32(char32_t value) noexcept { return codepoint(static_cast<uint32_t>(value)); }
 
 private:
-    uint32_t value_;  ///< 存储的码点值
+    uint32_t value_; ///< 存储的码点值
 
 private:
     template <typename T>
-    static bool utf16_codepoint(const T* data, size_t index, const size_t len,
-                                    uint32_t& cp, size_t& consumed, const bool need_swap) {
+    static bool utf16_codepoint(const T* data, size_t index, const size_t len, uint32_t& cp, size_t& consumed,
+                                const bool need_swap) {
         if (index >= len) {
             cp = 0xFFFD;
             consumed = 0;
@@ -196,7 +196,8 @@ public:
      * @brief 默认构造函数
      * @brief 构造空字符U+0000
      */
-    constexpr codepoint() noexcept : value_(0) {}
+    constexpr codepoint() noexcept :
+    value_(0) {}
 
     /**
      * @brief 从uint32_t构造码点
@@ -204,20 +205,20 @@ public:
      *
      * 如果值非法，自动替换为U+FFFD。
      */
-    constexpr explicit codepoint(uint32_t value) noexcept
-    : value_(is_valid_codepoint(value) ? value : REPLACEMENT_VALUE) {}
+    constexpr explicit codepoint(uint32_t value) noexcept :
+    value_(is_valid_codepoint(value) ? value : REPLACEMENT_VALUE) {}
 
     /**
      * @brief 从char32_t构造码点
      * @param value UTF-32字符
      */
-    constexpr explicit codepoint(const char32_t value) noexcept
-    : codepoint(static_cast<uint32_t>(value)) {}
+    constexpr explicit codepoint(const char32_t value) noexcept :
+    codepoint(static_cast<uint32_t>(value)) {}
 
     constexpr codepoint(const codepoint&) noexcept = default;
-    constexpr codepoint& operator =(const codepoint&) noexcept = default;
+    constexpr codepoint& operator=(const codepoint&) noexcept = default;
     constexpr codepoint(codepoint&&) noexcept = default;
-    constexpr codepoint& operator =(codepoint&&) noexcept = default;
+    constexpr codepoint& operator=(codepoint&&) noexcept = default;
 
     /**
      * @brief 获取码点的uint32_t值
@@ -229,49 +230,37 @@ public:
      * @brief 获取码点的char32_t值
      * @return UTF-32字符
      */
-    constexpr char32_t to_char32() const noexcept {
-        return static_cast<char32_t>(value_);
-    }
+    constexpr char32_t to_char32() const noexcept { return static_cast<char32_t>(value_); }
 
     /**
      * @brief 是否为替换符U+FFFD
      * @return 是替换符返回true
      */
-    constexpr bool is_replacement() const noexcept {
-        return value_ == REPLACEMENT_VALUE;
-    }
+    constexpr bool is_replacement() const noexcept { return value_ == REPLACEMENT_VALUE; }
 
     /**
      * @brief 是否为ASCII字符（U+0000 ~ U+007F）
      * @return 是ASCII字符返回true
      */
-    constexpr bool is_ascii() const noexcept {
-        return value_ <= 0x7F;
-    }
+    constexpr bool is_ascii() const noexcept { return value_ <= 0x7F; }
 
     /**
      * @brief 是否位于基本多文种平面（BMP, U+0000 ~ U+FFFF）
      * @return 在BMP内返回true
      */
-    constexpr bool is_bmp() const noexcept {
-        return value_ <= 0xFFFF;
-    }
+    constexpr bool is_bmp() const noexcept { return value_ <= 0xFFFF; }
 
     /**
      * @brief 是否为辅助平面字符（需要UTF-16代理对）
      * @return 是辅助平面字符返回true
      */
-    constexpr bool is_supplementary() const noexcept {
-        return value_ > 0xFFFF && value_ <= MAX_VALUE;
-    }
+    constexpr bool is_supplementary() const noexcept { return value_ > 0xFFFF && value_ <= MAX_VALUE; }
 
     /**
      * @brief 是否需要UTF-16代理对表示
      * @return 需要代理对返回true
      */
-    constexpr bool needs_surrogate_pair() const noexcept {
-        return is_supplementary();
-    }
+    constexpr bool needs_surrogate_pair() const noexcept { return is_supplementary(); }
 
     /**
      * @brief UTF-8编码后的字节数
@@ -284,9 +273,15 @@ public:
      * - U+10000 ~ U+10FFFF: 4字节
      */
     constexpr size_t utf8_length() const noexcept {
-        if (value_ <= 0x7F)    return 1;
-        if (value_ <= 0x7FF)   return 2;
-        if (value_ <= 0xFFFF)  return 3;
+        if (value_ <= 0x7F) {
+            return 1;
+        }
+        if (value_ <= 0x7FF) {
+            return 2;
+        }
+        if (value_ <= 0xFFFF) {
+            return 3;
+        }
         return 4;
     }
 
@@ -296,9 +291,7 @@ public:
      *
      * BMP字符需要1个码元，辅助平面字符需要2个码元（代理对）。
      */
-    constexpr size_t utf16_length() const noexcept {
-        return is_supplementary() ? 2u : 1u;
-    }
+    constexpr size_t utf16_length() const noexcept { return is_supplementary() ? 2u : 1u; }
 
     /**
      * @brief 追加UTF-8编码到string
@@ -333,9 +326,7 @@ public:
      *
      * 将码点直接追加到u32string中（一个码元）。
      */
-    void append_to(u32string& result) const {
-        result.push_back(static_cast<char32_t>(value_));
-    }
+    void append_to(u32string& result) const { result.push_back(static_cast<char32_t>(value_)); }
 
     /**
      * @brief 追加编码到wstring
@@ -343,27 +334,15 @@ public:
      */
     void append_to(wstring& result) const;
 
-    constexpr bool operator ==(const codepoint& other) const noexcept {
-        return value_ == other.value_;
-    }
-    constexpr bool operator !=(const codepoint& other) const noexcept {
-        return value_ != other.value_;
-    }
-    constexpr bool operator <(const codepoint& other) const noexcept {
-        return value_ < other.value_;
-    }
-    constexpr bool operator <=(const codepoint& other) const noexcept {
-        return value_ <= other.value_;
-    }
-    constexpr bool operator >(const codepoint& other) const noexcept {
-        return value_ > other.value_;
-    }
-    constexpr bool operator >=(const codepoint& other) const noexcept {
-        return value_ >= other.value_;
-    }
+    constexpr bool operator==(const codepoint& other) const noexcept { return value_ == other.value_; }
+    constexpr bool operator!=(const codepoint& other) const noexcept { return value_ != other.value_; }
+    constexpr bool operator<(const codepoint& other) const noexcept { return value_ < other.value_; }
+    constexpr bool operator<=(const codepoint& other) const noexcept { return value_ <= other.value_; }
+    constexpr bool operator>(const codepoint& other) const noexcept { return value_ > other.value_; }
+    constexpr bool operator>=(const codepoint& other) const noexcept { return value_ >= other.value_; }
 
-    constexpr bool operator ==(uint32_t v) const noexcept { return value_ == v; }
-    constexpr bool operator !=(uint32_t v) const noexcept { return value_ != v; }
+    constexpr bool operator==(uint32_t v) const noexcept { return value_ == v; }
+    constexpr bool operator!=(uint32_t v) const noexcept { return value_ != v; }
 };
 
 /** @} */ // CodePoint

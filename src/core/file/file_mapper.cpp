@@ -1,37 +1,37 @@
 #include <NeForce/core/file/file_mapper.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/system/sysinfo.hpp>
+#    include <NeForce/core/system/sysinfo.hpp>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#    include <sys/mman.h>
+#    include <sys/stat.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     const file_mapper::native_handle_type invalid_handle =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        INVALID_HANDLE_VALUE;
+            INVALID_HANDLE_VALUE;
 #else
-        -1;
+            -1;
 #endif
 
-    void do_unmap(void*& ptr, file_mapper::size_type& size,
-                  file_mapper::size_type& offset
+    void do_unmap(void*& ptr, file_mapper::size_type& size, file_mapper::size_type& offset
 #ifdef NEFORCE_PLATFORM_WINDOWS
-                  , file_mapper::native_handle_type& mapping_handle
-                  , const file_mapper::native_handle_type invalid
+                  ,
+                  file_mapper::native_handle_type& mapping_handle, const file_mapper::native_handle_type invalid
 #endif
                   ) noexcept {
-        if (!ptr) return;
+        if (!ptr) {
+            return;
+        }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const uint32_t granularity = sysinfo::instance().get_system_info().allocation_granularity;
         const uintptr_t delta = static_cast<uintptr_t>(offset) & ~(static_cast<uintptr_t>(granularity) - 1u);
-        const uintptr_t base_addr =
-            reinterpret_cast<uintptr_t>(ptr) -
-            (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1u));
+        const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr) -
+                                    (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1u));
         ::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_addr));
 
         if (mapping_handle != invalid) {
@@ -42,9 +42,7 @@ namespace {
         const long page_size = ::sysconf(_SC_PAGESIZE);
         if (page_size > 0) {
             const size_t page_mask = static_cast<size_t>(page_size) - 1;
-            const uintptr_t base_addr =
-                reinterpret_cast<uintptr_t>(ptr) -
-                (static_cast<uintptr_t>(offset) & page_mask);
+            const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr) - (static_cast<uintptr_t>(offset) & page_mask);
             const size_t total = size + (static_cast<size_t>(offset) & page_mask);
             ::munmap(reinterpret_cast<void*>(base_addr), total);
         }
@@ -53,25 +51,27 @@ namespace {
         size = 0;
         offset = 0;
     }
-}
+} // namespace
 
 
-file_mapper::file_mapper(const native_handle_type file_handle)
-: file_handle_(file_handle) {
+file_mapper::file_mapper(const native_handle_type file_handle) :
+file_handle_(file_handle) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     mapping_handle_ = invalid_handle;
 #endif
 }
 
-file_mapper::~file_mapper() {
-    unmap();
-}
+file_mapper::~file_mapper() { unmap(); }
 
-file_mapper::file_mapper(file_mapper&& other) noexcept
-: file_handle_(other.file_handle_), ptr_(other.ptr_),
-  size_(other.size_), offset_(other.offset_), access_(other.access_)
+file_mapper::file_mapper(file_mapper&& other) noexcept :
+file_handle_(other.file_handle_),
+ptr_(other.ptr_),
+size_(other.size_),
+offset_(other.offset_),
+access_(other.access_)
 #ifdef NEFORCE_PLATFORM_WINDOWS
-, mapping_handle_(other.mapping_handle_)
+,
+mapping_handle_(other.mapping_handle_)
 #endif
 {
     other.ptr_ = nullptr;
@@ -83,8 +83,10 @@ file_mapper::file_mapper(file_mapper&& other) noexcept
 #endif
 }
 
-file_mapper& file_mapper::operator =(file_mapper&& other) noexcept {
-    if (addressof(other) == this) return *this;
+file_mapper& file_mapper::operator=(file_mapper&& other) noexcept {
+    if (addressof(other) == this) {
+        return *this;
+    }
 
     unmap();
     file_handle_ = other.file_handle_;
@@ -104,8 +106,7 @@ file_mapper& file_mapper::operator =(file_mapper&& other) noexcept {
     return *this;
 }
 
-bool file_mapper::map(const size_type offset, size_type size,
-                      const file_access access, const file_map_hint hint) {
+bool file_mapper::map(const size_type offset, size_type size, const file_access access, const file_map_hint hint) {
     lock<mutex> lk(mutex_);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -129,23 +130,17 @@ bool file_mapper::map(const size_type offset, size_type size,
         map_access = FILE_MAP_READ;
     }
 
-    mapping_handle_ = ::CreateFileMappingW(
-        file_handle_, nullptr, protect,
-        static_cast<::DWORD>(aligned_size >> 32),
-        static_cast<::DWORD>(aligned_size & 0xFFFFFFFF),
-        nullptr
-    );
+    mapping_handle_ = ::CreateFileMappingW(file_handle_, nullptr, protect, static_cast<::DWORD>(aligned_size >> 32),
+                                           static_cast<::DWORD>(aligned_size & 0xFFFFFFFF), nullptr);
 
     if (!mapping_handle_ || mapping_handle_ == invalid_handle) {
         mapping_handle_ = invalid_handle;
         return false;
     }
 
-    void* base = ::MapViewOfFile(
-        mapping_handle_, map_access,
-        static_cast<::DWORD>(aligned_offset >> 32),
-        static_cast<::DWORD>(aligned_offset & 0xFFFFFFFF),
-        static_cast<::SIZE_T>(aligned_size));
+    void* base =
+            ::MapViewOfFile(mapping_handle_, map_access, static_cast<::DWORD>(aligned_offset >> 32),
+                            static_cast<::DWORD>(aligned_offset & 0xFFFFFFFF), static_cast<::SIZE_T>(aligned_size));
 
     if (!base) {
         ::CloseHandle(mapping_handle_);
@@ -167,20 +162,26 @@ bool file_mapper::map(const size_type offset, size_type size,
         using PFN = ::BOOL(__stdcall*)(::HANDLE, ::ULONG_PTR, ::PWIN32_MEMORY_RANGE_ENTRY, ::ULONG);
         static auto pfn = reinterpret_cast<PFN>(::GetProcAddress(hK32, "PrefetchVirtualMemory"));
         if (pfn && hint == file_map_hint::SEQUENTIAL) {
-            ::WIN32_MEMORY_RANGE_ENTRY range{ ptr_, size };
+            ::WIN32_MEMORY_RANGE_ENTRY range{ptr_, size};
             pfn(::GetCurrentProcess(), 1, &range, 0);
         }
     }
 
 #else
     const long page_size = ::sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) return false;
+    if (page_size <= 0) {
+        return false;
+    }
 
     if (size == 0) {
         struct ::stat64 st{};
-        if (::fstat64(file_handle_, &st) == -1) return false;
+        if (::fstat64(file_handle_, &st) == -1) {
+            return false;
+        }
         const uint64_t file_size = static_cast<uint64_t>(st.st_size);
-        if (file_size <= static_cast<uint64_t>(offset)) return false;
+        if (file_size <= static_cast<uint64_t>(offset)) {
+            return false;
+        }
         size = static_cast<size_type>(file_size - static_cast<uint64_t>(offset));
     }
 
@@ -191,12 +192,16 @@ bool file_mapper::map(const size_type offset, size_type size,
 
     int prot = PROT_READ;
     const auto af = static_cast<fud_t>(access);
-    if (af & O_RDWR) prot = PROT_READ | PROT_WRITE;
-    else if (af & O_WRONLY) prot = PROT_WRITE;
+    if (af & O_RDWR) {
+        prot = PROT_READ | PROT_WRITE;
+    } else if (af & O_WRONLY) {
+        prot = PROT_WRITE;
+    }
 
-    void* base = ::mmap(nullptr, aligned_size, prot, MAP_SHARED,
-                        file_handle_, static_cast<::off_t>(aligned_off));
-    if (base == MAP_FAILED) return false;
+    void* base = ::mmap(nullptr, aligned_size, prot, MAP_SHARED, file_handle_, static_cast<::off_t>(aligned_off));
+    if (base == MAP_FAILED) {
+        return false;
+    }
 
     int advice = MADV_NORMAL;
     switch (hint) {
@@ -241,13 +246,17 @@ bool file_mapper::remap(const size_type new_offset, const size_type new_size) {
 bool file_mapper::flush(const bool async) noexcept {
     lock<mutex> lk(mutex_);
 
-    if (!ptr_) return false;
+    if (!ptr_) {
+        return false;
+    }
     if (!(static_cast<fud_t>(access_) & static_cast<fud_t>(file_access::WRITE))) {
         return true;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!::FlushViewOfFile(ptr_, size_)) return false;
+    if (!::FlushViewOfFile(ptr_, size_)) {
+        return false;
+    }
     if (!async && mapping_handle_ != invalid_handle) {
         return ::FlushFileBuffers(file_handle_) != 0;
     }
@@ -255,12 +264,12 @@ bool file_mapper::flush(const bool async) noexcept {
 
 #else
     const long page_size = ::sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) return false;
+    if (page_size <= 0) {
+        return false;
+    }
 
     const size_t page_mask = static_cast<size_t>(page_size) - 1;
-    const uintptr_t base_addr =
-        reinterpret_cast<uintptr_t>(ptr_) -
-        (static_cast<uintptr_t>(offset_) & page_mask);
+    const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr_) - (static_cast<uintptr_t>(offset_) & page_mask);
     const size_t total = size_ + (static_cast<size_t>(offset_) & page_mask);
 
     return ::msync(reinterpret_cast<void*>(base_addr), total, async ? MS_ASYNC : MS_SYNC) == 0;
@@ -268,26 +277,25 @@ bool file_mapper::flush(const bool async) noexcept {
 }
 
 bool file_mapper::lock_pages(const bool lock_in_memory) const noexcept {
-    if (!ptr_) return false;
+    if (!ptr_) {
+        return false;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return lock_in_memory
-        ? ::VirtualLock(ptr_, size_) != 0
-        : ::VirtualUnlock(ptr_, size_) != 0;
+    return lock_in_memory ? ::VirtualLock(ptr_, size_) != 0 : ::VirtualUnlock(ptr_, size_) != 0;
 
 #else
     const long page_size = ::sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) return false;
+    if (page_size <= 0) {
+        return false;
+    }
 
     const size_t page_mask = static_cast<size_t>(page_size) - 1;
-    const uintptr_t base_addr =
-        reinterpret_cast<uintptr_t>(ptr_) -
-        (static_cast<uintptr_t>(offset_) & page_mask);
+    const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr_) - (static_cast<uintptr_t>(offset_) & page_mask);
     const size_t total = size_ + (static_cast<size_t>(offset_) & page_mask);
 
-    return lock_in_memory
-        ? ::mlock(reinterpret_cast<void*>(base_addr), total) == 0
-        : ::munlock(reinterpret_cast<void*>(base_addr), total) == 0;
+    return lock_in_memory ? ::mlock(reinterpret_cast<void*>(base_addr), total) == 0
+                          : ::munlock(reinterpret_cast<void*>(base_addr), total) == 0;
 #endif
 }
 

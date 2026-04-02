@@ -15,24 +15,20 @@ byte_vector websocket_session_base::build_frame(websocket_opcode opcode, const s
     } else if (len <= 0xFFFF) {
         frame.push_back(static_cast<byte_t>(second | 126));
         const uint16_t net_len = endian::host_to_network(static_cast<uint16_t>(len));
-        frame.insert(frame.end(),
-            reinterpret_cast<const byte_t*>(&net_len),
-            reinterpret_cast<const byte_t*>(&net_len) + 2);
+        frame.insert(frame.end(), reinterpret_cast<const byte_t*>(&net_len),
+                     reinterpret_cast<const byte_t*>(&net_len) + 2);
     } else {
         frame.push_back(static_cast<byte_t>(second | 127));
         const uint64_t net_len = endian::host_to_network(static_cast<uint64_t>(len));
-        frame.insert(frame.end(),
-            reinterpret_cast<const byte_t*>(&net_len),
-            reinterpret_cast<const byte_t*>(&net_len) + 8);
+        frame.insert(frame.end(), reinterpret_cast<const byte_t*>(&net_len),
+                     reinterpret_cast<const byte_t*>(&net_len) + 8);
     }
 
     uint32_t masking_key = 0;
     if (masked) {
         thread_local random_mt tl_mt;
         masking_key = tl_mt.next_int<uint32_t>();
-        frame.insert(frame.end(),
-            reinterpret_cast<byte_t*>(&masking_key),
-            reinterpret_cast<byte_t*>(&masking_key) + 4);
+        frame.insert(frame.end(), reinterpret_cast<byte_t*>(&masking_key), reinterpret_cast<byte_t*>(&masking_key) + 4);
     }
 
     if (len > 0) {

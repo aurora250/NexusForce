@@ -9,14 +9,10 @@ namespace {
             static uint32_t pool_thread_id = 0;
             return pool_thread_id;
         }
-        static uint32_t get_new_id() noexcept {
-            return get_id()++;
-        }
-        static void reset_id() noexcept {
-            get_id() = 0;
-        }
+        static uint32_t get_new_id() noexcept { return get_id()++; }
+        static void reset_id() noexcept { get_id() = 0; }
     };
-}
+} // namespace
 
 
 local_queue::steal_strategy local_queue::steal_strategy_ = steal_strategy::adaptive;
@@ -46,7 +42,9 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
         const auto cur_src_local_head = pir.second;
         const auto cur_src_tail = tail_.load(memory_order_acquire);
         const auto cur_src_size = cur_src_tail - cur_src_local_head;
-        if (cur_src_size == 0) return 0;
+        if (cur_src_size == 0) {
+            return 0;
+        }
 
         switch (steal_strategy_) {
             case steal_strategy::half: {
@@ -58,9 +56,8 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
                 break;
             }
             case steal_strategy::fixed_batch: {
-                steal_num = (cur_src_size >= fixed_batch_size_)
-                    ? fixed_batch_size_
-                    : _NEFORCE min(cur_src_size, static_cast<uint32_t>(1));
+                steal_num = (cur_src_size >= fixed_batch_size_) ? fixed_batch_size_
+                                                                : _NEFORCE min(cur_src_size, static_cast<uint32_t>(1));
                 break;
             }
             case steal_strategy::adaptive: {
@@ -78,13 +75,14 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
             }
         }
 
-        if (steal_num == 0) return 0;
+        if (steal_num == 0) {
+            return 0;
+        }
 
         const auto next_src_local_head = cur_src_local_head + steal_num;
         next_src_head = pack(cur_src_steal, next_src_local_head);
 
-        if (head_.compare_exchange_weak(cur_src_head, next_src_head,
-            memory_order_acq_rel, memory_order_acquire)) {
+        if (head_.compare_exchange_weak(cur_src_head, next_src_head, memory_order_acq_rel, memory_order_acquire)) {
             break;
         }
     }
@@ -100,19 +98,18 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
     while (true) {
         const auto cur_src_local_head = unpack(cur_src_head).second;
         next_src_head = pack(cur_src_local_head, cur_src_local_head);
-        if (head_.compare_exchange_weak(cur_src_head, next_src_head,
-            memory_order_acq_rel, memory_order_acquire)) {
+        if (head_.compare_exchange_weak(cur_src_head, next_src_head, memory_order_acq_rel, memory_order_acquire)) {
             return steal_num;
         }
     }
 }
 
-local_queue::local_queue(local_queue&& other) noexcept
-    : tasks_(move(other.tasks_))
-    , head_(other.head_.load(memory_order_relaxed))
-    , tail_(other.tail_.load(memory_order_relaxed)) {}
+local_queue::local_queue(local_queue&& other) noexcept :
+tasks_(move(other.tasks_)),
+head_(other.head_.load(memory_order_relaxed)),
+tail_(other.tail_.load(memory_order_relaxed)) {}
 
-local_queue& local_queue::operator =(local_queue&& other) noexcept {
+local_queue& local_queue::operator=(local_queue&& other) noexcept {
     if (this != &other) {
         tasks_ = move(other.tasks_);
         head_.store(other.head_.load(memory_order_relaxed), memory_order_relaxed);
@@ -134,12 +131,10 @@ optional<function<void()>> local_queue::try_pop() {
         }
 
         const auto next_local_head = cur_local_head + 1;
-        const auto next_head = (cur_local_head == cur_steal)
-            ? pack(next_local_head, next_local_head)
-            : pack(cur_steal, next_local_head);
+        const auto next_head = (cur_local_head == cur_steal) ? pack(next_local_head, next_local_head)
+                                                             : pack(cur_steal, next_local_head);
 
-        if (head_.compare_exchange_weak(cur_head, next_head,
-            memory_order_acq_rel, memory_order_acquire)) {
+        if (head_.compare_exchange_weak(cur_head, next_head, memory_order_acq_rel, memory_order_acquire)) {
             index = static_cast<size_t>(cur_local_head) & mask_;
             break;
         }
@@ -159,7 +154,9 @@ optional<function<void()>> local_queue::be_stolen_by(local_queue& dst_queue) {
     }
 
     auto steal_num = this->be_stolen_by_impl(dst_queue, dst_tail);
-    if (steal_num == 0) return result;
+    if (steal_num == 0) {
+        return result;
+    }
 
     steal_num = steal_num - 1;
     const auto next_dst_tail = dst_tail + steal_num;
@@ -172,13 +169,13 @@ optional<function<void()>> local_queue::be_stolen_by(local_queue& dst_queue) {
     return result;
 }
 
-worker_context::worker_context(worker_context&& other) noexcept
-: queue(move(other.queue))
-, id(other.id)
-, is_stealing(other.is_stealing.load(memory_order_relaxed))
-, consecutive_idle_count(other.consecutive_idle_count) {}
+worker_context::worker_context(worker_context&& other) noexcept :
+queue(move(other.queue)),
+id(other.id),
+is_stealing(other.is_stealing.load(memory_order_relaxed)),
+consecutive_idle_count(other.consecutive_idle_count) {}
 
-worker_context& worker_context::operator =(worker_context&& other) noexcept {
+worker_context& worker_context::operator=(worker_context&& other) noexcept {
     if (this != &other) {
         queue = move(other.queue);
         id = other.id;
@@ -190,9 +187,9 @@ worker_context& worker_context::operator =(worker_context&& other) noexcept {
 
 NEFORCE_BEGIN_INNER__
 
-manual_thread::manual_thread(thread_func&& func) noexcept
-    : func_(move(func)),
-    thread_id_(thread_pool_id_generator::get_new_id()) {}
+manual_thread::manual_thread(thread_func&& func) noexcept :
+func_(move(func)),
+thread_id_(thread_pool_id_generator::get_new_id()) {}
 
 void manual_thread::start() {
     thread t(move(func_), thread_id_);
@@ -203,12 +200,12 @@ NEFORCE_END_INNER__
 
 string thread_pool::pool_statistics::to_string() const {
     string result;
-    result += _NEFORCE to_string("total_threads:   ", total_threads,   "\n");
-    result += _NEFORCE to_string("idle_threads:    ", idle_threads,    "\n");
-    result += _NEFORCE to_string("busy_threads:    ", busy_threads,    "\n");
-    result += _NEFORCE to_string("queue_size:      ", queue_size,      "\n");
+    result += _NEFORCE to_string("total_threads:   ", total_threads, "\n");
+    result += _NEFORCE to_string("idle_threads:    ", idle_threads, "\n");
+    result += _NEFORCE to_string("busy_threads:    ", busy_threads, "\n");
+    result += _NEFORCE to_string("queue_size:      ", queue_size, "\n");
     result += _NEFORCE to_string("total_submitted: ", total_submitted, "\n");
-    result += _NEFORCE to_string("total_stolen:    ", total_stolen,    "\n");
+    result += _NEFORCE to_string("total_stolen:    ", total_stolen, "\n");
     result += _NEFORCE to_string("total_completed: ", total_completed);
     return result;
 }
@@ -223,9 +220,7 @@ void thread_pool::thread_function(const id_type thread_id) {
         lock<mutex> lock(worker_contexts_mtx_);
         worker_contexts_.emplace(thread_id, move(ctx));
         if (thread_id < worker_contexts_ptr_.size()) {
-            worker_contexts_ptr_[thread_id].store(
-                &worker_contexts_[thread_id], memory_order_release
-            );
+            worker_contexts_ptr_[thread_id].store(&worker_contexts_[thread_id], memory_order_release);
         }
     }
 
@@ -233,9 +228,9 @@ void thread_pool::thread_function(const id_type thread_id) {
     ++idle_thread_size_;
     auto last = system_clock::now();
 
-    constexpr size_t MIN_WAIT_MS = 1;      // 最小等待 1ms
-    constexpr size_t MAX_WAIT_MS = 100;    // 最大等待 100ms
-    constexpr size_t MAX_IDLE_SHIFT = 7;   // 最多 2^7 = 128 倍
+    constexpr size_t MIN_WAIT_MS = 1;    // 最小等待 1ms
+    constexpr size_t MAX_WAIT_MS = 100;  // 最大等待 100ms
+    constexpr size_t MAX_IDLE_SHIFT = 7; // 最多 2^7 = 128 倍
 
     for (;;) {
         optional<task_type> task{};
@@ -293,9 +288,8 @@ void thread_pool::thread_function(const id_type thread_id) {
                 return;
             }
 
-            if (not_empty_.wait_for(lk, milliseconds(wait_ms), [this] {
-                return !is_running_ || !task_queue_.empty();
-            })) {
+            if (not_empty_.wait_for(lk, milliseconds(wait_ms),
+                                    [this] { return !is_running_ || !task_queue_.empty(); })) {
                 last = system_clock::now();
             } else if (pool_mode_ == pool_mode::cached) {
                 if (cv_status::timeout == not_empty_.wait_for(lk, seconds(1))) {
@@ -341,7 +335,7 @@ optional<thread_pool::task_type> thread_pool::try_steal_task(worker_context& ctx
 
     {
         lock<mutex> lock(worker_contexts_mtx_);
-        for (auto& atomic_ptr : worker_contexts_ptr_) {
+        for (auto& atomic_ptr: worker_contexts_ptr_) {
             worker_context* ptr = atomic_ptr.load(memory_order_acquire);
             if (ptr && ptr->id != ctx.id) {
                 snapshot.push_back(ptr);
@@ -349,7 +343,7 @@ optional<thread_pool::task_type> thread_pool::try_steal_task(worker_context& ctx
         }
     }
 
-    for (worker_context* other : snapshot) {
+    for (worker_context* other: snapshot) {
         if (other->is_stealing.load(memory_order_acquire)) {
             continue;
         }
@@ -380,8 +374,7 @@ thread_pool::pool_statistics thread_pool::statistics_unsafe() const {
     pool_statistics stats{};
     stats.total_threads = threads_map_.size();
     stats.idle_threads = idle_thread_size_.load();
-    stats.busy_threads = stats.total_threads > stats.idle_threads ?
-        stats.total_threads - stats.idle_threads : 0;
+    stats.busy_threads = stats.total_threads > stats.idle_threads ? stats.total_threads - stats.idle_threads : 0;
     stats.queue_size = task_size_.load();
     stats.total_submitted = total_submitted_tasks_.load();
     stats.total_stolen = total_stolen_tasks_.load();
@@ -399,33 +392,40 @@ thread_pool::thread_pool() {
 }
 
 thread_pool::~thread_pool() {
-    if(is_running_) {
+    if (is_running_) {
         stop();
     }
 }
 
 bool thread_pool::set_mode(const pool_mode mode) noexcept {
-    if (is_running_) return false;
+    if (is_running_) {
+        return false;
+    }
     pool_mode_ = mode;
     return true;
 }
 
 bool thread_pool::set_steal_mode(const steal_strategy strategy, uint32_t steal_batch) noexcept {
-    if (is_running_) return false;
+    if (is_running_) {
+        return false;
+    }
     local_queue::set_steal_strategy(strategy, steal_batch);
     return true;
 }
 
 bool thread_pool::set_task_threshhold(const size_t threshhold) noexcept {
-    if (is_running_) return false;
+    if (is_running_) {
+        return false;
+    }
     task_threshhold_ = threshhold;
     return true;
 }
 
 bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
-    if (is_running_ || pool_mode_ == pool_mode::fixed) return false;
-    thread_threshhold_ = threshhold > max_threshhold
-        ? max_threshhold : threshhold;
+    if (is_running_ || pool_mode_ == pool_mode::fixed) {
+        return false;
+    }
+    thread_threshhold_ = threshhold > max_threshhold ? max_threshhold : threshhold;
     return true;
 }
 
@@ -435,12 +435,14 @@ thread_pool::pool_statistics thread_pool::statistics() const {
 }
 
 bool thread_pool::start(const size_t init_thread_size) {
-    if(is_running_) return false;
+    if (is_running_) {
+        return false;
+    }
 
     {
         lock<mutex> ctx_lock(worker_contexts_mtx_);
         worker_contexts_.clear();
-        for (auto& ptr : worker_contexts_ptr_) {
+        for (auto& ptr: worker_contexts_ptr_) {
             ptr.store(nullptr, memory_order_release);
         }
     }
@@ -452,10 +454,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     unique_lock<mutex> lk(task_queue_mtx_);
 
     for (id_type i = 0; i < init_thread_size_; i++) {
-        auto ptr = make_unique<inner::manual_thread>(
-            [this](const id_type id) {
-                thread_function(id);
-            });
+        auto ptr = make_unique<inner::manual_thread>([this](const id_type id) { thread_function(id); });
         id_type thread_id = ptr->id();
         auto* t_ptr = ptr.get();
 
@@ -479,7 +478,9 @@ bool thread_pool::start(const size_t init_thread_size) {
 }
 
 thread_pool::pool_statistics thread_pool::stop() {
-    if (!is_running_) return {};
+    if (!is_running_) {
+        return {};
+    }
     is_running_ = false;
 
     {
@@ -496,7 +497,7 @@ thread_pool::pool_statistics thread_pool::stop() {
 
     {
         lock<mutex> ctx_lock(worker_contexts_mtx_);
-        for (auto& ptr : worker_contexts_ptr_) {
+        for (auto& ptr: worker_contexts_ptr_) {
             ptr.store(nullptr, memory_order_release);
         }
         worker_contexts_.clear();

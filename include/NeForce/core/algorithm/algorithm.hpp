@@ -8,10 +8,10 @@
  * 此文件提供了所有常用算法的头文件集合。
  */
 
-#include "parallel.hpp"
-#include "remove.hpp"
 #include "numeric.hpp"
+#include "parallel.hpp"
 #include "permutation.hpp"
+#include "remove.hpp"
 #include "set.hpp"
 #include "shuffle.hpp"
 #include "sort.hpp"

@@ -9,12 +9,12 @@
  * 包括线程创建、等待、分离、线程标识符、线程名称设置等操作。
  */
 
-#include "NeForce/core/functional/apply.hpp"
-#include "NeForce/core/exception/exception.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/async/this_thread.hpp"
+#include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/functional/apply.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <pthread.h>
+#    include <pthread.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -29,13 +29,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 线程操作异常
  */
 struct thread_exception final : system_exception {
-    explicit thread_exception(const char* info = "Thread Operation Failed.",
-                              const char* type = static_type,
-                              const int code = 0) noexcept
-    : system_exception(info, type, code) {}
+    explicit thread_exception(const char* info = "Thread Operation Failed.", const char* type = static_type,
+                              const int code = 0) noexcept :
+    system_exception(info, type, code) {}
 
-    explicit thread_exception(const exception& e)
-    : system_exception(e) {}
+    explicit thread_exception(const exception& e) :
+    system_exception(e) {}
 
     ~thread_exception() override = default;
 
@@ -72,12 +71,12 @@ public:
          */
         using native_id_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-            ::DWORD;
+                ::DWORD;
 #else
-            ::pthread_t;
+                ::pthread_t;
 #endif
 
-        native_id_type id_{};  ///< 系统线程标识符
+        native_id_type id_{}; ///< 系统线程标识符
 
         friend class thread;
 
@@ -91,7 +90,8 @@ public:
          * @brief 从原生ID构造
          * @param id 原生线程ID
          */
-        explicit id(const native_id_type id) noexcept : id_(id) {}
+        explicit id(const native_id_type id) noexcept :
+        id_(id) {}
 
         /**
          * @brief 获取原生线程ID
@@ -112,7 +112,7 @@ public:
          * @param rhs 右操作数
          * @return 两个线程ID是否相等
          */
-        NEFORCE_NODISCARD bool operator ==(const id& rhs) const noexcept {
+        NEFORCE_NODISCARD bool operator==(const id& rhs) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             return id_ == rhs.id_;
 #else
@@ -125,9 +125,7 @@ public:
          * @param rhs 右操作数
          * @return 两个线程ID是否不相等
          */
-        NEFORCE_NODISCARD bool operator !=(const id& rhs) const noexcept {
-            return !(*this == rhs);
-        }
+        NEFORCE_NODISCARD bool operator!=(const id& rhs) const noexcept { return !(*this == rhs); }
     };
 
     /**
@@ -142,14 +140,14 @@ public:
          * @brief 钩子触发点枚举
          */
         enum class point {
-            before_create,  ///< 线程创建前
-            after_create,   ///< 线程创建后
-            thread_start,   ///< 线程函数开始执行
-            thread_end,     ///< 线程函数结束
-            before_destroy  ///< 线程对象销毁前
+            before_create, ///< 线程创建前
+            after_create,  ///< 线程创建后
+            thread_start,  ///< 线程函数开始执行
+            thread_end,    ///< 线程函数结束
+            before_destroy ///< 线程对象销毁前
         };
 
-        using callback_t = void(*)(point point, id thread_id); ///< 钩子回调函数类型
+        using callback_t = void (*)(point point, id thread_id); ///< 钩子回调函数类型
 
         /**
          * @brief 添加钩子回调
@@ -199,12 +197,12 @@ private:
      * @brief 线程数据具体实现
      * @tparam Callable 可调用对象类型
      */
-    template <typename Callable>
-    struct thread_data final : data_base {
+    template <typename Callable> struct thread_data final : data_base {
         Callable func_;
 
         template <typename F>
-        explicit thread_data(F&& f) : func_(_NEFORCE forward<F>(f)) {}
+        explicit thread_data(F&& f) :
+        func_(_NEFORCE forward<F>(f)) {}
 
         void run() override { func_(); }
     };
@@ -249,9 +247,9 @@ public:
      */
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        ::HANDLE;
+            ::HANDLE;
 #else
-        ::pthread_t;
+            ::pthread_t;
 #endif
 
 private:
@@ -264,12 +262,11 @@ private:
 #else
     static void*
 #endif
-    thread_entry(void* arg);
+            thread_entry(void* arg);
 
     void start_thread_impl(thread_startup_args* args);
 
-    template <typename F>
-    void start_thread(F&& f) {
+    template <typename F> void start_thread(F&& f) {
         auto data = _NEFORCE make_unique<thread_data<decay_t<F>>>(_NEFORCE forward<F>(f));
         this->start_thread_impl(new thread_startup_args{_NEFORCE move(data), id_});
     }
@@ -303,7 +300,7 @@ public:
     }
 
     thread(const thread&) = delete;
-    thread& operator =(const thread&) = delete;
+    thread& operator=(const thread&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -316,7 +313,7 @@ public:
      * @param other 要移动的线程对象
      * @return 当前对象的引用
      */
-    thread& operator =(thread&& other) noexcept;
+    thread& operator=(thread&& other) noexcept;
 
     /**
      * @brief 析构函数
@@ -328,17 +325,13 @@ public:
      * @brief 获取线程标识符
      * @return 线程标识符
      */
-    NEFORCE_NODISCARD id get_id() const noexcept {
-        return id_;
-    }
+    NEFORCE_NODISCARD id get_id() const noexcept { return id_; }
 
     /**
      * @brief 获取原生句柄
      * @return 平台特定的线程句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
-        return handle_;
-    }
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return handle_; }
 
     /**
      * @brief 检查线程是否可被等待
@@ -346,9 +339,7 @@ public:
      *
      * 线程在创建后、被等待结束或分离前是可被等待的。
      */
-    NEFORCE_NODISCARD bool joinable() const noexcept {
-        return state_ == CREATED;
-    }
+    NEFORCE_NODISCARD bool joinable() const noexcept { return state_ == CREATED; }
 
     /**
      * @brief 等待线程结束
@@ -455,9 +446,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool name(char* buffer, size_t size) {
  * @param name 线程名称
  * @return 是否设置成功
  */
-NEFORCE_ALWAYS_INLINE_INLINE bool set_name(const char* name) {
-    return thread::set_name(this_thread::handle(), name);
-}
+NEFORCE_ALWAYS_INLINE_INLINE bool set_name(const char* name) { return thread::set_name(this_thread::handle(), name); }
 
 /** @} */ // Thread
 

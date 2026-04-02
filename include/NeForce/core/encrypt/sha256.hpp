@@ -65,18 +65,14 @@ NEFORCE_ALWAYS_INLINE_INLINE string sha256(const string& data) {
  * @param data 输入数据
  * @return 32字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const cbyte_view data) {
-    return SHA256::hash(data);
-}
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const cbyte_view data) { return SHA256::hash(data); }
 
 /**
  * @brief SHA-256哈希便捷函数（字节向量版本）
  * @param data 输入数据
  * @return 32字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const byte_vector& data) {
-    return SHA256::hash(data.view());
-}
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const byte_vector& data) { return SHA256::hash(data.view()); }
 
 /** @} */ // Encryption
 

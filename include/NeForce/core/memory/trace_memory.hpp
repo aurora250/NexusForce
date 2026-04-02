@@ -30,8 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 在分配内存时记录调用栈，在释放内存时清除记录。
  * 析构时检查是否有未释放的内存，并输出详细的泄漏信息。
  */
-template <typename T>
-class trace_allocator {
+template <typename T> class trace_allocator {
     static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
 
 public:
@@ -50,13 +49,12 @@ public:
      *
      * 提供将当前分配器重新绑定到其他类型的能力。
      */
-    template <typename U>
-    struct rebind {
+    template <typename U> struct rebind {
         using other = trace_allocator<U>;
     };
 
 private:
-    unordered_map<T*, stacktrace> traces_;  ///< 内存分配追踪表
+    unordered_map<T*, stacktrace> traces_; ///< 内存分配追踪表
 
 public:
     /**
@@ -68,16 +66,18 @@ public:
      * @brief 拷贝构造函数
      * @param other 源分配器
      */
-    trace_allocator(const trace_allocator& other)
-    : traces_(other.traces_) {}
+    trace_allocator(const trace_allocator& other) :
+    traces_(other.traces_) {}
 
     /**
      * @brief 拷贝赋值运算符
      * @param other 源分配器
      * @return 自身引用
      */
-    trace_allocator& operator =(const trace_allocator& other) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    trace_allocator& operator=(const trace_allocator& other) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         traces_ = other.traces_;
         return *this;
     }
@@ -100,8 +100,10 @@ public:
      * 遍历追踪表，输出每个泄漏指针的地址和分配时的调用栈。
      */
     void print_stacktrace() const {
-        for(auto& entry : traces_) {
-            if (entry.first == 0) continue;
+        for (auto& entry: traces_) {
+            if (entry.first == 0) {
+                continue;
+            }
             _NEFORCE printcln(color::red(), "Leaked pointer: ", static_cast<void*>(entry.first));
             _NEFORCE printcln(color::red(), "Allocation stack trace:\n", entry.second);
         }
@@ -127,9 +129,7 @@ public:
      *
      * 分配一个T类型元素的内存，并记录当前调用栈。
      */
-    NEFORCE_NODISCARD NEFORCE_ALLOC_OPTIMIZE pointer allocate() {
-        return this->allocate(1);
-    }
+    NEFORCE_NODISCARD NEFORCE_ALLOC_OPTIMIZE pointer allocate() { return this->allocate(1); }
 
     /**
      * @brief 释放内存
@@ -152,9 +152,7 @@ public:
      *
      * 释放由allocate()分配的单个元素内存。
      */
-    void deallocate(pointer p) noexcept {
-        this->deallocate(p, 1);
-    }
+    void deallocate(pointer p) noexcept { this->deallocate(p, 1); }
 };
 
 /**
@@ -168,7 +166,7 @@ public:
  * 所有trace_allocator实例都是相等的。
  */
 template <typename T, typename U>
-bool operator ==(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) noexcept {
+bool operator==(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) noexcept {
     return true;
 }
 
@@ -181,7 +179,7 @@ bool operator ==(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) n
  * @return 始终返回false
  */
 template <typename T, typename U>
-bool operator !=(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) noexcept {
+bool operator!=(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) noexcept {
     return false;
 }
 

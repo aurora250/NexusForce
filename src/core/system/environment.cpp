@@ -1,12 +1,12 @@
-#include <NeForce/core/system/environment.hpp>
 #include <NeForce/core/async/shared_mutex.hpp>
+#include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <processenv.h>
-#include <urlmon.h>
+#    include <processenv.h>
+#    include <urlmon.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <unistd.h>
-#include <cstdlib>
+#    include <cstdlib>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -40,7 +40,7 @@ namespace {
         return ::setenv(name.data(), value.data(), overwrite ? 1 : 0) == 0;
 #endif
     }
-}
+} // namespace
 
 
 string environment::get(const string& name) {
@@ -196,13 +196,19 @@ string environment::temp_directory() {
     return string(buffer);
 #else
     const char* tmpdir = ::getenv("TMPDIR");
-    if (tmpdir) return tmpdir;
+    if (tmpdir) {
+        return tmpdir;
+    }
 
     tmpdir = ::getenv("TEMP");
-    if (tmpdir) return tmpdir;
+    if (tmpdir) {
+        return tmpdir;
+    }
 
     tmpdir = ::getenv("TMP");
-    if (tmpdir) return tmpdir;
+    if (tmpdir) {
+        return tmpdir;
+    }
 
     return "/tmp";
 #endif
@@ -232,8 +238,12 @@ string environment::home_directory() {
         result = string(homedrive) + string(homepath);
     }
 
-    if (homedrive) ::free(homedrive);
-    if (homepath) ::free(homepath);
+    if (homedrive) {
+        ::free(homedrive);
+    }
+    if (homepath) {
+        ::free(homepath);
+    }
 
     return result;
 #else

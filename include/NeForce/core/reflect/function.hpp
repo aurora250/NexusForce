@@ -31,10 +31,10 @@ public:
     using invoker = function<meta_any(void*, const vector<meta_any>&)>; ///< 函数调用器类型
 
 private:
-    string_view name_;        ///< 函数名称
-    invoker invoker_;         ///< 调用器
-    size_t min_args_ = 0;     ///< 最小参数数量
-    size_t max_args_ = 0;     ///< 最大参数数量
+    string_view name_;    ///< 函数名称
+    invoker invoker_;     ///< 调用器
+    size_t min_args_ = 0; ///< 最小参数数量
+    size_t max_args_ = 0; ///< 最大参数数量
 
 public:
     /**
@@ -42,8 +42,9 @@ public:
      * @param name 函数名称
      * @param invoker 调用器
      */
-    meta_function(string_view name, invoker invoker)
-    : name_(name), invoker_(move(invoker)) {}
+    meta_function(string_view name, invoker invoker) :
+    name_(name),
+    invoker_(move(invoker)) {}
 
     /**
      * @brief 获取函数名称
@@ -58,7 +59,9 @@ public:
      * @return 返回值包装为meta_any
      */
     meta_any invoke(void* obj, const vector<meta_any>& args) const {
-        if (!invoker_) return meta_any{};
+        if (!invoker_) {
+            return meta_any{};
+        }
         try {
             return invoker_(move(obj), args);
         } catch (...) {
@@ -71,9 +74,7 @@ public:
      * @param obj 对象指针
      * @return 返回值包装为meta_any
      */
-    meta_any invoke(void* obj) const noexcept {
-        return invoke(obj, {});
-    }
+    meta_any invoke(void* obj) const noexcept { return invoke(obj, {}); }
 
     /**
      * @brief 获取最小参数数量
@@ -110,7 +111,8 @@ Ret invoke_impl(Class* obj, Ret (Class::*func)(Args...), const vector<reflect::m
 }
 
 template <typename Ret, typename Class, typename... Args, size_t... Is>
-Ret invoke_impl(const Class* obj, Ret (Class::*func)(Args...) const, const vector<reflect::meta_any>& args, index_sequence<Is...>) {
+Ret invoke_impl(const Class* obj, Ret (Class::*func)(Args...) const, const vector<reflect::meta_any>& args,
+                index_sequence<Is...>) {
     return (obj->*func)(args[Is].template convert<Args>()...);
 }
 
@@ -153,7 +155,8 @@ decltype(auto) make_const_member_invoker(Ret (Class::*func)(Args...) const) {
         if (sizeof...(Args) != args.size()) {
             NEFORCE_THROW_EXCEPTION(value_exception("Argument count mismatch"));
         }
-        auto result = inner::invoke_impl(static_cast<const Class*>(obj), func, args, make_index_sequence<sizeof...(Args)>{});
+        auto result =
+                inner::invoke_impl(static_cast<const Class*>(obj), func, args, make_index_sequence<sizeof...(Args)>{});
         return reflect::meta_any(result);
     };
 }

@@ -1,22 +1,22 @@
 #include <NeForce/core/system/share_memory.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <windef.h>
-#include <WinBase.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <NeForce/core/config/windef.hpp>
+#    include <WinBase.h>
+#    include <windef.h>
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cerrno>
-#include <cstring>
+#    include <cerrno>
+#    include <cstring>
+#    include <fcntl.h>
+#    include <sys/mman.h>
+#    include <sys/stat.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -35,30 +35,29 @@ namespace {
 
     share_memory::native_handle_type invalid_handle =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        nullptr;
+            nullptr;
 #else
-        -1;
+            -1;
 #endif
-}
+} // namespace
 
 
-share_memory::share_memory() noexcept
-: handle_(invalid_handle) {}
+share_memory::share_memory() noexcept :
+handle_(invalid_handle) {}
 
-share_memory::share_memory(const string& name, size_t size,
-                             open_mode mode, access_mode access)
-: handle_(invalid_handle) {
+share_memory::share_memory(const string& name, size_t size, open_mode mode, access_mode access) :
+handle_(invalid_handle) {
     open(name, size, mode, access);
 }
 
-share_memory::share_memory(share_memory&& other) noexcept
-: handle_(other.handle_),
-  name_(static_cast<string&&>(other.name_)),
-  size_(other.size_),
-  mapped_size_(other.mapped_size_),
-  mapped_addr_(other.mapped_addr_),
-  access_mode_(other.access_mode_),
-  is_open_(other.is_open_) {
+share_memory::share_memory(share_memory&& other) noexcept :
+handle_(other.handle_),
+name_(static_cast<string&&>(other.name_)),
+size_(other.size_),
+mapped_size_(other.mapped_size_),
+mapped_addr_(other.mapped_addr_),
+access_mode_(other.access_mode_),
+is_open_(other.is_open_) {
     other.handle_ = invalid_handle;
     other.size_ = 0;
     other.mapped_size_ = 0;
@@ -66,8 +65,10 @@ share_memory::share_memory(share_memory&& other) noexcept
     other.is_open_ = false;
 }
 
-share_memory& share_memory::operator =(share_memory&& other) noexcept {
-    if (addressof(other) == this) return *this;
+share_memory& share_memory::operator=(share_memory&& other) noexcept {
+    if (addressof(other) == this) {
+        return *this;
+    }
 
     close();
 
@@ -88,12 +89,9 @@ share_memory& share_memory::operator =(share_memory&& other) noexcept {
     return *this;
 }
 
-share_memory::~share_memory() {
-    close();
-}
+share_memory::~share_memory() { close(); }
 
-void share_memory::open(const string& name, size_t size,
-                         open_mode mode, access_mode access) {
+void share_memory::open(const string& name, size_t size, open_mode mode, access_mode access) {
     if (is_open_) {
         close();
     }
@@ -107,14 +105,8 @@ void share_memory::open(const string& name, size_t size,
     const ::DWORD access_flags = (access == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
 
     if (mode == open_mode::create_only) {
-        handle_ = ::CreateFileMappingA(
-            INVALID_HANDLE_VALUE,
-            nullptr,
-            protect,
-            static_cast<::DWORD>(size >> 32),
-            static_cast<::DWORD>(size & 0xFFFFFFFF),
-            name.data()
-        );
+        handle_ = ::CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr, protect, static_cast<::DWORD>(size >> 32),
+                                       static_cast<::DWORD>(size & 0xFFFFFFFF), name.data());
 
         if (handle_ == invalid_handle) {
             NEFORCE_THROW_EXCEPTION(share_memory_exception("CreateFileMapping failed"));
@@ -131,14 +123,8 @@ void share_memory::open(const string& name, size_t size,
             NEFORCE_THROW_EXCEPTION(share_memory_exception("OpenFileMapping failed"));
         }
     } else {
-        handle_ = ::CreateFileMappingA(
-            INVALID_HANDLE_VALUE,
-            nullptr,
-            protect,
-            static_cast<::DWORD>(size >> 32),
-            static_cast<::DWORD>(size & 0xFFFFFFFF),
-            name.data()
-        );
+        handle_ = ::CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr, protect, static_cast<::DWORD>(size >> 32),
+                                       static_cast<::DWORD>(size & 0xFFFFFFFF), name.data());
 
         if (handle_ == invalid_handle) {
             NEFORCE_THROW_EXCEPTION(share_memory_exception("CreateFileMapping failed"));
@@ -236,13 +222,8 @@ void* share_memory::map(size_t offset, size_t length) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::DWORD access = (access_mode_ == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
 
-    mapped_addr_ = ::MapViewOfFile(
-        handle_,
-        access,
-        static_cast<::DWORD>(offset >> 32),
-        static_cast<::DWORD>(offset & 0xFFFFFFFF),
-        map_length
-    );
+    mapped_addr_ = ::MapViewOfFile(handle_, access, static_cast<::DWORD>(offset >> 32),
+                                   static_cast<::DWORD>(offset & 0xFFFFFFFF), map_length);
 
     if (mapped_addr_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(share_memory_exception("MapViewOfFile failed"));
@@ -250,14 +231,7 @@ void* share_memory::map(size_t offset, size_t length) {
 #else
     int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
 
-    mapped_addr_ = ::mmap(
-        nullptr,
-        map_length,
-        prot,
-        MAP_SHARED,
-        handle_,
-        static_cast<::off_t>(offset)
-    );
+    mapped_addr_ = ::mmap(nullptr, map_length, prot, MAP_SHARED, handle_, static_cast<::off_t>(offset));
 
     if (mapped_addr_ == MAP_FAILED) {
         mapped_addr_ = nullptr;

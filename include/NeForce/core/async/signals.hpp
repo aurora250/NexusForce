@@ -29,8 +29,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 用于控制回调是否在调用后自动断开。
  */
 enum class callback_result {
-    keep,   ///< 保留回调
-    erase,  ///< 调用后自动删除
+    keep,  ///< 保留回调
+    erase, ///< 调用后自动删除
 };
 
 
@@ -67,14 +67,14 @@ enum class nshot_t : size_t {};
  */
 class connection {
 private:
-    shared_ptr<bool> connected_;  ///< 连接状态标志
+    shared_ptr<bool> connected_; ///< 连接状态标志
 
 public:
     /**
      * @brief 默认构造函数，创建处于已连接状态的对象
      */
-    connection()
-    : connected_(_NEFORCE make_shared<bool>(true)) {}
+    connection() :
+    connected_(_NEFORCE make_shared<bool>(true)) {}
 
     /**
      * @brief 断开连接
@@ -92,17 +92,13 @@ public:
      * @brief 检查连接是否有效
      * @return 连接是否仍然有效
      */
-    bool connected() const noexcept {
-        return connected_ && *connected_;
-    }
+    bool connected() const noexcept { return connected_ && *connected_; }
 
     /**
      * @brief 获取连接标志的内部指针
      * @return 共享指针指向bool标志
      */
-    shared_ptr<bool> flag() const noexcept {
-        return connected_;
-    }
+    shared_ptr<bool> flag() const noexcept { return connected_; }
 };
 
 
@@ -114,7 +110,7 @@ public:
  */
 class scoped_connection {
 private:
-    connection conn_{};  ///< 被管理的连接
+    connection conn_{}; ///< 被管理的连接
 
 public:
     /**
@@ -126,15 +122,13 @@ public:
      * @brief 从连接构造
      * @param conn 要管理的连接
      */
-    explicit scoped_connection(connection conn) noexcept
-    : conn_(_NEFORCE move(conn)) {}
+    explicit scoped_connection(connection conn) noexcept :
+    conn_(_NEFORCE move(conn)) {}
 
     /**
      * @brief 析构函数，自动断开连接
      */
-    ~scoped_connection() {
-        conn_.disconnect();
-    }
+    ~scoped_connection() { conn_.disconnect(); }
 
     scoped_connection(const scoped_connection&) = delete;
     scoped_connection& operator=(const scoped_connection&) = delete;
@@ -143,15 +137,15 @@ public:
      * @brief 移动构造函数
      * @param other 被移动的对象
      */
-    scoped_connection(scoped_connection&& other) noexcept
-    : conn_(_NEFORCE move(other.conn_)) {}
+    scoped_connection(scoped_connection&& other) noexcept :
+    conn_(_NEFORCE move(other.conn_)) {}
 
     /**
      * @brief 移动赋值运算符
      * @param other 被移动的对象
      * @return 自身引用
      */
-    scoped_connection& operator =(scoped_connection&& other) noexcept {
+    scoped_connection& operator=(scoped_connection&& other) noexcept {
         if (this != &other) {
             conn_.disconnect();
             conn_ = _NEFORCE move(other.conn_);
@@ -162,17 +156,13 @@ public:
     /**
      * @brief 手动断开连接
      */
-    void disconnect() noexcept {
-        conn_.disconnect();
-    }
+    void disconnect() noexcept { conn_.disconnect(); }
 
     /**
      * @brief 检查连接是否有效
      * @return 连接是否仍然有效
      */
-    bool connected() const noexcept {
-        return conn_.connected();
-    }
+    bool connected() const noexcept { return conn_.connected(); }
 
     /**
      * @brief 释放连接所有权
@@ -180,14 +170,11 @@ public:
      *
      * 将管理的连接返回给调用者，之后scoped_connection不再管理它。
      */
-    connection release() noexcept {
-        return _NEFORCE move(conn_);
-    }
+    connection release() noexcept { return _NEFORCE move(conn_); }
 };
 
 
-template <typename... Types>
-struct signal;
+template <typename... Types> struct signal;
 
 /**
  * @class signal_blocker
@@ -195,20 +182,19 @@ struct signal;
  *
  * 信号阻塞管理器，在作用域内临时阻塞信号触发。
  */
-template <typename... Types>
-class signal_blocker {
+template <typename... Types> class signal_blocker {
 private:
-    shared_ptr<bool> blocked_flag_;  ///< 阻塞标志
-    bool old_value_;                 ///< 原值
-    bool released_ = false;          ///< 是否已手动解除
+    shared_ptr<bool> blocked_flag_; ///< 阻塞标志
+    bool old_value_;                ///< 原值
+    bool released_ = false;         ///< 是否已手动解除
 
 public:
     /**
      * @brief 构造函数，阻塞指定信号
      * @param sig 要阻塞的信号
      */
-    explicit signal_blocker(signal<Types...>& sig) noexcept
-    : blocked_flag_(sig.block_flag()) {
+    explicit signal_blocker(signal<Types...>& sig) noexcept :
+    blocked_flag_(sig.block_flag()) {
         old_value_ = *blocked_flag_;
         *blocked_flag_ = true;
     }
@@ -246,49 +232,39 @@ public:
  *
  * 多播委托实现。
  */
-template <typename... Types>
-struct signal {
+template <typename... Types> struct signal {
 private:
     /**
      * @struct slot_entry
      * @brief 槽条目
      */
     struct slot_entry {
-        using callback_type = function<callback_result(Types...)>;  ///< 回调函数类型
+        using callback_type = function<callback_result(Types...)>; ///< 回调函数类型
 
-        callback_type callback;           ///< 回调函数
-        shared_ptr<bool> connected_flag;  ///< 连接状态标志
-        int priority;                     ///< 优先级（值越大优先级越高）
+        callback_type callback;          ///< 回调函数
+        shared_ptr<bool> connected_flag; ///< 连接状态标志
+        int priority;                    ///< 优先级（值越大优先级越高）
 
-        slot_entry(callback_type cb, shared_ptr<bool> flag, const int pri = 0)
-        : callback(_NEFORCE move(cb)), connected_flag(_NEFORCE move(flag)), priority(pri) {}
+        slot_entry(callback_type cb, shared_ptr<bool> flag, const int pri = 0) :
+        callback(_NEFORCE move(cb)),
+        connected_flag(_NEFORCE move(flag)),
+        priority(pri) {}
     };
 
-    vector<slot_entry> slots_{};     ///< 槽列表
-    shared_ptr<bool> blocked_flag_{_NEFORCE make_shared<bool>(false)};   ///< 阻塞标志
-    mutable mutex mutex_;            ///< 互斥锁
+    vector<slot_entry> slots_{};                                       ///< 槽列表
+    shared_ptr<bool> blocked_flag_{_NEFORCE make_shared<bool>(false)}; ///< 阻塞标志
+    mutable mutex mutex_;                                              ///< 互斥锁
 
-    template <typename T>
-    static shared_ptr<T> lock_if_weak(const weak_ptr<T>& self) {
-        return self.lock();
-    }
-    template <typename T>
-    static const shared_ptr<T>& lock_if_weak(const shared_ptr<T>& self) noexcept {
-        return self;
-    }
-    template <typename T>
-    static T* lock_if_weak(T* self) noexcept {
-        return self;
-    }
+    template <typename T> static shared_ptr<T> lock_if_weak(const weak_ptr<T>& self) { return self.lock(); }
+    template <typename T> static const shared_ptr<T>& lock_if_weak(const shared_ptr<T>& self) noexcept { return self; }
+    template <typename T> static T* lock_if_weak(T* self) noexcept { return self; }
 
-    template <typename Func>
-    auto with_lock(Func&& func) const {
+    template <typename Func> auto with_lock(Func&& func) const {
         lock<mutex> lock(mutex_);
         return _NEFORCE forward<Func>(func)();
     }
 
-    template <typename Func>
-    auto with_lock(Func&& func) {
+    template <typename Func> auto with_lock(Func&& func) {
         lock<mutex> lock(mutex_);
         return _NEFORCE forward<Func>(func)();
     }
@@ -301,9 +277,8 @@ private:
      * @param memfn 成员函数指针
      * @return 包装后的可调用对象
      */
-    template <typename Self, typename MemFn>
-    auto bind(Self self, MemFn memfn) {
-        return [self = _NEFORCE move(self), memfn] (Types... args) {
+    template <typename Self, typename MemFn> auto bind(Self self, MemFn memfn) {
+        return [self = _NEFORCE move(self), memfn](Types... args) {
             auto ptr = signal::lock_if_weak(self);
             if (ptr == nullptr) {
                 return callback_result::erase;
@@ -322,9 +297,8 @@ private:
      * @param one 一次性标签
      * @return 包装后的可调用对象
      */
-    template <typename Self, typename MemFn>
-    auto bind(Self self, MemFn memfn, oneshot_t one) {
-        return [self = _NEFORCE move(self), memfn] (Types... args) {
+    template <typename Self, typename MemFn> auto bind(Self self, MemFn memfn, oneshot_t one) {
+        return [self = _NEFORCE move(self), memfn](Types... args) {
             auto ptr = signal::lock_if_weak(self);
             if (ptr == nullptr) {
                 return callback_result::erase;
@@ -343,9 +317,8 @@ private:
      * @param n nshot_t标签
      * @return 包装后的可调用对象
      */
-    template <typename Self, typename MemFn>
-    auto bind(Self self, MemFn memfn, nshot_t n) {
-        return [self = _NEFORCE move(self), memfn, n = static_cast<size_t>(n)] (Types... args) mutable {
+    template <typename Self, typename MemFn> auto bind(Self self, MemFn memfn, nshot_t n) {
+        return [self = _NEFORCE move(self), memfn, n = static_cast<size_t>(n)](Types... args) mutable {
             if (n == 0) {
                 return callback_result::erase;
             }
@@ -370,8 +343,8 @@ private:
      * @return 连接句柄
      */
     template <typename Func>
-    enable_if_t<is_invocable_r_v<callback_result, Func, Types...>, connection>
-    connect_impl(Func callback, int priority) {
+    enable_if_t<is_invocable_r_v<callback_result, Func, Types...>, connection> connect_impl(Func callback,
+                                                                                            int priority) {
         connection conn{};
 
         auto it = slots_.begin();
@@ -391,8 +364,8 @@ private:
      * @return 连接句柄
      */
     template <typename Func>
-    enable_if_t<!is_invocable_r_v<callback_result, Func, Types...>, connection>
-    connect_impl(Func callback, int priority) {
+    enable_if_t<!is_invocable_r_v<callback_result, Func, Types...>, connection> connect_impl(Func callback,
+                                                                                             int priority) {
         connection conn{};
 
         auto wrapped = [callback = _NEFORCE move(callback)](Types... args) mutable {
@@ -411,7 +384,7 @@ private:
 
     size_t slot_count_unlocked() const noexcept {
         size_t count = 0;
-        for (const auto& slot : slots_) {
+        for (const auto& slot: slots_) {
             if (slot.connected_flag && *slot.connected_flag) {
                 ++count;
             }
@@ -422,9 +395,9 @@ private:
 public:
     signal() = default;
     signal(const signal&) = delete;
-    signal& operator =(const signal&) = delete;
+    signal& operator=(const signal&) = delete;
     signal(signal&&) = default;
-    signal& operator =(signal&&) = default;
+    signal& operator=(signal&&) = default;
 
     /**
      * @brief 连接成员函数（默认优先级0）
@@ -436,8 +409,7 @@ public:
      * @param tag 连接标签（可选）
      * @return 连接句柄
      */
-    template <typename Self, typename MemFn, typename... Tag>
-    connection connect(Self self, MemFn memfn, Tag... tag) {
+    template <typename Self, typename MemFn, typename... Tag> connection connect(Self self, MemFn memfn, Tag... tag) {
         return this->connect(_NEFORCE move(self), memfn, 0, tag...);
     }
 
@@ -448,9 +420,8 @@ public:
      * @param priority 优先级（值越大优先级越高）
      * @return 连接句柄
      */
-    template <typename Func>
-    connection connect(Func callback, int priority = 0) {
-        return this->with_lock([this, callback = _NEFORCE move(callback), priority]{
+    template <typename Func> connection connect(Func callback, int priority = 0) {
+        return this->with_lock([this, callback = _NEFORCE move(callback), priority] {
             return this->connect_impl(_NEFORCE move(callback), priority);
         });
     }
@@ -470,7 +441,7 @@ public:
     connection connect(Self self, MemFn memfn, int priority, Tag... tag) {
         static_assert(sizeof...(Tag) <= 1, "only zero or one tag is allowed");
 
-        return this->with_lock([this, self = _NEFORCE move(self), memfn = _NEFORCE move(memfn), priority, tag...]{
+        return this->with_lock([this, self = _NEFORCE move(self), memfn = _NEFORCE move(memfn), priority, tag...] {
             connection conn{};
 
             auto it = slots_.begin();
@@ -494,12 +465,16 @@ public:
         vector<slot_entry> snapshot;
         {
             lock<mutex> lk(mutex_);
-            if (is_blocked()) return;
+            if (is_blocked()) {
+                return;
+            }
             snapshot = slots_;
         }
 
-        for (auto& slot : snapshot) {
-            if (!slot.connected_flag || !(*slot.connected_flag)) continue;
+        for (auto& slot: snapshot) {
+            if (!slot.connected_flag || !(*slot.connected_flag)) {
+                continue;
+            }
 
             const callback_result res = slot.callback(args...);
             if (res == callback_result::erase) {
@@ -510,13 +485,9 @@ public:
         {
             lock<mutex> lk(mutex_);
             slots_.erase(
-                _NEFORCE remove_if(slots_.begin(), slots_.end(),
-                    [](const slot_entry& s) {
-                        return !s.connected_flag || !(*s.connected_flag);
-                    }
-                ),
-                slots_.end()
-            );
+                    _NEFORCE remove_if(slots_.begin(), slots_.end(),
+                                       [](const slot_entry& s) { return !s.connected_flag || !(*s.connected_flag); }),
+                    slots_.end());
         }
     }
 
@@ -528,18 +499,17 @@ public:
      *
      * 在指定的执行器上异步调用emit。
      */
-    template <typename Executor>
-    void emit_executor(Executor& executor, Types... args) {
+    template <typename Executor> void emit_executor(Executor& executor, Types... args) {
         auto weak_flag = weak_ptr<bool>(blocked_flag_);
         auto args_tuple = _NEFORCE make_tuple(_NEFORCE forward<Types>(args)...);
 
-        executor.post([this, weak_flag = _NEFORCE move(weak_flag),
-                       args_tuple = _NEFORCE move(args_tuple)]() mutable {
-            if (weak_flag.expired()) return;
+        executor.post([this, weak_flag = _NEFORCE move(weak_flag), args_tuple = _NEFORCE move(args_tuple)]() mutable {
+            if (weak_flag.expired()) {
+                return;
+            }
 
-            _NEFORCE apply([this](auto&&... a) {
-                this->emit(_NEFORCE forward<decltype(a)>(a)...);
-            }, _NEFORCE move(args_tuple));
+            _NEFORCE apply([this](auto&&... a) { this->emit(_NEFORCE forward<decltype(a)>(a)...); },
+                           _NEFORCE move(args_tuple));
         });
     }
 
@@ -547,18 +517,13 @@ public:
      * @brief 函数调用操作符
      * @param args 信号参数
      */
-    template <typename... Args>
-    void operator ()(Args&&... args) {
-        this->emit(_NEFORCE forward<Args>(args)...);
-    }
+    template <typename... Args> void operator()(Args&&... args) { this->emit(_NEFORCE forward<Args>(args)...); }
 
     /**
      * @brief 断开所有连接
      */
     void disconnect_all() {
-        this->with_lock([this] {
-            slots_.clear();
-        });
+        this->with_lock([this] { slots_.clear(); });
     }
 
     /**
@@ -570,10 +535,12 @@ public:
      * 当此信号触发时，会转发给other信号。
      */
     connection connect_signal(signal& other, int priority = 0) {
-        return this->connect([other_ptr = &other](Types... args) {
-            other_ptr->emit(args...);
-            return callback_result::keep;
-        }, priority);
+        return this->connect(
+                [other_ptr = &other](Types... args) {
+                    other_ptr->emit(args...);
+                    return callback_result::keep;
+                },
+                priority);
     }
 
     /**
@@ -585,12 +552,14 @@ public:
      * 当此信号触发时，如果指针非空，则转发给other信号。
      */
     connection connect_signal(signal* other, int priority = 0) {
-        return this->connect([other](Types... args) {
-            if (other) {
-                other->emit(args...);
-            }
-            return callback_result::keep;
-        }, priority);
+        return this->connect(
+                [other](Types... args) {
+                    if (other) {
+                        other->emit(args...);
+                    }
+                    return callback_result::keep;
+                },
+                priority);
     }
 
     /**
@@ -609,12 +578,14 @@ public:
         using result_type = invoke_result_t<Predicate, Types...>;
         static_assert(is_boolean_v<result_type>, "only boolean results are allowed");
 
-        return this->connect([callback = _NEFORCE move(callback), pred = _NEFORCE move(pred)](Types... args) mutable {
-            if (pred(args...)) {
-                callback(_NEFORCE forward<Types>(args)...);
-            }
-            return callback_result::keep;
-        }, priority);
+        return this->connect(
+                [callback = _NEFORCE move(callback), pred = _NEFORCE move(pred)](Types... args) mutable {
+                    if (pred(args...)) {
+                        callback(_NEFORCE forward<Types>(args)...);
+                    }
+                    return callback_result::keep;
+                },
+                priority);
     }
 
     /**
@@ -638,12 +609,14 @@ public:
 
         auto bound = this->bind(_NEFORCE move(self), memfn, tag...);
 
-        return this->connect([bound = _NEFORCE move(bound), pred = _NEFORCE move(pred)](Types... args) mutable {
-            if (pred(args...)) {
-                return bound(_NEFORCE forward<Types>(args)...);
-            }
-            return callback_result::keep;
-        }, priority);
+        return this->connect(
+                [bound = _NEFORCE move(bound), pred = _NEFORCE move(pred)](Types... args) mutable {
+                    if (pred(args...)) {
+                        return bound(_NEFORCE forward<Types>(args)...);
+                    }
+                    return callback_result::keep;
+                },
+                priority);
     }
 
     /**
@@ -662,15 +635,19 @@ public:
         using result_type = invoke_result_t<Filter, Types...>;
         static_assert(is_optional_v<result_type>, "only optional results are allowed");
 
-        return this->connect([callback = _NEFORCE move(callback), filter = _NEFORCE move(filter)](Types... args) mutable {
-            auto filtered = filter(args...);
-            if (filtered) {
-                _NEFORCE apply([&callback](auto&&... filtered_args) {
-                    callback(_NEFORCE forward<decltype(filtered_args)>(filtered_args)...);
-                }, _NEFORCE move(*filtered));
-            }
-            return callback_result::keep;
-        }, priority);
+        return this->connect(
+                [callback = _NEFORCE move(callback), filter = _NEFORCE move(filter)](Types... args) mutable {
+                    auto filtered = filter(args...);
+                    if (filtered) {
+                        _NEFORCE apply(
+                                [&callback](auto&&... filtered_args) {
+                                    callback(_NEFORCE forward<decltype(filtered_args)>(filtered_args)...);
+                                },
+                                _NEFORCE move(*filtered));
+                    }
+                    return callback_result::keep;
+                },
+                priority);
     }
 
     /**
@@ -688,36 +665,32 @@ public:
     connection connect_transformed(Func callback, Transform transform, int priority = 0) {
         static_assert(is_invocable_v<Transform, Types...>, "only function inputs are allowed");
 
-        return this->connect([callback = _NEFORCE move(callback), transform = _NEFORCE move(transform)](Types... args) mutable {
-            callback(transform(_NEFORCE forward<Types>(args)...));
-            return callback_result::keep;
-        }, priority);
+        return this->connect(
+                [callback = _NEFORCE move(callback), transform = _NEFORCE move(transform)](Types... args) mutable {
+                    callback(transform(_NEFORCE forward<Types>(args)...));
+                    return callback_result::keep;
+                },
+                priority);
     }
 
     /**
      * @brief 获取阻塞标志
      * @return 阻塞标志的共享指针
      */
-    shared_ptr<bool> block_flag() const noexcept {
-        return blocked_flag_;
-    }
+    shared_ptr<bool> block_flag() const noexcept { return blocked_flag_; }
 
     /**
      * @brief 检查信号是否被阻塞
      * @return 是否被阻塞
      */
-    bool is_blocked() const noexcept {
-        return blocked_flag_ && *blocked_flag_;
-    }
+    bool is_blocked() const noexcept { return blocked_flag_ && *blocked_flag_; }
 
     /**
      * @brief 获取活跃槽的数量
      * @return 槽数量
      */
     size_t slot_count() const noexcept {
-        return this->with_lock([this] {
-            return slot_count_unlocked();
-        });
+        return this->with_lock([this] { return slot_count_unlocked(); });
     }
 
     /**
@@ -725,9 +698,7 @@ public:
      * @return 是否为空
      */
     NEFORCE_NODISCARD bool empty() const noexcept {
-        return this->with_lock([this] {
-            return slot_count_unlocked() == 0;
-        });
+        return this->with_lock([this] { return slot_count_unlocked() == 0; });
     }
 };
 

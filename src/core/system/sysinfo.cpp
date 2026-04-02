@@ -1,21 +1,21 @@
-#include <NeForce/core/system/sysinfo.hpp>
-#include <NeForce/core/string/to_string.hpp>
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/async/mutex.hpp>
+#include <NeForce/core/string/to_string.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
+#include <NeForce/core/utility/packages.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/memory/bit.hpp>
-#include <intrin.h>
-#include <comdef.h>
-#include <pdh.h>
-#include <psapi.h>
-#include <winternl.h>
+#    include <NeForce/core/memory/bit.hpp>
+#    include <comdef.h>
+#    include <intrin.h>
+#    include <pdh.h>
+#    include <psapi.h>
+#    include <winternl.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <NeForce/core/file/file.hpp>
-#include <sys/sysinfo.h>
-#include <sys/utsname.h>
-#include <unistd.h>
-#include <dirent.h>
+#    include <NeForce/core/file/file.hpp>
+#    include <dirent.h>
+#    include <sys/sysinfo.h>
+#    include <sys/utsname.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -27,7 +27,7 @@ namespace {
 
     void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        int cpu_info_data[4] = { -1 };
+        int cpu_info_data[4] = {-1};
         char vendor[13] = {};
         char brand[49] = {};
 
@@ -72,20 +72,19 @@ namespace {
         }
 
         ::HKEY hkey = nullptr;
-        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-            R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)",
-            0, KEY_READ, &hkey) == ERROR_SUCCESS) {
+        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE, R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
+                           &hkey) == ERROR_SUCCESS) {
 
             ::DWORD mhz = 0;
             ::DWORD size = sizeof(::DWORD);
 
-            if (::RegQueryValueEx(hkey, "~MHz", nullptr, nullptr,
-                reinterpret_cast<::LPBYTE>(&mhz), &size) == ERROR_SUCCESS) {
+            if (::RegQueryValueEx(hkey, "~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
+                ERROR_SUCCESS) {
                 CPU_info.current_MHZ = mhz;
-                }
+            }
 
             ::RegCloseKey(hkey);
-            }
+        }
 #else
         const file cpuinfo(path("/proc/cpuinfo"));
         string_view line;
@@ -95,7 +94,9 @@ namespace {
         size_t pos = 0;
 
         while (_NEFORCE getline(cpuinfo_str.view(), pos, line)) {
-            if (line.empty()) continue;
+            if (line.empty()) {
+                continue;
+            }
 
             if (line.find("processor") == 0) {
                 processor_count++;
@@ -146,10 +147,7 @@ namespace {
             size_t cmf_pos = 0;
             const string data = cpu_max_freq.read();
 
-            getline(data.view(), cmf_pos, freq_str,
-            [](const char c) {
-                return is_space(c);
-            });
+            getline(data.view(), cmf_pos, freq_str, [](const char c) { return is_space(c); });
 
             if (!freq_str.empty()) {
                 CPU_info.max_MHz = to_uint64(freq_str) / 1000;
@@ -164,10 +162,7 @@ namespace {
                 size_t cmf_pos = 0;
                 const string data = cpu_cur_freq.read();
 
-                getline(data.view(), cmf_pos, freq_str,
-                [](const char c) {
-                    return is_space(c);
-                });
+                getline(data.view(), cmf_pos, freq_str, [](const char c) { return is_space(c); });
 
                 if (!freq_str.empty()) {
                     CPU_info.current_MHZ = to_uint64(freq_str) / 1000;
@@ -182,10 +177,9 @@ namespace {
         const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
         if (ntdll) {
             using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
-            const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(
-                ::GetProcAddress(ntdll, "RtlGetVersion"));
+            const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(::GetProcAddress(ntdll, "RtlGetVersion"));
 
-            ::OSVERSIONINFOW version_info = { sizeof(version_info) };
+            ::OSVERSIONINFOW version_info = {sizeof(version_info)};
             if (RtlGetVersion(&version_info) == 0) {
                 os_version_info.major = version_info.dwMajorVersion;
                 os_version_info.minor = version_info.dwMinorVersion;
@@ -196,20 +190,19 @@ namespace {
         }
 
         ::HKEY hkey{};
-        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-            R"(SOFTWARE\Microsoft\Windows NT\CurrentVersion)",
-            0, KEY_READ, &hkey) == ERROR_SUCCESS) {
+        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE, R"(SOFTWARE\Microsoft\Windows NT\CurrentVersion)", 0, KEY_READ, &hkey) ==
+            ERROR_SUCCESS) {
 
             char product_name[256];
             ::DWORD size = sizeof(product_name);
 
-            if (::RegQueryValueEx(hkey, "ProductName", nullptr, nullptr,
-                reinterpret_cast<::LPBYTE>(product_name), &size) == ERROR_SUCCESS) {
+            if (::RegQueryValueEx(hkey, "ProductName", nullptr, nullptr, reinterpret_cast<::LPBYTE>(product_name),
+                                  &size) == ERROR_SUCCESS) {
                 os_version_info.product_name = product_name;
-                }
+            }
 
             ::RegCloseKey(hkey);
-            }
+        }
 #else
         ::utsname uname_data{};
         if (::uname(&uname_data) == 0) {
@@ -233,8 +226,9 @@ namespace {
                 } else if (!current_number.empty() && part_index < 3) {
                     version_parts[part_index] = to_int32(current_number.view());
                     part_index++;
-                    if (part_index >= 3)
+                    if (part_index >= 3) {
                         break;
+                    }
                     current_number.clear();
 
                     if (c == '-' || c == '+' || c == ' ') {
@@ -254,7 +248,9 @@ namespace {
         }
 
         const file os_release(path("/etc/os-release"));
-        if (!os_release.is_opened()) return;
+        if (!os_release.is_opened()) {
+            return;
+        }
 
         string_view line;
         size_t pos = 0;
@@ -277,7 +273,7 @@ namespace {
         }
 #endif
     }
-}
+} // namespace
 
 
 size_t sysinfo::memory_info::available_memory() const noexcept {
@@ -365,20 +361,20 @@ void sysinfo::init() {
         memory_info_.total_page_file = mem_status.ullTotalPageFile;
         memory_info_.available_page_file = mem_status.ullAvailPageFile;
     }
-    
+
 #else
     system_info_.page_size = ::sysconf(::_SC_PAGESIZE);
     system_info_.processor_numbers = ::sysconf(::_SC_NPROCESSORS_ONLN);
     system_info_.allocation_granularity = system_info_.page_size;
 
-#ifdef NEFORCE_ARCH_BITS_64
+#    ifdef NEFORCE_ARCH_BITS_64
     system_info_.min_app_address = 0x400000;
     system_info_.max_app_address = 0x7fffffffffff;
-#else
+#    else
     system_info_.min_app_address = 0x08048000;
     system_info_.max_app_address = 0xC0000000;
-#endif
-    
+#    endif
+
     ::utsname uname_data{};
     if (::uname(&uname_data) == 0) {
         const string& machine = uname_data.machine;
@@ -396,7 +392,7 @@ void sysinfo::init() {
             architecture_ = architecture::UNKNOWN;
         }
     }
-    
+
     get_cpu_info_internal(cpu_info_);
     get_os_version_internal(os_version_info_);
 
@@ -447,9 +443,9 @@ void sysinfo::init() {
             }
         }
     }
-    
+
 #endif
-    
+
     initialized_.store(true, memory_order_release);
 }
 
@@ -460,7 +456,7 @@ void sysinfo::refresh() {
 }
 
 string sysinfo::format_bytes(const uint64_t bytes) {
-    constexpr string_view units[] = { "B", "KB", "MB", "GB", "TB", "PB" };
+    constexpr string_view units[] = {"B", "KB", "MB", "GB", "TB", "PB"};
     int unit_index = 0;
     double size = static_cast<double>(bytes);
 
@@ -481,9 +477,7 @@ float64_t sysinfo::cpu_usage() {
         if (::PdhOpenQuery(nullptr, 0, &cpu_query) != ERROR_SUCCESS) {
             return 0.0;
         }
-        if (::PdhAddCounter(cpu_query,
-            "\\Processor(_Total)\\% Processor Time",
-            0, &cpu_total) != ERROR_SUCCESS) {
+        if (::PdhAddCounter(cpu_query, "\\Processor(_Total)\\% Processor Time", 0, &cpu_total) != ERROR_SUCCESS) {
             ::PdhCloseQuery(cpu_query);
             return 0.0;
         }
@@ -498,8 +492,7 @@ float64_t sysinfo::cpu_usage() {
 
     ::PDH_FMT_COUNTERVALUE counter_val{};
 
-    if (::PdhGetFormattedCounterValue(cpu_total,
-        PDH_FMT_DOUBLE, nullptr, &counter_val) != ERROR_SUCCESS) {
+    if (::PdhGetFormattedCounterValue(cpu_total, PDH_FMT_DOUBLE, nullptr, &counter_val) != ERROR_SUCCESS) {
         return 0.0;
     }
 
@@ -522,7 +515,7 @@ float64_t sysinfo::cpu_usage() {
     if (line.find("cpu ") == 0) {
         const string_view data = line.view(5);
         string_view dsv;
-        uint64_t cll[8] = {0,0,0,0,0,0,0,0};
+        uint64_t cll[8] = {0, 0, 0, 0, 0, 0, 0, 0};
         pos = 0;
 
         if (getline(data, pos, dsv)) {
@@ -546,8 +539,7 @@ float64_t sysinfo::cpu_usage() {
             const uint64_t idle_diff = current_idle - prev_idle;
 
             if (total_diff > 0) {
-                const float64_t usage = 100.0 *
-                    (1.0 - static_cast<float64_t>(idle_diff) / total_diff);
+                const float64_t usage = 100.0 * (1.0 - static_cast<float64_t>(idle_diff) / total_diff);
                 prev_total = total;
                 prev_idle = current_idle;
                 return usage;

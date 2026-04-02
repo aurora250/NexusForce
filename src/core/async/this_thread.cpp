@@ -1,12 +1,12 @@
 #include <NeForce/core/async/this_thread.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <windef.h>
-#include <WinBase.h>
+#    include <WinBase.h>
+#    include <windef.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <ctime>
-#include <pthread.h>
+#    include <ctime>
+#    include <pthread.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_THIS_THREAD__
@@ -22,7 +22,9 @@ void NEFORCE_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept 
         ::nanosleep(&ts, nullptr);
 #endif
     } else {
-        if (ms == 0) return;
+        if (ms == 0) {
+            return;
+        }
 #ifdef NEFORCE_PLATFORM_WINDOWS
         static ::LARGE_INTEGER frequency{0};
         if (frequency.QuadPart == 0) {
@@ -77,12 +79,16 @@ void NEFORCE_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept 
 }
 
 void NEFORCE_API sleep_for_us(uint64_t ms) noexcept {
-    if (ms == 0) return;
+    if (ms == 0) {
+        return;
+    }
 
     if (ms >= 1000) {
         sleep_for_ms(static_cast<uint32_t>(ms / 1000), true);
         ms %= 1000;
-        if (ms == 0) return;
+        if (ms == 0) {
+            return;
+        }
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -127,7 +133,9 @@ void NEFORCE_API sleep_for_ns(uint64_t ns) noexcept {
     if (ns >= 1000000) {
         sleep_for_us(ns / 1000);
         ns %= 1000;
-        if (ns == 0) return;
+        if (ns == 0) {
+            return;
+        }
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -174,12 +182,19 @@ bool NEFORCE_API affinity(size_t cpu_mask) noexcept {
 bool NEFORCE_API priority(int priority) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     int win_priority;
-    if (priority >= 90) win_priority = THREAD_PRIORITY_TIME_CRITICAL;
-    else if (priority >= 70) win_priority = THREAD_PRIORITY_HIGHEST;
-    else if (priority >= 50) win_priority = THREAD_PRIORITY_ABOVE_NORMAL;
-    else if (priority >= 30) win_priority = THREAD_PRIORITY_NORMAL;
-    else if (priority >= 10) win_priority = THREAD_PRIORITY_BELOW_NORMAL;
-    else win_priority = THREAD_PRIORITY_LOWEST;
+    if (priority >= 90) {
+        win_priority = THREAD_PRIORITY_TIME_CRITICAL;
+    } else if (priority >= 70) {
+        win_priority = THREAD_PRIORITY_HIGHEST;
+    } else if (priority >= 50) {
+        win_priority = THREAD_PRIORITY_ABOVE_NORMAL;
+    } else if (priority >= 30) {
+        win_priority = THREAD_PRIORITY_NORMAL;
+    } else if (priority >= 10) {
+        win_priority = THREAD_PRIORITY_BELOW_NORMAL;
+    } else {
+        win_priority = THREAD_PRIORITY_LOWEST;
+    }
     return ::SetThreadPriority(::GetCurrentThread(), win_priority) != 0;
 #else
     int policy;

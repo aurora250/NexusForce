@@ -42,13 +42,12 @@ concept same_as = is_same_v<T1, T2> && is_same_v<T2, T1>;
  * 3. T1和T2都可以转换为公共引用类型
  */
 template <typename T1, typename T2>
-concept common_reference_with = requires {
-	typename common_reference_t<T1, T2>;
-	typename common_reference_t<T2, T1>;
-}
-&& same_as<common_reference_t<T1, T2>, common_reference_t<T2, T1>>
-&& convertible_to<T1, common_reference_t<T1, T2>>
-&& convertible_to<T2, common_reference_t<T1, T2>>;
+concept common_reference_with =
+        requires {
+            typename common_reference_t<T1, T2>;
+            typename common_reference_t<T2, T1>;
+        } && same_as<common_reference_t<T1, T2>, common_reference_t<T2, T1>> &&
+        convertible_to<T1, common_reference_t<T1, T2>> && convertible_to<T2, common_reference_t<T1, T2>>;
 
 /**
  * @concept common_with
@@ -63,13 +62,17 @@ concept common_reference_with = requires {
  * 4. 满足公共引用相关约束
  */
 template <typename T1, typename T2>
-concept common_with = requires { typename common_type_t<T1, T2>; typename common_type_t<T2, T1>; }
-&& same_as<common_type_t<T1, T2>, common_type_t<T2, T1>> && requires {
-	static_cast<common_type_t<T1, T2>>(_NEFORCE declval<T1>());
-	static_cast<common_type_t<T1, T2>>(_NEFORCE declval<T2>());
-} && common_reference_with<add_lvalue_reference_t<const T1>, add_lvalue_reference_t<const T2>>
-&& common_reference_with<add_lvalue_reference_t<common_type_t<T1, T2>>,
-	common_reference_t<add_lvalue_reference_t<const T1>, add_lvalue_reference_t<const T2>>>;
+concept common_with =
+        requires {
+            typename common_type_t<T1, T2>;
+            typename common_type_t<T2, T1>;
+        } && same_as<common_type_t<T1, T2>, common_type_t<T2, T1>> &&
+        requires {
+            static_cast<common_type_t<T1, T2>>(_NEFORCE declval<T1>());
+            static_cast<common_type_t<T1, T2>>(_NEFORCE declval<T2>());
+        } && common_reference_with<add_lvalue_reference_t<const T1>, add_lvalue_reference_t<const T2>> &&
+        common_reference_with<add_lvalue_reference_t<common_type_t<T1, T2>>,
+                              common_reference_t<add_lvalue_reference_t<const T1>, add_lvalue_reference_t<const T2>>>;
 
 /**
  * @concept derived_from
@@ -110,10 +113,9 @@ concept move_constructible = is_move_constructible_v<T>;
  * 2. 可以从左值引用、const左值引用、const值进行构造和转换
  */
 template <typename T>
-concept copy_constructible = move_constructible<T>
-&& constructible_from<T, T&>&& convertible_to<T&, T>
-&& constructible_from<T, const T&>&& convertible_to<const T&, T>
-&& constructible_from<T, const T>&& convertible_to<const T, T>;
+concept copy_constructible = move_constructible<T> && constructible_from<T, T&> && convertible_to<T&, T> &&
+                             constructible_from<T, const T&> && convertible_to<const T&, T> &&
+                             constructible_from<T, const T> && convertible_to<const T, T>;
 
 /**
  * @concept default_initializable
@@ -124,8 +126,8 @@ concept copy_constructible = move_constructible<T>
  */
 template <typename T>
 concept default_initializable = constructible_from<T> && requires {
-	T{};
-	::new (static_cast<void*>(nullptr)) T;
+    T{};
+    ::new (static_cast<void*>(nullptr)) T;
 };
 
 /**
@@ -137,11 +139,11 @@ concept default_initializable = constructible_from<T> && requires {
  * 要求To是左值引用，并且可以将From的值赋给To。
  */
 template <typename To, typename From>
-concept assignable_from = is_lvalue_reference_v<To>
-&& common_reference_with<const remove_reference_t<To>&, const remove_reference_t<From>&>
-&& requires(To x, From&& y) {
-	{ x = static_cast<From&&>(y) } -> same_as<To>;
-};
+concept assignable_from = is_lvalue_reference_v<To> &&
+                          common_reference_with<const remove_reference_t<To>&, const remove_reference_t<From>&> &&
+                          requires(To x, From&& y) {
+                              { x = static_cast<From&&>(y) } -> same_as<To>;
+                          };
 
 
 /**
@@ -156,10 +158,7 @@ concept assignable_from = is_lvalue_reference_v<To>
  * 4. 可交换
  */
 template <typename T>
-concept movable = is_object_v<T>
-&& move_constructible<T>
-&& assignable_from<T&, T>
-&& is_swappable_v<T>;
+concept movable = is_object_v<T> && move_constructible<T> && assignable_from<T&, T> && is_swappable_v<T>;
 
 /**
  * @concept copyable
@@ -169,11 +168,8 @@ concept movable = is_object_v<T>
  * 在movable基础上增加复制构造和复制赋值的要求。
  */
 template <typename T>
-concept copyable = copy_constructible<T>
-&& movable<T>
-&& assignable_from<T&, T&>
-&& assignable_from<T&, const T&>
-&& assignable_from<T&, const T>;
+concept copyable = copy_constructible<T> && movable<T> && assignable_from<T&, T&> && assignable_from<T&, const T&> &&
+                   assignable_from<T&, const T>;
 
 
 /**
@@ -185,10 +181,9 @@ concept copyable = copy_constructible<T>
  * 要求T1可以与T2进行==和!=比较，结果可转换为bool。
  */
 template <typename T1, typename T2>
-concept one_way_equality_comparable =
-	requires(const remove_reference_t<T1>& x, const remove_reference_t<T2>& y) {
-		{ x == y } -> convertible_to<bool>;
-		{ x != y } -> convertible_to<bool>;
+concept one_way_equality_comparable = requires(const remove_reference_t<T1>& x, const remove_reference_t<T2>& y) {
+    { x == y } -> convertible_to<bool>;
+    { x != y } -> convertible_to<bool>;
 };
 
 /**
@@ -198,8 +193,7 @@ concept one_way_equality_comparable =
  * @tparam T2 第二个类型
  */
 template <typename T1, typename T2>
-concept both_equality_comparable =
-one_way_equality_comparable<T1, T2>&& one_way_equality_comparable<T2, T1>;
+concept both_equality_comparable = one_way_equality_comparable<T1, T2> && one_way_equality_comparable<T2, T1>;
 
 /**
  * @concept equality_comparable
@@ -216,10 +210,11 @@ concept equality_comparable = one_way_equality_comparable<T, T>;
  * @tparam T2 第二个类型
  */
 template <typename T1, typename T2>
-concept equality_comparable_with = equality_comparable<T1> && equality_comparable<T2>
-&& common_reference_with<const remove_reference_t<T1>&, const remove_reference_t<T2>&>
-&& equality_comparable<common_reference_t<const remove_reference_t<T1>&, const remove_reference_t<T2>&>>
-&& both_equality_comparable<T1, T2>;
+concept equality_comparable_with =
+        equality_comparable<T1> && equality_comparable<T2> &&
+        common_reference_with<const remove_reference_t<T1>&, const remove_reference_t<T2>&> &&
+        equality_comparable<common_reference_t<const remove_reference_t<T1>&, const remove_reference_t<T2>&>> &&
+        both_equality_comparable<T1, T2>;
 
 
 /**
@@ -230,10 +225,10 @@ concept equality_comparable_with = equality_comparable<T1> && equality_comparabl
  */
 template <typename T1, typename T2>
 concept one_way_ordered = requires(const remove_reference_t<T1>& x, const remove_reference_t<T2>& y) {
-	{ x < y } -> convertible_to<bool>;
-	{ x > y } -> convertible_to<bool>;
-	{ x <= y } -> convertible_to<bool>;
-	{ x >= y } -> convertible_to<bool>;
+    { x < y } -> convertible_to<bool>;
+    { x > y } -> convertible_to<bool>;
+    { x <= y } -> convertible_to<bool>;
+    { x >= y } -> convertible_to<bool>;
 };
 
 /**
@@ -243,7 +238,7 @@ concept one_way_ordered = requires(const remove_reference_t<T1>& x, const remove
  * @tparam T2 第二个类型
  */
 template <typename T1, typename T2>
-concept both_ordered_with = one_way_ordered<T1, T2>&& one_way_ordered<T2, T1>;
+concept both_ordered_with = one_way_ordered<T1, T2> && one_way_ordered<T2, T1>;
 
 /**
  * @concept totally_ordered
@@ -262,10 +257,10 @@ concept totally_ordered = equality_comparable<T> && one_way_ordered<T, T>;
  * @tparam T2 第二个类型
  */
 template <typename T1, typename T2>
-concept totally_ordered_with = totally_ordered<T1> && totally_ordered<T2>
-&& equality_comparable_with<T1, T2>
-&& totally_ordered<common_reference_t<const remove_reference_t<T1>&, const remove_reference_t<T2>&>>
-&& both_ordered_with<T1, T2>;
+concept totally_ordered_with =
+        totally_ordered<T1> && totally_ordered<T2> && equality_comparable_with<T1, T2> &&
+        totally_ordered<common_reference_t<const remove_reference_t<T1>&, const remove_reference_t<T2>&>> &&
+        both_ordered_with<T1, T2>;
 
 
 /**
@@ -296,11 +291,11 @@ concept regular = semiregular<T> && equality_comparable<T>;
  */
 template <typename T>
 concept iterator_typedef = requires() {
-	typename iterator_traits<T>::iterator_category;
-	typename iterator_traits<T>::value_type;
-	typename iterator_traits<T>::difference_type;
-	typename iterator_traits<T>::pointer;
-	typename iterator_traits<T>::reference;
+    typename iterator_traits<T>::iterator_category;
+    typename iterator_traits<T>::value_type;
+    typename iterator_traits<T>::difference_type;
+    typename iterator_traits<T>::pointer;
+    typename iterator_traits<T>::reference;
 };
 
 /**
@@ -314,12 +309,12 @@ concept iterator_typedef = requires() {
  * 3. 支持解引用、前缀/后缀递增
  */
 template <typename Iterator>
-concept input_iterator = both_equality_comparable<Iterator, Iterator>
-&& iterator_typedef<Iterator> && requires(Iterator it) {
-	{ *it } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
-	{ ++it } -> same_as<Iterator&>;
-	{ it++ } -> same_as<Iterator>;
-};
+concept input_iterator =
+        both_equality_comparable<Iterator, Iterator> && iterator_typedef<Iterator> && requires(Iterator it) {
+            { *it } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
+            { ++it } -> same_as<Iterator&>;
+            { it++ } -> same_as<Iterator>;
+        };
 
 /**
  * @concept forward_iterator
@@ -332,10 +327,10 @@ concept input_iterator = both_equality_comparable<Iterator, Iterator>
  * 3. 迭代器差值计算
  */
 template <typename Iterator>
-concept forward_iterator = both_ordered_with<Iterator, Iterator> && semiregular<Iterator>
-&& input_iterator<Iterator> && requires(Iterator it1, Iterator it2) {
-	{ it1 - it2 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
-};
+concept forward_iterator = both_ordered_with<Iterator, Iterator> && semiregular<Iterator> && input_iterator<Iterator> &&
+                           requires(Iterator it1, Iterator it2) {
+                               { it1 - it2 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
+                           };
 
 /**
  * @concept bidirectional_iterator
@@ -346,8 +341,8 @@ concept forward_iterator = both_ordered_with<Iterator, Iterator> && semiregular<
  */
 template <typename Iterator>
 concept bidirectional_iterator = forward_iterator<Iterator> && requires(Iterator it) {
-	{ --it } -> same_as<Iterator&>;
-	{ it-- } -> same_as<Iterator>;
+    { --it } -> same_as<Iterator&>;
+    { it-- } -> same_as<Iterator>;
 };
 
 /**
@@ -358,16 +353,17 @@ concept bidirectional_iterator = forward_iterator<Iterator> && requires(Iterator
  * 在双向迭代器基础上增加随机访问操作支持。
  */
 template <typename Iterator>
-concept random_access_iterator = bidirectional_iterator<Iterator>
-&& requires(Iterator it1, Iterator it2, typename iterator_traits<Iterator>::difference_type n) {
-	{ it1 + n } -> convertible_to<Iterator>;
-	{ n + it1 } -> convertible_to<Iterator>;
-	{ it1 - n } -> convertible_to<Iterator>;
-	{ it1 += n } -> convertible_to<Iterator>;
-	{ it1 -= n } -> convertible_to<Iterator>;
-	{ it2 - it1 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
-	{ it1[n] } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
-};
+concept random_access_iterator =
+        bidirectional_iterator<Iterator> &&
+        requires(Iterator it1, Iterator it2, typename iterator_traits<Iterator>::difference_type n) {
+            { it1 + n } -> convertible_to<Iterator>;
+            { n + it1 } -> convertible_to<Iterator>;
+            { it1 - n } -> convertible_to<Iterator>;
+            { it1 += n } -> convertible_to<Iterator>;
+            { it1 -= n } -> convertible_to<Iterator>;
+            { it2 - it1 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
+            { it1[n] } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
+        };
 
 /**
  * @concept contiguous_iterator
@@ -377,12 +373,11 @@ concept random_access_iterator = bidirectional_iterator<Iterator>
  * 在随机访问迭代器基础上增加连续内存布局要求。
  */
 template <typename Iterator>
-concept contiguous_iterator = random_access_iterator<Iterator>
-&& is_lvalue_reference_v<iter_reference_t<Iterator>>
-&& same_as<iter_value_t<Iterator>, remove_cvref_t<iter_reference_t<Iterator>>>
-&& requires(const Iterator& i) {
-	{ _NEFORCE to_address(i) } -> same_as<add_pointer_t<iter_reference_t<Iterator>>>;
-};
+concept contiguous_iterator =
+        random_access_iterator<Iterator> && is_lvalue_reference_v<iter_reference_t<Iterator>> &&
+        same_as<iter_value_t<Iterator>, remove_cvref_t<iter_reference_t<Iterator>>> && requires(const Iterator& i) {
+            { _NEFORCE to_address(i) } -> same_as<add_pointer_t<iter_reference_t<Iterator>>>;
+        };
 
 
 /**
@@ -395,12 +390,10 @@ concept contiguous_iterator = random_access_iterator<Iterator>
  */
 template <typename Sentinel, typename Iterator>
 concept sentinel_for =
-    input_iterator<Iterator> &&
-    semiregular<Sentinel> &&
-    requires(const Iterator& i, const Sentinel& s) {
-		{ i == s } -> convertible_to<bool>;
-		{ i != s } -> convertible_to<bool>;
-    };
+        input_iterator<Iterator> && semiregular<Sentinel> && requires(const Iterator& i, const Sentinel& s) {
+            { i == s } -> convertible_to<bool>;
+            { i != s } -> convertible_to<bool>;
+        };
 
 /**
  * @concept sized_sentinel_for
@@ -412,14 +405,11 @@ concept sentinel_for =
  */
 template <typename Sentinel, typename Iterator>
 concept sized_sentinel_for =
-    input_iterator<Iterator> &&
-    sentinel_for<Sentinel, Iterator> &&
-    requires(const Iterator& i, const Sentinel& s) {
-		{ s - i } -> same_as<iter_difference_t<Iterator>>;
-    } &&
-    requires(const Iterator& i, const Sentinel& s) {
-		{ i + (s - i) } -> same_as<Iterator>;
-    };
+        input_iterator<Iterator> && sentinel_for<Sentinel, Iterator> && requires(const Iterator& i, const Sentinel& s) {
+            { s - i } -> same_as<iter_difference_t<Iterator>>;
+        } && requires(const Iterator& i, const Sentinel& s) {
+            { i + (s - i) } -> same_as<Iterator>;
+        };
 
 /** @} */ // Concepts
 
@@ -443,46 +433,33 @@ NEFORCE_BEGIN_RANGES__
  * 为范围视图提供统一的begin()和end()接口。
  * 派生类只需实现自己的begin()和end()方法。
  */
-template <typename Derived>
-struct view_base {
+template <typename Derived> struct view_base {
 private:
-     constexpr const Derived& derived() const noexcept {
-        return static_cast<const Derived&>(*this);
-     }
+    constexpr const Derived& derived() const noexcept { return static_cast<const Derived&>(*this); }
 
-     constexpr Derived& derived() noexcept {
-        return static_cast<Derived&>(*this);
-     }
+    constexpr Derived& derived() noexcept { return static_cast<Derived&>(*this); }
 
 public:
     /**
      * @brief 获取范围的起始const迭代器
      * @return 起始迭代器
      */
-	constexpr decltype(auto) begin() const {
-		return derived().begin();
-	}
+    constexpr decltype(auto) begin() const { return derived().begin(); }
     /**
      * @brief 获取范围的结束const迭代器
      * @return 结束迭代器
      */
-	constexpr decltype(auto) end() const {
-		return derived().end();
-	}
+    constexpr decltype(auto) end() const { return derived().end(); }
     /**
      * @brief 获取范围的起始迭代器
      * @return 起始迭代器
      */
-	constexpr decltype(auto) begin() {
-		return derived().begin();
-	}
+    constexpr decltype(auto) begin() { return derived().begin(); }
     /**
      * @brief 获取范围的结束迭代器
      * @return 结束迭代器
      */
-	constexpr decltype(auto) end() {
-		return derived().end();
-	}
+    constexpr decltype(auto) end() { return derived().end(); }
 };
 
 NEFORCE_END_RANGES__
@@ -492,22 +469,19 @@ NEFORCE_END_RANGES__
  * @brief 检查类型是否为视图
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_view : false_type {};
+template <typename T> struct is_view : false_type {};
 
 /**
  * @brief view_base特化的视图检查
  * @tparam D 派生类类型
  */
-template <typename D>
-struct is_view<ranges::view_base<D>> : true_type {};
+template <typename D> struct is_view<ranges::view_base<D>> : true_type {};
 
 /**
  * @var is_view_v
  * @brief is_view的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<ranges::view_base<T>, T>;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<ranges::view_base<T>, T>;
 
 /** @} */ // View
 
@@ -521,8 +495,7 @@ NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<ranges::view_base<T>, T
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename, typename = void>
-NEFORCE_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
+template <typename, typename = void> NEFORCE_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool __is_iterator_with_cate_v<Iterator, void_t<iter_category_t<Iterator>>> = true;
 NEFORCE_END_INNER__
@@ -546,9 +519,9 @@ NEFORCE_INLINE17 constexpr bool is_ranges_iter_v = inner::__is_iterator_with_cat
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_iter_v =
 #ifdef NEFORCE_STANDARD_20
-iterator_typedef<Iterator> &&
+        iterator_typedef<Iterator> &&
 #endif
-is_ranges_iter_v<Iterator>;
+        is_ranges_iter_v<Iterator>;
 
 
 /**
@@ -559,7 +532,8 @@ is_ranges_iter_v<Iterator>;
  * 通过检查迭代器类别是否可以转换为input_iterator_tag来判断。
  */
 template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_ranges_input_iter_v = is_convertible_v<iter_category_t<Iterator>, input_iterator_tag>;
+NEFORCE_INLINE17 constexpr bool is_ranges_input_iter_v =
+        is_convertible_v<iter_category_t<Iterator>, input_iterator_tag>;
 
 /**
  * @var is_input_iter_v
@@ -569,9 +543,9 @@ NEFORCE_INLINE17 constexpr bool is_ranges_input_iter_v = is_convertible_v<iter_c
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_input_iter_v =
 #ifdef NEFORCE_STANDARD_20
-input_iterator<Iterator> &&
+        input_iterator<Iterator> &&
 #endif
-is_ranges_input_iter_v<Iterator>;
+        is_ranges_input_iter_v<Iterator>;
 
 
 /**
@@ -579,7 +553,8 @@ is_ranges_input_iter_v<Iterator>;
  * @brief 检查是否为范围前向迭代器
  */
 template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_ranges_fwd_iter_v = is_convertible_v<iter_category_t<Iterator>, forward_iterator_tag>;
+NEFORCE_INLINE17 constexpr bool is_ranges_fwd_iter_v =
+        is_convertible_v<iter_category_t<Iterator>, forward_iterator_tag>;
 
 /**
  * @var is_fwd_iter_v
@@ -588,9 +563,9 @@ NEFORCE_INLINE17 constexpr bool is_ranges_fwd_iter_v = is_convertible_v<iter_cat
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_fwd_iter_v =
 #ifdef NEFORCE_STANDARD_20
-forward_iterator<Iterator> &&
+        forward_iterator<Iterator> &&
 #endif
-is_ranges_fwd_iter_v<Iterator>;
+        is_ranges_fwd_iter_v<Iterator>;
 
 
 /**
@@ -598,7 +573,8 @@ is_ranges_fwd_iter_v<Iterator>;
  * @brief 检查是否为范围双向迭代器
  */
 template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_ranges_bid_iter_v = is_convertible_v<iter_category_t<Iterator>, bidirectional_iterator_tag>;
+NEFORCE_INLINE17 constexpr bool is_ranges_bid_iter_v =
+        is_convertible_v<iter_category_t<Iterator>, bidirectional_iterator_tag>;
 
 /**
  * @var is_bid_iter_v
@@ -607,9 +583,9 @@ NEFORCE_INLINE17 constexpr bool is_ranges_bid_iter_v = is_convertible_v<iter_cat
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_bid_iter_v =
 #ifdef NEFORCE_STANDARD_20
-bidirectional_iterator<Iterator> &&
+        bidirectional_iterator<Iterator> &&
 #endif
-is_ranges_bid_iter_v<Iterator>;
+        is_ranges_bid_iter_v<Iterator>;
 
 
 /**
@@ -617,7 +593,8 @@ is_ranges_bid_iter_v<Iterator>;
  * @brief 检查是否为范围随机访问迭代器
  */
 template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v = is_convertible_v<iter_category_t<Iterator>, random_access_iterator_tag>;
+NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v =
+        is_convertible_v<iter_category_t<Iterator>, random_access_iterator_tag>;
 
 /**
  * @var is_rnd_iter_v
@@ -626,9 +603,9 @@ NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v = is_convertible_v<iter_cat
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_rnd_iter_v =
 #ifdef NEFORCE_STANDARD_20
-random_access_iterator<Iterator> &&
+        random_access_iterator<Iterator> &&
 #endif
-is_ranges_rnd_iter_v<Iterator>;
+        is_ranges_rnd_iter_v<Iterator>;
 
 
 /**
@@ -637,7 +614,7 @@ is_ranges_rnd_iter_v<Iterator>;
  */
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_ranges_cot_iter_v =
-is_convertible_v<iter_category_t<Iterator>, contiguous_iterator_tag>;
+        is_convertible_v<iter_category_t<Iterator>, contiguous_iterator_tag>;
 
 /**
  * @var is_cot_iter_v
@@ -646,10 +623,10 @@ is_convertible_v<iter_category_t<Iterator>, contiguous_iterator_tag>;
 template <typename Iterator>
 NEFORCE_INLINE17 constexpr bool is_cot_iter_v =
 #ifdef NEFORCE_STANDARD_20
-random_access_iterator<Iterator> && 
+        random_access_iterator<Iterator> &&
 #endif // NEFORCE_STANDARD_20
-is_lvalue_reference_v<decltype(*_NEFORCE declval<Iterator&>())> && is_same_v<remove_cv_t<Iterator>, Iterator>
-&& is_pod_v<iter_value_t<Iterator>> && is_ranges_cot_iter_v<Iterator>;
+        is_lvalue_reference_v<decltype(*_NEFORCE declval<Iterator&>())> && is_same_v<remove_cv_t<Iterator>, Iterator> &&
+        is_pod_v<iter_value_t<Iterator>> && is_ranges_cot_iter_v<Iterator>;
 
 /** @} */ // IteratorChecks
 

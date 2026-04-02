@@ -9,10 +9,10 @@
  * 包括多种排序算法、排序检查和部分排序功能。
  */
 
-#include "NeForce/core/algorithm/merge.hpp"
-#include "NeForce/core/algorithm/heap.hpp"
-#include "NeForce/core/algorithm/partition.hpp"
 #include "NeForce/core/algorithm/compare.hpp"
+#include "NeForce/core/algorithm/heap.hpp"
+#include "NeForce/core/algorithm/merge.hpp"
+#include "NeForce/core/algorithm/partition.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -38,19 +38,20 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 检查范围 [first, last) 是否按照比较函数 comp 排序。
  */
-template <typename Iterator, typename Compare>
-bool is_sorted(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare> bool is_sorted(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-	if (first == last) return true;
-	Iterator next = _NEFORCE next(first);
-	for (; next != last; ++first, ++next) {
-		if (comp(*next, *first)) {
-			return false;
-		}
-	}
-	return true;
+    if (first == last) {
+        return true;
+    }
+    Iterator next = _NEFORCE next(first);
+    for (; next != last; ++first, ++next) {
+        if (comp(*next, *first)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -60,9 +61,8 @@ bool is_sorted(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 如果范围已排序则返回true，否则返回false
  */
-template <typename Iterator>
-bool is_sorted(Iterator first, Iterator last) {
-	return is_sorted(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+template <typename Iterator> bool is_sorted(Iterator first, Iterator last) {
+    return is_sorted(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -76,18 +76,20 @@ bool is_sorted(Iterator first, Iterator last) {
  *
  * 在范围 [first, last) 中查找第一个使得序列不满足排序条件的位置。
  */
-template <typename Iterator, typename Compare>
-Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare> Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-	if (first == last) return last;
-	Iterator next = _NEFORCE next(first);
-	for (; next != last; ++first, ++next) {
-		if (comp(*next, *first))
-			return next;
-	}
-	return last;
+    if (first == last) {
+        return last;
+    }
+    Iterator next = _NEFORCE next(first);
+    for (; next != last; ++first, ++next) {
+        if (comp(*next, *first)) {
+            return next;
+        }
+    }
+    return last;
 }
 
 /**
@@ -97,9 +99,8 @@ Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束
  * @return 指向首个破坏排序的元素的迭代器
  */
-template <typename Iterator>
-Iterator is_sorted_until(Iterator first, Iterator last) {
-	return is_sorted_until(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+template <typename Iterator> Iterator is_sorted_until(Iterator first, Iterator last) {
+    return is_sorted_until(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 
@@ -120,12 +121,13 @@ Iterator is_sorted_until(Iterator first, Iterator last) {
  * 空间复杂度：O(N)
  * 稳定性：稳定
  */
-template <typename Iterator, typename Compare>
-void merge_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare> void merge_sort(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
     const auto n = _NEFORCE distance(first, last);
-    if (n < 2) return;
+    if (n < 2) {
+        return;
+    }
     Iterator mid = first + n / 2;
     _NEFORCE merge_sort(first, mid);
     _NEFORCE merge_sort(mid, last);
@@ -138,8 +140,7 @@ void merge_sort(Iterator first, Iterator last, Compare comp) {
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator>
-void merge_sort(Iterator first, Iterator last) {
+template <typename Iterator> void merge_sort(Iterator first, Iterator last) {
     return _NEFORCE merge_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -160,11 +161,13 @@ void merge_sort(Iterator first, Iterator last) {
  */
 template <typename Iterator, typename Compare>
 void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) {
-    if (first == middle) return;
+    if (first == middle) {
+        return;
+    }
     _NEFORCE make_heap(first, middle, comp);
     for (Iterator i = middle; i < last; ++i) {
         if (comp(*i, *first)) {
-	        inner::pop_heap_aux(first, middle, i, *i, comp);
+            inner::pop_heap_aux(first, middle, i, *i, comp);
         }
     }
     _NEFORCE sort_heap(first, middle, comp);
@@ -177,8 +180,7 @@ void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) 
  * @param middle 部分排序的边界
  * @param last 范围结束
  */
-template <typename Iterator>
-void partial_sort(Iterator first, Iterator middle, Iterator last) {
+template <typename Iterator> void partial_sort(Iterator first, Iterator middle, Iterator last) {
     return _NEFORCE partial_sort(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -199,29 +201,28 @@ void partial_sort(Iterator first, Iterator middle, Iterator last) {
  * 时间复杂度：O(N log M)，其中M = result_last - result_first
  */
 template <typename Iterator1, typename Iterator2, typename Compare>
-Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp) {
+Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last,
+                            Compare comp) {
     static_assert(is_ranges_input_iter_v<Iterator1>, "Iterator must be input_iterator");
 
-	if (result_first == result_last) return result_last;
-	Iterator2 result_real_last = result_first;
-	while (first != last && result_real_last != result_last) {
-		*result_real_last = *first;
-		++result_real_last;
-		++first;
-	}
+    if (result_first == result_last) {
+        return result_last;
+    }
+    Iterator2 result_real_last = result_first;
+    while (first != last && result_real_last != result_last) {
+        *result_real_last = *first;
+        ++result_real_last;
+        ++first;
+    }
     _NEFORCE make_heap(result_first, result_real_last, comp);
-	while (first != last) {
-		if (comp(*first, *result_first)) {
-            _NEFORCE adjust_heap(
-                result_first,
-                0,
-            	result_real_last - result_first,
-            	*first, comp);
+    while (first != last) {
+        if (comp(*first, *result_first)) {
+            _NEFORCE adjust_heap(result_first, 0, result_real_last - result_first, *first, comp);
         }
-		++first;
-	}
+        ++first;
+    }
     _NEFORCE sort_heap(result_first, result_real_last, comp);
-	return result_real_last;
+    return result_real_last;
 }
 
 /**
@@ -283,19 +284,20 @@ NEFORCE_END_INNER__
  * 空间复杂度：O(1)
  * 稳定性：稳定
  */
-template <typename Iterator, typename Compare>
-void insertion_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare> void insertion_sort(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-    if (first == last) return;
+    if (first == last) {
+        return;
+    }
     for (Iterator i = first + 1; i != last; ++i) {
         iter_value_t<Iterator> value = *i;
         if (comp(value, *first)) {
             _NEFORCE copy_backward(first, i, i + 1);
             *first = value;
         } else {
-	        inner::__insertion_sort_aux(i, value, comp);
+            inner::__insertion_sort_aux(i, value, comp);
         }
     }
 }
@@ -306,8 +308,7 @@ void insertion_sort(Iterator first, Iterator last, Compare comp) {
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator>
-void insertion_sort(Iterator first, Iterator last) {
+template <typename Iterator> void insertion_sort(Iterator first, Iterator last) {
     return _NEFORCE insertion_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -340,7 +341,7 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare 
         }
         --depth_limit;
         Iterator cut = _NEFORCE lomuto_partition(
-            first, last, _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);
+                first, last, _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);
         _NEFORCE introspective_sort(cut, last, depth_limit, comp);
         last = cut;
     }
@@ -353,8 +354,7 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare 
  * @param last 范围结束
  * @param depth_limit 递归深度限制
  */
-template <typename Iterator>
-void introspective_sort(Iterator first, Iterator last, int depth_limit) {
+template <typename Iterator> void introspective_sort(Iterator first, Iterator last, int depth_limit) {
     return _NEFORCE introspective_sort(first, last, depth_limit, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -377,8 +377,7 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit) {
  *
  * @note 此实现容易在已排序数据上出现最坏情况。
  */
-template <typename Iterator, typename Compare>
-void quick_sort(Iterator first, Iterator last, Compare comp) {
+template <typename Iterator, typename Compare> void quick_sort(Iterator first, Iterator last, Compare comp) {
     if (first < last) {
         Iterator pov = last - 1;
         Iterator cut = _NEFORCE lomuto_partition(first, last, *pov, comp);
@@ -394,8 +393,7 @@ void quick_sort(Iterator first, Iterator last, Compare comp) {
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator>
-void quick_sort(Iterator first, Iterator last) {
+template <typename Iterator> void quick_sort(Iterator first, Iterator last) {
     return _NEFORCE quick_sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -422,9 +420,7 @@ void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compa
         }
         --depth_limit;
         Iterator cut = _NEFORCE lomuto_partition(
-            first, last,
-            _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp),
-            comp);
+                first, last, _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);
         inner::__intro_sort_dispatch(cut, last, depth_limit, comp);
         last = cut;
     }
@@ -439,7 +435,9 @@ void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compa
  */
 NEFORCE_CONST_FUNCTION constexpr int __log2_int(int x) noexcept {
     int k = 0;
-    for (; x > 1; x >>= 1) ++k;
+    for (; x > 1; x >>= 1) {
+        ++k;
+    }
     return k;
 }
 
@@ -463,9 +461,10 @@ NEFORCE_END_INNER__
  * 空间复杂度：O(log N)
  * 稳定性：不稳定
  */
-template <typename Iterator, typename Compare>
-void sort(Iterator first, Iterator last, Compare comp) {
-    if (first == last) return;
+template <typename Iterator, typename Compare> void sort(Iterator first, Iterator last, Compare comp) {
+    if (first == last) {
+        return;
+    }
 
     inner::__intro_sort_dispatch(first, last, inner::__log2_int(last - first) * 2, comp);
     constexpr size_t threshhold = MEMORY_ALIGN_THRESHHOLD;
@@ -473,11 +472,10 @@ void sort(Iterator first, Iterator last, Compare comp) {
     if (last - first > threshhold) {
         _NEFORCE insertion_sort(first, first + threshhold, comp);
         for (Iterator i = first + threshhold; i != last; ++i) {
-	        inner::__insertion_sort_aux(i, *i, comp);
+            inner::__insertion_sort_aux(i, *i, comp);
         }
-    }
-    else {
-	    _NEFORCE insertion_sort(first, last, comp);
+    } else {
+        _NEFORCE insertion_sort(first, last, comp);
     }
 }
 
@@ -487,8 +485,7 @@ void sort(Iterator first, Iterator last, Compare comp) {
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator>
-void sort(Iterator first, Iterator last) {
+template <typename Iterator> void sort(Iterator first, Iterator last) {
     return _NEFORCE sort(first, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
@@ -509,9 +506,12 @@ template <typename Iterator, typename Compare>
 void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp) {
     while (last - first > 3) {
         Iterator cut = _NEFORCE lomuto_partition(
-            first, last, _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);
-        if (cut <= nth) first = cut;
-        else last = cut;
+                first, last, _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);
+        if (cut <= nth) {
+            first = cut;
+        } else {
+            last = cut;
+        }
     }
     _NEFORCE insertion_sort(first, last, comp);
 }
@@ -523,8 +523,7 @@ void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp) {
  * @param nth 目标位置
  * @param last 范围结束
  */
-template <typename Iterator>
-void nth_element(Iterator first, Iterator nth, Iterator last) {
+template <typename Iterator> void nth_element(Iterator first, Iterator nth, Iterator last) {
     return _NEFORCE nth_element(first, nth, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

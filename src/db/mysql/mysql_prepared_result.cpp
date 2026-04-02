@@ -42,11 +42,11 @@ namespace {
                 return MEMORY_BIG_ALLOC_THRESHHOLD;
         }
     }
-}
+} // namespace
 
 
-mysql_prepared_result::mysql_prepared_result(::MYSQL_STMT* stmt)
-: stmt_(stmt) {
+mysql_prepared_result::mysql_prepared_result(::MYSQL_STMT* stmt) :
+stmt_(stmt) {
     if (!stmt_) {
         NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Invalid MYSQL_STMT pointer"));
     }
@@ -133,7 +133,9 @@ bool mysql_prepared_result::next() {
 string_view mysql_prepared_result::get(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     NEFORCE_DEBUG_VERIFY(n < column_count_, "Column index out of range")
-    if ((*is_null_)[n]) return {};
+    if ((*is_null_)[n]) {
+        return {};
+    }
     return {(*buffers_)[n].data(), (*lengths_)[n]};
 }
 
@@ -143,7 +145,9 @@ bool mysql_prepared_result::get_bool(const size_type n) const {
     if (column_types_->at(n) != ::MYSQL_TYPE_TINY) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to bool mismatch"));
     }
-    if ((*is_null_)[n]) return false;
+    if ((*is_null_)[n]) {
+        return false;
+    }
     return *reinterpret_cast<const int8_t*>((*buffers_)[n].data()) != 0;
 }
 
@@ -155,7 +159,9 @@ int16_t mysql_prepared_result::get_int16(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to int16 mismatch"));
     }
 
-    if ((*is_null_)[n]) return 0;
+    if ((*is_null_)[n]) {
+        return 0;
+    }
     if (type == ::MYSQL_TYPE_TINY) {
         return *reinterpret_cast<const int8_t*>((*buffers_)[n].data());
     }
@@ -166,12 +172,14 @@ int32_t mysql_prepared_result::get_int32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     NEFORCE_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_INT24 ||
-          type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
+    if (!(type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_INT24 || type == ::MYSQL_TYPE_SHORT ||
+          type == ::MYSQL_TYPE_TINY)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to int32 mismatch"));
     }
 
-    if ((*is_null_)[n]) return 0;
+    if ((*is_null_)[n]) {
+        return 0;
+    }
 
     if (type == ::MYSQL_TYPE_TINY) {
         return *reinterpret_cast<const int8_t*>((*buffers_)[n].data());
@@ -186,13 +194,14 @@ int64_t mysql_prepared_result::get_int64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     NEFORCE_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_LONGLONG || type == ::MYSQL_TYPE_LONG ||
-          type == ::MYSQL_TYPE_INT24 || type == ::MYSQL_TYPE_SHORT ||
-          type == ::MYSQL_TYPE_TINY)) {
+    if (!(type == ::MYSQL_TYPE_LONGLONG || type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_INT24 ||
+          type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to int64 mismatch"));
     }
 
-    if ((*is_null_)[n]) return 0;
+    if ((*is_null_)[n]) {
+        return 0;
+    }
 
     if (type == ::MYSQL_TYPE_TINY) {
         return *reinterpret_cast<const int8_t*>((*buffers_)[n].data());
@@ -213,7 +222,9 @@ float32_t mysql_prepared_result::get_float32(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to float32 mismatch"));
     }
 
-    if ((*is_null_)[n]) return 0;
+    if ((*is_null_)[n]) {
+        return 0;
+    }
 
     return *reinterpret_cast<const float*>((*buffers_)[n].data());
 }
@@ -226,7 +237,9 @@ float64_t mysql_prepared_result::get_float64(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to float64 mismatch"));
     }
 
-    if ((*is_null_)[n]) return 0;
+    if ((*is_null_)[n]) {
+        return 0;
+    }
 
     if (type == ::MYSQL_TYPE_FLOAT) {
         return *reinterpret_cast<const float*>((*buffers_)[n].data());
@@ -243,7 +256,9 @@ decimal_t mysql_prepared_result::get_decimal(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to decimal mismatch"));
     }
 
-    if ((*is_null_)[n]) return {};
+    if ((*is_null_)[n]) {
+        return {};
+    }
 
     return decimal::parse({(*buffers_)[n].data(), (*lengths_)[n]}).value();
 }
@@ -252,12 +267,14 @@ vector<char> mysql_prepared_result::get_blob(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     NEFORCE_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_BLOB || type == ::MYSQL_TYPE_TINY_BLOB ||
-          type == ::MYSQL_TYPE_MEDIUM_BLOB || type == ::MYSQL_TYPE_LONG_BLOB)) {
+    if (!(type == ::MYSQL_TYPE_BLOB || type == ::MYSQL_TYPE_TINY_BLOB || type == ::MYSQL_TYPE_MEDIUM_BLOB ||
+          type == ::MYSQL_TYPE_LONG_BLOB)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to blob mismatch"));
     }
 
-    if ((*is_null_)[n]) return {};
+    if ((*is_null_)[n]) {
+        return {};
+    }
 
     return vector<char>((*buffers_)[n].begin(), (*buffers_)[n].begin() + (*lengths_)[n]);
 }
@@ -269,7 +286,9 @@ uint64_t mysql_prepared_result::get_bit(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to BIT mismatch"));
     }
 
-    if ((*is_null_)[n]) return 0;
+    if ((*is_null_)[n]) {
+        return 0;
+    }
 
     uint64_t value = 0;
     for (unsigned long i = 0; i < (*lengths_)[n]; ++i) {
@@ -285,7 +304,9 @@ date mysql_prepared_result::get_date(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to date mismatch"));
     }
 
-    if ((*is_null_)[n]) return {};
+    if ((*is_null_)[n]) {
+        return {};
+    }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
     return date(mt->year, mt->month, mt->day);
@@ -298,7 +319,9 @@ time mysql_prepared_result::get_time(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to time mismatch"));
     }
 
-    if ((*is_null_)[n]) return time{};
+    if ((*is_null_)[n]) {
+        return time{};
+    }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
     return time(mt->hour, mt->minute, mt->second);
@@ -311,7 +334,9 @@ datetime mysql_prepared_result::get_datetime(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to datetime mismatch"));
     }
 
-    if ((*is_null_)[n]) return {};
+    if ((*is_null_)[n]) {
+        return {};
+    }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
     return datetime(date(mt->year, mt->month, mt->day), time(mt->hour, mt->minute, mt->second));
@@ -324,7 +349,9 @@ timestamp mysql_prepared_result::get_timestamp(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to timestamp mismatch"));
     }
 
-    if ((*is_null_)[n]) return {};
+    if ((*is_null_)[n]) {
+        return {};
+    }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
     return timestamp(datetime(mt->year, mt->month, mt->day, mt->hour, mt->minute, mt->second));

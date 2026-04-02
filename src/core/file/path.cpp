@@ -1,23 +1,23 @@
+#include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/file/path.hpp>
 #include <NeForce/core/file/path_tree.hpp>
-#include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <windef.h>
-#include <WinBase.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <NeForce/core/config/windef.hpp>
+#    include <WinBase.h>
+#    include <windef.h>
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/stat.h>
-#include <dirent.h>
-#include <cstdlib>
-#include <fcntl.h>
+#    include <cstdlib>
+#    include <dirent.h>
+#    include <fcntl.h>
+#    include <sys/stat.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -49,36 +49,48 @@ void path::split_iterator::find_next() {
 }
 
 path path::parent_path() const {
-    if (path_.empty()) return path{};
+    if (path_.empty()) {
+        return path{};
+    }
 
     const size_t last_sep = path_.find_last_of(spliter);
-    if (last_sep == string::npos) return path{};
-    if (last_sep == 0) return path{"/"};
+    if (last_sep == string::npos) {
+        return path{};
+    }
+    if (last_sep == 0) {
+        return path{"/"};
+    }
 
     return path{path_.substr(0, last_sep)};
 }
 
 string_view path::filename() const noexcept {
-    if (path_.empty()) return {};
+    if (path_.empty()) {
+        return {};
+    }
 
     const size_t last_sep = path_.find_last_of(spliter);
-    if (last_sep == string::npos) return path_.view();
+    if (last_sep == string::npos) {
+        return path_.view();
+    }
     return path_.view().substr(last_sep + 1);
 }
 
 string_view path::stem() const noexcept {
     const string_view fname = filename();
-    if (fname.empty()) return {};
+    if (fname.empty()) {
+        return {};
+    }
 
     const size_t last_dot = fname.find_last_of('.');
-    if (last_dot == string::npos || last_dot == 0) return fname;
+    if (last_dot == string::npos || last_dot == 0) {
+        return fname;
+    }
 
     return fname.substr(0, last_dot);
 }
 
-string_view path::extension() const noexcept {
-    return path::extension(path_.view());
-}
+string_view path::extension() const noexcept { return path::extension(path_.view()); }
 
 string_view path::extension(const string_view path) noexcept {
     const size_t last_sep = path.find_last_of(spliter);
@@ -92,7 +104,9 @@ string_view path::extension(const string_view path) noexcept {
 }
 
 path path::lexically_normal() const noexcept {
-    if (path_.empty()) return path(".");
+    if (path_.empty()) {
+        return path(".");
+    }
 
     string result;
     string drive_prefix;
@@ -142,7 +156,7 @@ path path::lexically_normal() const noexcept {
     }
 
     vector<string_view> normalized;
-    for (const auto& part : parts) {
+    for (const auto& part: parts) {
         if (part.empty() || part == ".") {
             continue;
         } else if (part == "..") {
@@ -168,7 +182,9 @@ path path::lexically_normal() const noexcept {
 #endif
 
     for (size_t i = 0; i < normalized.size(); ++i) {
-        if (i > 0) result += preferred_separator;
+        if (i > 0) {
+            result += preferred_separator;
+        }
         result += normalized[i];
     }
 
@@ -190,7 +206,9 @@ path path::lexically_normal() const noexcept {
 }
 
 path path::absolute(const path& base) const {
-    if (this->empty()) return path{};
+    if (this->empty()) {
+        return path{};
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     char buffer[MAX_PATH];
@@ -221,33 +239,43 @@ path path::relative(const path& base) const {
     const path abs_base = base.absolute();
 
     vector<string_view> this_parts;
-    for (auto it = abs_path.begin(); it != abs_path.end(); ++it) this_parts.push_back(*it);
+    for (auto it = abs_path.begin(); it != abs_path.end(); ++it) {
+        this_parts.push_back(*it);
+    }
 
     vector<string_view> base_parts;
-    for (auto it = abs_base.begin(); it != abs_base.end(); ++it) base_parts.push_back(*it);
+    for (auto it = abs_base.begin(); it != abs_base.end(); ++it) {
+        base_parts.push_back(*it);
+    }
 
     size_t i = 0;
     const size_t n = min(this_parts.size(), base_parts.size());
-    while (i < n && this_parts[i] == base_parts[i]) ++i;
+    while (i < n && this_parts[i] == base_parts[i]) {
+        ++i;
+    }
 
     string result;
     for (size_t j = i; j < base_parts.size(); ++j) {
-        if (!result.empty()) result += preferred_separator;
+        if (!result.empty()) {
+            result += preferred_separator;
+        }
         result += "..";
     }
     for (size_t j = i; j < this_parts.size(); ++j) {
-        if (!result.empty()) result += preferred_separator;
+        if (!result.empty()) {
+            result += preferred_separator;
+        }
         result += this_parts[j];
     }
-    if (result.empty()) result = ".";
+    if (result.empty()) {
+        result = ".";
+    }
 
     return path(move(result));
 }
 
 
-path path::current_path() {
-    return path(environment::current_directory());
-}
+path path::current_path() { return path(environment::current_directory()); }
 
 path path::temp_directory_path() {
     string temp(environment::temp_directory());
@@ -259,8 +287,10 @@ path path::temp_directory_path() {
     return path(move(temp));
 }
 
-path& path::operator /=(const path& other) {
-    if (other.empty()) return *this;
+path& path::operator/=(const path& other) {
+    if (other.empty()) {
+        return *this;
+    }
 
     if (path_.empty()) {
         path_ = other.path_;
@@ -284,8 +314,10 @@ path& path::operator /=(const path& other) {
     return *this;
 }
 
-path& path::operator /=(const string_view other) {
-    if (other.empty()) return *this;
+path& path::operator/=(const string_view other) {
+    if (other.empty()) {
+        return *this;
+    }
 
     if (path_.empty()) {
         path_ = other;
@@ -308,21 +340,19 @@ path& path::operator /=(const string_view other) {
     return *this;
 }
 
-path path::operator /(const path& other) const {
+path path::operator/(const path& other) const {
     path result = *this;
     result /= other;
     return result;
 }
 
-path path::operator /(const string_view pth) const {
+path path::operator/(const string_view pth) const {
     path result = *this;
     result /= pth;
     return result;
 }
 
-path_tree path::to_tree() const {
-    return path_tree::scan(*this, path_tree::scan_options{});
-}
+path_tree path::to_tree() const { return path_tree::scan(*this, path_tree::scan_options{}); }
 
 vector<path> path::children(const bool include_hidden) const {
     path_tree::scan_options opts;
@@ -332,7 +362,7 @@ vector<path> path::children(const bool include_hidden) const {
 
     vector<path> result;
     if (!tree.empty() && tree.root()) {
-        for (const auto& child : tree.root()->children()) {
+        for (const auto& child: tree.root()->children()) {
             result.push_back(child->get_path());
         }
     }
@@ -348,7 +378,7 @@ vector<path> path::child_files(const bool include_hidden) const {
 
     vector<path> result;
     if (!tree.empty() && tree.root()) {
-        for (const auto& child : tree.root()->children()) {
+        for (const auto& child: tree.root()->children()) {
             result.push_back(child->get_path());
         }
     }
@@ -364,16 +394,14 @@ vector<path> path::child_dirs(const bool include_hidden) const {
 
     vector<path> result;
     if (!tree.empty() && tree.root()) {
-        for (const auto& child : tree.root()->children()) {
+        for (const auto& child: tree.root()->children()) {
             result.push_back(child->get_path());
         }
     }
     return result;
 }
 
-bool path::exists() const noexcept {
-    return path::exists(path_);
-}
+bool path::exists() const noexcept { return path::exists(path_); }
 
 bool path::exists(const string& path) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -384,9 +412,7 @@ bool path::exists(const string& path) noexcept {
 #endif
 }
 
-bool path::is_directory() const noexcept {
-    return path::is_directory(path_);
-}
+bool path::is_directory() const noexcept { return path::is_directory(path_); }
 
 bool path::is_directory(const string& path) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -394,14 +420,14 @@ bool path::is_directory(const string& path) noexcept {
     return attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY);
 #else
     struct ::stat64 st{};
-    if (::stat64(path.data(), &st) == -1) return false;
+    if (::stat64(path.data(), &st) == -1) {
+        return false;
+    }
     return S_ISDIR(st.st_mode);
 #endif
 }
 
-bool path::is_file() const noexcept {
-    return path::is_file(path_);
-}
+bool path::is_file() const noexcept { return path::is_file(path_); }
 
 bool path::is_file(const string& path) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -409,12 +435,14 @@ bool path::is_file(const string& path) noexcept {
     return attrib != INVALID_FILE_ATTRIBUTES && !(attrib & FILE_ATTRIBUTE_DIRECTORY);
 #else
     struct ::stat64 st{};
-    if (::stat64(path.data(), &st) == -1) return false;
+    if (::stat64(path.data(), &st) == -1) {
+        return false;
+    }
     return S_ISREG(st.st_mode) || S_ISLNK(st.st_mode);
 #endif
 }
 
-bool path::operator ==(const path& rhs) const noexcept {
+bool path::operator==(const path& rhs) const noexcept {
     const path lhs_norm = this->lexically_normal();
     const path rhs_norm = rhs.lexically_normal();
 
@@ -425,7 +453,7 @@ bool path::operator ==(const path& rhs) const noexcept {
 #endif
 }
 
-bool path::operator <(const path& rhs) const noexcept {
+bool path::operator<(const path& rhs) const noexcept {
     const path lhs_norm = lexically_normal();
     const path rhs_norm = rhs.lexically_normal();
 

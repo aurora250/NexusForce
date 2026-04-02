@@ -26,11 +26,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * 包含插件的基本元数据，用于插件识别和管理。
  */
 struct plugin_info {
-    string name;           ///< 插件名称
-    string version;        ///< 插件版本
-    string author;         ///< 插件作者
-    string description;    ///< 插件描述
-    string library_path;   ///< 插件库路径
+    string name;         ///< 插件名称
+    string version;      ///< 插件版本
+    string author;       ///< 插件作者
+    string description;  ///< 插件描述
+    string library_path; ///< 插件库路径
 };
 
 
@@ -79,10 +79,10 @@ struct iplugin {
  */
 struct plugin_deleter {
 public:
-    using deleter_type = void(*)(iplugin*);  ///< 删除函数类型
+    using deleter_type = void (*)(iplugin*); ///< 删除函数类型
 
 private:
-    deleter_type func_ = nullptr;  ///< 删除函数指针
+    deleter_type func_ = nullptr; ///< 删除函数指针
 
 public:
     /**
@@ -99,18 +99,18 @@ public:
      * @brief 构造函数
      * @param func 删除函数指针
      */
-    explicit plugin_deleter(deleter_type func) noexcept
-    : func_(func) {}
+    explicit plugin_deleter(deleter_type func) noexcept :
+    func_(func) {}
 
     plugin_deleter(const plugin_deleter&) = delete;
-    plugin_deleter& operator =(const plugin_deleter&) = delete;
+    plugin_deleter& operator=(const plugin_deleter&) = delete;
 
     /**
      * @brief 移动构造函数
      * @param other 被移动的删除器
      */
-    plugin_deleter(plugin_deleter&& other) noexcept
-    : func_(other.func_) {
+    plugin_deleter(plugin_deleter&& other) noexcept :
+    func_(other.func_) {
         other.func_ = nullptr;
     }
 
@@ -119,7 +119,7 @@ public:
      * @param other 被移动的删除器
      * @return 自身引用
      */
-    plugin_deleter& operator =(plugin_deleter&& other) noexcept {
+    plugin_deleter& operator=(plugin_deleter&& other) noexcept {
         func_ = other.func_;
         other.func_ = nullptr;
         return *this;
@@ -131,9 +131,10 @@ public:
      *
      * 调用实际的删除函数销毁插件对象。
      */
-    void operator ()(iplugin* plugin) const
-    noexcept(is_nothrow_invocable_v<deleter_type, iplugin*>) {
-        if (plugin) func_(plugin);
+    void operator()(iplugin* plugin) const noexcept(is_nothrow_invocable_v<deleter_type, iplugin*>) {
+        if (plugin) {
+            func_(plugin);
+        }
     }
 
     /**
@@ -142,9 +143,7 @@ public:
      *
      * 用于在移动语义中获取新的删除器实例。
      */
-    plugin_deleter rebind() && noexcept {
-        return plugin_deleter(_NEFORCE move(*this));
-    }
+    plugin_deleter rebind() && noexcept { return plugin_deleter(_NEFORCE move(*this)); }
 };
 
 /**

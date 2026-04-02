@@ -1,15 +1,15 @@
-#include <NeForce/core/system/signal.hpp>
 #include <NeForce/core/algorithm/remove.hpp>
-#include <NeForce/core/system/console.hpp>
 #include <NeForce/core/exception/terminate.hpp>
+#include <NeForce/core/system/console.hpp>
+#include <NeForce/core/system/signal.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <windef.h>
-#include <WinBase.h>
+#    include <NeForce/core/config/windef.hpp>
+#    include <WinBase.h>
+#    include <windef.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <cstring>
-#include <cstdlib>
+#    include <cstdlib>
+#    include <cstring>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -25,13 +25,9 @@ namespace {
         signal_manager& manager = signal_manager::instance();
         manager.send_signal(static_cast<signal_event>(sig));
     }
-    void alarm_handler(int sig) {
-        signal_manager::instance().send_signal(signal_event::TIMEOUT);
-    }
+    void alarm_handler(int sig) { signal_manager::instance().send_signal(signal_event::TIMEOUT); }
 
-    bool is_valid_posix_signal(const int sig) {
-        return sig > 0 && sig < 64;
-    }
+    bool is_valid_posix_signal(const int sig) { return sig > 0 && sig < 64; }
     bool is_windows_simulated_event(signal_event event) {
         const int value = static_cast<int>(event);
         return value >= 1000 && value < 2000;
@@ -39,27 +35,23 @@ namespace {
 #endif
 
     thread_local signal_event current_signal =
-    #ifdef NEFORCE_PLATFORM_WINDOWS
-        static_cast<signal_event>(CTRL_C_EVENT);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            static_cast<signal_event>(CTRL_C_EVENT);
 #else
-        static_cast<signal_event>(SIGTERM);
+            static_cast<signal_event>(SIGTERM);
 #endif
 
     thread_local void* signal_context = nullptr;
-}
+} // namespace
 
 #ifdef NEFORCE_PLATFORM_LINUX
-unordered_map<signal_event, int> signal_manager::windows_to_posix_map_ = {
-    {signal_event::CTRL_BREAK, SIGTERM},
-    {signal_event::CLOSE,      SIGHUP},
-    {signal_event::LOGOFF,     SIGTERM},
-    {signal_event::SHUTDOWN,   SIGTERM}
-};
+unordered_map<signal_event, int> signal_manager::windows_to_posix_map_ = {{signal_event::CTRL_BREAK, SIGTERM},
+                                                                          {signal_event::CLOSE, SIGHUP},
+                                                                          {signal_event::LOGOFF, SIGTERM},
+                                                                          {signal_event::SHUTDOWN, SIGTERM}};
 #endif
 
-signal_manager::signal_manager() {
-    initialize_platform();
-}
+signal_manager::signal_manager() { initialize_platform(); }
 
 signal_manager::~signal_manager() {
     stop_monitoring();
@@ -70,40 +62,30 @@ void signal_manager::initialize_platform() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetConsoleCtrlHandler(windows_handler, TRUE);
 
-    handlers_[signal_event::INTERRUPT]  = nullptr;
+    handlers_[signal_event::INTERRUPT] = nullptr;
     handlers_[signal_event::CTRL_BREAK] = nullptr;
-    handlers_[signal_event::CLOSE]      = nullptr;
-    handlers_[signal_event::LOGOFF]     = nullptr;
-    handlers_[signal_event::SHUTDOWN]   = nullptr;
+    handlers_[signal_event::CLOSE] = nullptr;
+    handlers_[signal_event::LOGOFF] = nullptr;
+    handlers_[signal_event::SHUTDOWN] = nullptr;
 
-    registered_windows_events_ = {
-        CTRL_C_EVENT,
-        CTRL_BREAK_EVENT,
-        CTRL_CLOSE_EVENT,
-        CTRL_LOGOFF_EVENT,
-        CTRL_SHUTDOWN_EVENT
-    };
+    registered_windows_events_ = {CTRL_C_EVENT, CTRL_BREAK_EVENT, CTRL_CLOSE_EVENT, CTRL_LOGOFF_EVENT,
+                                  CTRL_SHUTDOWN_EVENT};
 #else
     struct ::sigaction sa;
     sa.sa_handler = posix_handler;
     ::sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
 
-    const int posix_signals[] = {
-        SIGINT, SIGTERM, SIGABRT, SIGILL,  SIGFPE,
-        SIGSEGV, SIGBUS, SIGPIPE, SIGALRM, SIGHUP,
-        SIGUSR1, SIGUSR2
-    };
+    const int posix_signals[] = {SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,  SIGSEGV,
+                                 SIGBUS, SIGPIPE, SIGALRM, SIGHUP, SIGUSR1, SIGUSR2};
 
-    for (const int sig : posix_signals) {
+    for (const int sig: posix_signals) {
         ::sigaction(sig, &sa, &old_actions_[sig]);
     }
 
     ::sigevent sev{};
-    sev.sigev_notify            = SIGEV_THREAD;
-    sev.sigev_notify_function   = [](::sigval val) {
-        signal_manager::instance().send_signal(signal_event::TIMEOUT);
-    };
+    sev.sigev_notify = SIGEV_THREAD;
+    sev.sigev_notify_function = [](::sigval val) { signal_manager::instance().send_signal(signal_event::TIMEOUT); };
     sev.sigev_notify_attributes = nullptr;
     ::timer_create(CLOCK_REALTIME, &sev, &alarm_timer_);
 #endif
@@ -114,13 +96,12 @@ void signal_manager::cleanup_platform() const {
     ::SetConsoleCtrlHandler(windows_handler, FALSE);
 #else
     for (int sig = 1; sig < 64; ++sig) {
-        if (old_actions_[sig].sa_handler != SIG_DFL &&
-            old_actions_[sig].sa_handler != SIG_IGN &&
+        if (old_actions_[sig].sa_handler != SIG_DFL && old_actions_[sig].sa_handler != SIG_IGN &&
             old_actions_[sig].sa_handler != nullptr) {
             ::sigaction(sig, &old_actions_[sig], nullptr);
         }
     }
-    
+
     if (alarm_timer_ != nullptr) {
         ::timer_delete(alarm_timer_);
     }
@@ -149,14 +130,13 @@ void signal_manager::register_handler(const signal_event event, signal_handler h
     handlers_[event] = move(handler);
 }
 
-void signal_manager::register_handlers(
-    const vector<signal_event>& events, signal_handler handler) {
+void signal_manager::register_handlers(const vector<signal_event>& events, signal_handler handler) {
     if (!handler) {
         NEFORCE_THROW_EXCEPTION(system_exception("Signal handler cannot be null"));
     }
 
     lock<mutex> lock(mutex_);
-    for (auto event : events) {
+    for (auto event: events) {
         handlers_[event] = handler;
     }
 }
@@ -175,18 +155,18 @@ void signal_manager::send_signal(const signal_event event, void* context) {
     send_signal_nolock(event, context);
 }
 
-void signal_manager::set_force_exit_timeout(const int timeout_ms) {
-    force_exit_timeout_ = timeout_ms;
-}
+void signal_manager::set_force_exit_timeout(const int timeout_ms) { force_exit_timeout_ = timeout_ms; }
 
 void signal_manager::start_monitoring() {
-    if (running_) return;
+    if (running_) {
+        return;
+    }
     running_ = true;
     force_exit_ = false;
 
     signal_thread_ = thread(&signal_manager::signal_thread_func, this);
     timeout_thread_ = thread(&signal_manager::timeout_monitor_thread, this);
-    
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetThreadPriority(signal_thread_.native_handle(), THREAD_PRIORITY_HIGHEST);
 #else
@@ -197,23 +177,23 @@ void signal_manager::start_monitoring() {
 }
 
 void signal_manager::stop_monitoring() {
-    if (!running_) return;
-    
+    if (!running_) {
+        return;
+    }
+
     running_ = false;
     cv_.notify_all();
-    
+
     if (signal_thread_.joinable()) {
         signal_thread_.join();
     }
-    
+
     if (timeout_thread_.joinable()) {
         timeout_thread_.join();
     }
 }
 
-bool signal_manager::is_running() const {
-    return running_;
-}
+bool signal_manager::is_running() const { return running_; }
 
 void signal_manager::signal_thread_func() {
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -262,17 +242,14 @@ void signal_manager::timeout_monitor_thread() {
             const int timeout = force_exit_timeout_.load();
             const auto now = steady_clock::now();
 
-            auto it = remove_if(
-                pending_signals_.begin(), pending_signals_.end(),
-                [timeout, now](const pending_signal& ps) -> bool {
-                    const auto age = time_cast<milliseconds>(now - ps.timestamp).count();
-                    return age > timeout;
-                }
-            );
+            auto it = remove_if(pending_signals_.begin(), pending_signals_.end(),
+                                [timeout, now](const pending_signal& ps) -> bool {
+                                    const auto age = time_cast<milliseconds>(now - ps.timestamp).count();
+                                    return age > timeout;
+                                });
 
             if (it != pending_signals_.end()) {
-                printcln(color::yellow(), "Removing ",
-                    pending_signals_.end() - it, " stale signal(s)");
+                printcln(color::yellow(), "Removing ", pending_signals_.end() - it, " stale signal(s)");
                 pending_signals_.erase(it, pending_signals_.end());
                 cv_.notify_all();
             }
@@ -299,9 +276,9 @@ void signal_manager::process_signal(signal_event event, void* context) {
 
         current_signal =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-            static_cast<signal_event>(CTRL_C_EVENT);
+                static_cast<signal_event>(CTRL_C_EVENT);
 #else
-            static_cast<signal_event>(SIGTERM);
+                static_cast<signal_event>(SIGTERM);
 #endif
         signal_context = nullptr;
 
@@ -336,12 +313,10 @@ void signal_manager::process_signal(signal_event event, void* context) {
         case signal_event::FLOATING_POINT:
         case signal_event::BUS_ERROR: {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-            printcln(color::red(), "Critical error signal received: ",
-                static_cast<int>(event));
+            printcln(color::red(), "Critical error signal received: ", static_cast<int>(event));
             send_signal(signal_event::FORCE_EXIT);
 #else
-            printcln(color::red(), "Critical error detected, aborting: ",
-                static_cast<int>(event));
+            printcln(color::red(), "Critical error detected, aborting: ", static_cast<int>(event));
             ::abort();
 #endif
             break;
@@ -377,8 +352,7 @@ void signal_manager::process_signal(signal_event event, void* context) {
         }
         case signal_event::CUSTOM_1:
         case signal_event::CUSTOM_2: {
-            printcln(color::cyan(), "Custom event received: ",
-                static_cast<int>(event));
+            printcln(color::cyan(), "Custom event received: ", static_cast<int>(event));
             break;
         }
         case signal_event::FORCE_EXIT: {
@@ -386,8 +360,7 @@ void signal_manager::process_signal(signal_event event, void* context) {
             terminate();
         }
         default: {
-            printcln(color::yellow(), "Unhandled signal: ",
-                static_cast<int>(event));
+            printcln(color::yellow(), "Unhandled signal: ", static_cast<int>(event));
             break;
         }
     }
@@ -398,24 +371,20 @@ signal_manager::signal_result signal_manager::wait_for_signal_internal(const int
 
     if (timeout_ms >= 0) {
         const auto timeout_time = steady_clock::now() + milliseconds(timeout_ms);
-        if (!cv_.wait_until(lock, timeout_time, [this]() {
-            return !pending_signals_.empty() || !running_;
-        })) {
-            return { signal_event::TIMEOUT, nullptr };
+        if (!cv_.wait_until(lock, timeout_time, [this]() { return !pending_signals_.empty() || !running_; })) {
+            return {signal_event::TIMEOUT, nullptr};
         }
     } else {
-        cv_.wait(lock, [this]() {
-            return !pending_signals_.empty() || !running_;
-        });
+        cv_.wait(lock, [this]() { return !pending_signals_.empty() || !running_; });
     }
 
     if (!pending_signals_.empty()) {
         const pending_signal ps = pending_signals_.front();
         pending_signals_.erase(pending_signals_.begin());
-        return { ps.event, ps.context };
+        return {ps.event, ps.context};
     }
 
-    return { signal_event::TIMEOUT, nullptr };
+    return {signal_event::TIMEOUT, nullptr};
 }
 
 void signal_manager::send_signal_nolock(signal_event event, void* context) {
@@ -427,13 +396,11 @@ void signal_manager::send_signal_nolock(signal_event event, void* context) {
 
     if (is_valid_posix_signal(sig_value)) {
         pending_signals_.emplace_back(event, context, steady_clock::now());
-        printcln(color::yellow(), "POSIX signal sent: ", sig_value,
-                 " (", ::strsignal(sig_value), ")");
+        printcln(color::yellow(), "POSIX signal sent: ", sig_value, " (", ::strsignal(sig_value), ")");
     } else if (is_windows_simulated_event(event)) {
         const auto it = windows_to_posix_map_.find(event);
         if (it != windows_to_posix_map_.end()) {
-            printcln(color::yellow(), "Windows simulated event: ",
-                     sig_value, " -> POSIX ", it->second);
+            printcln(color::yellow(), "Windows simulated event: ", sig_value, " -> POSIX ", it->second);
         }
         pending_signals_.emplace_back(event, context, steady_clock::now());
     } else {
@@ -448,14 +415,14 @@ bool signal_manager::block_signals(const vector<signal_event>& signals_to_block)
 #ifdef NEFORCE_PLATFORM_LINUX
     ::sigset_t mask;
     ::sigemptyset(&mask);
-    
-    for (const auto event : signals_to_block) {
+
+    for (const auto event: signals_to_block) {
         const int sig = static_cast<int>(event);
         if (sig > 0) {
             ::sigaddset(&mask, sig);
         }
     }
-    
+
     return ::pthread_sigmask(SIG_BLOCK, &mask, nullptr) == 0;
 #endif
     return true;
@@ -465,14 +432,14 @@ bool signal_manager::unblock_signals(const vector<signal_event>& signals_to_unbl
 #ifdef NEFORCE_PLATFORM_LINUX
     ::sigset_t mask;
     ::sigemptyset(&mask);
-    
-    for (const auto event : signals_to_unblock) {
+
+    for (const auto event: signals_to_unblock) {
         const int sig = static_cast<int>(event);
         if (sig > 0) {
             ::sigaddset(&mask, sig);
         }
     }
-    
+
     return ::pthread_sigmask(SIG_UNBLOCK, &mask, nullptr) == 0;
 #endif
     return true;

@@ -1,24 +1,24 @@
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#ifdef NEFORCE_COMPILER_MSVC
-#include <consoleapi.h>
-#include <consoleapi2.h>
-#endif
-#ifdef NEFORCE_COMPILER_MINGW
-#include <windef.h>
-#include <wingdi.h>
-#include <wincon.h>
-#endif
-#include <WinBase.h>
-#include <WinNls.h>
+#    ifdef NEFORCE_COMPILER_MSVC
+#        include <consoleapi.h>
+#        include <consoleapi2.h>
+#    endif
+#    ifdef NEFORCE_COMPILER_MINGW
+#        include <wincon.h>
+#        include <windef.h>
+#        include <wingdi.h>
+#    endif
+#    include <WinBase.h>
+#    include <WinNls.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <NeForce/core/system/environment.hpp>
-#include <sys/ioctl.h>
-#include <termios.h>
-#include <unistd.h>
-#include <cerrno>
-#include <cstdlib>
+#    include <NeForce/core/system/environment.hpp>
+#    include <cerrno>
+#    include <cstdlib>
+#    include <sys/ioctl.h>
+#    include <termios.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -31,7 +31,9 @@ void sys_console::print_string_unsafe(const string_view str) const {
     while (total < str.length()) {
         const ssize_t written = ::write(out_, str.data() + total, str.length() - total);
         if (written < 0) {
-            if (errno == EINTR) continue;
+            if (errno == EINTR) {
+                continue;
+            }
             break;
         }
         total += written;
@@ -47,14 +49,14 @@ void sys_console::set_color_unsafe(const color& color, const bool use_256_color)
     }
 }
 
-void sys_console::typewriter_print_unsafe(const string_view text,
-    const milliseconds delay_per_char, const bool with_sound) const {
+void sys_console::typewriter_print_unsafe(const string_view text, const milliseconds delay_per_char,
+                                          const bool with_sound) const {
     if (delay_per_char.count() <= 0) {
         print_string_unsafe(text);
         return;
     }
 
-    for (const char ch : text) {
+    for (const char ch: text) {
         print_string_unsafe(string(1, ch));
         flush_unsafe();
 
@@ -86,9 +88,9 @@ string sys_console::readln_unsafe() const {
         }
 
         size_t actual_read = read;
-        if (actual_read > 1 && buffer[actual_read-2] == '\r' && buffer[actual_read-1] == '\n') {
+        if (actual_read > 1 && buffer[actual_read - 2] == '\r' && buffer[actual_read - 1] == '\n') {
             actual_read -= 2;
-        } else if (actual_read > 0 && (buffer[actual_read-1] == '\r' || buffer[actual_read-1] == '\n')) {
+        } else if (actual_read > 0 && (buffer[actual_read - 1] == '\r' || buffer[actual_read - 1] == '\n')) {
             actual_read--;
         }
 
@@ -108,9 +110,15 @@ string sys_console::readln_unsafe() const {
     while (true) {
         char ch;
         const ssize_t n = ::read(in_, &ch, 1);
-        if (n <= 0) break;
-        if (ch == '\n') break;
-        if (ch == '\r') continue;
+        if (n <= 0) {
+            break;
+        }
+        if (ch == '\n') {
+            break;
+        }
+        if (ch == '\r') {
+            continue;
+        }
         line.push_back(ch);
     }
     return line;
@@ -269,9 +277,8 @@ void sys_console::flash_screen_unsafe() const {
 #endif
 }
 
-void sys_console::fade_effect_unsafe(
-    const string_view text, const color& from, const color& to,
-    const milliseconds duration, const bool is_fade_in) const {
+void sys_console::fade_effect_unsafe(const string_view text, const color& from, const color& to,
+                                     const milliseconds duration, const bool is_fade_in) const {
     if (!supports_colors() || duration.count() <= 0 || text.empty()) {
         print_string_unsafe(text);
         return;
@@ -318,9 +325,13 @@ void sys_console::fade_effect_unsafe(
 
 sys_console::sys_console()
 #ifdef NEFORCE_PLATFORM_WINDOWS
-: out_(INVALID_HANDLE_VALUE), in_(INVALID_HANDLE_VALUE)
+:
+out_(INVALID_HANDLE_VALUE),
+in_(INVALID_HANDLE_VALUE)
 #else
-: out_(STDOUT_FILENO), in_(STDIN_FILENO)
+:
+out_(STDOUT_FILENO),
+in_(STDIN_FILENO)
 #endif
 {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -384,7 +395,7 @@ void sys_console::println() {
 void sys_console::clear() {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    constexpr ::COORD top_left = { 0, 0 };
+    constexpr ::COORD top_left = {0, 0};
     ::CONSOLE_SCREEN_BUFFER_INFO screen;
     ::DWORD written;
 
@@ -468,8 +479,12 @@ string sys_console::password(const string_view prompt, const char mask, const bo
                         print_string_unsafe("\b \b");
                     } else if (show_length) {
                         size_t display_length = password.length() + 1;
-                        if (password.length() > 9) ++display_length;
-                        if (password.length() > 99) ++display_length;
+                        if (password.length() > 9) {
+                            ++display_length;
+                        }
+                        if (password.length() > 99) {
+                            ++display_length;
+                        }
 
                         print_string_unsafe("\r");
                         print_string_unsafe(prompt);
@@ -525,7 +540,9 @@ string sys_console::password(const string_view prompt, const char mask, const bo
             const ssize_t n = ::read(in_, &ch, 1);
 
             if (n <= 0) {
-                if (n < 0 && errno == EINTR) continue;
+                if (n < 0 && errno == EINTR) {
+                    continue;
+                }
                 break;
             }
 
@@ -632,24 +649,30 @@ void sys_console::reset_color() {
     this->print_string_unsafe("\033[0m");
 }
 
-void sys_console::progress_bar(double percentage, const int width,
-    const bool show_percentage, const char fill_char, const char empty_char) {
+void sys_console::progress_bar(double percentage, const int width, const bool show_percentage, const char fill_char,
+                               const char empty_char) {
     lock<mutex> lock(mutex_);
 
     double display_percentage = percentage;
     if (percentage > 1.0 && percentage <= 100.0) {
         display_percentage = percentage / 100.0;
     }
-    if (display_percentage < 0.0) display_percentage = 0.0;
-    else if (display_percentage > 1.0) display_percentage = 1.0;
+    if (display_percentage < 0.0) {
+        display_percentage = 0.0;
+    } else if (display_percentage > 1.0) {
+        display_percentage = 1.0;
+    }
 
     const int filled = static_cast<int>(display_percentage * width);
     string bar;
     bar.reserve(width + 20);
     bar.push_back('[');
     for (int i = 0; i < width; ++i) {
-        if (i < filled) bar.push_back(fill_char);
-        else bar.push_back(empty_char);
+        if (i < filled) {
+            bar.push_back(fill_char);
+        } else {
+            bar.push_back(empty_char);
+        }
     }
     bar.push_back(']');
     if (show_percentage) {
@@ -688,10 +711,8 @@ void sys_console::save_cursor_position() {
 void sys_console::restore_cursor_position() {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::SetConsoleCursorPosition(out_, ::COORD{
-        static_cast<::SHORT>(saved_cursor_pos_.width),
-        static_cast<::SHORT>(saved_cursor_pos_.height)
-    });
+    ::SetConsoleCursorPosition(out_, ::COORD{static_cast<::SHORT>(saved_cursor_pos_.width),
+                                             static_cast<::SHORT>(saved_cursor_pos_.height)});
 #else
     this->print_string_unsafe("\033[u");
 #endif
@@ -727,10 +748,7 @@ sys_console::console_size sys_console::get_console_size() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     if (::GetConsoleScreenBufferInfo(out_, &csbi)) {
-        return console_size{
-            csbi.srWindow.Right - csbi.srWindow.Left + 1,
-            csbi.srWindow.Bottom - csbi.srWindow.Top + 1
-        };
+        return console_size{csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1};
     }
     return console_size{80, 24};
 
@@ -742,10 +760,7 @@ sys_console::console_size sys_console::get_console_size() const {
     const string cols = environment::get("COLUMNS");
     const string rows = environment::get("LINES");
     if (!cols.empty() && !rows.empty()) {
-        return console_size{
-            _NEFORCE to_int32(cols.view()),
-            _NEFORCE to_int32(rows.view())
-        };
+        return console_size{_NEFORCE to_int32(cols.view()), _NEFORCE to_int32(rows.view())};
     }
     return console_size{80, 24};
 #endif
@@ -768,28 +783,26 @@ bool sys_console::supports_colors() const {
     return (mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0;
 #elif defined(NEFORCE_PLATFORM_LINUX)
     const string term = environment::get("TERM");
-    if (term.empty()) return false;
-    return (::isatty(out_) && (
-        term.find("xterm") != string::npos ||
-        term.find("screen") != string::npos ||
-        term.find("tmux") != string::npos ||
-        term.find("rxvt") != string::npos ||
-        term.find("color") != string::npos
-    ));
+    if (term.empty()) {
+        return false;
+    }
+    return (::isatty(out_) && (term.find("xterm") != string::npos || term.find("screen") != string::npos ||
+                               term.find("tmux") != string::npos || term.find("rxvt") != string::npos ||
+                               term.find("color") != string::npos));
 #endif
 }
 
 bool sys_console::supports_truecolor() const {
-    if (!supports_colors()) return false;
+    if (!supports_colors()) {
+        return false;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return true;
 #elif defined(NEFORCE_PLATFORM_LINUX)
     const string colorterm = environment::get("COLORTERM");
-    return !colorterm.empty() && (
-        colorterm.find("truecolor") != string::npos ||
-        colorterm.find("24bit") != string::npos
-    );
+    return !colorterm.empty() &&
+           (colorterm.find("truecolor") != string::npos || colorterm.find("24bit") != string::npos);
 #endif
 }
 
@@ -802,7 +815,9 @@ bool sys_console::supports_unicode() const {
     const string lc_ctype = environment::get("LC_CTYPE");
 
     const string encoding = !lc_ctype.empty() ? lc_ctype : (!lc_all.empty() ? lc_all : lang);
-    if (encoding.empty()) return false;
+    if (encoding.empty()) {
+        return false;
+    }
 
     return string_find_pattern(encoding.data(), "UTF-8") != nullptr ||
            string_find_pattern(encoding.data(), "utf8") != nullptr;
@@ -826,14 +841,12 @@ string sys_console::console_type() const {
 #endif
 }
 
-void sys_console::typewriter_print(const string_view text,
-    const milliseconds delay_per_char, const bool with_sound) {
+void sys_console::typewriter_print(const string_view text, const milliseconds delay_per_char, const bool with_sound) {
     lock<mutex> lock(mutex_);
     typewriter_print_unsafe(text, delay_per_char, with_sound);
 }
 
-void sys_console::typewriter_println(const string_view text,
-    const milliseconds delay_per_char, const bool with_sound) {
+void sys_console::typewriter_println(const string_view text, const milliseconds delay_per_char, const bool with_sound) {
     lock<mutex> lock(mutex_);
     typewriter_print_unsafe(text, delay_per_char, with_sound);
     print_string_unsafe("\n");
@@ -849,8 +862,7 @@ void sys_console::flash_screen() {
     flash_screen_unsafe();
 }
 
-void sys_console::notification(const string_view message,
-    const milliseconds duration, const bool play_sound) {
+void sys_console::notification(const string_view message, const milliseconds duration, const bool play_sound) {
     lock<mutex> lock(mutex_);
 
     if (play_sound) {
@@ -867,20 +879,20 @@ void sys_console::notification(const string_view message,
     }
 }
 
-void sys_console::fade_in(const string_view text, const milliseconds duration,
-    const color& start_color, const color& end_color) {
+void sys_console::fade_in(const string_view text, const milliseconds duration, const color& start_color,
+                          const color& end_color) {
     lock<mutex> lock(mutex_);
     fade_effect_unsafe(text, start_color, end_color, duration, true);
 }
 
-void sys_console::fade_out(const string_view text, const milliseconds duration,
-    const color& start_color, const color& end_color) {
+void sys_console::fade_out(const string_view text, const milliseconds duration, const color& start_color,
+                           const color& end_color) {
     lock<mutex> lock(mutex_);
     fade_effect_unsafe(text, start_color, end_color, duration, false);
 }
 
-void sys_console::fade_in_out(const string_view text, const milliseconds in_duration,
-    const milliseconds hold_duration, const milliseconds out_duration) {
+void sys_console::fade_in_out(const string_view text, const milliseconds in_duration, const milliseconds hold_duration,
+                              const milliseconds out_duration) {
     lock<mutex> lock(mutex_);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS

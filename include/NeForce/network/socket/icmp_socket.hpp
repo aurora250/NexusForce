@@ -17,11 +17,7 @@ struct icmp_header {
 
 class NEFORCE_API icmp_socket final : public socket_base {
 public:
-    enum icmp_type : uint8_t {
-        ICMP_ECHO_REPLY   = 0,
-        ICMP_ECHO_REQUEST = 8,
-        ICMP_TIME_EXCEEDED = 11
-    };
+    enum icmp_type : uint8_t { ICMP_ECHO_REPLY = 0, ICMP_ECHO_REQUEST = 8, ICMP_TIME_EXCEEDED = 11 };
 
     struct ping_result {
         ip_address destination;
@@ -38,33 +34,25 @@ public:
     };
 
 private:
-    bool receive_reply(
-        milliseconds timeout, uint16_t expected_id, uint16_t expected_seq,
-        ip_address& sender, icmp_header& out_header,
-        vector<char>& out_data, uint8_t& recv_ttl);
+    bool receive_reply(milliseconds timeout, uint16_t expected_id, uint16_t expected_seq, ip_address& sender,
+                       icmp_header& out_header, vector<char>& out_data, uint8_t& recv_ttl);
 
-    void send_echo_request(
-        const ip_address& dest, uint16_t id, uint16_t seq,
-        uint8_t ttl, const void* data, size_t data_len);
+    void send_echo_request(const ip_address& dest, uint16_t id, uint16_t seq, uint8_t ttl, const void* data,
+                           size_t data_len);
 
 public:
     icmp_socket() = default;
 
-    explicit icmp_socket(native_handle_type fd) noexcept
-    : socket_base(fd) {}
+    explicit icmp_socket(native_handle_type fd) noexcept :
+    socket_base(fd) {}
 
     void open(int family = AF_INET);
 
-    ping_result ping(const ip_address& dest,
-                     milliseconds timeout,
-                     uint16_t sequence = 0,
-                     const void* data = nullptr,
+    ping_result ping(const ip_address& dest, milliseconds timeout, uint16_t sequence = 0, const void* data = nullptr,
                      size_t data_len = 0);
 
-    vector<traceroute_hop> traceroute(const ip_address& dest,
-                                       int max_hops = 30,
-                                       milliseconds probe_timeout = milliseconds(1000),
-                                       int probes_per_hop = 3);
+    vector<traceroute_hop> traceroute(const ip_address& dest, int max_hops = 30,
+                                      milliseconds probe_timeout = milliseconds(1000), int probes_per_hop = 3);
 };
 
 NEFORCE_END_NAMESPACE__

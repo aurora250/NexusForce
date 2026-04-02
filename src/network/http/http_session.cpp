@@ -1,6 +1,6 @@
-#include <NeForce/network/http/http_session.hpp>
-#include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/string/to_string.hpp>
+#include <NeForce/core/time/clocks.hpp>
+#include <NeForce/network/http/http_session.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 NEFORCE_NODISCARD string http_cookie::to_string() const {
@@ -71,7 +71,7 @@ void http_cookie::set_expires_from_now(const int64_t seconds) {
     expires = datetime::now() + seconds;
 }
 
-string& http_session::operator [](const string& key) {
+string& http_session::operator[](const string& key) {
     touch();
     return data[key];
 }
@@ -109,9 +109,7 @@ void http_session::touch() noexcept {
     is_new = false;
 }
 
-bool http_session::contains(const string& key) const noexcept {
-    return data.find(key) != data.end();
-}
+bool http_session::contains(const string& key) const noexcept { return data.find(key) != data.end(); }
 
 bool http_session::is_valid() const noexcept {
     if (invalidated) {
@@ -154,7 +152,7 @@ string http_session::to_string() const {
 
     if (!data.empty()) {
         result += "Data:\n";
-        for (const auto& pair : data) {
+        for (const auto& pair: data) {
             const string key = pair.first;
             const string value = pair.second;
             result += "  " + move(key) + " = " + move(value) + "\n";

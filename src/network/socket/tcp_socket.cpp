@@ -1,7 +1,7 @@
 #include <NeForce/network/socket/tcp_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <fcntl.h>
-#include <errno.h>
+#    include <errno.h>
+#    include <fcntl.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -21,12 +21,10 @@ namespace {
         return ::select(static_cast<int>(fd + 1), nullptr, &write_fds, nullptr, &tv) > 0;
 #endif
     }
-}
+} // namespace
 
 
-void tcp_socket::open(const int family) {
-    open_ip(family, SOCK_STREAM, IPPROTO_TCP);
-}
+void tcp_socket::open(const int family) { open_ip(family, SOCK_STREAM, IPPROTO_TCP); }
 
 bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout, bool was_blocking) {
     if (!is_open()) {
@@ -114,11 +112,9 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
         if (was_blocking) {
             NEFORCE_IGNORE set_nonblocking(false);
         }
-        NEFORCE_THROW_EXCEPTION(socket_exception(
-            "Failed to get socket options or socket error occurred",
-            socket_exception::static_type,
-            optval ? optval : socket_exception::last_error())
-        );
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to get socket options or socket error occurred",
+                                                 socket_exception::static_type,
+                                                 optval ? optval : socket_exception::last_error()));
     }
 
     if (was_blocking) {
@@ -131,7 +127,9 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const int flags) {
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
     }
-    if (data.empty()) return 0;
+    if (data.empty()) {
+        return 0;
+    }
 
     const ssize_t result = ::send(fd_, data.data(), data.size(), flags);
     if (result < 0) {
@@ -144,7 +142,9 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const milliseconds 
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
     }
-    if (data.empty()) return 0;
+    if (data.empty()) {
+        return 0;
+    }
 
     if (timeout.count() > 0) {
         if (!wait_for_write(fd_, timeout)) {
@@ -163,7 +163,9 @@ ssize_t tcp_socket::receive(memory_view<char> buffer, const int flags) {
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
     }
-    if (buffer.empty()) return 0;
+    if (buffer.empty()) {
+        return 0;
+    }
 
     const ssize_t result = ::recv(fd_, buffer.data(), buffer.size(), flags);
     if (result < 0) {
@@ -196,10 +198,8 @@ vector<char> tcp_socket::receive_all(const size_t expected_size) {
     size_t total_received = 0;
 
     while (total_received < expected_size) {
-        const ssize_t received = receive(memory_view<char>(
-            buffer.data() + total_received,
-            expected_size - total_received
-        ));
+        const ssize_t received =
+                receive(memory_view<char>(buffer.data() + total_received, expected_size - total_received));
 
         if (received == 0) {
             break;

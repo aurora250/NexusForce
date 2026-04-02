@@ -3,25 +3,24 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    constexpr auto cipher_list =
-            "ECDHE-ECDSA-AES128-GCM-SHA256:"
-            "ECDHE-RSA-AES128-GCM-SHA256:"
-            "ECDHE-ECDSA-AES256-GCM-SHA384:"
-            "ECDHE-RSA-AES256-GCM-SHA384:"
-            "ECDHE-ECDSA-CHACHA20-POLY1305:"
-            "ECDHE-RSA-CHACHA20-POLY1305:"
-            "DHE-RSA-AES128-GCM-SHA256:"
-            "DHE-RSA-AES256-GCM-SHA384:"
-            "ECDHE-ECDSA-AES128-SHA256:"
-            "ECDHE-RSA-AES128-SHA256:"
-            "ECDHE-ECDSA-AES256-SHA384:"
-            "ECDHE-RSA-AES256-SHA384:"
-            "DHE-RSA-AES128-SHA256:"
-            "DHE-RSA-AES256-SHA256:"
-            "AES128-GCM-SHA256:"
-            "AES256-GCM-SHA384:"
-            "AES128-SHA256:"
-            "AES256-SHA256";
+    constexpr auto cipher_list = "ECDHE-ECDSA-AES128-GCM-SHA256:"
+                                 "ECDHE-RSA-AES128-GCM-SHA256:"
+                                 "ECDHE-ECDSA-AES256-GCM-SHA384:"
+                                 "ECDHE-RSA-AES256-GCM-SHA384:"
+                                 "ECDHE-ECDSA-CHACHA20-POLY1305:"
+                                 "ECDHE-RSA-CHACHA20-POLY1305:"
+                                 "DHE-RSA-AES128-GCM-SHA256:"
+                                 "DHE-RSA-AES256-GCM-SHA384:"
+                                 "ECDHE-ECDSA-AES128-SHA256:"
+                                 "ECDHE-RSA-AES128-SHA256:"
+                                 "ECDHE-ECDSA-AES256-SHA384:"
+                                 "ECDHE-RSA-AES256-SHA384:"
+                                 "DHE-RSA-AES128-SHA256:"
+                                 "DHE-RSA-AES256-SHA256:"
+                                 "AES128-GCM-SHA256:"
+                                 "AES256-GCM-SHA384:"
+                                 "AES128-SHA256:"
+                                 "AES256-SHA256";
 
     SSL_METHOD* convert_method(const ssl_method method) {
         switch (method) {
@@ -36,17 +35,17 @@ namespace {
             }
         }
     }
-}
+} // namespace
 
 
-int ssl_exception::last_error() noexcept {
-    return static_cast<int>(::ERR_get_error());
-}
+int ssl_exception::last_error() noexcept { return static_cast<int>(::ERR_get_error()); }
 
 string ssl_exception::last_error_message() {
     char buf[256];
     const auto err = ::ERR_get_error();
-    if (err == 0) return "";
+    if (err == 0) {
+        return "";
+    }
     ::ERR_error_string_n(err, buf, sizeof(buf));
     return {buf};
 }
@@ -57,30 +56,21 @@ ssl_context::ssl_context(const ssl_method method) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create SSL context"));
     }
 
-    ::SSL_CTX_set_options(ctx_.get(),
-            SSL_OP_NO_SSLv2 |
-            SSL_OP_NO_SSLv3
-        );
+    ::SSL_CTX_set_options(ctx_.get(), SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3);
 
     if (::SSL_CTX_set_cipher_list(ctx_.get(), cipher_list) != 1) {
         ::SSL_CTX_set_cipher_list(ctx_.get(), "DEFAULT:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK");
     }
 
 #ifdef TLS1_3_VERSION
-    ::SSL_CTX_set_ciphersuites(ctx_.get(),
-        "TLS_AES_128_GCM_SHA256:"
-        "TLS_AES_256_GCM_SHA384:"
-        "TLS_CHACHA20_POLY1305_SHA256");
+    ::SSL_CTX_set_ciphersuites(ctx_.get(), "TLS_AES_128_GCM_SHA256:"
+                                           "TLS_AES_256_GCM_SHA384:"
+                                           "TLS_CHACHA20_POLY1305_SHA256");
 #endif
 
     if (::SSL_CTX_set_default_verify_paths(ctx_.get()) != 1) {
-        const char* ca_paths[] = {
-            "/etc/ssl/certs",
-            "/etc/pki/tls/certs",
-            "/usr/local/share/certs",
-            "/etc/ssl/cert.pem",
-            nullptr
-        };
+        const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs", "/etc/ssl/cert.pem",
+                                  nullptr};
 
         for (int i = 0; ca_paths[i] != nullptr; ++i) {
             ::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, ca_paths[i]);
@@ -117,12 +107,16 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
         NEFORCE_THROW_EXCEPTION(value_exception("Certificate or key PEM data is empty"));
     }
 
-    ::BIO *cert_bio = ::BIO_new_mem_buf(cert_pem.data(), cert_pem.size());
-    ::BIO *key_bio = ::BIO_new_mem_buf(key_pem.data(), key_pem.size());
+    ::BIO* cert_bio = ::BIO_new_mem_buf(cert_pem.data(), cert_pem.size());
+    ::BIO* key_bio = ::BIO_new_mem_buf(key_pem.data(), key_pem.size());
 
     if (!cert_bio || !key_bio) {
-        if (cert_bio) ::BIO_free(cert_bio);
-        if (key_bio) ::BIO_free(key_bio);
+        if (cert_bio) {
+            ::BIO_free(cert_bio);
+        }
+        if (key_bio) {
+            ::BIO_free(key_bio);
+        }
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create BIO"));
     }
 
@@ -133,8 +127,12 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     ::BIO_free(key_bio);
 
     if (!cert || !key) {
-        if (cert) ::X509_free(cert);
-        if (key) ::EVP_PKEY_free(key);
+        if (cert) {
+            ::X509_free(cert);
+        }
+        if (key) {
+            ::EVP_PKEY_free(key);
+        }
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to parse PEM data"));
     }
 
@@ -186,7 +184,9 @@ void ssl_context::set_ciphersuites(const string& ciphersuites) {
 }
 
 void ssl_context::set_default_options() {
-    if (!ctx_) return;
+    if (!ctx_) {
+        return;
+    }
 
     long options = SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1;
     options |= SSL_OP_SINGLE_DH_USE | SSL_OP_SINGLE_ECDH_USE;
@@ -200,22 +200,20 @@ void ssl_context::set_default_options() {
     set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256");
 }
 
-void ssl_context::set_session_cache_size(long size) {
-    ::SSL_CTX_sess_set_cache_size(ctx_.get(), size);
-}
+void ssl_context::set_session_cache_size(long size) { ::SSL_CTX_sess_set_cache_size(ctx_.get(), size); }
 
-void ssl_context::set_timeout(long seconds) {
-    ::SSL_CTX_set_timeout(ctx_.get(), seconds);
-}
+void ssl_context::set_timeout(long seconds) { ::SSL_CTX_set_timeout(ctx_.get(), seconds); }
 
 void ssl_context::set_alpn_protos(const vector<string>& protocols) {
     if (!ctx_) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
-    if (protocols.empty()) return;
+    if (protocols.empty()) {
+        return;
+    }
 
     byte_vector alpn_data;
-    for (const auto& proto : protocols) {
+    for (const auto& proto: protocols) {
         if (proto.empty() || proto.size() > 255) {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid ALPN protocol length"));
         }

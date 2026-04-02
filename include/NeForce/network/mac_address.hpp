@@ -15,25 +15,19 @@ private:
 public:
     mac_address() noexcept = default;
 
-    explicit mac_address(const byte_t* bytes) noexcept {
-        copy(bytes, bytes + MAC_LEN, bytes_.begin());
-    }
+    explicit mac_address(const byte_t* bytes) noexcept { copy(bytes, bytes + MAC_LEN, bytes_.begin()); }
 
-    explicit mac_address(const bytes_type& bytes) noexcept
-    : bytes_(bytes) {}
+    explicit mac_address(const bytes_type& bytes) noexcept :
+    bytes_(bytes) {}
 
     static optional<mac_address> parse(string_view str) noexcept;
     static optional<mac_address> parse(const ip_address& ip, const char* iface = nullptr) noexcept;
 
     string to_string() const;
 
-    bool operator ==(const mac_address& other) const noexcept {
-        return bytes_ == other.bytes_;
-    }
+    bool operator==(const mac_address& other) const noexcept { return bytes_ == other.bytes_; }
 
-    bool operator !=(const mac_address& other) const noexcept {
-        return !(*this == other);
-    }
+    bool operator!=(const mac_address& other) const noexcept { return !(*this == other); }
 
     const bytes_type& bytes() const noexcept { return bytes_; }
 };

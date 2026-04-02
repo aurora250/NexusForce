@@ -72,10 +72,9 @@ struct invoke_other_tag {
  *
  * 包含invoke_type和type两个类型成员，分别表示调用类型和结果类型。
  */
-template <typename T, typename Tag>
-struct invoke_result_true {
-    using invoke_type   = Tag; ///< 调用类型标签
-    using type          = T;   ///< 调用结果类型
+template <typename T, typename Tag> struct invoke_result_true {
+    using invoke_type = Tag; ///< 调用类型标签
+    using type = T;          ///< 调用结果类型
 };
 
 /**
@@ -96,15 +95,14 @@ NEFORCE_BEGIN_INNER__
  * @tparam Arg 对象参数类型
  * @tparam Args 函数参数类型
  */
-template <typename MemPtr, typename Arg, typename... Args>
-struct __invoke_result_memfun_ref {
+template <typename MemPtr, typename Arg, typename... Args> struct __invoke_result_memfun_ref {
 private:
     template <typename F, typename T, typename... Args1>
     static invoke_result_true<decltype((_NEFORCE declval<T>().*_NEFORCE declval<F>())(_NEFORCE declval<Args1>()...)),
-        invoke_memfun_ref_tag> __test(int);
+                              invoke_memfun_ref_tag>
+    __test(int);
 
-    template <typename...>
-    static invoke_result_false __test(...);
+    template <typename...> static invoke_result_false __test(...);
 
 public:
     using type = decltype(__test<MemPtr, Arg, Args...>(0));
@@ -117,15 +115,14 @@ public:
  * @tparam Arg 对象指针参数类型
  * @tparam Args 函数参数类型
  */
-template <typename MemPtr, typename Arg, typename... Args>
-struct __invoke_result_memfun_deref {
+template <typename MemPtr, typename Arg, typename... Args> struct __invoke_result_memfun_deref {
 private:
     template <typename F, typename T, typename... Args1>
     static invoke_result_true<decltype((*_NEFORCE declval<T>().*_NEFORCE declval<F>())(_NEFORCE declval<Args1>()...)),
-        invoke_memfun_deref_tag> __test(int);
+                              invoke_memfun_deref_tag>
+    __test(int);
 
-    template <typename...>
-    static invoke_result_false __test(...);
+    template <typename...> static invoke_result_false __test(...);
 
 public:
     using type = decltype(__test<MemPtr, Arg, Args...>(0));
@@ -137,15 +134,13 @@ public:
  * @tparam MemPtr 成员对象指针类型
  * @tparam Arg 对象参数类型
  */
-template <typename MemPtr, typename Arg>
-struct __invoke_result_memobj_ref {
+template <typename MemPtr, typename Arg> struct __invoke_result_memobj_ref {
 private:
     template <typename F, typename T>
-    static invoke_result_true<decltype(_NEFORCE declval<T>().*_NEFORCE declval<F>()),
-        invoke_memobj_ref_tag> __test(int);
+    static invoke_result_true<decltype(_NEFORCE declval<T>().*_NEFORCE declval<F>()), invoke_memobj_ref_tag>
+    __test(int);
 
-    template <typename, typename>
-    static invoke_result_false __test(...);
+    template <typename, typename> static invoke_result_false __test(...);
 
 public:
     using type = decltype(__test<MemPtr, Arg>(0));
@@ -157,15 +152,13 @@ public:
  * @tparam MemPtr 成员对象指针类型
  * @tparam Arg 对象指针参数类型
  */
-template <typename MemPtr, typename Arg>
-struct __invoke_result_memobj_deref {
+template <typename MemPtr, typename Arg> struct __invoke_result_memobj_deref {
 private:
     template <typename F, typename T>
-    static invoke_result_true<decltype(*_NEFORCE declval<T>().*_NEFORCE declval<F>()),
-        invoke_memobj_deref_tag> __test(int);
+    static invoke_result_true<decltype(*_NEFORCE declval<T>().*_NEFORCE declval<F>()), invoke_memobj_deref_tag>
+    __test(int);
 
-    template <typename, typename>
-    static invoke_result_false __test(...);
+    template <typename, typename> static invoke_result_false __test(...);
 
 public:
     using type = decltype(__test<MemPtr, Arg>(0));
@@ -179,8 +172,7 @@ public:
  *
  * 根据对象类型决定使用引用访问还是解引用访问。
  */
-template <typename MemPtr, typename Arg>
-struct __invoke_result_memobj;
+template <typename MemPtr, typename Arg> struct __invoke_result_memobj;
 
 /**
  * @brief 成员对象指针特化的结果类型推导
@@ -188,14 +180,12 @@ struct __invoke_result_memobj;
  * @tparam Class 类类型
  * @tparam Arg 对象参数类型
  */
-template <typename Res, typename Class, typename Arg>
-struct __invoke_result_memobj<Res Class::*, Arg> {
+template <typename Res, typename Class, typename Arg> struct __invoke_result_memobj<Res Class::*, Arg> {
     using Argval = remove_cvref_t<Arg>;
     using MemPtr = Res Class::*;
-    using type = typename conditional_t<disjunction<
-        is_same<Argval, Class>, is_base_of<Class, Argval>>::value,
-        __invoke_result_memobj_ref<MemPtr, Arg>,
-        __invoke_result_memobj_deref<MemPtr, Arg>>::type;
+    using type = typename conditional_t<disjunction<is_same<Argval, Class>, is_base_of<Class, Argval>>::value,
+                                        __invoke_result_memobj_ref<MemPtr, Arg>,
+                                        __invoke_result_memobj_deref<MemPtr, Arg>>::type;
 };
 
 /**
@@ -205,8 +195,7 @@ struct __invoke_result_memobj<Res Class::*, Arg> {
  * @tparam Arg 对象参数类型
  * @tparam Args 函数参数类型
  */
-template <typename MemPtr, typename Arg, typename... Args>
-struct __invoke_result_memfun;
+template <typename MemPtr, typename Arg, typename... Args> struct __invoke_result_memfun;
 
 /**
  * @brief 成员函数指针特化的结果类型推导
@@ -219,8 +208,8 @@ template <typename Res, typename Class, typename Arg, typename... Args>
 struct __invoke_result_memfun<Res Class::*, Arg, Args...> {
     using MemPtr = Res Class::*;
     using type = typename conditional_t<is_base_of<Class, remove_reference_t<Arg>>::value,
-        __invoke_result_memfun_ref<MemPtr, Arg, Args...>,
-        __invoke_result_memfun_deref<MemPtr, Arg, Args...>>::type;
+                                        __invoke_result_memfun_ref<MemPtr, Arg, Args...>,
+                                        __invoke_result_memfun_deref<MemPtr, Arg, Args...>>::type;
 };
 
 /**
@@ -231,31 +220,28 @@ struct __invoke_result_memfun<Res Class::*, Arg, Args...> {
  * @tparam F 可调用对象类型
  * @tparam Args 参数类型
  */
-template <bool IsMemObj, bool IsMemFun, typename F, typename... Args>
-struct __invoke_result_dispatch {
+template <bool IsMemObj, bool IsMemFun, typename F, typename... Args> struct __invoke_result_dispatch {
     using type = invoke_result_false;
 };
 
 /// 成员对象指针的分发特化
 template <typename MemPtr, typename Arg>
 struct __invoke_result_dispatch<true, false, MemPtr, Arg>
-    : __invoke_result_memobj<decay_t<MemPtr>, unwrap_reference_t<Arg>> {};
+: __invoke_result_memobj<decay_t<MemPtr>, unwrap_reference_t<Arg>> {};
 
 /// 成员函数指针的分发特化
 template <typename MemPtr, typename Arg, typename... Args>
 struct __invoke_result_dispatch<false, true, MemPtr, Arg, Args...>
-    : __invoke_result_memfun<decay_t<MemPtr>, unwrap_reference_t<Arg>, Args...> {};
+: __invoke_result_memfun<decay_t<MemPtr>, unwrap_reference_t<Arg>, Args...> {};
 
 /// 其他可调用对象的分发特化
-template <typename F, typename... Args>
-struct __invoke_result_dispatch<false, false, F, Args...> {
+template <typename F, typename... Args> struct __invoke_result_dispatch<false, false, F, Args...> {
 private:
     template <typename F1, typename... Args1>
-    static invoke_result_true<
-        decltype(_NEFORCE declval<F1>()(_NEFORCE declval<Args1>()...)), invoke_other_tag> __test(int);
+    static invoke_result_true<decltype(_NEFORCE declval<F1>()(_NEFORCE declval<Args1>()...)), invoke_other_tag>
+    __test(int);
 
-    template <typename...>
-    static invoke_result_false __test(...);
+    template <typename...> static invoke_result_false __test(...);
 
 public:
     using type = decltype(__test<F, Args...>(0));
@@ -268,10 +254,9 @@ public:
  * @tparam Args 参数类型
  */
 template <typename F, typename... Args>
-struct __invoke_result_aux : __invoke_result_dispatch<
-    is_member_object_pointer<remove_reference_t<F>>::value,
-    is_member_function_pointer<remove_reference_t<F>>::value,
-    F, Args...>::type {};
+struct __invoke_result_aux
+: __invoke_result_dispatch<is_member_object_pointer<remove_reference_t<F>>::value,
+                           is_member_function_pointer<remove_reference_t<F>>::value, F, Args...>::type {};
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -290,16 +275,14 @@ NEFORCE_END_INNER__
  * 使用特化形式F(Args...)指定函数和参数类型。
  * 推导调用F(Args...)的结果类型。
  */
-template <typename Sign>
-struct invoke_result;
+template <typename Sign> struct invoke_result;
 
 /**
  * @brief invoke_result的特化版本
  * @tparam F 可调用对象类型
  * @tparam Args 参数类型
  */
-template <typename F, typename... Args>
-struct invoke_result<F(Args...)> : inner::__invoke_result_aux<F, Args...> {};
+template <typename F, typename... Args> struct invoke_result<F(Args...)> : inner::__invoke_result_aux<F, Args...> {};
 
 /**
  * @typedef invoke_result_t
@@ -307,8 +290,7 @@ struct invoke_result<F(Args...)> : inner::__invoke_result_aux<F, Args...> {};
  * @tparam F 可调用对象类型
  * @tparam Args 参数类型
  */
-template <typename F, typename... Args>
-using invoke_result_t = typename inner::__invoke_result_aux<F, Args...>::type;
+template <typename F, typename... Args> using invoke_result_t = typename inner::__invoke_result_aux<F, Args...>::type;
 
 
 /// @cond
@@ -330,45 +312,44 @@ template <typename Result, typename Ret>
 struct __is_invocable_aux<Result, Ret, true, void_t<typename Result::type>> : true_type {};
 
 #ifdef NEFORCE_COMPILER_GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #elif defined(NEFORCE_COMPILER_CLANG)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wctor-dtor-privacy"
+#    pragma clang diagnostic push
+#    pragma clang diagnostic ignored "-Wctor-dtor-privacy"
 #elif defined(NEFORCE_COMPILER_MSVC)
-#pragma warning(push)
-#pragma warning(disable : 4624)
+#    pragma warning(push)
+#    pragma warning(disable : 4624)
 #endif
 
 /// 返回类型非void的特化
-template <typename Result, typename Ret>
-struct __is_invocable_aux<Result, Ret, false, void_t<typename Result::type>> {
+template <typename Result, typename Ret> struct __is_invocable_aux<Result, Ret, false, void_t<typename Result::type>> {
 private:
     using Res_t = typename Result::type;
 
     template <typename T, bool Nothrow = noexcept(_NEFORCE declvoid<T>(_NEFORCE declval<Res_t>())),
-        typename = decltype(_NEFORCE declvoid<T>(_NEFORCE declval<Res_t>())), bool Dangle =
+              typename = decltype(_NEFORCE declvoid<T>(_NEFORCE declval<Res_t>())),
+              bool Dangle =
 #if defined(NEFORCE_COMPILER_GCC) && defined(NEFORCE_PLATFORM_WINDOWS)
-        __reference_converts_from_temporary(T, Res_t)
+                      __reference_converts_from_temporary(T, Res_t)
 #else
-        false
+                      false
 #endif
-    >
+              >
     static bool_constant<Nothrow && !Dangle> __test(int);
 
-    template <typename T, bool = false>
-    static false_type __test(...);
+    template <typename T, bool = false> static false_type __test(...);
 
 public:
     using type = decltype(__test<Ret, true>(1));
 };
 
 #ifdef NEFORCE_COMPILER_CLANG
-#pragma clang diagnostic pop
+#    pragma clang diagnostic pop
 #elif defined(NEFORCE_COMPILER_GCC)
-#pragma GCC diagnostic pop
+#    pragma GCC diagnostic pop
 #elif defined(NEFORCE_COMPILER_MSVC)
-#pragma warning(pop)
+#    pragma warning(pop)
 #endif
 
 NEFORCE_END_INNER__
@@ -421,24 +402,20 @@ NEFORCE_INLINE17 constexpr bool is_invocable_r_v = is_invocable_r<Ret, F, Args..
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename F, typename T, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_ref_tag) {
+template <typename F, typename T, typename... Args> constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_ref_tag) {
     return noexcept((_NEFORCE declval<unwrap_reference_t<T>>().*_NEFORCE declval<F>())(_NEFORCE declval<Args>()...));
 }
 template <typename F, typename T, typename... Args>
 constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_deref_tag) {
     return noexcept((*_NEFORCE declval<T>().*_NEFORCE declval<F>())(_NEFORCE declval<Args>()...));
 }
-template <typename F, typename T>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_ref_tag) {
+template <typename F, typename T> constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_ref_tag) {
     return noexcept(_NEFORCE declval<unwrap_reference_t<T>>().*_NEFORCE declval<F>());
 }
-template <typename F, typename T>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_deref_tag) {
+template <typename F, typename T> constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_deref_tag) {
     return noexcept(*_NEFORCE declval<T>().*_NEFORCE declval<F>());
 }
-template <typename F, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_other_tag) {
+template <typename F, typename... Args> constexpr bool __invoke_is_nothrow_dispatch(invoke_other_tag) {
     return noexcept(_NEFORCE declval<F>()(_NEFORCE declval<Args>()...));
 }
 
@@ -450,8 +427,7 @@ constexpr bool __invoke_is_nothrow_dispatch(invoke_other_tag) {
  * @tparam Args 参数类型
  */
 template <typename Result, typename F, typename... Args>
-struct __invoke_is_nothrow : bool_constant<
-    __invoke_is_nothrow_dispatch<F, Args...> (typename Result::invoke_type{})> {};
+struct __invoke_is_nothrow : bool_constant<__invoke_is_nothrow_dispatch<F, Args...>(typename Result::invoke_type{})> {};
 
 /**
  * @typedef __bind_invoke_is_nothrow
@@ -473,8 +449,8 @@ NEFORCE_END_INNER__
  * 检查是否可以使用给定的参数调用F，并且调用过程不会抛出异常。
  */
 template <typename F, typename... Args>
-struct is_nothrow_invocable : conjunction<
-    is_invocable<F, Args...>, inner::__bind_invoke_is_nothrow<F, Args...>>::type {};
+struct is_nothrow_invocable : conjunction<is_invocable<F, Args...>, inner::__bind_invoke_is_nothrow<F, Args...>>::type {
+};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -503,7 +479,7 @@ NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_ref_tag, MemFun&& f, T&&
     return (inner::__invoke_forward<T>(t).*f)(_NEFORCE forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
-NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args){
+NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args) {
     return (*_NEFORCE forward<T>(t).*f)(_NEFORCE forward<Args>(args)...);
 }
 template <typename Res, typename MemPtr, typename T>
@@ -535,8 +511,7 @@ NEFORCE_END_INNER__
  */
 template <typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 typename inner::__invoke_result_aux<Callable, Args...>::type
-invoke(Callable&& f, Args&&... args)
-noexcept(is_nothrow_invocable<Callable, Args...>::value) {
+invoke(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Args...>::value) {
     using result = inner::__invoke_result_aux<Callable, Args...>;
     using type = typename result::type;
     using tag = typename result::invoke_type;
@@ -549,17 +524,15 @@ NEFORCE_BEGIN_INNER__
 
 template <typename T, typename Tag, typename Res, typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 enable_if_t<is_invocable_r<Res, Callable, Args...>::value && is_void<Res>::value, Res>
-__invoke_r_dispatch(Callable&& f, Args&&... args)
-noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-	__invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
-	return;
+__invoke_r_dispatch(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Args...>::value) {
+    __invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
+    return;
 }
 
 template <typename T, typename Tag, typename Res, typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 enable_if_t<is_invocable_r<Res, Callable, Args...>::value && !is_void<Res>::value, Res>
-__invoke_r_dispatch(Callable&& f, Args&&... args)
-noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-	return __invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
+__invoke_r_dispatch(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Args...>::value) {
+    return __invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
 }
 
 NEFORCE_END_INNER__
@@ -579,14 +552,12 @@ NEFORCE_END_INNER__
  */
 template <typename Res, typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 enable_if_t<is_invocable_r<Res, Callable, Args...>::value, Res>
-invoke_r(Callable&& f, Args&&... args)
-noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-    using result = inner:: __invoke_result_aux<Callable, Args...>;
+invoke_r(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Args...>::value) {
+    using result = inner::__invoke_result_aux<Callable, Args...>;
     using type = typename result::type;
     using tag = typename result::invoke_type;
-    return inner::__invoke_r_dispatch<type, tag, Res, Callable, Args...>(
-    	_NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...
-	);
+    return inner::__invoke_r_dispatch<type, tag, Res, Callable, Args...>(_NEFORCE forward<Callable>(f),
+                                                                         _NEFORCE forward<Args>(args)...);
 }
 
 /** @} */ // InvokeFunction

@@ -2,7 +2,8 @@
 #ifdef NEFORCE_SUPPORT_SQLITE3
 NEFORCE_BEGIN_NAMESPACE__
 
-sqlite_prepared_result::sqlite_prepared_result(::sqlite3_stmt* statement) noexcept : stmt_(statement) {
+sqlite_prepared_result::sqlite_prepared_result(::sqlite3_stmt* statement) noexcept :
+stmt_(statement) {
     if (stmt_) {
         columns_ = ::sqlite3_column_count(stmt_);
         for (int i = 0; i < columns_; ++i) {
@@ -13,7 +14,9 @@ sqlite_prepared_result::sqlite_prepared_result(::sqlite3_stmt* statement) noexce
 }
 
 bool sqlite_prepared_result::next() noexcept {
-    if (empty()) return false;
+    if (empty()) {
+        return false;
+    }
     return ::sqlite3_step(stmt_) == SQLITE_ROW && ++cursor_;
 }
 
@@ -78,7 +81,7 @@ uint64_t sqlite_prepared_result::get_bit(const size_type n) const noexcept {
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto data = get(n);
     uint64_t value = 0;
-    for (const char i : data) {
+    for (const char i: data) {
         value = value << 8 | static_cast<byte_t>(i);
     }
     return value;
@@ -88,7 +91,9 @@ datetime sqlite_prepared_result::get_datetime(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, n));
-    if (text) return datetime::parse(text);
+    if (text) {
+        return datetime::parse(text);
+    }
     return {};
 }
 

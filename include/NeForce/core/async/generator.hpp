@@ -2,9 +2,9 @@
 #define NEFORCE_CORE_ASYNC_GENERATOR_HPP__
 #include "NeForce/core/async/coroutine.hpp"
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#include "NeForce/core/async/atomic.hpp"
-#include "NeForce/core/exception/exception_ptr.hpp"
-#include "NeForce/core/utility/optional.hpp"
+#    include "NeForce/core/async/atomic.hpp"
+#    include "NeForce/core/exception/exception_ptr.hpp"
+#    include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -29,15 +29,13 @@ public:
      * 可在协程中等待此对象，如果已取消则抛出异常。
      */
     struct check_awaiter {
-        const cancellation_token* token;  ///< 令牌指针
+        const cancellation_token* token; ///< 令牌指针
 
         /**
          * @brief 检查是否可立即恢复
          * @return 如果已取消则返回true，表示可以立即恢复（并抛出异常）
          */
-        bool await_ready() const noexcept {
-            return token && token->is_cancelled();
-        }
+        bool await_ready() const noexcept { return token && token->is_cancelled(); }
 
         /**
          * @brief 暂停协程（实际上从不暂停）
@@ -58,10 +56,10 @@ public:
 
 private:
     struct state {
-        atomic<bool> cancelled{false};   ///< 取消标志
-        atomic<size_t> ref_count{1};     ///< 引用计数
+        atomic<bool> cancelled{false}; ///< 取消标志
+        atomic<size_t> ref_count{1};   ///< 引用计数
     };
-    state* state_;  ///< 共享状态
+    state* state_; ///< 共享状态
 
     /**
      * @brief 释放状态引用
@@ -76,15 +74,15 @@ public:
     /**
      * @brief 默认构造函数，创建新的取消令牌
      */
-    cancellation_token()
-    : state_(new state()) {}
+    cancellation_token() :
+    state_(new state()) {}
 
     /**
      * @brief 拷贝构造函数，共享状态
      * @param other 另一个取消令牌
      */
-    cancellation_token(const cancellation_token& other)
-    : state_(other.state_) {
+    cancellation_token(const cancellation_token& other) :
+    state_(other.state_) {
         if (state_) {
             state_->ref_count.fetch_add(1, memory_order_relaxed);
         }
@@ -95,7 +93,7 @@ public:
      * @param other 另一个取消令牌
      * @return 自身引用
      */
-    cancellation_token& operator =(const cancellation_token& other) {
+    cancellation_token& operator=(const cancellation_token& other) {
         if (this != &other) {
             release();
             state_ = other.state_;
@@ -109,9 +107,7 @@ public:
     /**
      * @brief 析构函数，释放状态
      */
-    ~cancellation_token() {
-        release();
-    }
+    ~cancellation_token() { release(); }
 
     /**
      * @brief 请求取消
@@ -126,17 +122,13 @@ public:
      * @brief 检查是否已被取消
      * @return 是否已被取消
      */
-    bool is_cancelled() const noexcept {
-        return state_ && state_->cancelled.load(memory_order_acquire);
-    }
+    bool is_cancelled() const noexcept { return state_ && state_->cancelled.load(memory_order_acquire); }
 
     /**
      * @brief 获取取消检查等待器
      * @return 检查等待器
      */
-    check_awaiter check() const {
-        return check_awaiter{this};
-    }
+    check_awaiter check() const { return check_awaiter{this}; }
 };
 
 
@@ -148,24 +140,21 @@ public:
  * 使用协程实现的懒序列生成器，支持范围for循环和组合操作。
  * 每次co_yield产生一个值，协程暂停直到下一次迭代。
  */
-template <typename T>
-class generator {
+template <typename T> class generator {
 public:
     /**
      * @struct promise_type
      * @brief 生成器的promise类型
      */
     struct promise_type {
-        optional<T> current_value;  ///< 当前产生的值
-        exception_ptr exception;    ///< 异常指针
+        optional<T> current_value; ///< 当前产生的值
+        exception_ptr exception;   ///< 异常指针
 
         /**
          * @brief 获取生成器对象
          * @return 生成器对象
          */
-        generator get_return_object() {
-            return generator{coroutine_handle<promise_type>::from_promise(*this)};
-        }
+        generator get_return_object() { return generator{coroutine_handle<promise_type>::from_promise(*this)}; }
 
         /**
          * @brief 初始暂停点
@@ -197,9 +186,7 @@ public:
         /**
          * @brief 处理未捕获的异常
          */
-        void unhandled_exception() {
-            exception = _NEFORCE current_exception();
-        }
+        void unhandled_exception() { exception = _NEFORCE current_exception(); }
     };
 
     /**
@@ -213,7 +200,7 @@ public:
         using pointer = T*;
         using reference = T&;
 
-        coroutine_handle<promise_type> handle;  ///< 协程句柄
+        coroutine_handle<promise_type> handle; ///< 协程句柄
 
         /**
          * @brief 默认构造函数
@@ -224,14 +211,14 @@ public:
          * @brief 从协程句柄构造
          * @param h 协程句柄
          */
-        explicit iterator(coroutine_handle<promise_type> h)
-        : handle(h) {}
+        explicit iterator(coroutine_handle<promise_type> h) :
+        handle(h) {}
 
         /**
          * @brief 前置递增，恢复协程获取下一个值
          * @return 自身引用
          */
-        iterator& operator ++() {
+        iterator& operator++() {
             handle.resume();
             if (handle.done()) {
                 handle = nullptr;
@@ -242,15 +229,13 @@ public:
         /**
          * @brief 后置递增
          */
-        void operator ++(int) {
-            ++(*this);
-        }
+        void operator++(int) { ++(*this); }
 
         /**
          * @brief 解引用，获取当前值
          * @return 当前值的引用
          */
-        T& operator *() const noexcept {
+        T& operator*() const noexcept {
             NEFORCE_CONSTEXPR_ASSERT(handle.promise().current_value.has_value());
             return *handle.promise().current_value;
         }
@@ -259,46 +244,40 @@ public:
          * @brief 箭头操作符
          * @return 指向当前值的指针
          */
-        T* operator ->() const noexcept {
-            return &(*handle.promise().current_value);
-        }
+        T* operator->() const noexcept { return &(*handle.promise().current_value); }
 
         /**
          * @brief 相等比较
          * @param other 另一个迭代器
          * @return 是否相等
          */
-        bool operator ==(const iterator& other) const noexcept {
-            return handle == other.handle;
-        }
+        bool operator==(const iterator& other) const noexcept { return handle == other.handle; }
 
         /**
          * @brief 不等比较
          * @param other 另一个迭代器
          * @return 是否不等
          */
-        bool operator !=(const iterator& other) const noexcept {
-            return !(*this == other);
-        }
+        bool operator!=(const iterator& other) const noexcept { return !(*this == other); }
     };
 
 private:
-    coroutine_handle<promise_type> handle_;  ///< 协程句柄
+    coroutine_handle<promise_type> handle_; ///< 协程句柄
 
 public:
     /**
      * @brief 从协程句柄构造
      * @param h 协程句柄
      */
-    explicit generator(coroutine_handle<promise_type> h)
-    : handle_(h) {}
+    explicit generator(coroutine_handle<promise_type> h) :
+    handle_(h) {}
 
     /**
      * @brief 移动构造函数
      * @param other 被移动的对象
      */
-    generator(generator&& other) noexcept
-    : handle_(other.handle_) {
+    generator(generator&& other) noexcept :
+    handle_(other.handle_) {
         other.handle_ = nullptr;
     }
 
@@ -307,7 +286,7 @@ public:
      * @param other 被移动的对象
      * @return 自身引用
      */
-    generator& operator =(generator&& other) noexcept {
+    generator& operator=(generator&& other) noexcept {
         if (this != &other) {
             if (handle_) {
                 handle_.destroy();
@@ -328,7 +307,7 @@ public:
     }
 
     generator(const generator&) = delete;
-    generator& operator =(const generator&) = delete;
+    generator& operator=(const generator&) = delete;
 
     /**
      * @brief 获取起始迭代器
@@ -351,9 +330,7 @@ public:
      * @brief 获取结束迭代器
      * @return 结束迭代器
      */
-    iterator end() {
-        return iterator{nullptr};
-    }
+    iterator end() { return iterator{nullptr}; }
 
     /**
      * @brief 映射变换
@@ -361,9 +338,8 @@ public:
      * @param func 变换函数
      * @return 变换后的生成器
      */
-    template <typename F>
-    invoke_result_t<F, T> map(F&& func) {
-        for (auto&& value : *this) {
+    template <typename F> invoke_result_t<F, T> map(F&& func) {
+        for (auto&& value: *this) {
             co_yield func(_NEFORCE forward<decltype(value)>(value));
         }
     }
@@ -374,9 +350,8 @@ public:
      * @param pred 谓词
      * @return 过滤后的生成器
      */
-    template <typename Pred>
-    generator filter(Pred&& pred) {
-        for (auto&& value : *this) {
+    template <typename Pred> generator filter(Pred&& pred) {
+        for (auto&& value: *this) {
             if (pred(value)) {
                 co_yield _NEFORCE forward<decltype(value)>(value);
             }
@@ -390,8 +365,10 @@ public:
      */
     generator take(const size_t n) {
         size_t count = 0;
-        for (auto&& value : *this) {
-            if (count >= n) break;
+        for (auto&& value: *this) {
+            if (count >= n) {
+                break;
+            }
             co_yield _NEFORCE forward<decltype(value)>(value);
             ++count;
         }
@@ -404,7 +381,7 @@ public:
      */
     generator skip(const size_t n) {
         size_t count = 0;
-        for (auto&& value : *this) {
+        for (auto&& value: *this) {
             if (count < n) {
                 ++count;
                 continue;
@@ -419,10 +396,10 @@ public:
      * @return 连接后的生成器
      */
     generator chain(generator&& other) {
-        for (auto&& value : *this) {
+        for (auto&& value: *this) {
             co_yield _NEFORCE forward<decltype(value)>(value);
         }
-        for (auto&& value : other) {
+        for (auto&& value: other) {
             co_yield _NEFORCE forward<decltype(value)>(value);
         }
     }
@@ -432,9 +409,8 @@ public:
      * @tparam F 函数类型
      * @param func 要对每个元素执行的函数
      */
-    template <typename F>
-    void for_each(F&& func) {
-        for (auto&& value : *this) {
+    template <typename F> void for_each(F&& func) {
+        for (auto&& value: *this) {
             func(_NEFORCE forward<decltype(value)>(value));
         }
     }
@@ -447,10 +423,9 @@ public:
      * @param func 折叠函数
      * @return 折叠结果
      */
-    template <typename Acc, typename F>
-    Acc fold(Acc init, F&& func) {
+    template <typename Acc, typename F> Acc fold(Acc init, F&& func) {
         Acc result = _NEFORCE move(init);
-        for (auto&& value : *this) {
+        for (auto&& value: *this) {
             result = func(_NEFORCE move(result), _NEFORCE forward<decltype(value)>(value));
         }
         return result;
@@ -466,8 +441,7 @@ public:
  * 表示一个可能产生结果的异步操作。
  * 支持co_await等待、取消、组合等操作。
  */
-template <typename T>
-class task {
+template <typename T> class task {
 public:
     /**
      * @struct promise_type
@@ -490,8 +464,7 @@ public:
              * @param h 协程句柄
              * @return 要继续的协程
              */
-            coroutine_handle<> await_suspend(
-                coroutine_handle<promise_type> h) noexcept {
+            coroutine_handle<> await_suspend(coroutine_handle<promise_type> h) noexcept {
                 auto& promise = h.promise();
                 if (promise.continuation) {
                     return promise.continuation;
@@ -505,34 +478,28 @@ public:
             void await_resume() noexcept {}
         };
 
-        optional<T> result;              ///< 结果值
-        exception_ptr exception;         ///< 异常指针
-        coroutine_handle<> continuation; ///< 继续执行的协程
-        cancellation_token* token = nullptr;  ///< 取消令牌
+        optional<T> result;                  ///< 结果值
+        exception_ptr exception;             ///< 异常指针
+        coroutine_handle<> continuation;     ///< 继续执行的协程
+        cancellation_token* token = nullptr; ///< 取消令牌
 
         /**
          * @brief 获取任务对象
          * @return 任务对象
          */
-        task get_return_object() {
-            return task{coroutine_handle<promise_type>::from_promise(*this)};
-        }
+        task get_return_object() { return task{coroutine_handle<promise_type>::from_promise(*this)}; }
 
         /**
          * @brief 设置取消令牌
          * @param t 取消令牌指针
          */
-        void set_cancellation_token(cancellation_token* t) noexcept {
-            token = t;
-        }
+        void set_cancellation_token(cancellation_token* t) noexcept { token = t; }
 
         /**
          * @brief 检查是否已取消
          * @return 是否已取消
          */
-        bool is_cancelled() const noexcept {
-            return token && token->is_cancelled();
-        }
+        bool is_cancelled() const noexcept { return token && token->is_cancelled(); }
 
         /**
          * @brief 初始暂停点
@@ -550,16 +517,12 @@ public:
          * @brief 设置返回值
          * @param value 返回值
          */
-        void return_value(T value) {
-            result = _NEFORCE move(value);
-        }
+        void return_value(T value) { result = _NEFORCE move(value); }
 
         /**
          * @brief 处理未捕获的异常
          */
-        void unhandled_exception() noexcept {
-            exception = current_exception();
-        }
+        void unhandled_exception() noexcept { exception = current_exception(); }
     };
 
     /**
@@ -567,23 +530,20 @@ public:
      * @brief 任务等待器
      */
     struct awaiter {
-        coroutine_handle<promise_type> handle;  ///< 协程句柄
+        coroutine_handle<promise_type> handle; ///< 协程句柄
 
         /**
          * @brief 检查是否可立即恢复
          * @return 如果任务已完成则返回true
          */
-        bool await_ready() const noexcept {
-            return handle.done();
-        }
+        bool await_ready() const noexcept { return handle.done(); }
 
         /**
          * @brief 暂停时执行的操作
          * @param continuation 继续执行的协程
          * @return 要恢复的协程
          */
-        coroutine_handle<> await_suspend(
-            coroutine_handle<> continuation) noexcept {
+        coroutine_handle<> await_suspend(coroutine_handle<> continuation) noexcept {
             handle.promise().continuation = continuation;
             return handle;
         }
@@ -601,22 +561,22 @@ public:
     };
 
 private:
-    coroutine_handle<promise_type> handle_;  ///< 协程句柄
+    coroutine_handle<promise_type> handle_; ///< 协程句柄
 
 public:
     /**
      * @brief 从协程句柄构造
      * @param h 协程句柄
      */
-    explicit task(coroutine_handle<promise_type> h)
-    : handle_(h) {}
+    explicit task(coroutine_handle<promise_type> h) :
+    handle_(h) {}
 
     /**
      * @brief 移动构造函数
      * @param other 被移动的对象
      */
-    task(task&& other) noexcept
-    : handle_(other.handle_) {
+    task(task&& other) noexcept :
+    handle_(other.handle_) {
         other.handle_ = nullptr;
     }
 
@@ -625,7 +585,7 @@ public:
      * @param other 被移动的对象
      * @return 自身引用
      */
-    task& operator =(task&& other) noexcept {
+    task& operator=(task&& other) noexcept {
         if (this != &other) {
             if (handle_) {
                 handle_.destroy();
@@ -652,17 +612,13 @@ public:
      * @brief 获取等待器
      * @return 等待器对象
      */
-    awaiter operator co_await() {
-        return awaiter{handle_};
-    }
+    awaiter operator co_await() { return awaiter{handle_}; }
 
     /**
      * @brief 检查任务是否已完成
      * @return 是否已完成
      */
-    bool done() const noexcept {
-        return handle_.done();
-    }
+    bool done() const noexcept { return handle_.done(); }
 
     /**
      * @brief 恢复任务执行
@@ -701,42 +657,32 @@ public:
      * @brief 检查任务是否被取消
      * @return 是否被取消
      */
-    bool is_cancelled() const noexcept {
-        return handle_ && handle_.promise().is_cancelled();
-    }
+    bool is_cancelled() const noexcept { return handle_ && handle_.promise().is_cancelled(); }
 };
 
 
 /**
  * @brief void特化的任务类
  */
-template <>
-class task<void> {
+template <> class task<void> {
 public:
     struct promise_type {
         exception_ptr exception;
         coroutine_handle<> continuation;
         cancellation_token* token = nullptr;
 
-        task get_return_object() {
-            return task{coroutine_handle<promise_type>::from_promise(*this)};
-        }
+        task get_return_object() { return task{coroutine_handle<promise_type>::from_promise(*this)}; }
 
-        void set_cancellation_token(cancellation_token* t) {
-            token = t;
-        }
+        void set_cancellation_token(cancellation_token* t) { token = t; }
 
-        bool is_cancelled() const {
-            return token && token->is_cancelled();
-        }
+        bool is_cancelled() const { return token && token->is_cancelled(); }
 
         suspend_always initial_suspend() noexcept { return {}; }
 
         struct final_awaiter {
             bool await_ready() noexcept { return false; }
 
-            coroutine_handle<> await_suspend(
-                coroutine_handle<promise_type> h) noexcept {
+            coroutine_handle<> await_suspend(coroutine_handle<promise_type> h) noexcept {
                 auto& promise = h.promise();
                 if (promise.continuation) {
                     return promise.continuation;
@@ -751,20 +697,15 @@ public:
 
         void return_void() noexcept {}
 
-        void unhandled_exception() {
-            exception = current_exception();
-        }
+        void unhandled_exception() { exception = current_exception(); }
     };
 
     struct awaiter {
         coroutine_handle<promise_type> handle;
 
-        bool await_ready() const noexcept {
-            return handle.done();
-        }
+        bool await_ready() const noexcept { return handle.done(); }
 
-        coroutine_handle<> await_suspend(
-            coroutine_handle<> continuation) noexcept {
+        coroutine_handle<> await_suspend(coroutine_handle<> continuation) noexcept {
             handle.promise().continuation = continuation;
             return handle;
         }
@@ -780,9 +721,11 @@ private:
     coroutine_handle<promise_type> handle_;
 
 public:
-    explicit task(coroutine_handle<promise_type> h) : handle_(h) {}
+    explicit task(coroutine_handle<promise_type> h) :
+    handle_(h) {}
 
-    task(task&& other) noexcept : handle_(other.handle_) {
+    task(task&& other) noexcept :
+    handle_(other.handle_) {
         other.handle_ = nullptr;
     }
 
@@ -804,15 +747,11 @@ public:
     }
 
     task(const task&) = delete;
-    task& operator =(const task&) = delete;
+    task& operator=(const task&) = delete;
 
-    awaiter operator co_await() {
-        return awaiter{handle_};
-    }
+    awaiter operator co_await() { return awaiter{handle_}; }
 
-    bool done() const {
-        return handle_.done();
-    }
+    bool done() const { return handle_.done(); }
 
     void resume() {
         if (handle_ && !handle_.done()) {
@@ -835,17 +774,14 @@ public:
         }
     }
 
-    bool is_cancelled() const {
-        return handle_ && handle_.promise().is_cancelled();
-    }
+    bool is_cancelled() const { return handle_ && handle_.promise().is_cancelled(); }
 };
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-template <typename... Ts>
-    struct when_all_result {
+template <typename... Ts> struct when_all_result {
     tuple<Ts...> values;
 };
 

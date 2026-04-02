@@ -8,8 +8,8 @@
  * 此文件提供了格式化函数的声明，包括可变参数版本的格式化。
  */
 
-#include "NeForce/core/typeinfo/types.hpp"
 #include <cstdarg>
+#include "NeForce/core/typeinfo/types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

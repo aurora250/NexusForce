@@ -28,24 +28,23 @@ NEFORCE_BEGIN_NAMESPACE__
  * 管理临时内存缓冲区的RAII包装器，用于算法中需要临时存储的场景。
  * 自动管理内存分配和释放，确保异常安全。
  */
-template <typename Iterator>
-struct temporary_buffer {
+template <typename Iterator> struct temporary_buffer {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "temporary buffer requires forward iterator types.");
 
 public:
-    using value_type        = iter_value_t<Iterator>;   ///< 元素类型
-    using pointer           = value_type*;              ///< 指针类型
-    using const_pointer     = const value_type*;        ///< 常量指针类型
-    using reference         = value_type&;              ///< 引用类型
-    using const_reference   = const value_type&;        ///< 常量引用类型
-    using size_type         = size_t;                ///< 大小类型
-    using difference_type   = ptrdiff_t;                ///< 差异类型
-    using allocator_type    = standard_allocator<value_type>;    ///< 分配器类型
+    using value_type = iter_value_t<Iterator>;             ///< 元素类型
+    using pointer = value_type*;                           ///< 指针类型
+    using const_pointer = const value_type*;               ///< 常量指针类型
+    using reference = value_type&;                         ///< 引用类型
+    using const_reference = const value_type&;             ///< 常量引用类型
+    using size_type = size_t;                              ///< 大小类型
+    using difference_type = ptrdiff_t;                     ///< 差异类型
+    using allocator_type = standard_allocator<value_type>; ///< 分配器类型
 
 private:
-    size_type original_len_ = 0;  ///< 请求的缓冲区大小
-    size_type len_ = 0;           ///< 实际分配的缓冲区大小
-    pointer buffer_ = nullptr;    ///< 缓冲区指针
+    size_type original_len_ = 0; ///< 请求的缓冲区大小
+    size_type len_ = 0;          ///< 实际分配的缓冲区大小
+    pointer buffer_ = nullptr;   ///< 缓冲区指针
 
 private:
     /**
@@ -65,7 +64,9 @@ private:
 
         while (len_ > 0) {
             buffer_ = allocator_type::allocate(len_);
-            if (buffer_) break;
+            if (buffer_) {
+                break;
+            }
             len_ /= 2;
         }
     }
@@ -94,8 +95,8 @@ private:
     }
 
 public:
-    temporary_buffer(const temporary_buffer&) = delete;  ///< 禁止复制构造
-    void operator =(const temporary_buffer&) = delete;   ///< 禁止复制赋值
+    temporary_buffer(const temporary_buffer&) = delete; ///< 禁止复制构造
+    void operator=(const temporary_buffer&) = delete;   ///< 禁止复制赋值
 
     /**
      * @brief 构造函数
@@ -112,7 +113,9 @@ public:
         try {
             len_ = _NEFORCE distance(first, last);
             this->allocate_buffer();
-            if (len_ > 0) this->initialize_buffer(*first);
+            if (len_ > 0) {
+                this->initialize_buffer(*first);
+            }
         } catch (...) {
             allocator_type::deallocate(buffer_);
             buffer_ = 0;
@@ -135,57 +138,43 @@ public:
      * @brief 获取缓冲区实际大小
      * @return 实际分配的缓冲区大小
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept {
-        return len_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept { return len_; }
 
     /**
      * @brief 获取请求的缓冲区大小
      * @return 构造函数请求的缓冲区大小
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type requested_size() const noexcept {
-        return original_len_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type requested_size() const noexcept { return original_len_; }
 
     /**
      * @brief 获取缓冲区起始迭代器
      * @return 指向缓冲区首元素的指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer begin() noexcept {
-        return buffer_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer begin() noexcept { return buffer_; }
 
     /**
      * @brief 获取缓冲区结束迭代器
      * @return 指向缓冲区末尾的指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer end() noexcept {
-        return buffer_ + len_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer end() noexcept { return buffer_ + len_; }
 
     /**
      * @brief 获取常量缓冲区起始迭代器
      * @return 指向缓冲区首元素的常量指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer cbegin() const noexcept {
-        return buffer_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer cbegin() const noexcept { return buffer_; }
 
     /**
      * @brief 获取常量缓冲区结束迭代器
      * @return 指向缓冲区末尾的常量指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer cend() const noexcept {
-        return buffer_ + len_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer cend() const noexcept { return buffer_ + len_; }
 
     /**
      * @brief 检查缓冲区是否为空
      * @return 如果缓冲区大小为0则返回true，否则返回false
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept {
-        return len_ == 0;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept { return len_ == 0; }
 };
 
 /** @} */ // TemporaryBuffer

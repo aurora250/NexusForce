@@ -5,4 +5,4 @@
 #ifndef YAML_BUILDER_HPP
 #define YAML_BUILDER_HPP
 
-#endif //YAML_BUILDER_HPP
+#endif // YAML_BUILDER_HPP

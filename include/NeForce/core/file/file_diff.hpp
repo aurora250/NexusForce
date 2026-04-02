@@ -36,9 +36,9 @@ public:
 
     using size_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        unsigned long;  ///< 大小类型
+            unsigned long; ///< 大小类型
 #else
-        size_t;         ///< 大小类型
+            size_t; ///< 大小类型
 #endif
 
     using difference_type = int64_t; ///< 差异偏移量类型
@@ -50,11 +50,11 @@ public:
      * 描述两个二进制文件中的一个差异点。
      */
     struct binary_diff_entry {
-        difference_type offset = 0;  ///< 差异在文件中的偏移量（字节）
-        byte_t byte1 = 0;            ///< 第一个文件中的字节值
-        byte_t byte2 = 0;            ///< 第二个文件中的字节值
-        int64_t size_diff = 0;       ///< 文件大小差异（字节）
-        bool is_size_diff = false;   ///< 是否为文件大小差异（而非内容差异）
+        difference_type offset = 0; ///< 差异在文件中的偏移量（字节）
+        byte_t byte1 = 0;           ///< 第一个文件中的字节值
+        byte_t byte2 = 0;           ///< 第二个文件中的字节值
+        int64_t size_diff = 0;      ///< 文件大小差异（字节）
+        bool is_size_diff = false;  ///< 是否为文件大小差异（而非内容差异）
     };
 
     /**
@@ -91,10 +91,8 @@ public:
      * - 忽略大小写：将字母统一转换为小写后比较
      * - 忽略空白字符：去除行首尾空白，将连续空白压缩为单个空格
      */
-    NEFORCE_NODISCARD static bool compare_text(
-        const path& file1, const path& file2,
-        bool ignore_case = false,
-        bool ignore_whitespace = false);
+    NEFORCE_NODISCARD static bool compare_text(const path& file1, const path& file2, bool ignore_case = false,
+                                               bool ignore_whitespace = false);
 
     /**
      * @brief 获取二进制差异列表
@@ -109,9 +107,8 @@ public:
      *
      * @note 差异条目按文件偏移量升序排列
      */
-    NEFORCE_NODISCARD static vector<binary_diff_entry> binary_diff(
-        const path& file1, const path& file2,
-        size_type max_diffs = 100);
+    NEFORCE_NODISCARD static vector<binary_diff_entry> binary_diff(const path& file1, const path& file2,
+                                                                   size_type max_diffs = 100);
 };
 
 /** @} */ // File

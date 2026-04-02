@@ -22,12 +22,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 管道操作异常
  */
 struct pipe_exception final : system_exception {
-    explicit pipe_exception(
-        const char* info = "Pipe Operation Failed.", const char* type = static_type,
-        const int code = 0) noexcept : system_exception(info, type, code) {}
+    explicit pipe_exception(const char* info = "Pipe Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    system_exception(info, type, code) {}
 
-    explicit pipe_exception(const exception& e)
-    : system_exception(e) {}
+    explicit pipe_exception(const exception& e) :
+    system_exception(e) {}
 
     ~pipe_exception() override = default;
     static constexpr auto static_type = "pipe_exception";
@@ -82,7 +82,7 @@ public:
     ~pipe();
 
     pipe(const pipe&) = delete;
-    pipe& operator =(const pipe&) = delete;
+    pipe& operator=(const pipe&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -92,7 +92,7 @@ public:
     /**
      * @brief 移动赋值运算符
      */
-    pipe& operator =(pipe&& other) noexcept;
+    pipe& operator=(pipe&& other) noexcept;
 
     /**
      * @brief 从管道读取数据

@@ -28,8 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note T必须是整数类型。
  */
-template <typename T, T... Values>
-struct integer_sequence {
+template <typename T, T... Values> struct integer_sequence {
     static_assert(is_integral<T>::value, "integer sequence requires integral types.");
 
     using value_type = T; ///< 序列中整数的类型
@@ -38,9 +37,7 @@ struct integer_sequence {
      * @brief 获取序列中整数的数量
      * @return 序列大小
      */
-    NEFORCE_NODISCARD static constexpr size_t size() noexcept {
-        return sizeof...(Values);
-    }
+    NEFORCE_NODISCARD static constexpr size_t size() noexcept { return sizeof...(Values); }
 };
 
 /**
@@ -54,9 +51,9 @@ struct integer_sequence {
 template <typename T, T Size>
 using make_integer_sequence =
 #if defined(NEFORCE_COMPILER_MSVC) || defined(NEFORCE_COMPILER_CLANG)
-    __make_integer_seq<integer_sequence, T, Size>;
+        __make_integer_seq<integer_sequence, T, Size>;
 #else
-    integer_sequence<T, __integer_pack(Size)...>;
+        integer_sequence<T, __integer_pack(Size)...>;
 #endif
 
 /**
@@ -66,8 +63,7 @@ using make_integer_sequence =
  *
  * 使用size_t作为整数类型的integer_sequence特化，专门用于索引操作。
  */
-template <size_t... Values>
-using index_sequence = integer_sequence<size_t, Values...>;
+template <size_t... Values> using index_sequence = integer_sequence<size_t, Values...>;
 
 /**
  * @typedef make_index_sequence
@@ -76,8 +72,7 @@ using index_sequence = integer_sequence<size_t, Values...>;
  *
  * 生成一个从0到Size-1的size_t索引序列。
  */
-template <size_t Size>
-using make_index_sequence = make_integer_sequence<size_t, Size>;
+template <size_t Size> using make_index_sequence = make_integer_sequence<size_t, Size>;
 
 /**
  * @typedef index_sequence_for
@@ -86,8 +81,7 @@ using make_index_sequence = make_integer_sequence<size_t, Size>;
  *
  * 生成一个长度等于Types参数包大小的索引序列。
  */
-template <typename... Types>
-using index_sequence_for = make_index_sequence<sizeof...(Types)>;
+template <typename... Types> using index_sequence_for = make_index_sequence<sizeof...(Types)>;
 
 /** @} */ // IntegerSequence
 
@@ -104,8 +98,7 @@ using index_sequence_for = make_index_sequence<sizeof...(Types)>;
  *
  * 将索引序列包装为独立类型，用于需要区分integer_sequence和其他类型的场景。
  */
-template <size_t... Values>
-struct index_tuple {};
+template <size_t... Values> struct index_tuple {};
 
 /**
  * @struct build_index_tuple
@@ -114,11 +107,9 @@ struct index_tuple {};
  *
  * 通过类型推导机制从索引序列构建索引元组。
  */
-template <size_t Num>
-struct build_index_tuple {
+template <size_t Num> struct build_index_tuple {
 private:
-    template <size_t... Is>
-    static index_tuple<Is...> convert(index_sequence<Is...>);
+    template <size_t... Is> static index_tuple<Is...> convert(index_sequence<Is...>);
 
 public:
     /**
@@ -131,8 +122,7 @@ public:
  * @typedef build_index_tuple_t
  * @brief build_index_tuple的便捷别名
  */
-template <size_t Num>
-using build_index_tuple_t = typename build_index_tuple<Num>::type;
+template <size_t Num> using build_index_tuple_t = typename build_index_tuple<Num>::type;
 
 /** @} */ // IndexTuple
 

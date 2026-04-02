@@ -27,8 +27,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 为字符包装类型提供统一的接口，支持字符到各种字符串类型的转换。
  */
-template <typename T, typename CharT>
-struct icharacter : ipackage<T, CharT> {
+template <typename T, typename CharT> struct icharacter : ipackage<T, CharT> {
     static_assert(is_character_v<CharT>, "CharT must be character.");
 
     constexpr icharacter() noexcept = default;
@@ -37,15 +36,15 @@ struct icharacter : ipackage<T, CharT> {
     constexpr icharacter(const icharacter&) noexcept = default;
     constexpr icharacter(icharacter&&) noexcept = default;
 
-    constexpr icharacter& operator =(const icharacter&) noexcept = default;
-    constexpr icharacter& operator =(icharacter&&) noexcept = default;
+    constexpr icharacter& operator=(const icharacter&) noexcept = default;
+    constexpr icharacter& operator=(icharacter&&) noexcept = default;
 
     /**
      * @brief 构造函数
      * @param value 字符值
      */
-    constexpr icharacter(CharT value) noexcept
-    : ipackage<T, CharT>(value) {}
+    constexpr icharacter(CharT value) noexcept :
+    ipackage<T, CharT>(value) {}
 
     /**
      * @brief 转换为bool操作符
@@ -60,18 +59,14 @@ struct icharacter : ipackage<T, CharT> {
      * @param obj 字符视图
      * @return 普通字符串
      */
-    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<CharT>& obj) {
-        return T::to_string(obj);
-    }
+    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<CharT>& obj) { return T::to_string(obj); }
 
     /**
      * @brief 转换为宽字符串
      * @param obj 字符视图
      * @return 宽字符串
      */
-    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<CharT>& obj) {
-        return T::to_wstring(obj);
-    }
+    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<CharT>& obj) { return T::to_wstring(obj); }
 
 #ifdef NEFORCE_STANDARD_20
     /**
@@ -79,9 +74,7 @@ struct icharacter : ipackage<T, CharT> {
      * @param obj 字符视图
      * @return UTF-8字符串
      */
-    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<CharT>& obj) {
-        return T::to_u8string(obj);
-    }
+    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<CharT>& obj) { return T::to_u8string(obj); }
 #endif
 
     /**
@@ -171,10 +164,7 @@ NEFORCE_CONSTEXPR20 string to_string(basic_string<CharT>&& x) {
  * @param x 右值普通字符串
  * @return 移动后的普通字符串
  */
-template <>
-NEFORCE_CONSTEXPR20 string to_string<char>(string&& x) {
-    return _NEFORCE move(x);
-}
+template <> NEFORCE_CONSTEXPR20 string to_string<char>(string&& x) { return _NEFORCE move(x); }
 
 /**
  * @brief 将字符转换为宽字符串
@@ -236,10 +226,7 @@ NEFORCE_CONSTEXPR20 wstring to_wstring(basic_string<CharT>&& x) {
  * @param x 右值宽字符串
  * @return 移动后的宽字符串
  */
-template <>
-NEFORCE_CONSTEXPR20 wstring to_wstring<wchar_t>(wstring&& x) {
-    return _NEFORCE move(x);
-}
+template <> NEFORCE_CONSTEXPR20 wstring to_wstring<wchar_t>(wstring&& x) { return _NEFORCE move(x); }
 
 #ifdef NEFORCE_STANDARD_20
 
@@ -303,10 +290,7 @@ NEFORCE_CONSTEXPR20 u8string to_u8string(basic_string<CharT>&& x) {
  * @param x 右值UTF-8字符串
  * @return 移动后的UTF-8字符串
  */
-template <>
-NEFORCE_CONSTEXPR20 u8string to_u8string<char8_t>(u8string&& x) {
-    return _NEFORCE move(x);
-}
+template <> NEFORCE_CONSTEXPR20 u8string to_u8string<char8_t>(u8string&& x) { return _NEFORCE move(x); }
 
 #endif
 
@@ -370,10 +354,7 @@ NEFORCE_CONSTEXPR20 u16string to_u16string(basic_string<CharT>&& x) {
  * @param x 右值UTF-16字符串
  * @return 移动后的UTF-16字符串
  */
-template <>
-NEFORCE_CONSTEXPR20 u16string to_u16string<char16_t>(u16string&& x) {
-    return _NEFORCE move(x);
-}
+template <> NEFORCE_CONSTEXPR20 u16string to_u16string<char16_t>(u16string&& x) { return _NEFORCE move(x); }
 
 /**
  * @brief 将字符转换为UTF-32字符串
@@ -435,10 +416,7 @@ NEFORCE_CONSTEXPR20 u32string to_u32string(basic_string<CharT>&& x) {
  * @param x 右值UTF-32字符串
  * @return 移动后的UTF-32字符串
  */
-template <>
-NEFORCE_CONSTEXPR20 u32string to_u32string<char32_t>(u32string&& x) {
-    return _NEFORCE move(x);
-}
+template <> NEFORCE_CONSTEXPR20 u32string to_u32string<char32_t>(u32string&& x) { return _NEFORCE move(x); }
 
 /** @} */ // ToString
 

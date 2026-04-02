@@ -32,28 +32,28 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API file_watcher {
 private:
-    using callback_t = function<void(const path&, file_watch_event)>;  ///< 事件回调类型
+    using callback_t = function<void(const path&, file_watch_event)>; ///< 事件回调类型
 
-    path watch_path_;                    ///< 监视的目录路径
-    bool recursive_;                     ///< 是否递归监视子目录
-    atomic<bool> watching_{false};       ///< 是否正在监视
-    atomic<bool> stopping_{false};       ///< 是否正在停止
-    callback_t callback_;                ///< 事件回调函数
-    file_watch_event current_events_{file_watch_event::ALL};  ///< 当前监视的事件类型
-    vector<char> buffer_;                ///< 事件数据缓冲区
-    mutex callback_mutex_;               ///< 回调函数互斥锁
+    path watch_path_;                                        ///< 监视的目录路径
+    bool recursive_;                                         ///< 是否递归监视子目录
+    atomic<bool> watching_{false};                           ///< 是否正在监视
+    atomic<bool> stopping_{false};                           ///< 是否正在停止
+    callback_t callback_;                                    ///< 事件回调函数
+    file_watch_event current_events_{file_watch_event::ALL}; ///< 当前监视的事件类型
+    vector<char> buffer_;                                    ///< 事件数据缓冲区
+    mutex callback_mutex_;                                   ///< 回调函数互斥锁
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::HANDLE dir_handle_ = INVALID_HANDLE_VALUE;       ///< 目录句柄
-    ::HANDLE completion_port_ = INVALID_HANDLE_VALUE;  ///< I/O完成端口
-    ::OVERLAPPED overlapped_{};                        ///< 重叠I/O结构
+    ::HANDLE dir_handle_ = INVALID_HANDLE_VALUE;      ///< 目录句柄
+    ::HANDLE completion_port_ = INVALID_HANDLE_VALUE; ///< I/O完成端口
+    ::OVERLAPPED overlapped_{};                       ///< 重叠I/O结构
 #else
-    int inotify_fd_ = -1;        ///< inotify文件描述符
-    int watch_descriptor_ = -1;  ///< 监视描述符
-    int event_fd_ = -1;          ///< 事件通知文件描述符
+    int inotify_fd_ = -1;       ///< inotify文件描述符
+    int watch_descriptor_ = -1; ///< 监视描述符
+    int event_fd_ = -1;         ///< 事件通知文件描述符
 #endif
 
-    thread watch_thread_;        ///< 监视线程
+    thread watch_thread_; ///< 监视线程
 
     /**
      * @brief 监视线程函数
@@ -79,7 +79,7 @@ public:
     ~file_watcher();
 
     file_watcher(const file_watcher&) = delete;
-    file_watcher& operator =(const file_watcher&) = delete;
+    file_watcher& operator=(const file_watcher&) = delete;
 
     /**
      * @brief 开始监视
@@ -103,33 +103,25 @@ public:
      * @brief 获取监视的目录路径
      * @return 目录路径
      */
-    NEFORCE_NODISCARD const path& watch_path() const noexcept {
-        return watch_path_;
-    }
+    NEFORCE_NODISCARD const path& watch_path() const noexcept { return watch_path_; }
 
     /**
      * @brief 获取当前监视的事件类型
      * @return 事件类型
      */
-    NEFORCE_NODISCARD file_watch_event current_events() const noexcept {
-        return current_events_;
-    }
+    NEFORCE_NODISCARD file_watch_event current_events() const noexcept { return current_events_; }
 
     /**
      * @brief 检查是否正在监视
      * @return 是否正在监视
      */
-    NEFORCE_NODISCARD bool is_watching() const noexcept {
-        return watching_.load();
-    }
+    NEFORCE_NODISCARD bool is_watching() const noexcept { return watching_.load(); }
 
     /**
      * @brief 检查是否递归监视子目录
      * @return 是否递归
      */
-    NEFORCE_NODISCARD bool is_recursive() const noexcept {
-        return recursive_;
-    }
+    NEFORCE_NODISCARD bool is_recursive() const noexcept { return recursive_; }
 
     /**
      * @brief 更新监视的事件类型

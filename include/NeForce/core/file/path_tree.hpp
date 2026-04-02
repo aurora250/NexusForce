@@ -39,19 +39,19 @@ public:
      * @brief 节点类型枚举
      */
     enum class node_type : uint8_t {
-        unknown   = 0,  ///< 未知
-        directory = 1,  ///< 目录
-        file      = 2,  ///< 普通文件
-        symlink   = 3,  ///< 符号链接
+        unknown = 0,   ///< 未知
+        directory = 1, ///< 目录
+        file = 2,      ///< 普通文件
+        symlink = 3,   ///< 符号链接
     };
 
     /**
      * @brief 遍历控制指令
      */
     enum class visit_result : uint8_t {
-        proceed     = 0,  ///< 继续遍历
-        skip        = 1,  ///< 跳过当前节点的子节点
-        stop        = 2,  ///< 终止整个遍历
+        proceed = 0, ///< 继续遍历
+        skip = 1,    ///< 跳过当前节点的子节点
+        stop = 2,    ///< 终止整个遍历
     };
 
     /**
@@ -65,16 +65,16 @@ public:
         friend class path_tree;
 
     public:
-        using ptr = shared_ptr<node>;       ///< 节点共享指针
-        using weak_ptr = weak_ptr<node>;    ///< 节点弱指针
-        using children_list = vector<ptr>;  ///< 子节点列表
+        using ptr = shared_ptr<node>;      ///< 节点共享指针
+        using weak_ptr = weak_ptr<node>;   ///< 节点弱指针
+        using children_list = vector<ptr>; ///< 子节点列表
 
     private:
-        path path_;                 ///< 节点对应路径
-        node_type type_;            ///< 节点类型
-        weak_ptr parent_;           ///< 父节点
-        children_list children_;    ///< 子节点列表
-        size_t depth_;              ///< 节点深度
+        path path_;              ///< 节点对应路径
+        node_type type_;         ///< 节点类型
+        weak_ptr parent_;        ///< 父节点
+        children_list children_; ///< 子节点列表
+        size_t depth_;           ///< 节点深度
 
     public:
         node() = default;
@@ -85,13 +85,15 @@ public:
          * @param type 节点类型
          * @param depth 节点深度
          */
-        explicit node(path p, node_type type, size_t depth = 0)
-        : path_(_NEFORCE move(p)), type_(type), depth_(depth) {}
+        explicit node(path p, node_type type, size_t depth = 0) :
+        path_(_NEFORCE move(p)),
+        type_(type),
+        depth_(depth) {}
 
         node(const node&) = delete;
-        node& operator =(const node&) = delete;
+        node& operator=(const node&) = delete;
         node(node&&) noexcept = default;
-        node& operator =(node&&) noexcept = default;
+        node& operator=(node&&) noexcept = default;
 
         /** @brief 获取路径 */
         NEFORCE_NODISCARD const path& get_path() const noexcept { return path_; }
@@ -103,9 +105,7 @@ public:
         NEFORCE_NODISCARD size_t depth() const noexcept { return depth_; }
 
         /** @brief 是否为目录 */
-        NEFORCE_NODISCARD bool is_directory() const noexcept {
-            return type_ == node_type::directory;
-        }
+        NEFORCE_NODISCARD bool is_directory() const noexcept { return type_ == node_type::directory; }
 
         /** @brief 是否为文件 */
         NEFORCE_NODISCARD bool is_file() const noexcept {
@@ -113,29 +113,19 @@ public:
         }
 
         /** @brief 是否为根节点 */
-        NEFORCE_NODISCARD bool is_root() const noexcept {
-            return parent_.expired();
-        }
+        NEFORCE_NODISCARD bool is_root() const noexcept { return parent_.expired(); }
 
         /** @brief 是否为叶节点（无子节点） */
-        NEFORCE_NODISCARD bool is_leaf() const noexcept {
-            return children_.empty();
-        }
+        NEFORCE_NODISCARD bool is_leaf() const noexcept { return children_.empty(); }
 
         /** @brief 获取父节点 */
-        NEFORCE_NODISCARD ptr parent() const noexcept {
-            return parent_.lock();
-        }
+        NEFORCE_NODISCARD ptr parent() const noexcept { return parent_.lock(); }
 
         /** @brief 获取子节点列表 */
-        NEFORCE_NODISCARD const children_list& children() const noexcept {
-            return children_;
-        }
+        NEFORCE_NODISCARD const children_list& children() const noexcept { return children_; }
 
         /** @brief 获取子节点数量 */
-        NEFORCE_NODISCARD size_t child_count() const noexcept {
-            return children_.size();
-        }
+        NEFORCE_NODISCARD size_t child_count() const noexcept { return children_.size(); }
 
         /**
          * @brief 按名称查找直接子节点
@@ -200,15 +190,14 @@ public:
     };
 
 private:
-    node::ptr root_;  ///< 根节点
+    node::ptr root_; ///< 根节点
 
     static void scan_impl(const node::ptr& parent, const scan_options& options, size_t current_depth);
     static void traverse_dfs_impl(const node::ptr& current, const visitor& v, bool& stopped);
     static void collect_impl(const node::ptr& current, const filter& f, vector<node::ptr>& result);
     static node::ptr clone_node(const node::ptr& src, const node::ptr& new_parent, size_t depth);
 
-    static node::ptr prune_impl(const node::ptr& src, const filter& f,
-                                const node::ptr& new_parent, size_t depth);
+    static node::ptr prune_impl(const node::ptr& src, const filter& f, const node::ptr& new_parent, size_t depth);
 
     string to_string_impl(const node::ptr& n, string_view indent, size_t depth) const;
 
@@ -219,13 +208,13 @@ public:
      * @brief 从路径构造树
      * @param root_path 根路径
      */
-    explicit path_tree(path root_path)
-    : root_(make_shared<node>(_NEFORCE move(root_path), node_type::directory, 0)) {}
+    explicit path_tree(path root_path) :
+    root_(make_shared<node>(_NEFORCE move(root_path), node_type::directory, 0)) {}
 
     path_tree(const path_tree&) = default;
     path_tree(path_tree&&) noexcept = default;
-    path_tree& operator =(const path_tree&) = default;
-    path_tree& operator =(path_tree&&) noexcept = default;
+    path_tree& operator=(const path_tree&) = default;
+    path_tree& operator=(path_tree&&) noexcept = default;
 
     /**
      * @brief 从文件系统扫描构建路径树
@@ -236,10 +225,7 @@ public:
      * 递归扫描给定路径下的所有文件和目录，
      * 根据选项进行过滤和深度控制。
      */
-    NEFORCE_NODISCARD static path_tree scan(
-        const path& root,
-        const scan_options& options = {}
-    );
+    NEFORCE_NODISCARD static path_tree scan(const path& root, const scan_options& options);
 
     /** @brief 获取根节点 */
     NEFORCE_NODISCARD node::ptr root() const noexcept { return root_; }

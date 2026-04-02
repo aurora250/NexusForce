@@ -22,12 +22,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 动态库操作异常
  */
 struct dynamic_library_exception final : system_exception {
-    explicit dynamic_library_exception(
-        const char* info = "Dynamic Library Operation Failed.", const char* type = static_type,
-        const int code = 0) noexcept : system_exception(info, type, code) {}
+    explicit dynamic_library_exception(const char* info = "Dynamic Library Operation Failed.",
+                                       const char* type = static_type, const int code = 0) noexcept :
+    system_exception(info, type, code) {}
 
-    explicit dynamic_library_exception(const exception& e)
-    : system_exception(e) {}
+    explicit dynamic_library_exception(const exception& e) :
+    system_exception(e) {}
 
     ~dynamic_library_exception() override = default;
     static constexpr auto static_type = "dynamic_library_exception";
@@ -49,8 +49,8 @@ struct dynamic_library_exception final : system_exception {
  */
 class NEFORCE_API dynamic_library {
 private:
-    void* handle_;  ///< 动态库句柄
-    string path_;   ///< 库文件路径
+    void* handle_; ///< 动态库句柄
+    string path_;  ///< 库文件路径
 
 private:
     /**
@@ -75,7 +75,7 @@ public:
     ~dynamic_library();
 
     dynamic_library(const dynamic_library&) = delete;
-    dynamic_library& operator =(const dynamic_library&) = delete;
+    dynamic_library& operator=(const dynamic_library&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -88,7 +88,7 @@ public:
      * @param other 被移动的对象
      * @return 自身引用
      */
-    dynamic_library& operator =(dynamic_library&& other) noexcept;
+    dynamic_library& operator=(dynamic_library&& other) noexcept;
 
     /**
      * @brief 获取符号
@@ -97,10 +97,7 @@ public:
      * @return 符号地址，转换为指定类型
      * @throws dynamic_library_exception 符号不存在时抛出
      */
-    template <typename T>
-    T to_symbol(const string& name) const {
-        return reinterpret_cast<T>(symbol(name));
-    }
+    template <typename T> T to_symbol(const string& name) const { return reinterpret_cast<T>(symbol(name)); }
 
     /**
      * @brief 获取原始符号地址
@@ -121,32 +118,24 @@ public:
      * @brief 检查动态库是否已加载
      * @return 是否已加载
      */
-    NEFORCE_NODISCARD bool is_open() const noexcept {
-        return handle_ != nullptr;
-    }
+    NEFORCE_NODISCARD bool is_open() const noexcept { return handle_ != nullptr; }
 
     /**
      * @brief 卸载动态库
      */
-    void unload() {
-        close();
-    }
+    void unload() { close(); }
 
     /**
      * @brief 获取原生句柄
      * @return 平台相关的动态库句柄
      */
-    NEFORCE_NODISCARD void* native_handle() const noexcept {
-        return handle_;
-    }
+    NEFORCE_NODISCARD void* native_handle() const noexcept { return handle_; }
 
     /**
      * @brief 获取库文件路径
      * @return 路径字符串
      */
-    NEFORCE_NODISCARD const string& path() const noexcept {
-        return path_;
-    }
+    NEFORCE_NODISCARD const string& path() const noexcept { return path_; }
 };
 
 /** @} */ // DynamicLibrary

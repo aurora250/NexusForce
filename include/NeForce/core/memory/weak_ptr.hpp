@@ -40,23 +40,19 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 弱指针本身是线程安全的，但升级后的共享指针需要单独管理
  */
-template <typename T>
-class weak_ptr {
+template <typename T> class weak_ptr {
 public:
-    using element_type = T;  ///< 元素类型
+    using element_type = T; ///< 元素类型
 
 private:
-    element_type* ptr_ = nullptr;   ///< 观察的对象指针
-    inner::__smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
+    element_type* ptr_ = nullptr;                 ///< 观察的对象指针
+    inner::__smart_ptr_counter* owner_ = nullptr; ///< 控制块指针
 
-    template <typename U>
-    friend class weak_ptr;
+    template <typename U> friend class weak_ptr;
 
-    template <typename U>
-    friend class shared_ptr;
+    template <typename U> friend class shared_ptr;
 
-    template <typename U>
-    friend class inner::smart_pointer_atomic;
+    template <typename U> friend class inner::smart_pointer_atomic;
 
 public:
     /**
@@ -75,8 +71,9 @@ public:
      * 创建观察sp管理的对象的弱指针。
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr(const shared_ptr<U>& sp) noexcept
-    : ptr_(sp.get()), owner_(reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_)) {
+    weak_ptr(const shared_ptr<U>& sp) noexcept :
+    ptr_(sp.get()),
+    owner_(reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_)) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -86,8 +83,9 @@ public:
      * @brief 拷贝构造函数
      * @param wp 要拷贝的弱指针
      */
-    weak_ptr(const weak_ptr& wp) noexcept
-    : ptr_(wp.ptr_), owner_(wp.owner_) {
+    weak_ptr(const weak_ptr& wp) noexcept :
+    ptr_(wp.ptr_),
+    owner_(wp.owner_) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -99,8 +97,9 @@ public:
      * @param wp 要拷贝的弱指针
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr(const weak_ptr<U>& wp) noexcept
-    : ptr_(wp.ptr_), owner_(wp.owner_) {
+    weak_ptr(const weak_ptr<U>& wp) noexcept :
+    ptr_(wp.ptr_),
+    owner_(wp.owner_) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -110,8 +109,9 @@ public:
      * @brief 移动构造函数
      * @param wp 要移动的弱指针
      */
-    weak_ptr(weak_ptr&& wp) noexcept
-    : ptr_(wp.ptr_), owner_(wp.owner_) {
+    weak_ptr(weak_ptr&& wp) noexcept :
+    ptr_(wp.ptr_),
+    owner_(wp.owner_) {
         wp.ptr_ = nullptr;
         wp.owner_ = nullptr;
     }
@@ -122,8 +122,9 @@ public:
      * @param wp 要移动的弱指针
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr(weak_ptr<U>&& wp) noexcept
-    : ptr_(wp.ptr_), owner_(wp.owner_) {
+    weak_ptr(weak_ptr<U>&& wp) noexcept :
+    ptr_(wp.ptr_),
+    owner_(wp.owner_) {
         wp.ptr_ = nullptr;
         wp.owner_ = nullptr;
     }
@@ -132,21 +133,25 @@ public:
      * @brief 析构函数
      * @note 减少弱引用计数，当弱引用计数为0时删除控制块
      */
-    ~weak_ptr() {
-        reset();
-    }
+    ~weak_ptr() { reset(); }
 
     /**
      * @brief 拷贝赋值运算符
      * @param wp 要拷贝的弱指针
      * @return 当前弱指针的引用
      */
-    weak_ptr& operator =(const weak_ptr& wp) noexcept {
-        if (_NEFORCE addressof(wp) == this) return *this;
-        if (owner_) owner_->decref_weak();
+    weak_ptr& operator=(const weak_ptr& wp) noexcept {
+        if (_NEFORCE addressof(wp) == this) {
+            return *this;
+        }
+        if (owner_) {
+            owner_->decref_weak();
+        }
         ptr_ = wp.ptr_;
         owner_ = wp.owner_;
-        if (owner_) owner_->incref_weak();
+        if (owner_) {
+            owner_->incref_weak();
+        }
         return *this;
     }
 
@@ -157,11 +162,15 @@ public:
      * @return 当前弱指针的引用
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr& operator =(const weak_ptr<U>& wp) noexcept {
-        if (owner_) owner_->decref_weak();
+    weak_ptr& operator=(const weak_ptr<U>& wp) noexcept {
+        if (owner_) {
+            owner_->decref_weak();
+        }
         ptr_ = wp.ptr_;
         owner_ = wp.owner_;
-        if (owner_) owner_->incref_weak();
+        if (owner_) {
+            owner_->incref_weak();
+        }
         return *this;
     }
 
@@ -172,11 +181,15 @@ public:
      * @return 当前弱指针的引用
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr& operator =(const shared_ptr<U>& sp) noexcept {
-        if (owner_) owner_->decref_weak();
+    weak_ptr& operator=(const shared_ptr<U>& sp) noexcept {
+        if (owner_) {
+            owner_->decref_weak();
+        }
         ptr_ = sp.get();
         owner_ = reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_);
-        if (owner_) owner_->incref_weak();
+        if (owner_) {
+            owner_->incref_weak();
+        }
         return *this;
     }
 
@@ -185,9 +198,13 @@ public:
      * @param wp 要移动的弱指针
      * @return 当前弱指针的引用
      */
-    weak_ptr& operator =(weak_ptr&& wp) noexcept {
-        if (_NEFORCE addressof(wp) == this) return *this;
-        if (owner_) owner_->decref_weak();
+    weak_ptr& operator=(weak_ptr&& wp) noexcept {
+        if (_NEFORCE addressof(wp) == this) {
+            return *this;
+        }
+        if (owner_) {
+            owner_->decref_weak();
+        }
         ptr_ = wp.ptr_;
         owner_ = wp.owner_;
         wp.ptr_ = nullptr;
@@ -202,8 +219,10 @@ public:
      * @return 当前弱指针的引用
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr& operator =(weak_ptr<U>&& wp) noexcept {
-        if (owner_) owner_->decref_weak();
+    weak_ptr& operator=(weak_ptr<U>&& wp) noexcept {
+        if (owner_) {
+            owner_->decref_weak();
+        }
         ptr_ = wp.ptr_;
         owner_ = wp.owner_;
         wp.ptr_ = nullptr;
@@ -229,7 +248,9 @@ public:
      * @param wp 要交换的弱指针
      */
     void swap(weak_ptr& wp) noexcept {
-        if (_NEFORCE addressof(wp) == this) return;
+        if (_NEFORCE addressof(wp) == this) {
+            return;
+        }
         _NEFORCE swap(ptr_, wp.ptr_);
         _NEFORCE swap(owner_, wp.owner_);
     }
@@ -238,17 +259,13 @@ public:
      * @brief 获取观察对象的引用计数
      * @return 强引用计数值
      */
-    NEFORCE_NODISCARD long use_count() const noexcept {
-        return owner_ ? static_cast<long>(owner_->use_count()) : 0;
-    }
+    NEFORCE_NODISCARD long use_count() const noexcept { return owner_ ? static_cast<long>(owner_->use_count()) : 0; }
 
     /**
      * @brief 检查观察的对象是否已被销毁
      * @return 对象是否已被销毁
      */
-    NEFORCE_NODISCARD bool expired() const noexcept {
-        return use_count() == 0;
-    }
+    NEFORCE_NODISCARD bool expired() const noexcept { return use_count() == 0; }
 
     /**
      * @brief 尝试获取共享智能指针
@@ -269,8 +286,7 @@ public:
      * @param rhs 要比较的弱指针
      * @return 是否共享同一控制块
      */
-    template <typename U>
-    NEFORCE_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
+    template <typename U> NEFORCE_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
         return owner_ == rhs.owner_;
     }
 
@@ -280,8 +296,7 @@ public:
      * @param rhs 要比较的共享指针
      * @return 是否共享同一控制块
      */
-    template <typename U>
-    NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
+    template <typename U> NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
         return owner_ == reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 
@@ -291,8 +306,7 @@ public:
      * @param rhs 要比较的弱指针
      * @return 当前控制块地址是否小于rhs的控制块地址
      */
-    template <typename U>
-    NEFORCE_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
+    template <typename U> NEFORCE_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
         return owner_ < rhs.owner_;
     }
 
@@ -302,8 +316,7 @@ public:
      * @param rhs 要比较的共享指针
      * @return 当前控制块地址是否小于rhs的控制块地址
      */
-    template <typename U>
-    NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
+    template <typename U> NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
         return owner_ < reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 };
@@ -314,8 +327,7 @@ public:
  * @brief 智能指针的所有权比较器
  * @tparam T 智能指针的类型
  */
-template <typename T>
-struct owner_less;
+template <typename T> struct owner_less;
 
 /**
  * @brief 共享指针的所有权比较器特化
@@ -323,28 +335,27 @@ struct owner_less;
  *
  * 提供基于控制块地址的智能指针比较，用于关联容器中的排序。
  */
-template <typename T>
-struct owner_less<shared_ptr<T>> {
-    using is_transparent = void;  ///< 支持透明比较
+template <typename T> struct owner_less<shared_ptr<T>> {
+    using is_transparent = void; ///< 支持透明比较
 
     /**
      * @brief 比较两个共享指针的所有权
      */
-    NEFORCE_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const shared_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     /**
      * @brief 比较共享指针和弱指针的所有权
      */
-    NEFORCE_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     /**
      * @brief 比较弱指针和共享指针的所有权
      */
-    NEFORCE_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 };
@@ -353,28 +364,27 @@ struct owner_less<shared_ptr<T>> {
  * @brief 弱指针的所有权比较器特化
  * @tparam T 弱指针的类型
  */
-template <typename T>
-struct owner_less<weak_ptr<T>> {
-    using is_transparent = void;  ///< 支持透明比较
+template <typename T> struct owner_less<weak_ptr<T>> {
+    using is_transparent = void; ///< 支持透明比较
 
     /**
      * @brief 比较两个弱指针的所有权
      */
-    NEFORCE_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const weak_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     /**
      * @brief 比较弱指针和共享指针的所有权
      */
-    NEFORCE_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     /**
      * @brief 比较共享指针和弱指针的所有权
      */
-    NEFORCE_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 };
@@ -384,15 +394,14 @@ struct owner_less<weak_ptr<T>> {
  *
  * 支持不同类型智能指针之间的透明比较。
  */
-template <>
-struct owner_less<void> {
-    using is_transparent = void;  ///< 支持透明比较
+template <> struct owner_less<void> {
+    using is_transparent = void; ///< 支持透明比较
 
     /**
      * @brief 比较两个共享指针的所有权
      */
     template <typename T, typename U>
-    NEFORCE_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
@@ -400,7 +409,7 @@ struct owner_less<void> {
      * @brief 比较共享指针和弱指针的所有权
      */
     template <typename T, typename U>
-    NEFORCE_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const shared_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
@@ -408,7 +417,7 @@ struct owner_less<void> {
      * @brief 比较弱指针和共享指针的所有权
      */
     template <typename T, typename U>
-    NEFORCE_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const weak_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
@@ -416,7 +425,7 @@ struct owner_less<void> {
      * @brief 比较两个弱指针的所有权
      */
     template <typename T, typename U>
-    NEFORCE_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
+    NEFORCE_NODISCARD bool operator()(const weak_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 };
@@ -435,8 +444,7 @@ struct owner_less<void> {
  *
  * 提供weak_ptr的原子操作支持，实现无锁的原子操作。
  */
-template <typename T>
-struct atomic<weak_ptr<T>> {
+template <typename T> struct atomic<weak_ptr<T>> {
 public:
     using value_type = weak_ptr<T>;
 
@@ -450,9 +458,7 @@ public:
      * @brief 检查是否无锁
      * @return 始终返回false
      */
-    bool is_lock_free() const noexcept {
-        return false;
-    }
+    bool is_lock_free() const noexcept { return false; }
 
     constexpr atomic() noexcept = default;
 
@@ -460,43 +466,35 @@ public:
      * @brief 从weak_ptr构造
      * @param value 初始值
      */
-    atomic(value_type value) noexcept
-    : atomic_(move(value)) {}
+    atomic(value_type value) noexcept :
+    atomic_(move(value)) {}
 
     atomic(const atomic&) = delete;
-    void operator =(const atomic&) = delete;
+    void operator=(const atomic&) = delete;
 
     /**
      * @brief 原子加载
      * @param mo 内存序
      * @return 加载的值
      */
-    value_type load(memory_order mo = memory_order_seq_cst) const noexcept {
-        return atomic_.load(mo);
-    }
+    value_type load(memory_order mo = memory_order_seq_cst) const noexcept { return atomic_.load(mo); }
 
     /**
      * @brief 隐式转换操作符
      */
-    operator value_type() const noexcept {
-        return atomic_.load(memory_order_seq_cst);
-    }
+    operator value_type() const noexcept { return atomic_.load(memory_order_seq_cst); }
 
     /**
      * @brief 原子存储
      * @param desired 要存储的值
      * @param mo 内存序
      */
-    void store(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
-        atomic_.swap(desired, mo);
-    }
+    void store(value_type desired, memory_order mo = memory_order_seq_cst) noexcept { atomic_.swap(desired, mo); }
 
     /**
      * @brief 赋值操作符
      */
-    void operator =(value_type desired) noexcept {
-        atomic_.swap(desired, memory_order_seq_cst);
-    }
+    void operator=(value_type desired) noexcept { atomic_.swap(desired, memory_order_seq_cst); }
 
     /**
      * @brief 交换操作
@@ -512,8 +510,7 @@ public:
     /**
      * @brief 比较交换强版本
      */
-    bool compare_exchange_strong(value_type& expected, value_type desired,
-                                 memory_order mo, memory_order mo2) noexcept {
+    bool compare_exchange_strong(value_type& expected, value_type desired, memory_order mo, memory_order mo2) noexcept {
         return atomic_.compare_exchange_strong(expected, desired, mo, mo2);
     }
 
@@ -528,8 +525,7 @@ public:
     /**
      * @brief 比较交换弱版本
      */
-    bool compare_exchange_weak(value_type& expected, value_type desired,
-                               memory_order mo, memory_order mo2) noexcept {
+    bool compare_exchange_weak(value_type& expected, value_type desired, memory_order mo, memory_order mo2) noexcept {
         return compare_exchange_strong(expected, move(desired), mo, mo2);
     }
 
@@ -544,23 +540,17 @@ public:
     /**
      * @brief 等待值改变
      */
-    void wait(value_type mold, memory_order mo = memory_order_seq_cst) const noexcept {
-        atomic_.wait(move(mold), mo);
-    }
+    void wait(value_type mold, memory_order mo = memory_order_seq_cst) const noexcept { atomic_.wait(move(mold), mo); }
 
     /**
      * @brief 通知一个等待者
      */
-    void notify_one() noexcept {
-        atomic_.notify_one();
-    }
+    void notify_one() noexcept { atomic_.notify_one(); }
 
     /**
      * @brief 通知所有等待者
      */
-    void notify_all() noexcept {
-        atomic_.notify_all();
-    }
+    void notify_all() noexcept { atomic_.notify_all(); }
 };
 
 /** @} */ // AtomicOperations

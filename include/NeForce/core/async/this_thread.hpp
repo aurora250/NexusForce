@@ -10,22 +10,22 @@
 
 #include "NeForce/core/typeinfo/types.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include "NeForce/core/config/windef.hpp"
-#include <processthreadsapi.h>
-#include <synchapi.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <processthreadsapi.h>
+#    include <synchapi.h>
+#    include "NeForce/core/config/windef.hpp"
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sched.h>
-#include <unistd.h>
+#    include <sched.h>
+#    include <unistd.h>
 #endif
 #ifdef NEFORCE_ARCH_RISCV
-#include <riscv_pause.h>
+#    include <riscv_pause.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_THIS_THREAD__
@@ -73,17 +73,17 @@ NEFORCE_ALWAYS_INLINE_INLINE void relax() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::_mm_pause();
 #else
-#if defined(NEFORCE_ARCH_X86)
+#    if defined(NEFORCE_ARCH_X86)
     __builtin_ia32_pause();
-#elif defined(NEFORCE_ARCH_ARM)
+#    elif defined(NEFORCE_ARCH_ARM)
     asm volatile("yield" ::: "memory");
-#elif defined(NEFORCE_ARCH_RISCV)
+#    elif defined(NEFORCE_ARCH_RISCV)
     ::riscv_pause();
-#elif defined(NEFORCE_ARCH_LOONGARCH)
+#    elif defined(NEFORCE_ARCH_LOONGARCH)
     asm volatile("dbar 0" ::: "memory");
-#else
+#    else
     this_thread::yield();
-#endif
+#    endif
 #endif
 }
 

@@ -11,7 +11,7 @@ json_builder& json_builder::begin_object() {
         }
         root_ = move(new_object);
     } else {
-        const auto & current = contexts_.top();
+        const auto& current = contexts_.top();
         if (current.type == array) {
             current.array_ptr->add_element(move(new_object));
         } else if (current.type == object) {
@@ -37,7 +37,7 @@ json_builder& json_builder::begin_array() {
         }
         root_ = move(new_array);
     } else {
-        const auto & current = contexts_.top();
+        const auto& current = contexts_.top();
         if (current.type == array) {
             current.array_ptr->add_element(move(new_array));
         } else if (current.type == object) {

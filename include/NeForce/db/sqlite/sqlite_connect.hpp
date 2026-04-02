@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_SQLITE_CONNECT_HPP__
 #define NEFORCE_DATABASE_SQLITE_CONNECT_HPP__
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#include "NeForce/db/db_interface.hpp"
-#include <sqlite3.h>
+#    include <sqlite3.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API sqlite_connect final : idb_tb_connect {
@@ -36,8 +36,8 @@ public:
 
 class NEFORCE_API sqlite_factory final : public idb_factory {
 public:
-    explicit sqlite_factory(db_config config)
-    : idb_factory(move(config)) {}
+    explicit sqlite_factory(db_config config) :
+    idb_factory(move(config)) {}
 
     idb_connect* create_connect() override;
     idb_result* create_result(void* native_result) override;

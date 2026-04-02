@@ -1,22 +1,22 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/system/stacktrace.hpp>
+#include <NeForce/core/utility/packages.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/async/call_once.hpp>
-#include <NeForce/core/async/mutex.hpp>
-#include <windef.h>
-#include <WinBase.h>
-#ifdef NEFORCE_COMPILER_MSVC
-#include <verrsrc.h>
-#endif
-#ifdef NEFORCE_COMPILER_MINGW
-#include <winver.h>
-#endif
-#include <DbgHelp.h>
+#    include <NeForce/core/async/call_once.hpp>
+#    include <NeForce/core/async/mutex.hpp>
+#    include <WinBase.h>
+#    include <windef.h>
+#    ifdef NEFORCE_COMPILER_MSVC
+#        include <verrsrc.h>
+#    endif
+#    ifdef NEFORCE_COMPILER_MINGW
+#        include <winver.h>
+#    endif
+#    include <DbgHelp.h>
 #else
-#include <execinfo.h>
-#include <dlfcn.h>
-#include <cxxabi.h>
-#include <cstdlib>
+#    include <cstdlib>
+#    include <cxxabi.h>
+#    include <dlfcn.h>
+#    include <execinfo.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -24,9 +24,10 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     void ensure_initialized() noexcept {
         static once_flag init_flag{};
-        call_once(init_flag, [](){
+        call_once(init_flag, []() {
             ::SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
-            if (!::SymInitialize(::GetCurrentProcess(), nullptr, 1)) {}
+            if (!::SymInitialize(::GetCurrentProcess(), nullptr, 1)) {
+            }
         });
     }
     mutex& dbghelp_mutex() {
@@ -34,11 +35,13 @@ namespace {
         return mtx;
     }
 #endif
-}
+} // namespace
 
 
 string stacktrace::frame::name() const {
-    if (!address_) return "<empty>";
+    if (!address_) {
+        return "<empty>";
+    }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ensure_initialized();
 
@@ -58,8 +61,7 @@ string stacktrace::frame::name() const {
     ::Dl_info info;
     if (::dladdr(address_, &info) && info.dli_sname) {
         int status = 0;
-        char* demangled = ::abi::__cxa_demangle(info.dli_sname,
-            nullptr, nullptr, &status);
+        char* demangled = ::abi::__cxa_demangle(info.dli_sname, nullptr, nullptr, &status);
         if (status == 0 && demangled) {
             string res(demangled);
             std::free(demangled);
@@ -72,7 +74,9 @@ string stacktrace::frame::name() const {
 }
 
 string stacktrace::frame::to_string() const {
-    if (!address_) return "<empty>";
+    if (!address_) {
+        return "<empty>";
+    }
     string result = address_string(address_);
     const string symbol = name();
     if (!symbol.empty() && symbol != "<unknown>") {
@@ -83,10 +87,9 @@ string stacktrace::frame::to_string() const {
 
 stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    vector<void *> buffer(max_depth);
-    const ::USHORT captured = ::CaptureStackBackTrace(
-        static_cast<::DWORD>(skip + 2), static_cast<::DWORD>(max_depth),
-        buffer.data(), nullptr);
+    vector<void*> buffer(max_depth);
+    const ::USHORT captured = ::CaptureStackBackTrace(static_cast<::DWORD>(skip + 2), static_cast<::DWORD>(max_depth),
+                                                      buffer.data(), nullptr);
     frames_.reserve(captured);
     for (::USHORT i = 0; i < captured; ++i) {
         frames_.emplace_back(buffer[i]);
@@ -94,7 +97,9 @@ stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
 #else
     vector<void*> buffer(max_depth + skip + 2);
     const int captured = ::backtrace(buffer.data(), static_cast<int>(buffer.size()));
-    if (captured <= 0) return;
+    if (captured <= 0) {
+        return;
+    }
 
     const size_t to_skip = _NEFORCE min(static_cast<size_t>(captured), skip + 2);
     const size_t valid_frames = captured - to_skip;
@@ -110,7 +115,9 @@ string stacktrace::to_string() const {
     string result;
     for (size_t i = 0; i < frames_.size(); ++i) {
         result += _NEFORCE to_string("#", i, " ", frames_[i]);
-        if (i + 1 < frames_.size()) result += "\n";
+        if (i + 1 < frames_.size()) {
+            result += "\n";
+        }
     }
     return result;
 }

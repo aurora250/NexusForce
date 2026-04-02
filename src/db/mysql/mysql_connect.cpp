@@ -1,15 +1,15 @@
 #include <NeForce/db/mysql/mysql_connect.hpp>
 #ifdef NEFORCE_SUPPORT_MYSQL
-#include <NeForce/db/mysql/mysql_prepared_statement.hpp>
-#include <NeForce/db/mysql/mysql_result.hpp>
+#    include <NeForce/db/mysql/mysql_prepared_statement.hpp>
+#    include <NeForce/db/mysql/mysql_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 bool mysql_connect::connect(const db_config& config) noexcept {
-    const ::MYSQL* p = ::mysql_real_connect(
-        link_, config.host.data(), config.username.data(),
-        config.password.data(), config.database.data(), config.port,
-        nullptr, 0);
-    if (p == nullptr) return false;
+    const ::MYSQL* p = ::mysql_real_connect(link_, config.host.data(), config.username.data(), config.password.data(),
+                                            config.database.data(), config.port, nullptr, 0);
+    if (p == nullptr) {
+        return false;
+    }
     NEFORCE_IGNORE set_character_set(config.charset);
     return true;
 }
@@ -37,24 +37,18 @@ bool mysql_connect::set_options(const ::mysql_option option, const string& str) 
     return connected() && !::mysql_options(link_, option, str.data());
 }
 
-string_view mysql_connect::get_character_set() const noexcept {
-    return ::mysql_character_set_name(link_);
-}
+string_view mysql_connect::get_character_set() const noexcept { return ::mysql_character_set_name(link_); }
 
-string_view mysql_connect::get_error() const noexcept {
-    return ::mysql_error(link_);
-}
+string_view mysql_connect::get_error() const noexcept { return ::mysql_error(link_); }
 
-uint32_t mysql_connect::get_errno() const noexcept {
-    return ::mysql_errno(link_);
-}
+uint32_t mysql_connect::get_errno() const noexcept { return ::mysql_errno(link_); }
 
-bool mysql_connect::update(const string& sql) const noexcept {
-    return !::mysql_query(link_, sql.data());
-}
+bool mysql_connect::update(const string& sql) const noexcept { return !::mysql_query(link_, sql.data()); }
 
 unique_ptr<idb_tb_result> mysql_connect::query(const string& sql) const noexcept {
-    if (::mysql_query(link_, sql.data())) return {};
+    if (::mysql_query(link_, sql.data())) {
+        return {};
+    }
     return make_unique<mysql_result>(::mysql_store_result(link_));
 }
 

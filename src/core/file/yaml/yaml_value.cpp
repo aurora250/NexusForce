@@ -3,28 +3,26 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     bool needs_quotes(const string& str) {
-        if (str.empty()) return true;
+        if (str.empty()) {
+            return true;
+        }
 
-        if (str == "true" || str == "false" || str == "null" ||
-            str == "True" || str == "False" || str == "Null" ||
-            str == "TRUE" || str == "FALSE" || str == "NULL" ||
-            str == "~" || str == "yes" || str == "no" ||
+        if (str == "true" || str == "false" || str == "null" || str == "True" || str == "False" || str == "Null" ||
+            str == "TRUE" || str == "FALSE" || str == "NULL" || str == "~" || str == "yes" || str == "no" ||
             str == "on" || str == "off") {
             return true;
-            }
+        }
 
         if (is_digit(str[0]) || str[0] == '-' || str[0] == '+' || str[0] == '.') {
             return true;
         }
 
-        for (const char ch : str) {
-            if (ch == ':' || ch == '#' || ch == '[' || ch == ']' ||
-                ch == '{' || ch == '}' || ch == ',' || ch == '&' ||
-                ch == '*' || ch == '!' || ch == '|' || ch == '>' ||
-                ch == '\'' || ch == '"' || ch == '%' || ch == '@' ||
+        for (const char ch: str) {
+            if (ch == ':' || ch == '#' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == ',' || ch == '&' ||
+                ch == '*' || ch == '!' || ch == '|' || ch == '>' || ch == '\'' || ch == '"' || ch == '%' || ch == '@' ||
                 ch == '`' || ch == '\n' || ch == '\r') {
                 return true;
-                }
+            }
         }
 
         return false;
@@ -37,13 +35,15 @@ namespace {
             result += "[";
             const auto& elements = seq->get_elements();
             for (size_t i = 0; i < elements.size(); ++i) {
-                if (i > 0) result += ", ";
+                if (i > 0) {
+                    result += ", ";
+                }
                 stringify_value(result, elements[i].get(), indent, true);
             }
             result += "]";
         } else {
             const auto& elements = seq->get_elements();
-            for (const auto& elem : elements) {
+            for (const auto& elem: elements) {
                 result += "\n" + string(indent, ' ') + "- ";
 
                 if (elem->is_sequence() || elem->is_mapping()) {
@@ -61,8 +61,10 @@ namespace {
             const auto& members = map->get_members();
             bool first = true;
 
-            for (const auto& pair : members) {
-                if (!first) result += ", ";
+            for (const auto& pair: members) {
+                if (!first) {
+                    result += ", ";
+                }
                 first = false;
                 if (needs_quotes(pair.first)) {
                     result += "\"" + escape(pair.first) + "\"";
@@ -77,7 +79,7 @@ namespace {
             const auto& members = map->get_members();
             bool first = true;
 
-            for (const auto& pair : members) {
+            for (const auto& pair: members) {
                 if (!first) {
                     result += "\n";
                 }
@@ -159,7 +161,7 @@ namespace {
             }
         }
     }
-}
+} // namespace
 
 
 string yaml_value::to_string() const {

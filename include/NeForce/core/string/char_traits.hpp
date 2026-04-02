@@ -29,15 +29,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供字符类型的基本操作接口，包括复制、移动、比较、查找等。
  * 作为具体字符特征特化的基类。
  */
-template <typename CharT, typename IntT>
-struct base_char_traits {
-    using char_type = CharT;  ///< 字符类型
-    using int_type  = IntT;   ///< 整数类型
+template <typename CharT, typename IntT> struct base_char_traits {
+    using char_type = CharT; ///< 字符类型
+    using int_type = IntT;   ///< 整数类型
 
-    static_assert(
-        sizeof(int_type) >= sizeof(char_type),
-        "int_type must be able to represent all char_type values plus EOF"
-    );
+    static_assert(sizeof(int_type) >= sizeof(char_type),
+                  "int_type must be able to represent all char_type values plus EOF");
 
     /**
      * @brief 复制字符序列
@@ -46,8 +43,7 @@ struct base_char_traits {
      * @param count 要复制的字符数
      * @return dest指针
      */
-    static constexpr char_type* copy(
-        char_type* dest, const char_type* srcs, const size_t count) noexcept {
+    static constexpr char_type* copy(char_type* dest, const char_type* srcs, const size_t count) noexcept {
         _NEFORCE memory_copy(dest, srcs, count * sizeof(char_type));
         return dest;
     }
@@ -59,8 +55,7 @@ struct base_char_traits {
      * @param count 要移动的字符数
      * @return dest指针
      */
-    static constexpr char_type* move(
-        char_type* dest, const char_type* srcs, const size_t count) noexcept {
+    static constexpr char_type* move(char_type* dest, const char_type* srcs, const size_t count) noexcept {
         _NEFORCE memory_move(dest, srcs, count * sizeof(char_type));
         return dest;
     }
@@ -72,8 +67,7 @@ struct base_char_traits {
      * @param count 要比较的字符数
      * @return 负值（lhs < rhs）、0（相等）、正值（lhs > rhs）
      */
-    NEFORCE_NODISCARD static constexpr int compare(
-        const char_type* lhs, const char_type* rhs, size_t count) noexcept {
+    NEFORCE_NODISCARD static constexpr int compare(const char_type* lhs, const char_type* rhs, size_t count) noexcept {
         return _NEFORCE string_compare(lhs, rhs, count);
     }
 
@@ -93,8 +87,8 @@ struct base_char_traits {
      * @param target 要查找的字符
      * @return 指向第一个匹配字符的指针，未找到则返回nullptr
      */
-    NEFORCE_NODISCARD static constexpr const char_type* find(
-        const char_type* str, const size_t count, const char_type target) noexcept {
+    NEFORCE_NODISCARD static constexpr const char_type* find(const char_type* str, const size_t count,
+                                                             const char_type target) noexcept {
         return _NEFORCE string_find<char_type>(str, target, count);
     }
 
@@ -105,8 +99,7 @@ struct base_char_traits {
      * @param chr 要设置的字符
      * @return str指针
      */
-    static constexpr char_type* assign(
-        char_type* const str, const size_t count, const char_type chr) noexcept {
+    static constexpr char_type* assign(char_type* const str, const size_t count, const char_type chr) noexcept {
         return _NEFORCE string_set<char_type>(str, chr, count);
     }
 
@@ -115,9 +108,7 @@ struct base_char_traits {
      * @param lhs 左值引用
      * @param rhs 右值
      */
-    static constexpr void assign(char_type& lhs, const char_type rhs) noexcept {
-        lhs = rhs;
-    }
+    static constexpr void assign(char_type& lhs, const char_type rhs) noexcept { lhs = rhs; }
 
     /**
      * @brief 相等比较
@@ -125,9 +116,7 @@ struct base_char_traits {
      * @param rhs 右字符
      * @return 是否相等
      */
-    NEFORCE_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept {
-        return lhs == rhs;
-    }
+    NEFORCE_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept { return lhs == rhs; }
 
     /**
      * @brief 小于比较
@@ -135,9 +124,7 @@ struct base_char_traits {
      * @param rhs 右字符
      * @return 是否lhs < rhs
      */
-    NEFORCE_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
-        return lhs < rhs;
-    }
+    NEFORCE_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept { return lhs < rhs; }
 
     /**
      * @brief 如果不是EOF则返回原值，否则返回0
@@ -152,9 +139,7 @@ struct base_char_traits {
      * @brief 返回EOF值
      * @return EOF值
      */
-    NEFORCE_NODISCARD static constexpr int_type eof() noexcept {
-        return static_cast<int_type>(-1);
-    }
+    NEFORCE_NODISCARD static constexpr int_type eof() noexcept { return static_cast<int_type>(-1); }
 };
 
 /**
@@ -165,24 +150,23 @@ struct base_char_traits {
  *
  * 为窄字符类型提供优化的内存操作实现。
  */
-template <typename CharT, typename IntT>
-struct narrow_char_traits : private base_char_traits<CharT, IntT> {
+template <typename CharT, typename IntT> struct narrow_char_traits : private base_char_traits<CharT, IntT> {
     static_assert(sizeof(CharT) == sizeof(byte_t), "size of CharT must be the same as byte type");
 
 private:
     using base_type = base_char_traits<CharT, IntT>;
 
 public:
-    using char_type = CharT;  ///< 字符类型
-    using int_type  = IntT;   ///< 整数类型
+    using char_type = CharT; ///< 字符类型
+    using int_type = IntT;   ///< 整数类型
 
     using base_type::copy;
-    using base_type::move;
-    using base_type::length;
-    using base_type::eq;
-    using base_type::lt;
-    using base_type::not_eof;
     using base_type::eof;
+    using base_type::eq;
+    using base_type::length;
+    using base_type::lt;
+    using base_type::move;
+    using base_type::not_eof;
 
 public:
     /**
@@ -192,8 +176,8 @@ public:
      * @param n 要比较的字符数
      * @return 比较结果
      */
-    NEFORCE_NODISCARD static constexpr int compare(
-        const char_type* lhs, const char_type* rhs, const size_t n) noexcept {
+    NEFORCE_NODISCARD static constexpr int compare(const char_type* lhs, const char_type* rhs,
+                                                   const size_t n) noexcept {
         return _NEFORCE memory_compare(lhs, rhs, n);
     }
 
@@ -204,8 +188,8 @@ public:
      * @param chr 要查找的字符
      * @return 指向第一个匹配字符的指针
      */
-    NEFORCE_NODISCARD static constexpr const char_type* find(
-        const char_type* str, const size_t n, const char_type chr) noexcept {
+    NEFORCE_NODISCARD static constexpr const char_type* find(const char_type* str, const size_t n,
+                                                             const char_type chr) noexcept {
         return static_cast<const char_type*>(_NEFORCE memory_find(str, chr, n));
     }
 
@@ -216,8 +200,7 @@ public:
      * @param chr 要设置的字符
      * @return str指针
      */
-    static constexpr char_type* assign(
-        char_type* str, size_t n, const char_type chr) noexcept {
+    static constexpr char_type* assign(char_type* str, size_t n, const char_type chr) noexcept {
         return static_cast<char_type*>(_NEFORCE memory_set(str, chr, n));
     }
 
@@ -226,9 +209,7 @@ public:
      * @param lhs 左值引用
      * @param rhs 右值引用
      */
-    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
-        lhs = rhs;
-    }
+    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept { lhs = rhs; }
 };
 
 
@@ -239,18 +220,17 @@ public:
  *
  * 默认使用base_char_traits，针对具体字符类型有特化。
  */
-template <typename CharT>
-struct char_traits : base_char_traits<CharT, int64_t> {};
+template <typename CharT> struct char_traits : base_char_traits<CharT, int64_t> {};
 
 /// char类型的特化
-template <> struct char_traits<char>     : narrow_char_traits<char, int32_t> {};
+template <> struct char_traits<char> : narrow_char_traits<char, int32_t> {};
 
 /// wchar_t类型的特化
-template <> struct char_traits<wchar_t>  : base_char_traits<wchar_t, uint32_t> {};
+template <> struct char_traits<wchar_t> : base_char_traits<wchar_t, uint32_t> {};
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /// char8_t类型的特化
-template <> struct char_traits<char8_t>  : narrow_char_traits<char8_t, uint32_t> {};
+template <> struct char_traits<char8_t> : narrow_char_traits<char8_t, uint32_t> {};
 #endif
 
 /// char16_t类型的特化
@@ -264,15 +244,13 @@ template <> struct char_traits<char32_t> : base_char_traits<char32_t, uint32_t> 
  * @brief 获取字符特征中的字符类型
  * @tparam Traits 字符特征类型
  */
-template <typename Traits>
-using char_traits_char_t = typename Traits::char_type;
+template <typename Traits> using char_traits_char_t = typename Traits::char_type;
 
 /**
  * @brief 获取字符特征中的字符指针类型
  * @tparam Traits 字符特征类型
  */
-template <typename Traits>
-using char_traits_ptr_t = const typename Traits::char_type*;
+template <typename Traits> using char_traits_ptr_t = const typename Traits::char_type*;
 
 
 /// @cond
@@ -286,10 +264,9 @@ NEFORCE_BEGIN_INNER__
  *
  * 用于加速字符串查找操作，通过位图记录字符出现情况。
  */
-template <typename CharT, bool IsChar = is_character_v<CharT>>
-class __string_bitmap {
+template <typename CharT, bool IsChar = is_character_v<CharT>> class __string_bitmap {
 private:
-    bool matches_[numeric_traits<byte_t>::max() + 1] = {};  ///< 字符匹配位图
+    bool matches_[numeric_traits<byte_t>::max() + 1] = {}; ///< 字符匹配位图
 
 public:
     /**
@@ -315,13 +292,10 @@ public:
      * @param chr 要检查的字符
      * @return 是否被标记
      */
-    constexpr bool match(const CharT chr) const noexcept {
-        return matches_[static_cast<byte_t>(chr)];
-    }
+    constexpr bool match(const CharT chr) const noexcept { return matches_[static_cast<byte_t>(chr)]; }
 };
 
-template <typename CharT>
-class __string_bitmap<CharT, false> {};
+template <typename CharT> class __string_bitmap<CharT, false> {};
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -337,9 +311,13 @@ NEFORCE_END_INNER__
  */
 template <typename Traits>
 constexpr bool char_traits_equal(const char_traits_ptr_t<Traits> lhs, const size_t lh_size,
-    const char_traits_ptr_t<Traits> rhs, const size_t rh_size) noexcept {
-    if (lh_size != rh_size) return false;
-    if (lh_size == 0u) return true;
+                                 const char_traits_ptr_t<Traits> rhs, const size_t rh_size) noexcept {
+    if (lh_size != rh_size) {
+        return false;
+    }
+    if (lh_size == 0u) {
+        return true;
+    }
 
     return Traits::compare(lhs, rhs, lh_size) == 0;
 }
@@ -355,12 +333,18 @@ constexpr bool char_traits_equal(const char_traits_ptr_t<Traits> lhs, const size
  */
 template <typename Traits>
 constexpr int char_traits_compare(const char_traits_ptr_t<Traits> lhs, const size_t lh_size,
-    const char_traits_ptr_t<Traits> rhs, const size_t rh_size) noexcept {
+                                  const char_traits_ptr_t<Traits> rhs, const size_t rh_size) noexcept {
     const int state = Traits::compare(lhs, rhs, _NEFORCE min(lh_size, rh_size));
-    if (state != 0) return state;
+    if (state != 0) {
+        return state;
+    }
 
-    if (lh_size < rh_size) return -1;
-    if (lh_size > rh_size) return 1;
+    if (lh_size < rh_size) {
+        return -1;
+    }
+    if (lh_size > rh_size) {
+        return 1;
+    }
     return 0;
 }
 
@@ -375,18 +359,25 @@ constexpr int char_traits_compare(const char_traits_ptr_t<Traits> lhs, const siz
  * @return 子序列首次出现的位置，未找到则返回-1
  */
 template <typename Traits>
-constexpr size_t char_traits_find(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
-    if (rsc_size > dest_size || start > dest_size - rsc_size) return static_cast<size_t>(-1);
-    if (rsc_size == 0)  return start;
+constexpr size_t char_traits_find(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                                  const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    if (rsc_size > dest_size || start > dest_size - rsc_size) {
+        return static_cast<size_t>(-1);
+    }
+    if (rsc_size == 0) {
+        return start;
+    }
 
     const auto may_match_end = dest + (dest_size - rsc_size) + 1;
-    for (auto if_match = dest + start; ; ++if_match) {
+    for (auto if_match = dest + start;; ++if_match) {
         if_match = Traits::find(if_match, static_cast<size_t>(may_match_end - if_match), *rsc);
-        if (!if_match) return static_cast<size_t>(-1);
+        if (!if_match) {
+            return static_cast<size_t>(-1);
+        }
 
-        if (Traits::compare(if_match, rsc, rsc_size) == 0)
+        if (Traits::compare(if_match, rsc, rsc_size) == 0) {
             return static_cast<size_t>(if_match - dest);
+        }
     }
 }
 
@@ -400,12 +391,13 @@ constexpr size_t char_traits_find(const char_traits_ptr_t<Traits> dest, const si
  * @return 字符首次出现的位置，未找到则返回-1
  */
 template <typename Traits>
-constexpr size_t char_traits_find_char(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_char_t<Traits> chr) noexcept {
+constexpr size_t char_traits_find_char(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                                       const char_traits_char_t<Traits> chr) noexcept {
     if (start < dest_size) {
         const auto found = Traits::find(dest + start, dest_size - start, chr);
-        if (found)
+        if (found) {
             return static_cast<size_t>(found - dest);
+        }
     }
     return static_cast<size_t>(-1);
 }
@@ -421,16 +413,21 @@ constexpr size_t char_traits_find_char(const char_traits_ptr_t<Traits> dest, con
  * @return 子序列最后一次出现的位置，未找到则返回-1
  */
 template <typename Traits>
-constexpr size_t char_traits_rfind(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
-    if (rsc_size == 0) return _NEFORCE min(start, dest_size);
+constexpr size_t char_traits_rfind(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                                   const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    if (rsc_size == 0) {
+        return _NEFORCE min(start, dest_size);
+    }
 
     if (rsc_size <= dest_size) {
         for (auto if_match = dest + _NEFORCE min(start, dest_size - rsc_size);; --if_match) {
-            if (Traits::eq(*if_match, *rsc) && Traits::compare(if_match, rsc, rsc_size) == 0)
+            if (Traits::eq(*if_match, *rsc) && Traits::compare(if_match, rsc, rsc_size) == 0) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -447,13 +444,16 @@ constexpr size_t char_traits_rfind(const char_traits_ptr_t<Traits> dest, const s
  */
 template <typename Traits>
 constexpr size_t char_traits_rfind_char(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_char_t<Traits> chr) noexcept {
+                                        const size_t start, const char_traits_char_t<Traits> chr) noexcept {
     if (dest_size != 0) {
         for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
-            if (Traits::eq(*if_match, chr))
+            if (Traits::eq(*if_match, chr)) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -471,23 +471,25 @@ constexpr size_t char_traits_rfind_char(const char_traits_ptr_t<Traits> dest, co
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    is_specialization_v<Traits, char_traits>
+                                   is_specialization_v<Traits, char_traits>
 #else
-    is_specialization_v<Traits, char_traits>()
+                                   is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_first_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                           const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                           const size_t rsc_size) noexcept {
     if (rsc_size != 0 && start < dest_size) {
         inner::__string_bitmap<char_traits_char_t<Traits>> match;
         if (!match.mark(rsc, rsc + rsc_size)) {
-            return (char_traits_find_first_of<Traits, false>)
-                (dest, dest_size, start, rsc, rsc_size);
+            return (char_traits_find_first_of<Traits, false>) (dest, dest_size, start, rsc, rsc_size);
         }
         const auto end = dest + dest_size;
         for (auto if_match = dest + start; if_match < end; ++if_match) {
-            if (match.match(*if_match))
+            if (match.match(*if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -505,18 +507,21 @@ constexpr size_t char_traits_find_first_of(const char_traits_ptr_t<Traits> dest,
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    !is_specialization_v<Traits, char_traits>
+                                   !is_specialization_v<Traits, char_traits>
 #else
-    !is_specialization_v<Traits, char_traits>()
+                                   !is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_first_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                           const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                           const size_t rsc_size) noexcept {
     if (rsc_size != 0 && start < dest_size) {
         const auto end = dest + dest_size;
         for (auto if_match = dest + start; if_match < end; ++if_match) {
-            if (Traits::find(rsc, rsc_size, *if_match))
+            if (Traits::find(rsc, rsc_size, *if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -534,24 +539,29 @@ constexpr size_t char_traits_find_first_of(const char_traits_ptr_t<Traits> dest,
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    is_specialization_v<Traits, char_traits>
+                                   is_specialization_v<Traits, char_traits>
 #else
-    is_specialization_v<Traits, char_traits>()
+                                   is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_last_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                          const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                          const size_t rsc_size) noexcept {
     if (rsc_size != 0 && dest_size != 0) {
         inner::__string_bitmap<char_traits_char_t<Traits>> match;
-        if (!match.mark(rsc, rsc + rsc_size))
-            return (char_traits_find_last_of<Traits, false>)
-            (dest, dest_size, start, rsc, rsc_size);
+        if (!match.mark(rsc, rsc + rsc_size)) {
+            return (char_traits_find_last_of<Traits, false>) (dest, dest_size, start, rsc, rsc_size);
+        }
 
         for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
-            if (match.match(*if_match))
+            if (match.match(*if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -569,19 +579,24 @@ constexpr size_t char_traits_find_last_of(const char_traits_ptr_t<Traits> dest, 
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    !is_specialization_v<Traits, char_traits>
+                                   !is_specialization_v<Traits, char_traits>
 #else
-    !is_specialization_v<Traits, char_traits>()
+                                   !is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_last_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                          const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                          const size_t rsc_size) noexcept {
     if (rsc_size != 0 && dest_size != 0) {
         for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
-            if (Traits::find(rsc, rsc_size, *if_match))
+            if (Traits::find(rsc, rsc_size, *if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -599,23 +614,26 @@ constexpr size_t char_traits_find_last_of(const char_traits_ptr_t<Traits> dest, 
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    is_specialization_v<Traits, char_traits>
+                                   is_specialization_v<Traits, char_traits>
 #else
-    is_specialization_v<Traits, char_traits>()
+                                   is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_first_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                               const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                               const size_t rsc_size) noexcept {
     if (start < dest_size) {
         inner::__string_bitmap<char_traits_char_t<Traits>> match;
-        if (!match.mark(rsc, rsc + rsc_size))
-            return (char_traits_find_first_not_of<Traits, false>)
-            (dest, dest_size, start, rsc, rsc_size);
+        if (!match.mark(rsc, rsc + rsc_size)) {
+            return (char_traits_find_first_not_of<Traits, false>) (dest, dest_size, start, rsc, rsc_size);
+        }
 
         const auto end = dest + dest_size;
         for (auto if_match = dest + start; if_match < end; ++if_match) {
-            if (!match.match(*if_match))
+            if (!match.match(*if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -633,18 +651,21 @@ constexpr size_t char_traits_find_first_not_of(const char_traits_ptr_t<Traits> d
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    !is_specialization_v<Traits, char_traits>
+                                   !is_specialization_v<Traits, char_traits>
 #else
-    !is_specialization_v<Traits, char_traits>()
+                                   !is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_first_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                               const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                               const size_t rsc_size) noexcept {
     if (start < dest_size) {
         const auto end = dest + dest_size;
         for (auto if_match = dest + start; if_match < end; ++if_match) {
-            if (!Traits::find(rsc, rsc_size, *if_match))
+            if (!Traits::find(rsc, rsc_size, *if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -661,12 +682,13 @@ constexpr size_t char_traits_find_first_not_of(const char_traits_ptr_t<Traits> d
  */
 template <typename Traits>
 constexpr size_t char_traits_find_not_char(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_char_t<Traits> chr) noexcept {
+                                           const size_t start, const char_traits_char_t<Traits> chr) noexcept {
     if (start < dest_size) {
         const auto end = dest + dest_size;
         for (auto if_match = dest + start; if_match < end; ++if_match) {
-            if (!Traits::eq(*if_match, chr))
+            if (!Traits::eq(*if_match, chr)) {
                 return static_cast<size_t>(if_match - dest);
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -684,24 +706,29 @@ constexpr size_t char_traits_find_not_char(const char_traits_ptr_t<Traits> dest,
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    is_specialization_v<Traits, char_traits>
+                                   is_specialization_v<Traits, char_traits>
 #else
-    is_specialization_v<Traits, char_traits>()
+                                   is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_last_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                              const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                              const size_t rsc_size) noexcept {
     if (dest_size != 0) {
         inner::__string_bitmap<char_traits_char_t<Traits>> match;
-        if (!match.mark(rsc, rsc + rsc_size))
-            return (char_traits_find_last_not_of<Traits, false>)
-            (dest, dest_size, start, rsc, rsc_size);
+        if (!match.mark(rsc, rsc + rsc_size)) {
+            return (char_traits_find_last_not_of<Traits, false>) (dest, dest_size, start, rsc, rsc_size);
+        }
 
         for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
-            if (!match.match(*if_match))
+            if (!match.match(*if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -719,19 +746,24 @@ constexpr size_t char_traits_find_last_not_of(const char_traits_ptr_t<Traits> de
  */
 template <typename Traits, enable_if_t<
 #ifdef NEFORCE_STANDARD_17
-    !is_specialization_v<Traits, char_traits>
+                                   !is_specialization_v<Traits, char_traits>
 #else
-    !is_specialization_v<Traits, char_traits>()
+                                   !is_specialization_v<Traits, char_traits>()
 #endif
-    , int> = 0>
+                                   ,
+                                   int> = 0>
 constexpr size_t char_traits_find_last_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+                                              const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                              const size_t rsc_size) noexcept {
     if (dest_size != 0) {
         for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
-            if (!Traits::find(rsc, rsc_size, *if_match))
+            if (!Traits::find(rsc, rsc_size, *if_match)) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -748,13 +780,16 @@ constexpr size_t char_traits_find_last_not_of(const char_traits_ptr_t<Traits> de
  */
 template <typename Traits>
 constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
-    const size_t start, const char_traits_char_t<Traits> chr) noexcept {
+                                            const size_t start, const char_traits_char_t<Traits> chr) noexcept {
     if (dest_size != 0) {
         for (auto if_match = dest + _NEFORCE min(start, dest_size - 1);; --if_match) {
-            if (!Traits::eq(*if_match, chr))
+            if (!Traits::eq(*if_match, chr)) {
                 return static_cast<size_t>(if_match - dest);
+            }
 
-            if (if_match == dest) break;
+            if (if_match == dest) {
+                break;
+            }
         }
     }
     return static_cast<size_t>(-1);
@@ -762,31 +797,27 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
 
 /** @} */ // CharTraits
 
-#define __NEFORCE_BUILD_CHAR_PTR_HASH(OPT) \
-template <> \
-struct hash<OPT*> { \
-    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
-        return FNV_hash_string(str, char_traits<OPT>::length(str)); \
-    } \
-}; \
-template <> \
-struct hash<const OPT*> { \
-    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
-        return FNV_hash_string(str, char_traits<OPT>::length(str)); \
-    } \
-}; \
-template <size_t N> \
-struct hash<OPT[N]> { \
-    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT (&str)[N]) const noexcept { \
-        return FNV_hash_string(str, N - 1); \
-    } \
-}; \
-template <size_t N> \
-struct hash<const OPT[N]> { \
-    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT (&str)[N]) const noexcept { \
-        return FNV_hash_string(str, N - 1); \
-    } \
-};
+#define __NEFORCE_BUILD_CHAR_PTR_HASH(OPT)                                                  \
+    template <> struct hash<OPT*> {                                                         \
+        NEFORCE_NODISCARD constexpr size_t operator()(const OPT* str) const noexcept {      \
+            return FNV_hash_string(str, char_traits<OPT>::length(str));                     \
+        }                                                                                   \
+    };                                                                                      \
+    template <> struct hash<const OPT*> {                                                   \
+        NEFORCE_NODISCARD constexpr size_t operator()(const OPT* str) const noexcept {      \
+            return FNV_hash_string(str, char_traits<OPT>::length(str));                     \
+        }                                                                                   \
+    };                                                                                      \
+    template <size_t N> struct hash<OPT[N]> {                                               \
+        NEFORCE_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
+            return FNV_hash_string(str, N - 1);                                             \
+        }                                                                                   \
+    };                                                                                      \
+    template <size_t N> struct hash<const OPT[N]> {                                         \
+        NEFORCE_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
+            return FNV_hash_string(str, N - 1);                                             \
+        }                                                                                   \
+    };
 
 NEFORCE_MACRO_RANGE_CHARS(__NEFORCE_BUILD_CHAR_PTR_HASH)
 #undef __NEFORCE_BUILD_CHAR_PTR_HASH

@@ -56,15 +56,15 @@ public:
      */
     class line_iterator {
     public:
-        using value_type = string;           ///< 元素类型
-        using reference = const string&;     ///< 引用类型
-        using pointer = const string*;       ///< 指针类型
+        using value_type = string;                    ///< 元素类型
+        using reference = const string&;              ///< 引用类型
+        using pointer = const string*;                ///< 指针类型
         using iterator_category = input_iterator_tag; ///< 迭代器类别
-        using difference_type = ptrdiff_t;   ///< 差值类型
+        using difference_type = ptrdiff_t;            ///< 差值类型
 
     private:
-        const file* file_ = nullptr;         ///< 关联的文件对象
-        mutable string current_line_;        ///< 当前行内容
+        const file* file_ = nullptr;  ///< 关联的文件对象
+        mutable string current_line_; ///< 当前行内容
 
     public:
         /**
@@ -82,53 +82,49 @@ public:
          * @brief 解引用操作符
          * @return 当前行的引用
          */
-        reference operator *() const noexcept { return current_line_; }
+        reference operator*() const noexcept { return current_line_; }
 
         /**
          * @brief 成员访问操作符
          * @return 当前行指针
          */
-        pointer operator ->() const noexcept { return &current_line_; }
+        pointer operator->() const noexcept { return &current_line_; }
 
         /**
          * @brief 前置递增操作符
          * @return 递增后的迭代器
          */
-        line_iterator& operator ++();
+        line_iterator& operator++();
 
         /**
          * @brief 后置递增操作符
          * @return 递增前的迭代器
          */
-        line_iterator operator ++(int);
+        line_iterator operator++(int);
 
         /**
          * @brief 相等比较操作符
          * @param rhs 另一个迭代器
          * @return 相等返回true
          */
-        bool operator ==(const line_iterator& rhs) const noexcept {
-            return file_ == rhs.file_;
-        }
+        bool operator==(const line_iterator& rhs) const noexcept { return file_ == rhs.file_; }
 
         /**
          * @brief 不等比较操作符
          * @param rhs 另一个迭代器
          * @return 不等返回true
          */
-        bool operator !=(const line_iterator& rhs) const noexcept {
-            return !(*this == rhs);
-        }
+        bool operator!=(const line_iterator& rhs) const noexcept { return !(*this == rhs); }
     };
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type          = ::DWORD;      ///< 大小类型
-    using difference_type    = ::LONGLONG;   ///< 偏移量类型
-    using native_handle_type = ::HANDLE;     ///< 原生文件句柄类型
+    using size_type = ::DWORD;           ///< 大小类型
+    using difference_type = ::LONGLONG;  ///< 偏移量类型
+    using native_handle_type = ::HANDLE; ///< 原生文件句柄类型
 #else
-    using size_type          = size_t;       ///< 大小类型
-    using difference_type    = ::off_t;      ///< 偏移量类型
-    using native_handle_type = int;          ///< 原生文件句柄类型
+    using size_type = size_t;        ///< 大小类型
+    using difference_type = ::off_t; ///< 偏移量类型
+    using native_handle_type = int;  ///< 原生文件句柄类型
 #endif
 
     /**
@@ -136,31 +132,31 @@ public:
      * @brief 文件块信息
      */
     struct chunk_info {
-        difference_type offset;    ///< 块偏移
-        size_type size;            ///< 块大小
-        size_type index;           ///< 块索引
+        difference_type offset; ///< 块偏移
+        size_type size;         ///< 块大小
+        size_type index;        ///< 块索引
     };
 
 private:
-    native_handle_type handle_;    ///< 文件句柄
-    path path_{};                  ///< 文件路径
-    bool opened_ = false;          ///< 是否已打开
-    bool append_mode_ = false;     ///< 是否为追加模式
+    native_handle_type handle_; ///< 文件句柄
+    path path_{};               ///< 文件路径
+    bool opened_ = false;       ///< 是否已打开
+    bool append_mode_ = false;  ///< 是否为追加模式
 
-    size_type buffer_size_ = buffer_size;      ///< 缓冲区大小
-    mutable byte_vector read_buffer_{};        ///< 读缓冲区
-    mutable size_type read_buffer_pos_ = 0;    ///< 读缓冲区位置
-    mutable size_type read_buffer_size_ = 0;   ///< 读缓冲区有效数据大小
-    mutable byte_vector write_buffer_{};       ///< 写缓冲区
-    mutable size_type write_buffer_pos_ = 0;   ///< 写缓冲区位置
+    size_type buffer_size_ = buffer_size;    ///< 缓冲区大小
+    mutable byte_vector read_buffer_{};      ///< 读缓冲区
+    mutable size_type read_buffer_pos_ = 0;  ///< 读缓冲区位置
+    mutable size_type read_buffer_size_ = 0; ///< 读缓冲区有效数据大小
+    mutable byte_vector write_buffer_{};     ///< 写缓冲区
+    mutable size_type write_buffer_pos_ = 0; ///< 写缓冲区位置
 
-    mutable string last_error_msg_;            ///< 最后错误信息
-    mutable int last_error_code_ = 0;          ///< 最后错误码
+    mutable string last_error_msg_;   ///< 最后错误信息
+    mutable int last_error_code_ = 0; ///< 最后错误码
 
-    unique_ptr<file_mapper> map_;              ///< 内存映射对象
-    unique_ptr<file_locker> locker_;           ///< 文件锁对象
-    unique_ptr<file_info> info_;               ///< 文件信息对象
-    unique_ptr<file_async> async_;             ///< 异步I/O对象
+    unique_ptr<file_mapper> map_;    ///< 内存映射对象
+    unique_ptr<file_locker> locker_; ///< 文件锁对象
+    unique_ptr<file_info> info_;     ///< 文件信息对象
+    unique_ptr<file_async> async_;   ///< 异步I/O对象
 
 private:
     void init_sub_objects() noexcept;
@@ -192,15 +188,12 @@ public:
      *
      * 创建并打开文件。
      */
-    explicit file(
-        path pth, bool append = false,
-        file_access access = file_access::READ_WRITE,
-        file_shared share_mode = file_shared::SHARE_READ,
-        file_creation creation = file_creation::OPEN_EXIST,
-        file_attri attributes = file_attri::NORMAL);
+    explicit file(path pth, bool append = false, file_access access = file_access::READ_WRITE,
+                  file_shared share_mode = file_shared::SHARE_READ, file_creation creation = file_creation::OPEN_EXIST,
+                  file_attri attributes = file_attri::NORMAL);
 
     file(const file&) = delete;
-    file& operator =(const file&) = delete;
+    file& operator=(const file&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -213,7 +206,7 @@ public:
      * @param other 要移动的文件对象
      * @return 自身引用
      */
-    file& operator =(file&& other) noexcept;
+    file& operator=(file&& other) noexcept;
 
     /**
      * @brief 析构函数
@@ -232,11 +225,9 @@ public:
      * @param attributes 文件属性
      * @return 打开成功返回true
      */
-    bool open(path pth, bool append = false,
-              file_access access = file_access::READ_WRITE,
+    bool open(path pth, bool append = false, file_access access = file_access::READ_WRITE,
               file_shared share_mode = file_shared::SHARE_READ_WRITE,
-              file_creation creation = file_creation::OPEN_EXIST,
-              file_attri attributes = file_attri::NORMAL);
+              file_creation creation = file_creation::OPEN_EXIST, file_attri attributes = file_attri::NORMAL);
 
     /**
      * @brief 重新打开文件（使用原有路径）
@@ -247,11 +238,9 @@ public:
      * @param attributes 文件属性
      * @return 打开成功返回true
      */
-    bool open(bool append = false,
-              file_access access = file_access::READ_WRITE,
+    bool open(bool append = false, file_access access = file_access::READ_WRITE,
               file_shared share_mode = file_shared::SHARE_READ_WRITE,
-              file_creation creation = file_creation::OPEN_EXIST,
-              file_attri attributes = file_attri::NORMAL);
+              file_creation creation = file_creation::OPEN_EXIST, file_attri attributes = file_attri::NORMAL);
 
     /**
      * @brief 关闭文件
@@ -463,50 +452,38 @@ public:
      * @brief 获取原生文件句柄
      * @return 文件句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
-        return handle_;
-    }
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return handle_; }
 
     /**
      * @brief 获取文件路径
      * @return 路径引用
      */
-    NEFORCE_NODISCARD const path& file_path() const noexcept {
-        return path_;
-    }
+    NEFORCE_NODISCARD const path& file_path() const noexcept { return path_; }
 
     /**
      * @brief 检查文件是否已打开
      * @return 是否已打开
      */
-    NEFORCE_NODISCARD bool is_opened() const noexcept {
-        return opened_;
-    }
+    NEFORCE_NODISCARD bool is_opened() const noexcept { return opened_; }
 
     /**
      * @brief 检查是否为追加模式
      * @return 是否为追加模式
      */
-    NEFORCE_NODISCARD bool is_append() const noexcept {
-        return append_mode_;
-    }
+    NEFORCE_NODISCARD bool is_append() const noexcept { return append_mode_; }
 
 
     /**
      * @brief 获取最后错误信息
      * @return 错误信息
      */
-    NEFORCE_NODISCARD const string& last_error() const noexcept {
-        return last_error_msg_;
-    }
+    NEFORCE_NODISCARD const string& last_error() const noexcept { return last_error_msg_; }
 
     /**
      * @brief 获取最后错误码
      * @return 错误码
      */
-    NEFORCE_NODISCARD int last_error_code() const noexcept {
-        return last_error_code_;
-    }
+    NEFORCE_NODISCARD int last_error_code() const noexcept { return last_error_code_; }
 
     /**
      * @brief 清除错误状态
@@ -517,17 +494,13 @@ public:
      * @brief 获取行迭代器起始
      * @return 行迭代器
      */
-    NEFORCE_NODISCARD line_iterator begin_lines() const {
-        return line_iterator(this);
-    }
+    NEFORCE_NODISCARD line_iterator begin_lines() const { return line_iterator(this); }
 
     /**
      * @brief 获取行迭代器结束
      * @return 结束迭代器
      */
-    NEFORCE_NODISCARD line_iterator end_lines() const {
-        return {};
-    }
+    NEFORCE_NODISCARD line_iterator end_lines() const { return {}; }
 
     /**
      * @brief 获取内存映射对象

@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_MYSQL_CONNECT_HPP__
 #define NEFORCE_DATABASE_MYSQL_CONNECT_HPP__
 #ifdef NEFORCE_SUPPORT_MYSQL
-#include "NeForce/db/db_interface.hpp"
-#include <mysql/mysql.h>
+#    include <mysql/mysql.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API mysql_connect final : idb_tb_connect {
@@ -34,8 +34,8 @@ public:
 
 class NEFORCE_API mysql_factory final : public idb_factory {
 public:
-    explicit mysql_factory(db_config config)
-    : idb_factory(move(config)) {}
+    explicit mysql_factory(db_config config) :
+    idb_factory(move(config)) {}
 
     idb_connect* create_connect() override;
     idb_result* create_result(void* native_result) override;

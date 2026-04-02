@@ -1,25 +1,25 @@
-#include <NeForce/core/file/path_tree.hpp>
 #include <NeForce/core/container/queue.hpp>
+#include <NeForce/core/file/path_tree.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <windef.h>
-#include <WinBase.h>
-#include <fileapi.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <NeForce/core/config/windef.hpp>
+#    include <WinBase.h>
+#    include <fileapi.h>
+#    include <windef.h>
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/stat.h>
-#include <dirent.h>
+#    include <dirent.h>
+#    include <sys/stat.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 path_tree::node::ptr path_tree::node::find_child(const string_view name) const noexcept {
-    for (const auto& child : children_) {
+    for (const auto& child: children_) {
         if (child->get_path().filename() == name) {
             return child;
         }
@@ -45,11 +45,11 @@ bool path_tree::node::remove_child(const string_view name) {
 path_tree path_tree::scan(const path& root, const scan_options& options) {
     path_tree tree;
 
-    if (!root.exists()) return tree;
+    if (!root.exists()) {
+        return tree;
+    }
 
-    const node_type root_type = root.is_directory()
-        ? node_type::directory
-        : node_type::file;
+    const node_type root_type = root.is_directory() ? node_type::directory : node_type::file;
 
     tree.root_ = make_shared<node>(root.absolute(), root_type, 0);
 
@@ -60,12 +60,10 @@ path_tree path_tree::scan(const path& root, const scan_options& options) {
     return tree;
 }
 
-void path_tree::scan_impl(
-    const node::ptr&    parent,
-    const scan_options& options,
-    const size_t        current_depth
-) {
-    if (options.max_depth > 0 && current_depth > options.max_depth) return;
+void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, const size_t current_depth) {
+    if (options.max_depth > 0 && current_depth > options.max_depth) {
+        return;
+    }
 
     const path& dir = parent->get_path();
 
@@ -74,46 +72,50 @@ void path_tree::scan_impl(
     WIN32_FIND_DATAA fdata;
     const path search_path = dir / "*";
     const HANDLE hFind = ::FindFirstFileA(search_path.data(), &fdata);
-    if (hFind == INVALID_HANDLE_VALUE) return;
+    if (hFind == INVALID_HANDLE_VALUE) {
+        return;
+    }
 
     do {
         const string_view name(fdata.cFileName);
-        if (name == "." || name == "..") continue;
+        if (name == "." || name == "..") {
+            continue;
+        }
 
-        if (!options.include_hidden && !name.empty() && name.front() == '.') continue;
+        if (!options.include_hidden && !name.empty() && name.front() == '.') {
+            continue;
+        }
 
         const path child_path = dir / name;
         const bool is_dir = (fdata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
 
         node_type type = is_dir ? node_type::directory : node_type::file;
 
-        const bool type_ok = !(options.files_only && is_dir) &&
-                             !(options.dirs_only  && !is_dir);
+        const bool type_ok = !(options.files_only && is_dir) && !(options.dirs_only && !is_dir);
 
         bool ext_ok = true;
         if (!is_dir && !options.extensions.empty()) {
             const string_view ext = child_path.extension();
             ext_ok = false;
-            for (const auto& e : options.extensions) {
-                if (ext == e.view()) { ext_ok = true; break; }
+            for (const auto& e: options.extensions) {
+                if (ext == e.view()) {
+                    ext_ok = true;
+                    break;
+                }
             }
         }
 
         auto child_node = make_shared<node>(child_path, type, current_depth);
         child_node->parent_ = parent;
 
-        const bool custom_ok = !options.custom_filter ||
-                                options.custom_filter(*child_node);
+        const bool custom_ok = !options.custom_filter || options.custom_filter(*child_node);
 
         if (type_ok && ext_ok && custom_ok) {
             parent->children_.push_back(child_node);
         }
 
         if (is_dir) {
-            node::ptr& recurse_node =
-                (type_ok && ext_ok && custom_ok)
-                    ? parent->children_.back()
-                    : child_node;
+            node::ptr& recurse_node = (type_ok && ext_ok && custom_ok) ? parent->children_.back() : child_node;
             scan_impl(recurse_node, options, current_depth + 1);
         }
 
@@ -123,76 +125,92 @@ void path_tree::scan_impl(
 
 #else
     ::DIR* dp = ::opendir(dir.data());
-    if (!dp) return;
+    if (!dp) {
+        return;
+    }
 
     struct ::dirent* entry;
     while ((entry = ::readdir(dp)) != nullptr) {
         const string_view name(entry->d_name);
-        if (name == "." || name == "..") continue;
+        if (name == "." || name == "..") {
+            continue;
+        }
 
-        if (!options.include_hidden && !name.empty() && name.front() == '.') continue;
+        if (!options.include_hidden && !name.empty() && name.front() == '.') {
+            continue;
+        }
 
         const path child_path = dir / name;
 
         node_type type = node_type::unknown;
         bool is_dir = false;
 
-#ifdef _DIRENT_HAVE_D_TYPE
+#    ifdef _DIRENT_HAVE_D_TYPE
         if (entry->d_type == DT_DIR) {
-            type   = node_type::directory;
+            type = node_type::directory;
             is_dir = true;
         } else if (entry->d_type == DT_LNK) {
             type = node_type::symlink;
             if (options.follow_symlinks) {
                 is_dir = child_path.is_directory();
-                if (is_dir) type = node_type::directory;
+                if (is_dir) {
+                    type = node_type::directory;
+                }
             }
         } else if (entry->d_type == DT_REG) {
             type = node_type::file;
         } else {
             struct ::stat64 st{};
             if (::stat64(child_path.data(), &st) == 0) {
-                if (S_ISDIR(st.st_mode))      { type = node_type::directory; is_dir = true; }
-                else if (S_ISREG(st.st_mode)) { type = node_type::file; }
-                else if (S_ISLNK(st.st_mode)) { type = node_type::symlink; }
+                if (S_ISDIR(st.st_mode)) {
+                    type = node_type::directory;
+                    is_dir = true;
+                } else if (S_ISREG(st.st_mode)) {
+                    type = node_type::file;
+                } else if (S_ISLNK(st.st_mode)) {
+                    type = node_type::symlink;
+                }
             }
         }
-#else
+#    else
         struct ::stat64 st{};
         if (::stat64(child_path.data(), &st) == 0) {
-            if      (S_ISDIR(st.st_mode)) { type = node_type::directory; is_dir = true; }
-            else if (S_ISREG(st.st_mode)) { type = node_type::file; }
-            else if (S_ISLNK(st.st_mode)) { type = node_type::symlink; }
+            if (S_ISDIR(st.st_mode)) {
+                type = node_type::directory;
+                is_dir = true;
+            } else if (S_ISREG(st.st_mode)) {
+                type = node_type::file;
+            } else if (S_ISLNK(st.st_mode)) {
+                type = node_type::symlink;
+            }
         }
-#endif
+#    endif
 
-        const bool type_ok = !(options.files_only && is_dir) &&
-                             !(options.dirs_only  && !is_dir);
+        const bool type_ok = !(options.files_only && is_dir) && !(options.dirs_only && !is_dir);
 
         bool ext_ok = true;
         if (!is_dir && !options.extensions.empty()) {
             const string_view ext = child_path.extension();
             ext_ok = false;
-            for (const auto& e : options.extensions) {
-                if (ext == e.view()) { ext_ok = true; break; }
+            for (const auto& e: options.extensions) {
+                if (ext == e.view()) {
+                    ext_ok = true;
+                    break;
+                }
             }
         }
 
         auto child_node = make_shared<node>(child_path, type, current_depth);
         child_node->parent_ = parent;
 
-        const bool custom_ok = !options.custom_filter ||
-                                options.custom_filter(*child_node);
+        const bool custom_ok = !options.custom_filter || options.custom_filter(*child_node);
 
         if (type_ok && ext_ok && custom_ok) {
             parent->children_.push_back(child_node);
         }
 
         if (is_dir) {
-            node::ptr& recurse_node =
-                (type_ok && ext_ok && custom_ok)
-                    ? parent->children_.back()
-                    : child_node;
+            node::ptr& recurse_node = (type_ok && ext_ok && custom_ok) ? parent->children_.back() : child_node;
             scan_impl(recurse_node, options, current_depth + 1);
         }
     }
@@ -202,7 +220,9 @@ void path_tree::scan_impl(
 }
 
 size_t path_tree::size() const noexcept {
-    if (!root_) return 0;
+    if (!root_) {
+        return 0;
+    }
     size_t count = 0;
     traverse_dfs([&](const node& /*n*/) -> visit_result {
         ++count;
@@ -212,17 +232,23 @@ size_t path_tree::size() const noexcept {
 }
 
 size_t path_tree::max_depth() const noexcept {
-    if (!root_) return 0;
+    if (!root_) {
+        return 0;
+    }
     size_t max_d = 0;
     traverse_dfs([&](const node& n) -> visit_result {
-        if (n.depth() > max_d) max_d = n.depth();
+        if (n.depth() > max_d) {
+            max_d = n.depth();
+        }
         return visit_result::proceed;
     });
     return max_d;
 }
 
 path_tree::node::ptr path_tree::find(const path& p) const noexcept {
-    if (!root_) return nullptr;
+    if (!root_) {
+        return nullptr;
+    }
 
     const path target = p.absolute();
 
@@ -238,9 +264,7 @@ path_tree::node::ptr path_tree::find(const path& p) const noexcept {
 }
 
 vector<path_tree::node::ptr> path_tree::find_all(const string_view name) const {
-    return find_if([&](const node& n) {
-        return n.get_path().filename() == name;
-    });
+    return find_if([&](const node& n) { return n.get_path().filename() == name; });
 }
 
 vector<path_tree::node::ptr> path_tree::find_if(const filter& f) const {
@@ -250,48 +274,55 @@ vector<path_tree::node::ptr> path_tree::find_if(const filter& f) const {
 }
 
 vector<path_tree::node::ptr> path_tree::find_by_extension(const string_view ext) const {
-    return find_if([&](const node& n) {
-        return n.is_file() && n.get_path().extension() == ext;
-    });
+    return find_if([&](const node& n) { return n.is_file() && n.get_path().extension() == ext; });
 }
 
-void path_tree::collect_impl(
-    const node::ptr&    current,
-    const filter&       f,
-    vector<node::ptr>&  result
-) {
-    if (!current) return;
-    if (f(*current)) result.push_back(current);
-    for (const auto& child : current->children_) {
+void path_tree::collect_impl(const node::ptr& current, const filter& f, vector<node::ptr>& result) {
+    if (!current) {
+        return;
+    }
+    if (f(*current)) {
+        result.push_back(current);
+    }
+    for (const auto& child: current->children_) {
         collect_impl(child, f, result);
     }
 }
 
 void path_tree::traverse_dfs(const visitor& v) const {
-    if (!root_) return;
+    if (!root_) {
+        return;
+    }
     bool stopped = false;
     traverse_dfs_impl(root_, v, stopped);
 }
 
-void path_tree::traverse_dfs_impl(
-    const node::ptr& current,
-    const visitor&   v,
-    bool&            stopped
-) {
-    if (!current || stopped) return;
+void path_tree::traverse_dfs_impl(const node::ptr& current, const visitor& v, bool& stopped) {
+    if (!current || stopped) {
+        return;
+    }
 
     const visit_result res = v(*current);
-    if (res == visit_result::stop)  { stopped = true; return; }
-    if (res == visit_result::skip)  { return; }
+    if (res == visit_result::stop) {
+        stopped = true;
+        return;
+    }
+    if (res == visit_result::skip) {
+        return;
+    }
 
-    for (const auto& child : current->children_) {
-        if (stopped) break;
+    for (const auto& child: current->children_) {
+        if (stopped) {
+            break;
+        }
         traverse_dfs_impl(child, v, stopped);
     }
 }
 
 void path_tree::traverse_bfs(const visitor& v) const {
-    if (!root_) return;
+    if (!root_) {
+        return;
+    }
 
     queue<node::ptr> q;
     q.push(root_);
@@ -301,10 +332,14 @@ void path_tree::traverse_bfs(const visitor& v) const {
         q.pop();
 
         const visit_result res = v(*current);
-        if (res == visit_result::stop) return;
-        if (res == visit_result::skip) continue;
+        if (res == visit_result::stop) {
+            return;
+        }
+        if (res == visit_result::skip) {
+            continue;
+        }
 
-        for (const auto& child : current->children_) {
+        for (const auto& child: current->children_) {
             q.push(child);
         }
     }
@@ -312,28 +347,35 @@ void path_tree::traverse_bfs(const visitor& v) const {
 
 void path_tree::traverse_files(const visitor& v) const {
     traverse_dfs([&](const node& n) -> visit_result {
-        if (n.is_file()) return v(n);
+        if (n.is_file()) {
+            return v(n);
+        }
         return visit_result::proceed;
     });
 }
 
 void path_tree::traverse_dirs(const visitor& v) const {
     traverse_dfs([&](const node& n) -> visit_result {
-        if (n.is_directory()) return v(n);
+        if (n.is_directory()) {
+            return v(n);
+        }
         return visit_result::proceed;
     });
 }
 
 path_tree::node::ptr path_tree::insert(const path& p, const node_type type) {
-    if (!root_) return nullptr;
+    if (!root_) {
+        return nullptr;
+    }
 
-    const path abs = p.is_file() ? p.parent_path().absolute() / p.filename()
-                                 : p.absolute();
+    const path abs = p.is_file() ? p.parent_path().absolute() / p.filename() : p.absolute();
     node::ptr current = root_;
 
     for (auto it = abs.begin(); it != abs.end(); ++it) {
         const string_view part = *it;
-        if (part.empty()) continue;
+        if (part.empty()) {
+            continue;
+        }
 
         node::ptr child = current->find_child(part);
         if (!child) {
@@ -342,11 +384,7 @@ path_tree::node::ptr path_tree::insert(const path& p, const node_type type) {
             const bool is_last = (next_it == abs.end());
             const node_type child_type = is_last ? type : node_type::directory;
 
-            child = make_shared<node>(
-                current->get_path() / part,
-                child_type,
-                current->depth_ + 1
-            );
+            child = make_shared<node>(current->get_path() / part, child_type, current->depth_ + 1);
             child->parent_ = current;
             current->children_.push_back(child);
         }
@@ -357,20 +395,31 @@ path_tree::node::ptr path_tree::insert(const path& p, const node_type type) {
 }
 
 bool path_tree::remove(const path& p) {
-    if (!root_) return false;
+    if (!root_) {
+        return false;
+    }
 
     const node::ptr target = find(p);
-    if (!target) return false;
-    if (target->is_root()) { root_ = nullptr; return true; }
+    if (!target) {
+        return false;
+    }
+    if (target->is_root()) {
+        root_ = nullptr;
+        return true;
+    }
 
     const node::ptr parent = target->parent();
-    if (!parent) return false;
+    if (!parent) {
+        return false;
+    }
 
     return parent->remove_child(target->get_path().filename());
 }
 
 void path_tree::merge(const path_tree& other) {
-    if (!other.root_) return;
+    if (!other.root_) {
+        return;
+    }
 
     other.traverse_dfs([&](const node& n) -> visit_result {
         if (!n.is_root()) {
@@ -382,24 +431,26 @@ void path_tree::merge(const path_tree& other) {
 
 path_tree path_tree::subtree(const path& p) const {
     const node::ptr target = find(p);
-    if (!target) return {};
+    if (!target) {
+        return {};
+    }
 
     path_tree result;
     result.root_ = clone_node(target, nullptr, 0);
     return result;
 }
 
-path_tree::node::ptr path_tree::clone_node(
-    const node::ptr& src,
-    const node::ptr& new_parent,
-    const size_t     depth
-) {
-    if (!src) return nullptr;
+path_tree::node::ptr path_tree::clone_node(const node::ptr& src, const node::ptr& new_parent, const size_t depth) {
+    if (!src) {
+        return nullptr;
+    }
 
     auto cloned = make_shared<node>(src->get_path(), src->type(), depth);
-    if (new_parent) cloned->parent_ = new_parent;
+    if (new_parent) {
+        cloned->parent_ = new_parent;
+    }
 
-    for (const auto& child : src->children_) {
+    for (const auto& child: src->children_) {
         auto cloned_child = clone_node(child, cloned, depth + 1);
         cloned->children_.push_back(cloned_child);
     }
@@ -407,25 +458,27 @@ path_tree::node::ptr path_tree::clone_node(
 }
 
 path_tree path_tree::prune(const filter& f) const {
-    if (!root_) return {};
+    if (!root_) {
+        return {};
+    }
 
     path_tree result;
     result.root_ = prune_impl(root_, f, nullptr, 0);
     return result;
 }
 
-path_tree::node::ptr path_tree::prune_impl(
-    const node::ptr& src,
-    const filter&    f,
-    const node::ptr& new_parent,
-    const size_t     depth
-) {
-    if (!src) return nullptr;
+path_tree::node::ptr path_tree::prune_impl(const node::ptr& src, const filter& f, const node::ptr& new_parent,
+                                           const size_t depth) {
+    if (!src) {
+        return nullptr;
+    }
 
     auto cloned = make_shared<node>(src->get_path(), src->type(), depth);
-    if (new_parent) cloned->parent_ = new_parent;
+    if (new_parent) {
+        cloned->parent_ = new_parent;
+    }
 
-    for (const auto& child : src->children_) {
+    for (const auto& child: src->children_) {
         auto pruned_child = prune_impl(child, f, cloned, depth + 1);
         if (pruned_child) {
             cloned->children_.push_back(pruned_child);
@@ -433,7 +486,9 @@ path_tree::node::ptr path_tree::prune_impl(
     }
 
     if (src->is_directory()) {
-        if (!cloned->children_.empty() || f(*src)) return cloned;
+        if (!cloned->children_.empty() || f(*src)) {
+            return cloned;
+        }
         return nullptr;
     }
 
@@ -468,34 +523,38 @@ vector<path> path_tree::all_dir_paths() const {
 }
 
 string path_tree::to_string() const {
-    if (!root_) return {};
+    if (!root_) {
+        return {};
+    }
     return to_string_impl(root_, "  ", 0);
 }
 
 string path_tree::to_string(const string_view indent) const {
-    if (!root_) return {};
+    if (!root_) {
+        return {};
+    }
     return to_string_impl(root_, indent, 0);
 }
 
-string path_tree::to_string_impl(
-    const node::ptr& n,
-    const string_view indent,
-    const size_t depth
-) const {
-    if (!n) return {};
+string path_tree::to_string_impl(const node::ptr& n, const string_view indent, const size_t depth) const {
+    if (!n) {
+        return {};
+    }
 
     string result;
-    for (size_t i = 0; i < depth; ++i) result += indent;
+    for (size_t i = 0; i < depth; ++i) {
+        result += indent;
+    }
 
-    const string_view fname = n->is_root()
-        ? n->get_path().view()
-        : n->get_path().filename();
+    const string_view fname = n->is_root() ? n->get_path().view() : n->get_path().filename();
 
     result += fname;
-    if (n->is_directory()) result += '/';
+    if (n->is_directory()) {
+        result += '/';
+    }
     result += '\n';
 
-    for (const auto& child : n->children_) {
+    for (const auto& child: n->children_) {
         result += to_string_impl(child, indent, depth + 1);
     }
     return result;

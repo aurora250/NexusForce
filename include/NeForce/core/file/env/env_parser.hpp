@@ -107,9 +107,7 @@ private:
      *
      * @throws env_exception 当变量格式错误时抛出
      */
-    bool parse_variable_line(
-        const string& line, string& name,
-        unique_ptr<env_variable>& variable) const;
+    bool parse_variable_line(const string& line, string& name, unique_ptr<env_variable>& variable) const;
 
     /**
      * @brief 解析无引号的值
@@ -156,8 +154,9 @@ public:
      *
      * 初始化解析器并创建空的文档对象。
      */
-    explicit env_parser(string text) noexcept
-    : text_(_NEFORCE move(text)), len_(text_.size()) {
+    explicit env_parser(string text) noexcept :
+    text_(_NEFORCE move(text)),
+    len_(text_.size()) {
         root_ = make_unique<env_document>();
     }
 

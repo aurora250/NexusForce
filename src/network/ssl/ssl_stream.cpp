@@ -137,7 +137,8 @@ bool ssl_stream::connect() {
                 error_msg += " (Connection closed)";
                 break;
             }
-            default: unreachable();
+            default:
+                unreachable();
         }
         NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg.data()));
     }
@@ -283,7 +284,9 @@ bool ssl_stream::write_all(const void* data, const size_t size) {
 }
 
 int ssl_stream::pending() const {
-    if (!ssl_) return 0;
+    if (!ssl_) {
+        return 0;
+    }
     return ::SSL_pending(ssl_.get());
 }
 
@@ -315,7 +318,9 @@ void ssl_stream::set_sni_hostname(const string& hostname) {
 }
 
 ::X509* ssl_stream::get_peer_certificate() const {
-    if (!ssl_) return nullptr;
+    if (!ssl_) {
+        return nullptr;
+    }
     return ::SSL_get_peer_certificate(ssl_.get());
 }
 
@@ -336,12 +341,16 @@ bool ssl_stream::verify_peer() const {
 }
 
 string ssl_stream::get_cipher_name() const {
-    if (!ssl_) return "";
+    if (!ssl_) {
+        return "";
+    }
     return ::SSL_get_cipher_name(ssl_.get());
 }
 
 string ssl_stream::get_version() const {
-    if (!ssl_) return "";
+    if (!ssl_) {
+        return "";
+    }
     return ::SSL_get_version(ssl_.get());
 }
 

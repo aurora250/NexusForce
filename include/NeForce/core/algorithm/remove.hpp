@@ -43,15 +43,16 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Iterator1, typename Iterator2, typename T>
 constexpr Iterator2 remove_copy(Iterator1 first, Iterator1 last, Iterator2 result, const T& value) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterator must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>,
+                  "Iterator must be forward_iterator");
 
-	for (; first != last; ++first) {
-		if (*first != value) {
-			*result = *first;
-			++result;
-		}
-	}
-	return result;
+    for (; first != last; ++first) {
+        if (*first != value) {
+            *result = *first;
+            ++result;
+        }
+    }
+    return result;
 }
 
 /**
@@ -70,15 +71,16 @@ constexpr Iterator2 remove_copy(Iterator1 first, Iterator1 last, Iterator2 resul
  */
 template <typename Iterator1, typename Iterator2, typename Predicate>
 constexpr Iterator2 remove_copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterator must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>,
+                  "Iterator must be forward_iterator");
 
-	for (; first != last; ++first) {
-		if (!pred(*first)) {
-			*result = *first;
-			++result;
-		}
-	}
-	return result;
+    for (; first != last; ++first) {
+        if (!pred(*first)) {
+            *result = *first;
+            ++result;
+        }
+    }
+    return result;
 }
 
 /**
@@ -96,13 +98,12 @@ constexpr Iterator2 remove_copy_if(Iterator1 first, Iterator1 last, Iterator2 re
  *
  * @note 算法保持剩余元素的相对顺序
  */
-template <typename Iterator, typename T>
-constexpr Iterator remove(Iterator first, Iterator last, const T& value) {
+template <typename Iterator, typename T> constexpr Iterator remove(Iterator first, Iterator last, const T& value) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
-	first = _NEFORCE find(first, last, value);
-	Iterator next = first;
-	return first == last ? first : _NEFORCE remove_copy(++next, last, first, value);
+    first = _NEFORCE find(first, last, value);
+    Iterator next = first;
+    return first == last ? first : _NEFORCE remove_copy(++next, last, first, value);
 }
 
 /**
@@ -124,9 +125,9 @@ template <typename Iterator, typename Predicate>
 constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
-	first = _NEFORCE find_if(first, last, pred);
-	Iterator next = first;
-	return first == last ? first : _NEFORCE remove_copy_if(++next, last, first, pred);
+    first = _NEFORCE find_if(first, last, pred);
+    Iterator next = first;
+    return first == last ? first : _NEFORCE remove_copy_if(++next, last, first, pred);
 }
 
 /**
@@ -143,20 +144,15 @@ constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
  * @note 要求容器提供 begin(), end(), erase() 方法
  * @note 值类型 U 必须与容器的元素类型相同
  */
-template <typename Container, typename U>
-constexpr size_t erase(Container& cont, const U& value) {
-	static_assert(
-		declval<decltype(*cont.begin())>().operator ==(declval<U>()),
-		"U must be comparable to the value type of Container");
+template <typename Container, typename U> constexpr size_t erase(Container& cont, const U& value) {
+    static_assert(declval<decltype(*cont.begin())>().operator==(declval<U>()),
+                  "U must be comparable to the value type of Container");
 
-	const auto old_size = cont.size();
-	const auto end = cont.end();
-	auto removed = _NEFORCE remove_if(cont.begin(), end,
-		[&value](const auto& iter) {
-			return *iter == value;
-		});
-	cont.erase(removed, end);
-	return old_size - cont.size();
+    const auto old_size = cont.size();
+    const auto end = cont.end();
+    auto removed = _NEFORCE remove_if(cont.begin(), end, [&value](const auto& iter) { return *iter == value; });
+    cont.erase(removed, end);
+    return old_size - cont.size();
 }
 
 /**
@@ -173,16 +169,13 @@ constexpr size_t erase(Container& cont, const U& value) {
  *
  * @note 要求容器提供 begin(), end(), erase() 方法
  */
-template <typename Container, typename Predicate>
-constexpr size_t erase_if(Container& cont, Predicate pred) {
-	const size_t old_size = cont.size();
-	const auto end = cont.end();
-	auto removed = _NEFORCE remove_if(cont.begin(), end,
-		[ref_pred = _NEFORCE ref(pred)](const auto& iter) {
-			return ref_pred(*iter);
-		});
-	cont.erase(removed, end);
-	return old_size - cont.size();
+template <typename Container, typename Predicate> constexpr size_t erase_if(Container& cont, Predicate pred) {
+    const size_t old_size = cont.size();
+    const auto end = cont.end();
+    auto removed = _NEFORCE remove_if(cont.begin(), end,
+                                      [ref_pred = _NEFORCE ref(pred)](const auto& iter) { return ref_pred(*iter); });
+    cont.erase(removed, end);
+    return old_size - cont.size();
 }
 
 /** @} */ // RemoveAlgorithms

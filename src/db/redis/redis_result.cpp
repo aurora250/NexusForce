@@ -1,6 +1,6 @@
 #include <NeForce/db/redis/redis_result.hpp>
 #ifdef NEFORCE_SUPPORT_HIREDIS
-#include <NeForce/core/utility/packages.hpp>
+#    include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -17,7 +17,9 @@ namespace {
             case REDIS_REPLY_ARRAY: {
                 string result;
                 for (size_t i = 0; i < element->elements; ++i) {
-                    if (i > 0) result += " ";
+                    if (i > 0) {
+                        result += " ";
+                    }
                     result += format_redis_reply_element(element->element[i]);
                 }
                 return result;
@@ -27,11 +29,13 @@ namespace {
             }
         }
     }
-}
+} // namespace
 
 
 string redis_result::get_string() const {
-    if (empty()) return {};
+    if (empty()) {
+        return {};
+    }
 
     if (!kv_pairs_->empty() && kv_cursor_ > 0) {
         return string(value());
@@ -43,15 +47,17 @@ string redis_result::get_string() const {
     return format_redis_reply_element(result_);
 }
 
-redis_result::redis_result() noexcept
-: column_names_(make_unique<vector<string>>()),
-  kv_pairs_(make_unique<vector<pair<string, string>>>()){}
+redis_result::redis_result() noexcept :
+column_names_(make_unique<vector<string>>()),
+kv_pairs_(make_unique<vector<pair<string, string>>>()) {}
 
-redis_result::redis_result(::redisReply* reply) noexcept
-: result_(reply),
-  column_names_(make_unique<vector<string>>()),
-  kv_pairs_(make_unique<vector<pair<string, string>>>()) {
-    if (!result_) return;
+redis_result::redis_result(::redisReply* reply) noexcept :
+result_(reply),
+column_names_(make_unique<vector<string>>()),
+kv_pairs_(make_unique<vector<pair<string, string>>>()) {
+    if (!result_) {
+        return;
+    }
 
     switch (result_->type) {
         case REDIS_REPLY_ARRAY: {
@@ -99,37 +105,41 @@ redis_result::~redis_result() {
 }
 
 bool redis_result::next() noexcept {
-    if (empty() || cursor_ >= rows_) return false;
+    if (empty() || cursor_ >= rows_) {
+        return false;
+    }
     ++cursor_;
     ++kv_cursor_;
     return cursor_ <= rows_;
 }
 
 string_view redis_result::key() const noexcept {
-    if (kv_pairs_->empty() || kv_cursor_ == 0) return {};
-    return kv_pairs_->operator [](kv_cursor_ - 1).first.view();
+    if (kv_pairs_->empty() || kv_cursor_ == 0) {
+        return {};
+    }
+    return kv_pairs_->operator[](kv_cursor_ - 1).first.view();
 }
 
 string_view redis_result::value() const noexcept {
-    if (kv_pairs_->empty() || kv_cursor_ == 0) return {};
-    return kv_pairs_->operator [](kv_cursor_ - 1).second.view();
+    if (kv_pairs_->empty() || kv_cursor_ == 0) {
+        return {};
+    }
+    return kv_pairs_->operator[](kv_cursor_ - 1).second.view();
 }
 
-bool redis_result::value_bool() const {
-    return boolean::parse(get_string().view()).value();
-}
+bool redis_result::value_bool() const { return boolean::parse(get_string().view()).value(); }
 
 int64_t redis_result::value_int64() const {
-    if (!result_) return 0;
+    if (!result_) {
+        return 0;
+    }
     if (result_->type == REDIS_REPLY_INTEGER) {
         return result_->integer;
     }
     return integer64::parse(get_string().view()).value();
 }
 
-double redis_result::value_double() const {
-    return float64::parse(get_string().view()).value();
-}
+double redis_result::value_double() const { return float64::parse(get_string().view()).value(); }
 
 vector<string> redis_result::value_array() const {
     vector<string> result;

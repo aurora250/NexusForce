@@ -1,15 +1,17 @@
 #include <NeForce/core/system/dynamic_library.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <libloaderapi.h>
+#    include <NeForce/core/config/windef.hpp>
+#    include <libloaderapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <dlfcn.h>
+#    include <dlfcn.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 void dynamic_library::open() {
-    if (handle_) return;
+    if (handle_) {
+        return;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     handle_ = ::LoadLibraryA(path_.data());
@@ -35,17 +37,19 @@ void dynamic_library::close() {
     }
 }
 
-dynamic_library::dynamic_library(const string& pth)
-: handle_(nullptr), path_(pth) {
+dynamic_library::dynamic_library(const string& pth) :
+handle_(nullptr),
+path_(pth) {
     open();
 }
 
-dynamic_library::dynamic_library(dynamic_library&& other) noexcept
-: handle_(other.handle_), path_(move(other.path_)) {
+dynamic_library::dynamic_library(dynamic_library&& other) noexcept :
+handle_(other.handle_),
+path_(move(other.path_)) {
     other.handle_ = nullptr;
 }
 
-dynamic_library& dynamic_library::operator =(dynamic_library&& other) noexcept {
+dynamic_library& dynamic_library::operator=(dynamic_library&& other) noexcept {
     if (this != &other) {
         close();
         handle_ = other.handle_;
@@ -55,9 +59,7 @@ dynamic_library& dynamic_library::operator =(dynamic_library&& other) noexcept {
     return *this;
 }
 
-dynamic_library::~dynamic_library() {
-    close();
-}
+dynamic_library::~dynamic_library() { close(); }
 
 void* dynamic_library::symbol(const string& name) const {
     if (!is_open()) {
@@ -82,7 +84,9 @@ void* dynamic_library::symbol(const string& name) const {
 }
 
 bool dynamic_library::has_symbol(const string& name) const noexcept {
-    if (!is_open()) return false;
+    if (!is_open()) {
+        return false;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data()) != nullptr;

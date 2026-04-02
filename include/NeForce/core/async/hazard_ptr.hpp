@@ -32,7 +32,7 @@ class hazard_pointer_obj_base;
  * 记录包含一个原子指针和一个活跃标志。
  */
 struct hazard_pointer_record {
-    atomic<void*> hazard_ptr{nullptr};           ///< 受保护的指针
+    atomic<void*> hazard_ptr{nullptr};            ///< 受保护的指针
     atomic<hazard_pointer_record*> next{nullptr}; ///< 链表中的下一个记录
     atomic<bool> active{false};                   ///< 记录是否活跃
 
@@ -44,9 +44,7 @@ struct hazard_pointer_record {
      */
     bool try_acquire() {
         bool expected = false;
-        return active.compare_exchange_strong(
-            expected, true,
-            memory_order_acquire, memory_order_relaxed);
+        return active.compare_exchange_strong(expected, true, memory_order_acquire, memory_order_relaxed);
     }
 
     /**
@@ -61,17 +59,13 @@ struct hazard_pointer_record {
      * @brief 保护指定的指针
      * @param ptr 要保护的指针
      */
-    void protect(void* ptr) {
-        hazard_ptr.store(ptr, memory_order_release);
-    }
+    void protect(void* ptr) { hazard_ptr.store(ptr, memory_order_release); }
 
     /**
      * @brief 获取当前保护的指针
      * @return 受保护的指针
      */
-    void* get_protected() const {
-        return hazard_ptr.load(memory_order_acquire);
-    }
+    void* get_protected() const { return hazard_ptr.load(memory_order_acquire); }
 };
 
 /**
@@ -83,10 +77,10 @@ struct hazard_pointer_record {
  */
 class hazard_pointer_obj_base {
 public:
-    hazard_pointer_obj_base* next{nullptr};  ///< 链表中的下一个对象
+    hazard_pointer_obj_base* next{nullptr}; ///< 链表中的下一个对象
 
     virtual ~hazard_pointer_obj_base() = default;
-    virtual void destroy() = 0;  ///< 销毁对象
+    virtual void destroy() = 0; ///< 销毁对象
 };
 
 /**
@@ -99,8 +93,8 @@ public:
  */
 template <typename T, typename Deleter = default_delete<void>>
 class hazard_pointer_obj final : public hazard_pointer_obj_base {
-    T* ptr;           ///< 实际对象指针
-    Deleter deleter;  ///< 删除器
+    T* ptr;          ///< 实际对象指针
+    Deleter deleter; ///< 删除器
 
 public:
     /**
@@ -108,15 +102,14 @@ public:
      * @param p 要管理的指针
      * @param d 删除器
      */
-    explicit hazard_pointer_obj(T* p, Deleter d = Deleter())
-    : ptr(p), deleter(_NEFORCE move(d)) {}
+    explicit hazard_pointer_obj(T* p, Deleter d = Deleter()) :
+    ptr(p),
+    deleter(_NEFORCE move(d)) {}
 
     /**
      * @brief 销毁对象
      */
-    void destroy() override {
-        deleter(ptr);
-    }
+    void destroy() override { deleter(ptr); }
 };
 
 /**
@@ -126,8 +119,8 @@ public:
  * 每个线程维护一个退役对象列表，当列表大小达到阈值时触发扫描回收。
  */
 struct retire_list {
-    hazard_pointer_obj_base* head{nullptr};  ///< 链表头
-    size_t count{0};   ///< 列表大小
+    hazard_pointer_obj_base* head{nullptr}; ///< 链表头
+    size_t count{0};                        ///< 列表大小
 
     /**
      * @brief 添加对象到退役列表
@@ -155,9 +148,7 @@ struct retire_list {
     /**
      * @brief 析构函数
      */
-    ~retire_list() {
-        clear();
-    }
+    ~retire_list() { clear(); }
 };
 
 /**
@@ -168,11 +159,11 @@ struct retire_list {
  */
 class hazard_pointer_domain {
 private:
-    atomic<hazard_pointer_record*> head_{nullptr};  ///< 记录链表头
+    atomic<hazard_pointer_record*> head_{nullptr}; ///< 记录链表头
 
-    static thread_local retire_list tl_retire_list_;  ///< 线程本地退役列表
+    static thread_local retire_list tl_retire_list_; ///< 线程本地退役列表
 
-    static constexpr size_t RETIRE_THRESHOLD = 100;  ///< 回收阈值
+    static constexpr size_t RETIRE_THRESHOLD = 100; ///< 回收阈值
 
     /**
      * @brief 获取所有活跃的险象指针
@@ -265,9 +256,7 @@ public:
         hazard_pointer_record* old_head = head_.load(memory_order_relaxed);
         do {
             new_record->next.store(old_head, memory_order_relaxed);
-        } while (!head_.compare_exchange_weak(
-            old_head, new_record,
-            memory_order_release, memory_order_relaxed));
+        } while (!head_.compare_exchange_weak(old_head, new_record, memory_order_release, memory_order_relaxed));
 
         return new_record;
     }
@@ -281,9 +270,10 @@ public:
      *
      * 将对象添加到当前线程的退役列表，如果列表大小超过阈值则触发回收。
      */
-    template <typename T, typename Deleter = default_delete<T>>
-    void retire(T* ptr, Deleter deleter = Deleter()) {
-        if (!ptr) return;
+    template <typename T, typename Deleter = default_delete<T>> void retire(T* ptr, Deleter deleter = Deleter()) {
+        if (!ptr) {
+            return;
+        }
 
         auto* obj = new hazard_pointer_obj<T, Deleter>(ptr, _NEFORCE move(deleter));
         tl_retire_list_.add(obj);
@@ -296,9 +286,7 @@ public:
     /**
      * @brief 手动触发回收
      */
-    void reclaim() {
-        scan_and_reclaim();
-    }
+    void reclaim() { scan_and_reclaim(); }
 
     /**
      * @brief 获取默认的险象指针域
@@ -319,8 +307,8 @@ public:
  */
 class hazard_pointer {
 private:
-    hazard_pointer_record* record_{nullptr};  ///< 持有的记录
-    hazard_pointer_domain* domain_{nullptr};  ///< 所属域
+    hazard_pointer_record* record_{nullptr}; ///< 持有的记录
+    hazard_pointer_domain* domain_{nullptr}; ///< 所属域
 
 public:
     hazard_pointer() = default;
@@ -331,8 +319,8 @@ public:
      *
      * 从指定域获取一个险象指针记录。
      */
-    explicit hazard_pointer(hazard_pointer_domain& domain)
-    : domain_(&domain) {
+    explicit hazard_pointer(hazard_pointer_domain& domain) :
+    domain_(&domain) {
         record_ = domain_->acquire_record();
     }
 
@@ -348,13 +336,14 @@ public:
         }
     }
 
-    hazard_pointer(hazard_pointer&& other) noexcept
-        : record_(other.record_), domain_(other.domain_) {
+    hazard_pointer(hazard_pointer&& other) noexcept :
+    record_(other.record_),
+    domain_(other.domain_) {
         other.record_ = nullptr;
         other.domain_ = nullptr;
     }
 
-    hazard_pointer& operator =(hazard_pointer&& other) noexcept {
+    hazard_pointer& operator=(hazard_pointer&& other) noexcept {
         if (this != &other) {
             reset_protection();
             if (record_) {
@@ -379,9 +368,10 @@ public:
      *
      * 使用ABA预防算法：读取指针 -> 保护 -> 验证未改变。
      */
-    template <typename T>
-    T* protect(const atomic<T*>& src) {
-        if (!record_) return nullptr;
+    template <typename T> T* protect(const atomic<T*>& src) {
+        if (!record_) {
+            return nullptr;
+        }
 
         T* ptr = src.load(memory_order_relaxed);
         while (true) {
@@ -401,9 +391,10 @@ public:
      * @param src 原子指针源
      * @return 是否成功保护
      */
-    template <typename T>
-    bool try_protect(T*& ptr, const atomic<T*>& src) {
-        if (!record_) return false;
+    template <typename T> bool try_protect(T*& ptr, const atomic<T*>& src) {
+        if (!record_) {
+            return false;
+        }
 
         ptr = src.load(memory_order_relaxed);
         record_->protect(ptr);
@@ -441,9 +432,7 @@ public:
      * @brief 检查是否持有有效记录
      * @return 是否有效
      */
-    explicit operator bool() const noexcept {
-        return record_ != nullptr;
-    }
+    explicit operator bool() const noexcept { return record_ != nullptr; }
 };
 
 /**
@@ -451,8 +440,7 @@ public:
  * @param domain 险象指针域
  * @return 新创建的险象指针
  */
-inline hazard_pointer
-make_hazard_pointer(hazard_pointer_domain& domain = hazard_pointer_domain::default_domain()) {
+inline hazard_pointer make_hazard_pointer(hazard_pointer_domain& domain = hazard_pointer_domain::default_domain()) {
     return hazard_pointer(domain);
 }
 
@@ -464,11 +452,10 @@ make_hazard_pointer(hazard_pointer_domain& domain = hazard_pointer_domain::defau
  *
  * 将险象指针与一个特定类型的指针绑定，提供类型安全的访问。
  */
-template <typename T>
-class hazard_pointer_holder {
+template <typename T> class hazard_pointer_holder {
 private:
-    hazard_pointer hp_;   ///< 险象指针
-    T* ptr_{nullptr};     ///< 受保护的指针
+    hazard_pointer hp_; ///< 险象指针
+    T* ptr_{nullptr};   ///< 受保护的指针
 
 public:
     hazard_pointer_holder() = default;
@@ -477,8 +464,8 @@ public:
      * @brief 构造函数
      * @param domain 险象指针域
      */
-    explicit hazard_pointer_holder(hazard_pointer_domain& domain)
-    : hp_(domain) {}
+    explicit hazard_pointer_holder(hazard_pointer_domain& domain) :
+    hp_(domain) {}
 
     /**
      * @brief 保护原子指针
@@ -494,33 +481,25 @@ public:
      * @brief 获取当前保护的指针
      * @return 指针
      */
-    T* get() const noexcept {
-        return ptr_;
-    }
+    T* get() const noexcept { return ptr_; }
 
     /**
      * @brief 解引用操作符
      * @return 引用
      */
-    T& operator *() const noexcept {
-        return *ptr_;
-    }
+    T& operator*() const noexcept { return *ptr_; }
 
     /**
      * @brief 箭头操作符
      * @return 指针
      */
-    T* operator ->() const noexcept {
-        return ptr_;
-    }
+    T* operator->() const noexcept { return ptr_; }
 
     /**
      * @brief 检查是否持有有效指针
      * @return 是否有效
      */
-    explicit operator bool() const noexcept {
-        return ptr_ != nullptr;
-    }
+    explicit operator bool() const noexcept { return ptr_ != nullptr; }
 
     /**
      * @brief 重置持有的指针

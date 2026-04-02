@@ -32,8 +32,8 @@ NEFORCE_INLINE17 constexpr uint32_t BITMAP_WORD_SIZE = 8 * sizeof(uint32_t);
  */
 struct bit_reference : icommon<bit_reference>, istringify<bit_reference> {
 private:
-    uint32_t* ptr_ = nullptr;  ///< 指向包含该位的字
-    uint32_t mask_ = 0;  ///< 掩码，用于定位特定位
+    uint32_t* ptr_ = nullptr; ///< 指向包含该位的字
+    uint32_t mask_ = 0;       ///< 掩码，用于定位特定位
 
 public:
     /**
@@ -46,22 +46,24 @@ public:
      * @param ptr 指向字的指针
      * @param mask 位掩码
      */
-    NEFORCE_CONSTEXPR20 bit_reference(uint32_t* ptr, const uint32_t mask) noexcept
-    : ptr_(ptr), mask_(mask) {}
+    NEFORCE_CONSTEXPR20 bit_reference(uint32_t* ptr, const uint32_t mask) noexcept :
+    ptr_(ptr),
+    mask_(mask) {}
 
     /**
      * @brief 拷贝构造函数
      * @param other 源位引用
      */
-    NEFORCE_CONSTEXPR20 bit_reference(const bit_reference& other) noexcept
-    : ptr_(other.ptr_), mask_(other.mask_) {}
+    NEFORCE_CONSTEXPR20 bit_reference(const bit_reference& other) noexcept :
+    ptr_(other.ptr_),
+    mask_(other.mask_) {}
 
     /**
      * @brief 拷贝赋值运算符
      * @param other 源位引用
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 bit_reference& operator =(const bit_reference& other) noexcept {
+    NEFORCE_CONSTEXPR20 bit_reference& operator=(const bit_reference& other) noexcept {
         return *this = static_cast<bool>(other);
     }
 
@@ -69,8 +71,9 @@ public:
      * @brief 移动构造函数
      * @param other 源位引用
      */
-    NEFORCE_CONSTEXPR20 bit_reference(bit_reference&& other) noexcept
-    : ptr_(other.ptr_), mask_(other.mask_) {
+    NEFORCE_CONSTEXPR20 bit_reference(bit_reference&& other) noexcept :
+    ptr_(other.ptr_),
+    mask_(other.mask_) {
         other.ptr_ = nullptr;
         other.mask_ = 0;
     }
@@ -80,7 +83,7 @@ public:
      * @param other 源位引用
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 bit_reference& operator =(bit_reference&& other) noexcept {
+    NEFORCE_CONSTEXPR20 bit_reference& operator=(bit_reference&& other) noexcept {
         *this = static_cast<bool>(other);
         other.ptr_ = nullptr;
         other.mask_ = 0;
@@ -92,7 +95,7 @@ public:
      * @param value 要赋的值
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 bit_reference& operator =(const bool value) noexcept {
+    NEFORCE_CONSTEXPR20 bit_reference& operator=(const bool value) noexcept {
         if (value) {
             *ptr_ |= mask_;
         } else {
@@ -105,23 +108,21 @@ public:
      * @brief 转换为布尔值
      * @return 位的布尔值
      */
-    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept {
-        return *ptr_ & mask_;
-    }
+    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept { return *ptr_ & mask_; }
 
     /**
      * @brief 翻转位值
      */
-    NEFORCE_CONSTEXPR20 void flip() const noexcept {
-        *ptr_ ^= mask_;
-    }
+    NEFORCE_CONSTEXPR20 void flip() const noexcept { *ptr_ ^= mask_; }
 
     /**
      * @brief 交换两个位引用
      * @param other 要交换的另一个位引用
      */
     NEFORCE_CONSTEXPR20 void swap(bit_reference& other) noexcept {
-        if (_NEFORCE addressof(other) == this) return;
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
         const bool tmp = static_cast<bool>(other);
         other = *this;
         *this = tmp;
@@ -132,7 +133,7 @@ public:
      * @param rhs 右侧位引用
      * @return 两个位是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator ==(const bit_reference& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const bit_reference& rhs) const noexcept {
         return static_cast<bool>(*this) == static_cast<bool>(rhs);
     }
 
@@ -141,7 +142,7 @@ public:
      * @param rhs 右侧位引用
      * @return 比较结果（false < true）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator <(const bit_reference& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const bit_reference& rhs) const noexcept {
         return static_cast<bool>(*this) < static_cast<bool>(rhs);
     }
 
@@ -157,9 +158,7 @@ public:
      * @brief 转换为字符串
      * @return "1"或"0"的字符串表示
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return static_cast<bool>(*this) ? "1"_s : "0"_s;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return static_cast<bool>(*this) ? "1"_s : "0"_s; }
 };
 
 
@@ -171,37 +170,34 @@ public:
  *
  * 提供对位图元素的随机访问迭代器支持。
  */
-template <bool IsConst, typename BitMap>
-struct bitmap_iterator : iiterator<bitmap_iterator<IsConst, BitMap>> {
+template <bool IsConst, typename BitMap> struct bitmap_iterator : iiterator<bitmap_iterator<IsConst, BitMap>> {
 public:
-    using container_type	= BitMap;  ///< 容器类型
-    using value_type		= typename container_type::value_type;  ///< 值类型
-    using size_type			= typename container_type::size_type;  ///< 大小类型
-    using difference_type	= typename container_type::difference_type;  ///< 差值类型
-    using iterator_category = random_access_iterator_tag;  ///< 迭代器类别
-    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;  ///< 引用类型
-    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;  ///< 指针类型
+    using container_type = BitMap;                                    ///< 容器类型
+    using value_type = typename container_type::value_type;           ///< 值类型
+    using size_type = typename container_type::size_type;             ///< 大小类型
+    using difference_type = typename container_type::difference_type; ///< 差值类型
+    using iterator_category = random_access_iterator_tag;             ///< 迭代器类别
+    using reference = conditional_t<IsConst, typename container_type::const_reference,
+                                    typename container_type::reference>; ///< 引用类型
+    using pointer = conditional_t<IsConst, typename container_type::const_pointer,
+                                  typename container_type::pointer>; ///< 指针类型
 
 private:
-    uint32_t* ptr_ = nullptr;  ///< 指向当前字的指针
-    uint32_t off_ = 0;  ///< 在当前字中的位偏移
-    const container_type* container_ = nullptr;  ///< 关联容器指针
+    uint32_t* ptr_ = nullptr;                   ///< 指向当前字的指针
+    uint32_t off_ = 0;                          ///< 在当前字中的位偏移
+    const container_type* container_ = nullptr; ///< 关联容器指针
 
     friend class bitmap;
     template <bool, typename> friend struct bitmap_iterator;
 
 private:
     template <typename Ref>
-    NEFORCE_CONSTEXPR20
-    enable_if_t<is_boolean_v<Ref>, Ref>
-    reference_dispatch() const noexcept {
+    NEFORCE_CONSTEXPR20 enable_if_t<is_boolean_v<Ref>, Ref> reference_dispatch() const noexcept {
         return (*ptr_ & (1U << off_)) != 0;
     }
 
     template <typename Ref>
-    NEFORCE_CONSTEXPR20
-    enable_if_t<!is_boolean_v<Ref>, Ref>
-    reference_dispatch() const noexcept {
+    NEFORCE_CONSTEXPR20 enable_if_t<!is_boolean_v<Ref>, Ref> reference_dispatch() const noexcept {
         return Ref(ptr_, 1U << off_);
     }
 
@@ -210,9 +206,9 @@ public:
     NEFORCE_CONSTEXPR20 ~bitmap_iterator() = default;
 
     NEFORCE_CONSTEXPR20 bitmap_iterator(const bitmap_iterator&) noexcept = default;
-    NEFORCE_CONSTEXPR20 bitmap_iterator& operator =(const bitmap_iterator&) noexcept = default;
+    NEFORCE_CONSTEXPR20 bitmap_iterator& operator=(const bitmap_iterator&) noexcept = default;
     NEFORCE_CONSTEXPR20 bitmap_iterator(bitmap_iterator&&) noexcept = default;
-    NEFORCE_CONSTEXPR20 bitmap_iterator& operator =(bitmap_iterator&&) noexcept = default;
+    NEFORCE_CONSTEXPR20 bitmap_iterator& operator=(bitmap_iterator&&) noexcept = default;
 
     /**
      * @brief 构造函数
@@ -220,8 +216,10 @@ public:
      * @param offset 位偏移
      * @param bm 位图指针
      */
-    NEFORCE_CONSTEXPR20 bitmap_iterator(uint32_t* ptr, const uint32_t offset, const container_type* bm) noexcept
-    : ptr_(ptr), off_(offset), container_(bm) {}
+    NEFORCE_CONSTEXPR20 bitmap_iterator(uint32_t* ptr, const uint32_t offset, const container_type* bm) noexcept :
+    ptr_(ptr),
+    off_(offset),
+    container_(bm) {}
 
     /**
      * @brief 从另一个迭代器转换构造
@@ -229,8 +227,10 @@ public:
      * @param other 源迭代器
      */
     template <bool IsConst2>
-    NEFORCE_CONSTEXPR20 explicit bitmap_iterator(const bitmap_iterator<IsConst2, BitMap>& other) noexcept
-    : ptr_(other.ptr_), off_(other.off_), container_(other.container_) {}
+    NEFORCE_CONSTEXPR20 explicit bitmap_iterator(const bitmap_iterator<IsConst2, BitMap>& other) noexcept :
+    ptr_(other.ptr_),
+    off_(other.off_),
+    container_(other.container_) {}
 
     /**
      * @brief 解引用操作
@@ -295,9 +295,7 @@ public:
      * @param n 偏移量
      * @return 偏移位置元素的引用
      */
-    NEFORCE_CONSTEXPR20 reference operator [](const difference_type n) const noexcept {
-        return *(*this + n);
-    }
+    NEFORCE_CONSTEXPR20 reference operator[](const difference_type n) const noexcept { return *(*this + n); }
 
     /**
      * @brief 相等比较
@@ -323,17 +321,13 @@ public:
      * @brief 获取底层指针
      * @return 当前字的指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer base() const noexcept {
-        return ptr_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer base() const noexcept { return ptr_; }
 
     /**
      * @brief 获取关联容器
      * @return 关联容器指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const container_type* container() const noexcept {
-        return container_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const container_type* container() const noexcept { return container_; }
 };
 
 
@@ -346,18 +340,18 @@ public:
  */
 class bitmap : public icollector<bitmap> {
 public:
-    using value_type         = bool;  ///< 值类型
-    using pointer            = bit_reference*;  ///< 指针类型
-    using reference          = bit_reference;  ///< 引用类型
-    using const_pointer      = const bool*;  ///< 常量指针类型
-    using const_reference    = const bool;  ///< 常量引用类型
-    using size_type          = size_t;  ///< 大小类型
-    using difference_type    = ptrdiff_t;  ///< 差值类型
-    using iterator                  = bitmap_iterator<false, bitmap>;  ///< 迭代器类型
-    using const_iterator            = bitmap_iterator<true, bitmap>;   ///< 常量迭代器类型
-    using reverse_iterator          = _NEFORCE reverse_iterator<iterator>;  ///< 反向迭代器类型
-    using const_reverse_iterator    = _NEFORCE reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
-    using allocator_type            = allocator<uint32_t>;  ///< 分配器类型
+    using value_type = bool;                                                  ///< 值类型
+    using pointer = bit_reference*;                                           ///< 指针类型
+    using reference = bit_reference;                                          ///< 引用类型
+    using const_pointer = const bool*;                                        ///< 常量指针类型
+    using const_reference = const bool;                                       ///< 常量引用类型
+    using size_type = size_t;                                                 ///< 大小类型
+    using difference_type = ptrdiff_t;                                        ///< 差值类型
+    using iterator = bitmap_iterator<false, bitmap>;                          ///< 迭代器类型
+    using const_iterator = bitmap_iterator<true, bitmap>;                     ///< 常量迭代器类型
+    using reverse_iterator = _NEFORCE reverse_iterator<iterator>;             ///< 反向迭代器类型
+    using const_reverse_iterator = _NEFORCE reverse_iterator<const_iterator>; ///< 常量反向迭代器类型
+    using allocator_type = allocator<uint32_t>;                               ///< 分配器类型
 
 private:
     /**
@@ -367,8 +361,8 @@ private:
      * 管理底层数组的分配和释放。
      */
     struct bit_storage {
-        uint32_t* ptr = nullptr;  ///< 指向存储数组的指针
-        compressed_pair<allocator_type, size_t> cpair{default_construct_tag{}, 0};  ///< 压缩存储分配器和容量
+        uint32_t* ptr = nullptr;                                                   ///< 指向存储数组的指针
+        compressed_pair<allocator_type, size_t> cpair{default_construct_tag{}, 0}; ///< 压缩存储分配器和容量
 
         /**
          * @brief 默认构造函数
@@ -380,7 +374,9 @@ private:
          * @param word 字数
          */
         explicit NEFORCE_CONSTEXPR20 bit_storage(const size_t word) {
-            if (word == 0) return;
+            if (word == 0) {
+                return;
+            }
             ptr = cpair.get_base().allocate(word);
             cpair.value = word;
         }
@@ -395,14 +391,15 @@ private:
         }
 
         bit_storage(const bit_storage&) = delete;
-        bit_storage& operator =(const bit_storage&) = delete;
+        bit_storage& operator=(const bit_storage&) = delete;
 
         /**
          * @brief 移动构造函数
          * @param other 源存储对象
          */
-        NEFORCE_CONSTEXPR20 bit_storage(bit_storage&& other) noexcept
-        : ptr(other.ptr), cpair(_NEFORCE move(other.cpair)) {
+        NEFORCE_CONSTEXPR20 bit_storage(bit_storage&& other) noexcept :
+        ptr(other.ptr),
+        cpair(_NEFORCE move(other.cpair)) {
             other.ptr = nullptr;
             other.cpair.value = 0;
         }
@@ -412,7 +409,7 @@ private:
          * @param other 源存储对象
          * @return 自身引用
          */
-        NEFORCE_CONSTEXPR20 bit_storage& operator =(bit_storage&& other) noexcept {
+        NEFORCE_CONSTEXPR20 bit_storage& operator=(bit_storage&& other) noexcept {
             if (this != &other) {
                 reset();
                 cpair = _NEFORCE move(other.cpair);
@@ -439,30 +436,24 @@ private:
          * @brief 分配指定数量的字
          * @param word 字数
          */
-        NEFORCE_CONSTEXPR20 void allocate(const size_t word) {
-            reset(cpair.get_base().allocate(word), word);
-        }
+        NEFORCE_CONSTEXPR20 void allocate(const size_t word) { reset(cpair.get_base().allocate(word), word); }
 
         /**
          * @brief 获取存储指针
          * @return 存储指针
          */
-        NEFORCE_CONSTEXPR20 uint32_t* get() const noexcept {
-            return ptr;
-        }
+        NEFORCE_CONSTEXPR20 uint32_t* get() const noexcept { return ptr; }
 
         /**
          * @brief 获取容量（字数）
          * @return 容量
          */
-        NEFORCE_CONSTEXPR20 size_t capacity() const noexcept {
-            return cpair.value;
-        }
+        NEFORCE_CONSTEXPR20 size_t capacity() const noexcept { return cpair.value; }
     };
 
-    iterator start_{};  ///< 起始迭代器
-    iterator finish_{};  ///< 结束迭代器
-    bit_storage storage_{};  ///< 底层存储
+    iterator start_{};      ///< 起始迭代器
+    iterator finish_{};     ///< 结束迭代器
+    bit_storage storage_{}; ///< 底层存储
 
 private:
     /**
@@ -479,7 +470,9 @@ private:
      * @param word 位数
      */
     NEFORCE_CONSTEXPR20 void allocate_storage(const size_type word) {
-        if (word == 0) return;
+        if (word == 0) {
+            return;
+        }
         storage_.allocate(word_count(word));
     }
 
@@ -561,8 +554,7 @@ private:
      * @param extra_len 插入长度
      */
     template <typename Iterator>
-    void reallocate_insert_range(const iterator position, Iterator first,
-                                 Iterator last, const size_type extra_len) {
+    void reallocate_insert_range(const iterator position, Iterator first, Iterator last, const size_type extra_len) {
         const size_type old_size = size();
         const size_type new_size = old_size + extra_len;
         const size_type new_words = word_count(new_size);
@@ -601,9 +593,10 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
-    range_init(Iterator first, Iterator last) {
-        if (first == last) return;
+    enable_if_t<!is_ranges_fwd_iter_v<Iterator>> range_init(Iterator first, Iterator last) {
+        if (first == last) {
+            return;
+        }
 
         bitmap tmp{};
         while (first != last) {
@@ -621,10 +614,10 @@ private:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator>
-    enable_if_t<is_ranges_fwd_iter_v<Iterator>>
-    range_init(Iterator first, Iterator last) {
-        if (first == last) return;
+    template <typename Iterator> enable_if_t<is_ranges_fwd_iter_v<Iterator>> range_init(Iterator first, Iterator last) {
+        if (first == last) {
+            return;
+        }
 
         const size_type n = _NEFORCE distance(first, last);
         bit_storage tmp_storage(word_count(n));
@@ -645,9 +638,10 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
-    insert_range(iterator position, Iterator first, Iterator last) {
-        if (first == last) return;
+    enable_if_t<!is_ranges_fwd_iter_v<Iterator>> insert_range(iterator position, Iterator first, Iterator last) {
+        if (first == last) {
+            return;
+        }
         bitmap tmp(first, last);
         insert_range(position, tmp.begin(), tmp.end());
         return;
@@ -661,9 +655,10 @@ private:
      * @param last 结束迭代器
      */
     template <typename Iterator>
-    enable_if_t<is_ranges_fwd_iter_v<Iterator>>
-    insert_range(iterator position, Iterator first, Iterator last) {
-        if (first == last) return;
+    enable_if_t<is_ranges_fwd_iter_v<Iterator>> insert_range(iterator position, Iterator first, Iterator last) {
+        if (first == last) {
+            return;
+        }
         const size_type n = _NEFORCE distance(first, last);
         if (capacity() - size() >= n) {
             bitmap::bit_copy_backward(position, end(), finish_ + static_cast<difference_type>(n));
@@ -690,7 +685,9 @@ public:
      * 构造包含n个位的位置，所有位初始化为false。
      */
     NEFORCE_CONSTEXPR20 explicit bitmap(const size_type word) {
-        if (word == 0) return;
+        if (word == 0) {
+            return;
+        }
         allocate_storage(word);
         set_iterators(word);
         _NEFORCE fill(storage_.get(), storage_.get() + storage_.capacity(), 0);
@@ -702,7 +699,9 @@ public:
      * @param value 初始值
      */
     NEFORCE_CONSTEXPR20 explicit bitmap(const size_type word, const bool value) {
-        if (word == 0) return;
+        if (word == 0) {
+            return;
+        }
         allocate_storage(word);
         set_iterators(word);
         _NEFORCE fill(storage_.get(), storage_.get() + storage_.capacity(), value ? ~0U : 0U);
@@ -713,23 +712,25 @@ public:
      * @param word 位数
      * @param value 初始值
      */
-    NEFORCE_CONSTEXPR20 explicit bitmap(const int32_t word, const bool value)
-    : bitmap(static_cast<size_type>(word), value) {}
+    NEFORCE_CONSTEXPR20 explicit bitmap(const int32_t word, const bool value) :
+    bitmap(static_cast<size_type>(word), value) {}
 
     /**
      * @brief 64位整数构造函数
      * @param word 位数
      * @param value 初始值
      */
-    NEFORCE_CONSTEXPR20 explicit bitmap(const int64_t word, const bool value)
-    : bitmap(static_cast<size_type>(word), value) {}
+    NEFORCE_CONSTEXPR20 explicit bitmap(const int64_t word, const bool value) :
+    bitmap(static_cast<size_type>(word), value) {}
 
     /**
      * @brief 拷贝构造函数
      * @param other 源位图
      */
     NEFORCE_CONSTEXPR20 bitmap(const bitmap& other) {
-        if (other.empty()) return;
+        if (other.empty()) {
+            return;
+        }
 
         const size_type n = other.size();
         bit_storage tmp(word_count(n));
@@ -746,8 +747,10 @@ public:
      * @param other 源位图
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 bitmap& operator =(const bitmap& other) {
-        if (_NEFORCE addressof(other) == this) return *this;
+    NEFORCE_CONSTEXPR20 bitmap& operator=(const bitmap& other) {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         bitmap tmp(other);
         bitmap::swap(tmp);
         return *this;
@@ -757,10 +760,10 @@ public:
      * @brief 移动构造函数
      * @param other 源位图
      */
-    NEFORCE_CONSTEXPR20 bitmap(bitmap&& other) noexcept
-    : start_(other.start_.ptr_, other.start_.off_, this),
-      finish_(other.finish_.ptr_, other.finish_.off_, this),
-      storage_(_NEFORCE move(other.storage_)) {
+    NEFORCE_CONSTEXPR20 bitmap(bitmap&& other) noexcept :
+    start_(other.start_.ptr_, other.start_.off_, this),
+    finish_(other.finish_.ptr_, other.finish_.off_, this),
+    storage_(_NEFORCE move(other.storage_)) {
         other.start_ = iterator();
         other.finish_ = iterator();
     }
@@ -770,8 +773,10 @@ public:
      * @param other 源位图
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 bitmap& operator =(bitmap&& other) noexcept {
-        if (_NEFORCE addressof(other) == this) return *this;
+    NEFORCE_CONSTEXPR20 bitmap& operator=(bitmap&& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
         bitmap::swap(other);
         return *this;
     }
@@ -792,85 +797,65 @@ public:
      */
     NEFORCE_CONSTEXPR20 ~bitmap() = default;
 
-     /**
+    /**
      * @brief 获取起始迭代器
      * @return 指向第一个位的迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 iterator begin() noexcept {
-        return start_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 iterator begin() noexcept { return start_; }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向最后一个位之后位置的迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 iterator end() noexcept {
-        return finish_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 iterator end() noexcept { return finish_; }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个位的常量迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator begin() const noexcept {
-        return cbegin();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator begin() const noexcept { return cbegin(); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个位之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator end() const noexcept {
-        return cend();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator end() const noexcept { return cend(); }
 
     /**
      * @brief 获取常量起始迭代器
      * @return 指向第一个位的常量迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator cbegin() const noexcept {
-        return const_iterator{start_};
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator cbegin() const noexcept { return const_iterator{start_}; }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向最后一个位之后位置的常量迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator cend() const noexcept {
-        return const_iterator{finish_};
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_iterator cend() const noexcept { return const_iterator{finish_}; }
 
     /**
      * @brief 获取反向起始迭代器
      * @return 指向最后一个位的反向迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reverse_iterator rbegin() noexcept {
-        return reverse_iterator(end());
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
 
     /**
      * @brief 获取反向结束迭代器
      * @return 指向第一个位之前位置的反向迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reverse_iterator rend() noexcept {
-        return reverse_iterator(begin());
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
 
     /**
      * @brief 获取常量反向起始迭代器
      * @return 指向最后一个位的常量反向迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reverse_iterator rbegin() const noexcept {
-        return crbegin();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reverse_iterator rbegin() const noexcept { return crbegin(); }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个位之前位置的常量反向迭代器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reverse_iterator rend() const noexcept {
-        return crend();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reverse_iterator rend() const noexcept { return crend(); }
 
     /**
      * @brief 获取常量反向起始迭代器
@@ -892,25 +877,19 @@ public:
      * @brief 获取位数
      * @return 位图中的位数
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept {
-        return cend() - cbegin();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept { return cend() - cbegin(); }
 
     /**
      * @brief 获取最大可能位数
      * @return 最大位数
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type max_size() const noexcept {
-        return static_cast<size_type>(-1);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type max_size() const noexcept { return static_cast<size_type>(-1); }
 
     /**
      * @brief 检查是否为空
      * @return 位图是否为空
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept {
-        return start_ == finish_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept { return start_ == finish_; }
 
     /**
      * @brief 获取容量（位数）
@@ -925,7 +904,7 @@ public:
      * @param n 索引
      * @return 指定位置的位的引用
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reference operator [](const size_type n) {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reference operator[](const size_type n) {
         return *(begin() + static_cast<difference_type>(n));
     }
 
@@ -934,7 +913,7 @@ public:
      * @param n 索引
      * @return 指定位置的位的常量值
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reference operator [](const size_type n) const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reference operator[](const size_type n) const {
         return *(cbegin() + static_cast<difference_type>(n));
     }
 
@@ -942,33 +921,25 @@ public:
      * @brief 访问第一个位
      * @return 第一个位的引用
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reference front() {
-        return *begin();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reference front() { return *begin(); }
 
     /**
      * @brief 常量版本，访问第一个位
      * @return 第一个位的常量值
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reference front() const {
-        return *cbegin();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reference front() const { return *cbegin(); }
 
     /**
      * @brief 访问最后一个位
      * @return 最后一个位的引用
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reference back() {
-        return *(end() - 1);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 reference back() { return *(end() - 1); }
 
     /**
      * @brief 常量版本，访问最后一个位
      * @return 最后一个位的常量值
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reference back() const {
-        return *(cend() - 1);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_reference back() const { return *(cend() - 1); }
 
     /**
      * @brief 预留容量
@@ -1024,8 +995,7 @@ public:
      * @param first 起始迭代器
      * @param last 结束迭代器
      */
-    template <typename Iterator>
-    NEFORCE_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
+    template <typename Iterator> NEFORCE_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
         bitmap::insert_range(position, first, last);
     }
 
@@ -1036,7 +1006,9 @@ public:
      * @param last 数组结束指针
      */
     NEFORCE_CONSTEXPR20 void insert(const iterator& position, const bool* first, const bool* last) {
-        if (first == last) return;
+        if (first == last) {
+            return;
+        }
         const size_type n = _NEFORCE distance(first, last);
         if (capacity() - size() >= n) {
             bitmap::bit_copy_backward(position, end(), finish_ + static_cast<difference_type>(n));
@@ -1054,7 +1026,9 @@ public:
      * @param value 插入值
      */
     NEFORCE_CONSTEXPR20 void insert(const iterator& position, const size_type n, const bool value) {
-        if (n == 0) return;
+        if (n == 0) {
+            return;
+        }
         if (capacity() - size() >= n) {
             bitmap::bit_copy_backward(position, end(), finish_ + static_cast<difference_type>(n));
             _NEFORCE fill(position, position + static_cast<difference_type>(n), value);
@@ -1087,9 +1061,7 @@ public:
     /**
      * @brief 删除末尾位
      */
-    NEFORCE_CONSTEXPR20 void pop_back() {
-        --finish_;
-    }
+    NEFORCE_CONSTEXPR20 void pop_back() { --finish_; }
 
     /**
      * @brief 删除指定位置的位
@@ -1097,11 +1069,11 @@ public:
      * @return 指向被删除元素之后位置的迭代器
      */
     NEFORCE_CONSTEXPR20 iterator erase(const iterator& position) {
-      if (position + 1 != end()) {
-          bitmap::bit_copy(position + 1, end(), position);
-      }
-      --finish_;
-      return position;
+        if (position + 1 != end()) {
+            bitmap::bit_copy(position + 1, end(), position);
+        }
+        --finish_;
+        return position;
     }
 
     /**
@@ -1131,16 +1103,16 @@ public:
     /**
      * @brief 清空位图
      */
-    NEFORCE_CONSTEXPR20 void clear() {
-        bitmap::erase(begin(), end());
-    }
+    NEFORCE_CONSTEXPR20 void clear() { bitmap::erase(begin(), end()); }
 
     /**
      * @brief 交换两个位图的内容
      * @param other 要交换的另一个位图
      */
     NEFORCE_CONSTEXPR20 void swap(bitmap& other) noexcept {
-        if (_NEFORCE addressof(other) == this) return;
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
         _NEFORCE swap(start_, other.start_);
         _NEFORCE swap(finish_, other.finish_);
         _NEFORCE swap(storage_, other.storage_);
@@ -1155,8 +1127,8 @@ public:
      * @param rhs 右侧位图
      * @return 如果两个位图大小相等且对应位相等返回true
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator ==(const bitmap& rhs) const
-    noexcept(noexcept(_NEFORCE equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const bitmap& rhs) const
+            noexcept(noexcept(_NEFORCE equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
         return this->size() == rhs.size() && _NEFORCE equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
 
@@ -1165,8 +1137,9 @@ public:
      * @param rhs 右侧位图
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator <(const bitmap& rhs) const
-    noexcept(noexcept(_NEFORCE lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const bitmap& rhs) const
+            noexcept(noexcept(_NEFORCE lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(),
+                                                               rhs.cend()))) {
         return _NEFORCE lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };

@@ -32,8 +32,8 @@ private:
     void update_cache(const string& key, const dns_query_result& result);
 
 public:
-    dns_client()
-    : dns_client(config()) {}
+    dns_client() :
+    dns_client(config()) {}
 
     explicit dns_client(config cfg, bool use_tcp = false);
 
@@ -44,17 +44,11 @@ public:
 
     void clear_cache() { cache_.clear(); }
 
-    dns_query_result query(
-        string_view domain,
-        dns_record::raw type = dns_record::A,
-        dns_query qclass = dns_query::INTERNET
-    );
+    dns_query_result query(string_view domain, dns_record::raw type = dns_record::A,
+                           dns_query qclass = dns_query::INTERNET);
 
-    future<dns_query_result> query_async(
-        const string& domain,
-        dns_record::raw type = dns_record::A,
-        dns_query qclass = dns_query::INTERNET
-    );
+    future<dns_query_result> query_async(const string& domain, dns_record::raw type = dns_record::A,
+                                         dns_query qclass = dns_query::INTERNET);
 
     vector<string> resolve_a(string_view domain);
     vector<string> resolve_aaaa(string_view domain);

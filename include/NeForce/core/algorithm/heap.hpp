@@ -8,8 +8,8 @@
  * 此文件提供了堆算法实现，用于在随机访问容器上创建和操作二叉堆数据结构。
  */
 
-#include "NeForce/core/functional/functor.hpp"
 #include "NeForce/core/algorithm/iterator.hpp"
+#include "NeForce/core/functional/functor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -43,14 +43,14 @@ NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last, Compar
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-	auto n = last - first;
-	for (iter_difference_t<Iterator> child = 1; child < n; ++child) {
-		auto parent = (child - 1) / 2;
-		if (comp(*(first + parent), *(first + child))) {
-			return first + child;
-		}
-	}
-	return last;
+    auto n = last - first;
+    for (iter_difference_t<Iterator> child = 1; child < n; ++child) {
+        auto parent = (child - 1) / 2;
+        if (comp(*(first + parent), *(first + child))) {
+            return first + child;
+        }
+    }
+    return last;
 }
 
 /**
@@ -62,9 +62,8 @@ NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last, Compar
  *
  * 默认使用小于比较，创建最大堆。
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
-	return _NEFORCE is_heap_until(first, last, less<iter_value_t<Iterator>>());
+template <typename Iterator> NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
+    return _NEFORCE is_heap_until(first, last, less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -78,7 +77,7 @@ NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp) {
-	return _NEFORCE is_heap_until(first, last, comp) == last;
+    return _NEFORCE is_heap_until(first, last, comp) == last;
 }
 
 /**
@@ -88,9 +87,8 @@ NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp) {
  * @param last 范围结束迭代器
  * @return 如果范围是有效堆则返回 true，否则返回 false
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last) {
-	return _NEFORCE is_heap_until(first, last) == last;
+template <typename Iterator> NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last) {
+    return _NEFORCE is_heap_until(first, last) == last;
 }
 
 
@@ -111,33 +109,27 @@ NEFORCE_BEGIN_INNER__
  * 将新元素插入堆中的合适位置，通过向上调整维护堆性质。
  */
 template <typename Iterator, typename T, typename Compare>
-NEFORCE_CONSTEXPR20 void push_heap_aux(
-    Iterator first,
-    iter_difference_t<Iterator> hole_index,
-    iter_difference_t<Iterator> top_index,
-    T value, Compare comp) {
+NEFORCE_CONSTEXPR20 void push_heap_aux(Iterator first, iter_difference_t<Iterator> hole_index,
+                                       iter_difference_t<Iterator> top_index, T value, Compare comp) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
     static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-	auto parent = (hole_index - 1) / 2;
-	while (hole_index > top_index && comp(*(first + parent), value)) {
-		*(first + hole_index) = *(first + parent);
-		hole_index = parent;
-		parent = (hole_index - 1) / 2;
-	}
-	*(first + hole_index) = value;
+    auto parent = (hole_index - 1) / 2;
+    while (hole_index > top_index && comp(*(first + parent), value)) {
+        *(first + hole_index) = *(first + parent);
+        hole_index = parent;
+        parent = (hole_index - 1) / 2;
+    }
+    *(first + hole_index) = value;
 }
 
 /**
  * @brief 堆插入辅助函数
  */
 template <typename Iterator, typename T>
-NEFORCE_CONSTEXPR20 void push_heap_aux(
-    Iterator first,
-    iter_difference_t<Iterator> hole_index,
-    iter_difference_t<Iterator> top_index,
-    T value) {
-	inner::push_heap_aux(first, hole_index, top_index, value, less<iter_value_t<Iterator>>());
+NEFORCE_CONSTEXPR20 void push_heap_aux(Iterator first, iter_difference_t<Iterator> hole_index,
+                                       iter_difference_t<Iterator> top_index, T value) {
+    inner::push_heap_aux(first, hole_index, top_index, value, less<iter_value_t<Iterator>>());
 }
 
 NEFORCE_END_INNER__
@@ -157,16 +149,17 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last, Compare comp) {
-	if (last - first < 2) return;
-	inner::push_heap_aux(first, last - first - 1, 0, *(last - 1), comp);
+    if (last - first < 2) {
+        return;
+    }
+    inner::push_heap_aux(first, last - first - 1, 0, *(last - 1), comp);
 }
 
 /**
  * @brief 向堆中插入元素
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last) {
-	_NEFORCE push_heap(first, last, less<iter_value_t<Iterator>>());
+template <typename Iterator> NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last) {
+    _NEFORCE push_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -184,37 +177,31 @@ NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last) {
  * 用于删除堆顶元素后的堆调整。
  */
 template <typename Iterator, typename T, typename Compare>
-NEFORCE_CONSTEXPR20 void adjust_heap(
-    Iterator first,
-    iter_difference_t<Iterator> hole_index,
-    iter_difference_t<Iterator> len,
-    T value, Compare comp) {
-	auto top_index = hole_index;
-	auto child = 2 * hole_index + 1;
-	while (child < len) {
-		if (child + 1 < len && comp(*(first + child), *(first + child + 1))) {
-			++child;
-		}
-		if (!comp(value, *(first + child))) {
-			break;
-		}
-		*(first + hole_index) = *(first + child);
-		hole_index = child;
-		child = 2 * hole_index + 1;
-	}
-	inner::push_heap_aux(first, hole_index, top_index, value, comp);
+NEFORCE_CONSTEXPR20 void adjust_heap(Iterator first, iter_difference_t<Iterator> hole_index,
+                                     iter_difference_t<Iterator> len, T value, Compare comp) {
+    auto top_index = hole_index;
+    auto child = 2 * hole_index + 1;
+    while (child < len) {
+        if (child + 1 < len && comp(*(first + child), *(first + child + 1))) {
+            ++child;
+        }
+        if (!comp(value, *(first + child))) {
+            break;
+        }
+        *(first + hole_index) = *(first + child);
+        hole_index = child;
+        child = 2 * hole_index + 1;
+    }
+    inner::push_heap_aux(first, hole_index, top_index, value, comp);
 }
 
 /**
  * @brief 堆调整辅助函数
  */
 template <typename Iterator, typename T>
-NEFORCE_CONSTEXPR20 void adjust_heap(
-    Iterator first,
-    iter_difference_t<Iterator> hole_index,
-    iter_difference_t<Iterator> len,
-    T value) {
-	_NEFORCE adjust_heap(first, hole_index, len, value, less<iter_value_t<Iterator>>());
+NEFORCE_CONSTEXPR20 void adjust_heap(Iterator first, iter_difference_t<Iterator> hole_index,
+                                     iter_difference_t<Iterator> len, T value) {
+    _NEFORCE adjust_heap(first, hole_index, len, value, less<iter_value_t<Iterator>>());
 }
 
 
@@ -236,8 +223,8 @@ NEFORCE_BEGIN_INNER__
  */
 template <typename Iterator, typename T, typename Compare>
 NEFORCE_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator result, T value, Compare comp) {
-	*result = *first;
-	_NEFORCE adjust_heap(first, 0, last - first, value, comp);
+    *result = *first;
+    _NEFORCE adjust_heap(first, 0, last - first, value, comp);
 }
 
 /**
@@ -245,7 +232,7 @@ NEFORCE_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator re
  */
 template <typename Iterator, typename T>
 NEFORCE_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator result, T value) {
-	inner::pop_heap_aux(first, last, result, value, less<iter_value_t<Iterator>>());
+    inner::pop_heap_aux(first, last, result, value, less<iter_value_t<Iterator>>());
 }
 
 NEFORCE_END_INNER__
@@ -265,17 +252,18 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last, Compare comp) {
-	if (last - first < 2) return;
-	--last;
-	inner::pop_heap_aux(first, last, last, *last, comp);
+    if (last - first < 2) {
+        return;
+    }
+    --last;
+    inner::pop_heap_aux(first, last, last, *last, comp);
 }
 
 /**
  * @brief 删除堆顶元素
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last) {
-	_NEFORCE pop_heap(first, last, less<iter_value_t<Iterator>>());
+template <typename Iterator> NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last) {
+    _NEFORCE pop_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -291,17 +279,16 @@ NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last) {
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last, Compare comp) {
-	while (last - first > 1) {
-		_NEFORCE pop_heap(first, last--, comp);
-	}
+    while (last - first > 1) {
+        _NEFORCE pop_heap(first, last--, comp);
+    }
 }
 
 /**
  * @brief 将堆转换为有序序列
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last) {
-	_NEFORCE sort_heap(first, last, less<iter_value_t<Iterator>>());
+template <typename Iterator> NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last) {
+    _NEFORCE sort_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -317,24 +304,29 @@ NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last) {
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp) {
-	if (last - first < 2) return;
-	const auto len = last - first;
-	if (len < 2) return;
+    if (last - first < 2) {
+        return;
+    }
+    const auto len = last - first;
+    if (len < 2) {
+        return;
+    }
 
-	auto parent = (len - 2) / 2;
-	while (true) {
-		_NEFORCE adjust_heap(first, parent, len, *(first + parent), comp);
-		if (parent == 0) return;
-		--parent;
-	}
+    auto parent = (len - 2) / 2;
+    while (true) {
+        _NEFORCE adjust_heap(first, parent, len, *(first + parent), comp);
+        if (parent == 0) {
+            return;
+        }
+        --parent;
+    }
 }
 
 /**
  * @brief 创建堆
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
-	_NEFORCE make_heap(first, last, less<iter_value_t<Iterator>>());
+template <typename Iterator> NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
+    _NEFORCE make_heap(first, last, less<iter_value_t<Iterator>>());
 }
 
 /** @} */ // HeapAlgorithms

@@ -27,14 +27,14 @@ NEFORCE_BEGIN_REFLECT__
  */
 class meta_property {
 public:
-    using getter = function<meta_any(void*)>;  ///< 属性读取器类型
-    using setter = function<void(void*, const meta_any&)>;  ///< 属性写入器类型
+    using getter = function<meta_any(void*)>;              ///< 属性读取器类型
+    using setter = function<void(void*, const meta_any&)>; ///< 属性写入器类型
 
 private:
-    string_view name_;          ///< 属性名称
-    reflect::type_id type_id_;  ///< 属性类型ID
-    getter getter_;             ///< 读取器
-    setter setter_;             ///< 写入器
+    string_view name_;         ///< 属性名称
+    reflect::type_id type_id_; ///< 属性类型ID
+    getter getter_;            ///< 读取器
+    setter setter_;            ///< 写入器
 
 public:
     /**
@@ -44,8 +44,11 @@ public:
      * @param getter 读取器
      * @param setter 写入器
      */
-    meta_property(string_view name, reflect::type_id type_id, getter getter, setter setter)
-    : name_(name), type_id_(type_id), getter_(move(getter)), setter_(move(setter)) {}
+    meta_property(string_view name, reflect::type_id type_id, getter getter, setter setter) :
+    name_(name),
+    type_id_(type_id),
+    getter_(move(getter)),
+    setter_(move(setter)) {}
 
     /**
      * @brief 获取属性名称
@@ -65,7 +68,9 @@ public:
      * @return 属性值（包装为any）
      */
     NEFORCE_NODISCARD meta_any get(void* obj) const {
-        if (!obj || !getter_) return meta_any{};
+        if (!obj || !getter_) {
+            return meta_any{};
+        }
         return getter_(move(obj));
     }
 
@@ -76,7 +81,9 @@ public:
      * @return 设置成功返回true
      */
     bool set(void* obj, const meta_any& value) const {
-        if (!obj || !setter_) return false;
+        if (!obj || !setter_) {
+            return false;
+        }
         try {
             setter_(move(obj), value);
             return true;
@@ -92,8 +99,7 @@ public:
      * @param value 要设置的值
      * @return 设置成功返回true
      */
-    template <typename T, enable_if_t<!is_same_v<meta_any, decay_t<T>>, int> = 0>
-    bool set(void* obj, T&& value) const {
+    template <typename T, enable_if_t<!is_same_v<meta_any, decay_t<T>>, int> = 0> bool set(void* obj, T&& value) const {
         return this->set(obj, meta_any{_NEFORCE forward<T>(value)});
     }
 };

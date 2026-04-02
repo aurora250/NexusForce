@@ -1,8 +1,7 @@
 #include "test.h"
 
-void handle_session_api(
-    http_request &request, http_response &response, http_server &server) {
-    http_session *sess = server.get_session(request);
+void handle_session_api(http_request& request, http_response& response, http_server& server) {
+    http_session* sess = server.get_session(request);
     string action = request.parameter("action");
 
     if (action == "create") {
@@ -21,16 +20,17 @@ void handle_session_api(
     } else if (action == "info") {
         if (sess) {
             auto json = json_builder()
-                .begin_object()
-                .key("sessionId")
-                .value(sess->id)
-                .key("createTime")
-                .value(sess->create_time.to_string_ISO_UTC())
-                .key("lastAccess")
-                .value(sess->last_access.to_string_ISO_UTC())
-                .key("attributes")
-                .value(sess->data).end_object()
-                .build();
+                                .begin_object()
+                                .key("sessionId")
+                                .value(sess->id)
+                                .key("createTime")
+                                .value(sess->create_time.to_string_ISO_UTC())
+                                .key("lastAccess")
+                                .value(sess->last_access.to_string_ISO_UTC())
+                                .key("attributes")
+                                .value(sess->data)
+                                .end_object()
+                                .build();
 
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
@@ -50,7 +50,7 @@ void handle_session_api(
     }
 }
 
-void handle_session_attribute(http_request &request, http_response &response, http_server &server) {
+void handle_session_attribute(http_request& request, http_response& response, http_server& server) {
     string attrName, attrValue;
     string content_type = request.header(HTTP_KEY::Content_Type);
 
@@ -58,19 +58,19 @@ void handle_session_attribute(http_request &request, http_response &response, ht
         try {
             auto root = json_parser(request.body).parse();
             if (root && root->is_object()) {
-                const json_object *obj = root->as_object();
+                const json_object* obj = root->as_object();
 
-                const json_value *attrNameVal = obj->get_member("attrName");
+                const json_value* attrNameVal = obj->get_member("attrName");
                 if (attrNameVal && attrNameVal->is_string()) {
                     attrName = attrNameVal->as_string()->get_value();
                 }
 
-                const json_value *attrValueVal = obj->get_member("attrValue");
+                const json_value* attrValueVal = obj->get_member("attrValue");
                 if (attrValueVal && attrValueVal->is_string()) {
                     attrValue = attrValueVal->as_string()->get_value();
                 }
             }
-        } catch (const exception &e) {
+        } catch (const exception& e) {
             println("JSON parse error:", e.what());
         }
     } else {
@@ -78,19 +78,19 @@ void handle_session_attribute(http_request &request, http_response &response, ht
         attrValue = request.parameter("attrValue");
     }
 
-    http_session *sess = server.get_session(request, true);
+    http_session* sess = server.get_session(request, true);
 
     if (!attrName.empty()) {
         (*sess)[attrName] = attrValue;
 
         auto json = json_builder()
-            .begin_object()
-            .key("attrName")
-            .value(attrName)
-            .key("attrValue")
-            .value(attrValue)
-            .end_object()
-            .build();
+                            .begin_object()
+                            .key("attrName")
+                            .value(attrName)
+                            .key("attrValue")
+                            .value(attrValue)
+                            .end_object()
+                            .build();
 
         response.status = HTTP_STATUS::S2_OK;
         response.status_message = "OK";
@@ -104,8 +104,7 @@ void handle_session_attribute(http_request &request, http_response &response, ht
     }
 }
 
-void handle_cookie_api(
-    http_request& request, http_response& response) {
+void handle_cookie_api(http_request& request, http_response& response) {
     if (request.method.is_post()) {
         HTTP_COOKIE_NAME name;
         string value, max_age_str;
@@ -154,10 +153,13 @@ void handle_cookie_api(
             response.cookies.emplace_back(move(ck));
 
             auto json = json_builder()
-                .begin_object()
-                .key("name").value(name.cookie_name())
-                .key("value").value(value)
-                .end_object().build();
+                                .begin_object()
+                                .key("name")
+                                .value(name.cookie_name())
+                                .key("value")
+                                .value(value)
+                                .end_object()
+                                .build();
 
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
@@ -169,8 +171,7 @@ void handle_cookie_api(
             response.set_content_type(HTTP_CONTENT::JSON_APP);
             response.body = R"({"error":"Missing cookie name"})";
         }
-    }
-    else if (request.method.is_delete()) {
+    } else if (request.method.is_delete()) {
         HTTP_COOKIE_NAME name(request.parameter("name"));
         if (!name.cookie_name().empty()) {
             http_cookie ck;
@@ -197,11 +198,11 @@ void test_https_server() {
         https_server server(8443, 128);
         server.load_certificate(
 #ifdef NEFORCE_PLATFORM_LINUX
-            "/home/huenqi/server.crt", "/home/huenqi/server.key"
+                "/home/huenqi/server.crt", "/home/huenqi/server.key"
 #else
-            "D:/OpenSSL/server.crt", "D:/OpenSSL/server.key"
+                "D:/OpenSSL/server.crt", "D:/OpenSSL/server.key"
 #endif
-            );
+        );
 
         http_router& r = server.router();
 
@@ -242,11 +243,15 @@ void test_https_server() {
 
             json_builder json;
             json.begin_object()
-                .key("https").value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
-                .key("method").value(request.method.to_string())
-                .key("path").value(request.path)
-                .key("user_agent").value(request.header("User-Agent"))
-                .end_object();
+                    .key("https")
+                    .value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
+                    .key("method")
+                    .value(request.method.to_string())
+                    .key("path")
+                    .value(request.path)
+                    .key("user_agent")
+                    .value(request.header("User-Agent"))
+                    .end_object();
 
             response.body = json.build()->to_string();
         });
@@ -258,10 +263,13 @@ void test_https_server() {
 
             json_builder json;
             json.begin_object()
-                .key("https").value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
-                .key("body").value(request.body)
-                .key("content_type").value(request.header(HTTP_KEY::Content_Type))
-                .end_object();
+                    .key("https")
+                    .value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
+                    .key("body")
+                    .value(request.body)
+                    .key("content_type")
+                    .value(request.header(HTTP_KEY::Content_Type))
+                    .end_object();
 
             response.body = json.build()->to_string();
         });
@@ -278,17 +286,15 @@ void test_https_server() {
 
             signal_guard guard;
 
-            signal_manager::instance().register_handler(
-                signal_event::INTERRUPT,
-                [&server](signal_event event, void* context) -> bool {
-                    if (event == signal_event::INTERRUPT) {
-                        println("Interrupting...");
-                        server.stop();
-                        immediate_exit(0);
-                    }
-                    return false;
-                }
-            );
+            signal_manager::instance().register_handler(signal_event::INTERRUPT,
+                                                        [&server](signal_event event, void* context) -> bool {
+                                                            if (event == signal_event::INTERRUPT) {
+                                                                println("Interrupting...");
+                                                                server.stop();
+                                                                immediate_exit(0);
+                                                            }
+                                                            return false;
+                                                        });
 
             while (server.is_running()) {
                 this_thread::sleep_for(seconds(1));
@@ -308,33 +314,24 @@ void test_http_server() {
         router.use(make_unique<cors_filter>("http://127.0.0.1:5500"));
         router.use(make_unique<static_file_filter>(res_root().str()));
 
-        router.post("/old-link", [](http_request&, http_response& response) {
-            response.redirect_url = "/new-link";
-        });
-        router.post("/forward-me", [](http_request&, http_response& response) {
-            response.forward_path = "/forward-target";
-        });
+        router.post("/old-link", [](http_request&, http_response& response) { response.redirect_url = "/new-link"; });
+        router.post("/forward-me",
+                    [](http_request&, http_response& response) { response.forward_path = "/forward-target"; });
         router.post("/forward-target", [](http_request&, http_response& response) {
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
             response.body = "Forward Successfully";
         });
 
-        router.get_post("/api/session",
-            [&server](http_request& request, http_response& response) {
-                handle_session_api(request, response, server);
-            }
-        );
-        router.get_post("/api/session-attribute",
-            [&server](http_request& request, http_response& response) {
-                handle_session_attribute(request, response, server);
-            }
-        );
-        router.post_delete("/api/cookie",
-            [](http_request& request, http_response& response) {
-                handle_cookie_api(request, response);
-            }
-        );
+        router.get_post("/api/session", [&server](http_request& request, http_response& response) {
+            handle_session_api(request, response, server);
+        });
+        router.get_post("/api/session-attribute", [&server](http_request& request, http_response& response) {
+            handle_session_attribute(request, response, server);
+        });
+        router.post_delete("/api/cookie", [](http_request& request, http_response& response) {
+            handle_cookie_api(request, response);
+        });
 
         router.get("/api/logger-test", [](http_request&, http_response& response) {
             response.status = HTTP_STATUS::S2_OK;
@@ -380,7 +377,7 @@ void test_http_server() {
             response.body = test.read();
         });
 
-        router.set_not_found_handler([](http_request&, http_response &response) {
+        router.set_not_found_handler([](http_request&, http_response& response) {
             static file err{res_root() / "404err.html"};
             response.status = HTTP_STATUS::S4_NOT_FOUNT;
             response.status_message = "Not Found";
@@ -405,9 +402,8 @@ void test_http_server() {
                 }
             });
 
-            session->set_close_handler([](websocket_status status, const string& reason) {
-                println("Connection closed:", reason);
-            });
+            session->set_close_handler(
+                    [](websocket_status status, const string& reason) { println("Connection closed:", reason); });
 
             if (session->is_open()) {
                 session->send("Welcome to chat room!");
@@ -417,17 +413,15 @@ void test_http_server() {
         if (server.start()) {
             signal_manager::instance().start_monitoring();
 
-            signal_manager::instance().register_handler(
-                signal_event::INTERRUPT,
-                [&server](signal_event event, void* context) -> bool {
-                    if (event == signal_event::INTERRUPT) {
-                        println("Interrupting...");
-                        server.stop();
-                        immediate_exit(0);
-                    }
-                    return false;
-                }
-            );
+            signal_manager::instance().register_handler(signal_event::INTERRUPT,
+                                                        [&server](signal_event event, void* context) -> bool {
+                                                            if (event == signal_event::INTERRUPT) {
+                                                                println("Interrupting...");
+                                                                server.stop();
+                                                                immediate_exit(0);
+                                                            }
+                                                            return false;
+                                                        });
 
             printcln(color::green(), "Press Ctrl+C to stop the server.");
             while (server.is_running()) {
@@ -466,10 +460,10 @@ void test_http_client() {
         println("Effective URL: ", response.effective_url);
         printfln("Total Time: {}ms", response.total_time.count());
         println("Headers:");
-        for (const auto& elem : response.headers) {
+        for (const auto& elem: response.headers) {
             const auto& key = elem.first;
             const auto& values = elem.second;
-            for (const auto& val : values) {
+            for (const auto& val: values) {
                 println("  ", key, ": ", val);
             }
         }
@@ -484,7 +478,7 @@ void test_http_client() {
         if (!cookies.empty()) {
             println();
             println("Cookies received:");
-            for (const auto& c : cookies) {
+            for (const auto& c: cookies) {
                 println("  ", c.name.cookie_name(), "=", c.value);
             }
         }
@@ -505,9 +499,8 @@ void test_download() {
 
     const path pem = res_root() / "cacert.pem";
     client.get_client().load_ca_file(pem.str());
-    const bool res = client.download_file(
-        "https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe",
-        res_root() / "python.exe");
+    const bool res = client.download_file("https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe",
+                                          res_root() / "python.exe");
     println("Download result:", res);
 }
 
@@ -531,7 +524,7 @@ void test_dns() {
 
         auto ips = cloudflare_client.resolve_a("example.com");
         println("IPv4 addresses for example.com:");
-        for (const auto& ip : ips) {
+        for (const auto& ip: ips) {
             println("  ", ip);
         }
 
@@ -545,7 +538,7 @@ void test_dns() {
         }
         println("First query (no cache): ", c.during().count(), "ns");
         println("IPv6 addresses:");
-        for (const auto& addr : ipv6_addrs) {
+        for (const auto& addr: ipv6_addrs) {
             println("  ", addr);
         }
 
@@ -557,24 +550,18 @@ void test_dns() {
 
         auto mx_records = client.resolve_mx("gmail.com");
         println("MX records for gmail.com:");
-        for (const auto& mx : mx_records) {
+        for (const auto& mx: mx_records) {
             println("  ", mx);
         }
 
-        vector<string> domains = {
-            "google.com",
-            "facebook.com",
-            "twitter.com",
-            "github.com",
-            "stackoverflow.com"
-        };
+        vector<string> domains = {"google.com", "facebook.com", "twitter.com", "github.com", "stackoverflow.com"};
         auto results = client.batch_query(domains, dns_record::A);
 
         for (size_t i = 0; i < domains.size(); ++i) {
             println(domains[i], ":");
 
             if (results[i].is_success()) {
-                for (const auto& answer : results[i].answers) {
+                for (const auto& answer: results[i].answers) {
                     println("  ", answer.data);
                 }
                 println("  Query time:", results[i].query_time.count(), "ms");
@@ -585,7 +572,7 @@ void test_dns() {
 
         auto txt_records = client.resolve_txt("google.com");
         println("TXT records for google.com:");
-        for (const auto& txt : txt_records) {
+        for (const auto& txt: txt_records) {
             println("  ", txt);
         }
     } catch (const exception& e) {
@@ -671,11 +658,8 @@ void test_ping() {
 
             if (result.success) {
                 success_count++;
-                printfln("来自 {} 的回复: 字节={} 时间={}ms TTL={}\n",
-                               result.destination.to_string(),
-                               result.reply_size,
-                               result.rtt.count(),
-                               result.reply_ttl);
+                printfln("来自 {} 的回复: 字节={} 时间={}ms TTL={}\n", result.destination.to_string(),
+                         result.reply_size, result.rtt.count(), result.reply_ttl);
             } else {
                 printfln("请求超时 (序列号 {})\n", i);
             }
@@ -687,8 +671,7 @@ void test_ping() {
 
         int loss_rate = (4 - success_count) * 100 / 4;
         println("\nPing 统计信息:\n");
-        printfln("    已发送 = 4, 已接收 = {}, 丢失 = {} ({}% 丢失)\n",
-                     success_count, 4 - success_count, loss_rate);
+        printfln("    已发送 = 4, 已接收 = {}, 丢失 = {} ({}% 丢失)\n", success_count, 4 - success_count, loss_rate);
 
     } catch (const exception& e) {
         printfln("Ping 失败: {}\n", e.what());
@@ -722,24 +705,16 @@ void test_smtp() {
     dns_client dns;
 
     smtp_socket smtp;
-    smtp.connect(
-       "smtp.qq.com",
-       ports{465},
-       "myhost.local",
-       smtp_socket::tls_mode::implicit,
-       &dns,
-       &ctx,
-       "smtp.qq.com"
-    );
+    smtp.connect("smtp.qq.com", ports{465}, "myhost.local", smtp_socket::tls_mode::implicit, &dns, &ctx, "smtp.qq.com");
 
     file code{res_root() / "authcode"};
     smtp.authenticate("1737900250@qq.com", code.read(), smtp_socket::auth_method::login);
 
     smtp_message msg;
-    msg.from    = "1737900250@qq.com";
-    msg.to      = { "1737900250@qq.com" };
+    msg.from = "1737900250@qq.com";
+    msg.to = {"1737900250@qq.com"};
     msg.subject = "Hello from NeForce";
-    msg.body    = "This is a test email sent to QQ mailbox.";
+    msg.body = "This is a test email sent to QQ mailbox.";
 
     smtp.send(msg);
     smtp.disconnect();

@@ -19,14 +19,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /// 字符字符串
-using string    = basic_string<char>;
+using string = basic_string<char>;
 
 /// 宽字符字符串
-using wstring   = basic_string<wchar_t>;
+using wstring = basic_string<wchar_t>;
 
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /// UTF-8字符串
-using u8string  = basic_string<char8_t>;
+using u8string = basic_string<char8_t>;
 #endif
 
 /// UTF-16字符串
@@ -51,9 +51,7 @@ NEFORCE_BEGIN_LITERALS__
  * @param len 字符串长度
  * @return string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string operator ""_s(const char* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string operator""_s(const char* str, size_t len) noexcept { return {str, len}; }
 
 /**
  * @brief 创建wchar_t字符串的字面量操作符
@@ -61,7 +59,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string operator ""_s(const char* str, size
  * @param len 字符串长度
  * @return wstring对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator ""_s(const wchar_t* str, size_t len) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator""_s(const wchar_t* str, size_t len) noexcept {
     return {str, len};
 }
 
@@ -72,7 +70,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator ""_s(const wchar_t* str, 
  * @param len 字符串长度
  * @return u8string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator ""_s(const char8_t* str, size_t len) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator""_s(const char8_t* str, size_t len) noexcept {
     return {str, len};
 }
 #endif // NEFORCE_STANDARD_20
@@ -83,7 +81,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator ""_s(const char8_t* str,
  * @param len 字符串长度
  * @return u16string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u16string operator ""_s(const char16_t* str, size_t len) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u16string operator""_s(const char16_t* str, size_t len) noexcept {
     return {str, len};
 }
 
@@ -93,7 +91,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u16string operator ""_s(const char16_t* st
  * @param len 字符串长度
  * @return u32string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u32string operator ""_s(const char32_t* str, size_t len) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u32string operator""_s(const char32_t* str, size_t len) noexcept {
     return {str, len};
 }
 
@@ -119,7 +117,7 @@ NEFORCE_CONSTEXPR20 string escape(const string_view str) {
     string result;
     result.reserve(str.length() + str.length() / 4);
 
-    for (const char c : str) {
+    for (const char c: str) {
         switch (c) {
             case '\"': {
                 result += "\\\"";
@@ -179,18 +177,14 @@ NEFORCE_CONSTEXPR20 string escape(const string_view str) {
  * @param str 要转义的字符串
  * @return 转义后的字符串
  */
-NEFORCE_CONSTEXPR20 string escape(const string& str) {
-    return escape(str.view());
-}
+NEFORCE_CONSTEXPR20 string escape(const string& str) { return escape(str.view()); }
 
 /**
  * @brief 转义C风格字符串中的特殊字符
  * @param str C风格字符串
  * @return 转义后的字符串
  */
-NEFORCE_CONSTEXPR20 string escape(const char* str) {
-    return escape(string_view{str});
-}
+NEFORCE_CONSTEXPR20 string escape(const char* str) { return escape(string_view{str}); }
 
 /**
  * @brief 从字符串视图中按分隔符读取一行（字符版本）
@@ -206,14 +200,16 @@ NEFORCE_CONSTEXPR20 string escape(const char* str) {
  * 返回true表示至少读取了一个字符（包括分隔符的情况）。
  */
 template <typename CharT>
-NEFORCE_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& pos,
-                              basic_string<CharT>& str, CharT delim = static_cast<CharT>('\n')) {
+NEFORCE_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& pos, basic_string<CharT>& str,
+                                 CharT delim = static_cast<CharT>('\n')) {
     str.clear();
     bool has_read = false;
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
-        if (c == delim) break;
+        if (c == delim) {
+            break;
+        }
         str.push_back(c);
     }
     return has_read;
@@ -229,14 +225,16 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& po
  * @return 是否成功读取到数据
  */
 template <typename CharT>
-NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
-                              basic_string<CharT>& str, CharT delim = static_cast<CharT>('\n')) {
+NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos, basic_string<CharT>& str,
+                                 CharT delim = static_cast<CharT>('\n')) {
     str.clear();
     bool has_read = false;
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
-        if (c == delim) break;
+        if (c == delim) {
+            break;
+        }
         str.push_back(c);
     }
     return has_read;
@@ -255,16 +253,17 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
  * 使用自定义谓词判断分隔符，可以处理复杂的行分割逻辑。
  */
 template <typename CharT, typename Pred>
-NEFORCE_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& pos,
-                              basic_string<CharT>& str, Pred split = [](const CharT c) {
-                                  return c == static_cast<CharT>('\n');
-                              }) {
+NEFORCE_CONSTEXPR20 bool getline(
+        const basic_string_view<CharT> data, size_t& pos, basic_string<CharT>& str,
+        Pred split = [](const CharT c) { return c == static_cast<CharT>('\n'); }) {
     str.clear();
     bool has_read = false;
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
-        if (split(c)) break;
+        if (split(c)) {
+            break;
+        }
         str.push_back(c);
     }
     return has_read;
@@ -281,16 +280,17 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& po
  * @return 是否成功读取到数据
  */
 template <typename CharT, typename Pred>
-NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
-                              basic_string<CharT>& str, Pred split = [](const CharT c) {
-                                  return c == static_cast<CharT>('\n');
-                              }) {
+NEFORCE_CONSTEXPR20 bool getline(
+        const basic_string<CharT>& data, size_t& pos, basic_string<CharT>& str,
+        Pred split = [](const CharT c) { return c == static_cast<CharT>('\n'); }) {
     str.clear();
     bool has_read = false;
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
-        if (split(c)) break;
+        if (split(c)) {
+            break;
+        }
         str.push_back(c);
     }
     return has_read;
@@ -306,7 +306,9 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
  * 如果指针为空，返回"nullptr"。
  */
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string address_string(const void* p) {
-    if (p == nullptr) return {"nullptr"};
+    if (p == nullptr) {
+        return {"nullptr"};
+    }
 
 #ifdef NEFORCE_ARCH_BITS_64
     constexpr uintptr_t address_mask = 0xF000000000000000ULL;

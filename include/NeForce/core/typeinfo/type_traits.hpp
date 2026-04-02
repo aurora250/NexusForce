@@ -26,28 +26,23 @@ NEFORCE_BEGIN_NAMESPACE__
  * 将编译时常量包装为类型，是类型特性库的基础设施。
  * 提供value静态成员和operator()用于获取值。
  */
-template <typename T, T Value>
-struct integral_constant {
+template <typename T, T Value> struct integral_constant {
     static constexpr T value = Value; ///< 存储的整数值
 
-    using value_type    = T;          ///< 值类型
-    using type          = integral_constant<T, Value>; ///< 自身类型
+    using value_type = T;                     ///< 值类型
+    using type = integral_constant<T, Value>; ///< 自身类型
 
     /**
      * @brief 显式转换到值类型的运算符
      * @return Value 的转换结果
      */
-    constexpr explicit operator value_type() const noexcept {
-        return value;
-    }
+    constexpr explicit operator value_type() const noexcept { return value; }
 
     /**
      * @brief 函数调用运算符，用于获取值
      * @return 存储的整数值
      */
-    NEFORCE_NODISCARD constexpr value_type operator ()() const noexcept {
-        return value;
-    }
+    NEFORCE_NODISCARD constexpr value_type operator()() const noexcept { return value; }
 };
 
 
@@ -56,8 +51,7 @@ struct integral_constant {
  * @brief 布尔常量包装器
  * @tparam Value 布尔值
  */
-template <bool Value>
-using bool_constant = integral_constant<bool, Value>;
+template <bool Value> using bool_constant = integral_constant<bool, Value>;
 
 using true_type = bool_constant<true>;   ///< 表示true的类型
 using false_type = bool_constant<false>; ///< 表示false的类型
@@ -67,16 +61,14 @@ using false_type = bool_constant<false>; ///< 表示false的类型
  * @brief 32位无符号整数常量包装器
  * @tparam Value 32位无符号整数值
  */
-template <uint32_t Value>
-using uint32_constant = integral_constant<uint32_t, Value>;
+template <uint32_t Value> using uint32_constant = integral_constant<uint32_t, Value>;
 
 /**
  * @typedef uint64_constant
  * @brief 64位无符号整数常量包装器
  * @tparam Value 64位无符号整数值
  */
-template <uint64_t Value>
-using uint64_constant = integral_constant<uint64_t, Value>;
+template <uint64_t Value> using uint64_constant = integral_constant<uint64_t, Value>;
 
 
 /**
@@ -86,8 +78,7 @@ using uint64_constant = integral_constant<uint64_t, Value>;
  *
  * 用于SFINAE技术中检测表达式是否合法。
  */
-template <typename... Types>
-using void_t = void;
+template <typename... Types> using void_t = void;
 
 /**
  * @struct enable_if
@@ -98,12 +89,10 @@ using void_t = void;
  * 当Test为false时，主模板没有::type成员，触发SFINAE。
  * 当Test为true时，特化版本提供::type成员。
  */
-template <bool Test, typename T = void>
-struct enable_if {};
+template <bool Test, typename T = void> struct enable_if {};
 
 /// @cond
-template <typename T>
-struct enable_if<true, T> {
+template <typename T> struct enable_if<true, T> {
     using type = T;
 };
 /// @endcond
@@ -112,8 +101,7 @@ struct enable_if<true, T> {
  * @typedef enable_if_t
  * @brief enable_if的便捷别名
  */
-template <bool Test, typename T = void>
-using enable_if_t = typename enable_if<Test, T>::type;
+template <bool Test, typename T = void> using enable_if_t = typename enable_if<Test, T>::type;
 
 
 /**
@@ -123,14 +111,12 @@ using enable_if_t = typename enable_if<Test, T>::type;
  * @tparam T1 如果Test为true时选择的类型
  * @tparam T2 如果Test为false时选择的类型
  */
-template <bool Test, typename T1, typename T2>
-struct conditional {
+template <bool Test, typename T1, typename T2> struct conditional {
     using type = T1;
 };
 
 /// @cond
-template <typename T1, typename T2>
-struct conditional<false, T1, T2> {
+template <typename T1, typename T2> struct conditional<false, T1, T2> {
     using type = T2;
 };
 /// @endcond
@@ -139,8 +125,7 @@ struct conditional<false, T1, T2> {
  * @typedef conditional_t
  * @brief conditional的便捷别名
  */
-template <bool Test, typename T1, typename T2>
-using conditional_t = typename conditional<Test, T1, T2>::type;
+template <bool Test, typename T1, typename T2> using conditional_t = typename conditional<Test, T1, T2>::type;
 
 
 /**
@@ -150,16 +135,14 @@ using conditional_t = typename conditional<Test, T1, T2>::type;
  *
  * 对给定布尔类型特化的值进行逻辑非操作。
  */
-template <typename T>
-struct negation : bool_constant<!static_cast<bool>(T::value)> {};
+template <typename T> struct negation : bool_constant<!static_cast<bool>(T::value)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var negation_v
  * @brief negation的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool negation_v = negation<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool negation_v = negation<T>::value;
 #endif
 
 
@@ -169,12 +152,10 @@ NEFORCE_INLINE17 constexpr bool negation_v = negation<T>::value;
  * @tparam T1 第一个类型
  * @tparam T2 第二个类型
  */
-template <typename T1, typename T2>
-struct is_same : false_type {};
+template <typename T1, typename T2> struct is_same : false_type {};
 
 /// @cond
-template <typename T>
-struct is_same<T, T> : true_type {};
+template <typename T> struct is_same<T, T> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -182,8 +163,7 @@ struct is_same<T, T> : true_type {};
  * @var is_same_v
  * @brief is_same的便捷变量模板
  */
-template <typename T1, typename T2>
-NEFORCE_INLINE17 constexpr bool is_same_v = is_same<T1, T2>::value;
+template <typename T1, typename T2> NEFORCE_INLINE17 constexpr bool is_same_v = is_same<T1, T2>::value;
 #endif
 
 
@@ -194,8 +174,7 @@ NEFORCE_INLINE17 constexpr bool is_same_v = is_same<T1, T2>::value;
  *
  * 将类型T包装为::type成员，用于防止模板参数推导。
  */
-template <typename T>
-struct type_identity {
+template <typename T> struct type_identity {
     using type = T;
 };
 
@@ -203,8 +182,7 @@ struct type_identity {
  * @typedef type_identity_t
  * @brief type_identity的便捷别名
  */
-template <typename T>
-using type_identity_t = typename type_identity<T>::type;
+template <typename T> using type_identity_t = typename type_identity<T>::type;
 
 
 /**
@@ -213,23 +191,18 @@ using type_identity_t = typename type_identity<T>::type;
  * @tparam T 要查找的类型
  * @tparam Types 类型集合
  */
-template <typename T, typename... Types>
-struct is_any_of;
+template <typename T, typename... Types> struct is_any_of;
 
 #ifdef NEFORCE_STANDARD_17
-template <typename T, typename... Types>
-struct is_any_of : bool_constant<(is_same_v<T, Types> || ...)> {};
+template <typename T, typename... Types> struct is_any_of : bool_constant<(is_same_v<T, Types> || ...)> {};
 #else
-template <typename T, typename... Types>
-struct is_any_of : false_type {};
+template <typename T, typename... Types> struct is_any_of : false_type {};
 
 /// @cond
-template <typename T, typename U>
-struct is_any_of<T, U> : is_same<T, U> {};
+template <typename T, typename U> struct is_any_of<T, U> : is_same<T, U> {};
 
 template <typename T, typename U, typename... Types>
-struct is_any_of<T, U, Types...> 
-    : conditional<is_same<T, U>::value, true_type, is_any_of<T, Types...>>::type {};
+struct is_any_of<T, U, Types...> : conditional<is_same<T, U>::value, true_type, is_any_of<T, Types...>>::type {};
 /// @endcond
 #endif // NEFORCE_STANDARD_17
 
@@ -238,21 +211,17 @@ struct is_any_of<T, U, Types...>
  * @var is_any_of_v
  * @brief is_any_of的便捷变量模板
  */
-template <typename T, typename... Types>
-NEFORCE_INLINE17 constexpr bool is_any_of_v = is_any_of<T, Types...>::value;
+template <typename T, typename... Types> NEFORCE_INLINE17 constexpr bool is_any_of_v = is_any_of<T, Types...>::value;
 #endif
-
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
 // 析取辅助实现
-template <bool, typename first, typename...>
-struct __disjunction_aux {
+template <bool, typename first, typename...> struct __disjunction_aux {
     using type = first;
 };
-template <typename Curr, typename Next, typename... Rest>
-struct __disjunction_aux<false, Curr, Next, Rest...> {
+template <typename Curr, typename Next, typename... Rest> struct __disjunction_aux<false, Curr, Next, Rest...> {
     using type = typename __disjunction_aux<static_cast<bool>(Next::value), Next, Rest...>::type;
 };
 NEFORCE_END_INNER__
@@ -265,14 +234,11 @@ NEFORCE_END_INNER__
  *
  * 计算Args::value的逻辑或，短路求值。
  */
-template <typename... Args>
-struct disjunction : false_type {};
+template <typename... Args> struct disjunction : false_type {};
 
 /// @cond
 template <typename First, typename... Rest>
-struct disjunction<First, Rest...>
-    : inner::__disjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
-};
+struct disjunction<First, Rest...> : inner::__disjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -280,20 +246,17 @@ struct disjunction<First, Rest...>
  * @var disjunction_v
  * @brief disjunction的便捷变量模板
  */
-template <typename... Args>
-NEFORCE_INLINE17 constexpr bool disjunction_v = disjunction<Args...>::value;
+template <typename... Args> NEFORCE_INLINE17 constexpr bool disjunction_v = disjunction<Args...>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
 // 合取辅助实现
-template <bool, typename First, typename...>
-struct __conjunction_aux {
+template <bool, typename First, typename...> struct __conjunction_aux {
     using type = First;
 };
-template <typename Curr, typename Next, typename... Rest>
-struct __conjunction_aux<true, Curr, Next, Rest...> {
+template <typename Curr, typename Next, typename... Rest> struct __conjunction_aux<true, Curr, Next, Rest...> {
     using type = typename __conjunction_aux<static_cast<bool>(Next::value), Next, Rest...>::type;
 };
 NEFORCE_END_INNER__
@@ -306,14 +269,11 @@ NEFORCE_END_INNER__
  *
  * 计算Args::value的逻辑与，短路求值。
  */
-template <typename... Args>
-struct conjunction : true_type {};
+template <typename... Args> struct conjunction : true_type {};
 
 /// @cond
 template <typename First, typename... Rest>
-struct conjunction<First, Rest...>
-    : inner::__conjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
-};
+struct conjunction<First, Rest...> : inner::__conjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -321,8 +281,7 @@ struct conjunction<First, Rest...>
  * @var conjunction_v
  * @brief conjunction的便捷变量模板
  */
-template <typename... Args>
-NEFORCE_INLINE17 constexpr bool conjunction_v = conjunction<Args...>::value;
+template <typename... Args> NEFORCE_INLINE17 constexpr bool conjunction_v = conjunction<Args...>::value;
 #endif
 
 /** @} */ // TypeTraitsUtilities
@@ -338,14 +297,12 @@ NEFORCE_INLINE17 constexpr bool conjunction_v = conjunction<Args...>::value;
  * @brief 移除const限定符
  * @tparam T 输入类型
  */
-template <typename T>
-struct remove_const {
+template <typename T> struct remove_const {
     using type = T;
 };
 
 /// @cond
-template <typename T>
-struct remove_const<const T> {
+template <typename T> struct remove_const<const T> {
     using type = T;
 };
 /// @endcond
@@ -354,8 +311,7 @@ struct remove_const<const T> {
  * @typedef remove_const_t
  * @brief remove_const的便捷别名
  */
-template <typename T>
-using remove_const_t = typename remove_const<T>::type;
+template <typename T> using remove_const_t = typename remove_const<T>::type;
 
 
 /**
@@ -363,14 +319,12 @@ using remove_const_t = typename remove_const<T>::type;
  * @brief 移除volatile限定符
  * @tparam T 输入类型
  */
-template <typename T>
-struct remove_volatile {
+template <typename T> struct remove_volatile {
     using type = T;
 };
 
 /// @cond
-template <typename T>
-struct remove_volatile<volatile T> {
+template <typename T> struct remove_volatile<volatile T> {
     using type = T;
 };
 /// @endcond
@@ -379,52 +333,43 @@ struct remove_volatile<volatile T> {
  * @typedef remove_volatile_t
  * @brief remove_volatile的便捷别名
  */
-template <typename T>
-using remove_volatile_t = typename remove_volatile<T>::type;
+template <typename T> using remove_volatile_t = typename remove_volatile<T>::type;
 
 
 /**
  * @struct remove_cv
  * @brief 移除const和volatile限定符
  * @tparam T 输入类型
-*
+ *
  * 同时提供bind_cv_t元函数，用于将原类型的cv限定符应用到其他类型。
  */
-template <typename T>
-struct remove_cv {
+template <typename T> struct remove_cv {
     using type = T;
 
     /**
      * @brief 将原类型的cv限定符应用到其他类型
      * @tparam wrapper 要应用限定符的类型
      */
-    template <typename wrapper>
-    using bind_cv_t = wrapper;
+    template <typename wrapper> using bind_cv_t = wrapper;
 };
 
 /// @cond
-template <typename T>
-struct remove_cv<const T> {
+template <typename T> struct remove_cv<const T> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_cv_t = const wrapper;
+    template <typename wrapper> using bind_cv_t = const wrapper;
 };
 
-template <typename T>
-struct remove_cv<volatile T> {
+template <typename T> struct remove_cv<volatile T> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_cv_t = volatile wrapper;
+    template <typename wrapper> using bind_cv_t = volatile wrapper;
 };
 
-template <typename T>
-struct remove_cv<const volatile T> {
+template <typename T> struct remove_cv<const volatile T> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_cv_t = const volatile wrapper;
+    template <typename wrapper> using bind_cv_t = const volatile wrapper;
 };
 /// @endcond
 
@@ -432,8 +377,7 @@ struct remove_cv<const volatile T> {
  * @typedef remove_cv_t
  * @brief remove_cv的便捷别名
  */
-template <typename T>
-using remove_cv_t = typename remove_cv<T>::type;
+template <typename T> using remove_cv_t = typename remove_cv<T>::type;
 
 /**
  * @typedef copy_cv_t
@@ -441,8 +385,7 @@ using remove_cv_t = typename remove_cv<T>::type;
  * @tparam From 源类型，提供cv限定符
  * @tparam To 目标类型，接受cv限定符
  */
-template <typename From, typename To>
-using copy_cv_t = typename remove_cv<From>::template bind_cv_t<To>;
+template <typename From, typename To> using copy_cv_t = typename remove_cv<From>::template bind_cv_t<To>;
 
 
 /**
@@ -452,33 +395,27 @@ using copy_cv_t = typename remove_cv<From>::template bind_cv_t<To>;
  *
  * 同时提供bind_ref_t元函数，用于将原类型的引用限定符应用到其他类型。
  */
-template <typename T>
-struct remove_reference {
+template <typename T> struct remove_reference {
     using type = T;
 
     /**
      * @brief 将原类型的引用限定符应用到其他类型
      * @tparam wrapper 要应用引用限定符的类型
      */
-    template <typename wrapper>
-    using bind_ref_t = wrapper;
+    template <typename wrapper> using bind_ref_t = wrapper;
 };
 
 /// @cond
-template <typename T>
-struct remove_reference<T&> {
+template <typename T> struct remove_reference<T&> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_ref_t = wrapper&;
+    template <typename wrapper> using bind_ref_t = wrapper&;
 };
 
-template <typename T>
-struct remove_reference<T&&> {
+template <typename T> struct remove_reference<T&&> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_ref_t = wrapper&&;
+    template <typename wrapper> using bind_ref_t = wrapper&&;
 };
 /// @endcond
 
@@ -486,8 +423,7 @@ struct remove_reference<T&&> {
  * @typedef remove_reference_t
  * @brief remove_reference的便捷别名
  */
-template <typename T>
-using remove_reference_t = typename remove_reference<T>::type;
+template <typename T> using remove_reference_t = typename remove_reference<T>::type;
 
 /**
  * @typedef copy_ref_t
@@ -495,8 +431,7 @@ using remove_reference_t = typename remove_reference<T>::type;
  * @tparam From 源类型，提供引用限定符
  * @tparam To 目标类型，接受引用限定符
  */
-template <typename From, typename To>
-using copy_ref_t = typename remove_reference<From>::template bind_ref_t<To>;
+template <typename From, typename To> using copy_ref_t = typename remove_reference<From>::template bind_ref_t<To>;
 
 /**
  * @typedef copy_cvref_t
@@ -504,8 +439,7 @@ using copy_ref_t = typename remove_reference<From>::template bind_ref_t<To>;
  * @tparam From 源类型，提供cv和引用限定符
  * @tparam To 目标类型，接受限定符
  */
-template <typename From, typename To>
-using copy_cvref_t = copy_ref_t<From, copy_cv_t<From, To>>;
+template <typename From, typename To> using copy_cvref_t = copy_ref_t<From, copy_cv_t<From, To>>;
 
 
 /**
@@ -513,8 +447,7 @@ using copy_cvref_t = copy_ref_t<From, copy_cv_t<From, To>>;
  * @brief 同时移除cv和引用限定符的类型包装
  * @tparam T 输入类型
  */
-template <typename T>
-struct remove_cvref {
+template <typename T> struct remove_cvref {
     using type = remove_cv_t<remove_reference_t<T>>;
 };
 
@@ -522,8 +455,7 @@ struct remove_cvref {
  * @typedef remove_cvref_t
  * @brief remove_cvref的便捷别名
  */
-template <typename T>
-using remove_cvref_t = typename remove_cvref<T>::type;
+template <typename T> using remove_cvref_t = typename remove_cvref<T>::type;
 
 
 /**
@@ -531,19 +463,16 @@ using remove_cvref_t = typename remove_cvref<T>::type;
  * @brief 移除数组的最外层维度
  * @tparam T 输入类型
  */
-template <typename T>
-struct remove_extent {
+template <typename T> struct remove_extent {
     using type = T;
 };
 
 /// @cond
-template <typename T, size_t Idx>
-struct remove_extent<T[Idx]> {
+template <typename T, size_t Idx> struct remove_extent<T[Idx]> {
     using type = T;
 };
 
-template <typename T>
-struct remove_extent<T[]> {
+template <typename T> struct remove_extent<T[]> {
     using type = T;
 };
 /// @endcond
@@ -552,8 +481,7 @@ struct remove_extent<T[]> {
  * @typedef remove_extent_t
  * @brief remove_extent的便捷别名
  */
-template <typename T>
-using remove_extent_t = typename remove_extent<T>::type;
+template <typename T> using remove_extent_t = typename remove_extent<T>::type;
 
 
 /**
@@ -561,19 +489,16 @@ using remove_extent_t = typename remove_extent<T>::type;
  * @brief 移除数组的所有维度
  * @tparam T 输入类型
  */
-template <typename T>
-struct remove_all_extents {
+template <typename T> struct remove_all_extents {
     using type = T;
 };
 
 /// @cond
-template <typename T, size_t Idx>
-struct remove_all_extents<T[Idx]> {
+template <typename T, size_t Idx> struct remove_all_extents<T[Idx]> {
     using type = typename remove_all_extents<T>::type;
 };
 
-template <typename T>
-struct remove_all_extents<T[]> {
+template <typename T> struct remove_all_extents<T[]> {
     using type = typename remove_all_extents<T>::type;
 };
 /// @endcond
@@ -582,8 +507,7 @@ struct remove_all_extents<T[]> {
  * @typedef remove_all_extents_t
  * @brief remove_all_extents的便捷别名
  */
-template <typename T>
-using remove_all_extents_t = typename remove_all_extents<T>::type;
+template <typename T> using remove_all_extents_t = typename remove_all_extents<T>::type;
 
 
 /**
@@ -593,49 +517,39 @@ using remove_all_extents_t = typename remove_all_extents<T>::type;
  *
  * 同时提供bind_pointer_t元函数，用于将原类型的指针限定符应用到其他类型。
  */
-template <typename T>
-struct remove_pointer {
+template <typename T> struct remove_pointer {
     using type = T;
 
     /**
      * @brief 将原类型的指针限定符应用到其他类型
      * @tparam wrapper 要应用指针限定符的类型
      */
-    template <typename wrapper>
-    using bind_pointer_t = wrapper;
+    template <typename wrapper> using bind_pointer_t = wrapper;
 };
 
 /// @cond
-template <typename T>
-struct remove_pointer<T*> {
+template <typename T> struct remove_pointer<T*> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_pointer_t = wrapper*;
+    template <typename wrapper> using bind_pointer_t = wrapper*;
 };
 
-template <typename T>
-struct remove_pointer<T* const> {
+template <typename T> struct remove_pointer<T* const> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_pointer_t = const wrapper*;
+    template <typename wrapper> using bind_pointer_t = const wrapper*;
 };
 
-template <typename T>
-struct remove_pointer<T* volatile> {
+template <typename T> struct remove_pointer<T* volatile> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_pointer_t = volatile wrapper*;
+    template <typename wrapper> using bind_pointer_t = volatile wrapper*;
 };
 
-template <typename T>
-struct remove_pointer<T* const volatile> {
+template <typename T> struct remove_pointer<T* const volatile> {
     using type = T;
 
-    template <typename wrapper>
-    using bind_pointer_t = volatile const wrapper*;
+    template <typename wrapper> using bind_pointer_t = volatile const wrapper*;
 };
 /// @endcond
 
@@ -643,8 +557,7 @@ struct remove_pointer<T* const volatile> {
  * @typedef remove_pointer_t
  * @brief remove_pointer的便捷别名
  */
-template <typename T>
-using remove_pointer_t = typename remove_pointer<T>::type;
+template <typename T> using remove_pointer_t = typename remove_pointer<T>::type;
 
 /**
  * @typedef copy_pointer_t
@@ -652,8 +565,7 @@ using remove_pointer_t = typename remove_pointer<T>::type;
  * @tparam From 源类型，提供指针限定符
  * @tparam To 目标类型，接受指针限定符
  */
-template <typename From, typename To>
-using copy_pointer_t = typename remove_pointer<From>::template bind_pointer_t<To>;
+template <typename From, typename To> using copy_pointer_t = typename remove_pointer<From>::template bind_pointer_t<To>;
 
 
 /**
@@ -661,23 +573,20 @@ using copy_pointer_t = typename remove_pointer<From>::template bind_pointer_t<To
  * @brief 移除函数类型的限定符
  * @tparam T 函数类型
  */
-template <typename T>
-struct remove_function_qualifiers {
+template <typename T> struct remove_function_qualifiers {
     using type = T;
 };
 
 /// @cond
 
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...)> {
+template <typename Ret, typename... Args> struct remove_function_qualifiers<Ret(Args...)> {
     using type = Ret(Args...);
 };
 
-#define __NEFORCE_EXPAND_REM_FUNC_QULF(QUF) \
-template <typename Ret, typename... Args> \
-struct remove_function_qualifiers<Ret(Args...) QUF> { \
-    using type = Ret(Args...); \
-};
+#define __NEFORCE_EXPAND_REM_FUNC_QULF(QUF)                                                         \
+    template <typename Ret, typename... Args> struct remove_function_qualifiers<Ret(Args...) QUF> { \
+        using type = Ret(Args...);                                                                  \
+    };
 
 NEFORCE_MACRO_RANGES_CV(__NEFORCE_EXPAND_REM_FUNC_QULF)
 NEFORCE_MACRO_RANGES_CV_REF(__NEFORCE_EXPAND_REM_FUNC_QULF)
@@ -692,8 +601,7 @@ NEFORCE_MACRO_RANGES_CV_REF_NOEXCEPT(__NEFORCE_EXPAND_REM_FUNC_QULF)
  * @typedef remove_function_qualifiers_t
  * @brief remove_function_qualifiers的便捷别名
  */
-template <typename T>
-using remove_function_qualifiers_t = typename remove_function_qualifiers<T>::type;
+template <typename T> using remove_function_qualifiers_t = typename remove_function_qualifiers<T>::type;
 
 /** @} */ // RemoveQualifiers
 
@@ -705,11 +613,9 @@ using remove_function_qualifiers_t = typename remove_function_qualifiers<T>::typ
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename>
-struct __is_void_helper : false_type {};
+template <typename> struct __is_void_helper : false_type {};
 
-template <>
-struct __is_void_helper<void> : true_type {};
+template <> struct __is_void_helper<void> : true_type {};
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -720,16 +626,14 @@ NEFORCE_END_INNER__
  *
  * 移除cv限定符后检查是否为void类型。
  */
-template <typename T>
-struct is_void : inner::__is_void_helper<remove_cv_t<T>>::type {};
+template <typename T> struct is_void : inner::__is_void_helper<remove_cv_t<T>>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_void_v
  * @brief is_void的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_void_v = is_void<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_void_v = is_void<T>::value;
 #endif
 
 
@@ -739,8 +643,7 @@ NEFORCE_INLINE17 constexpr bool is_void_v = is_void<T>::value;
  * @tparam T 要包装的类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename T, typename Dummy = void>
-struct package {
+template <typename T, typename Dummy = void> struct package {
     using type = T;
 };
 
@@ -748,24 +651,21 @@ struct package {
  * @typedef package_t
  * @brief package的便捷别名
  */
-template <typename T>
-using package_t = typename package<T>::type;
+template <typename T> using package_t = typename package<T>::type;
 
 /**
  * @struct is_packaged
  * @brief 判断类型是否被包装
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_packaged : bool_constant<!is_same<package_t<T>, T>::value> {};
+template <typename T> struct is_packaged : bool_constant<!is_same<package_t<T>, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_packaged_v
  * @brief is_packaged的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_packaged_v = is_packaged<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_packaged_v = is_packaged<T>::value;
 #endif
 
 /**
@@ -774,8 +674,7 @@ NEFORCE_INLINE17 constexpr bool is_packaged_v = is_packaged<T>::value;
  * @tparam T 要解包的类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename T, typename Dummy = void>
-struct unpackage {
+template <typename T, typename Dummy = void> struct unpackage {
     using type = T;
 };
 
@@ -783,31 +682,27 @@ struct unpackage {
  * @typedef unpackage_t
  * @brief unpackage的便捷别名
  */
-template <typename T>
-using unpackage_t = typename unpackage<T>::type;
+template <typename T> using unpackage_t = typename unpackage<T>::type;
 
 /**
  * @typedef unpack_remove_cvref_t
  * @brief 同时解包并移除cv和引用限定符
  */
-template <typename T>
-using unpack_remove_cvref_t = unpackage_t<remove_cvref_t<T>>;
+template <typename T> using unpack_remove_cvref_t = unpackage_t<remove_cvref_t<T>>;
 
 /**
  * @struct is_unpackaged
  * @brief 判断类型是否被解包
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_unpackaged : bool_constant<!is_same<unpackage_t<T>, T>::value> {};
+template <typename T> struct is_unpackaged : bool_constant<!is_same<unpackage_t<T>, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_unpackaged_v
  * @brief is_unpackaged的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_unpackaged_v = is_unpackaged<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_unpackaged_v = is_unpackaged<T>::value;
 #endif
 
 
@@ -817,21 +712,19 @@ NEFORCE_INLINE17 constexpr bool is_unpackaged_v = is_unpackaged<T>::value;
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_character : bool_constant<is_any_of<remove_cvref_t<T>,
-    char, wchar_t,
+struct is_character : bool_constant<is_any_of<remove_cvref_t<T>, char, wchar_t,
 #ifdef NEFORCE_STANDARD_20
-    char8_t,
+                                              char8_t,
 #endif
-    char16_t, char32_t
->::value> {};
+                                              char16_t, char32_t>::value> {
+};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_character_v
  * @brief is_character的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_character_v = is_character<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_character_v = is_character<T>::value;
 #endif
 
 
@@ -840,16 +733,14 @@ NEFORCE_INLINE17 constexpr bool is_character_v = is_character<T>::value;
  * @brief 判断类型是否为布尔类型
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_boolean : bool_constant<is_same<remove_cvref_t<T>, bool>::value> {};
+template <typename T> struct is_boolean : bool_constant<is_same<remove_cvref_t<T>, bool>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_boolean_v
  * @brief is_boolean的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_boolean_v = is_boolean<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_boolean_v = is_boolean<T>::value;
 #endif
 
 
@@ -861,17 +752,16 @@ NEFORCE_INLINE17 constexpr bool is_boolean_v = is_boolean<T>::value;
  * 包括所有标准整数类型，不包括字符类型和布尔类型。
  */
 template <typename T>
-struct is_standard_integral : bool_constant<is_any_of<remove_cvref_t<T>,
-    signed char, short, int, long, long long,
-    unsigned char, unsigned short, unsigned int, unsigned long, unsigned long long>::value> {};
+struct is_standard_integral
+: bool_constant<is_any_of<remove_cvref_t<T>, signed char, short, int, long, long long, unsigned char, unsigned short,
+                          unsigned int, unsigned long, unsigned long long>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_standard_integral_v
  * @brief is_standard_integral的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_standard_integral_v = is_standard_integral<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_standard_integral_v = is_standard_integral<T>::value;
 #endif
 
 
@@ -890,8 +780,7 @@ struct is_integral : bool_constant<disjunction<is_standard_integral<T>, is_chara
  * @var is_integral_v
  * @brief is_integral的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_integral_v = is_integral<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_integral_v = is_integral<T>::value;
 #endif
 
 
@@ -919,29 +808,25 @@ template <typename T> NEFORCE_INLINE17 constexpr bool is_floating_point_v = is_f
  *
  * 包括整数类型和浮点数类型。
  */
-template <typename T>
-struct is_arithmetic : bool_constant<disjunction<is_integral<T>, is_floating_point<T>>::value> {};
+template <typename T> struct is_arithmetic : bool_constant<disjunction<is_integral<T>, is_floating_point<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_arithmetic_v
  * @brief is_arithmetic的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_arithmetic_v = is_arithmetic<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_arithmetic_v = is_arithmetic<T>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T, bool = is_integral<T>::value>
-struct __check_sign_aux {
+template <typename T, bool = is_integral<T>::value> struct __check_sign_aux {
     static constexpr bool is_signed = static_cast<remove_cvref_t<T>>(-1) < static_cast<remove_cv_t<T>>(0);
     static constexpr bool is_unsigned = !is_signed;
 };
 
-template <typename T>
-struct __check_sign_aux<T, false> {
+template <typename T> struct __check_sign_aux<T, false> {
     static constexpr bool is_signed = is_floating_point<T>::value;
     static constexpr bool is_unsigned = false;
 };
@@ -953,16 +838,14 @@ NEFORCE_END_INNER__
  * @brief 判断类型是否为有符号类型
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_signed : bool_constant<inner::__check_sign_aux<unpack_remove_cvref_t<T>>::is_signed> {};
+template <typename T> struct is_signed : bool_constant<inner::__check_sign_aux<unpack_remove_cvref_t<T>>::is_signed> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_signed_v
  * @brief is_signed的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_signed_v = is_signed<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_signed_v = is_signed<T>::value;
 #endif
 
 /**
@@ -978,8 +861,7 @@ struct is_unsigned : bool_constant<inner::__check_sign_aux<unpack_remove_cvref_t
  * @var is_unsigned_v
  * @brief is_unsigned的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_unsigned_v = is_unsigned<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_unsigned_v = is_unsigned<T>::value;
 #endif
 
 /** @} */ // TypeProperties
@@ -995,8 +877,7 @@ NEFORCE_INLINE17 constexpr bool is_unsigned_v = is_unsigned<T>::value;
  * @brief 添加const限定符
  * @tparam T 输入类型
  */
-template <typename T>
-struct add_const {
+template <typename T> struct add_const {
     using type = const T;
 };
 
@@ -1004,8 +885,7 @@ struct add_const {
  * @typedef add_const_t
  * @brief add_const的便捷别名
  */
-template <typename T>
-using add_const_t = typename add_const<T>::type;
+template <typename T> using add_const_t = typename add_const<T>::type;
 
 /**
  * @brief 将值转换为const引用
@@ -1014,14 +894,10 @@ using add_const_t = typename add_const<T>::type;
  * @return 值的const引用
  * @note 删除const右值重载以防止悬垂引用
  */
-template <typename T>
-NEFORCE_NODISCARD constexpr add_const_t<T>& as_const(T& val) noexcept {
-    return val;
-}
+template <typename T> NEFORCE_NODISCARD constexpr add_const_t<T>& as_const(T& val) noexcept { return val; }
 
 /// @cond
-template <typename T>
-void as_const(const T&&) = delete;
+template <typename T> void as_const(const T&&) = delete;
 /// @endcond
 
 /**
@@ -1029,8 +905,7 @@ void as_const(const T&&) = delete;
  * @brief 添加volatile限定符
  * @tparam T 输入类型
  */
-template <typename T>
-struct add_volatile {
+template <typename T> struct add_volatile {
     using type = volatile T;
 };
 
@@ -1038,16 +913,14 @@ struct add_volatile {
  * @typedef add_volatile_t
  * @brief add_volatile的便捷别名
  */
-template <typename T>
-using add_volatile_t = typename add_volatile<T>::type;
+template <typename T> using add_volatile_t = typename add_volatile<T>::type;
 
 /**
  * @struct add_cv
  * @brief 同时添加const和volatile限定符
  * @tparam T 输入类型
  */
-template <typename T>
-struct add_cv {
+template <typename T> struct add_cv {
     using type = const volatile T;
 };
 
@@ -1055,8 +928,7 @@ struct add_cv {
  * @typedef add_cv_t
  * @brief add_cv的类型别名
  */
-template <typename T>
-using add_cv_t = typename add_cv<T>::type;
+template <typename T> using add_cv_t = typename add_cv<T>::type;
 
 
 /**
@@ -1067,15 +939,13 @@ using add_cv_t = typename add_cv<T>::type;
  *
  * 提供lvalue和rvalue类型别名。
  */
-template <typename T, typename Dummy = void>
-struct add_reference {
+template <typename T, typename Dummy = void> struct add_reference {
     using lvalue = T;
     using rvalue = T;
 };
 
 /// @cond
-template <typename T>
-struct add_reference<T, void_t<T&>> {
+template <typename T> struct add_reference<T, void_t<T&>> {
     using lvalue = T&;
     using rvalue = T&&;
 };
@@ -1086,8 +956,7 @@ struct add_reference<T, void_t<T&>> {
  * @brief 添加左值引用
  * @tparam T 输入类型
  */
-template <typename T>
-struct add_lvalue_reference {
+template <typename T> struct add_lvalue_reference {
     using type = typename add_reference<T>::lvalue;
 };
 
@@ -1095,16 +964,14 @@ struct add_lvalue_reference {
  * @typedef add_lvalue_reference_t
  * @brief add_lvalue_reference的便捷别名
  */
-template <typename T>
-using add_lvalue_reference_t = typename add_reference<T>::lvalue;
+template <typename T> using add_lvalue_reference_t = typename add_reference<T>::lvalue;
 
 /**
  * @struct add_rvalue_reference
  * @brief 添加右值引用
  * @tparam T 输入类型
  */
-template <typename T>
-struct add_rvalue_reference {
+template <typename T> struct add_rvalue_reference {
     using type = typename add_reference<T>::rvalue;
 };
 
@@ -1112,8 +979,7 @@ struct add_rvalue_reference {
  * @typedef add_rvalue_reference_t
  * @brief add_rvalue_reference的便捷别名
  */
-template <typename T>
-using add_rvalue_reference_t = typename add_reference<T>::rvalue;
+template <typename T> using add_rvalue_reference_t = typename add_reference<T>::rvalue;
 
 
 /**
@@ -1122,14 +988,12 @@ using add_rvalue_reference_t = typename add_reference<T>::rvalue;
  * @tparam T 输入类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename T, typename Dummy = void>
-struct add_pointer {
+template <typename T, typename Dummy = void> struct add_pointer {
     using type = T;
 };
 
 /// @cond
-template <typename T>
-struct add_pointer<T, void_t<remove_reference_t<T>*>> {
+template <typename T> struct add_pointer<T, void_t<remove_reference_t<T>*>> {
     using type = remove_reference_t<T>*;
 };
 /// @endcond
@@ -1138,8 +1002,7 @@ struct add_pointer<T, void_t<remove_reference_t<T>*>> {
  * @typedef add_pointer_t
  * @brief add_pointer的便捷别名
  */
-template <typename T>
-using add_pointer_t = typename add_pointer<T>::type;
+template <typename T> using add_pointer_t = typename add_pointer<T>::type;
 
 /** @} */ // AddQualifiers
 
@@ -1155,11 +1018,9 @@ using add_pointer_t = typename add_pointer<T>::type;
  * @return 类型的右值引用
  * @warning 此函数仅有声明，不应被实际调用
  */
-template <typename T>
-add_rvalue_reference_t<T> declval() noexcept;
+template <typename T> add_rvalue_reference_t<T> declval() noexcept;
 
-template <typename T>
-add_lvalue_reference_t<T> ldeclval() noexcept;
+template <typename T> add_lvalue_reference_t<T> ldeclval() noexcept;
 
 /**
  * @brief 获取类型的副本，仅用于非求值上下文
@@ -1167,16 +1028,14 @@ add_lvalue_reference_t<T> ldeclval() noexcept;
  * @return 类型的副本
  * @warning 此函数仅有声明，不应被实际调用
  */
-template <typename T>
-type_identity_t<T> declcopy(type_identity_t<T>) noexcept;
+template <typename T> type_identity_t<T> declcopy(type_identity_t<T>) noexcept;
 
 /**
  * @brief 将类型映射为void，仅用于非求值上下文
  * @tparam T 目标类型
  * @warning 此函数仅有声明，不应被实际调用
  */
-template <typename T>
-void declvoid(type_identity_t<T>) noexcept;
+template <typename T> void declvoid(type_identity_t<T>) noexcept;
 
 /** @} */ // DeclvalTools
 
@@ -1193,15 +1052,12 @@ void declvoid(type_identity_t<T>) noexcept;
  *
  * 对于非数组类型返回0，对于数组类型返回其维度数。
  */
-template <typename T>
-struct rank : integral_constant<size_t, 0> {};
+template <typename T> struct rank : integral_constant<size_t, 0> {};
 
 /// @cond
-template <typename T, size_t Idx>
-struct rank<T[Idx]> : integral_constant<size_t, rank<T>::value + 1> {};
+template <typename T, size_t Idx> struct rank<T[Idx]> : integral_constant<size_t, rank<T>::value + 1> {};
 
-template <typename T>
-struct rank<T[]> : integral_constant<size_t, rank<T>::value + 1> {};
+template <typename T> struct rank<T[]> : integral_constant<size_t, rank<T>::value + 1> {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1209,8 +1065,7 @@ struct rank<T[]> : integral_constant<size_t, rank<T>::value + 1> {};
  * @var rank_v
  * @brief rank的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr size_t rank_v = rank<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr size_t rank_v = rank<T>::value;
 #endif
 
 
@@ -1222,18 +1077,14 @@ NEFORCE_INLINE17 constexpr size_t rank_v = rank<T>::value;
  *
  * 对于非数组类型或越界的维度返回0。
  */
-template <typename T, uint32_t Idx = 0>
-struct extent : integral_constant<size_t, 0> {};
+template <typename T, uint32_t Idx = 0> struct extent : integral_constant<size_t, 0> {};
 
 /// @cond
-template <typename T, size_t N>
-struct extent<T[N], 0> : integral_constant<size_t, N> {};
+template <typename T, size_t N> struct extent<T[N], 0> : integral_constant<size_t, N> {};
 
-template <typename T, uint32_t Idx, size_t N>
-struct extent<T[N], Idx> : extent<T, Idx - 1> {};
+template <typename T, uint32_t Idx, size_t N> struct extent<T[N], Idx> : extent<T, Idx - 1> {};
 
-template <typename T, uint32_t Idx>
-struct extent<T[], Idx> : extent<T, Idx - 1> {};
+template <typename T, uint32_t Idx> struct extent<T[], Idx> : extent<T, Idx - 1> {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1241,8 +1092,7 @@ struct extent<T[], Idx> : extent<T, Idx - 1> {};
  * @var extent_v
  * @brief extent的便捷变量模板
  */
-template <typename T, uint32_t Idx = 0>
-NEFORCE_INLINE17 constexpr size_t extent_v = extent<T, Idx>::value;
+template <typename T, uint32_t Idx = 0> NEFORCE_INLINE17 constexpr size_t extent_v = extent<T, Idx>::value;
 #endif
 
 /** @} */ // ArrayProperties
@@ -1258,8 +1108,7 @@ NEFORCE_INLINE17 constexpr size_t extent_v = extent<T, Idx>::value;
  * @brief 提取模板的第一个类型参数
  * @tparam T 模板类型
  */
-template <typename T>
-struct get_first_temp_para;
+template <typename T> struct get_first_temp_para;
 
 /// @cond
 template <template <typename, typename...> class T, typename First, typename... Rest>
@@ -1272,8 +1121,7 @@ struct get_first_temp_para<T<First, Rest...>> {
  * @typedef get_first_temp_para_t
  * @brief get_first_temp_para的便捷别名
  */
-template <typename Tmp>
-using get_first_temp_para_t = typename get_first_temp_para<Tmp>::type;
+template <typename Tmp> using get_first_temp_para_t = typename get_first_temp_para<Tmp>::type;
 
 
 /**
@@ -1281,12 +1129,10 @@ using get_first_temp_para_t = typename get_first_temp_para<Tmp>::type;
  * @brief 提取参数列表的第一个类型参数
  * @tparam Types 参数列表
  */
-template <typename... Types>
-struct get_first_para;
+template <typename... Types> struct get_first_para;
 
 /// @cond
-template <typename First, typename... Rest>
-struct get_first_para<First, Rest...> {
+template <typename First, typename... Rest> struct get_first_para<First, Rest...> {
     using type = First;
 };
 /// @endcond
@@ -1295,8 +1141,7 @@ struct get_first_para<First, Rest...> {
  * @typedef get_first_para_t
  * @brief get_first_para的便捷别名
  */
-template <typename... Types>
-using get_first_para_t = typename get_first_para<Types...>::type;
+template <typename... Types> using get_first_para_t = typename get_first_para<Types...>::type;
 
 
 /**
@@ -1307,15 +1152,13 @@ using get_first_para_t = typename get_first_para<Types...>::type;
  *
  * 如果指针类型定义了difference_type，则使用该类型，否则使用默认的ptrdiff_t。
  */
-template <typename T, typename Dummy = void>
-struct get_ptr_difference {
+template <typename T, typename Dummy = void> struct get_ptr_difference {
     using type = ptrdiff_t;
 };
 
 /// @cond
 template <typename T>
-struct get_ptr_difference<T, enable_if_t<
-    is_same<typename T::difference_type, typename T::difference_type>::value>> {
+struct get_ptr_difference<T, enable_if_t<is_same<typename T::difference_type, typename T::difference_type>::value>> {
     using type = typename T::difference_type;
 };
 /// @endcond
@@ -1324,8 +1167,7 @@ struct get_ptr_difference<T, enable_if_t<
  * @typedef get_ptr_difference_t
  * @brief get_ptr_difference的便捷别名
  */
-template <typename T>
-using get_ptr_difference_t = typename get_ptr_difference<T>::type;
+template <typename T> using get_ptr_difference_t = typename get_ptr_difference<T>::type;
 
 
 /**
@@ -1334,8 +1176,7 @@ using get_ptr_difference_t = typename get_ptr_difference<T>::type;
  * @tparam NewFirst 新的第一个参数
  * @tparam T 原始模板类型
  */
-template <typename NewFirst, typename T>
-struct replace_first_para;
+template <typename NewFirst, typename T> struct replace_first_para;
 
 /// @cond
 template <typename NewFirst, template <typename, typename...> class T, typename First, typename... Rest>
@@ -1348,8 +1189,7 @@ struct replace_first_para<NewFirst, T<First, Rest...>> {
  * @typedef replace_first_para_t
  * @brief replace_first_para的便捷别名
  */
-template <typename T, typename U>
-using replace_first_para_t = typename replace_first_para<T, U>::type;
+template <typename T, typename U> using replace_first_para_t = typename replace_first_para<T, U>::type;
 
 
 /**
@@ -1361,15 +1201,14 @@ using replace_first_para_t = typename replace_first_para<T, U>::type;
  *
  * 如果指针类型定义了rebind模板，则使用该模板，否则通过替换第一个参数来创建新类型。
  */
-template <typename T, typename U, typename Dummy = void>
-struct get_rebind_type {
+template <typename T, typename U, typename Dummy = void> struct get_rebind_type {
     using type = replace_first_para_t<U, T>;
 };
 
 /// @cond
 template <typename T, typename U>
-struct get_rebind_type<T, U, enable_if_t<
-    is_same<typename T::template rebind<U>, typename T::template rebind<U>>::value>> {
+struct get_rebind_type<T, U,
+                       enable_if_t<is_same<typename T::template rebind<U>, typename T::template rebind<U>>::value>> {
     using type = typename T::template rebind<U>;
 };
 /// @endcond
@@ -1378,8 +1217,7 @@ struct get_rebind_type<T, U, enable_if_t<
  * @typedef get_rebind_type_t
  * @brief get_rebind_type的便捷别名
  */
-template <typename T, typename U>
-using get_rebind_type_t = typename get_rebind_type<T, U>::type;
+template <typename T, typename U> using get_rebind_type_t = typename get_rebind_type<T, U>::type;
 
 /** @} */ // TemplateTraitsUtilities
 
@@ -1394,12 +1232,10 @@ using get_rebind_type_t = typename get_rebind_type<T, U>::type;
  * @brief 判断类型是否为有界数组
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_bounded_array : false_type {};
+template <typename T> struct is_bounded_array : false_type {};
 
 /// @cond
-template <typename T, size_t Idx>
-struct is_bounded_array<T[Idx]> : true_type {};
+template <typename T, size_t Idx> struct is_bounded_array<T[Idx]> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1407,8 +1243,7 @@ struct is_bounded_array<T[Idx]> : true_type {};
  * @var is_bounded_array_v
  * @brief is_bounded_array的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_bounded_array_v = is_bounded_array<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_bounded_array_v = is_bounded_array<T>::value;
 #endif
 
 
@@ -1417,12 +1252,10 @@ NEFORCE_INLINE17 constexpr bool is_bounded_array_v = is_bounded_array<T>::value;
  * @brief 判断类型是否为无界数组
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_unbounded_array : false_type {};
+template <typename T> struct is_unbounded_array : false_type {};
 
 /// @cond
-template <typename T>
-struct is_unbounded_array<T[]> : true_type {};
+template <typename T> struct is_unbounded_array<T[]> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1430,8 +1263,7 @@ struct is_unbounded_array<T[]> : true_type {};
  * @var is_unbounded_array_v
  * @brief is_unbounded_array的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_unbounded_array_v = is_unbounded_array<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_unbounded_array_v = is_unbounded_array<T>::value;
 #endif
 
 /**
@@ -1441,16 +1273,14 @@ NEFORCE_INLINE17 constexpr bool is_unbounded_array_v = is_unbounded_array<T>::va
  *
  * 包括有界数组和无界数组。
  */
-template <typename T>
-struct is_array : bool_constant<is_unbounded_array<T>::value || is_bounded_array<T>::value> {};
+template <typename T> struct is_array : bool_constant<is_unbounded_array<T>::value || is_bounded_array<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_array_v
  * @brief is_array的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_array_v = is_array<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_array_v = is_array<T>::value;
 #endif
 
 
@@ -1459,12 +1289,10 @@ NEFORCE_INLINE17 constexpr bool is_array_v = is_array<T>::value;
  * @brief 判断类型是否为左值引用
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_lvalue_reference : false_type {};
+template <typename T> struct is_lvalue_reference : false_type {};
 
 /// @cond
-template <typename T>
-struct is_lvalue_reference<T&> : true_type {};
+template <typename T> struct is_lvalue_reference<T&> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1472,8 +1300,7 @@ struct is_lvalue_reference<T&> : true_type {};
  * @var is_lvalue_reference_v
  * @brief is_lvalue_reference的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_lvalue_reference_v = is_lvalue_reference<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_lvalue_reference_v = is_lvalue_reference<T>::value;
 #endif
 
 /**
@@ -1481,12 +1308,10 @@ NEFORCE_INLINE17 constexpr bool is_lvalue_reference_v = is_lvalue_reference<T>::
  * @brief 判断类型是否为右值引用
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_rvalue_reference : false_type {};
+template <typename T> struct is_rvalue_reference : false_type {};
 
 /// @cond
-template <typename T>
-struct is_rvalue_reference<T&&> : true_type {};
+template <typename T> struct is_rvalue_reference<T&&> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1494,8 +1319,7 @@ struct is_rvalue_reference<T&&> : true_type {};
  * @var is_rvalue_reference_v
  * @brief is_rvalue_reference的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_rvalue_reference_v = is_rvalue_reference<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_rvalue_reference_v = is_rvalue_reference<T>::value;
 #endif
 
 
@@ -1514,8 +1338,7 @@ struct is_reference : bool_constant<is_lvalue_reference<T>::value || is_rvalue_r
  * @var is_reference_v
  * @brief is_reference的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_reference_v = is_reference<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_reference_v = is_reference<T>::value;
 #endif
 
 
@@ -1524,16 +1347,14 @@ NEFORCE_INLINE17 constexpr bool is_reference_v = is_reference<T>::value;
  * @brief 判断类型是否为nullptr_t
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_null_pointer : bool_constant<is_same<remove_cvref_t<T>, nullptr_t>::value> {};
+template <typename T> struct is_null_pointer : bool_constant<is_same<remove_cvref_t<T>, nullptr_t>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_null_pointer_v
  * @brief is_null_pointer的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_null_pointer_v = is_null_pointer<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_null_pointer_v = is_null_pointer<T>::value;
 #endif
 
 
@@ -1544,21 +1365,16 @@ NEFORCE_INLINE17 constexpr bool is_null_pointer_v = is_null_pointer<T>::value;
  *
  * 包括各种cv限定的指针类型。
  */
-template <typename T>
-struct is_pointer : false_type {};
+template <typename T> struct is_pointer : false_type {};
 
 /// @cond
-template <typename T>
-struct is_pointer<T*> : true_type {};
+template <typename T> struct is_pointer<T*> : true_type {};
 
-template <typename T>
-struct is_pointer<T* const> : true_type {};
+template <typename T> struct is_pointer<T* const> : true_type {};
 
-template <typename T>
-struct is_pointer<T* volatile> : true_type {};
+template <typename T> struct is_pointer<T* volatile> : true_type {};
 
-template <typename T>
-struct is_pointer<T* const volatile> : true_type {};
+template <typename T> struct is_pointer<T* const volatile> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1566,8 +1382,7 @@ struct is_pointer<T* const volatile> : true_type {};
  * @var is_pointer_v
  * @brief is_pointer的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_pointer_v = is_pointer<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_pointer_v = is_pointer<T>::value;
 #endif
 
 
@@ -1576,16 +1391,14 @@ NEFORCE_INLINE17 constexpr bool is_pointer_v = is_pointer<T>::value;
  * @brief 判断类型是否为枚举类型
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_enum : bool_constant<__is_enum(T)> {};
+template <typename T> struct is_enum : bool_constant<__is_enum(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_enum_v
  * @brief is_enum的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_enum_v = is_enum<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_enum_v = is_enum<T>::value;
 #endif
 
 
@@ -1596,16 +1409,14 @@ NEFORCE_INLINE17 constexpr bool is_enum_v = is_enum<T>::value;
  *
  * 包括整数类型和枚举类型。
  */
-template <typename T>
-struct is_integral_like : bool_constant<disjunction<is_integral<T>, is_enum<T>>::value> {};
+template <typename T> struct is_integral_like : bool_constant<disjunction<is_integral<T>, is_enum<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_integral_like_v
  * @brief is_integral_like的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_integral_like_v = is_integral_like<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_integral_like_v = is_integral_like<T>::value;
 #endif
 
 
@@ -1614,16 +1425,14 @@ NEFORCE_INLINE17 constexpr bool is_integral_like_v = is_integral_like<T>::value;
  * @brief 判断类型是否为联合类型
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_union : bool_constant<__is_union(T)> {};
+template <typename T> struct is_union : bool_constant<__is_union(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_union_v
  * @brief is_union的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_union_v = is_union<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_union_v = is_union<T>::value;
 #endif
 
 
@@ -1632,16 +1441,14 @@ NEFORCE_INLINE17 constexpr bool is_union_v = is_union<T>::value;
  * @brief 判断类型是否为类类型
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_class : bool_constant<__is_class(T)> {};
+template <typename T> struct is_class : bool_constant<__is_class(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_class_v
  * @brief is_class的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_class_v = is_class<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_class_v = is_class<T>::value;
 #endif
 
 
@@ -1653,16 +1460,14 @@ NEFORCE_INLINE17 constexpr bool is_class_v = is_class<T>::value;
  * 包括算术类型、void和nullptr_t。
  */
 template <typename T>
-struct is_fundamental : bool_constant<
-    disjunction<is_arithmetic<T>, is_void<T>, is_null_pointer<T>>::value> {};
+struct is_fundamental : bool_constant<disjunction<is_arithmetic<T>, is_void<T>, is_null_pointer<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_fundamental_v
  * @brief is_fundamental的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_fundamental_v = is_fundamental<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_fundamental_v = is_fundamental<T>::value;
 #endif
 
 
@@ -1673,16 +1478,14 @@ NEFORCE_INLINE17 constexpr bool is_fundamental_v = is_fundamental<T>::value;
  *
  * 非基本类型的类型都是复合类型。
  */
-template <typename T>
-struct is_compound : bool_constant<!is_fundamental<T>::value> {};
+template <typename T> struct is_compound : bool_constant<!is_fundamental<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_compound_v
  * @brief is_compound的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_compound_v = is_compound<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_compound_v = is_compound<T>::value;
 #endif
 
 
@@ -1691,12 +1494,10 @@ NEFORCE_INLINE17 constexpr bool is_compound_v = is_compound<T>::value;
  * @brief 判断类型是否被const限定
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_const : false_type {};
+template <typename T> struct is_const : false_type {};
 
 /// @cond
-template <typename T>
-struct is_const<const T> : true_type {};
+template <typename T> struct is_const<const T> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1704,8 +1505,7 @@ struct is_const<const T> : true_type {};
  * @var is_const_v
  * @brief is_const的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_const_v = is_const<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_const_v = is_const<T>::value;
 #endif
 
 
@@ -1714,12 +1514,10 @@ NEFORCE_INLINE17 constexpr bool is_const_v = is_const<T>::value;
  * @brief 判断类型是否被volatile限定
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_volatile : false_type {};
+template <typename T> struct is_volatile : false_type {};
 
 /// @cond
-template <typename T>
-struct is_volatile<volatile T> : true_type {};
+template <typename T> struct is_volatile<volatile T> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -1727,15 +1525,14 @@ struct is_volatile<volatile T> : true_type {};
  * @var is_volatile_v
  * @brief is_volatile的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_volatile_v = is_volatile<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_volatile_v = is_volatile<T>::value;
 #endif
 
 
 #ifdef NEFORCE_COMPILER_MSVC
 // 禁用MSVC警告4180：从const限定的函数类型中移除const
-#pragma warning(push)
-#pragma warning(disable: 4180)
+#    pragma warning(push)
+#    pragma warning(disable : 4180)
 #endif
 
 /**
@@ -1747,21 +1544,19 @@ NEFORCE_INLINE17 constexpr bool is_volatile_v = is_volatile<T>::value;
  * 通过检查const限定的函数类型是否仍为const来判断是否为函数类型。
  */
 template <typename T>
-struct is_function : bool_constant<
-    !is_const<const remove_function_qualifiers_t<T>>::value
-    && !is_reference<remove_function_qualifiers_t<T>>::value> {};
+struct is_function : bool_constant<!is_const<const remove_function_qualifiers_t<T>>::value &&
+                                   !is_reference<remove_function_qualifiers_t<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_function_v
  * @brief is_function的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_function_v = is_function<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_function_v = is_function<T>::value;
 #endif
 
 #ifdef NEFORCE_COMPILER_MSVC
-#pragma warning(pop)
+#    pragma warning(pop)
 #endif
 
 
@@ -1778,17 +1573,16 @@ NEFORCE_INLINE17 constexpr bool is_function_v = is_function<T>::value;
  * 5. 已被实现
  */
 template <typename T>
-struct is_allocable : bool_constant<
-    !(is_void<T>::value || is_reference<T>::value || is_function<T>::value || is_const<T>::value)
-    && (sizeof(T) > 0)> {};
+struct is_allocable
+: bool_constant<!(is_void<T>::value || is_reference<T>::value || is_function<T>::value || is_const<T>::value) &&
+                (sizeof(T) > 0)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_allocable_v
  * @brief is_allocable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_allocable_v = is_allocable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_allocable_v = is_allocable<T>::value;
 #endif
 
 
@@ -1800,16 +1594,14 @@ NEFORCE_INLINE17 constexpr bool is_allocable_v = is_allocable<T>::value;
  * 对象类型包括除了函数、引用和void之外的所有类型。
  * 函数类型和引用类型不能被const限定，因此利用这一特性进行判断。
  */
-template <typename T>
-struct is_object : bool_constant<is_const<const T>::value && !is_void<T>::value> {};
+template <typename T> struct is_object : bool_constant<is_const<const T>::value && !is_void<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_object_v
  * @brief is_object的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_object_v = is_object<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_object_v = is_object<T>::value;
 #endif
 
 
@@ -1823,19 +1615,17 @@ NEFORCE_INLINE17 constexpr bool is_object_v = is_object<T>::value;
  * 2. 字符类型的数组
  */
 template <typename T>
-struct is_cstring : bool_constant<
-    (is_pointer<remove_cvref_t<T>>::value &&
-        is_character<remove_pointer_t<remove_cvref_t<T>>>::value) ||
-    (is_bounded_array<remove_cvref_t<T>>::value &&
-        is_character<remove_all_extents_t<remove_cvref_t<T>>>::value)> {};
+struct is_cstring
+: bool_constant<(is_pointer<remove_cvref_t<T>>::value && is_character<remove_pointer_t<remove_cvref_t<T>>>::value) ||
+                (is_bounded_array<remove_cvref_t<T>>::value &&
+                 is_character<remove_all_extents_t<remove_cvref_t<T>>>::value)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_cstring_v
  * @brief is_cstring的便捷变量模板
  */
-template <typename T>
-constexpr bool is_cstring_v = is_cstring<T>::value;
+template <typename T> constexpr bool is_cstring_v = is_cstring<T>::value;
 #endif
 
 
@@ -1844,23 +1634,18 @@ constexpr bool is_cstring_v = is_cstring<T>::value;
  * @brief 判断类型是否为成员函数指针
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_member_function_pointer;
+template <typename T> struct is_member_function_pointer;
 
 /// @cond
 #ifdef NEFORCE_COMPILER_CLANG
-template <typename T>
-struct is_member_function_pointer : bool_constant<__is_member_function_pointer(T)> {};
+template <typename T> struct is_member_function_pointer : bool_constant<__is_member_function_pointer(T)> {};
 #else
 NEFORCE_BEGIN_INNER__
-template <typename>
-struct __is_member_function_pointer_aux : false_type {};
-template <typename T, typename C>
-struct __is_member_function_pointer_aux<T C::*> : is_function<T> {};
+template <typename> struct __is_member_function_pointer_aux : false_type {};
+template <typename T, typename C> struct __is_member_function_pointer_aux<T C::*> : is_function<T> {};
 NEFORCE_END_INNER__
 
-template <typename T>
-struct is_member_function_pointer : inner::__is_member_function_pointer_aux<remove_cv_t<T>> {};
+template <typename T> struct is_member_function_pointer : inner::__is_member_function_pointer_aux<remove_cv_t<T>> {};
 #endif
 /// @endcond
 
@@ -1879,18 +1664,14 @@ NEFORCE_INLINE17 constexpr bool is_member_function_pointer_v = is_member_functio
  * @brief 判断类型是否为成员对象指针
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_member_object_pointer;
+template <typename T> struct is_member_object_pointer;
 
 /// @cond
 #ifdef NEFORCE_COMPILER_CLANG
-template <typename T>
-struct is_member_object_pointer : bool_constant<__is_member_object_pointer(T)> {};
+template <typename T> struct is_member_object_pointer : bool_constant<__is_member_object_pointer(T)> {};
 #else
-template <typename T>
-struct is_member_object_pointer : false_type {};
-template <typename T, typename C>
-struct is_member_object_pointer<T C::*> : bool_constant<!is_function<T>::value> {};
+template <typename T> struct is_member_object_pointer : false_type {};
+template <typename T, typename C> struct is_member_object_pointer<T C::*> : bool_constant<!is_function<T>::value> {};
 #endif
 /// @endcond
 
@@ -1909,13 +1690,11 @@ NEFORCE_INLINE17 constexpr bool is_member_object_pointer_v = is_member_object_po
  * @brief 判断类型是否为成员指针
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_member_pointer;
+template <typename T> struct is_member_pointer;
 
 /// @cond
 #ifdef NEFORCE_COMPILER_CLANG
-template <typename T>
-struct is_member_pointer : bool_constant<__is_member_pointer(T)> {};
+template <typename T> struct is_member_pointer : bool_constant<__is_member_pointer(T)> {};
 #else
 template <typename T>
 struct is_member_pointer : bool_constant<is_member_object_pointer<T>::value || is_member_function_pointer<T>::value> {};
@@ -1927,8 +1706,7 @@ struct is_member_pointer : bool_constant<is_member_object_pointer<T>::value || i
  * @var is_member_pointer_v
  * @brief is_member_pointer的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_member_pointer_v = is_member_pointer<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_member_pointer_v = is_member_pointer<T>::value;
 #endif
 
 
@@ -1945,17 +1723,16 @@ NEFORCE_INLINE17 constexpr bool is_member_pointer_v = is_member_pointer<T>::valu
  * 5. nullptr_t
  */
 template <typename T>
-struct is_scalar : bool_constant<disjunction<
-    is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>
->::value> {};
+struct is_scalar
+: bool_constant<
+          disjunction<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_scalar_v
  * @brief is_scalar的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_scalar_v = is_scalar<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_scalar_v = is_scalar<T>::value;
 #endif
 
 
@@ -1969,16 +1746,14 @@ NEFORCE_INLINE17 constexpr bool is_scalar_v = is_scalar<T>::value;
  * 2. 没有虚函数和虚基类
  * 3. 如果有基类，基类也必须是空类型
  */
-template <typename T>
-struct is_empty : bool_constant<__is_empty(T)> {};
+template <typename T> struct is_empty : bool_constant<__is_empty(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_empty_v
  * @brief is_empty的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_empty_v = is_empty<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_empty_v = is_empty<T>::value;
 #endif
 
 
@@ -1989,16 +1764,14 @@ NEFORCE_INLINE17 constexpr bool is_empty_v = is_empty<T>::value;
  *
  * 多态类型包含虚函数。
  */
-template <typename T>
-struct is_polymorphic : bool_constant<__is_polymorphic(T)> {};
+template <typename T> struct is_polymorphic : bool_constant<__is_polymorphic(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_polymorphic_v
  * @brief is_polymorphic的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_polymorphic_v = is_polymorphic<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_polymorphic_v = is_polymorphic<T>::value;
 #endif
 
 
@@ -2009,16 +1782,14 @@ NEFORCE_INLINE17 constexpr bool is_polymorphic_v = is_polymorphic<T>::value;
  *
  * 抽象类型包含纯虚函数，不能直接实例化。
  */
-template <typename T>
-struct is_abstract : bool_constant<__is_abstract(T)> {};
+template <typename T> struct is_abstract : bool_constant<__is_abstract(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_abstract_v
  * @brief is_abstract的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_abstract_v = is_abstract<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_abstract_v = is_abstract<T>::value;
 #endif
 
 
@@ -2029,27 +1800,23 @@ NEFORCE_INLINE17 constexpr bool is_abstract_v = is_abstract<T>::value;
  *
  * final类不能被继承，final虚函数不能被重写。
  */
-template <typename T>
-struct is_final : bool_constant<__is_final(T)> {};
+template <typename T> struct is_final : bool_constant<__is_final(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_final_v
  * @brief is_final的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_final_v = is_final<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_final_v = is_final<T>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T, bool = is_enum<T>::value>
-struct __underlying_type_aux {
+template <typename T, bool = is_enum<T>::value> struct __underlying_type_aux {
     using type = __underlying_type(T);
 };
-template <typename T>
-struct __underlying_type_aux<T, false> {};
+template <typename T> struct __underlying_type_aux<T, false> {};
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -2060,15 +1827,13 @@ NEFORCE_END_INNER__
  *
  * 对于非枚举类型，不提供::type成员。
  */
-template <typename T>
-struct underlying_type : inner::__underlying_type_aux<T> {};
+template <typename T> struct underlying_type : inner::__underlying_type_aux<T> {};
 
 /**
  * @typedef underlying_type_t
  * @brief underlying_type的便捷别名
  */
-template <typename T>
-using underlying_type_t = typename underlying_type<T>::type;
+template <typename T> using underlying_type_t = typename underlying_type<T>::type;
 
 
 /**
@@ -2082,16 +1847,14 @@ using underlying_type_t = typename underlying_type<T>::type;
  * 3. 没有基类，或者只有一个标准布局的基类
  * 4. 非静态数据成员不能同时出现在基类和派生类中
  */
-template <typename T>
-struct is_standard_layout : bool_constant<__is_standard_layout(T)> {};
+template <typename T> struct is_standard_layout : bool_constant<__is_standard_layout(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_standard_layout_v
  * @brief is_standard_layout的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_standard_layout_v = is_standard_layout<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_standard_layout_v = is_standard_layout<T>::value;
 #endif
 
 
@@ -2102,16 +1865,14 @@ NEFORCE_INLINE17 constexpr bool is_standard_layout_v = is_standard_layout<T>::va
  *
  * POD类型同时满足标准布局和平凡(trivial)条件。
  */
-template <typename T>
-struct is_pod : bool_constant<__is_pod(T)> {};
+template <typename T> struct is_pod : bool_constant<__is_pod(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_pod_v
  * @brief is_pod的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_pod_v = is_pod<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_pod_v = is_pod<T>::value;
 #endif
 
 
@@ -2152,16 +1913,13 @@ NEFORCE_INLINE17 constexpr bool has_unique_object_representations_v = has_unique
  *    - 所有非静态数据成员都是public
  *    - 没有虚函数和虚基类
  */
-template <typename T>
-struct is_aggregate;
+template <typename T> struct is_aggregate;
 
 /// @cond
 #ifdef NEFORCE_COMPILER_MSVC
-template <typename T>
-struct is_aggregate : bool_constant<is_array<T>::value || __is_aggregate(T)> {};
+template <typename T> struct is_aggregate : bool_constant<is_array<T>::value || __is_aggregate(T)> {};
 #else
-template <typename T>
-struct is_aggregate : bool_constant<__is_aggregate(remove_cv_t<T>)> {};
+template <typename T> struct is_aggregate : bool_constant<__is_aggregate(remove_cv_t<T>)> {};
 #endif
 /// @endcond
 
@@ -2170,8 +1928,7 @@ struct is_aggregate : bool_constant<__is_aggregate(remove_cv_t<T>)> {};
  * @var is_aggregate_v
  * @brief is_aggregate的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_aggregate_v = is_aggregate<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_aggregate_v = is_aggregate<T>::value;
 #endif
 
 
@@ -2186,17 +1943,16 @@ NEFORCE_INLINE17 constexpr bool is_aggregate_v = is_aggregate<T>::value;
  * 1. 成员变量具有相同的类型、数量和排列顺序
  * 2. 成员变量具有相同的对齐方式
  */
-template <typename T1, typename T2>
-struct is_layout_compatible : bool_constant<__is_layout_compatible(T1, T2)> {};
+template <typename T1, typename T2> struct is_layout_compatible : bool_constant<__is_layout_compatible(T1, T2)> {};
 
 /**
  * @var is_layout_compatible_v
  * @brief is_layout_compatible的便捷变量模板
  */
-#ifdef NEFORCE_STANDARD_14
+#    ifdef NEFORCE_STANDARD_14
 template <typename T1, typename T2>
 NEFORCE_INLINE17 constexpr bool is_layout_compatible_v = is_layout_compatible<T1, T2>::value;
-#endif
+#    endif
 
 
 /**
@@ -2208,17 +1964,17 @@ NEFORCE_INLINE17 constexpr bool is_layout_compatible_v = is_layout_compatible<T1
  * 指针可互转换基类意味着可以将派生类指针安全地转换为基类指针。
  */
 template <typename Base, typename Derived>
-struct is_pointer_interconvertible_base_of : bool_constant<
-    __is_pointer_interconvertible_base_of(Base, Derived)> {};
+struct is_pointer_interconvertible_base_of : bool_constant<__is_pointer_interconvertible_base_of(Base, Derived)> {};
 
-#ifdef NEFORCE_STANDARD_14
+#    ifdef NEFORCE_STANDARD_14
 /**
  * @var is_pointer_interconvertible_base_of_v
  * @brief is_pointer_interconvertible_base_of的便捷变量模板
  */
 template <typename Base, typename Derived>
-NEFORCE_INLINE17 constexpr bool is_pointer_interconvertible_base_of_v = is_pointer_interconvertible_base_of<Base, Derived>::value;
-#endif
+NEFORCE_INLINE17 constexpr bool is_pointer_interconvertible_base_of_v =
+        is_pointer_interconvertible_base_of<Base, Derived>::value;
+#    endif
 #endif
 
 
@@ -2228,8 +1984,7 @@ NEFORCE_INLINE17 constexpr bool is_pointer_interconvertible_base_of_v = is_point
  * @tparam Base 基类类型
  * @tparam Derived 派生类类型
  */
-template <typename Base, typename Derived>
-struct is_base_of : bool_constant<__is_base_of(Base, Derived)> {};
+template <typename Base, typename Derived> struct is_base_of : bool_constant<__is_base_of(Base, Derived)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2251,8 +2006,7 @@ NEFORCE_INLINE17 constexpr bool is_base_of_v = is_base_of<Base, Derived>::value;
  *
  * 用于检查成员指针是否与类对象指针可互相转换。
  */
-template <typename T, typename Mem>
-constexpr bool is_pointer_interconvertible_with_class(Mem T::*mp) noexcept {
+template <typename T, typename Mem> constexpr bool is_pointer_interconvertible_with_class(Mem T::* mp) noexcept {
     return __builtin_is_pointer_interconvertible_with_class(mp);
 }
 
@@ -2292,16 +2046,14 @@ constexpr bool is_corresponding_member(M1 S1::* m1, M2 S2::* m2) noexcept {
  *    移动赋值运算符和析构函数由编译器自动生成(=default)
  * 2. 没有虚函数和虚基类
  */
-template <typename T>
-struct is_trivial : bool_constant<__is_trivial(T)> {};
+template <typename T> struct is_trivial : bool_constant<__is_trivial(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_trivial_v
  * @brief is_trivial的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_trivial_v = is_trivial<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_trivial_v = is_trivial<T>::value;
 #endif
 
 
@@ -2312,16 +2064,14 @@ NEFORCE_INLINE17 constexpr bool is_trivial_v = is_trivial<T>::value;
  *
  * 平凡可复制类型可以通过逐字节复制安全复制。
  */
-template <typename T>
-struct is_trivially_copyable : bool_constant<__is_trivially_copyable(T)> {};
+template <typename T> struct is_trivially_copyable : bool_constant<__is_trivially_copyable(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_trivially_copyable_v
  * @brief is_trivially_copyable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_trivially_copyable_v = is_trivially_copyable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_trivially_copyable_v = is_trivially_copyable<T>::value;
 #endif
 
 
@@ -2330,16 +2080,14 @@ NEFORCE_INLINE17 constexpr bool is_trivially_copyable_v = is_trivially_copyable<
  * @brief 判断类型是否具有虚析构函数
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct has_virtual_destructor : bool_constant<__has_virtual_destructor(T)> {};
+template <typename T> struct has_virtual_destructor : bool_constant<__has_virtual_destructor(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var has_virtual_destructor_v
  * @brief has_virtual_destructor的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool has_virtual_destructor_v = has_virtual_destructor<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool has_virtual_destructor_v = has_virtual_destructor<T>::value;
 #endif
 
 
@@ -2349,8 +2097,7 @@ NEFORCE_INLINE17 constexpr bool has_virtual_destructor_v = has_virtual_destructo
  * @tparam T 要构造的类型
  * @tparam Args 构造参数类型
  */
-template <typename T, typename... Args>
-struct is_constructible : bool_constant<__is_constructible(T, Args...)> {};
+template <typename T, typename... Args> struct is_constructible : bool_constant<__is_constructible(T, Args...)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2368,16 +2115,14 @@ NEFORCE_INLINE17 constexpr bool is_constructible_v = is_constructible<T, Args...
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_copy_constructible : bool_constant<
- is_constructible<T, add_lvalue_reference_t<const T>>::value> {};
+struct is_copy_constructible : bool_constant<is_constructible<T, add_lvalue_reference_t<const T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_copy_constructible_v
  * @brief is_copy_constructible的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_copy_constructible_v = is_copy_constructible<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_copy_constructible_v = is_copy_constructible<T>::value;
 #endif
 
 
@@ -2386,23 +2131,20 @@ NEFORCE_INLINE17 constexpr bool is_copy_constructible_v = is_copy_constructible<
  * @brief 判断类型是否可默认构造
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_default_constructible : bool_constant<is_constructible<T>::value> {};
+template <typename T> struct is_default_constructible : bool_constant<is_constructible<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_default_constructible_v
  * @brief is_default_constructible的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_default_constructible_v = is_default_constructible<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_default_constructible_v = is_default_constructible<T>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T>
-void __implicitly_default_construct_aux(const T&) noexcept;
+template <typename T> void __implicitly_default_construct_aux(const T&) noexcept;
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -2414,14 +2156,12 @@ NEFORCE_END_INNER__
  *
  * 检查是否可以用空初始化列表隐式构造类型。
  */
-template <typename T, typename Dummy = void>
-struct is_implicitly_default_constructible : false_type {};
+template <typename T, typename Dummy = void> struct is_implicitly_default_constructible : false_type {};
 
 /// @cond
 template <typename T>
-struct is_implicitly_default_constructible<
-    T, void_t<decltype(inner::__implicitly_default_construct_aux<T>({}))>
-> : true_type {};
+struct is_implicitly_default_constructible<T, void_t<decltype(inner::__implicitly_default_construct_aux<T>({}))>>
+: true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -2439,16 +2179,14 @@ NEFORCE_INLINE17 constexpr bool is_implicitly_default_constructible_v = is_impli
  * @brief 判断类型是否可移动构造
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_move_constructible : bool_constant<is_constructible<T, T>::value> {};
+template <typename T> struct is_move_constructible : bool_constant<is_constructible<T, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_move_constructible_v
  * @brief is_move_constructible的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_move_constructible_v = is_move_constructible<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_move_constructible_v = is_move_constructible<T>::value;
 #endif
 
 
@@ -2458,16 +2196,14 @@ NEFORCE_INLINE17 constexpr bool is_move_constructible_v = is_move_constructible<
  * @tparam To 目标类型，接受赋值的类型
  * @tparam From 源类型，提供赋值的类型
  */
-template <typename To, typename From>
-struct is_assignable : bool_constant<__is_assignable(To, From)> {};
+template <typename To, typename From> struct is_assignable : bool_constant<__is_assignable(To, From)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_assignable_v
  * @brief is_assignable的便捷变量模板
  */
-template <typename To, typename From>
-NEFORCE_INLINE17 constexpr bool is_assignable_v = is_assignable<To, From>::value;
+template <typename To, typename From> NEFORCE_INLINE17 constexpr bool is_assignable_v = is_assignable<To, From>::value;
 #endif
 
 
@@ -2480,15 +2216,14 @@ NEFORCE_INLINE17 constexpr bool is_assignable_v = is_assignable<To, From>::value
  */
 template <typename T>
 struct is_copy_assignable
-    : bool_constant<is_assignable<add_lvalue_reference_t<T>, add_lvalue_reference_t<const T>>::value> {};
+: bool_constant<is_assignable<add_lvalue_reference_t<T>, add_lvalue_reference_t<const T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_copy_assignable_v
  * @brief is_copy_assignable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_copy_assignable_v = is_copy_assignable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_copy_assignable_v = is_copy_assignable<T>::value;
 #endif
 
 
@@ -2499,16 +2234,14 @@ NEFORCE_INLINE17 constexpr bool is_copy_assignable_v = is_copy_assignable<T>::va
  *
  * 检查是否可以用右值进行赋值。
  */
-template <typename T>
-struct is_move_assignable : bool_constant<is_assignable<add_lvalue_reference_t<T>, T>::value> {};
+template <typename T> struct is_move_assignable : bool_constant<is_assignable<add_lvalue_reference_t<T>, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_move_assignable_v
  * @brief is_move_assignable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_move_assignable_v = is_move_assignable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_move_assignable_v = is_move_assignable<T>::value;
 #endif
 
 
@@ -2522,46 +2255,36 @@ NEFORCE_INLINE17 constexpr bool is_move_assignable_v = is_move_assignable<T>::va
  * 1. void、无界数组和函数类型不可析构
  * 2. 引用和标量类型总是可析构
  */
-template <typename T>
-struct is_destructible;
+template <typename T> struct is_destructible;
 
 /// @cond
 #ifdef NEFORCE_COMPILER_MSVC
-template <typename T>
-struct is_destructible : bool_constant<__is_destructible(T)> {};
+template <typename T> struct is_destructible : bool_constant<__is_destructible(T)> {};
 #else
 NEFORCE_BEGIN_INNER__
-template <typename T>
-struct __destructible_aux {
+template <typename T> struct __destructible_aux {
 private:
-    template <typename T1, typename = decltype(declval<T1&>().~T1())>
-    static true_type __test(int);
-    template <typename>
-    static false_type __test(...);
+    template <typename T1, typename = decltype(declval<T1&>().~T1())> static true_type __test(int);
+    template <typename> static false_type __test(...);
 
 public:
-    using type =  decltype(__test<T>(0));
+    using type = decltype(__test<T>(0));
 };
 
-template <typename T,
-    bool = disjunction<is_void<T>, is_unbounded_array<T>, is_function<T>>::value,
-    bool = disjunction<is_reference<T>, is_scalar<T>>::value>
+template <typename T, bool = disjunction<is_void<T>, is_unbounded_array<T>, is_function<T>>::value,
+          bool = disjunction<is_reference<T>, is_scalar<T>>::value>
 struct __is_destructible_dispatch;
 
 template <typename T>
-struct __is_destructible_dispatch<T, false, false>
-    : __destructible_aux<remove_all_extents_t<T>>::type {};
+struct __is_destructible_dispatch<T, false, false> : __destructible_aux<remove_all_extents_t<T>>::type {};
 
-template <typename T>
-struct __is_destructible_dispatch<T, true, false> : false_type {};
+template <typename T> struct __is_destructible_dispatch<T, true, false> : false_type {};
 
-template <typename T>
-struct __is_destructible_dispatch<T, false, true> : true_type {};
+template <typename T> struct __is_destructible_dispatch<T, false, true> : true_type {};
 
 NEFORCE_END_INNER__
 
-template <typename T>
-struct is_destructible : inner::__is_destructible_dispatch<T>::type {};
+template <typename T> struct is_destructible : inner::__is_destructible_dispatch<T>::type {};
 #endif
 /// @endcond
 
@@ -2570,8 +2293,7 @@ struct is_destructible : inner::__is_destructible_dispatch<T>::type {};
  * @var is_destructible_v
  * @brief is_destructible的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_destructible_v = is_destructible<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_destructible_v = is_destructible<T>::value;
 #endif
 
 
@@ -2602,8 +2324,8 @@ NEFORCE_INLINE17 constexpr bool is_trivially_constructible_v = is_trivially_cons
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_trivially_copy_constructible : bool_constant<
-    is_trivially_constructible<T, add_lvalue_reference_t<const T>>::value> {};
+struct is_trivially_copy_constructible
+: bool_constant<is_trivially_constructible<T, add_lvalue_reference_t<const T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2676,8 +2398,8 @@ NEFORCE_INLINE17 constexpr bool is_trivially_assignable_v = is_trivially_assigna
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_trivially_copy_assignable : bool_constant<
-    is_trivially_assignable<add_lvalue_reference_t<T>, add_lvalue_reference_t<const T>>::value> {};
+struct is_trivially_copy_assignable
+: bool_constant<is_trivially_assignable<add_lvalue_reference_t<T>, add_lvalue_reference_t<const T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2695,8 +2417,7 @@ NEFORCE_INLINE17 constexpr bool is_trivially_copy_assignable_v = is_trivially_co
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_trivially_move_assignable : bool_constant<
-    is_trivially_assignable<add_lvalue_reference_t<T>, T>::value> {};
+struct is_trivially_move_assignable : bool_constant<is_trivially_assignable<add_lvalue_reference_t<T>, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2718,9 +2439,11 @@ NEFORCE_INLINE17 constexpr bool is_trivially_move_assignable_v = is_trivially_mo
 template <typename T>
 struct is_trivially_destructible :
 #if defined(NEFORCE_COMPILER_MSVC) || defined(NEFORCE_COMPILER_CLANG)
-    bool_constant<__is_trivially_destructible(T)> {};
+        bool_constant<__is_trivially_destructible(T)> {
+};
 #else
-    conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor(T)>> {};
+        conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor(T)>> {
+};
 #endif
 
 #ifdef NEFORCE_STANDARD_14
@@ -2728,8 +2451,7 @@ struct is_trivially_destructible :
  * @var is_trivially_destructible_v
  * @brief is_trivially_destructible的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_trivially_destructible_v = is_trivially_destructible<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_trivially_destructible_v = is_trivially_destructible<T>::value;
 #endif
 
 
@@ -2739,16 +2461,14 @@ NEFORCE_INLINE17 constexpr bool is_trivially_destructible_v = is_trivially_destr
  * @tparam T 要构造的类型
  * @tparam Args 构造参数类型
  */
-template <typename T, typename... Args>
-struct is_nothrow_constructible;
+template <typename T, typename... Args> struct is_nothrow_constructible;
 
 /**
  * @struct is_nothrow_default_constructible
  * @brief 判断类型是否可无异常默认构造
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_nothrow_default_constructible;
+template <typename T> struct is_nothrow_default_constructible;
 
 /// @cond
 #ifdef NEFORCE_COMPILER_MSVC
@@ -2756,42 +2476,32 @@ template <typename T, typename... Args>
 struct is_nothrow_constructible : bool_constant<__is_nothrow_constructible(T, Args...)> {};
 #else
 NEFORCE_BEGIN_INNER__
-template <typename T, bool = is_array<T>::value>
-struct __is_nothrow_default_constructible_dispatch;
+template <typename T, bool = is_array<T>::value> struct __is_nothrow_default_constructible_dispatch;
 
 template <typename T>
-struct __is_nothrow_default_constructible_dispatch<T, true> : conjunction<
-    is_bounded_array<T>, bool_constant<noexcept(remove_all_extents_t<T>())>> {};
+struct __is_nothrow_default_constructible_dispatch<T, true>
+: conjunction<is_bounded_array<T>, bool_constant<noexcept(remove_all_extents_t<T>())>> {};
 
-template <typename T>
-struct __is_nothrow_default_constructible_dispatch<T, false>
-    : bool_constant<noexcept(T())> {};
+template <typename T> struct __is_nothrow_default_constructible_dispatch<T, false> : bool_constant<noexcept(T())> {};
 
 NEFORCE_END_INNER__
 
 template <typename T>
-struct is_nothrow_default_constructible : conjunction<
-    is_default_constructible<T>,
-    inner::__is_nothrow_default_constructible_dispatch<T>
-> {};
+struct is_nothrow_default_constructible
+: conjunction<is_default_constructible<T>, inner::__is_nothrow_default_constructible_dispatch<T>> {};
 
 NEFORCE_BEGIN_INNER__
 
 template <typename T, typename... Args>
-struct __is_nothrow_constructible_dispatch
-    : bool_constant<noexcept(T(_NEFORCE declval<Args>()...))> {};
+struct __is_nothrow_constructible_dispatch : bool_constant<noexcept(T(_NEFORCE declval<Args>()...))> {};
 
-template <typename T>
-struct __is_nothrow_constructible_dispatch<T>
-    : is_nothrow_default_constructible<T> {};
+template <typename T> struct __is_nothrow_constructible_dispatch<T> : is_nothrow_default_constructible<T> {};
 
 NEFORCE_END_INNER__
 
 template <typename T, typename... Args>
-struct is_nothrow_constructible : conjunction<
-    is_constructible<T, Args...>,
-    inner::__is_nothrow_constructible_dispatch<T, Args...>
-> {};
+struct is_nothrow_constructible
+: conjunction<is_constructible<T, Args...>, inner::__is_nothrow_constructible_dispatch<T, Args...>> {};
 #endif
 /// @endcond
 
@@ -2811,8 +2521,8 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_constructible_v = is_nothrow_construc
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_nothrow_copy_constructible : bool_constant<
-    is_nothrow_constructible<T, add_lvalue_reference_t<const T>>::value> {};
+struct is_nothrow_copy_constructible
+: bool_constant<is_nothrow_constructible<T, add_lvalue_reference_t<const T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2826,8 +2536,7 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_copy_constructible_v = is_nothrow_cop
 
 /// @cond
 #ifdef NEFORCE_COMPILER_MSVC
-template <typename T>
-struct is_nothrow_default_constructible : bool_constant<is_nothrow_constructible_v<T>> {};
+template <typename T> struct is_nothrow_default_constructible : bool_constant<is_nothrow_constructible_v<T>> {};
 #endif
 /// @endcond
 
@@ -2847,8 +2556,7 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_default_constructible_v = is_nothrow_
  * @brief 判断类型是否可无异常移动构造
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_nothrow_move_constructible : bool_constant<is_nothrow_constructible<T, T>::value> {};
+template <typename T> struct is_nothrow_move_constructible : bool_constant<is_nothrow_constructible<T, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2866,8 +2574,7 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_move_constructible_v = is_nothrow_mov
  * @tparam To 目标类型
  * @tparam From 源类型
  */
-template <typename To, typename From>
-struct is_nothrow_assignable;
+template <typename To, typename From> struct is_nothrow_assignable;
 
 /// @cond
 template <typename To, typename From>
@@ -2890,8 +2597,8 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_assignable_v = is_nothrow_assignable<
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_nothrow_copy_assignable : bool_constant<
-    is_nothrow_assignable<add_lvalue_reference_t<T>, add_lvalue_reference_t<const T>>::value> {};
+struct is_nothrow_copy_assignable
+: bool_constant<is_nothrow_assignable<add_lvalue_reference_t<T>, add_lvalue_reference_t<const T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2909,8 +2616,7 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_copy_assignable_v = is_nothrow_copy_a
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_nothrow_move_assignable : bool_constant<
-    is_nothrow_assignable<add_lvalue_reference_t<T>, T>::value> {};
+struct is_nothrow_move_assignable : bool_constant<is_nothrow_assignable<add_lvalue_reference_t<T>, T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -2925,33 +2631,27 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_move_assignable_v = is_nothrow_move_a
 #ifndef NEFORCE_COMPILER_MSVC
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T>
-struct __is_nothrow_destructible_aux {
+template <typename T> struct __is_nothrow_destructible_aux {
 private:
-    template <typename T1>
-    static bool_constant<noexcept(declval<T1&>().~T1())> __test(int);
+    template <typename T1> static bool_constant<noexcept(declval<T1&>().~T1())> __test(int);
 
-    template <typename>
-    static false_type __test(...);
+    template <typename> static false_type __test(...);
 
 public:
-    using type =  decltype(__test<T>(0));
+    using type = decltype(__test<T>(0));
 };
 
-template <typename T,
-    bool = disjunction<is_void<T>, is_unbounded_array<T>, is_function<T>>::value,
-    bool = disjunction<is_reference<T>, is_scalar<T>>::value>
+template <typename T, bool = disjunction<is_void<T>, is_unbounded_array<T>, is_function<T>>::value,
+          bool = disjunction<is_reference<T>, is_scalar<T>>::value>
 struct __is_nothrow_destructible_dispatch;
 
 template <typename T>
 struct __is_nothrow_destructible_dispatch<T, false, false>
-    : __is_nothrow_destructible_aux<remove_all_extents_t<T>>::type {};
+: __is_nothrow_destructible_aux<remove_all_extents_t<T>>::type {};
 
-template <typename T>
-struct __is_nothrow_destructible_dispatch<T, true, false> : false_type {};
+template <typename T> struct __is_nothrow_destructible_dispatch<T, true, false> : false_type {};
 
-template <typename T>
-struct __is_nothrow_destructible_dispatch<T, false, true> : true_type {};
+template <typename T> struct __is_nothrow_destructible_dispatch<T, false, true> : true_type {};
 NEFORCE_END_INNER__
 /// @endcond
 #endif
@@ -2962,16 +2662,17 @@ NEFORCE_END_INNER__
  * @brief 判断类型是否可无异常析构
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_nothrow_destructible;
+template <typename T> struct is_nothrow_destructible;
 
 /// @cond
 template <typename T>
 struct is_nothrow_destructible :
 #ifdef NEFORCE_COMPILER_MSVC
-    bool_constant<__is_nothrow_destructible(T)> {};
+        bool_constant<__is_nothrow_destructible(T)> {
+};
 #else
-    inner::__is_nothrow_destructible_dispatch<T>::type {};
+        inner::__is_nothrow_destructible_dispatch<T>::type {
+};
 #endif
 /// @endcond
 
@@ -2980,8 +2681,7 @@ struct is_nothrow_destructible :
  * @var is_nothrow_destructible_v
  * @brief is_nothrow_destructible的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_nothrow_destructible_v = is_nothrow_destructible<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_nothrow_destructible_v = is_nothrow_destructible<T>::value;
 #endif
 
 
@@ -2993,16 +2693,14 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_destructible_v = is_nothrow_destructi
  * 位置不变意味着类型可以在内存中自由移动而不影响其行为。
  * 默认情况下，平凡可复制的类型是位置不变的。
  */
-template <typename T>
-struct is_location_invariant : is_trivially_copyable<T>::type {};
+template <typename T> struct is_location_invariant : is_trivially_copyable<T>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_location_invariant_v
  * @brief is_location_invariant的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_location_invariant_v = is_location_invariant<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_location_invariant_v = is_location_invariant<T>::value;
 #endif
 
 /** @} */ // TypeSpecialMemberFunctionChecks
@@ -3021,8 +2719,7 @@ NEFORCE_INLINE17 constexpr bool is_location_invariant_v = is_location_invariant<
  *
  * 用于实现完美转发，保持值的类别
  */
-template <typename T>
-NEFORCE_NODISCARD constexpr T&& forward(remove_reference_t<T>& x) noexcept {
+template <typename T> NEFORCE_NODISCARD constexpr T&& forward(remove_reference_t<T>& x) noexcept {
     return static_cast<T&&>(x);
 }
 
@@ -3035,8 +2732,7 @@ NEFORCE_NODISCARD constexpr T&& forward(remove_reference_t<T>& x) noexcept {
  *
  * 用于实现完美转发，保持值的类别
  */
-template <typename T>
-NEFORCE_NODISCARD constexpr T&& forward(remove_reference_t<T>&& x) noexcept {
+template <typename T> NEFORCE_NODISCARD constexpr T&& forward(remove_reference_t<T>&& x) noexcept {
     static_assert(!is_lvalue_reference<T>::value, "forward failed.");
     return static_cast<T&&>(x);
 }
@@ -3049,8 +2745,7 @@ NEFORCE_NODISCARD constexpr T&& forward(remove_reference_t<T>&& x) noexcept {
  *
  * 用于实现移动语义
  */
-template <typename T>
-NEFORCE_NODISCARD constexpr remove_reference_t<T>&& move(T&& x) noexcept {
+template <typename T> NEFORCE_NODISCARD constexpr remove_reference_t<T>&& move(T&& x) noexcept {
     return static_cast<remove_reference_t<T>&&>(x);
 }
 
@@ -3063,8 +2758,8 @@ NEFORCE_NODISCARD constexpr remove_reference_t<T>&& move(T&& x) noexcept {
 如果类型不可无异常移动构造但可复制构造，则返回const引用以避免潜在异常
  */
 template <typename T>
-NEFORCE_NODISCARD constexpr
-conditional_t<!is_nothrow_move_constructible<T>::value && is_copy_constructible<T>::value, const T&, T&&>
+NEFORCE_NODISCARD constexpr conditional_t<!is_nothrow_move_constructible<T>::value && is_copy_constructible<T>::value,
+                                          const T&, T&&>
 move_if_noexcept(T& x) noexcept {
     return _NEFORCE move(x);
 }
@@ -3077,22 +2772,17 @@ move_if_noexcept(T& x) noexcept {
  *
  * 可避免重载的operator&干扰
  */
-template <typename T>
-NEFORCE_NODISCARD constexpr T* addressof(T& x) noexcept {
-    return __builtin_addressof(x);
-}
+template <typename T> NEFORCE_NODISCARD constexpr T* addressof(T& x) noexcept { return __builtin_addressof(x); }
 
 /**
  * @brief 禁止获取const右值的地址
  * @tparam T 对象类型
  * @note 删除const右值重载以防止悬垂引用
  */
-template <typename T>
-const T* addressof(const T&&) = delete;
+template <typename T> const T* addressof(const T&&) = delete;
 
 
-template <typename T, typename U>
-constexpr size_t offset_of(U T::* member) {
+template <typename T, typename U> constexpr size_t offset_of(U T::* member) {
     return reinterpret_cast<size_t>(&(reinterpret_cast<T const volatile*>(nullptr)->*member));
 }
 
@@ -3113,14 +2803,12 @@ struct __is_convertible_helper {
     using type = typename is_void<To>::type;
 };
 
-template <typename From, typename To>
-struct __is_convertible_helper<From, To, false> {
+template <typename From, typename To> struct __is_convertible_helper<From, To, false> {
 private:
     template <typename From1, typename To1, typename = decltype(_NEFORCE declvoid<To1>(_NEFORCE declval<From1>()))>
     static true_type __test(int);
 
-    template <typename, typename>
-    static false_type __test(...);
+    template <typename, typename> static false_type __test(...);
 
 public:
     using type = decltype(__test<From, To>(0));
@@ -3138,11 +2826,14 @@ NEFORCE_END_INNER__
 template <typename From, typename To>
 struct is_convertible :
 #if defined(NEFORCE_COMPILER_MSVC)
-    bool_constant<__is_convertible_to(From, To)> {};
+        bool_constant<__is_convertible_to(From, To)> {
+};
 #elif defined(NEFORCE_COMPILER_CLANG)
-    bool_constant<__is_convertible(From, To)> {};
+        bool_constant<__is_convertible(From, To)> {
+};
 #else
-    inner::__is_convertible_helper<From, To>::type {};
+        inner::__is_convertible_helper<From, To>::type {
+};
 #endif
 
 #ifdef NEFORCE_STANDARD_14
@@ -3175,7 +2866,7 @@ concept convertible_to = is_convertible_v<From, To> && requires { static_cast<To
  * 通过检查指向未知大小数组的指针的转换性来实现。
  */
 template <typename ToElement, typename FromElement>
-using is_array_convertible = is_convertible<FromElement(*)[], ToElement(*)[]>;
+using is_array_convertible = is_convertible<FromElement (*)[], ToElement (*)[]>;
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -3195,17 +2886,15 @@ NEFORCE_INLINE17 constexpr bool is_array_convertible_v = is_array_convertible<To
  * @tparam IsConvertible From是否可以转换为To
  * @tparam IsVoid To是否为void类型
  */
-template <typename From, typename To,
-    bool IsConvertible = is_convertible<From, To>::value,
-    bool IsVoid = is_void<To>::value>
+template <typename From, typename To, bool IsConvertible = is_convertible<From, To>::value,
+          bool IsVoid = is_void<To>::value>
 struct is_nothrow_convertible : bool_constant<noexcept(_NEFORCE declcopy<To>(_NEFORCE declval<From>()))> {};
 
 /// @cond
 template <typename From, typename To, bool IsVoid>
 struct is_nothrow_convertible<From, To, false, IsVoid> : false_type {};
 
-template <typename From, typename To>
-struct is_nothrow_convertible<From, To, true, true> : true_type {};
+template <typename From, typename To> struct is_nothrow_convertible<From, To, true, true> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -3230,8 +2919,8 @@ struct is_nothrow_arrow : bool_constant<is_nothrow_convertible<Iterator, Ptr>::v
 
 /// @cond
 template <typename Iterator, typename Ptr>
-struct is_nothrow_arrow<Iterator, Ptr, false> : bool_constant<
-    noexcept(_NEFORCE declcopy<Ptr>(_NEFORCE declval<Iterator>().operator->()))> {};
+struct is_nothrow_arrow<Iterator, Ptr, false>
+: bool_constant<noexcept(_NEFORCE declcopy<Ptr>(_NEFORCE declval<Iterator>().operator->()))> {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -3253,69 +2942,52 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_arrow_v = is_nothrow_arrow<Iterator, 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <size_t>
-struct __sign_byte_aux;
+template <size_t> struct __sign_byte_aux;
 
-template <>
-struct __sign_byte_aux<1> {
-    template <typename>
-    using signed_t = signed char;
-    template <typename>
-    using unsigned_t = unsigned char;
+template <> struct __sign_byte_aux<1> {
+    template <typename> using signed_t = signed char;
+    template <typename> using unsigned_t = unsigned char;
 };
-template <>
-struct __sign_byte_aux<2> {
-    template <typename>
-    using signed_t = signed short;
-    template <typename>
-    using unsigned_t = unsigned short;
+template <> struct __sign_byte_aux<2> {
+    template <typename> using signed_t = signed short;
+    template <typename> using unsigned_t = unsigned short;
 };
-template <>
-struct __sign_byte_aux<4> {
+template <> struct __sign_byte_aux<4> {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     template <typename T>
-    using signed_t = 
-        conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, signed long, signed int>;
-
-    template <typename T>
-    using unsigned_t = 
-        conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, unsigned long, unsigned int>;
-#elif defined(NEFORCE_PLATFORM_LINUX)
-    template <typename>
-    using signed_t = signed int;
-    template <typename>
-    using unsigned_t = unsigned int;
-#endif
-};
-template <>
-struct __sign_byte_aux<8> {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    template <typename>
-    using signed_t = signed long long;
-    template <typename>
-    using unsigned_t = unsigned long long;
-#elif defined(NEFORCE_PLATFORM_LINUX)
-    template <typename T>
-    using signed_t =
-        conditional_t<is_same<T, signed long>::value || is_same<T, unsigned long>::value, signed long, signed long long>;
+    using signed_t = conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, signed long, signed int>;
 
     template <typename T>
     using unsigned_t =
-        conditional_t<is_same<T, signed long>::value || is_same<T, unsigned long>::value, unsigned long, unsigned long long>;
+            conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, unsigned long, unsigned int>;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    template <typename> using signed_t = signed int;
+    template <typename> using unsigned_t = unsigned int;
+#endif
+};
+template <> struct __sign_byte_aux<8> {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    template <typename> using signed_t = signed long long;
+    template <typename> using unsigned_t = unsigned long long;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    template <typename T>
+    using signed_t = conditional_t<is_same<T, signed long>::value || is_same<T, unsigned long>::value, signed long,
+                                   signed long long>;
+
+    template <typename T>
+    using unsigned_t = conditional_t<is_same<T, signed long>::value || is_same<T, unsigned long>::value, unsigned long,
+                                     unsigned long long>;
 #endif
 };
 
-template <typename T>
-using __set_signed_byte = typename __sign_byte_aux<sizeof(T)>::template signed_t<T>;
-template <typename T>
-using __set_unsigned_byte = typename __sign_byte_aux<sizeof(T)>::template unsigned_t<T>;
+template <typename T> using __set_signed_byte = typename __sign_byte_aux<sizeof(T)>::template signed_t<T>;
+template <typename T> using __set_unsigned_byte = typename __sign_byte_aux<sizeof(T)>::template unsigned_t<T>;
 
-template <typename T>
-struct __set_sign {
+template <typename T> struct __set_sign {
     static_assert(is_integral_like<T>::value && !is_boolean<T>::value,
-        "make signed only support non-bool && integral-like types");
+                  "make signed only support non-bool && integral-like types");
 
-    using signed_type   = copy_cv_t<T, __set_signed_byte<T>>;
+    using signed_type = copy_cv_t<T, __set_signed_byte<T>>;
     using unsigned_type = copy_cv_t<T, __set_unsigned_byte<T>>;
 };
 NEFORCE_END_INNER__
@@ -3328,8 +3000,7 @@ NEFORCE_END_INNER__
  *
  * 保持输入类型的cv限定符，只改变符号。
  */
-template <typename T>
-struct make_signed {
+template <typename T> struct make_signed {
     using type = typename inner::__set_sign<T>::signed_type;
 };
 
@@ -3337,8 +3008,7 @@ struct make_signed {
  * @typedef make_signed_t
  * @brief make_signed的便捷别名
  */
-template <typename T>
-using make_signed_t = typename make_signed<T>::type;
+template <typename T> using make_signed_t = typename make_signed<T>::type;
 
 /**
  * @struct make_unsigned
@@ -3347,8 +3017,7 @@ using make_signed_t = typename make_signed<T>::type;
  *
  * 保持输入类型的cv限定符，只改变符号。
  */
-template <typename T>
-struct make_unsigned {
+template <typename T> struct make_unsigned {
     using type = typename inner::__set_sign<T>::unsigned_type;
 };
 
@@ -3356,22 +3025,18 @@ struct make_unsigned {
  * @typedef make_unsigned_t
  * @brief make_unsigned的便捷别名
  */
-template <typename T>
-using make_unsigned_t = typename make_unsigned<T>::type;
+template <typename T> using make_unsigned_t = typename make_unsigned<T>::type;
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <size_t Size, bool IsSigned>
-struct __make_integer_impl;
+template <size_t Size, bool IsSigned> struct __make_integer_impl;
 
-template <size_t Size>
-struct __make_integer_impl<Size, true> {
+template <size_t Size> struct __make_integer_impl<Size, true> {
     using type = typename __sign_byte_aux<Size>::template signed_t<int>;
 };
 
-template <size_t Size>
-struct __make_integer_impl<Size, false> {
+template <size_t Size> struct __make_integer_impl<Size, false> {
     using type = typename __sign_byte_aux<Size>::template unsigned_t<int>;
 };
 NEFORCE_END_INNER__
@@ -3383,8 +3048,7 @@ NEFORCE_END_INNER__
  * @tparam Size 字节大小
  * @tparam IsSigned 是否为有符号类型，默认为true
  */
-template <size_t Size, bool IsSigned = true>
-struct make_integer {
+template <size_t Size, bool IsSigned = true> struct make_integer {
     using type = typename inner::__make_integer_impl<Size, IsSigned>::type;
 };
 
@@ -3392,8 +3056,7 @@ struct make_integer {
  * @typedef make_integer_t
  * @brief make_integer的便捷别名
  */
-template <size_t Size, bool IsSigned = true>
-using make_integer_t = typename make_integer<Size, IsSigned>::type;
+template <size_t Size, bool IsSigned = true> using make_integer_t = typename make_integer<Size, IsSigned>::type;
 
 
 /**
@@ -3401,20 +3064,17 @@ using make_integer_t = typename make_integer<Size, IsSigned>::type;
  * @brief 获取值列表中的最大值
  * @tparam Values 值列表
  */
-template <size_t... Values>
-struct max_value;
+template <size_t... Values> struct max_value;
 
 /// @cond
-template <size_t Value>
-struct max_value<Value> : integral_constant<size_t, Value> {};
+template <size_t Value> struct max_value<Value> : integral_constant<size_t, Value> {};
 
 template <size_t First, size_t Second, size_t... Rest>
 struct max_value<First, Second, Rest...> : max_value<(First > Second ? First : Second), Rest...> {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
-template <size_t... Values>
-NEFORCE_INLINE17 constexpr size_t max_value_v = max_value<Values...>::value;
+template <size_t... Values> NEFORCE_INLINE17 constexpr size_t max_value_v = max_value<Values...>::value;
 #endif
 
 /** @} */ // SignManipulation
@@ -3430,16 +3090,14 @@ NEFORCE_INLINE17 constexpr size_t max_value_v = max_value<Values...>::value;
  * @brief 查询类型的对齐要求
  * @tparam T 要查询的类型
  */
-template <typename T>
-struct alignment_of : integral_constant<size_t, alignof(T)> {};
+template <typename T> struct alignment_of : integral_constant<size_t, alignof(T)> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var alignment_of_v
  * @brief alignment_of的便捷变量模板
  */
-template <typename T>
-constexpr size_t alignment_of_v = alignment_of<T>::value;
+template <typename T> constexpr size_t alignment_of_v = alignment_of<T>::value;
 #endif
 
 
@@ -3449,8 +3107,7 @@ constexpr size_t alignment_of_v = alignment_of<T>::value;
  * @tparam Len 存储大小
  * @tparam Align 对齐要求
  */
-template <size_t Len, size_t Align = alignof(_NEFORCE max_align_t)>
-struct aligned_storage {
+template <size_t Len, size_t Align = alignof(_NEFORCE max_align_t)> struct aligned_storage {
     static_assert((Align & (Align - 1)) == 0, "Alignment must be power of two");
 
     /**
@@ -3458,7 +3115,7 @@ struct aligned_storage {
      * @brief 实际的对齐存储类型
      */
     struct alignas(Align) type {
-        byte_t data[Len];  ///< 原始存储数据
+        byte_t data[Len]; ///< 原始存储数据
     };
 };
 
@@ -3478,8 +3135,7 @@ using aligned_storage_t = typename aligned_storage<Len, Align>::type;
  *
  * 创建一个可以容纳Types中任何类型的存储，具有严格的对齐要求。
  */
-template <size_t Len, typename... Types>
-struct aligned_union {
+template <size_t Len, typename... Types> struct aligned_union {
 private:
     static constexpr size_t required_alignment = max_value<alignof(Types)...>::value;
     static constexpr size_t required_size = max_value<sizeof(Types)...>::value;
@@ -3502,7 +3158,7 @@ public:
      * @brief 实际的对齐存储类型
      */
     struct alignas(alignment_value) type {
-        byte_t data[storage_size];  ///< 原始存储数据
+        byte_t data[storage_size]; ///< 原始存储数据
     };
 
     /**
@@ -3515,11 +3171,8 @@ public:
      * 2. 大小不超过存储大小
      * 3. 对齐要求不超过存储对齐
      */
-    template <typename T>
-    static constexpr bool is_storable() noexcept {
-        return is_trivially_copyable<T>::value &&
-            sizeof(T) <= storage_size &&
-            alignof(T) <= alignment_value;
+    template <typename T> static constexpr bool is_storable() noexcept {
+        return is_trivially_copyable<T>::value && sizeof(T) <= storage_size && alignof(T) <= alignment_value;
     }
 };
 
@@ -3527,16 +3180,14 @@ public:
  * @typedef aligned_union_t
  * @brief aligned_union的便捷别名
  */
-template <size_t Len, typename... Types>
-using aligned_union_t = typename aligned_union<Len, Types...>::type;
+template <size_t Len, typename... Types> using aligned_union_t = typename aligned_union<Len, Types...>::type;
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var aligned_union_v
  * @brief 获取aligned_union的对齐要求值
  */
-template <size_t Len, typename... Types>
-constexpr size_t aligned_union_v = aligned_union<Len, Types...>::align_value;
+template <size_t Len, typename... Types> constexpr size_t aligned_union_v = aligned_union<Len, Types...>::align_value;
 #endif
 
 /** @} */ // Alignment
@@ -3557,28 +3208,27 @@ constexpr size_t aligned_union_v = aligned_union<Len, Types...>::align_value;
  * 2. 数组类型转换为指针类型（除非用于初始化引用）
  * 3. 函数类型转换为函数指针类型（除非用于初始化引用）
  */
-template <typename T>
-struct decay {
+template <typename T> struct decay {
 private:
     using remove_ref_t = remove_reference_t<T>;
-    using check_func_t = conditional_t<is_function<remove_ref_t>::value, add_pointer_t<remove_ref_t>, remove_cv_t<remove_ref_t>>;
+    using check_func_t =
+            conditional_t<is_function<remove_ref_t>::value, add_pointer_t<remove_ref_t>, remove_cv_t<remove_ref_t>>;
 
 public:
-    using type = conditional_t<is_array<remove_ref_t>::value, add_pointer_t<remove_extent_t<remove_ref_t>>, check_func_t>;
+    using type =
+            conditional_t<is_array<remove_ref_t>::value, add_pointer_t<remove_extent_t<remove_ref_t>>, check_func_t>;
 };
 
 /**
  * @typedef decay_t
  * @brief decay的便捷别名
  */
-template <typename T>
-using decay_t = typename decay<T>::type;
+template <typename T> using decay_t = typename decay<T>::type;
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename Default, typename, template <typename...> class, typename...>
-struct __detector {
+template <typename Default, typename, template <typename...> class, typename...> struct __detector {
     using value_t = false_type;
     using type = Default;
 };
@@ -3625,8 +3275,7 @@ using common_ternary_operator_t = decltype(true ? _NEFORCE declval<T1>() : _NEFO
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename, typename, typename = void>
-struct __oper_decay_aux {};
+template <typename, typename, typename = void> struct __oper_decay_aux {};
 template <typename T1, typename T2>
 struct __oper_decay_aux<T1, T2, void_t<common_ternary_operator_t<decay_t<T1>, decay_t<T2>>>> {
     using type = decay_t<common_ternary_operator_t<decay_t<T1>, decay_t<T2>>>;
@@ -3639,25 +3288,20 @@ NEFORCE_END_INNER__
  * @brief 查找多个类型的公共类型
  * @tparam Types 类型列表
  */
-template <typename... Types>
-struct common_type;
+template <typename... Types> struct common_type;
 
 /**
  * @typedef common_type_t
  * @brief common_type的便捷别名
  */
-template <typename... Types>
-using common_type_t = typename common_type<Types...>::type;
+template <typename... Types> using common_type_t = typename common_type<Types...>::type;
 
 /// @cond
-template <>
-struct common_type<> {};
+template <> struct common_type<> {};
 
-template <typename T1>
-struct common_type<T1> : common_type<T1, T1> {};
+template <typename T1> struct common_type<T1> : common_type<T1, T1> {};
 
-template <typename T1, typename T2>
-struct common_type<T1, T2> : inner::__oper_decay_aux<T1, T2> {};
+template <typename T1, typename T2> struct common_type<T1, T2> : inner::__oper_decay_aux<T1, T2> {};
 
 template <typename T1, typename T2, typename... Rest>
 struct common_type<T1, T2, Rest...> : common_type<common_type_t<T1, T2>, Rest...> {};
@@ -3671,35 +3315,29 @@ struct common_type<T1, T2, Rest...> : common_type<common_type_t<T1, T2>, Rest...
  * @brief 查找多个类型的公共引用类型
  * @tparam Types 类型列表
  */
-template <typename... Types>
-struct common_reference;
+template <typename... Types> struct common_reference;
 
 /**
  * @typedef common_reference_t
  * @brief common_reference的便捷别名
  */
-template <typename... Types>
-using common_reference_t = typename common_reference<Types...>::type;
+template <typename... Types> using common_reference_t = typename common_reference<Types...>::type;
 
 /// @cond
 
-template <>
-struct common_reference<> {};
+template <> struct common_reference<> {};
 
-template <typename T>
-struct common_reference<T> {
+template <typename T> struct common_reference<T> {
     using type = T;
 };
 
 
 NEFORCE_BEGIN_INNER__
 
-template <typename T1, typename T2>
-struct __common_reference_base_aux : common_type<T1, T2> {};
+template <typename T1, typename T2> struct __common_reference_base_aux : common_type<T1, T2> {};
 
-template <typename T1, typename T2> requires requires {
-    typename _NEFORCE common_ternary_operator_t<T1, T2>;
-}
+template <typename T1, typename T2>
+    requires requires { typename _NEFORCE common_ternary_operator_t<T1, T2>; }
 struct __common_reference_base_aux<T1, T2> {
     using type = _NEFORCE common_ternary_operator_t<T1, T2>;
 };
@@ -3707,18 +3345,16 @@ struct __common_reference_base_aux<T1, T2> {
 template <typename, typename, template <typename> typename, template <typename> typename>
 struct __basic_common_reference {};
 
-template <typename T1>
-struct __add_qualifier_aux {
-    template <typename T2>
-    using apply_t = copy_ref_t<T1, copy_cv_t<T1, T2>>;
+template <typename T1> struct __add_qualifier_aux {
+    template <typename T2> using apply_t = copy_ref_t<T1, copy_cv_t<T1, T2>>;
 };
 
 template <typename T1, typename T2>
 using qualifier_extract = typename __basic_common_reference<remove_cvref_t<T1>, remove_cvref_t<T2>,
-    __add_qualifier_aux<T1>::template apply_t, __add_qualifier_aux<T2>::template apply_t>::type;
+                                                            __add_qualifier_aux<T1>::template apply_t,
+                                                            __add_qualifier_aux<T2>::template apply_t>::type;
 
-template <typename T1, typename T2>
-struct __common_ref_qualify_aux : __common_reference_base_aux<T1, T2> {};
+template <typename T1, typename T2> struct __common_ref_qualify_aux : __common_reference_base_aux<T1, T2> {};
 
 template <typename T1, typename T2>
     requires requires { typename qualifier_extract<T1, T2>; }
@@ -3726,15 +3362,13 @@ struct __common_ref_qualify_aux<T1, T2> {
     using type = qualifier_extract<T1, T2>;
 };
 
-template <typename T1, typename T2>
-struct __common_reference_ptr_aux : __common_ref_qualify_aux<T1, T2> {};
+template <typename T1, typename T2> struct __common_reference_ptr_aux : __common_ref_qualify_aux<T1, T2> {};
 
-template <typename T1, typename T2> requires
-    is_lvalue_reference_v<common_ternary_operator_t<copy_cv_t<T1, T2>&, copy_cv_t<T2, T1>&>>
+template <typename T1, typename T2>
+    requires is_lvalue_reference_v<common_ternary_operator_t<copy_cv_t<T1, T2>&, copy_cv_t<T2, T1>&>>
 using __common_lvalue_aux = common_ternary_operator_t<copy_cv_t<T1, T2>&, copy_cv_t<T2, T1>&>;
 
-template <typename, typename>
-struct __common_reference_aux {};
+template <typename, typename> struct __common_reference_aux {};
 
 template <typename T1, typename T2>
     requires requires { typename __common_lvalue_aux<T1, T2>; }
@@ -3742,34 +3376,31 @@ struct __common_reference_aux<T1&, T2&> {
     using type = __common_lvalue_aux<T1, T2>;
 };
 
-template <typename T1, typename T2> requires
-    is_convertible_v<T1&&, __common_lvalue_aux<const T1, T2>>
+template <typename T1, typename T2>
+    requires is_convertible_v<T1&&, __common_lvalue_aux<const T1, T2>>
 struct __common_reference_aux<T1&&, T2&> {
     using type = __common_lvalue_aux<const T1, T2>;
 };
 
-template <typename T1, typename T2> requires
-    is_convertible_v<T2&&, __common_lvalue_aux<const T2, T1>>
+template <typename T1, typename T2>
+    requires is_convertible_v<T2&&, __common_lvalue_aux<const T2, T1>>
 struct __common_reference_aux<T1&, T2&&> {
     using type = __common_lvalue_aux<const T2, T1>;
 };
 
-template <typename T1, typename T2>
-using __common_rvalue_aux = remove_reference_t<__common_lvalue_aux<T1, T2>>&&;
+template <typename T1, typename T2> using __common_rvalue_aux = remove_reference_t<__common_lvalue_aux<T1, T2>>&&;
 
-template <typename T1, typename T2> requires
-    is_convertible_v<T1&&, __common_rvalue_aux<T1, T2>> &&
-    is_convertible_v<T2&&, __common_rvalue_aux<T1, T2>>
+template <typename T1, typename T2>
+    requires is_convertible_v<T1&&, __common_rvalue_aux<T1, T2>> && is_convertible_v<T2&&, __common_rvalue_aux<T1, T2>>
 struct __common_reference_aux<T1&&, T2&&> {
     using type = __common_rvalue_aux<T1, T2>;
 };
 
-template <typename T1, typename T2>
-using __common_reference_aux_t = typename __common_reference_aux<T1, T2>::type;
+template <typename T1, typename T2> using __common_reference_aux_t = typename __common_reference_aux<T1, T2>::type;
 
-template <typename T1, typename T2> requires
-    is_convertible_v<add_pointer_t<T1>, add_pointer_t<__common_reference_aux_t<T1, T2>>> &&
-    is_convertible_v<add_pointer_t<T2>, add_pointer_t<__common_reference_aux_t<T1, T2>>>
+template <typename T1, typename T2>
+    requires is_convertible_v<add_pointer_t<T1>, add_pointer_t<__common_reference_aux_t<T1, T2>>> &&
+             is_convertible_v<add_pointer_t<T2>, add_pointer_t<__common_reference_aux_t<T1, T2>>>
 struct __common_reference_ptr_aux<T1, T2> {
     using type = __common_reference_aux_t<T1, T2>;
 };
@@ -3777,11 +3408,9 @@ struct __common_reference_ptr_aux<T1, T2> {
 NEFORCE_END_INNER__
 
 
-template <typename T1, typename T2>
-struct common_reference<T1, T2> : inner::__common_reference_ptr_aux<T1, T2> {};
+template <typename T1, typename T2> struct common_reference<T1, T2> : inner::__common_reference_ptr_aux<T1, T2> {};
 
-template <typename T1, typename T2, typename T3, typename... Rest>
-struct common_reference<T1, T2, T3, Rest...> {};
+template <typename T1, typename T2, typename T3, typename... Rest> struct common_reference<T1, T2, T3, Rest...> {};
 
 template <typename T1, typename T2, typename T3, typename... Rest>
     requires requires { typename common_reference_t<T1, T2>; }
@@ -3799,8 +3428,7 @@ struct common_reference<T1, T2, T3, Rest...> : common_reference<common_reference
  *
  * 用于检查某个类型是否是特定模板的特化版本。
  */
-template <typename T, template <typename...> class Template>
-struct is_specialization : false_type {};
+template <typename T, template <typename...> class Template> struct is_specialization : false_type {};
 
 /// @cond
 template <template <typename...> class Template, typename... Args>
@@ -3821,8 +3449,7 @@ NEFORCE_INLINE17 constexpr bool is_specialization_v = is_specialization<T, Templ
  * @tparam Template 要检查的模板
  * @return 如果T是Template的特化返回true，否则返回false
  */
-template <typename T, template <typename...> class Template>
-constexpr bool is_specialization_v() {
+template <typename T, template <typename...> class Template> constexpr bool is_specialization_v() {
     return is_specialization<T, Template>::value;
 }
 #endif
@@ -3835,11 +3462,9 @@ constexpr bool is_specialization_v() {
  * @{
  */
 
-template <typename>
-struct is_swappable;
+template <typename> struct is_swappable;
 
-template <typename>
-struct is_nothrow_swappable;
+template <typename> struct is_nothrow_swappable;
 
 
 /**
@@ -3850,8 +3475,7 @@ struct is_nothrow_swappable;
  */
 template <typename T>
 NEFORCE_CONSTEXPR14 enable_if_t<conjunction<is_move_constructible<T>, is_move_assignable<T>>::value>
-swap(T& lhs, T& rhs)
-noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T>::value);
+swap(T& lhs, T& rhs) noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T>::value);
 
 /**
  * @brief 交换两个相同类型的数组
@@ -3861,9 +3485,8 @@ noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T
  * @param rhs 右操作数数组
  */
 template <typename T, size_t Size>
-NEFORCE_CONSTEXPR14 enable_if_t<is_swappable<T>::value>
-swap(T(& lhs)[Size], T(& rhs)[Size])
-noexcept(is_nothrow_swappable<T>::value);
+NEFORCE_CONSTEXPR14 enable_if_t<is_swappable<T>::value> swap(T (&lhs)[Size],
+                                                             T (&rhs)[Size]) noexcept(is_nothrow_swappable<T>::value);
 
 /**
  * @brief 删除无参数的swap重载
@@ -3879,8 +3502,8 @@ void swap() = delete;
  * @return 对象的旧值
  */
 template <typename T, typename U = T>
-NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val)
-noexcept(conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&, U>>::value);
+NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(
+        conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&, U>>::value);
 
 
 /**
@@ -3890,13 +3513,12 @@ noexcept(conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&,
  * @tparam T2 第二个类型
  * @tparam Dummy SFINAE参数，默认为void
  */
-template <typename T1, typename T2, typename Dummy = void>
-struct is_swappable_from : false_type {};
+template <typename T1, typename T2, typename Dummy = void> struct is_swappable_from : false_type {};
 
 /// @cond
 template <typename T1, typename T2>
-struct is_swappable_from<T1, T2, void_t<decltype(
-    _NEFORCE swap(_NEFORCE declval<T1>(), _NEFORCE declval<T2>()))>> : true_type {};
+struct is_swappable_from<T1, T2, void_t<decltype(_NEFORCE swap(_NEFORCE declval<T1>(), _NEFORCE declval<T2>()))>>
+: true_type {};
 /// @endcond
 
 
@@ -3909,8 +3531,7 @@ struct is_swappable_from<T1, T2, void_t<decltype(
  * 要求可以双向调用swap。
  */
 template <typename T1, typename T2>
-struct is_swappable_with : bool_constant<
-    conjunction<is_swappable_from<T1, T2>, is_swappable_from<T2, T1>>::value> {};
+struct is_swappable_with : bool_constant<conjunction<is_swappable_from<T1, T2>, is_swappable_from<T2, T1>>::value> {};
 
 
 /**
@@ -3919,16 +3540,14 @@ struct is_swappable_with : bool_constant<
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_swappable : bool_constant<
-    is_swappable_with<add_lvalue_reference_t<T>, add_lvalue_reference_t<T>>::value> {};
+struct is_swappable : bool_constant<is_swappable_with<add_lvalue_reference_t<T>, add_lvalue_reference_t<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_swappable_v
  * @brief is_swappable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_swappable_v = is_swappable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_swappable_v = is_swappable<T>::value;
 #endif
 
 
@@ -3939,9 +3558,9 @@ NEFORCE_INLINE17 constexpr bool is_swappable_v = is_swappable<T>::value;
  * @tparam T2 第二个类型
  */
 template <typename T1, typename T2>
-struct is_nothrow_swappable_from : bool_constant<
-    noexcept(_NEFORCE swap(_NEFORCE declval<T1>(), _NEFORCE declval<T2>())) &&
-    noexcept(_NEFORCE swap(_NEFORCE declval<T2>(), _NEFORCE declval<T1>()))> {};
+struct is_nothrow_swappable_from
+: bool_constant<noexcept(_NEFORCE swap(_NEFORCE declval<T1>(), _NEFORCE declval<T2>())) &&
+                noexcept(_NEFORCE swap(_NEFORCE declval<T2>(), _NEFORCE declval<T1>()))> {};
 
 
 /**
@@ -3951,8 +3570,8 @@ struct is_nothrow_swappable_from : bool_constant<
  * @tparam T2 第二个类型
  */
 template <typename T1, typename T2>
-struct is_nothrow_swappable_with : bool_constant<
-    conjunction<is_swappable_with<T1, T2>, is_nothrow_swappable_from<T1, T2>>::value> {};
+struct is_nothrow_swappable_with
+: bool_constant<conjunction<is_swappable_with<T1, T2>, is_nothrow_swappable_from<T1, T2>>::value> {};
 
 
 /**
@@ -3961,16 +3580,15 @@ struct is_nothrow_swappable_with : bool_constant<
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_nothrow_swappable : bool_constant<
-    is_nothrow_swappable_with<add_lvalue_reference_t<T>, add_lvalue_reference_t<T>>::value> {};
+struct is_nothrow_swappable
+: bool_constant<is_nothrow_swappable_with<add_lvalue_reference_t<T>, add_lvalue_reference_t<T>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_nothrow_swappable_v
  * @brief is_nothrow_swappable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_nothrow_swappable_v = is_nothrow_swappable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_nothrow_swappable_v = is_nothrow_swappable<T>::value;
 #endif
 
 
@@ -3984,13 +3602,11 @@ NEFORCE_INLINE17 constexpr bool is_nothrow_swappable_v = is_nothrow_swappable<T>
  * 具体来说，当调用函数时，除了全局和局部作用域外，
  * 编译器还会在参数类型所属的命名空间中查找函数声明。
  */
-template <typename T, typename Dummy = void>
-struct is_ADL_swappable : false_type {};
+template <typename T, typename Dummy = void> struct is_ADL_swappable : false_type {};
 
 /// @cond
 template <typename T>
-struct is_ADL_swappable<T, void_t<
-    decltype(swap(_NEFORCE declval<T&>(), _NEFORCE declval<T&>()))>> : true_type {};
+struct is_ADL_swappable<T, void_t<decltype(swap(_NEFORCE declval<T&>(), _NEFORCE declval<T&>()))>> : true_type {};
 /// @endcond
 
 
@@ -4006,24 +3622,22 @@ struct is_ADL_swappable<T, void_t<
  * 4. 不支持ADL查找的swap
  */
 template <typename T>
-struct is_trivially_swappable : bool_constant<conjunction<
-    is_trivially_destructible<T>, is_trivially_move_constructible<T>,
-    is_trivially_move_assignable<T>, negation<is_ADL_swappable<T>>>::value> {};
+struct is_trivially_swappable
+: bool_constant<conjunction<is_trivially_destructible<T>, is_trivially_move_constructible<T>,
+                            is_trivially_move_assignable<T>, negation<is_ADL_swappable<T>>>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_trivially_swappable_v
  * @brief is_trivially_swappable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_trivially_swappable_v = is_trivially_swappable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_trivially_swappable_v = is_trivially_swappable<T>::value;
 #endif
 
 
 template <typename T>
 NEFORCE_CONSTEXPR14 enable_if_t<conjunction<is_move_constructible<T>, is_move_assignable<T>>::value>
-swap(T& lhs, T& rhs)
-noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T>::value) {
+swap(T& lhs, T& rhs) noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T>::value) {
     T tmp = _NEFORCE move(lhs);
     lhs = _NEFORCE move(rhs);
     rhs = _NEFORCE move(tmp);
@@ -4031,10 +3645,11 @@ noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T
 }
 
 template <typename T, size_t Size>
-NEFORCE_CONSTEXPR14 enable_if_t<is_swappable<T>::value>
-swap(T(& lhs)[Size], T(& rhs)[Size])
-noexcept(is_nothrow_swappable<T>::value) {
-    if (&lhs == &rhs) return;
+NEFORCE_CONSTEXPR14 enable_if_t<is_swappable<T>::value> swap(T (&lhs)[Size],
+                                                             T (&rhs)[Size]) noexcept(is_nothrow_swappable<T>::value) {
+    if (&lhs == &rhs) {
+        return;
+    }
     T* first1 = lhs;
     T* last1 = first1 + Size;
     T* first2 = rhs;
@@ -4045,8 +3660,8 @@ noexcept(is_nothrow_swappable<T>::value) {
 }
 
 template <typename T, typename U>
-NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val)
-noexcept(conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&, U>>::value) {
+NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(
+        conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&, U>>::value) {
     T old_val = _NEFORCE move(val);
     val = _NEFORCE forward<U>(new_val);
     return old_val;
@@ -4090,14 +3705,12 @@ concept is_pair_v = requires(T p) {
  * 1. value_type类型成员
  * 2. allocate(size_t)成员函数
  */
-template <typename Alloc, typename Dummy = void>
-struct is_allocator : false_type {};
+template <typename Alloc, typename Dummy = void> struct is_allocator : false_type {};
 
 /// @cond
 template <typename Alloc>
-struct is_allocator<Alloc, void_t<
-    typename Alloc::value_type, decltype(declval<Alloc&>().allocate(size_t{}))>>
-    : true_type {};
+struct is_allocator<Alloc, void_t<typename Alloc::value_type, decltype(declval<Alloc&>().allocate(size_t{}))>>
+: true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -4105,25 +3718,20 @@ struct is_allocator<Alloc, void_t<
  * @var is_allocator_v
  * @brief is_allocator的便捷变量模板
  */
-template <typename Alloc>
-NEFORCE_INLINE17 constexpr bool is_allocator_v = is_allocator<Alloc>::value;
+template <typename Alloc> NEFORCE_INLINE17 constexpr bool is_allocator_v = is_allocator<Alloc>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T>
-struct __has_valid_begin_end {
+template <typename T> struct __has_valid_begin_end {
 private:
     template <typename U>
-    static auto __test(int) -> decltype(
-        declval<U>().begin(), declval<U>().end(),
-        is_same<decltype(declval<U>().begin()), decltype(declval<U>().end())>(),
-        true_type{}
-    );
+    static auto __test(int)
+            -> decltype(declval<U>().begin(), declval<U>().end(),
+                        is_same<decltype(declval<U>().begin()), decltype(declval<U>().end())>(), true_type{});
 
-    template <typename U>
-    static false_type __test(...);
+    template <typename U> static false_type __test(...);
 
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
@@ -4137,17 +3745,11 @@ NEFORCE_END_INNER__
  * @brief 判断类型是否可以递增
  * @tparam Iterator 要检查的类型
  */
-template <typename Iterator>
-struct is_incrementible {
+template <typename Iterator> struct is_incrementible {
 private:
-    template <typename U>
-    static auto __test(int) -> decltype(
-        ++declval<U&>(),
-        true_type{}
-    );
+    template <typename U> static auto __test(int) -> decltype(++declval<U&>(), true_type{});
 
-    template <typename U>
-    static false_type __test(...);
+    template <typename U> static false_type __test(...);
 
 public:
     static constexpr bool value = decltype(__test<Iterator>(0))::value;
@@ -4158,8 +3760,7 @@ public:
  * @var is_incrementible_v
  * @brief iis_incrementible的便捷变量模板
  */
-template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_incrementible_v = is_incrementible<Iterator>::value;
+template <typename Iterator> NEFORCE_INLINE17 constexpr bool is_incrementible_v = is_incrementible<Iterator>::value;
 #endif
 
 
@@ -4168,17 +3769,12 @@ NEFORCE_INLINE17 constexpr bool is_incrementible_v = is_incrementible<Iterator>:
  * @brief 判断类型是否可以递减
  * @tparam Iterator 要检查的类型
  */
-template <typename Iterator>
-struct is_decrementible {
+template <typename Iterator> struct is_decrementible {
 private:
-    template <typename U>
-    static auto __test(int) -> decltype(
-        --declval<U&>(),
-        true_type{}
-    );
+    template <typename U> static auto __test(int) -> decltype(--declval<U&>(), true_type{});
 
-    template <typename U>
-    static false_type __test(...);
+    template <typename U> static false_type __test(...);
+
 public:
     static constexpr bool value = decltype(__test<Iterator>(0))::value;
 };
@@ -4188,8 +3784,7 @@ public:
  * @var is_decrementible_v
  * @brief is_decrementible的便捷变量模板
  */
-template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_decrementible_v = is_decrementible<Iterator>::value;
+template <typename Iterator> NEFORCE_INLINE17 constexpr bool is_decrementible_v = is_decrementible<Iterator>::value;
 #endif
 
 
@@ -4203,34 +3798,25 @@ NEFORCE_INLINE17 constexpr bool is_decrementible_v = is_decrementible<Iterator>:
  * 2. begin()返回的迭代器可以递增
  */
 template <typename Container>
-struct is_iterable : bool_constant<
-    inner::__has_valid_begin_end<Container>::value &&
-    is_incrementible<decltype(declval<Container>().begin())>::value
-> {};
+struct is_iterable : bool_constant<inner::__has_valid_begin_end<Container>::value &&
+                                   is_incrementible<decltype(declval<Container>().begin())>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_iterable_v
  * @brief is_iterable的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_iterable_v = is_iterable<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_iterable_v = is_iterable<T>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T>
-struct __has_first_and_second {
+template <typename T> struct __has_first_and_second {
 private:
-    template <typename U>
-    static auto __test(int) -> decltype(
-        declval<U>().first, declval<U>().second,
-        true_type{}
-    );
+    template <typename U> static auto __test(int) -> decltype(declval<U>().first, declval<U>().second, true_type{});
 
-    template <typename U>
-    static false_type __test(...);
+    template <typename U> static false_type __test(...);
 
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
@@ -4248,32 +3834,28 @@ NEFORCE_END_INNER__
  * 2. 迭代器的解引用结果具有first和second成员
  */
 template <typename Map>
-struct is_maplike : bool_constant<
-    is_iterable<Map>::value &&
-    inner::__has_first_and_second<decltype(*declval<decltype(declval<Map>().begin())>())>::value
-> {};
+struct is_maplike
+: bool_constant<is_iterable<Map>::value &&
+                inner::__has_first_and_second<decltype(*declval<decltype(declval<Map>().begin())>())>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var is_maplike_v
  * @brief is_maplike的便捷变量模板
  */
-template <typename Map>
-NEFORCE_INLINE17 constexpr bool is_maplike_v = is_maplike<Map>::value;
+template <typename Map> NEFORCE_INLINE17 constexpr bool is_maplike_v = is_maplike<Map>::value;
 #endif
 
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename Alloc, typename T, typename... Args>
-struct __has_construct_impl {
+template <typename Alloc, typename T, typename... Args> struct __has_construct_impl {
 private:
-    template <typename Alloc1,
-    typename = decltype(_NEFORCE declval<Alloc1*>()->construct(_NEFORCE declval<T*>(), _NEFORCE declval<Args>()...))>
+    template <typename Alloc1, typename = decltype(_NEFORCE declval<Alloc1*>()->construct(_NEFORCE declval<T*>(),
+                                                                                          _NEFORCE declval<Args>()...))>
     static true_type __test(int);
 
-    template <typename>
-    static false_type __test(...);
+    template <typename> static false_type __test(...);
 
 public:
     using type = decltype(__test<Alloc>(0));
@@ -4303,14 +3885,12 @@ NEFORCE_INLINE17 constexpr bool has_construct_v = has_construct<Alloc, T, Args..
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename T>
-struct __has_base_impl {
+template <typename T> struct __has_base_impl {
 private:
-    template <typename U>
-    static auto __test(int) -> decltype(_NEFORCE declval<const U>().base(), true_type{});
+    template <typename U> static auto __test(int) -> decltype(_NEFORCE declval<const U>().base(), true_type{});
 
-    template <typename U>
-    static false_type __test(...);
+    template <typename U> static false_type __test(...);
+
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
@@ -4322,16 +3902,14 @@ NEFORCE_END_INNER__
  * @brief 判断类型是否具有base成员函数
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct has_base : bool_constant<inner::__has_base_impl<T>::value> {};
+template <typename T> struct has_base : bool_constant<inner::__has_base_impl<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
  * @var has_base_v
  * @brief has_base的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool has_base_v = has_base<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool has_base_v = has_base<T>::value;
 #endif
 
 /** @} */ // TypeActionCheck
@@ -4353,18 +3931,13 @@ NEFORCE_INLINE17 constexpr bool has_base_v = has_base<T>::value;
  *   - 函数的return语句直接返回该局部对象。
  */
 template <typename T>
-NEFORCE_ALWAYS_INLINE constexpr T initialize()
-noexcept(is_nothrow_default_constructible<T>::value) {
+NEFORCE_ALWAYS_INLINE constexpr T initialize() noexcept(is_nothrow_default_constructible<T>::value) {
     static_assert(is_default_constructible<T>::value, "T must be default constructible");
     return T();
 }
 
 #define __NEFORCE_INITIALIZE_BASIC_FUNCTION(OPT) \
-template <> \
-NEFORCE_ALWAYS_INLINE constexpr OPT \
-initialize() noexcept { \
-    return static_cast<OPT>(0); \
-}
+    template <> NEFORCE_ALWAYS_INLINE constexpr OPT initialize() noexcept { return static_cast<OPT>(0); }
 
 NEFORCE_MACRO_RANGE_ARITHMETIC(__NEFORCE_INITIALIZE_BASIC_FUNCTION)
 #undef __NEFORCE_INITIALIZE_BASIC_FUNCTION

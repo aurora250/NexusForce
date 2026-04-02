@@ -25,9 +25,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 using platform_wait_t =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    long;
+        long;
 #else
-    int;
+        int;
 #endif
 
 
@@ -38,24 +38,24 @@ using platform_wait_t =
  * 定义FUTEX系统调用的操作标志。这些标志对应于Linux内核的FUTEX操作。
  */
 enum class futex_wait_flags : platform_wait_t {
-    private_flag = 0,                  ///< 私有标志位
-    wait = 0,                          ///< 等待操作
-    wake = 1,                          ///< 唤醒操作
-    requeue = 3,                       ///< 将等待队列转移到另一个FUTEX
-    cmp_requeue = 4,                   ///< 带比较的转移
-    wake_op = 5,                       ///< 唤醒并原子修改另一个FUTEX
-    lock_pi = 6,                       ///< 优先级继承锁（加锁）
-    unlock_pi = 7,                     ///< 优先级继承锁（解锁）
-    trylock_pi = 8,                    ///< 尝试加锁（非阻塞）
-    wait_bitset = 9,                   ///< 位集等待操作
-    wake_bitset = 10,                  ///< 位集唤醒操作
-    wait_requeue_pi = 11,              ///< 等待并转移到PI FUTEX
-    cmp_requeue_pi = 12,               ///< 带比较的等待并转移
-    wait_private = wait | private_flag,    ///< 私有等待操作
-    wake_private = wake | private_flag,    ///< 私有唤醒操作
-    wait_bitset_private = wait_bitset | private_flag,  ///< 私有位集等待操作
-    wake_bitset_private = wake_bitset | private_flag,  ///< 私有位集唤醒操作
-    bitset_match_any = -1              ///< 匹配任何等待集合的位掩码
+    private_flag = 0,                                 ///< 私有标志位
+    wait = 0,                                         ///< 等待操作
+    wake = 1,                                         ///< 唤醒操作
+    requeue = 3,                                      ///< 将等待队列转移到另一个FUTEX
+    cmp_requeue = 4,                                  ///< 带比较的转移
+    wake_op = 5,                                      ///< 唤醒并原子修改另一个FUTEX
+    lock_pi = 6,                                      ///< 优先级继承锁（加锁）
+    unlock_pi = 7,                                    ///< 优先级继承锁（解锁）
+    trylock_pi = 8,                                   ///< 尝试加锁（非阻塞）
+    wait_bitset = 9,                                  ///< 位集等待操作
+    wake_bitset = 10,                                 ///< 位集唤醒操作
+    wait_requeue_pi = 11,                             ///< 等待并转移到PI FUTEX
+    cmp_requeue_pi = 12,                              ///< 带比较的等待并转移
+    wait_private = wait | private_flag,               ///< 私有等待操作
+    wake_private = wake | private_flag,               ///< 私有唤醒操作
+    wait_bitset_private = wait_bitset | private_flag, ///< 私有位集等待操作
+    wake_bitset_private = wake_bitset | private_flag, ///< 私有位集唤醒操作
+    bitset_match_any = -1                             ///< 匹配任何等待集合的位掩码
 };
 
 
@@ -93,10 +93,8 @@ void NEFORCE_API futex_wait(void* addr, platform_wait_t value) noexcept;
  * @note 实际超时精度受系统调度器和时钟精度限制
  * @warning 调用者必须确保 addr 在等待期间保持有效且可访问
  */
-bool NEFORCE_API
-futex_wait_until(void* addr, platform_wait_t value,
-                 bool has_timeout, int64_t sec, int64_t ns,
-                 bool is_monotonic = false);
+bool NEFORCE_API futex_wait_until(void* addr, platform_wait_t value, bool has_timeout, int64_t sec, int64_t ns,
+                                  bool is_monotonic = false);
 
 /**
  * @brief 通知等待的线程
@@ -111,10 +109,10 @@ futex_wait_until(void* addr, platform_wait_t value,
 void NEFORCE_API futex_notify(void* addr, bool all) noexcept;
 
 #ifdef NEFORCE_PLATFORM_LINUX
-#define NEFORCE_FUTEX_HAS_ADVANCED 1
+#    define NEFORCE_FUTEX_HAS_ADVANCED 1
 
-int futex(void* wait_addr, futex_wait_flags flags, int wake_count,
-          void* requeue_addr, int requeue_count, int cmp_value) noexcept;
+int futex(void* wait_addr, futex_wait_flags flags, int wake_count, void* requeue_addr, int requeue_count,
+          int cmp_value) noexcept;
 
 /**
  * @brief 将部分等待线程转移到另一个 futex
@@ -124,8 +122,7 @@ int futex(void* wait_addr, futex_wait_flags flags, int wake_count,
  * @param requeue_count 转移的线程数（唤醒后剩余队列中转移）
  * @return 0 成功；负值错误码（如 -EINVAL）
  */
-int NEFORCE_API futex_requeue(void* wait_addr, int wake_count,
-                              void* requeue_addr, int requeue_count) noexcept;
+int NEFORCE_API futex_requeue(void* wait_addr, int wake_count, void* requeue_addr, int requeue_count) noexcept;
 
 /**
  * @brief 唤醒线程的同时原子修改另一个 futex 的值
@@ -138,8 +135,8 @@ int NEFORCE_API futex_requeue(void* wait_addr, int wake_count,
  * @param cmp_arg   比较参数
  * @return 0 成功；负值错误码
  */
-int NEFORCE_API futex_wake_op(void* addr, int wake_count, void* op_addr,
-                              int op_arg, int op, int cmp, int cmp_arg) noexcept;
+int NEFORCE_API futex_wake_op(void* addr, int wake_count, void* op_addr, int op_arg, int op, int cmp,
+                              int cmp_arg) noexcept;
 
 int NEFORCE_API futex_lock_pi(void* addr) noexcept;
 int NEFORCE_API futex_trylock_pi(void* addr) noexcept;
@@ -152,8 +149,7 @@ int NEFORCE_API futex_unlock_pi(void* addr) noexcept;
  * @param requeue_addr  目标 PI futex 地址
  * @return 0 成功；负值错误码
  */
-int NEFORCE_API futex_wait_requeue_pi(void* wait_addr, int value,
-                                      void* requeue_addr) noexcept;
+int NEFORCE_API futex_wait_requeue_pi(void* wait_addr, int value, void* requeue_addr) noexcept;
 
 #endif // NEFORCE_PLATFORM_LINUX
 

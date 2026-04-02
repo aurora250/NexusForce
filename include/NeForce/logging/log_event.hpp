@@ -13,7 +13,7 @@
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #ifdef ERROR
-#undef ERROR
+#    undef ERROR
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -31,24 +31,31 @@ NEFORCE_BEGIN_NAMESPACE__
  * 用于控制日志输出和过滤。
  */
 enum class LOG_LEVEL {
-    TRACE = 0,  ///< 跟踪级别，最详细的调试信息
-    DEBUG,      ///< 调试级别，用于开发调试
-    INFO,       ///< 信息级别，普通信息
-    WARN,       ///< 警告级别，表示潜在问题
-    ERROR,      ///< 错误级别，表示可恢复的错误
-    FATAL       ///< 致命级别，表示不可恢复的错误
+    TRACE = 0, ///< 跟踪级别，最详细的调试信息
+    DEBUG,     ///< 调试级别，用于开发调试
+    INFO,      ///< 信息级别，普通信息
+    WARN,      ///< 警告级别，表示潜在问题
+    ERROR,     ///< 错误级别，表示可恢复的错误
+    FATAL      ///< 致命级别，表示不可恢复的错误
 };
 
 
 NEFORCE_CONSTEXPR20 string to_string(const LOG_LEVEL level) {
-    switch(level) {
-        case LOG_LEVEL::TRACE: return "TRACE";
-        case LOG_LEVEL::DEBUG: return "DEBUG";
-        case LOG_LEVEL::INFO:  return "INFO";
-        case LOG_LEVEL::WARN:  return "WARN";
-        case LOG_LEVEL::ERROR: return "ERROR";
-        case LOG_LEVEL::FATAL: return "FATAL";
-        default: unreachable();
+    switch (level) {
+        case LOG_LEVEL::TRACE:
+            return "TRACE";
+        case LOG_LEVEL::DEBUG:
+            return "DEBUG";
+        case LOG_LEVEL::INFO:
+            return "INFO";
+        case LOG_LEVEL::WARN:
+            return "WARN";
+        case LOG_LEVEL::ERROR:
+            return "ERROR";
+        case LOG_LEVEL::FATAL:
+            return "FATAL";
+        default:
+            unreachable();
     }
 }
 
@@ -61,14 +68,14 @@ NEFORCE_CONSTEXPR20 string to_string(const LOG_LEVEL level) {
  * 线程、级别和消息内容。用于在日志系统中传递和格式化日志。
  */
 struct log_event {
-    unordered_map<string, string> context;  ///< 上下文信息键值对
-    string file;                            ///< 源文件名
-    string func;                            ///< 函数名
-    string message;                         ///< 日志消息
-    datetime dt;                            ///< 时间戳
-    int line;                               ///< 行号
-    thread::id thread_id;                   ///< 线程ID
-    LOG_LEVEL level;                        ///< 日志级别
+    unordered_map<string, string> context; ///< 上下文信息键值对
+    string file;                           ///< 源文件名
+    string func;                           ///< 函数名
+    string message;                        ///< 日志消息
+    datetime dt;                           ///< 时间戳
+    int line;                              ///< 行号
+    thread::id thread_id;                  ///< 线程ID
+    LOG_LEVEL level;                       ///< 日志级别
 };
 
 /** @} */ // Logging

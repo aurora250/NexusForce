@@ -1,6 +1,6 @@
-#include <NeForce/core/string/string_util.hpp>
 #include <NeForce/core/algorithm/numeric.hpp>
 #include <NeForce/core/container/unordered_set.hpp>
+#include <NeForce/core/string/string_util.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 vector<string_view> split(const string_view str, const string_view delimiters, const bool skip_empty) {
@@ -50,17 +50,21 @@ vector<string> split(const string& str, const string& delimiters, const bool ski
 string join(const vector<string>& vec, const string& delimiter) {
     string result;
     for (size_t i = 0; i < vec.size(); ++i) {
-        if (i != 0) result += delimiter;
+        if (i != 0) {
+            result += delimiter;
+        }
         result += vec[i];
     }
     return result;
 }
 
 string join_fast(const vector<string>& vec, const string& delimiter) {
-    if (vec.empty()) return "";
+    if (vec.empty()) {
+        return "";
+    }
 
     size_t total_length = 0;
-    for (const auto& s : vec) {
+    for (const auto& s: vec) {
         total_length += s.length();
     }
     total_length += delimiter.length() * (vec.size() - 1);
@@ -69,7 +73,9 @@ string join_fast(const vector<string>& vec, const string& delimiter) {
     result.reserve(total_length);
 
     for (size_t i = 0; i < vec.size(); ++i) {
-        if (i != 0) result.append(delimiter);
+        if (i != 0) {
+            result.append(delimiter);
+        }
         result.append(vec[i]);
     }
 
@@ -77,18 +83,18 @@ string join_fast(const vector<string>& vec, const string& delimiter) {
 }
 
 string join_accumulate(const vector<string>& vec, const string& delimiter) {
-    if (vec.empty()) return "";
+    if (vec.empty()) {
+        return "";
+    }
     return accumulate(next(vec.begin()), vec.end(), vec[0],
-         [&delimiter](const string& a, const string& b) {
-             return a + delimiter + b;
-         });
+                      [&delimiter](const string& a, const string& b) { return a + delimiter + b; });
 }
 
 
 vector<string> unique(const vector<string>& vec) {
     vector<string> result;
     unordered_set<string> seen;
-    for (const auto& s : vec) {
+    for (const auto& s: vec) {
         if (seen.insert(s).second) {
             result.push_back(s);
         }

@@ -46,26 +46,30 @@ private:
      * 保存当前构建的上下文信息，用于维护对象/数组的嵌套关系。
      */
     struct frame {
-        range_type type = object;  ///< 上下文类型
+        range_type type = object; ///< 上下文类型
         union {
-            json_object* object_ptr = nullptr;   ///< 当前对象指针
-            json_array* array_ptr;   ///< 当前数组指针
+            json_object* object_ptr = nullptr; ///< 当前对象指针
+            json_array* array_ptr;             ///< 当前数组指针
         };
 
         frame() = default;
-        frame(const range_type t, json_object* obj) : type(t), object_ptr(obj) {}
-        frame(const range_type t, json_array* arr) : type(t), array_ptr(arr) {}
+        frame(const range_type t, json_object* obj) :
+        type(t),
+        object_ptr(obj) {}
+        frame(const range_type t, json_array* arr) :
+        type(t),
+        array_ptr(arr) {}
 
         frame(const frame&) = default;
-        frame& operator =(const frame&) = default;
+        frame& operator=(const frame&) = default;
         frame(frame&&) = default;
-        frame& operator =(frame&&) = default;
+        frame& operator=(frame&&) = default;
         ~frame() = default;
     };
 
-    stack<frame> contexts_;        ///< 上下文栈
-    unique_ptr<json_value> root_;  ///< 根节点
-    string current_key_;           ///< 当前对象的键名
+    stack<frame> contexts_;       ///< 上下文栈
+    unique_ptr<json_value> root_; ///< 根节点
+    string current_key_;          ///< 当前对象的键名
 
 private:
     /**
@@ -80,8 +84,7 @@ private:
      * - 数组中：作为新元素添加
      * - 对象中：与当前键名配对添加
      */
-    template <typename T>
-    json_builder& value_impl(unique_ptr<T> value) {
+    template <typename T> json_builder& value_impl(unique_ptr<T> value) {
         if (contexts_.empty()) {
             if (root_) {
                 NEFORCE_THROW_EXCEPTION(json_exception("Multiple root values not allowed"));
@@ -109,8 +112,7 @@ private:
      * @return 自身引用
      */
     template <typename Iterable>
-    enable_if_t<is_iterable_v<Iterable>, json_builder&>
-    value_iterable_dispatch(const Iterable& iterable) {
+    enable_if_t<is_iterable_v<Iterable>, json_builder&> value_iterable_dispatch(const Iterable& iterable) {
         return this->value_iterable_impl(iterable);
     }
 
@@ -120,11 +122,9 @@ private:
      * @param maplike 映射表对象
      * @return 自身引用
      */
-    template <typename Map>
-    enable_if_t<is_maplike_v<Map>, json_builder&>
-    value_iterable_impl(const Map& maplike) {
+    template <typename Map> enable_if_t<is_maplike_v<Map>, json_builder&> value_iterable_impl(const Map& maplike) {
         begin_object();
-        for (const auto& pair : maplike) {
+        for (const auto& pair: maplike) {
             this->key(pair.first).value(pair.second);
         }
         end_object();
@@ -138,10 +138,9 @@ private:
      * @return 自身引用
      */
     template <typename Iterable>
-    enable_if_t<!is_maplike_v<Iterable>, json_builder&>
-    value_iterable_impl(const Iterable& iterable) {
+    enable_if_t<!is_maplike_v<Iterable>, json_builder&> value_iterable_impl(const Iterable& iterable) {
         begin_array();
-        for (const auto& element : iterable) {
+        for (const auto& element: iterable) {
             this->value(element);
         }
         end_array();
@@ -155,7 +154,7 @@ public:
     json_builder() = default;
 
     json_builder(const json_builder&) = delete;
-    json_builder& operator =(const json_builder&) = delete;
+    json_builder& operator=(const json_builder&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -168,7 +167,7 @@ public:
      * @param other 源构建器
      * @return 自身引用
      */
-    json_builder& operator =(json_builder&& other) = default;
+    json_builder& operator=(json_builder&& other) = default;
 
     /**
      * @brief 开始一个json对象
@@ -228,9 +227,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(nullptr_t np) {
-        return value_impl(make_unique<json_null>());
-    }
+    json_builder& value(nullptr_t np) { return value_impl(make_unique<json_null>()); }
 
     /**
      * @brief 设置字符串值
@@ -238,9 +235,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(const string& value) {
-        return value_impl(make_unique<json_string>(value));
-    }
+    json_builder& value(const string& value) { return value_impl(make_unique<json_string>(value)); }
 
     /**
      * @brief 设置C字符串值
@@ -248,9 +243,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(const char* value) {
-        return this->value(string(value));
-    }
+    json_builder& value(const char* value) { return this->value(string(value)); }
 
     /**
      * @brief 设置字符串视图值
@@ -258,9 +251,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(const string_view value) {
-        return this->value(string(value));
-    }
+    json_builder& value(const string_view value) { return this->value(string(value)); }
 
     /**
      * @brief 设置双精度浮点数值
@@ -268,9 +259,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(const double value) {
-        return value_impl(make_unique<json_number>(value));
-    }
+    json_builder& value(const double value) { return value_impl(make_unique<json_number>(value)); }
 
     /**
      * @brief 设置整数值
@@ -278,9 +267,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(const int value) {
-        return value_impl(make_unique<json_number>(static_cast<double>(value)));
-    }
+    json_builder& value(const int value) { return value_impl(make_unique<json_number>(static_cast<double>(value))); }
 
     /**
      * @brief 设置布尔值
@@ -288,9 +275,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(const bool value) {
-        return value_impl(make_unique<json_bool>(value));
-    }
+    json_builder& value(const bool value) { return value_impl(make_unique<json_bool>(value)); }
 
     /**
      * @brief 设置已构建的json值
@@ -298,9 +283,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws json_exception 当上下文无效或键名缺失时抛出
      */
-    json_builder& value(unique_ptr<json_value>&& value) {
-        return value_impl(_NEFORCE move(value));
-    }
+    json_builder& value(unique_ptr<json_value>&& value) { return value_impl(_NEFORCE move(value)); }
 
     /**
      * @brief 设置可迭代对象的值
@@ -312,8 +295,7 @@ public:
      * - 映射表类型转换为对象
      * - 其他可迭代类型转换为数组
      */
-    template <typename Iterable>
-    json_builder& value(const Iterable& iterable) {
+    template <typename Iterable> json_builder& value(const Iterable& iterable) {
         return this->value_iterable_dispatch(iterable);
     }
 

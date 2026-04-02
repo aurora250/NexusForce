@@ -1,22 +1,20 @@
 #include <NeForce/core/file/yaml/yaml_parser.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-char yaml_parser::current() const noexcept {
-    return eof() ? '\0' : yaml_[pos_];
-}
+char yaml_parser::current() const noexcept { return eof() ? '\0' : yaml_[pos_]; }
 
 char yaml_parser::peek(const size_t offset) const noexcept {
     const size_t peek_pos = pos_ + offset;
     return peek_pos >= len_ ? '\0' : yaml_[peek_pos];
 }
 
-bool yaml_parser::eof() const noexcept {
-    return pos_ >= len_;
-}
+bool yaml_parser::eof() const noexcept { return pos_ >= len_; }
 
 void yaml_parser::advance() noexcept {
-    if (eof()) return;
-    
+    if (eof()) {
+        return;
+    }
+
     if (current() == '\n') {
         line_++;
         column_ = 1;
@@ -41,13 +39,9 @@ bool yaml_parser::expect(const char ch) {
     return true;
 }
 
-bool yaml_parser::is_whitespace(const char ch) const noexcept {
-    return ch == ' ' || ch == '\t';
-}
+bool yaml_parser::is_whitespace(const char ch) const noexcept { return ch == ' ' || ch == '\t'; }
 
-bool yaml_parser::is_newline(const char ch) const noexcept {
-    return ch == '\n' || ch == '\r';
-}
+bool yaml_parser::is_newline(const char ch) const noexcept { return ch == '\n' || ch == '\r'; }
 
 void yaml_parser::skip_whitespace_inline() noexcept {
     while (!eof() && is_whitespace(current())) {
@@ -66,10 +60,12 @@ void yaml_parser::skip_comment() noexcept {
 void yaml_parser::skip_to_next_line() noexcept {
     skip_whitespace_inline();
     skip_comment();
-    
+
     if (current() == '\r') {
         advance();
-        if (current() == '\n') advance();
+        if (current() == '\n') {
+            advance();
+        }
     } else if (current() == '\n') {
         advance();
     }
@@ -166,23 +162,18 @@ void yaml_parser::parse_directive() {
     }
 }
 
-bool yaml_parser::has_anchor() const noexcept {
-    return current() == '&';
-}
+bool yaml_parser::has_anchor() const noexcept { return current() == '&'; }
 
-bool yaml_parser::has_alias() const noexcept {
-    return current() == '*';
-}
+bool yaml_parser::has_alias() const noexcept { return current() == '*'; }
 
 string yaml_parser::parse_anchor() {
     if (current() != '&') {
         return "";
     }
     advance();
-    
+
     string anchor_name;
-    while (!eof() && (is_alpha_or_digit(current()) || 
-                      current() == '_' || current() == '-')) {
+    while (!eof() && (is_alpha_or_digit(current()) || current() == '_' || current() == '-')) {
         anchor_name += current();
         advance();
     }
@@ -210,15 +201,14 @@ yaml_ptr yaml_parser::parse_alias() {
     if (current() != '*') {
         throw_parse_error("Expected '*' for alias");
     }
-    
+
     advance();
     string alias_name;
-    while (!eof() && (is_alpha_or_digit(current()) ||
-                      current() == '_' || current() == '-')) {
+    while (!eof() && (is_alpha_or_digit(current()) || current() == '_' || current() == '-')) {
         alias_name += current();
         advance();
     }
-    
+
     if (alias_name.empty()) {
         throw_parse_error("Empty alias name");
     }
@@ -230,13 +220,14 @@ yaml_ptr yaml_parser::parse_alias() {
 }
 
 void yaml_parser::skip_tag() noexcept {
-    if (current() != '!') return;
+    if (current() != '!') {
+        return;
+    }
     advance();
     if (current() == '!') {
         advance();
     }
-    while (!eof() && !is_whitespace(current()) && 
-           !is_newline(current()) && current() != ',') {
+    while (!eof() && !is_whitespace(current()) && !is_newline(current()) && current() != ',') {
         advance();
     }
     skip_whitespace_inline();
@@ -264,20 +255,14 @@ string yaml_parser::parse_tag() {
     } else if (current() == '!') {
         tag += '!';
         advance();
-        while (!eof() && !is_whitespace(current()) &&
-               current() != ':' && current() != ',' &&
-               current() != '[' && current() != ']' &&
-               current() != '{' && current() != '}' &&
-               current() != '#') {
+        while (!eof() && !is_whitespace(current()) && current() != ':' && current() != ',' && current() != '[' &&
+               current() != ']' && current() != '{' && current() != '}' && current() != '#') {
             tag += current();
             advance();
         }
     } else {
-        while (!eof() && !is_whitespace(current()) &&
-               current() != ':' && current() != ',' &&
-               current() != '[' && current() != ']' &&
-               current() != '{' && current() != '}' &&
-               current() != '#') {
+        while (!eof() && !is_whitespace(current()) && current() != ':' && current() != ',' && current() != '[' &&
+               current() != ']' && current() != '{' && current() != '}' && current() != '#') {
             tag += current();
             advance();
         }
@@ -286,26 +271,19 @@ string yaml_parser::parse_tag() {
 }
 
 bool yaml_parser::is_plain_safe(const char ch) const noexcept {
-    return is_alpha_or_digit(ch) || ch == '_'
-        || ch == '-' || ch == '.' || ch == '/' || ch == '+';
+    return is_alpha_or_digit(ch) || ch == '_' || ch == '-' || ch == '.' || ch == '/' || ch == '+';
 }
 
-bool yaml_parser::is_key_char(const char ch) const noexcept {
-    return is_plain_safe(ch) || ch == ' ';
-}
+bool yaml_parser::is_key_char(const char ch) const noexcept { return is_plain_safe(ch) || ch == ' '; }
 
 bool yaml_parser::is_indicator(const char ch) const noexcept {
-    return ch == '-' || ch == '?' || ch == ':' ||
-           ch == ',' || ch == '[' || ch == ']' ||
-           ch == '{' || ch == '}' || ch == '#' ||
-           ch == '&' || ch == '*' || ch == '!' ||
-           ch == '|' || ch == '>' || ch == '\'' ||
-           ch == '"' || ch == '%' || ch == '@' || ch == '`';
+    return ch == '-' || ch == '?' || ch == ':' || ch == ',' || ch == '[' || ch == ']' || ch == '{' || ch == '}' ||
+           ch == '#' || ch == '&' || ch == '*' || ch == '!' || ch == '|' || ch == '>' || ch == '\'' || ch == '"' ||
+           ch == '%' || ch == '@' || ch == '`';
 }
 
 bool yaml_parser::is_flow_indicator(const char ch) const noexcept {
-    return ch == ',' || ch == '[' || ch == ']' ||
-           ch == '{' || ch == '}';
+    return ch == ',' || ch == '[' || ch == ']' || ch == '{' || ch == '}';
 }
 
 bool yaml_parser::is_document_start() const noexcept {
@@ -320,21 +298,25 @@ bool yaml_parser::is_document_end() const noexcept {
 
 void yaml_parser::parse_document_start() {
     if (is_document_start()) {
-        advance(); advance(); advance();
+        advance();
+        advance();
+        advance();
         skip_to_next_line();
     }
 }
 
 void yaml_parser::parse_document_end() {
     if (is_document_end()) {
-        advance(); advance(); advance();
+        advance();
+        advance();
+        advance();
         skip_to_next_line();
     }
 }
 
 char32_t yaml_parser::parse_unicode_escape(const size_t digits) {
     char32_t code_point = 0;
-    
+
     for (size_t i = 0; i < digits; ++i) {
         const char ch = current();
         if (!is_xdigit(ch)) {
@@ -356,28 +338,64 @@ char32_t yaml_parser::parse_unicode_escape(const size_t digits) {
 string yaml_parser::unescape_string(const string& str) const {
     string result;
     result.reserve(str.size());
-    
+
     for (size_t i = 0; i < str.size(); ++i) {
         if (str[i] == '\\' && i + 1 < str.size()) {
             switch (str[++i]) {
-                case '0':  result += '\0'; break;
-                case 'a':  result += '\a'; break;
-                case 'b':  result += '\b'; break;
-                case 't':  result += '\t'; break;
-                case '\t': result += '\t'; break;
-                case 'n':  result += '\n'; break;
-                case 'v':  result += '\v'; break;
-                case 'f':  result += '\f'; break;
-                case 'r':  result += '\r'; break;
-                case 'e':  result += '\x1B'; break;
-                case ' ':  result += ' '; break;
-                case '"':  result += '"'; break;
-                case '/':  result += '/'; break;
-                case '\\': result += '\\'; break;
-                case 'N':  result += "\u0085"; break;
-                case '_':  result += "\u00A0"; break;
-                case 'L':  result += "\u2028"; break;
-                case 'P':  result += "\u2029"; break;
+                case '0':
+                    result += '\0';
+                    break;
+                case 'a':
+                    result += '\a';
+                    break;
+                case 'b':
+                    result += '\b';
+                    break;
+                case 't':
+                    result += '\t';
+                    break;
+                case '\t':
+                    result += '\t';
+                    break;
+                case 'n':
+                    result += '\n';
+                    break;
+                case 'v':
+                    result += '\v';
+                    break;
+                case 'f':
+                    result += '\f';
+                    break;
+                case 'r':
+                    result += '\r';
+                    break;
+                case 'e':
+                    result += '\x1B';
+                    break;
+                case ' ':
+                    result += ' ';
+                    break;
+                case '"':
+                    result += '"';
+                    break;
+                case '/':
+                    result += '/';
+                    break;
+                case '\\':
+                    result += '\\';
+                    break;
+                case 'N':
+                    result += "\u0085";
+                    break;
+                case '_':
+                    result += "\u00A0";
+                    break;
+                case 'L':
+                    result += "\u2028";
+                    break;
+                case 'P':
+                    result += "\u2029";
+                    break;
                 default:
                     result += '\\';
                     result += str[i];
@@ -387,7 +405,7 @@ string yaml_parser::unescape_string(const string& str) const {
             result += str[i];
         }
     }
-    
+
     return result;
 }
 
@@ -397,7 +415,7 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
     if (is_indicator(current()) && current() != '-') {
         throw_parse_error("Plain string cannot start with indicator");
     }
-    
+
     while (!eof()) {
         const char ch = current();
 
@@ -412,7 +430,7 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
                 break;
             }
         }
-        
+
         result += ch;
         advance();
     }
@@ -429,7 +447,7 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
 shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
     expect('\'');
     string result;
-    
+
     while (!eof()) {
         if (current() == '\'') {
             advance();
@@ -447,39 +465,90 @@ shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
             advance();
         }
     }
-    
+
     return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::SingleQuoted);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
     expect('"');
     string result;
-    
+
     while (!eof() && current() != '"') {
         if (current() == '\\') {
             advance();
             if (eof()) {
                 throw_parse_error("Unexpected end of string");
             }
-            
+
             switch (current()) {
-                case '0':  result += '\0'; advance(); break;
-                case 'a':  result += '\a'; advance(); break;
-                case 'b':  result += '\b'; advance(); break;
-                case 't':  result += '\t'; advance(); break;
-                case 'n':  result += '\n'; advance(); break;
-                case 'v':  result += '\v'; advance(); break;
-                case 'f':  result += '\f'; advance(); break;
-                case 'r':  result += '\r'; advance(); break;
-                case 'e':  result += '\x1B'; advance(); break;
-                case ' ':  result += ' '; advance(); break;
-                case '"':  result += '"'; advance(); break;
-                case '/':  result += '/'; advance(); break;
-                case '\\': result += '\\'; advance(); break;
-                case 'N':  result += "\u0085"; advance(); break;
-                case '_':  result += "\u00A0"; advance(); break;
-                case 'L':  result += "\u2028"; advance(); break;
-                case 'P':  result += "\u2029"; advance(); break;
+                case '0':
+                    result += '\0';
+                    advance();
+                    break;
+                case 'a':
+                    result += '\a';
+                    advance();
+                    break;
+                case 'b':
+                    result += '\b';
+                    advance();
+                    break;
+                case 't':
+                    result += '\t';
+                    advance();
+                    break;
+                case 'n':
+                    result += '\n';
+                    advance();
+                    break;
+                case 'v':
+                    result += '\v';
+                    advance();
+                    break;
+                case 'f':
+                    result += '\f';
+                    advance();
+                    break;
+                case 'r':
+                    result += '\r';
+                    advance();
+                    break;
+                case 'e':
+                    result += '\x1B';
+                    advance();
+                    break;
+                case ' ':
+                    result += ' ';
+                    advance();
+                    break;
+                case '"':
+                    result += '"';
+                    advance();
+                    break;
+                case '/':
+                    result += '/';
+                    advance();
+                    break;
+                case '\\':
+                    result += '\\';
+                    advance();
+                    break;
+                case 'N':
+                    result += "\u0085";
+                    advance();
+                    break;
+                case '_':
+                    result += "\u00A0";
+                    advance();
+                    break;
+                case 'L':
+                    result += "\u2028";
+                    advance();
+                    break;
+                case 'P':
+                    result += "\u2029";
+                    advance();
+                    break;
                 case 'x': {
                     advance();
                     result += static_cast<char>(parse_unicode_escape(2));
@@ -564,7 +633,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
             advance();
         }
     }
-    
+
     skip_whitespace_inline();
     skip_comment();
 
@@ -619,7 +688,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
     }
 
     vector<string> lines;
-    
+
     while (!eof()) {
         size_t line_indent = 0;
         while (!eof() && current() == ' ') {
@@ -657,8 +726,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
             lines.pop_back();
         }
     } else if (chomping == 'c') {
-        while (lines.size() > 1 && lines.back().empty() &&
-            lines[lines.size() - 2].empty()) {
+        while (lines.size() > 1 && lines.back().empty() && lines[lines.size() - 2].empty()) {
             lines.pop_back();
         }
     }
@@ -674,7 +742,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
     } else {
         for (size_t i = 0; i < lines.size(); ++i) {
             if (i > 0) {
-                if (lines[i].empty() || lines[i-1].empty()) {
+                if (lines[i].empty() || lines[i - 1].empty()) {
                     result += '\n';
                 } else {
                     result += ' ';
@@ -686,7 +754,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
             result += '\n';
         }
     }
-    
+
     return result;
 }
 
@@ -708,11 +776,10 @@ shared_ptr<yaml_null> yaml_parser::parse_null() {
         advance();
     }
 
-    if (value == "null" || value == "Null" || value == "NULL" || 
-        value == "~" || value.empty()) {
+    if (value == "null" || value == "Null" || value == "NULL" || value == "~" || value.empty()) {
         return make_shared<yaml_null>();
     }
-    
+
     throw_parse_error("Invalid null value: " + value);
     return {};
 }
@@ -761,8 +828,7 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
         lower_special.lowercase();
 
         if (lower_special == ".inf" || lower_special == ".infinity") {
-            double val = is_negative ?
-                -numeric_traits<double>::infinity() : numeric_traits<double>::infinity();
+            double val = is_negative ? -numeric_traits<double>::infinity() : numeric_traits<double>::infinity();
             return make_shared<yaml_float>(val);
         } else if (lower_special == ".nan") {
             return make_shared<yaml_float>(numeric_traits<double>::quiet_nan());
@@ -780,7 +846,7 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
     if (current() == '0' && !eof()) {
         num_str += current();
         advance();
-        
+
         if (current() == 'x' || current() == 'X') {
             is_hex = true;
             num_str += current();
@@ -798,7 +864,7 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
 
     while (!eof()) {
         const char ch = current();
-        
+
         if (is_hex && is_xdigit(ch)) {
             num_str += ch;
             advance();
@@ -905,10 +971,8 @@ shared_ptr<yaml_value> yaml_parser::parse_scalar() {
         const size_t saved_pos = pos_;
         string potential_ts;
 
-        while (!eof() && (is_digit(current()) || current() == '-' ||
-                         current() == ':' || current() == '.' ||
-                         current() == 'T' || current() == 'Z' ||
-                         current() == '+' || current() == ' ')) {
+        while (!eof() && (is_digit(current()) || current() == '-' || current() == ':' || current() == '.' ||
+                          current() == 'T' || current() == 'Z' || current() == '+' || current() == ' ')) {
             potential_ts += current();
             advance();
         }
@@ -958,22 +1022,22 @@ shared_ptr<yaml_sequence> yaml_parser::parse_flow_sequence() {
     in_flow_context_ = true;
     auto seq = make_shared<yaml_sequence>(yaml_sequence::Flow);
     skip_whitespace_inline();
-    
+
     if (current() == ']') {
         advance();
         in_flow_context_ = prev_flow;
         return seq;
     }
-    
+
     while (!eof()) {
         skip_whitespace_inline();
         skip_comment();
-        
+
         if (current() == '\n') {
             skip_to_next_line();
             skip_whitespace_inline();
         }
-        
+
         if (current() == ']') {
             advance();
             break;
@@ -982,7 +1046,7 @@ shared_ptr<yaml_sequence> yaml_parser::parse_flow_sequence() {
         auto value = parse_inline_value();
         seq->add_element(_NEFORCE move(value));
         skip_whitespace_inline();
-        
+
         if (current() == ',') {
             advance();
             skip_whitespace_inline();
@@ -1329,8 +1393,7 @@ string yaml_parser::parse_plain_key() {
     string key;
     while (!eof()) {
         const char ch = current();
-        if (ch == ':' && (peek(1) == ' ' || is_newline(peek(1)) ||
-                         peek(1) == '\0' || is_flow_indicator(peek(1)))) {
+        if (ch == ':' && (peek(1) == ' ' || is_newline(peek(1)) || peek(1) == '\0' || is_flow_indicator(peek(1)))) {
             break;
         }
         if (is_newline(ch) || is_flow_indicator(ch)) {
@@ -1524,9 +1587,7 @@ shared_ptr<yaml_value> yaml_parser::parse_value() {
 }
 
 shared_ptr<yaml_value> yaml_parser::parse() {
-    if (len_ >= 3 &&
-        static_cast<byte_t>(yaml_[0]) == 0xEF &&
-        static_cast<byte_t>(yaml_[1]) == 0xBB &&
+    if (len_ >= 3 && static_cast<byte_t>(yaml_[0]) == 0xEF && static_cast<byte_t>(yaml_[1]) == 0xBB &&
         static_cast<byte_t>(yaml_[2]) == 0xBF) {
         pos_ = 3;
     }

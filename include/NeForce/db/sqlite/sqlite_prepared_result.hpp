@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_SQLITE_PREPARED_RESULT_HPP__
 #define NEFORCE_DATABASE_SQLITE_PREPARED_RESULT_HPP__
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#include "NeForce/db/db_interface.hpp"
-#include <sqlite3.h>
+#    include <sqlite3.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API sqlite_prepared_result final : idb_prepared_result {
@@ -17,10 +17,16 @@ public:
     sqlite_prepared_result() noexcept = default;
     explicit sqlite_prepared_result(::sqlite3_stmt* statement) noexcept;
 
-    ~sqlite_prepared_result() override { if (stmt_) ::sqlite3_reset(stmt_); }
+    ~sqlite_prepared_result() override {
+        if (stmt_) {
+            ::sqlite3_reset(stmt_);
+        }
+    }
 
-    NEFORCE_NODISCARD NEFORCE_DEPRECATED_FOR("use COUNT * instead of using this function")
-    size_type row_count() const noexcept override { return 0; }
+    NEFORCE_NODISCARD NEFORCE_DEPRECATED_FOR("use COUNT * instead of using this function") size_type
+            row_count() const noexcept override {
+        return 0;
+    }
     NEFORCE_NODISCARD size_type column_count() const noexcept override { return columns_; }
 
     NEFORCE_NODISCARD bool empty() const noexcept override { return stmt_ == nullptr; }
@@ -37,10 +43,10 @@ public:
     NEFORCE_NODISCARD float32_t get_float32(size_type n) const override;
     NEFORCE_NODISCARD float64_t get_float64(size_type n) const override;
     NEFORCE_NODISCARD decimal_t get_decimal(size_type n) const override;
-    
+
     NEFORCE_NODISCARD vector<char> get_blob(size_type n) const override;
     NEFORCE_NODISCARD uint64_t get_bit(size_type n) const noexcept override;
-    
+
     NEFORCE_NODISCARD date get_date(size_type n) const noexcept override { return get_datetime(n).date(); }
     NEFORCE_NODISCARD time get_time(size_type n) const noexcept override { return get_datetime(n).time(); }
     NEFORCE_NODISCARD datetime get_datetime(size_type n) const override;

@@ -34,11 +34,10 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此信号量不支持递归获取
  */
-template <platform_wait_t LeastMaxValue = numeric_traits<platform_wait_t>::max()>
-class counting_semaphore {
+template <platform_wait_t LeastMaxValue = numeric_traits<platform_wait_t>::max()> class counting_semaphore {
     static_assert(LeastMaxValue >= 0, "LeastMaxValue should be upper than zero.");
 
-    alignas(alignof(platform_wait_t)) platform_wait_t counter_;  ///< 信号量计数器
+    alignas(alignof(platform_wait_t)) platform_wait_t counter_; ///< 信号量计数器
 
     /**
      * @brief 尝试获取信号量的内部实现
@@ -52,9 +51,8 @@ class counting_semaphore {
         if (old_value == 0) {
             return false;
         }
-        return _NEFORCE atomic_cmpexch_strong(
-            &counter_, &old_value, old_value - 1,
-            memory_order_acquire, memory_order_relaxed);
+        return _NEFORCE atomic_cmpexch_strong(&counter_, &old_value, old_value - 1, memory_order_acquire,
+                                              memory_order_relaxed);
     }
 
 public:
@@ -65,23 +63,21 @@ public:
      * 创建计数信号量并设置初始计数值。
      * @note desired不能为负数
      */
-    explicit counting_semaphore(const platform_wait_t desired) noexcept
-    : counter_(desired) {
+    explicit counting_semaphore(const platform_wait_t desired) noexcept :
+    counter_(desired) {
         NEFORCE_CONSTEXPR_ASSERT(desired >= 0);
     }
 
-    ~counting_semaphore() = default;  ///< 析构函数
+    ~counting_semaphore() = default; ///< 析构函数
 
     counting_semaphore(const counting_semaphore&) = delete;
-    counting_semaphore& operator =(const counting_semaphore&) = delete;
+    counting_semaphore& operator=(const counting_semaphore&) = delete;
 
     /**
      * @brief 获取信号量的最大可能值
      * @return 信号量的最大计数值
      */
-    static constexpr platform_wait_t max() noexcept {
-        return LeastMaxValue; 
-    }
+    static constexpr platform_wait_t max() noexcept { return LeastMaxValue; }
 
     /**
      * @brief 释放信号量
@@ -102,9 +98,7 @@ public:
      * 阻塞当前线程，直到成功获取信号量。
      */
     void acquire() noexcept {
-        auto const pred = [this] {
-            return this->do_try_acquire();
-        };
+        auto const pred = [this] { return this->do_try_acquire(); };
         _NEFORCE atomic_wait_address(&counter_, pred);
     }
 
@@ -115,9 +109,7 @@ public:
      * 非阻塞地尝试获取信号量。
      */
     bool try_acquire() noexcept {
-        auto const pred = [this] {
-            return this->do_try_acquire();
-        };
+        auto const pred = [this] { return this->do_try_acquire(); };
         return _NEFORCE atomic_spin(pred, [] { return false; });
     }
 
@@ -131,11 +123,8 @@ public:
      * 阻塞当前线程，直到成功获取信号量或超时。
      * 超时时间从调用开始计算。
      */
-    template <typename Rep, typename Period>
-    bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
-        auto const pred = [this] {
-            return this->do_try_acquire();
-        };
+    template <typename Rep, typename Period> bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
+        auto const pred = [this] { return this->do_try_acquire(); };
         return _NEFORCE atomic_wait_address_for(&counter_, pred, relative);
     }
 
@@ -148,11 +137,8 @@ public:
      *
      * 阻塞当前线程，直到成功获取信号量或到达指定时间点。
      */
-    template <typename Clock, typename Dur>
-    bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
-        auto const pred = [this] {
-            return this->do_try_acquire();
-        };
+    template <typename Clock, typename Dur> bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
+        auto const pred = [this] { return this->do_try_acquire(); };
         return _NEFORCE atomic_wait_address_until(&counter_, pred, timeout);
     }
 };
@@ -177,7 +163,7 @@ class NEFORCE_API semaphore {
 public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     static constexpr long max_count = numeric_traits<long>::max(); ///< 最大计数值
-    using native_handle_type = ::HANDLE; ///< 原生句柄类型
+    using native_handle_type = ::HANDLE;                           ///< 原生句柄类型
 #else
     static constexpr int max_count = SEM_VALUE_MAX;
     using native_handle_type = ::sem_t;
@@ -211,9 +197,9 @@ public:
     ~semaphore() noexcept;
 
     semaphore(const semaphore&) = delete;
-    semaphore& operator =(const semaphore&) = delete;
+    semaphore& operator=(const semaphore&) = delete;
     semaphore(semaphore&&) = delete;
-    semaphore& operator =(semaphore&&) = delete;
+    semaphore& operator=(semaphore&&) = delete;
 
     /**
      * @brief 阻塞获取信号量
@@ -242,8 +228,7 @@ public:
      * 阻塞当前线程，直到成功获取信号量或超时。
      * 超时时间从调用开始计算。
      */
-    template <typename Rep, typename Period>
-    bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
+    template <typename Rep, typename Period> bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return semaphore::try_acquire_for_impl(_NEFORCE time_cast<milliseconds>(relative));
 #else
@@ -261,8 +246,7 @@ public:
      * 阻塞当前线程，直到成功获取信号量或到达指定时间点。
      * 如果timeout <= now，则立即调用try_acquire()。
      */
-    template <typename Clock, typename Dur>
-    bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
+    template <typename Clock, typename Dur> bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
         auto now = Clock::now();
         if (timeout <= now) {
             return try_acquire();

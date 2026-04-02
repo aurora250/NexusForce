@@ -31,14 +31,13 @@ NEFORCE_BEGIN_NAMESPACE__
  * 管理所有定时任务的调度和执行。使用独立的线程运行调度循环，
  * 基于时间点对任务进行排序，并在任务到期时执行回调函数。
  */
-template <typename Clock>
-class timer_scheduler {
+template <typename Clock> class timer_scheduler {
 public:
-    using clock_type = Clock;                    ///< 时钟类型
-    using time_point = typename clock_type::time_point;   ///< 时间点类型
-    using duration = typename clock_type::duration;       ///< 时长类型
-    using token = size_t;                         ///< 任务标识符类型
-    using handler_type = _NEFORCE function<void()>;  ///< 回调函数类型
+    using clock_type = Clock;                           ///< 时钟类型
+    using time_point = typename clock_type::time_point; ///< 时间点类型
+    using duration = typename clock_type::duration;     ///< 时长类型
+    using token = size_t;                               ///< 任务标识符类型
+    using handler_type = _NEFORCE function<void()>;     ///< 回调函数类型
 
 private:
     /**
@@ -48,31 +47,37 @@ private:
      * 包含任务的到期时间、唯一标识符和回调函数。
      */
     struct node {
-        time_point expire;     ///< 到期时间
-        token id;              ///< 任务ID
-        handler_type handler;  ///< 回调函数
+        time_point expire;    ///< 到期时间
+        token id;             ///< 任务ID
+        handler_type handler; ///< 回调函数
 
-        node(time_point exp, const token tid, handler_type&& h)
-        : expire(exp), id(tid), handler(_NEFORCE move(h)) {}
+        node(time_point exp, const token tid, handler_type&& h) :
+        expire(exp),
+        id(tid),
+        handler(_NEFORCE move(h)) {}
 
         /**
          * @brief 比较操作符，按到期时间和ID排序
          */
-        bool operator <(const node& other) const {
-            if (expire < other.expire) return true;
-            if (expire > other.expire) return false;
+        bool operator<(const node& other) const {
+            if (expire < other.expire) {
+                return true;
+            }
+            if (expire > other.expire) {
+                return false;
+            }
             return id < other.id;
         }
     };
 
-    set<node> nodes_;   ///< 按时间排序的任务集合
-    map<token, typename set<node>::iterator> node_map_;  ///< ID到迭代器的映射
+    set<node> nodes_;                                   ///< 按时间排序的任务集合
+    map<token, typename set<node>::iterator> node_map_; ///< ID到迭代器的映射
 
-    thread thread_;          ///< 调度线程
-    mutable mutex mutex_;    ///< 互斥锁
-    condition_variable cv_;  ///< 条件变量
-    token next_id_;          ///< 下一个可用的任务ID
-    atomic<bool> stopped_;    ///< 停止标志
+    thread thread_;         ///< 调度线程
+    mutable mutex mutex_;   ///< 互斥锁
+    condition_variable cv_; ///< 条件变量
+    token next_id_;         ///< 下一个可用的任务ID
+    atomic<bool> stopped_;  ///< 停止标志
 
     friend class thread_pool;
 
@@ -90,10 +95,10 @@ private:
             unique_lock<mutex> lock(mutex_);
 
             if (nodes_.empty()) {
-                cv_.wait(lock, [this] {
-                    return stopped_.load() || !nodes_.empty();
-                });
-                if (stopped_.load()) break;
+                cv_.wait(lock, [this] { return stopped_.load() || !nodes_.empty(); });
+                if (stopped_.load()) {
+                    break;
+                }
             }
 
             time_point now = clock_type::now();
@@ -122,8 +127,9 @@ public:
     /**
      * @brief 构造函数，启动调度线程
      */
-    timer_scheduler()
-    : next_id_(0), stopped_(false) {
+    timer_scheduler() :
+    next_id_(0),
+    stopped_(false) {
         thread_ = thread(&timer_scheduler::run, this);
     }
 
@@ -139,9 +145,9 @@ public:
     }
 
     timer_scheduler(const timer_scheduler&) = delete;
-    timer_scheduler& operator =(const timer_scheduler&) = delete;
+    timer_scheduler& operator=(const timer_scheduler&) = delete;
     timer_scheduler(timer_scheduler&&) = default;
-    timer_scheduler& operator =(timer_scheduler&&) = default;
+    timer_scheduler& operator=(timer_scheduler&&) = default;
 
     /**
      * @brief 添加定时任务
@@ -226,14 +232,13 @@ public:
  * 封装一个定时任务，提供简单的设置和等待接口。
  * 支持一次性定时和取消操作。
  */
-template <typename Clock>
-class basic_timer {
+template <typename Clock> class basic_timer {
 public:
-    using clock_type = Clock;                               ///< 时钟类型
-    using time_point = typename clock_type::time_point;     ///< 时间点类型
-    using duration = typename clock_type::duration;         ///< 时长类型
-    using token = typename timer_scheduler<Clock>::token;   ///< 任务标识符类型
-    using handler_type = typename timer_scheduler<Clock>::handler_type;  ///< 回调函数类型
+    using clock_type = Clock;                                           ///< 时钟类型
+    using time_point = typename clock_type::time_point;                 ///< 时间点类型
+    using duration = typename clock_type::duration;                     ///< 时长类型
+    using token = typename timer_scheduler<Clock>::token;               ///< 任务标识符类型
+    using handler_type = typename timer_scheduler<Clock>::handler_type; ///< 回调函数类型
 
 private:
     timer_scheduler<Clock> scheduler_{};    ///< 共享的调度器
@@ -246,25 +251,25 @@ public:
     /**
      * @brief 析构函数，自动取消未完成的任务
      */
-    ~basic_timer() {
-        cancel();
-    }
+    ~basic_timer() { cancel(); }
 
     basic_timer(const basic_timer&) = delete;
-    basic_timer& operator =(const basic_timer&) = delete;
+    basic_timer& operator=(const basic_timer&) = delete;
 
     /**
      * @brief 移动构造函数
      */
-    basic_timer(basic_timer&& other) noexcept
-    : scheduler_(other.scheduler_), task_id_(other.task_id_), expire_(other.expire_) {
+    basic_timer(basic_timer&& other) noexcept :
+    scheduler_(other.scheduler_),
+    task_id_(other.task_id_),
+    expire_(other.expire_) {
         other.task_id_ = 0;
     }
 
     /**
      * @brief 移动赋值运算符
      */
-    basic_timer& operator =(basic_timer&& other) noexcept {
+    basic_timer& operator=(basic_timer&& other) noexcept {
         if (this != &other) {
             cancel();
             task_id_ = other.task_id_;
@@ -300,25 +305,19 @@ public:
      * @brief 设置从当前时间开始的毫秒数
      * @param ms 毫秒数
      */
-    void expires_from_now(const int64_t ms) {
-        expires_after(milliseconds(ms));
-    }
+    void expires_from_now(const int64_t ms) { expires_after(milliseconds(ms)); }
 
     /**
      * @brief 获取到期时间点
      * @return 到期时间点
      */
-    NEFORCE_NODISCARD time_point expiry() const {
-        return expire_;
-    }
+    NEFORCE_NODISCARD time_point expiry() const { return expire_; }
 
     /**
      * @brief 检查定时器是否活跃（有待执行的任务）
      * @return 是否活跃
      */
-    NEFORCE_NODISCARD bool is_active() const {
-        return task_id_ != 0;
-    }
+    NEFORCE_NODISCARD bool is_active() const { return task_id_ != 0; }
 
     /**
      * @brief 异步等待定时器到期
@@ -328,11 +327,9 @@ public:
      * 如果之前有未完成的任务，会自动取消。
      * 回调函数会在调度线程中执行，不应包含耗时操作。
      */
-    template <typename WaitHandler>
-    void async_wait(WaitHandler&& handler) {
+    template <typename WaitHandler> void async_wait(WaitHandler&& handler) {
         cancel();
-        task_id_ = scheduler_.add_task(expire_,
-            handler_type(_NEFORCE forward<WaitHandler>(handler)));
+        task_id_ = scheduler_.add_task(expire_, handler_type(_NEFORCE forward<WaitHandler>(handler)));
     }
 
     /**

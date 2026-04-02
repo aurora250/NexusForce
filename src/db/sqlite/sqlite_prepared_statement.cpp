@@ -1,6 +1,6 @@
 #include <NeForce/db/sqlite/sqlite_prepared_statement.hpp>
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#include <NeForce/db/sqlite/sqlite_prepared_result.hpp>
+#    include <NeForce/db/sqlite/sqlite_prepared_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void sqlite_prepared_statement::clear_bindings() {
@@ -11,15 +11,14 @@ void sqlite_prepared_statement::clear_bindings() {
     param_buffers_.resize(param_count_);
 }
 
-sqlite_prepared_statement::sqlite_prepared_statement(
-    ::sqlite3* db, const string& sql) : db_(db) {
+sqlite_prepared_statement::sqlite_prepared_statement(::sqlite3* db, const string& sql) :
+db_(db) {
     if (!db_) {
         last_error_ = "Database connection is null";
         return;
     }
 
-    const int rc = ::sqlite3_prepare_v2(
-        db_, sql.data(), static_cast<int>(sql.size()), &stmt_, nullptr);
+    const int rc = ::sqlite3_prepare_v2(db_, sql.data(), static_cast<int>(sql.size()), &stmt_, nullptr);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         stmt_ = nullptr;
@@ -32,9 +31,13 @@ sqlite_prepared_statement::sqlite_prepared_statement(
     prepared_ = true;
 }
 
-sqlite_prepared_statement::sqlite_prepared_statement(sqlite_prepared_statement&& other) noexcept
-: db_(other.db_), stmt_(other.stmt_), param_count_(other.param_count_),
-param_buffers_(move(other.param_buffers_)), prepared_(other.prepared_), last_error_(_NEFORCE move(other.last_error_)) {
+sqlite_prepared_statement::sqlite_prepared_statement(sqlite_prepared_statement&& other) noexcept :
+db_(other.db_),
+stmt_(other.stmt_),
+param_count_(other.param_count_),
+param_buffers_(move(other.param_buffers_)),
+prepared_(other.prepared_),
+last_error_(_NEFORCE move(other.last_error_)) {
     other.stmt_ = nullptr;
     other.db_ = nullptr;
     other.param_count_ = 0;
@@ -43,8 +46,7 @@ param_buffers_(move(other.param_buffers_)), prepared_(other.prepared_), last_err
     other.last_error_.clear();
 }
 
-sqlite_prepared_statement& sqlite_prepared_statement::operator =(
-    sqlite_prepared_statement&& other) noexcept {
+sqlite_prepared_statement& sqlite_prepared_statement::operator=(sqlite_prepared_statement&& other) noexcept {
     if (this != &other) {
         if (stmt_) {
             ::sqlite3_finalize(stmt_);
@@ -83,7 +85,8 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const string_vi
         param_buffers_.resize(index);
     }
     param_buffers_[index - 1].assign(value.data(), value.data() + len);
-    const int rc = ::sqlite3_bind_text(stmt_, index, param_buffers_[index - 1].data(), static_cast<int>(len), SQLITE_TRANSIENT);
+    const int rc = ::sqlite3_bind_text(stmt_, index, param_buffers_[index - 1].data(), static_cast<int>(len),
+                                       SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;
@@ -140,8 +143,8 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const void* dat
     }
     param_buffers_[index - 1].resize(length);
     memory_copy(param_buffers_[index - 1].data(), data, length);
-    const int rc = ::sqlite3_bind_blob(
-        stmt_, index, param_buffers_[index - 1].data(), static_cast<int>(length), SQLITE_TRANSIENT);
+    const int rc = ::sqlite3_bind_blob(stmt_, index, param_buffers_[index - 1].data(), static_cast<int>(length),
+                                       SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;

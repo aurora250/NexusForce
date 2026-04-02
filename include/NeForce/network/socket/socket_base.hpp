@@ -18,14 +18,12 @@ struct NEFORCE_API socket_exception final : network_exception {
     static int last_error() noexcept;
     static bool is_would_block(int error) noexcept;
 
-    explicit socket_exception(
-        const char* info = "Socket Operation Failed.",
-        const char* type = static_type,
-        const int code = last_error()) noexcept
-    : network_exception(info, type, code) {}
+    explicit socket_exception(const char* info = "Socket Operation Failed.", const char* type = static_type,
+                              const int code = last_error()) noexcept :
+    network_exception(info, type, code) {}
 
-    explicit socket_exception(const exception& e)
-    : network_exception(e) {}
+    explicit socket_exception(const exception& e) :
+    network_exception(e) {}
 
     ~socket_exception() override = default;
 
@@ -38,17 +36,17 @@ struct NEFORCE_API socket_exception final : network_exception {
 class NEFORCE_API socket_base {
 public:
     using native_handle_type =
-    #ifdef NEFORCE_PLATFORM_WINDOWS
-        ::UINT_PTR;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            ::UINT_PTR;
 #else
-        int;
+            int;
 #endif
 
     static constexpr native_handle_type invalid_handle =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        numeric_traits<native_handle_type>::max();
+            numeric_traits<native_handle_type>::max();
 #else
-        -1;
+            -1;
 #endif
 
 protected:
@@ -57,32 +55,24 @@ protected:
 public:
     socket_base();
 
-    explicit socket_base(const native_handle_type fd) noexcept
-    : fd_(fd) {}
+    explicit socket_base(const native_handle_type fd) noexcept :
+    fd_(fd) {}
 
     socket_base(const socket_base&) = delete;
-    socket_base& operator =(const socket_base&) = delete;
+    socket_base& operator=(const socket_base&) = delete;
 
-    socket_base(socket_base&& other) noexcept
-    : fd_(exchange(other.fd_, invalid_handle)) {}
+    socket_base(socket_base&& other) noexcept :
+    fd_(exchange(other.fd_, invalid_handle)) {}
 
-    socket_base& operator =(socket_base&& other) noexcept;
+    socket_base& operator=(socket_base&& other) noexcept;
 
-    virtual ~socket_base() {
-        close();
-    }
+    virtual ~socket_base() { close(); }
 
-    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
-        return fd_;
-    }
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return fd_; }
 
-    NEFORCE_NODISCARD bool is_open() const noexcept {
-        return fd_ != invalid_handle;
-    }
+    NEFORCE_NODISCARD bool is_open() const noexcept { return fd_ != invalid_handle; }
 
-    explicit operator bool() const noexcept {
-        return is_open();
-    }
+    explicit operator bool() const noexcept { return is_open(); }
 
     void open(int family, int type, int protocol);
     virtual bool close() noexcept;
@@ -117,9 +107,7 @@ public:
     void bind(const ip_address& endpoint);
     void listen(int backlog);
 
-    NEFORCE_NODISCARD native_handle_type release() noexcept {
-        return exchange(fd_, invalid_handle);
-    }
+    NEFORCE_NODISCARD native_handle_type release() noexcept { return exchange(fd_, invalid_handle); }
 };
 
 NEFORCE_END_NAMESPACE__

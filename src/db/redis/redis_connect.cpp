@@ -1,11 +1,12 @@
 #include <NeForce/db/redis/redis_connect.hpp>
 #ifdef NEFORCE_SUPPORT_HIREDIS
-#include <NeForce/db/redis/redis_result.hpp>
+#    include <NeForce/db/redis/redis_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-::redisReply* redis_connect::execute_command(
-    const string_view command, const vector<string_view>& args) const {
-    if (!link_) return nullptr;
+::redisReply* redis_connect::execute_command(const string_view command, const vector<string_view>& args) const {
+    if (!link_) {
+        return nullptr;
+    }
 
     vector<const char*> argv;
     vector<size_t> argvlen;
@@ -13,18 +14,18 @@ NEFORCE_BEGIN_NAMESPACE__
     argv.push_back(command.data());
     argvlen.push_back(command.length());
 
-    for (const auto& arg : args) {
+    for (const auto& arg: args) {
         argv.push_back(arg.data());
         argvlen.push_back(arg.length());
     }
 
-    return static_cast<::redisReply*>(
-        ::redisCommandArgv(link_, argv.size(), argv.data(), argvlen.data())
-    );
+    return static_cast<::redisReply*>(::redisCommandArgv(link_, argv.size(), argv.data(), argvlen.data()));
 }
 
 bool redis_connect::authenticate(const string& password) const {
-    if (password.empty()) return true;
+    if (password.empty()) {
+        return true;
+    }
     const auto reply = execute_command("AUTH", {password.view()});
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
@@ -38,7 +39,9 @@ bool redis_connect::authenticate(const string& password) const {
 }
 
 bool redis_connect::select_database(const string& db_index) const {
-    if (db_index.empty()) return true;
+    if (db_index.empty()) {
+        return true;
+    }
     try {
         const auto reply = execute_command("SELECT", {db_index.view()});
         if (!reply || reply->type == REDIS_REPLY_ERROR) {
@@ -85,7 +88,9 @@ bool redis_connect::reconnect(const db_config& config) {
 }
 
 void redis_connect::close() noexcept {
-    if (!link_) return;
+    if (!link_) {
+        return;
+    }
     ::redisFree(link_);
     link_ = nullptr;
 }
@@ -98,9 +103,7 @@ string_view redis_connect::get_error() const noexcept {
 }
 
 bool redis_connect::update(const string& sql) const noexcept {
-    const auto reply = static_cast<::redisReply*>(
-        ::redisCommand(link_, sql.data())
-        );
+    const auto reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Command failed";
@@ -113,9 +116,7 @@ bool redis_connect::update(const string& sql) const noexcept {
 }
 
 unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
-    const auto reply = static_cast<::redisReply*>(
-        ::redisCommand(link_, sql.data())
-        );
+    const auto reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Query failed";
@@ -127,11 +128,14 @@ unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
 }
 
 bool redis_connect::is_valid() const noexcept {
-    if (!connected()) return false;
+    if (!connected()) {
+        return false;
+    }
     const auto reply = execute_command("PING");
-    if (!reply || reply->type != REDIS_REPLY_STATUS ||
-        string_compare(reply->str, "PONG") != 0) {
-        if (reply) ::freeReplyObject(reply);
+    if (!reply || reply->type != REDIS_REPLY_STATUS || string_compare(reply->str, "PONG") != 0) {
+        if (reply) {
+            ::freeReplyObject(reply);
+        }
         return false;
     }
     ::freeReplyObject(reply);
@@ -209,7 +213,7 @@ bool redis_connect::exists(const string& key) {
 
 bool redis_connect::expire(const string& key, const int seconds) {
     const string sec_str = integer32(seconds).to_string();
-    const auto reply = execute_command("EXPIRE", {key.view(), sec_str.view() });
+    const auto reply = execute_command("EXPIRE", {key.view(), sec_str.view()});
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "EXPIRE failed";
@@ -292,7 +296,7 @@ bool redis_connect::rpush(const string& key, const string& value) {
 unique_ptr<idb_kv_result> redis_connect::lrange(const string& key, const int start, const int stop) {
     const string start_str = integer32(start).to_string();
     const string stop_str = integer32(stop).to_string();
-    const auto reply = execute_command("LRANGE", {key.view(), start_str.view(), stop_str.view() });
+    const auto reply = execute_command("LRANGE", {key.view(), start_str.view(), stop_str.view()});
     if (!reply) {
         last_error_ = "LRANGE command failed";
         return nullptr;

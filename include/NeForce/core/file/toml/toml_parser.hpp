@@ -47,22 +47,22 @@ private:
      * 保存表格解析的上下文信息，用于表格数组的嵌套管理。
      */
     struct context {
-        toml_table* table;      ///< 当前表格指针
-        vector<string> path;    ///< 当前路径
+        toml_table* table;   ///< 当前表格指针
+        vector<string> path; ///< 当前路径
     };
 
     vector<context> context_stack_;  ///< 上下文栈
     bool is_in_array_table_ = false; ///< 是否在表格数组中
 
-    string text_;        ///< 待解析的toml文本
-    size_t len_;         ///< 文本长度
-    size_t pos_ = 0;     ///< 当前解析位置
-    size_t line_ = 1;    ///< 当前行号
-    size_t column_ = 1;  ///< 当前列号
+    string text_;       ///< 待解析的toml文本
+    size_t len_;        ///< 文本长度
+    size_t pos_ = 0;    ///< 当前解析位置
+    size_t line_ = 1;   ///< 当前行号
+    size_t column_ = 1; ///< 当前列号
 
-    unique_ptr<toml_table> root_;  ///< 解析结果根表格
-    toml_table* ctb_ = nullptr;    ///< 当前表格指针
-    vector<string> ctp_;           ///< 当前表格路径
+    unique_ptr<toml_table> root_; ///< 解析结果根表格
+    toml_table* ctb_ = nullptr;   ///< 当前表格指针
+    vector<string> ctp_;          ///< 当前表格路径
 
     /**
      * @brief 跳过空白字符
@@ -344,8 +344,9 @@ public:
      *
      * 初始化解析器，创建空的根表格。
      */
-    explicit toml_parser(string text) noexcept
-    : text_(_NEFORCE move(text)), len_(text_.size()) {
+    explicit toml_parser(string text) noexcept :
+    text_(_NEFORCE move(text)),
+    len_(text_.size()) {
         root_ = make_unique<toml_table>();
         ctb_ = root_.get();
     }

@@ -15,15 +15,15 @@
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #ifdef NEFORCE_COMPILER_MSVC
-#include <consoleapi.h>
+#    include <consoleapi.h>
 #endif
 #ifdef NEFORCE_COMPILER_MINGW
-#include <windef.h>
-#include <wingdi.h>
-#include <wincon.h>
+#    include <wincon.h>
+#    include <windef.h>
+#    include <wingdi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <csignal>
+#    include <csignal>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -42,51 +42,51 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 enum class signal_event {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    INTERRUPT      = CTRL_C_EVENT,           ///< Ctrl+C中断信号
-    CTRL_BREAK     = CTRL_BREAK_EVENT,       ///< Ctrl+Break信号
-    CLOSE          = CTRL_CLOSE_EVENT,       ///< 关闭控制台窗口
-    LOGOFF         = CTRL_LOGOFF_EVENT,      ///< 用户注销
-    SHUTDOWN       = CTRL_SHUTDOWN_EVENT,    ///< 系统关机
+    INTERRUPT = CTRL_C_EVENT,       ///< Ctrl+C中断信号
+    CTRL_BREAK = CTRL_BREAK_EVENT,  ///< Ctrl+Break信号
+    CLOSE = CTRL_CLOSE_EVENT,       ///< 关闭控制台窗口
+    LOGOFF = CTRL_LOGOFF_EVENT,     ///< 用户注销
+    SHUTDOWN = CTRL_SHUTDOWN_EVENT, ///< 系统关机
 
-    TERMINATE      = 1000,                   ///< 终止信号（模拟SIGTERM）
-    ABORT          = 1001,                   ///< 中止信号（模拟SIGABRT）
-    ILLEGAL_INSTR  = 1002,                   ///< 非法指令（模拟SIGILL）
-    FLOATING_POINT = 1003,                   ///< 浮点异常（模拟SIGFPE）
-    SEGMENT_FAULT  = 1004,                   ///< 段错误（模拟SIGSEGV）
-    BUS_ERROR      = 1005,                   ///< 总线错误（模拟SIGBUS）
-    PIPE_BROKEN    = 1006,                   ///< 管道破裂（模拟SIGPIPE）
-    ALARM          = 1007,                   ///< 定时器信号（模拟SIGALRM）
-    HANGUP         = 1008,                   ///< 挂起信号（模拟SIGHUP）
-    USER1          = 1009,                   ///< 用户自定义信号1（模拟SIGUSR1）
-    USER2          = 1010,                   ///< 用户自定义信号2（模拟SIGUSR2）
+    TERMINATE = 1000,      ///< 终止信号（模拟SIGTERM）
+    ABORT = 1001,          ///< 中止信号（模拟SIGABRT）
+    ILLEGAL_INSTR = 1002,  ///< 非法指令（模拟SIGILL）
+    FLOATING_POINT = 1003, ///< 浮点异常（模拟SIGFPE）
+    SEGMENT_FAULT = 1004,  ///< 段错误（模拟SIGSEGV）
+    BUS_ERROR = 1005,      ///< 总线错误（模拟SIGBUS）
+    PIPE_BROKEN = 1006,    ///< 管道破裂（模拟SIGPIPE）
+    ALARM = 1007,          ///< 定时器信号（模拟SIGALRM）
+    HANGUP = 1008,         ///< 挂起信号（模拟SIGHUP）
+    USER1 = 1009,          ///< 用户自定义信号1（模拟SIGUSR1）
+    USER2 = 1010,          ///< 用户自定义信号2（模拟SIGUSR2）
 
-    TIMEOUT        = 2000,                   ///< 超时事件
-    CUSTOM_1       = 2001,                   ///< 自定义事件1
-    CUSTOM_2       = 2002,                   ///< 自定义事件2
-    FORCE_EXIT     = 9999                    ///< 强制退出信号
+    TIMEOUT = 2000,   ///< 超时事件
+    CUSTOM_1 = 2001,  ///< 自定义事件1
+    CUSTOM_2 = 2002,  ///< 自定义事件2
+    FORCE_EXIT = 9999 ///< 强制退出信号
 #else
-    INTERRUPT      = SIGINT,                 ///< Ctrl+C中断信号
-    TERMINATE      = SIGTERM,                ///< 终止信号
-    ABORT          = SIGABRT,                ///< 中止信号
-    ILLEGAL_INSTR  = SIGILL,                 ///< 非法指令
-    FLOATING_POINT = SIGFPE,                 ///< 浮点异常
-    SEGMENT_FAULT  = SIGSEGV,                ///< 段错误
-    BUS_ERROR      = SIGBUS,                 ///< 总线错误
-    PIPE_BROKEN    = SIGPIPE,                ///< 管道破裂
-    ALARM          = SIGALRM,                ///< 定时器信号
-    HANGUP         = SIGHUP,                 ///< 挂起信号
-    USER1          = SIGUSR1,                ///< 用户自定义信号1
-    USER2          = SIGUSR2,                ///< 用户自定义信号2
+    INTERRUPT = SIGINT,      ///< Ctrl+C中断信号
+    TERMINATE = SIGTERM,     ///< 终止信号
+    ABORT = SIGABRT,         ///< 中止信号
+    ILLEGAL_INSTR = SIGILL,  ///< 非法指令
+    FLOATING_POINT = SIGFPE, ///< 浮点异常
+    SEGMENT_FAULT = SIGSEGV, ///< 段错误
+    BUS_ERROR = SIGBUS,      ///< 总线错误
+    PIPE_BROKEN = SIGPIPE,   ///< 管道破裂
+    ALARM = SIGALRM,         ///< 定时器信号
+    HANGUP = SIGHUP,         ///< 挂起信号
+    USER1 = SIGUSR1,         ///< 用户自定义信号1
+    USER2 = SIGUSR2,         ///< 用户自定义信号2
 
-    CTRL_BREAK     = 1000,                   ///< Ctrl+Break（模拟）
-    CLOSE          = 1001,                   ///< 关闭事件（模拟）
-    LOGOFF         = 1002,                   ///< 注销事件（模拟）
-    SHUTDOWN       = 1003,                   ///< 关机事件（模拟）
+    CTRL_BREAK = 1000, ///< Ctrl+Break（模拟）
+    CLOSE = 1001,      ///< 关闭事件（模拟）
+    LOGOFF = 1002,     ///< 注销事件（模拟）
+    SHUTDOWN = 1003,   ///< 关机事件（模拟）
 
-    TIMEOUT        = 2000,                   ///< 超时事件
-    CUSTOM_1       = 2001,                   ///< 自定义事件1
-    CUSTOM_2       = 2002,                   ///< 自定义事件2
-    FORCE_EXIT     = 9999                    ///< 强制退出信号
+    TIMEOUT = 2000,   ///< 超时事件
+    CUSTOM_1 = 2001,  ///< 自定义事件1
+    CUSTOM_2 = 2002,  ///< 自定义事件2
+    FORCE_EXIT = 9999 ///< 强制退出信号
 #endif
 };
 
@@ -120,8 +120,8 @@ private:
      * @brief 信号等待结果
      */
     struct signal_result {
-        signal_event event;   ///< 信号事件
-        void* context;        ///< 上下文数据
+        signal_event event; ///< 信号事件
+        void* context;      ///< 上下文数据
     };
 
     /**
@@ -133,31 +133,33 @@ private:
         void* context;                      ///< 上下文数据
         steady_clock::time_point timestamp; ///< 时间戳
 
-        pending_signal(const signal_event event, void* context, steady_clock::time_point timestamp)
-        : event{event}, context{context}, timestamp{timestamp} {}
+        pending_signal(const signal_event event, void* context, steady_clock::time_point timestamp) :
+        event{event},
+        context{context},
+        timestamp{timestamp} {}
     };
 
-    atomic<bool> running_{false};           ///< 运行标志
-    atomic<bool> force_exit_{false};        ///< 强制退出标志
-    atomic<int> force_exit_timeout_{5000};  ///< 强制退出超时（毫秒）
+    atomic<bool> running_{false};          ///< 运行标志
+    atomic<bool> force_exit_{false};       ///< 强制退出标志
+    atomic<int> force_exit_timeout_{5000}; ///< 强制退出超时（毫秒）
 
-    mutex mutex_;                           ///< 保护共享数据的互斥锁
-    condition_variable cv_;                 ///< 信号等待条件变量
+    mutex mutex_;           ///< 保护共享数据的互斥锁
+    condition_variable cv_; ///< 信号等待条件变量
 
     unordered_map<signal_event, signal_handler> handlers_; ///< 信号处理函数映射
-    vector<pending_signal> pending_signals_; ///< 待处理信号队列
+    vector<pending_signal> pending_signals_;               ///< 待处理信号队列
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     vector<::DWORD> registered_windows_events_; ///< 已注册的Windows事件
 #else
-    struct ::sigaction old_actions_[64]{};      ///< 保存原有信号处理器
-    ::timer_t alarm_timer_{nullptr};            ///< 定时器
+    struct ::sigaction old_actions_[64]{}; ///< 保存原有信号处理器
+    ::timer_t alarm_timer_{nullptr};       ///< 定时器
 
     static unordered_map<signal_event, int> windows_to_posix_map_; ///< Windows事件到POSIX信号的映射
 #endif
 
-    thread signal_thread_;      ///< 信号处理线程
-    thread timeout_thread_;     ///< 超时监控线程
+    thread signal_thread_;  ///< 信号处理线程
+    thread timeout_thread_; ///< 超时监控线程
 
 private:
     void initialize_platform();
@@ -175,9 +177,9 @@ private:
 
 public:
     signal_manager(const signal_manager&) = delete;
-    signal_manager& operator =(const signal_manager&) = delete;
+    signal_manager& operator=(const signal_manager&) = delete;
     signal_manager(const signal_manager&&) = delete;
-    signal_manager& operator =(const signal_manager&&) = delete;
+    signal_manager& operator=(const signal_manager&&) = delete;
 
     /**
      * @brief 析构函数
@@ -301,18 +303,14 @@ public:
      *
      * 启动信号监控。
      */
-    signal_guard() {
-        signal_manager::instance().start_monitoring();
-    }
+    signal_guard() { signal_manager::instance().start_monitoring(); }
 
     /**
      * @brief 析构函数
      *
      * 停止信号监控。
      */
-    ~signal_guard() {
-        signal_manager::instance().stop_monitoring();
-    }
+    ~signal_guard() { signal_manager::instance().stop_monitoring(); }
 };
 
 /** @} */ // SystemSignal

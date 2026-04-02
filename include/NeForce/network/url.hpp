@@ -33,12 +33,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供URL的解析、字符串化、编码和解码功能。
  */
 struct url : iobject<url> {
-    string scheme;      ///< 协议类型
-    string host;        ///< 主机名或IP地址
-    ports port;         ///< 端口号
-    string path;        ///< 资源路径
-    string query;       ///< 查询字符串
-    string fragment;    ///< 片段标识符
+    string scheme;   ///< 协议类型
+    string host;     ///< 主机名或IP地址
+    ports port;      ///< 端口号
+    string path;     ///< 资源路径
+    string query;    ///< 查询字符串
+    string fragment; ///< 片段标识符
 
     /**
      * @brief 默认构造函数
@@ -46,7 +46,7 @@ struct url : iobject<url> {
     url() = default;
 
     url(url&& other) = default;
-    url& operator =(url&& other) = default;
+    url& operator=(url&& other) = default;
 
     /**
      * @brief 验证URL是否有效

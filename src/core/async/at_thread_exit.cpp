@@ -22,7 +22,7 @@ namespace {
         }
         thread_registry().thread_exit_list = nullptr;
     }
-}
+} // namespace
 
 
 void thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept {

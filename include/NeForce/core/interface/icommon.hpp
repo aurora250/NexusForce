@@ -26,12 +26,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * 派生类需要实现to_hash()方法，即可通过此接口自动获得哈希支持。
  * 该接口会自动特化hash模板，使对象可用于哈希相关操作如哈希容器。
  */
-template <typename T>
-struct ihashable {
+template <typename T> struct ihashable {
 private:
-    constexpr const T& derived() const noexcept {
-        return static_cast<const T&>(*this);
-    }
+    constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 
 public:
     /**
@@ -40,8 +37,7 @@ public:
      *
      * 实际调用派生类的to_hash()方法
      */
-    NEFORCE_NODISCARD constexpr size_t to_hash() const
-    noexcept(noexcept(derived().to_hash())) {
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept(noexcept(derived().to_hash())) {
         return derived().to_hash();
     }
 };
@@ -58,10 +54,8 @@ public:
  * @brief ihashable的哈希特化
  * @tparam T 子类类型
  */
-template <typename T>
-struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
-    NEFORCE_NODISCARD constexpr size_t operator ()(const T& obj) const
-    noexcept(noexcept(obj.to_hash())) {
+template <typename T> struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
+    NEFORCE_NODISCARD constexpr size_t operator()(const T& obj) const noexcept(noexcept(obj.to_hash())) {
         return obj.to_hash();
     }
 };
@@ -82,12 +76,9 @@ struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
  * 通过CRTP模式实现，派生类只需实现operator ==和operator <两个基本比较操作，
  * 即可自动获得所有比较运算符的完整实现。
  */
-template <typename T>
-struct icomparable {
+template <typename T> struct icomparable {
 private:
-    constexpr const T& derived() const noexcept {
-        return static_cast<const T&>(*this);
-    }
+    constexpr const T& derived() const noexcept { return static_cast<const T&>(*this); }
 
 public:
     /**
@@ -97,8 +88,7 @@ public:
      *
      * 调用派生类实现的operator ==进行相等性判断。
      */
-    NEFORCE_NODISCARD constexpr bool operator ==(const T& rhs) const
-        noexcept(noexcept(derived() == rhs)) {
+    NEFORCE_NODISCARD constexpr bool operator==(const T& rhs) const noexcept(noexcept(derived() == rhs)) {
         return derived() == rhs;
     }
 
@@ -109,8 +99,7 @@ public:
      *
      * 基于operator ==的结果取反得到不等比较结果。
      */
-    NEFORCE_NODISCARD constexpr bool operator !=(const T& rhs) const
-        noexcept(noexcept(!(*this == rhs))) {
+    NEFORCE_NODISCARD constexpr bool operator!=(const T& rhs) const noexcept(noexcept(!(*this == rhs))) {
         return !(*this == rhs);
     }
 
@@ -121,8 +110,7 @@ public:
      *
      * 调用派生类实现的operator <进行小于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator <(const T& rhs) const
-        noexcept(noexcept(derived() < rhs)) {
+    NEFORCE_NODISCARD constexpr bool operator<(const T& rhs) const noexcept(noexcept(derived() < rhs)) {
         return derived() < rhs;
     }
 
@@ -133,8 +121,7 @@ public:
      *
      * 通过交换操作数并调用operator <来实现大于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator >(const T& rhs) const
-        noexcept(noexcept(rhs < derived())) {
+    NEFORCE_NODISCARD constexpr bool operator>(const T& rhs) const noexcept(noexcept(rhs < derived())) {
         return rhs < derived();
     }
 
@@ -145,8 +132,7 @@ public:
      *
      * 通过取反operator >的结果实现小于等于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator <=(const T& rhs) const
-        noexcept(noexcept(!(derived() > rhs))) {
+    NEFORCE_NODISCARD constexpr bool operator<=(const T& rhs) const noexcept(noexcept(!(derived() > rhs))) {
         return !(derived() > rhs);
     }
 
@@ -157,8 +143,7 @@ public:
      *
      * 通过取反operator <的结果实现大于等于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator >=(const T& rhs) const
-        noexcept(noexcept(!(derived() < rhs))) {
+    NEFORCE_NODISCARD constexpr bool operator>=(const T& rhs) const noexcept(noexcept(!(derived() < rhs))) {
         return !(derived() < rhs);
     }
 };
@@ -173,8 +158,7 @@ public:
  * 为派生类提供完整的比较和哈希支持。派生类需实现三个核心方法：
  * operator ==, operator < 和 to_hash()。
  */
-template <typename T>
-struct icommon : icomparable<T>, ihashable<T> {};
+template <typename T> struct icommon : icomparable<T>, ihashable<T> {};
 
 /** @} */ // CRTPInterfaces
 

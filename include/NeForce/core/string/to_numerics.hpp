@@ -13,10 +13,10 @@
 #include "NeForce/core/numeric/math.hpp"
 #include "NeForce/core/string/string_view.hpp"
 #ifdef max
-#undef max
+#    undef max
 #endif
 #ifdef min
-#undef min
+#    undef min
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -35,8 +35,7 @@ NEFORCE_BEGIN_INNER__
  * 支持空格跳过、正负号处理、溢出检测。
  */
 template <typename T>
-constexpr enable_if_t<is_signed_v<T>, T>
-str_to_ints(const string_view sv, char** endptr, int base) {
+constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char** endptr, int base) {
     using UT = make_unsigned_t<T>;
 
     const char* start = sv.data();
@@ -44,12 +43,16 @@ str_to_ints(const string_view sv, char** endptr, int base) {
     const char* end = start + len;
 
     if (len == 0) {
-        if (endptr) *endptr = const_cast<char*>(start);
+        if (endptr) {
+            *endptr = const_cast<char*>(start);
+        }
         return 0;
     }
 
     const char* p = start;
-    while (p != end && is_space(*p)) ++p;
+    while (p != end && is_space(*p)) {
+        ++p;
+    }
     const char* start_conversion = p;
 
     int sign = 1;
@@ -61,7 +64,9 @@ str_to_ints(const string_view sv, char** endptr, int base) {
     }
 
     if (base != 0 && (base < 2 || base > 36)) {
-        if (endptr) *endptr = const_cast<char*>(start_conversion);
+        if (endptr) {
+            *endptr = const_cast<char*>(start_conversion);
+        }
         return 0;
     }
 
@@ -102,7 +107,9 @@ str_to_ints(const string_view sv, char** endptr, int base) {
         } else {
             break;
         }
-        if (digit >= static_cast<uint32_t>(base)) break;
+        if (digit >= static_cast<uint32_t>(base)) {
+            break;
+        }
 
         any_converted = true;
         if (!overflow) {
@@ -123,8 +130,9 @@ str_to_ints(const string_view sv, char** endptr, int base) {
         return 0;
     }
 
-    if (overflow)
+    if (overflow) {
         return (sign > 0) ? numeric_traits<T>::max() : numeric_traits<T>::min();
+    }
 
     if (sign > 0) {
         return static_cast<T>(result);
@@ -148,19 +156,22 @@ str_to_ints(const string_view sv, char** endptr, int base) {
  * 支持空格跳过、正负号处理、溢出检测。负数会按照C标准转换为最大值。
  */
 template <typename T>
-constexpr enable_if_t<is_unsigned_v<T>, T>
-str_to_uints(const string_view sv, char** endptr, int base) {
+constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, char** endptr, int base) {
     const char* start = sv.data();
     const size_t len = sv.size();
     const char* end = start + len;
 
     if (len == 0) {
-        if (endptr) *endptr = const_cast<char*>(start);
+        if (endptr) {
+            *endptr = const_cast<char*>(start);
+        }
         return 0;
     }
 
     const char* p = start;
-    while (p != end && is_space(*p)) ++p;
+    while (p != end && is_space(*p)) {
+        ++p;
+    }
     const char* start_conversion = p;
 
     int sign = 1;
@@ -172,7 +183,9 @@ str_to_uints(const string_view sv, char** endptr, int base) {
     }
 
     if (base != 0 && (base < 2 || base > 36)) {
-        if (endptr) *endptr = const_cast<char*>(start_conversion);
+        if (endptr) {
+            *endptr = const_cast<char*>(start_conversion);
+        }
         return 0;
     }
 
@@ -211,7 +224,9 @@ str_to_uints(const string_view sv, char** endptr, int base) {
         } else {
             break;
         }
-        if (digit >= static_cast<unsigned int>(base)) break;
+        if (digit >= static_cast<unsigned int>(base)) {
+            break;
+        }
 
         any_converted = true;
         if (!overflow) {
@@ -228,8 +243,12 @@ str_to_uints(const string_view sv, char** endptr, int base) {
         *endptr = any_converted ? const_cast<char*>(p) : const_cast<char*>(start_conversion);
     }
 
-    if (!any_converted) return 0;
-    if (overflow) return numeric_traits<T>::max();
+    if (!any_converted) {
+        return 0;
+    }
+    if (overflow) {
+        return numeric_traits<T>::max();
+    }
 
     if (sign < 0) {
         // for unsigned, negative sign yields two's complement wrap,
@@ -248,20 +267,13 @@ str_to_uints(const string_view sv, char** endptr, int base) {
  *
  * 使用预计算表加速常用指数的计算，超出范围时使用通用幂函数。
  */
-template <typename T>
-NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
-    constexpr T pow10_table[] = {
-        1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9,
-        1e10, 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19,
-        1e20, 1e21, 1e22, 1e23, 1e24, 1e25, 1e26, 1e27, 1e28, 1e29,
-        1e30, 1e31, 1e32
-    };
-    constexpr T neg_pow10_table[] = {
-        1e0, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9,
-        1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16, 1e-17, 1e-18, 1e-19,
-        1e-20, 1e-21, 1e-22, 1e-23, 1e-24, 1e-25, 1e-26, 1e-27, 1e-28, 1e-29,
-        1e-30, 1e-31, 1e-32
-    };
+template <typename T> NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
+    constexpr T pow10_table[] = {1e0,  1e1,  1e2,  1e3,  1e4,  1e5,  1e6,  1e7,  1e8,  1e9,  1e10,
+                                 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19, 1e20, 1e21,
+                                 1e22, 1e23, 1e24, 1e25, 1e26, 1e27, 1e28, 1e29, 1e30, 1e31, 1e32};
+    constexpr T neg_pow10_table[] = {1e0,   1e-1,  1e-2,  1e-3,  1e-4,  1e-5,  1e-6,  1e-7,  1e-8,  1e-9,  1e-10,
+                                     1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16, 1e-17, 1e-18, 1e-19, 1e-20, 1e-21,
+                                     1e-22, 1e-23, 1e-24, 1e-25, 1e-26, 1e-27, 1e-28, 1e-29, 1e-30, 1e-31, 1e-32};
     constexpr int max_table_exp = 32;
 
     if (exp >= 0 && exp <= max_table_exp) {
@@ -284,19 +296,22 @@ NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
  * 处理精度损失和溢出情况。
  */
 template <typename T>
-constexpr enable_if_t<is_floating_point_v<T>, T>
-str_to_floats(const string_view sv, char** endptr) {
+constexpr enable_if_t<is_floating_point_v<T>, T> str_to_floats(const string_view sv, char** endptr) {
     const char* start = sv.data();
     const size_t len = sv.size();
     const char* end = start + len;
 
     if (len == 0) {
-        if (endptr) *endptr = const_cast<char*>(start);
+        if (endptr) {
+            *endptr = const_cast<char*>(start);
+        }
         return static_cast<T>(0);
     }
 
     const char* p = start;
-    while (p != end && is_space(*p)) ++p;
+    while (p != end && is_space(*p)) {
+        ++p;
+    }
     const char* start_conversion = p;
 
     int sign = 1;
@@ -316,7 +331,9 @@ str_to_floats(const string_view sv, char** endptr) {
                 const bool terminated = (p + 3 == end) || !is_alpha_or_digit(p[3]);
                 if (terminated) {
                     p += 3;
-                    if (endptr) *endptr = const_cast<char*>(p);
+                    if (endptr) {
+                        *endptr = const_cast<char*>(p);
+                    }
                     const T inf_val = numeric_traits<T>::infinity();
                     return (sign < 0) ? -inf_val : inf_val;
                 }
@@ -333,10 +350,16 @@ str_to_floats(const string_view sv, char** endptr) {
                     p += 3;
                     if (p != end && *p == '(') {
                         ++p;
-                        while (p != end && *p != ')') ++p;
-                        if (p != end && *p == ')') ++p;
+                        while (p != end && *p != ')') {
+                            ++p;
+                        }
+                        if (p != end && *p == ')') {
+                            ++p;
+                        }
                     }
-                    if (endptr) *endptr = const_cast<char*>(p);
+                    if (endptr) {
+                        *endptr = const_cast<char*>(p);
+                    }
                     return numeric_traits<T>::quiet_nan();
                 }
             }
@@ -375,7 +398,9 @@ str_to_floats(const string_view sv, char** endptr) {
     }
 
     if (!has_digits) {
-        if (endptr) *endptr = const_cast<char*>(start_conversion);
+        if (endptr) {
+            *endptr = const_cast<char*>(start_conversion);
+        }
         return static_cast<T>(0);
     }
 
@@ -412,10 +437,14 @@ str_to_floats(const string_view sv, char** endptr) {
         constexpr int min_exp = numeric_traits<T>::min_exponent10 - 50;
 
         if (exponent > max_exp) {
-            if (endptr) *endptr = const_cast<char*>(p);
+            if (endptr) {
+                *endptr = const_cast<char*>(p);
+            }
             return (sign > 0) ? numeric_traits<T>::infinity() : -numeric_traits<T>::infinity();
         } else if (exponent < min_exp) {
-            if (endptr) *endptr = const_cast<char*>(p);
+            if (endptr) {
+                *endptr = const_cast<char*>(p);
+            }
             return static_cast<T>(0);
         } else {
             result *= fast_pow10<T>(exponent);
@@ -424,13 +453,17 @@ str_to_floats(const string_view sv, char** endptr) {
 
     const T inf = numeric_traits<T>::infinity();
     if (result == inf || result == -inf) {
-        if (endptr) *endptr = const_cast<char*>(p);
+        if (endptr) {
+            *endptr = const_cast<char*>(p);
+        }
         return (sign > 0) ? inf : -inf;
     }
 
     result = (sign > 0) ? result : -result;
 
-    if (endptr) *endptr = const_cast<char*>(p);
+    if (endptr) {
+        *endptr = const_cast<char*>(p);
+    }
     return result;
 }
 
@@ -450,14 +483,15 @@ NEFORCE_END_INNER__
  * @return 转换后的32位浮点数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr float32_t
-to_float32(const string_view sv, size_t* idx = nullptr) {
+NEFORCE_NODISCARD constexpr float32_t to_float32(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const float32_t num = inner::str_to_floats<float>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -468,14 +502,15 @@ to_float32(const string_view sv, size_t* idx = nullptr) {
  * @return 转换后的64位浮点数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr float64_t
-to_float64(const string_view sv, size_t* idx = nullptr) {
+NEFORCE_NODISCARD constexpr float64_t to_float64(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const float64_t num = inner::str_to_floats<double>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -486,14 +521,15 @@ to_float64(const string_view sv, size_t* idx = nullptr) {
  * @return 转换后的十进制浮点数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr decimal_t
-to_decimal(const string_view sv, size_t* idx = nullptr) {
+NEFORCE_NODISCARD constexpr decimal_t to_decimal(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const decimal_t num = inner::str_to_floats<long double>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -505,14 +541,15 @@ to_decimal(const string_view sv, size_t* idx = nullptr) {
  * @return 转换后的64位有符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr int64_t
-to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr int64_t to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int64_t num = inner::str_to_ints<int64_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -524,14 +561,15 @@ to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的64位无符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr uint64_t
-to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr uint64_t to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint64_t num = inner::str_to_uints<uint64_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -543,14 +581,15 @@ to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的32位有符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr int32_t
-to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr int32_t to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int32_t num = inner::str_to_ints<int>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -562,14 +601,15 @@ to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的32位无符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr uint32_t
-to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr uint32_t to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint32_t num = inner::str_to_uints<uint32_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
+    if (idx) {
+        *idx = static_cast<size_t>(endptr - sv.data());
+    }
     return num;
 }
 
@@ -581,8 +621,7 @@ to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的16位有符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr int16_t
-to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr int16_t to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     const int32_t val = to_int32(sv, idx, base);
     if (val > static_cast<int32_t>(numeric_traits<int16_t>::max()) ||
         val < static_cast<int32_t>(numeric_traits<int16_t>::min())) {
@@ -599,8 +638,7 @@ to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的16位无符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr uint16_t
-to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr uint16_t to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     const uint32_t val = to_uint32(sv, idx, base);
     if (val > static_cast<uint32_t>(numeric_traits<uint16_t>::max())) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Value out of uint16_t range."));
@@ -616,8 +654,7 @@ to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的8位有符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr int8_t
-to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr int8_t to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     const int32_t val = to_int32(sv, idx, base);
     if (val > static_cast<int32_t>(numeric_traits<int8_t>::max()) ||
         val < static_cast<int32_t>(numeric_traits<int8_t>::min())) {
@@ -634,8 +671,7 @@ to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  * @return 转换后的8位无符号整数
  * @throws typecast_exception 转换失败时
  */
-NEFORCE_NODISCARD constexpr uint8_t
-to_uint8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+NEFORCE_NODISCARD constexpr uint8_t to_uint8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     const uint32_t val = to_uint32(sv, idx, base);
     if (val > static_cast<uint32_t>(numeric_traits<uint8_t>::max())) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Value out of uint8_t range."));

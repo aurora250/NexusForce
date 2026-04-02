@@ -1,5 +1,5 @@
-#include <NeForce/plugin/plugin_manager.hpp>
 #include <NeForce/core/file/path.hpp>
+#include <NeForce/plugin/plugin_manager.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -11,12 +11,10 @@ namespace {
         return (ext == ".so");
 #endif
     }
-}
+} // namespace
 
 
-plugin_manager::~plugin_manager() {
-    shutdown_all();
-}
+plugin_manager::~plugin_manager() { shutdown_all(); }
 
 size_t plugin_manager::load_plugins(const string& pth) {
     size_t count = 0;
@@ -27,7 +25,7 @@ size_t plugin_manager::load_plugins(const string& pth) {
 
     const path pths(pth);
 
-    for (const auto& entry : pths) {
+    for (const auto& entry: pths) {
         if (is_plugin_file(entry)) {
             load_plugin(entry);
             ++count;
@@ -45,8 +43,8 @@ void plugin_manager::load_plugin(const string_view pth) {
 
     auto lib = make_unique<dynamic_library>(pth);
 
-    const auto create_func = lib->to_symbol<iplugin*(*)()>(NEFORCE_PLUGIN_CREATE_FUNC);
-    const auto destroy_func = lib->to_symbol<void(*)(iplugin*)>(NEFORCE_PLUGIN_DESTROY_FUNC);
+    const auto create_func = lib->to_symbol<iplugin* (*) ()>(NEFORCE_PLUGIN_CREATE_FUNC);
+    const auto destroy_func = lib->to_symbol<void (*)(iplugin*)>(NEFORCE_PLUGIN_DESTROY_FUNC);
 
     iplugin* raw_ptr = create_func();
     if (!raw_ptr) {
@@ -70,7 +68,9 @@ void plugin_manager::load_plugin(const string_view pth) {
 bool plugin_manager::unload_plugin(const string& name) {
     lock<mutex> lock(mutex_);
     const auto it = plugins_.find(name);
-    if (it == plugins_.end()) return false;
+    if (it == plugins_.end()) {
+        return false;
+    }
 
     it->second->shutdown();
     plugins_.erase(it);
@@ -93,7 +93,7 @@ vector<string> plugin_manager::list_plugins() const {
     lock<mutex> lock(mutex_);
     vector<string> names;
     names.reserve(plugins_.size());
-    for (const auto& pair : plugins_) {
+    for (const auto& pair: plugins_) {
         names.push_back(pair.first);
     }
     return names;
@@ -101,17 +101,18 @@ vector<string> plugin_manager::list_plugins() const {
 
 void plugin_manager::initialize_all() {
     lock<mutex> lock(mutex_);
-    for (const auto& pair : plugins_) {
+    for (const auto& pair: plugins_) {
         pair.second->initialize();
     }
 }
 
 void plugin_manager::shutdown_all() noexcept {
     lock<mutex> lock(mutex_);
-    for (const auto& pair : plugins_) {
+    for (const auto& pair: plugins_) {
         try {
             pair.second->shutdown();
-        } catch (...) {}
+        } catch (...) {
+        }
     }
     plugins_.clear();
     libraries_.clear();

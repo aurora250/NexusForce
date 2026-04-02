@@ -37,14 +37,14 @@ public:
      */
     static constexpr bool is_little_endian =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        true;
+            true;
 #elif defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)
-        __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__;
+            __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__;
 #elif defined(__BYTE_ORDER) && defined(__LITTLE_ENDIAN)
-        __BYTE_ORDER == __LITTLE_ENDIAN;
+            __BYTE_ORDER == __LITTLE_ENDIAN;
 #else
-        false;
-#warning "Unsupported costexpr endian type"
+            false;
+#    warning "Unsupported costexpr endian type"
 #endif
 
     /**
@@ -55,8 +55,7 @@ public:
     /**
      * @brief 运行时检测是否为小端序
      */
-    NEFORCE_NODISCARD static NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE
-    bool is_little_endian_runtime() noexcept {
+    NEFORCE_NODISCARD static NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE bool is_little_endian_runtime() noexcept {
         constexpr uint16_t test = 0x0001;
         return *reinterpret_cast<const byte_t*>(&test) == 0x01;
     }
@@ -66,9 +65,7 @@ public:
      * @param value 输入值
      * @return 字节序反转后的值
      */
-    static constexpr uint16_t byteswap16(uint16_t value) noexcept {
-        return (value >> 8) | (value << 8);
-    }
+    static constexpr uint16_t byteswap16(uint16_t value) noexcept { return (value >> 8) | (value << 8); }
 
     /**
      * @brief 32位整数字节序反转
@@ -76,9 +73,7 @@ public:
      * @return 字节序反转后的值
      */
     static constexpr uint32_t byteswap32(uint32_t value) noexcept {
-        return ((value >> 24) & 0x000000FF) |
-               ((value >> 8)  & 0x0000FF00) |
-               ((value << 8)  & 0x00FF0000) |
+        return ((value >> 24) & 0x000000FF) | ((value >> 8) & 0x0000FF00) | ((value << 8) & 0x00FF0000) |
                ((value << 24) & 0xFF000000);
     }
 
@@ -88,51 +83,47 @@ public:
      * @return 字节序反转后的值
      */
     static constexpr uint64_t byteswap64(uint64_t value) noexcept {
-        return ((value >> 56) & 0x00000000000000FF) |
-               ((value >> 40) & 0x000000000000FF00) |
-               ((value >> 24) & 0x0000000000FF0000) |
-               ((value >> 8)  & 0x00000000FF000000) |
-               ((value << 8)  & 0x000000FF00000000) |
-               ((value << 24) & 0x0000FF0000000000) |
-               ((value << 40) & 0x00FF000000000000) |
-               ((value << 56) & 0xFF00000000000000);
+        return ((value >> 56) & 0x00000000000000FF) | ((value >> 40) & 0x000000000000FF00) |
+               ((value >> 24) & 0x0000000000FF0000) | ((value >> 8) & 0x00000000FF000000) |
+               ((value << 8) & 0x000000FF00000000) | ((value << 24) & 0x0000FF0000000000) |
+               ((value << 40) & 0x00FF000000000000) | ((value << 56) & 0xFF00000000000000);
     }
 
 private:
+    template <typename T> static constexpr enable_if_t<is_big_endian, T> host_to_network_impl1(T value) noexcept {
+        return value;
+    }
+
+    template <typename T> static constexpr enable_if_t<sizeof(T) == 2, T> host_to_network_impl2(T value) noexcept {
+        return endian::byteswap16(value);
+    }
+
+    template <typename T> static constexpr enable_if_t<sizeof(T) == 4, T> host_to_network_impl2(T value) noexcept {
+        return endian::byteswap32(value);
+    }
+
+    template <typename T> static constexpr enable_if_t<sizeof(T) == 8, T> host_to_network_impl2(T value) noexcept {
+        return endian::byteswap64(value);
+    }
+
     template <typename T>
-    static constexpr enable_if_t<is_big_endian, T>
-    host_to_network_impl1(T value) noexcept { return value; }
-
-    template <typename T> static constexpr
-    enable_if_t<sizeof(T) == 2, T>
-    host_to_network_impl2(T value) noexcept { return endian::byteswap16(value); }
-
-    template <typename T> static constexpr
-    enable_if_t<sizeof(T) == 4, T>
-    host_to_network_impl2(T value) noexcept { return endian::byteswap32(value); }
-
-    template <typename T> static constexpr
-    enable_if_t<sizeof(T) == 8, T>
-    host_to_network_impl2(T value) noexcept { return endian::byteswap64(value); }
-
-    template <typename T> static constexpr
-    enable_if_t<sizeof(T) != 2 && sizeof(T) != 4 && sizeof(T) != 8, T>
+    static constexpr enable_if_t<sizeof(T) != 2 && sizeof(T) != 4 && sizeof(T) != 8, T>
     host_to_network_impl2(T value) noexcept {
         static_assert(sizeof(T) == 0, "Unsupported type size for endian swap");
         return value;
     }
 
-    template <typename T>
-    static constexpr enable_if_t<!is_big_endian, T>
-    host_to_network_impl1(T value) noexcept { return endian::host_to_network_impl2(value); }
+    template <typename T> static constexpr enable_if_t<!is_big_endian, T> host_to_network_impl1(T value) noexcept {
+        return endian::host_to_network_impl2(value);
+    }
 
-    template <typename T>
-    static constexpr enable_if_t<is_little_endian, T>
-    host_to_network_impl3(T value) noexcept { return value; }
+    template <typename T> static constexpr enable_if_t<is_little_endian, T> host_to_network_impl3(T value) noexcept {
+        return value;
+    }
 
-    template <typename T>
-    static constexpr enable_if_t<!is_little_endian, T>
-    host_to_network_impl3(T value) noexcept { return endian::host_to_network_impl2(value); }
+    template <typename T> static constexpr enable_if_t<!is_little_endian, T> host_to_network_impl3(T value) noexcept {
+        return endian::host_to_network_impl2(value);
+    }
 
 public:
     /**
@@ -144,8 +135,7 @@ public:
      * 网络字节序为大端序。
      * 大端序系统直接返回，小端序系统执行字节序反转。
      */
-    template <typename T>
-    static constexpr T host_to_network(T value) noexcept {
+    template <typename T> static constexpr T host_to_network(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl1(value);
     }
@@ -158,8 +148,7 @@ public:
      *
      * 网络序转主机序与主机序转网络序相同（对称操作）。
      */
-    template <typename T>
-    static constexpr T network_to_host(T value) noexcept {
+    template <typename T> static constexpr T network_to_host(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network(value);
     }
@@ -172,8 +161,7 @@ public:
      *
      * 小端序系统直接返回，大端序系统执行字节序反转。
      */
-    template <typename T>
-    static constexpr T host_to_le(T value) noexcept {
+    template <typename T> static constexpr T host_to_le(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl3(value);
     }
@@ -186,8 +174,7 @@ public:
      *
      * 小端序转主机序与主机序转小端序相同（对称操作）。
      */
-    template <typename T>
-    static constexpr T le_to_host(T value) noexcept {
+    template <typename T> static constexpr T le_to_host(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_le(value);
     }
@@ -200,8 +187,7 @@ public:
      *
      * 大端序系统直接返回，小端序系统执行字节序反转。
      */
-    template <typename T>
-    static constexpr T host_to_be(T value) noexcept {
+    template <typename T> static constexpr T host_to_be(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl1(value);
     }
@@ -214,8 +200,7 @@ public:
      *
      * 大端序转主机序与主机序转大端序相同（对称操作）。
      */
-    template <typename T>
-    static constexpr T be_to_host(T value) noexcept {
+    template <typename T> static constexpr T be_to_host(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_be(value);
     }
@@ -228,8 +213,7 @@ public:
      *
      * 强制反转字节序，不关心当前平台字节序。
      */
-    template <typename T>
-    static constexpr T swap_endian(T value) noexcept {
+    template <typename T> static constexpr T swap_endian(T value) noexcept {
         static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl2(value);
     }
@@ -240,8 +224,7 @@ public:
      * @return 读取的16位整数
      */
     static uint16_t read_le16(const byte_t* data) noexcept {
-        return static_cast<uint16_t>(data[0]) |
-              (static_cast<uint16_t>(data[1]) << 8);
+        return static_cast<uint16_t>(data[0]) | (static_cast<uint16_t>(data[1]) << 8);
     }
 
     /**
@@ -250,10 +233,8 @@ public:
      * @return 读取的32位整数
      */
     static uint32_t read_le32(const byte_t* data) noexcept {
-        return static_cast<uint32_t>(data[0]) |
-              (static_cast<uint32_t>(data[1]) << 8) |
-              (static_cast<uint32_t>(data[2]) << 16) |
-              (static_cast<uint32_t>(data[3]) << 24);
+        return static_cast<uint32_t>(data[0]) | (static_cast<uint32_t>(data[1]) << 8) |
+               (static_cast<uint32_t>(data[2]) << 16) | (static_cast<uint32_t>(data[3]) << 24);
     }
 
     /**
@@ -262,14 +243,10 @@ public:
      * @return 读取的64位整数
      */
     static uint64_t read_le64(const byte_t* data) noexcept {
-        return static_cast<uint64_t>(data[0]) |
-              (static_cast<uint64_t>(data[1]) << 8) |
-              (static_cast<uint64_t>(data[2]) << 16) |
-              (static_cast<uint64_t>(data[3]) << 24) |
-              (static_cast<uint64_t>(data[4]) << 32) |
-              (static_cast<uint64_t>(data[5]) << 40) |
-              (static_cast<uint64_t>(data[6]) << 48) |
-              (static_cast<uint64_t>(data[7]) << 56);
+        return static_cast<uint64_t>(data[0]) | (static_cast<uint64_t>(data[1]) << 8) |
+               (static_cast<uint64_t>(data[2]) << 16) | (static_cast<uint64_t>(data[3]) << 24) |
+               (static_cast<uint64_t>(data[4]) << 32) | (static_cast<uint64_t>(data[5]) << 40) |
+               (static_cast<uint64_t>(data[6]) << 48) | (static_cast<uint64_t>(data[7]) << 56);
     }
 
     /**
@@ -287,10 +264,8 @@ public:
      * @return 读取的32位整数
      */
     static uint32_t read_be32(const byte_t* data) noexcept {
-        return (static_cast<uint32_t>(data[0]) << 24) |
-               (static_cast<uint32_t>(data[1]) << 16) |
-               (static_cast<uint32_t>(data[2]) << 8) |
-                static_cast<uint32_t>(data[3]);
+        return (static_cast<uint32_t>(data[0]) << 24) | (static_cast<uint32_t>(data[1]) << 16) |
+               (static_cast<uint32_t>(data[2]) << 8) | static_cast<uint32_t>(data[3]);
     }
 
     /**
@@ -299,14 +274,10 @@ public:
      * @return 读取的64位整数
      */
     static uint64_t read_be64(const byte_t* data) noexcept {
-        return (static_cast<uint64_t>(data[0]) << 56) |
-               (static_cast<uint64_t>(data[1]) << 48) |
-               (static_cast<uint64_t>(data[2]) << 40) |
-               (static_cast<uint64_t>(data[3]) << 32) |
-               (static_cast<uint64_t>(data[4]) << 24) |
-               (static_cast<uint64_t>(data[5]) << 16) |
-               (static_cast<uint64_t>(data[6]) << 8)  |
-                static_cast<uint64_t>(data[7]);
+        return (static_cast<uint64_t>(data[0]) << 56) | (static_cast<uint64_t>(data[1]) << 48) |
+               (static_cast<uint64_t>(data[2]) << 40) | (static_cast<uint64_t>(data[3]) << 32) |
+               (static_cast<uint64_t>(data[4]) << 24) | (static_cast<uint64_t>(data[5]) << 16) |
+               (static_cast<uint64_t>(data[6]) << 8) | static_cast<uint64_t>(data[7]);
     }
 
     /**

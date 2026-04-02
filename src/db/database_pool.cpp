@@ -1,16 +1,19 @@
-#include <NeForce/db/database_pool.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/db/database_pool.hpp>
 #ifdef NEFORCE_SUPPORT_DB
-#include <NeForce/db/mysql/mysql_connect.hpp>
-#include <NeForce/db/pgsql/pgsql_connect.hpp>
-#include <NeForce/db/redis/redis_connect.hpp>
-#include <NeForce/db/sqlite/sqlite_connect.hpp>
+#    include <NeForce/db/mysql/mysql_connect.hpp>
+#    include <NeForce/db/pgsql/pgsql_connect.hpp>
+#    include <NeForce/db/redis/redis_connect.hpp>
+#    include <NeForce/db/sqlite/sqlite_connect.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-database_pool::database_pool(const db_type type, const db_config& config, const pool_config& pool_config)
-: config_(config), pool_cfg_(pool_config) {
-    if (pool_cfg_.min_size == 0) pool_cfg_.min_size = 1;
+database_pool::database_pool(const db_type type, const db_config& config, const pool_config& pool_config) :
+config_(config),
+pool_cfg_(pool_config) {
+    if (pool_cfg_.min_size == 0) {
+        pool_cfg_.min_size = 1;
+    }
     if (pool_cfg_.max_size < pool_cfg_.min_size) {
         pool_cfg_.max_size = pool_cfg_.min_size;
     }
@@ -60,20 +63,16 @@ database_pool::database_pool(const db_type type, const db_config& config, const 
             consecutive_failures = 0;
         } else {
             ++consecutive_failures;
-            printcfln(
-                color::yellow(),
-                "[database_pool] Connection attempt failed ({}/{})",
-                consecutive_failures, max_consecutive_failures);
+            printcfln(color::yellow(), "[database_pool] Connection attempt failed ({}/{})", consecutive_failures,
+                      max_consecutive_failures);
 
             if (consecutive_failures >= max_consecutive_failures) {
-                printcfln(
-                    color::red(),
-                    "[database_pool] Unable to establish initial connections, "
-                    "created {}/{}", created, pool_cfg_.init_size);
+                printcfln(color::red(),
+                          "[database_pool] Unable to establish initial connections, "
+                          "created {}/{}",
+                          created, pool_cfg_.init_size);
                 if (created == 0) {
-                    NEFORCE_THROW_EXCEPTION(
-                        database_exception("Failed to create any initial database connection")
-                    );
+                    NEFORCE_THROW_EXCEPTION(database_exception("Failed to create any initial database connection"));
                 }
                 break;
             }
@@ -85,43 +84,35 @@ database_pool::database_pool(const db_type type, const db_config& config, const 
     scanner_thread_ = thread([this] { scanner_task(); });
 }
 
-database_pool::~database_pool() {
-    stop();
-}
+database_pool::~database_pool() { stop(); }
 
-shared_ptr<idb_connect> database_pool::get_connect() {
-    return acquire_impl<idb_connect>();
-}
+shared_ptr<idb_connect> database_pool::get_connect() { return acquire_impl<idb_connect>(); }
 
-shared_ptr<idb_tb_connect> database_pool::get_tb_connect() {
-    return acquire_impl<idb_tb_connect>();
-}
+shared_ptr<idb_tb_connect> database_pool::get_tb_connect() { return acquire_impl<idb_tb_connect>(); }
 
-shared_ptr<idb_kv_connect> database_pool::get_kv_connect() {
-    return acquire_impl<idb_kv_connect>();
-}
+shared_ptr<idb_kv_connect> database_pool::get_kv_connect() { return acquire_impl<idb_kv_connect>(); }
 
 size_t database_pool::idle_count() const noexcept {
     unique_lock<mutex> lk(queue_mtx_);
     return idle_queue_.size();
 }
 
-size_t database_pool::total_count() const noexcept {
-    return total_count_.load(memory_order_acquire);
-}
+size_t database_pool::total_count() const noexcept { return total_count_.load(memory_order_acquire); }
 
 void database_pool::stop() {
     bool expected = true;
-    if (!running_.compare_exchange_strong(expected, false,
-                                          memory_order_acq_rel,
-                                          memory_order_acquire)) {
+    if (!running_.compare_exchange_strong(expected, false, memory_order_acq_rel, memory_order_acquire)) {
         return;
     }
 
     cv_.notify_all();
 
-    if (replenish_thread_.joinable()) replenish_thread_.join();
-    if (scanner_thread_.joinable())   scanner_thread_.join();
+    if (replenish_thread_.joinable()) {
+        replenish_thread_.join();
+    }
+    if (scanner_thread_.joinable()) {
+        scanner_thread_.join();
+    }
 
     unique_lock<mutex> lk(queue_mtx_);
     while (!idle_queue_.empty()) {
@@ -145,7 +136,9 @@ idb_connect* database_pool::try_create_connect() noexcept {
 }
 
 void database_pool::return_connect(idb_connect* conn) noexcept {
-    if (conn == nullptr) return;
+    if (conn == nullptr) {
+        return;
+    }
 
     if (!conn->is_valid()) {
         delete conn;
@@ -173,11 +166,12 @@ void database_pool::replenish_task() {
     while (running_.load(memory_order_acquire)) {
         unique_lock<mutex> lk(queue_mtx_);
 
-        cv_.wait(lk, [this] {
-            return !running_.load(memory_order_relaxed) || idle_queue_.size() < pool_cfg_.min_size;
-        });
+        cv_.wait(lk,
+                 [this] { return !running_.load(memory_order_relaxed) || idle_queue_.size() < pool_cfg_.min_size; });
 
-        if (!running_.load(memory_order_relaxed)) break;
+        if (!running_.load(memory_order_relaxed)) {
+            break;
+        }
 
         const size_t cur_total = total_count_.load(memory_order_relaxed);
         const size_t cur_idle = idle_queue_.size();
@@ -188,10 +182,14 @@ void database_pool::replenish_task() {
         lk.unlock_quiet();
 
         for (size_t i = 0; i < to_create; ++i) {
-            if (!running_.load(memory_order_relaxed)) return;
+            if (!running_.load(memory_order_relaxed)) {
+                return;
+            }
 
             idb_connect* conn = try_create_connect();
-            if (conn == nullptr) break;
+            if (conn == nullptr) {
+                break;
+            }
 
             total_count_.fetch_add(1, memory_order_relaxed);
 
@@ -208,12 +206,12 @@ void database_pool::scanner_task() {
     while (running_.load(memory_order_acquire)) {
         {
             unique_lock<mutex> lk(queue_mtx_);
-            cv_.wait_for(lk, pool_cfg_.max_idle_time / 2, [this] {
-                return !running_.load(memory_order_relaxed);
-            });
+            cv_.wait_for(lk, pool_cfg_.max_idle_time / 2, [this] { return !running_.load(memory_order_relaxed); });
         }
 
-        if (!running_.load(memory_order_relaxed)) break;
+        if (!running_.load(memory_order_relaxed)) {
+            break;
+        }
 
         unique_lock<mutex> lk(queue_mtx_);
 
@@ -222,7 +220,9 @@ void database_pool::scanner_task() {
             const connection_entry& front = idle_queue_.front();
 
             const bool timed_out = front.idle_duration() >= time_cast<milliseconds>(pool_cfg_.max_idle_time);
-            if (!timed_out) break;
+            if (!timed_out) {
+                break;
+            }
 
             delete front.conn;
             idle_queue_.pop();
@@ -233,10 +233,8 @@ void database_pool::scanner_task() {
         lk.unlock_quiet();
 
         if (removed > 0) {
-            printcfln(
-                color::gray(),
-                "[database_pool] Reclaimed {} idle connections, total={}",
-                removed, total_count_.load(memory_order_relaxed));
+            printcfln(color::gray(), "[database_pool] Reclaimed {} idle connections, total={}", removed,
+                      total_count_.load(memory_order_relaxed));
         }
     }
 }

@@ -1,6 +1,6 @@
 #include <NeForce/compress/lz4_compress.hpp>
 #ifdef NEFORCE_SUPPORT_LZ4
-#include <lz4hc.h>
+#    include <lz4hc.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size, const int level) {
@@ -13,22 +13,14 @@ byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size,
     int compressed_size = 0;
 
     if (level >= 1 && level <= 12) {
-        compressed_size = ::LZ4_compress_HC(
-            reinterpret_cast<const char*>(data),
-            reinterpret_cast<char*>(compressed.data()),
-            static_cast<int>(size),
-            max_compressed_size,
-            level
-        );
+        compressed_size =
+                ::LZ4_compress_HC(reinterpret_cast<const char*>(data), reinterpret_cast<char*>(compressed.data()),
+                                  static_cast<int>(size), max_compressed_size, level);
     } else {
         const int acceleration = (level > 12) ? (21 - level) : 1;
-        compressed_size = ::LZ4_compress_fast(
-            reinterpret_cast<const char*>(data),
-            reinterpret_cast<char*>(compressed.data()),
-            static_cast<int>(size),
-            max_compressed_size,
-            acceleration > 0 ? acceleration : 1
-        );
+        compressed_size =
+                ::LZ4_compress_fast(reinterpret_cast<const char*>(data), reinterpret_cast<char*>(compressed.data()),
+                                    static_cast<int>(size), max_compressed_size, acceleration > 0 ? acceleration : 1);
     }
 
     if (compressed_size <= 0) {
@@ -59,12 +51,9 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
             decompressed.resize(estimated_original_size);
         }
 
-        result = ::LZ4_decompress_safe(
-            reinterpret_cast<const char*>(data),
-            reinterpret_cast<char*>(decompressed.data()),
-            static_cast<int>(size),
-            static_cast<int>(decompressed.size())
-        );
+        result =
+                ::LZ4_decompress_safe(reinterpret_cast<const char*>(data), reinterpret_cast<char*>(decompressed.data()),
+                                      static_cast<int>(size), static_cast<int>(decompressed.size()));
 
         if (result > 0) {
             decompressed.resize(result);
@@ -82,9 +71,7 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
     return decompressed;
 }
 
-lz4_compressor::stream_compressor::stream_compressor(const int level) {
-    reset(level);
-}
+lz4_compressor::stream_compressor::stream_compressor(const int level) { reset(level); }
 
 lz4_compressor::stream_compressor::~stream_compressor() {
     if (stream_) {
@@ -92,16 +79,18 @@ lz4_compressor::stream_compressor::~stream_compressor() {
     }
 }
 
-lz4_compressor::stream_compressor::stream_compressor(stream_compressor&& other) noexcept
-: stream_(other.stream_), use_hc_(other.use_hc_), level_(other.level_),
-  bytes_input_(other.bytes_input_), bytes_output_(other.bytes_output_) {
+lz4_compressor::stream_compressor::stream_compressor(stream_compressor&& other) noexcept :
+stream_(other.stream_),
+use_hc_(other.use_hc_),
+level_(other.level_),
+bytes_input_(other.bytes_input_),
+bytes_output_(other.bytes_output_) {
     other.stream_ = nullptr;
     other.bytes_input_ = 0;
     other.bytes_output_ = 0;
 }
 
-lz4_compressor::stream_compressor&
-lz4_compressor::stream_compressor::operator =(stream_compressor&& other) noexcept {
+lz4_compressor::stream_compressor& lz4_compressor::stream_compressor::operator=(stream_compressor&& other) noexcept {
     if (this != &other) {
         if (stream_) {
             ::LZ4_freeStream(stream_);
@@ -156,23 +145,14 @@ byte_vector lz4_compressor::stream_compressor::compress(const cbyte_view& data, 
 
         int compressed_size = 0;
         if (use_hc_) {
-            compressed_size = ::LZ4_compress_HC(
-                reinterpret_cast<const char*>(data.data()),
-                reinterpret_cast<char*>(output.data()),
-                static_cast<int>(data.size()),
-                max_compressed_size,
-                level_
-            );
+            compressed_size = ::LZ4_compress_HC(reinterpret_cast<const char*>(data.data()),
+                                                reinterpret_cast<char*>(output.data()), static_cast<int>(data.size()),
+                                                max_compressed_size, level_);
         } else {
             const int acceleration = (level_ > 12) ? (21 - level_) : 1;
             compressed_size = ::LZ4_compress_fast_continue(
-                stream_,
-                reinterpret_cast<const char*>(data.data()),
-                reinterpret_cast<char*>(output.data()),
-                static_cast<int>(data.size()),
-                max_compressed_size,
-                acceleration > 0 ? acceleration : 1
-            );
+                    stream_, reinterpret_cast<const char*>(data.data()), reinterpret_cast<char*>(output.data()),
+                    static_cast<int>(data.size()), max_compressed_size, acceleration > 0 ? acceleration : 1);
         }
 
         if (compressed_size <= 0) {
@@ -204,9 +184,7 @@ byte_vector lz4_compressor::stream_compressor::finish() {
     return byte_vector{};
 }
 
-lz4_compressor::stream_decompressor::stream_decompressor() {
-    reset();
-}
+lz4_compressor::stream_decompressor::stream_decompressor() { reset(); }
 
 lz4_compressor::stream_decompressor::~stream_decompressor() {
     if (stream_) {
@@ -214,15 +192,17 @@ lz4_compressor::stream_decompressor::~stream_decompressor() {
     }
 }
 
-lz4_compressor::stream_decompressor::stream_decompressor(stream_decompressor&& other) noexcept
-: stream_(other.stream_), bytes_input_(other.bytes_input_), bytes_output_(other.bytes_output_) {
+lz4_compressor::stream_decompressor::stream_decompressor(stream_decompressor&& other) noexcept :
+stream_(other.stream_),
+bytes_input_(other.bytes_input_),
+bytes_output_(other.bytes_output_) {
     other.stream_ = nullptr;
     other.bytes_input_ = 0;
     other.bytes_output_ = 0;
 }
 
 lz4_compressor::stream_decompressor&
-lz4_compressor::stream_decompressor::operator =(stream_decompressor&& other) noexcept {
+lz4_compressor::stream_decompressor::operator=(stream_decompressor&& other) noexcept {
     if (this != &other) {
         if (stream_) {
             ::LZ4_freeStreamDecode(stream_);
@@ -267,12 +247,8 @@ byte_vector lz4_compressor::stream_decompressor::decompress(const byte_view& dat
         output.resize(block_size);
 
         const int decompressed_size = ::LZ4_decompress_safe_continue(
-            stream_,
-            reinterpret_cast<const char*>(data.data()),
-            reinterpret_cast<char*>(output.data()),
-            static_cast<int>(data.size()),
-            static_cast<int>(output.size())
-        );
+                stream_, reinterpret_cast<const char*>(data.data()), reinterpret_cast<char*>(output.data()),
+                static_cast<int>(data.size()), static_cast<int>(output.size()));
 
         if (decompressed_size < 0) {
             NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 stream decompression failed"));

@@ -21,7 +21,7 @@ void http_filter_chain::clear() noexcept {
     if (owns_filters_) {
         filters_.clear();
     } else {
-        for (auto& filter : filters_) {
+        for (auto& filter: filters_) {
             filter.release();
         }
         filters_.clear();
@@ -29,7 +29,7 @@ void http_filter_chain::clear() noexcept {
 }
 
 bool http_filter_chain::execute_pre_filters(http_request& request, http_response& response) {
-    for (const auto& filter : filters_) {
+    for (const auto& filter: filters_) {
         if (!filter) {
             continue;
         }
@@ -66,7 +66,7 @@ void http_filter_chain::execute_post_filters(http_request& request, http_respons
 }
 
 void http_filter_chain::execute_filters(http_request& request, http_response& response) {
-    for (const auto& filter : filters_) {
+    for (const auto& filter: filters_) {
         if (!filter) {
             continue;
         }
@@ -103,8 +103,7 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
 
 bool logging_filter::pre_filter(http_request& request, http_response& response) {
     string log_msg =
-        "[" + datetime::now().to_string() + "] Request: " +
-        request.method.to_string() + " " + request.path;
+            "[" + datetime::now().to_string() + "] Request: " + request.method.to_string() + " " + request.path;
 
     if (!request.query.empty()) {
         log_msg += "?" + request.query;
@@ -112,7 +111,7 @@ bool logging_filter::pre_filter(http_request& request, http_response& response) 
 
     if (log_headers && !request.headers.empty()) {
         log_msg += "\n  Headers:";
-        for (const auto& pair : request.headers) {
+        for (const auto& pair: request.headers) {
             const string key = pair.first;
             const string value = pair.second;
             log_msg += "\n" + move(key) + ": " + move(value);
@@ -136,9 +135,7 @@ bool logging_filter::pre_filter(http_request& request, http_response& response) 
 void logging_filter::post_filter(http_request& request, http_response& response) {
     using UT = underlying_type_t<HTTP_STATUS>;
 
-    string log_msg =
-        "[" + datetime::now().to_string() + "] Response: " +
-        to_string(static_cast<UT>(response.status));
+    string log_msg = "[" + datetime::now().to_string() + "] Response: " + to_string(static_cast<UT>(response.status));
 
     if (!response.status_message.empty()) {
         log_msg += " " + response.status_message;
@@ -146,7 +143,7 @@ void logging_filter::post_filter(http_request& request, http_response& response)
 
     if (log_headers && !response.headers.empty()) {
         log_msg += "\nHeaders:";
-        for (const auto& pair : response.headers) {
+        for (const auto& pair: response.headers) {
             const string key = pair.first;
             const string value = pair.second;
             log_msg += "\n" + key + ": " + value;
@@ -165,8 +162,8 @@ void logging_filter::post_filter(http_request& request, http_response& response)
     println(log_msg);
 }
 
-static_file_filter::static_file_filter(string root_path)
-: root_path_(_NEFORCE move(root_path)) {
+static_file_filter::static_file_filter(string root_path) :
+root_path_(_NEFORCE move(root_path)) {
     if (!root_path_.empty() && !root_path_.ends_with("/")) {
         root_path_ += "/";
     }
@@ -185,7 +182,7 @@ static_file_filter::static_file_filter(string root_path)
 }
 
 optional<HTTP_CONTENT> static_file_filter::get_mime_type(const string& path) const {
-    for (const auto& mime : mime_types_) {
+    for (const auto& mime: mime_types_) {
         const auto& ext = mime.first;
         auto type = mime.second;
         if (path.ends_with(ext.view())) {
@@ -241,9 +238,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             return false;
         }
 
-        const bool is_binary = mime_type->is_jpeg_img() ||
-                               mime_type->is_png_img() ||
-                               mime_type->is_bmp_img() ||
+        const bool is_binary = mime_type->is_jpeg_img() || mime_type->is_png_img() || mime_type->is_bmp_img() ||
                                mime_type->is_webp_img();
 
         if (is_binary) {
@@ -323,7 +318,7 @@ void rate_limit_filter::cleanup_old_entries() {
 }
 
 bool authentication_filter::is_path_excluded(const string& path) const {
-    for (const auto& excluded : excluded_paths_) {
+    for (const auto& excluded: excluded_paths_) {
         if (path == excluded || path.starts_with(excluded)) {
             return true;
         }

@@ -1,44 +1,43 @@
 #include <NeForce/core/async/semaphore.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <handleapi.h>
-#include <windef.h>
-#include <WinBase.h>
+#    include <WinBase.h>
+#    include <handleapi.h>
+#    include <windef.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
-    template <typename Rep, typename Period>
-    struct timespec relative_to_timespec(const nanoseconds relative) noexcept {
+    template <typename Rep, typename Period> struct timespec relative_to_timespec(const nanoseconds relative) noexcept {
         struct ::timespec now{};
         ::clock_gettime(CLOCK_REALTIME, &now);
 
         auto total_ns = relative.count();
-        if (total_ns < 0) total_ns = 0;
+        if (total_ns < 0) {
+            total_ns = 0;
+        }
 
         constexpr long kNsPerSec = 1'000'000'000L;
-        now.tv_sec  += static_cast<::time_t>(total_ns / kNsPerSec);
+        now.tv_sec += static_cast<::time_t>(total_ns / kNsPerSec);
         now.tv_nsec += static_cast<long>(total_ns % kNsPerSec);
 
         if (now.tv_nsec >= kNsPerSec) {
-            now.tv_sec  += 1;
+            now.tv_sec += 1;
             now.tv_nsec -= kNsPerSec;
         }
         return now;
     }
 #endif
-}
+} // namespace
 
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 bool semaphore::try_acquire_for_impl(const milliseconds timeout) noexcept {
     auto ms = timeout.count();
-    if (ms < 0) ms = 0;
-    const ::DWORD result = ::WaitForSingleObjectEx(
-        handle_,
-        static_cast<::DWORD>(ms),
-        FALSE
-    );
+    if (ms < 0) {
+        ms = 0;
+    }
+    const ::DWORD result = ::WaitForSingleObjectEx(handle_, static_cast<::DWORD>(ms), FALSE);
     return result == WAIT_OBJECT_0;
 }
 #else
@@ -57,12 +56,7 @@ semaphore::semaphore(long initial, long maximum) {
     NEFORCE_CONSTEXPR_ASSERT(maximum >= initial);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    handle_ = ::CreateSemaphoreW(
-        nullptr,
-        initial,
-        maximum,
-        nullptr
-    );
+    handle_ = ::CreateSemaphoreW(nullptr, initial, maximum, nullptr);
     if (handle_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateSemaphoreW failed"));
     }

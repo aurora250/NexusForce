@@ -1,8 +1,8 @@
 #ifndef NEFORCE_DATABASE_PGSQL_RESULT_HPP__
 #define NEFORCE_DATABASE_PGSQL_RESULT_HPP__
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#include "NeForce/db/db_interface.hpp"
-#include <libpq-fe.h>
+#    include <libpq-fe.h>
+#    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API pgsql_tb_result final : public idb_tb_result {
@@ -19,7 +19,7 @@ public:
     ~pgsql_tb_result() override;
 
     pgsql_tb_result(const pgsql_tb_result&) = delete;
-    pgsql_tb_result& operator =(const pgsql_tb_result&) = delete;
+    pgsql_tb_result& operator=(const pgsql_tb_result&) = delete;
 
     NEFORCE_NODISCARD bool empty() const noexcept override { return row_count_ == 0; }
     bool is_null(size_type index) const;

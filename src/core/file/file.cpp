@@ -1,18 +1,18 @@
 #include <NeForce/core/file/file.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/stat.h>
-#include <string.h>
-#include <errno.h>
-#include <unistd.h>
+#    include <errno.h>
+#    include <string.h>
+#    include <sys/stat.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     const file::native_handle_type invalid_handle =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        INVALID_HANDLE_VALUE;
+            INVALID_HANDLE_VALUE;
 #else
-        -1;
+            -1;
 #endif
 
     string get_last_error_msg() {
@@ -22,10 +22,10 @@ namespace {
             return {};
         }
         ::LPSTR message_buffer = nullptr;
-        const auto size = ::FormatMessageA(
-            FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-            nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-            reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
+        const auto size = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+                                                   FORMAT_MESSAGE_IGNORE_INSERTS,
+                                           nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                                           reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
 
         string message(message_buffer, size);
         ::LocalFree(message_buffer);
@@ -48,10 +48,11 @@ namespace {
         return mode;
     }
 #endif
-}
+} // namespace
 
 
-file::line_iterator::line_iterator(const file* f) : file_(f) {
+file::line_iterator::line_iterator(const file* f) :
+file_(f) {
     if (file_ && file_->is_opened()) {
         ++(*this);
     }
@@ -71,17 +72,13 @@ file::line_iterator file::line_iterator::operator++(int) {
 }
 
 bool file::flush_write_buffer() const noexcept {
-    if (write_buffer_pos_ == 0) return true;
+    if (write_buffer_pos_ == 0) {
+        return true;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     size_type bytes_written;
-    const ::BOOL success = ::WriteFile(
-        handle_,
-        write_buffer_.data(),
-        write_buffer_pos_,
-        &bytes_written,
-        nullptr
-    );
+    const ::BOOL success = ::WriteFile(handle_, write_buffer_.data(), write_buffer_pos_, &bytes_written, nullptr);
 
     if (!success || bytes_written != write_buffer_pos_) {
         return false;
@@ -90,14 +87,13 @@ bool file::flush_write_buffer() const noexcept {
 #else
     ssize_t total_written = 0;
     while (total_written < static_cast<ssize_t>(write_buffer_pos_)) {
-        const ssize_t bytes_written = ::write(
-            handle_,
-            write_buffer_.data() + total_written,
-            write_buffer_pos_ - total_written
-        );
+        const ssize_t bytes_written =
+                ::write(handle_, write_buffer_.data() + total_written, write_buffer_pos_ - total_written);
 
         if (bytes_written == -1) {
-            if (errno == EINTR) continue;
+            if (errno == EINTR) {
+                continue;
+            }
             return false;
         }
         total_written += bytes_written;
@@ -116,11 +112,8 @@ bool file::fill_read_buffer() const noexcept {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     size_type bytes_read;
-    const ::BOOL success = ::ReadFile(
-        handle_, read_buffer_.data(),
-        static_cast<::DWORD>(buffer_size_),
-        &bytes_read, nullptr
-    );
+    const ::BOOL success =
+            ::ReadFile(handle_, read_buffer_.data(), static_cast<::DWORD>(buffer_size_), &bytes_read, nullptr);
 
     if (!success) {
         read_buffer_size_ = 0;
@@ -169,7 +162,9 @@ void file::set_last_error() const {
 }
 
 void file::adjust_buffer_size() {
-    if (!opened_ || handle_ == invalid_handle) return;
+    if (!opened_ || handle_ == invalid_handle) {
+        return;
+    }
 
     const size_type file_sz = size();
 
@@ -189,29 +184,27 @@ void file::adjust_buffer_size() {
     write_buffer_.resize(buffer_size_);
 }
 
-file::file()
-: handle_(invalid_handle) {}
+file::file() :
+handle_(invalid_handle) {}
 
-file::file(path pth, const bool append,
-           const file_access access,
-           const file_shared share_mode, const file_creation creation,
-           const file_attri attributes)
-: path_(move(pth)) {
+file::file(path pth, const bool append, const file_access access, const file_shared share_mode,
+           const file_creation creation, const file_attri attributes) :
+path_(move(pth)) {
     open(path_, append, access, share_mode, creation, attributes);
 }
 
-file::file(file&& other) noexcept
-: handle_(other.handle_),
-  path_(move(other.path_)),
-  opened_(other.opened_),
-  append_mode_(other.append_mode_),
-  read_buffer_(move(other.read_buffer_)),
-  read_buffer_pos_(other.read_buffer_pos_),
-  read_buffer_size_(other.read_buffer_size_),
-  write_buffer_(move(other.write_buffer_)),
-  write_buffer_pos_(other.write_buffer_pos_),
-  last_error_msg_(move(other.last_error_msg_)),
-  last_error_code_(other.last_error_code_) {
+file::file(file&& other) noexcept :
+handle_(other.handle_),
+path_(move(other.path_)),
+opened_(other.opened_),
+append_mode_(other.append_mode_),
+read_buffer_(move(other.read_buffer_)),
+read_buffer_pos_(other.read_buffer_pos_),
+read_buffer_size_(other.read_buffer_size_),
+write_buffer_(move(other.write_buffer_)),
+write_buffer_pos_(other.write_buffer_pos_),
+last_error_msg_(move(other.last_error_msg_)),
+last_error_code_(other.last_error_code_) {
     other.handle_ = invalid_handle;
     other.opened_ = false;
     other.append_mode_ = false;
@@ -224,8 +217,10 @@ file::file(file&& other) noexcept
     other.last_error_code_ = 0;
 }
 
-file& file::operator =(file&& other) noexcept {
-    if (this == addressof(other)) return *this;
+file& file::operator=(file&& other) noexcept {
+    if (this == addressof(other)) {
+        return *this;
+    }
 
     close();
     handle_ = other.handle_;
@@ -251,13 +246,10 @@ file& file::operator =(file&& other) noexcept {
     return *this;
 }
 
-file::~file() {
-    close();
-}
+file::~file() { close(); }
 
-bool file::open(path pth, const bool append,
-                file_access access, file_shared share_mode,
-                file_creation creation, file_attri attributes) {
+bool file::open(path pth, const bool append, file_access access, file_shared share_mode, file_creation creation,
+                file_attri attributes) {
     close();
     clear_error();
 
@@ -268,15 +260,8 @@ bool file::open(path pth, const bool append,
     write_buffer_pos_ = 0;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    handle_ = ::CreateFileA(
-        pth.data(),
-        static_cast<fud_t>(access),
-        static_cast<fud_t>(share_mode),
-        nullptr,
-        static_cast<fud_t>(creation),
-        static_cast<fud_t>(attributes),
-        nullptr
-    );
+    handle_ = ::CreateFileA(pth.data(), static_cast<fud_t>(access), static_cast<fud_t>(share_mode), nullptr,
+                            static_cast<fud_t>(creation), static_cast<fud_t>(attributes), nullptr);
 
 #else
     auto flags = static_cast<fud_t>(access);
@@ -342,16 +327,15 @@ bool file::open(path pth, const bool append,
     return true;
 }
 
-bool file::open(const bool append,
-                const file_access access,
-                const file_shared share_mode,
-                const file_creation creation,
+bool file::open(const bool append, const file_access access, const file_shared share_mode, const file_creation creation,
                 const file_attri attributes) {
     return open(path_, append, access, share_mode, creation, attributes);
 }
 
 void file::close() noexcept {
-    if (!opened_) return;
+    if (!opened_) {
+        return;
+    }
 
     flush_write_buffer();
     reset_sub_objects();
@@ -372,8 +356,12 @@ void file::close() noexcept {
 }
 
 bool file::flush() noexcept {
-    if (!opened_ || handle_ == invalid_handle) return false;
-    if (!flush_write_buffer()) return false;
+    if (!opened_ || handle_ == invalid_handle) {
+        return false;
+    }
+    if (!flush_write_buffer()) {
+        return false;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::FlushFileBuffers(handle_) != 0;
@@ -383,18 +371,22 @@ bool file::flush() noexcept {
 }
 
 file::size_type file::write(const string& data, const size_type size) {
-    if (!opened_ || handle_ == invalid_handle) return 0;
+    if (!opened_ || handle_ == invalid_handle) {
+        return 0;
+    }
     const size_type real_size = size > data.size() ? data.size() : size;
     return write(data.data(), real_size);
 }
 
-file::size_type file::write(const string& data) {
-    return write(data, data.size());
-}
+file::size_type file::write(const string& data) { return write(data, data.size()); }
 
 file::size_type file::write(const void* data, const size_type size) {
-    if (!opened_ || handle_ == invalid_handle || !data) return 0;
-    if (size == 0) return 0;
+    if (!opened_ || handle_ == invalid_handle || !data) {
+        return 0;
+    }
+    if (size == 0) {
+        return 0;
+    }
 
     if (append_mode_ && !seek(0, file_pointer::END)) {
         set_last_error();
@@ -402,7 +394,9 @@ file::size_type file::write(const void* data, const size_type size) {
     }
 
     if (size > buffer_size_ * 4) {
-        if (!flush_write_buffer()) return 0;
+        if (!flush_write_buffer()) {
+            return 0;
+        }
 
         size_type total_written = 0;
         const auto ptr = static_cast<const byte_t*>(data);
@@ -410,10 +404,7 @@ file::size_type file::write(const void* data, const size_type size) {
         while (total_written < size) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             size_type bytes_written = 0;
-            const size_type to_write = min<size_type>(
-                size - total_written,
-                numeric_traits<size_type>::max()
-            );
+            const size_type to_write = min<size_type>(size - total_written, numeric_traits<size_type>::max());
 
             if (!::WriteFile(handle_, ptr + total_written, to_write, &bytes_written, nullptr)) {
                 set_last_error();
@@ -421,18 +412,24 @@ file::size_type file::write(const void* data, const size_type size) {
             }
 
             total_written += bytes_written;
-            if (bytes_written != to_write) break;
+            if (bytes_written != to_write) {
+                break;
+            }
 
 #else
             const ssize_t written = ::write(handle_, ptr + total_written, size - total_written);
 
             if (written == -1) {
-                if (errno == EINTR) continue;
+                if (errno == EINTR) {
+                    continue;
+                }
                 set_last_error();
                 break;
             }
 
-            if (written == 0) break;
+            if (written == 0) {
+                break;
+            }
             total_written += static_cast<size_type>(written);
 
 #endif
@@ -464,16 +461,24 @@ file::size_type file::write(const void* data, const size_type size) {
 }
 
 file::size_type file::read(string& out, const size_type size) const {
-    if (!opened_ || handle_ == invalid_handle) return 0;
+    if (!opened_ || handle_ == invalid_handle) {
+        return 0;
+    }
     out.clear();
-    if (size == 0) return 0;
+    if (size == 0) {
+        return 0;
+    }
     out.resize(size);
     return read(out.data(), size);
 }
 
 file::size_type file::read(void* buffer, const size_type size) const {
-    if (!opened_ || handle_ == invalid_handle || !buffer) return 0;
-    if (size == 0) return 0;
+    if (!opened_ || handle_ == invalid_handle || !buffer) {
+        return 0;
+    }
+    if (size == 0) {
+        return 0;
+    }
 
     auto ptr = static_cast<char*>(buffer);
     size_type total_read = 0;
@@ -499,35 +504,47 @@ file::size_type file::read(void* buffer, const size_type size) const {
     return total_read;
 }
 
-file::size_type file::read(string& out) const {
-    return read(out, out.size());
-}
+file::size_type file::read(string& out) const { return read(out, out.size()); }
 
 string file::read() const {
-    if (!opened_ || handle_ == invalid_handle) return {};
+    if (!opened_ || handle_ == invalid_handle) {
+        return {};
+    }
 
     const size_type file_size = size();
-    if (file_size == 0) return {};
+    if (file_size == 0) {
+        return {};
+    }
 
     const difference_type current_pos = tell();
-    if (!seek(0, file_pointer::BEGIN)) return {};
+    if (!seek(0, file_pointer::BEGIN)) {
+        return {};
+    }
 
     string content;
     content.resize(file_size);
     const size_type bytes_read = read(content, file_size);
 
-    if (!seek(current_pos, file_pointer::BEGIN)) return {};
+    if (!seek(current_pos, file_pointer::BEGIN)) {
+        return {};
+    }
 
-    if (bytes_read != file_size) content.resize(bytes_read);
+    if (bytes_read != file_size) {
+        content.resize(bytes_read);
+    }
     return content;
 }
 
 vector<string> file::read_chunks(const size_type chunk_size) const {
     vector<string> chunks;
-    if (!opened_ || handle_ == invalid_handle) return chunks;
+    if (!opened_ || handle_ == invalid_handle) {
+        return chunks;
+    }
 
     const size_type file_sz = size();
-    if (file_sz == 0) return chunks;
+    if (file_sz == 0) {
+        return chunks;
+    }
 
     const difference_type original_pos = tell();
     if (original_pos == static_cast<difference_type>(-1)) {
@@ -557,27 +574,30 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
             while (bytes_read < to_read) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
                 size_type bytes_read_now = 0;
-                const size_type to_read_now = min<size_type>(
-                    to_read - bytes_read,
-                    numeric_traits<size_type>::max()
-                );
+                const size_type to_read_now = min<size_type>(to_read - bytes_read, numeric_traits<size_type>::max());
 
                 if (!::ReadFile(handle_, data + bytes_read, to_read_now, &bytes_read_now, nullptr)) {
                     set_last_error();
                     break;
                 }
                 bytes_read += bytes_read_now;
-                if (bytes_read_now == 0) break;
+                if (bytes_read_now == 0) {
+                    break;
+                }
 
 #else
                 const ssize_t bytes_read_now = ::read(handle_, data + bytes_read, to_read - bytes_read);
                 if (bytes_read_now == -1) {
-                    if (errno == EINTR) continue;
+                    if (errno == EINTR) {
+                        continue;
+                    }
                     set_last_error();
                     break;
                 }
 
-                if (bytes_read_now == 0) break;
+                if (bytes_read_now == 0) {
+                    break;
+                }
                 bytes_read += static_cast<size_type>(bytes_read_now);
 #endif
             }
@@ -601,14 +621,16 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
         remaining -= chunk.size();
     }
 
-    if(!seek(original_pos, file_pointer::BEGIN)) {
+    if (!seek(original_pos, file_pointer::BEGIN)) {
         set_last_error();
     }
     return chunks;
 }
 
 bool file::write_chunks(const vector<string>& chunks) {
-    if (!opened_ || handle_ == invalid_handle) return false;
+    if (!opened_ || handle_ == invalid_handle) {
+        return false;
+    }
 
     const difference_type original_pos = tell();
 
@@ -624,8 +646,10 @@ bool file::write_chunks(const vector<string>& chunks) {
     bool success = true;
     size_type total_written = 0;
 
-    for (const auto& chunk : chunks) {
-        if (chunk.empty()) continue;
+    for (const auto& chunk: chunks) {
+        if (chunk.empty()) {
+            continue;
+        }
 
         const char* data = chunk.data();
         size_type remaining = chunk.size();
@@ -639,14 +663,10 @@ bool file::write_chunks(const vector<string>& chunks) {
                 }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-                const size_type to_write = min<size_type>(
-                    remaining,
-                    numeric_traits<size_type>::max()
-                );
+                const size_type to_write = min<size_type>(remaining, numeric_traits<size_type>::max());
                 size_type written_now = 0;
 
-                if (!::WriteFile(handle_, data + (chunk.size() - remaining),
-                    to_write, &written_now, nullptr)) {
+                if (!::WriteFile(handle_, data + (chunk.size() - remaining), to_write, &written_now, nullptr)) {
                     set_last_error();
                     success = false;
                     break;
@@ -654,11 +674,12 @@ bool file::write_chunks(const vector<string>& chunks) {
                 bytes_written = written_now;
 
 #else
-                const ssize_t written_now =
-                    ::write(handle_, data + (chunk.size() - remaining), remaining);
+                const ssize_t written_now = ::write(handle_, data + (chunk.size() - remaining), remaining);
 
                 if (written_now == -1) {
-                    if (errno == EINTR) continue;
+                    if (errno == EINTR) {
+                        continue;
+                    }
                     set_last_error();
                     success = false;
                     break;
@@ -677,14 +698,15 @@ bool file::write_chunks(const vector<string>& chunks) {
             remaining -= bytes_written;
             total_written += bytes_written;
         }
-        if (!success) break;
+        if (!success) {
+            break;
+        }
     }
 
     if (!flush()) {
         success = false;
     }
-    if (!append_mode_ && original_pos >= 0 &&
-        !seek(original_pos, file_pointer::BEGIN)) {
+    if (!append_mode_ && original_pos >= 0 && !seek(original_pos, file_pointer::BEGIN)) {
         set_last_error();
     }
     return success;
@@ -701,7 +723,9 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
     }
 
     const size_type file_sz = size();
-    if (file_sz == 0) return info;
+    if (file_sz == 0) {
+        return info;
+    }
 
     const size_type num_chunks = (file_sz + chunk_size - 1) / chunk_size;
     info.reserve(num_chunks);
@@ -718,7 +742,9 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
         ci.size = min(remaining, chunk_size);
         info.push_back(ci);
 
-        if (file_sz - offset < ci.size) break;
+        if (file_sz - offset < ci.size) {
+            break;
+        }
         offset += ci.size;
         ++index;
     }
@@ -727,8 +753,12 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
 }
 
 file::size_type file::read_binary(void* out, const size_type size) const {
-    if (!opened_ || handle_ == invalid_handle || !out) return 0;
-    if (size == 0) return 0;
+    if (!opened_ || handle_ == invalid_handle || !out) {
+        return 0;
+    }
+    if (size == 0) {
+        return 0;
+    }
 
     auto ptr = static_cast<byte_t*>(out);
     size_type total_read = 0;
@@ -754,7 +784,9 @@ file::size_type file::read_binary(void* out, const size_type size) const {
 }
 
 file::size_type file::read_binary(string& out, const size_type size) const {
-    if (!opened_ || handle_ == invalid_handle) return 0;
+    if (!opened_ || handle_ == invalid_handle) {
+        return 0;
+    }
     if (size == 0) {
         out.clear();
         return 0;
@@ -774,7 +806,9 @@ file::size_type file::read_binary(string& out) const {
 }
 
 string file::read_binary() const {
-    if (!opened_ || handle_ == invalid_handle) return {};
+    if (!opened_ || handle_ == invalid_handle) {
+        return {};
+    }
 
     const size_type sz = size();
     string content;
@@ -782,13 +816,17 @@ string file::read_binary() const {
 
     if (sz > 0) {
         const size_type bytes_read = read_binary(content, sz);
-        if (bytes_read != sz) content.resize(bytes_read);
+        if (bytes_read != sz) {
+            content.resize(bytes_read);
+        }
     }
     return content;
 }
 
 bool file::read_line(string& line) const {
-    if (!opened_ || handle_ == invalid_handle) return false;
+    if (!opened_ || handle_ == invalid_handle) {
+        return false;
+    }
 
     line.clear();
     bool found_eol = false;
@@ -823,16 +861,22 @@ bool file::read_line(string& line) const {
 
 string file::read_line() const {
     string line;
-    if (!read_line(line)) return {};
+    if (!read_line(line)) {
+        return {};
+    }
     return line;
 }
 
 vector<string> file::read_lines() const {
     vector<string> lines;
-    if (!opened_ || handle_ == invalid_handle) return lines;
+    if (!opened_ || handle_ == invalid_handle) {
+        return lines;
+    }
 
     const string content = read();
-    if (content.empty()) return lines;
+    if (content.empty()) {
+        return lines;
+    }
 
     size_t start = 0;
     size_t end = content.find('\n');
@@ -900,11 +944,15 @@ uint64_t file::size64() const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER sz{};
-    if (!::GetFileSizeEx(handle_, &sz)) return 0;
+    if (!::GetFileSizeEx(handle_, &sz)) {
+        return 0;
+    }
     return static_cast<uint64_t>(sz.QuadPart);
 #else
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return 0;
+    if (::fstat64(handle_, &st) == -1) {
+        return 0;
+    }
     return static_cast<uint64_t>(st.st_size);
 #endif
 }
@@ -915,7 +963,9 @@ void file::clear_error() noexcept {
 }
 
 bool file::seek(const difference_type distance, file_pointer method) const noexcept {
-    if (!opened_ || handle_ == invalid_handle) return false;
+    if (!opened_ || handle_ == invalid_handle) {
+        return false;
+    }
 
     if (append_mode_) {
         if (method != file_pointer::END || distance != 0) {
@@ -998,7 +1048,9 @@ file::difference_type file::tell() const noexcept {
 }
 
 file::difference_type file::system_tell() const noexcept {
-    if (!opened_ || handle_ == invalid_handle) return -1;
+    if (!opened_ || handle_ == invalid_handle) {
+        return -1;
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::LARGE_INTEGER li_zero{};
@@ -1046,14 +1098,10 @@ bool file::prefetch(const size_type hint_size) const noexcept {
         return false;
     }
 
-    const ::ULARGE_INTEGER start_offset = {
-        static_cast<size_type>(current_pos & 0xFFFFFFFF),
-        static_cast<size_type>(current_pos >> 32)
-    };
-    const ::ULARGE_INTEGER end_offset = {
-        static_cast<size_type>(file_size.QuadPart & 0xFFFFFFFF),
-        static_cast<size_type>(file_size.QuadPart >> 32)
-    };
+    const ::ULARGE_INTEGER start_offset = {static_cast<size_type>(current_pos & 0xFFFFFFFF),
+                                           static_cast<size_type>(current_pos >> 32)};
+    const ::ULARGE_INTEGER end_offset = {static_cast<size_type>(file_size.QuadPart & 0xFFFFFFFF),
+                                         static_cast<size_type>(file_size.QuadPart >> 32)};
 
     size_type region_size = prefetch_size;
     if (start_offset.QuadPart + region_size > end_offset.QuadPart) {
@@ -1064,42 +1112,25 @@ bool file::prefetch(const size_type hint_size) const noexcept {
         return true;
     }
 
-    const ::HANDLE hMapping = ::CreateFileMappingA(
-        handle_,
-        nullptr,
-        PAGE_READONLY,
-        0, 0,
-        nullptr
-    );
+    const ::HANDLE hMapping = ::CreateFileMappingA(handle_, nullptr, PAGE_READONLY, 0, 0, nullptr);
 
     if (!hMapping || hMapping == invalid_handle) {
         set_last_error();
         return false;
     }
 
-    void* pView = ::MapViewOfFile(
-        hMapping,
-        FILE_MAP_READ,
-        start_offset.HighPart,
-        start_offset.LowPart,
-        region_size
-    );
+    void* pView = ::MapViewOfFile(hMapping, FILE_MAP_READ, start_offset.HighPart, start_offset.LowPart, region_size);
 
     if (pView) {
         ::WIN32_MEMORY_RANGE_ENTRY range{pView, region_size};
         const ::HMODULE hKernel32 = ::GetModuleHandleA("kernel32.dll");
         if (hKernel32) {
-            using PFN_PrefetchVirtualMemory = ::BOOL(__stdcall*)(
-                ::HANDLE hProcess,
-                ::ULONG_PTR NumberOfEntries,
-                ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses,
-                ::ULONG Flags
-            );
+            using PFN_PrefetchVirtualMemory =
+                    ::BOOL(__stdcall*)(::HANDLE hProcess, ::ULONG_PTR NumberOfEntries,
+                                       ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses, ::ULONG Flags);
 
             static auto pfnPrefetchVirtualMemory =
-                reinterpret_cast<PFN_PrefetchVirtualMemory>(
-                    ::GetProcAddress(hKernel32, "PrefetchVirtualMemory")
-                );
+                    reinterpret_cast<PFN_PrefetchVirtualMemory>(::GetProcAddress(hKernel32, "PrefetchVirtualMemory"));
             if (pfnPrefetchVirtualMemory) {
                 if (pfnPrefetchVirtualMemory(::GetCurrentProcess(), 1, &range, 0)) {
                     ::UnmapViewOfFile(pView);
@@ -1118,12 +1149,8 @@ bool file::prefetch(const size_type hint_size) const noexcept {
 #else
     const difference_type current_pos = tell();
     if (current_pos >= 0) {
-        const int advice_result = ::posix_fadvise(
-            handle_,
-            current_pos,
-            static_cast<difference_type>(prefetch_size),
-            POSIX_FADV_WILLNEED
-        );
+        const int advice_result =
+                ::posix_fadvise(handle_, current_pos, static_cast<difference_type>(prefetch_size), POSIX_FADV_WILLNEED);
 
         if (advice_result != 0) {
             last_error_code_ = advice_result;
@@ -1156,8 +1183,7 @@ bool file::truncate(const difference_type size) const noexcept {
 
     if (write_buffer_pos_ > 0) {
         const difference_type current_pos = tell();
-        const difference_type buffer_end_pos =
-            current_pos + static_cast<difference_type>(write_buffer_pos_);
+        const difference_type buffer_end_pos = current_pos + static_cast<difference_type>(write_buffer_pos_);
         if (size >= current_pos && size < buffer_end_pos) {
             if (!flush_write_buffer()) {
                 buffers_cleared = false;
@@ -1182,7 +1208,9 @@ bool file::truncate(const difference_type size) const noexcept {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const difference_type current_pos = tell();
-    if (current_pos < 0) return false;
+    if (current_pos < 0) {
+        return false;
+    }
 
     if (!seek(size, file_pointer::BEGIN)) {
         return false;

@@ -25,13 +25,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief json格式操作失败
  */
 struct json_exception final : value_exception {
-    explicit json_exception(const char* info = "JSON Operation Failed.",
-                            const char* type = static_type,
-                            const int code = 0) noexcept
-    : value_exception(info, type, code) {}
+    explicit json_exception(const char* info = "JSON Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    value_exception(info, type, code) {}
 
-    explicit json_exception(const exception& e)
-    : value_exception(e) {}
+    explicit json_exception(const exception& e) :
+    value_exception(e) {}
 
     ~json_exception() override = default;
     static constexpr auto static_type = "json_exception";
@@ -67,12 +66,12 @@ public:
      * @brief json值类型枚举
      */
     enum types {
-        Null,    ///< null值类型
-        Bool,    ///< 布尔值类型
-        Number,  ///< 数字类型
-        String,  ///< 字符串类型
-        Object,  ///< 对象类型
-        Array    ///< 数组类型
+        Null,   ///< null值类型
+        Bool,   ///< 布尔值类型
+        Number, ///< 数字类型
+        String, ///< 字符串类型
+        Object, ///< 对象类型
+        Array   ///< 数组类型
     };
 
     /**
@@ -209,7 +208,8 @@ public:
      * @brief 构造函数
      * @param value 布尔值
      */
-    explicit json_bool(const bool value) noexcept : value_(value) {}
+    explicit json_bool(const bool value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取类型
@@ -239,14 +239,15 @@ public:
  */
 class NEFORCE_API json_number final : public json_value {
 private:
-    double value_;  ///< 数字值
+    double value_; ///< 数字值
 
 public:
     /**
      * @brief 构造函数
      * @param value 双精度浮点数值
      */
-    explicit json_number(const double value) noexcept : value_(value) {}
+    explicit json_number(const double value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取类型
@@ -276,14 +277,15 @@ public:
  */
 class NEFORCE_API json_string final : public json_value {
 private:
-    string value_;  ///< 字符串值
+    string value_; ///< 字符串值
 
 public:
     /**
      * @brief 构造函数
      * @param value 字符串值
      */
-    explicit json_string(string value) noexcept : value_(_NEFORCE move(value)) {}
+    explicit json_string(string value) noexcept :
+    value_(_NEFORCE move(value)) {}
 
     /**
      * @brief 获取类型
@@ -313,7 +315,7 @@ public:
  */
 class NEFORCE_API json_object final : public json_value {
 private:
-    unordered_map<string, unique_ptr<json_value>> members_{};  ///< 成员映射表
+    unordered_map<string, unique_ptr<json_value>> members_{}; ///< 成员映射表
 
 public:
     /**
@@ -322,7 +324,7 @@ public:
     json_object() = default;
 
     json_object(const json_object&) = delete;
-    json_object& operator =(const json_object&) = delete;
+    json_object& operator=(const json_object&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -335,7 +337,7 @@ public:
      * @param other 源对象
      * @return 自身引用
      */
-    json_object& operator =(json_object&& other) = default;
+    json_object& operator=(json_object&& other) = default;
 
     /**
      * @brief 获取类型
@@ -354,9 +356,7 @@ public:
      * @param key 成员键名
      * @param value 成员值指针
      */
-    void add_member(const string& key, unique_ptr<json_value> value) {
-        members_[key] = _NEFORCE move(value);
-    }
+    void add_member(const string& key, unique_ptr<json_value> value) { members_[key] = _NEFORCE move(value); }
 
     /**
      * @brief 获取常量成员指针
@@ -365,7 +365,9 @@ public:
      */
     NEFORCE_NODISCARD const json_value* get_member(const string& key) const {
         const auto it = members_.find(key);
-        if (it != members_.end()) return it->second.get();
+        if (it != members_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -387,7 +389,7 @@ public:
  */
 class NEFORCE_API json_array final : public json_value {
 private:
-    vector<unique_ptr<json_value>> elements_;  ///< 元素列表
+    vector<unique_ptr<json_value>> elements_; ///< 元素列表
 
 public:
     /**
@@ -396,7 +398,7 @@ public:
     json_array() = default;
 
     json_array(const json_array&) = delete;
-    json_array& operator =(const json_array&) = delete;
+    json_array& operator=(const json_array&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -409,7 +411,7 @@ public:
      * @param other 源数组
      * @return 自身引用
      */
-    json_array& operator =(json_array&& other) = default;
+    json_array& operator=(json_array&& other) = default;
 
     /**
      * @brief 获取类型
@@ -427,17 +429,17 @@ public:
      * @brief 添加元素
      * @param value 元素值指针
      */
-    void add_element(unique_ptr<json_value> value) {
-        elements_.emplace_back(_NEFORCE move(value));
-    }
+    void add_element(unique_ptr<json_value> value) { elements_.emplace_back(_NEFORCE move(value)); }
 
     /**
      * @brief 获取常量元素指针
      * @param index 元素索引
      * @return 元素的常量指针，索引越界返回nullptr
      */
-    NEFORCE_NODISCARD const json_value* get_element(const size_t index) const noexcept  {
-        if (index < elements_.size()) return elements_[index].get();
+    NEFORCE_NODISCARD const json_value* get_element(const size_t index) const noexcept {
+        if (index < elements_.size()) {
+            return elements_[index].get();
+        }
         return nullptr;
     }
 

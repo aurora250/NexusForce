@@ -10,17 +10,17 @@
 
 #include "NeForce/core/typeinfo/type_traits.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include "NeForce/core/config/windef.hpp"
-#include <synchapi.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
+#    include <synchapi.h>
+#    include "NeForce/core/config/windef.hpp"
+#    ifdef max
+#        undef max
+#    endif
+#    ifdef min
+#        undef min
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <pthread.h>
+#    include <pthread.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -41,13 +41,13 @@ public:
      */
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        ::SRWLOCK;
+            ::SRWLOCK;
 #else
-        ::pthread_mutex_t;
+            ::pthread_mutex_t;
 #endif
 
 private:
-    mutable native_handle_type mutex_;  ///< 互斥锁句柄
+    mutable native_handle_type mutex_; ///< 互斥锁句柄
 
 public:
     /**
@@ -61,10 +61,10 @@ public:
     ~mutex();
 
     mutex(const mutex&) = delete;
-    mutex& operator =(const mutex&) = delete;
+    mutex& operator=(const mutex&) = delete;
 
     mutex(mutex&&) = default;
-    mutex& operator =(mutex&&) = default;
+    mutex& operator=(mutex&&) = default;
 
     /**
      * @brief 获取原生句柄
@@ -114,13 +114,13 @@ public:
      */
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        ::CRITICAL_SECTION;
+            ::CRITICAL_SECTION;
 #else
-        ::pthread_mutex_t;
+            ::pthread_mutex_t;
 #endif
 
 private:
-    mutable native_handle_type recursive_mutex_;  ///< 互斥锁句柄
+    mutable native_handle_type recursive_mutex_; ///< 互斥锁句柄
 
 public:
     /**
@@ -134,7 +134,7 @@ public:
     ~recursive_mutex();
 
     recursive_mutex(const recursive_mutex&) = delete;
-    recursive_mutex& operator =(const recursive_mutex&) = delete;
+    recursive_mutex& operator=(const recursive_mutex&) = delete;
 
     /**
      * @brief 获取原生句柄
@@ -180,13 +180,12 @@ public:
  *
  * RAII风格的锁管理器，在构造时锁定互斥锁，在析构时解锁。
  */
-template <typename Mutex>
-class lock {
+template <typename Mutex> class lock {
 public:
-    using mutex_type = Mutex;  ///< 互斥锁类型
+    using mutex_type = Mutex; ///< 互斥锁类型
 
 private:
-    mutex_type& mutex_;  ///< 引用的互斥锁
+    mutex_type& mutex_; ///< 引用的互斥锁
 
 public:
     /**
@@ -195,7 +194,8 @@ public:
      *
      * 构造时锁定互斥锁。
      */
-    explicit lock(mutex_type& m) : mutex_(m) {
+    explicit lock(mutex_type& m) :
+    mutex_(m) {
         mutex_.lock();
     }
 
@@ -204,12 +204,10 @@ public:
      *
      * 析构时解锁互斥锁。
      */
-    ~lock() {
-        mutex_.unlock();
-    }
+    ~lock() { mutex_.unlock(); }
 
     lock(const lock&) = delete;
-    lock& operator =(const lock&) = delete;
+    lock& operator=(const lock&) = delete;
 };
 
 
@@ -248,8 +246,7 @@ NEFORCE_INLINE17 constexpr try_lock_tag try_lock{};
  *
  * 独占锁，支持延迟锁定、尝试锁定、转移所有权等特性。
  */
-template <typename Mutex>
-class unique_lock {
+template <typename Mutex> class unique_lock {
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
 
@@ -271,8 +268,9 @@ public:
      *
      * 构造时立即锁定互斥锁。
      */
-    explicit unique_lock(mutex_type& m)
-    : mutex_(&m), owns_lock_(true) {
+    explicit unique_lock(mutex_type& m) :
+    mutex_(&m),
+    owns_lock_(true) {
         mutex_->lock();
     }
 
@@ -283,8 +281,8 @@ public:
      *
      * 构造时不锁定互斥锁，稍后可以调用lock()锁定。
      */
-    unique_lock(mutex_type& m, defer_lock_tag tag) noexcept
-    : mutex_(&m) {}
+    unique_lock(mutex_type& m, defer_lock_tag tag) noexcept :
+    mutex_(&m) {}
 
     /**
      * @brief 尝试锁定构造函数
@@ -293,11 +291,12 @@ public:
      *
      * 构造时尝试锁定互斥锁，如果失败则不会阻塞。
      */
-    unique_lock(mutex_type& m, try_lock_tag tag) noexcept
-    : mutex_(&m), owns_lock_(m.try_lock()) {}
+    unique_lock(mutex_type& m, try_lock_tag tag) noexcept :
+    mutex_(&m),
+    owns_lock_(m.try_lock()) {}
 
     unique_lock(const unique_lock&) = delete;
-    unique_lock& operator =(const unique_lock&) = delete;
+    unique_lock& operator=(const unique_lock&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -305,8 +304,9 @@ public:
      *
      * 转移互斥锁的所有权和锁定状态。
      */
-    unique_lock(unique_lock&& other) noexcept
-        : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {
+    unique_lock(unique_lock&& other) noexcept :
+    mutex_(other.mutex_),
+    owns_lock_(other.owns_lock_) {
         other.mutex_ = nullptr;
         other.owns_lock_ = false;
     }
@@ -318,9 +318,13 @@ public:
      *
      * 释放当前锁，然后转移所有权。
      */
-    unique_lock& operator =(unique_lock&& other) noexcept {
-        if (_NEFORCE addressof(other) == this) return *this;
-        if (owns_lock_) mutex_->unlock();
+    unique_lock& operator=(unique_lock&& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
+        if (owns_lock_) {
+            mutex_->unlock();
+        }
         mutex_ = other.mutex_;
         owns_lock_ = other.owns_lock_;
         other.mutex_ = nullptr;
@@ -334,32 +338,28 @@ public:
      * 如果拥有锁的所有权，则解锁互斥锁。
      */
     ~unique_lock() {
-        if (owns_lock_) mutex_->unlock();
+        if (owns_lock_) {
+            mutex_->unlock();
+        }
     }
 
     /**
      * @brief 转换为布尔值
      * @return 是否拥有锁的所有权
      */
-    NEFORCE_NODISCARD explicit operator bool() const noexcept {
-        return owns_lock_;
-    }
+    NEFORCE_NODISCARD explicit operator bool() const noexcept { return owns_lock_; }
 
     /**
      * @brief 检查是否拥有锁
      * @return 是否拥有锁的所有权
      */
-    NEFORCE_NODISCARD bool owns_lock() const noexcept {
-        return owns_lock_;
-    }
+    NEFORCE_NODISCARD bool owns_lock() const noexcept { return owns_lock_; }
 
     /**
      * @brief 获取管理的互斥锁指针
      * @return 指向管理的互斥锁的指针，如果没有管理则返回nullptr
      */
-    NEFORCE_NODISCARD mutex_type* mutex() const noexcept {
-        return mutex_;
-    }
+    NEFORCE_NODISCARD mutex_type* mutex() const noexcept { return mutex_; }
 
     /**
      * @brief 锁定互斥锁
@@ -367,8 +367,12 @@ public:
      * 如果已拥有锁或未管理互斥锁，则不执行任何操作。
      */
     void lock_quiet() {
-        if (!mutex_) return;
-        if (owns_lock_) return;
+        if (!mutex_) {
+            return;
+        }
+        if (owns_lock_) {
+            return;
+        }
         mutex_->lock();
         owns_lock_ = true;
     }
@@ -379,8 +383,12 @@ public:
      * 如果未拥有锁或未管理互斥锁，则不执行任何操作。
      */
     void unlock_quiet() {
-        if (!mutex_) return;
-        if (!owns_lock_) return;
+        if (!mutex_) {
+            return;
+        }
+        if (!owns_lock_) {
+            return;
+        }
         mutex_->unlock();
         owns_lock_ = false;
     }
@@ -392,8 +400,12 @@ public:
      * 非阻塞地尝试锁定互斥锁。
      */
     bool try_lock() noexcept {
-        if (!mutex_) return false;
-        if (owns_lock_) return true;
+        if (!mutex_) {
+            return false;
+        }
+        if (owns_lock_) {
+            return true;
+        }
         owns_lock_ = mutex_->try_lock();
         return owns_lock_;
     }

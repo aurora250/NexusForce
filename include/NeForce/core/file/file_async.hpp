@@ -14,7 +14,7 @@
 #include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/string/string.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <aio.h>
+#    include <aio.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -40,13 +40,13 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API file_async {
 public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type          = ::DWORD;      ///< 大小类型
-    using difference_type    = ::LONGLONG;   ///< 偏移量类型
-    using aiocb_type         = ::OVERLAPPED; ///< 异步I/O控制块类型
+    using size_type = ::DWORD;          ///< 大小类型
+    using difference_type = ::LONGLONG; ///< 偏移量类型
+    using aiocb_type = ::OVERLAPPED;    ///< 异步I/O控制块类型
 #else
-    using size_type          = size_t;       ///< 大小类型
-    using difference_type    = ::off_t;      ///< 偏移量类型
-    using aiocb_type         = ::aiocb;      ///< 异步I/O控制块类型
+    using size_type = size_t;        ///< 大小类型
+    using difference_type = ::off_t; ///< 偏移量类型
+    using aiocb_type = ::aiocb;      ///< 异步I/O控制块类型
 #endif
 
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
@@ -88,17 +88,17 @@ public:
      * 表示一个异步操作的状态，用于等待操作完成和获取结果。
      */
     struct async_result {
-        bool completed = false;           ///< 操作是否已完成
-        size_t bytes_transferred = 0;     ///< 实际传输的字节数
-        int error_code = 0;               ///< 错误码（0表示成功）
-        aiocb_type* cb = nullptr;         ///< 异步I/O控制块指针
+        bool completed = false;                ///< 操作是否已完成
+        size_t bytes_transferred = 0;          ///< 实际传输的字节数
+        int error_code = 0;                    ///< 错误码（0表示成功）
+        aiocb_type* cb = nullptr;              ///< 异步I/O控制块指针
         async_context* user_context = nullptr; ///< 用户上下文指针
     };
 
 private:
-    native_handle_type handle_;                    ///< 文件句柄
-    mutable mutex mutex_;                          ///< 保护操作列表的互斥锁
-    mutable vector<aiocb_type*> operations_;       ///< 进行中的异步操作列表
+    native_handle_type handle_;                                   ///< 文件句柄
+    mutable mutex mutex_;                                         ///< 保护操作列表的互斥锁
+    mutable vector<aiocb_type*> operations_;                      ///< 进行中的异步操作列表
     mutable unordered_map<aiocb_type*, async_context*> contexts_; ///< 操作上下文映射
 
     bool complete_result(async_result& result, size_type bytes) noexcept;
@@ -121,7 +121,7 @@ public:
     ~file_async();
 
     file_async(const file_async&) = delete;
-    file_async& operator =(const file_async&) = delete;
+    file_async& operator=(const file_async&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -134,7 +134,7 @@ public:
      * @param other 要移动的对象
      * @return 自身引用
      */
-    file_async& operator =(file_async&& other) noexcept;
+    file_async& operator=(file_async&& other) noexcept;
 
     /**
      * @brief 提交异步读取操作

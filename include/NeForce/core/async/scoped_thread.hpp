@@ -27,38 +27,39 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class scoped_thread {
 public:
-    using id = thread::id;  ///< 线程ID类型
-    using native_handle_type = thread::native_handle_type;  ///< 原生句柄类型
+    using id = thread::id;                                 ///< 线程ID类型
+    using native_handle_type = thread::native_handle_type; ///< 原生句柄类型
 
 private:
     template <typename Callable, typename Object, typename... Args>
-    static constexpr bool pmf_expects_stop_token = conjunction_v<
-        is_member_function_pointer<remove_reference_t<Callable>>,
-        is_invocable<Callable, Object, stop_token, Args...>>;
+    static constexpr bool pmf_expects_stop_token =
+            conjunction_v<is_member_function_pointer<remove_reference_t<Callable>>,
+                          is_invocable<Callable, Object, stop_token, Args...>>;
 
     stop_source stop_source_{none};
     thread thread_{};
 
-    template <typename Callable, typename Object, typename... Args, enable_if_t<
-        pmf_expects_stop_token<Callable, Args...>, int> = 0>
+    template <typename Callable, typename Object, typename... Args,
+              enable_if_t<pmf_expects_stop_token<Callable, Args...>, int> = 0>
     static thread create(stop_source& source, Callable func, Object&& object, Args&&... args) {
         return thread{func, _NEFORCE forward<Object>(object), source.get_token(), _NEFORCE forward<Args>(args)...};
     }
 
-    template <typename Callable, typename... Args, enable_if_t<
-        !pmf_expects_stop_token<Callable, Args...> &&
-        is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>, int> = 0>
+    template <typename Callable, typename... Args,
+              enable_if_t<!pmf_expects_stop_token<Callable, Args...> &&
+                                  is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>,
+                          int> = 0>
     static thread create(stop_source& source, Callable func, Args&&... args) {
         return thread{_NEFORCE forward<Callable>(func), source.get_token(), _NEFORCE forward<Args>(args)...};
     }
 
-    template <typename Callable, typename... Args, enable_if_t<
-        !pmf_expects_stop_token<Callable, Args...> &&
-        !is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>, int> = 0>
+    template <typename Callable, typename... Args,
+              enable_if_t<!pmf_expects_stop_token<Callable, Args...> &&
+                                  !is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>,
+                          int> = 0>
     static thread create(stop_source&, Callable func, Args&&... args) {
-        static_assert(
-            is_invocable_v<decay_t<Callable>, decay_t<Args>...>,
-            "jthread arguments must be invocable after conversion to rvalues");
+        static_assert(is_invocable_v<decay_t<Callable>, decay_t<Args>...>,
+                      "jthread arguments must be invocable after conversion to rvalues");
         return thread{_NEFORCE forward<Callable>(func), _NEFORCE forward<Args>(args)...};
     }
 
@@ -79,13 +80,13 @@ public:
      *
      * 创建新线程并开始执行。如果函数接受stop_token参数，会自动传递。
      */
-    template <typename Callable, typename... Args, typename = enable_if_t<
-        !is_same_v<remove_cvref_t<Callable>, scoped_thread>>>
-    explicit scoped_thread(Callable&& func, Args&&... args)
-    : thread_{this->create(stop_source_, _NEFORCE forward<Callable>(func), _NEFORCE forward<Args>(args)...)} {}
+    template <typename Callable, typename... Args,
+              typename = enable_if_t<!is_same_v<remove_cvref_t<Callable>, scoped_thread>>>
+    explicit scoped_thread(Callable&& func, Args&&... args) :
+    thread_{this->create(stop_source_, _NEFORCE forward<Callable>(func), _NEFORCE forward<Args>(args)...)} {}
 
-    scoped_thread(const scoped_thread&) = delete;  ///< 禁止拷贝构造
-    scoped_thread& operator =(const scoped_thread&) = delete;  ///< 禁止拷贝赋值
+    scoped_thread(const scoped_thread&) = delete;            ///< 禁止拷贝构造
+    scoped_thread& operator=(const scoped_thread&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 移动构造函数
@@ -98,7 +99,7 @@ public:
      * @param other 要移动的scoped_thread
      * @return 当前对象的引用
      */
-    scoped_thread& operator =(scoped_thread&& other) noexcept {
+    scoped_thread& operator=(scoped_thread&& other) noexcept {
         scoped_thread(move(other)).swap(*this);
         return *this;
     }
@@ -128,18 +129,14 @@ public:
      * @brief 检查线程是否可被等待
      * @return 是否可被等待
      */
-    NEFORCE_NODISCARD bool joinable() const noexcept {
-        return thread_.joinable();
-    }
+    NEFORCE_NODISCARD bool joinable() const noexcept { return thread_.joinable(); }
 
     /**
      * @brief 等待线程结束
      *
      * 阻塞当前线程，直到目标线程执行完成。
      */
-    void join() {
-        thread_.join();
-    }
+    void join() { thread_.join(); }
 
     /**
      * @brief 分离线程
@@ -147,41 +144,31 @@ public:
      * 允许线程独立执行，不再与其关联。
      * 分离后不能再加入或请求停止。
      */
-    void detach() {
-        thread_.detach();
-    }
+    void detach() { thread_.detach(); }
 
     /**
      * @brief 获取线程ID
      * @return 线程ID
      */
-    NEFORCE_NODISCARD id get_id() const noexcept {
-        return thread_.get_id();
-    }
+    NEFORCE_NODISCARD id get_id() const noexcept { return thread_.get_id(); }
 
     /**
      * @brief 获取原生线程句柄
      * @return 原生线程句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_handle() const {
-        return thread_.native_handle();
-    }
+    NEFORCE_NODISCARD native_handle_type native_handle() const { return thread_.native_handle(); }
 
     /**
      * @brief 获取停止源
      * @return 关联的stop_source
      */
-    NEFORCE_NODISCARD stop_source get_stop_source() noexcept {
-        return stop_source_;
-    }
+    NEFORCE_NODISCARD stop_source get_stop_source() noexcept { return stop_source_; }
 
     /**
      * @brief 获取停止令牌
      * @return 关联的stop_token
      */
-    NEFORCE_NODISCARD stop_token get_stop_token() const noexcept {
-        return stop_source_.get_token();
-    }
+    NEFORCE_NODISCARD stop_token get_stop_token() const noexcept { return stop_source_.get_token(); }
 
     /**
      * @brief 请求线程停止
@@ -189,9 +176,7 @@ public:
      *
      * 设置停止标志，线程可以通过检查stop_token来响应停止请求。
      */
-    bool request_stop() noexcept {
-        return stop_source_.request_stop();
-    }
+    bool request_stop() noexcept { return stop_source_.request_stop(); }
 };
 
 /** @} */ // Thread

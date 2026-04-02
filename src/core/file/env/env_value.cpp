@@ -1,5 +1,5 @@
-#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/file/env/env_value.hpp>
+#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -8,7 +8,7 @@ namespace {
             return value;
         } else if (qt == env_variable::Single) {
             string result;
-            for (const char c : value) {
+            for (const char c: value) {
                 if (c == '\'') {
                     result += "'\\''";
                 } else {
@@ -57,7 +57,7 @@ namespace {
             }
         }
     }
-}
+} // namespace
 
 
 int env_variable::get_int(const int default_value) const noexcept {
@@ -92,23 +92,19 @@ bool env_variable::get_bool(const bool default_value) const noexcept {
     }
 }
 
-string env_value::to_string() const {
-    return env_value_to_string(this);
-}
+string env_value::to_string() const { return env_value_to_string(this); }
 
-string env_value::to_document() const {
-    return env_value_to_string(this);
-}
+string env_value::to_document() const { return env_value_to_string(this); }
 
 string env_document::to_string() const {
     string result;
-    for (const auto& comment : get_comments()) {
+    for (const auto& comment: get_comments()) {
         result += "# " + comment + "\n";
     }
     if (!get_comments().empty()) {
         result += "\n";
     }
-    for (const auto& var : get_variables()) {
+    for (const auto& var: get_variables()) {
         result += env_value_to_string(var.second.get(), var.first) + "\n";
     }
     return result;

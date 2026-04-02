@@ -27,9 +27,9 @@ struct NEFORCE_API steady_clock;
  * 表示系统范围的实时时钟，系统时钟的时间点可以转换为日历时间。
  */
 struct NEFORCE_API system_clock {
-    using duration = nanoseconds;   ///< 持续时间类型
-    using rep = duration::rep;            ///< 数值类型
-    using period = duration::period;      ///< 时间单位比例
+    using duration = nanoseconds;                         ///< 持续时间类型
+    using rep = duration::rep;                            ///< 数值类型
+    using period = duration::period;                      ///< 时间单位比例
     using time_point = _NEFORCE time_point<system_clock>; ///< 时间点类型
 
     static_assert(duration::min() < duration::zero(), "a clock's minimum duration cannot be less than its epoch");
@@ -78,9 +78,9 @@ struct NEFORCE_API system_clock {
  * 稳定时钟的时间点仅用于测量时间间隔。
  */
 struct NEFORCE_API steady_clock {
-    using duration = nanoseconds;   ///< 持续时间类型
-    using rep = duration::rep;            ///< 数值类型
-    using period = duration::period;      ///< 时间单位比例
+    using duration = nanoseconds;                         ///< 持续时间类型
+    using rep = duration::rep;                            ///< 数值类型
+    using period = duration::period;                      ///< 时间单位比例
     using time_point = _NEFORCE time_point<steady_clock>; ///< 时间点类型
 
     /**
@@ -102,8 +102,7 @@ struct NEFORCE_API steady_clock {
      * @return 系统时钟时间点
      */
     template <typename Dur>
-    static system_clock::time_point
-    to_system(const _NEFORCE time_point<steady_clock, Dur>& tp) {
+    static system_clock::time_point to_system(const _NEFORCE time_point<steady_clock, Dur>& tp) {
         const auto steady_now = steady_clock::now();
         const auto sys_now = system_clock::now();
 
@@ -119,7 +118,7 @@ struct NEFORCE_API steady_clock {
  * @param nsec 绝对时间戳的纳秒部分，取值范围为
  * @param is_monotonic 是否使用单调时钟
  * @return 相对延迟时间
-*
+ *
  * 此函数接收一个绝对时间戳和时钟类型标志，
  * 计算从当前时刻到该时间点之间的时间差，并以毫秒形式返回。
  * 返回的毫秒数会被限制在 0 到 2^32-2 的范围内，
@@ -135,21 +134,17 @@ milliseconds NEFORCE_API relative_time(int64_t sec, int64_t nsec, bool is_monoto
  * @brief 检查是否为时钟类型
  * @tparam T 要检查的类型
  */
-template <typename T>
-struct is_clock;
+template <typename T> struct is_clock;
 
-template <>
-struct is_clock<system_clock> : true_type {};
+template <> struct is_clock<system_clock> : true_type {};
 
-template <>
-struct is_clock<steady_clock> : true_type {};
+template <> struct is_clock<steady_clock> : true_type {};
 
 /**
  * @var is_clock_v
  * @brief is_clock的便捷变量模板
  */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
+template <typename T> NEFORCE_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
 
 /** @} */ // Clocks
 
@@ -171,8 +166,7 @@ NEFORCE_BEGIN_THIS_THREAD__
  *  - 对于稳定时钟，计算一次睡眠时间；
  *  - 对于非稳定时钟，循环检查直到达到目标时间。
  */
-template <typename Clock, typename Dur>
-void sleep_until(const time_point<Clock, Dur>& time) {
+template <typename Clock, typename Dur> void sleep_until(const time_point<Clock, Dur>& time) {
     auto current = Clock::now();
     if (Clock::is_steady) {
         if (current < time) {

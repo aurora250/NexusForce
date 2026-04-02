@@ -46,9 +46,7 @@ struct NEFORCE_API XOR {
      *
      * XOR加解密过程相同，直接调用encrypt方法。
      */
-    static byte_vector decrypt(cbyte_view data, cbyte_view key) {
-        return encrypt(data, key);
-    }
+    static byte_vector decrypt(cbyte_view data, cbyte_view key) { return encrypt(data, key); }
 };
 
 
@@ -79,10 +77,8 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector XOR_encrypt(const byte_vector& data, co
  * @return 加密后的字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string XOR_encrypt(const string& data, const string& key) {
-    const byte_vector e = XOR_encrypt(
-        cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()},
-        cbyte_view{reinterpret_cast<const byte_t*>(key.data()), key.size()}
-    );
+    const byte_vector e = XOR_encrypt(cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()},
+                                      cbyte_view{reinterpret_cast<const byte_t*>(key.data()), key.size()});
     return string(e.begin(), e.end());
 }
 
@@ -114,10 +110,8 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector XOR_decrypt(const byte_vector& data, co
  * @return 解密后的字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string XOR_decrypt(const string& data, const string& key) {
-    const byte_vector d = XOR_decrypt(
-        cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()},
-        cbyte_view{reinterpret_cast<const byte_t*>(key.data()), key.size()}
-    );
+    const byte_vector d = XOR_decrypt(cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()},
+                                      cbyte_view{reinterpret_cast<const byte_t*>(key.data()), key.size()});
     return string(d.begin(), d.end());
 }
 

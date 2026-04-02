@@ -11,10 +11,7 @@ void file_sink::open_new_file() {
         filename += "." + to_string(file_index_);
     }
 
-    if (!file_.open(path(filename), true,
-                    file_access::WRITE,
-                    file_shared::SHARE_WRITE,
-                    file_creation::OPEN_FORCE)) {
+    if (!file_.open(path(filename), true, file_access::WRITE, file_shared::SHARE_WRITE, file_creation::OPEN_FORCE)) {
         NEFORCE_THROW_EXCEPTION(file_exception("Failed to open log file"));
     }
     current_size_ = file_.size();
@@ -40,9 +37,12 @@ static string default_format(log_event event) {
     return result;
 }
 
-file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation)
-: base_filename_(_NEFORCE move(filename)), max_file_size_(max_file_size),
-  current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
+file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation) :
+base_filename_(_NEFORCE move(filename)),
+max_file_size_(max_file_size),
+current_size_(0),
+file_index_(0),
+enable_date_rotation_(enable_date_rotation) {
     if (enable_date_rotation_) {
         current_date_ = datetime::now().date().to_string();
     }

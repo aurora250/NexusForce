@@ -28,21 +28,27 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API hexadecimal : iobject<hexadecimal>, ipackage<hexadecimal, int64_t> {
 public:
-    using value_type = int64_t;  ///< 值类型
-    using base = ipackage;       ///< 基类类型
+    using value_type = int64_t; ///< 值类型
+    using base = ipackage;      ///< 基类类型
 
 public:
     static constexpr byte_t invalid_xdigit = numeric_traits<byte_t>::max();
-    
+
     /**
      * @brief 将十六进制字符转换为对应的数值
      * @param c 十六进制字符（0-9, a-f, A-F）
      * @return 对应的数值（0-15），当字符无效时返回invalid_xdigit
      */
     static constexpr byte_t xdigit_value(const char c) noexcept {
-        if (c >= '0' && c <= '9') return c - '0';
-        if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
-        if (c >= 'A' && c <= 'F') return 10 + (c - 'A');
+        if (c >= '0' && c <= '9') {
+            return c - '0';
+        }
+        if (c >= 'a' && c <= 'f') {
+            return 10 + (c - 'a');
+        }
+        if (c >= 'A' && c <= 'F') {
+            return 10 + (c - 'A');
+        }
         return invalid_xdigit;
     }
 
@@ -66,13 +72,19 @@ private:
      * 十六进制数字（0-9, a-f, A-F），忽略前导和尾随空格。
      */
     static NEFORCE_CONSTEXPR20 value_type parse_view(const string_view view) {
-        if (view.empty()) return 0;
+        if (view.empty()) {
+            return 0;
+        }
 
         bool negative = false;
         size_t start = 0;
 
-        while (start < view.size() && is_space(view[start])) ++start;
-        if (start == view.size()) return 0;
+        while (start < view.size() && is_space(view[start])) {
+            ++start;
+        }
+        if (start == view.size()) {
+            return 0;
+        }
 
         if (view[start] == '-') {
             negative = true;
@@ -81,8 +93,7 @@ private:
             ++start;
         }
 
-        if (start + 1 < view.size() && view[start] == '0' &&
-            (view[start+1] == 'x' || view[start+1] == 'X')) {
+        if (start + 1 < view.size() && view[start] == '0' && (view[start + 1] == 'x' || view[start + 1] == 'X')) {
             start += 2;
         }
 
@@ -117,60 +128,60 @@ public:
      * @brief 从16位有符号整数构造
      * @param value 整数值
      */
-    explicit constexpr hexadecimal(const int16_t value) noexcept
-    : base(value) {}
+    explicit constexpr hexadecimal(const int16_t value) noexcept :
+    base(value) {}
 
     /**
      * @brief 从32位有符号整数构造
      * @param value 整数值
      */
-    explicit constexpr hexadecimal(const int32_t value) noexcept
-    : base(value) {}
+    explicit constexpr hexadecimal(const int32_t value) noexcept :
+    base(value) {}
 
     /**
      * @brief 从16位无符号整数构造
      * @param value 整数值
      */
-    explicit constexpr hexadecimal(const uint16_t value) noexcept
-    : base(value) {}
+    explicit constexpr hexadecimal(const uint16_t value) noexcept :
+    base(value) {}
 
     /**
      * @brief 从32位无符号整数构造
      * @param value 整数值
      */
-    explicit constexpr hexadecimal(const uint32_t value) noexcept
-    : base(value) {}
+    explicit constexpr hexadecimal(const uint32_t value) noexcept :
+    base(value) {}
 
     /**
      * @brief 从64位无符号整数构造
      * @param value 整数值
      */
-    explicit constexpr hexadecimal(const uint64_t value) noexcept
-    : base(value) {}
+    explicit constexpr hexadecimal(const uint64_t value) noexcept :
+    base(value) {}
 
     /**
      * @brief 从字符串视图构造
      * @param view 十六进制字符串视图
      * @throws value_exception 解析失败时抛出
      */
-    NEFORCE_CONSTEXPR20 explicit hexadecimal(const string_view view)
-    : base(parse_view(view)) {}
+    NEFORCE_CONSTEXPR20 explicit hexadecimal(const string_view view) :
+    base(parse_view(view)) {}
 
     /**
      * @brief 从C风格字符串构造
      * @param str 十六进制字符串
      * @throws value_exception 解析失败时抛出
      */
-    NEFORCE_CONSTEXPR20 explicit hexadecimal(const char* str)
-    : hexadecimal(string_view(str)) {}
+    NEFORCE_CONSTEXPR20 explicit hexadecimal(const char* str) :
+    hexadecimal(string_view(str)) {}
 
     /**
      * @brief 从字符串对象构造
      * @param str 十六进制字符串
      * @throws value_exception 解析失败时抛出
      */
-    NEFORCE_CONSTEXPR20 explicit hexadecimal(const string& str)
-    : hexadecimal(str.view()) {}
+    NEFORCE_CONSTEXPR20 explicit hexadecimal(const string& str) :
+    hexadecimal(str.view()) {}
 
     constexpr hexadecimal() noexcept = default;
     NEFORCE_CONSTEXPR20 ~hexadecimal() = default;
@@ -178,13 +189,13 @@ public:
     constexpr hexadecimal(const hexadecimal&) noexcept = default;
     constexpr hexadecimal(hexadecimal&&) noexcept = default;
 
-    constexpr hexadecimal& operator =(const hexadecimal& other) noexcept = default;
-    constexpr hexadecimal& operator =(hexadecimal&& other) noexcept = default;
+    constexpr hexadecimal& operator=(const hexadecimal& other) noexcept = default;
+    constexpr hexadecimal& operator=(hexadecimal&& other) noexcept = default;
 
-    explicit constexpr hexadecimal(const value_type value) noexcept
-    : base(value) {}
+    explicit constexpr hexadecimal(const value_type value) noexcept :
+    base(value) {}
 
-    constexpr hexadecimal& operator =(const value_type value) noexcept {
+    constexpr hexadecimal& operator=(const value_type value) noexcept {
         value_ = value;
         return *this;
     }
@@ -193,9 +204,7 @@ public:
      * @brief 转换为bool操作符
      * @return 值是否非零
      */
-    NEFORCE_NODISCARD explicit constexpr operator bool() const noexcept {
-        return value_ != static_cast<value_type>(0);
-    }
+    NEFORCE_NODISCARD explicit constexpr operator bool() const noexcept { return value_ != static_cast<value_type>(0); }
 
     /**
      * @brief 获取指定位的值
@@ -247,9 +256,7 @@ public:
      * @brief 转换为字符串
      * @return 十六进制格式的字符串（带0x前缀）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return format("{:#x}", *this);
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return format("{:#x}", *this); }
 
     /**
      * @brief 从字符串解析十六进制值
@@ -257,13 +264,10 @@ public:
      * @return 解析得到的十六进制对象
      * @throws value_exception 解析失败时抛出
      */
-    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 hexadecimal parse(const string_view str) {
-        return hexadecimal(str);
-    }
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 hexadecimal parse(const string_view str) { return hexadecimal(str); }
 };
 
-template <>
-struct unpackage<hexadecimal> {
+template <> struct unpackage<hexadecimal> {
     using type = int64_t;
 };
 
@@ -283,7 +287,7 @@ NEFORCE_BEGIN_LITERALS__
  * @param len 长度
  * @return 解析得到的十六进制对象
  */
-NEFORCE_CONSTEXPR20 hexadecimal operator ""_hex(const char* str, const size_t len) {
+NEFORCE_CONSTEXPR20 hexadecimal operator""_hex(const char* str, const size_t len) {
     return hexadecimal{string_view(str, len)};
 }
 
@@ -292,7 +296,7 @@ NEFORCE_CONSTEXPR20 hexadecimal operator ""_hex(const char* str, const size_t le
  * @param value 整数值
  * @return 十六进制对象
  */
-constexpr hexadecimal operator ""_hex(const unsigned long long value) {
+constexpr hexadecimal operator""_hex(const unsigned long long value) {
     return hexadecimal{static_cast<int64_t>(value)};
 }
 

@@ -2,26 +2,27 @@
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/string/to_string.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <sys/inotify.h>
-#include <sys/eventfd.h>
-#include <poll.h>
-#include <cerrno>
+#    include <cerrno>
+#    include <poll.h>
+#    include <sys/eventfd.h>
+#    include <sys/inotify.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-file_watcher::file_watcher(path watch_path, const bool recursive)
-: watch_path_(move(watch_path)), recursive_(recursive) {
+file_watcher::file_watcher(path watch_path, const bool recursive) :
+watch_path_(move(watch_path)),
+recursive_(recursive) {
     if (!watch_path_.exists() || !watch_path_.is_directory()) {
         NEFORCE_THROW_EXCEPTION(system_exception("Watch path must be an existing directory"));
     }
 }
 
-file_watcher::~file_watcher() {
-    stop();
-}
+file_watcher::~file_watcher() { stop(); }
 
 bool file_watcher::start(callback_t callback, file_watch_event events) {
-    if (watching_.load()) return false;
+    if (watching_.load()) {
+        return false;
+    }
 
     {
         lock<mutex> lock(callback_mutex_);
@@ -33,15 +34,9 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
-    dir_handle_ = ::CreateFile(
-        watch_path_.data(),
-        FILE_LIST_DIRECTORY,
-        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-        nullptr,
-        OPEN_EXISTING,
-        FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OVERLAPPED,
-        nullptr
-    );
+    dir_handle_ = ::CreateFile(watch_path_.data(), FILE_LIST_DIRECTORY,
+                               FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, nullptr, OPEN_EXISTING,
+                               FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OVERLAPPED, nullptr);
     if (dir_handle_ == INVALID_HANDLE_VALUE) {
         watching_.store(false);
         return false;
@@ -86,11 +81,7 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
         mask |= IN_ACCESS;
     }
 
-    watch_descriptor_ = ::inotify_add_watch(
-        inotify_fd_,
-        watch_path_.data(),
-        mask
-    );
+    watch_descriptor_ = ::inotify_add_watch(inotify_fd_, watch_path_.data(), mask);
     if (watch_descriptor_ == -1) {
         ::close(event_fd_);
         ::close(inotify_fd_);
@@ -179,15 +170,14 @@ void file_watcher::watch_thread_func() {
     {
         const int ev = static_cast<int>(current_events_);
         if (ev & static_cast<int>(file_watch_event::CREATED)) {
-            notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME
-                           | FILE_NOTIFY_CHANGE_CREATION;
+            notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_CREATION;
         }
         if (ev & static_cast<int>(file_watch_event::DELETED)) {
             notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME;
         }
         if (ev & static_cast<int>(file_watch_event::MODIFIED)) {
-            notify_filter |= FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE
-                           | FILE_NOTIFY_CHANGE_ATTRIBUTES | FILE_NOTIFY_CHANGE_SECURITY;
+            notify_filter |= FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE | FILE_NOTIFY_CHANGE_ATTRIBUTES |
+                             FILE_NOTIFY_CHANGE_SECURITY;
         }
         if (ev & static_cast<int>(file_watch_event::ACCESSED)) {
             notify_filter |= FILE_NOTIFY_CHANGE_LAST_ACCESS;
@@ -198,16 +188,9 @@ void file_watcher::watch_thread_func() {
     }
 
     ::DWORD bytes_returned = 0;
-    ::BOOL result = ::ReadDirectoryChangesW(
-        dir_handle_,
-        buffer_.data(),
-        static_cast<::DWORD>(buffer_.size()),
-        recursive_ ? TRUE : FALSE,
-        notify_filter,
-        &bytes_returned,
-        &local_overlapped,
-        nullptr
-    );
+    ::BOOL result = ::ReadDirectoryChangesW(dir_handle_, buffer_.data(), static_cast<::DWORD>(buffer_.size()),
+                                            recursive_ ? TRUE : FALSE, notify_filter, &bytes_returned,
+                                            &local_overlapped, nullptr);
 
     if (!result) {
         ::CloseHandle(local_overlapped.hEvent);
@@ -220,17 +203,14 @@ void file_watcher::watch_thread_func() {
         ::ULONG_PTR completion_key = 0;
         ::LPOVERLAPPED lpOverlapped = nullptr;
 
-        const ::BOOL io_completed = ::GetQueuedCompletionStatus(
-            completion_port_,
-            &bytes_transferred,
-            &completion_key,
-            &lpOverlapped,
-            1000
-        );
+        const ::BOOL io_completed =
+                ::GetQueuedCompletionStatus(completion_port_, &bytes_transferred, &completion_key, &lpOverlapped, 1000);
 
         if (!io_completed) {
             const ::DWORD error = ::GetLastError();
-            if (error == WAIT_TIMEOUT) continue;
+            if (error == WAIT_TIMEOUT) {
+                continue;
+            }
             break;
         }
 
@@ -277,9 +257,8 @@ void file_watcher::watch_thread_func() {
                 if (fni->NextEntryOffset == 0) {
                     fni = nullptr;
                 } else {
-                    fni = reinterpret_cast<::FILE_NOTIFY_INFORMATION*>(
-                        reinterpret_cast<::BYTE*>(fni) + fni->NextEntryOffset
-                    );
+                    fni = reinterpret_cast<::FILE_NOTIFY_INFORMATION*>(reinterpret_cast<::BYTE*>(fni) +
+                                                                       fni->NextEntryOffset);
                 }
             }
         }
@@ -287,17 +266,12 @@ void file_watcher::watch_thread_func() {
         if (watching_.load()) {
             ::ResetEvent(local_overlapped.hEvent);
             bytes_returned = 0;
-            result = ::ReadDirectoryChangesW(
-                dir_handle_,
-                buffer_.data(),
-                static_cast<::DWORD>(buffer_.size()),
-                recursive_ ? TRUE : FALSE,
-                notify_filter,
-                &bytes_returned,
-                &local_overlapped,
-                nullptr
-            );
-            if (!result) break;
+            result = ::ReadDirectoryChangesW(dir_handle_, buffer_.data(), static_cast<::DWORD>(buffer_.size()),
+                                             recursive_ ? TRUE : FALSE, notify_filter, &bytes_returned,
+                                             &local_overlapped, nullptr);
+            if (!result) {
+                break;
+            }
         }
     }
 
@@ -313,7 +287,9 @@ void file_watcher::watch_thread_func() {
     while (watching_.load() && !stopping_.load()) {
         const int poll_result = ::poll(fds, 2, 1000);
         if (poll_result == -1) {
-            if (errno == EINTR) continue;
+            if (errno == EINTR) {
+                continue;
+            }
             break;
         } else if (poll_result == 0) {
             continue;
@@ -328,7 +304,9 @@ void file_watcher::watch_thread_func() {
         if (fds[0].revents & POLLIN) {
             const ssize_t len = ::read(inotify_fd_, buffer_.data(), buffer_.size());
             if (len <= 0) {
-                if (errno == EAGAIN || errno == EWOULDBLOCK) continue;
+                if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    continue;
+                }
                 break;
             }
 

@@ -36,9 +36,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API json_parser {
 private:
-    string text_;        ///< 待解析的json文本
-    size_t len_;         ///< 文本长度
-    size_t pos_ = 0;     ///< 当前解析位置
+    string text_;    ///< 待解析的json文本
+    size_t len_;     ///< 文本长度
+    size_t pos_ = 0; ///< 当前解析位置
 
     /**
      * @brief 跳过空白字符
@@ -135,8 +135,9 @@ public:
      *
      * 初始化解析器，准备开始解析。
      */
-    explicit json_parser(string text) noexcept
-    : text_(_NEFORCE move(text)), len_(text_.size()) {}
+    explicit json_parser(string text) noexcept :
+    text_(_NEFORCE move(text)),
+    len_(text_.size()) {}
 
     /**
      * @brief 执行解析

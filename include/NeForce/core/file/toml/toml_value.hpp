@@ -34,13 +34,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief toml格式操作失败
  */
 struct toml_exception final : value_exception {
-    explicit toml_exception(const char* info = "TOML Operation Failed.",
-                            const char* type = static_type,
-                            const int code = 0) noexcept
-    : value_exception(info, type, code) {}
+    explicit toml_exception(const char* info = "TOML Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    value_exception(info, type, code) {}
 
-    explicit toml_exception(const exception& e)
-    : value_exception(e) {}
+    explicit toml_exception(const exception& e) :
+    value_exception(e) {}
 
     ~toml_exception() override = default;
     static constexpr auto static_type = "toml_exception";
@@ -77,13 +76,13 @@ public:
      * @brief toml值类型枚举
      */
     enum types {
-        Boolean,   ///< 布尔值类型
-        Integer,   ///< 整数类型
-        Float,     ///< 浮点数类型
-        String,    ///< 字符串类型
-        DateTime,  ///< 日期时间类型
-        Array,     ///< 数组类型
-        Table      ///< 表格类型
+        Boolean,  ///< 布尔值类型
+        Integer,  ///< 整数类型
+        Float,    ///< 浮点数类型
+        String,   ///< 字符串类型
+        DateTime, ///< 日期时间类型
+        Array,    ///< 数组类型
+        Table     ///< 表格类型
     };
 
     /**
@@ -203,14 +202,15 @@ public:
  */
 class NEFORCE_API toml_boolean final : public toml_value {
 private:
-    bool value_;  ///< 布尔值
+    bool value_; ///< 布尔值
 
 public:
     /**
      * @brief 构造函数
      * @param value 布尔值
      */
-    explicit toml_boolean(const bool value) noexcept : value_(value) {}
+    explicit toml_boolean(const bool value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取类型
@@ -239,14 +239,15 @@ public:
  */
 class NEFORCE_API toml_integer final : public toml_value {
 private:
-    int64_t value_;  ///< 整数值
+    int64_t value_; ///< 整数值
 
 public:
     /**
      * @brief 构造函数
      * @param value 64位整数值
      */
-    explicit toml_integer(const int64_t value) noexcept : value_(value) {}
+    explicit toml_integer(const int64_t value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取类型
@@ -275,14 +276,15 @@ public:
  */
 class NEFORCE_API toml_float final : public toml_value {
 private:
-    double value_;  ///< 浮点数值
+    double value_; ///< 浮点数值
 
 public:
     /**
      * @brief 构造函数
      * @param value 双精度浮点数值
      */
-    explicit toml_float(const double value) noexcept : value_(value) {}
+    explicit toml_float(const double value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取类型
@@ -320,15 +322,15 @@ public:
      * @brief 字符串引号类型枚举
      */
     enum string_type {
-        Basic,          ///< 基本字符串 "string"
-        Literal,        ///< 字面量字符串 'string'
-        MultiBasic,     ///< 多行基本字符串 """string"""
-        MultiLiteral    ///< 多行字面量字符串 '''string'''
+        Basic,       ///< 基本字符串 "string"
+        Literal,     ///< 字面量字符串 'string'
+        MultiBasic,  ///< 多行基本字符串 """string"""
+        MultiLiteral ///< 多行字面量字符串 '''string'''
     };
 
 private:
-    string value_;       ///< 字符串值
-    string_type type_;   ///< 引号类型
+    string value_;     ///< 字符串值
+    string_type type_; ///< 引号类型
 
 public:
     /**
@@ -336,8 +338,9 @@ public:
      * @param value 字符串值
      * @param type 引号类型，默认为Basic
      */
-    explicit toml_string(string value, const string_type type = Basic) noexcept
-    : value_(_NEFORCE move(value)), type_(type) {}
+    explicit toml_string(string value, const string_type type = Basic) noexcept :
+    value_(_NEFORCE move(value)),
+    type_(type) {}
 
     /**
      * @brief 获取类型
@@ -381,15 +384,15 @@ public:
      * @brief 日期时间类型枚举
      */
     enum datetime_type {
-        OffsetDateTime,    ///< 偏移日期时间 1979-05-27T07:32:00Z
-        LocalDateTime,     ///< 本地日期时间 1979-05-27T07:32:00
-        LocalDate,         ///< 本地日期 1979-05-27
-        LocalTime          ///< 本地时间 07:32:00
+        OffsetDateTime, ///< 偏移日期时间 1979-05-27T07:32:00Z
+        LocalDateTime,  ///< 本地日期时间 1979-05-27T07:32:00
+        LocalDate,      ///< 本地日期 1979-05-27
+        LocalTime       ///< 本地时间 07:32:00
     };
 
 private:
-    datetime value_;      ///< 日期时间值
-    datetime_type type_;  ///< 日期时间类型
+    datetime value_;     ///< 日期时间值
+    datetime_type type_; ///< 日期时间类型
 
 public:
     /**
@@ -399,8 +402,8 @@ public:
      *
      * 根据指定的类型解析字符串并存储为datetime对象。
      */
-    explicit toml_datetime(const string_view value, const datetime_type type) noexcept
-    : type_(type) {
+    explicit toml_datetime(const string_view value, const datetime_type type) noexcept :
+    type_(type) {
         switch (type_) {
             case datetime_type::OffsetDateTime: {
                 datetime dt;
@@ -490,7 +493,7 @@ public:
  */
 class NEFORCE_API toml_array final : public toml_value {
 private:
-    vector<unique_ptr<toml_value>> elements_;  ///< 元素列表
+    vector<unique_ptr<toml_value>> elements_; ///< 元素列表
 
 public:
     /**
@@ -499,7 +502,7 @@ public:
     toml_array() = default;
 
     toml_array(const toml_array&) = delete;
-    toml_array& operator =(const toml_array&) = delete;
+    toml_array& operator=(const toml_array&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -512,7 +515,7 @@ public:
      * @param other 源数组
      * @return 自身引用
      */
-    toml_array& operator =(toml_array&& other) = default;
+    toml_array& operator=(toml_array&& other) = default;
 
     /**
      * @brief 获取类型
@@ -530,9 +533,7 @@ public:
      * @brief 添加元素
      * @param value 元素值指针
      */
-    void add_element(unique_ptr<toml_value> value) {
-        elements_.emplace_back(_NEFORCE move(value));
-    }
+    void add_element(unique_ptr<toml_value> value) { elements_.emplace_back(_NEFORCE move(value)); }
 
     /**
      * @brief 获取常量元素指针
@@ -540,7 +541,9 @@ public:
      * @return 元素的常量指针，索引越界返回nullptr
      */
     NEFORCE_NODISCARD const toml_value* get_element(const size_t index) const noexcept {
-        if (index < elements_.size()) return elements_[index].get();
+        if (index < elements_.size()) {
+            return elements_[index].get();
+        }
         return nullptr;
     }
 
@@ -566,8 +569,8 @@ public:
  */
 class NEFORCE_API toml_table final : public toml_value {
 private:
-    unordered_map<string, unique_ptr<toml_value>> members_{};  ///< 成员映射表
-    bool is_inline_ = false;  ///< 是否为内联表格
+    unordered_map<string, unique_ptr<toml_value>> members_{}; ///< 成员映射表
+    bool is_inline_ = false;                                  ///< 是否为内联表格
 
 public:
     /**
@@ -579,10 +582,11 @@ public:
      * @brief 构造函数
      * @param is_inline 是否为内联表格
      */
-    explicit toml_table(const bool is_inline) : is_inline_(is_inline) {}
+    explicit toml_table(const bool is_inline) :
+    is_inline_(is_inline) {}
 
     toml_table(const toml_table&) = delete;
-    toml_table& operator =(const toml_table&) = delete;
+    toml_table& operator=(const toml_table&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -595,7 +599,7 @@ public:
      * @param other 源表格
      * @return 自身引用
      */
-    toml_table& operator =(toml_table&& other) = default;
+    toml_table& operator=(toml_table&& other) = default;
 
     /**
      * @brief 获取类型
@@ -614,9 +618,7 @@ public:
      * @param key 成员键名
      * @param value 成员值指针
      */
-    void add_member(const string& key, unique_ptr<toml_value> value) {
-        members_[key] = _NEFORCE move(value);
-    }
+    void add_member(const string& key, unique_ptr<toml_value> value) { members_[key] = _NEFORCE move(value); }
 
     /**
      * @brief 获取常量成员指针
@@ -625,7 +627,9 @@ public:
      */
     NEFORCE_NODISCARD const toml_value* get_member(const string& key) const {
         const auto it = members_.find(key);
-        if (it != members_.end()) return it->second.get();
+        if (it != members_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -636,7 +640,9 @@ public:
      */
     NEFORCE_NODISCARD toml_value* get_member(const string& key) {
         const auto it = members_.find(key);
-        if (it != members_.end()) return it->second.get();
+        if (it != members_.end()) {
+            return it->second.get();
+        }
         return nullptr;
     }
 
@@ -645,9 +651,7 @@ public:
      * @param key 成员键名
      * @return 是否存在
      */
-    NEFORCE_NODISCARD bool has_member(const string& key) const {
-        return members_.find(key) != members_.end();
-    }
+    NEFORCE_NODISCARD bool has_member(const string& key) const { return members_.find(key) != members_.end(); }
 
     /**
      * @brief 获取所有成员的常量引用

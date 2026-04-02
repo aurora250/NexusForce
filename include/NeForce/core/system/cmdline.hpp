@@ -16,12 +16,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 命令行解析异常
  */
 struct cmdline_exception final : system_exception {
-    explicit cmdline_exception(
-        const char* info = "CmdLine Operation Failed.", const char* type = static_type,
-        const int code = 0) noexcept : system_exception(info, type, code) {}
+    explicit cmdline_exception(const char* info = "CmdLine Operation Failed.", const char* type = static_type,
+                               const int code = 0) noexcept :
+    system_exception(info, type, code) {}
 
-    explicit cmdline_exception(const exception& e)
-    : system_exception(e) {}
+    explicit cmdline_exception(const exception& e) :
+    system_exception(e) {}
 
     ~cmdline_exception() override = default;
     static constexpr auto static_type = "cmdline_exception";
@@ -57,9 +57,9 @@ public:
      * 描述一个命令行选项的所有属性。
      */
     struct option {
-        string long_name;           ///< 长选项名称
-        char short_name = 0;        ///< 短选项字符
-        string description;         ///< 选项描述
+        string long_name;            ///< 长选项名称
+        char short_name = 0;         ///< 短选项字符
+        string description;          ///< 选项描述
         bool requires_value = false; ///< 是否需要值
         bool allow_multiple = false; ///< 是否允许多次出现
         string default_value;        ///< 默认值
@@ -77,16 +77,15 @@ public:
          * @param allow_multi 是否允许多次出现
          * @param def_val 默认值
          */
-        option(string lname, char sname, string desc,
-               bool req_val, bool allow_multi, string def_val);
+        option(string lname, char sname, string desc, bool req_val, bool allow_multi, string def_val);
     };
 
 private:
-    string program_name_;                     ///< 程序名称
-    vector<option> options_;                  ///< 选项列表
-    unordered_map<string, option*> options_long_;  ///< 长选项名到选项的映射
-    unordered_map<char, option*> options_short_;   ///< 短选项字符到选项的映射
-    vector<string> positional_;               ///< 位置参数
+    string program_name_;                         ///< 程序名称
+    vector<option> options_;                      ///< 选项列表
+    unordered_map<string, option*> options_long_; ///< 长选项名到选项的映射
+    unordered_map<char, option*> options_short_;  ///< 短选项字符到选项的映射
+    vector<string> positional_;                   ///< 位置参数
 
     /**
      * @brief 根据长选项名查找选项
@@ -131,8 +130,7 @@ public:
      * @param default_value 默认值
      * @throws cmdline_exception 选项名重复时抛出
      */
-    void add_option(const string& long_name, char short_name,
-                    const string& description, bool requires_value = false,
+    void add_option(const string& long_name, char short_name, const string& description, bool requires_value = false,
                     bool allow_multiple = false, const string& default_value = "");
 
     /**
@@ -183,17 +181,13 @@ public:
      * @brief 获取位置参数
      * @return 位置参数向量引用
      */
-    const vector<string>& positional_args() const noexcept {
-        return positional_;
-    }
+    const vector<string>& positional_args() const noexcept { return positional_; }
 
     /**
      * @brief 获取程序名称
      * @return 程序名称
      */
-    const string& program_name() const noexcept {
-        return program_name_;
-    }
+    const string& program_name() const noexcept { return program_name_; }
 
     /**
      * @brief 打印帮助信息

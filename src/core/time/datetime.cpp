@@ -1,9 +1,9 @@
 #include <NeForce/core/time/datetime.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/config/windef.hpp>
-#include <sysinfoapi.h>
+#    include <NeForce/core/config/windef.hpp>
+#    include <sysinfoapi.h>
 #else
-#include <ctime>
+#    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -20,10 +20,8 @@ NEFORCE_NODISCARD datetime datetime::now() noexcept {
         }
         std::tm local_tm{};
         ::localtime_r(&now_time, &local_tm);
-        return datetime(
-            local_tm.tm_year + 1900, local_tm.tm_mon + 1, local_tm.tm_mday,
-            local_tm.tm_hour, local_tm.tm_min, local_tm.tm_sec,
-            local_tm.tm_gmtoff);
+        return datetime(local_tm.tm_year + 1900, local_tm.tm_mon + 1, local_tm.tm_mday, local_tm.tm_hour,
+                        local_tm.tm_min, local_tm.tm_sec, local_tm.tm_gmtoff);
 #endif
     } catch (...) {
         return datetime();

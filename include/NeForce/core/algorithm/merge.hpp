@@ -47,23 +47,22 @@ NEFORCE_BEGIN_NAMESPACE__
  * 3. 输出范围有足够的空间容纳所有元素
  */
 template <typename Iterator1, typename Iterator2, typename Iterator3, typename Compare>
-constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
-	Iterator2 last2, Iterator3 result, Compare comp) {
-    static_assert(
-        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
-        "Iterator must be forward_iterator");
+constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result,
+                          Compare comp) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+                  "Iterator must be forward_iterator");
 
-	while (first1 != last1 && first2 != last2) {
-		if (comp(*first2, *first1)) {
-			*result = *first2;
-			++first2;
-		} else {
-			*result = *first1;
-			++first1;
-		}
-		++result;
-	}
-	return _NEFORCE copy(first2, last2, _NEFORCE copy(first1, last1, result));
+    while (first1 != last1 && first2 != last2) {
+        if (comp(*first2, *first1)) {
+            *result = *first2;
+            ++first2;
+        } else {
+            *result = *first1;
+            ++first1;
+        }
+        ++result;
+    }
+    return _NEFORCE copy(first2, last2, _NEFORCE copy(first1, last1, result));
 }
 
 /**
@@ -80,7 +79,7 @@ constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
  */
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
-	return _NEFORCE merge(first1, last1, first2, last2, result, _NEFORCE less<iter_value_t<Iterator1>>());
+    return _NEFORCE merge(first1, last1, first2, last2, result, _NEFORCE less<iter_value_t<Iterator1>>());
 }
 
 /// @cond
@@ -100,35 +99,39 @@ NEFORCE_BEGIN_INNER__
  * 使用旋转和递归在原地合并两个已排序的子范围。
  */
 template <typename Iterator, typename Compare>
-constexpr void __merge_without_buffer_aux(
-    Iterator first, Iterator middle, Iterator last,
-    iter_difference_t<Iterator> len1, iter_difference_t<Iterator> len2, Compare comp) {
+constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Iterator last,
+                                          iter_difference_t<Iterator> len1, iter_difference_t<Iterator> len2,
+                                          Compare comp) {
 
-	if (len1 == 0 || len2 == 0) return;
-	if (len1 + len2 == 2) {
-		if (comp(*middle, *first)) _NEFORCE iter_swap(first, middle);
-		return;
-	}
-	Iterator first_cut = first;
-	Iterator second_cut = middle;
-	iter_difference_t<Iterator> len11 = 0;
-	auto len22 = len11;
-	if (len1 > len2) {
-		len11 = len1 / 2;
-		_NEFORCE advance(first_cut, len11);
-		second_cut = _NEFORCE lower_bound(middle, last, *first_cut, comp);
-		len22 = _NEFORCE distance(middle, second_cut);
-	} else {
-		len22 = len2 / 2;
-		_NEFORCE advance(second_cut, len22);
-		first_cut = _NEFORCE upper_bound(first, middle, *second_cut, comp);
-		len11 = _NEFORCE distance(first, first_cut);
-	}
-	_NEFORCE rotate(first_cut, middle, second_cut);
-	Iterator new_middle = first_cut;
-	_NEFORCE advance(new_middle, len22);
-	inner::__merge_without_buffer_aux(first, first_cut, new_middle, len11, len22, comp);
-	inner::__merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
+    if (len1 == 0 || len2 == 0) {
+        return;
+    }
+    if (len1 + len2 == 2) {
+        if (comp(*middle, *first)) {
+            _NEFORCE iter_swap(first, middle);
+        }
+        return;
+    }
+    Iterator first_cut = first;
+    Iterator second_cut = middle;
+    iter_difference_t<Iterator> len11 = 0;
+    auto len22 = len11;
+    if (len1 > len2) {
+        len11 = len1 / 2;
+        _NEFORCE advance(first_cut, len11);
+        second_cut = _NEFORCE lower_bound(middle, last, *first_cut, comp);
+        len22 = _NEFORCE distance(middle, second_cut);
+    } else {
+        len22 = len2 / 2;
+        _NEFORCE advance(second_cut, len22);
+        first_cut = _NEFORCE upper_bound(first, middle, *second_cut, comp);
+        len11 = _NEFORCE distance(first, first_cut);
+    }
+    _NEFORCE rotate(first_cut, middle, second_cut);
+    Iterator new_middle = first_cut;
+    _NEFORCE advance(new_middle, len22);
+    inner::__merge_without_buffer_aux(first, first_cut, new_middle, len11, len22, comp);
+    inner::__merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
 }
 
 /**
@@ -147,25 +150,24 @@ constexpr void __merge_without_buffer_aux(
  * 使用缓冲区优化旋转操作，选择最小的部分放入缓冲区。
  */
 template <typename Iterator1, typename Iterator2>
-constexpr Iterator1 __rotate_with_buffer_aux(
-    Iterator1 first, Iterator1 middle, Iterator1 last,
-	iter_difference_t<Iterator1> len1, iter_difference_t<Iterator1> len2,
-	Iterator2 buffer, iter_difference_t<Iterator2> buffer_size) {
+constexpr Iterator1 __rotate_with_buffer_aux(Iterator1 first, Iterator1 middle, Iterator1 last,
+                                             iter_difference_t<Iterator1> len1, iter_difference_t<Iterator1> len2,
+                                             Iterator2 buffer, iter_difference_t<Iterator2> buffer_size) {
 
-	Iterator2 buffer_end;
-	if (len1 > len2 && len2 <= buffer_size) {
-		buffer_end = _NEFORCE copy(middle, last, buffer);
-		_NEFORCE copy_backward(first, middle, last);
-		return _NEFORCE copy(buffer, buffer_end, first);
-	}
-	if (len1 <= buffer_size) {
-		buffer_end = _NEFORCE copy(first, middle, buffer);
-		_NEFORCE copy(middle, last, first);
-		return _NEFORCE copy_backward(buffer, buffer_end, last);
-	}
-	_NEFORCE rotate(first, middle, last);
-	_NEFORCE advance(first, len2);
-	return first;
+    Iterator2 buffer_end;
+    if (len1 > len2 && len2 <= buffer_size) {
+        buffer_end = _NEFORCE copy(middle, last, buffer);
+        _NEFORCE copy_backward(first, middle, last);
+        return _NEFORCE copy(buffer, buffer_end, first);
+    }
+    if (len1 <= buffer_size) {
+        buffer_end = _NEFORCE copy(first, middle, buffer);
+        _NEFORCE copy(middle, last, first);
+        return _NEFORCE copy_backward(buffer, buffer_end, last);
+    }
+    _NEFORCE rotate(first, middle, last);
+    _NEFORCE advance(first, len2);
+    return first;
 }
 
 /**
@@ -185,70 +187,65 @@ constexpr Iterator1 __rotate_with_buffer_aux(
  * 使用临时缓冲区优化原地合并算法。
  */
 template <typename Iterator, typename Pointer, typename Compare>
-constexpr void __merge_with_buffer_aux(
-    Iterator first, Iterator middle, Iterator last,
-	iter_difference_t<Iterator> len1, iter_difference_t<Iterator> len2,
-	Pointer buffer, iter_difference_t<Iterator> buffer_size, Compare comp) {
+constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator last, iter_difference_t<Iterator> len1,
+                                       iter_difference_t<Iterator> len2, Pointer buffer,
+                                       iter_difference_t<Iterator> buffer_size, Compare comp) {
 
-	if (len1 <= len2 && len1 <= buffer_size) {
-		Pointer end_buffer = _NEFORCE copy(first, middle, buffer);
-		_NEFORCE merge(buffer, end_buffer, middle, last, first, comp);
-	}
-	else if (len2 <= buffer_size) {
-		Pointer end_buffer = _NEFORCE copy(middle, last, buffer);
-		if (first == middle) {
-			_NEFORCE copy_backward(buffer, end_buffer, last);
-			return;
-		}
-		if (buffer == end_buffer) {
-			_NEFORCE copy_backward(first, middle, last);
-			return;
-		}
-		--middle;
-		--end_buffer;
-		while (true) {
-			if (comp(*end_buffer, *middle)) {
-				*--last = *middle;
-				if (first == middle) {
-					_NEFORCE copy_backward(buffer, ++end_buffer, last);
-					return;
-				}
-				--middle;
-			}
-			else {
-				*--last = *end_buffer;
-				if (buffer == end_buffer) {
-					_NEFORCE copy_backward(first, ++middle, last);
-					return;
-				}
-				--end_buffer;
-			}
-		}
-	}
-	else {
-		Iterator first_cut = first;
-		Iterator second_cut = middle;
-		iter_difference_t<Iterator> len11 = 0;
-		auto len22 = len11;
-		if (len1 > len2) {
-			len11 = len1 / 2;
-			_NEFORCE advance(first_cut, len11);
-			second_cut = _NEFORCE lower_bound(middle, last, *first_cut, comp);
-			len22 = _NEFORCE distance(middle, second_cut);
-		} else {
-			len22 = len2 / 2;
-			_NEFORCE advance(second_cut, len22);
-			first_cut = _NEFORCE upper_bound(first, middle, *second_cut, comp);
-			len11 = _NEFORCE distance(first, first_cut);
-		}
-		Iterator new_middle = inner::__rotate_with_buffer_aux(
-			first_cut, middle, second_cut, len1 - len11, len22, buffer, buffer_size);
+    if (len1 <= len2 && len1 <= buffer_size) {
+        Pointer end_buffer = _NEFORCE copy(first, middle, buffer);
+        _NEFORCE merge(buffer, end_buffer, middle, last, first, comp);
+    } else if (len2 <= buffer_size) {
+        Pointer end_buffer = _NEFORCE copy(middle, last, buffer);
+        if (first == middle) {
+            _NEFORCE copy_backward(buffer, end_buffer, last);
+            return;
+        }
+        if (buffer == end_buffer) {
+            _NEFORCE copy_backward(first, middle, last);
+            return;
+        }
+        --middle;
+        --end_buffer;
+        while (true) {
+            if (comp(*end_buffer, *middle)) {
+                *--last = *middle;
+                if (first == middle) {
+                    _NEFORCE copy_backward(buffer, ++end_buffer, last);
+                    return;
+                }
+                --middle;
+            } else {
+                *--last = *end_buffer;
+                if (buffer == end_buffer) {
+                    _NEFORCE copy_backward(first, ++middle, last);
+                    return;
+                }
+                --end_buffer;
+            }
+        }
+    } else {
+        Iterator first_cut = first;
+        Iterator second_cut = middle;
+        iter_difference_t<Iterator> len11 = 0;
+        auto len22 = len11;
+        if (len1 > len2) {
+            len11 = len1 / 2;
+            _NEFORCE advance(first_cut, len11);
+            second_cut = _NEFORCE lower_bound(middle, last, *first_cut, comp);
+            len22 = _NEFORCE distance(middle, second_cut);
+        } else {
+            len22 = len2 / 2;
+            _NEFORCE advance(second_cut, len22);
+            first_cut = _NEFORCE upper_bound(first, middle, *second_cut, comp);
+            len11 = _NEFORCE distance(first, first_cut);
+        }
+        Iterator new_middle = inner::__rotate_with_buffer_aux(first_cut, middle, second_cut, len1 - len11, len22,
+                                                              buffer, buffer_size);
 
-		inner::__merge_with_buffer_aux(
-			first, first_cut, new_middle, len11, len22, buffer, buffer_size, comp);
-		inner::__merge_with_buffer_aux(
-			new_middle, second_cut, last, len1 - len11, len2 - len22, buffer, buffer_size, comp);
-	}
+        inner::__merge_with_buffer_aux(first, first_cut, new_middle, len11, len22, buffer, buffer_size, comp);
+        inner::__merge_with_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, buffer, buffer_size,
+                                       comp);
+    }
 }
 
 NEFORCE_END_INNER__
@@ -272,15 +269,17 @@ template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
     static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be a bidirectional_iterator");
 
-	if (first == middle || middle == last) return;
-	auto len1 = _NEFORCE distance(first, middle);
-	auto len2 = _NEFORCE distance(middle, last);
-	try {
-		temporary_buffer<Iterator> buffer(first, last);
-		inner::__merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
-	} catch (...) {
-		inner::__merge_without_buffer_aux(first, middle, last, len1, len2, comp);
-	}
+    if (first == middle || middle == last) {
+        return;
+    }
+    auto len1 = _NEFORCE distance(first, middle);
+    auto len2 = _NEFORCE distance(middle, last);
+    try {
+        temporary_buffer<Iterator> buffer(first, last);
+        inner::__merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
+    } catch (...) {
+        inner::__merge_without_buffer_aux(first, middle, last, len1, len2, comp);
+    }
 }
 
 /**
@@ -290,9 +289,8 @@ NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator
  * @param middle 范围中间分割点
  * @param last 范围结束
  */
-template <typename Iterator>
-NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last) {
-	return _NEFORCE inplace_merge(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
+template <typename Iterator> NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last) {
+    return _NEFORCE inplace_merge(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 /** @} */ // MergeAlgorithms
