@@ -25,19 +25,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install clang-format
+      - name: Install clang-format-19
         run: |
+          UBUNTU_VERSION=$(lsb_release -cs)
+          
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+          sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_VERSION}/ llvm-toolchain-${UBUNTU_VERSION}-19 main"
           sudo apt-get update
-          sudo apt-get install -y clang-format-17
-          sudo ln -sf /usr/bin/clang-format-17 /usr/bin/clang-format
+          sudo apt-get install -y clang-format-19
+          sudo ln -sf /usr/bin/clang-format-19 /usr/bin/clang-format
+          clang-format --version
 
       - name: Run clang-format check
         run: |
           find src include tests examples \
             -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.h" \) \
             ! -path "*/build/*" ! -path "*/vcpkg_installed/*" \
-            -print0 > filelist.txt
-          
-          xargs -0 clang-format --dry-run --Werror -style=file < filelist.txt
+            -exec clang-format --dry-run --Werror -style=file {} +
           
           echo "✅ All files are properly formatted!"
