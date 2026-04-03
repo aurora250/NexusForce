@@ -51,10 +51,8 @@ jobs:
           cmake -B ${{ github.workspace }}/build \
             -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake \
             -DCMAKE_BUILD_TYPE=Release \
-            -DBUILD_DOCS=OFF \
-            -DCATKIN_ENABLE_TESTING=OFF \
-            -DBUILD_DOCUMENTATION=OFF \
-            -DCMAKE_VERBOSE_MAKEFILE=ON
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_TESTS=OFF \
 
       - name: Build
         run: |
