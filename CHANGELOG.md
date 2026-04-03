@@ -1,15 +1,16 @@
 # CHANGELOG
 
-## [1.0.0] - 2026-03-29
+## [1.0.0] - 2026-04-02
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
 - 导出 cmake 配置函数
+- 添加代码格式化与检测配置
 - 添加 lz4 压缩操作
 - 添加线程屏障 barrier / latch
 - 添加协程 coroutine / generator 支持
 - 添加危险指针 hazard_ptr
-- 添加信号量 semaphore
+- 添加系统信号量 semaphore
 - 添加基于协程的虚拟线程 virtual_thread
 - 添加布隆过滤器 bloom_filter
 - 添加 lru_cache / ttl_cache
@@ -52,6 +53,7 @@
 ### 🐛 Bug Fixes
 - 修复 make_shared 内存泄漏问题
 - 修复线程池 cached 模式下的临界区操作异常问题
+- 修复 datetime 对UTC时间处理的异常问题
 
 ## [0.4.0] - 2025-12-26
 
@@ -79,7 +81,7 @@
 - 添加进程控制类 process
 - 添加信号控制类 signal_manager
 - 添加堆栈回溯类 stacktrace
-- 添加持续时间 duraion 系统与时钟系统
+- 添加持续时间 duration 系统与时钟系统
 - 添加 RGBA 颜色操作类 color
 - 添加基础类型包装系统 packages
 - 添加标准 SQL 语句流式构建类 sql_builder
@@ -119,7 +121,7 @@
 - 添加十六进制操作类 hexadecimal
 - 添加 optional
 - 添加 json_parser / json_builder 结构
-- 添加 print 打印函数
+- 添加 print 打印函数以代替 detailof 打印函数
 - 添加 LCD / Mersenne Twister / hardware Noise 随机算法
 - 添加字符串转数据类型系列函数
 - 添加基于原子操作的无锁队列 lock_free_queue
@@ -138,7 +140,7 @@
 - 健全 basic_stringstream 实现
 - 健全类型萃取结构 type_traits
 - 健全线程池 thread_pool
-- 使用 cmake 代替 sin 进行跨平台构建，优化项目结构
+- 优化项目结构
 
 ### 📚 Documentation
 - 添加 README 编译指南

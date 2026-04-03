@@ -3,9 +3,47 @@
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-NEFORCE_ERROR_BUILD_FINAL_CLASS(database_typecast_exception, database_exception, "Database Type Cast Failed.")
-NEFORCE_ERROR_BUILD_FINAL_CLASS(database_prepared_stmt_exception, database_exception,
-                                "Database Prepared Statement Operations Error.")
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief 异常类集
+ * @{
+ */
+
+/**
+ * @struct database_typecast_exception
+ * @brief 数据库数据类型转换异常
+ */
+struct database_typecast_exception final : database_exception {
+    explicit database_typecast_exception(const char* info = "Database Type Cast Failed.",
+                                         const char* type = static_type,
+                                         const int code = 0) noexcept
+    : database_exception(info, type, code) {}
+
+    explicit database_typecast_exception(const exception& e)
+    : database_exception(e) {}
+
+    ~database_typecast_exception() override = default;
+    static constexpr auto static_type = "database_typecast_exception";
+};
+
+/**
+ * @struct database_prepared_stmt_exception
+ * @brief 数据库预处理语句操作异常
+ */
+struct database_prepared_stmt_exception final : database_exception {
+    explicit database_prepared_stmt_exception(const char* info = "Database Prepared Statement Operations Error.",
+                                              const char* type = static_type,
+                                              const int code = 0) noexcept
+    : database_exception(info, type, code) {}
+
+    explicit database_prepared_stmt_exception(const exception& e)
+    : database_exception(e) {}
+
+    ~database_prepared_stmt_exception() override = default;
+    static constexpr auto static_type = "database_prepared_stmt_exception";
+};
+
+/** @} */ // Exceptions
 
 
 enum class db_type : uint8_t {
