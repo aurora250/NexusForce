@@ -275,6 +275,34 @@ void test_rnd() {
     println("UUID V7:", uuid::v7());
 }
 
+void test_locale() {
+    locale c = locale::classic();
+    printfln("name={}, encoding={}", c.name(), c.encoding());
+
+    locale sys_loc = locale::system();
+    println("system locale:", sys_loc.name());
+
+    try {
+        locale fr("fr_FR.UTF-8");
+        auto ni = fr.numeric();
+        printfln("fr decimal='{}', thousands='{}'", ni.decimal_point, ni.thousands_sep);
+
+        int r = fr.compare("café", "cafe");
+        println("collate 'café' vs 'cafe':", r);
+
+        println("is_alpha('é'):", fr.is_alpha(U'\u00e9'));
+        printfln("to_upper('é'): U+{:04X}", static_cast<uint32_t>(fr.to_upper(U'\u00e9')));
+    } catch (const locale_exception& e) {
+        println(e.what());
+    }
+
+    auto av = locale::available_locales();
+    printfln("Available locales ({} total):", av.size());
+    for (size_t i = 0; i < av.size() && i < 5; ++i) {
+        printfln("  {}", av[i]);
+    }
+}
+
 void test_atomic() {
     atomic<shared_ptr<int>> aptr{make_shared<int>(2)};
     println(*aptr.load().get());

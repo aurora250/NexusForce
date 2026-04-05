@@ -57,6 +57,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/locale.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/share_memory.cpp

@@ -250,7 +250,8 @@ struct task_info {
         failed     ///< 执行失败
     };
 
-    enum class priority_type : uint32_t {}; ///< 优先级类型
+    enum class priority_type : uint32_t {
+    }; ///< 优先级类型
 
     const uint64_t id;                                 ///< 任务ID
     atomic<status> status{status::pending};            ///< 任务状态

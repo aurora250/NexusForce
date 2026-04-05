@@ -6,7 +6,12 @@
 #include "NeForce/network/ssl/ssl_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-enum class ssl_method { TLS_SERVER, TLS_CLIENT, TLS_SERVER_DTLS, TLS_CLIENT_DTLS };
+enum class ssl_method {
+    TLS_SERVER,
+    TLS_CLIENT,
+    TLS_SERVER_DTLS,
+    TLS_CLIENT_DTLS
+};
 
 
 class NEFORCE_API ssl_context {

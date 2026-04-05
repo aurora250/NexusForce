@@ -68,6 +68,7 @@
 #include "NeForce/core/system/cmdline.hpp"
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/core/system/environment.hpp"
+#include "NeForce/core/system/locale.hpp"
 #include "NeForce/core/system/process.hpp"
 #include "NeForce/core/system/share_memory.hpp"
 #include "NeForce/core/system/signal.hpp"

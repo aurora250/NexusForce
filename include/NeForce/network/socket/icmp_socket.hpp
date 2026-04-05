@@ -17,7 +17,11 @@ struct icmp_header {
 
 class NEFORCE_API icmp_socket final : public socket_base {
 public:
-    enum icmp_type : uint8_t { ICMP_ECHO_REPLY = 0, ICMP_ECHO_REQUEST = 8, ICMP_TIME_EXCEEDED = 11 };
+    enum icmp_type : uint8_t {
+        ICMP_ECHO_REPLY = 0,
+        ICMP_ECHO_REQUEST = 8,
+        ICMP_TIME_EXCEEDED = 11
+    };
 
     struct ping_result {
         ip_address destination;

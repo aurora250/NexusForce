@@ -25,11 +25,21 @@ struct NEFORCE_API ftp_exception final : network_exception {
 
 class NEFORCE_API ftp_client final : public ip_socket {
 public:
-    enum class transfer_mode { ascii, binary };
+    enum class transfer_mode {
+        ascii,
+        binary
+    };
 
-    enum class passive_mode { active, passive };
+    enum class passive_mode {
+        active,
+        passive
+    };
 
-    enum class tls_mode { none, implicit_, explicit_ };
+    enum class tls_mode {
+        none,
+        implicit_,
+        explicit_
+    };
 
     struct entry {
         string name;

@@ -207,6 +207,7 @@
 - 必选依赖:
   - pcre2
   - OpenSSL
+  - GTest
 - 可选依赖：
   - PostgreSQL
   - MySQL

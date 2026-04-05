@@ -26,7 +26,16 @@ public:
     string anchor;
     string tag;
 
-    enum types { Null, Boolean, Integer, Float, String, Timestamp, Sequence, Mapping };
+    enum types {
+        Null,
+        Boolean,
+        Integer,
+        Float,
+        String,
+        Timestamp,
+        Sequence,
+        Mapping
+    };
 
     virtual ~yaml_value() = default;
     NEFORCE_NODISCARD virtual types type() const noexcept = 0;
@@ -104,7 +113,13 @@ public:
 
 class NEFORCE_API yaml_string final : public yaml_value {
 public:
-    enum string_style { Plain, SingleQuoted, DoubleQuoted, Literal, Folded };
+    enum string_style {
+        Plain,
+        SingleQuoted,
+        DoubleQuoted,
+        Literal,
+        Folded
+    };
 
 private:
     string value;
@@ -147,7 +162,10 @@ public:
 
 class NEFORCE_API yaml_sequence final : public yaml_value {
 public:
-    enum sequence_style { Block, Flow };
+    enum sequence_style {
+        Block,
+        Flow
+    };
 
 private:
     vector<yaml_ptr> elements;
@@ -189,7 +207,10 @@ public:
 
 class NEFORCE_API yaml_mapping final : public yaml_value {
 public:
-    enum mapping_style { Block, Flow };
+    enum mapping_style {
+        Block,
+        Flow
+    };
 
 private:
     unordered_map<string, yaml_ptr> members;

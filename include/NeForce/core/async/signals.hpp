@@ -55,7 +55,8 @@ NEFORCE_INLINE17 constexpr oneshot_t oneshot{};
  *
  * 用于标记连接触发指定次数后自动断开。
  */
-enum class nshot_t : size_t {};
+enum class nshot_t : size_t {
+};
 
 
 /**

@@ -39,9 +39,17 @@ struct NEFORCE_API smtp_message {
 
 class NEFORCE_API smtp_socket final : public ip_socket {
 public:
-    enum class auth_method { none, plain, login };
+    enum class auth_method {
+        none,
+        plain,
+        login
+    };
 
-    enum class tls_mode { none, implicit, starttls };
+    enum class tls_mode {
+        none,
+        implicit,
+        starttls
+    };
 
     struct response {
         int code;

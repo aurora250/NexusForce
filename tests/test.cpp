@@ -735,6 +735,7 @@ void test_tpool() {
         scoped_click grd(clk);
         pool.submit_task([&pool] {
             pool.submit_task(test_sysinfo);
+            pool.submit_task(test_locale);
             pool.submit_task(test_file);
             pool.submit_task(test_datetimes);
             pool.submit_task(test_print);

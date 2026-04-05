@@ -15,12 +15,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct database_typecast_exception final : database_exception {
     explicit database_typecast_exception(const char* info = "Database Type Cast Failed.",
-                                         const char* type = static_type,
-                                         const int code = 0) noexcept
-    : database_exception(info, type, code) {}
+                                         const char* type = static_type, const int code = 0) noexcept :
+    database_exception(info, type, code) {}
 
-    explicit database_typecast_exception(const exception& e)
-    : database_exception(e) {}
+    explicit database_typecast_exception(const exception& e) :
+    database_exception(e) {}
 
     ~database_typecast_exception() override = default;
     static constexpr auto static_type = "database_typecast_exception";
@@ -32,12 +31,11 @@ struct database_typecast_exception final : database_exception {
  */
 struct database_prepared_stmt_exception final : database_exception {
     explicit database_prepared_stmt_exception(const char* info = "Database Prepared Statement Operations Error.",
-                                              const char* type = static_type,
-                                              const int code = 0) noexcept
-    : database_exception(info, type, code) {}
+                                              const char* type = static_type, const int code = 0) noexcept :
+    database_exception(info, type, code) {}
 
-    explicit database_prepared_stmt_exception(const exception& e)
-    : database_exception(e) {}
+    explicit database_prepared_stmt_exception(const exception& e) :
+    database_exception(e) {}
 
     ~database_prepared_stmt_exception() override = default;
     static constexpr auto static_type = "database_prepared_stmt_exception";

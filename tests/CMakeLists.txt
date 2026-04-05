@@ -19,3 +19,9 @@ set_target_properties(NexusForceTests PROPERTIES
 
 target_link_libraries(NexusForceTests PRIVATE NexusForce::NexusForce)
 nexusforce_compiler_options(NexusForceTests)
+
+find_package(GTest CONFIG REQUIRED)
+target_link_libraries(NexusForceTests PRIVATE GTest::gtest GTest::gtest_main)
+
+enable_testing()
+add_test(NAME NexusForceTests COMMAND NexusForceTests)

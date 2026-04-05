@@ -37,7 +37,10 @@ private:
      * @enum range_type
      * @brief 上下文类型枚举
      */
-    enum range_type { object, array };
+    enum range_type {
+        object,
+        array
+    };
 
     /**
      * @struct frame

@@ -13,7 +13,12 @@ enum class dns_opcode : uint8_t {
     UPDATE = 5  // 区域更新
 };
 
-enum class dns_query : uint16_t { INTERNET = 1, CHAOS = 3, HESIOD = 4, ANY = 255 };
+enum class dns_query : uint16_t {
+    INTERNET = 1,
+    CHAOS = 3,
+    HESIOD = 4,
+    ANY = 255
+};
 
 enum class dns_response : uint8_t {
     NON_ERROR = 0,
@@ -27,7 +32,14 @@ enum class dns_response : uint8_t {
 
 class dns_exception final : public network_exception {
 public:
-    enum class code { TIMEOUT, NETWORK_ERROR, PARSE_ERROR, SERVER_FAILURE, TRUNCATED, NO_RECORD };
+    enum class code {
+        TIMEOUT,
+        NETWORK_ERROR,
+        PARSE_ERROR,
+        SERVER_FAILURE,
+        TRUNCATED,
+        NO_RECORD
+    };
 
     explicit dns_exception(const string& what) :
     network_exception(what.data()) {}
