@@ -30,6 +30,19 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
+          config: |
+            paths:
+              - src
+              - include
+            paths-ignore:
+              - cmake
+              - docs
+              - examples
+              - tests
+              - build
+              - vcpkg
+              - third_party
+              - submodules
 
       - name: Install system dependencies
         run: |

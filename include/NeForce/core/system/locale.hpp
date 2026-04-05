@@ -9,7 +9,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 struct locale_exception final : system_exception {
     explicit locale_exception(const char* info = "Locale Operation Failed", const char* type = static_type,
-                               const int code = 0) noexcept :
+                              const int code = 0) noexcept :
     system_exception(info, type, code) {}
 
     explicit locale_exception(const exception& e) :

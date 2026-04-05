@@ -171,7 +171,7 @@ endif()
 
 
 if(NEXUSFORCE_BUILD_DOCS)
-    add_subdirectory(docs/config)
+    add_subdirectory(docs)
 else()
     message(STATUS "Skipping documentation build (NEXUSFORCE_BUILD_DOCS=OFF)")
 endif()
