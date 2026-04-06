@@ -106,20 +106,20 @@ namespace {
         other(other) {}
 
         template <typename T>
-        enable_if_t<is_same_v<T, ::sockaddr_in>, bool> operator()(const T& value) noexcept {
+        enable_if_t<is_same_v<T, ::sockaddr_in>, bool> operator()(const T& value) {
             if (!other.is_ipv4()) {
                 return false;
             }
             const auto& a2 = other.address().get<::sockaddr_in>();
-            return _NEFORCE memory_compare(&value.sin_addr, &a2.sin_addr, sizeof(::in_addr)) == 0;
+            return memory_compare(&value.sin_addr, &a2.sin_addr, sizeof(::in_addr)) == 0;
         }
         template <typename T>
-        enable_if_t<is_same_v<T, ::sockaddr_in6>, bool> operator()(const T& value) noexcept {
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, bool> operator()(const T& value) {
             if (!other.is_ipv6()) {
                 return false;
             }
             const auto& a2 = other.address().get<::sockaddr_in6>();
-            return _NEFORCE memory_compare(&value.sin6_addr, &a2.sin6_addr, sizeof(::in6_addr)) == 0;
+            return memory_compare(&value.sin6_addr, &a2.sin6_addr, sizeof(::in6_addr)) == 0;
         }
         template <typename T>
         enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, bool> operator()(const T&) noexcept {
@@ -162,7 +162,7 @@ ip_address ip_address::loopback(const ports port, const int family) noexcept {
         a4.sin_port = endian::host_to_network(static_cast<uint16_t>(port));
         result.addr_ = a4;
     }
-    return move(result);
+    return result;
 }
 
 const ::sockaddr* ip_address::data() const noexcept { return addr_.visit(const_data_visitor{}); }
@@ -199,7 +199,7 @@ optional<ip_address> ip_address::parse(const string& host, const ports port) noe
     return none;
 }
 
-bool ip_address::operator==(const ip_address& other) const noexcept {
+bool ip_address::operator==(const ip_address& other) const {
     if (!is_valid() && !other.is_valid()) {
         return true;
     }

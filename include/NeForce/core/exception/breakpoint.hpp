@@ -89,7 +89,7 @@ NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE constexpr bool is_constant_evalua
  * @brief 检测当前进程是否正在被调试器附加
  * @return 如果正在调试则返回true，否则返回false
  */
-bool NEFORCE_API is_debugger_present() noexcept;
+bool NEFORCE_API is_debugger_present();
 
 /**
  * @brief 调试断言
@@ -99,7 +99,7 @@ bool NEFORCE_API is_debugger_present() noexcept;
  * 当条件为false时，输出断言失败信息并触发调试断点（如果正在调试）。
  * 仅在调试构建中有效，发布构建中此函数为空操作。
  */
-void NEFORCE_API debug_assert(bool condition, const char* message = nullptr) noexcept;
+void NEFORCE_API debug_assert(bool condition, const char* message = nullptr);
 
 /**
  * @brief 触发调试断点
@@ -134,7 +134,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void breakpoint() noexcept {
  * 首先检查是否有调试器附加，如果有则触发断点。
  * 适用于条件性断点，避免在非调试环境中意外中断。
  */
-NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging() noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging() {
     if (is_debugger_present()) {
         breakpoint();
     }

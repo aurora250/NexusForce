@@ -71,61 +71,61 @@ namespace {
 http_router::http_router() { setup_default_handlers(); }
 
 void http_router::get(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::GET, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::GET(), path, _NEFORCE move(handler));
 }
 
 void http_router::post(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::POST, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::POST(), path, _NEFORCE move(handler));
 }
 
 void http_router::put(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::PUT, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::PUT(), path, _NEFORCE move(handler));
 }
 
 void http_router::del(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::DELETE, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::DELETE(), path, _NEFORCE move(handler));
 }
 
 void http_router::head(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::HEAD, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::HEAD(), path, _NEFORCE move(handler));
 }
 
 void http_router::options(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::OPTIONS, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::OPTIONS(), path, _NEFORCE move(handler));
 }
 
 void http_router::trace(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::TRACE, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::TRACE(), path, _NEFORCE move(handler));
 }
 
 void http_router::connect(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::CONNECT, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::CONNECT(), path, _NEFORCE move(handler));
 }
 
 void http_router::patch(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::PATCH, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::PATCH(), path, _NEFORCE move(handler));
 }
 
 void http_router::get_post(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::GET, path, handler);
-    route(HTTP_METHOD::POST, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::GET(), path, handler);
+    route(HTTP_METHOD::POST(), path, _NEFORCE move(handler));
 }
 
 void http_router::post_delete(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::POST, path, handler);
-    route(HTTP_METHOD::DELETE, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::POST(), path, handler);
+    route(HTTP_METHOD::DELETE(), path, _NEFORCE move(handler));
 }
 
 void http_router::all(const string& path, http_handler_t handler) {
-    route(HTTP_METHOD::GET, path, handler);
-    route(HTTP_METHOD::POST, path, handler);
-    route(HTTP_METHOD::PUT, path, handler);
-    route(HTTP_METHOD::DELETE, path, handler);
-    route(HTTP_METHOD::HEAD, path, handler);
-    route(HTTP_METHOD::OPTIONS, path, handler);
-    route(HTTP_METHOD::TRACE, path, handler);
-    route(HTTP_METHOD::CONNECT, path, handler);
-    route(HTTP_METHOD::PATCH, path, _NEFORCE move(handler));
+    route(HTTP_METHOD::GET(), path, handler);
+    route(HTTP_METHOD::POST(), path, handler);
+    route(HTTP_METHOD::PUT(), path, handler);
+    route(HTTP_METHOD::DELETE(), path, handler);
+    route(HTTP_METHOD::HEAD(), path, handler);
+    route(HTTP_METHOD::OPTIONS(), path, handler);
+    route(HTTP_METHOD::TRACE(), path, handler);
+    route(HTTP_METHOD::CONNECT(), path, handler);
+    route(HTTP_METHOD::PATCH(), path, _NEFORCE move(handler));
 }
 
 void http_router::route(const HTTP_METHOD& method, const string& path, const http_handler_t& handler) {
@@ -204,7 +204,7 @@ void http_router::setup_default_handlers() {
     not_found_handler_ = [](http_request& request, http_response& response) {
         response.status = HTTP_STATUS::S4_NOT_FOUNT;
         response.status_message = "Not Found";
-        response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+        response.set_content_type(HTTP_CONTENT::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
                         "<html><head><title>404 Not Found</title></head>"
                         "<body><h1>404 - Not Found</h1>"
@@ -217,7 +217,7 @@ void http_router::setup_default_handlers() {
     method_not_allowed_handler_ = [](http_request& request, http_response& response) {
         response.status = HTTP_STATUS::S4_METHOD_NOT_ALLOWED;
         response.status_message = "Method Not Allowed";
-        response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+        response.set_content_type(HTTP_CONTENT::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
                         "<html><head><title>405 Method Not Allowed</title></head>"
                         "<body><h1>405 - Method Not Allowed</h1>"
@@ -230,7 +230,7 @@ void http_router::setup_default_handlers() {
     exception_handler_ = [](http_request& request, http_response& response, const exception& e) {
         response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
         response.status_message = "Internal Server Error";
-        response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+        response.set_content_type(HTTP_CONTENT::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
                         "<html><head><title>500 Internal Server Error</title></head>"
                         "<body><h1>500 - Internal Server Error</h1>"
@@ -300,7 +300,7 @@ http_response http_router::handle_request(http_request& request) {
         } else {
             response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
             response.status_message = "Internal Server Error";
-            response.set_content_type(HTTP_CONTENT::PLAIN_TEXT);
+            response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
             response.body = "Internal Server Error: "_s + e.what();
         }
     }

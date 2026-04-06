@@ -13,7 +13,7 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-optional<mac_address> mac_address::parse(const string_view str) noexcept {
+optional<mac_address> mac_address::parse(const string_view str) {
     if (str.size() != 17) {
         return none;
     }
@@ -44,7 +44,7 @@ optional<mac_address> mac_address::parse(const string_view str) noexcept {
 }
 
 
-optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface) noexcept {
+optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface) {
     if (!ip.is_valid() || !ip.is_ipv4()) {
         return none;
     }

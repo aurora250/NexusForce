@@ -275,7 +275,7 @@ void abort() noexcept {
 #else
     ::sigset_t mask;
     ::sigemptyset(&mask);
-    ::sigprocmask(SIG_SETMASK, &mask, nullptr);
+    ::pthread_sigmask(SIG_SETMASK, &mask, nullptr);
 
     struct ::sigaction sa;
     sa.sa_handler = SIG_DFL;

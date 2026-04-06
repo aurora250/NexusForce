@@ -195,21 +195,21 @@ public:
      * @param async 是否异步刷新
      * @return 是否成功
      */
-    bool flush(bool async = false) noexcept;
+    bool flush(bool async = false);
 
     /**
      * @brief 静态方法：删除共享内存对象
      * @param name 共享内存名称
      * @return 是否成功删除
      */
-    static bool remove(const string& name) noexcept;
+    static bool remove(const string& name);
 
     /**
      * @brief 静态方法：检查共享内存是否存在
      * @param name 共享内存名称
      * @return 是否存在
      */
-    static bool exists(const string& name) noexcept;
+    static bool exists(const string& name);
 };
 
 /** @} */ // ShareMemory

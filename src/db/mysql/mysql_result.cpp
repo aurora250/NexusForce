@@ -2,7 +2,7 @@
 #ifdef NEFORCE_SUPPORT_MYSQL
 NEFORCE_BEGIN_NAMESPACE__
 
-mysql_result::mysql_result() noexcept :
+mysql_result::mysql_result() :
 column_name_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<::enum_field_types>>()) {}
 

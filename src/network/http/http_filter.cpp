@@ -86,11 +86,11 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
         return true;
     }
 
-    response.headers[HTTP_KEY::Access_Control_Allow_Origin] = allowed_origins;
-    response.headers[HTTP_KEY::Access_Control_Allow_Credentials] = to_string(allow_credentials);
-    response.headers[HTTP_KEY::Access_Control_Allow_Methods] = allowed_methods.to_string();
-    response.headers[HTTP_KEY::Access_Control_Allow_Headers] = allowed_headers;
-    response.headers[HTTP_KEY::Access_Control_Max_Age] = to_string(max_age);
+    response.headers[HTTP_KEY::Access_Control_Allow_Origin()] = allowed_origins;
+    response.headers[HTTP_KEY::Access_Control_Allow_Credentials()] = to_string(allow_credentials);
+    response.headers[HTTP_KEY::Access_Control_Allow_Methods()] = allowed_methods.to_string();
+    response.headers[HTTP_KEY::Access_Control_Allow_Headers()] = allowed_headers;
+    response.headers[HTTP_KEY::Access_Control_Max_Age()] = to_string(max_age);
 
     if (request.method.is_options()) {
         response.status = HTTP_STATUS::S2_NO_CONTENT;
@@ -168,17 +168,17 @@ root_path_(_NEFORCE move(root_path)) {
         root_path_ += "/";
     }
 
-    mime_types_[".css"] = HTTP_CONTENT::CSS_TEXT;
-    mime_types_[".jpg"] = HTTP_CONTENT::JPEG_IMG;
-    mime_types_[".jpeg"] = HTTP_CONTENT::JPEG_IMG;
-    mime_types_[".png"] = HTTP_CONTENT::PNG_IMG;
-    mime_types_[".bmp"] = HTTP_CONTENT::BMP_IMG;
-    mime_types_[".webp"] = HTTP_CONTENT::WEBP_IMG;
-    mime_types_[".html"] = HTTP_CONTENT::HTML_TEXT;
-    mime_types_[".htm"] = HTTP_CONTENT::HTML_TEXT;
-    mime_types_[".json"] = HTTP_CONTENT::JSON_APP;
-    mime_types_[".txt"] = HTTP_CONTENT::PLAIN_TEXT;
-    mime_types_[".xml"] = HTTP_CONTENT::XML_TEXT;
+    mime_types_[".css"] = HTTP_CONTENT::CSS_TEXT();
+    mime_types_[".jpg"] = HTTP_CONTENT::JPEG_IMG();
+    mime_types_[".jpeg"] = HTTP_CONTENT::JPEG_IMG();
+    mime_types_[".png"] = HTTP_CONTENT::PNG_IMG();
+    mime_types_[".bmp"] = HTTP_CONTENT::BMP_IMG();
+    mime_types_[".webp"] = HTTP_CONTENT::WEBP_IMG();
+    mime_types_[".html"] = HTTP_CONTENT::HTML_TEXT();
+    mime_types_[".htm"] = HTTP_CONTENT::HTML_TEXT();
+    mime_types_[".json"] = HTTP_CONTENT::JSON_APP();
+    mime_types_[".txt"] = HTTP_CONTENT::PLAIN_TEXT();
+    mime_types_[".xml"] = HTTP_CONTENT::XML_TEXT();
 }
 
 optional<HTTP_CONTENT> static_file_filter::get_mime_type(const string& path) const {
@@ -212,7 +212,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
     if (!is_safe_path(req_path)) {
         response.status = HTTP_STATUS::S4_FORBIDDEN;
         response.status_message = "Forbidden";
-        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT);
+        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
         response.body = "Access denied";
         return false;
     }
@@ -233,7 +233,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
         if (file_size > max_file_size_) {
             response.status = HTTP_STATUS::S4_PAYLOAD_LARGE;
             response.status_message = "Payload Too Large";
-            response.set_content_type(HTTP_CONTENT::PLAIN_TEXT);
+            response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
             response.body = "File too large";
             return false;
         }
@@ -290,7 +290,7 @@ bool rate_limit_filter::pre_filter(http_request& request, http_response& respons
     if (info.count > max_requests) {
         response.status = HTTP_STATUS::S4_MANY_REQUESTS;
         response.status_message = "Too Many Requests";
-        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT);
+        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
         response.body = "Rate limit exceeded";
         response.set_header("Retry-After", to_string(window_seconds.count()));
         return false;
@@ -337,7 +337,7 @@ bool authentication_filter::pre_filter(http_request& request, http_response& res
     if (!auth_validator_(request)) {
         response.status = HTTP_STATUS::S4_UNAUTHORIZED;
         response.status_message = "Unauthorized";
-        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT);
+        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
         response.body = "Authentication required";
         response.set_header("WWW-Authenticate", "Bearer");
         return false;

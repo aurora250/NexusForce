@@ -111,11 +111,10 @@ thread::thread_monitor::~thread_monitor() noexcept {
 }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-unsigned int __stdcall
+unsigned int __stdcall thread::thread_entry(void* arg) {
 #else
-void *
+void* thread::thread_entry(void* arg) {
 #endif
-        thread::thread_entry(void* arg) {
     auto* args = static_cast<thread_startup_args*>(arg);
     const unique_ptr<data_base> data = _NEFORCE move(args->data);
     thread_monitor monitor(args->thread_id);

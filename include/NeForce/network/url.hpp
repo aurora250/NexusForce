@@ -86,7 +86,7 @@ struct url : iobject<url> {
      *
      * 将特殊字符转换为%XX格式
      */
-    NEFORCE_NODISCARD static string encode(string_view str, bool encode_slash = true) noexcept;
+    NEFORCE_NODISCARD static string encode(string_view str, bool encode_slash = true);
 
     /**
      * @brief URL解码字符串
@@ -95,7 +95,7 @@ struct url : iobject<url> {
      *
      * 将%XX格式转换回原始字符
      */
-    NEFORCE_NODISCARD static optional<string> decode(string_view str) noexcept;
+    NEFORCE_NODISCARD static optional<string> decode(string_view str);
 };
 
 /** @} */ // Network

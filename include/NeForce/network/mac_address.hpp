@@ -20,8 +20,8 @@ public:
     explicit mac_address(const bytes_type& bytes) noexcept :
     bytes_(bytes) {}
 
-    static optional<mac_address> parse(string_view str) noexcept;
-    static optional<mac_address> parse(const ip_address& ip, const char* iface = nullptr) noexcept;
+    static optional<mac_address> parse(string_view str);
+    static optional<mac_address> parse(const ip_address& ip, const char* iface = nullptr);
 
     string to_string() const;
 

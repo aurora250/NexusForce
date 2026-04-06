@@ -129,7 +129,9 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
         return;
     }
 
-    struct ::dirent* entry;
+    const ::dirent* entry = nullptr;
+
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     while ((entry = ::readdir(dp)) != nullptr) {
         const string_view name(entry->d_name);
         if (name == "." || name == "..") {
@@ -142,7 +144,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
         const path child_path = dir / name;
 
-        node_type type = node_type::unknown;
+        auto type = node_type::unknown;
         bool is_dir = false;
 
 #    ifdef _DIRENT_HAVE_D_TYPE
@@ -289,12 +291,12 @@ void path_tree::collect_impl(const node::ptr& current, const filter& f, vector<n
     }
 }
 
-void path_tree::traverse_dfs(const visitor& v) const {
+void path_tree::traverse_dfs(const visitor& visitor) const {
     if (!root_) {
         return;
     }
     bool stopped = false;
-    traverse_dfs_impl(root_, v, stopped);
+    traverse_dfs_impl(root_, visitor, stopped);
 }
 
 void path_tree::traverse_dfs_impl(const node::ptr& current, const visitor& v, bool& stopped) {
@@ -319,7 +321,7 @@ void path_tree::traverse_dfs_impl(const node::ptr& current, const visitor& v, bo
     }
 }
 
-void path_tree::traverse_bfs(const visitor& v) const {
+void path_tree::traverse_bfs(const visitor& visitor) const {
     if (!root_) {
         return;
     }
@@ -331,7 +333,7 @@ void path_tree::traverse_bfs(const visitor& v) const {
         node::ptr current = q.front();
         q.pop();
 
-        const visit_result res = v(*current);
+        const visit_result res = visitor(*current);
         if (res == visit_result::stop) {
             return;
         }
@@ -345,19 +347,19 @@ void path_tree::traverse_bfs(const visitor& v) const {
     }
 }
 
-void path_tree::traverse_files(const visitor& v) const {
+void path_tree::traverse_files(const visitor& visitor) const {
     traverse_dfs([&](const node& n) -> visit_result {
         if (n.is_file()) {
-            return v(n);
+            return visitor(n);
         }
         return visit_result::proceed;
     });
 }
 
-void path_tree::traverse_dirs(const visitor& v) const {
+void path_tree::traverse_dirs(const visitor& visitor) const {
     traverse_dfs([&](const node& n) -> visit_result {
         if (n.is_directory()) {
-            return v(n);
+            return visitor(n);
         }
         return visit_result::proceed;
     });

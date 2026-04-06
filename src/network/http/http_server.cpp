@@ -386,8 +386,8 @@ string http_server_base::build_response_str(const http_response& response) {
     }
 
     // Content-Length
-    if (response.redirect_url.empty() && !response.has_header(HTTP_KEY::Content_Length)) {
-        result += HTTP_KEY::Content_Length + ": " + _NEFORCE to_string(response.body.size()) + "\r\n";
+    if (response.redirect_url.empty() && !response.has_header(HTTP_KEY::Content_Length())) {
+        result += HTTP_KEY::Content_Length() + ": " + _NEFORCE to_string(response.body.size()) + "\r\n";
     }
 
     for (const auto& pair: response.headers) {
@@ -420,9 +420,9 @@ void http_server_base::add_session_cookie(const http_request& request, http_resp
     session_cookie.value = session->id;
     session_cookie.http_only = true;
 
-    const bool is_https = request.header(HTTP_KEY::X_Forwarded_Proto) == "https";
+    const bool is_https = request.header(HTTP_KEY::X_Forwarded_Proto()) == "https";
     session_cookie.secure = is_https;
-    session_cookie.same_site = is_https ? HTTP_KEY::Strict : HTTP_KEY::Lax;
+    session_cookie.same_site = is_https ? HTTP_KEY::Strict() : HTTP_KEY::Lax();
 
     response.cookies.emplace_back(move(session_cookie));
     session->is_new = false;
@@ -433,7 +433,7 @@ void http_server_base::send_error_response(tcp_socket* client_socket, const HTTP
         http_response error_response;
         error_response.status = status;
         error_response.status_message = get_status_message(status);
-        error_response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+        error_response.set_content_type(HTTP_CONTENT::HTML_TEXT());
         error_response.body = "<!DOCTYPE html>"
                               "<html><head><title>Error</title></head>"
                               "<body><h1>" +

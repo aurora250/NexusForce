@@ -153,8 +153,6 @@ private:
 #else
     struct ::sigaction old_actions_[64]{}; ///< 保存原有信号处理器
     ::timer_t alarm_timer_{nullptr};       ///< 定时器
-
-    static unordered_map<signal_event, int> windows_to_posix_map_; ///< Windows事件到POSIX信号的映射
 #endif
 
     thread signal_thread_;  ///< 信号处理线程

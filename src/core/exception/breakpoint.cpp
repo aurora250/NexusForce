@@ -8,7 +8,7 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-bool is_debugger_present() noexcept {
+bool is_debugger_present() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::IsDebuggerPresent() != 0;
 #else
@@ -32,7 +32,7 @@ bool is_debugger_present() noexcept {
 #endif
 }
 
-void debug_assert(bool condition, const char* message) noexcept {
+void debug_assert(bool condition, const char* message) {
     if (!condition) {
         println(color::red(), "Debug assertion failed:", message);
         breakpoint_if_debugging();

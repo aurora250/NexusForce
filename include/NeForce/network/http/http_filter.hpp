@@ -57,7 +57,7 @@ public:
 class NEFORCE_API cors_filter final : public http_filter {
 public:
     string allowed_origins;
-    HTTP_METHOD allowed_methods{HTTP_METHOD::DEFAULT};
+    HTTP_METHOD allowed_methods{HTTP_METHOD::DEFAULT()};
     string allowed_headers{"Content-Type, Cookie, Accept, X-Requested-With"};
     bool allow_credentials = true;
     size_t max_age = 86400;

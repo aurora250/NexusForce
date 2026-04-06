@@ -61,8 +61,8 @@ public:
     NEFORCE_NODISCARD string to_string() const;
     NEFORCE_NODISCARD static optional<ip_address> parse(const string& host, ports port = ports::undef) noexcept;
 
-    NEFORCE_NODISCARD bool operator==(const ip_address& other) const noexcept;
-    NEFORCE_NODISCARD bool operator!=(const ip_address& other) const noexcept { return !(*this == other); }
+    NEFORCE_NODISCARD bool operator==(const ip_address& other) const;
+    NEFORCE_NODISCARD bool operator!=(const ip_address& other) const { return !(*this == other); }
 };
 
 NEFORCE_END_NAMESPACE__

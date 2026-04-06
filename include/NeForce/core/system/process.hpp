@@ -192,14 +192,14 @@ public:
      * @param info 进程信息
      * @return 内存信息结构
      */
-    static memory_info get_memory_info(const state_info& info) noexcept;
+    static memory_info get_memory_info(const state_info& info);
 
     /**
      * @brief 获取进程状态
      * @param info 进程信息
      * @return 进程状态枚举值
      */
-    static state get_state(const state_info& info) noexcept;
+    static state get_state(const state_info& info);
 
     /**
      * @brief 检查进程权限
@@ -207,7 +207,7 @@ public:
      * @param permission 要检查的权限
      * @return 是否拥有指定权限
      */
-    static bool check_permission(const state_info& info, permission permission) noexcept;
+    static bool check_permission(const state_info& info, permission permission);
 
     /**
      * @brief 根据进程ID获取进程名称

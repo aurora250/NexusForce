@@ -16,7 +16,7 @@ private:
     unique_ptr<vector<::enum_field_types>> column_types_;
 
 public:
-    mysql_result() noexcept;
+    mysql_result();
     explicit mysql_result(::MYSQL_RES* result);
     ~mysql_result() override;
 

@@ -49,7 +49,7 @@ namespace {
 
 
 #ifdef NEFORCE_PLATFORM_LINUX
-bool arp::local_info(const char* iface) noexcept {
+bool arp::local_info(const char* iface) {
     socket_base query_sock;
 
     const bool res = query_sock.try_open(AF_INET, SOCK_DGRAM, 0);
@@ -177,7 +177,7 @@ void arp::close() noexcept {
 #endif
 }
 
-optional<mac_address> arp::resolve(const ip_address& target, const milliseconds timeout) noexcept {
+optional<mac_address> arp::resolve(const ip_address& target, const milliseconds timeout) {
     if (!target.is_valid() || !target.is_ipv4()) {
         return none;
     }

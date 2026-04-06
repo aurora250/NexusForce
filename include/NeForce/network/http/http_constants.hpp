@@ -255,41 +255,41 @@ public:
 
     ~HTTP_CONTENT() = default;
 
-    static const HTTP_CONTENT HTML_TEXT;  ///< text/html
-    static const HTTP_CONTENT XML_TEXT;   ///< text/xml
-    static const HTTP_CONTENT CSS_TEXT;   ///< text/css
-    static const HTTP_CONTENT PLAIN_TEXT; ///< text/plain
-    static const HTTP_CONTENT JSON_APP;   ///< application/json
-    static const HTTP_CONTENT FORM_APP;   ///< application/x-www-form-urlencoded
-    static const HTTP_CONTENT JPEG_IMG;   ///< image/jpeg
-    static const HTTP_CONTENT PNG_IMG;    ///< image/png
-    static const HTTP_CONTENT BMP_IMG;    ///< image/bmp
-    static const HTTP_CONTENT WEBP_IMG;   ///< image/webp
-    static const HTTP_CONTENT HTML_MSG;   ///< message/html
+    static const HTTP_CONTENT& HTML_TEXT();  ///< text/html
+    static const HTTP_CONTENT& XML_TEXT();   ///< text/xml
+    static const HTTP_CONTENT& CSS_TEXT();   ///< text/css
+    static const HTTP_CONTENT& PLAIN_TEXT(); ///< text/plain
+    static const HTTP_CONTENT& JSON_APP();   ///< application/json
+    static const HTTP_CONTENT& FORM_APP();   ///< application/x-www-form-urlencoded
+    static const HTTP_CONTENT& JPEG_IMG();   ///< image/jpeg
+    static const HTTP_CONTENT& PNG_IMG();    ///< image/png
+    static const HTTP_CONTENT& BMP_IMG();    ///< image/bmp
+    static const HTTP_CONTENT& WEBP_IMG();   ///< image/webp
+    static const HTTP_CONTENT& HTML_MSG();   ///< message/html
 
-    NEFORCE_NODISCARD bool is_html_text() const noexcept { return content_ == HTML_TEXT.content_; }
-    NEFORCE_NODISCARD bool is_xml_text() const noexcept { return content_ == XML_TEXT.content_; }
-    NEFORCE_NODISCARD bool is_css_text() const noexcept { return content_ == CSS_TEXT.content_; }
-    NEFORCE_NODISCARD bool is_plain_text() const noexcept { return content_ == PLAIN_TEXT.content_; }
-    NEFORCE_NODISCARD bool is_json_app() const noexcept { return content_ == JSON_APP.content_; }
-    NEFORCE_NODISCARD bool is_form_app() const noexcept { return content_ == FORM_APP.content_; }
-    NEFORCE_NODISCARD bool is_jpeg_img() const noexcept { return content_ == JPEG_IMG.content_; }
-    NEFORCE_NODISCARD bool is_png_img() const noexcept { return content_ == PNG_IMG.content_; }
-    NEFORCE_NODISCARD bool is_bmp_img() const noexcept { return content_ == BMP_IMG.content_; }
-    NEFORCE_NODISCARD bool is_webp_img() const noexcept { return content_ == WEBP_IMG.content_; }
-    NEFORCE_NODISCARD bool is_html_msg() const noexcept { return content_ == HTML_MSG.content_; }
+    NEFORCE_NODISCARD bool is_html_text() const { return content_ == HTML_TEXT().content_; }
+    NEFORCE_NODISCARD bool is_xml_text() const { return content_ == XML_TEXT().content_; }
+    NEFORCE_NODISCARD bool is_css_text() const { return content_ == CSS_TEXT().content_; }
+    NEFORCE_NODISCARD bool is_plain_text() const { return content_ == PLAIN_TEXT().content_; }
+    NEFORCE_NODISCARD bool is_json_app() const { return content_ == JSON_APP().content_; }
+    NEFORCE_NODISCARD bool is_form_app() const { return content_ == FORM_APP().content_; }
+    NEFORCE_NODISCARD bool is_jpeg_img() const { return content_ == JPEG_IMG().content_; }
+    NEFORCE_NODISCARD bool is_png_img() const { return content_ == PNG_IMG().content_; }
+    NEFORCE_NODISCARD bool is_bmp_img() const { return content_ == BMP_IMG().content_; }
+    NEFORCE_NODISCARD bool is_webp_img() const { return content_ == WEBP_IMG().content_; }
+    NEFORCE_NODISCARD bool is_html_msg() const { return content_ == HTML_MSG().content_; }
 
-    NEFORCE_NODISCARD static bool is_html_text(const string_view view) noexcept { return view == HTML_TEXT.content_; }
-    NEFORCE_NODISCARD static bool is_xml_text(const string_view view) noexcept { return view == XML_TEXT.content_; }
-    NEFORCE_NODISCARD static bool is_css_text(const string_view view) noexcept { return view == CSS_TEXT.content_; }
-    NEFORCE_NODISCARD static bool is_plain_text(const string_view view) noexcept { return view == PLAIN_TEXT.content_; }
-    NEFORCE_NODISCARD static bool is_json_app(const string_view view) noexcept { return view == JSON_APP.content_; }
-    NEFORCE_NODISCARD static bool is_form_app(const string_view view) noexcept { return view == FORM_APP.content_; }
-    NEFORCE_NODISCARD static bool is_jpeg_img(const string_view view) noexcept { return view == JPEG_IMG.content_; }
-    NEFORCE_NODISCARD static bool is_png_img(const string_view view) noexcept { return view == PNG_IMG.content_; }
-    NEFORCE_NODISCARD static bool is_bmp_img(const string_view view) noexcept { return view == BMP_IMG.content_; }
-    NEFORCE_NODISCARD static bool is_webp_img(const string_view view) noexcept { return view == WEBP_IMG.content_; }
-    NEFORCE_NODISCARD static bool is_html_msg(const string_view view) noexcept { return view == HTML_MSG.content_; }
+    NEFORCE_NODISCARD static bool is_html_text(const string_view view) { return view == HTML_TEXT().content_; }
+    NEFORCE_NODISCARD static bool is_xml_text(const string_view view) { return view == XML_TEXT().content_; }
+    NEFORCE_NODISCARD static bool is_css_text(const string_view view) { return view == CSS_TEXT().content_; }
+    NEFORCE_NODISCARD static bool is_plain_text(const string_view view) { return view == PLAIN_TEXT().content_; }
+    NEFORCE_NODISCARD static bool is_json_app(const string_view view) { return view == JSON_APP().content_; }
+    NEFORCE_NODISCARD static bool is_form_app(const string_view view) { return view == FORM_APP().content_; }
+    NEFORCE_NODISCARD static bool is_jpeg_img(const string_view view) { return view == JPEG_IMG().content_; }
+    NEFORCE_NODISCARD static bool is_png_img(const string_view view) { return view == PNG_IMG().content_; }
+    NEFORCE_NODISCARD static bool is_bmp_img(const string_view view) { return view == BMP_IMG().content_; }
+    NEFORCE_NODISCARD static bool is_webp_img(const string_view view) { return view == WEBP_IMG().content_; }
+    NEFORCE_NODISCARD static bool is_html_msg(const string_view view) { return view == HTML_MSG().content_; }
 
     /**
      * @brief 获取左值内容
@@ -386,16 +386,16 @@ public:
 
     ~HTTP_METHOD() = default;
 
-    static const HTTP_METHOD GET;     ///< GET方法
-    static const HTTP_METHOD POST;    ///< POST方法
-    static const HTTP_METHOD HEAD;    ///< HEAD方法
-    static const HTTP_METHOD PUT;     ///< PUT方法
-    static const HTTP_METHOD DELETE;  ///< DELETE方法
-    static const HTTP_METHOD OPTIONS; ///< OPTIONS方法
-    static const HTTP_METHOD TRACE;   ///< TRACE方法
-    static const HTTP_METHOD CONNECT; ///< CONNECT方法
-    static const HTTP_METHOD PATCH;   ///< PATCH方法
-    static const HTTP_METHOD DEFAULT; ///< 默认方法
+    static const HTTP_METHOD& GET();     ///< GET方法
+    static const HTTP_METHOD& POST();    ///< POST方法
+    static const HTTP_METHOD& HEAD();    ///< HEAD方法
+    static const HTTP_METHOD& PUT();     ///< PUT方法
+    static const HTTP_METHOD& DELETE();  ///< DELETE方法
+    static const HTTP_METHOD& OPTIONS(); ///< OPTIONS方法
+    static const HTTP_METHOD& TRACE();   ///< TRACE方法
+    static const HTTP_METHOD& CONNECT(); ///< CONNECT方法
+    static const HTTP_METHOD& PATCH();   ///< PATCH方法
+    static const HTTP_METHOD& DEFAULT(); ///< 默认方法
 
     /**
      * @brief 获取左值方法
@@ -432,15 +432,15 @@ public:
         return HTTP_METHOD(_NEFORCE move(method_) + ", " + _NEFORCE move(rhs.method_));
     }
 
-    NEFORCE_NODISCARD bool is_get() const noexcept { return method_ == GET.method_; }
-    NEFORCE_NODISCARD bool is_post() const noexcept { return method_ == POST.method_; }
-    NEFORCE_NODISCARD bool is_head() const noexcept { return method_ == HEAD.method_; }
-    NEFORCE_NODISCARD bool is_put() const noexcept { return method_ == PUT.method_; }
-    NEFORCE_NODISCARD bool is_delete() const noexcept { return method_ == DELETE.method_; }
-    NEFORCE_NODISCARD bool is_options() const noexcept { return method_ == OPTIONS.method_; }
-    NEFORCE_NODISCARD bool is_trace() const noexcept { return method_ == TRACE.method_; }
-    NEFORCE_NODISCARD bool is_connect() const noexcept { return method_ == CONNECT.method_; }
-    NEFORCE_NODISCARD bool is_patch() const noexcept { return method_ == PATCH.method_; }
+    NEFORCE_NODISCARD bool is_get() const { return method_ == GET().method_; }
+    NEFORCE_NODISCARD bool is_post() const { return method_ == POST().method_; }
+    NEFORCE_NODISCARD bool is_head() const { return method_ == HEAD().method_; }
+    NEFORCE_NODISCARD bool is_put() const { return method_ == PUT().method_; }
+    NEFORCE_NODISCARD bool is_delete() const { return method_ == DELETE().method_; }
+    NEFORCE_NODISCARD bool is_options() const { return method_ == OPTIONS().method_; }
+    NEFORCE_NODISCARD bool is_trace() const { return method_ == TRACE().method_; }
+    NEFORCE_NODISCARD bool is_connect() const { return method_ == CONNECT().method_; }
+    NEFORCE_NODISCARD bool is_patch() const { return method_ == PATCH().method_; }
 
     /**
      * @brief 转换为字符串
@@ -504,10 +504,10 @@ public:
 
     ~HTTP_COOKIE_NAME() = default;
 
-    static const HTTP_COOKIE_NAME JSESSIONID;   ///< Java/JSP会话ID
-    static const HTTP_COOKIE_NAME SESSIONID;    ///< 通用会话ID
-    static const HTTP_COOKIE_NAME PHPSESSID;    ///< PHP会话ID
-    static const HTTP_COOKIE_NAME ASPSESSIONID; ///< ASP会话ID
+    static const HTTP_COOKIE_NAME& JSESSIONID();   ///< Java/JSP会话ID
+    static const HTTP_COOKIE_NAME& SESSIONID();    ///< 通用会话ID
+    static const HTTP_COOKIE_NAME& PHPSESSID();    ///< PHP会话ID
+    static const HTTP_COOKIE_NAME& ASPSESSIONID(); ///< ASP会话ID
 
     /**
      * @brief 获取左值Cookie名称
@@ -530,17 +530,17 @@ public:
 
 
 struct NEFORCE_API HTTP_KEY {
-    static const string Access_Control_Allow_Credentials;
-    static const string Access_Control_Allow_Headers;
-    static const string Access_Control_Allow_Methods;
-    static const string Access_Control_Allow_Origin;
-    static const string Access_Control_Max_Age;
-    static const string Connection;
-    static const string Content_Length;
-    static const string Content_Type;
-    static const string Lax;
-    static const string Strict;
-    static const string X_Forwarded_Proto;
+    static const string& Access_Control_Allow_Credentials();
+    static const string& Access_Control_Allow_Headers();
+    static const string& Access_Control_Allow_Methods();
+    static const string& Access_Control_Allow_Origin();
+    static const string& Access_Control_Max_Age();
+    static const string& Connection();
+    static const string& Content_Length();
+    static const string& Content_Type();
+    static const string& Lax();
+    static const string& Strict();
+    static const string& X_Forwarded_Proto();
 };
 
 /** @} */ // Http

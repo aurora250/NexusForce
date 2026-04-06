@@ -38,16 +38,17 @@ namespace {
         const auto argv = new char*[argc];
 
         argv[0] = new char[executable.length() + 1];
-        _NEFORCE string_copy(argv[0], executable.data());
+        string_copy(argv[0], executable.data());
 
         for (size_t i = 0; i < args.size(); ++i) {
             argv[i + 1] = new char[args[i].length() + 1];
-            _NEFORCE string_copy(argv[i + 1], args[i].data());
+            string_copy(argv[i + 1], args[i].data());
         }
 
         argv[argc - 1] = nullptr;
         return argv;
     }
+
     void free_argv(char** argv) noexcept {
         if (argv) {
             for (int i = 0; argv[i] != nullptr; ++i) {
@@ -100,7 +101,9 @@ process::state_info process::create(const string& executable, const vector<strin
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
-        NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
+        char errbuf[256];
+        char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+        NEFORCE_THROW_EXCEPTION(process_exception(msg));
     }
 
     if (pid == 0) {
@@ -108,12 +111,16 @@ process::state_info process::create(const string& executable, const vector<strin
             info.stdout_pipe.close_read();
 
             if (::dup2(info.stdout_pipe.native_write_handle(), STDOUT_FILENO) == -1) {
-                printcln(color::red(), "dup2 stdout failed: ", ::strerror(errno));
+                char errbuf[256];
+                char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+                printcln(color::red(), "dup2 stdout failed: ", msg);
                 ::_exit(1);
             }
 
             if (::dup2(info.stdout_pipe.native_write_handle(), STDERR_FILENO) == -1) {
-                printcln(color::red(), "dup2 stderr failed: ", ::strerror(errno));
+                char errbuf[256];
+                char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+                printcln(color::red(), "dup2 stderr failed: ", msg);
                 ::_exit(1);
             }
 
@@ -123,7 +130,9 @@ process::state_info process::create(const string& executable, const vector<strin
         char** argv = build_argv(executable, args);
         ::execvp(executable.data(), argv);
 
-        printcln(color::red(), "execvp failed: ", ::strerror(errno));
+        char errbuf[256];
+        char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+        printcln(color::red(), "execvp failed: ", msg);
         free_argv(argv);
         ::_exit(1);
     }
@@ -161,7 +170,9 @@ int process::wait_for(state_info& info, int timeout_ms) {
 
     if (timeout_ms < 0) {
         if (::waitpid(info.process_id, &status, 0) == -1) {
-            NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
+            char errbuf[256];
+            char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+            NEFORCE_THROW_EXCEPTION(process_exception(msg));
         }
     } else {
         int elapsed = 0;
@@ -170,7 +181,9 @@ int process::wait_for(state_info& info, int timeout_ms) {
             constexpr int sleep_interval = 100;
             const ::pid_t result = ::waitpid(info.process_id, &status, WNOHANG);
             if (result == -1) {
-                NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
+                char errbuf[256];
+                char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+                NEFORCE_THROW_EXCEPTION(process_exception(msg));
             }
             if (result > 0) {
                 break;
@@ -259,7 +272,7 @@ process::native_id_type process::current_id() noexcept {
 #endif
 }
 
-process::memory_info process::get_memory_info(const state_info& info) noexcept {
+process::memory_info process::get_memory_info(const state_info& info) {
     memory_info mem_info = {0, 0, 0, 0};
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::PROCESS_MEMORY_COUNTERS pmc;
@@ -283,14 +296,14 @@ process::memory_info process::get_memory_info(const state_info& info) noexcept {
         size_t size NEFORCE_UNUSED = to_uint64(tmp.view());
         getline(text, pos, tmp, [](char c) { return is_space(c); });
         const size_t rss = to_uint64(tmp.view());
-        mem_info.working_set_size = rss * sysconf(_SC_PAGE_SIZE);
+        mem_info.working_set_size = rss * ::sysconf(_SC_PAGE_SIZE);
         // Peak memory not directly available
     }
 #endif
     return mem_info;
 }
 
-process::state process::get_state(const state_info& info) noexcept {
+process::state process::get_state(const state_info& info) {
     if (!is_running(info)) {
         return state::exited;
     }
@@ -323,7 +336,7 @@ process::state process::get_state(const state_info& info) noexcept {
     return state::unknown;
 }
 
-bool process::check_permission(const state_info& info, permission permission) noexcept {
+bool process::check_permission(const state_info& info, permission permission) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD desired_access = 0;
 

@@ -65,7 +65,7 @@ semaphore::semaphore(long initial, long maximum) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateSemaphoreW failed"));
     }
 #else
-    NEFORCE_IGNORE maximum;
+    ignore = maximum;
     int ret = ::sem_init(&sem_, 0, static_cast<unsigned>(initial));
     if (ret == 0) {
         NEFORCE_THROW_EXCEPTION(system_exception("sem_init failed"));

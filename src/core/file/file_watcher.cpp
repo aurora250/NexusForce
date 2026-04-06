@@ -115,7 +115,7 @@ void file_watcher::stop() {
 #else
     if (event_fd_ != -1) {
         constexpr uint64_t value = 1;
-        NEFORCE_IGNORE ::write(event_fd_, &value, sizeof(value));
+        ignore = ::write(event_fd_, &value, sizeof(value));
     }
 #endif
 
@@ -297,7 +297,7 @@ void file_watcher::watch_thread_func() {
 
         if (fds[1].revents & POLLIN) {
             uint64_t value;
-            NEFORCE_IGNORE ::read(event_fd_, &value, sizeof(value));
+            ignore = ::read(event_fd_, &value, sizeof(value));
             break;
         }
 

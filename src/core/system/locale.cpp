@@ -1,7 +1,7 @@
 #include <NeForce/core/system/locale.hpp>
+#include <NeForce/core/algorithm/sort.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/utility/packages.hpp>
-#    include <NeForce/core/algorithm/sort.hpp>
 #    include <NeForce/core/config/windef.hpp>
 #    include <stringapiset.h>
 #endif
@@ -83,12 +83,12 @@ namespace {
 
 #else
 
-    string nl_str(nl_item item, locale_t loc) const {
+    string nl_str(const ::nl_item item, const ::locale_t loc) {
         const char* p = ::nl_langinfo_l(item, loc);
         return p ? string(p) : string{};
     }
 
-    void free_locale(bool& owns, locale_t& loc) noexcept {
+    void free_locale(bool& owns, ::locale_t& loc) noexcept {
         if (owns && loc != LC_GLOBAL_LOCALE) {
             ::freelocale(loc);
             loc = LC_GLOBAL_LOCALE;
@@ -115,11 +115,11 @@ void locale::load_locale(const string& name) {
 #else
     free_locale(owns_, loc_);
 
-    const char* lname = (name.empty() || name == "C" || name == "POSIX") ? "C" : name.c_str();
+    const char* lname = (name.empty() || name == "C" || name == "POSIX") ? "C" : name.data();
 
-    locale_t loc = ::newlocale(LC_ALL_MASK, lname, static_cast<locale_t>(0));
-    if (loc == static_cast<locale_t>(0)) {
-        throw locale_exception(string("locale: cannot open '") + lname + "'");
+    const ::locale_t loc = ::newlocale(LC_ALL_MASK, lname, nullptr);
+    if (loc == nullptr) {
+        throw locale_exception(string("locale: cannot open '"_s + lname + "'").data());
     }
 
     loc_ = loc;
@@ -224,11 +224,14 @@ locale locale::system() {
     replace(wn.begin(), wn.end(), L'-', L'_');
     return locale(wcharacter::to_string(wn.view()));
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* env = ::getenv("LC_ALL");
     if (!env || !*env) {
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         env = ::getenv("LC_CTYPE");
     }
     if (!env || !*env) {
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         env = ::getenv("LANG");
     }
     return locale(env ? env : "C");
@@ -285,7 +288,7 @@ locale::monetary_info locale::monetary() const {
 #else
     info.currency_symbol = nl_str(CRNCYSTR, loc_);
     if (!info.currency_symbol.empty()) {
-        char ind = info.currency_symbol[0];
+        const char ind = info.currency_symbol[0];
         info.p_cs_precedes = (ind == '-');
         info.n_cs_precedes = info.p_cs_precedes;
         info.currency_symbol.erase(0, 1);
@@ -297,11 +300,11 @@ locale::monetary_info locale::monetary() const {
     info.negative_sign = nl_str(NEGATIVE_SIGN, loc_);
     {
         string s = nl_str(FRAC_DIGITS, loc_);
-        info.frac_digits = s.empty() ? 2 : static_cast<int>(static_cast<unsigned char>(s[0]));
+        info.frac_digits = s.empty() ? 2 : static_cast<int>(static_cast<byte_t>(s[0]));
     }
     {
         string s = nl_str(INT_FRAC_DIGITS, loc_);
-        info.int_frac_digits = s.empty() ? 2 : static_cast<int>(static_cast<unsigned char>(s[0]));
+        info.int_frac_digits = s.empty() ? 2 : static_cast<int>(static_cast<byte_t>(s[0]));
     }
 
 #endif
@@ -346,17 +349,17 @@ locale::time_info locale::time() const {
     info.am_str = nl_str(AM_STR, loc_);
     info.pm_str = nl_str(PM_STR, loc_);
 
-    static const nl_item kDay[7] = {DAY_1, DAY_2, DAY_3, DAY_4, DAY_5, DAY_6, DAY_7};
-    static const nl_item kAbbrDay[7] = {ABDAY_1, ABDAY_2, ABDAY_3, ABDAY_4, ABDAY_5, ABDAY_6, ABDAY_7};
+    static constexpr ::nl_item kDay[7] = {DAY_1, DAY_2, DAY_3, DAY_4, DAY_5, DAY_6, DAY_7};
+    static constexpr ::nl_item kAbbrDay[7] = {ABDAY_1, ABDAY_2, ABDAY_3, ABDAY_4, ABDAY_5, ABDAY_6, ABDAY_7};
     for (int i = 0; i < 7; ++i) {
         info.day_names.push_back(nl_str(kDay[i], loc_));
         info.abbr_day_names.push_back(nl_str(kAbbrDay[i], loc_));
     }
 
-    static const nl_item kMon[12] = {MON_1, MON_2, MON_3, MON_4,  MON_5,  MON_6,
-                                     MON_7, MON_8, MON_9, MON_10, MON_11, MON_12};
-    static const nl_item kAbbrMon[12] = {ABMON_1, ABMON_2, ABMON_3, ABMON_4,  ABMON_5,  ABMON_6,
-                                         ABMON_7, ABMON_8, ABMON_9, ABMON_10, ABMON_11, ABMON_12};
+    static constexpr ::nl_item kMon[12] = {MON_1, MON_2, MON_3, MON_4,  MON_5,  MON_6,
+                                           MON_7, MON_8, MON_9, MON_10, MON_11, MON_12};
+    static constexpr ::nl_item kAbbrMon[12] = {ABMON_1, ABMON_2, ABMON_3, ABMON_4,  ABMON_5,  ABMON_6,
+                                               ABMON_7, ABMON_8, ABMON_9, ABMON_10, ABMON_11, ABMON_12};
     for (int i = 0; i < 12; ++i) {
         info.month_names.push_back(nl_str(kMon[i], loc_));
         info.abbr_month_names.push_back(nl_str(kAbbrMon[i], loc_));
@@ -489,8 +492,8 @@ int locale::compare(const string& a, const string& b, collate_strength strength)
 #else
     auto to_wide = [&](const string& s) -> wstring {
         wstring out(s.size() + 1, L'\0');
-        locale_t saved = ::uselocale(loc_);
-        size_t n = ::mbstowcs(&out[0], s.c_str(), out.size());
+        const ::locale_t saved = ::uselocale(loc_);
+        const size_t n = ::mbstowcs(&out[0], s.data(), out.size());
         ::uselocale(saved);
         if (n == static_cast<size_t>(-1)) {
             return {};
@@ -500,7 +503,7 @@ int locale::compare(const string& a, const string& b, collate_strength strength)
     };
     auto wa = to_wide(a);
     auto wb = to_wide(b);
-    return ::wcscoll_l(wa.c_str(), wb.c_str(), loc_);
+    return ::wcscoll_l(wa.data(), wb.data(), loc_);
 #endif
 }
 
@@ -528,8 +531,8 @@ string locale::collation_key(const string& s) const {
 #else
     auto to_wide = [&](const string& mb) -> wstring {
         wstring out(mb.size() + 1, L'\0');
-        locale_t saved = ::uselocale(loc_);
-        size_t n = ::mbstowcs(&out[0], mb.c_str(), out.size());
+        const ::locale_t saved = ::uselocale(loc_);
+        const size_t n = ::mbstowcs(&out[0], mb.data(), out.size());
         ::uselocale(saved);
         if (n == static_cast<size_t>(-1)) {
             return {};
@@ -537,10 +540,11 @@ string locale::collation_key(const string& s) const {
         out.resize(n);
         return out;
     };
+
     auto ws = to_wide(s);
-    size_t sz = ::wcsxfrm_l(nullptr, ws.c_str(), 0, loc_);
+    const size_t sz = ::wcsxfrm_l(nullptr, ws.data(), 0, loc_);
     wstring key(sz + 1, L'\0');
-    ::wcsxfrm_l(&key[0], ws.c_str(), sz + 1, loc_);
+    ::wcsxfrm_l(&key[0], ws.data(), sz + 1, loc_);
     return string(reinterpret_cast<const char*>(key.data()), sz * sizeof(wchar_t));
 #endif
 }
@@ -569,12 +573,12 @@ string locale::to_multibyte(const u32string& ucs4) const {
     return out;
 
 #else
-    iconv_t cd = ::iconv_open(encoding_.c_str(), "UTF-32LE");
-    if (cd == reinterpret_cast<iconv_t>(-1)) {
+    const ::iconv_t cd = ::iconv_open(encoding_.data(), "UTF-32LE");
+    if (cd == reinterpret_cast<::iconv_t>(-1)) {
         throw locale_exception("to_multibyte: iconv_open failed");
     }
 
-    const char* in = reinterpret_cast<const char*>(ucs4.data());
+    auto in = reinterpret_cast<const char*>(ucs4.data());
     size_t in_left = ucs4.size() * sizeof(char32_t);
     string result(in_left * 4 + 4, '\0');
     char* out = &result[0];
@@ -616,15 +620,15 @@ u32string locale::to_ucs4(const string& mb) const {
 
 #else
 
-    iconv_t cd = ::iconv_open("UTF-32LE", encoding_.c_str());
-    if (cd == reinterpret_cast<iconv_t>(-1)) {
+    const ::iconv_t cd = ::iconv_open("UTF-32LE", encoding_.data());
+    if (cd == reinterpret_cast<::iconv_t>(-1)) {
         throw locale_exception("to_ucs4: iconv_open failed");
     }
 
     const char* in = mb.data();
     size_t in_left = mb.size();
     u32string result(mb.size() + 1, U'\0');
-    char* out = reinterpret_cast<char*>(&result[0]);
+    auto out = reinterpret_cast<char*>(&result[0]);
     size_t out_left = result.size() * sizeof(char32_t);
 
     if (::iconv(cd, const_cast<char**>(&in), &in_left, &out, &out_left) == static_cast<size_t>(-1)) {
@@ -632,7 +636,7 @@ u32string locale::to_ucs4(const string& mb) const {
         throw locale_exception("to_ucs4: iconv failed");
     }
     ::iconv_close(cd);
-    size_t chars = (result.size() * sizeof(char32_t) - out_left) / sizeof(char32_t);
+    const size_t chars = (result.size() * sizeof(char32_t) - out_left) / sizeof(char32_t);
     result.resize(chars);
     return result;
 #endif
@@ -651,9 +655,10 @@ vector<string> locale::available_locales() {
 
     auto collect = [&](const char* pattern) {
         ::glob_t g{};
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         if (::glob(pattern, GLOB_NOSORT, nullptr, &g) == 0) {
             for (size_t i = 0; i < g.gl_pathc; ++i) {
-                const char* sl = ::strrchr(g.gl_pathv[i], '/');
+                const char* sl = string_find_last(g.gl_pathv[i], '/');
                 if (!sl) {
                     continue;
                 }

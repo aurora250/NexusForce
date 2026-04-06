@@ -21,7 +21,7 @@ struct NEFORCE_API ssl_exception final : thirdparty_exception {
                            const int code = last_error()) noexcept :
     thirdparty_exception(info, type, code) {}
 
-    explicit ssl_exception(const int code) noexcept :
+    explicit ssl_exception(const int code) :
     thirdparty_exception(last_error_message().data(), static_type, code) {}
 
     explicit ssl_exception(const exception& e) :

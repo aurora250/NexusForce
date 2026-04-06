@@ -73,7 +73,7 @@ private:
     websocket_server<socket_type> ws_server_;
     session_manager session_manager_;
 
-    HTTP_COOKIE_NAME cookie_name_{HTTP_COOKIE_NAME::JSESSIONID};
+    HTTP_COOKIE_NAME cookie_name_{HTTP_COOKIE_NAME::JSESSIONID()};
 
 public:
     size_t max_header_size_{max_header_size};
@@ -87,7 +87,7 @@ private:
                                                        cookie_name_, max_header_size_, max_body_size_);
 
             if (client_socket.is_ssl()) {
-                request.set_header(HTTP_KEY::X_Forwarded_Proto, "https");
+                request.set_header(HTTP_KEY::X_Forwarded_Proto(), "https");
             }
 
             if (enable_websocket_ && this->try_websocket_upgrade(client_socket, request)) {

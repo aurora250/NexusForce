@@ -66,7 +66,7 @@ public:
 
 
 struct http_client_request {
-    HTTP_METHOD method{HTTP_METHOD::GET};
+    HTTP_METHOD method{HTTP_METHOD::GET()};
     string host;
     ports port;
     string path = "/";

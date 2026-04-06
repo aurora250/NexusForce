@@ -13,7 +13,7 @@ struct NEFORCE_API http_cookie : istringify<http_cookie> {
     int max_age = -1;
     bool secure = false;
     bool http_only = false;
-    string same_site{HTTP_KEY::Strict};
+    string same_site{HTTP_KEY::Strict()};
     datetime expires{};
 
     NEFORCE_NODISCARD string to_string() const;

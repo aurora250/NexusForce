@@ -369,7 +369,8 @@ public:
 
     static constexpr size_t task_max_threshhold = numeric_traits<int32_t>::max(); ///< 最大任务队列阈值
     static constexpr size_t max_idle_seconds = 60;                                ///< 最大空闲秒数
-    static const size_t max_threshhold;                                           ///< 最大线程数阈值
+
+    static size_t max_thread_threshhold();
 
 private:
     using task_type = function<void()>; ///< 任务类型
@@ -398,8 +399,8 @@ private:
 
     timer_scheduler<steady_clock> timer_{}; ///< 定时器调度器
 
-    id_type init_thread_size_{0};              ///< 初始线程数
-    size_t thread_threshhold_{max_threshhold}; ///< 线程数阈值
+    id_type init_thread_size_{0}; ///< 初始线程数
+    size_t thread_threshhold_;    ///< 线程数阈值
 
     priority_queue<priority_task> task_queue_{};  ///< 全局优先级任务队列
     atomic<uint32_t> task_size_{0};               ///< 全局队列大小
@@ -473,12 +474,6 @@ public:
      * @return 设置成功返回true（线程池未运行时且处于缓存模式）
      */
     bool set_thread_threshhold(size_t threshhold) noexcept;
-
-    /**
-     * @brief 获取最大线程数
-     * @return 系统支持的最大线程数
-     */
-    NEFORCE_NODISCARD static size_t max_thread_size() noexcept { return max_threshhold; }
 
     /**
      * @brief 检查线程池是否正在运行

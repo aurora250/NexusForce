@@ -367,9 +367,9 @@ private:
         return value;
     }
 
-    static decltype(auto) generate(true_type) noexcept { return generate_32bit(); }
+    static decltype(auto) generate(true_type) { return generate_32bit(); }
 
-    static decltype(auto) generate(false_type) noexcept { return generate_64bit(); }
+    static decltype(auto) generate(false_type) { return generate_64bit(); }
 
 public:
     /**

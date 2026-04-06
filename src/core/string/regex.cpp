@@ -391,7 +391,7 @@ bool regex_iterator::operator==(const regex_iterator& other) const noexcept {
     return regex_ == other.regex_ && subject_ == other.subject_ && current_index_ == other.current_index_;
 }
 
-void regex_token_iterator::find_next() noexcept {
+void regex_token_iterator::find_next() {
     if (state_ == state::END) {
         current_ = "";
         return;
@@ -495,7 +495,7 @@ index_(index) {
     }
 }
 
-regex_token_iterator& regex_token_iterator::operator++() noexcept {
+regex_token_iterator& regex_token_iterator::operator++() {
     if (state_ != state::END) {
         find_next();
     }

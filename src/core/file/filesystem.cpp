@@ -115,7 +115,9 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) {
         return false;
     }
 
-    ::dirent* entry;
+    const ::dirent* entry = nullptr;
+
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     while ((entry = ::readdir(dir)) != nullptr) {
         const string name = entry->d_name;
         if (name == "." || name == "..") {
@@ -238,7 +240,7 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 
     if (ok) {
         ::fchmod(dst_fd, st.st_mode & 0777);
-        struct ::timespec times[2] = {st.st_atim, st.st_mtim};
+        const ::timespec times[2] = {st.st_atim, st.st_mtim};
         ::futimens(dst_fd, times);
     }
 
@@ -295,8 +297,10 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
     if (!dir) {
         return false;
     }
-    ::dirent* entry;
 
+    const ::dirent* entry = nullptr;
+
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     while ((entry = ::readdir(dir)) != nullptr) {
         const string item = entry->d_name;
         if (item == "." || item == "..") {

@@ -111,7 +111,7 @@ public:
          * 构造一个从指定位置开始遍历路径的迭代器。
          * 如果路径为空或起始位置无效，则构造为结束迭代器。
          */
-        explicit split_iterator(const string* path, const size_t pos = 0) noexcept :
+        explicit split_iterator(const string* path, const size_t pos = 0) :
         path_(path),
         start_(pos),
         done_(false) {
@@ -250,13 +250,13 @@ public:
      * @brief 获取起始路径组件迭代器
      * @return 指向第一个组件的迭代器
      */
-    NEFORCE_NODISCARD split_iterator begin() const noexcept { return split_iterator(&path_, 0); }
+    NEFORCE_NODISCARD split_iterator begin() const { return split_iterator(&path_, 0); }
 
     /**
      * @brief 获取结束路径组件迭代器
      * @return 结束迭代器
      */
-    NEFORCE_NODISCARD split_iterator end() const noexcept { return split_iterator(); }
+    NEFORCE_NODISCARD split_iterator end() const { return split_iterator(); }
 
     /**
      * @brief 获取父路径

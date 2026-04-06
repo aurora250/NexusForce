@@ -1,0 +1,77 @@
+name: "Clang-Tidy Check"
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'examples/**'
+      - '.clang-tidy'
+      - 'CMakeLists.txt'
+      - 'cmake/NexusForceRunTidy.cmake'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'examples/**'
+      - '.clang-tidy'
+      - 'CMakeLists.txt'
+      - 'cmake/NexusForceRunTidy.cmake'
+  workflow_dispatch:
+
+jobs:
+  clang-tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install clang-tidy-19
+        run: |
+          UBUNTU_VERSION=$(lsb_release -cs)
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+          sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_VERSION}/ llvm-toolchain-${UBUNTU_VERSION}-19 main"
+          sudo apt-get update
+          sudo apt-get install -y clang-tidy-19
+          sudo ln -sf /usr/bin/clang-tidy-19 /usr/bin/clang-tidy
+          clang-tidy --version
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential ninja-build libtirpc-dev libc++abi-dev
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgJsonGlob: '**/vcpkg.json'
+          vcpkgGitCommit: '2024.03.25'
+
+      - name: Set VCPKG_ROOT environment variable
+        run: echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
+
+      - name: Configure CMake (with clang-tidy and compile commands)
+        run: |
+          cmake -B ${{ github.workspace }}/build \
+            -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_TESTS=OFF
+
+      - name: Run clang-tidy (tidy-check target)
+        run: |
+          cmake --build ${{ github.workspace }}/build --target tidy-check
+
+      - name: (Optional) Generate and upload clang-tidy report
+        if: always()
+        run: |
+          cmake --build ${{ github.workspace }}/build --target tidy-check-report
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-tidy-report
+          path: ${{ github.workspace }}/build/clang_tidy_report.txt

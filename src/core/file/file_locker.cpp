@@ -101,7 +101,7 @@ bool file_locker::is_locked(const difference_type offset, const difference_type 
     // it can only detect it by attempting a non-blocking shared lock
     // This operation will temporarily lock the file area
     if (try_lock(offset, length, file_lock::SHARED)) {
-        NEFORCE_IGNORE unlock(offset, length);
+        ignore = unlock(offset, length);
         if (lock_out) {
             *lock_out = file_lock::SHARED;
         }
@@ -125,7 +125,7 @@ bool file_locker::is_locked(const difference_type offset, const difference_type 
 
     if (fl.l_type == F_UNLCK) {
         if (lock_out) {
-            *lock_out = static_cast<file_lock>(0);
+            *lock_out = file_lock::SHARED;
         }
         return false;
     }
@@ -150,7 +150,7 @@ length_(length) {
 
 file_lock_guard::~file_lock_guard() {
     if (locked_) {
-        NEFORCE_IGNORE locker_.unlock(offset_, length_);
+        ignore = locker_.unlock(offset_, length_);
     }
 }
 

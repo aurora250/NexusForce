@@ -1002,7 +1002,7 @@ public:
      */
     void get() {
         base_type::reset reset(*this);
-        NEFORCE_IGNORE this->get_result();
+        ignore = this->get_result();
     }
 
     shared_future<void> share() noexcept;
@@ -1115,7 +1115,7 @@ public:
     /**
      * @brief 获取结果
      */
-    void get() const { NEFORCE_IGNORE this->get_result(); }
+    void get() const { ignore = this->get_result(); }
 };
 
 /// @cond

@@ -108,7 +108,7 @@ env_builder& env_builder::comment(string text) noexcept {
     return *this;
 }
 
-env_builder& env_builder::blank_line() noexcept {
+env_builder& env_builder::blank_line() {
     static string empty{};
     root_->add_comment(empty);
     return *this;

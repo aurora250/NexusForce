@@ -37,7 +37,9 @@ pipe::pipe(bool inheritable) {
     }
 #else
     if (::pipe(fds_) == -1) {
-        NEFORCE_THROW_EXCEPTION(pipe_exception(::strerror(errno)));
+        char errbuf[256];
+        char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
+        NEFORCE_THROW_EXCEPTION(pipe_exception(msg));
     }
 
     if (!inheritable) {

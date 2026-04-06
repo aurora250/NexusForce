@@ -8,14 +8,14 @@ void handle_session_api(http_request& request, http_response& response, http_ser
         sess = server.get_session(request, true);
         response.status = HTTP_STATUS::S2_OK;
         response.status_message = "OK";
-        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_content_type(HTTP_CONTENT::JSON_APP());
         response.body = R"({"sessionId":")" + sess->id + R"("})";
     } else if (action == "invalidate" && sess) {
         sess->invalidated = true;
         sess->data.clear();
         response.status = HTTP_STATUS::S2_OK;
         response.status_message = "OK";
-        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_content_type(HTTP_CONTENT::JSON_APP());
         response.body = R"({"message":"Session invalidated"})";
     } else if (action == "info") {
         if (sess) {
@@ -34,27 +34,27 @@ void handle_session_api(http_request& request, http_response& response, http_ser
 
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = json->to_string();
         } else {
             response.status = HTTP_STATUS::S4_BAD_REQUEST;
             response.status_message = "Bad Request";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = R"({"error":"No active session found"})";
         }
     } else {
         response.status = HTTP_STATUS::S4_BAD_REQUEST;
         response.status_message = "Bad Request";
-        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_content_type(HTTP_CONTENT::JSON_APP());
         response.body = R"({"error":"Invalid session action"})";
     }
 }
 
 void handle_session_attribute(http_request& request, http_response& response, http_server& server) {
     string attrName, attrValue;
-    string content_type = request.header(HTTP_KEY::Content_Type);
+    string content_type = request.header(HTTP_KEY::Content_Type());
 
-    if (content_type.find(HTTP_CONTENT::JSON_APP.content()) == 0) {
+    if (content_type.find(HTTP_CONTENT::JSON_APP().content()) == 0) {
         try {
             auto root = json_parser(request.body).parse();
             if (root && root->is_object()) {
@@ -94,12 +94,12 @@ void handle_session_attribute(http_request& request, http_response& response, ht
 
         response.status = HTTP_STATUS::S2_OK;
         response.status_message = "OK";
-        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_content_type(HTTP_CONTENT::JSON_APP());
         response.body = json->to_string();
     } else {
         response.status = HTTP_STATUS::S4_BAD_REQUEST;
         response.status_message = "Bad Request";
-        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_content_type(HTTP_CONTENT::JSON_APP());
         response.body = R"({"error":"Missing attribute name"})";
     }
 }
@@ -108,9 +108,9 @@ void handle_cookie_api(http_request& request, http_response& response) {
     if (request.method.is_post()) {
         HTTP_COOKIE_NAME name;
         string value, max_age_str;
-        string content_type = request.header(HTTP_KEY::Content_Type);
+        string content_type = request.header(HTTP_KEY::Content_Type());
 
-        if (content_type.find(HTTP_CONTENT::JSON_APP.content()) != string::npos) {
+        if (content_type.find(HTTP_CONTENT::JSON_APP().content()) != string::npos) {
             try {
                 auto root = json_parser(request.body).parse();
                 if (root && root->is_object()) {
@@ -163,12 +163,12 @@ void handle_cookie_api(http_request& request, http_response& response) {
 
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = json->to_string();
         } else {
             response.status = HTTP_STATUS::S4_BAD_REQUEST;
             response.status_message = "Bad Request";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = R"({"error":"Missing cookie name"})";
         }
     } else if (request.method.is_delete()) {
@@ -182,12 +182,12 @@ void handle_cookie_api(http_request& request, http_response& response) {
 
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = R"({"name":")" + name.to_string() + R"("})";
         } else {
             response.status = HTTP_STATUS::S4_BAD_REQUEST;
             response.status_message = "Bad Request";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = R"({"error":"Missing cookie name"})";
         }
     }
@@ -211,7 +211,7 @@ void test_https_server() {
 
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT());
 
             const string html = R"(
 <!DOCTYPE html>
@@ -239,12 +239,12 @@ void test_https_server() {
         r.get("/api/info", [](http_request& request, http_response& response) {
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
 
             json_builder json;
             json.begin_object()
                     .key("https")
-                    .value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
+                    .value(request.header(HTTP_KEY::X_Forwarded_Proto()) == "https")
                     .key("method")
                     .value(request.method.to_string())
                     .key("path")
@@ -259,16 +259,16 @@ void test_https_server() {
         r.post("/api/echo", [](http_request& request, http_response& response) {
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
 
             json_builder json;
             json.begin_object()
                     .key("https")
-                    .value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
+                    .value(request.header(HTTP_KEY::X_Forwarded_Proto()) == "https")
                     .key("body")
                     .value(request.body)
                     .key("content_type")
-                    .value(request.header(HTTP_KEY::Content_Type))
+                    .value(request.header(HTTP_KEY::Content_Type()))
                     .end_object();
 
             response.body = json.build()->to_string();
@@ -341,7 +341,7 @@ void test_http_server() {
         router.get("/api/data/*", [](http_request&, http_response& response) {
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_content_type(HTTP_CONTENT::JSON_APP());
             response.body = R"({"status":"success"})";
         });
 
@@ -349,7 +349,7 @@ void test_http_server() {
             static file index{res_root() / "index.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT());
             response.body = index.read();
         });
 
@@ -357,7 +357,7 @@ void test_http_server() {
             static file detail{res_root() / "detail.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT());
             response.body = detail.read();
         });
 
@@ -365,7 +365,7 @@ void test_http_server() {
             static file index{res_root() / "index.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT());
             response.body = index.read();
         });
 
@@ -373,7 +373,7 @@ void test_http_server() {
             static file test{res_root() / "index.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
-            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT());
             response.body = test.read();
         });
 
@@ -381,7 +381,7 @@ void test_http_server() {
             static file err{res_root() / "404err.html"};
             response.status = HTTP_STATUS::S4_NOT_FOUNT;
             response.status_message = "Not Found";
-            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT());
             response.body = err.read();
         });
 

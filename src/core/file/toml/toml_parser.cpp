@@ -792,7 +792,7 @@ void toml_parser::parse_array_table_header() {
     arr->add_element(move(new_table));
     context_stack_.push_back({ctb_, ctp_});
     ctb_ = new_table_ptr;
-    ctp_ = path;
+    ctp_ = move(path);
     is_in_array_table_ = true;
 }
 

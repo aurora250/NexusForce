@@ -56,7 +56,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
     int result = ::connect(fd_, endpoint.data(), endpoint.size());
     if (result == 0) {
         if (was_blocking) {
-            NEFORCE_IGNORE set_nonblocking(false);
+            ignore = set_nonblocking(false);
         }
         return true;
     }
@@ -65,14 +65,14 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (error != WSAEWOULDBLOCK) {
         if (was_blocking) {
-            NEFORCE_IGNORE set_nonblocking(false);
+            ignore = set_nonblocking(false);
         }
         NEFORCE_THROW_EXCEPTION(socket_exception("Connection failed with unexpected error"));
     }
 #else
     if (error != EINPROGRESS) {
         if (was_blocking) {
-            NEFORCE_IGNORE set_nonblocking(false);
+            ignore = set_nonblocking(false);
         }
         NEFORCE_THROW_EXCEPTION(socket_exception("Connection failed with unexpected error"));
     }
@@ -94,14 +94,14 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
 
     if (result < 0) {
         if (was_blocking) {
-            NEFORCE_IGNORE set_nonblocking(false);
+            ignore = set_nonblocking(false);
         }
         NEFORCE_THROW_EXCEPTION(socket_exception("Select operation failed during connection"));
     }
 
     if (result == 0) {
         if (was_blocking) {
-            NEFORCE_IGNORE set_nonblocking(false);
+            ignore = set_nonblocking(false);
         }
         return false;
     }
@@ -110,7 +110,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
     ::socklen_t optlen = sizeof(optval);
     if (!get_option(SOL_SOCKET, SO_ERROR, &optval, &optlen) || optval != 0) {
         if (was_blocking) {
-            NEFORCE_IGNORE set_nonblocking(false);
+            ignore = set_nonblocking(false);
         }
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to get socket options or socket error occurred",
                                                  socket_exception::static_type,
@@ -118,7 +118,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
     }
 
     if (was_blocking) {
-        NEFORCE_IGNORE set_nonblocking(false);
+        ignore = set_nonblocking(false);
     }
     return true;
 }

@@ -4,7 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 struct http_request {
-    HTTP_METHOD method = HTTP_METHOD::GET;
+    HTTP_METHOD method = HTTP_METHOD::GET();
     string path = "/";
     string version = "HTTP/1.1";
     string query{};
@@ -48,10 +48,10 @@ struct http_request {
 
     NEFORCE_NODISCARD bool has_session() const noexcept { return session != nullptr && session->is_valid(); }
 
-    NEFORCE_NODISCARD string_view content_type() const noexcept { return header(HTTP_KEY::Content_Type); }
+    NEFORCE_NODISCARD string_view content_type() const noexcept { return header(HTTP_KEY::Content_Type()); }
 
     NEFORCE_NODISCARD bool is_keep_alive() const noexcept {
-        const auto conn = header(HTTP_KEY::Connection);
+        const auto conn = header(HTTP_KEY::Connection());
         return conn == "keep-alive" || conn == "Keep-Alive";
     }
 
@@ -78,7 +78,7 @@ struct http_request {
     }
 
     void clear() {
-        method = HTTP_METHOD::GET;
+        method = HTTP_METHOD::GET();
         path = "/";
         version = "HTTP/1.1";
         query.clear();
@@ -102,8 +102,8 @@ struct NEFORCE_API http_response {
     string forward_path{};
 
     http_response() {
-        headers[HTTP_KEY::Content_Type] = HTTP_CONTENT::PLAIN_TEXT.to_string() + "; charset=utf-8";
-        headers[HTTP_KEY::Connection] = "close";
+        headers[HTTP_KEY::Content_Type()] = HTTP_CONTENT::PLAIN_TEXT().to_string() + "; charset=utf-8";
+        headers[HTTP_KEY::Connection()] = "close";
     }
 
     NEFORCE_NODISCARD string_view header(const string& name) const noexcept {
@@ -115,9 +115,9 @@ struct NEFORCE_API http_response {
 
     NEFORCE_NODISCARD bool has_header(const string& name) const noexcept { return headers.find(name) != headers.end(); }
 
-    void set_content_type(HTTP_CONTENT value) { headers[HTTP_KEY::Content_Type] = move(value).content(); }
+    void set_content_type(HTTP_CONTENT value) { headers[HTTP_KEY::Content_Type()] = move(value).content(); }
 
-    void set_content_type(string value) { headers[HTTP_KEY::Content_Type] = move(value); }
+    void set_content_type(string value) { headers[HTTP_KEY::Content_Type()] = move(value); }
 };
 
 NEFORCE_END_NAMESPACE__

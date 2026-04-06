@@ -1,8 +1,8 @@
 #include <NeForce/core/async/thread_pool.hpp>
+#include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
-
 namespace {
     struct thread_pool_id_generator {
         static uint32_t& get_id() noexcept {
@@ -198,6 +198,11 @@ void manual_thread::start() {
 
 NEFORCE_END_INNER__
 
+size_t thread_pool::max_thread_threshhold() {
+    static size_t max_threshhold = sysinfo::instance().get_system_info().processor_numbers;
+    return max_threshhold;
+}
+
 string thread_pool::pool_statistics::to_string() const {
     string result;
     result += _NEFORCE to_string("total_threads:   ", total_threads, "\n");
@@ -209,8 +214,6 @@ string thread_pool::pool_statistics::to_string() const {
     result += _NEFORCE to_string("total_completed: ", total_completed);
     return result;
 }
-
-const size_t thread_pool::max_threshhold = sysinfo::instance().get_system_info().processor_numbers;
 
 void thread_pool::thread_function(const id_type thread_id) {
     worker_context ctx;
@@ -382,9 +385,10 @@ thread_pool::pool_statistics thread_pool::statistics_unsafe() const {
     return stats;
 }
 
-thread_pool::thread_pool() {
-    worker_contexts_ptr_.reserve(max_threshhold);
-    for (size_t i = 0; i < max_threshhold; ++i) {
+thread_pool::thread_pool() :
+thread_threshhold_{max_thread_threshhold()} {
+    worker_contexts_ptr_.reserve(thread_threshhold_);
+    for (size_t i = 0; i < thread_threshhold_; ++i) {
         atomic<worker_context*> tmp;
         tmp.store(nullptr, memory_order_relaxed);
         worker_contexts_ptr_.emplace_back(move(tmp));
@@ -392,8 +396,13 @@ thread_pool::thread_pool() {
 }
 
 thread_pool::~thread_pool() {
-    if (is_running_) {
+    if (!is_running_) {
+        return;
+    }
+    try {
         stop();
+    } catch (...) {
+        terminate();
     }
 }
 
@@ -425,7 +434,7 @@ bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
     if (is_running_ || pool_mode_ == pool_mode::fixed) {
         return false;
     }
-    thread_threshhold_ = threshhold > max_threshhold ? max_threshhold : threshhold;
+    thread_threshhold_ = threshhold > max_thread_threshhold() ? max_thread_threshhold() : threshhold;
     return true;
 }
 

@@ -16,6 +16,7 @@
 #    include <NeForce/core/system/environment.hpp>
 #    include <cerrno>
 #    include <cstdlib>
+#    include <fcntl.h>
 #    include <sys/ioctl.h>
 #    include <termios.h>
 #    include <unistd.h>
@@ -244,7 +245,13 @@ void sys_console::beep_unsafe() const {
         print_string_unsafe("\a");
         flush_unsafe();
     } else {
-        ::system("echo -e '\a' > /dev/tty 2>/dev/null");
+        const int fd = ::open("/dev/tty", O_WRONLY);
+        if (fd != -1) {
+            ::write(fd, "\a", 1);
+            ::close(fd);
+        } else {
+            ::write(STDERR_FILENO, "\a", 1);
+        }
     }
 #endif
 }
@@ -413,7 +420,7 @@ void sys_console::pause(const string_view msg) {
     lock<mutex> lock(mutex_);
     this->flush_unsafe();
     this->print_string_unsafe(msg);
-    NEFORCE_IGNORE this->readln_unsafe();
+    ignore = this->readln_unsafe();
     this->flush_unsafe();
 }
 

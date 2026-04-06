@@ -445,7 +445,7 @@ file::size_type file::write(const void* data, const size_type size) {
         const size_type available = buffer_size_ - write_buffer_pos_;
         const size_type to_copy = min(remaining, available);
 
-        copy_n(ptr, to_copy, write_buffer_.begin() + write_buffer_pos_);
+        copy_n(ptr, static_cast<ptrdiff_t>(to_copy), write_buffer_.begin() + write_buffer_pos_);
         write_buffer_pos_ += to_copy;
         total_written += to_copy;
         ptr += to_copy;
@@ -494,7 +494,7 @@ file::size_type file::read(void* buffer, const size_type size) const {
         const size_type available_in_buffer = read_buffer_size_ - read_buffer_pos_;
         const size_type to_read = min(remaining, available_in_buffer);
 
-        copy_n(read_buffer_.data() + read_buffer_pos_, to_read, ptr);
+        copy_n(read_buffer_.data() + read_buffer_pos_, static_cast<ptrdiff_t>(to_read), ptr);
         read_buffer_pos_ += to_read;
         ptr += to_read;
         total_read += to_read;
@@ -735,7 +735,7 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
 
     while (offset < file_sz) {
         chunk_info ci{};
-        ci.offset = offset;
+        ci.offset = static_cast<difference_type>(offset);
         ci.index = index;
 
         const size_type remaining = file_sz - offset;
@@ -1009,7 +1009,7 @@ bool file::seek(const difference_type distance, file_pointer method) const {
     return true;
 }
 
-file::difference_type file::tell() const noexcept {
+file::difference_type file::tell() const {
     if (!opened_ || handle_ == invalid_handle) {
         last_error_code_ = EBADF;
         return -1;
@@ -1047,7 +1047,7 @@ file::difference_type file::tell() const noexcept {
     return adjusted_pos;
 }
 
-file::difference_type file::system_tell() const noexcept {
+file::difference_type file::system_tell() const {
     if (!opened_ || handle_ == invalid_handle) {
         return -1;
     }
@@ -1069,7 +1069,7 @@ file::difference_type file::system_tell() const noexcept {
 #endif
 }
 
-bool file::prefetch(const size_type hint_size) const noexcept {
+bool file::prefetch(const size_type hint_size) const {
     if (!opened_ || handle_ == invalid_handle) {
         last_error_code_ = EBADF;
         return false;
@@ -1154,7 +1154,9 @@ bool file::prefetch(const size_type hint_size) const noexcept {
 
         if (advice_result != 0) {
             last_error_code_ = advice_result;
-            last_error_msg_ = ::strerror(advice_result);
+            char buf[256];
+            const char* msg = strerror_r(advice_result, buf, sizeof(buf));
+            last_error_msg_ = msg;
         }
     }
     return fill_read_buffer();
@@ -1218,7 +1220,7 @@ bool file::truncate(const difference_type size) const {
 
     if (!::SetEndOfFile(handle_)) {
         set_last_error();
-        NEFORCE_IGNORE seek(current_pos, file_pointer::BEGIN);
+        ignore = seek(current_pos, file_pointer::BEGIN);
         return false;
     }
 
@@ -1227,7 +1229,7 @@ bool file::truncate(const difference_type size) const {
             set_last_error();
         }
     } else {
-        NEFORCE_IGNORE seek(current_pos, file_pointer::BEGIN);
+        ignore = seek(current_pos, file_pointer::BEGIN);
     }
 
     return true;

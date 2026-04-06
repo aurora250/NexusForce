@@ -10,6 +10,7 @@
  * 不进行内存分配，性能高效。适用于函数参数传递，避免不必要的拷贝。
  */
 
+#include "basic_string_view.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
 #include "NeForce/core/iterator/reverse_iterator.hpp"
 #include "NeForce/core/string/char_traits.hpp"
@@ -956,7 +957,7 @@ public:
      * @return 是否相等
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept {
-        return equal_to(view_type(str));
+        return equal_to(basic_string_view(str));
     }
 
     /**
@@ -995,6 +996,15 @@ public:
         return _NEFORCE FNV_hash_string(this->data(), this->length());
     }
 };
+
+
+extern template class basic_string_view<char>;
+extern template class basic_string_view<wchar_t>;
+#ifdef NEFORCE_STANDARD_20
+extern template class basic_string_view<char8_t>;
+#endif
+extern template class basic_string_view<char16_t>;
+extern template class basic_string_view<char32_t>;
 
 /** @} */ // StringView
 

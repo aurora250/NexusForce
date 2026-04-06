@@ -47,7 +47,7 @@ string redis_result::get_string() const {
     return format_redis_reply_element(result_);
 }
 
-redis_result::redis_result() noexcept :
+redis_result::redis_result() :
 column_names_(make_unique<vector<string>>()),
 kv_pairs_(make_unique<vector<pair<string, string>>>()) {}
 

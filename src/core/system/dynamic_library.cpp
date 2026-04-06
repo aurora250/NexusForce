@@ -21,7 +21,9 @@ void dynamic_library::open() {
 #else
     handle_ = ::dlopen(path_.data(), RTLD_LAZY | RTLD_LOCAL);
     if (!handle_) {
-        NEFORCE_THROW_EXCEPTION(dynamic_library_exception(::dlerror()));
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
+        const char* err = ::dlerror();
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception(err));
     }
 #endif
 }
@@ -73,8 +75,10 @@ void* dynamic_library::symbol(const string& name) const {
     }
     return reinterpret_cast<void*>(proc);
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     ::dlerror();
     void* sym = ::dlsym(handle_, name.data());
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* error = ::dlerror();
     if (error) {
         NEFORCE_THROW_EXCEPTION(dynamic_library_exception(error));
@@ -91,9 +95,12 @@ bool dynamic_library::has_symbol(const string& name) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data()) != nullptr;
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     ::dlerror();
-    ::dlsym(handle_, name.data());
-    return ::dlerror() == nullptr;
+    ignore = ::dlsym(handle_, name.data());
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
+    const char* error = ::dlerror();
+    return error == nullptr;
 #endif
 }
 

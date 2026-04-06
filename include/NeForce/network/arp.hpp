@@ -20,7 +20,7 @@ private:
 #endif
 
 #ifdef NEFORCE_PLATFORM_LINUX
-    bool local_info(const char* iface) noexcept;
+    bool local_info(const char* iface);
 #endif
 
 public:
@@ -30,7 +30,7 @@ public:
     bool open(const char* iface = nullptr);
     void close() noexcept;
 
-    optional<mac_address> resolve(const ip_address& target, milliseconds timeout = milliseconds(1000)) noexcept;
+    optional<mac_address> resolve(const ip_address& target, milliseconds timeout = milliseconds(1000));
 };
 
 NEFORCE_END_NAMESPACE__

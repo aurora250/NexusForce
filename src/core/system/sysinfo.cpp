@@ -419,11 +419,11 @@ void sysinfo::init() {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
                     string_view value = line.view(colon + 1);
-                    NEFORCE_IGNORE value.trim_left();
+                    ignore = value.trim_left();
                     if (value.ends_with("kB")) {
                         value = value.substr(0, value.length() - 2);
                     }
-                    NEFORCE_IGNORE value.trim_right();
+                    ignore = value.trim_right();
                     if (!value.empty()) {
                         memory_info_.total_physical = to_uint64(value) * 1024;
                     }
@@ -432,11 +432,11 @@ void sysinfo::init() {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
                     string_view value = line.view(colon + 1);
-                    NEFORCE_IGNORE value.trim_left();
+                    ignore = value.trim_left();
                     if (value.ends_with("kB")) {
                         value = value.substr(0, value.length() - 2);
                     }
-                    NEFORCE_IGNORE value.trim_right();
+                    ignore = value.trim_right();
                     if (!value.empty()) {
                         memory_info_.available_physical = to_uint64(value) * 1024;
                     }
@@ -540,7 +540,8 @@ float64_t sysinfo::cpu_usage() {
             const uint64_t idle_diff = current_idle - prev_idle;
 
             if (total_diff > 0) {
-                const float64_t usage = 100.0 * (1.0 - static_cast<float64_t>(idle_diff) / total_diff);
+                const float64_t usage =
+                        100.0 * (1.0 - static_cast<float64_t>(idle_diff) / static_cast<float64_t>(total_diff));
                 prev_total = total;
                 prev_idle = current_idle;
                 return usage;
@@ -567,6 +568,7 @@ uint32_t sysinfo::process_count() {
     ::DIR* dir = ::opendir("/proc");
     if (dir) {
         ::dirent* entry;
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         while ((entry = ::readdir(dir)) != nullptr) {
             if (entry->d_type == DT_DIR) {
                 bool is_numeric = true;

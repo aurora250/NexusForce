@@ -31,6 +31,15 @@ namespace {
         const int value = static_cast<int>(event);
         return value >= 1000 && value < 2000;
     }
+
+    const unordered_map<signal_event, int>& windows_to_posix_map() {
+        static unordered_map<signal_event, int> signal_map{{signal_event::CTRL_BREAK, SIGTERM},
+                                                           {signal_event::CLOSE, SIGHUP},
+                                                           {signal_event::LOGOFF, SIGTERM},
+                                                           {signal_event::SHUTDOWN, SIGTERM}};
+        return signal_map;
+    };
+
 #endif
 
     thread_local signal_event current_signal =
@@ -43,12 +52,6 @@ namespace {
     thread_local void* signal_context = nullptr;
 } // namespace
 
-#ifdef NEFORCE_PLATFORM_LINUX
-unordered_map<signal_event, int> signal_manager::windows_to_posix_map_ = {{signal_event::CTRL_BREAK, SIGTERM},
-                                                                          {signal_event::CLOSE, SIGHUP},
-                                                                          {signal_event::LOGOFF, SIGTERM},
-                                                                          {signal_event::SHUTDOWN, SIGTERM}};
-#endif
 
 signal_manager::signal_manager() { initialize_platform(); }
 
@@ -395,10 +398,11 @@ void signal_manager::send_signal_nolock(signal_event event, void* context) {
 
     if (is_valid_posix_signal(sig_value)) {
         pending_signals_.emplace_back(event, context, steady_clock::now());
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         printcln(color::yellow(), "POSIX signal sent: ", sig_value, " (", ::strsignal(sig_value), ")");
     } else if (is_windows_simulated_event(event)) {
-        const auto it = windows_to_posix_map_.find(event);
-        if (it != windows_to_posix_map_.end()) {
+        const auto it = windows_to_posix_map().find(event);
+        if (it != windows_to_posix_map().end()) {
             printcln(color::yellow(), "Windows simulated event: ", sig_value, " -> POSIX ", it->second);
         }
         pending_signals_.emplace_back(event, context, steady_clock::now());

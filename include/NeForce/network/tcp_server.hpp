@@ -74,7 +74,7 @@ protected:
     }
 
 public:
-    explicit basic_tcp_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold) :
+    explicit basic_tcp_server(const uint16_t port, const size_t worker_count = thread_pool::max_thread_threshhold()) :
     port_(port) {
         if (worker_count == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
@@ -187,7 +187,7 @@ protected:
     }
 
 public:
-    explicit ssl_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold) :
+    explicit ssl_server(const uint16_t port, const size_t worker_count = thread_pool::max_thread_threshhold()) :
     basic_tcp_server<ssl_socket>(port, worker_count),
     ssl_ctx_(ssl_method::TLS_SERVER) {}
 

@@ -204,6 +204,7 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& po
                                  CharT delim = static_cast<CharT>('\n')) {
     str.clear();
     bool has_read = false;
+    // NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult)
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
@@ -229,6 +230,7 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos, b
                                  CharT delim = static_cast<CharT>('\n')) {
     str.clear();
     bool has_read = false;
+    // NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult)
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
@@ -258,6 +260,7 @@ NEFORCE_CONSTEXPR20 bool getline(
         Pred split = [](const CharT c) { return c == static_cast<CharT>('\n'); }) {
     str.clear();
     bool has_read = false;
+    // NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult)
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];
@@ -285,6 +288,7 @@ NEFORCE_CONSTEXPR20 bool getline(
         Pred split = [](const CharT c) { return c == static_cast<CharT>('\n'); }) {
     str.clear();
     bool has_read = false;
+    // NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult)
     while (pos < data.size()) {
         has_read = true;
         const CharT c = data[pos++];

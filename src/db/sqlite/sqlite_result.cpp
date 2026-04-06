@@ -2,7 +2,7 @@
 #ifdef NEFORCE_SUPPORT_SQLITE3
 NEFORCE_BEGIN_NAMESPACE__
 
-sqlite_result::sqlite_result() noexcept :
+sqlite_result::sqlite_result() :
 column_names_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<int>>()) {}
 

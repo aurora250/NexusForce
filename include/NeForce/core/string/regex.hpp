@@ -519,7 +519,7 @@ private:
     size_t last_pos_ = 0;           ///< 最后处理位置
 
 private:
-    void find_next() noexcept;
+    void find_next();
 
 public:
     /**
@@ -545,13 +545,13 @@ public:
      * @brief 前置递增操作符
      * @return 递增后的迭代器
      */
-    regex_token_iterator& operator++() noexcept;
+    regex_token_iterator& operator++();
 
     /**
      * @brief 后置递增操作符
      * @return 递增前的迭代器
      */
-    regex_token_iterator operator++(int) noexcept {
+    regex_token_iterator operator++(int) {
         regex_token_iterator tmp = *this;
         ++(*this);
         return tmp;

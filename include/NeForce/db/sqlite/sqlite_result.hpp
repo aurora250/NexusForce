@@ -15,7 +15,7 @@ private:
     unique_ptr<vector<int>> column_types_;
 
 public:
-    sqlite_result() noexcept;
+    sqlite_result();
     explicit sqlite_result(::sqlite3_stmt* statement);
     ~sqlite_result() override;
 
@@ -44,8 +44,8 @@ public:
     NEFORCE_NODISCARD vector<char> get_blob(size_type n) const override;
     NEFORCE_NODISCARD uint64_t get_bit(size_type n) const noexcept override;
 
-    NEFORCE_NODISCARD date get_date(size_type n) const noexcept override { return get_datetime(n).date(); }
-    NEFORCE_NODISCARD time get_time(size_type n) const noexcept override { return get_datetime(n).time(); }
+    NEFORCE_NODISCARD date get_date(size_type n) const override { return get_datetime(n).date(); }
+    NEFORCE_NODISCARD time get_time(size_type n) const override { return get_datetime(n).time(); }
     NEFORCE_NODISCARD datetime get_datetime(size_type n) const override;
     NEFORCE_NODISCARD timestamp get_timestamp(size_type n) const override;
 };

@@ -10,7 +10,7 @@ bool mysql_connect::connect(const db_config& config) noexcept {
     if (p == nullptr) {
         return false;
     }
-    NEFORCE_IGNORE set_character_set(config.charset);
+    ignore = set_character_set(config.charset);
     return true;
 }
 

@@ -204,6 +204,7 @@
 - [CMake](https://cmake.org/) 3.19+
 - [vcpkg](https://github.com/microsoft/vcpkg)
 - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) 19+
+- [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) 19+
 - 必选依赖:
   - pcre2
   - OpenSSL

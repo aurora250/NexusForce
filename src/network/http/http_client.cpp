@@ -573,11 +573,11 @@ http_client_response http_client::do_request(http_client_request&& request, int 
 
             const auto status_code = static_cast<uint16_t>(response.status);
             if (status_code == 303) {
-                new_req.method = HTTP_METHOD::GET;
+                new_req.method = HTTP_METHOD::GET();
                 new_req.body.clear();
             } else if (status_code == 301 || status_code == 302) {
                 if (request.method.is_post()) {
-                    new_req.method = HTTP_METHOD::GET;
+                    new_req.method = HTTP_METHOD::GET();
                     new_req.body.clear();
                 } else {
                     new_req.method = request.method;
@@ -694,7 +694,7 @@ http_client_response http_client::get(const string& url, const unordered_map<str
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::GET;
+    req.method = HTTP_METHOD::GET();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -713,7 +713,7 @@ http_client_response http_client::post(const string& url, const string& body, co
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::POST;
+    req.method = HTTP_METHOD::POST();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -748,7 +748,7 @@ http_client_response http_client::put(const string& url, const string& body, con
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::PUT;
+    req.method = HTTP_METHOD::PUT();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -768,7 +768,7 @@ http_client_response http_client::del(const string& url, const unordered_map<str
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::DELETE;
+    req.method = HTTP_METHOD::DELETE();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -786,7 +786,7 @@ http_client_response http_client::head(const string& url, const unordered_map<st
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::HEAD;
+    req.method = HTTP_METHOD::HEAD();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -804,7 +804,7 @@ http_client_response http_client::options(const string& url, const unordered_map
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::OPTIONS;
+    req.method = HTTP_METHOD::OPTIONS();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -824,7 +824,7 @@ http_client_response http_client::patch(const string& url, const string& body, c
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::PATCH;
+    req.method = HTTP_METHOD::PATCH();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {

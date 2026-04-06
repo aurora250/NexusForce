@@ -259,11 +259,10 @@ private:
     state state_ = NOT_A_THREAD;  ///< 线程状态
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    static unsigned int __stdcall
+    static unsigned int __stdcall thread_entry(void* arg);
 #else
-    static void*
+    static void* thread_entry(void* arg);
 #endif
-            thread_entry(void* arg);
 
     void start_thread_impl(thread_startup_args* args);
 

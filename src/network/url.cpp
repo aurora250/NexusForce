@@ -153,7 +153,7 @@ string url::to_string() const {
     return ret;
 }
 
-string url::encode(const string_view str, const bool encode_slash) noexcept {
+string url::encode(const string_view str, const bool encode_slash) {
     string result;
     result.reserve(str.size() * 3);
 
@@ -172,7 +172,7 @@ string url::encode(const string_view str, const bool encode_slash) noexcept {
     return result;
 }
 
-optional<string> url::decode(const string_view str) noexcept {
+optional<string> url::decode(const string_view str) {
     string result;
     result.reserve(str.size());
 
@@ -186,7 +186,7 @@ optional<string> url::decode(const string_view str) noexcept {
             if (!xpair.first) {
                 return none;
             }
-            result += xpair.second;
+            result += static_cast<char>(xpair.second);
             i += 2;
         } else if (str[i] == '+') {
             result += ' ';

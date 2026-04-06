@@ -169,7 +169,7 @@ void test_dbpool() {
             threads.emplace_back([&pool] {
                 for (int i = 0; i < 25; i++) {
                     auto conn = pool.get_connect();
-                    NEFORCE_IGNORE conn->update("SELECT SLEEP(0.01)");
+                    ignore = conn->update("SELECT SLEEP(0.01)");
                 }
             });
         }
@@ -189,8 +189,8 @@ void test_dbpool() {
             threads.emplace_back([&mysql_config] {
                 for (int i = 0; i < 25; i++) {
                     auto* conn = new mysql_connect();
-                    NEFORCE_IGNORE conn->connect(mysql_config);
-                    NEFORCE_IGNORE conn->update("SELECT SLEEP(0.01)");
+                    ignore = conn->connect(mysql_config);
+                    ignore = conn->update("SELECT SLEEP(0.01)");
                     delete conn;
                 }
             });

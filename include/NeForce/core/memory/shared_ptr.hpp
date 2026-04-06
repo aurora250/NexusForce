@@ -45,12 +45,12 @@ protected:
     /**
      * @brief 删除管理的对象
      */
-    virtual void delete_object() noexcept = 0;
+    virtual void delete_object() = 0;
 
     /**
      * @brief 删除控制块自身
      */
-    virtual void delete_this() noexcept = 0;
+    virtual void delete_this() = 0;
 
 public:
     /**
@@ -136,13 +136,15 @@ template <typename T, typename Deleter>
 struct __smart_ptr_counter_impl final : __smart_ptr_counter {
     compressed_pair<Deleter, T*> ptr_pair_{default_construct_tag{}, nullptr};
 
+    static_assert(is_invocable_v<Deleter, T*>, "Deleter must be invocable by T*");
+
     explicit __smart_ptr_counter_impl(T* ptr) noexcept(is_nothrow_default_constructible_v<Deleter>) :
     ptr_pair_(default_construct_tag{}, ptr) {}
 
     explicit __smart_ptr_counter_impl(T* ptr, Deleter&& deleter) noexcept(is_nothrow_move_constructible_v<Deleter>) :
     ptr_pair_(exact_arg_construct_tag{}, _NEFORCE move(deleter), ptr) {}
 
-    void delete_object() noexcept override {
+    void delete_object() override {
         ptr_pair_.get_base()(ptr_pair_.value);
         ptr_pair_.value = nullptr;
     }

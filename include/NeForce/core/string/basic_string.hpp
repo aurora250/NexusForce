@@ -480,7 +480,7 @@ private:
      * @param last2 源结束
      * @return 自身引用
      */
-    template <typename Iterator>
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
     NEFORCE_CONSTEXPR20 basic_string& replace_copy(iterator first1, iterator last1, Iterator first2, Iterator last2) {
         static_assert(is_iter_v<Iterator> && is_same_v<iter_value_t<Iterator>, value_type>, "Iterator type mismatch.");
 
@@ -559,7 +559,7 @@ private:
      * @param n2 源长度
      * @return 自身引用
      */
-    template <typename Iterator>
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
     NEFORCE_CONSTEXPR20 basic_string& replace_copy(iterator first1, const size_type n1, Iterator first2,
                                                    const size_type n2) {
         return replace_copy(first1, first1 + n1, first2, _NEFORCE next(first2, n2));
@@ -2157,7 +2157,7 @@ public:
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare(const size_type off, const size_type n,
                                                       const basic_string& other) const {
-        return view(off, n).compare(other);
+        return view(off, n).compare(other.view());
     }
 
     /**
@@ -2188,8 +2188,8 @@ public:
      * @param view 字符串视图
      * @return 比较结果
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare(const string_view& view) const noexcept {
-        return _NEFORCE char_traits_compare<Traits>(data(), size(), view.data(), view.size());
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare(const view_type& view) const noexcept {
+        return char_traits_compare<traits_type>(data(), size(), view.data(), view.size());
     }
 
     /**
@@ -2246,7 +2246,7 @@ public:
     NEFORCE_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n1, const_pointer str,
                                               const size_type n2) {
         NEFORCE_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");
-        return replace_copy(data() + position, n1, str, n2);
+        return replace_copy({data() + position, this}, n1, str, n2);
     }
 
     /// 替换迭代器范围为指定长度的字符数组
@@ -2260,7 +2260,7 @@ public:
     NEFORCE_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n1, const size_type n2,
                                               const value_type value) {
         NEFORCE_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");
-        return replace_fill(data() + position, n1, n2, value);
+        return replace_fill({data() + position, this}, n1, n2, value);
     }
 
     /// 替换迭代器范围为多个相同字符
@@ -2276,7 +2276,7 @@ public:
                                               const size_type position2, const size_type n2 = npos) {
         NEFORCE_DEBUG_VERIFY(position1 < size(), "basic_string index out of ranges.");
         NEFORCE_DEBUG_VERIFY(position2 < size(), "basic_string index out of ranges.");
-        return replace_copy(data() + position1, n1, str.data() + position2, n2);
+        return replace_copy({data() + position1, this}, n1, str.data() + position2, n2);
     }
 
     /// 替换迭代器范围为另一个迭代器范围
@@ -2323,13 +2323,13 @@ public:
     }
 
     /// 查找指定长度的字符串视图
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find(const string_view& view, const size_type off,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find(const view_type& view, const size_type off,
                                                          const size_type count) const noexcept {
         return (char_traits_find<Traits>) (data(), size(), off, view.data(), count);
     }
 
     /// 查找字符串视图
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find(const string_view& view,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find(const view_type& view,
                                                          const size_type off = 0) const noexcept {
         return _NEFORCE char_traits_find<Traits>(data(), size(), off, view.data(), view.size());
     }
@@ -2357,13 +2357,13 @@ public:
     }
 
     /// 从后向前查找指定长度的字符串视图
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type rfind(const string_view& view, const size_type off,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type rfind(const view_type& view, const size_type off,
                                                           const size_type count) const noexcept {
         return (char_traits_rfind<Traits>) (data(), size(), off, view.data(), count);
     }
 
     /// 从后向前查找字符串视图
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type rfind(const string_view& view,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type rfind(const view_type& view,
                                                           const size_type off = 0) const noexcept {
         return (char_traits_rfind<Traits>) (data(), size(), off, view.data(), view.size());
     }
@@ -2393,13 +2393,13 @@ public:
     }
 
     /// 查找第一个出现在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_of(const string_view& view, const size_type off,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_of(const view_type& view, const size_type off,
                                                                   const size_type n) const noexcept {
         return (char_traits_find_first_of<Traits>) (data(), size(), off, view.data(), n);
     }
 
     /// 查找第一个出现在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_of(const string_view& view,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_of(const view_type& view,
                                                                   const size_type off = 0) const noexcept {
         return (char_traits_find_first_of<Traits>) (data(), size(), off, view.data(), view.size());
     }
@@ -2429,13 +2429,13 @@ public:
     }
 
     /// 查找最后一个出现在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_of(const string_view& view, const size_type off,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_of(const view_type& view, const size_type off,
                                                                  const size_type n) const noexcept {
         return (char_traits_find_last_of<Traits>) (data(), size(), off, view.data(), n);
     }
 
     /// 查找最后一个出现在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_of(const string_view& view,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_of(const view_type& view,
                                                                  const size_type off = npos) const noexcept {
         return (char_traits_find_last_of<Traits>) (data(), size(), off, view.data(), view.size());
     }
@@ -2465,13 +2465,13 @@ public:
     }
 
     /// 查找第一个不在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_not_of(const string_view& view, const size_type off,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_not_of(const view_type& view, const size_type off,
                                                                       const size_type n) const noexcept {
         return (char_traits_find_first_not_of<Traits>) (data(), size(), off, view.data(), n);
     }
 
     /// 查找第一个不在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_not_of(const string_view& view,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_first_not_of(const view_type& view,
                                                                       const size_type off = 0) const noexcept {
         return (char_traits_find_first_not_of<Traits>) (data(), size(), off, view.data(), view.size());
     }
@@ -2501,13 +2501,13 @@ public:
     }
 
     /// 查找最后一个不在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_not_of(const string_view& view, const size_type off,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_not_of(const view_type& view, const size_type off,
                                                                      const size_type n) const noexcept {
         return (char_traits_find_last_not_of<Traits>) (data(), size(), off, view.data(), n);
     }
 
     /// 查找最后一个不在字符串视图中的字符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_not_of(const string_view& view,
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type find_last_not_of(const view_type& view,
                                                                      const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>) (data(), size(), off, view.data(), view.size());
     }
@@ -2776,7 +2776,7 @@ NEFORCE_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator+(const basic_str
 }
 
 template <typename CharT, typename Traits, typename Alloc>
-NEFORCE_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator+(const string_view& lhs,
+NEFORCE_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator+(const basic_string_view<CharT, Traits>& lhs,
                                                                  const basic_string<CharT, Traits, Alloc>& rhs) {
     basic_string<CharT, Traits, Alloc> tmp(lhs);
     tmp.append(rhs);
@@ -2784,7 +2784,7 @@ NEFORCE_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator+(const string_vi
 }
 template <typename CharT, typename Traits, typename Alloc>
 NEFORCE_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator+(const basic_string<CharT, Traits, Alloc>& lhs,
-                                                                 const string_view& rhs) {
+                                                                 const basic_string_view<CharT, Traits>& rhs) {
     basic_string<CharT, Traits, Alloc> tmp(lhs);
     tmp.append(rhs);
     return _NEFORCE move(tmp);
@@ -2979,6 +2979,15 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(const basic_string<CharT, 
                                                       const basic_string_view<CharT, Traits>& rhs) noexcept {
     return !(rhs < lhs);
 }
+
+
+extern template class basic_string<char>;
+extern template class basic_string<wchar_t>;
+#ifdef NEFORCE_STANDARD_20
+extern template class basic_string<char8_t>;
+#endif
+extern template class basic_string<char16_t>;
+extern template class basic_string<char32_t>;
 
 /** @} */ // String
 

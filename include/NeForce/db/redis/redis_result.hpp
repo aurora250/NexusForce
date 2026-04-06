@@ -20,7 +20,7 @@ private:
     string get_string() const;
 
 public:
-    redis_result() noexcept;
+    redis_result();
     explicit redis_result(::redisReply* reply);
     ~redis_result() override;
 

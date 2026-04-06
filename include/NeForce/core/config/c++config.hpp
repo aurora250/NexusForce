@@ -506,8 +506,6 @@
 #    define NEFORCE_UNUSED
 #endif
 
-#define NEFORCE_IGNORE (void)
-
 
 #ifdef NEFORCE_STANDARD_17
 #    define NEFORCE_UNLIKELY [[unlikely]]

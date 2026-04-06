@@ -400,7 +400,7 @@ public:
      *
      * 返回逻辑文件指针位置（考虑缓冲区）。
      */
-    difference_type tell() const noexcept;
+    difference_type tell() const;
 
     /**
      * @brief 获取系统文件指针位置
@@ -408,7 +408,7 @@ public:
      *
      * 返回操作系统层面的文件指针位置，不考虑缓冲区。
      */
-    difference_type system_tell() const noexcept;
+    difference_type system_tell() const;
 
     /**
      * @brief 预取数据到缓存
@@ -417,7 +417,7 @@ public:
      *
      * 建议操作系统将后续数据预加载到内存，提高顺序访问性能。
      */
-    bool prefetch(size_type hint_size = 0) const noexcept;
+    bool prefetch(size_type hint_size = 0) const;
 
     /**
      * @brief 截断文件

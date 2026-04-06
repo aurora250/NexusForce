@@ -324,7 +324,7 @@ vector<char> ftp_client::download_impl(const string& remote_path, tcp_socket& da
         data_sock.close();
     }
 
-    NEFORCE_IGNORE read_response();
+    ignore = read_response();
     return data;
 }
 
@@ -344,7 +344,7 @@ void ftp_client::upload_impl(const string& remote_path, tcp_socket& data_sock, c
         data_sock.close();
     }
 
-    NEFORCE_IGNORE read_response();
+    ignore = read_response();
 }
 
 void ftp_client::open_and_connect(const ip_address& addr) {
@@ -551,7 +551,7 @@ ftp_client::tls_info ftp_client::upgrade_tls(ssl_context& ctx, const string& sni
 
 void ftp_client::disconnect() {
     if (is_open()) {
-        NEFORCE_IGNORE send_command("QUIT");
+        ignore = send_command("QUIT");
     }
     connected_ = false;
     tls_active_ = false;
@@ -633,7 +633,7 @@ vector<ftp_client::entry> ftp_client::list(const string& path) {
         data_sock.close();
     }
 
-    NEFORCE_IGNORE read_response();
+    ignore = read_response();
 
     vector<entry> entries;
     string line;
@@ -668,7 +668,7 @@ vector<string> ftp_client::nlst(const string& path) {
         data_sock.close();
     }
 
-    NEFORCE_IGNORE read_response();
+    ignore = read_response();
 
     vector<string> names;
     string line;

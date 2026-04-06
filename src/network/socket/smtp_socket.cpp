@@ -237,7 +237,7 @@ void smtp_socket::do_post_connect(const string& domain, const tls_mode mode, con
     }
 
     server_domain_ = domain;
-    NEFORCE_IGNORE do_ehlo(domain);
+    ignore = do_ehlo(domain);
     connected_ = true;
 }
 
@@ -318,7 +318,7 @@ void smtp_socket::connect(const string& hostname, const ports port, const string
 void smtp_socket::disconnect() {
     if (is_open()) {
         const string quit = "QUIT\r\n";
-        NEFORCE_IGNORE raw_send(quit.data(), quit.size());
+        ignore = raw_send(quit.data(), quit.size());
         read_response();
     }
     connected_ = false;
@@ -340,7 +340,7 @@ smtp_socket::starttls_result smtp_socket::starttls(const ssl_context& ctx, const
     }
 
     do_tls_handshake(ctx, sni_hostname);
-    NEFORCE_IGNORE do_ehlo(server_domain_);
+    ignore = do_ehlo(server_domain_);
 
     starttls_result result;
     result.upgraded = true;

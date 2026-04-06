@@ -508,5 +508,14 @@ struct unpack_utility_construct_tag {
 
 /** @} */ // ConstructionTags
 
+struct ignore_t {
+    template <typename T>
+    NEFORCE_CONSTEXPR14 const ignore_t& operator=(const T&) const noexcept {
+        return *this;
+    }
+};
+
+NEFORCE_INLINE17 constexpr ignore_t ignore{};
+
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_TYPEINFO_TYPES_HPP__

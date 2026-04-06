@@ -28,6 +28,7 @@ namespace {
         }
         return "";
 #else
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         const char* value = ::getenv(name.data());
         return value ? string(value) : "";
 #endif
@@ -37,6 +38,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return ::_putenv_s(name.data(), value.data()) == 0;
 #else
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         return ::setenv(name.data(), value.data(), overwrite ? 1 : 0) == 0;
 #endif
     }
@@ -58,6 +60,7 @@ bool environment::unset(const string& name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetEnvironmentVariableA(name.data(), nullptr) != 0;
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     return ::unsetenv(name.data()) == 0;
 #endif
 }
@@ -177,8 +180,10 @@ string environment::current_user() {
     }
     return "";
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* username = ::getenv("USER");
     if (!username) {
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         username = ::getenv("USERNAME");
     }
     return username ? string(username) : "";
@@ -195,21 +200,24 @@ string environment::temp_directory() {
     }
     return string(buffer);
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* tmpdir = ::getenv("TMPDIR");
     if (tmpdir) {
         return tmpdir;
     }
 
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     tmpdir = ::getenv("TEMP");
     if (tmpdir) {
         return tmpdir;
     }
 
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     tmpdir = ::getenv("TMP");
+
     if (tmpdir) {
         return tmpdir;
     }
-
     return "/tmp";
 #endif
 }
@@ -247,6 +255,7 @@ string environment::home_directory() {
 
     return result;
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* home = ::getenv("HOME");
     return home ? string(home) : "";
 #endif

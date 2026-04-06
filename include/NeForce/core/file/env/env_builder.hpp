@@ -170,7 +170,7 @@ public:
      * @brief 添加空行
      * @return 自身引用，支持链式调用
      */
-    env_builder& blank_line() noexcept;
+    env_builder& blank_line();
 
     /**
      * @brief 直接添加键值对（字符串版本）
