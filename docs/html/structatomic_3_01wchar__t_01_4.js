@@ -8,5 +8,7 @@ var structatomic_3_01wchar__t_01_4 =
     [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
     [ "operator wchar_t", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
     [ "operator wchar_t", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+    [ "operator=", "structatomic_3_01wchar__t_01_4.html#a417ae103a95ffe928506deea1a2f19c8", null ],
+    [ "operator=", "structatomic_3_01wchar__t_01_4.html#a7404dc84181353991ec07ad0ed842468", null ],
     [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
 ];

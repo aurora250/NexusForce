@@ -3,8 +3,8 @@
 #    include <lz4hc.h>
 NEFORCE_BEGIN_NAMESPACE__
 
-byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size, const int level) {
-    const int max_compressed_size = ::LZ4_compressBound(static_cast<int>(size));
+byte_vector lz4_compressor::compress_data(const byte_t* data, size_t size, int level) {
+    int max_compressed_size = ::LZ4_compressBound(static_cast<int>(size));
     if (max_compressed_size <= 0) {
         NEFORCE_THROW_EXCEPTION(lz4_exception("Input size too large for LZ4 compression"));
     }
@@ -40,7 +40,7 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
     int result = 0;
     int attempt = 0;
     constexpr int MAX_ATTEMPTS = 5;
-    constexpr size_t MAX_BUFFER_SIZE = 1024 * 1024 * 1024;
+    constexpr size_t MAX_BUFFER_SIZE{1024ULL * 1024 * 1024};
 
     do {
         if (attempt > 0) {

@@ -17,7 +17,7 @@ private:
 
 public:
     mysql_result() noexcept;
-    explicit mysql_result(::MYSQL_RES* result) noexcept;
+    explicit mysql_result(::MYSQL_RES* result);
     ~mysql_result() override;
 
     NEFORCE_NODISCARD bool empty() const noexcept override { return result_ == nullptr; }

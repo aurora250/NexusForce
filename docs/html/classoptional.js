@@ -13,7 +13,7 @@ var classoptional =
     [ "optional", "classoptional.html#afec68e13603a5f09d86ae5afa6a65497", null ],
     [ "optional", "classoptional.html#a5149a2b0e04fded77b8cef05b4a149b7", null ],
     [ "optional", "classoptional.html#aa3a97d2669c23714f449b9f25c3ba2fd", null ],
-    [ "optional", "classoptional.html#abcd30e37c38e66ba2504ed67a5dd47e4", null ],
+    [ "optional", "classoptional.html#a367f3dcab5d414d45b159f4a8d3bb8c1", null ],
     [ "~optional", "classoptional.html#aa6eb37e7dc562a3f355685df9881eb0d", null ],
     [ "and_then", "classoptional.html#aaa107fb1965c0bf4a4e15e5064d0cc52", null ],
     [ "and_then", "classoptional.html#a0dea507fd84e53a8c39a877ffad352cf", null ],

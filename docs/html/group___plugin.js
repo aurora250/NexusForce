@@ -14,7 +14,7 @@ var group___plugin =
       [ "shutdown", "structiplugin.html#ae5d9267f0a284319b9df78496ae6c8b3", null ]
     ] ],
     [ "plugin_deleter", "structplugin__deleter.html", [
-      [ "deleter_type", "structplugin__deleter.html#a122ab5f33b2c0ebcf295e666322e9762", null ],
+      [ "deleter_type", "structplugin__deleter.html#a1971c84fb464e400807c9fcde1cb8611", null ],
       [ "plugin_deleter", "structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a", null ],
       [ "~plugin_deleter", "structplugin__deleter.html#a2c7aac329f10395b5c36bbce38dec815", null ],
       [ "plugin_deleter", "structplugin__deleter.html#a03fbca2183006f758b8a204211ba1a4a", null ],

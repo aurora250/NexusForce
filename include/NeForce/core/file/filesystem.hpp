@@ -68,7 +68,7 @@ public:
      * 清空目录中的所有文件和子目录，但不删除目录本身。
      * 如果recursive为false，只删除目录中的文件，保留子目录。
      */
-    static bool remove_all_in_directory(const path& p, bool recursive = true) noexcept;
+    static bool remove_all_in_directory(const path& p, bool recursive = true);
 
     /**
      * @brief 删除文件或目录
@@ -78,7 +78,7 @@ public:
      * 如果是文件，直接删除；
      * 如果是目录，递归删除目录及其所有内容。
      */
-    static bool remove_all(const path& p) noexcept;
+    static bool remove_all(const path& p);
 
     /**
      * @brief 复制文件
@@ -115,7 +115,7 @@ public:
      * 跨文件系统时，会执行复制后删除原文件。
      * 支持文件和目录的移动。
      */
-    static bool move(const path& from, const path& to, bool overwrite = true) noexcept;
+    static bool move(const path& from, const path& to, bool overwrite = true);
 
     /**
      * @brief 重命名文件或目录
@@ -125,7 +125,7 @@ public:
      *
      * 要求新路径在同一文件系统内。
      */
-    static bool rename(const path& old_name, const path& new_name) noexcept;
+    static bool rename(const path& old_name, const path& new_name);
 
     /**
      * @brief 创建并写入文件

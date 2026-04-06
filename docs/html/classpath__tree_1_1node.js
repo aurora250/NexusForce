@@ -2,7 +2,7 @@ var classpath__tree_1_1node =
 [
     [ "children_list", "classpath__tree_1_1node.html#a2a0801dd531b8ab16eec183e86081ce8", null ],
     [ "ptr", "classpath__tree_1_1node.html#a5f41634a8284d75aa0f4e8497eda708b", null ],
-    [ "weak_ptr", "classpath__tree_1_1node.html#ae39229a7267c061993955f3ab61187f4", null ],
+    [ "weak_ptr", "classpath__tree_1_1node.html#a593a61c879ad11f77eefc27dfe80a0bc", null ],
     [ "node", "classpath__tree_1_1node.html#adfe2c7bca934a373dc8f69215b95cea0", null ],
     [ "add_child", "classpath__tree_1_1node.html#aad1af0bcb1d32eb9fd1a5ade9a6a1859", null ],
     [ "child_count", "classpath__tree_1_1node.html#ab5192a883f152dd7c91bb2b71f08457f", null ],

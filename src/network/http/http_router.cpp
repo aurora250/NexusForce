@@ -128,7 +128,7 @@ void http_router::all(const string& path, http_handler_t handler) {
     route(HTTP_METHOD::PATCH, path, _NEFORCE move(handler));
 }
 
-void http_router::route(const HTTP_METHOD& method, const string& path, http_handler_t handler) {
+void http_router::route(const HTTP_METHOD& method, const string& path, const http_handler_t& handler) {
     if (path.empty() || !handler) {
         return;
     }

@@ -239,7 +239,7 @@ private:
         /**
          * @brief 析构函数
          */
-        ~thread_monitor();
+        ~thread_monitor() noexcept;
     };
 
 public:

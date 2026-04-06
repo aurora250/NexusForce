@@ -406,7 +406,7 @@ private:
     atomic<uint32_t> idle_thread_size_{0};        ///< 空闲线程数
     size_t task_threshhold_{task_max_threshhold}; ///< 任务队列阈值
 
-    mutex task_queue_mtx_{};         ///< 任务队列互斥锁
+    mutable mutex task_queue_mtx_{}; ///< 任务队列互斥锁
     condition_variable not_full_{};  ///< 队列非满条件变量
     condition_variable not_empty_{}; ///< 队列非空条件变量
     condition_variable exit_cond_{}; ///< 退出条件变量

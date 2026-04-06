@@ -219,7 +219,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 #endif
 }
 
-size_t path_tree::size() const noexcept {
+size_t path_tree::size() const {
     if (!root_) {
         return 0;
     }
@@ -231,7 +231,7 @@ size_t path_tree::size() const noexcept {
     return count;
 }
 
-size_t path_tree::max_depth() const noexcept {
+size_t path_tree::max_depth() const {
     if (!root_) {
         return 0;
     }
@@ -245,7 +245,7 @@ size_t path_tree::max_depth() const noexcept {
     return max_d;
 }
 
-path_tree::node::ptr path_tree::find(const path& p) const noexcept {
+path_tree::node::ptr path_tree::find(const path& p) const {
     if (!root_) {
         return nullptr;
     }

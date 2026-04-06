@@ -35,7 +35,7 @@ namespace {
     void write_data_channel(tcp_socket& sock, const char* data, const size_t len) {
         size_t total = 0;
         while (total < len) {
-            const ssize_t n = ::send(sock.native_handle(), data + total, len - total, 0);
+            const ssize_t n = ::send(sock.native_handle(), data + total, static_cast<int>(len - total), 0);
             if (n <= 0) {
                 NEFORCE_THROW_EXCEPTION(ftp_exception("Data channel write failed"));
             }
@@ -426,8 +426,14 @@ ftp_client::entry ftp_client::parse_list_entry(const string& line) {
 }
 
 ftp_client::~ftp_client() {
-    if (connected_) {
+    if (!connected_) {
+        return;
+    }
+    try {
         disconnect();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
     }
 }
 

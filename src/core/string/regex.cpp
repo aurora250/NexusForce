@@ -50,6 +50,7 @@ string match_result::format(const string_view fmt) const {
                         if (group >= 0 && group < static_cast<int>(groups_.size())) {
                             result += groups_[group];
                         }
+                        // NOLINTNEXTLINE(bugprone-empty-catch)
                     } catch (...) {
                         // ignore
                     }
@@ -139,10 +140,10 @@ match_result regex::do_match(const PCRE2_SPTR subject, const size_t length, cons
     groups.reserve(rc);
     group_positions.reserve(rc);
 
-    for (int i = 0; i < rc; ++i) {
-        if (ovector[2 * i] != PCRE2_UNSET) {
-            const size_t start = ovector[2 * i];
-            const size_t end = ovector[2 * i + 1];
+    for (ptrdiff_t i = 0; i < rc; ++i) {
+        if (ovector[i * 2] != PCRE2_UNSET) {
+            const size_t start = ovector[i * 2];
+            const size_t end = ovector[i * 2 + 1];
             groups.emplace_back(reinterpret_cast<const char*>(subject + start), end - start);
             group_positions.emplace_back(start, end - start);
         } else {
@@ -369,7 +370,7 @@ regex_iterator regex_iterator::from_index(const regex* re, const string& str, pt
     return it;
 }
 
-regex_iterator::reference regex_iterator::operator*() const noexcept {
+regex_iterator::reference regex_iterator::operator*() const {
     thread_local const match_result empty_result{};
     build_cache();
     if (current_index_ >= 0 && current_index_ < static_cast<ptrdiff_t>(cached_matches_.size())) {

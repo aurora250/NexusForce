@@ -249,7 +249,7 @@ template&lt;typename Key, typename Value&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00089">89</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00246">capacity()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00238">capacity()</a>.</p>
 
 </div>
 </div>
@@ -281,9 +281,9 @@ template&lt;typename Key, typename Value&gt; </div>
 <p>析构函数 </p>
 <p>自动停止并等待清理线程结束。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00097">97</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00098">98</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00127">disable_cleanup()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00128">disable_cleanup()</a>.</p>
 
 </div>
 </div>
@@ -316,7 +316,7 @@ template&lt;typename Key, typename Value&gt; </div>
 <p>获取缓存容量 </p>
 <dl class="section return"><dt>返回</dt><dd>缓存的最大容量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00238">238</a> 行定义.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00089">ttl_cache()</a>.</p>
 
@@ -350,11 +350,11 @@ template&lt;typename Key, typename Value&gt; </div>
 <p>手动清理过期项 </p>
 <p>遍历所有缓存项，删除已过期的项。 此方法在启用后台清理线程时会自动定期调用。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00246">246</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00102">pair&lt; T1, T2 &gt;::second</a>.</p>
+<p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00101">pair&lt; T1, T2 &gt;::second</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00108">enable_cleanup()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00107">enable_cleanup()</a>.</p>
 
 </div>
 </div>
@@ -393,7 +393,7 @@ template&lt;typename Key, typename Value&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果键存在且未过期返回true，否则返回false</dd></dl>
 <p>此方法会检查过期时间，如果键已过期则自动删除。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00205">205</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00203">203</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
@@ -427,9 +427,9 @@ template&lt;typename Key, typename Value&gt; </div>
 <p>禁用后台清理线程 </p>
 <p>停止后台清理线程并等待其结束。 不会清空已有缓存项，只是停止自动清理。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00127">127</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00128">128</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00097">~ttl_cache()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00098">~ttl_cache()</a>.</p>
 
 </div>
 </div>
@@ -467,9 +467,9 @@ template&lt;typename Key, typename Value&gt; </div>
 </dl>
 <p>启动后台线程定期清理过期的缓存项。 如果清理线程已运行，此操作无效。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00108">108</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00107">107</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00256">cleanup()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00246">cleanup()</a>.</p>
 
 </div>
 </div>
@@ -507,7 +507,7 @@ template&lt;typename Key, typename Value&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果键存在并成功删除返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00223">223</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00221">221</a> 行定义.</p>
 
 </div>
 </div>
@@ -546,7 +546,7 @@ template&lt;typename Key, typename Value&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>包含值的optional，如果键不存在或已过期返回none</dd></dl>
 <p>根据刷新策略决定是否更新过期时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00176">176</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00175">175</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="none_8hpp_source.html#l00073">none</a>, <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>, <a class="el" href="ttl__cache_8hpp_source.html#l00057">on_access</a> , 以及 <a class="el" href="ttl__cache_8hpp_source.html#l00058">sliding_window</a>.</p>
 
@@ -591,7 +591,7 @@ template&lt;typename Key, typename Value&gt; </div>
 </dl>
 <p>使用默认TTL插入或更新缓存项。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00151">151</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00150">150</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
@@ -642,7 +642,7 @@ template&lt;typename Key, typename Value&gt; </div>
 </dl>
 <p>使用指定的TTL插入或更新缓存项。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00164">164</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00163">163</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
@@ -682,7 +682,7 @@ template&lt;typename Key, typename Value&gt; </div>
 </dl>
 <p>决定访问缓存项时如何影响其过期时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00140">140</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00141">141</a> 行定义.</p>
 
 </div>
 </div>
@@ -714,7 +714,7 @@ template&lt;typename Key, typename Value&gt; </div>
 <p>获取当前缓存大小 </p>
 <dl class="section return"><dt>返回</dt><dd>缓存中的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00238">238</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00232">232</a> 行定义.</p>
 
 </div>
 </div>

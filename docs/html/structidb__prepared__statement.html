@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: idb_prepared_statement结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structidb__prepared__statement.html','','structidb__prepared__statement-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">idb_prepared_statement结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>预处理语句抽象基类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a67ab1c9f04a375b478a034db711b3675" id="r_a67ab1c9f04a375b478a034db711b3675"><td class="memItemLeft">virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a67ab1c9f04a375b478a034db711b3675">param_count</a> () const noexcept=0</td></tr>
+<tr class="memdesc:a67ab1c9f04a375b478a034db711b3675"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取参数数量  <br /></td></tr>
+<tr class="memitem:ab21150730b90141dfd37083d9d21e0f3" id="r_ab21150730b90141dfd37083d9d21e0f3"><td class="memItemLeft"><a id="ab21150730b90141dfd37083d9d21e0f3" name="ab21150730b90141dfd37083d9d21e0f3"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;value)=0</td></tr>
+<tr class="memdesc:ab21150730b90141dfd37083d9d21e0f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定字符串 <br /></td></tr>
+<tr class="memitem:acf37860b88bfa7fd95272d0c2b13ce0a" id="r_acf37860b88bfa7fd95272d0c2b13ce0a"><td class="memItemLeft"><a id="acf37860b88bfa7fd95272d0c2b13ce0a" name="acf37860b88bfa7fd95272d0c2b13ce0a"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> value)=0</td></tr>
+<tr class="memdesc:acf37860b88bfa7fd95272d0c2b13ce0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定字符串视图 <br /></td></tr>
+<tr class="memitem:af8d4d5a5485c462827fa45fbd909d0ea" id="r_af8d4d5a5485c462827fa45fbd909d0ea"><td class="memItemLeft"><a id="af8d4d5a5485c462827fa45fbd909d0ea" name="af8d4d5a5485c462827fa45fbd909d0ea"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, const char *value)=0</td></tr>
+<tr class="memdesc:af8d4d5a5485c462827fa45fbd909d0ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定C字符串 <br /></td></tr>
+<tr class="memitem:a5fd7f0157b00d43b238e9b79404e82eb" id="r_a5fd7f0157b00d43b238e9b79404e82eb"><td class="memItemLeft"><a id="a5fd7f0157b00d43b238e9b79404e82eb" name="a5fd7f0157b00d43b238e9b79404e82eb"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, <a class="el" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> value)=0</td></tr>
+<tr class="memdesc:a5fd7f0157b00d43b238e9b79404e82eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定32位整数 <br /></td></tr>
+<tr class="memitem:a203cda3f3bf52a50d91488cc333f6dcd" id="r_a203cda3f3bf52a50d91488cc333f6dcd"><td class="memItemLeft"><a id="a203cda3f3bf52a50d91488cc333f6dcd" name="a203cda3f3bf52a50d91488cc333f6dcd"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> value)=0</td></tr>
+<tr class="memdesc:a203cda3f3bf52a50d91488cc333f6dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定64位整数 <br /></td></tr>
+<tr class="memitem:af8c65a9348aaa14ca7e0b8cdc3bf92d9" id="r_af8c65a9348aaa14ca7e0b8cdc3bf92d9"><td class="memItemLeft"><a id="af8c65a9348aaa14ca7e0b8cdc3bf92d9" name="af8c65a9348aaa14ca7e0b8cdc3bf92d9"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, <a class="el" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a> value)=0</td></tr>
+<tr class="memdesc:af8c65a9348aaa14ca7e0b8cdc3bf92d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定浮点数 <br /></td></tr>
+<tr class="memitem:ad194131cad5aa306d695dcb5aeb8729b" id="r_ad194131cad5aa306d695dcb5aeb8729b"><td class="memItemLeft"><a id="ad194131cad5aa306d695dcb5aeb8729b" name="ad194131cad5aa306d695dcb5aeb8729b"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, const void *<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> length)=0</td></tr>
+<tr class="memdesc:ad194131cad5aa306d695dcb5aeb8729b"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定二进制数据 <br /></td></tr>
+<tr class="memitem:a5edc6ce541b1a871ee9910ba9ec565f9" id="r_a5edc6ce541b1a871ee9910ba9ec565f9"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a5edc6ce541b1a871ee9910ba9ec565f9">execute</a> ()=0</td></tr>
+<tr class="memdesc:a5edc6ce541b1a871ee9910ba9ec565f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行非查询语句（UPDATE/INSERT/DELETE）  <br /></td></tr>
+<tr class="memitem:a75ad5d2dbd0d97d8cfc70ed5ecea5faf" id="r_a75ad5d2dbd0d97d8cfc70ed5ecea5faf"><td class="memItemLeft">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__prepared__result.html">idb_prepared_result</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query</a> ()=0</td></tr>
+<tr class="memdesc:a75ad5d2dbd0d97d8cfc70ed5ecea5faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行查询语句（SELECT）  <br /></td></tr>
+<tr class="memitem:a67f600d24fe96ea4b26508953e1ac2ed" id="r_a67f600d24fe96ea4b26508953e1ac2ed"><td class="memItemLeft">virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a67f600d24fe96ea4b26508953e1ac2ed">get_error</a> () const noexcept=0</td></tr>
+<tr class="memdesc:a67f600d24fe96ea4b26508953e1ac2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取错误信息  <br /></td></tr>
+<tr class="memitem:ac2d8c780282f37e5033aa64025cd0435" id="r_ac2d8c780282f37e5033aa64025cd0435"><td class="memItemLeft">virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac2d8c780282f37e5033aa64025cd0435">get_errno</a> () const noexcept=0</td></tr>
+<tr class="memdesc:ac2d8c780282f37e5033aa64025cd0435"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取错误码  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>预处理语句抽象基类 </p>
+<p>提供参数绑定和执行的接口，支持SQL注入防护和性能优化。 </p>
+
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00136">136</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a5edc6ce541b1a871ee9910ba9ec565f9" name="a5edc6ce541b1a871ee9910ba9ec565f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5edc6ce541b1a871ee9910ba9ec565f9">&#9670;&#160;</a></span>execute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool idb_prepared_statement::execute </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>执行非查询语句（UPDATE/INSERT/DELETE） </p>
+<dl class="section return"><dt>返回</dt><dd>执行成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a5edc6ce541b1a871ee9910ba9ec565f9">execute()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5edc6ce541b1a871ee9910ba9ec565f9">execute()</a>.</p>
+
+</div>
+</div>
+<a id="a75ad5d2dbd0d97d8cfc70ed5ecea5faf" name="a75ad5d2dbd0d97d8cfc70ed5ecea5faf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">&#9670;&#160;</a></span>execute_query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__prepared__result.html">idb_prepared_result</a> &gt; idb_prepared_statement::execute_query </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>执行查询语句（SELECT） </p>
+<dl class="section return"><dt>返回</dt><dd>查询结果集 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query()</a>.</p>
+
+</div>
+</div>
+<a id="ac2d8c780282f37e5033aa64025cd0435" name="ac2d8c780282f37e5033aa64025cd0435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d8c780282f37e5033aa64025cd0435">&#9670;&#160;</a></span>get_errno()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> idb_prepared_statement::get_errno </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取错误码 </p>
+<dl class="section return"><dt>返回</dt><dd>数据库错误码 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ac2d8c780282f37e5033aa64025cd0435">get_errno()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ac2d8c780282f37e5033aa64025cd0435">get_errno()</a>.</p>
+
+</div>
+</div>
+<a id="a67f600d24fe96ea4b26508953e1ac2ed" name="a67f600d24fe96ea4b26508953e1ac2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f600d24fe96ea4b26508953e1ac2ed">&#9670;&#160;</a></span>get_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> idb_prepared_statement::get_error </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取错误信息 </p>
+<dl class="section return"><dt>返回</dt><dd>错误描述字符串 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a67f600d24fe96ea4b26508953e1ac2ed">get_error()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a67f600d24fe96ea4b26508953e1ac2ed">get_error()</a>.</p>
+
+</div>
+</div>
+<a id="a67ab1c9f04a375b478a034db711b3675" name="a67ab1c9f04a375b478a034db711b3675"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ab1c9f04a375b478a034db711b3675">&#9670;&#160;</a></span>param_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> idb_prepared_statement::param_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取参数数量 </p>
+<dl class="section return"><dt>返回</dt><dd>占位符数量 </dd></dl>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="structidb__prepared__statement.html">idb_prepared_statement</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -12,5 +12,7 @@ var searchData=
   ['wake_5fprivate_9',['wake_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95',1,'futex.hpp']]],
   ['warn_10',['WARN',['../group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
   ['write_11',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
-  ['write_5fthrough_12',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]]
+  ['write_5fthrough_12',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
+  ['ws_13',['ws',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c',1,'ports']]],
+  ['wss_14',['wss',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c',1,'ports']]]
 ];

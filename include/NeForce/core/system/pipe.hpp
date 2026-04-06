@@ -106,7 +106,7 @@ public:
      * @brief 从管道读取所有可用数据（非阻塞）
      * @return 读取的数据字符串
      */
-    NEFORCE_NODISCARD string read_available() noexcept;
+    NEFORCE_NODISCARD string read_available();
 
     /**
      * @brief 向管道写入数据

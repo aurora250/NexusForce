@@ -126,6 +126,7 @@ namespace {
             } else if (lower_attr.starts_with("max-age=")) {
                 try {
                     c.max_age = integer32::parse(attr.substr(8)).value();
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
                 } catch (...) {
                     // ignore
                 }
@@ -134,6 +135,7 @@ namespace {
             } else if (lower_attr.starts_with("expires=")) {
                 try {
                     c.expires = datetime::parse_GMT(attr.substr(8));
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
                 } catch (...) {
                     // ignore
                 }
@@ -166,6 +168,7 @@ namespace {
                 try {
                     resp.http_version_major = uinteger16::parse(ver.substr(0, dot)).value();
                     resp.http_version_minor = uinteger16::parse(ver.substr(dot + 1)).value();
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
                 } catch (...) {
                     // ignore
                 }
@@ -181,6 +184,7 @@ namespace {
         try {
             uint16_t code = uinteger16::parse(status_line.substr(sp1 + 1, sp2 - sp1 - 1)).value();
             resp.status = static_cast<HTTP_STATUS>(code);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
             // ignore
         }
@@ -222,6 +226,7 @@ namespace {
                 } else if (key_lower == "content-length") {
                     try {
                         resp.content_length = uinteger64::parse(value).value();
+                        // NOLINTNEXTLINE(bugprone-empty-catch)
                     } catch (...) {
                         // ignore
                     }

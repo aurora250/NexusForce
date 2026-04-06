@@ -39,6 +39,7 @@ NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest, const void* N
     auto dest_v = static_cast<volatile byte_t*>(dest);
     auto src_v = static_cast<const volatile byte_t*>(src);
     while (count--) {
+        // NOLINTNEXTLINE(clang-analyzer-core.uninitialized.Assign)
         *dest_v = *src_v;
         dest_v++;
         src_v++;

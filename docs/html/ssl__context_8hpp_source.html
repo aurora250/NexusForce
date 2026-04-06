@@ -94,10 +94,10 @@ $(function(){initNavTree('ssl__context_8hpp_source.html','',''); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;NeForce/network/ssl/ssl_exception.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;openssl/ssl.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;openssl/ssl.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;NeForce/network/ssl/ssl_exception.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">enum class</span> ssl_method {</div>
@@ -111,58 +111,54 @@ $(function(){initNavTree('ssl__context_8hpp_source.html','',''); });
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span>NEFORCE_API ssl_context {</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">struct </span>ctx_deleter {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">void</span> operator ()(::SSL_CTX* ctx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="keywordflow">if</span> (ctx) ::SSL_CTX_free(ctx);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    };</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    unique_ptr&lt;::SSL_CTX, ctx_deleter&gt; ctx_;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">void</span> operator()(::SSL_CTX* ctx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="keywordflow">if</span> (ctx) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                ::SSL_CTX_free(ctx);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    };</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">explicit</span> ssl_context(ssl_method method = ssl_method::TLS_SERVER);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    ~ssl_context() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ssl_context(<span class="keyword">const</span> ssl_context&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ssl_context&amp; operator =(<span class="keyword">const</span> ssl_context&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ssl_context(ssl_context&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ssl_context&amp; operator =(ssl_context&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">bool</span> load_certificate(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; cert_file, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key_file);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> load_certificate_from_memory(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; cert_pem, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key_pem);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> load_verify_locations(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ca_file, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ca_path = <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> set_options(<span class="keywordtype">long</span> options);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> set_verify_mode(<span class="keywordtype">int</span> mode);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> require_client_certificate();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    unique_ptr&lt;::SSL_CTX, ctx_deleter&gt; ctx_;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">explicit</span> ssl_context(ssl_method method = ssl_method::TLS_SERVER);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ~ssl_context() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    ssl_context(<span class="keyword">const</span> ssl_context&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ssl_context&amp; operator=(<span class="keyword">const</span> ssl_context&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    ssl_context(ssl_context&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    ssl_context&amp; operator=(ssl_context&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> load_certificate(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; cert_file, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key_file);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> load_certificate_from_memory(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; cert_pem, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key_pem);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">bool</span> load_verify_locations(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ca_file, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ca_path = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> set_options(<span class="keywordtype">long</span> options);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> set_verify_mode(<span class="keywordtype">int</span> mode);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> set_cipher_list(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ciphers);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> set_ciphersuites(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ciphersuites);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> set_default_options();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> set_session_cache_size(<span class="keywordtype">long</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> set_timeout(<span class="keywordtype">long</span> <a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a>);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> set_alpn_protos(<span class="keyword">const</span> vector&lt;string&gt;&amp; protocols);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    NEFORCE_NODISCARD ::SSL_CTX* native_handle() const noexcept {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> ctx_.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> require_client_certificate();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> set_cipher_list(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ciphers);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> set_ciphersuites(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; ciphersuites);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> set_default_options();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> set_session_cache_size(<span class="keywordtype">long</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> set_timeout(<span class="keywordtype">long</span> <a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> set_alpn_protos(<span class="keyword">const</span> vector&lt;string&gt;&amp; protocols);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    NEFORCE_NODISCARD ::SSL_CTX* native_handle() const noexcept { <span class="keywordflow">return</span> ctx_.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>(); }</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">return</span> ctx_ != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_valid() const noexcept {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> ctx_ != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__</span></div>
-<div class="ttc" id="aclassunique__ptr_html_aaad36e992e2a4169701ba56b75718638"><div class="ttname"><a href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">unique_ptr::get</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00354">unique_ptr.hpp:354</a></div></div>
-<div class="ttc" id="agroup___duration_html_gafce1f041e55ef5a119744bb53b2aabd9"><div class="ttname"><a href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a></div><div class="ttdeci">duration&lt; int64_t &gt; seconds</div><div class="ttdoc">秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00161">duration.hpp:161</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept { <span class="keywordflow">return</span> ctx_ != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_valid() const noexcept { <span class="keywordflow">return</span> ctx_ != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__</span></div>
+<div class="ttc" id="aclassunique__ptr_html_aaad36e992e2a4169701ba56b75718638"><div class="ttname"><a href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">unique_ptr::get</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00342">unique_ptr.hpp:342</a></div></div>
+<div class="ttc" id="agroup___duration_html_gafce1f041e55ef5a119744bb53b2aabd9"><div class="ttname"><a href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a></div><div class="ttdeci">duration&lt; int64_t &gt; seconds</div><div class="ttdoc">秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00158">duration.hpp:158</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
 <div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
 <div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
 </div><!-- fragment --></div><!-- contents -->

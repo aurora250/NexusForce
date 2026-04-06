@@ -1,5 +1,12 @@
 var NAVTREEINDEX19 =
 {
+"group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277":[1,151,18,3],
+"group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3":[1,151,18,2],
+"group___logging.html#ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5":[1,151,18,4],
+"group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15":[1,151,18,1],
+"group___math_constants.html":[1,78],
+"group___math_constants.html#ga007d3842f652c65048072924d81d9ed6":[1,78,9],
+"group___math_constants.html#ga4824a7640629417cfd86f30d8a00b4f5":[1,78,5],
 "group___math_constants.html#ga66d373bbf190628a22a8261af89c945c":[1,78,7],
 "group___math_constants.html#ga76d935a866e41679862dae61e0c0e065":[1,78,1],
 "group___math_constants.html#ga79d2dde9d953cdcdab93295832c2f457":[1,78,2],
@@ -113,7 +120,7 @@ var NAVTREEINDEX19 =
 "group___mutex.html":[1,17],
 "group___mutex.html#ga350cd44b97804684fc729a02a728a33e":[1,17,9],
 "group___mutex.html#gafd2a4ed346c171a31775c9d071a3f32f":[1,17,8],
-"group___network.html":[1,152],
+"group___network.html":[1,153],
 "group___none.html":[1,142],
 "group___none.html#ga821a4974ccf7b7d0b01bf5170acff797":[1,142,1],
 "group___normal_iterators.html":[1,60],
@@ -239,15 +246,8 @@ var NAVTREEINDEX19 =
 "group___platform_detection.html#gab99bb2a8e1dff9c8064f39a99da90d46":[1,24,5],
 "group___platform_detection.html#gabf431f66bada0965a85fc869fadd7668":[1,24,0],
 "group___platform_detection.html#gafbe22ba3c6a132654e1193b1c02bfb3f":[1,24,3],
-"group___plugin.html":[1,153],
-"group___plugin.html#ga410e53efc8f03f530c6794d60818d504":[1,153,7],
-"group___plugin.html#ga74771a48a81e35febe1026112c62e1f8":[1,153,8],
-"group___plugin.html#gad609af93bddb00f7c05edb56b9dc08bf":[1,153,5],
-"group___plugin.html#gaf25d3a0e4b54927bc59ad58466f31dcc":[1,153,4],
-"group___plugin.html#gaf947f049a3822c8b84313e907b0ebb58":[1,153,6],
-"group___pointer_traits.html":[1,58],
-"group___pointer_traits.html#ga27751f364a156df0d2465257f9cac040":[1,58,5],
-"group___pointer_traits.html#gaad81bc9519e268839715728fedfea51e":[1,58,2],
-"group___pointer_traits.html#gac0004e8b2ceae8ef1ca7f782adc45122":[1,58,3],
-"group___pointer_traits.html#gae5389a2c211913bf9c5700224a7eb73e":[1,58,4]
+"group___plugin.html":[1,154],
+"group___plugin.html#ga410e53efc8f03f530c6794d60818d504":[1,154,7],
+"group___plugin.html#ga74771a48a81e35febe1026112c62e1f8":[1,154,8],
+"group___plugin.html#gad609af93bddb00f7c05edb56b9dc08bf":[1,154,5]
 };

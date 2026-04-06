@@ -135,7 +135,7 @@ public:
      * - 其他策略仅关闭文件
      * 此操作后文件对象将处于关闭状态。
      */
-    void cleanup();
+    void cleanup() noexcept;
 
     /**
      * @brief 释放临时文件的所有权

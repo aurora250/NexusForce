@@ -1,5 +1,10 @@
 var NAVTREEINDEX15 =
 {
+"classweak__ptr.html#a158980a941d23231cd5129d735a5703a":[1,71,2,17],
+"classweak__ptr.html#a158980a941d23231cd5129d735a5703a":[1,77,0,17],
+"classweak__ptr.html#a1cea7e5d967f735563944a045d53229b":[1,71,2,14],
+"classweak__ptr.html#a1cea7e5d967f735563944a045d53229b":[1,77,0,14],
+"classweak__ptr.html#a33e02aa3da3b60d4ebf8e6404c3e77b2":[1,71,2,7],
 "classweak__ptr.html#a33e02aa3da3b60d4ebf8e6404c3e77b2":[1,77,0,7],
 "classweak__ptr.html#a381983782fa1b5bc1ce7e998d9d1e13d":[1,71,2,18],
 "classweak__ptr.html#a381983782fa1b5bc1ce7e998d9d1e13d":[1,77,0,18],
@@ -91,6 +96,7 @@ var NAVTREEINDEX15 =
 "datetime_8hpp.html":[5,0,0,0,1,16,2],
 "datetime_8hpp_source.html":[5,0,0,0,1,16,2],
 "db__config_8hpp_source.html":[5,0,0,0,2,5],
+"db__interface_8hpp.html":[5,0,0,0,2,6],
 "db__interface_8hpp_source.html":[5,0,0,0,2,6],
 "deleter_8hpp.html":[5,0,0,0,1,18,3],
 "deleter_8hpp_source.html":[5,0,0,0,1,18,3],
@@ -243,11 +249,5 @@ var NAVTREEINDEX15 =
 "functions_type_c.html":[4,3,3,2],
 "functions_type_d.html":[4,3,3,3],
 "functions_type_e.html":[4,3,3,4],
-"functions_type_f.html":[4,3,3,5],
-"functions_type_g.html":[4,3,3,6],
-"functions_type_h.html":[4,3,3,7],
-"functions_type_i.html":[4,3,3,8],
-"functions_type_k.html":[4,3,3,9],
-"functions_type_l.html":[4,3,3,10],
-"functions_type_m.html":[4,3,3,11]
+"functions_type_f.html":[4,3,3,5]
 };

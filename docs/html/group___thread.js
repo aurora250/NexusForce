@@ -30,7 +30,7 @@ var group___thread =
         [ "to_hash", "structthread_1_1id.html#aa1e76c7df33be4d83151f47bc0825aaf", null ]
       ] ],
       [ "hook", "structthread_1_1hook.html", [
-        [ "callback_t", "structthread_1_1hook.html#a3cb0384db8eb83e2341c918b0f1f15ff", null ],
+        [ "callback_t", "structthread_1_1hook.html#ab43416ec116fd0118fd18583d69fdae0", null ],
         [ "point", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cf", [
           [ "before_create", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfac791155e22a5ee01f385ee533fd91dd0", null ],
           [ "after_create", "structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cfa5c7067e65bdfce3ef3585a9a9fb9ac80", null ],

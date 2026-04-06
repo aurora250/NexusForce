@@ -131,7 +131,7 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const int flags) {
         return 0;
     }
 
-    const ssize_t result = ::send(fd_, data.data(), data.size(), flags);
+    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send data"));
     }
@@ -152,7 +152,7 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const milliseconds 
         }
     }
 
-    const ssize_t result = ::send(fd_, data.data(), data.size(), flags);
+    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send data"));
     }
@@ -167,7 +167,7 @@ ssize_t tcp_socket::receive(memory_view<char> buffer, const int flags) {
         return 0;
     }
 
-    const ssize_t result = ::recv(fd_, buffer.data(), buffer.size(), flags);
+    const ssize_t result = ::recv(fd_, buffer.data(), static_cast<int>(buffer.size()), flags);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to receive data"));
     }

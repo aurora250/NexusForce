@@ -42,7 +42,7 @@ var atomic__base_8hpp =
     [ "atomic_thread_fence", "group___memory_order.html#gad09904472351069bf4052ca1aa2cef7b", null ],
     [ "atomic_xor_fetch", "group___atomic_operations.html#ga7b991ea245c0d1d223ef0ea22b5d9c5c", null ],
     [ "cmpexch_failure_order", "group___memory_order.html#gafda3e5c6834532546b1eaef81affc2b2", null ],
-    [ "is_always_lock_free", "group___atomic_operations.html#ga4588c81b98fa2b7eacf87c0479094826", null ],
+    [ "is_always_lock_free", "group___atomic_operations.html#ga3a0d5268ae71df1d0d5872747ebf7c66", null ],
     [ "is_valid_cmpexch_failure_order", "group___memory_order.html#ga0ebbd1fbd5cee109f313d7ef89dd257f", null ],
     [ "operator&", "group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6", null ],
     [ "operator|", "group___memory_order.html#ga4d9a876d4d53afcbc2b20efdf7f0d170", null ],

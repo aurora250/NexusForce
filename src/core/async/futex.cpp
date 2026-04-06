@@ -64,11 +64,10 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
 #endif
 }
 
-void futex_wait(void* addr, const platform_wait_t value) noexcept {
+void futex_wait(void* addr, platform_wait_t value) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     auto p = static_cast<volatile platform_wait_t*>(addr);
-    const ::BOOL result = ::WaitOnAddress(p, const_cast<platform_wait_t*>(&value), sizeof(platform_wait_t),
-                                          numeric_traits<::DWORD>::max());
+    const ::BOOL result = ::WaitOnAddress(p, &value, sizeof(platform_wait_t), numeric_traits<::DWORD>::max());
 
     if (result == 0) {
         ::DWORD err = ::GetLastError();
@@ -92,11 +91,11 @@ void futex_wait(void* addr, const platform_wait_t value) noexcept {
 
 void futex_notify(void* addr, const bool all) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const auto p = static_cast<volatile platform_wait_t*>(addr);
+    auto p = static_cast<platform_wait_t*>(addr);
     if (all) {
-        ::WakeByAddressAll(const_cast<platform_wait_t*>(p));
+        ::WakeByAddressAll(p);
     } else {
-        ::WakeByAddressSingle(const_cast<platform_wait_t*>(p));
+        ::WakeByAddressSingle(p);
     }
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),

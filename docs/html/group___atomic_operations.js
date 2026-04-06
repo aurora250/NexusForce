@@ -82,6 +82,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator char", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator char", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01char_01_4.html#a530a63e68d3812e02d99b3b4515c334b", null ],
+      [ "operator=", "structatomic_3_01char_01_4.html#ac4ee386052ce9fbd76772b03e4a6943a", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; signed char &gt;", "structatomic_3_01signed_01char_01_4.html", [
@@ -93,6 +95,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator signed char", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator signed char", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01signed_01char_01_4.html#aa6dec395d8f263e3fe72066b230e76b7", null ],
+      [ "operator=", "structatomic_3_01signed_01char_01_4.html#a452bf7e5c5c78b7199beee7d9f9cd728", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; unsigned char &gt;", "structatomic_3_01unsigned_01char_01_4.html", [
@@ -104,6 +108,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator unsigned char", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator unsigned char", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01unsigned_01char_01_4.html#aeb872fce665d4cd8278fd6a614e130d6", null ],
+      [ "operator=", "structatomic_3_01unsigned_01char_01_4.html#a9fe9dbc119612af84b4bdfc4121a127e", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; short &gt;", "structatomic_3_01short_01_4.html", [
@@ -115,6 +121,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator short", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator short", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01short_01_4.html#a4728c37789dd0974e2c974b7f027d0e2", null ],
+      [ "operator=", "structatomic_3_01short_01_4.html#ad42633b10c18e06fd51114c171e788f9", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; unsigned short &gt;", "structatomic_3_01unsigned_01short_01_4.html", [
@@ -126,6 +134,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator unsigned short", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator unsigned short", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01unsigned_01short_01_4.html#abf8c6a71337b3e459f192e224b41714e", null ],
+      [ "operator=", "structatomic_3_01unsigned_01short_01_4.html#a80f9c649076bf1ee23f49d23a5056e96", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; int &gt;", "structatomic_3_01int_01_4.html", [
@@ -137,6 +147,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator int", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator int", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01int_01_4.html#af8244ece64d0ef4cd4685983675e9d7a", null ],
+      [ "operator=", "structatomic_3_01int_01_4.html#a738df4dc5059526bc9d5a45f63088abc", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; unsigned int &gt;", "structatomic_3_01unsigned_01int_01_4.html", [
@@ -148,6 +160,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator unsigned int", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator unsigned int", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01unsigned_01int_01_4.html#af7d7c36da21cfea13da64e7ef33d4bef", null ],
+      [ "operator=", "structatomic_3_01unsigned_01int_01_4.html#a506b0060f5d6399034c515170ff77371", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; long &gt;", "structatomic_3_01long_01_4.html", [
@@ -159,6 +173,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator long", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator long", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01long_01_4.html#ae241cc98b76605a3f3b16df43c9d187c", null ],
+      [ "operator=", "structatomic_3_01long_01_4.html#a042cc46a4dcf90efc055ee9538a1cf99", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; unsigned long &gt;", "structatomic_3_01unsigned_01long_01_4.html", [
@@ -170,6 +186,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator unsigned long", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator unsigned long", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01unsigned_01long_01_4.html#a92a722f5750e892f6646cd9f3a74bae3", null ],
+      [ "operator=", "structatomic_3_01unsigned_01long_01_4.html#af9d213c923b97ed606ff91f44d1ae712", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; long long &gt;", "structatomic_3_01long_01long_01_4.html", [
@@ -181,6 +199,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator long long", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator long long", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01long_01long_01_4.html#a5848205a2e5914aa488db4888862ee8b", null ],
+      [ "operator=", "structatomic_3_01long_01long_01_4.html#af87956346dd7e8afcad69917717f5960", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; unsigned long long &gt;", "structatomic_3_01unsigned_01long_01long_01_4.html", [
@@ -192,6 +212,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator unsigned long long", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator unsigned long long", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01unsigned_01long_01long_01_4.html#a72844b70c8fd371fdaf20fe34fd8effb", null ],
+      [ "operator=", "structatomic_3_01unsigned_01long_01long_01_4.html#ade6fd0d1cdd6369568f311fcc0efd59e", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; wchar_t &gt;", "structatomic_3_01wchar__t_01_4.html", [
@@ -203,6 +225,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator wchar_t", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator wchar_t", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01wchar__t_01_4.html#a417ae103a95ffe928506deea1a2f19c8", null ],
+      [ "operator=", "structatomic_3_01wchar__t_01_4.html#a7404dc84181353991ec07ad0ed842468", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; char16_t &gt;", "structatomic_3_01char16__t_01_4.html", [
@@ -214,6 +238,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator char16_t", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator char16_t", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01char16__t_01_4.html#a18bdec2f349c6b5e09f28d85134b5394", null ],
+      [ "operator=", "structatomic_3_01char16__t_01_4.html#a86af83e0e5be743584b0942d3f312e11", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; char32_t &gt;", "structatomic_3_01char32__t_01_4.html", [
@@ -225,6 +251,8 @@ var group___atomic_operations =
       [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
       [ "operator char32_t", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
       [ "operator char32_t", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+      [ "operator=", "structatomic_3_01char32__t_01_4.html#a1f5821deba7ea3ce22b09d4615280fca", null ],
+      [ "operator=", "structatomic_3_01char32__t_01_4.html#a9e04a2120ea6d381663be590d3ca32d8", null ],
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic&lt; float &gt;", "structatomic_3_01float_01_4.html", [
@@ -562,5 +590,5 @@ var group___atomic_operations =
     [ "atomic_wait_address_until_v", "group___atomic_operations.html#ga4ea9991a1e00b98f7bfbb4717f63d5ec", null ],
     [ "atomic_wait_address_v", "group___atomic_operations.html#ga546bc65d02a41df5d8915cdce428bb61", null ],
     [ "atomic_xor_fetch", "group___atomic_operations.html#ga7b991ea245c0d1d223ef0ea22b5d9c5c", null ],
-    [ "is_always_lock_free", "group___atomic_operations.html#ga4588c81b98fa2b7eacf87c0479094826", null ]
+    [ "is_always_lock_free", "group___atomic_operations.html#ga3a0d5268ae71df1d0d5872747ebf7c66", null ]
 ];

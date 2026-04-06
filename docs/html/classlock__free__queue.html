@@ -159,7 +159,7 @@ template&lt;typename T&gt; </div>
 <p>默认构造函数 </p>
 <p>初始化队列，创建哨兵节点作为初始的头尾节点。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00197">197</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00189">189</a> 行定义.</p>
 
 </div>
 </div>
@@ -191,9 +191,9 @@ template&lt;typename T&gt; </div>
 <p>析构函数 </p>
 <p>清空队列并删除哨兵节点。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00210">210</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00202">202</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">pop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00255">pop()</a>.</p>
 
 </div>
 </div>
@@ -228,9 +228,9 @@ template&lt;typename T&gt; </div>
 <dl class="section warning"><dt>警告</dt><dd>此方法不是线程安全的！ 调用clear()时，应确保没有其他线程同时进行push或pop操作。 如果有并发的push操作，clear可能永远无法完成。</dd></dl>
 <dl class="section note"><dt>注解</dt><dd>建议在单线程环境或确保独占访问时调用此方法。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00355">355</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00349">349</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">pop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00255">pop()</a>.</p>
 
 </div>
 </div>
@@ -263,7 +263,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果队列为空返回true，否则返回false</dd></dl>
 <dl class="section note"><dt>注解</dt><dd>由于无锁队列的并发特性，此方法返回的结果可能瞬间失效。 仅用于监控和统计，不应用于同步控制。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00324">324</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00318">318</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a>.</p>
 
@@ -298,11 +298,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>出队元素的unique_ptr，如果队列为空则返回空指针</dd></dl>
 <p>从队列头部弹出元素，支持多线程并发出队。 使用CAS操作保证线程安全。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">261</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00255">255</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00152">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00135">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01017">make_unique()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00155">next()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00141">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00964">make_unique()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00355">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00210">~lock_free_queue()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00349">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00202">~lock_free_queue()</a>.</p>
 
 </div>
 </div>
@@ -340,9 +340,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>将新值压入队列尾部，支持多线程并发入队。 使用CAS操作保证线程安全。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00223">223</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00217">217</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00214">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>, <a class="el" href="atomic_8hpp_source.html#l00135">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00383">unique_ptr&lt; T, Deleter &gt;::release()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00201">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00342">unique_ptr&lt; T, Deleter &gt;::get()</a>, <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00363">unique_ptr&lt; T, Deleter &gt;::release()</a>.</p>
 
 </div>
 </div>
@@ -375,7 +375,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>队列中元素的近似数量</dd></dl>
 <dl class="section note"><dt>注解</dt><dd>由于无锁队列的并发特性，返回值可能不精确。 此方法通过维护入队和出队计数器来计算队列大小。 仅用于监控和统计，不应用于同步控制。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00338">338</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00332">332</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
@@ -411,9 +411,9 @@ template&lt;typename T&gt; </div>
 <p>尝试从队列头部弹出元素，最多重试3次。 如果队列为空或多次CAS失败，则返回空指针。</p>
 <dl class="section note"><dt>注解</dt><dd>此方法不会自旋等待，适合在高竞争环境下使用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00290">290</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00284">284</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00152">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00135">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01017">make_unique()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00155">next()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00896">retry()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00141">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00964">make_unique()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00840">retry()</a>.</p>
 
 </div>
 </div>

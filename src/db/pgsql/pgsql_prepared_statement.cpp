@@ -37,7 +37,7 @@ sql_(sql) {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQprepare(conn_, stmt_name_.data(), sql_.data(), param_count_, nullptr);
+    ::PGresult* result = ::PQprepare(conn_, stmt_name_.data(), sql_.data(), static_cast<int>(param_count_), nullptr);
     if (!result) {
         set_error("Failed to prepare statement", 1);
         return;
@@ -51,13 +51,20 @@ sql_(sql) {
 }
 
 pgsql_prepared_statement::~pgsql_prepared_statement() {
-    if (conn_) {
+    if (!conn_) {
+        return;
+    }
+
+    try {
         const string deallocate_sql = "DEALLOCATE " + _NEFORCE move(stmt_name_);
         ::PGresult* result = ::PQexec(conn_, deallocate_sql.data());
         if (result) {
             ::PQclear(result);
         }
         data_.reset();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
     }
 }
 
@@ -122,8 +129,9 @@ bool pgsql_prepared_statement::execute() {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQexecPrepared(conn_, stmt_name_.data(), param_count_, data_->param_ptrs.data(),
-                                          data_->param_lengths.data(), data_->param_formats.data(), 0);
+    ::PGresult* result =
+            ::PQexecPrepared(conn_, stmt_name_.data(), static_cast<int>(param_count_), data_->param_ptrs.data(),
+                             data_->param_lengths.data(), data_->param_formats.data(), 0);
 
     if (!result) {
         set_error("Failed to execute prepared statement", 4);
@@ -145,7 +153,7 @@ unique_ptr<idb_prepared_result> pgsql_prepared_statement::execute_query() {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQexecPrepared(conn_, stmt_name_.data(), param_count_,
+    ::PGresult* result = ::PQexecPrepared(conn_, stmt_name_.data(), static_cast<int>(param_count_),
                                           data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
                                           data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
                                           data_->param_formats.empty() ? nullptr : data_->param_formats.data(), 0);

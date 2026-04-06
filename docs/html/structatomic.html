@@ -158,12 +158,6 @@ bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (T &amp;e
 <tr class="memitem:ad148d550ce43e0430492133202e7fd2f" id="r_ad148d550ce43e0430492133202e7fd2f"><td class="memItemLeft"><a id="ad148d550ce43e0430492133202e7fd2f" name="ad148d550ce43e0430492133202e7fd2f"></a>
 bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (T &amp;expected, T value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:ad148d550ce43e0430492133202e7fd2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版强比较交换操作 <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-静态 Public 属性</h2></td></tr>
-<tr class="memitem:a0cec92c6884c57fe1afb00ebad76d518" id="r_a0cec92c6884c57fe1afb00ebad76d518"><td class="memItemLeft"><a id="a0cec92c6884c57fe1afb00ebad76d518" name="a0cec92c6884c57fe1afb00ebad76d518"></a>
-static constexpr bool&#160;</td><td class="memItemRight"><b>is_always_lock_free</b> = _NEFORCE is_always_lock_free&lt;sizeof(value_), align_inner&gt;()</td></tr>
-<tr class="memdesc:a0cec92c6884c57fe1afb00ebad76d518"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否总是无锁 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -211,7 +205,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00060">60</a> 行定义.</p>
 
 </div>
 </div>
@@ -267,11 +261,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00214">214</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00201">201</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01118">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00121">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00042">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01079">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00120">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a>, <a class="el" href="atomic_8hpp_source.html#l00240">compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00248">compare_exchange_strong()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01253">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00523">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01261">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01269">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00531">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00539">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00223">lock_free_queue&lt; T &gt;::push()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a>, <a class="el" href="atomic_8hpp_source.html#l00225">compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00232">compare_exchange_strong()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01236">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00533">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01244">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01251">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00541">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00548">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00217">lock_free_queue&lt; T &gt;::push()</a>.</p>
 
 </div>
 </div>
@@ -320,9 +314,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00240">240</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00225">225</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00103">cmpexch_failure_order()</a>, <a class="el" href="atomic_8hpp_source.html#l00214">compare_exchange_strong()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00103">cmpexch_failure_order()</a>, <a class="el" href="atomic_8hpp_source.html#l00201">compare_exchange_strong()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -371,9 +365,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00193">193</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00182">182</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00103">cmpexch_failure_order()</a>, <a class="el" href="atomic_8hpp_source.html#l00171">compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00103">cmpexch_failure_order()</a>, <a class="el" href="atomic_8hpp_source.html#l00160">compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -428,11 +422,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00171">171</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00160">160</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00121">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00042">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00120">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00193">compare_exchange_weak()</a> , 以及 <a class="el" href="atomic_8hpp_source.html#l00201">compare_exchange_weak()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00182">compare_exchange_weak()</a> , 以及 <a class="el" href="atomic_8hpp_source.html#l00189">compare_exchange_weak()</a>.</p>
 
 </div>
 </div>
@@ -475,11 +469,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>交换前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00152">152</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00141">141</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01205">atomic_exchange_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01162">atomic_exchange_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">lock_free_queue&lt; T &gt;::pop()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00290">lock_free_queue&lt; T &gt;::try_pop()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00255">lock_free_queue&lt; T &gt;::pop()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00284">lock_free_queue&lt; T &gt;::try_pop()</a>.</p>
 
 </div>
 </div>
@@ -511,9 +505,9 @@ template&lt;typename T&gt; </div>
 <p>检查是否支持无锁操作 </p>
 <dl class="section return"><dt>返回</dt><dd>是否支持无锁 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00103">103</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00096">96</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00049">is_always_lock_free</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01258">is_always_lock_free()</a>.</p>
 
 </div>
 </div>
@@ -551,11 +545,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>加载的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00135">135</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00124">124</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01178">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01136">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="hazard__ptr_8hpp_source.html#l00253">hazard_pointer_domain::acquire_record()</a>, <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="thread__tracker_8hpp_source.html#l00068">thread_tracker::is_single_threaded()</a>, <a class="el" href="atomic_8hpp_source.html#l00070">atomic&lt; bool &gt;::operator bool()</a>, <a class="el" href="atomic_8hpp_source.html#l00077">atomic&lt; bool &gt;::operator bool()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00261">lock_free_queue&lt; T &gt;::pop()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00383">hazard_pointer::protect()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00223">lock_free_queue&lt; T &gt;::push()</a>, <a class="el" href="thread__tracker_8hpp_source.html#l00078">thread_tracker::thread_count()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00290">lock_free_queue&lt; T &gt;::try_pop()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00405">hazard_pointer::try_protect()</a> , 以及 <a class="el" href="hazard__ptr_8hpp_source.html#l00235">hazard_pointer_domain::~hazard_pointer_domain()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="hazard__ptr_8hpp_source.html#l00244">hazard_pointer_domain::acquire_record()</a>, <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="thread__tracker_8hpp_source.html#l00064">thread_tracker::is_single_threaded()</a>, <a class="el" href="atomic_8hpp_source.html#l00067">atomic&lt; bool &gt;::operator bool()</a>, <a class="el" href="atomic_8hpp_source.html#l00072">atomic&lt; bool &gt;::operator bool()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00255">lock_free_queue&lt; T &gt;::pop()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00373">hazard_pointer::protect()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00217">lock_free_queue&lt; T &gt;::push()</a>, <a class="el" href="thread__tracker_8hpp_source.html#l00072">thread_tracker::thread_count()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00284">lock_free_queue&lt; T &gt;::try_pop()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00397">hazard_pointer::try_protect()</a> , 以及 <a class="el" href="hazard__ptr_8hpp_source.html#l00226">hazard_pointer_domain::~hazard_pointer_domain()</a>.</p>
 
 </div>
 </div>
@@ -587,7 +581,7 @@ template&lt;typename T&gt; </div>
 <p>类型转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>当前值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00067">67</a> 行定义.</p>
 
 </div>
 </div>
@@ -625,9 +619,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>设置后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00086">86</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00079">79</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00119">store()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00108">store()</a>.</p>
 
 </div>
 </div>
@@ -669,11 +663,11 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00119">119</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00108">108</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01157">atomic_store_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01116">atomic_store_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="hazard__ptr_8hpp_source.html#l00253">hazard_pointer_domain::acquire_record()</a>, <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="atomic_8hpp_source.html#l00086">operator=()</a>, <a class="el" href="atomic_8hpp_source.html#l00094">operator=()</a> , 以及 <a class="el" href="shared__ptr_8hpp_source.html#l01227">atomic&lt; shared_ptr&lt; T &gt; &gt;::operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="hazard__ptr_8hpp_source.html#l00244">hazard_pointer_domain::acquire_record()</a>, <a class="el" href="call__once_8hpp_source.html#l00062">once_flag::call_once</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="atomic_8hpp_source.html#l00079">operator=()</a>, <a class="el" href="atomic_8hpp_source.html#l00087">operator=()</a> , 以及 <a class="el" href="shared__ptr_8hpp_source.html#l01213">atomic&lt; shared_ptr&lt; T &gt; &gt;::operator=()</a>.</p>
 
 </div>
 </div>

@@ -3,7 +3,7 @@
 #    include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-pgsql_tb_result::pgsql_tb_result(::PGresult* result, const bool owns) noexcept :
+pgsql_tb_result::pgsql_tb_result(::PGresult* result, const bool owns) :
 result_(result),
 owns_result_(owns) {
     if (result_) {
@@ -13,8 +13,13 @@ owns_result_(owns) {
 }
 
 pgsql_tb_result::~pgsql_tb_result() {
-    if (owns_result_ && result_) {
-        ::PQclear(result_);
+    try {
+        if (owns_result_ && result_) {
+            ::PQclear(result_);
+        }
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
     }
 }
 
@@ -22,7 +27,7 @@ bool pgsql_tb_result::is_null(const size_type index) const {
     if (static_cast<int>(index) >= column_count_) {
         NEFORCE_THROW_EXCEPTION(database_exception("Column index out of range"));
     }
-    return ::PQgetisnull(result_, current_row_, static_cast<int>(index)) != 0;
+    return ::PQgetisnull(result_, static_cast<int>(current_row_), static_cast<int>(index)) != 0;
 }
 
 bool pgsql_tb_result::next() noexcept {
@@ -47,7 +52,7 @@ string_view pgsql_tb_result::get(const size_type index) const {
     if (is_null(index)) {
         return string_view();
     }
-    return ::PQgetvalue(result_, current_row_, static_cast<int>(index));
+    return ::PQgetvalue(result_, static_cast<int>(current_row_), static_cast<int>(index));
 }
 
 bool pgsql_tb_result::get_bool(const size_type index) const { return boolean::parse(get(index)).value(); }
@@ -69,8 +74,8 @@ vector<char> pgsql_tb_result::get_blob(const size_type index) const {
         return {};
     }
 
-    const string_view value = ::PQgetvalue(result_, current_row_, static_cast<int>(index));
-    const int length = ::PQgetlength(result_, current_row_, static_cast<int>(index));
+    const string_view value = ::PQgetvalue(result_, static_cast<int>(current_row_), static_cast<int>(index));
+    const int length = ::PQgetlength(result_, static_cast<int>(current_row_), static_cast<int>(index));
 
     if (length > 2 && value[0] == '\\' && value[1] == 'x') {
         size_t unescaped_length = 0;

@@ -115,203 +115,204 @@ $(function(){initNavTree('leonardo__heap_8hpp_source.html','',''); });
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keywordflow">if</span> (levels[level_index] &gt; 1) {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                child_heap1 = current_heap - 1 - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(levels[level_index] - 2);</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                child_heap2 = current_heap - 1;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                <span class="keywordflow">if</span> (*(first + prev_heap) &lt; *(first + child_heap1)) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="keywordflow">if</span> (*(first + prev_heap) &lt; *(first + child_heap2)) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a>(first + current_heap, first + prev_heap);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            current_heap = prev_heap;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            --level_index;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        }</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">int</span> current_level = levels[level_index];</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">while</span> (current_level &gt; 1) {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">size_t</span> max_child = current_heap;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        child_heap1 = current_heap - 1 - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(current_level - 2);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        child_heap2 = current_heap - 1;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">if</span> (*(first + max_child) &lt; *(first + child_heap1)) max_child = child_heap1;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">if</span> (*(first + max_child) &lt; *(first + child_heap2)) max_child = child_heap2;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                <span class="keywordflow">if</span> (*(first + prev_heap) &lt; *(first + child_heap1)) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                <span class="keywordflow">if</span> (*(first + prev_heap) &lt; *(first + child_heap2)) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a>(first + current_heap, first + prev_heap);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            current_heap = prev_heap;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            --level_index;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">int</span> current_level = levels[level_index];</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">while</span> (current_level &gt; 1) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">size_t</span> max_child = current_heap;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        child_heap1 = current_heap - 1 - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(current_level - 2);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        child_heap2 = current_heap - 1;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">if</span> (max_child == child_heap1) {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a>(first + current_heap, first + child_heap1);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            current_heap = child_heap1;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            --current_level;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (max_child == child_heap2) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a>(first + current_heap, first + child_heap2);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            current_heap = child_heap2;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            current_level -= 2;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">if</span> (*(first + max_child) &lt; *(first + child_heap1)) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            max_child = child_heap1;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">if</span> (*(first + max_child) &lt; *(first + child_heap2)) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            max_child = child_heap2;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> (max_child == child_heap1) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a>(first + current_heap, first + child_heap1);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            current_heap = child_heap1;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            --current_level;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (max_child == child_heap2) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a>(first + current_heap, first + child_heap2);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            current_heap = child_heap2;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            current_level -= 2;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
 </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#ga339f8c175e964064f8d7e8e2676591fa">   96</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#ga339f8c175e964064f8d7e8e2676591fa">push_leonardo_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = { 1 };</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 1; ++i) {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            --toplevel;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            ++levels[toplevel];</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            ++toplevel;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            ++toplevel;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        --toplevel;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        ++levels[toplevel];</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        ++toplevel;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#ga339f8c175e964064f8d7e8e2676591fa">  101</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#ga339f8c175e964064f8d7e8e2676591fa">push_leonardo_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">if</span> (first == last) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = {1};</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 1; ++i) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            --toplevel;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            ++levels[toplevel];</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            ++toplevel;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            ++toplevel;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        --toplevel;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        ++levels[toplevel];</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        ++toplevel;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 1, toplevel, levels);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        ++toplevel;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 1, toplevel, levels);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
 </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#ga136d8080ad6127b70845b45e199e2c5d">  141</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#ga136d8080ad6127b70845b45e199e2c5d">pop_leonardo_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = { 1 };</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>; ++i) {</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            --toplevel;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            ++levels[toplevel];</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        }</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            ++toplevel;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#ga136d8080ad6127b70845b45e199e2c5d">  144</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#ga136d8080ad6127b70845b45e199e2c5d">pop_leonardo_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> (first == last) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = {1};</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>; ++i) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            --toplevel;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            ++levels[toplevel];</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            ++toplevel;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        }</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">if</span> (levels[toplevel] &lt;= 1) {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        --toplevel;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            ++toplevel;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    }</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        --levels[toplevel];</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(levels[toplevel] - 1);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        ++toplevel;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 2 - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(levels[toplevel]), toplevel - 1, levels);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 2, toplevel, levels);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>}</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordflow">if</span> (levels[toplevel] &lt;= 1) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        --toplevel;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        --levels[toplevel];</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(levels[toplevel] - 1);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        ++toplevel;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 2 - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(levels[toplevel]), toplevel - 1, levels);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 2, toplevel, levels);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
 </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00184" data-start="{" data-end="}">
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#ga30b3db79677a6fbb9e3b71a62b48933f">  184</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#ga30b3db79677a6fbb9e3b71a62b48933f">sort_leonardo_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = { 1 };</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>; ++i) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            --toplevel;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            ++levels[toplevel];</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        }</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            ++toplevel;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            ++toplevel;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        }</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 2; i &gt; 0; --i) {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordflow">if</span> (levels[toplevel] &lt;= 1) {</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            --toplevel;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        }</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            --levels[toplevel];</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(levels[toplevel] - 1);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            ++toplevel;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(levels[toplevel]), toplevel - 1, levels);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        }</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    }</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>}</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00186" data-start="{" data-end="}">
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#ga30b3db79677a6fbb9e3b71a62b48933f">  186</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#ga30b3db79677a6fbb9e3b71a62b48933f">sort_leonardo_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordflow">if</span> (first == last) {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = {1};</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>; ++i) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            --toplevel;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            ++levels[toplevel];</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            ++toplevel;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            ++toplevel;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> - 2; i &gt; 0; --i) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">if</span> (levels[toplevel] &lt;= 1) {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            --toplevel;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            --levels[toplevel];</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(levels[toplevel] - 1);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            ++toplevel;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i - <a class="code hl_function" href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a>(levels[toplevel]), toplevel - 1, levels);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        }</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>}</div>
 </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#gaeccafcd2bf9df72de2f4a7ec6ff469fa">  230</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#gaeccafcd2bf9df72de2f4a7ec6ff469fa">make_leonardo_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = { 1 };</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>; ++i) {</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            --toplevel;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            ++levels[toplevel];</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        }</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            ++toplevel;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        }</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            ++toplevel;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        }</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>}</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="group___leonardo_heap.html#gaeccafcd2bf9df72de2f4a7ec6ff469fa">  231</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___leonardo_heap.html#gaeccafcd2bf9df72de2f4a7ec6ff469fa">make_leonardo_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordflow">if</span> (first == last) {</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a> = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first, last);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> levels = {1};</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">int</span> toplevel = 0;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>; ++i) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">if</span> (toplevel &gt; 0 &amp;&amp; levels[toplevel - 1] - levels[toplevel] == 1) {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            --toplevel;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            ++levels[toplevel];</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (levels[toplevel] != 1) {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            ++toplevel;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(1);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            ++toplevel;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            levels.<a class="code hl_function" href="classvector.html#a1add9f846ce2128c0702d803961a2685">push_back</a>(0);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        }</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        _NEFORCE <a class="code hl_function" href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a>(first, i, toplevel, levels);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>}</div>
 </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> <span class="comment">// LeonardoHeap</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> <span class="comment">// StandardAlgorithms</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_LEONARDO_HEAP_HPP__</span></div>
-<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
-<div class="ttc" id="aclassvector_html_a1add9f846ce2128c0702d803961a2685"><div class="ttname"><a href="classvector.html#a1add9f846ce2128c0702d803961a2685">vector::push_back</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00929">vector.hpp:929</a></div></div>
-<div class="ttc" id="agroup___iterator_category_checks_html_gafd48e5648f10e974c82b7b9adf9abdc8"><div class="ttname"><a href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v</div><div class="ttdoc">检查是否为范围随机访问迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00620">concepts.hpp:620</a></div></div>
-<div class="ttc" id="agroup___iterator_operation_html_gabd49270b18593c75e6b68d05a5a389ba"><div class="ttname"><a href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; distance(Iterator first, Iterator last)</div><div class="ttdoc">计算两个迭代器之间的距离</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00198">iterator.hpp:198</a></div></div>
-<div class="ttc" id="agroup___leonardo_heap_html_ga136d8080ad6127b70845b45e199e2c5d"><div class="ttname"><a href="group___leonardo_heap.html#ga136d8080ad6127b70845b45e199e2c5d">pop_leonardo_heap</a></div><div class="ttdeci">void pop_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">从莱昂纳多堆中弹出最大元素</div><div class="ttdef"><b>定义</b> <a href="#l00141">leonardo_heap.hpp:141</a></div></div>
-<div class="ttc" id="agroup___leonardo_heap_html_ga30b3db79677a6fbb9e3b71a62b48933f"><div class="ttname"><a href="group___leonardo_heap.html#ga30b3db79677a6fbb9e3b71a62b48933f">sort_leonardo_heap</a></div><div class="ttdeci">void sort_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">使用莱昂纳多堆进行排序</div><div class="ttdef"><b>定义</b> <a href="#l00184">leonardo_heap.hpp:184</a></div></div>
-<div class="ttc" id="agroup___leonardo_heap_html_ga339f8c175e964064f8d7e8e2676591fa"><div class="ttname"><a href="group___leonardo_heap.html#ga339f8c175e964064f8d7e8e2676591fa">push_leonardo_heap</a></div><div class="ttdeci">void push_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">向莱昂纳多堆中推入元素</div><div class="ttdef"><b>定义</b> <a href="#l00096">leonardo_heap.hpp:96</a></div></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> <span class="comment">// LeonardoHeap</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> <span class="comment">// StandardAlgorithms</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_LEONARDO_HEAP_HPP__</span></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aclassvector_html_a1add9f846ce2128c0702d803961a2685"><div class="ttname"><a href="classvector.html#a1add9f846ce2128c0702d803961a2685">vector::push_back</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00902">vector.hpp:902</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_gafd48e5648f10e974c82b7b9adf9abdc8"><div class="ttname"><a href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v</div><div class="ttdoc">检查是否为范围随机访问迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00601">concepts.hpp:601</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_gabd49270b18593c75e6b68d05a5a389ba"><div class="ttname"><a href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; distance(Iterator first, Iterator last)</div><div class="ttdoc">计算两个迭代器之间的距离</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00201">iterator.hpp:201</a></div></div>
+<div class="ttc" id="agroup___leonardo_heap_html_ga136d8080ad6127b70845b45e199e2c5d"><div class="ttname"><a href="group___leonardo_heap.html#ga136d8080ad6127b70845b45e199e2c5d">pop_leonardo_heap</a></div><div class="ttdeci">void pop_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">从莱昂纳多堆中弹出最大元素</div><div class="ttdef"><b>定义</b> <a href="#l00144">leonardo_heap.hpp:144</a></div></div>
+<div class="ttc" id="agroup___leonardo_heap_html_ga30b3db79677a6fbb9e3b71a62b48933f"><div class="ttname"><a href="group___leonardo_heap.html#ga30b3db79677a6fbb9e3b71a62b48933f">sort_leonardo_heap</a></div><div class="ttdeci">void sort_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">使用莱昂纳多堆进行排序</div><div class="ttdef"><b>定义</b> <a href="#l00186">leonardo_heap.hpp:186</a></div></div>
+<div class="ttc" id="agroup___leonardo_heap_html_ga339f8c175e964064f8d7e8e2676591fa"><div class="ttname"><a href="group___leonardo_heap.html#ga339f8c175e964064f8d7e8e2676591fa">push_leonardo_heap</a></div><div class="ttdeci">void push_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">向莱昂纳多堆中推入元素</div><div class="ttdef"><b>定义</b> <a href="#l00101">leonardo_heap.hpp:101</a></div></div>
 <div class="ttc" id="agroup___leonardo_heap_html_gac60b0313c9a99501982d00f52c3017c4"><div class="ttname"><a href="group___leonardo_heap.html#gac60b0313c9a99501982d00f52c3017c4">adjust_leonardo_heap</a></div><div class="ttdeci">void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, vector&lt; int &gt; &amp;levels)</div><div class="ttdoc">调整莱昂纳多堆</div><div class="ttdef"><b>定义</b> <a href="#l00040">leonardo_heap.hpp:40</a></div></div>
-<div class="ttc" id="agroup___leonardo_heap_html_gaeccafcd2bf9df72de2f4a7ec6ff469fa"><div class="ttname"><a href="group___leonardo_heap.html#gaeccafcd2bf9df72de2f4a7ec6ff469fa">make_leonardo_heap</a></div><div class="ttdeci">void make_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">构建莱昂纳多堆</div><div class="ttdef"><b>定义</b> <a href="#l00230">leonardo_heap.hpp:230</a></div></div>
-<div class="ttc" id="agroup___math_functions_html_ga34875965d73868ce23afb5a3a79372fd"><div class="ttname"><a href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a></div><div class="ttdeci">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo(const uint32_t n)</div><div class="ttdoc">计算莱昂纳多数</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00091">math.hpp:91</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_gaf24b9918e7d6e917eb59c4c5f9cd613d"><div class="ttname"><a href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a></div><div class="ttdeci">constexpr void iter_swap(Iterator1 a, Iterator2 b) noexcept(noexcept(_NEFORCE swap(*a, *b)))</div><div class="ttdoc">交换迭代器指向的元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00435">shift.hpp:435</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
+<div class="ttc" id="agroup___leonardo_heap_html_gaeccafcd2bf9df72de2f4a7ec6ff469fa"><div class="ttname"><a href="group___leonardo_heap.html#gaeccafcd2bf9df72de2f4a7ec6ff469fa">make_leonardo_heap</a></div><div class="ttdeci">void make_leonardo_heap(Iterator first, Iterator last)</div><div class="ttdoc">构建莱昂纳多堆</div><div class="ttdef"><b>定义</b> <a href="#l00231">leonardo_heap.hpp:231</a></div></div>
+<div class="ttc" id="agroup___math_functions_html_ga34875965d73868ce23afb5a3a79372fd"><div class="ttname"><a href="group___math_functions.html#ga34875965d73868ce23afb5a3a79372fd">leonardo</a></div><div class="ttdeci">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo(const uint32_t n)</div><div class="ttdoc">计算莱昂纳多数</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00088">math.hpp:88</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gaf24b9918e7d6e917eb59c4c5f9cd613d"><div class="ttname"><a href="group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d">iter_swap</a></div><div class="ttdeci">constexpr void iter_swap(Iterator1 a, Iterator2 b) noexcept(noexcept(_NEFORCE swap(*a, *b)))</div><div class="ttdoc">交换迭代器指向的元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00440">shift.hpp:440</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
 <div class="ttc" id="amath_8hpp_html"><div class="ttname"><a href="math_8hpp.html">math.hpp</a></div><div class="ttdoc">数学函数库</div></div>
 <div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -45,13 +45,13 @@ void env_parser::advance() noexcept {
     }
 }
 
-bool env_parser::is_comment_line(const string& line) const noexcept {
+bool env_parser::is_comment_line(const string& line) const {
     string trimmed = line;
     trimmed.trim();
     return trimmed.starts_with('#');
 }
 
-bool env_parser::is_blank_line(const string& line) const noexcept {
+bool env_parser::is_blank_line(const string& line) const {
     string trimmed = line;
     trimmed.trim();
     return trimmed.empty();

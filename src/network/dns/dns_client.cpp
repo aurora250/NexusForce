@@ -541,7 +541,10 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
 }
 
 future<dns_query_result> dns_client::query_async(const string& domain, dns_record::raw type, dns_query qclass) {
-    return async(launch::async, [this, domain, type, qclass] { return query(domain.view(), type, qclass); });
+    return async(launch::async,
+                 [this, domain, type, qclass]() -> dns_query_result { // NOLINT(bugprone-exception-escape)
+                     return query(domain.view(), type, qclass);
+                 });
 }
 
 vector<string> dns_client::resolve_a(const string_view domain) {

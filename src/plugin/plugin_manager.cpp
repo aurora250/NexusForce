@@ -111,7 +111,9 @@ void plugin_manager::shutdown_all() noexcept {
     for (const auto& pair: plugins_) {
         try {
             pair.second->shutdown();
+            // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
+            // ignore
         }
     }
     plugins_.clear();

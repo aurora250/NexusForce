@@ -5,7 +5,7 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
     void check_zlib_error(const int ret_code) {
         if (ret_code != Z_OK) {
-            const char* msg;
+            const char* msg = nullptr;
             switch (ret_code) {
                 case Z_MEM_ERROR:
                     msg = "Memory error";

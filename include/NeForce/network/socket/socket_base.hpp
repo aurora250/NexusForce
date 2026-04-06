@@ -66,7 +66,7 @@ public:
 
     socket_base& operator=(socket_base&& other) noexcept;
 
-    virtual ~socket_base() { close(); }
+    virtual ~socket_base() { socket_base::close(); }
 
     NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return fd_; }
 

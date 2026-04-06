@@ -96,222 +96,222 @@ $(function(){initNavTree('heap_8hpp_source.html','',''); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ALGORITHM_HEAP_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="functor_8hpp.html">NeForce/core/functional/functor.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="iterator_8hpp.html">NeForce/core/algorithm/iterator.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>NEFORCE_BEGIN_NAMESPACE__</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">   42</a></span>NEFORCE_CONSTEXPR20 Iterator <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(Iterator first, Iterator last, Compare comp) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">static_assert</span>(is_invocable_v&lt;Compare, <span class="keyword">decltype</span>(*first), <span class="keyword">decltype</span>(*first)&gt;, <span class="stringliteral">&quot;Compare must be invocable&quot;</span>);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">auto</span> n = last - first;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> child = 1; child &lt; n; ++child) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keyword">auto</span> parent = (child - 1) / 2;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">if</span> (comp(*(first + parent), *(first + child))) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">return</span> first + child;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> last;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="iterator_8hpp.html">NeForce/core/algorithm/iterator.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="functor_8hpp.html">NeForce/core/functional/functor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="invoke_8hpp.html">NeForce/core/functional/invoke.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">   43</a></span>NEFORCE_CONSTEXPR20 Iterator <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">static_assert</span>(is_invocable_v&lt;Compare, <span class="keyword">decltype</span>(*first), <span class="keyword">decltype</span>(*first)&gt;, <span class="stringliteral">&quot;Compare must be invocable&quot;</span>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">auto</span> n = last - first;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> child = 1; child &lt; n; ++child) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">auto</span> parent = (child - 1) / 2;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">if</span> (comp(*(first + parent), *(first + child))) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordflow">return</span> first + child;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
 </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga2cd8ad7b145417924e3e90fe7412744f">   66</a></span>NEFORCE_CONSTEXPR20 Iterator <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga2cd8ad7b145417924e3e90fe7412744f">   67</a></span>NEFORCE_CONSTEXPR20 Iterator <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">   80</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">is_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(first, last, comp) == last;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">   81</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">is_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(first, last, comp) == last;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
 </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga1c15e88e9241085e28d0eb0f8ed555aa">   92</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">is_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(first, last) == last;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga1c15e88e9241085e28d0eb0f8ed555aa">   93</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">is_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a>(first, last) == last;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
 </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>NEFORCE_BEGIN_INNER__</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> push_heap_aux(</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    Iterator first,</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> top_index,</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    T value, Compare comp) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">static_assert</span>(is_invocable_v&lt;Compare, <span class="keyword">decltype</span>(*first), <span class="keyword">decltype</span>(*first)&gt;, <span class="stringliteral">&quot;Compare must be invocable&quot;</span>);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">auto</span> parent = (hole_index - 1) / 2;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">while</span> (hole_index &gt; top_index &amp;&amp; comp(*(first + parent), value)) {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        *(first + hole_index) = *(first + parent);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        hole_index = parent;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        parent = (hole_index - 1) / 2;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    *(first + hole_index) = value;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> push_heap_aux(</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    Iterator first,</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> top_index,</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    T value) {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    inner::push_heap_aux(first, hole_index, top_index, value, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>NEFORCE_END_INNER__</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">  159</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">if</span> (last - first &lt; 2) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    inner::push_heap_aux(first, last - first - 1, 0, *(last - 1), comp);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>}</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>NEFORCE_BEGIN_INNER__</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> push_heap_aux(Iterator first, <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                                       <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> top_index, T value, Compare comp) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be random_access_iterator&quot;</span>);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">static_assert</span>(is_invocable_v&lt;Compare, <span class="keyword">decltype</span>(*first), <span class="keyword">decltype</span>(*first)&gt;, <span class="stringliteral">&quot;Compare must be invocable&quot;</span>);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">auto</span> parent = (hole_index - 1) / 2;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">while</span> (hole_index &gt; top_index &amp;&amp; comp(*(first + parent), value)) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        *(first + hole_index) = *(first + parent);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        hole_index = parent;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        parent = (hole_index - 1) / 2;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    *(first + hole_index) = value;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> push_heap_aux(Iterator first, <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                                       <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> top_index, T value) {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    inner::push_heap_aux(first, hole_index, top_index, value, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>NEFORCE_END_INNER__</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">  154</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">if</span> (last - first &lt; 2) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    inner::push_heap_aux(first, last - first - 1, 0, *(last - 1), comp);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
 </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga5b9afd42d578ab9316af4611808d555f">  168</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00165" data-start="{" data-end="}">
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga5b9afd42d578ab9316af4611808d555f">  165</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>}</div>
 </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span></div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00187" data-start="{" data-end="}">
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">  187</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    Iterator first,</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> len,</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    T value, Compare comp) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">auto</span> top_index = hole_index;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keyword">auto</span> child = 2 * hole_index + 1;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">while</span> (child &lt; len) {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">if</span> (child + 1 &lt; len &amp;&amp; comp(*(first + child), *(first + child + 1))) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            ++child;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        }</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keywordflow">if</span> (!comp(value, *(first + child))) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        }</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        *(first + hole_index) = *(first + child);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        hole_index = child;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        child = 2 * hole_index + 1;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    inner::push_heap_aux(first, hole_index, top_index, value, comp);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>}</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00184" data-start="{" data-end="}">
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">  184</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(Iterator first, <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                                     <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> len, T value, Compare comp) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keyword">auto</span> top_index = hole_index;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keyword">auto</span> child = 2 * hole_index + 1;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">while</span> (child &lt; len) {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordflow">if</span> (child + 1 &lt; len &amp;&amp; comp(*(first + child), *(first + child + 1))) {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            ++child;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">if</span> (!comp(value, *(first + child))) {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        *(first + hole_index) = *(first + child);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        hole_index = child;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        child = 2 * hole_index + 1;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    inner::push_heap_aux(first, hole_index, top_index, value, comp);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>}</div>
 </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00212" data-start="{" data-end="}">
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gaa4abcb1c72060bb2ce7fed9e4e7893f4">  212</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    Iterator first,</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> len,</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    T value) {</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(first, hole_index, len, value, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>}</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gaa4abcb1c72060bb2ce7fed9e4e7893f4">  206</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(Iterator first, <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> hole_index,</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                                     <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> len, T value) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(first, hole_index, len, value, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
 </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>NEFORCE_BEGIN_INNER__</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span></div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> pop_heap_aux(Iterator first, Iterator last, Iterator result, T value, Compare comp) {</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    *result = *first;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(first, 0, last - first, value, comp);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>}</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> pop_heap_aux(Iterator first, Iterator last, Iterator result, T value) {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    inner::pop_heap_aux(first, last, result, value, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>}</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>NEFORCE_END_INNER__</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00267" data-start="{" data-end="}">
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">  267</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">if</span> (last - first &lt; 2) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    --last;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    inner::pop_heap_aux(first, last, last, *last, comp);</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>NEFORCE_BEGIN_INNER__</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> pop_heap_aux(Iterator first, Iterator last, Iterator result, T value, Compare comp) {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    *result = *first;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(first, 0, last - first, value, comp);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>}</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> pop_heap_aux(Iterator first, Iterator last, Iterator result, T value) {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    inner::pop_heap_aux(first, last, result, value, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>}</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>NEFORCE_END_INNER__</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00258" data-start="{" data-end="}">
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">  258</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">if</span> (last - first &lt; 2) {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    --last;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    inner::pop_heap_aux(first, last, last, *last, comp);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>}</div>
 </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00277" data-start="{" data-end="}">
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gafea0b2c70923660008b33263e4d3a41b">  277</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>}</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00270" data-start="{" data-end="}">
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#gafea0b2c70923660008b33263e4d3a41b">  270</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>}</div>
 </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00293" data-start="{" data-end="}">
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">  293</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">while</span> (last - first &gt; 1) {</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(first, last--, comp);</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    }</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>}</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">  286</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">while</span> (last - first &gt; 1) {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a>(first, last--, comp);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>}</div>
 </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span></div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00303" data-start="{" data-end="}">
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga1617986485d2b96acb43fef66cbb16ee">  303</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00296" data-start="{" data-end="}">
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga1617986485d2b96acb43fef66cbb16ee">  296</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>}</div>
 </div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span></div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="foldopen" id="foldopen00319" data-start="{" data-end="}">
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">  319</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordflow">if</span> (last - first &lt; 2) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keyword">const</span> <span class="keyword">auto</span> len = last - first;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">if</span> (len &lt; 2) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keyword">auto</span> parent = (len - 2) / 2;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(first, parent, len, *(first + parent), comp);</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        <span class="keywordflow">if</span> (parent == 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        --parent;</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    }</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>}</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="foldopen" id="foldopen00312" data-start="{" data-end="}">
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">  312</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">if</span> (last - first &lt; 2) {</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    }</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keyword">const</span> <span class="keyword">auto</span> len = last - first;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="keywordflow">if</span> (len &lt; 2) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    }</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keyword">auto</span> parent = (len - 2) / 2;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a>(first, parent, len, *(first + parent), comp);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keywordflow">if</span> (parent == 0) {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        }</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        --parent;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    }</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>}</div>
 </div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span></div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00336" data-start="{" data-end="}">
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga95a8b88827a8877cf46757ece5faa342">  336</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>}</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="group___heap_algorithms.html#ga95a8b88827a8877cf46757ece5faa342">  335</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    _NEFORCE <a class="code hl_function" href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a>(first, last, <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>}</div>
 </div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> <span class="comment">// HeapAlgorithms</span></div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> <span class="comment">// StandardAlgorithms</span></div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_HEAP_HPP__</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> <span class="comment">// HeapAlgorithms</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> <span class="comment">// StandardAlgorithms</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_HEAP_HPP__</span></div>
 <div class="ttc" id="afunctor_8hpp_html"><div class="ttname"><a href="functor_8hpp.html">functor.hpp</a></div><div class="ttdoc">仿函数</div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_ga0eee97f765933114e7c424bf33511210"><div class="ttname"><a href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">is_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">检查范围是否为有效堆</div><div class="ttdef"><b>定义</b> <a href="#l00080">heap.hpp:80</a></div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_ga13c0e8fb3ca2d9f76d823a800c283dc9"><div class="ttname"><a href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">删除堆顶元素</div><div class="ttdef"><b>定义</b> <a href="#l00267">heap.hpp:267</a></div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_ga36c69d89ab0434ee867f42a56a075e7d"><div class="ttname"><a href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void adjust_heap(Iterator first, iter_difference_t&lt; Iterator &gt; hole_index, iter_difference_t&lt; Iterator &gt; len, T value, Compare comp)</div><div class="ttdoc">堆调整辅助函数</div><div class="ttdef"><b>定义</b> <a href="#l00187">heap.hpp:187</a></div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_ga6261d7e0da24fa3675dd248b9da5334f"><div class="ttname"><a href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">将堆转换为有序序列</div><div class="ttdef"><b>定义</b> <a href="#l00293">heap.hpp:293</a></div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_ga8beeb5a9c17ae71c242c05a60f312ea2"><div class="ttname"><a href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">创建堆</div><div class="ttdef"><b>定义</b> <a href="#l00319">heap.hpp:319</a></div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_gad1cbf5c3d9c1780e1da107267de93d21"><div class="ttname"><a href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">向堆中插入元素</div><div class="ttdef"><b>定义</b> <a href="#l00159">heap.hpp:159</a></div></div>
-<div class="ttc" id="agroup___heap_algorithms_html_gae66ef3b07664fe1c01838d58cb11833e"><div class="ttname"><a href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">查找堆中破坏堆性质的首个元素</div><div class="ttdef"><b>定义</b> <a href="#l00042">heap.hpp:42</a></div></div>
-<div class="ttc" id="agroup___iterator_category_checks_html_gafd48e5648f10e974c82b7b9adf9abdc8"><div class="ttname"><a href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v</div><div class="ttdoc">检查是否为范围随机访问迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00620">concepts.hpp:620</a></div></div>
-<div class="ttc" id="agroup___iterator_traits_html_gad620992f7bf5c8c7b5dfae7a3dd55781"><div class="ttname"><a href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::value_type iter_value_t</div><div class="ttdoc">获取迭代器的值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00093">iterator_traits.hpp:93</a></div></div>
-<div class="ttc" id="agroup___iterator_traits_html_gaf61f58aa2abc24434e0b77340ddf2cfa"><div class="ttname"><a href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::difference_type iter_difference_t</div><div class="ttdoc">获取迭代器的差值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00101">iterator_traits.hpp:101</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga0eee97f765933114e7c424bf33511210"><div class="ttname"><a href="group___heap_algorithms.html#ga0eee97f765933114e7c424bf33511210">is_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">检查范围是否为有效堆</div><div class="ttdef"><b>定义</b> <a href="#l00081">heap.hpp:81</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga13c0e8fb3ca2d9f76d823a800c283dc9"><div class="ttname"><a href="group___heap_algorithms.html#ga13c0e8fb3ca2d9f76d823a800c283dc9">pop_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">删除堆顶元素</div><div class="ttdef"><b>定义</b> <a href="#l00258">heap.hpp:258</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga36c69d89ab0434ee867f42a56a075e7d"><div class="ttname"><a href="group___heap_algorithms.html#ga36c69d89ab0434ee867f42a56a075e7d">adjust_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void adjust_heap(Iterator first, iter_difference_t&lt; Iterator &gt; hole_index, iter_difference_t&lt; Iterator &gt; len, T value, Compare comp)</div><div class="ttdoc">堆调整辅助函数</div><div class="ttdef"><b>定义</b> <a href="#l00184">heap.hpp:184</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga6261d7e0da24fa3675dd248b9da5334f"><div class="ttname"><a href="group___heap_algorithms.html#ga6261d7e0da24fa3675dd248b9da5334f">sort_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">将堆转换为有序序列</div><div class="ttdef"><b>定义</b> <a href="#l00286">heap.hpp:286</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga8beeb5a9c17ae71c242c05a60f312ea2"><div class="ttname"><a href="group___heap_algorithms.html#ga8beeb5a9c17ae71c242c05a60f312ea2">make_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">创建堆</div><div class="ttdef"><b>定义</b> <a href="#l00312">heap.hpp:312</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_gad1cbf5c3d9c1780e1da107267de93d21"><div class="ttname"><a href="group___heap_algorithms.html#gad1cbf5c3d9c1780e1da107267de93d21">push_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">向堆中插入元素</div><div class="ttdef"><b>定义</b> <a href="#l00154">heap.hpp:154</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_gae66ef3b07664fe1c01838d58cb11833e"><div class="ttname"><a href="group___heap_algorithms.html#gae66ef3b07664fe1c01838d58cb11833e">is_heap_until</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">查找堆中破坏堆性质的首个元素</div><div class="ttdef"><b>定义</b> <a href="#l00043">heap.hpp:43</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_gafd48e5648f10e974c82b7b9adf9abdc8"><div class="ttname"><a href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v</div><div class="ttdoc">检查是否为范围随机访问迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00601">concepts.hpp:601</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gad620992f7bf5c8c7b5dfae7a3dd55781"><div class="ttname"><a href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::value_type iter_value_t</div><div class="ttdoc">获取迭代器的值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00092">iterator_traits.hpp:92</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gaf61f58aa2abc24434e0b77340ddf2cfa"><div class="ttname"><a href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::difference_type iter_difference_t</div><div class="ttdoc">获取迭代器的差值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00100">iterator_traits.hpp:100</a></div></div>
+<div class="ttc" id="ainvoke_8hpp_html"><div class="ttname"><a href="invoke_8hpp.html">invoke.hpp</a></div><div class="ttdoc">统一调用接口</div></div>
 <div class="ttc" id="aiterator_8hpp_html"><div class="ttname"><a href="iterator_8hpp.html">iterator.hpp</a></div><div class="ttdoc">迭代器操作算法</div></div>
-<div class="ttc" id="astructless_html"><div class="ttname"><a href="structless.html">less</a></div><div class="ttdoc">小于比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00353">functor.hpp:353</a></div></div>
+<div class="ttc" id="astructless_html"><div class="ttname"><a href="structless.html">less</a></div><div class="ttdoc">小于比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00351">functor.hpp:351</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

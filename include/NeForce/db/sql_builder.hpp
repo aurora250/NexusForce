@@ -395,7 +395,7 @@ public:
      * @param fields 字段列表
      * @return 自身引用
      */
-    sql_builder& group_by(vector<string> fields);
+    sql_builder& group_by(const vector<string>& fields);
 
     /**
      * @brief 添加HAVING条件

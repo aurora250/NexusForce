@@ -161,7 +161,7 @@ template&lt;typename T&gt; </td></tr>
       </table>
 </div><div class="memdoc">
 <b>值:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a>(Class, #Class)</div>
-<div class="ttc" id="agroup___reflection_html_ga6508bad6337bffd24165f1d8038e2eb8"><div class="ttname"><a href="#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a></div><div class="ttdeci">#define NEFORCE_REFLECT_REGISTER_N(Class, Name)</div><div class="ttdoc">注册类型（无基类）</div><div class="ttdef"><b>定义</b> <a href="reflect_8hpp_source.html#l00212">reflect.hpp:212</a></div></div>
+<div class="ttc" id="agroup___reflection_html_ga6508bad6337bffd24165f1d8038e2eb8"><div class="ttname"><a href="#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a></div><div class="ttdeci">#define NEFORCE_REFLECT_REGISTER_N(Class, Name)</div><div class="ttdoc">注册类型（无基类）</div><div class="ttdef"><b>定义</b> <a href="reflect_8hpp_source.html#l00210">reflect.hpp:210</a></div></div>
 </div><!-- fragment -->
 <p>注册类型（无基类） </p>
 <dl class="params"><dt>参数</dt><dd>
@@ -172,7 +172,7 @@ template&lt;typename T&gt; </td></tr>
 </dl>
 <p>注册一个没有基类的类型。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00235">235</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00233">233</a> 行定义.</p>
 
 </div>
 </div>
@@ -195,7 +195,7 @@ template&lt;typename T&gt; </td></tr>
       </table>
 </div><div class="memdoc">
 <b>值:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a>(Class, Base, #Class)</div>
-<div class="ttc" id="agroup___reflection_html_gad623e383ce36c4add72a0ff8cc80c972"><div class="ttname"><a href="#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a></div><div class="ttdeci">#define NEFORCE_REFLECT_REGISTER_N_DERIVED(Class, Base, Name)</div><div class="ttdoc">注册类型（带基类）</div><div class="ttdef"><b>定义</b> <a href="reflect_8hpp_source.html#l00223">reflect.hpp:223</a></div></div>
+<div class="ttc" id="agroup___reflection_html_gad623e383ce36c4add72a0ff8cc80c972"><div class="ttname"><a href="#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a></div><div class="ttdeci">#define NEFORCE_REFLECT_REGISTER_N_DERIVED(Class, Base, Name)</div><div class="ttdoc">注册类型（带基类）</div><div class="ttdef"><b>定义</b> <a href="reflect_8hpp_source.html#l00221">reflect.hpp:221</a></div></div>
 </div><!-- fragment -->
 <p>注册类型（带基类） </p>
 <dl class="params"><dt>参数</dt><dd>
@@ -207,7 +207,7 @@ template&lt;typename T&gt; </td></tr>
 </dl>
 <p>注册一个有基类的类型，自动解析继承关系。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00245">245</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00242">242</a> 行定义.</p>
 
 </div>
 </div>
@@ -241,7 +241,7 @@ template&lt;typename T&gt; </td></tr>
 </dl>
 <p>注册一个没有基类的类型。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00212">212</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00210">210</a> 行定义.</p>
 
 </div>
 </div>
@@ -268,8 +268,8 @@ template&lt;typename T&gt; </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">auto</span> _neforce_reflect_##Class = []() { \</div>
-<div class="line">    _NEFORCE reflect::registry::instance().resolve_all_bases(); \</div>
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">auto</span> _neforce_reflect_##Class = []() {                              \</div>
+<div class="line">    _NEFORCE reflect::registry::instance().resolve_all_bases();            \</div>
 <div class="line">    <span class="keywordflow">return</span> _NEFORCE reflect::reflect&lt;Class&gt;(#Class).template base&lt;Base&gt;(); \</div>
 <div class="line">}()</div>
 </div><!-- fragment -->
@@ -284,7 +284,7 @@ template&lt;typename T&gt; </td></tr>
 </dl>
 <p>注册一个有基类的类型，自动解析继承关系。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00223">223</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00221">221</a> 行定义.</p>
 
 </div>
 </div>
@@ -321,9 +321,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>类型构建器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00200">200</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00198">198</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00449">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00442">name()</a>.</p>
 
 </div>
 </div>

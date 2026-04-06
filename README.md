@@ -272,6 +272,10 @@ sudo make install
 
 更新日志参见 [CHANGELOG](CHANGELOG.md)
 
+## 贡献者
+
+感谢所有贡献者！查看 [CONTRIBUTORS](CONTRIBUTORS.md) 获取完整名单。
+
 ## TODO
 
 - Google Benchmark 测试

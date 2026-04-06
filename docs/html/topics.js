@@ -149,6 +149,7 @@ var topics =
     [ "作用域守卫", "group___scope_guard.html", "group___scope_guard" ],
     [ "UUID", "group___u_u_i_d.html", "group___u_u_i_d" ],
     [ "变体", "group___variant.html", "group___variant" ],
+    [ "数据库接口", "group___database_interface.html", "group___database_interface" ],
     [ "SQL", "group___s_q_l.html", "group___s_q_l" ],
     [ "日志系统", "group___logging.html", "group___logging" ],
     [ "HTTP", "group___http.html", "group___http" ],

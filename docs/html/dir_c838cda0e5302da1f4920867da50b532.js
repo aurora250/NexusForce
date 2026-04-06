@@ -4,6 +4,7 @@ var dir_c838cda0e5302da1f4920867da50b532 =
     [ "console.hpp", "console_8hpp.html", "console_8hpp" ],
     [ "dynamic_library.hpp", "dynamic__library_8hpp.html", null ],
     [ "environment.hpp", "environment_8hpp.html", null ],
+    [ "locale.hpp", "locale_8hpp_source.html", null ],
     [ "pipe.hpp", "pipe_8hpp.html", null ],
     [ "process.hpp", "process_8hpp.html", "process_8hpp" ],
     [ "share_memory.hpp", "share__memory_8hpp.html", null ],

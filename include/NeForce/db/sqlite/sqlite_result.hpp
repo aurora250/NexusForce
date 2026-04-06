@@ -16,7 +16,7 @@ private:
 
 public:
     sqlite_result() noexcept;
-    explicit sqlite_result(::sqlite3_stmt* statement) noexcept;
+    explicit sqlite_result(::sqlite3_stmt* statement);
     ~sqlite_result() override;
 
     NEFORCE_NODISCARD NEFORCE_DEPRECATED_FOR("use COUNT * instead of using this function") size_type

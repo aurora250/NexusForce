@@ -8,5 +8,7 @@ var structatomic_3_01unsigned_01int_01_4 =
     [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
     [ "operator unsigned int", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
     [ "operator unsigned int", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+    [ "operator=", "structatomic_3_01unsigned_01int_01_4.html#af7d7c36da21cfea13da64e7ef33d4bef", null ],
+    [ "operator=", "structatomic_3_01unsigned_01int_01_4.html#a506b0060f5d6399034c515170ff77371", null ],
     [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
 ];

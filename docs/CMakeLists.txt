@@ -1,3 +1,8 @@
+if(NOT NEXUSFORCE_BUILD_DOCS)
+    message(STATUS "Skipping documentation build (NEXUSFORCE_BUILD_DOCS=OFF)")
+    return()
+endif()
+
 find_package(Doxygen QUIET)
 
 if(NEXUSFORCE_BUILD_DOCS AND NOT DOXYGEN_FOUND)

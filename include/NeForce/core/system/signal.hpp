@@ -207,7 +207,7 @@ public:
      * @param events 信号事件列表
      * @param handler 处理函数
      */
-    void register_handlers(const vector<signal_event>& events, signal_handler handler);
+    void register_handlers(const vector<signal_event>& events, const signal_handler& handler);
 
     /**
      * @brief 移除信号处理函数

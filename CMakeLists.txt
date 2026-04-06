@@ -91,6 +91,7 @@ set(CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY OFF)
 set(CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY ON)
 set(CMAKE_FIND_USE_PACKAGE_REGISTRY OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 set(NEXUSFORCE_VALID_STANDARDS 20 17 14)
@@ -127,7 +128,8 @@ option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFI
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
 option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
 
-option(NEXUSFORCE_FORMAT            "Enable code formatting with clang-format" ON)
+option(NEXUSFORCE_FORMAT            "Enable clang-format code formatting"   ON)
+option(NEXUSFORCE_CLANG_TIDY        "Enable clang-tidy static analysis"     ON)
 
 
 message(STATUS "Project Configuration:")
@@ -154,83 +156,12 @@ message(STATUS "")
 
 
 add_subdirectory(src)
+add_subdirectory(tests)
+add_subdirectory(examples)
+add_subdirectory(docs)
 
-
-if(NEXUSFORCE_BUILD_TESTS)
-    add_subdirectory(tests)
-else()
-    message(STATUS "Skipping tests build (NEXUSFORCE_BUILD_TESTS=OFF)")
-endif()
-
-
-if(NEXUSFORCE_BUILD_EXAMPLES)
-    add_subdirectory(examples)
-else()
-    message(STATUS "Skipping examples build (NEXUSFORCE_BUILD_EXAMPLES=OFF)")
-endif()
-
-
-if(NEXUSFORCE_BUILD_DOCS)
-    add_subdirectory(docs)
-else()
-    message(STATUS "Skipping documentation build (NEXUSFORCE_BUILD_DOCS=OFF)")
-endif()
-
-
-if(NEXUSFORCE_FORMAT)
-    find_program(CLANG_FORMAT_EXECUTABLE
-            NAMES clang-format clang-format-15 clang-format-16 clang-format-17
-            DOC "clang-format executable"
-    )
-
-    if(CLANG_FORMAT_EXECUTABLE)
-        message(STATUS "Found clang-format: ${CLANG_FORMAT_EXECUTABLE}")
-
-        file(GLOB_RECURSE NEXUSFORCE_FORMAT_SOURCES
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
-                "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
-                "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
-                "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp"
-                "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.hpp"
-                "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp"
-                "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.hpp"
-        )
-
-        list(FILTER NEXUSFORCE_FORMAT_SOURCES EXCLUDE REGEX ".*/build/.*")
-        list(FILTER NEXUSFORCE_FORMAT_SOURCES EXCLUDE REGEX ".*/vcpkg_installed/.*")
-
-        list(LENGTH NEXUSFORCE_FORMAT_SOURCES NUM_SOURCES)
-        message(STATUS "Found ${NUM_SOURCES} source files for formatting")
-
-        set(FORMAT_COMMANDS "")
-        foreach(SOURCE_FILE ${NEXUSFORCE_FORMAT_SOURCES})
-            list(APPEND FORMAT_COMMANDS
-                    COMMAND ${CLANG_FORMAT_EXECUTABLE} -style=file -i "${SOURCE_FILE}"
-            )
-        endforeach()
-
-        add_custom_target(format
-                ${FORMAT_COMMANDS}
-                COMMENT "Formatting ${NUM_SOURCES} files with ${CLANG_FORMAT_EXECUTABLE}..."
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                VERBATIM
-        )
-
-        add_custom_target(format-check
-                COMMAND ${CMAKE_COMMAND} -E echo "Checking code format with ${CLANG_FORMAT_EXECUTABLE}..."
-                COMMAND ${CLANG_FORMAT_EXECUTABLE} -style=file --dry-run --Werror
-                ${NEXUSFORCE_FORMAT_SOURCES}
-                COMMAND ${CMAKE_COMMAND} -E echo "✅ All ${NUM_SOURCES} files are properly formatted!"
-                COMMENT "Checking code format with clang-format (dry-run)"
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                VERBATIM
-        )
-    else()
-        message(WARNING "clang-format not found. Code formatting targets will not be available.")
-    endif()
-endif()
+include(cmake/NexusForceClangFormat.cmake)
+include(cmake/NexusForceClangTidy.cmake)
 
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/NexusForce/

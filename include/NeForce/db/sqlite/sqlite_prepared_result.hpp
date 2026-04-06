@@ -15,7 +15,7 @@ private:
 
 public:
     sqlite_prepared_result() noexcept = default;
-    explicit sqlite_prepared_result(::sqlite3_stmt* statement) noexcept;
+    explicit sqlite_prepared_result(::sqlite3_stmt* statement);
 
     ~sqlite_prepared_result() override {
         if (stmt_) {

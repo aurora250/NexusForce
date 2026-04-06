@@ -369,7 +369,7 @@ bool process::check_permission(const state_info& info, permission permission) no
 #endif
 }
 
-string process::name(native_id_type process_id) noexcept {
+string process::name(native_id_type process_id) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
 
@@ -381,7 +381,7 @@ string process::name(native_id_type process_id) noexcept {
     ::HMODULE hMod;
     ::DWORD cbNeeded;
 
-    if (::EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded)) {
+    if (::EnumProcessModules(hProcess, &hMod, sizeof(::HMODULE), &cbNeeded)) {
         ::GetModuleBaseNameA(hProcess, hMod, process_name, sizeof(process_name));
     }
 

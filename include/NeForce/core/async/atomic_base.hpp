@@ -210,7 +210,7 @@ struct interlocked_exchange_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
         return static_cast<T>(
-                ::_interlockedexchange64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+                ::_InterlockedExchange64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 
@@ -323,7 +323,7 @@ template <>
 struct interlocked_fetch_add_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
-        return static_cast<T>(::_interlockedexchangeadd64(reinterpret_cast<volatile long long*>(target),
+        return static_cast<T>(::_InterlockedExchangeAdd64(reinterpret_cast<volatile long long*>(target),
                                                           static_cast<long long>(value)));
     }
 };
@@ -358,7 +358,7 @@ struct interlocked_fetch_and_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
         return static_cast<T>(
-                ::_interlockedand64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+                ::_InterlockedAnd64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 
@@ -391,7 +391,7 @@ struct interlocked_fetch_or_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
         return static_cast<T>(
-                ::_interlockedor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+                ::_InterlockedOr64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 
@@ -425,7 +425,7 @@ struct interlocked_fetch_xor_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
         return static_cast<T>(
-                ::_interlockedxor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+                ::_InterlockedXor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
     }
 };
 

@@ -83,7 +83,7 @@ namespace {
             if (::inet_ntop(AF_INET, &value.sin_addr, buffer, sizeof(buffer))) {
                 return string(buffer) + ":" + _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin_port));
             }
-            return {};
+            return ""_s;
         }
         template <typename T>
         enable_if_t<is_same_v<T, ::sockaddr_in6>, string> operator()(const T& value) {
@@ -91,18 +91,18 @@ namespace {
                 return "["_s + string(buffer) +
                        "]:" + _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin6_port));
             }
-            return {};
+            return ""_s;
         }
         template <typename T>
         enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, string> operator()(const T&) {
-            return {};
+            return ""_s;
         }
     };
 
     struct equal_visitor {
         const ip_address& other;
 
-        equal_visitor(const ip_address& other) noexcept :
+        explicit equal_visitor(const ip_address& other) noexcept :
         other(other) {}
 
         template <typename T>

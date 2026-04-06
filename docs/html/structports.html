@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: ports结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structports.html','','structports-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ports结构体 参考<div class="ingroups"><a class="el" href="group___network.html">网络通信</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>网络端口封装类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ports_8hpp_source.html">ports.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 ports 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structports__inherit__graph.svg" width="135" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ac669b0e3aadb23af41c8fb0d20d8b9d8" id="r_ac669b0e3aadb23af41c8fb0d20d8b9d8"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">raw</a> : uint16_t { <br />
+&#160;&#160;<a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8ab5e2128a715d5132f2c9cccfda494a8f">undef</a> = 0
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8a8c3ac5cd5db2501202cd6d3fafe18cc2">http</a> = 80
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c">ws</a> = 80
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed">https</a> = 443
+, <br />
+&#160;&#160;<a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c">wss</a> = 443
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8ae4fe1286c69b67678413921ff7556f10">ftp</a> = 21
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8af75e5ea16e3962a4f63feea89b0ff573">tftp</a> = 69
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8a313e2ebd44b846ee8dae7459c1d447a3">ssh</a> = 22
+, <br />
+&#160;&#160;<a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8ae5588173ed4bea493048e6d5d87a9271">telnet</a> = 23
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05">smtp</a> = 25
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8ac58c1dba72d699d01322e9f08ec47861">dns</a> = 53
+, <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8a6aa35b0cf0169ddfeaeb3bfd74284b79">pop3</a> = 110
+, <br />
+&#160;&#160;<a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8a6649a8c8c111de3ac78f2311c81ccc1b">imap</a> = 143
+<br />
+ }</td></tr>
+<tr class="memdesc:ac669b0e3aadb23af41c8fb0d20d8b9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">端口号枚举值  <a href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aed7286a23ab2d5be7c08b47807fa5eb0" id="r_aed7286a23ab2d5be7c08b47807fa5eb0"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aed7286a23ab2d5be7c08b47807fa5eb0">ports</a> () noexcept=default</td></tr>
+<tr class="memdesc:aed7286a23ab2d5be7c08b47807fa5eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ad16ca5a958a7bac673c09ae68918d311" id="r_ad16ca5a958a7bac673c09ae68918d311"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad16ca5a958a7bac673c09ae68918d311">ports</a> (const <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">raw</a> <a class="el" href="#ac83896c19af3451bbd0ce66a1b9a233e">port</a>) noexcept</td></tr>
+<tr class="memdesc:ad16ca5a958a7bac673c09ae68918d311"><td class="mdescLeft">&#160;</td><td class="mdescRight">从枚举值构造  <br /></td></tr>
+<tr class="memitem:a9971f3b73413357e32b44e4229062f26" id="r_a9971f3b73413357e32b44e4229062f26"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a9971f3b73413357e32b44e4229062f26">ports</a> (const <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> <a class="el" href="#ac83896c19af3451bbd0ce66a1b9a233e">port</a>) noexcept</td></tr>
+<tr class="memdesc:a9971f3b73413357e32b44e4229062f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">从uint16_t构造  <br /></td></tr>
+<tr class="memitem:abd4092003d11db99eda911f01d242bc8" id="r_abd4092003d11db99eda911f01d242bc8"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abd4092003d11db99eda911f01d242bc8">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:abd4092003d11db99eda911f01d242bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">布尔转换运算符  <br /></td></tr>
+<tr class="memitem:a88dc0ead0b9d0c484727d7a04d12f6f0" id="r_a88dc0ead0b9d0c484727d7a04d12f6f0"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a88dc0ead0b9d0c484727d7a04d12f6f0">operator uint16_t</a> () const noexcept</td></tr>
+<tr class="memdesc:a88dc0ead0b9d0c484727d7a04d12f6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">uint16_t转换运算符  <br /></td></tr>
+<tr class="memitem:ad216c705c2904893b0ff3331ca5f88ab" id="r_ad216c705c2904893b0ff3331ca5f88ab"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad216c705c2904893b0ff3331ca5f88ab">to_string</a> () const</td></tr>
+<tr class="memdesc:ad216c705c2904893b0ff3331ca5f88ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为协议名称字符串  <br /></td></tr>
+<tr class="memitem:ae098763e06d7db0c2b1c5be30c09d5dd" id="r_ae098763e06d7db0c2b1c5be30c09d5dd"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae098763e06d7db0c2b1c5be30c09d5dd">to_string</a> (bool is_ws) const</td></tr>
+<tr class="memdesc:ae098763e06d7db0c2b1c5be30c09d5dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为协议名称字符串（支持WebSocket）  <br /></td></tr>
+<tr class="inherit_header pub_methods_structiobject"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structiobject')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structiobject.html">iobject&lt; ports &gt;</a></td></tr>
+<tr class="memitem:a6844b335224b3f1baddee0502c2dcc68 inherit pub_methods_structiobject" id="r_a6844b335224b3f1baddee0502c2dcc68"><td class="memItemLeft">NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="structiobject.html#a6844b335224b3f1baddee0502c2dcc68">try_parse</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str) noexcept</td></tr>
+<tr class="memdesc:a6844b335224b3f1baddee0502c2dcc68 inherit pub_methods_structiobject"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试从字符串解析对象  <br /></td></tr>
+<tr class="inherit_header pub_methods_structistringify"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structistringify')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structistringify.html">istringify&lt; ports &gt;</a></td></tr>
+<tr class="memitem:aeb53a048cd2b8e99462c2cf0f5c602bc inherit pub_methods_structistringify" id="r_aeb53a048cd2b8e99462c2cf0f5c602bc"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="structistringify.html#aeb53a048cd2b8e99462c2cf0f5c602bc">to_string</a> () const</td></tr>
+<tr class="memdesc:aeb53a048cd2b8e99462c2cf0f5c602bc inherit pub_methods_structistringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:af8fe0623e057c4f2f93f8b7fc6cfe251" id="r_af8fe0623e057c4f2f93f8b7fc6cfe251"><td class="memItemLeft">static <a class="el" href="structports.html">ports</a>&#160;</td><td class="memItemRight"><a class="el" href="#af8fe0623e057c4f2f93f8b7fc6cfe251">parse</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> scheme) noexcept</td></tr>
+<tr class="memdesc:af8fe0623e057c4f2f93f8b7fc6cfe251"><td class="mdescLeft">&#160;</td><td class="mdescRight">从协议名称解析端口  <br /></td></tr>
+<tr class="inherit_header pub_static_methods_structiobject"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_structiobject')"><span class="dynarrow"><span class="arrowhead closed"></span></span>静态 Public 成员函数 继承自 <a class="el" href="structiobject.html">iobject&lt; ports &gt;</a></td></tr>
+<tr class="memitem:acdd491e003107626c192fc9701c05c0a inherit pub_static_methods_structiobject" id="r_acdd491e003107626c192fc9701c05c0a"><td class="memItemLeft">static NEFORCE_NODISCARD constexpr <a class="el" href="structports.html">ports</a>&#160;</td><td class="memItemRight"><a class="el" href="structiobject.html#acdd491e003107626c192fc9701c05c0a">parse</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str)</td></tr>
+<tr class="memdesc:acdd491e003107626c192fc9701c05c0a inherit pub_static_methods_structiobject"><td class="mdescLeft">&#160;</td><td class="mdescRight">从字符串解析对象  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:ac83896c19af3451bbd0ce66a1b9a233e" id="r_ac83896c19af3451bbd0ce66a1b9a233e"><td class="memItemLeft"><a id="ac83896c19af3451bbd0ce66a1b9a233e" name="ac83896c19af3451bbd0ce66a1b9a233e"></a>
+<a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">raw</a>&#160;</td><td class="memItemRight"><b>port</b> {<a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8ab5e2128a715d5132f2c9cccfda494a8f">raw::undef</a>}</td></tr>
+<tr class="memdesc:ac83896c19af3451bbd0ce66a1b9a233e"><td class="mdescLeft">&#160;</td><td class="mdescRight">端口值 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>网络端口封装类 </p>
+<p>提供类型安全的端口表示，封装了常见协议的端口号，支持从协议名称解析和反向转换。 </p>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00027">27</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="ac669b0e3aadb23af41c8fb0d20d8b9d8" name="ac669b0e3aadb23af41c8fb0d20d8b9d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">&#9670;&#160;</a></span>raw</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">ports::raw</a> : <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>端口号枚举值 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8ab5e2128a715d5132f2c9cccfda494a8f" name="ac669b0e3aadb23af41c8fb0d20d8b9d8ab5e2128a715d5132f2c9cccfda494a8f"></a>undef&#160;</td><td class="fielddoc"><p>未定义/无效端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8a8c3ac5cd5db2501202cd6d3fafe18cc2" name="ac669b0e3aadb23af41c8fb0d20d8b9d8a8c3ac5cd5db2501202cd6d3fafe18cc2"></a>http&#160;</td><td class="fielddoc"><p>HTTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c" name="ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c"></a>ws&#160;</td><td class="fielddoc"><p>WebSocket协议端口（与HTTP共用） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed" name="ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed"></a>https&#160;</td><td class="fielddoc"><p>HTTPS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c" name="ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c"></a>wss&#160;</td><td class="fielddoc"><p>WebSocket Secure端口（与HTTPS共用） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8ae4fe1286c69b67678413921ff7556f10" name="ac669b0e3aadb23af41c8fb0d20d8b9d8ae4fe1286c69b67678413921ff7556f10"></a>ftp&#160;</td><td class="fielddoc"><p>FTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8af75e5ea16e3962a4f63feea89b0ff573" name="ac669b0e3aadb23af41c8fb0d20d8b9d8af75e5ea16e3962a4f63feea89b0ff573"></a>tftp&#160;</td><td class="fielddoc"><p>TFTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8a313e2ebd44b846ee8dae7459c1d447a3" name="ac669b0e3aadb23af41c8fb0d20d8b9d8a313e2ebd44b846ee8dae7459c1d447a3"></a>ssh&#160;</td><td class="fielddoc"><p>SSH协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8ae5588173ed4bea493048e6d5d87a9271" name="ac669b0e3aadb23af41c8fb0d20d8b9d8ae5588173ed4bea493048e6d5d87a9271"></a>telnet&#160;</td><td class="fielddoc"><p>Telnet协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05" name="ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05"></a>smtp&#160;</td><td class="fielddoc"><p>SMTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8ac58c1dba72d699d01322e9f08ec47861" name="ac669b0e3aadb23af41c8fb0d20d8b9d8ac58c1dba72d699d01322e9f08ec47861"></a>dns&#160;</td><td class="fielddoc"><p>DNS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8a6aa35b0cf0169ddfeaeb3bfd74284b79" name="ac669b0e3aadb23af41c8fb0d20d8b9d8a6aa35b0cf0169ddfeaeb3bfd74284b79"></a>pop3&#160;</td><td class="fielddoc"><p>POP3协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac669b0e3aadb23af41c8fb0d20d8b9d8a6649a8c8c111de3ac78f2311c81ccc1b" name="ac669b0e3aadb23af41c8fb0d20d8b9d8a6649a8c8c111de3ac78f2311c81ccc1b"></a>imap&#160;</td><td class="fielddoc"><p>IMAP协议端口 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00032">32</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="aed7286a23ab2d5be7c08b47807fa5eb0" name="aed7286a23ab2d5be7c08b47807fa5eb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed7286a23ab2d5be7c08b47807fa5eb0">&#9670;&#160;</a></span>ports() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ports::ports </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>创建未定义端口的对象。 </p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af8fe0623e057c4f2f93f8b7fc6cfe251">parse()</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00061">ports()</a>.</p>
+
+</div>
+</div>
+<a id="ad16ca5a958a7bac673c09ae68918d311" name="ad16ca5a958a7bac673c09ae68918d311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad16ca5a958a7bac673c09ae68918d311">&#9670;&#160;</a></span>ports() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ports::ports </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">raw</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从枚举值构造 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>端口枚举值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00061">61</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a> , 以及 <a class="el" href="#aed7286a23ab2d5be7c08b47807fa5eb0">ports()</a>.</p>
+
+</div>
+</div>
+<a id="a9971f3b73413357e32b44e4229062f26" name="a9971f3b73413357e32b44e4229062f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9971f3b73413357e32b44e4229062f26">&#9670;&#160;</a></span>ports() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ports::ports </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从uint16_t构造 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>端口数值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00068">68</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="abd4092003d11db99eda911f01d242bc8" name="abd4092003d11db99eda911f01d242bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd4092003d11db99eda911f01d242bc8">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ports::operator bool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>布尔转换运算符 </p>
+<dl class="section return"><dt>返回</dt><dd>端口有效返回true</dd></dl>
+<p>检查端口是否为undef。 </p>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00077">77</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00033">undef</a>.</p>
+
+</div>
+</div>
+<a id="a88dc0ead0b9d0c484727d7a04d12f6f0" name="a88dc0ead0b9d0c484727d7a04d12f6f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88dc0ead0b9d0c484727d7a04d12f6f0">&#9670;&#160;</a></span>operator uint16_t()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ports::operator <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>uint16_t转换运算符 </p>
+<dl class="section return"><dt>返回</dt><dd>端口的数值表示 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00083">83</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a>.</p>
+
+</div>
+</div>
+<a id="af8fe0623e057c4f2f93f8b7fc6cfe251" name="af8fe0623e057c4f2f93f8b7fc6cfe251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8fe0623e057c4f2f93f8b7fc6cfe251">&#9670;&#160;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structports.html">ports</a> ports::parse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>scheme</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从协议名称解析端口 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scheme</td><td>协议名称（如"http"、"https"、"ws"等） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>对应的端口对象，无法识别返回undef</dd></dl>
+<p>支持常见协议名称到端口号的映射。 </p>
+
+<p class="reference">引用了 <a class="el" href="#aed7286a23ab2d5be7c08b47807fa5eb0">ports()</a>.</p>
+
+</div>
+</div>
+<a id="ad216c705c2904893b0ff3331ca5f88ab" name="ad216c705c2904893b0ff3331ca5f88ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad216c705c2904893b0ff3331ca5f88ab">&#9670;&#160;</a></span>to_string() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> ports::to_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>转换为协议名称字符串 </p>
+<dl class="section return"><dt>返回</dt><dd>协议名称，非标准端口返回空字符串</dd></dl>
+<p>将端口号转换为对应的协议名称。 对于80端口返回"http"，443端口返回"https"。 </p>
+
+</div>
+</div>
+<a id="ae098763e06d7db0c2b1c5be30c09d5dd" name="ae098763e06d7db0c2b1c5be30c09d5dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae098763e06d7db0c2b1c5be30c09d5dd">&#9670;&#160;</a></span>to_string() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> ports::to_string </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_ws</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>转换为协议名称字符串（支持WebSocket） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_ws</td><td>是否为WebSocket协议 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>协议名称</dd></dl>
+<p>当is_ws为true时，80端口返回"ws"，443端口返回"wss"； 否则返回"http"/"https"。 </p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="ports_8hpp_source.html">ports.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="structports.html">ports</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

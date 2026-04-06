@@ -120,18 +120,18 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = typename conta
 <tr class="memitem:aa0aee0afee4aaf7f580bc778e1e8096f" id="r_aa0aee0afee4aaf7f580bc778e1e8096f"><td class="memItemLeft"><a id="aa0aee0afee4aaf7f580bc778e1e8096f" name="aa0aee0afee4aaf7f580bc778e1e8096f"></a>
 using&#160;</td><td class="memItemRight"><b>iterator_category</b> = <a class="el" href="structbidirectional__iterator__tag.html">bidirectional_iterator_tag</a></td></tr>
 <tr class="memdesc:aa0aee0afee4aaf7f580bc778e1e8096f"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
-<tr class="memitem:a8613bfcd3145d6eb43ef6ce9ecfbef80" id="r_a8613bfcd3145d6eb43ef6ce9ecfbef80"><td class="memItemLeft"><a id="a8613bfcd3145d6eb43ef6ce9ecfbef80" name="a8613bfcd3145d6eb43ef6ce9ecfbef80"></a>
-using&#160;</td><td class="memItemRight"><b>reference</b> = <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;IsConst, typename container_type::const_reference, typename container_type::reference&gt;</td></tr>
-<tr class="memdesc:a8613bfcd3145d6eb43ef6ce9ecfbef80"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
-<tr class="memitem:acc5d4f33825ad4f59ee537b89355a35b" id="r_acc5d4f33825ad4f59ee537b89355a35b"><td class="memItemLeft"><a id="acc5d4f33825ad4f59ee537b89355a35b" name="acc5d4f33825ad4f59ee537b89355a35b"></a>
-using&#160;</td><td class="memItemRight"><b>pointer</b> = <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;IsConst, typename container_type::const_pointer, typename container_type::pointer&gt;</td></tr>
-<tr class="memdesc:acc5d4f33825ad4f59ee537b89355a35b"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a69836855b559485ae0284e1ce35cf561" id="r_a69836855b559485ae0284e1ce35cf561"><td class="memItemLeft"><a id="a69836855b559485ae0284e1ce35cf561" name="a69836855b559485ae0284e1ce35cf561"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b></td></tr>
+<tr class="memdesc:a69836855b559485ae0284e1ce35cf561"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a56b86b7608436a635b25ccf43c1331a3" id="r_a56b86b7608436a635b25ccf43c1331a3"><td class="memItemLeft"><a id="a56b86b7608436a635b25ccf43c1331a3" name="a56b86b7608436a635b25ccf43c1331a3"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b></td></tr>
+<tr class="memdesc:a56b86b7608436a635b25ccf43c1331a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
 <tr class="memitem:af2c869793706cc70efe9fc1c1b9d3c92" id="r_af2c869793706cc70efe9fc1c1b9d3c92"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af2c869793706cc70efe9fc1c1b9d3c92">list_iterator</a> (node_type *ptr, const <a class="el" href="#a4d5520fb468b48e1b4eea06b2118915b">container_type</a> *<a class="el" href="classlist.html">list</a>) noexcept</td></tr>
 <tr class="memdesc:af2c869793706cc70efe9fc1c1b9d3c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
-<tr class="memitem:a3ce4fbde4675903df6ec25101073c86b" id="r_a3ce4fbde4675903df6ec25101073c86b"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a8613bfcd3145d6eb43ef6ce9ecfbef80">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3ce4fbde4675903df6ec25101073c86b">dereference</a> () const noexcept</td></tr>
+<tr class="memitem:a3ce4fbde4675903df6ec25101073c86b" id="r_a3ce4fbde4675903df6ec25101073c86b"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a69836855b559485ae0284e1ce35cf561">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3ce4fbde4675903df6ec25101073c86b">dereference</a> () const noexcept</td></tr>
 <tr class="memdesc:a3ce4fbde4675903df6ec25101073c86b"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作实现  <br /></td></tr>
 <tr class="memitem:a25e8db8f604219196f7948b1ba35b6fd" id="r_a25e8db8f604219196f7948b1ba35b6fd"><td class="memItemLeft"><a id="a25e8db8f604219196f7948b1ba35b6fd" name="a25e8db8f604219196f7948b1ba35b6fd"></a>
 void&#160;</td><td class="memItemRight"><b>increment</b> () noexcept</td></tr>
@@ -187,7 +187,7 @@ struct list_iterator&lt; IsConst, List &gt;</div><p>链表迭代器 </p>
 </dl>
 <p>为list提供双向迭代器支持，包含边界检查和调试验证。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00068">68</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="af2c869793706cc70efe9fc1c1b9d3c92" name="af2c869793706cc70efe9fc1c1b9d3c92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af2c869793706cc70efe9fc1c1b9d3c92">&#9670;&#160;</a></span>list_iterator()</h2>
@@ -260,9 +260,9 @@ template&lt;bool IsConst, typename List&gt; </div>
 <p>获取底层节点指针 </p>
 <dl class="section return"><dt>返回</dt><dd>当前节点指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00145">145</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00146">146</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01058">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l01047">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l00543">list&lt; pair&lt; Key, Value &gt; &gt;::emplace()</a>, <a class="el" href="list_8hpp_source.html#l00682">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00736">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00839">list&lt; pair&lt; Key, Value &gt; &gt;::transfer()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01016">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l01003">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l00509">list&lt; pair&lt; Key, Value &gt; &gt;::emplace()</a>, <a class="el" href="list_8hpp_source.html#l00630">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00686">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00789">list&lt; pair&lt; Key, Value &gt; &gt;::transfer()</a>.</p>
 
 </div>
 </div>
@@ -294,7 +294,7 @@ template&lt;bool IsConst, typename List&gt; </div>
 <p>获取关联容器 </p>
 <dl class="section return"><dt>返回</dt><dd>关联容器指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00153">153</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00152">152</a> 行定义.</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ template&lt;bool IsConst, typename List&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a8613bfcd3145d6eb43ef6ce9ecfbef80">reference</a> <a class="el" href="structlist__iterator.html">list_iterator</a>&lt; IsConst, List &gt;::dereference </td>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a69836855b559485ae0284e1ce35cf561">reference</a> <a class="el" href="structlist__iterator.html">list_iterator</a>&lt; IsConst, List &gt;::dereference </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -326,7 +326,7 @@ template&lt;bool IsConst, typename List&gt; </div>
 <p>解引用操作实现 </p>
 <dl class="section return"><dt>返回</dt><dd>当前节点的数据引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00107">107</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00108">108</a> 行定义.</p>
 
 </div>
 </div>
@@ -364,7 +364,7 @@ template&lt;bool IsConst, typename List&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否指向同一节点 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00136">136</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00137">137</a> 行定义.</p>
 
 </div>
 </div>

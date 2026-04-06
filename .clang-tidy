@@ -1,0 +1,187 @@
+---
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  concurrency-*,
+  cppcoreguidelines-*,
+  hicpp-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -readability-identifier-length,
+  -readability-function-cognitive-complexity,
+  -readability-named-parameter,
+  -readability-avoid-const-params-in-decls,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -hicpp-avoid-magic-numbers,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-reserved-identifier,
+  -cppcoreguidelines-pro-type-const-cast,
+  -cppcoreguidelines-pro-type-member-init,
+  -hicpp-member-init,
+  -performance-no-int-to-ptr,
+  -performance-unnecessary-value-param,
+  -cppcoreguidelines-pro-type-union-access,
+  -cppcoreguidelines-pro-type-vararg,
+  -hicpp-vararg,
+  -hicpp-signed-bitwise,
+  -cppcoreguidelines-avoid-c-arrays,
+  -clang-analyzer-optin.cplusplus.UninitializedObject
+
+WarningsAsErrors: '
+  bugprone-*,
+  -bugprone-reserved-identifier,
+  clang-analyzer-*,
+  concurrency-*,
+  -cppcoreguidelines-init-variables,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -cppcoreguidelines-pro-type-const-cast,
+  -cppcoreguidelines-pro-type-member-init,
+  cppcoreguidelines-pro-type-*,
+  -cppcoreguidelines-owning-memory,
+  modernize-use-nullptr,
+  modernize-use-override,
+  modernize-use-equals-default,
+  modernize-use-equals-delete,
+  performance-*,
+  readability-braces-around-statements,
+  readability-redundant-declaration,
+  bugprone-unchecked-optional-access,
+  bugprone-narrowing-conversions,
+  cppcoreguidelines-slicing,
+  modernize-avoid-bind,
+  performance-inefficient-vector-operation,
+'
+
+HeaderFilterRegex: '^(include/|src/).*\.(h|hpp)$'
+FormatStyle: file
+SystemHeaders: false
+
+CheckOptions:
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+
+  - key: readability-identifier-naming.NamespacePrefix
+    value: ''
+
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+
+  - key: readability-identifier-naming.EnumConstantCase
+    value: UPPER_CASE
+
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+
+  - key: readability-identifier-naming.ConstantPrefix
+    value: ''
+
+  - key: readability-identifier-naming.VariableCase
+    value: lower_case
+
+  - key: readability-identifier-naming.VariablePrefix
+    value: ''
+
+  - key: readability-identifier-naming.GlobalVariableCase
+    value: lower_case
+
+  - key: readability-identifier-naming.GlobalVariablePrefix
+    value: 'g_'
+
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: lower_case
+
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: '_'
+
+  - key: readability-identifier-naming.ProtectedMemberCase
+    value: lower_case
+
+  - key: readability-identifier-naming.ProtectedMemberSuffix
+    value: '_'
+
+  - key: readability-identifier-naming.PublicMemberCase
+    value: lower_case
+
+  - key: readability-identifier-naming.FunctionCase
+    value: lower_case
+
+  - key: readability-identifier-naming.MethodCase
+    value: lower_case
+
+  - key: readability-identifier-naming.ParameterCase
+    value: lower_case
+
+  - key: readability-identifier-naming.ParameterPrefix
+    value: ''
+
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE
+
+  - key: readability-identifier-naming.MacroDefinitionPrefix
+    value: ''
+
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+
+  - key: readability-identifier-naming.ConceptCase
+    value: CamelCase
+
+  - key: readability-identifier-length.IgnoredVariableNames
+    value: '^[ijkn]$|^x$|^y$|^z$|^e$|^id$|^io$'
+
+  - key: readability-line-length.LineLength
+    value: 120
+
+  - key: readability-magic-numbers.IgnoredNumbers
+    value: '0;1;2;3;4;8;16;32;64;128;256;512;1024;2048;4096'
+
+  - key: clang-analyzer-optin.cplusplus.VirtualCall.FunctionSizeThreshold
+    value: 200
+
+  - key: modernize-use-auto.MinTypeNameLength
+    value: 5
+
+  - key: performance-unnecessary-value-param.AllowedTypes
+    value: 'neforce::cbyte_view;neforce::byte_view;neforce::string_view;neforce::function'
+
+  - key: bugprone-assert-side-effect.AssertMacros
+    value: 'assert;NEFORCE_DEBUG_VERIFY;NEFORCE_CONSTEXPR_ASSERT;NEFORCE_ASSERTION'
+
+  - key: cppcoreguidelines-function-params-max-parameters.AllowedCount
+    value: 5
+
+  - key: performance-unnecessary-copy-initialization.AllowedTypes
+    value: 'neforce::shared_ptr;neforce::unique_ptr;neforce::weak_ptr'
+
+  - key: readability-uppercase-literal-suffix.IgnoreMacros
+    value: true
+
+  - key: cppcoreguidelines-avoid-capturing-lambda-by-reference-default.IgnoredRegexp
+    value: '^.*$'
+
+  - key: cppcoreguidelines-avoid-non-const-global-variables.AllowNonConstGlobals
+    value: false
+
+  - key: readability-identifier-naming.IgnoreFailedSplit
+    value: true
+
+  - key: cert-err33-c.CheckedFunctions
+    value: 'neforce::expected'
+
+  - key: cppcoreguidelines-pro-type-union-access.Allow
+    value: true

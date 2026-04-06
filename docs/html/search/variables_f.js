@@ -45,7 +45,7 @@ var searchData=
   ['platform_5fid_42',['platform_id',['../structsysinfo_1_1os__version__info.html#a340ac2d32b3d93b475587aab92695c5f',1,'sysinfo::os_version_info']]],
   ['png_5fimg_43',['PNG_IMG',['../struct_h_t_t_p___c_o_n_t_e_n_t.html#a476947095a8c78354f4c3c20e45122c2',1,'HTTP_CONTENT']]],
   ['popcount_5ftable_44',['POPCOUNT_TABLE',['../group___bit_manipulation.html#ga9d407777ef6c13fd950d17144fcf93d8',1,'bit.hpp']]],
-  ['port_45',['port',['../structurl.html#a28788980da3ace09bf314caa690db3ec',1,'url']]],
+  ['port_45',['port',['../structports.html#ac83896c19af3451bbd0ce66a1b9a233e',1,'ports::port'],['../structurl.html#a28788980da3ace09bf314caa690db3ec',1,'url::port']]],
   ['post_46',['POST',['../struct_h_t_t_p___m_e_t_h_o_d.html#a30ebbb0d765603172d18da0a66338aed',1,'HTTP_METHOD']]],
   ['precise_5ftolerance_47',['PRECISE_TOLERANCE',['../group___math_constants.html#gad8d9789f208cb19d22e9669f0b1d2261',1,'math.hpp']]],
   ['precision_48',['precision',['../structformat__options.html#a42db8df63c6c52f2f2cd4bc32edf1154',1,'format_options']]],

@@ -214,7 +214,7 @@ public:
      * @param process_id 进程ID
      * @return 进程名称，失败返回空字符串
      */
-    static string name(native_id_type process_id) noexcept;
+    static string name(native_id_type process_id);
 };
 
 /** @} */ // Process

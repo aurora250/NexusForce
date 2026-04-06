@@ -1,9 +1,9 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__
-#include <openssl/ssl.h>
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/network/ssl/ssl_exception.hpp"
+#include <openssl/ssl.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 enum class ssl_method {

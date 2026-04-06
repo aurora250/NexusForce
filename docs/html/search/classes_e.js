@@ -48,12 +48,13 @@ var searchData=
   ['pointer_5ftraits_45',['pointer_traits',['../structpointer__traits.html',1,'']]],
   ['pointer_5ftraits_3c_20t_20_2a_20_3e_46',['pointer_traits&lt; T * &gt;',['../structpointer__traits_3_01_t_01_5_01_4.html',1,'']]],
   ['pool_5fstatistics_47',['pool_statistics',['../structthread__pool_1_1pool__statistics.html',1,'thread_pool']]],
-  ['priority_5fqueue_48',['priority_queue',['../classpriority__queue.html',1,'']]],
-  ['priority_5fqueue_3c_20priority_5ftask_20_3e_49',['priority_queue&lt; priority_task &gt;',['../classpriority__queue.html',1,'']]],
-  ['process_50',['process',['../classprocess.html',1,'']]],
-  ['process_5fexception_51',['process_exception',['../structprocess__exception.html',1,'']]],
-  ['promise_52',['promise',['../classpromise.html',1,'']]],
-  ['promise_3c_20res_20_26_20_3e_53',['promise&lt; Res &amp; &gt;',['../classpromise_3_01_res_01_6_01_4.html',1,'']]],
-  ['promise_3c_20void_20_3e_54',['promise&lt; void &gt;',['../classpromise_3_01void_01_4.html',1,'']]],
-  ['promise_5ftype_55',['promise_type',['../structgenerator_1_1promise__type.html',1,'generator&lt; T &gt;::promise_type'],['../structtask_1_1promise__type.html',1,'task&lt; T &gt;::promise_type']]]
+  ['ports_48',['ports',['../structports.html',1,'']]],
+  ['priority_5fqueue_49',['priority_queue',['../classpriority__queue.html',1,'']]],
+  ['priority_5fqueue_3c_20priority_5ftask_20_3e_50',['priority_queue&lt; priority_task &gt;',['../classpriority__queue.html',1,'']]],
+  ['process_51',['process',['../classprocess.html',1,'']]],
+  ['process_5fexception_52',['process_exception',['../structprocess__exception.html',1,'']]],
+  ['promise_53',['promise',['../classpromise.html',1,'']]],
+  ['promise_3c_20res_20_26_20_3e_54',['promise&lt; Res &amp; &gt;',['../classpromise_3_01_res_01_6_01_4.html',1,'']]],
+  ['promise_3c_20void_20_3e_55',['promise&lt; void &gt;',['../classpromise_3_01void_01_4.html',1,'']]],
+  ['promise_5ftype_56',['promise_type',['../structgenerator_1_1promise__type.html',1,'generator&lt; T &gt;::promise_type'],['../structtask_1_1promise__type.html',1,'task&lt; T &gt;::promise_type']]]
 ];

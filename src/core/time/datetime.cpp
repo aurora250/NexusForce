@@ -14,10 +14,12 @@ NEFORCE_NODISCARD datetime datetime::now() noexcept {
         ::SYSTEMTIME st{};
         ::GetLocalTime(&st);
         ::TIME_ZONE_INFORMATION tzi{};
-        ::DWORD tzResult = ::GetTimeZoneInformation(&tzi);
+        const ::DWORD tzResult = ::GetTimeZoneInformation(&tzi);
         int64_t offset = 0;
         if (tzResult != TIME_ZONE_ID_INVALID) {
-            offset = -(tzi.Bias + (tzResult == TIME_ZONE_ID_DAYLIGHT ? tzi.DaylightBias : tzi.StandardBias)) * 60;
+            offset = -static_cast<int64_t>(tzi.Bias +
+                                           (tzResult == TIME_ZONE_ID_DAYLIGHT ? tzi.DaylightBias : tzi.StandardBias)) *
+                     60;
         }
         return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, offset);
 #elif defined(NEFORCE_PLATFORM_LINUX)

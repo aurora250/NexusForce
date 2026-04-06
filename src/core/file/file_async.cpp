@@ -108,22 +108,16 @@ file_async::~file_async() {
 }
 
 file_async::file_async(file_async&& other) noexcept :
-handle_(invalid_handle) {
-    lock<mutex> lk(other.mutex_);
-    handle_ = other.handle_;
-    operations_ = move(other.operations_);
-    contexts_ = move(other.contexts_);
+handle_(other.handle_),
+operations_(move(other.operations_)),
+contexts_(move(other.contexts_)) {
     other.handle_ = invalid_handle;
 }
 
 file_async& file_async::operator=(file_async&& other) noexcept {
-    if (addressof(other) == this) {
+    if (this == &other) {
         return *this;
     }
-
-    lock<mutex> lk_this(mutex_);
-    lock<mutex> lk_other(other.mutex_);
-
     handle_ = other.handle_;
     operations_ = move(other.operations_);
     contexts_ = move(other.contexts_);

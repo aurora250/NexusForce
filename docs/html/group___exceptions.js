@@ -41,6 +41,8 @@ var group___exceptions =
     [ "share_memory_exception", "structshare__memory__exception.html", null ],
     [ "anycast_exception", "structanycast__exception.html", null ],
     [ "optional_exception", "structoptional__exception.html", null ],
+    [ "database_typecast_exception", "structdatabase__typecast__exception.html", null ],
+    [ "database_prepared_stmt_exception", "structdatabase__prepared__stmt__exception.html", null ],
     [ "socket_exception", "structsocket__exception.html", null ],
     [ "ssl_exception", "structssl__exception.html", null ],
     [ "http_exception", "structhttp__exception.html", null ]

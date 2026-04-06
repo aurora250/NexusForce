@@ -396,13 +396,13 @@ public:
      * @brief 解引用操作符
      * @return 当前匹配结果
      */
-    NEFORCE_NODISCARD reference operator*() const noexcept;
+    NEFORCE_NODISCARD reference operator*() const;
 
     /**
      * @brief 成员访问操作符
      * @return 当前匹配结果指针
      */
-    NEFORCE_NODISCARD pointer operator->() const noexcept { return &(operator*()); }
+    NEFORCE_NODISCARD pointer operator->() const { return &(operator*()); }
 
     /**
      * @brief 前置递增操作符

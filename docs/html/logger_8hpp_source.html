@@ -107,28 +107,28 @@ $(function(){initNavTree('logger_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classlogger.html">   37</a></span><span class="keyword">class </span>NEFORCE_API logger {</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_enumeration" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> level_;         </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> async_;      </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_enumeration" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> level_;    </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> async_; </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="classvector.html">vector&lt;shared_ptr&lt;log_sink&gt;</a>&gt; sinks_;  </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classmutex.html">mutex</a> sinks_mutex_;       </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="classvector.html">vector&lt;shared_ptr&lt;log_sink&gt;</a>&gt; sinks_; </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classmutex.html">mutex</a> sinks_mutex_;                  </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_class" href="classqueue.html">queue&lt;log_event&gt;</a> queue_;  </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="classmutex.html">mutex</a> queue_mutex_;       </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_class" href="classcondition__variable.html">condition_variable</a> cv_;   </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_class" href="classqueue.html">queue&lt;log_event&gt;</a> queue_; </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="classmutex.html">mutex</a> queue_mutex_;      </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_class" href="classcondition__variable.html">condition_variable</a> cv_;  </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classthread.html">thread</a> worker_;           </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> running_;    </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classthread.html">thread</a> worker_;        </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> running_; </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> flush_requested_{<span class="keyword">false</span>};   </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_class" href="classmutex.html">mutex</a> flush_mutex_;                     </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classcondition__variable.html">condition_variable</a> flush_cv_;           </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> flush_requested_{<span class="keyword">false</span>}; </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_class" href="classmutex.html">mutex</a> flush_mutex_;                   </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classcondition__variable.html">condition_variable</a> flush_cv_;         </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_class" href="classfunction.html">function</a>&lt;bool(<span class="keyword">const</span> <a class="code hl_struct" href="structlog__event.html">log_event</a>&amp;)&gt; filter_;  </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_class" href="classmutex.html">mutex</a> filter_mutex_;                       </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_class" href="classfunction.html">function</a>&lt;bool(<span class="keyword">const</span> <a class="code hl_struct" href="structlog__event.html">log_event</a>&amp;)&gt; filter_; </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_class" href="classmutex.html">mutex</a> filter_mutex_;                      </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, string&gt;</a> context_;    </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="classmutex.html">mutex</a> context_mutex_;                      </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, string&gt;</a> context_; </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="classmutex.html">mutex</a> context_mutex_;                   </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> enqueue(<a class="code hl_struct" href="structlog__event.html">log_event</a>&amp;&amp; event);</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
@@ -151,9 +151,9 @@ $(function(){initNavTree('logger_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <a class="code hl_class" href="classlogger.html">logger</a>(<span class="keyword">const</span> <a class="code hl_class" href="classlogger.html">logger</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <a class="code hl_class" href="classlogger.html">logger</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classlogger.html">logger</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <a class="code hl_class" href="classlogger.html">logger</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classlogger.html">logger</a>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_class" href="classlogger.html">logger</a>(<a class="code hl_class" href="classlogger.html">logger</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="classlogger.html">logger</a>&amp; operator =(<a class="code hl_class" href="classlogger.html">logger</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="classlogger.html">logger</a>&amp; operator=(<a class="code hl_class" href="classlogger.html">logger</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span></div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classlogger.html#aadd537feeeb16186f6aeb4ca0267a8d7">  118</a></span>    <a class="code hl_function" href="classlogger.html#aadd537feeeb16186f6aeb4ca0267a8d7">~logger</a>();</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
@@ -218,30 +218,48 @@ $(function(){initNavTree('logger_8hpp_source.html','',''); });
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span></div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno"><a class="line" href="group___logging.html#ga468b51d53845d91c650bd64ec383f2db">  260</a></span><span class="preprocessor">#define NEFORCE_LOG_DEBUG(msg) _NEFORCE logger::instance().debug(msg, __FILE__, __func__, __LINE__)</span></div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="group___logging.html#ga27b4cb862a667f280c3651389e1bc377">  263</a></span><span class="preprocessor">#define NEFORCE_LOG_INFO(msg)  _NEFORCE logger::instance().info(msg,  __FILE__, __func__, __LINE__)</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="group___logging.html#ga27b4cb862a667f280c3651389e1bc377">  263</a></span><span class="preprocessor">#define NEFORCE_LOG_INFO(msg) _NEFORCE logger::instance().info(msg, __FILE__, __func__, __LINE__)</span></div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="group___logging.html#ga1d0f76ad379d9e5855530e0467d217b2">  266</a></span><span class="preprocessor">#define NEFORCE_LOG_WARN(msg)  _NEFORCE logger::instance().warn(msg,  __FILE__, __func__, __LINE__)</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="group___logging.html#ga1d0f76ad379d9e5855530e0467d217b2">  266</a></span><span class="preprocessor">#define NEFORCE_LOG_WARN(msg) _NEFORCE logger::instance().warn(msg, __FILE__, __func__, __LINE__)</span></div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span></div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="group___logging.html#ga860927111c67a1231d2dd479fb141262">  269</a></span><span class="preprocessor">#define NEFORCE_LOG_ERROR(msg) _NEFORCE logger::instance().error(msg, __FILE__, __func__, __LINE__)</span></div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span></div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="group___logging.html#ga1c2c0a35fecf5c58de109043e82b279a">  272</a></span><span class="preprocessor">#define NEFORCE_LOG_FATAL(msg) _NEFORCE logger::instance().fatal(msg, __FILE__, __func__, __LINE__)</span></div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="group___logging.html#ga205e2dc039acdf4eb046d0fa5628681b">  276</a></span><span class="preprocessor">#define NEFORCE_LOGF_TRACE(msg, ...) _NEFORCE logger::instance().trace(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span></div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="group___logging.html#gab0e8fba229c12c4e4d8b4d62032564ad">  279</a></span><span class="preprocessor">#define NEFORCE_LOGF_DEBUG(msg, ...) _NEFORCE logger::instance().debug(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="group___logging.html#gaea0b2b242d3f8aff3958d20f9c998fc3">  282</a></span><span class="preprocessor">#define NEFORCE_LOGF_INFO(msg, ...)  _NEFORCE logger::instance().info(_NEFORCE format(msg, __VA_ARGS__),  __FILE__, __func__, __LINE__)</span></div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="group___logging.html#ga2aff8d140fabdbfc10e6a300fc493a2c">  285</a></span><span class="preprocessor">#define NEFORCE_LOGF_WARN(msg, ...)  _NEFORCE logger::instance().warn(_NEFORCE format(msg, __VA_ARGS__),  __FILE__, __func__, __LINE__)</span></div>
+<div class="foldopen" id="foldopen00276" data-start="" data-end="">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="group___logging.html#ga205e2dc039acdf4eb046d0fa5628681b">  276</a></span><span class="preprocessor">#define NEFORCE_LOGF_TRACE(msg, ...) \</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="preprocessor">    _NEFORCE logger::instance().trace(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
+</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span></div>
+<div class="foldopen" id="foldopen00280" data-start="" data-end="">
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno"><a class="line" href="group___logging.html#gab0e8fba229c12c4e4d8b4d62032564ad">  280</a></span><span class="preprocessor">#define NEFORCE_LOGF_DEBUG(msg, ...) \</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="preprocessor">    _NEFORCE logger::instance().debug(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
+</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span></div>
+<div class="foldopen" id="foldopen00284" data-start="" data-end="">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="group___logging.html#gaea0b2b242d3f8aff3958d20f9c998fc3">  284</a></span><span class="preprocessor">#define NEFORCE_LOGF_INFO(msg, ...) \</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="preprocessor">    _NEFORCE logger::instance().info(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
+</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span></div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="group___logging.html#gaa22a88c22e6166ca5d9ac6c5664766c0">  288</a></span><span class="preprocessor">#define NEFORCE_LOGF_ERROR(msg, ...) _NEFORCE logger::instance().error(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span></div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="group___logging.html#ga718477d579666c5e10cb5ac70c4211b7">  291</a></span><span class="preprocessor">#define NEFORCE_LOGF_FATAL(msg, ...) _NEFORCE logger::instance().fatal(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> <span class="comment">// Logging</span></div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_LOGGING_LOGGER_HPP__</span></div>
+<div class="foldopen" id="foldopen00288" data-start="" data-end="">
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="group___logging.html#ga2aff8d140fabdbfc10e6a300fc493a2c">  288</a></span><span class="preprocessor">#define NEFORCE_LOGF_WARN(msg, ...) \</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="preprocessor">    _NEFORCE logger::instance().warn(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
+</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span></div>
+<div class="foldopen" id="foldopen00292" data-start="" data-end="">
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="group___logging.html#gaa22a88c22e6166ca5d9ac6c5664766c0">  292</a></span><span class="preprocessor">#define NEFORCE_LOGF_ERROR(msg, ...) \</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="preprocessor">    _NEFORCE logger::instance().error(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
+</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span></div>
+<div class="foldopen" id="foldopen00296" data-start="" data-end="">
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="group___logging.html#ga718477d579666c5e10cb5ac70c4211b7">  296</a></span><span class="preprocessor">#define NEFORCE_LOGF_FATAL(msg, ...) \</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="preprocessor">    _NEFORCE logger::instance().fatal(_NEFORCE format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</span></div>
+</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> <span class="comment">// Logging</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_LOGGING_LOGGER_HPP__</span></div>
 <div class="ttc" id="aclasscondition__variable_html"><div class="ttname"><a href="classcondition__variable.html">condition_variable</a></div><div class="ttdoc">条件变量类</div><div class="ttdef"><b>定义</b> <a href="condition__variable_8hpp_source.html#l00124">condition_variable.hpp:124</a></div></div>
 <div class="ttc" id="aclassfile_html"><div class="ttname"><a href="classfile.html">file</a></div><div class="ttdoc">文件操作类</div><div class="ttdef"><b>定义</b> <a href="file_8hpp_source.html#l00042">file.hpp:42</a></div></div>
 <div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
@@ -265,13 +283,13 @@ $(function(){initNavTree('logger_8hpp_source.html','',''); });
 <div class="ttc" id="aclasslogger_html_af026254ee95ac41660de5d9010cd7a49"><div class="ttname"><a href="classlogger.html#af026254ee95ac41660de5d9010cd7a49">logger::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">刷新所有输出目标</div></div>
 <div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00037">mutex.hpp:37</a></div></div>
 <div class="ttc" id="aclassqueue_html"><div class="ttname"><a href="classqueue.html">queue</a></div><div class="ttdoc">队列容器适配器</div><div class="ttdef"><b>定义</b> <a href="queue_8hpp_source.html#l00036">queue.hpp:36</a></div></div>
-<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00277">shared_ptr.hpp:277</a></div></div>
-<div class="ttc" id="aclassthread_html"><div class="ttname"><a href="classthread.html">thread</a></div><div class="ttdoc">线程类</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00060">thread.hpp:60</a></div></div>
+<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00267">shared_ptr.hpp:267</a></div></div>
+<div class="ttc" id="aclassthread_html"><div class="ttname"><a href="classthread.html">thread</a></div><div class="ttdoc">线程类</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00059">thread.hpp:59</a></div></div>
 <div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
-<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
 <div class="ttc" id="acondition__variable_8hpp_html"><div class="ttname"><a href="condition__variable_8hpp.html">condition_variable.hpp</a></div><div class="ttdoc">条件变量行为</div></div>
 <div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
-<div class="ttc" id="agroup___async_html_gacb2c2756930195cd969cc14a06c437bf"><div class="ttname"><a href="group___async.html#gacb2c2756930195cd969cc14a06c437bf">async</a></div><div class="ttdeci">NEFORCE_NODISCARD future&lt; async_result_t&lt; Func, Args... &gt; &gt; async(launch policy, Func &amp;&amp;function, Args &amp;&amp;... args)</div><div class="ttdoc">异步执行函数（指定策略）</div><div class="ttdef"><b>定义</b> <a href="async_8hpp_source.html#l00038">async.hpp:38</a></div></div>
+<div class="ttc" id="agroup___async_html_gacb2c2756930195cd969cc14a06c437bf"><div class="ttname"><a href="group___async.html#gacb2c2756930195cd969cc14a06c437bf">async</a></div><div class="ttdeci">NEFORCE_NODISCARD future&lt; async_result_t&lt; Func, Args... &gt; &gt; async(launch policy, Func &amp;&amp;function, Args &amp;&amp;... args)</div><div class="ttdoc">异步执行函数（指定策略）</div><div class="ttdef"><b>定义</b> <a href="async_8hpp_source.html#l00037">async.hpp:37</a></div></div>
 <div class="ttc" id="agroup___logging_html_gaa5a9053636a30269210c54e734e0d583"><div class="ttname"><a href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a></div><div class="ttdeci">LOG_LEVEL</div><div class="ttdoc">日志级别枚举</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00033">log_event.hpp:33</a></div></div>
 <div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc">LOG_LEVEL::FATAL</a></div><div class="ttdeci">@ FATAL</div><div class="ttdoc">致命级别，表示不可恢复的错误</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00039">log_event.hpp:39</a></div></div>
 <div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6">LOG_LEVEL::TRACE</a></div><div class="ttdeci">@ TRACE</div><div class="ttdoc">跟踪级别，最详细的调试信息</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00034">log_event.hpp:34</a></div></div>
@@ -279,12 +297,12 @@ $(function(){initNavTree('logger_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">LOG_LEVEL::INFO</a></div><div class="ttdeci">@ INFO</div><div class="ttdoc">信息级别，普通信息</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00036">log_event.hpp:36</a></div></div>
 <div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5">LOG_LEVEL::ERROR</a></div><div class="ttdeci">@ ERROR</div><div class="ttdoc">错误级别，表示可恢复的错误</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00038">log_event.hpp:38</a></div></div>
 <div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15">LOG_LEVEL::DEBUG</a></div><div class="ttdeci">@ DEBUG</div><div class="ttdoc">调试级别，用于开发调试</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00035">log_event.hpp:35</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00313">shift.hpp:313</a></div></div>
 <div class="ttc" id="alog__sink_8hpp_html"><div class="ttname"><a href="log__sink_8hpp.html">log_sink.hpp</a></div><div class="ttdoc">日志输出目标</div></div>
 <div class="ttc" id="aqueue_8hpp_html"><div class="ttname"><a href="queue_8hpp.html">queue.hpp</a></div><div class="ttdoc">队列容器适配器</div></div>
 <div class="ttc" id="ashared__ptr_8hpp_html"><div class="ttname"><a href="shared__ptr_8hpp.html">shared_ptr.hpp</a></div><div class="ttdoc">共享智能指针实现</div></div>
 <div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00031">atomic.hpp:31</a></div></div>
-<div class="ttc" id="astructlog__event_html"><div class="ttname"><a href="structlog__event.html">log_event</a></div><div class="ttdoc">日志事件结构体</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00063">log_event.hpp:63</a></div></div>
+<div class="ttc" id="astructlog__event_html"><div class="ttname"><a href="structlog__event.html">log_event</a></div><div class="ttdoc">日志事件结构体</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00070">log_event.hpp:70</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

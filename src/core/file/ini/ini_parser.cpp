@@ -45,7 +45,7 @@ void ini_parser::advance() noexcept {
     }
 }
 
-bool ini_parser::is_comment_line(const string& line) const noexcept {
+bool ini_parser::is_comment_line(const string& line) const {
     string trimmed = line;
     trimmed.trim();
     return trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#';
@@ -102,12 +102,9 @@ void ini_parser::parse_line(const string& line) {
 
 unique_ptr<ini_document> ini_parser::parse() {
     string line;
-    size_t line_start = 0;
 
     while (!eof()) {
         line.clear();
-        line_start = pos_;
-
         while (!eof() && current() != '\n') {
             line += current();
             advance();
@@ -117,11 +114,7 @@ unique_ptr<ini_document> ini_parser::parse() {
             advance();
         }
 
-        try {
-            parse_line(line);
-        } catch (...) {
-            throw;
-        }
+        parse_line(line);
     }
 
     return move(root_);

@@ -39,9 +39,10 @@ namespace {
 
         CPU_info.vendor = vendor;
 
-        for (int i = 0x80000002; i <= 0x80000004; i++) {
+        for (int i = static_cast<int>(0x80000002); i <= static_cast<int>(0x80000004); i++) {
             ::__cpuid(cpu_info_data, i);
-            _NEFORCE memory_copy(brand + (i - 0x80000002) * 16, cpu_info_data, sizeof(cpu_info_data));
+            _NEFORCE memory_copy(brand + static_cast<ptrdiff_t>((i - 0x80000002) * 16), cpu_info_data,
+                                 sizeof(cpu_info_data));
         }
         brand[48] = '\0';
         CPU_info.brand = brand;

@@ -245,9 +245,9 @@ $(function(){initNavTree('group___atomic_operations.html','',''); });
 <tr class="memitem:ga5f06a2fdc01cfa5e7180cdd87b8444d2" id="r_ga5f06a2fdc01cfa5e7180cdd87b8444d2"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga5f06a2fdc01cfa5e7180cdd87b8444d2 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ga5f06a2fdc01cfa5e7180cdd87b8444d2">atomic_sub_fetch_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
 <tr class="memdesc:ga5f06a2fdc01cfa5e7180cdd87b8444d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子减去并获取操作  <br /></td></tr>
-<tr class="memitem:ga4588c81b98fa2b7eacf87c0479094826" id="r_ga4588c81b98fa2b7eacf87c0479094826"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Size, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Align&gt; </td></tr>
-<tr class="memitem:ga4588c81b98fa2b7eacf87c0479094826 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga4588c81b98fa2b7eacf87c0479094826">is_always_lock_free</a> () noexcept</td></tr>
-<tr class="memdesc:ga4588c81b98fa2b7eacf87c0479094826"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作  <br /></td></tr>
+<tr class="memitem:ga3a0d5268ae71df1d0d5872747ebf7c66" id="r_ga3a0d5268ae71df1d0d5872747ebf7c66"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Size, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Align&gt; </td></tr>
+<tr class="memitem:ga3a0d5268ae71df1d0d5872747ebf7c66 template"><td class="memItemLeft">NEFORCE_CONSTEXPR17 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga3a0d5268ae71df1d0d5872747ebf7c66">is_always_lock_free</a> () noexcept</td></tr>
+<tr class="memdesc:ga3a0d5268ae71df1d0d5872747ebf7c66"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作  <br /></td></tr>
 <tr class="memitem:ga4ea9991a1e00b98f7bfbb4717f63d5ec" id="r_ga4ea9991a1e00b98f7bfbb4717f63d5ec"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Func, typename Clock, typename Dur&gt; </td></tr>
 <tr class="memitem:ga4ea9991a1e00b98f7bfbb4717f63d5ec template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga4ea9991a1e00b98f7bfbb4717f63d5ec">atomic_wait_address_until_v</a> (const T *addr, T &amp;&amp;old, Func &amp;&amp;func, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;timeout) noexcept</td></tr>
 <tr class="memdesc:ga4ea9991a1e00b98f7bfbb4717f63d5ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">基于值的原子定时等待（绝对时间）  <br /></td></tr>
@@ -304,7 +304,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00494">494</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00479">479</a> 行定义.</p>
 
 </div>
 </div>
@@ -361,11 +361,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>添加后的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00889">889</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00855">855</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00773">atomic_fetch_add()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00739">atomic_fetch_add()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01588">atomic_base&lt; char &gt;::operator++()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01595">atomic_base&lt; char &gt;::operator++()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03175">atomic_ref_base&lt; T, true, false &gt;::operator++()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01619">atomic_base&lt; char &gt;::operator+=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01626">atomic_base&lt; char &gt;::operator+=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03192">atomic_ref_base&lt; T, true, false &gt;::operator+=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01524">atomic_base&lt; char &gt;::operator++()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01529">atomic_base&lt; char &gt;::operator++()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02955">atomic_ref_base&lt; T, true, false &gt;::operator++()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01547">atomic_base&lt; char &gt;::operator+=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01554">atomic_base&lt; char &gt;::operator+=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02968">atomic_ref_base&lt; T, true, false &gt;::operator+=()</a>.</p>
 
 </div>
 </div>
@@ -420,11 +420,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>添加后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01265">1265</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01223">1223</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01178">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01136">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02738">atomic_float_base&lt; Float &gt;::operator+=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02745">atomic_float_base&lt; Float &gt;::operator+=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03420">atomic_ref_base&lt; Float, false, true &gt;::operator+=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02554">atomic_float_base&lt; Float &gt;::operator+=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02561">atomic_float_base&lt; Float &gt;::operator+=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03172">atomic_ref_base&lt; Float, false, true &gt;::operator+=()</a>.</p>
 
 </div>
 </div>
@@ -480,11 +480,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>操作后的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00929">929</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00895">895</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00817">atomic_fetch_and()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00783">atomic_fetch_and()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01651">atomic_base&lt; char &gt;::operator&amp;=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01658">atomic_base&lt; char &gt;::operator&amp;=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03210">atomic_ref_base&lt; T, true, false &gt;::operator&amp;=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01579">atomic_base&lt; char &gt;::operator&amp;=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01586">atomic_base&lt; char &gt;::operator&amp;=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02982">atomic_ref_base&lt; T, true, false &gt;::operator&amp;=()</a>.</p>
 
 </div>
 </div>
@@ -554,11 +554,11 @@ template&lt;typename T&gt; </div>
 <dd>
 要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00736">736</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00704">704</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00580">atomic_cmpexch_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00121">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00042">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00563">atomic_cmpexch_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00120">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02660">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02668">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03074">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03050">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02484">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02491">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02866">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02843">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a>.</p>
 
 </div>
 </div>
@@ -626,11 +626,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>强比较交换保证不伪失败 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01118">1118</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01079">1079</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00121">is_valid_cmpexch_failure_order()</a>, <a class="el" href="memory_8hpp_source.html#l00119">memory_compare()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>, <a class="el" href="breakpoint_8hpp_source.html#l00042">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00120">is_valid_cmpexch_failure_order()</a>, <a class="el" href="memory_8hpp_source.html#l00124">memory_compare()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00214">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00225">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01836">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01846">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02361">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02374">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02628">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02636">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03364">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03340">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02911">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02887">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00201">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00211">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01747">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01756">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02212">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02223">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02453">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02461">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03124">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03101">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02718">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02695">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a>.</p>
 
 </div>
 </div>
@@ -700,11 +700,11 @@ template&lt;typename T&gt; </div>
 <dd>
 要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00580">580</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00563">563</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00121">is_valid_cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>, <a class="el" href="breakpoint_8hpp_source.html#l00042">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00120">is_valid_cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00736">atomic_cmpexch_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02644">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02652">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03062">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03037">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00704">atomic_cmpexch_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02469">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02476">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02855">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02831">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a>.</p>
 
 </div>
 </div>
@@ -772,11 +772,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>弱比较交换可能伪失败，需要循环重试 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00992">992</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00958">958</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00121">is_valid_cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>, <a class="el" href="breakpoint_8hpp_source.html#l00042">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00120">is_valid_cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01265">atomic_add_fetch_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01118">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01205">atomic_exchange_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01229">atomic_fetch_add_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01247">atomic_fetch_sub_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01157">atomic_store_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01283">atomic_sub_fetch_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00171">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00180">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01787">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01797">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02306">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02319">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02612">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02620">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03352">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03327">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02899">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02874">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01223">atomic_add_fetch_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01079">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01162">atomic_exchange_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01187">atomic_fetch_add_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01205">atomic_fetch_sub_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01116">atomic_store_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01241">atomic_sub_fetch_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00160">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00169">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01705">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01713">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02166">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02176">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02437">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02445">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03113">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03088">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02707">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02683">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a>.</p>
 
 </div>
 </div>
@@ -832,11 +832,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>交换前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00553">553</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00536">536</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01766">atomic_base&lt; char &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01774">atomic_base&lt; char &gt;::exchange()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03025">atomic_ref_base&lt; T, true, false &gt;::exchange()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01685">atomic_base&lt; char &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01692">atomic_base&lt; char &gt;::exchange()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02819">atomic_ref_base&lt; T, true, false &gt;::exchange()</a>.</p>
 
 </div>
 </div>
@@ -892,11 +892,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>交换前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>用于非整数类型的原子交换 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01205">1205</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01162">1162</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01178">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01136">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00152">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00159">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02598">atomic_float_base&lt; Float &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02605">atomic_float_base&lt; Float &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03315">atomic_ref_base&lt; Float, false, true &gt;::exchange()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02862">atomic_ref_base&lt; T, false, false &gt;::exchange()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00141">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00148">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02423">atomic_float_base&lt; Float &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02430">atomic_float_base&lt; Float &gt;::exchange()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03076">atomic_ref_base&lt; Float, false, true &gt;::exchange()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02671">atomic_ref_base&lt; T, false, false &gt;::exchange()</a>.</p>
 
 </div>
 </div>
@@ -952,11 +952,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>添加前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00773">773</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00739">739</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00889">atomic_add_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00797">atomic_fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01907">atomic_base&lt; char &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01915">atomic_base&lt; char &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03111">atomic_ref_base&lt; T, true, false &gt;::fetch_add()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00092">counting_semaphore&lt; 1 &gt;::release()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00855">atomic_add_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00763">atomic_fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01807">atomic_base&lt; char &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01815">atomic_base&lt; char &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02895">atomic_ref_base&lt; T, true, false &gt;::fetch_add()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00093">counting_semaphore&lt; 1 &gt;::release()</a>.</p>
 
 </div>
 </div>
@@ -1011,11 +1011,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>添加前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01229">1229</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01187">1187</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01178">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01136">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02438">atomic_base&lt; T * &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02450">atomic_base&lt; T * &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02705">atomic_float_base&lt; Float &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02712">atomic_float_base&lt; Float &gt;::fetch_add()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03401">atomic_ref_base&lt; Float, false, true &gt;::fetch_add()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02276">atomic_base&lt; T * &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02287">atomic_base&lt; T * &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02521">atomic_float_base&lt; Float &gt;::fetch_add()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02528">atomic_float_base&lt; Float &gt;::fetch_add()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03153">atomic_ref_base&lt; Float, false, true &gt;::fetch_add()</a>.</p>
 
 </div>
 </div>
@@ -1071,11 +1071,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>操作前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00817">817</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00783">783</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00929">atomic_and_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01945">atomic_base&lt; char &gt;::fetch_and()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01953">atomic_base&lt; char &gt;::fetch_and()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03131">atomic_ref_base&lt; T, true, false &gt;::fetch_and()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00895">atomic_and_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01845">atomic_base&lt; char &gt;::fetch_and()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01853">atomic_base&lt; char &gt;::fetch_and()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02915">atomic_ref_base&lt; T, true, false &gt;::fetch_and()</a>.</p>
 
 </div>
 </div>
@@ -1131,11 +1131,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>操作前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00841">841</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00807">807</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00949">atomic_or_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01964">atomic_base&lt; char &gt;::fetch_or()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01972">atomic_base&lt; char &gt;::fetch_or()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03141">atomic_ref_base&lt; T, true, false &gt;::fetch_or()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00915">atomic_or_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01864">atomic_base&lt; char &gt;::fetch_or()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01871">atomic_base&lt; char &gt;::fetch_or()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02925">atomic_ref_base&lt; T, true, false &gt;::fetch_or()</a>.</p>
 
 </div>
 </div>
@@ -1191,11 +1191,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>减去前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00797">797</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00763">763</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00773">atomic_fetch_add()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00739">atomic_fetch_add()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00909">atomic_sub_fetch()</a>, <a class="el" href="latch_8hpp_source.html#l00065">latch::count_down()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01926">atomic_base&lt; char &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01934">atomic_base&lt; char &gt;::fetch_sub()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03121">atomic_ref_base&lt; T, true, false &gt;::fetch_sub()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00875">atomic_sub_fetch()</a>, <a class="el" href="latch_8hpp_source.html#l00063">latch::count_down()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01826">atomic_base&lt; char &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01834">atomic_base&lt; char &gt;::fetch_sub()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02905">atomic_ref_base&lt; T, true, false &gt;::fetch_sub()</a>.</p>
 
 </div>
 </div>
@@ -1250,11 +1250,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>减去前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01247">1247</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01205">1205</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01178">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01136">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02465">atomic_base&lt; T * &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02477">atomic_base&lt; T * &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02722">atomic_float_base&lt; Float &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02729">atomic_float_base&lt; Float &gt;::fetch_sub()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03411">atomic_ref_base&lt; Float, false, true &gt;::fetch_sub()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02301">atomic_base&lt; T * &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02312">atomic_base&lt; T * &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02538">atomic_float_base&lt; Float &gt;::fetch_sub()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02545">atomic_float_base&lt; Float &gt;::fetch_sub()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03163">atomic_ref_base&lt; Float, false, true &gt;::fetch_sub()</a>.</p>
 
 </div>
 </div>
@@ -1310,11 +1310,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>操作前的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00865">865</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00831">831</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00969">atomic_xor_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01983">atomic_base&lt; char &gt;::fetch_xor()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01991">atomic_base&lt; char &gt;::fetch_xor()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03151">atomic_ref_base&lt; T, true, false &gt;::fetch_xor()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00935">atomic_xor_fetch()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01882">atomic_base&lt; char &gt;::fetch_xor()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01890">atomic_base&lt; char &gt;::fetch_xor()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02935">atomic_ref_base&lt; T, true, false &gt;::fetch_xor()</a>.</p>
 
 </div>
 </div>
@@ -1364,11 +1364,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>加载的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00529">529</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00513">513</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01741">atomic_base&lt; char &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01752">atomic_base&lt; char &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03015">atomic_ref_base&lt; T, true, false &gt;::load()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00078">latch::try_wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01662">atomic_base&lt; char &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01672">atomic_base&lt; char &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02811">atomic_ref_base&lt; T, true, false &gt;::load()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00076">latch::try_wait()</a>.</p>
 
 </div>
 </div>
@@ -1418,11 +1418,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>加载的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>用于非整数类型的原子加载 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01178">1178</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01136">1136</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory_8hpp_source.html#l00030">memory_copy()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory_8hpp_source.html#l00029">memory_copy()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01265">atomic_add_fetch_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01205">atomic_exchange_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01229">atomic_fetch_add_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01247">atomic_fetch_sub_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01283">atomic_sub_fetch_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00135">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic_8hpp_source.html#l00142">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02570">atomic_float_base&lt; Float &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02577">atomic_float_base&lt; Float &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03305">atomic_ref_base&lt; Float, false, true &gt;::load()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02852">atomic_ref_base&lt; T, false, false &gt;::load()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01223">atomic_add_fetch_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01162">atomic_exchange_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01187">atomic_fetch_add_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01205">atomic_fetch_sub_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01241">atomic_sub_fetch_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic_8hpp_source.html#l00131">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02399">atomic_float_base&lt; Float &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02406">atomic_float_base&lt; Float &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03066">atomic_ref_base&lt; Float, false, true &gt;::load()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02663">atomic_ref_base&lt; T, false, false &gt;::load()</a>.</p>
 
 </div>
 </div>
@@ -1471,9 +1471,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>唤醒等待addr处值变化的线程。 使用裸等待器。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00443">443</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00438">438</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00065">latch::count_down()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01896">atomic_base&lt; char &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02427">atomic_base&lt; T * &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01443">atomic_flag::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02695">atomic_float_base&lt; Float &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03391">atomic_ref_base&lt; Float, false, true &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02938">atomic_ref_base&lt; T, false, false &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03101">atomic_ref_base&lt; T, true, false &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01889">atomic_base&lt; char &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02420">atomic_base&lt; T * &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01436">atomic_flag::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02688">atomic_float_base&lt; Float &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03384">atomic_ref_base&lt; Float, false, true &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02931">atomic_ref_base&lt; T, false, false &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03094">atomic_ref_base&lt; T, true, false &gt;::notify_one()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00092">counting_semaphore&lt; 1 &gt;::release()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00063">latch::count_down()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01799">atomic_base&lt; char &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02268">atomic_base&lt; T * &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01398">atomic_flag::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02513">atomic_float_base&lt; Float &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03145">atomic_ref_base&lt; Float, false, true &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02739">atomic_ref_base&lt; T, false, false &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02887">atomic_ref_base&lt; T, true, false &gt;::notify_all()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01794">atomic_base&lt; char &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02263">atomic_base&lt; T * &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01393">atomic_flag::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02508">atomic_float_base&lt; Float &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03140">atomic_ref_base&lt; Float, false, true &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02734">atomic_ref_base&lt; T, false, false &gt;::notify_one()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02882">atomic_ref_base&lt; T, true, false &gt;::notify_one()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00093">counting_semaphore&lt; 1 &gt;::release()</a>.</p>
 
 </div>
 </div>
@@ -1529,11 +1529,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>操作后的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00949">949</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00915">915</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00841">atomic_fetch_or()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00807">atomic_fetch_or()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01667">atomic_base&lt; char &gt;::operator|=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01674">atomic_base&lt; char &gt;::operator|=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03219">atomic_ref_base&lt; T, true, false &gt;::operator|=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01595">atomic_base&lt; char &gt;::operator|=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01602">atomic_base&lt; char &gt;::operator|=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02989">atomic_ref_base&lt; T, true, false &gt;::operator|=()</a>.</p>
 
 </div>
 </div>
@@ -1591,7 +1591,7 @@ template&lt;typename Pred, typename Spin = default_spin_policy&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00047">47</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00117">counting_semaphore&lt; 1 &gt;::try_acquire()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00116">counting_semaphore&lt; 1 &gt;::try_acquire()</a>.</p>
 
 </div>
 </div>
@@ -1646,11 +1646,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00507">507</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00491">491</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00046">memory_order_release</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00050">memory_order_seq_cst</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01452">atomic_flag::clear()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01469">atomic_flag::clear()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01715">atomic_base&lt; char &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01727">atomic_base&lt; char &gt;::store()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03006">atomic_ref_base&lt; T, true, false &gt;::store()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01404">atomic_flag::clear()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01420">atomic_flag::clear()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01638">atomic_base&lt; char &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01649">atomic_base&lt; char &gt;::store()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02802">atomic_ref_base&lt; T, true, false &gt;::store()</a>.</p>
 
 </div>
 </div>
@@ -1705,11 +1705,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>用于非整数类型的原子存储 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01157">1157</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01116">1116</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00119">atomic&lt; T &gt;::store()</a>, <a class="el" href="atomic_8hpp_source.html#l00126">atomic&lt; T &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02556">atomic_float_base&lt; Float &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02563">atomic_float_base&lt; Float &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03296">atomic_ref_base&lt; Float, false, true &gt;::store()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02843">atomic_ref_base&lt; T, false, false &gt;::store()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00108">atomic&lt; T &gt;::store()</a>, <a class="el" href="atomic_8hpp_source.html#l00115">atomic&lt; T &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02385">atomic_float_base&lt; Float &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02392">atomic_float_base&lt; Float &gt;::store()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03057">atomic_ref_base&lt; Float, false, true &gt;::store()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02654">atomic_ref_base&lt; T, false, false &gt;::store()</a>.</p>
 
 </div>
 </div>
@@ -1765,11 +1765,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>减去后的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00909">909</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00875">875</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00797">atomic_fetch_sub()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00763">atomic_fetch_sub()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01603">atomic_base&lt; char &gt;::operator--()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01610">atomic_base&lt; char &gt;::operator--()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03183">atomic_ref_base&lt; T, true, false &gt;::operator--()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01635">atomic_base&lt; char &gt;::operator-=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01642">atomic_base&lt; char &gt;::operator-=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03201">atomic_ref_base&lt; T, true, false &gt;::operator-=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01535">atomic_base&lt; char &gt;::operator--()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01540">atomic_base&lt; char &gt;::operator--()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02961">atomic_ref_base&lt; T, true, false &gt;::operator--()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01563">atomic_base&lt; char &gt;::operator-=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01570">atomic_base&lt; char &gt;::operator-=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02975">atomic_ref_base&lt; T, true, false &gt;::operator-=()</a>.</p>
 
 </div>
 </div>
@@ -1824,11 +1824,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>减去后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01283">1283</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01241">1241</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00992">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01178">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00958">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01136">atomic_load_any()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02754">atomic_float_base&lt; Float &gt;::operator-=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02761">atomic_float_base&lt; Float &gt;::operator-=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03429">atomic_ref_base&lt; Float, false, true &gt;::operator-=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l02570">atomic_float_base&lt; Float &gt;::operator-=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02577">atomic_float_base&lt; Float &gt;::operator-=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03181">atomic_ref_base&lt; Float, false, true &gt;::operator-=()</a>.</p>
 
 </div>
 </div>
@@ -1878,9 +1878,9 @@ template&lt;typename T, typename Pred&gt; </div>
 </dl>
 <p>等待直到pred()返回true。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00428">428</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00423">423</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00104">counting_semaphore&lt; 1 &gt;::acquire()</a>, <a class="el" href="latch_8hpp_source.html#l00089">latch::wait()</a> , 以及 <a class="el" href="barrier_8hpp_source.html#l00177">tree_barrier&lt; CmplFunc &gt;::wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00105">counting_semaphore&lt; 1 &gt;::acquire()</a>, <a class="el" href="latch_8hpp_source.html#l00087">latch::wait()</a> , 以及 <a class="el" href="barrier_8hpp_source.html#l00172">tree_barrier&lt; CmplFunc &gt;::wait()</a>.</p>
 
 </div>
 </div>
@@ -1938,7 +1938,7 @@ template&lt;typename Pred, typename Rep, typename Period&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前条件满足</dd></dl>
 <p>针对平台等待类型的特化版本，使用裸等待器。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00492">492</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00479">479</a> 行定义.</p>
 
 </div>
 </div>
@@ -1997,9 +1997,9 @@ template&lt;typename T, typename Pred, typename Rep, typename Period&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前条件满足</dd></dl>
 <p>等待直到pred()返回true或经过指定时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00473">473</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00461">461</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00135">counting_semaphore&lt; 1 &gt;::try_acquire_for()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00132">counting_semaphore&lt; 1 &gt;::try_acquire_for()</a>.</p>
 
 </div>
 </div>
@@ -2064,7 +2064,7 @@ template&lt;typename T, typename Func, typename Rep, typename Period&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前条件满足</dd></dl>
 <p>等待直到addr处的值不等于old或经过指定时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00453">453</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00442">442</a> 行定义.</p>
 
 </div>
 </div>
@@ -2122,7 +2122,7 @@ template&lt;typename Pred, typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前条件满足</dd></dl>
 <p>针对平台等待类型的特化版本，使用裸等待器。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00432">432</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00422">422</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>.</p>
 
@@ -2183,11 +2183,11 @@ template&lt;typename T, typename Pred, typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前条件满足</dd></dl>
 <p>等待直到pred()返回true或超时。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00413">413</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00404">404</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00152">counting_semaphore&lt; 1 &gt;::try_acquire_until()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00147">counting_semaphore&lt; 1 &gt;::try_acquire_until()</a>.</p>
 
 </div>
 </div>
@@ -2252,7 +2252,7 @@ template&lt;typename T, typename Func, typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前条件满足</dd></dl>
 <p>等待直到addr处的值不等于old或超时。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00393">393</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00385">385</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>.</p>
 
@@ -2310,9 +2310,9 @@ template&lt;typename T, typename Func&gt; </div>
 </dl>
 <p>等待直到addr处的值不等于old。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00413">413</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__wait_8hpp_source.html">atomic_wait.hpp</a> 第 <a class="el" href="atomic__wait_8hpp_source.html#l00408">408</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01880">atomic_base&lt; char &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02411">atomic_base&lt; T * &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01413">atomic_flag::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01425">atomic_flag::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02679">atomic_float_base&lt; Float &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03375">atomic_ref_base&lt; Float, false, true &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02922">atomic_ref_base&lt; T, false, false &gt;::wait()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03085">atomic_ref_base&lt; T, true, false &gt;::wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01787">atomic_base&lt; char &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02256">atomic_base&lt; T * &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01374">atomic_flag::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01383">atomic_flag::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02501">atomic_float_base&lt; Float &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03133">atomic_ref_base&lt; Float, false, true &gt;::wait()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02727">atomic_ref_base&lt; T, false, false &gt;::wait()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02875">atomic_ref_base&lt; T, true, false &gt;::wait()</a>.</p>
 
 </div>
 </div>
@@ -2368,16 +2368,16 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>操作后的值 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>要求操作类型为整形 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00969">969</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00935">935</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00865">atomic_fetch_xor()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00831">atomic_fetch_xor()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01683">atomic_base&lt; char &gt;::operator^=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01690">atomic_base&lt; char &gt;::operator^=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03228">atomic_ref_base&lt; T, true, false &gt;::operator^=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l01611">atomic_base&lt; char &gt;::operator^=()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01618">atomic_base&lt; char &gt;::operator^=()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02996">atomic_ref_base&lt; T, true, false &gt;::operator^=()</a>.</p>
 
 </div>
 </div>
-<a id="ga4588c81b98fa2b7eacf87c0479094826" name="ga4588c81b98fa2b7eacf87c0479094826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4588c81b98fa2b7eacf87c0479094826">&#9670;&#160;</a></span>is_always_lock_free()</h2>
+<a id="ga3a0d5268ae71df1d0d5872747ebf7c66" name="ga3a0d5268ae71df1d0d5872747ebf7c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3a0d5268ae71df1d0d5872747ebf7c66">&#9670;&#160;</a></span>is_always_lock_free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2388,7 +2388,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_always_lock_free </td>
+          <td class="memname">NEFORCE_CONSTEXPR17 bool is_always_lock_free </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -2396,7 +2396,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2411,7 +2411,9 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否支持无锁操作 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01300">1300</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01258">1258</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00096">atomic&lt; T &gt;::is_lock_free()</a>, <a class="el" href="atomic_8hpp_source.html#l00101">atomic&lt; T &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01626">atomic_base&lt; char &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01631">atomic_base&lt; char &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02031">atomic_base&lt; T * &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02038">atomic_base&lt; T * &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02373">atomic_float_base&lt; Float &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02378">atomic_float_base&lt; Float &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03050">atomic_ref_base&lt; Float, false, true &gt;::is_lock_free()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02647">atomic_ref_base&lt; T, false, false &gt;::is_lock_free()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02793">atomic_ref_base&lt; T, true, false &gt;::is_lock_free()</a>.</p>
 
 </div>
 </div>

@@ -6,7 +6,7 @@ mysql_result::mysql_result() noexcept :
 column_name_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<::enum_field_types>>()) {}
 
-mysql_result::mysql_result(::MYSQL_RES* result) noexcept :
+mysql_result::mysql_result(::MYSQL_RES* result) :
 result_(result),
 rows_(::mysql_num_rows(result)),
 columns_(::mysql_num_fields(result)),

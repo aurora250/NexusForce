@@ -163,7 +163,7 @@ private:
     void reset_sub_objects() noexcept;
 
     bool flush_write_buffer() const noexcept;
-    bool fill_read_buffer() const noexcept;
+    bool fill_read_buffer() const;
 
     void set_last_error() const;
 
@@ -392,7 +392,7 @@ public:
      *
      * 追加模式下只能seek到文件末尾。
      */
-    bool seek(difference_type distance, file_pointer method = file_pointer::END) const noexcept;
+    bool seek(difference_type distance, file_pointer method = file_pointer::END) const;
 
     /**
      * @brief 获取当前文件指针位置
@@ -427,7 +427,7 @@ public:
      * 将文件截断到指定大小，多余数据丢失。
      * 如果新大小大于原文件，文件会扩展（内容未定义）。
      */
-    bool truncate(difference_type size) const noexcept;
+    bool truncate(difference_type size) const;
 
     /**
      * @brief 获取文件大小

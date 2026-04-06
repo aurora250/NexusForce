@@ -230,7 +230,7 @@ var group___file =
       [ "node", "classpath__tree_1_1node.html", [
         [ "children_list", "classpath__tree_1_1node.html#a2a0801dd531b8ab16eec183e86081ce8", null ],
         [ "ptr", "classpath__tree_1_1node.html#a5f41634a8284d75aa0f4e8497eda708b", null ],
-        [ "weak_ptr", "classpath__tree_1_1node.html#ae39229a7267c061993955f3ab61187f4", null ],
+        [ "weak_ptr", "classpath__tree_1_1node.html#a593a61c879ad11f77eefc27dfe80a0bc", null ],
         [ "node", "classpath__tree_1_1node.html#adfe2c7bca934a373dc8f69215b95cea0", null ],
         [ "add_child", "classpath__tree_1_1node.html#aad1af0bcb1d32eb9fd1a5ade9a6a1859", null ],
         [ "child_count", "classpath__tree_1_1node.html#ab5192a883f152dd7c91bb2b71f08457f", null ],
@@ -311,7 +311,7 @@ var group___file =
       [ "release", "classtemp__file.html#a6bd876203a19428fb3113c30e8ee8269", null ],
       [ "set_delete_policy", "classtemp__file.html#a3f7ac3b078b81bae11e2cd63957cca11", null ]
     ] ],
-    [ "fud_t", "group___file.html#gae4813e6c48d0f95b7cdbc8cab7809a65", null ],
+    [ "fud_t", "group___file.html#ga7629ed37340e93203c1f0c100a479b33", null ],
     [ "file_attri", "group___file.html#gadd0b8478c8ee0d6b05880ca087016c9e", [
       [ "file_attri::NORMAL", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051", null ],
       [ "file_attri::READONLY", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e", null ],

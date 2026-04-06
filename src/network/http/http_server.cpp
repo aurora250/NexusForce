@@ -444,6 +444,7 @@ void http_server_base::send_error_response(tcp_socket* client_socket, const HTTP
                               "</p>"
                               "</body></html>";
         send_response(client_socket, error_response);
+        // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (...) {
         // ignore
     }

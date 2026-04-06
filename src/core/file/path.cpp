@@ -103,7 +103,7 @@ string_view path::extension(const string_view path) noexcept {
     return filename.substr(last_dot + 1);
 }
 
-path path::lexically_normal() const noexcept {
+path path::lexically_normal() const {
     if (path_.empty()) {
         return path(".");
     }
@@ -442,7 +442,7 @@ bool path::is_file(const string& path) noexcept {
 #endif
 }
 
-bool path::operator==(const path& rhs) const noexcept {
+bool path::operator==(const path& rhs) const {
     const path lhs_norm = this->lexically_normal();
     const path rhs_norm = rhs.lexically_normal();
 
@@ -453,7 +453,7 @@ bool path::operator==(const path& rhs) const noexcept {
 #endif
 }
 
-bool path::operator<(const path& rhs) const noexcept {
+bool path::operator<(const path& rhs) const {
     const path lhs_norm = lexically_normal();
     const path rhs_norm = rhs.lexically_normal();
 

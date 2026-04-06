@@ -245,16 +245,6 @@ NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="structatomic__base_3_01_t_01_5_
 <tr class="memdesc:ad8dadd88a6d0b99071f9df7c49ae885e inherit pub_methods_structatomic__base_3_01_t_01_5_01_4"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并或操作  <br /></td></tr>
 <tr class="memitem:a949e0b9639cec434570a5945530dea9e inherit pub_methods_structatomic__base_3_01_t_01_5_01_4" id="r_a949e0b9639cec434570a5945530dea9e"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="structatomic__base_3_01_t_01_5_01_4.html#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#a949e0b9639cec434570a5945530dea9e">fetch_xor</a> (<a class="el" href="structatomic__base_3_01_t_01_5_01_4.html#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:a949e0b9639cec434570a5945530dea9e inherit pub_methods_structatomic__base_3_01_t_01_5_01_4"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并异或操作  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-静态 Public 属性</h2></td></tr>
-<tr class="memitem:a0cec92c6884c57fe1afb00ebad76d518" id="r_a0cec92c6884c57fe1afb00ebad76d518"><td class="memItemLeft"><a id="a0cec92c6884c57fe1afb00ebad76d518" name="a0cec92c6884c57fe1afb00ebad76d518"></a>
-static constexpr bool&#160;</td><td class="memItemRight"><b>is_always_lock_free</b></td></tr>
-<tr class="memdesc:a0cec92c6884c57fe1afb00ebad76d518"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否总是无锁 <br /></td></tr>
-<tr class="inherit_header pub_static_attribs_structatomic__base_3_01_t_01_5_01_4"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_attribs_structatomic__base_3_01_t_01_5_01_4')"><span class="dynarrow"><span class="arrowhead closed"></span></span>静态 Public 属性 继承自 <a class="el" href="structatomic__base_3_01_t_01_5_01_4.html">atomic_base&lt; T * &gt;</a></td></tr>
-<tr class="memitem:a9c8e4f7d4b19552c2b2df7281e2b5b8c inherit pub_static_attribs_structatomic__base_3_01_t_01_5_01_4" id="r_a9c8e4f7d4b19552c2b2df7281e2b5b8c"><td class="memItemLeft">
-static constexpr bool&#160;</td><td class="memItemRight"><b>is_always_lock_free</b> = _NEFORCE is_always_lock_free&lt;sizeof(<a class="el" href="structatomic__base_3_01_t_01_5_01_4.html#a3df64c375c8ae24e670efd8f714c3410">value_type</a>), alignof(<a class="el" href="structatomic__base_3_01_t_01_5_01_4.html#a3df64c375c8ae24e670efd8f714c3410">value_type</a>)&gt;()</td></tr>
-<tr class="memdesc:a9c8e4f7d4b19552c2b2df7281e2b5b8c inherit pub_static_attribs_structatomic__base_3_01_t_01_5_01_4"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否总是无锁 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -266,7 +256,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00259">259</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00242">242</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a1464cb79d660c630d2fe3a44a7b8adba" name="a1464cb79d660c630d2fe3a44a7b8adba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1464cb79d660c630d2fe3a44a7b8adba">&#9670;&#160;</a></span>compare_exchange_strong()</h2>
@@ -317,7 +307,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00214">214</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00201">201</a> 行定义.</p>
 
 </div>
 </div>
@@ -370,7 +360,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00171">171</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00160">160</a> 行定义.</p>
 
 </div>
 </div>
@@ -411,7 +401,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>交换前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00152">152</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00141">141</a> 行定义.</p>
 
 </div>
 </div>
@@ -441,7 +431,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
 <p>检查是否支持无锁操作 </p>
 <dl class="section return"><dt>返回</dt><dd>是否支持无锁 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00103">103</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00096">96</a> 行定义.</p>
 
 </div>
 </div>
@@ -477,7 +467,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>加载的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00135">135</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00124">124</a> 行定义.</p>
 
 </div>
 </div>
@@ -507,7 +497,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
 <p>类型转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>当前值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00067">67</a> 行定义.</p>
 
 </div>
 </div>
@@ -547,7 +537,7 @@ struct atomic&lt; T * &gt;</div><p>指针类型的原子特化 </p>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00119">119</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00108">108</a> 行定义.</p>
 
 </div>
 </div>

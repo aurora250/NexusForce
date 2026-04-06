@@ -283,10 +283,10 @@ sql_builder& sql_builder::group_by(string field) {
     return *this;
 }
 
-sql_builder& sql_builder::group_by(vector<string> fields) {
+sql_builder& sql_builder::group_by(const vector<string>& fields) {
     auto* data = ensure_select_data();
     for (const auto& field: fields) {
-        data->group_by_fields.emplace_back(move(field));
+        data->group_by_fields.emplace_back(field);
     }
     return *this;
 }

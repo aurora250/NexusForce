@@ -107,8 +107,8 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
         NEFORCE_THROW_EXCEPTION(value_exception("Certificate or key PEM data is empty"));
     }
 
-    ::BIO* cert_bio = ::BIO_new_mem_buf(cert_pem.data(), cert_pem.size());
-    ::BIO* key_bio = ::BIO_new_mem_buf(key_pem.data(), key_pem.size());
+    ::BIO* cert_bio = ::BIO_new_mem_buf(cert_pem.data(), static_cast<int>(cert_pem.size()));
+    ::BIO* key_bio = ::BIO_new_mem_buf(key_pem.data(), static_cast<int>(key_pem.size()));
 
     if (!cert_bio || !key_bio) {
         if (cert_bio) {

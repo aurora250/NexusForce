@@ -110,15 +110,15 @@ Public 类型</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:ad2fdcf6ba77f77062ce7fe773bd2d2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">钩子触发点枚举  <a href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">更多...</a><br /></td></tr>
-<tr class="memitem:a3cb0384db8eb83e2341c918b0f1f15ff" id="r_a3cb0384db8eb83e2341c918b0f1f15ff"><td class="memItemLeft"><a id="a3cb0384db8eb83e2341c918b0f1f15ff" name="a3cb0384db8eb83e2341c918b0f1f15ff"></a>
-using&#160;</td><td class="memItemRight"><b>callback_t</b> = void(*)(<a class="el" href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">point</a> <a class="el" href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">point</a>, <a class="el" href="structthread_1_1id.html">id</a> thread_id)</td></tr>
-<tr class="memdesc:a3cb0384db8eb83e2341c918b0f1f15ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">钩子回调函数类型 <br /></td></tr>
+<tr class="memitem:ab43416ec116fd0118fd18583d69fdae0" id="r_ab43416ec116fd0118fd18583d69fdae0"><td class="memItemLeft"><a id="ab43416ec116fd0118fd18583d69fdae0" name="ab43416ec116fd0118fd18583d69fdae0"></a>
+using&#160;</td><td class="memItemRight"><b>callback_t</b> = void (*)(<a class="el" href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">point</a> <a class="el" href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">point</a>, <a class="el" href="structthread_1_1id.html">id</a> thread_id)</td></tr>
+<tr class="memdesc:ab43416ec116fd0118fd18583d69fdae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">钩子回调函数类型 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
-<tr class="memitem:a0bf51ba4d0324bb83e390845315e47a4" id="r_a0bf51ba4d0324bb83e390845315e47a4"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a0bf51ba4d0324bb83e390845315e47a4">add_hook</a> (<a class="el" href="#a3cb0384db8eb83e2341c918b0f1f15ff">callback_t</a> <a class="el" href="structthread_1_1hook.html">hook</a>)</td></tr>
+<tr class="memitem:a0bf51ba4d0324bb83e390845315e47a4" id="r_a0bf51ba4d0324bb83e390845315e47a4"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a0bf51ba4d0324bb83e390845315e47a4">add_hook</a> (<a class="el" href="#ab43416ec116fd0118fd18583d69fdae0">callback_t</a> <a class="el" href="structthread_1_1hook.html">hook</a>)</td></tr>
 <tr class="memdesc:a0bf51ba4d0324bb83e390845315e47a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加钩子回调  <br /></td></tr>
-<tr class="memitem:af745b29df61eaa20ae6735320abfd118" id="r_af745b29df61eaa20ae6735320abfd118"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#af745b29df61eaa20ae6735320abfd118">remove_hook</a> (<a class="el" href="#a3cb0384db8eb83e2341c918b0f1f15ff">callback_t</a> <a class="el" href="structthread_1_1hook.html">hook</a>)</td></tr>
+<tr class="memitem:af745b29df61eaa20ae6735320abfd118" id="r_af745b29df61eaa20ae6735320abfd118"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#af745b29df61eaa20ae6735320abfd118">remove_hook</a> (<a class="el" href="#ab43416ec116fd0118fd18583d69fdae0">callback_t</a> <a class="el" href="structthread_1_1hook.html">hook</a>)</td></tr>
 <tr class="memdesc:af745b29df61eaa20ae6735320abfd118"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除钩子回调  <br /></td></tr>
 <tr class="memitem:a464acf4a2b2781f2c768b26b85aa1425" id="r_a464acf4a2b2781f2c768b26b85aa1425"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a464acf4a2b2781f2c768b26b85aa1425">invoke</a> (<a class="el" href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">point</a> <a class="el" href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">point</a>, <a class="el" href="structthread_1_1id.html">id</a> thread_id)</td></tr>
 <tr class="memdesc:a464acf4a2b2781f2c768b26b85aa1425"><td class="mdescLeft">&#160;</td><td class="mdescRight">调用钩子回调  <br /></td></tr>
@@ -127,7 +127,7 @@ using&#160;</td><td class="memItemRight"><b>callback_t</b> = void(*)(<a class="e
 <div class="textblock"><p>线程生命周期钩子 </p>
 <p>提供线程生命周期事件的回调机制，用于监控线程的创建和销毁。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00139">139</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00137">137</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="ad2fdcf6ba77f77062ce7fe773bd2d2cf" name="ad2fdcf6ba77f77062ce7fe773bd2d2cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2fdcf6ba77f77062ce7fe773bd2d2cf">&#9670;&#160;</a></span>point</h2>
@@ -163,7 +163,7 @@ using&#160;</td><td class="memItemRight"><b>callback_t</b> = void(*)(<a class="e
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00144">144</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00142">142</a> 行定义.</p>
 
 </div>
 </div>
@@ -180,7 +180,7 @@ using&#160;</td><td class="memItemRight"><b>callback_t</b> = void(*)(<a class="e
         <tr>
           <td class="memname">void thread::hook::add_hook </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a3cb0384db8eb83e2341c918b0f1f15ff">callback_t</a></td>          <td class="paramname"><span class="paramname"><em>hook</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#ab43416ec116fd0118fd18583d69fdae0">callback_t</a></td>          <td class="paramname"><span class="paramname"><em>hook</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -251,7 +251,7 @@ using&#160;</td><td class="memItemRight"><b>callback_t</b> = void(*)(<a class="e
         <tr>
           <td class="memname">void thread::hook::remove_hook </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a3cb0384db8eb83e2341c918b0f1f15ff">callback_t</a></td>          <td class="paramname"><span class="paramname"><em>hook</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#ab43416ec116fd0118fd18583d69fdae0">callback_t</a></td>          <td class="paramname"><span class="paramname"><em>hook</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>

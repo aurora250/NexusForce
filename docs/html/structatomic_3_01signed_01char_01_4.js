@@ -8,5 +8,7 @@ var structatomic_3_01signed_01char_01_4 =
     [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
     [ "operator signed char", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
     [ "operator signed char", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+    [ "operator=", "structatomic_3_01signed_01char_01_4.html#aa6dec395d8f263e3fe72066b230e76b7", null ],
+    [ "operator=", "structatomic_3_01signed_01char_01_4.html#a452bf7e5c5c78b7199beee7d9f9cd728", null ],
     [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
 ];

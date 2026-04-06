@@ -105,7 +105,7 @@ bool file::flush_write_buffer() const noexcept {
     return true;
 }
 
-bool file::fill_read_buffer() const noexcept {
+bool file::fill_read_buffer() const {
     if (read_buffer_.empty()) {
         read_buffer_.resize(buffer_size_);
     }
@@ -962,7 +962,7 @@ void file::clear_error() noexcept {
     last_error_code_ = 0;
 }
 
-bool file::seek(const difference_type distance, file_pointer method) const noexcept {
+bool file::seek(const difference_type distance, file_pointer method) const {
     if (!opened_ || handle_ == invalid_handle) {
         return false;
     }
@@ -1161,7 +1161,7 @@ bool file::prefetch(const size_type hint_size) const noexcept {
 #endif
 }
 
-bool file::truncate(const difference_type size) const noexcept {
+bool file::truncate(const difference_type size) const {
     if (!opened_ || handle_ == invalid_handle) {
         last_error_code_ = EBADF;
         return false;

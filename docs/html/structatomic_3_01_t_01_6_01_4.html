@@ -125,12 +125,6 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:aae3c3ec7b287a0fc7d98db21be55f066"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱比较交换操作  <br /></td></tr>
 <tr class="memitem:a1464cb79d660c630d2fe3a44a7b8adba" id="r_a1464cb79d660c630d2fe3a44a7b8adba"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="structatomic.html#a1464cb79d660c630d2fe3a44a7b8adba">compare_exchange_strong</a> (T &amp;expected, T desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
 <tr class="memdesc:a1464cb79d660c630d2fe3a44a7b8adba"><td class="mdescLeft">&#160;</td><td class="mdescRight">强比较交换操作  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-静态 Public 属性</h2></td></tr>
-<tr class="memitem:a0cec92c6884c57fe1afb00ebad76d518" id="r_a0cec92c6884c57fe1afb00ebad76d518"><td class="memItemLeft"><a id="a0cec92c6884c57fe1afb00ebad76d518" name="a0cec92c6884c57fe1afb00ebad76d518"></a>
-static constexpr bool&#160;</td><td class="memItemRight"><b>is_always_lock_free</b></td></tr>
-<tr class="memdesc:a0cec92c6884c57fe1afb00ebad76d518"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否总是无锁 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -142,7 +136,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00278">278</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00262">262</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a1464cb79d660c630d2fe3a44a7b8adba" name="a1464cb79d660c630d2fe3a44a7b8adba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1464cb79d660c630d2fe3a44a7b8adba">&#9670;&#160;</a></span>compare_exchange_strong()</h2>
@@ -193,7 +187,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00214">214</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00201">201</a> 行定义.</p>
 
 </div>
 </div>
@@ -246,7 +240,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00171">171</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00160">160</a> 行定义.</p>
 
 </div>
 </div>
@@ -287,7 +281,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>交换前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00152">152</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00141">141</a> 行定义.</p>
 
 </div>
 </div>
@@ -317,7 +311,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
 <p>检查是否支持无锁操作 </p>
 <dl class="section return"><dt>返回</dt><dd>是否支持无锁 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00103">103</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00096">96</a> 行定义.</p>
 
 </div>
 </div>
@@ -353,7 +347,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>加载的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00135">135</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00124">124</a> 行定义.</p>
 
 </div>
 </div>
@@ -383,7 +377,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
 <p>类型转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>当前值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00067">67</a> 行定义.</p>
 
 </div>
 </div>
@@ -423,7 +417,7 @@ struct atomic&lt; T &amp; &gt;</div><p>引用类型的原子特化 </p>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00119">119</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic_8hpp_source.html">atomic.hpp</a> 第 <a class="el" href="atomic_8hpp_source.html#l00108">108</a> 行定义.</p>
 
 </div>
 </div>

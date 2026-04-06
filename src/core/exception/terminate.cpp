@@ -167,14 +167,14 @@ namespace {
             bool is_used;
         };
 
-        array<handler_entry, max_handler_threshhold> atexit_handlers{};
+        array<handler_entry, max_handler_threshhold> exit_handlers{};
         array<handler_entry, max_handler_threshhold> quick_exit_handlers{};
-        size_t atexit_count{0};
+        size_t exit_count{0};
         size_t quick_exit_count{0};
         mutex mtx;
 
         exit_handler_manager() {
-            fill(atexit_handlers.begin(), atexit_handlers.end(), handler_entry{nullptr, false});
+            fill(exit_handlers.begin(), exit_handlers.end(), handler_entry{nullptr, false});
             fill(quick_exit_handlers.begin(), quick_exit_handlers.end(), handler_entry{nullptr, false});
         }
 
@@ -190,15 +190,15 @@ namespace {
             }
 
             lock<mutex> lock(mtx);
-            if (atexit_count >= max_handler_threshhold) {
+            if (exit_count >= max_handler_threshhold) {
                 return -1;
             }
 
-            for (auto& entry: atexit_handlers) {
+            for (auto& entry: exit_handlers) {
                 if (!entry.is_used) {
                     entry.func = handler;
                     entry.is_used = true;
-                    ++atexit_count;
+                    ++exit_count;
                     return 0;
                 }
             }
@@ -226,14 +226,14 @@ namespace {
             return -1;
         }
 
-        void execute_atexit_handlers() {
-            for (int i = static_cast<int>(atexit_handlers.size()) - 1; i >= 0; --i) {
-                if (atexit_handlers[i].is_used) {
-                    atexit_handlers[i].func();
-                    atexit_handlers[i].is_used = false;
+        void execute_exit_handlers() {
+            for (int i = static_cast<int>(exit_handlers.size()) - 1; i >= 0; --i) {
+                if (exit_handlers[i].is_used) {
+                    exit_handlers[i].func();
+                    exit_handlers[i].is_used = false;
                 }
             }
-            atexit_count = 0;
+            exit_count = 0;
         }
 
         void execute_quick_exit_handlers() {
@@ -253,31 +253,25 @@ void set_terminate(const terminate_handler handler) noexcept {
     get_terminate_handler().store(handler, memory_order_release);
 }
 
-void terminate() {
-    const auto handler = get_terminate_handler().load(memory_order_acquire);
-    if (handler) {
-        handler();
+void terminate() noexcept {
+    try {
+        const auto handler = get_terminate_handler().load(memory_order_acquire);
+        if (handler) {
+            handler();
+        }
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
     }
     abort();
 }
 
-void abort() {
+void abort() noexcept {
     ::fflush(nullptr);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetUnhandledExceptionFilter(nullptr);
-
-    // STATUS_FATAL_APP_EXIT
-    ::PVOID handlers[1];
-    handlers[0] = ::AddVectoredExceptionHandler(1, nullptr);
-
-    constexpr ::ULONG_PTR args[1] = {0xC0000409}; // STATUS_STACK_BUFFER_OVERRUN
-
-    ::RaiseException(0xC0000409, EXCEPTION_NONCONTINUABLE, 1, args);
     ::TerminateProcess(::GetCurrentProcess(), 3);
-    if (handlers[0]) {
-        ::RemoveVectoredExceptionHandler(handlers[0]);
-    }
 #else
     ::sigset_t mask;
     ::sigemptyset(&mask);
@@ -313,7 +307,7 @@ int set_quick_exit(const exit_handler handler) noexcept {
 }
 
 void exit(const int status) {
-    exit_handler_manager::instance().execute_atexit_handlers();
+    exit_handler_manager::instance().execute_exit_handlers();
 
     ::fflush(nullptr);
 

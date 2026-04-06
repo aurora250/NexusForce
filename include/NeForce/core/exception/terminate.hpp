@@ -41,7 +41,7 @@ void NEFORCE_API set_terminate(terminate_handler handler) noexcept;
  *
  * @note 此函数不会返回，进程将在执行终止处理函数后终止。
  */
-NEFORCE_NORETURN void NEFORCE_API terminate();
+NEFORCE_NORETURN void NEFORCE_API terminate() noexcept;
 
 
 /**
@@ -51,7 +51,7 @@ NEFORCE_NORETURN void NEFORCE_API terminate();
  *
  * @note 此函数不会返回，进程将在执行函数后终止。
  */
-NEFORCE_NORETURN void NEFORCE_API abort();
+NEFORCE_NORETURN void NEFORCE_API abort() noexcept;
 
 
 /**

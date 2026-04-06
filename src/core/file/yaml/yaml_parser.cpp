@@ -352,8 +352,6 @@ string yaml_parser::unescape_string(const string& str) const {
                     result += '\b';
                     break;
                 case 't':
-                    result += '\t';
-                    break;
                 case '\t':
                     result += '\t';
                     break;
@@ -865,16 +863,8 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
     while (!eof()) {
         const char ch = current();
 
-        if (is_hex && is_xdigit(ch)) {
-            num_str += ch;
-            advance();
-        } else if (is_octal && ch >= '0' && ch <= '7') {
-            num_str += ch;
-            advance();
-        } else if (is_binary && (ch == '0' || ch == '1')) {
-            num_str += ch;
-            advance();
-        } else if (!is_hex && !is_octal && !is_binary && is_digit(ch)) {
+        if ((is_hex && is_xdigit(ch)) || (is_octal && ch >= '0' && ch <= '7') ||
+            (is_binary && (ch == '0' || ch == '1')) || (!is_hex && !is_octal && !is_binary && is_digit(ch))) {
             num_str += ch;
             advance();
         } else if (ch == '_') {

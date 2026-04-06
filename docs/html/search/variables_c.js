@@ -21,6 +21,5 @@ var searchData=
   ['min_5fexponent_18',['min_exponent',['../classnumeric__traits_3_01float32__t_01_4.html#ab3e5ee46f6220a5410c1c13b52f31fb3',1,'numeric_traits&lt; float32_t &gt;']]],
   ['min_5fexponent10_19',['min_exponent10',['../classnumeric__traits_3_01float32__t_01_4.html#a079a14d0bbb5a34abab8a4304ae07c61',1,'numeric_traits&lt; float32_t &gt;']]],
   ['minor_20',['minor',['../structsysinfo_1_1os__version__info.html#a8c7e7dd389d78e4994a8432e60306767',1,'sysinfo::os_version_info']]],
-  ['month_5fdays_21',['month_days',['../classdate.html#a78731e993e4f87ef6dad6f086107ac9a',1,'date']]],
-  ['months_5fstring_22',['months_string',['../classdatetime.html#a2f31b9283bc6adaee3ce0621cbf56052',1,'datetime']]]
+  ['month_5fdays_21',['month_days',['../classdate.html#a78731e993e4f87ef6dad6f086107ac9a',1,'date']]]
 ];

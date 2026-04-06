@@ -14,5 +14,6 @@ var searchData=
   ['device_11',['DEVICE',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d',1,'file_constants.hpp']]],
   ['directory_12',['DIRECTORY',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48',1,'file_constants.hpp']]],
   ['directory_13',['directory',['../classpath__tree.html#ab55e0606b796ecf83a0c16b83475abe8a5f8f22b8cdbaeee8cf857673a9b6ba20',1,'path_tree']]],
-  ['double_14',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]]
+  ['dns_14',['dns',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ac58c1dba72d699d01322e9f08ec47861',1,'ports']]],
+  ['double_15',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]]
 ];

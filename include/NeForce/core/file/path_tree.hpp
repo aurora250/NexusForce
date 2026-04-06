@@ -237,20 +237,20 @@ public:
      * @brief 获取树中节点总数
      * @return 节点数量
      */
-    NEFORCE_NODISCARD size_t size() const noexcept;
+    NEFORCE_NODISCARD size_t size() const;
 
     /**
      * @brief 获取树的最大深度
      * @return 最大深度
      */
-    NEFORCE_NODISCARD size_t max_depth() const noexcept;
+    NEFORCE_NODISCARD size_t max_depth() const;
 
     /**
      * @brief 通过绝对路径查找节点
      * @param p 要查找的路径
      * @return 找到的节点，未找到返回nullptr
      */
-    NEFORCE_NODISCARD node::ptr find(const path& p) const noexcept;
+    NEFORCE_NODISCARD node::ptr find(const path& p) const;
 
     /**
      * @brief 通过文件名查找所有匹配节点

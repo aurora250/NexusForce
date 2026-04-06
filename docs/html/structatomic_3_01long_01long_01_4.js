@@ -8,5 +8,7 @@ var structatomic_3_01long_01long_01_4 =
     [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
     [ "operator long long", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
     [ "operator long long", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+    [ "operator=", "structatomic_3_01long_01long_01_4.html#a5848205a2e5914aa488db4888862ee8b", null ],
+    [ "operator=", "structatomic_3_01long_01long_01_4.html#af87956346dd7e8afcad69917717f5960", null ],
     [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
 ];

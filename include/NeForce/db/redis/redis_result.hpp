@@ -21,7 +21,7 @@ private:
 
 public:
     redis_result() noexcept;
-    explicit redis_result(::redisReply* reply) noexcept;
+    explicit redis_result(::redisReply* reply);
     ~redis_result() override;
 
     NEFORCE_NODISCARD bool empty() const noexcept override { return !result_ || (rows_ == 0 && kv_pairs_->empty()); }

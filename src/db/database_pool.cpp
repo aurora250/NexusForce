@@ -135,7 +135,7 @@ idb_connect* database_pool::try_create_connect() noexcept {
     }
 }
 
-void database_pool::return_connect(idb_connect* conn) noexcept {
+void database_pool::return_connect(idb_connect* conn) {
     if (conn == nullptr) {
         return;
     }

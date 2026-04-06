@@ -174,7 +174,7 @@ template&lt;typename Res, typename... Args&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00041">41</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a3a32c746c6407f06616b1c2eead52151">operator=()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00083">operator=()</a>, <a class="el" href="#a3a474623a4049c9013b4b948e1f100d0">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00074">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00145">reset()</a> , 以及 <a class="el" href="packaged__task_8hpp_source.html#l00092">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a3a32c746c6407f06616b1c2eead52151">operator=()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00080">operator=()</a>, <a class="el" href="#a3a474623a4049c9013b4b948e1f100d0">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00073">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00136">reset()</a> , 以及 <a class="el" href="packaged__task_8hpp_source.html#l00089">swap()</a>.</p>
 
 </div>
 </div>
@@ -222,7 +222,7 @@ template&lt;typename Func, typename = enable_if_t&lt;!is_same_v&lt;packaged_task
 
 <p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00052">52</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
@@ -254,9 +254,9 @@ template&lt;typename Res, typename... Args&gt; </div>
 <p>析构函数 </p>
 <p>如果存在关联的future且任务未执行，会自动设置broken_promise异常。 </p>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00060">60</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -293,7 +293,7 @@ template&lt;typename Res, typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00074">74</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00073">73</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="packaged__task_8hpp_source.html#l00041">packaged_task()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
 
@@ -334,7 +334,7 @@ template&lt;typename Res, typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00109">109</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00102">102</a> 行定义.</p>
 
 </div>
 </div>
@@ -378,9 +378,9 @@ template&lt;typename Res, typename... Args&gt; </div>
 </dl>
 <p>执行任务但延迟结果设置，直到当前线程退出时才将结果传递给future。 适用于需要保证某些资源在结果设置前有效的场景。 </p>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00133">133</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00124">124</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
@@ -424,9 +424,9 @@ template&lt;typename Res, typename... Args&gt; </div>
 </dl>
 <p>同步执行包装的任务，结果或异常会传递给关联的future。 </p>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00120">120</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00111">111</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
@@ -464,9 +464,9 @@ template&lt;typename Res, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00083">83</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00080">80</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="packaged__task_8hpp_source.html#l00041">packaged_task()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="packaged__task_8hpp_source.html#l00041">packaged_task()</a>.</p>
 
 </div>
 </div>
@@ -504,7 +504,7 @@ template&lt;typename Res, typename... Args&gt; </div>
 </dl>
 <p>重置任务状态，可以重新关联新的future。 原有任务函数保持不变，但会创建新的共享状态。 </p>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00145">145</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00136">136</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="packaged__task_8hpp_source.html#l00041">packaged_task()</a>.</p>
 
@@ -543,7 +543,7 @@ template&lt;typename Res, typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00092">92</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00089">89</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="packaged__task_8hpp_source.html#l00041">packaged_task()</a>.</p>
 
@@ -577,7 +577,7 @@ template&lt;typename Res, typename... Args&gt; </div>
 <p>检查任务是否有效 </p>
 <dl class="section return"><dt>返回</dt><dd>是否关联了有效的可调用对象 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00100">100</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00095">95</a> 行定义.</p>
 
 </div>
 </div>

@@ -29,7 +29,7 @@ ssize_t udp_socket::send(memory_view<const char> data, const int flags) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid socket fd for UDP send"));
     }
 
-    const ssize_t result = ::send(fd_, data.data(), data.size(), flags);
+    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send UDP datagram to connected endpoint"));
     }
@@ -48,7 +48,7 @@ pair<ssize_t, ip_address> udp_socket::receive_from(memory_view<char> buffer, con
     ::sockaddr_storage addr_storage;
     ::socklen_t addrlen = sizeof(addr_storage);
 
-    ssize_t result = ::recvfrom(fd_, buffer.data(), buffer.size(), flags,
+    ssize_t result = ::recvfrom(fd_, buffer.data(), static_cast<int>(buffer.size()), flags,
                                 reinterpret_cast<struct sockaddr*>(&addr_storage), &addrlen);
 
     if (result < 0) {
@@ -76,7 +76,7 @@ ssize_t udp_socket::receive(memory_view<char> buffer, const int flags) {
         NEFORCE_THROW_EXCEPTION(value_exception("Receive buffer cannot be empty"));
     }
 
-    const ssize_t result = ::recv(fd_, buffer.data(), buffer.size(), flags);
+    const ssize_t result = ::recv(fd_, buffer.data(), static_cast<int>(buffer.size()), flags);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to receive UDP datagram from connected endpoint"));
     }

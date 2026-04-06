@@ -61,7 +61,9 @@ void temp_file::cleanup_all_temp_files() {
                 } else {
                     filesystem::remove(temp_path);
                 }
-            } catch (...) { /* ignore */
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
             }
         }
     }
@@ -117,7 +119,6 @@ temp_file& temp_file::operator=(temp_file&& other) noexcept {
 
     cleanup();
 
-    const path other_path = other.file_.file_path();
     const delete_policy other_policy = other.delete_policy_;
 
     file_ = move(other.file_);
@@ -127,22 +128,25 @@ temp_file& temp_file::operator=(temp_file&& other) noexcept {
     return *this;
 }
 
-void temp_file::cleanup() {
+void temp_file::cleanup() noexcept {
     if (delete_policy_ == delete_policy::KEEP_ON_EXIT) {
         file_.close();
         return;
     }
 
-    const path file_path = file_.file_path();
+    const path& file_path = file_.file_path();
     file_.close();
 
-    {
+    try {
         lock<mutex> lk(get_registry_mutex());
         auto& registry = get_temp_registry();
         const auto it = find(registry.begin(), registry.end(), file_path);
         if (it != registry.end()) {
             registry.erase(it);
         }
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
     }
 
     if (delete_policy_ == delete_policy::AUTO_DELETE) {
@@ -153,7 +157,9 @@ void temp_file::cleanup() {
                 } else {
                     filesystem::remove(file_path);
                 }
+                // NOLINTNEXTLINE(bugprone-empty-catch)
             } catch (...) {
+                // ignore
             }
         }
     }

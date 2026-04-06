@@ -102,51 +102,46 @@ $(function(){initNavTree('construct_8hpp_source.html','',''); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___inplace_memory_function.html#ga68b412b707b9885fe512b8acf2c2fb87">   33</a></span>NEFORCE_CONSTEXPR20 T* <a class="code hl_function" href="group___inplace_memory_function.html#ga68b412b707b9885fe512b8acf2c2fb87">construct</a>(T* ptr, Args&amp;&amp;... args)</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">noexcept</span>(is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">static_assert</span>(is_constructible_v&lt;T, Args...&gt;, <span class="stringliteral">&quot;T must be constructible with arguments&quot;</span>);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<span class="keyword">new</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...));</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___inplace_memory_function.html#ga68b412b707b9885fe512b8acf2c2fb87">   33</a></span>NEFORCE_CONSTEXPR20 T* <a class="code hl_function" href="group___inplace_memory_function.html#ga68b412b707b9885fe512b8acf2c2fb87">construct</a>(T* ptr, Args&amp;&amp;... args) <span class="keyword">noexcept</span>(is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static_assert</span>(is_constructible_v&lt;T, Args...&gt;, <span class="stringliteral">&quot;T must be constructible with arguments&quot;</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<span class="keyword">new</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...));</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">   47</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(T* pointer)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">noexcept</span>(is_nothrow_destructible_v&lt;T&gt;) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    pointer-&gt;~T();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">   46</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(T* pointer) <span class="keyword">noexcept</span>(is_nothrow_destructible_v&lt;T&gt;) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    pointer-&gt;~T();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>NEFORCE_CONSTEXPR20</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_iter_v&lt;Iterator&gt;</a> &amp;&amp; !is_trivially_destructible_v&lt;iter_value_t&lt;Iterator&gt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___inplace_memory_function.html#ga8ab7c381b09253b3c5ead4e0af63ce5b">   64</a></span><a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(Iterator first, Iterator last)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">noexcept</span>(is_nothrow_destructible_v&lt;iter_value_t&lt;Iterator&gt;&gt;) {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">for</span> (; first &lt; last; ++first) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        _NEFORCE <a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(&amp;*first);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_iter_v&lt;Iterator&gt;</a> &amp;&amp; !is_trivially_destructible_v&lt;iter_value_t&lt;Iterator&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___inplace_memory_function.html#ga8ab7c381b09253b3c5ead4e0af63ce5b">   61</a></span><a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(Iterator first, Iterator last) <span class="keyword">noexcept</span>(is_nothrow_destructible_v&lt;iter_value_t&lt;Iterator&gt;&gt;) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">for</span> (; first &lt; last; ++first) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        _NEFORCE <a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(&amp;*first);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
 </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>NEFORCE_CONSTEXPR20</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_iter_v&lt;Iterator&gt;</a> &amp;&amp; is_trivially_destructible_v&lt;iter_value_t&lt;Iterator&gt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="construct_8hpp.html#ga8ab7c381b09253b3c5ead4e0af63ce5b">   84</a></span><a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(Iterator first, Iterator last) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_iter_v&lt;Iterator&gt;</a> &amp;&amp; is_trivially_destructible_v&lt;iter_value_t&lt;Iterator&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="construct_8hpp.html#ga8ab7c381b09253b3c5ead4e0af63ce5b">   79</a></span><a class="code hl_function" href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a>(Iterator first, Iterator last) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
 </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> <span class="comment">// InplaceMemoryFunction</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_MEMORY_CONSTRUCT_HPP__</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> <span class="comment">// InplaceMemoryFunction</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_MEMORY_CONSTRUCT_HPP__</span></div>
 <div class="ttc" id="aconcepts_8hpp_html"><div class="ttname"><a href="concepts_8hpp.html">concepts.hpp</a></div><div class="ttdoc">概念和类型约束</div></div>
-<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03025">type_traits.hpp:3025</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03001">type_traits.hpp:3001</a></div></div>
 <div class="ttc" id="agroup___inplace_memory_function_html_ga68b412b707b9885fe512b8acf2c2fb87"><div class="ttname"><a href="group___inplace_memory_function.html#ga68b412b707b9885fe512b8acf2c2fb87">construct</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 T * construct(T *ptr, Args &amp;&amp;... args) noexcept(is_nothrow_constructible_v&lt; T, Args... &gt;)</div><div class="ttdoc">在指定内存位置构造对象</div><div class="ttdef"><b>定义</b> <a href="#l00033">construct.hpp:33</a></div></div>
-<div class="ttc" id="agroup___inplace_memory_function_html_ga944697ea9e7569e2eab45433e8109032"><div class="ttname"><a href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void destroy(T *pointer) noexcept(is_nothrow_destructible_v&lt; T &gt;)</div><div class="ttdoc">销毁单个对象</div><div class="ttdef"><b>定义</b> <a href="#l00047">construct.hpp:47</a></div></div>
-<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
+<div class="ttc" id="agroup___inplace_memory_function_html_ga944697ea9e7569e2eab45433e8109032"><div class="ttname"><a href="group___inplace_memory_function.html#ga944697ea9e7569e2eab45433e8109032">destroy</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void destroy(T *pointer) noexcept(is_nothrow_destructible_v&lt; T &gt;)</div><div class="ttdoc">销毁单个对象</div><div class="ttdef"><b>定义</b> <a href="#l00046">construct.hpp:46</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00112">type_traits.hpp:112</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -29,7 +29,6 @@ namespace {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const uint32_t granularity = sysinfo::instance().get_system_info().allocation_granularity;
-        const uintptr_t delta = static_cast<uintptr_t>(offset) & ~(static_cast<uintptr_t>(granularity) - 1u);
         const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr) -
                                     (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1u));
         ::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_addr));

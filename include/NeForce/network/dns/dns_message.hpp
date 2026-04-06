@@ -96,7 +96,7 @@ struct dns_query_result {
     vector<dns_record> authorities;
     vector<dns_record> additional;
     milliseconds query_time;
-    dns_response response_code;
+    dns_response response_code{dns_response::NON_ERROR};
     bool truncated;
     bool recursive_available;
 

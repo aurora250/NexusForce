@@ -163,7 +163,7 @@ vector<string> cmdline::get_os_argv() {
     for (int i = 0; i < argc; ++i) {
         args.push_back(_NEFORCE to_string(argv_wide[i]));
     }
-    ::LocalFree(argv_wide);
+    ::LocalFree(static_cast<void*>(argv_wide));
 #else
     file cmdline_file(path{"/proc/self/cmdline"});
     if (!cmdline_file.is_opened()) {
@@ -252,7 +252,7 @@ void cmdline::parse_short_options(const string& arg, const vector<string>& args,
                 if (index + 1 >= args.size()) {
                     NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option requires a value: -"_s + short_name).data()));
                 }
-                const string value = args[++index];
+                string value = args[++index];
                 if (opt->allow_multiple) {
                     opt->values.push_back(move(value));
                 } else {

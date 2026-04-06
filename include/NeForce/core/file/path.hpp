@@ -294,7 +294,7 @@ public:
      *
      * 解析路径中的"."和".."，移除多余的分隔符。
      */
-    NEFORCE_NODISCARD path lexically_normal() const noexcept;
+    NEFORCE_NODISCARD path lexically_normal() const;
 
     /**
      * @brief 获取绝对路径
@@ -439,14 +439,14 @@ public:
      * @param rhs 另一个路径
      * @return 是否相等
      */
-    NEFORCE_NODISCARD bool operator==(const path& rhs) const noexcept;
+    NEFORCE_NODISCARD bool operator==(const path& rhs) const;
 
     /**
      * @brief 小于比较
      * @param rhs 另一个路径
      * @return 是否小于
      */
-    NEFORCE_NODISCARD bool operator<(const path& rhs) const noexcept;
+    NEFORCE_NODISCARD bool operator<(const path& rhs) const;
 
     /**
      * @brief 计算哈希值

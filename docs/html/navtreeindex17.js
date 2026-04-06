@@ -1,5 +1,11 @@
 var NAVTREEINDEX17 =
 {
+"group___bit_manipulation.html#gaca7d03246c48e209e00c3355d632e1da":[1,33,14],
+"group___bit_manipulation.html#gaccd54859db374262f5c36034b8669abb":[1,33,11],
+"group___bit_manipulation.html#gace6550d923413b36d07c574320cff214":[1,33,6],
+"group___bit_manipulation.html#gae161496fd9c8999a12cf45d93ec19750":[1,33,26],
+"group___bit_manipulation.html#gae781ff6a7fad2bc8db38b0c3b371658e":[1,33,8],
+"group___bit_manipulation.html#gaf2706acea69cb92b45211c361b3cd40b":[1,33,13],
 "group___bit_manipulation.html#gafba370ed4270e4741f6a79f49582b081":[1,33,28],
 "group___bloom_filter.html":[1,34],
 "group___bound_algorithms.html":[1,1,10],
@@ -134,7 +140,7 @@ var NAVTREEINDEX17 =
 "group___container.html":[1,35],
 "group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95":[1,35,18],
 "group___convertible_checks.html":[1,125],
-"group___convertible_checks.html#gac4a5b95547730341f2c954f12d2857f5":[1,125,4],
+"group___convertible_checks.html#gab8efd424ae29f19c10d54d62118c763f":[1,125,4],
 "group___core_types.html":[1,132],
 "group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879":[1,132,15],
 "group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f":[1,132,0],
@@ -173,6 +179,7 @@ var NAVTREEINDEX17 =
 "group___data_bus_width.html":[1,28],
 "group___data_bus_width.html#ga7a0fbfaaa4c1e40fadf6f52c03c20a8f":[1,28,1],
 "group___data_bus_width.html#gaf9a7f6deec7509e87e250fe6a05c5eae":[1,28,0],
+"group___database_interface.html":[1,149],
 "group___date_time.html":[1,110],
 "group___debug_breakpoints_and_assertions.html":[1,40],
 "group___debug_breakpoints_and_assertions.html#ga0ed39d8133a30375f3cb51a092dde1e2":[1,40,4],
@@ -242,12 +249,5 @@ var NAVTREEINDEX17 =
 "group___encryption.html#gac2a495f2810bfb6c90688a09a94e2454":[1,39,31],
 "group___encryption.html#gac9984e27f1c006721a2ee282db352a32":[1,39,8],
 "group___encryption.html#gac9d4e016a3045f782adbaff307c3028f":[1,39,19],
-"group___encryption.html#gacc99ef05b5f45b5e03097d385ba7c87d":[1,39,29],
-"group___encryption.html#gad6258058e2fc95b08093d0973bf4e36c":[1,39,9],
-"group___encryption.html#gae84302c91975c32afbd96bea61d5952d":[1,39,12],
-"group___endian.html":[1,66],
-"group___env_config.html":[1,43],
-"group___environment_variables.html":[1,102],
-"group___exception_handling.html":[1,41],
-"group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32":[1,41,8]
+"group___encryption.html#gacc99ef05b5f45b5e03097d385ba7c87d":[1,39,29]
 };

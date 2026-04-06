@@ -27,7 +27,7 @@ public:
     arp() = default;
     ~arp() = default;
 
-    bool open(const char* iface = nullptr) noexcept;
+    bool open(const char* iface = nullptr);
     void close() noexcept;
 
     optional<mac_address> resolve(const ip_address& target, milliseconds timeout = milliseconds(1000)) noexcept;

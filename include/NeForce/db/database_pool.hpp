@@ -50,7 +50,7 @@ private:
 
     idb_connect* try_create_connect() noexcept;
 
-    void return_connect(idb_connect* conn) noexcept;
+    void return_connect(idb_connect* conn);
 
     void replenish_task();
     void scanner_task();

@@ -95,11 +95,11 @@ $(function(){initNavTree('redis__result_8hpp_source.html','',''); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_DATABASE_REDIS_RESULT_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_DATABASE_REDIS_RESULT_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifdef NEFORCE_SUPPORT_HIREDIS</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;NeForce/db/db_interface.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;hiredis/hiredis.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#    include &lt;hiredis/hiredis.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#    include &quot;<a class="code" href="db__interface_8hpp.html">NeForce/db/db_interface.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">struct </span>NEFORCE_API redis_result final : idb_kv_result {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">struct </span>NEFORCE_API redis_result final : <a class="code hl_struct" href="structidb__kv__result.html">idb_kv_result</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    ::redisReply* result_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    size_type cursor_ = 0;</div>
@@ -118,35 +118,31 @@ $(function(){initNavTree('redis__result_8hpp_source.html','',''); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    explicit redis_result(::redisReply* reply) noexcept;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    ~redis_result() override;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a>() const noexcept<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> !result_ || (rows_ == 0 &amp;&amp; kv_pairs_-&gt;empty());</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>() noexcept override;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> key() const noexcept override;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> value() const noexcept override;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> value_bool() const override;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> value_int64() const override;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> value_double() const override;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    NEFORCE_NODISCARD vector&lt;<span class="keywordtype">string</span>&gt; value_array() const override;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    NEFORCE_NODISCARD const vector&lt;pair&lt;<span class="keywordtype">string</span>, <span class="keywordtype">string</span>&gt;&gt;&amp; value_hash()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> *kv_pairs_; }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> type() const noexcept {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> result_ ? result_-&gt;type : -1;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_nil() const noexcept {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">return</span> result_ &amp;&amp; result_-&gt;type == REDIS_REPLY_NIL;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_REDIS_RESULT_HPP__</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> !result_ || (rows_ == 0 &amp;&amp; kv_pairs_-&gt;empty()); }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="structidb__result.html#a4ffe1b5d13e654c3cb99f000e7d4d093">next</a>() noexcept override;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> key() const noexcept override;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> value() const noexcept override;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> value_bool() const override;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> value_int64() const override;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> value_double() const override;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    NEFORCE_NODISCARD vector&lt;<span class="keywordtype">string</span>&gt; value_array() const override;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NEFORCE_NODISCARD const vector&lt;pair&lt;<span class="keywordtype">string</span>, <span class="keywordtype">string</span>&gt;&gt;&amp; value_hash()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> *kv_pairs_; }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> type() const noexcept { <span class="keywordflow">return</span> result_ ? result_-&gt;type : -1; }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_nil() const noexcept { <span class="keywordflow">return</span> result_ &amp;&amp; result_-&gt;type == REDIS_REPLY_NIL; }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_REDIS_RESULT_HPP__</span></div>
+<div class="ttc" id="adb__interface_8hpp_html"><div class="ttname"><a href="db__interface_8hpp.html">db_interface.hpp</a></div><div class="ttdoc">数据库抽象接口层</div></div>
 <div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
-<div class="ttc" id="agroup___iterator_operation_html_ga81a6fcf5c05367caa72c5e1e26ffa38f"><div class="ttname"><a href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a></div><div class="ttdeci">constexpr Iterator next(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</div><div class="ttdoc">获取迭代器的后一个位置</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00155">iterator.hpp:155</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga57a416f9c003e19a8fae0edc3f0902bb"><div class="ttname"><a href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const Container &amp;cont) noexcept(noexcept(cont.empty()))</div><div class="ttdoc">检查容器是否为空</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00383">type_erase.hpp:383</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga57a416f9c003e19a8fae0edc3f0902bb"><div class="ttname"><a href="group___type_erasure_functions.html#ga57a416f9c003e19a8fae0edc3f0902bb">empty</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool empty(const Container &amp;cont) noexcept(noexcept(cont.empty()))</div><div class="ttdoc">检查容器是否为空</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00362">type_erase.hpp:362</a></div></div>
+<div class="ttc" id="astructidb__kv__result_html"><div class="ttname"><a href="structidb__kv__result.html">idb_kv_result</a></div><div class="ttdoc">键值存储结果集抽象基类</div><div class="ttdef"><b>定义</b> <a href="db__interface_8hpp_source.html#l00107">db_interface.hpp:107</a></div></div>
+<div class="ttc" id="astructidb__result_html_a4ffe1b5d13e654c3cb99f000e7d4d093"><div class="ttname"><a href="structidb__result.html#a4ffe1b5d13e654c3cb99f000e7d4d093">idb_result::next</a></div><div class="ttdeci">virtual bool next()=0</div><div class="ttdoc">移动到下一行</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

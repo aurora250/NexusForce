@@ -8,5 +8,7 @@ var structatomic_3_01unsigned_01short_01_4 =
     [ "load", "structatomic.html#a08238b88fc524dbab833b1f2efbca3ec", null ],
     [ "operator unsigned short", "structatomic.html#aebc58046cb114024522dba369e66859c", null ],
     [ "operator unsigned short", "structatomic.html#aaadf92532bf753a9ce4ae08f975a78db", null ],
+    [ "operator=", "structatomic_3_01unsigned_01short_01_4.html#abf8c6a71337b3e459f192e224b41714e", null ],
+    [ "operator=", "structatomic_3_01unsigned_01short_01_4.html#a80f9c649076bf1ee23f49d23a5056e96", null ],
     [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
 ];

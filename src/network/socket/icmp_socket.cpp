@@ -34,7 +34,7 @@ void icmp_socket::send_echo_request(const ip_address& dest, const uint16_t id, c
         NEFORCE_THROW_EXCEPTION(value_exception("ICMP socket not opened"));
     }
 
-    size_t packet_len = sizeof(icmp_header) + data_len;
+    const size_t packet_len = sizeof(icmp_header) + data_len;
     vector<char> packet(packet_len);
     auto* hdr = reinterpret_cast<icmp_header*>(packet.data());
     hdr->type = ICMP_ECHO_REQUEST;
@@ -145,7 +145,7 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
         if (ip->version != 4) {
             continue;
         }
-        ip_header_len = ip->ihl * 4;
+        ip_header_len = static_cast<size_t>(ip->ihl * 4);
         if (ip_header_len < 20 || ip_header_len > static_cast<size_t>(recv_len)) {
             continue;
         }
@@ -177,7 +177,7 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
             }
 
             const auto* orig_ip = reinterpret_cast<const ip_header*>(icmp_start + sizeof(icmp_header));
-            size_t orig_ip_header_len = orig_ip->ihl * 4;
+            const size_t orig_ip_header_len = static_cast<size_t>(orig_ip->ihl * 4);
             if (orig_ip_header_len < sizeof(ip_header) || orig_ip_header_len > icmp_len - sizeof(icmp_header)) {
                 continue;
             }
@@ -189,8 +189,8 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
                 continue;
             }
 
-            auto orig_id = endian::network_to_host<uint16_t>(orig_icmp->id);
-            auto orig_seq = endian::network_to_host<uint16_t>(orig_icmp->sequence);
+            const auto orig_id = endian::network_to_host<uint16_t>(orig_icmp->id);
+            const auto orig_seq = endian::network_to_host<uint16_t>(orig_icmp->sequence);
 
             if (orig_id == expected_id && orig_seq == expected_seq) {
                 memory_copy(&out_header, &outer_hdr, sizeof(icmp_header));

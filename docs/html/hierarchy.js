@@ -223,7 +223,10 @@ var hierarchy =
         [ "thread_exception", "structthread__exception.html", null ]
       ] ],
       [ "thirdparty_exception", "structthirdparty__exception.html", [
-        [ "database_exception", "structdatabase__exception.html", null ],
+        [ "database_exception", "structdatabase__exception.html", [
+          [ "database_prepared_stmt_exception", "structdatabase__prepared__stmt__exception.html", null ],
+          [ "database_typecast_exception", "structdatabase__typecast__exception.html", null ]
+        ] ],
         [ "neforce::lz4_exception", "structneforce_1_1lz4__exception.html", null ],
         [ "ssl_exception", "structssl__exception.html", null ],
         [ "zlib_exception", "structzlib__exception.html", null ]
@@ -1055,6 +1058,18 @@ var hierarchy =
     [ "icomparable&lt; vector&lt; thread, allocator&lt; thread &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< vector< thread, allocator< thread > > >", "structicollector.html", null ]
     ] ],
+    [ "idb_connect", "structidb__connect.html", [
+      [ "idb_kv_connect", "structidb__kv__connect.html", null ],
+      [ "idb_tb_connect", "structidb__tb__connect.html", null ]
+    ] ],
+    [ "idb_factory", "classidb__factory.html", null ],
+    [ "idb_prepared_statement", "structidb__prepared__statement.html", null ],
+    [ "idb_result", "structidb__result.html", [
+      [ "idb_kv_result", "structidb__kv__result.html", null ],
+      [ "idb_tb_result", "structidb__tb__result.html", [
+        [ "idb_prepared_result", "structidb__prepared__result.html", null ]
+      ] ]
+    ] ],
     [ "identity&lt; T &gt;", "structidentity.html", null ],
     [ "ihashable&lt; T &gt;", "structihashable.html", [
       [ "icommon< compressed_pair< IfEmpty, T, is_empty_v< IfEmpty > &&!is_final_v< IfEmpty > > >", "structicommon.html", null ],
@@ -1569,7 +1584,9 @@ var hierarchy =
       [ "thread_pool::pool_statistics", "structthread__pool_1_1pool__statistics.html", null ]
     ] ],
     [ "istringify&lt; ports &gt;", "structistringify.html", [
-      [ "iobject< ports >", "structiobject.html", null ]
+      [ "iobject< ports >", "structiobject.html", [
+        [ "ports", "structports.html", null ]
+      ] ]
     ] ],
     [ "istringify&lt; stacktrace &gt;", "structistringify.html", [
       [ "stacktrace", "classstacktrace.html", null ]

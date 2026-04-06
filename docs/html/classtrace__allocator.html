@@ -203,7 +203,7 @@ template&lt;typename T&gt; </div>
 <p>析构函数 </p>
 <p>检查是否存在未释放的内存，如果有则输出内存泄漏报告。 </p>
 
-<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00090">90</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00092">92</a> 行定义.</p>
 
 </div>
 </div>
@@ -237,9 +237,9 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>指向分配内存的指针</dd></dl>
 <p>分配一个T类型元素的内存，并记录当前调用栈。 </p>
 
-<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00130">130</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00134">134</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="trace__memory_8hpp_source.html#l00130">trace_allocator&lt; U &gt;::allocate()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="trace__memory_8hpp_source.html#l00134">trace_allocator&lt; U &gt;::allocate()</a>.</p>
 
 </div>
 </div>
@@ -278,7 +278,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>指向分配内存的指针</dd></dl>
 <p>分配n个T类型元素的内存，并记录当前调用栈。 </p>
 
-<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00117">117</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00121">121</a> 行定义.</p>
 
 </div>
 </div>
@@ -316,7 +316,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>释放由allocate()分配的单个元素内存。 </p>
 
-<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00155">155</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00157">157</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="trace__memory_8hpp_source.html#l00157">trace_allocator&lt; U &gt;::deallocate()</a>.</p>
 
 </div>
 </div>
@@ -359,9 +361,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>释放由allocate分配的内存，并从追踪表中移除记录。 </p>
 
-<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00141">141</a> 行定义.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="trace__memory_8hpp_source.html#l00155">trace_allocator&lt; U &gt;::deallocate()</a>.</p>
+<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00143">143</a> 行定义.</p>
 
 </div>
 </div>
@@ -431,9 +431,9 @@ template&lt;typename T&gt; </div>
 <p>打印所有未释放内存的调用栈 </p>
 <p>遍历追踪表，输出每个泄漏指针的地址和分配时的调用栈。 </p>
 
-<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00102">102</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="trace__memory_8hpp_source.html">trace_memory.hpp</a> 第 <a class="el" href="trace__memory_8hpp_source.html#l00104">104</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="trace__memory_8hpp_source.html#l00090">trace_allocator&lt; U &gt;::~trace_allocator()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="trace__memory_8hpp_source.html#l00092">trace_allocator&lt; U &gt;::~trace_allocator()</a>.</p>
 
 </div>
 </div>

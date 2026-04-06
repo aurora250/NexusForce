@@ -309,7 +309,8 @@ date mysql_prepared_result::get_date(const size_type n) const {
     }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
-    return date(mt->year, mt->month, mt->day);
+    using date_type = date::date_type;
+    return date(static_cast<date_type>(mt->year), static_cast<date_type>(mt->month), static_cast<date_type>(mt->day));
 }
 
 time mysql_prepared_result::get_time(const size_type n) const {
@@ -324,7 +325,9 @@ time mysql_prepared_result::get_time(const size_type n) const {
     }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
-    return time(mt->hour, mt->minute, mt->second);
+    using time_type = time::time_type;
+    return time(static_cast<time_type>(mt->hour), static_cast<time_type>(mt->minute),
+                static_cast<time_type>(mt->second));
 }
 
 datetime mysql_prepared_result::get_datetime(const size_type n) const {
@@ -339,7 +342,12 @@ datetime mysql_prepared_result::get_datetime(const size_type n) const {
     }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
-    return datetime(date(mt->year, mt->month, mt->day), time(mt->hour, mt->minute, mt->second));
+    using date_type = date::date_type;
+    using time_type = time::time_type;
+    return datetime(
+            date(static_cast<date_type>(mt->year), static_cast<date_type>(mt->month), static_cast<date_type>(mt->day)),
+            time(static_cast<time_type>(mt->hour), static_cast<time_type>(mt->minute),
+                 static_cast<time_type>(mt->second)));
 }
 
 timestamp mysql_prepared_result::get_timestamp(const size_type n) const {
@@ -354,7 +362,12 @@ timestamp mysql_prepared_result::get_timestamp(const size_type n) const {
     }
 
     const auto mt = reinterpret_cast<const ::MYSQL_TIME*>((*buffers_)[n].data());
-    return timestamp(datetime(mt->year, mt->month, mt->day, mt->hour, mt->minute, mt->second));
+    using date_type = date::date_type;
+    using time_type = time::time_type;
+    return timestamp(datetime(
+            date(static_cast<date_type>(mt->year), static_cast<date_type>(mt->month), static_cast<date_type>(mt->day)),
+            time(static_cast<time_type>(mt->hour), static_cast<time_type>(mt->minute),
+                 static_cast<time_type>(mt->second))));
 }
 
 NEFORCE_END_NAMESPACE__

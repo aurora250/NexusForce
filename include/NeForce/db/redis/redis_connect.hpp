@@ -28,14 +28,14 @@ public:
     NEFORCE_DEPRECATED_FOR("Redis not support setting character sets")
     string_view get_character_set() const noexcept override { return ""; }
 
-    string_view get_error() const noexcept override;
+    string_view get_error() const override;
     uint32_t get_errno() const noexcept override { return link_ ? link_->err : 0; }
 
-    bool update(const string& sql) const noexcept override;
+    bool update(const string& sql) const override;
     unique_ptr<idb_kv_result> query(const string& sql) const override;
 
     bool connected() const noexcept override { return link_ != nullptr && !link_->err; }
-    bool is_valid() const noexcept override;
+    bool is_valid() const override;
 
     bool set(const string& key, const string& value) override;
     bool setex(const string& key, const string& value, int seconds) override;

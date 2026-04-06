@@ -129,7 +129,7 @@ void signal_manager::register_handler(const signal_event event, signal_handler h
     handlers_[event] = move(handler);
 }
 
-void signal_manager::register_handlers(const vector<signal_event>& events, signal_handler handler) {
+void signal_manager::register_handlers(const vector<signal_event>& events, const signal_handler& handler) {
     if (!handler) {
         NEFORCE_THROW_EXCEPTION(system_exception("Signal handler cannot be null"));
     }

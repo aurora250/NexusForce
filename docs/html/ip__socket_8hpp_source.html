@@ -124,8 +124,8 @@ $(function(){initNavTree('ip__socket_8hpp_source.html','',''); });
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    ip_socket() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">explicit</span> ip_socket(<span class="keyword">const</span> native_handle_type fd) noexcept</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    : socket_base(fd) {}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">explicit</span> ip_socket(<span class="keyword">const</span> native_handle_type fd) noexcept :</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    socket_base(fd) {}</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    ip_socket(ip_socket&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    ip_socket&amp; operator=(ip_socket&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
@@ -135,29 +135,23 @@ $(function(){initNavTree('ip__socket_8hpp_source.html','',''); });
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    ~ip_socket() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> address_family() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">return</span> family_;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> address_family() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> family_; }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_ipv4() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> family_ == AF_INET; }</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_ipv4() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> family_ == AF_INET;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_ipv6() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> family_ == AF_INET6; }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> connect(<span class="keyword">const</span> ip_address&amp; endpoint);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_ipv6() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> family_ == AF_INET6;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> connect(<span class="keyword">const</span> ip_address&amp; endpoint);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">bool</span> close() <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        family_ = AF_UNSPEC;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> socket_base::close();</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">bool</span> close() <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        family_ = AF_UNSPEC;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> socket_base::close();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
 </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SOCKET_IP_SOCKET_HPP__</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SOCKET_IP_SOCKET_HPP__</span></div>
 <div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00098">types.hpp:98</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>

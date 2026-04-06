@@ -57,7 +57,7 @@ random_mt::random_mt() noexcept { set_seed(static_cast<seed_type>(timestamp::now
 void random_mt::set_seed(const seed_type seed) noexcept {
     state_[0] = seed;
     for (size_t i = 1; i < n; ++i) {
-        state_[i] = 1812433253 * (state_[i - 1] ^ (state_[i - 1] >> 30)) + i;
+        state_[i] = static_cast<seed_type>(1812433253ULL * (state_[i - 1] ^ (state_[i - 1] >> 30)) + i);
     }
     index_ = n;
 }

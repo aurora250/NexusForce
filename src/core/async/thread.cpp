@@ -44,7 +44,7 @@ namespace {
 #    ifdef NEFORCE_COMPILER_MSVC
     void set_thread_name_by_exception(const char* name) {
         constexpr ::DWORD MSVC_EXCEPTION = 0x406D1388;
-        THREADNAME_INFO info;
+        THREADNAME_INFO info{};
         info.dwType = 0x1000;
         info.szName = name;
         info.dwThreadID = ::GetCurrentThreadId();
@@ -100,8 +100,13 @@ thread_id_(thread_id) {
     hook::invoke(hook::point::thread_start, thread_id_);
 }
 
-thread::thread_monitor::~thread_monitor() {
-    hook::invoke(hook::point::thread_end, thread_id_);
+thread::thread_monitor::~thread_monitor() noexcept {
+    try {
+        hook::invoke(hook::point::thread_end, thread_id_);
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
     thread_tracker::instance().on_thread_destroy();
 }
 
@@ -172,7 +177,12 @@ state_(other.state_) {
 thread& thread::operator=(thread&& other) noexcept {
     if (this != &other) {
         if (joinable()) {
-            hook::invoke(hook::point::before_destroy, id_);
+            try {
+                hook::invoke(hook::point::before_destroy, id_);
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
             terminate();
         }
 
@@ -191,7 +201,12 @@ thread& thread::operator=(thread&& other) noexcept {
 }
 
 thread::~thread() {
-    hook::invoke(hook::point::before_destroy, id_);
+    try {
+        hook::invoke(hook::point::before_destroy, id_);
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
     if (joinable()) {
         terminate();
     }

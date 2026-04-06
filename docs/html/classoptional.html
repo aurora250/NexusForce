@@ -154,12 +154,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a4a0641e07c3aa0e337ae55c134f7f09f" id="r_a4a0641e07c3aa0e337ae55c134f7f09f"><td class="memTemplParams" colspan="2">template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_assignable_v&lt; T &amp;, U &amp; &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:a4a0641e07c3aa0e337ae55c134f7f09f template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classoptional.html">optional</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4a0641e07c3aa0e337ae55c134f7f09f">operator=</a> (const <a class="el" href="classoptional.html">optional</a>&lt; U &amp; &gt; &amp;other)</td></tr>
 <tr class="memdesc:a4a0641e07c3aa0e337ae55c134f7f09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">从引用可选值赋值  <br /></td></tr>
-<tr class="memitem:aa3a97d2669c23714f449b9f25c3ba2fd" id="r_aa3a97d2669c23714f449b9f25c3ba2fd"><td class="memTemplParams" colspan="2">template&lt;typename ... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, Types... &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:aa3a97d2669c23714f449b9f25c3ba2fd" id="r_aa3a97d2669c23714f449b9f25c3ba2fd"><td class="memTemplParams" colspan="2">template&lt;typename... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, Types... &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:aa3a97d2669c23714f449b9f25c3ba2fd template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa3a97d2669c23714f449b9f25c3ba2fd">optional</a> (<a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, Types &amp;&amp;... args) noexcept(is_nothrow_constructible_v&lt; T, Types... &gt;)</td></tr>
 <tr class="memdesc:aa3a97d2669c23714f449b9f25c3ba2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">原位构造  <br /></td></tr>
-<tr class="memitem:abcd30e37c38e66ba2504ed67a5dd47e4" id="r_abcd30e37c38e66ba2504ed67a5dd47e4"><td class="memTemplParams" colspan="2">template&lt;typename U, typename ... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:abcd30e37c38e66ba2504ed67a5dd47e4 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abcd30e37c38e66ba2504ed67a5dd47e4">optional</a> (<a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, std::initializer_list&lt; U &gt; ilist, Types &amp;&amp;...args) noexcept(is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;)</td></tr>
-<tr class="memdesc:abcd30e37c38e66ba2504ed67a5dd47e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用初始化列表原位构造  <br /></td></tr>
+<tr class="memitem:a367f3dcab5d414d45b159f4a8d3bb8c1" id="r_a367f3dcab5d414d45b159f4a8d3bb8c1"><td class="memTemplParams" colspan="2">template&lt;typename U, typename... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a367f3dcab5d414d45b159f4a8d3bb8c1 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a367f3dcab5d414d45b159f4a8d3bb8c1">optional</a> (<a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, std::initializer_list&lt; U &gt; ilist, Types &amp;&amp;... args) noexcept(is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;)</td></tr>
+<tr class="memdesc:a367f3dcab5d414d45b159f4a8d3bb8c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用初始化列表原位构造  <br /></td></tr>
 <tr class="memitem:aa6eb37e7dc562a3f355685df9881eb0d" id="r_aa6eb37e7dc562a3f355685df9881eb0d"><td class="memItemLeft"><a id="aa6eb37e7dc562a3f355685df9881eb0d" name="aa6eb37e7dc562a3f355685df9881eb0d"></a>
 NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><b>~optional</b> () noexcept</td></tr>
 <tr class="memdesc:aa6eb37e7dc562a3f355685df9881eb0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
@@ -250,7 +250,7 @@ class optional&lt; T &gt;</div><p>可选值类 </p>
 </dl>
 <p>表示一个可能包含值也可能为空的对象。类似于指针，但拥有值语义。 </p>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00071">71</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00070">70</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="acacae09e8eb3ee707828dbe0aa53750e" name="acacae09e8eb3ee707828dbe0aa53750e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acacae09e8eb3ee707828dbe0aa53750e">&#9670;&#160;</a></span>optional() <span class="overload">[1/14]</span></h2>
@@ -286,11 +286,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <p>构造一个空的可选值。 </p>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00125">125</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00113">113</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="none_8hpp_source.html#l00073">none</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="optional_8hpp_source.html#l00769">operator&lt;()</a>, <a class="el" href="optional_8hpp_source.html#l00273">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00395">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00241">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00132">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00358">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00325">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00192">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00754">operator==()</a>, <a class="el" href="optional_8hpp_source.html#l00261">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00381">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00211">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00345">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00295">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00594">or_else()</a>, <a class="el" href="optional_8hpp_source.html#l00579">or_else()</a>, <a class="el" href="optional_8hpp_source.html#l00814">swap()</a>, <a class="el" href="optional_8hpp_source.html#l00706">transform()</a>, <a class="el" href="optional_8hpp_source.html#l00678">transform()</a>, <a class="el" href="optional_8hpp_source.html#l00692">transform()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00664">transform()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="optional_8hpp_source.html#l00761">operator&lt;()</a>, <a class="el" href="optional_8hpp_source.html#l00267">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00396">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00233">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00120">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00359">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00324">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00179">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00746">operator==()</a>, <a class="el" href="optional_8hpp_source.html#l00255">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00382">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00199">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00346">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00292">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00586">or_else()</a>, <a class="el" href="optional_8hpp_source.html#l00572">or_else()</a>, <a class="el" href="optional_8hpp_source.html#l00794">swap()</a>, <a class="el" href="optional_8hpp_source.html#l00698">transform()</a>, <a class="el" href="optional_8hpp_source.html#l00670">transform()</a>, <a class="el" href="optional_8hpp_source.html#l00684">transform()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00656">transform()</a>.</p>
 
 </div>
 </div>
@@ -335,9 +335,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00146">146</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00133">133</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>
@@ -382,9 +382,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00160">160</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00146">146</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>
@@ -421,9 +421,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00169">169</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00155">155</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>
@@ -460,9 +460,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00178">178</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00164">164</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>
@@ -507,9 +507,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00211">211</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00199">199</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -554,9 +554,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00225">225</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00214">214</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -593,9 +593,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00261">261</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00255">255</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -640,9 +640,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00295">295</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00292">292</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -687,9 +687,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00309">309</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00307">307</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -726,9 +726,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00345">345</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00346">346</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -773,9 +773,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00381">381</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00382">382</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -787,7 +787,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 <div class="memtemplate">
 template&lt;typename T&gt; </div>
 <div class="memtemplate">
-template&lt;typename ... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, Types... &gt;, int &gt; = 0&gt; </div>
+template&lt;typename... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, Types... &gt;, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -824,21 +824,21 @@ template&lt;typename ... Types, <a class="el" href="group___type_traits_utilitie
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00415">415</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00416">416</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
-<a id="abcd30e37c38e66ba2504ed67a5dd47e4" name="abcd30e37c38e66ba2504ed67a5dd47e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcd30e37c38e66ba2504ed67a5dd47e4">&#9670;&#160;</a></span>optional() <span class="overload">[14/14]</span></h2>
+<a id="a367f3dcab5d414d45b159f4a8d3bb8c1" name="a367f3dcab5d414d45b159f4a8d3bb8c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a367f3dcab5d414d45b159f4a8d3bb8c1">&#9670;&#160;</a></span>optional() <span class="overload">[14/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T&gt; </div>
 <div class="memtemplate">
-template&lt;typename U, typename ... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt; = 0&gt; </div>
+template&lt;typename U, typename... Types, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -882,9 +882,9 @@ template&lt;typename U, typename ... Types, <a class="el" href="group___type_tra
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00429">429</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00431">431</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
@@ -931,9 +931,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00622">622</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00614">614</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
@@ -979,9 +979,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00650">650</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00642">642</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -1027,9 +1027,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00608">608</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00600">600</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
 </div>
 </div>
@@ -1075,9 +1075,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00636">636</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00628">628</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -1130,7 +1130,7 @@ template&lt;typename U, typename... Types, <a class="el" href="group___type_trai
 
 <p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00464">464</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1177,9 +1177,9 @@ template&lt;typename... Types, <a class="el" href="group___type_traits_utilities
 
 <p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00448">448</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="optional_8hpp_source.html#l00814">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="optional_8hpp_source.html#l00794">swap()</a>.</p>
 
 </div>
 </div>
@@ -1243,7 +1243,7 @@ template&lt;typename T&gt; </div>
 <p>转换为布尔值 </p>
 <dl class="section return"><dt>返回</dt><dd>是否包含值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00493">493</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00491">491</a> 行定义.</p>
 
 </div>
 </div>
@@ -1275,9 +1275,9 @@ template&lt;typename T&gt; </div>
 <p>右值解引用运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>值的右值引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00747">747</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00739">739</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -1309,7 +1309,7 @@ template&lt;typename T&gt; </div>
 <p>左值解引用运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>值的左值引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00735">735</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00727">727</a> 行定义.</p>
 
 </div>
 </div>
@@ -1341,9 +1341,9 @@ template&lt;typename T&gt; </div>
 <p>常量右值解引用运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>值的常量右值引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00741">741</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00733">733</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -1375,7 +1375,7 @@ template&lt;typename T&gt; </div>
 <p>常量左值解引用运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>值的常量左值引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00729">729</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00721">721</a> 行定义.</p>
 
 </div>
 </div>
@@ -1407,7 +1407,7 @@ template&lt;typename T&gt; </div>
 <p>常量箭头运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>指向值的常量指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00717">717</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00709">709</a> 行定义.</p>
 
 </div>
 </div>
@@ -1439,7 +1439,7 @@ template&lt;typename T&gt; </div>
 <p>箭头运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>指向值的常量指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00723">723</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00715">715</a> 行定义.</p>
 
 </div>
 </div>
@@ -1477,9 +1477,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前值是否小于右操作数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00769">769</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00761">761</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -1517,9 +1517,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00273">273</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00267">267</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1565,9 +1565,9 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00395">395</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00396">396</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1613,9 +1613,9 @@ template&lt;typename U = T, <a class="el" href="group___type_traits_utilities.ht
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00241">241</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00233">233</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1653,9 +1653,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00132">132</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00120">120</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1693,9 +1693,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00358">358</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00359">359</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1741,9 +1741,9 @@ template&lt;typename U = T, <a class="el" href="group___type_traits_utilities.ht
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00325">325</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00324">324</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00474">reset()</a>.</p>
 
 </div>
 </div>
@@ -1789,9 +1789,9 @@ template&lt;typename U = T, <a class="el" href="group___type_traits_utilities.ht
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00179">179</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>
@@ -1829,9 +1829,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>两个可选值是否相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00754">754</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00746">746</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -1877,9 +1877,9 @@ template&lt;typename F, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>值存在时返回自身的移动，不存在时调用函数并返回结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00594">594</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00586">586</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -1925,9 +1925,9 @@ template&lt;typename F, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>值存在时返回自身的拷贝，不存在时调用函数并返回结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00579">579</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00572">572</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -1964,9 +1964,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00814">814</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00794">794</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03081">addressof()</a>, <a class="el" href="optional_8hpp_source.html#l00448">emplace()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00474">reset()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="optional_8hpp_source.html#l00448">emplace()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00474">reset()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
 
 </div>
 </div>
@@ -1998,7 +1998,7 @@ template&lt;typename T&gt; </div>
 <p>计算哈希值 </p>
 <dl class="section return"><dt>返回</dt><dd>哈希值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00806">806</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00786">786</a> 行定义.</p>
 
 </div>
 </div>
@@ -2044,9 +2044,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值的移动并返回新的optional，或返回none的optional </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00706">706</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00698">698</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -2092,9 +2092,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值并返回新的optional，或返回none的optional </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00678">678</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00670">670</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -2140,9 +2140,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值的移动并返回新的optional，或返回none的optional </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00692">692</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00684">684</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -2188,9 +2188,9 @@ template&lt;typename F&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>函数处理存储的值并返回新的optional，或返回none的optional </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00664">664</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00656">656</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03025">forward()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00125">optional()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="none_8hpp_source.html#l00073">none</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00113">optional()</a>.</p>
 
 </div>
 </div>
@@ -2228,7 +2228,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00514">514</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00510">510</a> 行定义.</p>
 
 </div>
 </div>
@@ -2266,9 +2266,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00538">538</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00534">534</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -2306,9 +2306,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00502">502</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00498">498</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="optional_8hpp_source.html#l01420">get()</a>, <a class="el" href="optional_8hpp_source.html#l01396">get()</a>, <a class="el" href="optional_8hpp_source.html#l01432">get()</a>, <a class="el" href="optional_8hpp_source.html#l01408">get()</a>, <a class="el" href="optional_8hpp_source.html#l01336">make_optional()</a>, <a class="el" href="optional_8hpp_source.html#l01377">make_optional()</a>, <a class="el" href="optional_8hpp_source.html#l00192">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00169">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00178">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00146">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00563">value_or()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00550">value_or()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="optional_8hpp_source.html#l01409">get()</a>, <a class="el" href="optional_8hpp_source.html#l01385">get()</a>, <a class="el" href="optional_8hpp_source.html#l01421">get()</a>, <a class="el" href="optional_8hpp_source.html#l01397">get()</a>, <a class="el" href="optional_8hpp_source.html#l01327">make_optional()</a>, <a class="el" href="optional_8hpp_source.html#l01366">make_optional()</a>, <a class="el" href="optional_8hpp_source.html#l00179">operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00155">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00164">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00133">optional()</a>, <a class="el" href="optional_8hpp_source.html#l00558">value_or()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00546">value_or()</a>.</p>
 
 </div>
 </div>
@@ -2346,9 +2346,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00526">526</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00522">522</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -2386,9 +2386,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>值存在时返回其值的引用，不存在时返回参数value </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00563">563</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00558">558</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>
@@ -2426,9 +2426,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>值存在时返回其值的拷贝，不存在时返回参数value </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00550">550</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="optional_8hpp_source.html">optional.hpp</a> 第 <a class="el" href="optional_8hpp_source.html#l00546">546</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00502">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="optional_8hpp_source.html#l00498">value()</a>.</p>
 
 </div>
 </div>

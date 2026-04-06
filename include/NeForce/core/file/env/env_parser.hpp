@@ -89,14 +89,14 @@ private:
      * @param line 要检查的行内容
      * @return 是否为注释行
      */
-    bool is_comment_line(const string& line) const noexcept;
+    bool is_comment_line(const string& line) const;
 
     /**
      * @brief 判断是否为空白行
      * @param line 要检查的行内容
      * @return 是否为空白行
      */
-    bool is_blank_line(const string& line) const noexcept;
+    bool is_blank_line(const string& line) const;
 
     /**
      * @brief 解析变量行

@@ -50,11 +50,6 @@ url url::parse(const string_view str) {
         NEFORCE_THROW_EXCEPTION(network_exception("URL scheme invalid"));
     }
 
-    size_t at_pos = str.find('@', pos);
-    if (at_pos != string::npos && at_pos < str.find('/', pos)) {
-        at_pos = pos;
-    }
-
     const size_t path_pos = str.find('/', pos);
     const size_t query_pos = str.find('?', pos);
     const size_t fragment_pos = str.find('#', pos);

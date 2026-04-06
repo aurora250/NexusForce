@@ -51,7 +51,7 @@ redis_result::redis_result() noexcept :
 column_names_(make_unique<vector<string>>()),
 kv_pairs_(make_unique<vector<pair<string, string>>>()) {}
 
-redis_result::redis_result(::redisReply* reply) noexcept :
+redis_result::redis_result(::redisReply* reply) :
 result_(reply),
 column_names_(make_unique<vector<string>>()),
 kv_pairs_(make_unique<vector<pair<string, string>>>()) {

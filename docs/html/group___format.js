@@ -24,9 +24,7 @@ var group___format =
     ] ],
     [ "formatter&lt; char &gt;", "structformatter_3_01char_01_4.html", null ],
     [ "formatter&lt; bool &gt;", "structformatter_3_01bool_01_4.html", null ],
-    [ "formatter&lt; string &gt;", "structformatter_3_01string_01_4.html", [
-      [ "operator()", "structformatter_3_01string_01_4.html#a9d0e2051cf5767dc94568e3a7cc3fe9b", null ]
-    ] ],
+    [ "formatter&lt; string &gt;", "structformatter_3_01string_01_4.html", null ],
     [ "formatter&lt; string_view &gt;", "structformatter_3_01string__view_01_4.html", null ],
     [ "formatter&lt; const char * &gt;", "structformatter_3_01const_01char_01_5_01_4.html", null ],
     [ "formatter&lt; nullptr_t &gt;", "structformatter_3_01nullptr__t_01_4.html", null ],

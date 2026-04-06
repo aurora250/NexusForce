@@ -6,7 +6,7 @@ sqlite_result::sqlite_result() noexcept :
 column_names_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<int>>()) {}
 
-sqlite_result::sqlite_result(::sqlite3_stmt* statement) noexcept :
+sqlite_result::sqlite_result(::sqlite3_stmt* statement) :
 stmt_(statement),
 column_names_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<int>>()) {
@@ -35,50 +35,50 @@ bool sqlite_result::next() noexcept {
 _NEFORCE string_view sqlite_result::get(const size_type n) const noexcept {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, n));
+    const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, static_cast<int>(n)));
     return text ? string_view{text} : ""_sv;
 }
 
 bool sqlite_result::get_bool(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return ::sqlite3_column_int(stmt_, n) != 0;
+    return ::sqlite3_column_int(stmt_, static_cast<int>(n)) != 0;
 }
 
 int16_t sqlite_result::get_int16(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<int16_t>(::sqlite3_column_int(stmt_, n));
+    return static_cast<int16_t>(::sqlite3_column_int(stmt_, static_cast<int>(n)));
 }
 
 int32_t sqlite_result::get_int32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return ::sqlite3_column_int(stmt_, n);
+    return ::sqlite3_column_int(stmt_, static_cast<int>(n));
 }
 
 int64_t sqlite_result::get_int64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return ::sqlite3_column_int64(stmt_, n);
+    return ::sqlite3_column_int64(stmt_, static_cast<int>(n));
 }
 
 float32_t sqlite_result::get_float32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<float32_t>(::sqlite3_column_double(stmt_, n));
+    return static_cast<float32_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
 }
 
 float64_t sqlite_result::get_float64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<float64_t>(::sqlite3_column_double(stmt_, n));
+    return static_cast<float64_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
 }
 
 decimal_t sqlite_result::get_decimal(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<decimal_t>(::sqlite3_column_double(stmt_, n));
+    return static_cast<decimal_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
 }
 
 _NEFORCE vector<char> sqlite_result::get_blob(const size_type n) const {
@@ -102,7 +102,7 @@ uint64_t sqlite_result::get_bit(const size_type n) const noexcept {
 _NEFORCE datetime sqlite_result::get_datetime(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, n));
+    const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, static_cast<int>(n)));
     if (text) {
         return _NEFORCE datetime::parse(text);
     }
@@ -112,7 +112,7 @@ _NEFORCE datetime sqlite_result::get_datetime(const size_type n) const {
 _NEFORCE timestamp sqlite_result::get_timestamp(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return timestamp{static_cast<long>(::sqlite3_column_int64(stmt_, n))};
+    return timestamp{static_cast<long>(::sqlite3_column_int64(stmt_, static_cast<int>(n)))};
 }
 
 NEFORCE_END_NAMESPACE__

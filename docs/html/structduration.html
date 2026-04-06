@@ -121,7 +121,7 @@ constexpr <a class="el" href="structduration.html">duration</a> &amp;&#160;</td>
 <tr class="memitem:a78728d719122c4c6459eafd65d833169" id="r_a78728d719122c4c6459eafd65d833169"><td class="memTemplParams" colspan="2">template&lt;typename Rep2, typename = enable_if_t&lt;is_convertible_v&lt;const Rep2&amp;, rep&gt;&gt;&gt; </td></tr>
 <tr class="memitem:a78728d719122c4c6459eafd65d833169 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a78728d719122c4c6459eafd65d833169">duration</a> (const Rep2 &amp;rep2)</td></tr>
 <tr class="memdesc:a78728d719122c4c6459eafd65d833169"><td class="mdescLeft">&#160;</td><td class="mdescRight">从数值构造  <br /></td></tr>
-<tr class="memitem:a3d5ba4ac8c538586202be5c6b001524a" id="r_a3d5ba4ac8c538586202be5c6b001524a"><td class="memTemplParams" colspan="2">template&lt;typename Rep2, typename Period2, typename Dummy = enable_if_t&lt;		is_convertible_v&lt;const Rep2&amp;, rep&gt; &amp;&amp; (is_floating_point_v&lt;rep&gt; || (is_harmonic&lt;Period2&gt;::value &amp;&amp; !is_floating_point_v&lt;Rep2&gt;))&gt;&gt; </td></tr>
+<tr class="memitem:a3d5ba4ac8c538586202be5c6b001524a" id="r_a3d5ba4ac8c538586202be5c6b001524a"><td class="memTemplParams" colspan="2">template&lt;typename Rep2, typename Period2, typename Dummy = enable_if_t&lt;is_convertible_v&lt;const Rep2&amp;, rep&gt; &amp;&amp;                                           (is_floating_point_v&lt;rep&gt; ||                                            (is_harmonic&lt;Period2&gt;::value &amp;&amp; !is_floating_point_v&lt;Rep2&gt;) )&gt;&gt; </td></tr>
 <tr class="memitem:a3d5ba4ac8c538586202be5c6b001524a template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3d5ba4ac8c538586202be5c6b001524a">duration</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep2, Period2 &gt; &amp;dur)</td></tr>
 <tr class="memdesc:a3d5ba4ac8c538586202be5c6b001524a"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他持续时间构造  <br /></td></tr>
 <tr class="memitem:gaeb19717e2329f809d58d4b20c372e6be" id="r_gaeb19717e2329f809d58d4b20c372e6be"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur, typename Dummy = enable_if_t&lt;is_duration_v&lt;Dur&gt;&gt;&gt; </td></tr>
@@ -177,7 +177,7 @@ class duration&lt; Rep, Period &gt;</div><p>持续时间类模板 </p>
 </dl>
 <p>表示一个时间间隔，支持不同时间单位的转换和运算。 </p>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00179">179</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00176">176</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a78728d719122c4c6459eafd65d833169" name="a78728d719122c4c6459eafd65d833169"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78728d719122c4c6459eafd65d833169">&#9670;&#160;</a></span>duration() <span class="overload">[1/2]</span></h2>
@@ -221,7 +221,7 @@ template&lt;typename Rep2, typename = enable_if_t&lt;is_convertible_v&lt;const R
 </dl>
 <p>从指定数值构造持续时间，支持隐式或显式转换。 </p>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00235">235</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00231">231</a> 行定义.</p>
 
 </div>
 </div>
@@ -233,7 +233,7 @@ template&lt;typename Rep2, typename = enable_if_t&lt;is_convertible_v&lt;const R
 <div class="memtemplate">
 template&lt;typename Rep, typename Period&gt; </div>
 <div class="memtemplate">
-template&lt;typename Rep2, typename Period2, typename Dummy = enable_if_t&lt;		is_convertible_v&lt;const Rep2&amp;, rep&gt; &amp;&amp; (is_floating_point_v&lt;rep&gt; || (is_harmonic&lt;Period2&gt;::value &amp;&amp; !is_floating_point_v&lt;Rep2&gt;))&gt;&gt; </div>
+template&lt;typename Rep2, typename Period2, typename Dummy = enable_if_t&lt;is_convertible_v&lt;const Rep2&amp;, rep&gt; &amp;&amp;                                           (is_floating_point_v&lt;rep&gt; ||                                            (is_harmonic&lt;Period2&gt;::value &amp;&amp; !is_floating_point_v&lt;Rep2&gt;) )&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -269,7 +269,7 @@ template&lt;typename Rep2, typename Period2, typename Dummy = enable_if_t&lt;		i
 </dl>
 <p>从另一种持续时间类型构造，支持时间单位转换。 </p>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00249">249</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00247">247</a> 行定义.</p>
 
 </div>
 </div>
@@ -302,9 +302,9 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>获取计数值 </p>
 <dl class="section return"><dt>返回</dt><dd>存储的时间数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00268">268</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00266">266</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="duration_8hpp_source.html#l00381">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator%=()</a>, <a class="el" href="duration_8hpp_source.html#l00327">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator+=()</a>, <a class="el" href="duration_8hpp_source.html#l00337">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator-=()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00908">sleep_for()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="duration_8hpp_source.html#l00373">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator%=()</a>, <a class="el" href="duration_8hpp_source.html#l00319">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator+=()</a>, <a class="el" href="duration_8hpp_source.html#l00329">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator-=()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00866">sleep_for()</a>.</p>
 
 </div>
 </div>
@@ -336,7 +336,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>获取最大持续时间 </p>
 <dl class="section return"><dt>返回</dt><dd>最大持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00407">407</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00395">395</a> 行定义.</p>
 
 </div>
 </div>
@@ -368,7 +368,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>获取最小持续时间 </p>
 <dl class="section return"><dt>返回</dt><dd>最小持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00399">399</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00389">389</a> 行定义.</p>
 
 </div>
 </div>
@@ -414,7 +414,7 @@ template&lt;typename U = rep, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00381">381</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00373">373</a> 行定义.</p>
 
 </div>
 </div>
@@ -460,7 +460,7 @@ template&lt;typename U = rep, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00369">369</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00361">361</a> 行定义.</p>
 
 </div>
 </div>
@@ -498,7 +498,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00347">347</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00339">339</a> 行定义.</p>
 
 </div>
 </div>
@@ -530,7 +530,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>一元正号运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>正持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00275">275</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00272">272</a> 行定义.</p>
 
 </div>
 </div>
@@ -562,7 +562,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>前置自增运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>自增后的持续时间引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00292">292</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00288">288</a> 行定义.</p>
 
 </div>
 </div>
@@ -594,7 +594,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>后置自增运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>自增前的持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00301">301</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00297">297</a> 行定义.</p>
 
 </div>
 </div>
@@ -632,7 +632,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00327">327</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00319">319</a> 行定义.</p>
 
 </div>
 </div>
@@ -664,7 +664,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>一元负号运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>负持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00284">284</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00280">280</a> 行定义.</p>
 
 </div>
 </div>
@@ -696,7 +696,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>前置自减运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>自减后的持续时间引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00309">309</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00303">303</a> 行定义.</p>
 
 </div>
 </div>
@@ -728,7 +728,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>后置自减运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>自减前的持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00318">318</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00312">312</a> 行定义.</p>
 
 </div>
 </div>
@@ -766,7 +766,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00337">337</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00329">329</a> 行定义.</p>
 
 </div>
 </div>
@@ -804,7 +804,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00357">357</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00349">349</a> 行定义.</p>
 
 </div>
 </div>
@@ -836,7 +836,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>获取零持续时间 </p>
 <dl class="section return"><dt>返回</dt><dd>零持续时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00391">391</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00383">383</a> 行定义.</p>
 
 </div>
 </div>

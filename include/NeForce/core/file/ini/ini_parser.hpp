@@ -90,7 +90,7 @@ private:
      * @param line 要检查的行内容
      * @return 是否为注释行（空行或以;、#开头的行）
      */
-    bool is_comment_line(const string& line) const noexcept;
+    bool is_comment_line(const string& line) const;
 
     /**
      * @brief 判断是否为节定义行

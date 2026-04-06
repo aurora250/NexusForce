@@ -124,7 +124,7 @@ bool arp::local_info(const char* iface) noexcept {
 }
 #endif
 
-bool arp::open(const char* iface) noexcept {
+bool arp::open(const char* iface) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (opened_) {
         return true;

@@ -65,7 +65,7 @@ bool filesystem::remove_directory(const path& p) noexcept {
 #endif
 }
 
-bool filesystem::remove_all_in_directory(const path& p, const bool recursive) noexcept {
+bool filesystem::remove_all_in_directory(const path& p, const bool recursive) {
     if (!p.is_directory()) {
         return false;
     }
@@ -153,7 +153,7 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) no
     return success;
 }
 
-bool filesystem::remove_all(const path& p) noexcept {
+bool filesystem::remove_all(const path& p) {
     if (p.is_file()) {
         return remove(p);
     }
@@ -322,7 +322,7 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
     return success;
 }
 
-bool filesystem::move(const path& from, const path& to, const bool overwrite) noexcept {
+bool filesystem::move(const path& from, const path& to, const bool overwrite) {
     if (!from.exists()) {
         return false;
     }
@@ -372,7 +372,7 @@ bool filesystem::move(const path& from, const path& to, const bool overwrite) no
 #endif
 }
 
-bool filesystem::rename(const path& old_name, const path& new_name) noexcept { return move(old_name, new_name, true); }
+bool filesystem::rename(const path& old_name, const path& new_name) { return move(old_name, new_name, true); }
 
 bool filesystem::create_and_write(const path& p, const string& content, const bool append) {
     const path parent = p.parent_path();

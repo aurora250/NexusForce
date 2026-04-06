@@ -1,3 +1,8 @@
+if(NOT NEXUSFORCE_BUILD_TESTS)
+    message(STATUS "Skipping tests build (NEXUSFORCE_BUILD_TESTS=OFF)")
+    return()
+endif()
+
 add_executable(NexusForceTests
         main.cpp
         test_file.cpp

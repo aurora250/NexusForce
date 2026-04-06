@@ -162,10 +162,10 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
         </tr>
       </table>
 </div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>THIS : BASE { \</div>
-<div class="line">    __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">INFO</a>) \</div>
-<div class="line">    __NEFORCE_ERROR_DERIVED_DESTRUCTOR(THIS) \</div>
-<div class="line">    __NEFORCE_ERROR_TYPE(THIS) \</div>
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>THIS : BASE {                                    \</div>
+<div class="line">    __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">INFO</a>)       \</div>
+<div class="line">    __NEFORCE_ERROR_DERIVED_DESTRUCTOR(THIS)            \</div>
+<div class="line">    __NEFORCE_ERROR_TYPE(THIS)                          \</div>
 <div class="line">};</div>
 <div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">LOG_LEVEL::INFO</a></div><div class="ttdeci">@ INFO</div><div class="ttdoc">信息级别，普通信息</div><div class="ttdef"><b>定义</b> <a href="log__event_8hpp_source.html#l00036">log_event.hpp:36</a></div></div>
 </div><!-- fragment -->
@@ -180,7 +180,7 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
 </dl>
 <p>快速定义可进一步派生的异常类。 </p>
 
-<p class="definition">在文件 <a class="el" href="exception_8hpp_source.html">exception.hpp</a> 第 <a class="el" href="exception_8hpp_source.html#l00048">48</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="exception_8hpp_source.html">exception.hpp</a> 第 <a class="el" href="exception_8hpp_source.html#l00043">43</a> 行定义.</p>
 
 </div>
 </div>
@@ -207,10 +207,10 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
         </tr>
       </table>
 </div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>THIS final : BASE { \</div>
-<div class="line">    __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">INFO</a>) \</div>
-<div class="line">    __NEFORCE_ERROR_FINAL_DESTRUCTOR(THIS) \</div>
-<div class="line">    __NEFORCE_ERROR_TYPE(THIS) \</div>
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>THIS final : BASE {                            \</div>
+<div class="line">    __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">INFO</a>)     \</div>
+<div class="line">    __NEFORCE_ERROR_FINAL_DESTRUCTOR(THIS)            \</div>
+<div class="line">    __NEFORCE_ERROR_TYPE(THIS)                        \</div>
 <div class="line">};</div>
 </div><!-- fragment -->
 <p>构建最终异常类宏 </p>
@@ -224,7 +224,7 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
 </dl>
 <p>快速定义不可派生的异常类。 </p>
 
-<p class="definition">在文件 <a class="el" href="exception_8hpp_source.html">exception.hpp</a> 第 <a class="el" href="exception_8hpp_source.html#l00064">64</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="exception_8hpp_source.html">exception.hpp</a> 第 <a class="el" href="exception_8hpp_source.html#l00059">59</a> 行定义.</p>
 
 </div>
 </div>
@@ -256,7 +256,7 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>当前异常的异常指针</dd></dl>
 <p>捕获当前异常并创建异常指针。 如果当前没有异常被捕获，返回空的异常指针。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00896">retry()</a>, <a class="el" href="generator_8hpp_source.html#l00200">generator&lt; T &gt;::promise_type::unhandled_exception()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00560">task&lt; T &gt;::promise_type::unhandled_exception()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00840">retry()</a>, <a class="el" href="generator_8hpp_source.html#l00190">generator&lt; T &gt;::promise_type::unhandled_exception()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00531">task&lt; T &gt;::promise_type::unhandled_exception()</a>.</p>
 
 </div>
 </div>
@@ -301,7 +301,7 @@ template&lt;typename Ex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>异常指针</dd></dl>
 <p>创建引用指定异常的异常指针。 如果内存分配失败，返回空的异常指针。 </p>
 
-<p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00332">332</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00312">312</a> 行定义.</p>
 
 </div>
 </div>
@@ -332,7 +332,7 @@ template&lt;typename Ex&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00595">task&lt; T &gt;::awaiter::await_resume()</a>, <a class="el" href="generator_8hpp_source.html#l00337">generator&lt; T &gt;::begin()</a>, <a class="el" href="generator_8hpp_source.html#l00680">task&lt; T &gt;::get()</a>, <a class="el" href="#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00896">retry()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00561">task&lt; T &gt;::awaiter::await_resume()</a>, <a class="el" href="generator_8hpp_source.html#l00317">generator&lt; T &gt;::begin()</a>, <a class="el" href="generator_8hpp_source.html#l00642">task&lt; T &gt;::get()</a>, <a class="el" href="#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00840">retry()</a>.</p>
 
 </div>
 </div>
@@ -394,7 +394,7 @@ template&lt;typename Ex&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="#gafa2df93411a6e72fbe11790aea38de2a">uncaught_exceptions()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00149">scope_fail&lt; Func &gt;::scope_fail()</a>, <a class="el" href="scope_8hpp_source.html#l00232">scope_success&lt; Func &gt;::scope_success()</a>, <a class="el" href="#gafa2df93411a6e72fbe11790aea38de2a">uncaught_exceptions()</a>, <a class="el" href="scope_8hpp_source.html#l00185">scope_fail&lt; Func &gt;::~scope_fail()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00269">scope_success&lt; Func &gt;::~scope_success()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00145">scope_fail&lt; Func &gt;::scope_fail()</a>, <a class="el" href="scope_8hpp_source.html#l00226">scope_success&lt; Func &gt;::scope_success()</a>, <a class="el" href="#gafa2df93411a6e72fbe11790aea38de2a">uncaught_exceptions()</a>, <a class="el" href="scope_8hpp_source.html#l00182">scope_fail&lt; Func &gt;::~scope_fail()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00263">scope_success&lt; Func &gt;::~scope_success()</a>.</p>
 
 </div>
 </div>

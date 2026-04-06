@@ -120,7 +120,7 @@ local_queue& local_queue::operator=(local_queue&& other) noexcept {
 
 optional<function<void()>> local_queue::try_pop() {
     auto cur_head = head_.load(memory_order_acquire);
-    size_t index;
+    size_t index = 0;
     while (true) {
         const auto pir = unpack(cur_head);
         const auto cur_steal = pir.first;
@@ -430,7 +430,7 @@ bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
 }
 
 thread_pool::pool_statistics thread_pool::statistics() const {
-    lock<mutex> lock(const_cast<mutex&>(task_queue_mtx_));
+    lock<mutex> lock(task_queue_mtx_);
     return statistics_unsafe();
 }
 

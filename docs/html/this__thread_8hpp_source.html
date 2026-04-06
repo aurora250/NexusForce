@@ -98,22 +98,22 @@ $(function(){initNavTree('this__thread_8hpp_source.html','',''); });
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="types_8hpp.html">NeForce/core/typeinfo/types.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="windef_8hpp.html">NeForce/core/config/windef.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;processthreadsapi.h&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;synchapi.h&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifdef max</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#undef max</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifdef min</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#undef min</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#    include &quot;<a class="code" href="windef_8hpp.html">NeForce/core/config/windef.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#    include &lt;processthreadsapi.h&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#    include &lt;synchapi.h&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#    ifdef max</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#        undef max</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#    endif</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#    ifdef min</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#        undef min</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#    endif</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_LINUX</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &lt;sched.h&gt;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#    include &lt;sched.h&gt;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#    include &lt;unistd.h&gt;</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifdef NEFORCE_ARCH_RISCV</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;riscv_pause.h&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#    include &lt;riscv_pause.h&gt;</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>NEFORCE_BEGIN_THIS_THREAD__</div>
@@ -144,17 +144,17 @@ $(function(){initNavTree('this__thread_8hpp_source.html','',''); });
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    ::_mm_pause();</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#if defined(NEFORCE_ARCH_X86)</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#    if defined(NEFORCE_ARCH_X86)</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    __builtin_ia32_pause();</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#elif defined(NEFORCE_ARCH_ARM)</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#    elif defined(NEFORCE_ARCH_ARM)</span></div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;yield&quot;</span> ::: <span class="stringliteral">&quot;memory&quot;</span>);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#elif defined(NEFORCE_ARCH_RISCV)</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#    elif defined(NEFORCE_ARCH_RISCV)</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    ::riscv_pause();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#elif defined(NEFORCE_ARCH_LOONGARCH)</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#    elif defined(NEFORCE_ARCH_LOONGARCH)</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;dbar 0&quot;</span> ::: <span class="stringliteral">&quot;memory&quot;</span>);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#    else</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    this_thread::yield();</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#    endif</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
 </div>
@@ -200,8 +200,8 @@ $(function(){initNavTree('this__thread_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
-<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00370">search.hpp:370</a></div></div>
-<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00160">duration.hpp:160</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00392">search.hpp:392</a></div></div>
+<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
 <div class="ttc" id="agroup___thread_html_ga0d65da9844fd9c1b7b0123ba22e9a3f0"><div class="ttname"><a href="group___thread.html#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority</a></div><div class="ttdeci">bool NEFORCE_API priority(int priority) noexcept</div><div class="ttdoc">设置线程优先级</div></div>
 <div class="ttc" id="agroup___thread_html_ga369d5171a87b9dcaa7e23d446d5dae91"><div class="ttname"><a href="group___thread.html#ga369d5171a87b9dcaa7e23d446d5dae91">sleep_for_ms</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE void sleep_for_ms(uint32_t milliseconds) noexcept</div><div class="ttdoc">睡眠指定毫秒数</div><div class="ttdef"><b>定义</b> <a href="#l00119">this_thread.hpp:119</a></div></div>
 <div class="ttc" id="agroup___thread_html_ga806b20f01364f190e884d670c292ca20"><div class="ttname"><a href="group___thread.html#ga806b20f01364f190e884d670c292ca20">sleep_for_ns</a></div><div class="ttdeci">void NEFORCE_API sleep_for_ns(uint64_t ns) noexcept</div><div class="ttdoc">精确睡眠指定纳秒数</div></div>

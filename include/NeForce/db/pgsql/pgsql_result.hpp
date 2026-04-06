@@ -15,7 +15,7 @@ private:
     bool owns_result_;
 
 public:
-    explicit pgsql_tb_result(::PGresult* result, bool owns = true) noexcept;
+    explicit pgsql_tb_result(::PGresult* result, bool owns = true);
     ~pgsql_tb_result() override;
 
     pgsql_tb_result(const pgsql_tb_result&) = delete;

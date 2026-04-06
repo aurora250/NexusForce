@@ -148,7 +148,7 @@ namespace {
         memory_copy(expanded_key, key, 32);
         for (int i = 8; i < 60; ++i) {
             byte_t temp[4];
-            memory_copy(temp, expanded_key + (i - 1) * 4, 4);
+            memory_copy(temp, expanded_key + static_cast<ptrdiff_t>((i - 1) * 4), 4);
 
             if (i % 8 == 0) {
                 const byte_t t = temp[0];
@@ -212,7 +212,7 @@ namespace {
         state[3] = temp;
     }
     constexpr void AES256_mix_columns(byte_t state[16]) {
-        for (int c = 0; c < 4; ++c) {
+        for (ptrdiff_t c = 0; c < 4; ++c) {
             const byte_t s0 = state[c * 4];
             const byte_t s1 = state[c * 4 + 1];
             const byte_t s2 = state[c * 4 + 2];
@@ -225,7 +225,7 @@ namespace {
         }
     }
     constexpr void inv_mix_columns(byte_t state[16]) {
-        for (int c = 0; c < 4; ++c) {
+        for (ptrdiff_t c = 0; c < 4; ++c) {
             const byte_t s0 = state[c * 4];
             const byte_t s1 = state[c * 4 + 1];
             const byte_t s2 = state[c * 4 + 2];
@@ -248,20 +248,20 @@ namespace {
             AES256_sub_bytes(block);
             AES256_shift_rows(block);
             AES256_mix_columns(block);
-            AES256_add_round_key(block, expanded_key + round * 16);
+            AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(round * 16));
         }
 
         AES256_sub_bytes(block);
         AES256_shift_rows(block);
-        AES256_add_round_key(block, expanded_key + 14 * 16);
+        AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(14 * 16));
     }
     constexpr void decrypt_block(byte_t block[16], const byte_t* expanded_key) {
-        AES256_add_round_key(block, expanded_key + 14 * 16);
+        AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(14 * 16));
 
         for (int round = 13; round >= 1; --round) {
             AES256_inv_shift_rows(block);
             AES256_inv_sub_bytes(block);
-            AES256_add_round_key(block, expanded_key + round * 16);
+            AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(round * 16));
             inv_mix_columns(block);
         }
 
@@ -364,8 +364,10 @@ byte_vector MD5::hash(const cbyte_view data) {
     for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[16];
         for (int i = 0; i < 16; ++i) {
-            w[i] = (byte_data[chunk_start + i * 4]) | (byte_data[chunk_start + i * 4 + 1] << 8) |
-                   (byte_data[chunk_start + i * 4 + 2] << 16) | (byte_data[chunk_start + i * 4 + 3] << 24);
+            w[i] = (byte_data[chunk_start + static_cast<size_t>(i * 4)]) |
+                   (byte_data[chunk_start + static_cast<size_t>(i * 4 + 1)] << 8) |
+                   (byte_data[chunk_start + static_cast<size_t>(i * 4 + 2)] << 16) |
+                   (byte_data[chunk_start + static_cast<size_t>(i * 4 + 3)] << 24);
         }
 
         uint32_t a = h0, b = h1, c = h2, d = h3;
@@ -440,7 +442,7 @@ byte_vector SHA1::hash(cbyte_view data) {
     for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[80];
 
-        for (int i = 0; i < 16; ++i) {
+        for (size_t i = 0; i < 16; ++i) {
             w[i] = (byte_data[chunk_start + i * 4] << 24) | (byte_data[chunk_start + i * 4 + 1] << 16) |
                    (byte_data[chunk_start + i * 4 + 2] << 8) | (byte_data[chunk_start + i * 4 + 3]);
         }
@@ -484,7 +486,7 @@ byte_vector SHA1::hash(cbyte_view data) {
     }
 
     byte_vector result(20);
-    for (int i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < 4; ++i) {
         result[i] = (h0 >> (24 - i * 8)) & 0xFF;
         result[i + 4] = (h1 >> (24 - i * 8)) & 0xFF;
         result[i + 8] = (h2 >> (24 - i * 8)) & 0xFF;
@@ -522,7 +524,7 @@ byte_vector SHA256::hash(const cbyte_view data) {
 
     for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[64];
-        for (int i = 0; i < 16; ++i) {
+        for (size_t i = 0; i < 16; ++i) {
             w[i] = (byte_data[chunk_start + i * 4] << 24) | (byte_data[chunk_start + i * 4 + 1] << 16) |
                    (byte_data[chunk_start + i * 4 + 2] << 8) | (byte_data[chunk_start + i * 4 + 3]);
         }

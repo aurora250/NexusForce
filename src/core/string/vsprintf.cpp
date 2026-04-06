@@ -52,7 +52,7 @@ namespace {
             sign = '-';
             unum = -static_cast<unsigned long long>(num);
         } else {
-            sign = (type & PLUS) ? '+' : ((type & SPACE) ? ' ' : 0);
+            sign = (type & PLUS) ? '+' : ((type & SPACE) ? ' ' : '\0');
             unum = static_cast<unsigned long long>(num);
         }
 
@@ -139,7 +139,7 @@ namespace {
             if (num < 0) {
                 sign = '-';
             } else {
-                sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : 0);
+                sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : '\0');
             }
 
             if (sign) {
@@ -152,7 +152,7 @@ namespace {
             sign = '-';
             num = -num;
         } else {
-            sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : 0);
+            sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : '\0');
         }
 
         if (precision < 0) {
@@ -170,7 +170,7 @@ namespace {
         } else {
             long long temp = int_part;
             while (temp != 0) {
-                int_buf[int_len++] = '0' + static_cast<char>(temp % 10);
+                int_buf[int_len++] = static_cast<char>('0' + (temp % 10));
                 temp /= 10;
             }
             for (int i = 0; i < int_len / 2; ++i) {
@@ -196,7 +196,7 @@ namespace {
                     int_len = 0;
                     long long temp = int_part;
                     while (temp != 0) {
-                        int_buf[int_len++] = '0' + static_cast<char>(temp % 10);
+                        int_buf[int_len++] = static_cast<char>('0' + (temp % 10));
                         temp /= 10;
                     }
                     for (int i = 0; i < int_len / 2; ++i) {
@@ -208,7 +208,7 @@ namespace {
             }
 
             for (int i = precision - 1; i >= 0; --i) {
-                frac_buf[i] = '0' + static_cast<char>(frac_val % 10);
+                frac_buf[i] = static_cast<char>('0' + (frac_val % 10));
                 frac_val /= 10;
             }
             frac_len = precision;
@@ -324,7 +324,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
 
         int qualifier = -1;
         if (*fmt == 'h' || *fmt == 'l' || *fmt == 'L') {
-            qualifier = *fmt;
+            qualifier = static_cast<int>(static_cast<byte_t>(*fmt));
             ++fmt;
         }
 
@@ -335,7 +335,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
                         *str++ = ' ';
                     }
                 }
-                *str++ = static_cast<byte_t>(va_arg(args, int));
+                *str++ = static_cast<char>(static_cast<byte_t>(va_arg(args, int)));
                 while (--field_width > 0) {
                     *str++ = ' ';
                 }
@@ -346,10 +346,8 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
                 if (!s) {
                     s = "(null)";
                 }
-                int len = string_length(s);
-                if (precision < 0) {
-                    precision = len;
-                } else if (len > precision) {
+                int len = static_cast<int>(string_length(s));
+                if (precision >= 0 && len > precision) {
                     len = precision;
                 }
 
@@ -376,7 +374,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
                     field_width = 8;
                     flags |= ZEROPAD;
                 }
-                str = number(str, reinterpret_cast<size_t>(va_arg(args, void*)), 16, field_width, precision, flags);
+                str = number(str, reinterpret_cast<int64_t>(va_arg(args, void*)), 16, field_width, precision, flags);
                 break;
             }
             case 'x': {
@@ -406,7 +404,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
             }
             case 'n': {
                 int* ip = va_arg(args, int*);
-                *ip = (str - buf);
+                *ip = static_cast<int>(str - buf);
                 break;
             }
             default: {

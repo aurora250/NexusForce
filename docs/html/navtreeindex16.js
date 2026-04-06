@@ -1,5 +1,11 @@
 var NAVTREEINDEX16 =
 {
+"functions_type_g.html":[4,3,3,6],
+"functions_type_h.html":[4,3,3,7],
+"functions_type_i.html":[4,3,3,8],
+"functions_type_k.html":[4,3,3,9],
+"functions_type_l.html":[4,3,3,10],
+"functions_type_m.html":[4,3,3,11],
 "functions_type_n.html":[4,3,3,12],
 "functions_type_p.html":[4,3,3,13],
 "functions_type_r.html":[4,3,3,14],
@@ -183,11 +189,11 @@ var NAVTREEINDEX16 =
 "group___atomic_operations.html#ga235411e03936c4aa90f209ab38cab492":[1,6,56],
 "group___atomic_operations.html#ga24828a1269aa6f3ba157e283df55530f":[1,6,63],
 "group___atomic_operations.html#ga2c2c8cbfcae01cfa2bf198fd831c62b2":[1,6,43],
+"group___atomic_operations.html#ga3a0d5268ae71df1d0d5872747ebf7c66":[1,6,68],
 "group___atomic_operations.html#ga4066975858c891b3012f41c4f33073b3":[1,6,51],
 "group___atomic_operations.html#ga434f8215fe9022960d09c84d7efca4e9":[1,6,54],
 "group___atomic_operations.html#ga4361b2cbe5710b778f5600a57d667850":[1,6,48],
 "group___atomic_operations.html#ga43ed57e1ebca17af575e229a1d6e333e":[1,6,35],
-"group___atomic_operations.html#ga4588c81b98fa2b7eacf87c0479094826":[1,6,68],
 "group___atomic_operations.html#ga4ea9991a1e00b98f7bfbb4717f63d5ec":[1,6,65],
 "group___atomic_operations.html#ga53e71ce4980e49652fa2787d1b3a7375":[1,6,37],
 "group___atomic_operations.html#ga546bc65d02a41df5d8915cdce428bb61":[1,6,66],
@@ -243,11 +249,5 @@ var NAVTREEINDEX16 =
 "group___bit_manipulation.html#gab8b0fc7d380d8ef733a8fe1239af4e1b":[1,33,23],
 "group___bit_manipulation.html#gab8f133d4b23b52b75fd0c952d85af189":[1,33,12],
 "group___bit_manipulation.html#gac832844ba0a5424f07b316752a6cbc7f":[1,33,4],
-"group___bit_manipulation.html#gaca5121f02918b2cea077eb25512cb83c":[1,33,5],
-"group___bit_manipulation.html#gaca7d03246c48e209e00c3355d632e1da":[1,33,14],
-"group___bit_manipulation.html#gaccd54859db374262f5c36034b8669abb":[1,33,11],
-"group___bit_manipulation.html#gace6550d923413b36d07c574320cff214":[1,33,6],
-"group___bit_manipulation.html#gae161496fd9c8999a12cf45d93ec19750":[1,33,26],
-"group___bit_manipulation.html#gae781ff6a7fad2bc8db38b0c3b371658e":[1,33,8],
-"group___bit_manipulation.html#gaf2706acea69cb92b45211c361b3cd40b":[1,33,13]
+"group___bit_manipulation.html#gaca5121f02918b2cea077eb25512cb83c":[1,33,5]
 };

@@ -85,8 +85,8 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const string_vi
         param_buffers_.resize(index);
     }
     param_buffers_[index - 1].assign(value.data(), value.data() + len);
-    const int rc = ::sqlite3_bind_text(stmt_, index, param_buffers_[index - 1].data(), static_cast<int>(len),
-                                       SQLITE_TRANSIENT);
+    const int rc = ::sqlite3_bind_text(stmt_, static_cast<int>(index), param_buffers_[index - 1].data(),
+                                       static_cast<int>(len), SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;
@@ -99,7 +99,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const int32_t v
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_bind_int(stmt_, index, value);
+    const int rc = ::sqlite3_bind_int(stmt_, static_cast<int>(index), value);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;
@@ -112,7 +112,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const int64_t v
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_bind_int64(stmt_, index, value);
+    const int rc = ::sqlite3_bind_int64(stmt_, static_cast<int>(index), value);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;
@@ -125,7 +125,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const float64_t
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_bind_double(stmt_, index, value);
+    const int rc = ::sqlite3_bind_double(stmt_, static_cast<int>(index), value);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;
@@ -143,8 +143,8 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const void* dat
     }
     param_buffers_[index - 1].resize(length);
     memory_copy(param_buffers_[index - 1].data(), data, length);
-    const int rc = ::sqlite3_bind_blob(stmt_, index, param_buffers_[index - 1].data(), static_cast<int>(length),
-                                       SQLITE_TRANSIENT);
+    const int rc = ::sqlite3_bind_blob(stmt_, static_cast<int>(index), param_buffers_[index - 1].data(),
+                                       static_cast<int>(length), SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;

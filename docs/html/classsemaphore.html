@@ -124,7 +124,7 @@ Public 成员函数</h2></td></tr>
 <div class="textblock"><p>系统信号量类 </p>
 <p>操作系统原生信号量，适用于跨进程同步或需要系统级支持的场景。 提供比原子信号量更丰富的功能，但性能相对较低。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00176">176</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00169">169</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a6023fe3d87bccedd287a1f2244691f41" name="a6023fe3d87bccedd287a1f2244691f41"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6023fe3d87bccedd287a1f2244691f41">&#9670;&#160;</a></span>semaphore()</h2>
@@ -266,7 +266,7 @@ Public 成员函数</h2></td></tr>
 
 <p class="reference">引用了 <a class="el" href="#a6fac839c9604da4b0d700e138c735efa">try_acquire()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a6fac839c9604da4b0d700e138c735efa">try_acquire()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00265">try_acquire_until()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a6fac839c9604da4b0d700e138c735efa">try_acquire()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00258">try_acquire_until()</a>.</p>
 
 </div>
 </div>
@@ -312,11 +312,11 @@ template&lt;typename Rep, typename Period&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>成功获取返回true，超时返回false</dd></dl>
 <p>阻塞当前线程，直到成功获取信号量或超时。 超时时间从调用开始计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00239">239</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="duration_8hpp_source.html#l00147">time_cast()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00246">try_acquire_for()</a>.</p>
+<p class="reference">引用了 <a class="el" href="duration_8hpp_source.html#l00144">time_cast()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00239">try_acquire_for()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00246">try_acquire_for()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00265">try_acquire_until()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="semaphore_8hpp_source.html#l00239">try_acquire_for()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00258">try_acquire_until()</a>.</p>
 
 </div>
 </div>
@@ -362,9 +362,9 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>成功获取返回true，超时返回false</dd></dl>
 <p>阻塞当前线程，直到成功获取信号量或到达指定时间点。 如果timeout &lt;= now，则立即调用try_acquire()。 </p>
 
-<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00265">265</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a> 第 <a class="el" href="semaphore_8hpp_source.html#l00258">258</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>, <a class="el" href="#a6fac839c9604da4b0d700e138c735efa">try_acquire()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00246">try_acquire_for()</a>.</p>
+<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>, <a class="el" href="#a6fac839c9604da4b0d700e138c735efa">try_acquire()</a> , 以及 <a class="el" href="semaphore_8hpp_source.html#l00239">try_acquire_for()</a>.</p>
 
 </div>
 </div>

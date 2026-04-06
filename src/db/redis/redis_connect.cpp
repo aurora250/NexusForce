@@ -19,7 +19,8 @@ NEFORCE_BEGIN_NAMESPACE__
         argvlen.push_back(arg.length());
     }
 
-    return static_cast<::redisReply*>(::redisCommandArgv(link_, argv.size(), argv.data(), argvlen.data()));
+    return static_cast<::redisReply*>(
+            ::redisCommandArgv(link_, static_cast<int>(argv.size()), argv.data(), argvlen.data()));
 }
 
 bool redis_connect::authenticate(const string& password) const {
@@ -95,14 +96,14 @@ void redis_connect::close() noexcept {
     link_ = nullptr;
 }
 
-string_view redis_connect::get_error() const noexcept {
+string_view redis_connect::get_error() const {
     if (link_ && link_->errstr[0] != '\0') {
         last_error_ = link_->errstr;
     }
-    return {last_error_.data(), last_error_.size()};
+    return last_error_.view();
 }
 
-bool redis_connect::update(const string& sql) const noexcept {
+bool redis_connect::update(const string& sql) const {
     const auto reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
@@ -127,7 +128,7 @@ unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
     return make_unique<redis_result>(reply);
 }
 
-bool redis_connect::is_valid() const noexcept {
+bool redis_connect::is_valid() const {
     if (!connected()) {
         return false;
     }

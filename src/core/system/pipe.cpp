@@ -104,7 +104,7 @@ int pipe::read(void* buffer, size_t size) noexcept {
 #endif
 }
 
-string pipe::read_available() noexcept {
+string pipe::read_available() {
     string output;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS

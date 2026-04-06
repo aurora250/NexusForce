@@ -1,15 +1,15 @@
 var searchData=
 [
-  ['callback_5ft_0',['callback_t',['../structthread_1_1hook.html#a3cb0384db8eb83e2341c918b0f1f15ff',1,'thread::hook']]],
+  ['callback_5ft_0',['callback_t',['../structthread_1_1hook.html#ab43416ec116fd0118fd18583d69fdae0',1,'thread::hook']]],
   ['callback_5ftype_1',['callback_type',['../classstop__callback.html#a3cd3524bacac20f224581815c5f61cd2',1,'stop_callback']]],
   ['cbyte_5fview_2',['cbyte_view',['../group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9',1,'memory_view.hpp']]],
-  ['centi_3',['centi',['../group___s_i_units.html#ga84759b43b2bd485e94ea77c15056556a',1,'ratio.hpp']]],
+  ['centi_3',['centi',['../group___s_i_units.html#ga037ed5d2bc56f378210678d84bcc854b',1,'ratio.hpp']]],
   ['char_5ftraits_5fchar_5ft_4',['char_traits_char_t',['../group___char_traits.html#ga2cf769a14029d485dcf792d82d53d889',1,'char_traits.hpp']]],
   ['char_5ftraits_5fptr_5ft_5',['char_traits_ptr_t',['../group___char_traits.html#ga288b36ae3d6183f3db9d626b46c748e1',1,'char_traits.hpp']]],
   ['char_5ftype_6',['char_type',['../structbase__char__traits.html#a2ac1b1346a0cb20eee00b5eb9a4886f9',1,'base_char_traits::char_type'],['../structnarrow__char__traits.html#a3c59eb90ff0c14bfcfd03c0149ac237c',1,'narrow_char_traits::char_type']]],
   ['children_5flist_7',['children_list',['../classpath__tree_1_1node.html#a2a0801dd531b8ab16eec183e86081ce8',1,'path_tree::node']]],
   ['clock_8',['clock',['../classlru__cache.html#af5c9f1f0d941c88179b008e50dda5db5',1,'lru_cache::clock'],['../classttl__cache.html#a889f01b5343ab704593312acfa6ce7a5',1,'ttl_cache::clock']]],
-  ['clock_5ftype_9',['clock_type',['../classcondition__variable.html#aced8c8b80dcb261481de04240cb41013',1,'condition_variable::clock_type'],['../classtimer__scheduler.html#a63b53abd0cbc9f95d0c55027a1581617',1,'timer_scheduler::clock_type'],['../classbasic__timer.html#a7e207030e1c38d14b3db768051754597',1,'basic_timer::clock_type'],['../structtime__point.html#adf5e45aea1ca0cfe444a27b73e698db2',1,'time_point::clock_type']]],
+  ['clock_5ftype_9',['clock_type',['../classcondition__variable.html#aced8c8b80dcb261481de04240cb41013',1,'condition_variable::clock_type'],['../classtimer__scheduler.html#a63b53abd0cbc9f95d0c55027a1581617',1,'timer_scheduler::clock_type'],['../classbasic__timer.html#a7e207030e1c38d14b3db768051754597',1,'basic_timer::clock_type'],['../structtime__point.html#adf5e45aea1ca0cfe444a27b73e698db2',1,'time_point::clock_type'],['../structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95',1,'idb_connect::clock_type']]],
   ['color_5ftype_10',['color_type',['../structrb__tree__node__base.html#afdc2b34eafed83b02833a1a9309c2c00',1,'rb_tree_node_base::color_type'],['../classrb__tree.html#a76030ed39e771c8e84bbd78c561c2c53',1,'rb_tree::color_type']]],
   ['common_5fternary_5foperator_5ft_11',['common_ternary_operator_t',['../group___type_attribute_operations.html#ga6f7624c2711c293f19f15c71febeaeb0',1,'type_traits.hpp']]],
   ['common_5ftype_5ft_12',['common_type_t',['../group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84',1,'type_traits.hpp']]],
