@@ -65,10 +65,6 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build --target tidy-check
 
-      - name: (Optional) Generate and upload clang-tidy report
-        if: always()
-        run: |
-          cmake --build ${{ github.workspace }}/build --target tidy-check-report
       - name: Upload report artifact
         if: always()
         uses: actions/upload-artifact@v4
