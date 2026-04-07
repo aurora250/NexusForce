@@ -160,6 +160,7 @@ string environment::current_directory() {
     }
     return string(buffer);
 #else
+    // NOLINTNEXTLINE(clang-analyzer-unix.StdCLibraryFunctions)
     char* buffer = ::getcwd(nullptr, 0);
     if (buffer == nullptr) {
         NEFORCE_THROW_EXCEPTION(system_exception("Failed to get current directory"));
