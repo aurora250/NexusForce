@@ -1,10 +1,10 @@
 #ifndef NEFORCE_CORE_EXCEPTION_ERRC_HPP__
 #define NEFORCE_CORE_EXCEPTION_ERRC_HPP__
-#include "NeForce/core/config/c++config.hpp"
+#include "NeForce/core/typeinfo/types.hpp"
 #include <cerrno>
 NEFORCE_BEGIN_NAMESPACE__
 
-enum class errc {
+enum class errc : int32_t {
     success = 0,
     address_family_not_supported = EAFNOSUPPORT,
     address_in_use = EADDRINUSE,

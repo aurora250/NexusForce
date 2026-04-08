@@ -16,9 +16,9 @@ public:
     error_category& operator=(const error_category&) = delete;
 
     virtual const char* name() const noexcept = 0;
-    virtual string message(int ev) const = 0;
+    virtual string message(int32_t ev) const = 0;
 
-    virtual error_condition default_error_condition(int ev) const noexcept;
+    virtual error_condition default_error_condition(int32_t ev) const noexcept;
 
     virtual bool equivalent(int code, const error_condition& condition) const noexcept;
     virtual bool equivalent(const error_code& code, int condition) const noexcept;
@@ -32,9 +32,9 @@ class generic_error_category final : public error_category {
 public:
     NEFORCE_NODISCARD const char* name() const noexcept override { return "generic"; }
 
-    NEFORCE_NODISCARD string message(int ev) const override;
+    NEFORCE_NODISCARD string message(int32_t ev) const override;
 
-    NEFORCE_NODISCARD error_condition default_error_condition(int ev) const noexcept override;
+    NEFORCE_NODISCARD error_condition default_error_condition(int32_t ev) const noexcept override;
 };
 
 const error_category& generic_category() noexcept;
@@ -47,9 +47,9 @@ class system_error_category final : public error_category {
 public:
     NEFORCE_NODISCARD const char* name() const noexcept override { return "system"; }
 
-    NEFORCE_NODISCARD string message(int ev) const override;
+    NEFORCE_NODISCARD string message(int32_t ev) const override;
 
-    NEFORCE_NODISCARD error_condition default_error_condition(int ev) const noexcept override;
+    NEFORCE_NODISCARD error_condition default_error_condition(int32_t ev) const noexcept override;
 };
 
 const error_category& system_category() noexcept;

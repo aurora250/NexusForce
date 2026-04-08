@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0] - 2026-04-02
+## [1.0.0] - 2026-04-08
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
@@ -15,11 +15,13 @@
 - 添加布隆过滤器 bloom_filter
 - 添加 lru_cache / ttl_cache
 - 添加断点调用 breakpoint
+- 添加错误码系统 errc / error_category / error_code / error_condition
 - 添加端序操作 endian
 - 添加 shared_ptr / weak_ptr 特化的 atomic 无锁操作
 - 添加反射系统与反射注册表 registry
 - 添加 Unicode 码点操作类 codepoint
 - 添加 PCRE2[with JIT] 正则类 regex
+- 添加本地化配置类 locale
 - 添加系统管道操作类 pipe
 - 添加共享内存类 share_memory
 - 添加系统信息获取类 sysinfo
@@ -31,6 +33,7 @@
 - 添加 Websockets 通信操作
 
 ### 🔧 Improvements
+- 通过 CodeQL / Clang-Format / Clang-Tidy 自动化工作流分析
 - 使用外部配置 cmake 选项
 - 使用 vcpkg 包管理
 - 大幅优化 network 结构设计
@@ -92,6 +95,7 @@
 - 添加测试资源文件
 
 ### 🔧 Improvements
+- 通过 vcpkg 内存泄露分析
 - 大幅优化项目结构，执行职责分离设计
 - 大幅优化 database 结构设计
 - 大幅优化 HTTP 结构设计，以 router / filter / server 结构代替 servlet
