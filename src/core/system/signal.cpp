@@ -42,13 +42,14 @@ namespace {
 
 #endif
 
-    thread_local signal_event current_signal =
+    thread_local auto g_current_signal =
 #ifdef NEFORCE_PLATFORM_WINDOWS
             static_cast<signal_event>(CTRL_C_EVENT);
 #else
             static_cast<signal_event>(SIGTERM);
 #endif
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
     thread_local void* signal_context = nullptr;
 } // namespace
 
@@ -271,12 +272,12 @@ void signal_manager::process_signal(signal_event event, void* context) {
     }
 
     if (handler) {
-        current_signal = event;
+        g_current_signal = event;
         signal_context = context;
 
         const bool should_exit = !handler(move(event), move(context));
 
-        current_signal =
+        g_current_signal =
 #ifdef NEFORCE_PLATFORM_WINDOWS
                 static_cast<signal_event>(CTRL_C_EVENT);
 #else
@@ -374,7 +375,7 @@ signal_manager::signal_result signal_manager::wait_for_signal_internal(const int
     if (timeout_ms >= 0) {
         const auto timeout_time = steady_clock::now() + milliseconds(timeout_ms);
         if (!cv_.wait_until(lock, timeout_time, [this]() { return !pending_signals_.empty() || !running_; })) {
-            return {signal_event::TIMEOUT, nullptr};
+            return signal_result{signal_event::TIMEOUT, nullptr};
         }
     } else {
         cv_.wait(lock, [this]() { return !pending_signals_.empty() || !running_; });
@@ -383,10 +384,10 @@ signal_manager::signal_result signal_manager::wait_for_signal_internal(const int
     if (!pending_signals_.empty()) {
         const pending_signal ps = pending_signals_.front();
         pending_signals_.erase(pending_signals_.begin());
-        return {ps.event, ps.context};
+        return signal_result{ps.event, ps.context};
     }
 
-    return {signal_event::TIMEOUT, nullptr};
+    return signal_result{signal_event::TIMEOUT, nullptr};
 }
 
 void signal_manager::send_signal_nolock(signal_event event, void* context) {

@@ -33,7 +33,7 @@ NEFORCE_NODISCARD datetime datetime::now() noexcept {
                         local_tm.tm_min, local_tm.tm_sec, local_tm.tm_gmtoff);
 #endif
     } catch (...) {
-        return datetime();
+        return {};
     }
 }
 

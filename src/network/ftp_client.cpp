@@ -72,7 +72,7 @@ ssize_t ftp_client::ctrl_recv(char* buf, const size_t len) {
 
 bool ftp_client::ctrl_read_line(string& out) {
     out.clear();
-    char ch;
+    char ch = 0;
     while (true) {
         const ssize_t n = ctrl_recv(&ch, 1);
         if (n <= 0) {
@@ -164,7 +164,7 @@ void ftp_client::expect_codes(const std::initializer_list<int> codes, const stri
 }
 
 void ftp_client::do_ctrl_tls_handshake() {
-    if (!ssl_ctx_) {
+    if (ssl_ctx_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(value_exception("ssl_context required for FTPS"));
     }
 
@@ -282,7 +282,7 @@ tcp_socket ftp_client::open_data_channel() {
     return tcp_socket(client_fd);
 }
 
-ssl_stream ftp_client::wrap_data_channel(tcp_socket&& sock) {
+ssl_stream ftp_client::wrap_data_channel(tcp_socket sock) {
     if (ssl_ctx_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(value_exception("ssl_context required for data channel TLS"));
     }
@@ -480,7 +480,7 @@ void ftp_client::connect(const string& hostname, const ports port, const tls_mod
 
     optional<dns_client> local_dns;
     dns_client* resolver = dns;
-    if (!resolver) {
+    if (resolver == nullptr) {
         local_dns.emplace();
         resolver = &(*local_dns);
     }

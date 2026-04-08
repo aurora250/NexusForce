@@ -34,25 +34,23 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
                 if (ret == 0) {
                     last_error_ = string(operation) + " unexpected EOF";
                     NEFORCE_THROW_EXCEPTION(ssl_exception("Unexpected EOF in SSL operation"));
-                } else {
-                    last_error_ = string(operation) + " system call error";
-                    NEFORCE_THROW_EXCEPTION(ssl_exception("System call error in SSL operation"));
                 }
-            } else {
-                char buf[256];
-                ::ERR_error_string_n(ssl_err, buf, sizeof(buf));
-                last_error_ = string(operation) + " syscall error: " + buf;
-                NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
+                last_error_ = string(operation) + " system call error";
+                NEFORCE_THROW_EXCEPTION(ssl_exception("System call error in SSL operation"));
             }
-            break;
+            char buf[256];
+            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
+            last_error_ = string(operation) + " syscall error: " + static_cast<char*>(buf);
+            NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
+            unreachable();
         }
         case SSL_ERROR_SSL: {
             const unsigned long ssl_err = ::ERR_get_error();
             char buf[256];
-            ::ERR_error_string_n(ssl_err, buf, sizeof(buf));
-            last_error_ = string(operation) + " SSL protocol error: " + buf;
+            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
+            last_error_ = string(operation) + " SSL protocol error: " + static_cast<char*>(buf);
             NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
-            break;
+            unreachable();
         }
         default: {
             last_error_ = string(operation) + " unknown error";
@@ -111,10 +109,10 @@ bool ssl_stream::connect() {
         const int err = SSL_get_error(ssl_.get(), ret);
         const auto ssl_err = ERR_get_error();
         char err_buf[256];
-        ERR_error_string_n(ssl_err, err_buf, sizeof(err_buf));
+        ERR_error_string_n(ssl_err, static_cast<char*>(err_buf), sizeof(err_buf));
 
         string error_msg = "SSL handshake failed: ";
-        error_msg += err_buf;
+        error_msg += static_cast<char*>(err_buf);
 
         switch (err) {
             case SSL_ERROR_SYSCALL: {
@@ -148,7 +146,7 @@ bool ssl_stream::connect() {
 
 void ssl_stream::close() {
     auto* ssl = ssl_.release();
-    if (ssl) {
+    if (ssl != nullptr) {
         ::SSL_shutdown(ssl);
         ::SSL_free(ssl);
     }
@@ -160,7 +158,7 @@ ssize_t ssl_stream::read(void* buffer, const size_t size) {
         last_error_ = "SSL object not initialized";
         return -1;
     }
-    if (!buffer || size == 0) {
+    if (buffer == nullptr || size == 0) {
         last_error_ = "Invalid buffer or size";
         return -1;
     }
@@ -190,7 +188,7 @@ ssize_t ssl_stream::write(const void* buffer, const size_t size) {
         last_error_ = "SSL object not initialized";
         return -1;
     }
-    if (!buffer || size == 0) {
+    if (buffer == nullptr || size == 0) {
         return 0;
     }
 
@@ -219,7 +217,7 @@ vector<char> ssl_stream::read_all(const size_t max_size) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL object not initialized"));
     }
     if (max_size == 0) {
-        return vector<char>();
+        return {};
     }
 
     vector<char> buffer;
@@ -229,7 +227,7 @@ vector<char> ssl_stream::read_all(const size_t max_size) {
 
     while (buffer.size() < max_size) {
         const size_t to_read = min(sizeof(temp), max_size - buffer.size());
-        const ssize_t ret = read(temp, to_read);
+        const ssize_t ret = read(static_cast<char*>(temp), to_read);
 
         if (ret < 0) {
             NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to read data"));
@@ -238,7 +236,7 @@ vector<char> ssl_stream::read_all(const size_t max_size) {
             break;
         }
 
-        buffer.insert(buffer.end(), temp, temp + ret);
+        buffer.insert(buffer.end(), static_cast<char*>(temp), static_cast<char*>(temp) + ret);
 
         if (ret < sizeof(temp)) {
             break;
@@ -253,7 +251,7 @@ bool ssl_stream::write_all(const void* data, const size_t size) {
         last_error_ = "SSL object not initialized";
         return false;
     }
-    if (!data) {
+    if (data == nullptr) {
         last_error_ = "Invalid data pointer";
         return false;
     }
@@ -262,7 +260,7 @@ bool ssl_stream::write_all(const void* data, const size_t size) {
         return true;
     }
 
-    auto ptr = static_cast<const char*>(data);
+    const auto* ptr = static_cast<const char*>(data);
     size_t remaining = size;
 
     while (remaining > 0) {
@@ -302,16 +300,16 @@ void ssl_stream::set_sni_hostname(const string& hostname) {
     if (::SSL_set_tlsext_host_name(ssl_.get(), hostname.data()) != 1) {
         const auto err = ::ERR_get_error();
         char buf[256];
-        ::ERR_error_string_n(err, buf, sizeof(buf));
+        ::ERR_error_string_n(err, static_cast<char*>(buf), sizeof(buf));
 
         string error_msg = "SSL_set_tlsext_host_name failed: ";
-        error_msg += buf;
+        error_msg += static_cast<char*>(buf);
         NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg.data()));
     }
 
 #if OPENSSL_VERSION_NUMBER >= 0x10002000L
     ::X509_VERIFY_PARAM* param = ::SSL_get0_param(ssl_.get());
-    if (param) {
+    if (param != nullptr) {
         ::X509_VERIFY_PARAM_set1_host(param, hostname.data(), 0);
     }
 #endif
@@ -330,7 +328,7 @@ bool ssl_stream::verify_peer() const {
     }
 
     ::X509* cert = ::SSL_get_peer_certificate(ssl_.get());
-    if (!cert) {
+    if (cert == nullptr) {
         return false;
     }
 

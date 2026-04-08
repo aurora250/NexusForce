@@ -92,7 +92,7 @@ private:
     void expect_codes(std::initializer_list<int> codes, const string& cmd);
 
     tcp_socket open_data_channel();
-    ssl_stream wrap_data_channel(tcp_socket&& sock);
+    ssl_stream wrap_data_channel(tcp_socket sock);
 
     void do_ctrl_tls_handshake();
     void do_post_connect();

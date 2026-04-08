@@ -17,11 +17,8 @@ bool file_locker::lock(const difference_type offset, const difference_type lengt
     ov.Offset = off_ul.LowPart;
     ov.OffsetHigh = off_ul.HighPart;
 
-    ::DWORD len_lo, len_hi;
-    if (length == 0) {
-        len_lo = 0xFFFFFFFF;
-        len_hi = 0xFFFFFFFF;
-    } else {
+    ::DWORD len_lo = 0xFFFFFFFF, len_hi = 0xFFFFFFFF;
+    if (length != 0) {
         const ::ULARGE_INTEGER len_ul = {static_cast<::DWORD>(length & 0xFFFFFFFF),
                                          static_cast<::DWORD>(static_cast<uint64_t>(length) >> 32)};
         len_lo = len_ul.LowPart;
@@ -67,11 +64,8 @@ bool file_locker::unlock(const difference_type offset, const difference_type len
     ov.Offset = off_ul.LowPart;
     ov.OffsetHigh = off_ul.HighPart;
 
-    ::DWORD len_lo, len_hi;
-    if (length == 0) {
-        len_lo = 0xFFFFFFFF;
-        len_hi = 0xFFFFFFFF;
-    } else {
+    ::DWORD len_lo = 0xFFFFFFFF, len_hi = 0xFFFFFFFF;
+    if (length != 0) {
         const ::ULARGE_INTEGER len_ul = {static_cast<::DWORD>(length & 0xFFFFFFFF),
                                          static_cast<::DWORD>(static_cast<uint64_t>(length) >> 32)};
         len_lo = len_ul.LowPart;
@@ -102,12 +96,12 @@ bool file_locker::is_locked(const difference_type offset, const difference_type 
     // This operation will temporarily lock the file area
     if (try_lock(offset, length, file_lock::SHARED)) {
         ignore = unlock(offset, length);
-        if (lock_out) {
+        if (lock_out != nullptr) {
             *lock_out = file_lock::SHARED;
         }
         return false;
     }
-    if (lock_out) {
+    if (lock_out != nullptr) {
         *lock_out = file_lock::EXCLUSIVE;
     }
     return true;
@@ -144,9 +138,8 @@ file_lock_guard::file_lock_guard(file_locker& locker, const difference_type offs
                                  const file_lock mode) :
 locker_(locker),
 offset_(offset),
-length_(length) {
-    locked_ = locker_.lock(offset, length, mode);
-}
+length_(length),
+locked_(locker_.lock(offset, length, mode)) {}
 
 file_lock_guard::~file_lock_guard() {
     if (locked_) {

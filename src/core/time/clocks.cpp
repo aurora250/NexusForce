@@ -29,7 +29,7 @@ void sleep_for_aux(const ssize_t s, const ssize_t ns) {
     li.QuadPart = -(ns / 100);
 
     const ::HANDLE timer = ::CreateWaitableTimerW(nullptr, 1, nullptr);
-    if (timer) {
+    if (timer != nullptr) {
         ::SetWaitableTimer(timer, &li, 0, nullptr, nullptr, 0);
         ::WaitForSingleObject(timer, numeric_traits<::DWORD>::max());
         ::CloseHandle(timer);
@@ -63,7 +63,7 @@ system_clock::time_point system_clock::now() noexcept {
 #endif
         return time_point(duration(total_nanos));
     } catch (...) {
-        return time_point();
+        return {};
     }
 }
 
@@ -83,7 +83,7 @@ steady_clock::time_point steady_clock::now() noexcept {
         const rep ticks = static_cast<rep>(count.QuadPart);
         const rep nanos_per_tick = 1'000'000'000LL / static_cast<rep>(freq.QuadPart);
         const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
-        rep total_nanos = ticks * nanos_per_tick + (ticks * remainder) / static_cast<rep>(freq.QuadPart);
+        rep total_nanos = (ticks * nanos_per_tick) + ((ticks / static_cast<rep>(freq.QuadPart)) * remainder);
 #elif defined(NEFORCE_PLATFORM_LINUX)
         ::timespec ts{};
         ::clock_gettime(CLOCK_MONOTONIC, &ts);
@@ -93,7 +93,7 @@ steady_clock::time_point steady_clock::now() noexcept {
 #endif
         return time_point(duration(total_nanos));
     } catch (...) {
-        return time_point();
+        return {};
     }
 }
 

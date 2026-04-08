@@ -2,7 +2,7 @@
 #include <NeForce/core/async/mutex.hpp>
 #include <NeForce/core/container/array.hpp>
 #include <NeForce/core/exception/terminate.hpp>
-#include <stdio.h> // ::fflush
+#include <cstdio> // ::fflush
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <errhandlingapi.h>
 #endif
@@ -167,15 +167,15 @@ namespace {
             bool is_used;
         };
 
-        array<handler_entry, max_handler_threshhold> exit_handlers{};
-        array<handler_entry, max_handler_threshhold> quick_exit_handlers{};
-        size_t exit_count{0};
-        size_t quick_exit_count{0};
-        mutex mtx;
+        array<handler_entry, max_handler_threshhold> exit_handlers_{};
+        array<handler_entry, max_handler_threshhold> quick_exit_handlers_{};
+        size_t exit_count_{0};
+        size_t quick_exit_count_{0};
+        mutex mtx_;
 
         exit_handler_manager() {
-            fill(exit_handlers.begin(), exit_handlers.end(), handler_entry{nullptr, false});
-            fill(quick_exit_handlers.begin(), quick_exit_handlers.end(), handler_entry{nullptr, false});
+            fill(exit_handlers_.begin(), exit_handlers_.end(), handler_entry{nullptr, false});
+            fill(quick_exit_handlers_.begin(), quick_exit_handlers_.end(), handler_entry{nullptr, false});
         }
 
     public:
@@ -185,20 +185,20 @@ namespace {
         }
 
         int register_atexit(const exit_handler handler) {
-            if (!handler) {
+            if (handler == nullptr) {
                 return -1;
             }
 
-            lock<mutex> lock(mtx);
-            if (exit_count >= max_handler_threshhold) {
+            lock<mutex> lock(mtx_);
+            if (exit_count_ >= max_handler_threshhold) {
                 return -1;
             }
 
-            for (auto& entry: exit_handlers) {
+            for (auto& entry: exit_handlers_) {
                 if (!entry.is_used) {
                     entry.func = handler;
                     entry.is_used = true;
-                    ++exit_count;
+                    ++exit_count_;
                     return 0;
                 }
             }
@@ -206,20 +206,20 @@ namespace {
         }
 
         int register_quick_exit(const exit_handler handler) {
-            if (!handler) {
+            if (handler == nullptr) {
                 return -1;
             }
 
-            lock<mutex> lock(mtx);
-            if (quick_exit_count >= max_handler_threshhold) {
+            lock<mutex> lock(mtx_);
+            if (quick_exit_count_ >= max_handler_threshhold) {
                 return -1;
             }
 
-            for (auto& entry: quick_exit_handlers) {
+            for (auto& entry: quick_exit_handlers_) {
                 if (!entry.is_used) {
                     entry.func = handler;
                     entry.is_used = true;
-                    ++quick_exit_count;
+                    ++quick_exit_count_;
                     return 0;
                 }
             }
@@ -227,23 +227,23 @@ namespace {
         }
 
         void execute_exit_handlers() {
-            for (int i = static_cast<int>(exit_handlers.size()) - 1; i >= 0; --i) {
-                if (exit_handlers[i].is_used) {
-                    exit_handlers[i].func();
-                    exit_handlers[i].is_used = false;
+            for (int i = static_cast<int>(exit_handlers_.size()) - 1; i >= 0; --i) {
+                if (exit_handlers_[i].is_used) {
+                    exit_handlers_[i].func();
+                    exit_handlers_[i].is_used = false;
                 }
             }
-            exit_count = 0;
+            exit_count_ = 0;
         }
 
         void execute_quick_exit_handlers() {
-            for (int i = static_cast<int>(quick_exit_handlers.size()) - 1; i >= 0; --i) {
-                if (quick_exit_handlers[i].is_used) {
-                    quick_exit_handlers[i].func();
-                    quick_exit_handlers[i].is_used = false;
+            for (int i = static_cast<int>(quick_exit_handlers_.size()) - 1; i >= 0; --i) {
+                if (quick_exit_handlers_[i].is_used) {
+                    quick_exit_handlers_[i].func();
+                    quick_exit_handlers_[i].is_used = false;
                 }
             }
-            quick_exit_count = 0;
+            quick_exit_count_ = 0;
         }
     };
 } // namespace
@@ -256,7 +256,7 @@ void set_terminate(const terminate_handler handler) noexcept {
 void terminate() noexcept {
     try {
         const auto handler = get_terminate_handler().load(memory_order_acquire);
-        if (handler) {
+        if (handler != nullptr) {
             handler();
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)

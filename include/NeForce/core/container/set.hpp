@@ -107,8 +107,9 @@ public:
      * @param other 源set
      * @return 自身引用
      */
-    set& operator=(set&& other) noexcept(is_nothrow_move_assignable_v<base_type>) {
-        tree_ = _NEFORCE move(other.tree_);
+    set& operator=(set&& other) noexcept(is_nothrow_swappable_v<base_type>) {
+        tree_.clear();
+        tree_.swap(other.tree_);
         return *this;
     }
 

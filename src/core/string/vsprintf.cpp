@@ -1,3 +1,4 @@
+#include <NeForce/core/algorithm/compare.hpp>
 #include <NeForce/core/memory/standard_allocator.hpp>
 #include <NeForce/core/numeric/numeric_types.hpp>
 #include <NeForce/core/string/char_types.hpp>
@@ -30,12 +31,12 @@ namespace {
     NEFORCE_CONSTEXPR20 char* number(char* str, const int64_t num, const int base, int size, int precision, int type) {
 
         char sign = 0, tmp[66];
-        auto digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const auto* digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        if (type & SMALL) {
+        if ((type & SMALL) != 0) {
             digits = "0123456789abcdefghijklmnopqrstuvwxyz";
         }
-        if (type & LEFT) {
+        if ((type & LEFT) != 0) {
             type &= ~ZEROPAD;
         }
         if (base < 2 || base > 36) {
@@ -45,22 +46,22 @@ namespace {
             return str;
         }
 
-        const char c = (type & ZEROPAD) ? '0' : ' ';
-        unsigned long long unum;
+        const char c = (type & ZEROPAD) != 0 ? '0' : ' ';
+        uint64_t unum = 0;
 
-        if (type & SIGN && num < 0) {
+        if ((type & SIGN) != 0 && num < 0) {
             sign = '-';
-            unum = -static_cast<unsigned long long>(num);
+            unum = -static_cast<uint64_t>(num);
         } else {
-            sign = (type & PLUS) ? '+' : ((type & SPACE) ? ' ' : '\0');
-            unum = static_cast<unsigned long long>(num);
+            sign = (type & PLUS) != 0 ? '+' : ((type & SPACE) != 0 ? ' ' : '\0');
+            unum = static_cast<uint64_t>(num);
         }
 
-        if (sign) {
+        if (sign != 0) {
             size--;
         }
 
-        if (type & SPECIAL) {
+        if ((type & SPECIAL) != 0) {
             if (base == 16) {
                 size -= 2;
             } else if (base == 8) {
@@ -79,31 +80,29 @@ namespace {
             }
         }
 
-        if (i > precision) {
-            precision = i;
-        }
+        precision = max(i, precision);
         size -= precision;
 
-        if (!(type & (ZEROPAD + LEFT))) {
+        if ((type & (ZEROPAD + LEFT)) == 0) {
             while (size-- > 0) {
                 *str++ = ' ';
             }
         }
 
-        if (sign) {
+        if (sign != 0) {
             *str++ = sign;
         }
 
-        if (type & SPECIAL) {
+        if ((type & SPECIAL) != 0) {
             if (base == 8) {
                 *str++ = '0';
             } else if (base == 16) {
                 *str++ = '0';
-                *str++ = (type & SMALL) ? 'x' : 'X';
+                *str++ = (type & SMALL) != 0 ? 'x' : 'X';
             }
         }
 
-        if (!(type & LEFT)) {
+        if ((type & LEFT) == 0) {
             while (size-- > 0) {
                 *str++ = c;
             }
@@ -131,18 +130,18 @@ namespace {
         int frac_len = 0;
 
         if (is_nan(num)) {
-            const char* nan_str = (flags & SMALL) ? "nan" : "NAN";
+            const char* nan_str = (flags & SMALL) != 0 ? "nan" : "NAN";
             return string_copy(str, nan_str);
         }
         if (is_infinity(num)) {
-            const char* inf_str = (flags & SMALL) ? "inf" : "INF";
+            const char* inf_str = (flags & SMALL) != 0 ? "inf" : "INF";
             if (num < 0) {
                 sign = '-';
             } else {
-                sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : '\0');
+                sign = (flags & PLUS) != 0 ? '+' : ((flags & SPACE) != 0 ? ' ' : '\0');
             }
 
-            if (sign) {
+            if (sign != 0) {
                 *str++ = sign;
             }
             return string_copy(str, inf_str);
@@ -152,15 +151,13 @@ namespace {
             sign = '-';
             num = -num;
         } else {
-            sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : '\0');
+            sign = (flags & PLUS) != 0 ? '+' : ((flags & SPACE) != 0 ? ' ' : '\0');
         }
 
         if (precision < 0) {
             precision = 6;
         }
-        if (precision > 20) {
-            precision = 20;
-        }
+        precision = min(precision, 20);
 
         auto int_part = static_cast<long long>(num);
         double fractional = num - static_cast<double>(int_part);
@@ -220,17 +217,17 @@ namespace {
         const int total_len = sign_len + total_num_len;
         int pad = field_width > total_len ? field_width - total_len : 0;
 
-        if (!(flags & LEFT) && !(flags & ZEROPAD)) {
+        if ((flags & LEFT) == 0 && (flags & ZEROPAD) == 0) {
             while (pad-- > 0) {
                 *str++ = ' ';
             }
         }
 
-        if (sign) {
+        if (sign != 0) {
             *str++ = sign;
         }
 
-        if (!(flags & LEFT) && (flags & ZEROPAD)) {
+        if ((flags & LEFT) == 0 && (flags & ZEROPAD) != 0) {
             while (pad-- > 0) {
                 *str++ = '0';
             }
@@ -247,7 +244,7 @@ namespace {
             }
         }
 
-        if (flags & LEFT) {
+        if ((flags & LEFT) != 0) {
             while (pad-- > 0) {
                 *str++ = ' ';
             }
@@ -258,15 +255,16 @@ namespace {
 } // namespace
 
 
+// NOLINTNEXTLINE(readability-non-const-parameter)
 int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
-    if (!buf || !fmt) {
+    if (buf == nullptr || fmt == nullptr) {
         return -1;
     }
 
-    char* str;
+    char* str = nullptr;
     char* end = buf + MEMORY_BIG_ALLOC_THRESHHOLD - 1;
 
-    for (str = buf; *fmt; ++fmt) {
+    for (str = buf; *fmt != 0; ++fmt) {
         if (*fmt != '%') {
             *str++ = *fmt;
             continue;
@@ -317,9 +315,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
             } else if (*fmt == '*') {
                 precision = va_arg(args, int);
             }
-            if (precision < 0) {
-                precision = 0;
-            }
+            precision = max(precision, 0);
         }
 
         int qualifier = -1;
@@ -330,7 +326,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
 
         switch (*fmt) {
             case 'c': {
-                if (!(flags & LEFT)) {
+                if ((flags & LEFT) == 0) {
                     while (--field_width > 0) {
                         *str++ = ' ';
                     }
@@ -343,7 +339,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
             }
             case 's': {
                 const char* s = va_arg(args, char*);
-                if (!s) {
+                if (s == nullptr) {
                     s = "(null)";
                 }
                 int len = static_cast<int>(string_length(s));
@@ -351,7 +347,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
                     len = precision;
                 }
 
-                if (!(flags & LEFT)) {
+                if ((flags & LEFT) == 0) {
                     while (len < field_width--) {
                         *str++ = ' ';
                     }
@@ -411,7 +407,7 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
                 if (*fmt != '%') {
                     *str++ = '%';
                 }
-                if (*fmt) {
+                if (*fmt != 0) {
                     *str++ = *fmt;
                 } else {
                     --fmt;
@@ -430,8 +426,9 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
     return static_cast<int>(str - buf);
 }
 
+// NOLINTNEXTLINE(readability-non-const-parameter)
 int vsnprintf(char* buf, const size_t size, const char* fmt, std::va_list args) noexcept {
-    if (!buf || size == 0 || !fmt) {
+    if (buf == nullptr || size == 0 || fmt == nullptr) {
         return -1;
     }
 
@@ -457,6 +454,7 @@ int vsnprintf(char* buf, const size_t size, const char* fmt, std::va_list args) 
 }
 
 int sprintf(char* buf, const char* fmt, ...) noexcept {
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
     std::va_list args;
 
     va_start(args, fmt);
@@ -467,6 +465,7 @@ int sprintf(char* buf, const char* fmt, ...) noexcept {
 }
 
 int snprintf(char* buf, const size_t size, const char* fmt, ...) noexcept {
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
     std::va_list args;
 
     va_start(args, fmt);
@@ -477,6 +476,7 @@ int snprintf(char* buf, const size_t size, const char* fmt, ...) noexcept {
 }
 
 int scprintf(const char* fmt, ...) noexcept {
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
     std::va_list args;
 
     va_start(args, fmt);

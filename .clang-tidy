@@ -32,8 +32,32 @@ Checks: >
   -cppcoreguidelines-pro-type-vararg,
   -hicpp-vararg,
   -hicpp-signed-bitwise,
+  -hicpp-avoid-c-arrays,
+  -clang-analyzer-optin.cplusplus.UninitializedObject,
+  -cppcoreguidelines-avoid-do-while,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
   -cppcoreguidelines-avoid-c-arrays,
-  -clang-analyzer-optin.cplusplus.UninitializedObject
+  -modernize-avoid-c-arrays,
+  -modernize-use-constraints,
+  -readability-make-member-function-const,
+  -readability-static-accessed-through-instance,
+  -readability-convert-member-functions-to-static,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -hicpp-no-array-decay,
+  -cppcoreguidelines-avoid-non-const-global-variables,
+  -readability-identifier-naming,
+  -readability-math-missing-parentheses,
+  -readability-isolate-declaration,
+  -modernize-use-designated-initializers,
+  -readability-use-anyofallof,
+  -cppcoreguidelines-rvalue-reference-param-not-moved,
+  -readability-else-after-return,
+  -readability-avoid-nested-conditional-operator,
+  -cppcoreguidelines-no-malloc,
+  -hicpp-no-malloc,
+  -cppcoreguidelines-owning-memory
 
 WarningsAsErrors: '
   bugprone-*,
@@ -72,19 +96,19 @@ CheckOptions:
     value: ''
 
   - key: readability-identifier-naming.ClassCase
-    value: CamelCase
+    value: lower_case
 
   - key: readability-identifier-naming.StructCase
-    value: CamelCase
+    value: lower_case
 
   - key: readability-identifier-naming.EnumCase
-    value: CamelCase
+    value: ''
 
   - key: readability-identifier-naming.EnumConstantCase
-    value: UPPER_CASE
+    value: ''
 
   - key: readability-identifier-naming.ConstantCase
-    value: UPPER_CASE
+    value: ''
 
   - key: readability-identifier-naming.ConstantPrefix
     value: ''
@@ -135,13 +159,13 @@ CheckOptions:
     value: ''
 
   - key: readability-identifier-naming.TypedefCase
-    value: CamelCase
+    value: ''
 
   - key: readability-identifier-naming.TypeAliasCase
-    value: CamelCase
+    value: ''
 
   - key: readability-identifier-naming.ConceptCase
-    value: CamelCase
+    value: ''
 
   - key: readability-identifier-length.IgnoredVariableNames
     value: '^[ijkn]$|^x$|^y$|^z$|^e$|^id$|^io$'

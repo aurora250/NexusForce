@@ -363,7 +363,7 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(unique_ptr<toml_value>&& value) { return value_impl(_NEFORCE move(value)); }
+    toml_builder& value(unique_ptr<toml_value> value) { return value_impl(_NEFORCE move(value)); }
 
     /**
      * @brief 设置指定类型的字符串值
@@ -410,7 +410,7 @@ public:
      *
      * 在独立的作用域内构建一个标准表格。
      */
-    toml_builder& value_table(_NEFORCE function<void(toml_builder&)>&& build_func);
+    toml_builder& value_table(const function<void(toml_builder&)>& build_func);
 
     /**
      * @brief 使用函数式方式构建内联表格值
@@ -419,7 +419,7 @@ public:
      *
      * 在独立的作用域内构建一个内联表格。
      */
-    toml_builder& value_inline_table(_NEFORCE function<void(toml_builder&)>&& build_func);
+    toml_builder& value_inline_table(const function<void(toml_builder&)>& build_func);
 
     /**
      * @brief 使用函数式方式构建数组值
@@ -428,7 +428,7 @@ public:
      *
      * 在独立的作用域内构建一个数组。
      */
-    toml_builder& value_array(_NEFORCE function<void(toml_builder&)>&& build_func);
+    toml_builder& value_array(const function<void(toml_builder&)>& build_func);
 
     /**
      * @brief 构建toml文档

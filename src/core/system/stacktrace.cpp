@@ -39,7 +39,7 @@ namespace {
 
 
 string stacktrace::frame::name() const {
-    if (!address_) {
+    if (address_ == nullptr) {
         return "<empty>";
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -48,13 +48,13 @@ string stacktrace::frame::name() const {
     lock<mutex> lock(dbghelp_mutex());
 
     char buffer[sizeof(::SYMBOL_INFO) + MAX_SYM_NAME * sizeof(::TCHAR)];
-    const auto symbol = reinterpret_cast<::PSYMBOL_INFO>(buffer);
+    auto* const symbol = reinterpret_cast<::PSYMBOL_INFO>(buffer);
     symbol->SizeOfStruct = sizeof(::SYMBOL_INFO);
     symbol->MaxNameLen = MAX_SYM_NAME;
 
     ::DWORD64 displacement = 0;
-    if (::SymFromAddr(::GetCurrentProcess(), reinterpret_cast<::DWORD64>(address_), &displacement, symbol)) {
-        return string(symbol->Name);
+    if (::SymFromAddr(::GetCurrentProcess(), reinterpret_cast<::DWORD64>(address_), &displacement, symbol) == TRUE) {
+        return {symbol->Name};
     }
     return "<unknown>";
 #else
@@ -74,7 +74,7 @@ string stacktrace::frame::name() const {
 }
 
 string stacktrace::frame::to_string() const {
-    if (!address_) {
+    if (address_ == nullptr) {
         return "<empty>";
     }
     string result = address_string(address_);

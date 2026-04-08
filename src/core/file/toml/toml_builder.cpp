@@ -162,7 +162,7 @@ toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
 
 toml_builder& toml_builder::end_array_table() { return end_table(); }
 
-toml_builder& toml_builder::value_table(function<void(toml_builder&)>&& build_func) {
+toml_builder& toml_builder::value_table(const function<void(toml_builder&)>& build_func) {
     if (contexts_.empty()) {
         NEFORCE_THROW_EXCEPTION(toml_exception("Cannot create table at root using value_table"));
     }
@@ -191,14 +191,14 @@ toml_builder& toml_builder::value_table(function<void(toml_builder&)>&& build_fu
     return *this;
 }
 
-toml_builder& toml_builder::value_inline_table(function<void(toml_builder&)>&& build_func) {
+toml_builder& toml_builder::value_inline_table(const function<void(toml_builder&)>& build_func) {
     begin_inline_table();
     build_func(*this);
     end_inline_table();
     return *this;
 }
 
-toml_builder& toml_builder::value_array(function<void(toml_builder&)>&& build_func) {
+toml_builder& toml_builder::value_array(const function<void(toml_builder&)>& build_func) {
     begin_array();
     build_func(*this);
     end_array();
@@ -219,7 +219,7 @@ toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) c
     for (const string& key: path) {
         const toml_value* existing = current->get_member(key);
 
-        if (existing) {
+        if (existing != nullptr) {
             if (!existing->is_table()) {
                 NEFORCE_THROW_EXCEPTION(toml_exception(("Key '" + key + "' already exists and is not a table").data()));
             }
@@ -245,18 +245,18 @@ toml_array* toml_builder::get_or_create_array_for_array_table(const vector<strin
     toml_table* parent = parent_path.empty() ? root_.get() : get_or_create_table_path(parent_path);
     const toml_value* existing = parent->get_member(array_name);
 
-    if (existing) {
+    if (existing != nullptr) {
         if (!existing->is_array()) {
             NEFORCE_THROW_EXCEPTION(
                     toml_exception(("Key '" + array_name + "' already exists and is not an array").data()));
         }
         return const_cast<toml_array*>(existing->as_array());
-    } else {
-        auto new_array = make_unique<toml_array>();
-        toml_array* new_array_ptr = new_array.get();
-        parent->add_member(array_name, move(new_array));
-        return new_array_ptr;
     }
+
+    auto new_array = make_unique<toml_array>();
+    toml_array* new_array_ptr = new_array.get();
+    parent->add_member(array_name, move(new_array));
+    return new_array_ptr;
 }
 
 NEFORCE_END_NAMESPACE__

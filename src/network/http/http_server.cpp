@@ -85,8 +85,8 @@ string http_server_base::session_manager::generate_session_id() {
     return move(str);
 }
 
-http_server_base::session_manager::session_manager() {
-    cleanup_running_ = true;
+http_server_base::session_manager::session_manager() :
+cleanup_running_(true) {
     cleanup_thread_ = thread(&session_manager::cleanup_expired_sessions, this);
 }
 
@@ -262,13 +262,13 @@ http_request http_server_base::parse_request(tcp_socket* client_socket, session_
 
                 while (remaining > 0) {
                     const size_t to_read = (remaining < sizeof(buffer)) ? remaining : sizeof(buffer);
-                    const ssize_t n = client_socket->receive(memory_view<char>(buffer, to_read));
+                    const ssize_t n = client_socket->receive(memory_view<char>(static_cast<char*>(buffer), to_read));
 
                     if (n <= 0) {
                         NEFORCE_THROW_EXCEPTION(http_exception("Connection closed while reading body"));
                     }
 
-                    request_data.append(buffer, n);
+                    request_data.append(static_cast<char*>(buffer), n);
                     remaining -= n;
                 }
             }
@@ -351,7 +351,7 @@ http_session* http_server_base::get_or_create_session(http_request& request, con
                                                       session_manager& manager, const HTTP_COOKIE_NAME& name) {
 
     http_session* sess = request.session;
-    if (sess) {
+    if (sess != nullptr) {
         return sess;
     }
 
@@ -360,7 +360,7 @@ http_session* http_server_base::get_or_create_session(http_request& request, con
         sess = manager.get_session(session_id, false);
     }
 
-    if (!sess && create) {
+    if (sess == nullptr && create) {
         sess = manager.get_session("", true);
     }
     request.session = sess;
@@ -411,7 +411,7 @@ void http_server_base::send_response(tcp_socket* client_socket, const http_respo
 void http_server_base::add_session_cookie(const http_request& request, http_response& response, http_session* session,
                                           const HTTP_COOKIE_NAME& name) {
 
-    if (!session || !session->is_new) {
+    if (session == nullptr || !session->is_new) {
         return;
     }
 

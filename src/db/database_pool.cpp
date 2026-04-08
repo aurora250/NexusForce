@@ -14,15 +14,9 @@ pool_cfg_(pool_config) {
     if (pool_cfg_.min_size == 0) {
         pool_cfg_.min_size = 1;
     }
-    if (pool_cfg_.max_size < pool_cfg_.min_size) {
-        pool_cfg_.max_size = pool_cfg_.min_size;
-    }
-    if (pool_cfg_.init_size < pool_cfg_.min_size) {
-        pool_cfg_.init_size = pool_cfg_.min_size;
-    }
-    if (pool_cfg_.init_size > pool_cfg_.max_size) {
-        pool_cfg_.init_size = pool_cfg_.max_size;
-    }
+    pool_cfg_.max_size = max(pool_cfg_.max_size, pool_cfg_.min_size);
+    pool_cfg_.init_size = max(pool_cfg_.init_size, pool_cfg_.min_size);
+    pool_cfg_.init_size = min(pool_cfg_.init_size, pool_cfg_.max_size);
 
     switch (type) {
 #ifdef NEFORCE_SUPPORT_MYSQL
@@ -116,6 +110,7 @@ void database_pool::stop() {
 
     unique_lock<mutex> lk(queue_mtx_);
     while (!idle_queue_.empty()) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete idle_queue_.front().conn;
         idle_queue_.pop();
     }
@@ -128,6 +123,7 @@ idb_connect* database_pool::try_create_connect() noexcept {
         if (conn != nullptr) {
             return conn;
         }
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete conn;
         return nullptr;
     } catch (...) {
@@ -141,6 +137,7 @@ void database_pool::return_connect(idb_connect* conn) {
     }
 
     if (!conn->is_valid()) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete conn;
         total_count_.fetch_sub(1, memory_order_relaxed);
         cv_.notify_one();
@@ -151,6 +148,7 @@ void database_pool::return_connect(idb_connect* conn) {
 
     if (idle_queue_.size() >= pool_cfg_.max_size) {
         lk.unlock_quiet();
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete conn;
         total_count_.fetch_sub(1, memory_order_relaxed);
         return;
@@ -224,6 +222,7 @@ void database_pool::scanner_task() {
                 break;
             }
 
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete front.conn;
             idle_queue_.pop();
             total_count_.fetch_sub(1, memory_order_relaxed);

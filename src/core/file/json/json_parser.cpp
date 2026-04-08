@@ -101,13 +101,15 @@ unique_ptr<json_value> json_parser::parse_keyword() {
     const string_view keyword = text_.view(start, pos_ - start);
     if (keyword == "true") {
         return make_unique<json_bool>(true);
-    } else if (keyword == "false") {
-        return make_unique<json_bool>(false);
-    } else if (keyword == "null") {
-    } else {
-        NEFORCE_THROW_EXCEPTION(json_exception("Invalid keyword"));
     }
-    return make_unique<json_null>();
+    if (keyword == "false") {
+        return make_unique<json_bool>(false);
+    }
+    if (keyword == "null") {
+        return make_unique<json_null>();
+    }
+    NEFORCE_THROW_EXCEPTION(json_exception("Invalid keyword"));
+    unreachable();
 }
 
 unique_ptr<json_array> json_parser::parse_array() {

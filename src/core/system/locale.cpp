@@ -21,9 +21,9 @@ namespace {
         vector<string> list;
     };
 
-    BOOL CALLBACK enum_proc(LPWSTR lname, DWORD, LPARAM param) {
+    ::BOOL CALLBACK enum_proc(::LPWSTR lname, ::DWORD /*unused*/, ::LPARAM param) {
         auto* ctx = reinterpret_cast<enum_ctx*>(param);
-        if (lname) {
+        if (lname != nullptr) {
             wstring wn(lname);
             replace(wn.begin(), wn.end(), L'-', L'_');
             ctx->list.push_back(wcharacter::to_string(wn.view()));
@@ -45,12 +45,10 @@ namespace {
         return base;
     }
 
-    wstring query_info(const LCTYPE type, const string_view win_name) {
+    wstring query_info(const ::LCTYPE type, const string_view win_name) {
         wstring wn_storage;
-        const wchar_t* lname;
-        if (win_name.empty()) {
-            lname = LOCALE_NAME_USER_DEFAULT;
-        } else {
+        const wchar_t* lname = nullptr;
+        if (!win_name.empty()) {
             wn_storage = character::to_wstring(win_name);
             lname = wn_storage.data();
         }
@@ -60,7 +58,7 @@ namespace {
             return {};
         }
         wstring buf(static_cast<size_t>(sz), L'\0');
-        ::GetLocaleInfoEx(lname, type, &buf[0], sz);
+        ::GetLocaleInfoEx(lname, type, buf.data(), sz);
         if (!buf.empty() && buf.back() == L'\0') {
             buf.pop_back();
         }
@@ -72,7 +70,7 @@ namespace {
         return wcharacter::to_string(info.view());
     }
 
-    UINT ansi_codepage(const string_view win_name) {
+    ::UINT ansi_codepage(const string_view win_name) {
         const auto s = query_info(LOCALE_IDEFAULTANSICODEPAGE, win_name);
         if (s.empty()) {
             return CP_ACP;
@@ -80,6 +78,66 @@ namespace {
         const auto ws = wcharacter::to_string(s.view());
         return uinteger32::parse(ws.view()).value();
     }
+
+    ::WORD char_type1(const char32_t cp) {
+        wchar_t buf[3]{};
+        int len = 0;
+        if (cp < 0x10000) {
+            buf[0] = static_cast<wchar_t>(cp);
+            len = 1;
+        } else {
+            const char32_t c = cp - 0x10000;
+            buf[0] = static_cast<wchar_t>(0xD800 | (c >> 10));
+            buf[1] = static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
+            len = 2;
+        }
+        ::WORD out[2]{};
+        ::GetStringTypeW(CT_CTYPE1, buf, len, out);
+        return out[0];
+    }
+
+    char32_t lcmap_case(const string& win_name, const char32_t cp, const ::DWORD flags) {
+        wchar_t buf[3]{};
+        int len = 0;
+        if (cp < 0x10000) {
+            buf[0] = static_cast<wchar_t>(cp);
+            len = 1;
+        } else {
+            const char32_t c = cp - 0x10000;
+            buf[0] = static_cast<wchar_t>(0xD800 | (c >> 10));
+            buf[1] = static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
+            len = 2;
+        }
+
+        wchar_t out[3]{};
+
+        wstring wn_storage;
+        const wchar_t* lname = nullptr;
+        if (!win_name.empty()) {
+            wn_storage = character::to_wstring(win_name.view());
+            lname = wn_storage.data();
+        }
+
+        ::LCMapStringEx(lname, flags, buf, len, out, 3, nullptr, nullptr, 0);
+        if (out[0] >= 0xD800 && out[0] <= 0xDBFF) {
+            return 0x10000U + static_cast<char32_t>(((out[0] - 0xD800) << 10) | (out[1] - 0xDC00));
+        }
+        return static_cast<char32_t>(out[0]);
+    }
+
+    constexpr ::LCTYPE kDay[7] = {LOCALE_SDAYNAME7, LOCALE_SDAYNAME1, LOCALE_SDAYNAME2, LOCALE_SDAYNAME3,
+                                  LOCALE_SDAYNAME4, LOCALE_SDAYNAME5, LOCALE_SDAYNAME6};
+    constexpr ::LCTYPE kAbbrDay[7] = {LOCALE_SABBREVDAYNAME7, LOCALE_SABBREVDAYNAME1, LOCALE_SABBREVDAYNAME2,
+                                      LOCALE_SABBREVDAYNAME3, LOCALE_SABBREVDAYNAME4, LOCALE_SABBREVDAYNAME5,
+                                      LOCALE_SABBREVDAYNAME6};
+
+    constexpr ::LCTYPE kMon[12] = {LOCALE_SMONTHNAME1, LOCALE_SMONTHNAME2,  LOCALE_SMONTHNAME3,  LOCALE_SMONTHNAME4,
+                                   LOCALE_SMONTHNAME5, LOCALE_SMONTHNAME6,  LOCALE_SMONTHNAME7,  LOCALE_SMONTHNAME8,
+                                   LOCALE_SMONTHNAME9, LOCALE_SMONTHNAME10, LOCALE_SMONTHNAME11, LOCALE_SMONTHNAME12};
+    constexpr ::LCTYPE kAbbrMon[12] = {LOCALE_SABBREVMONTHNAME1,  LOCALE_SABBREVMONTHNAME2,  LOCALE_SABBREVMONTHNAME3,
+                                       LOCALE_SABBREVMONTHNAME4,  LOCALE_SABBREVMONTHNAME5,  LOCALE_SABBREVMONTHNAME6,
+                                       LOCALE_SABBREVMONTHNAME7,  LOCALE_SABBREVMONTHNAME8,  LOCALE_SABBREVMONTHNAME9,
+                                       LOCALE_SABBREVMONTHNAME10, LOCALE_SABBREVMONTHNAME11, LOCALE_SABBREVMONTHNAME12};
 
 #else
 
@@ -214,7 +272,7 @@ locale& locale::operator=(locale&& other) noexcept {
 }
 
 locale locale::classic() { return locale("C"); }
-locale locale::from_name(const string& n) { return locale(n); }
+locale locale::from_name(const string& name) { return locale(name); }
 
 locale locale::system() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -239,7 +297,7 @@ locale locale::system() {
 }
 
 locale::numeric_info locale::numeric() const {
-    numeric_info info;
+    numeric_info info{};
 #ifdef NEFORCE_PLATFORM_WINDOWS
     info.decimal_point = query_info_utf8(LOCALE_SDECIMAL, win_name_.view());
     info.thousands_sep = query_info_utf8(LOCALE_STHOUSAND, win_name_.view());
@@ -265,7 +323,7 @@ locale::numeric_info locale::numeric() const {
 }
 
 locale::monetary_info locale::monetary() const {
-    monetary_info info;
+    monetary_info info{};
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     info.currency_symbol = query_info_utf8(LOCALE_SCURRENCY, win_name_.view());
@@ -313,7 +371,8 @@ locale::monetary_info locale::monetary() const {
 }
 
 locale::time_info locale::time() const {
-    time_info info;
+    time_info info{};
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     info.date_fmt = query_info_utf8(LOCALE_SSHORTDATE, win_name_.view());
     info.time_fmt = query_info_utf8(LOCALE_STIMEFORMAT, win_name_.view());
@@ -321,23 +380,10 @@ locale::time_info locale::time() const {
     info.am_str = query_info_utf8(LOCALE_S1159, win_name_.view());
     info.pm_str = query_info_utf8(LOCALE_S2359, win_name_.view());
 
-    static const LCTYPE kDay[7] = {LOCALE_SDAYNAME7, LOCALE_SDAYNAME1, LOCALE_SDAYNAME2, LOCALE_SDAYNAME3,
-                                   LOCALE_SDAYNAME4, LOCALE_SDAYNAME5, LOCALE_SDAYNAME6};
-    static const LCTYPE kAbbrDay[7] = {LOCALE_SABBREVDAYNAME7, LOCALE_SABBREVDAYNAME1, LOCALE_SABBREVDAYNAME2,
-                                       LOCALE_SABBREVDAYNAME3, LOCALE_SABBREVDAYNAME4, LOCALE_SABBREVDAYNAME5,
-                                       LOCALE_SABBREVDAYNAME6};
     for (int i = 0; i < 7; ++i) {
         info.day_names.push_back(query_info_utf8(kDay[i], win_name_.view()));
         info.abbr_day_names.push_back(query_info_utf8(kAbbrDay[i], win_name_.view()));
     }
-
-    static const LCTYPE kMon[12] = {LOCALE_SMONTHNAME1, LOCALE_SMONTHNAME2,  LOCALE_SMONTHNAME3,  LOCALE_SMONTHNAME4,
-                                    LOCALE_SMONTHNAME5, LOCALE_SMONTHNAME6,  LOCALE_SMONTHNAME7,  LOCALE_SMONTHNAME8,
-                                    LOCALE_SMONTHNAME9, LOCALE_SMONTHNAME10, LOCALE_SMONTHNAME11, LOCALE_SMONTHNAME12};
-    static const LCTYPE kAbbrMon[12] = {
-            LOCALE_SABBREVMONTHNAME1, LOCALE_SABBREVMONTHNAME2,  LOCALE_SABBREVMONTHNAME3,  LOCALE_SABBREVMONTHNAME4,
-            LOCALE_SABBREVMONTHNAME5, LOCALE_SABBREVMONTHNAME6,  LOCALE_SABBREVMONTHNAME7,  LOCALE_SABBREVMONTHNAME8,
-            LOCALE_SABBREVMONTHNAME9, LOCALE_SABBREVMONTHNAME10, LOCALE_SABBREVMONTHNAME11, LOCALE_SABBREVMONTHNAME12};
     for (int i = 0; i < 12; ++i) {
         info.month_names.push_back(query_info_utf8(kMon[i], win_name_.view()));
         info.abbr_month_names.push_back(query_info_utf8(kAbbrMon[i], win_name_.view()));
@@ -370,69 +416,21 @@ locale::time_info locale::time() const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
-static WORD char_type1(char32_t cp) {
-    wchar_t buf[3]{};
-    int len = 0;
-    if (cp < 0x10000) {
-        buf[0] = static_cast<wchar_t>(cp);
-        len = 1;
-    } else {
-        char32_t c = cp - 0x10000;
-        buf[0] = static_cast<wchar_t>(0xD800 | (c >> 10));
-        buf[1] = static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
-        len = 2;
-    }
-    WORD out[2]{};
-    ::GetStringTypeW(CT_CTYPE1, buf, len, out);
-    return out[0];
-}
-
-bool locale::is_alpha(char32_t cp) const noexcept { return (char_type1(cp) & C1_ALPHA) != 0; }
-bool locale::is_digit(char32_t cp) const noexcept { return (char_type1(cp) & C1_DIGIT) != 0; }
-bool locale::is_alnum(char32_t cp) const noexcept { return (char_type1(cp) & (C1_ALPHA | C1_DIGIT)) != 0; }
-bool locale::is_space(char32_t cp) const noexcept { return (char_type1(cp) & C1_SPACE) != 0; }
-bool locale::is_upper(char32_t cp) const noexcept { return (char_type1(cp) & C1_UPPER) != 0; }
-bool locale::is_lower(char32_t cp) const noexcept { return (char_type1(cp) & C1_LOWER) != 0; }
-bool locale::is_punct(char32_t cp) const noexcept { return (char_type1(cp) & C1_PUNCT) != 0; }
-bool locale::is_print(char32_t cp) const noexcept {
-    WORD t = char_type1(cp);
+bool locale::is_alpha(const char32_t cp) const noexcept { return (char_type1(cp) & C1_ALPHA) != 0; }
+bool locale::is_digit(const char32_t cp) const noexcept { return (char_type1(cp) & C1_DIGIT) != 0; }
+bool locale::is_alnum(const char32_t cp) const noexcept { return (char_type1(cp) & (C1_ALPHA | C1_DIGIT)) != 0; }
+bool locale::is_space(const char32_t cp) const noexcept { return (char_type1(cp) & C1_SPACE) != 0; }
+bool locale::is_upper(const char32_t cp) const noexcept { return (char_type1(cp) & C1_UPPER) != 0; }
+bool locale::is_lower(const char32_t cp) const noexcept { return (char_type1(cp) & C1_LOWER) != 0; }
+bool locale::is_punct(const char32_t cp) const noexcept { return (char_type1(cp) & C1_PUNCT) != 0; }
+bool locale::is_print(const char32_t cp) const noexcept {
+    const ::WORD t = char_type1(cp);
     return (t & (C1_ALPHA | C1_DIGIT | C1_PUNCT | C1_BLANK | C1_SPACE)) != 0;
 }
 
-static char32_t lcmap_case(const string& win_name, char32_t cp, DWORD flags) {
-    wchar_t buf[3]{};
-    int len = 0;
-    if (cp < 0x10000) {
-        buf[0] = static_cast<wchar_t>(cp);
-        len = 1;
-    } else {
-        char32_t c = cp - 0x10000;
-        buf[0] = static_cast<wchar_t>(0xD800 | (c >> 10));
-        buf[1] = static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
-        len = 2;
-    }
+char32_t locale::to_upper(const char32_t cp) const noexcept { return lcmap_case(win_name_, cp, LCMAP_UPPERCASE); }
 
-    wchar_t out[3]{};
-
-    wstring wn_storage;
-    const wchar_t* lname;
-    if (win_name.empty()) {
-        lname = LOCALE_NAME_USER_DEFAULT;
-    } else {
-        wn_storage = character::to_wstring(win_name.view());
-        lname = wn_storage.data();
-    }
-
-    ::LCMapStringEx(lname, flags, buf, len, out, 3, nullptr, nullptr, 0);
-    if (out[0] >= 0xD800 && out[0] <= 0xDBFF) {
-        return 0x10000u + static_cast<char32_t>(((out[0] - 0xD800) << 10) | (out[1] - 0xDC00));
-    }
-    return static_cast<char32_t>(out[0]);
-}
-
-char32_t locale::to_upper(char32_t cp) const noexcept { return lcmap_case(win_name_, cp, LCMAP_UPPERCASE); }
-
-char32_t locale::to_lower(char32_t cp) const noexcept { return lcmap_case(win_name_, cp, LCMAP_LOWERCASE); }
+char32_t locale::to_lower(const char32_t cp) const noexcept { return lcmap_case(win_name_, cp, LCMAP_LOWERCASE); }
 
 #else
 
@@ -454,9 +452,9 @@ char32_t locale::to_lower(char32_t cp) const noexcept {
 
 #endif
 
-int locale::compare(const string& a, const string& b, collate_strength strength) const {
+int locale::compare(const string& a, const string& b, const collate_strength strength) const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    DWORD flags = 0;
+    ::DWORD flags = 0;
     switch (strength) {
         case collate_strength::primary:
             flags = NORM_IGNORECASE | NORM_IGNORENONSPACE | NORM_IGNORESYMBOLS;
@@ -475,16 +473,14 @@ int locale::compare(const string& a, const string& b, collate_strength strength)
     wstring wb = character::to_wstring(b.view());
 
     wstring wn_storage;
-    const wchar_t* lname;
-    if (win_name_.empty()) {
-        lname = LOCALE_NAME_USER_DEFAULT;
-    } else {
+    const wchar_t* lname = nullptr;
+    if (!win_name_.empty()) {
         wn_storage = character::to_wstring(win_name_.view());
         lname = wn_storage.data();
     }
 
-    int r = ::CompareStringEx(lname, flags, wa.data(), static_cast<int>(wa.size()), wb.data(),
-                              static_cast<int>(wb.size()), nullptr, nullptr, 0);
+    const int r = ::CompareStringEx(lname, flags, wa.data(), static_cast<int>(wa.size()), wb.data(),
+                                    static_cast<int>(wb.size()), nullptr, nullptr, 0);
     if (r == 0) {
         return 0;
     }
@@ -510,10 +506,8 @@ int locale::compare(const string& a, const string& b, collate_strength strength)
 string locale::collation_key(const string& s) const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     wstring wn_storage;
-    const wchar_t* lname;
-    if (win_name_.empty()) {
-        lname = LOCALE_NAME_USER_DEFAULT;
-    } else {
+    const wchar_t* lname = nullptr;
+    if (!win_name_.empty()) {
         wn_storage = character::to_wstring(win_name_.view());
         lname = wn_storage.data();
     }
@@ -525,8 +519,8 @@ string locale::collation_key(const string& s) const {
         return {};
     }
     string key(static_cast<size_t>(sz), '\0');
-    ::LCMapStringEx(lname, LCMAP_SORTKEY, ws.data(), static_cast<int>(ws.size()), reinterpret_cast<LPWSTR>(&key[0]), sz,
-                    nullptr, nullptr, 0);
+    ::LCMapStringEx(lname, LCMAP_SORTKEY, ws.data(), static_cast<int>(ws.size()), reinterpret_cast<LPWSTR>(key.data()),
+                    sz, nullptr, nullptr, 0);
     return key;
 #else
     auto to_wide = [&](const string& mb) -> wstring {
@@ -554,22 +548,23 @@ string locale::to_multibyte(const u32string& ucs4) const {
     // UCS-4 -> UTF-16 -> ANSI
     wstring wide;
     wide.reserve(ucs4.size());
-    for (char32_t cp: ucs4) {
+    for (const char32_t cp: ucs4) {
         if (cp < 0x10000) {
             wide += static_cast<wchar_t>(cp);
         } else {
-            char32_t c = cp - 0x10000;
+            const char32_t c = cp - 0x10000;
             wide += static_cast<wchar_t>(0xD800 | (c >> 10));
             wide += static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
         }
     }
-    UINT cp = ansi_codepage(win_name_.view());
-    int sz = ::WideCharToMultiByte(cp, 0, wide.data(), static_cast<int>(wide.size()), nullptr, 0, nullptr, nullptr);
+    const ::UINT cp = ansi_codepage(win_name_.view());
+    const int sz =
+            ::WideCharToMultiByte(cp, 0, wide.data(), static_cast<int>(wide.size()), nullptr, 0, nullptr, nullptr);
     if (sz <= 0) {
         return {};
     }
     string out(static_cast<size_t>(sz), '\0');
-    ::WideCharToMultiByte(cp, 0, wide.data(), static_cast<int>(wide.size()), &out[0], sz, nullptr, nullptr);
+    ::WideCharToMultiByte(cp, 0, wide.data(), static_cast<int>(wide.size()), out.data(), sz, nullptr, nullptr);
     return out;
 
 #else
@@ -596,21 +591,21 @@ string locale::to_multibyte(const u32string& ucs4) const {
 
 u32string locale::to_ucs4(const string& mb) const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    UINT cp = ansi_codepage(win_name_.view());
-    int wsz = ::MultiByteToWideChar(cp, 0, mb.data(), static_cast<int>(mb.size()), nullptr, 0);
+    const ::UINT cp = ansi_codepage(win_name_.view());
+    const int wsz = ::MultiByteToWideChar(cp, 0, mb.data(), static_cast<int>(mb.size()), nullptr, 0);
     if (wsz <= 0) {
         return {};
     }
     wstring wide(static_cast<size_t>(wsz), L'\0');
-    ::MultiByteToWideChar(cp, 0, mb.data(), static_cast<int>(mb.size()), &wide[0], wsz);
+    ::MultiByteToWideChar(cp, 0, mb.data(), static_cast<int>(mb.size()), wide.data(), wsz);
     u32string out;
     out.reserve(wide.size());
     for (size_t i = 0; i < wide.size();) {
-        wchar_t wc = wide[i];
+        const wchar_t wc = wide[i];
         if (wc >= 0xD800 && wc <= 0xDBFF && i + 1 < wide.size()) {
-            char32_t hi = static_cast<char32_t>(wc - 0xD800);
-            char32_t lo = static_cast<char32_t>(wide[++i] - 0xDC00);
-            out += static_cast<char32_t>(0x10000u + (hi << 10) + lo);
+            const auto hi = static_cast<char32_t>(wc - 0xD800);
+            const auto lo = static_cast<char32_t>(wide[++i] - 0xDC00);
+            out += static_cast<char32_t>(0x10000U + (hi << 10) + lo);
         } else {
             out += static_cast<char32_t>(wc);
         }
@@ -645,7 +640,7 @@ u32string locale::to_ucs4(const string& mb) const {
 vector<string> locale::available_locales() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     enum_ctx ctx;
-    ::EnumSystemLocalesEx(enum_proc, LOCALE_ALL, reinterpret_cast<LPARAM>(&ctx), nullptr);
+    ::EnumSystemLocalesEx(enum_proc, LOCALE_ALL, reinterpret_cast<::LPARAM>(&ctx), nullptr);
     sort(ctx.list.begin(), ctx.list.end());
     return ctx.list;
 

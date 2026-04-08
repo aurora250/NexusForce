@@ -11,7 +11,7 @@ void http_filter_chain::add_filter(unique_ptr<http_filter> filter) {
 }
 
 void http_filter_chain::add_filter_ref(http_filter* filter) {
-    if (filter) {
+    if (filter != nullptr) {
         filters_.push_back(unique_ptr<http_filter>(filter));
         owns_filters_ = false;
     }
@@ -50,6 +50,7 @@ bool http_filter_chain::execute_pre_filters(http_request& request, http_response
 }
 
 void http_filter_chain::execute_post_filters(http_request& request, http_response& response) {
+    // NOLINTNEXTLINE(modernize-loop-convert)
     for (auto it = filters_.rbegin(); it != filters_.rend(); ++it) {
         if (!*it) {
             continue;
@@ -318,6 +319,7 @@ void rate_limit_filter::cleanup_old_entries() {
 }
 
 bool authentication_filter::is_path_excluded(const string& path) const {
+    // NOLINTNEXTLINE(readability-use-anyofallof)
     for (const auto& excluded: excluded_paths_) {
         if (path == excluded || path.starts_with(excluded)) {
             return true;

@@ -947,8 +947,7 @@ public:
      * @param other 源红黑树
      * @return 自身引用
      */
-    rb_tree& operator=(rb_tree&& other) noexcept(is_nothrow_move_constructible_v<rb_tree> &&
-                                                 is_nothrow_swappable_v<rb_tree>) {
+    rb_tree& operator=(rb_tree&& other) noexcept(is_nothrow_move_constructible_v<rb_tree>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }

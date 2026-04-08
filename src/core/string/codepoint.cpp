@@ -3,7 +3,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     template <typename T>
-    void append_utf8_char_aux(T&) {}
+    void append_utf8_char_aux(T& /*unused*/) {}
 
     template <>
     void append_utf8_char_aux<string>(string& result) {
@@ -51,7 +51,8 @@ namespace {
         if ((b1 & 0x80) == 0) {
             cp = b1;
             return true;
-        } else if ((b1 & 0xE0) == 0xC0) {
+        }
+        if ((b1 & 0xE0) == 0xC0) {
             if (len - i < 1) {
                 cp = 0xFFFD;
                 return false;
@@ -68,7 +69,8 @@ namespace {
                 return false;
             }
             return true;
-        } else if ((b1 & 0xF0) == 0xE0) {
+        }
+        if ((b1 & 0xF0) == 0xE0) {
             if (len - i < 2) {
                 cp = 0xFFFD;
                 return false;
@@ -91,7 +93,8 @@ namespace {
                 return false;
             }
             return true;
-        } else if ((b1 & 0xF8) == 0xF0) {
+        }
+        if ((b1 & 0xF8) == 0xF0) {
             if (len - i < 3) {
                 cp = 0xFFFD;
                 return false;
@@ -129,7 +132,7 @@ namespace {
 
 
 codepoint codepoint::decode_utf8(const byte_t* data, size_t& i, const size_t len) noexcept {
-    uint32_t raw;
+    uint32_t raw = 0;
     decode_utf8_char(data, i, len, raw);
     return codepoint(raw);
 }
@@ -149,7 +152,7 @@ void codepoint::append_to(u16string& result) const {
     if (value_ <= 0xFFFF) {
         result.push_back(static_cast<char16_t>(value_));
     } else {
-        const uint32_t adjusted = value_ - 0x10000u;
+        const uint32_t adjusted = value_ - 0x10000U;
         const auto high_surrogate = static_cast<char16_t>((adjusted >> 10) + 0xD800);
         const auto low_surrogate = static_cast<char16_t>((adjusted & 0x3FF) + 0xDC00);
         result.push_back(high_surrogate);
@@ -168,8 +171,8 @@ void codepoint::append_to(wstring& result) const {
         result.push_back(static_cast<wchar_t>(value_));
     } else {
         const uint32_t adjusted = value_ - 0x10000;
-        const wchar_t high_surrogate = static_cast<wchar_t>((adjusted >> 10) + 0xD800);
-        const wchar_t low_surrogate = static_cast<wchar_t>((adjusted & 0x3FF) + 0xDC00);
+        const auto high_surrogate = static_cast<wchar_t>((adjusted >> 10) + 0xD800);
+        const auto low_surrogate = static_cast<wchar_t>((adjusted & 0x3FF) + 0xDC00);
         result.push_back(high_surrogate);
         result.push_back(low_surrogate);
     }

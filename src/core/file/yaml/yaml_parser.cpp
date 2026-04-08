@@ -828,17 +828,17 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
         if (lower_special == ".inf" || lower_special == ".infinity") {
             double val = is_negative ? -numeric_traits<double>::infinity() : numeric_traits<double>::infinity();
             return make_shared<yaml_float>(val);
-        } else if (lower_special == ".nan") {
-            return make_shared<yaml_float>(numeric_traits<double>::quiet_nan());
-        } else {
-            pos_ = saved_pos;
-            line_ = saved_line;
-            column_ = saved_column;
-
-            num_str += '.';
-            advance();
-            is_float = true;
         }
+        if (lower_special == ".nan") {
+            return make_shared<yaml_float>(numeric_traits<double>::quiet_nan());
+        }
+        pos_ = saved_pos;
+        line_ = saved_line;
+        column_ = saved_column;
+
+        num_str += '.';
+        advance();
+        is_float = true;
     }
 
     if (current() == '0' && !eof()) {
@@ -903,15 +903,17 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
     try {
         if (is_float) {
             return make_shared<yaml_float>(float64::parse(num_str.view()).value());
-        } else if (is_hex) {
-            return make_shared<yaml_integer>(to_int64(num_str.view(), nullptr, 16));
-        } else if (is_octal) {
-            return make_shared<yaml_integer>(to_int64(num_str.view(2), nullptr, 8));
-        } else if (is_binary) {
-            return make_shared<yaml_integer>(to_int64(num_str.view(2), nullptr, 2));
-        } else {
-            return make_shared<yaml_integer>(to_int64(num_str.view()));
         }
+        if (is_hex) {
+            return make_shared<yaml_integer>(to_int64(num_str.view(), nullptr, 16));
+        }
+        if (is_octal) {
+            return make_shared<yaml_integer>(to_int64(num_str.view(2), nullptr, 8));
+        }
+        if (is_binary) {
+            return make_shared<yaml_integer>(to_int64(num_str.view(2), nullptr, 2));
+        }
+        return make_shared<yaml_integer>(to_int64(num_str.view()));
     } catch (...) {
         throw_parse_error("Invalid number: " + num_str);
     }
@@ -1310,7 +1312,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
             } else {
                 const size_t value_indent = peek_indent();
 
-                size_t effective_key_indent;
+                size_t effective_key_indent = 0;
                 if (first_key_on_same_line) {
                     effective_key_indent = (subsequent_key_indent > 0) ? subsequent_key_indent : map_indent;
                 } else {
@@ -1354,7 +1356,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
                 const auto* seq = value->as_sequence();
                 for (size_t i = 0; i < seq->size(); ++i) {
                     const auto* elem = seq->get_element(i);
-                    if (elem && elem->is_mapping()) {
+                    if (elem != nullptr && elem->is_mapping()) {
                         map->merge_from(elem->as_mapping());
                     }
                 }
@@ -1371,12 +1373,12 @@ string yaml_parser::parse_key() {
 
     if (current() == '"') {
         return parse_quoted_key();
-    } else if (current() == '\'') {
+    }
+    if (current() == '\'') {
         const auto str = parse_single_quoted_string();
         return str->get_value();
-    } else {
-        return parse_plain_key();
     }
+    return parse_plain_key();
 }
 
 string yaml_parser::parse_plain_key() {
@@ -1476,34 +1478,34 @@ shared_ptr<yaml_value> yaml_parser::parse_single_document() {
 shared_ptr<yaml_value> yaml_parser::parse_block_value() {
     if (current() == '-' && (peek(1) == ' ' || is_newline(peek(1)))) {
         return parse_block_sequence();
-    } else if (current() == '{') {
-        return parse_flow_mapping();
-    } else if (current() == '[') {
-        return parse_flow_sequence();
-    } else {
-        size_t saved_pos = pos_;
-        size_t saved_line = line_;
-        size_t saved_column = column_;
-        bool looks_like_mapping = false;
-
-        while (!eof() && !is_newline(current())) {
-            if (current() == ':' && (peek(1) == ' ' || is_newline(peek(1)) || eof())) {
-                looks_like_mapping = true;
-                break;
-            }
-            advance();
-        }
-
-        pos_ = saved_pos;
-        line_ = saved_line;
-        column_ = saved_column;
-
-        if (looks_like_mapping) {
-            return parse_block_mapping(true);
-        } else {
-            return parse_scalar();
-        }
     }
+    if (current() == '{') {
+        return parse_flow_mapping();
+    }
+    if (current() == '[') {
+        return parse_flow_sequence();
+    }
+    const size_t saved_pos = pos_;
+    const size_t saved_line = line_;
+    const size_t saved_column = column_;
+    bool looks_like_mapping = false;
+
+    while (!eof() && !is_newline(current())) {
+        if (current() == ':' && (peek(1) == ' ' || is_newline(peek(1)) || eof())) {
+            looks_like_mapping = true;
+            break;
+        }
+        advance();
+    }
+
+    pos_ = saved_pos;
+    line_ = saved_line;
+    column_ = saved_column;
+
+    if (looks_like_mapping) {
+        return parse_block_mapping(true);
+    }
+    return parse_scalar();
 }
 
 shared_ptr<yaml_value> yaml_parser::parse_value() {
@@ -1624,8 +1626,8 @@ shared_ptr<yaml_value> yaml_parser::parse() {
 optional<shared_ptr<yaml_value>> yaml_parser::try_parse() {
     try {
         return parse();
-    } catch (const yaml_exception&) {
-        return optional<shared_ptr<yaml_value>>();
+    } catch (...) {
+        return {};
     }
 }
 
@@ -1668,8 +1670,8 @@ vector<shared_ptr<yaml_value>> yaml_parser::parse_documents() {
 optional<vector<shared_ptr<yaml_value>>> yaml_parser::try_parse_documents() {
     try {
         return parse_documents();
-    } catch (const yaml_exception&) {
-        return optional<vector<shared_ptr<yaml_value>>>();
+    } catch (...) {
+        return {};
     }
 }
 

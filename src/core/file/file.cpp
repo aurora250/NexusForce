@@ -53,13 +53,13 @@ namespace {
 
 file::line_iterator::line_iterator(const file* f) :
 file_(f) {
-    if (file_ && file_->is_opened()) {
+    if (file_ != nullptr && file_->is_opened()) {
         ++(*this);
     }
 }
 
 file::line_iterator& file::line_iterator::operator++() {
-    if (file_ && !file_->read_line(current_line_)) {
+    if (file_ != nullptr && !file_->read_line(current_line_)) {
         file_ = nullptr;
     }
     return *this;
@@ -77,10 +77,10 @@ bool file::flush_write_buffer() const noexcept {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    size_type bytes_written;
+    size_type bytes_written = 0;
     const ::BOOL success = ::WriteFile(handle_, write_buffer_.data(), write_buffer_pos_, &bytes_written, nullptr);
 
-    if (!success || bytes_written != write_buffer_pos_) {
+    if (success == FALSE || bytes_written != write_buffer_pos_) {
         return false;
     }
 
@@ -111,11 +111,11 @@ bool file::fill_read_buffer() const {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    size_type bytes_read;
+    size_type bytes_read = 0;
     const ::BOOL success =
             ::ReadFile(handle_, read_buffer_.data(), static_cast<::DWORD>(buffer_size_), &bytes_read, nullptr);
 
-    if (!success) {
+    if (success == FALSE) {
         read_buffer_size_ = 0;
         return false;
     }
@@ -381,7 +381,7 @@ file::size_type file::write(const string& data, const size_type size) {
 file::size_type file::write(const string& data) { return write(data, data.size()); }
 
 file::size_type file::write(const void* data, const size_type size) {
-    if (!opened_ || handle_ == invalid_handle || !data) {
+    if (!opened_ || handle_ == invalid_handle || data == nullptr) {
         return 0;
     }
     if (size == 0) {
@@ -399,14 +399,14 @@ file::size_type file::write(const void* data, const size_type size) {
         }
 
         size_type total_written = 0;
-        const auto ptr = static_cast<const byte_t*>(data);
+        const auto* ptr = static_cast<const byte_t*>(data);
 
         while (total_written < size) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             size_type bytes_written = 0;
             const size_type to_write = min<size_type>(size - total_written, numeric_traits<size_type>::max());
 
-            if (!::WriteFile(handle_, ptr + total_written, to_write, &bytes_written, nullptr)) {
+            if (::WriteFile(handle_, ptr + total_written, to_write, &bytes_written, nullptr) == FALSE) {
                 set_last_error();
                 break;
             }
@@ -437,7 +437,7 @@ file::size_type file::write(const void* data, const size_type size) {
         return total_written;
     }
 
-    auto ptr = static_cast<const char*>(data);
+    const auto* ptr = static_cast<const char*>(data);
     size_type total_written = 0;
     size_type remaining = size;
 
@@ -473,14 +473,14 @@ file::size_type file::read(string& out, const size_type size) const {
 }
 
 file::size_type file::read(void* buffer, const size_type size) const {
-    if (!opened_ || handle_ == invalid_handle || !buffer) {
+    if (!opened_ || handle_ == invalid_handle || buffer == nullptr) {
         return 0;
     }
     if (size == 0) {
         return 0;
     }
 
-    auto ptr = static_cast<char*>(buffer);
+    auto* ptr = static_cast<char*>(buffer);
     size_type total_read = 0;
     size_type remaining = size;
 
@@ -576,7 +576,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
                 size_type bytes_read_now = 0;
                 const size_type to_read_now = min<size_type>(to_read - bytes_read, numeric_traits<size_type>::max());
 
-                if (!::ReadFile(handle_, data + bytes_read, to_read_now, &bytes_read_now, nullptr)) {
+                if (::ReadFile(handle_, data + bytes_read, to_read_now, &bytes_read_now, nullptr) == FALSE) {
                     set_last_error();
                     break;
                 }
@@ -655,7 +655,7 @@ bool file::write_chunks(const vector<string>& chunks) {
         size_type remaining = chunk.size();
 
         while (remaining > 0) {
-            size_type bytes_written;
+            size_type bytes_written = 0;
             if (remaining > buffer_size_ * 4) {
                 if (!flush_write_buffer()) {
                     success = false;
@@ -666,7 +666,7 @@ bool file::write_chunks(const vector<string>& chunks) {
                 const size_type to_write = min<size_type>(remaining, numeric_traits<size_type>::max());
                 size_type written_now = 0;
 
-                if (!::WriteFile(handle_, data + (chunk.size() - remaining), to_write, &written_now, nullptr)) {
+                if (::WriteFile(handle_, data + (chunk.size() - remaining), to_write, &written_now, nullptr) == FALSE) {
                     set_last_error();
                     success = false;
                     break;
@@ -753,14 +753,14 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
 }
 
 file::size_type file::read_binary(void* out, const size_type size) const {
-    if (!opened_ || handle_ == invalid_handle || !out) {
+    if (!opened_ || handle_ == invalid_handle || out == nullptr) {
         return 0;
     }
     if (size == 0) {
         return 0;
     }
 
-    auto ptr = static_cast<byte_t*>(out);
+    auto* ptr = static_cast<byte_t*>(out);
     size_type total_read = 0;
     size_type remaining = size;
 
@@ -907,7 +907,7 @@ file::size_type file::size() const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER sz{};
-    if (!::GetFileSizeEx(handle_, &sz)) {
+    if (::GetFileSizeEx(handle_, &sz) == FALSE) {
         set_last_error();
         return 0;
     }
@@ -944,7 +944,7 @@ uint64_t file::size64() const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER sz{};
-    if (!::GetFileSizeEx(handle_, &sz)) {
+    if (::GetFileSizeEx(handle_, &sz) == FALSE) {
         return 0;
     }
     return static_cast<uint64_t>(sz.QuadPart);
@@ -995,7 +995,7 @@ bool file::seek(const difference_type distance, file_pointer method) const {
     li.QuadPart = distance;
 
     ::LARGE_INTEGER new_pointer{};
-    if (!::SetFilePointerEx(handle_, li, &new_pointer, static_cast<fud_t>(method))) {
+    if (::SetFilePointerEx(handle_, li, &new_pointer, static_cast<fud_t>(method)) == FALSE) {
         set_last_error();
         return false;
     }
@@ -1015,12 +1015,12 @@ file::difference_type file::tell() const {
         return -1;
     }
 
-    difference_type system_pos;
+    difference_type system_pos = 0;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::LARGE_INTEGER li_zero{};
     ::LARGE_INTEGER current_pos;
-    if (!::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT)) {
+    if (::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT) == FALSE) {
         set_last_error();
         return -1;
     }
@@ -1055,7 +1055,7 @@ file::difference_type file::system_tell() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::LARGE_INTEGER li_zero{};
     ::LARGE_INTEGER current_pos;
-    if (!::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT)) {
+    if (::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT) == FALSE) {
         return -1;
     }
     return current_pos.QuadPart;
@@ -1093,7 +1093,7 @@ bool file::prefetch(const size_type hint_size) const {
         return false;
     }
     ::LARGE_INTEGER file_size;
-    if (!::GetFileSizeEx(handle_, &file_size)) {
+    if (::GetFileSizeEx(handle_, &file_size) == FALSE) {
         set_last_error();
         return false;
     }
@@ -1112,29 +1112,29 @@ bool file::prefetch(const size_type hint_size) const {
         return true;
     }
 
-    const ::HANDLE hMapping = ::CreateFileMappingA(handle_, nullptr, PAGE_READONLY, 0, 0, nullptr);
+    const ::HANDLE h_mapping = ::CreateFileMappingA(handle_, nullptr, PAGE_READONLY, 0, 0, nullptr);
 
-    if (!hMapping || hMapping == invalid_handle) {
+    if (h_mapping == nullptr || h_mapping == invalid_handle) {
         set_last_error();
         return false;
     }
 
-    void* pView = ::MapViewOfFile(hMapping, FILE_MAP_READ, start_offset.HighPart, start_offset.LowPart, region_size);
+    void* p_view = ::MapViewOfFile(h_mapping, FILE_MAP_READ, start_offset.HighPart, start_offset.LowPart, region_size);
 
-    if (pView) {
-        ::WIN32_MEMORY_RANGE_ENTRY range{pView, region_size};
-        const ::HMODULE hKernel32 = ::GetModuleHandleA("kernel32.dll");
-        if (hKernel32) {
+    if (p_view != nullptr) {
+        ::WIN32_MEMORY_RANGE_ENTRY range{p_view, region_size};
+        const ::HMODULE h_kernel32 = ::GetModuleHandleA("kernel32.dll");
+        if (h_kernel32 != nullptr) {
             using PFN_PrefetchVirtualMemory =
-                    ::BOOL(__stdcall*)(::HANDLE hProcess, ::ULONG_PTR NumberOfEntries,
-                                       ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses, ::ULONG Flags);
+                    ::BOOL(__stdcall*)(::HANDLE h_process, ::ULONG_PTR number_of_entries,
+                                       ::PWIN32_MEMORY_RANGE_ENTRY virtual_addresses, ::ULONG flags);
 
-            static auto pfnPrefetchVirtualMemory =
-                    reinterpret_cast<PFN_PrefetchVirtualMemory>(::GetProcAddress(hKernel32, "PrefetchVirtualMemory"));
-            if (pfnPrefetchVirtualMemory) {
-                if (pfnPrefetchVirtualMemory(::GetCurrentProcess(), 1, &range, 0)) {
-                    ::UnmapViewOfFile(pView);
-                    ::CloseHandle(hMapping);
+            static auto pfn_prefetch_virtual_memory =
+                    reinterpret_cast<PFN_PrefetchVirtualMemory>(::GetProcAddress(h_kernel32, "PrefetchVirtualMemory"));
+            if (pfn_prefetch_virtual_memory != nullptr) {
+                if (pfn_prefetch_virtual_memory(::GetCurrentProcess(), 1, &range, 0) == TRUE) {
+                    ::UnmapViewOfFile(p_view);
+                    ::CloseHandle(h_mapping);
                     return true;
                 }
             }
@@ -1143,8 +1143,8 @@ bool file::prefetch(const size_type hint_size) const {
         set_last_error();
     }
 
-    ::CloseHandle(hMapping);
-    return pView != nullptr;
+    ::CloseHandle(h_mapping);
+    return p_view != nullptr;
 
 #else
     const difference_type current_pos = tell();
@@ -1218,7 +1218,7 @@ bool file::truncate(const difference_type size) const {
         return false;
     }
 
-    if (!::SetEndOfFile(handle_)) {
+    if (::SetEndOfFile(handle_) == FALSE) {
         set_last_error();
         ignore = seek(current_pos, file_pointer::BEGIN);
         return false;

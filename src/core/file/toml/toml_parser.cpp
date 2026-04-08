@@ -131,7 +131,8 @@ unique_ptr<toml_string> toml_parser::parse_string() {
             return parse_multiline_basic_string();
         }
         return parse_basic_string();
-    } else if (current() == '\'') {
+    }
+    if (current() == '\'') {
         if (peek(1) == '\'' && peek(2) == '\'') {
             return parse_multiline_literal_string();
         }
@@ -197,7 +198,7 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                     break;
                 }
                 default:
-                    throw_parse_error("Invalid escape sequence: \\"_s + current());
+                    throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
             }
             advance();
         } else {
@@ -258,18 +259,21 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                 advance();
                 skip_whitespace();
                 continue;
-            } else if (current() == '\r' && peek() == '\n') {
+            }
+            if (current() == '\r' && peek() == '\n') {
                 advance();
                 advance();
                 skip_whitespace();
                 continue;
-            } else if (current() == ' ' || current() == '\t') {
+            }
+            if (current() == ' ' || current() == '\t') {
                 skip_whitespace();
                 if (current() == '\n') {
                     advance();
                     skip_whitespace();
                     continue;
-                } else if (current() == '\r' && peek() == '\n') {
+                }
+                if (current() == '\r' && peek() == '\n') {
                     advance();
                     advance();
                     skip_whitespace();
@@ -312,7 +316,7 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                     break;
                 }
                 default:
-                    throw_parse_error("Invalid escape sequence: \\"_s + current());
+                    throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
             }
             advance();
         } else {
@@ -380,11 +384,13 @@ unique_ptr<toml_value> toml_parser::parse_number() {
             advance();
             advance();
             return parse_integer(16);
-        } else if (next == 'o' || next == 'O') {
+        }
+        if (next == 'o' || next == 'O') {
             advance();
             advance();
             return parse_integer(8);
-        } else if (next == 'b' || next == 'B') {
+        }
+        if (next == 'b' || next == 'B') {
             advance();
             advance();
             return parse_integer(2);
@@ -435,10 +441,9 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         if (is_float) {
             double val = float64::parse(num_str.view()).value();
             return make_unique<toml_float>(val);
-        } else {
-            int64_t val = to_int64(num_str.view(), nullptr, 10);
-            return make_unique<toml_integer>(val);
         }
+        int64_t val = to_int64(num_str.view(), nullptr, 10);
+        return make_unique<toml_integer>(val);
     } catch (...) {
         throw_parse_error("Invalid numeric value: " + num_str);
     }
@@ -483,7 +488,7 @@ unique_ptr<toml_integer> toml_parser::parse_integer(const int base) {
     num_str.erase(remove(num_str.begin(), num_str.end(), '_'), num_str.end());
 
     try {
-        int64_t val;
+        int64_t val = 0;
         if (base == 2 || base == 8 || base == 16) {
             val = to_int64(num_str.view(), nullptr, base);
         } else {
@@ -534,7 +539,7 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
         throw_parse_error("Not a valid datetime format");
     }
 
-    toml_datetime::datetime_type dt_type;
+    toml_datetime::datetime_type dt_type{toml_datetime::LocalDate};
     if (has_datetime_sep) {
         if (dt_str.find('Z') != string::npos || dt_str.find('+') != string::npos || dt_str.rfind('-') > 10) {
             dt_type = toml_datetime::OffsetDateTime;
@@ -543,8 +548,6 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
         }
     } else if (has_time_sep) {
         dt_type = toml_datetime::LocalTime;
-    } else {
-        dt_type = toml_datetime::LocalDate;
     }
 
     return make_unique<toml_datetime>(dt_str, dt_type);
@@ -665,15 +668,20 @@ unique_ptr<toml_value> toml_parser::parse_value() {
 
     if (ch == '"' || ch == '\'') {
         return parse_string();
-    } else if (ch == '[') {
+    }
+    if (ch == '[') {
         return parse_array();
-    } else if (ch == '{') {
+    }
+    if (ch == '{') {
         return parse_inline_table();
-    } else if (ch == 't' || ch == 'f') {
+    }
+    if (ch == 't' || ch == 'f') {
         return parse_boolean();
-    } else if (ch == '+' || ch == '-' || ch == 'i' || ch == 'n') {
+    }
+    if (ch == '+' || ch == '-' || ch == 'i' || ch == 'n') {
         return parse_number();
-    } else if (is_digit(ch)) {
+    }
+    if (is_digit(ch)) {
         const size_t saved_pos = pos_;
         const size_t saved_line = line_;
         const size_t saved_column = column_;
@@ -720,9 +728,9 @@ void toml_parser::parse_key_value() {
         const toml_value* member = table->get_member(k);
         toml_table* sub_table = nullptr;
 
-        if (member && member->is_table()) {
+        if (member != nullptr && member->is_table()) {
             sub_table = const_cast<toml_table*>(member->as_table());
-        } else if (!member) {
+        } else if (member == nullptr) {
             auto new_table = make_unique<toml_table>();
             sub_table = new_table.get();
             table->add_member(k, move(new_table));
@@ -775,7 +783,7 @@ void toml_parser::parse_array_table_header() {
     const toml_value* existing = parent->get_member(array_key);
 
     toml_array* arr = nullptr;
-    if (existing) {
+    if (existing != nullptr) {
         if (!existing->is_array()) {
             throw_parse_error("Key '" + array_key + "' already exists and is not an array");
         }
@@ -790,7 +798,7 @@ void toml_parser::parse_array_table_header() {
     toml_table* new_table_ptr = new_table.get();
 
     arr->add_element(move(new_table));
-    context_stack_.push_back({ctb_, ctp_});
+    context_stack_.push_back(context{ctb_, ctp_});
     ctb_ = new_table_ptr;
     ctp_ = move(path);
     is_in_array_table_ = true;
@@ -799,10 +807,10 @@ void toml_parser::parse_array_table_header() {
 toml_table* toml_parser::get_or_create_table(const vector<string>& path) const {
     toml_table* tbl = root_.get();
     for (const string& key: path) {
-        const auto member = tbl->get_member(key);
-        if (member && member->is_table()) {
+        const auto* member = tbl->get_member(key);
+        if (member != nullptr && member->is_table()) {
             tbl = const_cast<toml_table*>(member->as_table());
-        } else if (!member) {
+        } else if (member == nullptr) {
             auto new_table = make_unique<toml_table>();
             toml_table* new_tbl_ptr = new_table.get();
             tbl->add_member(key, move(new_table));
@@ -818,7 +826,7 @@ toml_table* toml_parser::navigate_to_table(const vector<string>& path) const {
     toml_table* tbl = root_.get();
     for (const string& key: path) {
         const toml_value* member = tbl->get_member(key);
-        if (!member || !member->is_table()) {
+        if (member == nullptr || !member->is_table()) {
             return nullptr;
         }
         tbl = const_cast<toml_table*>(member->as_table());

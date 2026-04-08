@@ -33,8 +33,8 @@ shared_ptr<task_group>& get_current_task_group() noexcept {
 
 uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tail) {
     uint64_t cur_src_head = head_.load(memory_order_acquire);
-    uint64_t next_src_head;
-    uint32_t steal_num;
+    uint64_t next_src_head = 0;
+    uint32_t steal_num = 0;
 
     while (true) {
         const auto pir = unpack(cur_src_head);
@@ -187,7 +187,7 @@ worker_context& worker_context::operator=(worker_context&& other) noexcept {
 
 NEFORCE_BEGIN_INNER__
 
-manual_thread::manual_thread(thread_func&& func) noexcept :
+manual_thread::manual_thread(thread_func func) noexcept :
 func_(move(func)),
 thread_id_(thread_pool_id_generator::get_new_id()) {}
 
@@ -340,7 +340,7 @@ optional<thread_pool::task_type> thread_pool::try_steal_task(worker_context& ctx
         lock<mutex> lock(worker_contexts_mtx_);
         for (auto& atomic_ptr: worker_contexts_ptr_) {
             worker_context* ptr = atomic_ptr.load(memory_order_acquire);
-            if (ptr && ptr->id != ctx.id) {
+            if (ptr != nullptr && ptr->id != ctx.id) {
                 snapshot.push_back(ptr);
             }
         }

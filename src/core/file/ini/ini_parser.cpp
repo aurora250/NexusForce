@@ -93,7 +93,7 @@ void ini_parser::parse_line(const string& line) {
 
     string key, value;
     if (parse_key_value(line, key, value)) {
-        if (!current_section_) {
+        if (current_section_ == nullptr) {
             current_section_ = root_->get_global_section();
         }
         current_section_->set_property(key, value);

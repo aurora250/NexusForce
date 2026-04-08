@@ -252,9 +252,9 @@ http_response http_router::handle_request(http_request& request) {
 
         middleware_chain_.execute_filters(request, response);
 
-        auto* route_entry = find_handler(request.method, request.path, request);
+        const auto* route_entry = find_handler(request.method, request.path, request);
 
-        if (route_entry) {
+        if (route_entry != nullptr) {
             try {
                 route_entry->handler(request, response);
             } catch (const exception& e) {
@@ -322,6 +322,7 @@ bool http_router::has_route(const HTTP_METHOD& method, const string& path) const
     if (method_it == routes_.end()) {
         return false;
     }
+    // NOLINTNEXTLINE(readability-use-anyofallof)
     for (const auto& entry: method_it->second) {
         if (entry.pattern == path) {
             return true;

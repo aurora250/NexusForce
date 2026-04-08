@@ -36,7 +36,7 @@ namespace {
         encoded.reserve(domain.length() + 2);
 
         size_t start = 0;
-        size_t pos;
+        size_t pos = 0;
 
         while ((pos = domain.find('.', start)) != string::npos) {
             const auto len = pos - start;
@@ -461,7 +461,7 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
         }
     }
 
-    uint16_t res_len;
+    uint16_t res_len = 0;
     if (tls_tcp_state.socket.receive(memory_view<char>{reinterpret_cast<char*>(&res_len), 2}) != 2) {
         NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to receive response length"));
     }
@@ -621,32 +621,30 @@ string dns_client::reverse_query(const string_view ip) {
         NEFORCE_THROW_EXCEPTION(dns_exception("IP address cannot be empty"));
     }
 
-    string reverse_domain;
-
     if (ip.find(':') != string::npos) {
         NEFORCE_THROW_EXCEPTION(dns_exception("IPv6 reverse query not fully implemented"));
-    } else {
-        vector<string_view> parts;
-        parts.reserve(4);
-
-        size_t start = 0;
-        size_t pos;
-
-        while ((pos = ip.find('.', start)) != string::npos) {
-            parts.push_back(ip.view(start, pos - start));
-            start = pos + 1;
-        }
-
-        if (start < ip.length()) {
-            parts.push_back(ip.view(start));
-        }
-
-        if (parts.size() != 4) {
-            NEFORCE_THROW_EXCEPTION(dns_exception("Invalid IPv4 address"));
-        }
-
-        reverse_domain = parts[3] + "."_s + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";
     }
+
+    vector<string_view> parts;
+    parts.reserve(4);
+
+    size_t start = 0;
+    size_t pos = 0;
+
+    while ((pos = ip.find('.', start)) != string::npos) {
+        parts.push_back(ip.view(start, pos - start));
+        start = pos + 1;
+    }
+
+    if (start < ip.length()) {
+        parts.push_back(ip.view(start));
+    }
+
+    if (parts.size() != 4) {
+        NEFORCE_THROW_EXCEPTION(dns_exception("Invalid IPv4 address"));
+    }
+
+    const string reverse_domain = parts[3] + "."_s + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";
 
     const auto result = query(reverse_domain.view(), dns_record::PTR);
 

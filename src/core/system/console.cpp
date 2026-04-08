@@ -25,7 +25,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 void sys_console::print_string_unsafe(const string_view str) const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD written;
+    ::DWORD written = 0;
     ::WriteConsoleA(out_, str.data(), str.length(), &written, nullptr);
 #elif defined(NEFORCE_PLATFORM_LINUX)
     size_t total = 0;
@@ -81,10 +81,10 @@ string sys_console::readln_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string result;
     char buffer[1024];
-    ::DWORD read;
+    ::DWORD read = 0;
 
     do {
-        if (!::ReadConsoleA(in_, buffer, sizeof(buffer) - 1, &read, nullptr)) {
+        if (::ReadConsoleA(in_, buffer, sizeof(buffer) - 1, &read, nullptr) == FALSE) {
             break;
         }
 
@@ -129,11 +129,11 @@ string sys_console::readln_unsafe() const {
 string sys_console::read_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string result;
-    char ch;
-    ::DWORD read;
+    char ch = 0;
+    ::DWORD read = 0;
 
     while (true) {
-        if (!::ReadConsoleA(in_, &ch, 1, &read, nullptr) || read == 0) {
+        if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) == FALSE || read == 0) {
             break;
         }
         if (_NEFORCE is_space(ch)) {
@@ -193,11 +193,11 @@ char sys_console::read_char_unsafe() const {
     char ch = '\0';
     ::DWORD read = 0;
     try {
-        if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) && read > 0) {
+        if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) == TRUE && read > 0) {
             ::SetConsoleMode(in_, original_mode);
             if (ch == '\r') {
                 char next_ch = '\0';
-                if (::ReadConsoleA(in_, &next_ch, 1, &read, nullptr) && read > 0) {
+                if (::ReadConsoleA(in_, &next_ch, 1, &read, nullptr) == TRUE && read > 0) {
                     if (next_ch == '\n') {
                         return '\n';
                     }
@@ -311,7 +311,7 @@ void sys_console::fade_effect_unsafe(const string_view text, const color& from, 
     for (int i = 0; i <= steps; ++i) {
         float t = static_cast<float>(i) / steps;
         if (!is_fade_in) {
-            t = 1.0f - t;
+            t = 1.0F - t;
         }
         color current_color = color::lerp(from, to, t);
         print_string_unsafe("\r\033[2K");
@@ -333,8 +333,8 @@ void sys_console::fade_effect_unsafe(const string_view text, const color& from, 
 sys_console::sys_console()
 #ifdef NEFORCE_PLATFORM_WINDOWS
 :
-out_(INVALID_HANDLE_VALUE),
-in_(INVALID_HANDLE_VALUE)
+out_(::GetStdHandle(STD_OUTPUT_HANDLE)),
+in_(::GetStdHandle(STD_INPUT_HANDLE))
 #else
 :
 out_(STDOUT_FILENO),
@@ -342,9 +342,6 @@ in_(STDIN_FILENO)
 #endif
 {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    out_ = ::GetStdHandle(STD_OUTPUT_HANDLE);
-    in_ = ::GetStdHandle(STD_INPUT_HANDLE);
-
     if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
         NEFORCE_THROW_EXCEPTION(console_exception("Failed to get console handles"));
     }
@@ -352,7 +349,7 @@ in_(STDIN_FILENO)
     ::SetConsoleOutputCP(CP_UTF8);
     ::SetConsoleCP(CP_UTF8);
 
-    ::DWORD mode;
+    ::DWORD mode = 0;
     ::GetConsoleMode(out_, &mode);
     mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     ::SetConsoleMode(out_, mode);
@@ -403,8 +400,8 @@ void sys_console::clear() {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::COORD top_left = {0, 0};
-    ::CONSOLE_SCREEN_BUFFER_INFO screen;
-    ::DWORD written;
+    ::CONSOLE_SCREEN_BUFFER_INFO screen{};
+    ::DWORD written = 0;
 
     ::GetConsoleScreenBufferInfo(out_, &screen);
     const ::DWORD length = screen.dwSize.X * screen.dwSize.Y;
@@ -435,12 +432,12 @@ bool sys_console::confirmation(const string_view prompt, const char yes, const c
 
         if (to_uppercase(input) == to_uppercase(yes)) {
             return true;
-        } else if (to_uppercase(input) == to_uppercase(no)) {
-            return false;
-        } else {
-            const string error_msg = "Please enter '"_s + yes + "' or '" + no + "'.\n";
-            this->print_string_unsafe(error_msg);
         }
+        if (to_uppercase(input) == to_uppercase(no)) {
+            return false;
+        }
+        const string error_msg = "Please enter '"_s + yes + "' or '" + no + "'.\n";
+        this->print_string_unsafe(error_msg);
     }
 }
 
@@ -456,29 +453,30 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     flush_unsafe();
 
     ::DWORD original_mode = 0;
-    if (!::GetConsoleMode(in_, &original_mode)) {
+    if (::GetConsoleMode(in_, &original_mode) == FALSE) {
         NEFORCE_THROW_EXCEPTION(console_exception("Failed to get console mode"));
     }
     ::DWORD new_mode = original_mode;
     new_mode &= ~ENABLE_ECHO_INPUT;
     new_mode &= ~ENABLE_LINE_INPUT;
     new_mode |= ENABLE_PROCESSED_INPUT;
-    if (!::SetConsoleMode(in_, new_mode)) {
+    if (::SetConsoleMode(in_, new_mode) == FALSE) {
         NEFORCE_THROW_EXCEPTION(console_exception("Failed to set console mode"));
     }
 
     try {
         while (true) {
-            char ch;
-            ::DWORD read;
-            if (!::ReadConsoleA(in_, &ch, 1, &read, nullptr) || read == 0) {
+            char ch = 0;
+            ::DWORD read = 0;
+            if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) == FALSE || read == 0) {
                 break;
             }
 
             if (ch == '\r' || ch == '\n') {
                 print_string_unsafe("\n");
                 break;
-            } else if (ch == '\b') {
+            }
+            if (ch == '\b') {
                 if (!password.empty()) {
                     password.pop_back();
 
@@ -728,10 +726,10 @@ void sys_console::restore_cursor_position() {
 void sys_console::hide_cursor() {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::CONSOLE_CURSOR_INFO cursorInfo{};
-    ::GetConsoleCursorInfo(out_, &cursorInfo);
-    cursorInfo.bVisible = false;
-    ::SetConsoleCursorInfo(out_, &cursorInfo);
+    ::CONSOLE_CURSOR_INFO cursor_info{};
+    ::GetConsoleCursorInfo(out_, &cursor_info);
+    cursor_info.bVisible = FALSE;
+    ::SetConsoleCursorInfo(out_, &cursor_info);
 #else
     this->print_string_unsafe("\033[?25l");
 #endif
@@ -740,10 +738,10 @@ void sys_console::hide_cursor() {
 void sys_console::show_cursor() {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::CONSOLE_CURSOR_INFO cursorInfo{};
-    ::GetConsoleCursorInfo(out_, &cursorInfo);
-    cursorInfo.bVisible = true;
-    ::SetConsoleCursorInfo(out_, &cursorInfo);
+    ::CONSOLE_CURSOR_INFO cursor_info{};
+    ::GetConsoleCursorInfo(out_, &cursor_info);
+    cursor_info.bVisible = TRUE;
+    ::SetConsoleCursorInfo(out_, &cursor_info);
 #else
     this->print_string_unsafe("\033[?25h");
 #endif
@@ -754,12 +752,11 @@ sys_console::console_size sys_console::get_console_size() const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
-    if (::GetConsoleScreenBufferInfo(out_, &csbi)) {
+    if (::GetConsoleScreenBufferInfo(out_, &csbi) == TRUE) {
         return console_size{csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1};
     }
     return console_size{80, 24};
-
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     ::winsize ws;
     if (::ioctl(out_, TIOCGWINSZ, &ws) == 0) {
         return console_size{ws.ws_col, ws.ws_row};
@@ -785,10 +782,10 @@ bool sys_console::is_terminal_resized() {
 
 bool sys_console::supports_colors() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD mode;
+    ::DWORD mode = 0;
     ::GetConsoleMode(out_, &mode);
     return (mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     const string term = environment::get("TERM");
     if (term.empty()) {
         return false;
@@ -800,13 +797,12 @@ bool sys_console::supports_colors() const {
 }
 
 bool sys_console::supports_truecolor() const {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return supports_colors();
+#else
     if (!supports_colors()) {
         return false;
     }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    return true;
-#elif defined(NEFORCE_PLATFORM_LINUX)
     const string colorterm = environment::get("COLORTERM");
     return !colorterm.empty() &&
            (colorterm.find("truecolor") != string::npos || colorterm.find("24bit") != string::npos);
@@ -816,7 +812,7 @@ bool sys_console::supports_truecolor() const {
 bool sys_console::supports_unicode() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetConsoleOutputCP() == CP_UTF8;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     const string lang = environment::get("LANG");
     const string lc_all = environment::get("LC_ALL");
     const string lc_ctype = environment::get("LC_CTYPE");
@@ -834,7 +830,7 @@ bool sys_console::supports_unicode() const {
 bool sys_console::is_interactive() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return out_ != INVALID_HANDLE_VALUE && ::GetFileType(out_) == FILE_TYPE_CHAR;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     return ::isatty(out_);
 #endif
 }
@@ -842,7 +838,7 @@ bool sys_console::is_interactive() const {
 string sys_console::console_type() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return "windows_console";
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     const string term = environment::get("TERM");
     return !term.empty() ? term : "unknown";
 #endif

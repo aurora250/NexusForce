@@ -69,7 +69,7 @@ private:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string win_name_;
 #else
-    locale_t loc_;
+    ::locale_t loc_;
     bool owns_;
 #endif
 

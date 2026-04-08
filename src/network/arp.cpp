@@ -130,7 +130,7 @@ bool arp::open(const char* iface) {
         return true;
     }
 
-    if (iface) {
+    if (iface != nullptr) {
         iface_ = iface;
     }
     opened_ = true;
@@ -185,7 +185,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6;
-    const ::DWORD ip_addr = endian::network_to_host<::DWORD>(target.address().get<::sockaddr_in>().sin_addr.s_addr);
+    const auto ip_addr = endian::network_to_host<::DWORD>(target.address().get<::sockaddr_in>().sin_addr.s_addr);
 
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {

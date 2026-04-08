@@ -2,13 +2,13 @@
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-match_result::match_result(const string& subject, const size_t pos, const size_t len, const vector<string>& groups,
-                           const vector<pair<size_t, size_t>>& group_positions) :
+match_result::match_result(string subject, const size_t pos, const size_t len, const vector<string>& groups,
+                           vector<pair<size_t, size_t>> group_positions) :
 groups_(groups),
-group_positions_(group_positions),
+group_positions_(move(group_positions)),
 position_(pos),
 length_(len),
-subject_(subject) {}
+subject_(move(subject)) {}
 
 string match_result::format(const string_view fmt) const {
     if (!matched()) {
@@ -72,40 +72,21 @@ string match_result::format(const string_view fmt) const {
 }
 
 void regex::compile(const string& pattern, const uint32_t options) {
-    int errorcode;
-    PCRE2_SIZE erroroffset;
+    int error_code = 0;
+    PCRE2_SIZE error_offset = 0;
 
-    code_.reset(pcre2_compile(reinterpret_cast<PCRE2_SPTR>(pattern.data()), pattern.length(), options, &errorcode,
-                              &erroroffset, nullptr));
+    code_.reset(pcre2_compile(reinterpret_cast<PCRE2_SPTR>(pattern.data()), pattern.length(), options, &error_code,
+                              &error_offset, nullptr));
 
     if (!code_) {
         char error_message[256];
-        pcre2_get_error_message(errorcode, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
+        pcre2_get_error_message(error_code, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
         NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
     pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
 
     pattern_ = pattern;
-    options_ = options;
-}
-
-void regex::compile(string&& pattern, const uint32_t options) {
-    int errorcode;
-    PCRE2_SIZE erroroffset;
-
-    code_.reset(pcre2_compile(reinterpret_cast<PCRE2_SPTR>(pattern.data()), pattern.length(), options, &errorcode,
-                              &erroroffset, nullptr));
-
-    if (!code_) {
-        char error_message[256];
-        pcre2_get_error_message(errorcode, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
-        NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
-    }
-
-    pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
-
-    pattern_ = move(pattern);
     options_ = options;
 }
 
@@ -126,7 +107,7 @@ match_result regex::do_match(const PCRE2_SPTR subject, const size_t length, cons
 
     if (rc < 0) {
         if (rc == PCRE2_ERROR_NOMATCH) {
-            return match_result();
+            return {};
         }
         char error_message[256];
         pcre2_get_error_message(rc, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
@@ -152,12 +133,10 @@ match_result regex::do_match(const PCRE2_SPTR subject, const size_t length, cons
         }
     }
 
-    return match_result(subject_str, ovector[0], ovector[1] - ovector[0], groups, group_positions);
+    return {subject_str, ovector[0], ovector[1] - ovector[0], groups, group_positions};
 }
 
 regex::regex(const string& pattern, const uint32_t options) { compile(pattern, options); }
-
-regex::regex(string&& pattern, const uint32_t options) { compile(move(pattern), options); }
 
 regex::regex(regex&& other) noexcept :
 code_(move(other.code_)),
@@ -190,7 +169,7 @@ match_result regex::search(const string& str, const size_t pos) const {
 
 vector<match_result> regex::find_all(const string& str) const {
     vector<match_result> results;
-    const auto subject = reinterpret_cast<PCRE2_SPTR>(str.data());
+    const auto* subject = reinterpret_cast<PCRE2_SPTR>(str.data());
     const size_t length = str.length();
     size_t start_offset = 0;
 
@@ -284,7 +263,7 @@ vector<string> regex::split(const string& str, const int max_splits) const {
 }
 
 void regex_iterator::build_cache() const {
-    if (!cache_built_ && regex_) {
+    if (!cache_built_ && regex_ != nullptr) {
         cached_matches_ = regex_->find_all(subject_);
         cache_built_ = true;
 
@@ -343,10 +322,10 @@ void regex_iterator::find_last_before_position(const size_t pos) {
     current_index_ = -1;
 }
 
-regex_iterator::regex_iterator(const regex* re, const string& str, const size_t pos) :
+regex_iterator::regex_iterator(const regex* re, string str, const size_t pos) :
 regex_(re),
-subject_(str) {
-    if (regex_) {
+subject_(move(str)) {
+    if (regex_ != nullptr) {
         if (pos == 0) {
             build_cache();
         } else {
@@ -359,7 +338,7 @@ regex_iterator regex_iterator::from_index(const regex* re, const string& str, pt
     regex_iterator it;
     it.regex_ = re;
     it.subject_ = str;
-    if (re) {
+    if (re != nullptr) {
         it.build_cache();
         if (index >= 0 && index < static_cast<ptrdiff_t>(it.cached_matches_.size())) {
             it.current_index_ = index;
@@ -469,11 +448,11 @@ void regex_token_iterator::find_next() {
     }
 }
 
-regex_token_iterator::regex_token_iterator(const regex* re, const string& str, const int index) :
+regex_token_iterator::regex_token_iterator(const regex* re, string str, const int index) :
 regex_(re),
-subject_(str),
+subject_(move(str)),
 index_(index) {
-    if (regex_ && !subject_.empty()) {
+    if (regex_ != nullptr && !subject_.empty()) {
         match_iterator_ = regex_->begin(subject_);
         end_iterator_ = regex_->end(subject_);
 

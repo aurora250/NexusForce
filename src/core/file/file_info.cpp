@@ -40,7 +40,7 @@ handle_(handle) {}
 file_attri file_info::attributes() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::BY_HANDLE_FILE_INFORMATION info{};
-    if (!::GetFileInformationByHandle(handle_, &info)) {
+    if (::GetFileInformationByHandle(handle_, &info) == FALSE) {
         return file_attri::OTHERS;
     }
     return static_cast<file_attri>(info.dwFileAttributes);
@@ -60,7 +60,7 @@ bool file_info::set_attributes(const file_attri attr) noexcept {
         return false;
     }
     const char* p = path_buf;
-    if (string_compare(p, "\\\\?\\", 4) == 0) {
+    if (string_compare(p, R"(\\?\)", 4) == 0) {
         p += 4;
     }
     return ::SetFileAttributesA(p, static_cast<::DWORD>(attr)) != 0;
@@ -85,7 +85,7 @@ file_info::size_type file_info::size() const noexcept {
 uint64_t file_info::size64() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
-    if (!::GetFileSizeEx(handle_, &li)) {
+    if (::GetFileSizeEx(handle_, &li) == FALSE) {
         return 0;
     }
     return static_cast<uint64_t>(li.QuadPart);
@@ -102,7 +102,7 @@ bool file_info::size(size_type& out_size) const noexcept {
     out_size = 0;
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
-    if (!::GetFileSizeEx(handle_, &li)) {
+    if (::GetFileSizeEx(handle_, &li) == FALSE) {
         return false;
     }
     if (li.QuadPart > static_cast<::LONGLONG>(numeric_traits<size_type>::max())) {
@@ -126,7 +126,7 @@ bool file_info::size(size_type& out_size) const noexcept {
 datetime file_info::last_access_time() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FILETIME ftCreate{}, ftAccess{}, ftWrite{};
-    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) {
+    if (::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite) == FALSE) {
         return datetime::epoch();
     }
     return filetime_to_datetime(ftAccess);
@@ -155,7 +155,7 @@ bool file_info::set_last_access_time(const datetime& dt) noexcept {
 datetime file_info::last_write_time() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FILETIME ftCreate{}, ftAccess{}, ftWrite{};
-    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) {
+    if (::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite) == FALSE) {
         return datetime::epoch();
     }
     return filetime_to_datetime(ftWrite);
@@ -184,7 +184,7 @@ bool file_info::set_last_write_time(const datetime& dt) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
 datetime file_info::creation_time() const noexcept {
     ::FILETIME ftCreate{}, ftAccess{}, ftWrite{};
-    if (!::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite)) {
+    if (::GetFileTime(handle_, &ftCreate, &ftAccess, &ftWrite) == FALSE) {
         return datetime::epoch();
     }
     return filetime_to_datetime(ftCreate);

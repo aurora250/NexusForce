@@ -402,7 +402,7 @@ private:
     NEFORCE_CONSTEXPR20 basic_string& replace_fill(iterator first, size_type n1, const size_type n2,
                                                    const value_type value) {
 #ifdef NEFORCE_USING_SSO
-        const size_type offset = first - begin();
+        const difference_type offset = first - begin();
         const size_type old_size = size();
         const size_type actual_n1 = _NEFORCE min(n1, old_size - offset);
         if (actual_n1 == 0 && n2 == 0) {
@@ -413,7 +413,7 @@ private:
 
         if (!is_long() && new_size < sso_capacity) {
             pointer p = storage_.short_ + offset;
-            if (old_size - offset - actual_n1 > 0) {
+            if (static_cast<difference_type>(old_size - offset - actual_n1) > 0) {
                 traits_type::move(p + n2, p + actual_n1, old_size - offset - actual_n1);
             }
             traits_type::assign(p, n2, value);
@@ -488,13 +488,13 @@ private:
         size_type len2 = _NEFORCE distance(first2, last2);
 
 #ifdef NEFORCE_USING_SSO
-        const size_type offset = first1 - begin();
+        const difference_type offset = first1 - begin();
         const size_type old_size = size();
         const size_type new_size = old_size - len1 + len2;
 
         if (!is_long() && new_size < sso_capacity) {
             pointer p = storage_.short_ + offset;
-            if (old_size - offset - len1 > 0) {
+            if (static_cast<difference_type>(old_size - offset - len1) > 0) {
                 traits_type::move(p + len2, p + len1, old_size - offset - len1);
             }
             for (size_type i = 0; i < len2; ++i) {

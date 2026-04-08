@@ -13,28 +13,33 @@ NEFORCE_BEGIN_NAMESPACE__
 #ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
     struct winsock_initializer {
-        static atomic<int> ref_count;
+        static atomic<int> g_ref_count;
 
         winsock_initializer() {
-            const int prev = ref_count.fetch_add(1);
+            const int prev = g_ref_count.fetch_add(1);
             if (prev == 0) {
                 ::WSADATA wsa_data;
                 if (::WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
-                    ref_count.fetch_sub(1);
+                    g_ref_count.fetch_sub(1);
                     NEFORCE_THROW_EXCEPTION(system_exception("WSAStartup failed"));
                 }
             }
         }
 
         ~winsock_initializer() {
-            const int prev = ref_count.fetch_sub(1);
+            const int prev = g_ref_count.fetch_sub(1);
             if (prev == 1) {
                 ::WSACleanup();
             }
         }
+
+        winsock_initializer(const winsock_initializer&) = delete;
+        winsock_initializer& operator=(const winsock_initializer&) = delete;
+        winsock_initializer(winsock_initializer&&) = delete;
+        winsock_initializer& operator=(winsock_initializer&&) = delete;
     };
 
-    atomic<int> winsock_initializer::ref_count{0};
+    atomic<int> winsock_initializer::g_ref_count{0};
 } // namespace
 #endif
 
@@ -193,6 +198,7 @@ bool socket_base::set_reuse_port(const bool enable) noexcept {
     const int value = enable ? 1 : 0;
     return set_option(SOL_SOCKET, SO_REUSEPORT, &value, sizeof(value));
 #else
+    ignore = enable;
     return false;
 #endif
 }
@@ -221,7 +227,7 @@ bool socket_base::set_send_timeout(const milliseconds timeout) noexcept {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::DWORD ms = static_cast<::DWORD>(timeout.count());
+    const auto ms = static_cast<::DWORD>(timeout.count());
     return set_option(SOL_SOCKET, SO_SNDTIMEO, &ms, sizeof(ms));
 #else
     struct ::timeval tv;
@@ -237,7 +243,7 @@ bool socket_base::set_receive_timeout(const milliseconds timeout) noexcept {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::DWORD ms = static_cast<::DWORD>(timeout.count());
+    const auto ms = static_cast<::DWORD>(timeout.count());
     return set_option(SOL_SOCKET, SO_RCVTIMEO, &ms, sizeof(ms));
 #else
     struct ::timeval tv;
@@ -261,7 +267,8 @@ optional<ip_address> socket_base::local_endpoint() const {
 
     if (storage.ss_family == AF_INET) {
         return ip_address(*reinterpret_cast<::sockaddr_in*>(&storage));
-    } else if (storage.ss_family == AF_INET6) {
+    }
+    if (storage.ss_family == AF_INET6) {
         return ip_address(*reinterpret_cast<::sockaddr_in6*>(&storage));
     }
 
@@ -282,7 +289,8 @@ optional<ip_address> socket_base::remote_endpoint() const {
 
     if (storage.ss_family == AF_INET) {
         return ip_address(*reinterpret_cast<::sockaddr_in*>(&storage));
-    } else if (storage.ss_family == AF_INET6) {
+    }
+    if (storage.ss_family == AF_INET6) {
         return ip_address(*reinterpret_cast<::sockaddr_in6*>(&storage));
     }
 

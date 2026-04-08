@@ -9,13 +9,13 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 void dynamic_library::open() {
-    if (handle_) {
+    if (handle_ != nullptr) {
         return;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     handle_ = ::LoadLibraryA(path_.data());
-    if (!handle_) {
+    if (handle_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(dynamic_library_exception("dynamic library load failed."));
     }
 #else
@@ -29,7 +29,7 @@ void dynamic_library::open() {
 }
 
 void dynamic_library::close() {
-    if (handle_) {
+    if (handle_ != nullptr) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         ::FreeLibrary(static_cast<::HMODULE>(handle_));
 #else
@@ -39,9 +39,9 @@ void dynamic_library::close() {
     }
 }
 
-dynamic_library::dynamic_library(const string& pth) :
+dynamic_library::dynamic_library(string pth) :
 handle_(nullptr),
-path_(pth) {
+path_(move(pth)) {
     open();
 }
 
@@ -70,7 +70,7 @@ void* dynamic_library::symbol(const string& name) const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::FARPROC proc = ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data());
-    if (!proc) {
+    if (proc == nullptr) {
         NEFORCE_THROW_EXCEPTION(dynamic_library_exception("GetProcAddress failed"));
     }
     return reinterpret_cast<void*>(proc);

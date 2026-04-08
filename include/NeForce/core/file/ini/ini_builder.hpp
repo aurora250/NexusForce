@@ -174,7 +174,7 @@ public:
      * 在一个独立的函数作用域内定义节的内容，
      * 函数执行完毕后自动返回当前节。
      */
-    ini_builder& value_section(const string& name, _NEFORCE function<void(ini_builder&)>&& func);
+    ini_builder& value_section(const string& name, function<void(ini_builder&)> func);
 
     /**
      * @brief 构建文档

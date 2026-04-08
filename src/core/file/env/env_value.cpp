@@ -6,7 +6,8 @@ namespace {
     string escape_env_value(const string& value, env_variable::quote_type qt) {
         if (qt == env_variable::None) {
             return value;
-        } else if (qt == env_variable::Single) {
+        }
+        if (qt == env_variable::Single) {
             string result;
             for (const char c: value) {
                 if (c == '\'') {
@@ -16,9 +17,8 @@ namespace {
                 }
             }
             return result;
-        } else {
-            return escape(value);
         }
+        return escape(value);
     }
 
     string env_value_to_string(const env_value* value, const string& key = "") {

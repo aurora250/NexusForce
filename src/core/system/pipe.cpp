@@ -24,12 +24,12 @@ pipe::pipe(bool inheritable) {
     sa.bInheritHandle = inheritable ? TRUE : FALSE;
     sa.lpSecurityDescriptor = nullptr;
 
-    if (!::CreatePipe(&read_handle_, &write_handle_, &sa, 0)) {
+    if (::CreatePipe(&read_handle_, &write_handle_, &sa, 0) == FALSE) {
         NEFORCE_THROW_EXCEPTION(pipe_exception("CreatePipe failed"));
     }
 
     if (!inheritable) {
-        if (!::SetHandleInformation(read_handle_, HANDLE_FLAG_INHERIT, 0)) {
+        if (::SetHandleInformation(read_handle_, HANDLE_FLAG_INHERIT, 0) == FALSE) {
             ::CloseHandle(read_handle_);
             ::CloseHandle(write_handle_);
             NEFORCE_THROW_EXCEPTION(pipe_exception("SetHandleInformation failed"));
@@ -91,8 +91,8 @@ int pipe::read(void* buffer, size_t size) noexcept {
         return -1;
     }
 
-    ::DWORD bytes_read;
-    if (!::ReadFile(read_handle_, buffer, static_cast<::DWORD>(size), &bytes_read, nullptr)) {
+    ::DWORD bytes_read = 0;
+    if (::ReadFile(read_handle_, buffer, static_cast<::DWORD>(size), &bytes_read, nullptr) == FALSE) {
         return -1;
     }
     return static_cast<int>(bytes_read);
@@ -116,18 +116,18 @@ string pipe::read_available() {
 
     constexpr ::DWORD buffer_size = MEMORY_BIG_ALLOC_THRESHHOLD;
     char buffer[buffer_size];
-    ::DWORD bytes_read;
+    ::DWORD bytes_read = 0;
 
     while (true) {
-        ::DWORD bytes_available;
-        if (!::PeekNamedPipe(read_handle_, nullptr, 0, nullptr, &bytes_available, nullptr)) {
+        ::DWORD bytes_available = 0;
+        if (::PeekNamedPipe(read_handle_, nullptr, 0, nullptr, &bytes_available, nullptr) == FALSE) {
             break;
         }
         if (bytes_available == 0) {
             break;
         }
 
-        if (!::ReadFile(read_handle_, buffer, buffer_size - 1, &bytes_read, nullptr)) {
+        if (::ReadFile(read_handle_, buffer, buffer_size - 1, &bytes_read, nullptr) == FALSE) {
             break;
         }
 
@@ -167,8 +167,8 @@ int pipe::write(const void* data, size_t size) noexcept {
         return -1;
     }
 
-    ::DWORD bytes_written;
-    if (!::WriteFile(write_handle_, data, static_cast<::DWORD>(size), &bytes_written, nullptr)) {
+    ::DWORD bytes_written = 0;
+    if (::WriteFile(write_handle_, data, static_cast<::DWORD>(size), &bytes_written, nullptr) == FALSE) {
         return -1;
     }
     return static_cast<int>(bytes_written);

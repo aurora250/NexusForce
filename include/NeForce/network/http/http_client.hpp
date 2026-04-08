@@ -50,7 +50,7 @@ private:
     void update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url);
     string build_cookie_header(const url& request_url) const;
 
-    http_client_response do_request(http_client_request&& request, int redirect_count = 0);
+    http_client_response do_request(http_client_request request, int redirect_count = 0);
     bool ensure_connected(const string& host, ports port);
 
 public:

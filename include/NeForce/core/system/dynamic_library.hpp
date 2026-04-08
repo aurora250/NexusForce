@@ -70,7 +70,7 @@ public:
      * @param pth 动态库路径
      * @throws dynamic_library_exception 加载失败时抛出
      */
-    explicit dynamic_library(const string& pth);
+    explicit dynamic_library(string pth);
 
     ~dynamic_library();
 

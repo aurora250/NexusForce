@@ -13,7 +13,7 @@ namespace {
             return reinterpret_cast<const ::sockaddr*>(&value);
         }
         template <typename T>
-        enable_if_t<is_same_v<T, none_t>, const ::sockaddr*> operator()(const T&) noexcept {
+        enable_if_t<is_same_v<T, none_t>, const ::sockaddr*> operator()(const T& /*unused*/) noexcept {
             return nullptr;
         }
     };
@@ -24,22 +24,23 @@ namespace {
             return reinterpret_cast<::sockaddr*>(&value);
         }
         template <typename T>
-        enable_if_t<is_same_v<T, none_t>, ::sockaddr*> operator()(T&) noexcept {
+        enable_if_t<is_same_v<T, none_t>, ::sockaddr*> operator()(T& /*unused*/) noexcept {
             return nullptr;
         }
     };
 
     struct size_visitor {
         template <typename T>
-        enable_if_t<is_same_v<T, ::sockaddr_in>, int> operator()(const T&) noexcept {
+        enable_if_t<is_same_v<T, ::sockaddr_in>, int> operator()(const T& /*unused*/) noexcept {
             return sizeof(::sockaddr_in);
         }
         template <typename T>
-        enable_if_t<is_same_v<T, ::sockaddr_in6>, int> operator()(const T&) noexcept {
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, int> operator()(const T& /*unused*/) noexcept {
             return sizeof(::sockaddr_in6);
         }
         template <typename T>
-        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int> operator()(const T&) noexcept {
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int>
+        operator()(const T& /*unused*/) noexcept {
             return 0;
         }
     };
@@ -54,7 +55,8 @@ namespace {
             return value.sin6_family;
         }
         template <typename T>
-        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int> operator()(const T&) noexcept {
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int>
+        operator()(const T& /*unused*/) noexcept {
             return AF_UNSPEC;
         }
     };
@@ -70,7 +72,7 @@ namespace {
         }
         template <typename T>
         enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, uint16_t>
-        operator()(const T&) noexcept {
+        operator()(const T& /*unused*/) noexcept {
             return 0;
         }
     };
@@ -80,21 +82,23 @@ namespace {
 
         template <typename T>
         enable_if_t<is_same_v<T, ::sockaddr_in>, string> operator()(const T& value) {
-            if (::inet_ntop(AF_INET, &value.sin_addr, buffer, sizeof(buffer))) {
-                return string(buffer) + ":" + _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin_port));
+            if (::inet_ntop(AF_INET, &value.sin_addr, static_cast<char*>(buffer), sizeof(buffer))) {
+                return string(static_cast<char*>(buffer)) + ":" +
+                       _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin_port));
             }
             return ""_s;
         }
         template <typename T>
         enable_if_t<is_same_v<T, ::sockaddr_in6>, string> operator()(const T& value) {
-            if (::inet_ntop(AF_INET6, &value.sin6_addr, buffer, sizeof(buffer))) {
-                return "["_s + string(buffer) +
+            if (::inet_ntop(AF_INET6, &value.sin6_addr, static_cast<char*>(buffer), sizeof(buffer))) {
+                return "["_s + string(static_cast<char*>(buffer)) +
                        "]:" + _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin6_port));
             }
             return ""_s;
         }
         template <typename T>
-        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, string> operator()(const T&) {
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, string>
+        operator()(const T& /*unused*/) {
             return ""_s;
         }
     };
@@ -122,7 +126,8 @@ namespace {
             return memory_compare(&value.sin6_addr, &a2.sin6_addr, sizeof(::in6_addr)) == 0;
         }
         template <typename T>
-        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, bool> operator()(const T&) noexcept {
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, bool>
+        operator()(const T& /*unused*/) noexcept {
             return false;
         }
     };

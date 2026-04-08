@@ -4,7 +4,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     string toml_value_to_string(const toml_value* value) {
-        if (!value) {
+        if (value == nullptr) {
             return "";
         }
 
@@ -46,7 +46,7 @@ namespace {
                             escaped.pop_back();
                             escaped += "\\\"";
                         }
-                        return "\"\"\"" + escaped + "\"\"\"";
+                        return R"(""")" + escaped + R"(""")";
                     }
                     case toml_string::MultiLiteral: {
                         return "'''" + str + "'''";
@@ -102,9 +102,8 @@ namespace {
                     }
                     result += " }";
                     return result;
-                } else {
-                    return "{ /* non-inline table */ }";
                 }
+                return "{ /* non-inline table */ }";
             }
             default: {
                 return "unknown";
@@ -130,7 +129,7 @@ namespace {
     string toml_value_document(const toml_value* value);
 
     string toml_table_to_string_with_path(const toml_table* table, const string& path_prefix = "") {
-        if (!table) {
+        if (table == nullptr) {
             return "";
         }
 
@@ -217,7 +216,7 @@ namespace {
     }
 
     string toml_value_document(const toml_value* value) {
-        if (!value) {
+        if (value == nullptr) {
             return "";
         }
 
@@ -232,11 +231,11 @@ namespace {
                 const double val = value->as_float()->get_value();
                 if (is_nan(val)) {
                     return "nan";
-                } else if (is_infinity(val)) {
-                    return signbit(val) ? "-inf" : "inf";
-                } else {
-                    return _NEFORCE to_string(val);
                 }
+                if (is_infinity(val)) {
+                    return signbit(val) ? "-inf" : "inf";
+                }
+                return _NEFORCE to_string(val);
             }
             case toml_value::String: {
                 const toml_string* str_val = value->as_string();
@@ -263,9 +262,9 @@ namespace {
                         string escaped = escape(str);
                         if (!escaped.empty() && escaped.back() == '"') {
                             escaped.pop_back();
-                            escaped += "\\\"";
+                            escaped += R"(\")";
                         }
-                        return "\"\"\"" + escaped + "\"\"\"";
+                        return R"(""")" + escaped + R"(""")";
                     }
                     case toml_string::MultiLiteral: {
                         return "'''" + str + "'''";
@@ -310,9 +309,8 @@ namespace {
                     }
                     result += " }";
                     return result;
-                } else {
-                    return toml_table_to_string_with_path(table);
                 }
+                return toml_table_to_string_with_path(table);
             }
             default: {
                 return "unknown";

@@ -161,7 +161,7 @@ void file_watcher::watch_thread_func() {
     ::OVERLAPPED local_overlapped{};
     memory_zero(&local_overlapped);
     local_overlapped.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
-    if (!local_overlapped.hEvent) {
+    if (local_overlapped.hEvent == nullptr) {
         watching_.store(false);
         return;
     }
@@ -169,17 +169,17 @@ void file_watcher::watch_thread_func() {
     ::DWORD notify_filter = 0;
     {
         const int ev = static_cast<int>(current_events_);
-        if (ev & static_cast<int>(file_watch_event::CREATED)) {
+        if ((ev & static_cast<int>(file_watch_event::CREATED)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_CREATION;
         }
-        if (ev & static_cast<int>(file_watch_event::DELETED)) {
+        if ((ev & static_cast<int>(file_watch_event::DELETED)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME;
         }
-        if (ev & static_cast<int>(file_watch_event::MODIFIED)) {
+        if ((ev & static_cast<int>(file_watch_event::MODIFIED)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE | FILE_NOTIFY_CHANGE_ATTRIBUTES |
                              FILE_NOTIFY_CHANGE_SECURITY;
         }
-        if (ev & static_cast<int>(file_watch_event::ACCESSED)) {
+        if ((ev & static_cast<int>(file_watch_event::ACCESSED)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_LAST_ACCESS;
         }
         if (notify_filter == 0) {
@@ -192,7 +192,7 @@ void file_watcher::watch_thread_func() {
                                             recursive_ ? TRUE : FALSE, notify_filter, &bytes_returned,
                                             &local_overlapped, nullptr);
 
-    if (!result) {
+    if (result == FALSE) {
         ::CloseHandle(local_overlapped.hEvent);
         watching_.store(false);
         return;
@@ -201,12 +201,12 @@ void file_watcher::watch_thread_func() {
     while (watching_.load() && !stopping_.load()) {
         ::DWORD bytes_transferred = 0;
         ::ULONG_PTR completion_key = 0;
-        ::LPOVERLAPPED lpOverlapped = nullptr;
+        ::LPOVERLAPPED lp_overlapped = nullptr;
 
-        const ::BOOL io_completed =
-                ::GetQueuedCompletionStatus(completion_port_, &bytes_transferred, &completion_key, &lpOverlapped, 1000);
+        const ::BOOL io_completed = ::GetQueuedCompletionStatus(completion_port_, &bytes_transferred, &completion_key,
+                                                                &lp_overlapped, 1000);
 
-        if (!io_completed) {
+        if (io_completed == FALSE) {
             const ::DWORD error = ::GetLastError();
             if (error == WAIT_TIMEOUT) {
                 continue;
@@ -214,14 +214,14 @@ void file_watcher::watch_thread_func() {
             break;
         }
 
-        if (bytes_transferred == 0 && completion_key == 0 && lpOverlapped == nullptr) {
+        if (bytes_transferred == 0 && completion_key == 0 && lp_overlapped == nullptr) {
             break;
         }
 
         if (bytes_transferred > 0) {
             auto* fni = reinterpret_cast<::FILE_NOTIFY_INFORMATION*>(buffer_.data());
 
-            while (fni && watching_.load()) {
+            while (fni != nullptr && watching_.load()) {
                 const wstring wide_filename(fni->FileName, fni->FileNameLength / sizeof(wchar_t));
                 const string utf8_name = to_string(wide_filename);
                 if (!utf8_name.empty()) {
@@ -269,7 +269,7 @@ void file_watcher::watch_thread_func() {
             result = ::ReadDirectoryChangesW(dir_handle_, buffer_.data(), static_cast<::DWORD>(buffer_.size()),
                                              recursive_ ? TRUE : FALSE, notify_filter, &bytes_returned,
                                              &local_overlapped, nullptr);
-            if (!result) {
+            if (result == FALSE) {
                 break;
             }
         }
@@ -378,7 +378,7 @@ bool file_watcher::update_recursive(const bool recursive) {
     }
 
     callback_t saved_callback;
-    file_watch_event saved_events;
+    file_watch_event saved_events{file_watch_event::ALL};
     {
         lock<mutex> lock(callback_mutex_);
         saved_callback = callback_;

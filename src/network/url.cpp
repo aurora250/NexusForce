@@ -161,7 +161,7 @@ string url::encode(const string_view str, const bool encode_slash) {
         if (should_encode(c, encode_slash)) {
             result += '%';
             const auto uc = static_cast<unsigned char>(c);
-            constexpr char hex[] = "0123456789ABCDEF";
+            constexpr string_view hex{"0123456789ABCDEF"};
             result += hex[uc >> 4];
             result += hex[uc & 0x0F];
         } else {

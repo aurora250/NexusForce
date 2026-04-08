@@ -312,7 +312,7 @@ public:
      *
      * 在独立的作用域内构建一个对象，构建完成后自动闭合。
      */
-    json_builder& value_object(_NEFORCE function<void(json_builder&)>&& build_func);
+    json_builder& value_object(const function<void(json_builder&)>& build_func);
 
     /**
      * @brief 使用函数式方式构建数组值
@@ -321,7 +321,7 @@ public:
      *
      * 在独立的作用域内构建一个数组，构建完成后自动闭合。
      */
-    json_builder& value_array(_NEFORCE function<void(json_builder&)>&& build_func);
+    json_builder& value_array(const function<void(json_builder&)>& build_func);
 
     /**
      * @brief 构建json文档

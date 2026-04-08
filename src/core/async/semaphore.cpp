@@ -1,5 +1,6 @@
 #include <NeForce/core/async/semaphore.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <NeForce/core/algorithm/compare.hpp>
 #    include <windef.h>
 #    include <WinBase.h>
 #    include <handleapi.h>
@@ -37,10 +38,7 @@ namespace {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 bool semaphore::try_acquire_for_impl(const milliseconds timeout) noexcept {
-    auto ms = timeout.count();
-    if (ms < 0) {
-        ms = 0;
-    }
+    const auto ms = max(timeout.count(), 0LL);
     const ::DWORD result = ::WaitForSingleObjectEx(handle_, static_cast<::DWORD>(ms), FALSE);
     return result == WAIT_OBJECT_0;
 }
@@ -75,7 +73,7 @@ semaphore::semaphore(long initial, long maximum) {
 
 semaphore::~semaphore() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (handle_) {
+    if (handle_ != nullptr) {
         ::CloseHandle(handle_);
         handle_ = nullptr;
     }

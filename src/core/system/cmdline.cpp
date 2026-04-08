@@ -26,10 +26,10 @@ void cmdline::add_option(const string& long_name, const char short_name, const s
     if (long_name.empty() && short_name == 0) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception("Option must have at least one name"));
     }
-    if (!long_name.empty() && options_long_.count(long_name)) {
+    if (!long_name.empty() && options_long_.count(long_name) != 0U) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate long option: " + long_name).data()));
     }
-    if (short_name != 0 && options_short_.count(short_name)) {
+    if (short_name != 0 && options_short_.count(short_name) != 0U) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate short option: "_s + short_name).data()));
     }
 
@@ -75,7 +75,7 @@ void cmdline::parse(const vector<string>& args) {
 
         if (arg == "--") {
             end_of_options = true;
-        } else if (arg.compare(0, 2, "--") == 0) {
+        } else if (arg.starts_with("--")) {
             parse_long_option(arg, args, i);
         } else if (arg.size() > 1 && arg[0] == '-') {
             parse_short_options(arg, args, i);
@@ -157,7 +157,7 @@ vector<string> cmdline::get_os_argv() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     int argc = 0;
     ::LPWSTR* argv_wide = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
-    if (!argv_wide) {
+    if (argv_wide == nullptr) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception("CommandLineToArgvW failed"));
     }
     for (int i = 0; i < argc; ++i) {
@@ -207,7 +207,7 @@ void cmdline::parse_long_option(const string& arg, const vector<string>& args, s
     const string name = arg.substr(2, eq_pos == string::npos ? string::npos : eq_pos - 2);
 
     option* opt = find_option_long(name);
-    if (!opt) {
+    if (opt == nullptr) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unknown option: " + arg).data()));
     }
 
@@ -243,7 +243,7 @@ void cmdline::parse_short_options(const string& arg, const vector<string>& args,
         const char short_name = arg[j];
         option* opt = find_option_short(short_name);
 
-        if (!opt) {
+        if (opt == nullptr) {
             NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unknown short option: -"_s + short_name).data()));
         }
 

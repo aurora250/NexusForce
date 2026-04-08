@@ -87,7 +87,7 @@ namespace {
 
     http_cookie parse_set_cookie(const string_view str, string default_domain, string default_path) {
         vector<string_view> tokens;
-        size_t start = 0, end;
+        size_t start = 0, end = 0;
 
         while ((end = str.find(';', start)) != string::npos) {
             tokens.push_back(str.substr(start, end - start).trim());
@@ -499,7 +499,7 @@ bool http_client::ensure_connected(const string& host, const ports port) {
     }
 }
 
-http_client_response http_client::do_request(http_client_request&& request, int redirect_count) {
+http_client_response http_client::do_request(http_client_request request, int redirect_count) {
     http_client_response response;
     const auto start_time = steady_clock::now();
 

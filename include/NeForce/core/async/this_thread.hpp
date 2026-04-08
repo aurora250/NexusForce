@@ -138,13 +138,13 @@ void NEFORCE_API sleep_for_ms(uint32_t ms, bool busy_wait) noexcept;
 
 /**
  * @brief 精确睡眠指定微秒数
- * @param ms 要睡眠的微秒数
+ * @param us 要睡眠的微秒数
  *
  * 提供微秒级精度的睡眠，主要用于短时间延迟。
  *
  * @note 实际精度受系统时钟精度限制。
  */
-void NEFORCE_API sleep_for_us(uint64_t ms) noexcept;
+void NEFORCE_API sleep_for_us(uint64_t us) noexcept;
 
 /**
  * @brief 精确睡眠指定纳秒数

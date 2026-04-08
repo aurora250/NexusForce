@@ -23,6 +23,7 @@ namespace {
 
         if (::_dupenv_s(&value, &size, name.data()) == 0 && value != nullptr) {
             string result(value);
+            // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
             ::free(value);
             return result;
         }
@@ -158,7 +159,7 @@ string environment::current_directory() {
     if (length == 0) {
         NEFORCE_THROW_EXCEPTION(system_exception("Failed to get current directory"));
     }
-    return string(buffer);
+    return {buffer};
 #else
     // NOLINTNEXTLINE(clang-analyzer-unix.StdCLibraryFunctions)
     char* buffer = ::getcwd(nullptr, 0);
@@ -176,8 +177,8 @@ string environment::current_user() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     char username[256];
     ::DWORD size = sizeof(username);
-    if (::GetUserNameA(username, &size)) {
-        return string(username);
+    if (::GetUserNameA(username, &size) == TRUE) {
+        return {username};
     }
     return "";
 #else
@@ -199,7 +200,7 @@ string environment::temp_directory() {
     if (length == 0) {
         return "C:\\Temp";
     }
-    return string(buffer);
+    return {buffer};
 #else
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* tmpdir = ::getenv("TMPDIR");
@@ -232,6 +233,7 @@ string environment::home_directory() {
 
     if (::_dupenv_s(&value, &size, "USERPROFILE") == 0 && value != nullptr) {
         result = string(value);
+        // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
         ::free(value);
         return result;
     }
@@ -247,10 +249,12 @@ string environment::home_directory() {
         result = string(homedrive) + string(homepath);
     }
 
-    if (homedrive) {
+    if (homedrive != nullptr) {
+        // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
         ::free(homedrive);
     }
-    if (homepath) {
+    if (homepath != nullptr) {
+        // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
         ::free(homepath);
     }
 

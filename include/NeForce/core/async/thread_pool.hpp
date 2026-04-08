@@ -37,7 +37,7 @@ private:
     id_type thread_id_;
 
 public:
-    explicit manual_thread(thread_func&& func) noexcept;
+    explicit manual_thread(thread_func func) noexcept;
     ~manual_thread() = default;
 
     NEFORCE_NODISCARD id_type id() const noexcept { return thread_id_; }

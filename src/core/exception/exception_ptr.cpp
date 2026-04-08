@@ -5,7 +5,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 exception_ptr current_exception() noexcept {
     if (uncaught_exceptions() == 0) {
-        return exception_ptr();
+        return {};
     }
 
     try {
@@ -20,7 +20,7 @@ exception_ptr current_exception() noexcept {
 }
 
 void rethrow_exception(const exception_ptr& p) {
-    if (!p || !p.ecb_ || !p.ecb_->wrapper) {
+    if (!p || p.ecb_ == nullptr || !p.ecb_->wrapper) {
         terminate();
     }
     p.ecb_->wrapper->rethrow();

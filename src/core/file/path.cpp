@@ -159,7 +159,8 @@ path path::lexically_normal() const {
     for (const auto& part: parts) {
         if (part.empty() || part == ".") {
             continue;
-        } else if (part == "..") {
+        }
+        if (part == "..") {
             if (!normalized.empty() && normalized.back() != "..") {
                 normalized.pop_back();
             } else if (!is_absolute) {
@@ -417,7 +418,7 @@ bool path::is_directory() const noexcept { return path::is_directory(path_); }
 bool path::is_directory(const string& path) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::DWORD attrib = ::GetFileAttributesA(path.data());
-    return attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY);
+    return attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0U;
 #else
     struct ::stat64 st{};
     if (::stat64(path.data(), &st) == -1) {
@@ -432,7 +433,7 @@ bool path::is_file() const noexcept { return path::is_file(path_); }
 bool path::is_file(const string& path) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::DWORD attrib = ::GetFileAttributesA(path.data());
-    return attrib != INVALID_FILE_ATTRIBUTES && !(attrib & FILE_ATTRIBUTE_DIRECTORY);
+    return attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY) == 0U;
 #else
     struct ::stat64 st{};
     if (::stat64(path.data(), &st) == -1) {

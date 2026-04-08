@@ -30,6 +30,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
+          build-mode: none
           config: |
             paths:
               - src
@@ -43,33 +44,6 @@ jobs:
               - vcpkg
               - third_party
               - submodules
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake build-essential ninja-build libtirpc-dev libc++abi-dev
-
-      - name: Setup vcpkg
-        uses: lukka/run-vcpkg@v11
-        with:
-          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          vcpkgJsonGlob: '**/vcpkg.json'
-          vcpkgGitCommit: '2024.03.25'
-
-      - name: Set VCPKG_ROOT environment variable
-        run: echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
-
-      - name: Configure CMake
-        run: |
-          cmake -B ${{ github.workspace }}/build \
-            -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DNEXUSFORCE_BUILD_DOCS=OFF \
-            -DNEXUSFORCE_BUILD_TESTS=OFF \
-
-      - name: Build
-        run: |
-          cmake --build ${{ github.workspace }}/build --config Release --parallel $(nproc)
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2

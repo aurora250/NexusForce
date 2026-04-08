@@ -53,13 +53,13 @@ optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6; // byte count SendARP expected
 
-    const ::ULONG ip_addr = endian::network_to_host<::ULONG>(ip.address().get<::sockaddr_in>().sin_addr.s_addr);
+    const auto ip_addr = endian::network_to_host<::ULONG>(ip.address().get<::sockaddr_in>().sin_addr.s_addr);
 
-    const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
+    const ::DWORD ret = ::SendARP(ip_addr, 0, static_cast<::ULONG*>(mac), &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {
         byte_t mac_bytes[6];
-        memory_copy(mac_bytes, mac, 6);
-        return mac_address(mac_bytes);
+        memory_copy(static_cast<byte_t*>(mac_bytes), mac, 6);
+        return mac_address(static_cast<byte_t*>(mac_bytes));
     }
     return none;
 #else

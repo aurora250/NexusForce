@@ -33,7 +33,7 @@ condition_variable_base::~condition_variable_base() {
 void condition_variable_base::wait(mutex& mtx) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::BOOL result = ::SleepConditionVariableSRW(&cond_, mtx.native_handle(), numeric_traits<::DWORD>::max(), 0);
-    if (!result) {
+    if (result == FALSE) {
         terminate();
     }
 #else
@@ -46,7 +46,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const int64_t sec, con
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const milliseconds timeout_ms = relative_time(sec, ns, false);
     const ::BOOL result = ::SleepConditionVariableSRW(&cond_, mtx.native_handle(), timeout_ms.count(), 0);
-    if (result) {
+    if (result == TRUE) {
         return cv_status::success;
     }
     const ::DWORD err = ::GetLastError();
@@ -55,7 +55,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const int64_t sec, con
     }
     terminate();
 #else
-    const ::timespec ts{static_cast<ssize_t>(sec), static_cast<ssize_t>(ns)};
+    const ::timespec ts{static_cast<::time_t>(sec), static_cast<long>(ns)};
     const int result = ::__gthread_cond_timedwait(&cond_, mtx.native_handle(), &ts);
     return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::success;
 #endif
@@ -66,7 +66,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotoni
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const milliseconds timeout_ms = relative_time(sec, ns, is_monotonic);
     ::BOOL result = ::SleepConditionVariableSRW(&cond_, mtx.native_handle(), timeout_ms.count(), 0);
-    if (result) {
+    if (result == TRUE) {
         return cv_status::success;
     }
     const ::DWORD err = ::GetLastError();
@@ -76,7 +76,8 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotoni
     terminate();
 #else
     const ::timespec ts{static_cast<ssize_t>(sec), static_cast<ssize_t>(ns)};
-    const int result = ::pthread_cond_clockwait(&cond_, mtx.native_handle(), static_cast<int>(is_monotonic), &ts);
+    const clockid_t clock_id = is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME;
+    const int result = ::pthread_cond_clockwait(&cond_, mtx.native_handle(), clock_id, &ts);
     return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::success;
 #endif
 }

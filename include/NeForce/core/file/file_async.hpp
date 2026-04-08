@@ -66,7 +66,7 @@ private:
          * @brief 写操作上下文构造函数
          * @param d 要写入的数据
          */
-        explicit async_context(string&& d);
+        explicit async_context(string d);
 
         /**
          * @brief 读操作上下文构造函数

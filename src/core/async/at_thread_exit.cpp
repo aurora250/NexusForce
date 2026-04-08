@@ -5,6 +5,11 @@ namespace {
     struct thread_exit_registry {
         at_thread_exit_elt* thread_exit_list = nullptr;
 
+        thread_exit_registry() = default;
+        thread_exit_registry(const thread_exit_registry&) = delete;
+        thread_exit_registry& operator=(const thread_exit_registry&) = delete;
+        thread_exit_registry(thread_exit_registry&&) = delete;
+        thread_exit_registry& operator=(thread_exit_registry&&) = delete;
         ~thread_exit_registry();
     };
 

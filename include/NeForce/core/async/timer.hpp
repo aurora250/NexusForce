@@ -38,7 +38,7 @@ public:
     using time_point = typename clock_type::time_point; ///< 时间点类型
     using duration = typename clock_type::duration;     ///< 时长类型
     using token = size_t;                               ///< 任务标识符类型
-    using handler_type = _NEFORCE function<void()>;     ///< 回调函数类型
+    using handler_type = function<void()>;              ///< 回调函数类型
 
 private:
     /**
@@ -55,7 +55,12 @@ private:
         node(time_point exp, const token tid, handler_type&& h) :
         expire(exp),
         id(tid),
-        handler(_NEFORCE move(h)) {}
+        handler(move(h)) {}
+
+        node(const node&) = default;
+        node& operator=(const node&) = default;
+        node(node&&) = default;
+        node& operator=(node&&) = default;
 
         /**
          * @brief 比较操作符，按到期时间和ID排序

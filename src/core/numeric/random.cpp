@@ -64,21 +64,19 @@ void random_mt::set_seed(const seed_type seed) noexcept {
 
 bool secret::system_supported() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::HCRYPTPROV hProv;
-    const bool supported = ::CryptAcquireContext(&hProv, nullptr, nullptr, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT);
-    if (supported) {
-        ::CryptReleaseContext(hProv, 0);
+    ::HCRYPTPROV h_prov = 0;
+    const ::BOOL supported = ::CryptAcquireContextA(&h_prov, nullptr, nullptr, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT);
+    if (supported == TRUE) {
+        ::CryptReleaseContext(h_prov, 0);
+        return true;
     }
-    return supported;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     const int fd = ::open("/dev/urandom", O_RDONLY);
     if (fd == -1) {
         return false;
     }
     ::close(fd);
     return true;
-#else
-    return false;
 #endif
 }
 
@@ -88,18 +86,18 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    HCRYPTPROV hProv = 0;
-    if (!::CryptAcquireContext(&hProv, nullptr, nullptr, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
+    HCRYPTPROV h_prov = 0;
+    if (::CryptAcquireContextA(&h_prov, nullptr, nullptr, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT) == FALSE) {
         NEFORCE_THROW_EXCEPTION(device_exception("Failed to acquire crypto context"));
     }
 
-    if (!::CryptGenRandom(hProv, static_cast<::DWORD>(length), reinterpret_cast<::BYTE*>(buffer))) {
-        ::CryptReleaseContext(hProv, 0);
+    if (::CryptGenRandom(h_prov, static_cast<::DWORD>(length), reinterpret_cast<::BYTE*>(buffer)) == FALSE) {
+        ::CryptReleaseContext(h_prov, 0);
         NEFORCE_THROW_EXCEPTION(device_exception("Failed to generate random bytes"));
     }
 
-    ::CryptReleaseContext(hProv, 0);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+    ::CryptReleaseContext(h_prov, 0);
+#else
     const int fd = ::open("/dev/urandom", O_RDONLY);
     if (fd == -1) {
         NEFORCE_THROW_EXCEPTION(file_exception("Failed to open /dev/urandom"));

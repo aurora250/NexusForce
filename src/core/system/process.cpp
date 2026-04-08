@@ -82,7 +82,7 @@ process::state_info process::create(const string& executable, const vector<strin
     const ::BOOL success = ::CreateProcessA(nullptr, cmd_line.data(), nullptr, nullptr, capture_output ? TRUE : FALSE,
                                             0, nullptr, nullptr, &si, &pi);
 
-    if (!success) {
+    if (success == FALSE) {
         NEFORCE_THROW_EXCEPTION(process_exception("CreateProcess failed"));
     }
 
@@ -160,8 +160,8 @@ int process::wait_for(state_info& info, int timeout_ms) {
     }
     info.stdout_output = info.stdout_pipe.read_available();
 
-    ::DWORD exit_code;
-    if (!::GetExitCodeProcess(info.process_handle, &exit_code)) {
+    ::DWORD exit_code = 0;
+    if (::GetExitCodeProcess(info.process_handle, &exit_code) == FALSE) {
         NEFORCE_THROW_EXCEPTION(process_exception("GetExitCodeProcess failed"));
     }
     return static_cast<int>(exit_code);
@@ -212,7 +212,7 @@ int process::wait_for(state_info& info, int timeout_ms) {
 bool process::terminate(const state_info& info) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::BOOL result = ::TerminateProcess(info.process_handle, 1);
-    if (result) {
+    if (result == TRUE) {
         ::CloseHandle(info.process_handle);
         ::CloseHandle(info.thread_handle);
     }
@@ -253,8 +253,8 @@ bool process::resume(const state_info& info) noexcept {
 
 bool process::is_running(const state_info& info) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD exit_code;
-    if (::GetExitCodeProcess(info.process_handle, &exit_code)) {
+    ::DWORD exit_code = 0;
+    if (::GetExitCodeProcess(info.process_handle, &exit_code) == TRUE) {
         return exit_code == STILL_ACTIVE;
     }
     return false;
@@ -273,10 +273,10 @@ process::native_id_type process::current_id() noexcept {
 }
 
 process::memory_info process::get_memory_info(const state_info& info) {
-    memory_info mem_info = {0, 0, 0, 0};
+    memory_info mem_info{0, 0, 0, 0};
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::PROCESS_MEMORY_COUNTERS pmc;
-    if (::GetProcessMemoryInfo(info.process_handle, &pmc, sizeof(pmc))) {
+    if (::GetProcessMemoryInfo(info.process_handle, &pmc, sizeof(pmc)) == TRUE) {
         mem_info.working_set_size = pmc.WorkingSetSize;
         mem_info.peak_working_set_size = pmc.PeakWorkingSetSize;
         mem_info.pagefile_usage = pmc.PagefileUsage;
@@ -309,8 +309,8 @@ process::state process::get_state(const state_info& info) {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD exit_code;
-    if (::GetExitCodeProcess(info.process_handle, &exit_code) && exit_code == STILL_ACTIVE) {
+    ::DWORD exit_code = 0;
+    if (::GetExitCodeProcess(info.process_handle, &exit_code) == TRUE && exit_code == STILL_ACTIVE) {
         if (::SuspendThread(info.thread_handle) != static_cast<::DWORD>(-1)) {
             ::ResumeThread(info.thread_handle);
             return state::suspended;
@@ -391,15 +391,15 @@ string process::name(native_id_type process_id) {
     }
 
     char process_name[MAX_PATH] = {0};
-    ::HMODULE hMod;
-    ::DWORD cbNeeded;
+    ::HMODULE h_mod = nullptr;
+    ::DWORD cb_needed = 0;
 
-    if (::EnumProcessModules(hProcess, &hMod, sizeof(::HMODULE), &cbNeeded)) {
-        ::GetModuleBaseNameA(hProcess, hMod, process_name, sizeof(process_name));
+    if (::EnumProcessModules(hProcess, &h_mod, sizeof(::HMODULE), &cb_needed) == TRUE) {
+        ::GetModuleBaseNameA(hProcess, h_mod, process_name, sizeof(process_name));
     }
 
     ::CloseHandle(hProcess);
-    return string(process_name);
+    return {process_name};
 #else
     const path path("/proc/" + to_string(process_id) + "/comm");
     const file comm_file(path);

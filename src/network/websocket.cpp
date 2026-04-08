@@ -46,7 +46,7 @@ byte_vector websocket_session_base::build_frame(websocket_opcode opcode, const s
 }
 
 string websocket_session_base::make_close_payload(const websocket_status status, const string& reason) {
-    const uint16_t code = static_cast<uint16_t>(status);
+    const auto code = static_cast<uint16_t>(status);
     string payload;
     payload.reserve(2 + reason.size());
     payload.push_back(static_cast<char>((code >> 8) & 0xFF));

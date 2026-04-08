@@ -33,7 +33,7 @@ namespace {
     }
 #endif
 
-    share_memory::native_handle_type invalid_handle =
+    constexpr share_memory::native_handle_type g_invalid_handle =
 #ifdef NEFORCE_PLATFORM_WINDOWS
             nullptr;
 #else
@@ -43,10 +43,10 @@ namespace {
 
 
 share_memory::share_memory() noexcept :
-handle_(invalid_handle) {}
+handle_(g_invalid_handle) {}
 
 share_memory::share_memory(const string& name, size_t size, open_mode mode, access_mode access) :
-handle_(invalid_handle) {
+handle_(g_invalid_handle) {
     open(name, size, mode, access);
 }
 
@@ -58,7 +58,7 @@ mapped_size_(other.mapped_size_),
 mapped_addr_(other.mapped_addr_),
 access_mode_(other.access_mode_),
 is_open_(other.is_open_) {
-    other.handle_ = invalid_handle;
+    other.handle_ = g_invalid_handle;
     other.size_ = 0;
     other.mapped_size_ = 0;
     other.mapped_addr_ = nullptr;
@@ -80,7 +80,7 @@ share_memory& share_memory::operator=(share_memory&& other) noexcept {
     access_mode_ = other.access_mode_;
     is_open_ = other.is_open_;
 
-    other.handle_ = invalid_handle;
+    other.handle_ = g_invalid_handle;
     other.size_ = 0;
     other.mapped_size_ = 0;
     other.mapped_addr_ = nullptr;
@@ -108,7 +108,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         handle_ = ::CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr, protect, static_cast<::DWORD>(size >> 32),
                                        static_cast<::DWORD>(size & 0xFFFFFFFF), name.data());
 
-        if (handle_ == invalid_handle) {
+        if (handle_ == g_invalid_handle) {
             NEFORCE_THROW_EXCEPTION(share_memory_exception("CreateFileMapping failed"));
         }
 
@@ -119,14 +119,14 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         }
     } else if (mode == open_mode::open_only) {
         handle_ = ::OpenFileMappingA(access_flags, FALSE, name.data());
-        if (handle_ == invalid_handle) {
+        if (handle_ == g_invalid_handle) {
             NEFORCE_THROW_EXCEPTION(share_memory_exception("OpenFileMapping failed"));
         }
     } else {
         handle_ = ::CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr, protect, static_cast<::DWORD>(size >> 32),
                                        static_cast<::DWORD>(size & 0xFFFFFFFF), name.data());
 
-        if (handle_ == invalid_handle) {
+        if (handle_ == g_invalid_handle) {
             NEFORCE_THROW_EXCEPTION(share_memory_exception("CreateFileMapping failed"));
         }
     }
@@ -210,13 +210,13 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 void share_memory::close() noexcept {
     unmap();
 
-    if (handle_ != invalid_handle) {
+    if (handle_ != g_invalid_handle) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         ::CloseHandle(handle_);
 #else
         ::close(handle_);
 #endif
-        handle_ = invalid_handle;
+        handle_ = g_invalid_handle;
     }
 
     is_open_ = false;
@@ -300,7 +300,7 @@ bool share_memory::remove(const string& name) {
 bool share_memory::exists(const string& name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HANDLE h = ::OpenFileMappingA(FILE_MAP_READ, FALSE, name.data());
-    if (h != invalid_handle) {
+    if (h != g_invalid_handle) {
         ::CloseHandle(h);
         return true;
     }

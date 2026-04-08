@@ -23,14 +23,14 @@ namespace {
                   file_mapper::native_handle_type& mapping_handle, const file_mapper::native_handle_type invalid
 #endif
                   ) noexcept {
-        if (!ptr) {
+        if (ptr == nullptr) {
             return;
         }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const uint32_t granularity = sysinfo::instance().get_system_info().allocation_granularity;
         const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr) -
-                                    (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1u));
+                                    (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1U));
         ::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_addr));
 
         if (mapping_handle != invalid) {
@@ -54,10 +54,12 @@ namespace {
 
 
 file_mapper::file_mapper(const native_handle_type file_handle) :
-file_handle_(file_handle) {
+file_handle_(file_handle)
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    mapping_handle_ = invalid_handle;
+,
+mapping_handle_(invalid_handle)
 #endif
+{
 }
 
 file_mapper::~file_mapper() { unmap(); }
@@ -120,19 +122,16 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     const uint64_t offset_delta = static_cast<uint64_t>(offset) - aligned_offset;
     const uint64_t aligned_size = (size == 0) ? 0 : static_cast<uint64_t>(size) + offset_delta;
 
-    ::DWORD protect, map_access;
-    if (static_cast<fud_t>(access) & static_cast<fud_t>(file_access::WRITE)) {
+    ::DWORD protect = PAGE_READONLY, map_access = FILE_MAP_READ;
+    if ((static_cast<fud_t>(access) & static_cast<fud_t>(file_access::WRITE)) != 0U) {
         protect = PAGE_READWRITE;
         map_access = FILE_MAP_WRITE | FILE_MAP_READ;
-    } else {
-        protect = PAGE_READONLY;
-        map_access = FILE_MAP_READ;
     }
 
     mapping_handle_ = ::CreateFileMappingW(file_handle_, nullptr, protect, static_cast<::DWORD>(aligned_size >> 32),
                                            static_cast<::DWORD>(aligned_size & 0xFFFFFFFF), nullptr);
 
-    if (!mapping_handle_ || mapping_handle_ == invalid_handle) {
+    if (mapping_handle_ == nullptr || mapping_handle_ == invalid_handle) {
         mapping_handle_ = invalid_handle;
         return false;
     }
@@ -141,7 +140,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
             ::MapViewOfFile(mapping_handle_, map_access, static_cast<::DWORD>(aligned_offset >> 32),
                             static_cast<::DWORD>(aligned_offset & 0xFFFFFFFF), static_cast<::SIZE_T>(aligned_size));
 
-    if (!base) {
+    if (base == nullptr) {
         ::CloseHandle(mapping_handle_);
         mapping_handle_ = invalid_handle;
         return false;
@@ -151,16 +150,16 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 
     if (size == 0) {
         ::MEMORY_BASIC_INFORMATION mbi{};
-        if (::VirtualQuery(ptr_, &mbi, sizeof(mbi))) {
+        if (::VirtualQuery(ptr_, &mbi, sizeof(mbi)) == TRUE) {
             size = static_cast<size_type>(mbi.RegionSize);
         }
     }
 
-    const ::HMODULE hK32 = ::GetModuleHandleA("kernel32.dll");
-    if (hK32) {
+    const ::HMODULE hk32 = ::GetModuleHandleA("kernel32.dll");
+    if (hk32 != nullptr) {
         using PFN = ::BOOL(__stdcall*)(::HANDLE, ::ULONG_PTR, ::PWIN32_MEMORY_RANGE_ENTRY, ::ULONG);
-        static auto pfn = reinterpret_cast<PFN>(::GetProcAddress(hK32, "PrefetchVirtualMemory"));
-        if (pfn && hint == file_map_hint::SEQUENTIAL) {
+        static auto pfn = reinterpret_cast<PFN>(::GetProcAddress(hk32, "PrefetchVirtualMemory"));
+        if (pfn != nullptr && hint == file_map_hint::SEQUENTIAL) {
             ::WIN32_MEMORY_RANGE_ENTRY range{ptr_, size};
             pfn(::GetCurrentProcess(), 1, &range, 0);
         }
@@ -245,15 +244,15 @@ bool file_mapper::remap(const size_type new_offset, const size_type new_size) {
 bool file_mapper::flush(const bool async) noexcept {
     lock<mutex> lk(mutex_);
 
-    if (!ptr_) {
+    if (ptr_ == nullptr) {
         return false;
     }
-    if (!(static_cast<fud_t>(access_) & static_cast<fud_t>(file_access::WRITE))) {
+    if ((static_cast<fud_t>(access_) & static_cast<fud_t>(file_access::WRITE)) == 0U) {
         return true;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!::FlushViewOfFile(ptr_, size_)) {
+    if (::FlushViewOfFile(ptr_, size_) == FALSE) {
         return false;
     }
     if (!async && mapping_handle_ != invalid_handle) {
@@ -276,7 +275,7 @@ bool file_mapper::flush(const bool async) noexcept {
 }
 
 bool file_mapper::lock_pages(const bool lock_in_memory) const noexcept {
-    if (!ptr_) {
+    if (ptr_ == nullptr) {
         return false;
     }
 

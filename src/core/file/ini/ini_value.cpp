@@ -58,7 +58,7 @@ string ini_value::to_document() const { return ini_value_to_string(this); }
 string ini_document::to_string() const {
     string result;
     const ini_section* global = get_global_section();
-    if (global && !global->get_properties().empty()) {
+    if (global != nullptr && !global->get_properties().empty()) {
         for (const auto& prop: global->get_properties()) {
             result += prop.first + " = " + prop.second->get_value() + "\n";
         }

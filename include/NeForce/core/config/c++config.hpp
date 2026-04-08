@@ -128,6 +128,10 @@
 #        define WIN32_LEAN_AND_MEAN
 #    endif
 
+#    ifndef NOMINMAX
+#        define NOMINMAX
+#    endif
+
 #    ifdef bool
 #        undef bool
 #    endif
@@ -200,6 +204,10 @@
 
 #if !(defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_MSVC))
 #    error "NeForce: 不支持的编译器"
+#endif
+
+#ifdef __clang_analyzer__
+#    define NEFORCE_ANALYZER_CLANG 1
 #endif
 
 /** @} */ // CompilerDetection

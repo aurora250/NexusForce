@@ -47,12 +47,12 @@ namespace {
 
 mysql_prepared_result::mysql_prepared_result(::MYSQL_STMT* stmt) :
 stmt_(stmt) {
-    if (!stmt_) {
+    if (stmt_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Invalid MYSQL_STMT pointer"));
     }
 
     metadata_ = ::mysql_stmt_result_metadata(stmt_);
-    if (!metadata_) {
+    if (metadata_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("No result metadata from prepared statement"));
     }
 
@@ -77,7 +77,7 @@ stmt_(stmt) {
 }
 
 mysql_prepared_result::~mysql_prepared_result() {
-    if (metadata_) {
+    if (metadata_ != nullptr) {
         ::mysql_free_result(metadata_);
         metadata_ = nullptr;
     }
@@ -113,7 +113,8 @@ bool mysql_prepared_result::next() {
     if (ret == 0) {
         has_current_row_ = true;
         return true;
-    } else if (ret == MYSQL_DATA_TRUNCATED) {
+    }
+    if (ret == MYSQL_DATA_TRUNCATED) {
         has_current_row_ = true;
         for (unsigned int i = 0; i < column_count_; ++i) {
             if ((*is_error_)[i]) {
@@ -124,10 +125,9 @@ bool mysql_prepared_result::next() {
             }
         }
         return true;
-    } else {
-        has_current_row_ = false;
-        return false;
     }
+    has_current_row_ = false;
+    return false;
 }
 
 string_view mysql_prepared_result::get(const size_type n) const {
@@ -155,7 +155,7 @@ int16_t mysql_prepared_result::get_int16(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     NEFORCE_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
+    if (type != ::MYSQL_TYPE_SHORT && type != ::MYSQL_TYPE_TINY) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("Database type cast to int16 mismatch"));
     }
 
@@ -183,11 +183,11 @@ int32_t mysql_prepared_result::get_int32(const size_type n) const {
 
     if (type == ::MYSQL_TYPE_TINY) {
         return *reinterpret_cast<const int8_t*>((*buffers_)[n].data());
-    } else if (type == ::MYSQL_TYPE_SHORT) {
-        return *reinterpret_cast<const int16_t*>((*buffers_)[n].data());
-    } else {
-        return *reinterpret_cast<const int32_t*>((*buffers_)[n].data());
     }
+    if (type == ::MYSQL_TYPE_SHORT) {
+        return *reinterpret_cast<const int16_t*>((*buffers_)[n].data());
+    }
+    return *reinterpret_cast<const int32_t*>((*buffers_)[n].data());
 }
 
 int64_t mysql_prepared_result::get_int64(const size_type n) const {

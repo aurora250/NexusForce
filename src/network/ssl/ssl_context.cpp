@@ -46,8 +46,8 @@ string ssl_exception::last_error_message() {
     if (err == 0) {
         return "";
     }
-    ::ERR_error_string_n(err, buf, sizeof(buf));
-    return {buf};
+    ::ERR_error_string_n(err, static_cast<char*>(buf), sizeof(buf));
+    return {static_cast<char*>(buf)};
 }
 
 ssl_context::ssl_context(const ssl_method method) {
@@ -69,11 +69,11 @@ ssl_context::ssl_context(const ssl_method method) {
 #endif
 
     if (::SSL_CTX_set_default_verify_paths(ctx_.get()) != 1) {
-        const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs", "/etc/ssl/cert.pem",
-                                  nullptr};
+        const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",
+                                  "/etc/ssl/cert.pem"};
 
-        for (int i = 0; ca_paths[i] != nullptr; ++i) {
-            ::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, ca_paths[i]);
+        for (const auto& path: ca_paths) {
+            ::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, path);
         }
     }
 
@@ -110,11 +110,11 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     ::BIO* cert_bio = ::BIO_new_mem_buf(cert_pem.data(), static_cast<int>(cert_pem.size()));
     ::BIO* key_bio = ::BIO_new_mem_buf(key_pem.data(), static_cast<int>(key_pem.size()));
 
-    if (!cert_bio || !key_bio) {
-        if (cert_bio) {
+    if (cert_bio == nullptr || key_bio == nullptr) {
+        if (cert_bio != nullptr) {
             ::BIO_free(cert_bio);
         }
-        if (key_bio) {
+        if (key_bio != nullptr) {
             ::BIO_free(key_bio);
         }
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create BIO"));
@@ -126,11 +126,11 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     ::BIO_free(cert_bio);
     ::BIO_free(key_bio);
 
-    if (!cert || !key) {
-        if (cert) {
+    if (cert == nullptr || key == nullptr) {
+        if (cert != nullptr) {
             ::X509_free(cert);
         }
-        if (key) {
+        if (key != nullptr) {
             ::EVP_PKEY_free(key);
         }
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to parse PEM data"));

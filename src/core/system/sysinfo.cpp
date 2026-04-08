@@ -21,11 +21,11 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     mutex& sysinfo_mutex() {
-        static mutex sysinfo_mutex_;
-        return sysinfo_mutex_;
+        static mutex sysmutex;
+        return sysmutex;
     }
 
-    void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
+    void get_cpu_info_internal(sysinfo::CPU_info& cpu_info) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         int cpu_info_data[4] = {-1};
         char vendor[13] = {};
@@ -37,7 +37,7 @@ namespace {
         _NEFORCE memory_copy(vendor + 8, &cpu_info_data[2], 4);
         vendor[12] = '\0';
 
-        CPU_info.vendor = vendor;
+        cpu_info.vendor = vendor;
 
         for (int i = static_cast<int>(0x80000002); i <= static_cast<int>(0x80000004); i++) {
             ::__cpuid(cpu_info_data, i);
@@ -45,30 +45,32 @@ namespace {
                                  sizeof(cpu_info_data));
         }
         brand[48] = '\0';
-        CPU_info.brand = brand;
-        CPU_info.brand.trim_right();
+        cpu_info.brand = brand;
+        cpu_info.brand.trim_right();
 
         ::DWORD buffer_size = 0;
         ::GetLogicalProcessorInformation(nullptr, &buffer_size);
 
         if (::GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
-            const auto buffer = static_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*>(malloc(buffer_size));
-            if (buffer) {
-                if (::GetLogicalProcessorInformation(buffer, &buffer_size)) {
+            // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
+            auto* const buffer = static_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*>(::malloc(buffer_size));
+            if (buffer != nullptr) {
+                if (::GetLogicalProcessorInformation(buffer, &buffer_size) == TRUE) {
                     ::DWORD logical_processor_count = 0;
                     ::DWORD processor_core_count = 0;
 
                     for (::DWORD i = 0; i < buffer_size / sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++) {
                         if (buffer[i].Relationship == ::RelationProcessorCore) {
                             processor_core_count++;
-                            logical_processor_count += _NEFORCE popcount(buffer[i].ProcessorMask);
+                            logical_processor_count += popcount(buffer[i].ProcessorMask);
                         }
                     }
 
-                    CPU_info.cores = processor_core_count;
-                    CPU_info.logical_processors = logical_processor_count;
+                    cpu_info.cores = processor_core_count;
+                    cpu_info.logical_processors = logical_processor_count;
                 }
-                free(buffer);
+                // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
+                ::free(buffer);
             }
         }
 
@@ -81,7 +83,7 @@ namespace {
 
             if (::RegQueryValueEx(hkey, "~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
                 ERROR_SUCCESS) {
-                CPU_info.current_MHZ = mhz;
+                cpu_info.current_MHZ = mhz;
             }
 
             ::RegCloseKey(hkey);
@@ -176,7 +178,7 @@ namespace {
     void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
-        if (ntdll) {
+        if (ntdll != nullptr) {
             using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
             const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(::GetProcAddress(ntdll, "RtlGetVersion"));
 
@@ -354,7 +356,7 @@ void sysinfo::init() {
 
     ::MEMORYSTATUSEX mem_status{};
     mem_status.dwLength = sizeof(mem_status);
-    if (::GlobalMemoryStatusEx(&mem_status)) {
+    if (::GlobalMemoryStatusEx(&mem_status) == TRUE) {
         memory_info_.total_physical = mem_status.ullTotalPhys;
         memory_info_.available_physical = mem_status.ullAvailPhys;
         memory_info_.total_virtual = mem_status.ullTotalVirtual;
@@ -459,7 +461,7 @@ void sysinfo::refresh() {
 string sysinfo::format_bytes(const uint64_t bytes) {
     constexpr string_view units[] = {"B", "KB", "MB", "GB", "TB", "PB"};
     int unit_index = 0;
-    double size = static_cast<double>(bytes);
+    auto size = static_cast<double>(bytes);
 
     while (size >= 1024.0 && unit_index < 5) {
         size /= 1024.0;
@@ -558,8 +560,8 @@ float64_t sysinfo::cpu_usage() {
 uint32_t sysinfo::process_count() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD processes[1024];
-    ::DWORD needed;
-    if (!::EnumProcesses(processes, sizeof(processes), &needed)) {
+    ::DWORD needed = 0;
+    if (::EnumProcesses(processes, sizeof(processes), &needed) == FALSE) {
         return 0;
     }
     return needed / sizeof(::DWORD);

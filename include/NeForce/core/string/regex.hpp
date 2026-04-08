@@ -80,8 +80,8 @@ public:
      * @param groups 捕获组文本列表
      * @param group_positions 捕获组位置列表
      */
-    match_result(const string& subject, size_t pos, size_t len, const vector<string>& groups,
-                 const vector<pair<size_t, size_t>>& group_positions);
+    match_result(string subject, size_t pos, size_t len, const vector<string>& groups,
+                 vector<pair<size_t, size_t>> group_positions);
 
     /**
      * @brief 检查是否匹配成功
@@ -213,7 +213,6 @@ private:
 
 private:
     void compile(const string& pattern, uint32_t options = 0);
-    void compile(string&& pattern, uint32_t options = 0);
 
     match_result do_match(PCRE2_SPTR subject, size_t length, size_t start_offset, uint32_t options,
                           const string& subject_str) const;
@@ -226,14 +225,6 @@ public:
      * @throws regex_exception 编译失败时抛出
      */
     explicit regex(const string& pattern, uint32_t options = 0);
-
-    /**
-     * @brief 从字符串构造正则表达式
-     * @param pattern 正则表达式模式
-     * @param options 编译选项（PCRE2选项标志）
-     * @throws regex_exception 编译失败时抛出
-     */
-    explicit regex(string&& pattern, uint32_t options = 0);
 
     regex(regex&& other) noexcept;
     regex& operator=(regex&& other) noexcept;
@@ -381,7 +372,7 @@ public:
      * @param str 待遍历的字符串
      * @param pos 起始位置
      */
-    regex_iterator(const regex* re, const string& str, size_t pos = 0);
+    regex_iterator(const regex* re, string str, size_t pos = 0);
 
     /**
      * @brief 从指定索引构造迭代器
@@ -533,7 +524,7 @@ public:
      * @param str 待遍历的字符串
      * @param index 捕获组索引（-1表示分隔符模式，0表示完整匹配）
      */
-    regex_token_iterator(const regex* re, const string& str, int index = 0);
+    regex_token_iterator(const regex* re, string str, int index = 0);
 
     /**
      * @brief 解引用操作符

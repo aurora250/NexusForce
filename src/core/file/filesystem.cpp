@@ -25,12 +25,12 @@ bool filesystem::create_directories(const path& p) {
     while ((pos = ps.find_first_of(path::spliter, pos + 1)) != string::npos) {
         subdir = ps.substr(0, pos);
         if (!subdir.empty() && !path(subdir).is_directory()) {
-            if (!::CreateDirectoryA(subdir.data(), nullptr) && ::GetLastError() != ERROR_ALREADY_EXISTS) {
+            if (::CreateDirectoryA(subdir.data(), nullptr) == FALSE && ::GetLastError() != ERROR_ALREADY_EXISTS) {
                 return false;
             }
         }
     }
-    return ::CreateDirectoryA(ps.data(), nullptr) || ::GetLastError() == ERROR_ALREADY_EXISTS;
+    return ::CreateDirectoryA(ps.data(), nullptr) == TRUE || ::GetLastError() == ERROR_ALREADY_EXISTS;
 
 #else
     while ((pos = ps.find_first_of(path::spliter, pos + 1)) != string::npos) {
@@ -86,27 +86,27 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) {
         }
         const path full = p / path{name};
 
-        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+        if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0U) {
             if (recursive) {
                 if (!remove_all_in_directory(full, true)) {
                     success = false;
                 }
-                if (!::RemoveDirectoryA(full.data())) {
+                if (::RemoveDirectoryA(full.data()) == FALSE) {
                     success = false;
                 }
             }
         } else {
-            if (fd.dwFileAttributes & FILE_ATTRIBUTE_READONLY) {
+            if ((fd.dwFileAttributes & FILE_ATTRIBUTE_READONLY) != 0U) {
                 ::SetFileAttributesA(full.data(), fd.dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
             }
-            if (!::DeleteFileA(full.data())) {
+            if (::DeleteFileA(full.data()) == FALSE) {
                 ::SetFileAttributesA(full.data(), FILE_ATTRIBUTE_NORMAL);
-                if (!::DeleteFileA(full.data())) {
+                if (::DeleteFileA(full.data()) == FALSE) {
                     success = false;
                 }
             }
         }
-    } while (::FindNextFileA(hFind, &fd) != 0);
+    } while (::FindNextFileA(hFind, &fd) == TRUE);
     ::FindClose(hFind);
 
 #else
@@ -165,7 +165,7 @@ bool filesystem::remove_all(const path& p) {
 
     bool ok = remove_all_in_directory(p, true);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!::RemoveDirectoryA(p.data())) {
+    if (::RemoveDirectoryA(p.data()) == FALSE) {
         ok = false;
     }
 #else
@@ -199,11 +199,11 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (overwrite && actual_to.exists()) {
         const ::DWORD attrs = ::GetFileAttributesA(actual_to.data());
-        if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_READONLY)) {
+        if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_READONLY) != 0U) {
             ::SetFileAttributesA(actual_to.data(), attrs & ~FILE_ATTRIBUTE_READONLY);
         }
     }
-    return ::CopyFileA(from.data(), actual_to.data(), !overwrite) != 0;
+    return ::CopyFileA(from.data(), actual_to.data(), static_cast<::BOOL>(!overwrite)) != 0;
 
 #else
     const int src_fd = ::open(from.data(), O_RDONLY);
@@ -280,7 +280,7 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
         }
         const path sp = src / path{item};
         const path dp = dest / path{item};
-        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+        if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0U) {
             if (!copy_directory(sp, dp, overwrite)) {
                 success = false;
             }
@@ -337,7 +337,7 @@ bool filesystem::move(const path& from, const path& to, const bool overwrite) {
         flags |= MOVEFILE_REPLACE_EXISTING;
     }
 
-    if (::MoveFileExA(from.data(), to.data(), flags)) {
+    if (::MoveFileExA(from.data(), to.data(), flags) == TRUE) {
         return true;
     }
 
@@ -413,7 +413,7 @@ bool filesystem::create_and_write(const path& p, const string& content, const bo
 size_t filesystem::size(const path& p) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::WIN32_FILE_ATTRIBUTE_DATA data{};
-    if (!::GetFileAttributesExA(p.data(), GetFileExInfoStandard, &data)) {
+    if (::GetFileAttributesExA(p.data(), GetFileExInfoStandard, &data) == FALSE) {
         return 0;
     }
     ::ULARGE_INTEGER ul{};

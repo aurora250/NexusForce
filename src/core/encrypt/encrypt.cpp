@@ -156,18 +156,18 @@ namespace {
                 temp[1] = temp[2];
                 temp[2] = temp[3];
                 temp[3] = t;
-                for (int j = 0; j < 4; ++j) {
-                    temp[j] = AES256_sbox[temp[j]];
+                for (byte_t& j: temp) {
+                    j = AES256_sbox[j];
                 }
-                temp[0] ^= AES256_rcon[i / 8 - 1];
+                temp[0] ^= AES256_rcon[(i / 8) - 1];
             } else if (i % 8 == 4) {
-                for (int j = 0; j < 4; ++j) {
-                    temp[j] = AES256_sbox[temp[j]];
+                for (byte_t& j: temp) {
+                    j = AES256_sbox[j];
                 }
             }
 
             for (int j = 0; j < 4; ++j) {
-                expanded_key[i * 4 + j] = expanded_key[(i - 8) * 4 + j] ^ temp[j];
+                expanded_key[(i * 4) + j] = expanded_key[((i - 8) * 4) + j] ^ temp[j];
             }
         }
     }
@@ -372,7 +372,7 @@ byte_vector MD5::hash(const cbyte_view data) {
 
         uint32_t a = h0, b = h1, c = h2, d = h3;
         for (int i = 0; i < 64; ++i) {
-            uint32_t f, g;
+            uint32_t f = 0, g = 0;
             if (i < 16) {
                 f = md5_F(b, c, d);
                 g = i;
@@ -454,7 +454,7 @@ byte_vector SHA1::hash(cbyte_view data) {
         uint32_t a = h0, b = h1, c = h2, d = h3, e = h4;
 
         for (int i = 0; i < 80; ++i) {
-            uint32_t f, k;
+            uint32_t f = 0, k = 0;
 
             if (i < 20) {
                 f = (b & c) | ((~b) & d);
@@ -595,8 +595,8 @@ byte_vector AES256::encrypt(const cbyte_view data, const cbyte_view key) {
         byte_t block[16];
         memory_copy(block, data.data() + i, 16);
         encrypt_block(block, expanded_key);
-        for (int j = 0; j < 16; ++j) {
-            result.push_back(block[j]);
+        for (const byte_t j: block) {
+            result.push_back(j);
         }
     }
     return result;
@@ -619,8 +619,8 @@ byte_vector AES256::decrypt(const cbyte_view data, const cbyte_view key) {
         byte_t block[16];
         memory_copy(block, data.data() + i, 16);
         decrypt_block(block, expanded_key);
-        for (int j = 0; j < 16; ++j) {
-            result.push_back(block[j]);
+        for (const byte_t j: block) {
+            result.push_back(j);
         }
     }
     return result;
@@ -702,7 +702,7 @@ string AES256::decrypt_hex(const string_view encrypted_hex, const string_view ke
         }
     }
     byte_vector decrypted = decrypt_pkcs7(encrypted_bytes.view(), key_bytes.view());
-    return string(reinterpret_cast<const char*>(decrypted.data()), decrypted.size());
+    return {reinterpret_cast<const char*>(decrypted.data()), decrypted.size()};
 }
 
 NEFORCE_END_NAMESPACE__

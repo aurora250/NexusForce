@@ -46,7 +46,7 @@ string ssl_socket::peer_certificate_info() const {
     }
 
     ::X509* cert = ssl_->get_peer_certificate();
-    if (!cert) {
+    if (cert == nullptr) {
         return "";
     }
 
@@ -55,11 +55,11 @@ string ssl_socket::peer_certificate_info() const {
     char* subj = X509_NAME_oneline(X509_get_subject_name(cert), nullptr, 0);
     char* issuer = X509_NAME_oneline(X509_get_issuer_name(cert), nullptr, 0);
 
-    if (subj) {
+    if (subj != nullptr) {
         result = "Subject: " + string(subj) + "\n";
         ::OPENSSL_free(subj);
     }
-    if (issuer) {
+    if (issuer != nullptr) {
         result += "Issuer: " + string(issuer);
         ::OPENSSL_free(issuer);
     }

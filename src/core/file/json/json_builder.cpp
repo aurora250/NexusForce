@@ -83,7 +83,7 @@ json_builder& json_builder::key(const string& key) {
     return *this;
 }
 
-json_builder& json_builder::value_object(function<void(json_builder&)>&& build_func) {
+json_builder& json_builder::value_object(const function<void(json_builder&)>& build_func) {
     json_builder inner_builder;
     inner_builder.begin_object();
     build_func(inner_builder);
@@ -92,7 +92,7 @@ json_builder& json_builder::value_object(function<void(json_builder&)>&& build_f
     return value_impl(move(obj));
 }
 
-json_builder& json_builder::value_array(function<void(json_builder&)>&& build_func) {
+json_builder& json_builder::value_array(const function<void(json_builder&)>& build_func) {
     json_builder inner_builder;
     inner_builder.begin_array();
     build_func(inner_builder);

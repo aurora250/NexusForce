@@ -6,7 +6,7 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
     bool read_line(smtp_socket::native_handle_type fd, string& out_line) {
         out_line.clear();
-        char ch;
+        char ch = '\0';
         while (true) {
             const ssize_t n = ::recv(fd, &ch, 1, 0);
             if (n <= 0) {
@@ -98,7 +98,7 @@ ssize_t smtp_socket::raw_recv(char* buf, const size_t len) {
 
 bool smtp_socket::read_line(string& out) {
     out.clear();
-    char ch;
+    char ch = '\0';
     while (true) {
         const ssize_t n = raw_recv(&ch, 1);
         if (n <= 0) {
@@ -223,7 +223,7 @@ void smtp_socket::do_post_connect(const string& domain, const tls_mode mode, con
     tls_active_ = false;
 
     if (mode == tls_mode::implicit) {
-        if (!ctx) {
+        if (ctx == nullptr) {
             close();
             NEFORCE_THROW_EXCEPTION(value_exception("ssl_context required for implicit TLS"));
         }
@@ -285,7 +285,7 @@ void smtp_socket::connect(const string& hostname, const ports port, const string
     optional<dns_client> local_dns;
     dns_client* resolver = dns;
 
-    if (!resolver) {
+    if (resolver == nullptr) {
         local_dns.emplace();
         resolver = &(*local_dns);
     }

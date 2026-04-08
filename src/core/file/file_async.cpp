@@ -14,37 +14,37 @@ namespace {
 } // namespace
 
 
-file_async::async_context::async_context(string&& d) :
+file_async::async_context::async_context(string d) :
 data(move(d)),
-is_write(true) {
+is_write(true),
+// NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+cb(new aiocb_type{}) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    cb = new aiocb_type{};
     cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
-#else
-    cb = new aiocb_type{};
 #endif
 }
 
 file_async::async_context::async_context(string* buf) :
-buffer(buf) {
+buffer(buf),
+// NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+cb(new aiocb_type{}) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    cb = new aiocb_type{};
     cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
-#else
-    cb = new aiocb_type{};
 #endif
 }
 
 file_async::async_context::~async_context() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (cb) {
-        if (cb->hEvent) {
+    if (cb != nullptr) {
+        if (cb->hEvent != nullptr) {
             ::CloseHandle(cb->hEvent);
         }
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete cb;
         cb = nullptr;
     }
 #else
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     delete cb;
     cb = nullptr;
 #endif
@@ -63,6 +63,7 @@ bool file_async::complete_result(async_result& result, const size_type bytes) no
 
     const auto ci = contexts_.find(result.cb);
     if (ci != contexts_.end()) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ci->second;
         contexts_.erase(ci);
     }
@@ -91,7 +92,7 @@ handle_(handle) {}
 file_async::~file_async() {
     lock<mutex> lk(mutex_);
     for (auto* cb: operations_) {
-        if (!cb) {
+        if (cb == nullptr) {
             continue;
         }
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -101,6 +102,7 @@ file_async::~file_async() {
 #endif
     }
     for (auto& context: contexts_) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete context.second;
     }
     contexts_.clear();
@@ -146,25 +148,28 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
         buffer.resize(size);
     }
 
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto* ctx = new async_context(&buffer);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!ctx->cb->hEvent) {
+    if (ctx->cb->hEvent == nullptr) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
         result.error_code = static_cast<int>(::GetLastError());
         return result;
     }
 
     if (offset >= 0) {
-        const uint64_t off64 = static_cast<uint64_t>(offset);
+        const auto off64 = static_cast<uint64_t>(offset);
         ctx->cb->Offset = static_cast<::DWORD>(off64 & 0xFFFFFFFF);
         ctx->cb->OffsetHigh = static_cast<::DWORD>(off64 >> 32);
     }
 
     size_type bytes_read = 0;
-    if (::ReadFile(handle_, buffer.data(), size, &bytes_read, ctx->cb)) {
+    if (::ReadFile(handle_, buffer.data(), size, &bytes_read, ctx->cb) == TRUE) {
         result.completed = true;
         result.bytes_transferred = bytes_read;
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
     } else {
         const ::DWORD err = ::GetLastError();
@@ -178,6 +183,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
             contexts_[ctx->cb] = ctx;
         } else {
             result.error_code = static_cast<int>(err);
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete ctx;
         }
     }
@@ -199,6 +205,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
         contexts_[ctx->cb] = ctx;
     } else {
         result.error_code = errno;
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
     }
 #endif
@@ -213,25 +220,28 @@ file_async::async_result file_async::write(string data, const size_type size, co
                                         ? static_cast<size_type>(data.size())
                                         : min(size, static_cast<size_type>(data.size()));
 
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto* ctx = new async_context(move(data));
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!ctx->cb->hEvent) {
+    if (ctx->cb->hEvent == nullptr) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
         result.error_code = static_cast<int>(::GetLastError());
         return result;
     }
 
     if (offset >= 0) {
-        const uint64_t off64 = static_cast<uint64_t>(offset);
+        const auto off64 = static_cast<uint64_t>(offset);
         ctx->cb->Offset = static_cast<::DWORD>(off64 & 0xFFFFFFFF);
         ctx->cb->OffsetHigh = static_cast<::DWORD>(off64 >> 32);
     }
 
     size_type bytes_written = 0;
-    if (::WriteFile(handle_, ctx->data.data(), real_size, &bytes_written, ctx->cb)) {
+    if (::WriteFile(handle_, ctx->data.data(), real_size, &bytes_written, ctx->cb) == TRUE) {
         result.completed = true;
         result.bytes_transferred = bytes_written;
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
     } else {
         const ::DWORD err = ::GetLastError();
@@ -245,6 +255,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
             contexts_[ctx->cb] = ctx;
         } else {
             result.error_code = static_cast<int>(err);
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete ctx;
         }
     }
@@ -266,6 +277,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
         contexts_[ctx->cb] = ctx;
     } else {
         result.error_code = errno;
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
     }
 #endif
@@ -277,7 +289,7 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
     if (result.completed) {
         return true;
     }
-    if (!result.cb) {
+    if (result.cb == nullptr) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         result.error_code = ERROR_INVALID_PARAMETER;
 #else
@@ -290,15 +302,15 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
     size_type bytes_transferred = 0;
 
     if (timeout_ms == numeric_traits<uint32_t>::max()) {
-        if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, TRUE)) {
+        if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, TRUE) == TRUE) {
             return complete_result(result, bytes_transferred);
         }
     } else {
         const ::HANDLE ev = result.cb->hEvent;
-        if (ev) {
+        if (ev != nullptr) {
             const ::DWORD wr = ::WaitForSingleObject(ev, timeout_ms);
             if (wr == WAIT_OBJECT_0) {
-                if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, FALSE)) {
+                if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, FALSE) == TRUE) {
                     return complete_result(result, bytes_transferred);
                 }
             } else if (wr == WAIT_TIMEOUT) {
@@ -344,14 +356,14 @@ void file_async::cancel(async_result& result) noexcept {
     }
 
     lock<mutex> lk(mutex_);
-    if (!result.cb) {
+    if (result.cb == nullptr) {
         return;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!::CancelIoEx(handle_, result.cb)) {
+    if (::CancelIoEx(handle_, result.cb) == FALSE) {
         size_type bytes = 0;
-        if (::GetOverlappedResult(handle_, result.cb, &bytes, FALSE)) {
+        if (::GetOverlappedResult(handle_, result.cb, &bytes, FALSE) == TRUE) {
             result.bytes_transferred = bytes;
         } else {
             result.error_code = static_cast<int>(::GetLastError());
@@ -383,14 +395,14 @@ void file_async::cancel(async_result& result) noexcept {
 
     const auto ci = contexts_.find(result.cb);
     if (ci != contexts_.end()) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ci->second;
         contexts_.erase(ci);
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     else {
-        if (result.cb) {
-            delete result.cb;
-        }
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+        delete result.cb;
     }
 #endif
 

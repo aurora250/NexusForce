@@ -16,10 +16,10 @@ namespace {
             sum += *ptr++;
             len -= 2;
         }
-        if (len) {
+        if (len != 0U) {
             sum += *reinterpret_cast<const uint8_t*>(ptr);
         }
-        while (sum >> 16) {
+        while (sum >> 16 != 0U) {
             sum = (sum & 0xFFFF) + (sum >> 16);
         }
         return static_cast<uint16_t>(~sum);
@@ -41,7 +41,7 @@ void icmp_socket::send_echo_request(const ip_address& dest, const uint16_t id, c
     hdr->code = 0;
     hdr->id = endian::host_to_network<uint16_t>(id);
     hdr->sequence = endian::host_to_network<uint16_t>(seq);
-    if (data && data_len) {
+    if (data != nullptr && data_len != 0U) {
         memory_copy(packet.data() + sizeof(icmp_header), data, data_len);
     }
     hdr->checksum = 0;
@@ -91,11 +91,10 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
         tv.tv_sec = static_cast<long>(remaining.count() / 1000);
         tv.tv_usec = static_cast<long>((remaining.count() % 1000) * 1000);
 
-        int sel_ret;
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        sel_ret = ::select(0, &read_fds, nullptr, nullptr, &tv);
+        int sel_ret = ::select(0, &read_fds, nullptr, nullptr, &tv);
 #else
-        sel_ret = ::select(static_cast<int>(fd_ + 1), &read_fds, nullptr, nullptr, &tv);
+        int sel_ret = ::select(static_cast<int>(fd_ + 1), &read_fds, nullptr, nullptr, &tv);
 #endif
 
         if (sel_ret < 0) {
@@ -115,7 +114,7 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
         }
 
         peer_len = sizeof(peer_addr);
-        const ssize_t recv_len = ::recvfrom(fd_, recv_buffer, sizeof(recv_buffer), 0,
+        const ssize_t recv_len = ::recvfrom(fd_, static_cast<char*>(recv_buffer), sizeof(recv_buffer), 0,
                                             reinterpret_cast<::sockaddr*>(&peer_addr), &peer_len);
         if (recv_len < 0) {
             const int err = socket_exception::last_error();
@@ -177,7 +176,7 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
             }
 
             const auto* orig_ip = reinterpret_cast<const ip_header*>(icmp_start + sizeof(icmp_header));
-            const size_t orig_ip_header_len = static_cast<size_t>(orig_ip->ihl * 4);
+            const auto orig_ip_header_len = static_cast<size_t>(orig_ip->ihl * 4);
             if (orig_ip_header_len < sizeof(ip_header) || orig_ip_header_len > icmp_len - sizeof(icmp_header)) {
                 continue;
             }

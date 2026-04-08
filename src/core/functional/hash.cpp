@@ -166,7 +166,7 @@ murmur_hash MurmurHash_x64(const void* key, const size_t len, const uint32_t see
     h2 = hash_mix_x64(h2);
     h1 += h2;
     h2 += h1;
-    return murmur_hash(h1, h2);
+    return {h1, h2};
 }
 
 #endif

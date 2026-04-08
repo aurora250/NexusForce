@@ -15,26 +15,26 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
-    ::HRESULT(WINAPI* pSetThreadDescription)(::HANDLE, ::PCWSTR) = nullptr;
-    ::HRESULT(WINAPI* pGetThreadDescription)(::HANDLE, ::PWSTR*) = nullptr;
+    ::HRESULT(WINAPI* g_set_thread_description)(::HANDLE, ::PCWSTR) = nullptr;
+    ::HRESULT(WINAPI* g_get_thread_description)(::HANDLE, ::PWSTR*) = nullptr;
 
 #    pragma pack(push, 8)
-    struct THREADNAME_INFO {
-        DWORD dwType;
-        LPCSTR szName;
-        DWORD dwThreadID;
-        DWORD dwFlags;
+    struct threadname_info {
+        ::DWORD dw_type;
+        ::LPCSTR sz_name;
+        ::DWORD dw_thread_id;
+        ::DWORD dw_flags;
     };
 #    pragma pack(pop)
 
     void init_thread_name_funcs() {
         static once_flag init_module_flag;
         static auto init_thread_name = []() {
-            const auto kernel32 = ::GetModuleHandle("kernel32.dll");
+            auto* const kernel32 = ::GetModuleHandle("kernel32.dll");
             if (kernel32) {
-                pSetThreadDescription = reinterpret_cast<decltype(pSetThreadDescription)>(
+                g_set_thread_description = reinterpret_cast<decltype(g_set_thread_description)>(
                         ::GetProcAddress(kernel32, "SetThreadDescription"));
-                pGetThreadDescription = reinterpret_cast<decltype(pGetThreadDescription)>(
+                g_get_thread_description = reinterpret_cast<decltype(g_get_thread_description)>(
                         ::GetProcAddress(kernel32, "GetThreadDescription"));
             }
         };
@@ -43,14 +43,14 @@ namespace {
 
 #    ifdef NEFORCE_COMPILER_MSVC
     void set_thread_name_by_exception(const char* name) {
-        constexpr ::DWORD MSVC_EXCEPTION = 0x406D1388;
-        THREADNAME_INFO info{};
-        info.dwType = 0x1000;
-        info.szName = name;
-        info.dwThreadID = ::GetCurrentThreadId();
-        info.dwFlags = 0;
+        constexpr ::DWORD msvc_exception = 0x406D1388;
+        threadname_info info{};
+        info.dw_type = 0x1000;
+        info.sz_name = name;
+        info.dw_thread_id = ::GetCurrentThreadId();
+        info.dw_flags = 0;
         __try {
-            ::RaiseException(MSVC_EXCEPTION, 0, sizeof(info) / sizeof(::ULONG_PTR),
+            ::RaiseException(msvc_exception, 0, sizeof(info) / sizeof(::ULONG_PTR),
                              reinterpret_cast<::ULONG_PTR*>(&info));
         } __except (EXCEPTION_EXECUTE_HANDLER) {
         }
@@ -118,6 +118,8 @@ void* thread::thread_entry(void* arg) {
     auto* args = static_cast<thread_startup_args*>(arg);
     const unique_ptr<data_base> data = _NEFORCE move(args->data);
     thread_monitor monitor(args->thread_id);
+
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     delete args;
 
     try {
@@ -137,9 +139,11 @@ void thread::start_thread_impl(thread_startup_args* args) {
     hook::invoke(hook::point::before_create, id_);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
     unsigned int thread_id;
     handle_ = reinterpret_cast<native_handle_type>(::_beginthreadex(nullptr, 0, thread_entry, args, 0, &thread_id));
     if (handle_ == nullptr) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete args;
         NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
     }
@@ -272,21 +276,18 @@ void thread::swap(thread& other) noexcept {
 bool thread::set_name(native_handle_type handle, const char* name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     init_thread_name_funcs();
-    if (pSetThreadDescription) {
+    if (g_set_thread_description != nullptr) {
         wstring wstr{to_wstring(name)};
-        HRESULT hr = pSetThreadDescription(handle, wstr.data());
+        HRESULT hr = g_set_thread_description(handle, wstr.data());
         return SUCCEEDED(hr);
-    } else {
-#    ifdef NEFORCE_COMPILER_MSVC
-        if (handle == ::GetCurrentThread()) {
-            set_thread_name_by_exception(name);
-            return true;
-        } else
-#    endif
-        {
-            return false;
-        }
     }
+#    ifdef NEFORCE_COMPILER_MSVC
+    if (handle == ::GetCurrentThread()) {
+        set_thread_name_by_exception(name);
+        return true;
+    }
+#    endif
+    return false;
 #else
     return ::pthread_setname_np(handle, name) == 0;
 #endif
@@ -295,9 +296,9 @@ bool thread::set_name(native_handle_type handle, const char* name) {
 bool thread::name(native_handle_type handle, char* buffer, size_t size) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     init_thread_name_funcs();
-    if (pGetThreadDescription) {
+    if (g_get_thread_description != nullptr) {
         ::PWSTR wname = nullptr;
-        if (SUCCEEDED(pGetThreadDescription(handle, &wname))) {
+        if (SUCCEEDED(g_get_thread_description(handle, &wname))) {
             string name = to_string(wname);
             const size_t name_len = name.size();
             if (name_len < size) {

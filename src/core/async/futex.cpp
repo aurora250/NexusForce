@@ -32,7 +32,7 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
     }
 
     const auto ms = relative_time(sec, ns, is_monotonic);
-    if (::WaitOnAddress(addr, &value, sizeof(::DWORD), ms.count())) {
+    if (::WaitOnAddress(addr, &value, sizeof(::DWORD), ms.count()) == TRUE) {
         return true;
     }
 
@@ -66,7 +66,7 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
 
 void futex_wait(void* addr, platform_wait_t value) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    auto p = static_cast<volatile platform_wait_t*>(addr);
+    auto* p = static_cast<volatile platform_wait_t*>(addr);
     const ::BOOL result = ::WaitOnAddress(p, &value, sizeof(platform_wait_t), numeric_traits<::DWORD>::max());
 
     if (result == 0) {
@@ -91,7 +91,7 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
 
 void futex_notify(void* addr, const bool all) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    auto p = static_cast<platform_wait_t*>(addr);
+    auto* p = static_cast<platform_wait_t*>(addr);
     if (all) {
         ::WakeByAddressAll(p);
     } else {

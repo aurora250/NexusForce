@@ -30,11 +30,11 @@ void mysql_connect::close() noexcept {
 }
 
 bool mysql_connect::set_character_set(const string& encoding) const noexcept {
-    return connected() && !::mysql_set_character_set(link_, encoding.data());
+    return connected() && ::mysql_set_character_set(link_, encoding.data()) == 0;
 }
 
 bool mysql_connect::set_options(const ::mysql_option option, const string& str) const noexcept {
-    return connected() && !::mysql_options(link_, option, str.data());
+    return connected() && ::mysql_options(link_, option, str.data()) == 0;
 }
 
 string_view mysql_connect::get_character_set() const noexcept { return ::mysql_character_set_name(link_); }
@@ -43,10 +43,10 @@ string_view mysql_connect::get_error() const noexcept { return ::mysql_error(lin
 
 uint32_t mysql_connect::get_errno() const noexcept { return ::mysql_errno(link_); }
 
-bool mysql_connect::update(const string& sql) const noexcept { return !::mysql_query(link_, sql.data()); }
+bool mysql_connect::update(const string& sql) const noexcept { return ::mysql_query(link_, sql.data()) == 0; }
 
 unique_ptr<idb_tb_result> mysql_connect::query(const string& sql) const noexcept {
-    if (::mysql_query(link_, sql.data())) {
+    if (::mysql_query(link_, sql.data()) != 0) {
         return {};
     }
     return make_unique<mysql_result>(::mysql_store_result(link_));
@@ -57,8 +57,10 @@ unique_ptr<idb_prepared_statement> mysql_connect::prepare_statement(const string
 }
 
 idb_connect* mysql_factory::create_connect() {
-    const auto conn = new mysql_connect();
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    auto* conn = new mysql_connect();
     if (!conn->connect(config_)) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete conn;
         return nullptr;
     }
@@ -66,6 +68,7 @@ idb_connect* mysql_factory::create_connect() {
 }
 
 idb_result* mysql_factory::create_result(void* native_result) {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     return new mysql_result(static_cast<::MYSQL_RES*>(native_result));
 }
 

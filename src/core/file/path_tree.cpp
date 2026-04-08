@@ -91,7 +91,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
         node_type type = is_dir ? node_type::directory : node_type::file;
 
-        const bool type_ok = !(options.files_only && is_dir) && !(options.dirs_only && !is_dir);
+        const bool type_ok = !(options.files_only && is_dir) && !options.dirs_only || is_dir;
 
         bool ext_ok = true;
         if (!is_dir && !options.extensions.empty()) {
@@ -119,7 +119,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
             scan_impl(recurse_node, options, current_depth + 1);
         }
 
-    } while (::FindNextFileA(hFind, &fdata));
+    } while (::FindNextFileA(hFind, &fdata) == TRUE);
 
     ::FindClose(hFind);
 
@@ -239,9 +239,7 @@ size_t path_tree::max_depth() const {
     }
     size_t max_d = 0;
     traverse_dfs([&](const node& n) -> visit_result {
-        if (n.depth() > max_d) {
-            max_d = n.depth();
-        }
+        max_d = max(static_cast<size_t>(0), n.depth());
         return visit_result::proceed;
     });
     return max_d;

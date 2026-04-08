@@ -3825,8 +3825,8 @@ struct is_nothrow_swappable;
  * @param rhs 右操作数
  */
 template <typename T>
-NEFORCE_CONSTEXPR14 enable_if_t<conjunction<is_move_constructible<T>, is_move_assignable<T>>::value>
-swap(T& lhs, T& rhs) noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T>::value);
+NEFORCE_CONSTEXPR14 enable_if_t<is_move_constructible_v<T> && is_move_assignable_v<T>>
+swap(T& lhs, T& rhs) noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>);
 
 /**
  * @brief 交换两个相同类型的数组
@@ -3853,8 +3853,8 @@ void swap() = delete;
  * @return 对象的旧值
  */
 template <typename T, typename U = T>
-NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(
-        conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&, U>>::value);
+NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(is_nothrow_move_constructible_v<T> &&
+                                                             is_nothrow_assignable_v<T&, U>);
 
 
 /**
@@ -3992,8 +3992,8 @@ NEFORCE_INLINE17 constexpr bool is_trivially_swappable_v = is_trivially_swappabl
 
 
 template <typename T>
-NEFORCE_CONSTEXPR14 enable_if_t<conjunction<is_move_constructible<T>, is_move_assignable<T>>::value>
-swap(T& lhs, T& rhs) noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T>::value) {
+NEFORCE_CONSTEXPR14 enable_if_t<is_move_constructible_v<T> && is_move_assignable_v<T>>
+swap(T& lhs, T& rhs) noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>) {
     T tmp = _NEFORCE move(lhs);
     lhs = _NEFORCE move(rhs);
     rhs = _NEFORCE move(tmp);
@@ -4016,8 +4016,8 @@ NEFORCE_CONSTEXPR14 enable_if_t<is_swappable<T>::value> swap(T (&lhs)[Size],
 }
 
 template <typename T, typename U>
-NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(
-        conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&, U>>::value) {
+NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(is_nothrow_move_constructible_v<T> &&
+                                                             is_nothrow_assignable_v<T&, U>) {
     T old_val = _NEFORCE move(val);
     val = _NEFORCE forward<U>(new_val);
     return old_val;
