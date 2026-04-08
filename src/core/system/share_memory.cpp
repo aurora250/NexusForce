@@ -141,7 +141,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
     if (mode == open_mode::create_only) {
         flags |= O_CREAT | O_EXCL;
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
-        if (handle_ == invalid_handle) {
+        if (handle_ == g_invalid_handle) {
             char errbuf[256];
             char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
             NEFORCE_THROW_EXCEPTION(share_memory_exception(msg));
@@ -149,7 +149,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 
         if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
             ::close(handle_);
-            handle_ = invalid_handle;
+            handle_ = g_invalid_handle;
             ::shm_unlink(shm_name.data());
             char errbuf[256];
             char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
@@ -157,7 +157,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         }
     } else if (mode == open_mode::open_only) {
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
-        if (handle_ == invalid_handle) {
+        if (handle_ == g_invalid_handle) {
             char errbuf[256];
             char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
             NEFORCE_THROW_EXCEPTION(share_memory_exception(msg));
@@ -166,7 +166,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         struct ::stat stat_buf;
         if (::fstat(handle_, &stat_buf) == -1) {
             ::close(handle_);
-            handle_ = invalid_handle;
+            handle_ = g_invalid_handle;
             char errbuf[256];
             char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
             NEFORCE_THROW_EXCEPTION(share_memory_exception(msg));
@@ -174,7 +174,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         size_ = static_cast<size_t>(stat_buf.st_size);
     } else {
         handle_ = ::shm_open(shm_name.data(), flags | O_CREAT, 0666);
-        if (handle_ == invalid_handle) {
+        if (handle_ == g_invalid_handle) {
             char errbuf[256];
             char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
             NEFORCE_THROW_EXCEPTION(share_memory_exception(msg));
@@ -183,7 +183,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         struct ::stat stat_buf;
         if (::fstat(handle_, &stat_buf) == -1) {
             ::close(handle_);
-            handle_ = invalid_handle;
+            handle_ = g_invalid_handle;
             char errbuf[256];
             char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
             NEFORCE_THROW_EXCEPTION(share_memory_exception(msg));
@@ -192,7 +192,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         if (stat_buf.st_size == 0) {
             if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
                 ::close(handle_);
-                handle_ = invalid_handle;
+                handle_ = g_invalid_handle;
                 ::shm_unlink(shm_name.data());
                 char errbuf[256];
                 char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
@@ -308,7 +308,7 @@ bool share_memory::exists(const string& name) {
 #else
     const string shm_name = normalize_name(name);
     const int fd = ::shm_open(shm_name.data(), O_RDONLY, 0666);
-    if (fd != invalid_handle) {
+    if (fd != g_invalid_handle) {
         ::close(fd);
         return true;
     }

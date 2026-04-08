@@ -1,6 +1,6 @@
 #include <NeForce/network/socket/tcp_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
+#    include <cerrno>
 #    include <fcntl.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -44,7 +44,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to get socket flags"));
     }
 
-    if (flags & O_NONBLOCK) {
+    if ((flags & O_NONBLOCK) != 0) {
         was_blocking = false;
     } else {
         if (::fcntl(fd_, F_SETFL, flags | O_NONBLOCK) == -1) {

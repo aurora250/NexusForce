@@ -159,21 +159,24 @@ bytes_output_(other.bytes_output_) {
 }
 
 zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator=(stream_compressor&& other) noexcept {
-    if (this != &other) {
-        if (initialized_) {
-            ::deflateEnd(&stream_);
-        }
-
-        stream_ = other.stream_;
-        initialized_ = other.initialized_;
-        bytes_input_ = other.bytes_input_;
-        bytes_output_ = other.bytes_output_;
-
-        other.initialized_ = false;
-        other.stream_ = {};
-        other.bytes_input_ = 0;
-        other.bytes_output_ = 0;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    if (initialized_) {
+        ::deflateEnd(&stream_);
+    }
+
+    stream_ = other.stream_;
+    initialized_ = other.initialized_;
+    bytes_input_ = other.bytes_input_;
+    bytes_output_ = other.bytes_output_;
+
+    other.initialized_ = false;
+    other.stream_ = {};
+    other.bytes_input_ = 0;
+    other.bytes_output_ = 0;
+
     return *this;
 }
 
@@ -273,21 +276,24 @@ bytes_output_(other.bytes_output_) {
 
 zlib_compressor::stream_decompressor&
 zlib_compressor::stream_decompressor::operator=(stream_decompressor&& other) noexcept {
-    if (this != &other) {
-        if (initialized_) {
-            ::inflateEnd(&stream_);
-        }
-
-        stream_ = other.stream_;
-        initialized_ = other.initialized_;
-        bytes_input_ = other.bytes_input_;
-        bytes_output_ = other.bytes_output_;
-
-        other.initialized_ = false;
-        other.stream_ = {};
-        other.bytes_input_ = 0;
-        other.bytes_output_ = 0;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    if (initialized_) {
+        ::inflateEnd(&stream_);
+    }
+
+    stream_ = other.stream_;
+    initialized_ = other.initialized_;
+    bytes_input_ = other.bytes_input_;
+    bytes_output_ = other.bytes_output_;
+
+    other.initialized_ = false;
+    other.stream_ = {};
+    other.bytes_input_ = 0;
+    other.bytes_output_ = 0;
+
     return *this;
 }
 

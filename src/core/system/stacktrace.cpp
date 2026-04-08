@@ -59,10 +59,10 @@ string stacktrace::frame::name() const {
     return "<unknown>";
 #else
     ::Dl_info info;
-    if (::dladdr(address_, &info) && info.dli_sname) {
+    if (::dladdr(address_, &info) != 0 && info.dli_sname != nullptr) {
         int status = 0;
         char* demangled = ::abi::__cxa_demangle(info.dli_sname, nullptr, nullptr, &status);
-        if (status == 0 && demangled) {
+        if (status == 0 && demangled != nullptr) {
             string res(demangled);
             std::free(demangled);
             return res;

@@ -412,12 +412,15 @@ private:
          * @return 自身引用
          */
         NEFORCE_CONSTEXPR20 bit_storage& operator=(bit_storage&& other) noexcept {
-            if (this != &other) {
-                reset();
-                cpair = _NEFORCE move(other.cpair);
-                other.ptr = nullptr;
-                other.cpair.value = 0;
+            if (addressof(other) == this) {
+                return *this;
             }
+
+            reset();
+            cpair = _NEFORCE move(other.cpair);
+            other.ptr = nullptr;
+            other.cpair.value = 0;
+
             return *this;
         }
 

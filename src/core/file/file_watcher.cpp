@@ -68,16 +68,16 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
     }
 
     uint32_t mask = 0;
-    if (static_cast<int>(events) & static_cast<int>(file_watch_event::CREATED)) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::CREATED)) != 0U) {
         mask |= IN_CREATE | IN_MOVED_TO;
     }
-    if (static_cast<int>(events) & static_cast<int>(file_watch_event::DELETED)) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::DELETED)) != 0U) {
         mask |= IN_DELETE | IN_MOVED_FROM;
     }
-    if (static_cast<int>(events) & static_cast<int>(file_watch_event::MODIFIED)) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::MODIFIED)) != 0U) {
         mask |= IN_MODIFY | IN_ATTRIB;
     }
-    if (static_cast<int>(events) & static_cast<int>(file_watch_event::ACCESSED)) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::ACCESSED)) != 0U) {
         mask |= IN_ACCESS;
     }
 
@@ -295,13 +295,13 @@ void file_watcher::watch_thread_func() {
             continue;
         }
 
-        if (fds[1].revents & POLLIN) {
-            uint64_t value;
+        if ((fds[1].revents & POLLIN) != 0U) {
+            uint64_t value = 0;
             ignore = ::read(event_fd_, &value, sizeof(value));
             break;
         }
 
-        if (fds[0].revents & POLLIN) {
+        if ((fds[0].revents & POLLIN) != 0U) {
             const ssize_t len = ::read(inotify_fd_, buffer_.data(), buffer_.size());
             if (len <= 0) {
                 if (errno == EAGAIN || errno == EWOULDBLOCK) {
@@ -317,13 +317,13 @@ void file_watcher::watch_thread_func() {
                 auto evt = file_watch_event::ACCESSED;
                 bool matched = true;
 
-                if (event->mask & (IN_CREATE | IN_MOVED_TO)) {
+                if ((event->mask & (IN_CREATE | IN_MOVED_TO)) != 0U) {
                     evt = file_watch_event::CREATED;
-                } else if (event->mask & (IN_DELETE | IN_MOVED_FROM)) {
+                } else if ((event->mask & (IN_DELETE | IN_MOVED_FROM)) != 0U) {
                     evt = file_watch_event::DELETED;
-                } else if (event->mask & (IN_MODIFY | IN_ATTRIB)) {
+                } else if ((event->mask & (IN_MODIFY | IN_ATTRIB)) != 0U) {
                     evt = file_watch_event::MODIFIED;
-                } else if (event->mask & IN_ACCESS) {
+                } else if ((event->mask & IN_ACCESS) != 0U) {
                     evt = file_watch_event::ACCESSED;
                 } else {
                     matched = false;

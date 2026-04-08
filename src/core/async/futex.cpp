@@ -15,10 +15,10 @@
 #    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
+#    include <cerrno>
 #    include <linux/futex.h>
 #    include <syscall.h>
-#    include <time.h>
+#    include <ctime>
 #    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -53,10 +53,7 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
 
         const long ret = ::syscall(SYS_futex, addr, oper, value, &ts, nullptr, FUTEX_BITSET_MATCH_ANY);
 
-        if (ret == -1 && errno == ETIMEDOUT) {
-            return false;
-        }
-        return true;
+        return ret != -1 || errno != ETIMEDOUT;
     }
 
     ::syscall(SYS_futex, addr, oper, value, nullptr, nullptr, FUTEX_BITSET_MATCH_ANY);
@@ -79,7 +76,7 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
     const auto err =
             ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wait_private), value, nullptr);
 
-    if (!err) {
+    if (err == 0) {
         return;
     }
     if (errno == EAGAIN) {
@@ -135,7 +132,7 @@ int futex_cmp_requeue(void* wait_addr, int wake_count, void* requeue_addr, int r
 }
 
 int futex_wake_op(void* addr, int wake_count, void* op_addr, int op_arg, int op, int cmp, int cmp_arg) noexcept {
-    const unsigned int val3 = (op << 28) | (cmp << 24) | (op_arg << 12) | (cmp_arg);
+    const unsigned int val3 = (op << 28) | (cmp << 24) | (op_arg << 12) | cmp_arg;
     const long ret = ::syscall(SYS_futex, addr, static_cast<int>(futex_wait_flags::wake_op) | FUTEX_PRIVATE_FLAG,
                                wake_count, op_addr, nullptr, val3);
     if (ret == -1) {

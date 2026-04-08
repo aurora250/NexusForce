@@ -10,7 +10,7 @@
 #    include <csignal>
 
 #    ifndef SYS_exit
-#        if defined(NEFORCE_ARCH_X86_32)
+#        ifdef NEFORCE_ARCH_X86_32
 #            define SYS_exit 1
 #            define SYS_exit_group 252
 #            define SYS_close 6
@@ -42,35 +42,35 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
-#    if defined(NEFORCE_ARCH_X86_64)
+#    ifdef NEFORCE_ARCH_X86_64
     long syscall_exit(int status) {
-        long ret;
+        long ret = 0;
         __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_exit), "D"(status) : "rcx", "r11", "memory");
         return ret;
     }
     long syscall_exit_group(int status) {
-        long ret;
+        long ret = 0;
         __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_exit_group), "D"(status) : "rcx", "r11", "memory");
         return ret;
     }
     long syscall_close(int fd) {
-        long ret;
+        long ret = 0;
         __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_close), "D"(fd) : "rcx", "r11", "memory");
         return ret;
     }
 #    elif defined(NEFORCE_ARCH_X86_32)
     long syscall_exit(int status) {
-        long ret;
+        long ret = 0;
         __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_exit), "b"(status) : "memory");
         return ret;
     }
     long syscall_exit_group(int status) {
-        long ret;
+        long ret = 0;
         __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_exit_group), "b"(status) : "memory");
         return ret;
     }
     long syscall_close(int fd) {
-        long ret;
+        long ret = 0;
         __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_close), "b"(fd) : "memory");
         return ret;
     }

@@ -176,7 +176,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
         if (::fstat64(file_handle_, &st) == -1) {
             return false;
         }
-        const uint64_t file_size = static_cast<uint64_t>(st.st_size);
+        const auto file_size = static_cast<uint64_t>(st.st_size);
         if (file_size <= static_cast<uint64_t>(offset)) {
             return false;
         }
@@ -190,9 +190,9 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 
     int prot = PROT_READ;
     const auto af = static_cast<fud_t>(access);
-    if (af & O_RDWR) {
+    if ((af & O_RDWR) != 0) {
         prot = PROT_READ | PROT_WRITE;
-    } else if (af & O_WRONLY) {
+    } else if ((af & O_WRONLY) != 0) {
         prot = PROT_WRITE;
     }
 

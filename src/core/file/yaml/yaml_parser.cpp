@@ -970,8 +970,7 @@ shared_ptr<yaml_value> yaml_parser::parse_scalar() {
         }
 
         bool is_timestamp = false;
-        if (potential_ts.find('-') != string::npos &&
-            (potential_ts.find(':') != string::npos || potential_ts.find('T') != string::npos)) {
+        if (potential_ts.contains('-') && (potential_ts.contains(':') || potential_ts.contains('T'))) {
             is_timestamp = true;
         }
 

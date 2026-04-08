@@ -110,11 +110,12 @@ head_(other.head_.load(memory_order_relaxed)),
 tail_(other.tail_.load(memory_order_relaxed)) {}
 
 local_queue& local_queue::operator=(local_queue&& other) noexcept {
-    if (this != &other) {
-        tasks_ = move(other.tasks_);
-        head_.store(other.head_.load(memory_order_relaxed), memory_order_relaxed);
-        tail_.store(other.tail_.load(memory_order_relaxed), memory_order_relaxed);
+    if (addressof(other) == this) {
+        return *this;
     }
+    tasks_ = move(other.tasks_);
+    head_.store(other.head_.load(memory_order_relaxed), memory_order_relaxed);
+    tail_.store(other.tail_.load(memory_order_relaxed), memory_order_relaxed);
     return *this;
 }
 
@@ -176,12 +177,13 @@ is_stealing(other.is_stealing.load(memory_order_relaxed)),
 consecutive_idle_count(other.consecutive_idle_count) {}
 
 worker_context& worker_context::operator=(worker_context&& other) noexcept {
-    if (this != &other) {
-        queue = move(other.queue);
-        id = other.id;
-        is_stealing.store(other.is_stealing.load(memory_order_relaxed), memory_order_relaxed);
-        consecutive_idle_count = other.consecutive_idle_count;
+    if (addressof(other) == this) {
+        return *this;
     }
+    queue = move(other.queue);
+    id = other.id;
+    is_stealing.store(other.is_stealing.load(memory_order_relaxed), memory_order_relaxed);
+    consecutive_idle_count = other.consecutive_idle_count;
     return *this;
 }
 
@@ -299,7 +301,8 @@ void thread_pool::thread_function(const id_type thread_id) {
                     auto now = system_clock::now();
                     const auto sub = time_cast<seconds>(now - last);
 
-                    if (sub.count() >= max_idle_seconds && threads_map_.size() > init_thread_size_) {
+                    if (sub.count() >= static_cast<int64_t>(max_idle_seconds) &&
+                        threads_map_.size() > init_thread_size_) {
                         {
                             lock<mutex> ctx_lock(worker_contexts_mtx_);
                             if (thread_id < worker_contexts_ptr_.size()) {

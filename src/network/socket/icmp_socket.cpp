@@ -4,7 +4,7 @@
 #include <NeForce/network/socket/icmp_socket.hpp>
 #include <NeForce/network/socket/ip_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
+#    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

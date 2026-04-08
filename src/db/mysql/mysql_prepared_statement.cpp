@@ -5,7 +5,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     void throw_if_stmt_null(const ::MYSQL_STMT* ptr_) {
-        if (ptr_) {
+        if (ptr_ != nullptr) {
             return;
         }
         NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Prepared statement not initialized"));
@@ -15,15 +15,15 @@ namespace {
 
 mysql_prepared_statement::mysql_prepared_statement(::MYSQL* conn, const string_view sql) :
 conn_(conn) {
-    if (!conn_) {
+    if (conn_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Invalid MySQL connection pointer"));
     }
     stmt_ = ::mysql_stmt_init(conn_);
-    if (!stmt_) {
+    if (stmt_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("mysql_stmt_init failed"));
     }
 
-    if (::mysql_stmt_prepare(stmt_, sql.data(), sql.size())) {
+    if (::mysql_stmt_prepare(stmt_, sql.data(), sql.size()) != 0) {
         const string_view err = ::mysql_stmt_error(stmt_);
         ::mysql_stmt_close(stmt_);
         stmt_ = nullptr;
@@ -39,7 +39,7 @@ conn_(conn) {
 }
 
 mysql_prepared_statement::~mysql_prepared_statement() {
-    if (stmt_) {
+    if (stmt_ != nullptr) {
         ::mysql_stmt_close(stmt_);
         stmt_ = nullptr;
     }
@@ -61,7 +61,7 @@ mysql_prepared_statement& mysql_prepared_statement::operator=(mysql_prepared_sta
         return *this;
     }
 
-    if (stmt_) {
+    if (stmt_ != nullptr) {
         ::mysql_stmt_close(stmt_);
     }
     stmt_ = other.stmt_;
@@ -199,7 +199,7 @@ bool mysql_prepared_statement::execute() {
 unique_ptr<idb_prepared_result> mysql_prepared_statement::execute_query() {
     throw_if_stmt_null(stmt_);
     if (param_count_ > 0) {
-        if (::mysql_stmt_bind_param(stmt_, bind_params_.data()) != 0) {
+        if (::mysql_stmt_bind_param(stmt_, bind_params_.data())) {
             return nullptr;
         }
     }
@@ -210,14 +210,14 @@ unique_ptr<idb_prepared_result> mysql_prepared_statement::execute_query() {
 }
 
 string_view mysql_prepared_statement::get_error() const noexcept {
-    if (!stmt_) {
+    if (stmt_ == nullptr) {
         return "Invalid statement!";
     }
     return ::mysql_stmt_error(stmt_);
 }
 
 uint32_t mysql_prepared_statement::get_errno() const noexcept {
-    if (!stmt_) {
+    if (stmt_ == nullptr) {
         return 0;
     }
     return ::mysql_stmt_errno(stmt_);

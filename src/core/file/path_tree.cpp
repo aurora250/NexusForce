@@ -125,7 +125,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
 #else
     ::DIR* dp = ::opendir(dir.data());
-    if (!dp) {
+    if (dp == nullptr) {
         return;
     }
 
@@ -188,7 +188,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
         }
 #    endif
 
-        const bool type_ok = !(options.files_only && is_dir) && !(options.dirs_only && !is_dir);
+        const bool type_ok = !(options.files_only && is_dir) && !options.dirs_only || is_dir;
 
         bool ext_ok = true;
         if (!is_dir && !options.extensions.empty()) {

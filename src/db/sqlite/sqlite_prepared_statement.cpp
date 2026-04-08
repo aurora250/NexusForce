@@ -4,7 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 void sqlite_prepared_statement::clear_bindings() {
-    if (stmt_) {
+    if (stmt_ != nullptr) {
         ::sqlite3_clear_bindings(stmt_);
     }
     param_buffers_.clear();
@@ -13,7 +13,7 @@ void sqlite_prepared_statement::clear_bindings() {
 
 sqlite_prepared_statement::sqlite_prepared_statement(::sqlite3* db, const string& sql) :
 db_(db) {
-    if (!db_) {
+    if (db_ == nullptr) {
         last_error_ = "Database connection is null";
         return;
     }
@@ -47,36 +47,39 @@ last_error_(_NEFORCE move(other.last_error_)) {
 }
 
 sqlite_prepared_statement& sqlite_prepared_statement::operator=(sqlite_prepared_statement&& other) noexcept {
-    if (this != &other) {
-        if (stmt_) {
-            ::sqlite3_finalize(stmt_);
-        }
-        db_ = other.db_;
-        stmt_ = other.stmt_;
-        param_count_ = other.param_count_;
-        param_buffers_ = _NEFORCE move(other.param_buffers_);
-        last_error_ = _NEFORCE move(other.last_error_);
-        prepared_ = other.prepared_;
-
-        other.stmt_ = nullptr;
-        other.db_ = nullptr;
-        other.param_count_ = 0;
-        other.prepared_ = false;
-        other.param_buffers_.clear();
-        other.last_error_.clear();
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    if (stmt_ != nullptr) {
+        ::sqlite3_finalize(stmt_);
+    }
+    db_ = other.db_;
+    stmt_ = other.stmt_;
+    param_count_ = other.param_count_;
+    param_buffers_ = _NEFORCE move(other.param_buffers_);
+    last_error_ = _NEFORCE move(other.last_error_);
+    prepared_ = other.prepared_;
+
+    other.stmt_ = nullptr;
+    other.db_ = nullptr;
+    other.param_count_ = 0;
+    other.prepared_ = false;
+    other.param_buffers_.clear();
+    other.last_error_.clear();
+
     return *this;
 }
 
 sqlite_prepared_statement::~sqlite_prepared_statement() {
-    if (stmt_) {
+    if (stmt_ != nullptr) {
         ::sqlite3_finalize(stmt_);
         stmt_ = nullptr;
     }
 }
 
 bool sqlite_prepared_statement::bind_param(const uint32_t index, const string_view value) {
-    if (!prepared_ || !stmt_ || index == 0 || index > param_count_) {
+    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_) {
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
@@ -95,7 +98,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const string_vi
 }
 
 bool sqlite_prepared_statement::bind_param(const uint32_t index, const int32_t value) {
-    if (!prepared_ || !stmt_ || index == 0 || index > param_count_) {
+    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_) {
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
@@ -108,7 +111,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const int32_t v
 }
 
 bool sqlite_prepared_statement::bind_param(const uint32_t index, const int64_t value) {
-    if (!prepared_ || !stmt_ || index == 0 || index > param_count_) {
+    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_) {
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
@@ -121,7 +124,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const int64_t v
 }
 
 bool sqlite_prepared_statement::bind_param(const uint32_t index, const float64_t value) {
-    if (!prepared_ || !stmt_ || index == 0 || index > param_count_) {
+    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_) {
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
@@ -134,7 +137,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const float64_t
 }
 
 bool sqlite_prepared_statement::bind_param(const uint32_t index, const void* data, const size_t length) {
-    if (!prepared_ || !stmt_ || index == 0 || index > param_count_ || !data) {
+    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_ || data == nullptr) {
         last_error_ = "Invalid parameter or null pointer for blob";
         return false;
     }
@@ -153,7 +156,7 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const void* dat
 }
 
 bool sqlite_prepared_statement::execute() {
-    if (!prepared_ || !stmt_) {
+    if (!prepared_ || stmt_ == nullptr) {
         last_error_ = "Statement not prepared";
         return false;
     }
@@ -169,7 +172,7 @@ bool sqlite_prepared_statement::execute() {
 }
 
 unique_ptr<idb_prepared_result> sqlite_prepared_statement::execute_query() {
-    if (!prepared_ || !stmt_) {
+    if (!prepared_ || stmt_ == nullptr) {
         last_error_ = "Statement not prepared";
         return nullptr;
     }

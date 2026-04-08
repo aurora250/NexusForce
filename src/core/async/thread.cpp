@@ -150,7 +150,7 @@ void thread::start_thread_impl(thread_startup_args* args) {
     id_ = id(thread_id);
 
 #else
-    native_handle_type tid;
+    native_handle_type tid = 0;
     if (::pthread_create(&tid, nullptr, thread_entry, args) != 0) {
         delete args;
         NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
@@ -178,28 +178,31 @@ state_(other.state_) {
 }
 
 thread& thread::operator=(thread&& other) noexcept {
-    if (this != &other) {
-        if (joinable()) {
-            try {
-                hook::invoke(hook::point::before_destroy, id_);
-                // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
-            }
-            terminate();
-        }
-
-        handle_ = other.handle_;
-        id_ = other.id_;
-        state_ = other.state_;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        other.handle_ = nullptr;
-#else
-        other.handle_ = native_handle_type{};
-#endif
-        other.id_ = id{};
-        other.state_ = NOT_A_THREAD;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    if (joinable()) {
+        try {
+            hook::invoke(hook::point::before_destroy, id_);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+        terminate();
+    }
+
+    handle_ = other.handle_;
+    id_ = other.id_;
+    state_ = other.state_;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    other.handle_ = nullptr;
+#else
+    other.handle_ = native_handle_type{};
+#endif
+    other.id_ = id{};
+    other.state_ = NOT_A_THREAD;
+
     return *this;
 }
 

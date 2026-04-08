@@ -22,7 +22,7 @@ namespace {
                     return _NEFORCE to_string(static_cast<long long>(val));
                 }
                 string result = _NEFORCE to_string(val);
-                if (result.find('.') != string::npos) {
+                if (result.contains('.')) {
                     while (!result.empty() && result.back() == '0') {
                         result.pop_back();
                     }
@@ -97,7 +97,7 @@ namespace {
             case json_value::Number: {
                 const json_number* num_val = value->as_number();
                 string result = float64::to_string(num_val->get_value());
-                if (result.find('.') != string::npos) {
+                if (result.contains('.')) {
                     while (!result.empty() && result.back() == '0') {
                         result.pop_back();
                     }

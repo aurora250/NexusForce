@@ -31,7 +31,7 @@ namespace {
 #else
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
         const char* value = ::getenv(name.data());
-        return value ? string(value) : "";
+        return value != nullptr ? string(value) : "";
 #endif
     }
 
@@ -184,11 +184,11 @@ string environment::current_user() {
 #else
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* username = ::getenv("USER");
-    if (!username) {
+    if (username == nullptr) {
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
         username = ::getenv("USERNAME");
     }
-    return username ? string(username) : "";
+    return username != nullptr ? string(username) : "";
 #endif
 }
 
@@ -204,20 +204,20 @@ string environment::temp_directory() {
 #else
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* tmpdir = ::getenv("TMPDIR");
-    if (tmpdir) {
+    if (tmpdir != nullptr) {
         return tmpdir;
     }
 
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     tmpdir = ::getenv("TEMP");
-    if (tmpdir) {
+    if (tmpdir != nullptr) {
         return tmpdir;
     }
 
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     tmpdir = ::getenv("TMP");
 
-    if (tmpdir) {
+    if (tmpdir != nullptr) {
         return tmpdir;
     }
     return "/tmp";
@@ -262,7 +262,7 @@ string environment::home_directory() {
 #else
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* home = ::getenv("HOME");
-    return home ? string(home) : "";
+    return home != nullptr ? string(home) : "";
 #endif
 }
 

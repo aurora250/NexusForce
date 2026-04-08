@@ -38,7 +38,7 @@ string redis_result::get_string() const {
     }
 
     if (!kv_pairs_->empty() && kv_cursor_ > 0) {
-        return string(value());
+        return {value()};
     }
     if (is_array_ && cursor_ > 0) {
         ::redisReply* element = result_->element[cursor_ - 1];
@@ -55,7 +55,7 @@ redis_result::redis_result(::redisReply* reply) :
 result_(reply),
 column_names_(make_unique<vector<string>>()),
 kv_pairs_(make_unique<vector<pair<string, string>>>()) {
-    if (!result_) {
+    if (result_ == nullptr) {
         return;
     }
 
@@ -99,7 +99,7 @@ kv_pairs_(make_unique<vector<pair<string, string>>>()) {
 }
 
 redis_result::~redis_result() {
-    if (result_) {
+    if (result_ != nullptr) {
         ::freeReplyObject(result_);
     }
 }
@@ -130,7 +130,7 @@ string_view redis_result::value() const noexcept {
 bool redis_result::value_bool() const { return boolean::parse(get_string().view()).value(); }
 
 int64_t redis_result::value_int64() const {
-    if (!result_) {
+    if (result_ == nullptr) {
         return 0;
     }
     if (result_->type == REDIS_REPLY_INTEGER) {
@@ -143,7 +143,7 @@ double redis_result::value_double() const { return float64::parse(get_string().v
 
 vector<string> redis_result::value_array() const {
     vector<string> result;
-    if (result_ && result_->type == REDIS_REPLY_ARRAY) {
+    if (result_ != nullptr && result_->type == REDIS_REPLY_ARRAY) {
         for (size_t i = 0; i < result_->elements; ++i) {
             string value = format_redis_reply_element(result_->element[i]);
             result.push_back(_NEFORCE move(value));

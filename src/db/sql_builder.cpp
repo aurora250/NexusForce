@@ -46,30 +46,33 @@ where_conditions_(other.where_conditions_) {
 }
 
 sql_builder& sql_builder::operator=(const sql_builder& other) {
-    if (this != &other) {
-        sql_type_ = other.sql_type_;
-        table_ = other.table_;
-        table_alias_ = other.table_alias_;
-        where_conditions_ = other.where_conditions_;
-
-        if (other.select_data_) {
-            select_data_ = make_unique<select_data>(*other.select_data_);
-        } else {
-            select_data_.reset();
-        }
-
-        if (other.insert_data_) {
-            insert_data_ = make_unique<insert_data>(*other.insert_data_);
-        } else {
-            insert_data_.reset();
-        }
-
-        if (other.update_data_) {
-            update_data_ = make_unique<update_data>(*other.update_data_);
-        } else {
-            update_data_.reset();
-        }
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    sql_type_ = other.sql_type_;
+    table_ = other.table_;
+    table_alias_ = other.table_alias_;
+    where_conditions_ = other.where_conditions_;
+
+    if (other.select_data_) {
+        select_data_ = make_unique<select_data>(*other.select_data_);
+    } else {
+        select_data_.reset();
+    }
+
+    if (other.insert_data_) {
+        insert_data_ = make_unique<insert_data>(*other.insert_data_);
+    } else {
+        insert_data_.reset();
+    }
+
+    if (other.update_data_) {
+        update_data_ = make_unique<update_data>(*other.update_data_);
+    } else {
+        update_data_.reset();
+    }
+
     return *this;
 }
 

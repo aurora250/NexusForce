@@ -345,16 +345,19 @@ public:
     }
 
     hazard_pointer& operator=(hazard_pointer&& other) noexcept {
-        if (this != &other) {
-            reset_protection();
-            if (record_) {
-                record_->release();
-            }
-            record_ = other.record_;
-            domain_ = other.domain_;
-            other.record_ = nullptr;
-            other.domain_ = nullptr;
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        reset_protection();
+        if (record_) {
+            record_->release();
+        }
+        record_ = other.record_;
+        domain_ = other.domain_;
+        other.record_ = nullptr;
+        other.domain_ = nullptr;
+
         return *this;
     }
 

@@ -9,15 +9,15 @@ private:
     const error_category* category_;
 
 public:
-    error_code() noexcept
-    : value_(0), category_(&system_category()) {}
+    error_code() noexcept :
+    value_(0),
+    category_(&system_category()) {}
 
-    error_code(int val, const error_category& cat) noexcept
-    : value_(val), category_(&cat) {}
+    error_code(int val, const error_category& cat) noexcept :
+    value_(val),
+    category_(&cat) {}
 
-    error_code(errc e) noexcept {
-        *this = make_error_code(e);
-    }
+    error_code(errc e) noexcept { *this = make_error_code(e); }
 
     void assign(int val, const error_category& cat) noexcept {
         value_ = val;
@@ -32,9 +32,7 @@ public:
     NEFORCE_NODISCARD int value() const noexcept { return value_; }
     NEFORCE_NODISCARD const error_category& category() const noexcept { return *category_; }
 
-    error_condition default_error_condition() const noexcept {
-        return category_->default_error_condition(value_);
-    }
+    error_condition default_error_condition() const noexcept { return category_->default_error_condition(value_); }
 
     NEFORCE_NODISCARD string message() const { return category_->message(value_); }
 
@@ -44,18 +42,19 @@ public:
         return category_ == rhs.category_ && value_ == rhs.value_;
     }
     NEFORCE_NODISCARD bool operator<(const error_code& rhs) const noexcept {
-        if (*category_ < *rhs.category_) return true;
-        if (*rhs.category_ < *category_) return false;
+        if (*category_ < *rhs.category_) {
+            return true;
+        }
+        if (*rhs.category_ < *category_) {
+            return false;
+        }
         return value_ < rhs.value_;
     }
 
     NEFORCE_NODISCARD bool operator==(const error_condition& cond) const noexcept {
-        return category_->equivalent(value_, cond) ||
-               cond.category().equivalent(*this, cond.value());
+        return category_->equivalent(value_, cond) || cond.category().equivalent(*this, cond.value());
     }
-    NEFORCE_NODISCARD bool operator!=(const error_condition& cond) const noexcept {
-        return !(*this == cond);
-    }
+    NEFORCE_NODISCARD bool operator!=(const error_condition& cond) const noexcept { return !(*this == cond); }
 
     NEFORCE_NODISCARD size_t to_hash() const noexcept {
         const size_t h1 = hash<const error_category*>{}(category_);
@@ -64,9 +63,7 @@ public:
     }
 };
 
-inline error_code make_error_code(errc e) noexcept {
-    return {static_cast<int>(e), generic_category()};
-}
+inline error_code make_error_code(errc e) noexcept { return {static_cast<int>(e), generic_category()}; }
 
 error_code last_error() noexcept;
 

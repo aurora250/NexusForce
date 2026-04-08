@@ -531,9 +531,9 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
 
     const string_view dt_str = text_.view(start_pos, pos_ - start_pos);
 
-    const bool has_date_sep = dt_str.find('-') != string::npos;
-    const bool has_time_sep = dt_str.find(':') != string::npos;
-    const bool has_datetime_sep = dt_str.find('T') != string::npos || dt_str.find(' ') != string::npos;
+    const bool has_date_sep = dt_str.contains('-');
+    const bool has_time_sep = dt_str.contains(':');
+    const bool has_datetime_sep = dt_str.contains('T') || dt_str.contains(' ');
 
     if (!has_date_sep && !has_time_sep) {
         throw_parse_error("Not a valid datetime format");
@@ -541,7 +541,7 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
 
     toml_datetime::datetime_type dt_type{toml_datetime::LocalDate};
     if (has_datetime_sep) {
-        if (dt_str.find('Z') != string::npos || dt_str.find('+') != string::npos || dt_str.rfind('-') > 10) {
+        if (dt_str.contains('Z') || dt_str.contains('+') || dt_str.rfind('-') > 10) {
             dt_type = toml_datetime::OffsetDateTime;
         } else {
             dt_type = toml_datetime::LocalDateTime;

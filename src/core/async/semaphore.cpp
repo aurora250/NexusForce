@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <NeForce/core/async/semaphore.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/algorithm/compare.hpp>
@@ -6,21 +7,20 @@
 #    include <handleapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
-#    include <time.h>
+#    include <NeForce/core/algorithm/compare.hpp>
+#    include <cerrno>
+#    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
-    struct timespec relative_to_timespec(const nanoseconds relative) noexcept {
-        struct ::timespec now{};
+    ::timespec relative_to_timespec(const nanoseconds relative) noexcept {
+        ::timespec now{};
         ::clock_gettime(CLOCK_REALTIME, &now);
 
         auto total_ns = relative.count();
-        if (total_ns < 0) {
-            total_ns = 0;
-        }
+        total_ns = max(total_ns, static_cast<decltype(total_ns)>(0));
 
         constexpr long kNsPerSec = 1'000'000'000L;
         now.tv_sec += static_cast<::time_t>(total_ns / kNsPerSec);
@@ -44,8 +44,8 @@ bool semaphore::try_acquire_for_impl(const milliseconds timeout) noexcept {
 }
 #else
 bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
-    struct ::timespec ts = relative_to_timespec(timeout);
-    int ret;
+    const ::timespec ts = relative_to_timespec(timeout);
+    int ret = 0;
     do {
         ret = ::sem_timedwait(&sem_, &ts);
     } while (ret == -1 && errno == EINTR);
@@ -64,7 +64,7 @@ semaphore::semaphore(long initial, long maximum) {
     }
 #else
     (void) maximum;
-    int ret = ::sem_init(&sem_, 0, static_cast<unsigned>(initial));
+    const int ret = ::sem_init(&sem_, 0, static_cast<uint32_t>(initial));
     if (ret != 0) {
         NEFORCE_THROW_EXCEPTION(system_exception("sem_init failed"));
     }
@@ -86,7 +86,7 @@ void semaphore::acquire() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::WaitForSingleObjectEx(handle_, INFINITE, FALSE);
 #else
-    int ret;
+    int ret = 0;
     do {
         ret = ::sem_wait(&sem_);
     } while (ret == -1 && errno == EINTR);
@@ -98,7 +98,7 @@ bool semaphore::try_acquire() noexcept {
     const ::DWORD result = ::WaitForSingleObjectEx(handle_, 0, FALSE);
     return result == WAIT_OBJECT_0;
 #else
-    int ret;
+    int ret = 0;
     do {
         ret = ::sem_trywait(&sem_);
     } while (ret == -1 && errno == EINTR);

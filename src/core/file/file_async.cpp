@@ -1,6 +1,6 @@
 #include <NeForce/core/file/file_async.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
+#    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -117,7 +117,7 @@ contexts_(move(other.contexts_)) {
 }
 
 file_async& file_async::operator=(file_async&& other) noexcept {
-    if (this == &other) {
+    if (addressof(other) == this) {
         return *this;
     }
     handle_ = other.handle_;
@@ -328,7 +328,7 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
 #else
     const ::aiocb* list[1] = {result.cb};
 
-    if (timeout_ms == 0xFFFFFFFFu) {
+    if (timeout_ms == 0xFFFFFFFFU) {
         if (::aio_suspend(list, 1, nullptr) == 0) {
             return check_completion(result);
         }

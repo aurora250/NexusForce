@@ -12,15 +12,15 @@ rows_(::mysql_num_rows(result)),
 columns_(::mysql_num_fields(result)),
 column_name_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<::enum_field_types>>()) {
-    ::MYSQL_FIELD* field;
-    while ((field = ::mysql_fetch_field(result))) {
+    const ::MYSQL_FIELD* field = nullptr;
+    while ((field = ::mysql_fetch_field(result)) != nullptr) {
         column_name_->push_back(field->name);
         column_types_->push_back(field->type);
     }
 }
 
 mysql_result::~mysql_result() {
-    if (result_) {
+    if (result_ != nullptr) {
         ::mysql_free_result(result_);
     }
 }
@@ -52,7 +52,7 @@ int16_t mysql_result::get_int16(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY || type == ::MYSQL_TYPE_BOOL)) {
+    if (type != ::MYSQL_TYPE_SHORT && type != ::MYSQL_TYPE_TINY && type != ::MYSQL_TYPE_BOOL) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to int16 mismatch"));
     }
     return integer16::parse(cursor_[n]).value();
@@ -62,8 +62,8 @@ int32_t mysql_result::get_int32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_INT24 || type == ::MYSQL_TYPE_SHORT ||
-          type == ::MYSQL_TYPE_TINY || type == ::MYSQL_TYPE_BOOL)) {
+    if (type != ::MYSQL_TYPE_LONG && type != ::MYSQL_TYPE_INT24 && type != ::MYSQL_TYPE_SHORT &&
+        type != ::MYSQL_TYPE_TINY && type != ::MYSQL_TYPE_BOOL) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to int32 mismatch"));
     }
     return integer32::parse(cursor_[n]).value();
@@ -73,8 +73,8 @@ int64_t mysql_result::get_int64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_LONGLONG || type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_INT24 ||
-          type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY || type == ::MYSQL_TYPE_BOOL)) {
+    if (type != ::MYSQL_TYPE_LONGLONG && type != ::MYSQL_TYPE_LONG && type != ::MYSQL_TYPE_INT24 &&
+        type != ::MYSQL_TYPE_SHORT && type != ::MYSQL_TYPE_TINY && type != ::MYSQL_TYPE_BOOL) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to int64 mismatch"));
     }
     return integer64::parse(cursor_[n]).value();
@@ -84,8 +84,8 @@ float32_t mysql_result::get_float32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_FLOAT || type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_SHORT ||
-          type == ::MYSQL_TYPE_TINY)) {
+    if (type != ::MYSQL_TYPE_FLOAT && type != ::MYSQL_TYPE_LONG && type != ::MYSQL_TYPE_SHORT &&
+        type != ::MYSQL_TYPE_TINY) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to float32 mismatch"));
     }
     return float32::parse(cursor_[n]).value();
@@ -95,8 +95,8 @@ float64_t mysql_result::get_float64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_DOUBLE || type == ::MYSQL_TYPE_FLOAT || type == ::MYSQL_TYPE_LONGLONG ||
-          type == ::MYSQL_TYPE_LONG || type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
+    if (type != ::MYSQL_TYPE_DOUBLE && type != ::MYSQL_TYPE_FLOAT && type != ::MYSQL_TYPE_LONGLONG &&
+        type != ::MYSQL_TYPE_LONG && type != ::MYSQL_TYPE_SHORT && type != ::MYSQL_TYPE_TINY) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to float64 mismatch"));
     }
     return float64::parse(cursor_[n]).value();
@@ -106,9 +106,9 @@ decimal_t mysql_result::get_decimal(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_DECIMAL || type == ::MYSQL_TYPE_NEWDECIMAL || type == ::MYSQL_TYPE_DOUBLE ||
-          type == ::MYSQL_TYPE_FLOAT || type == ::MYSQL_TYPE_LONGLONG || type == ::MYSQL_TYPE_LONG ||
-          type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
+    if (type != ::MYSQL_TYPE_DECIMAL && type != ::MYSQL_TYPE_NEWDECIMAL && type != ::MYSQL_TYPE_DOUBLE &&
+        type != ::MYSQL_TYPE_FLOAT && type != ::MYSQL_TYPE_LONGLONG && type != ::MYSQL_TYPE_LONG &&
+        type != ::MYSQL_TYPE_SHORT && type != ::MYSQL_TYPE_TINY) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to decimal mismatch"));
     }
     return decimal::parse(cursor_[n]).value();
@@ -118,8 +118,8 @@ vector<char> mysql_result::get_blob(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
-    if (!(type == ::MYSQL_TYPE_BLOB || type == ::MYSQL_TYPE_TINY_BLOB || type == ::MYSQL_TYPE_MEDIUM_BLOB ||
-          type == ::MYSQL_TYPE_LONG_BLOB)) {
+    if (type != ::MYSQL_TYPE_BLOB && type != ::MYSQL_TYPE_TINY_BLOB && type != ::MYSQL_TYPE_MEDIUM_BLOB &&
+        type != ::MYSQL_TYPE_LONG_BLOB) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to blob mismatch"));
     }
     return {cursor_[n], cursor_[n] + ::mysql_fetch_lengths(result_)[n]};

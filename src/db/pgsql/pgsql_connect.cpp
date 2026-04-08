@@ -39,7 +39,7 @@ bool pgsql_connect::connect(const db_config& config) {
     string conn_str = build_conn_string(config);
     link_ = ::PQconnectdb(conn_str.data());
 
-    if (!link_ || ::PQstatus(link_) != ::CONNECTION_OK) {
+    if (link_ == nullptr || ::PQstatus(link_) != ::CONNECTION_OK) {
         last_error_ = ::PQerrorMessage(link_);
         last_errno_ = 1;
         close();
@@ -56,7 +56,7 @@ bool pgsql_connect::reconnect(const db_config& config) {
 }
 
 void pgsql_connect::close() {
-    if (link_) {
+    if (link_ != nullptr) {
         ::PQfinish(link_);
         link_ = nullptr;
     }
@@ -65,12 +65,12 @@ void pgsql_connect::close() {
 }
 
 bool pgsql_connect::set_character_set(const string& encoding) const {
-    if (!link_) {
+    if (link_ == nullptr) {
         return false;
     }
 
     ::PGresult* res = ::PQexec(link_, ("SET client_encoding TO " + encoding).data());
-    if (!res) {
+    if (res == nullptr) {
         return false;
     }
 
@@ -80,12 +80,12 @@ bool pgsql_connect::set_character_set(const string& encoding) const {
 }
 
 string_view pgsql_connect::get_character_set() const {
-    if (!link_) {
+    if (link_ == nullptr) {
         return {};
     }
 
     ::PGresult* res = ::PQexec(link_, "SHOW client_encoding");
-    if (!res) {
+    if (res == nullptr) {
         return {};
     }
 
@@ -95,18 +95,18 @@ string_view pgsql_connect::get_character_set() const {
     }
 
     const char* encoding = ::PQgetvalue(res, 0, 0);
-    const string_view ret = encoding ? string_view(encoding) : ""_sv;
+    const string_view ret = encoding != nullptr ? string_view(encoding) : ""_sv;
     ::PQclear(res);
     return ret;
 }
 
 bool pgsql_connect::update(const string& sql) const {
-    if (!link_) {
+    if (link_ == nullptr) {
         return false;
     }
 
     ::PGresult* res = ::PQexec(link_, sql.data());
-    if (!res) {
+    if (res == nullptr) {
         return false;
     }
 
@@ -118,12 +118,12 @@ bool pgsql_connect::update(const string& sql) const {
 bool pgsql_connect::connected() const { return link_ != nullptr && ::PQstatus(link_) == ::CONNECTION_OK; }
 
 unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
-    if (!link_) {
+    if (link_ == nullptr) {
         return nullptr;
     }
 
     ::PGresult* res = ::PQexec(link_, sql.data());
-    if (!res) {
+    if (res == nullptr) {
         return nullptr;
     }
 
@@ -135,21 +135,21 @@ unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
 }
 
 unique_ptr<idb_prepared_statement> pgsql_connect::prepare_statement(const string& sql) const {
-    if (!link_) {
+    if (link_ == nullptr) {
         return nullptr;
     }
 
-    const auto stmt = new pgsql_prepared_statement(link_, sql);
+    auto* const stmt = new pgsql_prepared_statement(link_, sql);
 
-    if (!stmt->param_count() && sql.find('$') != string::npos) {
+    if (stmt->param_count() == 0U && sql.contains('$')) {
         delete stmt;
         return nullptr;
     }
-    return unique_ptr<idb_prepared_statement>(stmt);
+    return {stmt};
 }
 
 idb_connect* pgsql_factory::create_connect() {
-    const auto conn = new pgsql_connect();
+    auto* const conn = new pgsql_connect();
     if (!conn->connect(config_)) {
         delete conn;
         return nullptr;
@@ -158,10 +158,10 @@ idb_connect* pgsql_factory::create_connect() {
 }
 
 idb_result* pgsql_factory::create_result(void* native_result) {
-    if (!native_result) {
+    if (native_result == nullptr) {
         return nullptr;
     }
-    const auto res = static_cast<::PGresult*>(native_result);
+    auto* const res = static_cast<::PGresult*>(native_result);
     return new pgsql_tb_result(res, false);
 }
 

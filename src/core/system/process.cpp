@@ -35,7 +35,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
     char** build_argv(const string& executable, const vector<string>& args) {
         const size_t argc = args.size() + 2;
-        const auto argv = new char*[argc];
+        auto* const argv = new char*[argc];
 
         argv[0] = new char[executable.length() + 1];
         string_copy(argv[0], executable.data());
@@ -50,7 +50,7 @@ namespace {
     }
 
     void free_argv(char** argv) noexcept {
-        if (argv) {
+        if (argv != nullptr) {
             for (int i = 0; argv[i] != nullptr; ++i) {
                 delete[] argv[i];
             }
@@ -166,7 +166,7 @@ int process::wait_for(state_info& info, int timeout_ms) {
     }
     return static_cast<int>(exit_code);
 #else
-    int status;
+    int status = 0;
 
     if (timeout_ms < 0) {
         if (::waitpid(info.process_id, &status, 0) == -1) {
@@ -259,7 +259,7 @@ bool process::is_running(const state_info& info) noexcept {
     }
     return false;
 #else
-    int status;
+    int status = 0;
     return ::waitpid(info.process_id, &status, WNOHANG) == 0;
 #endif
 }
@@ -291,7 +291,7 @@ process::memory_info process::get_memory_info(const state_info& info) {
     const string text = statm.read();
     if (statm.is_opened()) {
         string tmp;
-        size_t pos;
+        size_t pos = 0;
         getline(text, pos, tmp, [](char c) { return is_space(c); });
         size_t size NEFORCE_UNUSED = to_uint64(tmp.view());
         getline(text, pos, tmp, [](char c) { return is_space(c); });

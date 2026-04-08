@@ -145,12 +145,15 @@ options_(other.options_),
 capture_count_(other.capture_count_) {}
 
 regex& regex::operator=(regex&& other) noexcept {
-    if (this != &other) {
-        code_ = move(other.code_);
-        pattern_ = move(other.pattern_);
-        options_ = other.options_;
-        capture_count_ = other.capture_count_;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    code_ = move(other.code_);
+    pattern_ = move(other.pattern_);
+    options_ = other.options_;
+    capture_count_ = other.capture_count_;
+
     return *this;
 }
 

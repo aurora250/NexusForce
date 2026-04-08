@@ -25,7 +25,7 @@ bool sqlite_connect::reconnect(const db_config& config) {
 }
 
 void sqlite_connect::close() noexcept {
-    if (link_) {
+    if (link_ != nullptr) {
         ::sqlite3_close(link_);
     }
 }
@@ -49,7 +49,7 @@ string_view sqlite_connect::get_character_set() const {
 }
 
 string_view sqlite_connect::get_error() const {
-    if (link_) {
+    if (link_ != nullptr) {
         last_error_ = ::sqlite3_errmsg(link_);
     }
     return last_error_.view();
@@ -62,7 +62,7 @@ bool sqlite_connect::update(const string& sql) const {
 
     char* error_msg = nullptr;
     if (::sqlite3_exec(link_, sql.data(), nullptr, nullptr, &error_msg) != SQLITE_OK) {
-        if (error_msg) {
+        if (error_msg != nullptr) {
             last_error_ = error_msg;
             ::sqlite3_free(error_msg);
         }
@@ -100,7 +100,7 @@ bool sqlite_connect::is_valid() const {
 }
 
 idb_connect* sqlite_factory::create_connect() {
-    auto conn = new sqlite_connect();
+    auto* conn = new sqlite_connect();
     if (!conn->connect(config_)) {
         return nullptr;
     }

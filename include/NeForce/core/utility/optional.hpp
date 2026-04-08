@@ -357,19 +357,22 @@ public:
      * @return 当前对象的引用
      */
     optional& operator=(optional&& other) noexcept {
-        if (this != &other) {
-            if (other.have_value_) {
-                if (have_value_) {
-                    *get_ptr() = _NEFORCE move(*other);
-                } else {
-                    _NEFORCE construct(get_ptr(), _NEFORCE move(*other));
-                    have_value_ = true;
-                }
-                other.reset();
-            } else {
-                reset();
-            }
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        if (other.have_value_) {
+            if (have_value_) {
+                *get_ptr() = _NEFORCE move(*other);
+            } else {
+                _NEFORCE construct(get_ptr(), _NEFORCE move(*other));
+                have_value_ = true;
+            }
+            other.reset();
+        } else {
+            reset();
+        }
+
         return *this;
     }
 

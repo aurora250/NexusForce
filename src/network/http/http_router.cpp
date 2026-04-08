@@ -4,7 +4,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     optional<regex> compile_pattern(const string& pattern, vector<string>& param_names) {
-        if (pattern.find(':') == string::npos && pattern.find('*') == string::npos) {
+        if (pattern.contains(':') && pattern.contains('*')) {
             return none;
         }
 
@@ -136,7 +136,7 @@ void http_router::route(const HTTP_METHOD& method, const string& path, const htt
     const string& method_str = method.method();
     vector<string> methods;
 
-    if (method_str.find(',') != string::npos) {
+    if (method_str.contains(',')) {
         methods = split_methods(method_str);
     } else {
         methods.push_back(method_str);

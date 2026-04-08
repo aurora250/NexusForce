@@ -21,7 +21,7 @@ bool is_debugger_present() {
     size_t pos = 0;
     const string read = status_file.read();
     while (getline(read, pos, line)) {
-        if (line.compare(0, 10, "TracerPid:") == 0) {
+        if (line.starts_with("TracerPid:")) {
             const size_t f = line.find_first_of("0123456789");
             if (f != string::npos) {
                 return to_int32(line.view(f)) != 0;

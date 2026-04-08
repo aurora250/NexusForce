@@ -1,7 +1,7 @@
 #include <NeForce/core/file/file.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
-#    include <string.h>
+#    include <cerrno>
+#    include <cstring>
 #    include <sys/stat.h>
 #    include <unistd.h>
 #endif
@@ -122,7 +122,7 @@ bool file::fill_read_buffer() const {
     read_buffer_size_ = bytes_read;
 
 #else
-    ssize_t bytes_read;
+    ssize_t bytes_read = 0;
     do {
         bytes_read = ::read(handle_, read_buffer_.data(), buffer_size_);
     } while (bytes_read == -1 && errno == EINTR);
@@ -267,20 +267,20 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
     auto flags = static_cast<fud_t>(access);
     const auto creation_flags = static_cast<fud_t>(creation);
 
-    if ((creation_flags & O_CREAT) && !(flags & (O_RDONLY | O_WRONLY | O_RDWR))) {
+    if ((creation_flags & O_CREAT) != 0 && (flags & (O_RDONLY | O_WRONLY | O_RDWR)) == 0) {
         flags |= O_RDWR;
     }
     flags |= creation_flags;
 
     if (append) {
         flags |= O_APPEND;
-        if (creation_flags & O_TRUNC) {
+        if ((creation_flags & O_TRUNC) != 0) {
             flags &= ~O_TRUNC;
         }
     }
 
     ::mode_t mode = 0;
-    if (creation_flags & O_CREAT) {
+    if ((creation_flags & O_CREAT) != 0) {
         if (attributes == file_attri::OTHERS) {
             mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
         } else {
@@ -291,7 +291,7 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
         }
     }
 
-    if (creation_flags & O_CREAT) {
+    if ((creation_flags & O_CREAT) != 0) {
         handle_ = ::open(pth.data(), flags, mode);
     } else {
         handle_ = ::open(pth.data(), flags);

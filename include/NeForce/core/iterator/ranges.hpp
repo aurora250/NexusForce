@@ -294,10 +294,11 @@ public:
     constexpr filter_view& operator=(const filter_view& other)
         requires copyable<V> && copyable<Pred>
     {
-        if (this != &other) {
-            base_ = other.base_;
-            pred_ = other.pred_;
+        if (addressof(other) == this) {
+            return *this;
         }
+        base_ = other.base_;
+        pred_ = other.pred_;
         return *this;
     }
 
@@ -450,10 +451,11 @@ public:
     constexpr transform_view& operator=(const transform_view& other)
         requires copyable<V> && copyable<Func>
     {
-        if (this != &other) {
-            base_ = other.base_;
-            func_ = other.func_;
+        if (addressof(other) == this) {
+            return *this;
         }
+        base_ = other.base_;
+        func_ = other.func_;
         return *this;
     }
 

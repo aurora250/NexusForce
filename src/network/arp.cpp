@@ -6,7 +6,7 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/time/clocks.hpp>
-#    include <errno.h>
+#    include <cerrno>
 #    include <fcntl.h>
 #    include <linux/if_ether.h>
 #    include <linux/if_packet.h>
@@ -60,7 +60,7 @@ bool arp::local_info(const char* iface) {
     const int fd = query_sock.native_handle();
     ::ifreq ifr;
 
-    if (!iface || *iface == '\0') {
+    if (iface == nullptr || *iface == '\0') {
         ::ifconf ifc;
         char buf[4096];
         ifc.ifc_len = sizeof(buf);
@@ -79,10 +79,10 @@ bool arp::local_info(const char* iface) {
             if (::ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
                 continue;
             }
-            if (!(ifr.ifr_flags & IFF_UP)) {
+            if ((ifr.ifr_flags & IFF_UP) == 0) {
                 continue;
             }
-            if (ifr.ifr_flags & IFF_LOOPBACK) {
+            if ((ifr.ifr_flags & IFF_LOOPBACK) != 0) {
                 continue;
             }
             if (::ioctl(fd, SIOCGIFADDR, &ifr) < 0) {
@@ -209,7 +209,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     memory_copy(eth->src_mac, local_mac_.bytes().data(), 6);
     eth->ether_type = endian::host_to_network<uint16_t>(ARP_ETHER_TYPE);
 
-    const auto arp = reinterpret_cast<arp_packet*>(packet + sizeof(arp_ether_header));
+    auto* const arp = reinterpret_cast<arp_packet*>(packet + sizeof(arp_ether_header));
     arp->hw_type = endian::host_to_network<uint16_t>(1);
     arp->proto_type = endian::host_to_network<uint16_t>(ETH_P_IP);
     arp->hw_addr_len = 6;
@@ -278,13 +278,13 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
             continue;
         }
 
-        uint32_t recv_target_ip;
+        uint32_t recv_target_ip = 0;
         memory_copy(&recv_target_ip, recv_arp->target_ip, 4);
         if (recv_target_ip != local_ip_) {
             continue;
         }
 
-        uint32_t recv_sender_ip;
+        uint32_t recv_sender_ip = 0;
         memory_copy(&recv_sender_ip, recv_arp->sender_ip, 4);
         if (recv_sender_ip != target_ip) {
             continue;

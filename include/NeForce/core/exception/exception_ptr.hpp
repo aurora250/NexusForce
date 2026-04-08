@@ -212,10 +212,11 @@ public:
      * @return 当前异常指针的引用
      */
     exception_ptr& operator=(const exception_ptr& other) noexcept {
-        if (this != &other) {
-            exception_ptr temp(other);
-            swap(temp);
+        if (addressof(other) == this) {
+            return *this;
         }
+        exception_ptr temp(other);
+        swap(temp);
         return *this;
     }
 
@@ -225,10 +226,11 @@ public:
      * @return 当前异常指针的引用
      */
     exception_ptr& operator=(exception_ptr&& other) noexcept {
-        if (this != &other) {
-            exception_ptr temp(_NEFORCE move(other));
-            _NEFORCE swap(ecb_, other.ecb_);
+        if (addressof(other) == this) {
+            return *this;
         }
+        exception_ptr temp(_NEFORCE move(other));
+        swap(temp);
         return *this;
     }
 

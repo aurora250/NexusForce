@@ -24,12 +24,16 @@ any::any(any&& other) noexcept {
 any& any::operator=(any&& other) noexcept {
     if (!other.has_value()) {
         reset();
-    } else if (this != &other) {
-        reset();
-        ArgT arg{};
-        arg.any_ptr_ = this;
-        other.manage_(SWAP, &other, &arg);
+        return *this;
     }
+    if (addressof(other) == this) {
+        return *this;
+    }
+
+    reset();
+    ArgT arg{};
+    arg.any_ptr_ = this;
+    other.manage_(SWAP, &other, &arg);
     return *this;
 }
 

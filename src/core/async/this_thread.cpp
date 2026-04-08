@@ -12,6 +12,7 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
     int64_t qpc_frequency() noexcept {
         static const int64_t freq = []() {
@@ -22,6 +23,7 @@ namespace {
         return freq;
     }
 } // namespace
+#endif
 
 
 NEFORCE_BEGIN_THIS_THREAD__
@@ -179,7 +181,7 @@ bool affinity(size_t cpu_mask) noexcept {
     ::cpu_set_t cpuset;
     CPU_ZERO(&cpuset);
     for (size_t i = 0; i < sizeof(cpu_mask) * 8; ++i) {
-        if (cpu_mask & (static_cast<size_t>(1) << i)) {
+        if ((cpu_mask & (static_cast<size_t>(1) << i)) != 0U) {
             CPU_SET(i, &cpuset);
         }
     }
@@ -203,7 +205,7 @@ bool priority(int priority) noexcept {
     }
     return ::SetThreadPriority(::GetCurrentThread(), win_priority) != 0;
 #else
-    int policy;
+    int policy = 0;
     ::sched_param param;
     if (::pthread_getschedparam(::pthread_self(), &policy, &param) != 0) {
         return false;

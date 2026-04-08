@@ -114,13 +114,16 @@ public:
      * @return 自身引用
      */
     meta_any& operator=(const meta_any& other) {
-        if (this != &other) {
-            if (other.storage_) {
-                storage_ = other.storage_->clone();
-            } else {
-                storage_.reset();
-            }
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        if (other.storage_) {
+            storage_ = other.storage_->clone();
+        } else {
+            storage_.reset();
+        }
+
         return *this;
     }
 

@@ -92,21 +92,24 @@ bytes_output_(other.bytes_output_) {
 }
 
 lz4_compressor::stream_compressor& lz4_compressor::stream_compressor::operator=(stream_compressor&& other) noexcept {
-    if (this != &other) {
-        if (stream_ != nullptr) {
-            ::LZ4_freeStream(stream_);
-        }
-
-        stream_ = other.stream_;
-        use_hc_ = other.use_hc_;
-        level_ = other.level_;
-        bytes_input_ = other.bytes_input_;
-        bytes_output_ = other.bytes_output_;
-
-        other.stream_ = nullptr;
-        other.bytes_input_ = 0;
-        other.bytes_output_ = 0;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    if (stream_ != nullptr) {
+        ::LZ4_freeStream(stream_);
+    }
+
+    stream_ = other.stream_;
+    use_hc_ = other.use_hc_;
+    level_ = other.level_;
+    bytes_input_ = other.bytes_input_;
+    bytes_output_ = other.bytes_output_;
+
+    other.stream_ = nullptr;
+    other.bytes_input_ = 0;
+    other.bytes_output_ = 0;
+
     return *this;
 }
 
@@ -204,19 +207,22 @@ bytes_output_(other.bytes_output_) {
 
 lz4_compressor::stream_decompressor&
 lz4_compressor::stream_decompressor::operator=(stream_decompressor&& other) noexcept {
-    if (this != &other) {
-        if (stream_ != nullptr) {
-            ::LZ4_freeStreamDecode(stream_);
-        }
-
-        stream_ = other.stream_;
-        bytes_input_ = other.bytes_input_;
-        bytes_output_ = other.bytes_output_;
-
-        other.stream_ = nullptr;
-        other.bytes_input_ = 0;
-        other.bytes_output_ = 0;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    if (stream_ != nullptr) {
+        ::LZ4_freeStreamDecode(stream_);
+    }
+
+    stream_ = other.stream_;
+    bytes_input_ = other.bytes_input_;
+    bytes_output_ = other.bytes_output_;
+
+    other.stream_ = nullptr;
+    other.bytes_input_ = 0;
+    other.bytes_output_ = 0;
+
     return *this;
 }
 

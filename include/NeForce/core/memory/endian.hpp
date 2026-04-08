@@ -44,7 +44,7 @@ public:
             __BYTE_ORDER == __LITTLE_ENDIAN;
 #else
             false;
-#    warning "Unsupported costexpr endian type"
+#    warning "Unsupported constexpr endian type"
 #endif
 
     /**

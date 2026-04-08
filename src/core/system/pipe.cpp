@@ -68,20 +68,23 @@ fds_{other.fds_[0], other.fds_[1]} {
 #endif
 
 pipe& pipe::operator=(pipe&& other) noexcept {
-    if (this != &other) {
-        close();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        read_handle_ = other.read_handle_;
-        write_handle_ = other.write_handle_;
-        other.read_handle_ = nullptr;
-        other.write_handle_ = nullptr;
-#else
-        fds_[0] = other.fds_[0];
-        fds_[1] = other.fds_[1];
-        other.fds_[0] = -1;
-        other.fds_[1] = -1;
-#endif
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    close();
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    read_handle_ = other.read_handle_;
+    write_handle_ = other.write_handle_;
+    other.read_handle_ = nullptr;
+    other.write_handle_ = nullptr;
+#else
+    fds_[0] = other.fds_[0];
+    fds_[1] = other.fds_[1];
+    other.fds_[0] = -1;
+    other.fds_[1] = -1;
+#endif
+
     return *this;
 }
 

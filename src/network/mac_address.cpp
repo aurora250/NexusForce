@@ -70,7 +70,7 @@ optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface
     sin->sin_family = AF_INET;
     sin->sin_addr.s_addr = ip.address().get<::sockaddr_in>().sin_addr.s_addr;
 
-    if (iface) {
+    if (iface != nullptr) {
         string_copy(req.arp_dev, iface, IFNAMSIZ - 1);
         req.arp_dev[IFNAMSIZ - 1] = '\0';
     }
@@ -83,7 +83,7 @@ optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface
     const int ret = ::ioctl(fd, SIOCGARP, &req);
     ::close(fd);
 
-    if (ret == 0 && (req.arp_flags & ATF_COM)) {
+    if (ret == 0 && (req.arp_flags & ATF_COM) != 0) {
         uint8_t mac_bytes[6];
         memory_copy(mac_bytes, req.arp_ha.sa_data, 6);
         return mac_address(mac_bytes);

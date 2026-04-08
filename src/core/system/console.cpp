@@ -109,7 +109,7 @@ string sys_console::readln_unsafe() const {
 #elif defined(NEFORCE_PLATFORM_LINUX)
     string line;
     while (true) {
-        char ch;
+        char ch = 0;
         const ssize_t n = ::read(in_, &ch, 1);
         if (n <= 0) {
             break;
@@ -159,7 +159,7 @@ string sys_console::read_unsafe() const {
 
     try {
         while (true) {
-            char ch;
+            char ch = 0;
             const ssize_t n = ::read(in_, &ch, 1);
 
             if (n <= 0) {
@@ -541,7 +541,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 
     try {
         while (true) {
-            char ch;
+            char ch = 0;
             const ssize_t n = ::read(in_, &ch, 1);
 
             if (n <= 0) {
@@ -790,9 +790,8 @@ bool sys_console::supports_colors() const {
     if (term.empty()) {
         return false;
     }
-    return (::isatty(out_) && (term.find("xterm") != string::npos || term.find("screen") != string::npos ||
-                               term.find("tmux") != string::npos || term.find("rxvt") != string::npos ||
-                               term.find("color") != string::npos));
+    return (::isatty(out_) != 0 && (term.contains("xterm") || term.contains("screen") || term.contains("tmux") ||
+                                    term.contains("rxvt") || term.contains("color")));
 #endif
 }
 
@@ -804,8 +803,7 @@ bool sys_console::supports_truecolor() const {
         return false;
     }
     const string colorterm = environment::get("COLORTERM");
-    return !colorterm.empty() &&
-           (colorterm.find("truecolor") != string::npos || colorterm.find("24bit") != string::npos);
+    return !colorterm.empty() && (colorterm.contains("truecolor") || colorterm.contains("24bit"));
 #endif
 }
 
@@ -831,7 +829,7 @@ bool sys_console::is_interactive() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return out_ != INVALID_HANDLE_VALUE && ::GetFileType(out_) == FILE_TYPE_CHAR;
 #else
-    return ::isatty(out_);
+    return ::isatty(out_) != 0;
 #endif
 }
 

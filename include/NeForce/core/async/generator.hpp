@@ -94,12 +94,14 @@ public:
      * @return 自身引用
      */
     cancellation_token& operator=(const cancellation_token& other) {
-        if (this != &other) {
-            release();
-            state_ = other.state_;
-            if (state_) {
-                state_->ref_count.fetch_add(1, memory_order_relaxed);
-            }
+        if (addressof(other) == this) {
+            return *this;
+        }
+
+        release();
+        state_ = other.state_;
+        if (state_) {
+            state_->ref_count.fetch_add(1, memory_order_relaxed);
         }
         return *this;
     }
@@ -288,13 +290,16 @@ public:
      * @return 自身引用
      */
     generator& operator=(generator&& other) noexcept {
-        if (this != &other) {
-            if (handle_) {
-                handle_.destroy();
-            }
-            handle_ = other.handle_;
-            other.handle_ = nullptr;
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        if (handle_) {
+            handle_.destroy();
+        }
+        handle_ = other.handle_;
+        other.handle_ = nullptr;
+
         return *this;
     }
 
@@ -592,13 +597,16 @@ public:
      * @return 自身引用
      */
     task& operator=(task&& other) noexcept {
-        if (this != &other) {
-            if (handle_) {
-                handle_.destroy();
-            }
-            handle_ = other.handle_;
-            other.handle_ = nullptr;
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        if (handle_) {
+            handle_.destroy();
+        }
+        handle_ = other.handle_;
+        other.handle_ = nullptr;
+
         return *this;
     }
 
@@ -737,13 +745,16 @@ public:
     }
 
     task& operator=(task&& other) noexcept {
-        if (this != &other) {
-            if (handle_) {
-                handle_.destroy();
-            }
-            handle_ = other.handle_;
-            other.handle_ = nullptr;
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        if (handle_) {
+            handle_.destroy();
+        }
+        handle_ = other.handle_;
+        other.handle_ = nullptr;
+
         return *this;
     }
 

@@ -6,11 +6,11 @@
 #    include <stringapiset.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <stdlib.h>
+#    include <cstdlib>
 #    include <glob.h>
 #    include <langinfo.h>
-#    include <wctype.h>
-#    include <wchar.h>
+#    include <cwctype>
+#    include <cwchar>
 #    include <iconv.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -143,7 +143,7 @@ namespace {
 
     string nl_str(const ::nl_item item, const ::locale_t loc) {
         const char* p = ::nl_langinfo_l(item, loc);
-        return p ? string(p) : string{};
+        return p != nullptr ? string(p) : string{};
     }
 
     void free_locale(bool& owns, ::locale_t& loc) noexcept {
@@ -184,7 +184,7 @@ void locale::load_locale(const string& name) {
     owns_ = true;
     name_ = name.empty() ? "C" : name;
     const char* cs = ::nl_langinfo_l(CODESET, loc_);
-    encoding_ = cs ? cs : "UTF-8";
+    encoding_ = cs != nullptr ? cs : "UTF-8";
 #endif
 }
 
@@ -225,9 +225,10 @@ owns_(false)
 }
 
 locale& locale::operator=(const locale& other) {
-    if (this != &other) {
-        load_locale(other.name_);
+    if (addressof(other) == this) {
+        return *this;
     }
+    load_locale(other.name_);
     return *this;
 }
 
@@ -284,15 +285,15 @@ locale locale::system() {
 #else
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* env = ::getenv("LC_ALL");
-    if (!env || !*env) {
+    if (env == nullptr || (*env) == 0) {
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
         env = ::getenv("LC_CTYPE");
     }
-    if (!env || !*env) {
+    if (env == nullptr || (*env) == 0) {
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
         env = ::getenv("LANG");
     }
-    return locale(env ? env : "C");
+    return locale(env != nullptr ? env : "C");
 #endif
 }
 
@@ -489,7 +490,7 @@ int locale::compare(const string& a, const string& b, const collate_strength str
     auto to_wide = [&](const string& s) -> wstring {
         wstring out(s.size() + 1, L'\0');
         const ::locale_t saved = ::uselocale(loc_);
-        const size_t n = ::mbstowcs(&out[0], s.data(), out.size());
+        const size_t n = ::mbstowcs(out.data(), s.data(), out.size());
         ::uselocale(saved);
         if (n == static_cast<size_t>(-1)) {
             return {};
@@ -526,7 +527,7 @@ string locale::collation_key(const string& s) const {
     auto to_wide = [&](const string& mb) -> wstring {
         wstring out(mb.size() + 1, L'\0');
         const ::locale_t saved = ::uselocale(loc_);
-        const size_t n = ::mbstowcs(&out[0], mb.data(), out.size());
+        const size_t n = ::mbstowcs(out.data(), mb.data(), out.size());
         ::uselocale(saved);
         if (n == static_cast<size_t>(-1)) {
             return {};
@@ -538,8 +539,8 @@ string locale::collation_key(const string& s) const {
     auto ws = to_wide(s);
     const size_t sz = ::wcsxfrm_l(nullptr, ws.data(), 0, loc_);
     wstring key(sz + 1, L'\0');
-    ::wcsxfrm_l(&key[0], ws.data(), sz + 1, loc_);
-    return string(reinterpret_cast<const char*>(key.data()), sz * sizeof(wchar_t));
+    ::wcsxfrm_l(key.data(), ws.data(), sz + 1, loc_);
+    return {reinterpret_cast<const char*>(key.data()), sz * sizeof(wchar_t)};
 #endif
 }
 
@@ -573,10 +574,10 @@ string locale::to_multibyte(const u32string& ucs4) const {
         throw locale_exception("to_multibyte: iconv_open failed");
     }
 
-    auto in = reinterpret_cast<const char*>(ucs4.data());
+    const auto* in = reinterpret_cast<const char*>(ucs4.data());
     size_t in_left = ucs4.size() * sizeof(char32_t);
     string result(in_left * 4 + 4, '\0');
-    char* out = &result[0];
+    char* out = result.data();
     size_t out_left = result.size();
 
     if (::iconv(cd, const_cast<char**>(&in), &in_left, &out, &out_left) == static_cast<size_t>(-1)) {
@@ -623,7 +624,7 @@ u32string locale::to_ucs4(const string& mb) const {
     const char* in = mb.data();
     size_t in_left = mb.size();
     u32string result(mb.size() + 1, U'\0');
-    auto out = reinterpret_cast<char*>(&result[0]);
+    auto* out = reinterpret_cast<char*>(result.data());
     size_t out_left = result.size() * sizeof(char32_t);
 
     if (::iconv(cd, const_cast<char**>(&in), &in_left, &out, &out_left) == static_cast<size_t>(-1)) {

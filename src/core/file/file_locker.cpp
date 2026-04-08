@@ -118,12 +118,12 @@ bool file_locker::is_locked(const difference_type offset, const difference_type 
     }
 
     if (fl.l_type == F_UNLCK) {
-        if (lock_out) {
+        if (lock_out != nullptr) {
             *lock_out = file_lock::SHARED;
         }
         return false;
     }
-    if (lock_out) {
+    if (lock_out != nullptr) {
         *lock_out = (fl.l_type == F_RDLCK) ? file_lock::SHARED : file_lock::EXCLUSIVE;
     }
     return true;

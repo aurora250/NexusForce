@@ -20,7 +20,7 @@ void dynamic_library::open() {
     }
 #else
     handle_ = ::dlopen(path_.data(), RTLD_LAZY | RTLD_LOCAL);
-    if (!handle_) {
+    if (handle_ == nullptr) {
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
         const char* err = ::dlerror();
         NEFORCE_THROW_EXCEPTION(dynamic_library_exception(err));
@@ -52,12 +52,14 @@ path_(move(other.path_)) {
 }
 
 dynamic_library& dynamic_library::operator=(dynamic_library&& other) noexcept {
-    if (this != &other) {
-        close();
-        handle_ = other.handle_;
-        path_ = move(other.path_);
-        other.handle_ = nullptr;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    close();
+    handle_ = other.handle_;
+    path_ = move(other.path_);
+    other.handle_ = nullptr;
     return *this;
 }
 
@@ -80,7 +82,7 @@ void* dynamic_library::symbol(const string& name) const {
     void* sym = ::dlsym(handle_, name.data());
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* error = ::dlerror();
-    if (error) {
+    if (error != nullptr) {
         NEFORCE_THROW_EXCEPTION(dynamic_library_exception(error));
     }
     return sym;

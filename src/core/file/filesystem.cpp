@@ -2,8 +2,8 @@
 #include <NeForce/core/file/filesystem.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <dirent.h>
-#    include <errno.h>
-#    include <stdio.h>
+#    include <cerrno>
+#    include <cstdio>
 #    include <sys/stat.h>
 #    include <unistd.h>
 #endif
@@ -111,7 +111,7 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) {
 
 #else
     ::DIR* dir = ::opendir(p.data());
-    if (!dir) {
+    if (dir == nullptr) {
         return false;
     }
 
@@ -211,8 +211,8 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
         return false;
     }
 
-    struct ::stat st{};
-    if (::fstat(src_fd, &st) == -1) {
+    struct ::stat64 st{};
+    if (::fstat64(src_fd, &st) == -1) {
         ::close(src_fd);
         return false;
     }
@@ -227,7 +227,7 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 
     char buf[8192];
     bool ok = true;
-    ::ssize_t r;
+    ssize_t r = 0;
     while ((r = ::read(src_fd, buf, sizeof(buf))) > 0) {
         if (::write(dst_fd, buf, static_cast<size_t>(r)) != r) {
             ok = false;
@@ -294,7 +294,7 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
 
 #else
     ::DIR* dir = ::opendir(src.data());
-    if (!dir) {
+    if (dir == nullptr) {
         return false;
     }
 

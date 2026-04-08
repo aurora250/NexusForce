@@ -108,12 +108,13 @@ struct virtual_thread_task {
      * @return 当前对象的引用
      */
     virtual_thread_task& operator=(virtual_thread_task&& other) noexcept {
-        if (this != &other) {
-            if (handle_ && !handle_.done()) {
-                handle_.destroy();
-            }
-            handle_ = _NEFORCE exchange(other.handle_, nullptr);
+        if (addressof(other) == this) {
+            return *this;
         }
+        if (handle_ && !handle_.done()) {
+            handle_.destroy();
+        }
+        handle_ = _NEFORCE exchange(other.handle_, nullptr);
         return *this;
     }
 };

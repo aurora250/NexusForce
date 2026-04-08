@@ -200,7 +200,7 @@ namespace {
                     http_cookie c = parse_set_cookie(value, request_host, request_path);
                     resp.cookies.emplace_back(move(c));
                 } else if (key_lower == "transfer-encoding") {
-                    resp.chunked = value.find("chunked") != string::npos;
+                    resp.chunked = value.contains("chunked");
                 } else if (key_lower == "content-length") {
                     try {
                         resp.content_length = uinteger64::parse(value).value();
@@ -523,7 +523,8 @@ http_client_response http_client::do_request(http_client_request request, int re
 
     update_cookies(response.cookies, req_url);
 
-    if (config_.follow_redirects && response.is_redirect() && redirect_count < config_.max_redirects) {
+    if (config_.follow_redirects && response.is_redirect() &&
+        static_cast<uint16_t>(redirect_count) < config_.max_redirects) {
         string_view location = response.header("Location");
         if (!location.empty()) {
             url new_url;

@@ -6,6 +6,9 @@
 #    include <minwindef.h>
 #    include <WinBase.h>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <cstring>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 error_code last_error() noexcept {
@@ -16,7 +19,7 @@ error_code last_error() noexcept {
 #endif
 }
 
-error_condition error_category::default_error_condition(int ev) const noexcept { return error_condition(ev, *this); }
+error_condition error_category::default_error_condition(int ev) const noexcept { return {ev, *this}; }
 
 bool error_category::equivalent(int code, const error_condition& condition) const noexcept {
     return default_error_condition(code) == condition;
@@ -36,20 +39,18 @@ string generic_error_category::message(int ev) const {
 #else
     char buf[256];
 #    if (_POSIX_C_SOURCE >= 200112L) && !defined(_GNU_SOURCE)
-    if (strerror_r(ev, buf, sizeof(buf)) == 0) {
+    if (::strerror_r(ev, buf, sizeof(buf)) == 0) {
         return string(buf);
     }
     return "unknown error " + _NEFORCE to_string(ev);
 #    else
-    const char* s = strerror_r(ev, buf, sizeof(buf));
-    return s ? string(s) : "unknown error " + _NEFORCE to_string(ev);
+    const char* s = ::strerror_r(ev, buf, sizeof(buf));
+    return s != nullptr ? string(s) : "unknown error " + _NEFORCE to_string(ev);
 #    endif
 #endif
 }
 
-error_condition generic_error_category::default_error_condition(int ev) const noexcept {
-    return error_condition(ev, *this);
-}
+error_condition generic_error_category::default_error_condition(int ev) const noexcept { return {ev, *this}; }
 
 const error_category& generic_category() noexcept {
     static generic_error_category instance;
@@ -65,8 +66,8 @@ string system_error_category::message(int ev) const {
     }
 
     ::LPSTR buf = nullptr;
-    ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
-                   static_cast<DWORD>(ev), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, 0, nullptr);
+    ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                     nullptr, static_cast<DWORD>(ev), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, 0, nullptr);
 
     string result{buf};
     ::LocalFree(buf);
@@ -234,13 +235,13 @@ error_condition system_error_category::default_error_condition(int ev) const noe
 string system_error_category::message(int ev) const {
     char buf[256];
 #    if (_POSIX_C_SOURCE >= 200112L) && !defined(_GNU_SOURCE)
-    if (strerror_r(ev, buf, sizeof(buf)) == 0) {
+    if (::strerror_r(ev, buf, sizeof(buf)) == 0) {
         return string(buf);
     }
     return "unknown error " + to_string(ev);
 #    else
-    const char* s = strerror_r(ev, buf, sizeof(buf));
-    return s ? string(s) : "unknown error " + _NEFORCE to_string(ev);
+    const char* s = ::strerror_r(ev, buf, sizeof(buf));
+    return s != nullptr ? string(s) : "unknown error " + _NEFORCE to_string(ev);
 #    endif
 }
 

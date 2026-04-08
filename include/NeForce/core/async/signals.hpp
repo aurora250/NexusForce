@@ -147,10 +147,11 @@ public:
      * @return 自身引用
      */
     scoped_connection& operator=(scoped_connection&& other) noexcept {
-        if (this != &other) {
-            conn_.disconnect();
-            conn_ = _NEFORCE move(other.conn_);
+        if (addressof(other) == this) {
+            return *this;
         }
+        conn_.disconnect();
+        conn_ = _NEFORCE move(other.conn_);
         return *this;
     }
 

@@ -4,7 +4,7 @@
 #    include <sysinfoapi.h>
 #    include <timezoneapi.h>
 #else
-#    include <time.h>
+#    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -25,7 +25,7 @@ NEFORCE_NODISCARD datetime datetime::now() noexcept {
 #elif defined(NEFORCE_PLATFORM_LINUX)
         const ::time_t now_time = ::time(nullptr);
         if (now_time == static_cast<::time_t>(-1)) {
-            return datetime();
+            return {};
         }
         ::tm local_tm{};
         ::localtime_r(&now_time, &local_tm);

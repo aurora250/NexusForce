@@ -26,7 +26,7 @@ private:
     void set_error(string error, uint32_t errno_val = 0) noexcept;
 
 public:
-    pgsql_prepared_statement(PGconn* conn, const string& sql);
+    pgsql_prepared_statement(PGconn* conn, string sql);
     ~pgsql_prepared_statement() override;
 
     NEFORCE_NODISCARD uint32_t param_count() const noexcept override { return param_count_; }

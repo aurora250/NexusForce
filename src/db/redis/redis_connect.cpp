@@ -4,7 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 ::redisReply* redis_connect::execute_command(const string_view command, const vector<string_view>& args) const {
-    if (!link_) {
+    if (link_ == nullptr) {
         return nullptr;
     }
 
@@ -27,10 +27,10 @@ bool redis_connect::authenticate(const string& password) const {
     if (password.empty()) {
         return true;
     }
-    const auto reply = execute_command("AUTH", {password.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "Authentication failed";
+    auto* const reply = execute_command("AUTH", {password.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "Authentication failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -44,10 +44,10 @@ bool redis_connect::select_database(const string& db_index) const {
         return true;
     }
     try {
-        const auto reply = execute_command("SELECT", {db_index.view()});
-        if (!reply || reply->type == REDIS_REPLY_ERROR) {
-            if (reply) {
-                last_error_ = reply->str ? reply->str : "SELECT failed";
+        auto* const reply = execute_command("SELECT", {db_index.view()});
+        if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+            if (reply != nullptr) {
+                last_error_ = reply->str != nullptr ? reply->str : "SELECT failed";
                 ::freeReplyObject(reply);
             }
             return false;
@@ -62,8 +62,8 @@ bool redis_connect::select_database(const string& db_index) const {
 
 bool redis_connect::connect(const db_config& config) {
     link_ = ::redisConnect(config.host.data(), config.port);
-    if (!link_ || link_->err) {
-        if (link_) {
+    if (link_ == nullptr || link_->err != 0) {
+        if (link_ != nullptr) {
             last_error_ = link_->errstr;
             ::redisFree(link_);
             link_ = nullptr;
@@ -89,7 +89,7 @@ bool redis_connect::reconnect(const db_config& config) {
 }
 
 void redis_connect::close() noexcept {
-    if (!link_) {
+    if (link_ == nullptr) {
         return;
     }
     ::redisFree(link_);
@@ -97,17 +97,17 @@ void redis_connect::close() noexcept {
 }
 
 string_view redis_connect::get_error() const {
-    if (link_ && link_->errstr[0] != '\0') {
+    if (link_ != nullptr && link_->errstr[0] != '\0') {
         last_error_ = link_->errstr;
     }
     return last_error_.view();
 }
 
 bool redis_connect::update(const string& sql) const {
-    const auto reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "Command failed";
+    auto* const reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "Command failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -117,10 +117,10 @@ bool redis_connect::update(const string& sql) const {
 }
 
 unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
-    const auto reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "Query failed";
+    auto* const reply = static_cast<::redisReply*>(::redisCommand(link_, sql.data()));
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "Query failed";
             ::freeReplyObject(reply);
         }
         return nullptr;
@@ -132,9 +132,9 @@ bool redis_connect::is_valid() const {
     if (!connected()) {
         return false;
     }
-    const auto reply = execute_command("PING");
-    if (!reply || reply->type != REDIS_REPLY_STATUS || string_compare(reply->str, "PONG") != 0) {
-        if (reply) {
+    auto* const reply = execute_command("PING");
+    if (reply == nullptr || reply->type != REDIS_REPLY_STATUS || string_compare(reply->str, "PONG") != 0) {
+        if (reply != nullptr) {
             ::freeReplyObject(reply);
         }
         return false;
@@ -144,10 +144,10 @@ bool redis_connect::is_valid() const {
 }
 
 bool redis_connect::set(const string& key, const string& value) {
-    const auto reply = execute_command("SET", {key.view(), value.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "SET failed";
+    auto* const reply = execute_command("SET", {key.view(), value.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "SET failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -158,10 +158,10 @@ bool redis_connect::set(const string& key, const string& value) {
 
 bool redis_connect::setex(const string& key, const string& value, const int seconds) {
     const string sec_str = integer32(seconds).to_string();
-    const auto reply = execute_command("SETEX", {key.view(), sec_str.view(), value.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "SETEX failed";
+    auto* const reply = execute_command("SETEX", {key.view(), sec_str.view(), value.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "SETEX failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -171,13 +171,13 @@ bool redis_connect::setex(const string& key, const string& value, const int seco
 }
 
 unique_ptr<idb_kv_result> redis_connect::get(const string& key) {
-    const auto reply = execute_command("GET", {key.view()});
-    if (!reply) {
+    auto* const reply = execute_command("GET", {key.view()});
+    if (reply == nullptr) {
         last_error_ = "GET command failed";
         return nullptr;
     }
     if (reply->type == REDIS_REPLY_ERROR) {
-        last_error_ = reply->str ? reply->str : "GET failed";
+        last_error_ = reply->str != nullptr ? reply->str : "GET failed";
         ::freeReplyObject(reply);
         return nullptr;
     }
@@ -185,10 +185,10 @@ unique_ptr<idb_kv_result> redis_connect::get(const string& key) {
 }
 
 bool redis_connect::del(const string& key) {
-    const auto reply = execute_command("DEL", {key.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "DEL failed";
+    auto* const reply = execute_command("DEL", {key.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "DEL failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -199,10 +199,10 @@ bool redis_connect::del(const string& key) {
 }
 
 bool redis_connect::exists(const string& key) {
-    const auto reply = execute_command("EXISTS", {key.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "EXISTS failed";
+    auto* const reply = execute_command("EXISTS", {key.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "EXISTS failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -214,10 +214,10 @@ bool redis_connect::exists(const string& key) {
 
 bool redis_connect::expire(const string& key, const int seconds) {
     const string sec_str = integer32(seconds).to_string();
-    const auto reply = execute_command("EXPIRE", {key.view(), sec_str.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "EXPIRE failed";
+    auto* const reply = execute_command("EXPIRE", {key.view(), sec_str.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "EXPIRE failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -228,10 +228,10 @@ bool redis_connect::expire(const string& key, const int seconds) {
 }
 
 bool redis_connect::hset(const string& key, const string& field, const string& value) {
-    const auto reply = execute_command("HSET", {key.view(), field.view(), value.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "HSET failed";
+    auto* const reply = execute_command("HSET", {key.view(), field.view(), value.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "HSET failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -241,13 +241,13 @@ bool redis_connect::hset(const string& key, const string& field, const string& v
 }
 
 unique_ptr<idb_kv_result> redis_connect::hget(const string& key, const string& field) {
-    const auto reply = execute_command("HGET", {key.view(), field.view()});
-    if (!reply) {
+    auto* const reply = execute_command("HGET", {key.view(), field.view()});
+    if (reply == nullptr) {
         last_error_ = "HGET command failed";
         return nullptr;
     }
     if (reply->type == REDIS_REPLY_ERROR) {
-        last_error_ = reply->str ? reply->str : "HGET failed";
+        last_error_ = reply->str != nullptr ? reply->str : "HGET failed";
         ::freeReplyObject(reply);
         return nullptr;
     }
@@ -255,13 +255,13 @@ unique_ptr<idb_kv_result> redis_connect::hget(const string& key, const string& f
 }
 
 unique_ptr<idb_kv_result> redis_connect::hgetall(const string& key) {
-    const auto reply = execute_command("HGETALL", {key.view()});
-    if (!reply) {
+    auto* const reply = execute_command("HGETALL", {key.view()});
+    if (reply == nullptr) {
         last_error_ = "HGETALL command failed";
         return nullptr;
     }
     if (reply->type == REDIS_REPLY_ERROR) {
-        last_error_ = reply->str ? reply->str : "HGETALL failed";
+        last_error_ = reply->str != nullptr ? reply->str : "HGETALL failed";
         ::freeReplyObject(reply);
         return nullptr;
     }
@@ -269,10 +269,10 @@ unique_ptr<idb_kv_result> redis_connect::hgetall(const string& key) {
 }
 
 bool redis_connect::lpush(const string& key, const string& value) {
-    const auto reply = execute_command("LPUSH", {key.view(), value.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "LPUSH failed";
+    auto* const reply = execute_command("LPUSH", {key.view(), value.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "LPUSH failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -282,10 +282,10 @@ bool redis_connect::lpush(const string& key, const string& value) {
 }
 
 bool redis_connect::rpush(const string& key, const string& value) {
-    const auto reply = execute_command("RPUSH", {key.view(), value.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "RPUSH failed";
+    auto* const reply = execute_command("RPUSH", {key.view(), value.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "RPUSH failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -297,13 +297,13 @@ bool redis_connect::rpush(const string& key, const string& value) {
 unique_ptr<idb_kv_result> redis_connect::lrange(const string& key, const int start, const int stop) {
     const string start_str = integer32(start).to_string();
     const string stop_str = integer32(stop).to_string();
-    const auto reply = execute_command("LRANGE", {key.view(), start_str.view(), stop_str.view()});
-    if (!reply) {
+    auto* const reply = execute_command("LRANGE", {key.view(), start_str.view(), stop_str.view()});
+    if (reply == nullptr) {
         last_error_ = "LRANGE command failed";
         return nullptr;
     }
     if (reply->type == REDIS_REPLY_ERROR) {
-        last_error_ = reply->str ? reply->str : "LRANGE failed";
+        last_error_ = reply->str != nullptr ? reply->str : "LRANGE failed";
         ::freeReplyObject(reply);
         return nullptr;
     }
@@ -311,10 +311,10 @@ unique_ptr<idb_kv_result> redis_connect::lrange(const string& key, const int sta
 }
 
 bool redis_connect::sadd(const string& key, const string& member) {
-    const auto reply = execute_command("SADD", {key.view(), member.view()});
-    if (!reply || reply->type == REDIS_REPLY_ERROR) {
-        if (reply) {
-            last_error_ = reply->str ? reply->str : "SADD failed";
+    auto* const reply = execute_command("SADD", {key.view(), member.view()});
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        if (reply != nullptr) {
+            last_error_ = reply->str != nullptr ? reply->str : "SADD failed";
             ::freeReplyObject(reply);
         }
         return false;
@@ -324,13 +324,13 @@ bool redis_connect::sadd(const string& key, const string& member) {
 }
 
 unique_ptr<idb_kv_result> redis_connect::smembers(const string& key) {
-    const auto reply = execute_command("SMEMBERS", {key.view()});
-    if (!reply) {
+    auto* const reply = execute_command("SMEMBERS", {key.view()});
+    if (reply == nullptr) {
         last_error_ = "SMEMBERS command failed";
         return nullptr;
     }
     if (reply->type == REDIS_REPLY_ERROR) {
-        last_error_ = reply->str ? reply->str : "SMEMBERS failed";
+        last_error_ = reply->str != nullptr ? reply->str : "SMEMBERS failed";
         ::freeReplyObject(reply);
         return nullptr;
     }
@@ -338,7 +338,7 @@ unique_ptr<idb_kv_result> redis_connect::smembers(const string& key) {
 }
 
 idb_connect* redis_factory::create_connect() {
-    auto conn = new redis_connect();
+    auto* conn = new redis_connect();
     if (!conn->connect(config_)) {
         delete conn;
         return nullptr;

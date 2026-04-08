@@ -194,10 +194,10 @@ optional<HTTP_CONTENT> static_file_filter::get_mime_type(const string& path) con
 }
 
 bool static_file_filter::is_safe_path(const string& path) {
-    if (path.find("..") != string::npos) {
+    if (path.contains("..")) {
         return false;
     }
-    if (path.find("//") != string::npos) {
+    if (path.contains("//")) {
         return false;
     }
     return true;

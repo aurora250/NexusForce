@@ -277,12 +277,15 @@ public:
      * @brief 移动赋值运算符
      */
     basic_timer& operator=(basic_timer&& other) noexcept {
-        if (this != &other) {
-            cancel();
-            task_id_ = other.task_id_;
-            expire_ = other.expire_;
-            other.task_id_ = 0;
+        if (addressof(other) == this) {
+            return *this;
         }
+
+        cancel();
+        task_id_ = other.task_id_;
+        expire_ = other.expire_;
+        other.task_id_ = 0;
+
         return *this;
     }
 

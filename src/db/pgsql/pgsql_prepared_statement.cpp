@@ -5,9 +5,9 @@
 #    include <NeForce/db/pgsql/pgsql_prepared_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, const string& sql) :
+pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, string sql) :
 conn_(conn),
-sql_(sql) {
+sql_(move(sql)) {
     static _NEFORCE atomic<uint64_t> stmt_counter{0};
     stmt_name_ = "pstmt_" + _NEFORCE to_string(stmt_counter++);
 
@@ -21,9 +21,7 @@ sql_(sql) {
                 param_num = param_num * 10 + (sql_[pos] - '0');
                 ++pos;
             }
-            if (param_num > max_param) {
-                max_param = param_num;
-            }
+            max_param = max(param_num, max_param);
         }
     }
     param_count_ = max_param;
@@ -38,7 +36,7 @@ sql_(sql) {
     last_errno_ = 0;
 
     ::PGresult* result = ::PQprepare(conn_, stmt_name_.data(), sql_.data(), static_cast<int>(param_count_), nullptr);
-    if (!result) {
+    if (result == nullptr) {
         set_error("Failed to prepare statement", 1);
         return;
     }
@@ -51,14 +49,14 @@ sql_(sql) {
 }
 
 pgsql_prepared_statement::~pgsql_prepared_statement() {
-    if (!conn_) {
+    if (conn_ == nullptr) {
         return;
     }
 
     try {
         const string deallocate_sql = "DEALLOCATE " + _NEFORCE move(stmt_name_);
         ::PGresult* result = ::PQexec(conn_, deallocate_sql.data());
-        if (result) {
+        if (result != nullptr) {
             ::PQclear(result);
         }
         data_.reset();
@@ -106,7 +104,7 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const void* data
         return false;
     }
 
-    if (!data || length == 0) {
+    if (data == nullptr || length == 0) {
         return bind_param(index, static_cast<const char*>(nullptr));
     }
 
@@ -133,7 +131,7 @@ bool pgsql_prepared_statement::execute() {
             ::PQexecPrepared(conn_, stmt_name_.data(), static_cast<int>(param_count_), data_->param_ptrs.data(),
                              data_->param_lengths.data(), data_->param_formats.data(), 0);
 
-    if (!result) {
+    if (result == nullptr) {
         set_error("Failed to execute prepared statement", 4);
         return false;
     }
@@ -158,7 +156,7 @@ unique_ptr<idb_prepared_result> pgsql_prepared_statement::execute_query() {
                                           data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
                                           data_->param_formats.empty() ? nullptr : data_->param_formats.data(), 0);
 
-    if (!result) {
+    if (result == nullptr) {
         set_error("Failed to execute prepared statement query", 6);
         return nullptr;
     }

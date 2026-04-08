@@ -3,7 +3,7 @@
 #    include <NeForce/core/async/atomic.hpp>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <errno.h>
+#    include <cerrno>
 #    include <fcntl.h>
 #    include <netinet/tcp.h>
 #    include <unistd.h>
@@ -67,10 +67,11 @@ socket_base::socket_base() {
 }
 
 socket_base& socket_base::operator=(socket_base&& other) noexcept {
-    if (this != &other) {
-        close();
-        fd_ = exchange(other.fd_, invalid_handle);
+    if (addressof(other) == this) {
+        return *this;
     }
+    close();
+    fd_ = exchange(other.fd_, invalid_handle);
     return *this;
 }
 

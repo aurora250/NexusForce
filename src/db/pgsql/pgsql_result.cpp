@@ -6,7 +6,7 @@ NEFORCE_BEGIN_NAMESPACE__
 pgsql_tb_result::pgsql_tb_result(::PGresult* result, const bool owns) :
 result_(result),
 owns_result_(owns) {
-    if (result_) {
+    if (result_ != nullptr) {
         row_count_ = ::PQntuples(result_);
         column_count_ = ::PQnfields(result_);
     }
@@ -14,7 +14,7 @@ owns_result_(owns) {
 
 pgsql_tb_result::~pgsql_tb_result() {
     try {
-        if (owns_result_ && result_) {
+        if (owns_result_ && result_ != nullptr) {
             ::PQclear(result_);
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
@@ -24,7 +24,7 @@ pgsql_tb_result::~pgsql_tb_result() {
 }
 
 bool pgsql_tb_result::is_null(const size_type index) const {
-    if (static_cast<int>(index) >= column_count_) {
+    if (index >= column_count_) {
         NEFORCE_THROW_EXCEPTION(database_exception("Column index out of range"));
     }
     return ::PQgetisnull(result_, static_cast<int>(current_row_), static_cast<int>(index)) != 0;
@@ -39,10 +39,10 @@ bool pgsql_tb_result::next() noexcept {
 }
 
 const vector<string_view>& pgsql_tb_result::column_names() const {
-    if (!(column_names_.empty() && result_)) {
+    if (!column_names_.empty() || result_ == nullptr) {
         column_names_.reserve(column_count_);
-        for (int i = 0; i < column_count_; ++i) {
-            column_names_.emplace_back(PQfname(result_, i));
+        for (size_type i = 0; i < column_count_; ++i) {
+            column_names_.emplace_back(::PQfname(result_, static_cast<int>(i)));
         }
     }
     return column_names_;
@@ -50,7 +50,7 @@ const vector<string_view>& pgsql_tb_result::column_names() const {
 
 string_view pgsql_tb_result::get(const size_type index) const {
     if (is_null(index)) {
-        return string_view();
+        return {};
     }
     return ::PQgetvalue(result_, static_cast<int>(current_row_), static_cast<int>(index));
 }
@@ -81,14 +81,14 @@ vector<char> pgsql_tb_result::get_blob(const size_type index) const {
         size_t unescaped_length = 0;
         byte_t* unescaped = ::PQunescapeBytea(reinterpret_cast<const byte_t*>(value.data()), &unescaped_length);
 
-        if (unescaped) {
+        if (unescaped != nullptr) {
             vector<char> result(unescaped, unescaped + unescaped_length);
             ::PQfreemem(unescaped);
             return result;
         }
     }
 
-    return vector<char>(value.data(), value.data() + length);
+    return {value.data(), value.data() + length};
 }
 
 uint64_t pgsql_tb_result::get_bit(const size_type index) const { return to_uint64(get(index).data(), nullptr, 2); }

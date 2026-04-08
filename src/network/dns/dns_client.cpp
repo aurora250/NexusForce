@@ -621,7 +621,7 @@ string dns_client::reverse_query(const string_view ip) {
         NEFORCE_THROW_EXCEPTION(dns_exception("IP address cannot be empty"));
     }
 
-    if (ip.find(':') != string::npos) {
+    if (ip.contains(':')) {
         NEFORCE_THROW_EXCEPTION(dns_exception("IPv6 reverse query not fully implemented"));
     }
 
