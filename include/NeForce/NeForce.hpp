@@ -42,6 +42,7 @@
 #include "NeForce/core/encrypt/sha256.hpp"
 #include "NeForce/core/encrypt/xor.hpp"
 #include "NeForce/core/exception/breakpoint.hpp"
+#include "NeForce/core/exception/error_category.hpp"
 #include "NeForce/core/exception/terminate.hpp"
 #include "NeForce/core/file/env/env_builder.hpp"
 #include "NeForce/core/file/env/env_parser.hpp"

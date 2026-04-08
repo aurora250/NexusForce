@@ -4,36 +4,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    bool read_line(smtp_socket::native_handle_type fd, string& out_line) {
-        out_line.clear();
-        char ch = '\0';
-        while (true) {
-            const ssize_t n = ::recv(fd, &ch, 1, 0);
-            if (n <= 0) {
-                return false;
-            }
-            if (ch == '\r') {
-                continue;
-            }
-            if (ch == '\n') {
-                return true;
-            }
-            out_line += ch;
-        }
-    }
-
-    void send_all(smtp_socket::native_handle_type fd, const string& data) {
-        size_t total = 0;
-        while (total < data.size()) {
-            const ssize_t n = ::send(fd, data.data() + total, static_cast<int>(data.size() - total), 0);
-            if (n <= 0) {
-                NEFORCE_THROW_EXCEPTION(smtp_exception("send failed"));
-            }
-            total += static_cast<size_t>(n);
-        }
-    }
-
-
     string build_message(const smtp_message& msg) {
         string result;
 

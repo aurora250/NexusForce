@@ -3,6 +3,8 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
 #    include <WinBase.h>
+#    include <winnt.h>
+#    include <profileapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <ctime>

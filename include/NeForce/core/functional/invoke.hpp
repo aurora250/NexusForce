@@ -549,14 +549,14 @@ NEFORCE_BEGIN_INNER__
 template <typename T, typename Tag, typename Res, typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 enable_if_t<is_invocable_r<Res, Callable, Args...>::value && is_void<Res>::value, Res>
 __invoke_r_dispatch(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-    __invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
+    inner::__invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
     return;
 }
 
 template <typename T, typename Tag, typename Res, typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 enable_if_t<is_invocable_r<Res, Callable, Args...>::value && !is_void<Res>::value, Res>
 __invoke_r_dispatch(Callable&& f, Args&&... args) noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-    return __invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
+    return inner::__invoke_dispatch<T>(Tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
 }
 
 NEFORCE_END_INNER__

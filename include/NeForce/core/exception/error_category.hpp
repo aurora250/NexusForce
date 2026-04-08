@@ -1,0 +1,58 @@
+#ifndef NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__
+#define NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__
+#include "NeForce/core/exception/errc.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+class error_code;
+class error_condition;
+
+class error_category : public icomparable<error_category> {
+public:
+    error_category() noexcept = default;
+    virtual ~error_category() noexcept = default;
+
+    error_category(const error_category&) = delete;
+    error_category& operator=(const error_category&) = delete;
+
+    virtual const char* name() const noexcept = 0;
+    virtual string message(int ev) const = 0;
+
+    virtual error_condition default_error_condition(int ev) const noexcept;
+
+    virtual bool equivalent(int code, const error_condition& condition) const noexcept;
+    virtual bool equivalent(const error_code& code, int condition) const noexcept;
+
+    bool operator==(const error_category& rhs) const noexcept { return this == &rhs; }
+    bool operator<(const error_category& rhs) const noexcept { return less<const error_category*>()(this, &rhs); }
+};
+
+
+class generic_error_category final : public error_category {
+public:
+    NEFORCE_NODISCARD const char* name() const noexcept override { return "generic"; }
+
+    NEFORCE_NODISCARD string message(int ev) const override;
+
+    NEFORCE_NODISCARD error_condition default_error_condition(int ev) const noexcept override;
+};
+
+const error_category& generic_category() noexcept;
+
+inline error_code make_error_code(errc e) noexcept;
+inline error_condition make_error_condition(errc e) noexcept;
+
+
+class system_error_category final : public error_category {
+public:
+    NEFORCE_NODISCARD const char* name() const noexcept override { return "system"; }
+
+    NEFORCE_NODISCARD string message(int ev) const override;
+
+    NEFORCE_NODISCARD error_condition default_error_condition(int ev) const noexcept override;
+};
+
+const error_category& system_category() noexcept;
+
+NEFORCE_END_NAMESPACE__
+#endif // NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__

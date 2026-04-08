@@ -70,6 +70,7 @@ bool secret::system_supported() {
         ::CryptReleaseContext(h_prov, 0);
         return true;
     }
+    return false;
 #else
     const int fd = ::open("/dev/urandom", O_RDONLY);
     if (fd == -1) {

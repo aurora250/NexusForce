@@ -22,12 +22,6 @@ namespace {
     constexpr int32_t SPECIAL = 32;
     constexpr int32_t SMALL = 64;
 
-    constexpr uint32_t do_div(uint32_t* n, const uint32_t base) {
-        const uint32_t remainder = *n % base;
-        *n = *n / base;
-        return remainder;
-    }
-
     NEFORCE_CONSTEXPR20 char* number(char* str, const int64_t num, const int base, int size, int precision, int type) {
 
         char sign = 0, tmp[66];

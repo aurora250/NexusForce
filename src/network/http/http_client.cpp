@@ -23,28 +23,6 @@ namespace {
         return result;
     }
 
-    string url_decode(const string_view str) {
-        string result;
-        result.reserve(str.size());
-
-        for (size_t i = 0; i < str.size(); ++i) {
-            if (str[i] == '%' && i + 2 < str.size()) {
-                const auto xpair = hexadecimal::xdigit_value(str[i + 1], str[i + 2]);
-                if (xpair.first) {
-                    result += static_cast<char>(xpair.second);
-                    i += 2;
-                } else {
-                    result += str[i];
-                }
-            } else if (str[i] == '+') {
-                result += ' ';
-            } else {
-                result += str[i];
-            }
-        }
-        return result;
-    }
-
     bool parse_chunked_body(const string_view chunked, string& decoded) {
         decoded.clear();
         size_t pos = 0;

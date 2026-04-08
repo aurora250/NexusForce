@@ -10,9 +10,7 @@
  * 不进行内存分配，性能高效。适用于函数参数传递，避免不必要的拷贝。
  */
 
-#include "basic_string_view.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
-#include "NeForce/core/iterator/reverse_iterator.hpp"
 #include "NeForce/core/string/char_traits.hpp"
 #include "NeForce/core/string/char_types.hpp"
 NEFORCE_BEGIN_NAMESPACE__

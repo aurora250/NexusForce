@@ -58,14 +58,14 @@ semaphore::semaphore(long initial, long maximum) {
     NEFORCE_CONSTEXPR_ASSERT(maximum >= initial);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    handle_ = ::CreateSemaphoreW(nullptr, initial, maximum, nullptr);
+    handle_ = ::CreateSemaphoreA(nullptr, initial, maximum, nullptr);
     if (handle_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateSemaphoreW failed"));
     }
 #else
-    ignore = maximum;
+    (void) maximum;
     int ret = ::sem_init(&sem_, 0, static_cast<unsigned>(initial));
-    if (ret == 0) {
+    if (ret != 0) {
         NEFORCE_THROW_EXCEPTION(system_exception("sem_init failed"));
     }
 #endif

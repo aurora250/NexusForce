@@ -16,6 +16,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_category.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp

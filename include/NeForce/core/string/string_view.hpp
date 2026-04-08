@@ -1,6 +1,6 @@
 #ifndef NEFORCE_CORE_STRING_STRING_VIEW_HPP__
 #define NEFORCE_CORE_STRING_STRING_VIEW_HPP__
-#include "basic_string_view.hpp"
+#include "NeForce/core/string/basic_string_view.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

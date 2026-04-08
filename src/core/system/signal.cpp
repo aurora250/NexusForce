@@ -24,7 +24,6 @@ namespace {
         signal_manager& manager = signal_manager::instance();
         manager.send_signal(static_cast<signal_event>(sig));
     }
-    void alarm_handler(int sig) { signal_manager::instance().send_signal(signal_event::TIMEOUT); }
 
     bool is_valid_posix_signal(const int sig) { return sig > 0 && sig < 64; }
     bool is_windows_simulated_event(signal_event event) {
