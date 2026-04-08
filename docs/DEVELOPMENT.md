@@ -1,7 +1,7 @@
 # NexusForce 开发规范
 
 本文档面向 NexusForce 的所有贡献者，定义项目的**设计哲学**与**开发思维规范**。  
-关于代码格式（缩进、空格、换行等），请遵循项目根目录的 `.clang-format` 配置。
+关于代码格式（缩进、空格、换行等），请遵循项目根目录的 Clang-Format 配置。
 
 > **核心目标**：功能健全、风格统一、可读性强、社区共建、跨平台兼容。
 
@@ -145,7 +145,7 @@ NexusForce 遵循**语义化版本**：`MAJOR.MINOR.PATCH`
 
 每个 PR 必须通过：
 
-- `.clang-format` 格式化检查
+-ClangFormat格式化检查
 - **Clang-Tidy**
 - **CodeQL** 安全分析
 - **Valgrind** 内存泄漏检测
@@ -192,7 +192,7 @@ NexusForce 遵循**语义化版本**：`MAJOR.MINOR.PATCH`
 - 资源泄漏
 - 测试覆盖是否充分
 
-**禁止**：因个人风格偏好拒绝 PR（交给 `.clang-format` 和 Clang-Tidy）。
+**禁止**：因个人风格偏好拒绝 PR（交给 Clang-Format 和 Clang-Tidy）。
 
 ### 6.3 Git 提交规范
 
@@ -269,7 +269,7 @@ NexusForce 遵循**语义化版本**：`MAJOR.MINOR.PATCH`
 
 ### 8.3 致谢
 
-所有贡献者将列入 [`CONTRIBUTORS.md`](CONTRIBUTORS.md)。  
+所有贡献者将列入 [`CONTRIBUTORS.md`](../CONTRIBUTORS.md)。  
 重大设计或性能突破将在 `CHANGELOG.md` 中特别致谢。
 
 ---
