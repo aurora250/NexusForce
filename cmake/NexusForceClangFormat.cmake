@@ -19,6 +19,9 @@ file(GLOB_RECURSE NEXUSFORCE_FORMAT_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.hpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.hpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.h"
 )
 
 list(FILTER NEXUSFORCE_FORMAT_SOURCES EXCLUDE REGEX ".*/build/.*")

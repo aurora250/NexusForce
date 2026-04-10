@@ -733,7 +733,7 @@ void test_ftp_client() {
         client.login_anonymous();
 
         auto entries = client.list();
-        for (const auto& e : entries) {
+        for (const auto& e: entries) {
             println(e.is_directory ? "d" : "-", e.name);
         }
 

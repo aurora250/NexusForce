@@ -316,8 +316,7 @@ void test_atomic() {
 
 bool open_file(const char* path, error_code& ec) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    HANDLE h = CreateFileA(path, GENERIC_READ, FILE_SHARE_READ,
-                           nullptr, OPEN_EXISTING, 0, nullptr);
+    HANDLE h = CreateFileA(path, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, nullptr);
     if (h == INVALID_HANDLE_VALUE) {
         ec = last_error();
         return false;
