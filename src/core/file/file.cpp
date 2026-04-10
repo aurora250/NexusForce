@@ -130,9 +130,7 @@ void file::reset_sub_objects() noexcept {
     info_.reset();
 }
 
-void file::set_last_error() const {
-    last_error_code_ = _NEFORCE last_error();
-}
+void file::set_last_error() const { last_error_code_ = _NEFORCE last_error(); }
 
 void file::adjust_buffer_size() {
     if (!opened_ || handle_ == invalid_handle) {
@@ -926,9 +924,7 @@ uint64_t file::size64() const {
 #endif
 }
 
-void file::clear_error() noexcept {
-    last_error_code_.clear();
-}
+void file::clear_error() noexcept { last_error_code_.clear(); }
 
 bool file::seek(const difference_type distance, file_pointer method) const {
     if (!opened_ || handle_ == invalid_handle) {
@@ -1119,10 +1115,7 @@ bool file::prefetch(const size_type hint_size) const {
                 ::posix_fadvise(handle_, current_pos, static_cast<difference_type>(prefetch_size), POSIX_FADV_WILLNEED);
 
         if (advice_result != 0) {
-            last_error_code_ = advice_result;
-            char buf[256];
-            const char* msg = strerror_r(advice_result, buf, sizeof(buf));
-            last_error_msg_ = msg;
+            last_error_code_ = static_cast<errc>(advice_result);
         }
     }
     return fill_read_buffer();

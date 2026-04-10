@@ -4,10 +4,10 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 ftp_protocol::ftp_protocol(ftp_protocol&& other) noexcept :
-    tls_active_(other.tls_active_),
-    ctrl_ssl_(move(other.ctrl_ssl_)),
-    ssl_ctx_(other.ssl_ctx_),
-    data_tls_(other.data_tls_) {
+tls_active_(other.tls_active_),
+ctrl_ssl_(move(other.ctrl_ssl_)),
+ssl_ctx_(other.ssl_ctx_),
+data_tls_(other.data_tls_) {
     other.tls_active_ = false;
     other.ssl_ctx_ = nullptr;
     other.data_tls_ = false;
@@ -35,15 +35,19 @@ ssize_t ftp_protocol::ctrl_send(const char* data, const size_t len) {
 }
 
 ssize_t ftp_protocol::ctrl_recv(char* buf, const size_t len) {
-    if (len == 0) return 0;
+    if (len == 0) {
+        return 0;
+    }
 
     if (buffer_pos_ >= buffer_size_) {
         buffer_pos_ = 0;
-        ssize_t n;
+        ssize_t n = 0;
         if (tls_active_) {
             n = ctrl_ssl_.read(buffer_, kBufferSize);
         } else {
-            if (fd_ == invalid_handle) return -1;
+            if (fd_ == invalid_handle) {
+                return -1;
+            }
             n = ::recv(fd_, buffer_, static_cast<int>(kBufferSize), 0);
         }
 
@@ -156,8 +160,6 @@ void ftp_protocol::send_response(const int code, const string& msg) {
     }
 }
 
-void ftp_protocol::send_response(const response& resp) {
-    send_response(resp.code, resp.message);
-}
+void ftp_protocol::send_response(const response& resp) { send_response(resp.code, resp.message); }
 
 NEFORCE_END_NAMESPACE__

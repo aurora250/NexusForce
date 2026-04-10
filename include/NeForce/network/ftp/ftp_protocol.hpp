@@ -73,7 +73,8 @@ protected:
     ftp_protocol(ftp_protocol&& other) noexcept;
     ftp_protocol& operator=(ftp_protocol&& other) noexcept;
 
-    explicit ftp_protocol(native_handle_type fd) : ip_socket(fd) {}
+    explicit ftp_protocol(native_handle_type fd) :
+    ip_socket(fd) {}
 
     ssize_t ctrl_send(const char* data, size_t len);
     ssize_t ctrl_recv(char* buf, size_t len);
@@ -83,7 +84,10 @@ protected:
     void send_response(int code, const string& msg);
     void send_response(const response& resp);
 
-    void clear_buffer() { buffer_pos_ = 0; buffer_size_ = 0; }
+    void clear_buffer() {
+        buffer_pos_ = 0;
+        buffer_size_ = 0;
+    }
 };
 
 NEFORCE_END_NAMESPACE__

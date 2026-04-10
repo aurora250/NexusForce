@@ -16,6 +16,7 @@
 - 添加 lru_cache / ttl_cache
 - 添加断点调用 breakpoint
 - 添加错误码系统 errc / error_category / error_code / error_condition
+- 添加路径树 path_tree
 - 添加端序操作 endian
 - 添加 shared_ptr / weak_ptr 特化的 atomic 无锁操作
 - 添加反射系统与反射注册表 registry
@@ -31,15 +32,19 @@
 - 添加 ICMP / SMTP socket 操作
 - 添加 ARP / MAC / IP / ports 操作
 - 添加 Websockets 通信操作
+- 添加 cacert 证书测试
 
 ### 🔧 Improvements
-- 通过 CodeQL / Clang-Format / Clang-Tidy 自动化工作流分析
+- 完善配置项并通过 CodeQL / Clang-Format / Clang-Tidy 进行自动化分析
+- 完善 README 特性项
 - 使用外部配置 cmake 选项
 - 使用 vcpkg 包管理
 - 大幅优化 network 结构设计
+- 优化文档结构
 - 优化 FUTEX / atomic 设计结构
 - 优化 call_once 设计
 - 优化 path / file 设计，分离职责到子工具类
+- 使用 iiterator 优化迭代器实现
 - 优化随机数生成器的结构设计
 - 优化 UTF 转换操作实现
 - 优化 formatter 实现
@@ -47,7 +52,10 @@
 - 使用 none 统一工具类的空表示
 - 优化 WinSock 初始化方式
 - 优化数据库连接池实现
+- 优化测试结构
 - 使用匿名命名空间优化编译单元内部实现
+- 去除 builtin_allocator 内置行为的分配器
+- 去除 device 操作
 
 ### 📚 Documentation
 - 除 db 与 network 外的大部分 API 文档

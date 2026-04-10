@@ -11,7 +11,7 @@
 #    include <linux/if_packet.h>
 #    include <net/if.h>
 #    include <sys/ioctl.h>
-#    include <unistd.h>
+#    include <linux/if_arp.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -195,7 +195,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     return none;
 
 #else
-    if (!sock_.is_open() && !open(iface_.empty() ? nullptr : iface_.c_str())) {
+    if (!sock_.is_open() && !open(iface_.empty() ? nullptr : iface_.data())) {
         return none;
     }
     int fd = sock_.native_handle();

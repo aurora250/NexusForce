@@ -6,7 +6,8 @@ NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API ftp_session final : public ftp_protocol {
 public:
-    explicit ftp_session(tcp_socket&& sock) : ftp_protocol(sock.release()) {}
+    explicit ftp_session(tcp_socket&& sock) :
+    ftp_protocol(sock.release()) {}
 
     ftp_session(const ftp_session&) = delete;
     ftp_session& operator=(const ftp_session&) = delete;
@@ -44,7 +45,9 @@ public:
 
     NEFORCE_NODISCARD optional<ftp_session> accept_nonblock() {
         auto sock = acceptor_.accept_nonblock();
-        if (sock) return optional<ftp_session>{ftp_session{move(*sock)}};
+        if (sock) {
+            return optional<ftp_session>{ftp_session{move(*sock)}};
+        }
         return {};
     }
 

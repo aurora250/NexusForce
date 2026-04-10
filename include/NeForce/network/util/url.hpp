@@ -102,7 +102,7 @@ struct url : iobject<url> {
 
     NEFORCE_NODISCARD static string decode_tolerant(string_view str);
 
-    NEFORCE_NODISCARD static void parse_query(string_view query, unordered_map<string, string>& params);
+    static void parse_query(string_view query, unordered_map<string, string>& params);
 
     NEFORCE_NODISCARD static string build_query(const unordered_map<string, string>& params);
 };
