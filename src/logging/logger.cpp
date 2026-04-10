@@ -83,7 +83,7 @@ void logger::worker_loop() {
     }
 }
 
-logger::logger(const LOG_LEVEL level, const bool async) :
+logger::logger(const log_level level, const bool async) :
 level_(level),
 async_(async),
 running_(false) {
@@ -120,7 +120,7 @@ void logger::add_sink(shared_ptr<log_sink> sink) {
     sinks_.push_back(move(sink));
 }
 
-void logger::set_level(const LOG_LEVEL level) { level_ = level; }
+void logger::set_level(const log_level level) { level_ = level; }
 
 void logger::set_filter(function<bool(const log_event&)> filter) {
     lock<mutex> lock(filter_mutex_);
@@ -165,7 +165,7 @@ void logger::enable_async(const bool async) {
     }
 }
 
-void logger::log(const LOG_LEVEL level, string msg, string file, string func, const int line) {
+void logger::log(const log_level level, string msg, string file, string func, const int line) {
     if (level < level_) {
         return;
     }

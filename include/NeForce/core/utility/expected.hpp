@@ -1,6 +1,7 @@
 #ifndef NEFORCE_CORE_UTILITY_EXPECTED_HPP__
 #define NEFORCE_CORE_UTILITY_EXPECTED_HPP__
 #include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/memory/construct.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 
@@ -111,63 +112,6 @@ public:
 template <typename ErrorT>
 unexpected(ErrorT) -> unexpected<ErrorT>;
 #endif
-
-
-template <typename T>
-struct temporary_guard {
-    static_assert(is_nothrow_move_constructible_v<T>, "T must be nothrow move constructible");
-
-private:
-    T* guarded_ptr;
-    T temp;
-
-public:
-    constexpr explicit temporary_guard(T& value) :
-    guarded_ptr(_NEFORCE addressof(value)),
-    temp(_NEFORCE move(value)) {
-        _NEFORCE destroy(guarded_ptr);
-    }
-
-    NEFORCE_CONSTEXPR20 ~temporary_guard() {
-        if (guarded_ptr) {
-            NEFORCE_UNLIKELY { _NEFORCE construct(guarded_ptr, _NEFORCE move(temp)); }
-        }
-    }
-
-    temporary_guard(const temporary_guard&) = delete;
-    temporary_guard& operator=(const temporary_guard&) = delete;
-
-    constexpr T&& release() noexcept {
-        guarded_ptr = nullptr;
-        return _NEFORCE move(temp);
-    }
-};
-
-template <typename NT, typename OT, typename Arg>
-constexpr enable_if_t<is_nothrow_constructible_v<NT, Arg>>
-reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructible_v<NT, Arg>) {
-    _NEFORCE destroy(old_val);
-    _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
-    return;
-}
-
-template <typename NT, typename OT, typename Arg>
-constexpr enable_if_t<!is_nothrow_constructible_v<NT, Arg> && is_nothrow_move_constructible_v<NT>>
-reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructible_v<NT, Arg>) {
-    NT temp(_NEFORCE forward<Arg>(arg));
-    _NEFORCE destroy(old_val);
-    _NEFORCE construct(new_val, _NEFORCE move(temp));
-    return;
-}
-
-template <typename NT, typename OT, typename Arg>
-constexpr enable_if_t<!is_nothrow_constructible_v<NT, Arg> && !is_nothrow_move_constructible_v<NT>>
-reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructible_v<NT, Arg>) {
-    temporary_guard<OT> guard(*old_val);
-    _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
-    guard.release();
-    return;
-}
 
 
 template <typename T, typename ErrorT, typename Dummy>
@@ -494,10 +438,9 @@ public:
                           is_nothrow_swappable<T&>, is_nothrow_swappable<ErrorT&>>) {
         if (has_value_) {
             if (other.has_value_) {
-                using _NEFORCE swap;
-                swap(value_, other.value_);
+                _NEFORCE swap(value_, other.value_);
             } else {
-                swap_value_error(other);
+                this->swap_value_error(other);
             }
         } else {
             if (other.has_value_) {
@@ -843,7 +786,7 @@ public:
     template <typename U, typename Err2, enable_if_t<!is_void_v<U>, int> = 0>
     constexpr bool operator==(const expected<U, Err2>& rhs) {
         if (has_value()) {
-            return rhs.has_value() && this == *rhs;
+            return rhs.has_value() && value_ == *rhs;
         } else {
             return !rhs.has_value() && error() == rhs.error();
         }
@@ -851,7 +794,7 @@ public:
 
     template <typename U>
     constexpr bool operator==(const U& value) {
-        return has_value() && this == value;
+        return has_value() && value_ == value;
     }
 
     template <typename Err2>
@@ -1088,8 +1031,7 @@ public:
                 has_value_ = true;
                 other.has_value_ = false;
             } else {
-                using _NEFORCE swap;
-                swap(error_, other.error_);
+                _NEFORCE swap(error_, other.error_);
             }
         }
     }

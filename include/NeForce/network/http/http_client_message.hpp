@@ -4,8 +4,9 @@
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/http/http_session.hpp"
-#include "NeForce/network/ports.hpp"
+#include "NeForce/network/util/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
 struct http_client_response {
 public:
@@ -19,7 +20,7 @@ public:
     milliseconds connect_time{0};
     milliseconds send_time{0};
     milliseconds receive_time{0};
-    HTTP_STATUS status = HTTP_STATUS::S2_OK;
+    http_status status = http_status::S2_OK;
     string status_message;
     unordered_map<string, vector<string>> headers;
     string body;
@@ -66,7 +67,7 @@ public:
 
 
 struct http_client_request {
-    HTTP_METHOD method{HTTP_METHOD::GET()};
+    http_method method{http_method::GET()};
     string host;
     ports port;
     string path = "/";
@@ -90,5 +91,6 @@ struct http_client_request {
     NEFORCE_NODISCARD string build_full_path() const;
 };
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_HTTP_CLIENT_MESSAGE_HPP__

@@ -1,4 +1,4 @@
-#include <NeForce/network/socket/socket_base.hpp>
+#include <NeForce/network/socket_base.hpp>
 #include <NeForce/network/ssl/ssl_stream.hpp>
 #include <openssl/err.h>
 NEFORCE_BEGIN_NAMESPACE__

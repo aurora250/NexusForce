@@ -22,6 +22,7 @@ void test_cmd(int argc, char* argv[]);
 void test_rnd();
 void test_locale();
 void test_atomic();
+void test_errc();
 
 void test_regex();
 void test_format();
@@ -40,6 +41,7 @@ void test_traceroute();
 void test_ping();
 void test_arp();
 void test_smtp();
+void test_ftp_client();
 
 void test_ini();
 void test_env();

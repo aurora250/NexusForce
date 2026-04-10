@@ -3,6 +3,7 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/network/http/http_filter.hpp>
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
 void http_filter_chain::add_filter(unique_ptr<http_filter> filter) {
     if (filter) {
@@ -87,14 +88,14 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
         return true;
     }
 
-    response.headers[HTTP_KEY::Access_Control_Allow_Origin()] = allowed_origins;
-    response.headers[HTTP_KEY::Access_Control_Allow_Credentials()] = to_string(allow_credentials);
-    response.headers[HTTP_KEY::Access_Control_Allow_Methods()] = allowed_methods.to_string();
-    response.headers[HTTP_KEY::Access_Control_Allow_Headers()] = allowed_headers;
-    response.headers[HTTP_KEY::Access_Control_Max_Age()] = to_string(max_age);
+    response.headers[http_key::Access_Control_Allow_Origin()] = allowed_origins;
+    response.headers[http_key::Access_Control_Allow_Credentials()] = to_string(allow_credentials);
+    response.headers[http_key::Access_Control_Allow_Methods()] = allowed_methods.to_string();
+    response.headers[http_key::Access_Control_Allow_Headers()] = allowed_headers;
+    response.headers[http_key::Access_Control_Max_Age()] = to_string(max_age);
 
     if (request.method.is_options()) {
-        response.status = HTTP_STATUS::S2_NO_CONTENT;
+        response.status = http_status::S2_NO_CONTENT;
         response.status_message = "No Content";
         return false;
     }
@@ -134,7 +135,7 @@ bool logging_filter::pre_filter(http_request& request, http_response& response) 
 }
 
 void logging_filter::post_filter(http_request& request, http_response& response) {
-    using UT = underlying_type_t<HTTP_STATUS>;
+    using UT = underlying_type_t<http_status>;
 
     string log_msg = "[" + datetime::now().to_string() + "] Response: " + to_string(static_cast<UT>(response.status));
 
@@ -169,25 +170,25 @@ root_path_(_NEFORCE move(root_path)) {
         root_path_ += "/";
     }
 
-    mime_types_[".css"] = HTTP_CONTENT::CSS_TEXT();
-    mime_types_[".jpg"] = HTTP_CONTENT::JPEG_IMG();
-    mime_types_[".jpeg"] = HTTP_CONTENT::JPEG_IMG();
-    mime_types_[".png"] = HTTP_CONTENT::PNG_IMG();
-    mime_types_[".bmp"] = HTTP_CONTENT::BMP_IMG();
-    mime_types_[".webp"] = HTTP_CONTENT::WEBP_IMG();
-    mime_types_[".html"] = HTTP_CONTENT::HTML_TEXT();
-    mime_types_[".htm"] = HTTP_CONTENT::HTML_TEXT();
-    mime_types_[".json"] = HTTP_CONTENT::JSON_APP();
-    mime_types_[".txt"] = HTTP_CONTENT::PLAIN_TEXT();
-    mime_types_[".xml"] = HTTP_CONTENT::XML_TEXT();
+    mime_types_[".css"] = http_content::CSS_TEXT();
+    mime_types_[".jpg"] = http_content::JPEG_IMG();
+    mime_types_[".jpeg"] = http_content::JPEG_IMG();
+    mime_types_[".png"] = http_content::PNG_IMG();
+    mime_types_[".bmp"] = http_content::BMP_IMG();
+    mime_types_[".webp"] = http_content::WEBP_IMG();
+    mime_types_[".html"] = http_content::HTML_TEXT();
+    mime_types_[".htm"] = http_content::HTML_TEXT();
+    mime_types_[".json"] = http_content::JSON_APP();
+    mime_types_[".txt"] = http_content::PLAIN_TEXT();
+    mime_types_[".xml"] = http_content::XML_TEXT();
 }
 
-optional<HTTP_CONTENT> static_file_filter::get_mime_type(const string& path) const {
+optional<http_content> static_file_filter::get_mime_type(const string& path) const {
     for (const auto& mime: mime_types_) {
         const auto& ext = mime.first;
         auto type = mime.second;
         if (path.ends_with(ext.view())) {
-            return optional<HTTP_CONTENT>{move(type)};
+            return optional<http_content>{move(type)};
         }
     }
     return none;
@@ -211,9 +212,9 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
     const string& req_path = request.path;
 
     if (!is_safe_path(req_path)) {
-        response.status = HTTP_STATUS::S4_FORBIDDEN;
+        response.status = http_status::S4_FORBIDDEN;
         response.status_message = "Forbidden";
-        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
+        response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Access denied";
         return false;
     }
@@ -232,9 +233,9 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
 
         const size_t file_size = filesystem::size(file_path);
         if (file_size > max_file_size_) {
-            response.status = HTTP_STATUS::S4_PAYLOAD_LARGE;
+            response.status = http_status::S4_PAYLOAD_LARGE;
             response.status_message = "Payload Too Large";
-            response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
+            response.set_content_type(http_content::PLAIN_TEXT());
             response.body = "File too large";
             return false;
         }
@@ -248,7 +249,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             response.body = file(file_path).read();
         }
 
-        response.status = HTTP_STATUS::S2_OK;
+        response.status = http_status::S2_OK;
         response.status_message = "OK";
         response.set_content_type(*mime_type);
 
@@ -263,7 +264,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
     }
 }
 
-void static_file_filter::add_mime_type(const string& extension, HTTP_CONTENT content_type) {
+void static_file_filter::add_mime_type(const string& extension, http_content content_type) {
     if (!extension.empty()) {
         mime_types_[extension] = _NEFORCE move(content_type);
     }
@@ -289,9 +290,9 @@ bool rate_limit_filter::pre_filter(http_request& request, http_response& respons
     info.count++;
 
     if (info.count > max_requests) {
-        response.status = HTTP_STATUS::S4_MANY_REQUESTS;
+        response.status = http_status::S4_MANY_REQUESTS;
         response.status_message = "Too Many Requests";
-        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
+        response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Rate limit exceeded";
         response.set_header("Retry-After", to_string(window_seconds.count()));
         return false;
@@ -337,9 +338,9 @@ bool authentication_filter::pre_filter(http_request& request, http_response& res
     }
 
     if (!auth_validator_(request)) {
-        response.status = HTTP_STATUS::S4_UNAUTHORIZED;
+        response.status = http_status::S4_UNAUTHORIZED;
         response.status_message = "Unauthorized";
-        response.set_content_type(HTTP_CONTENT::PLAIN_TEXT());
+        response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Authentication required";
         response.set_header("WWW-Authenticate", "Bearer");
         return false;
@@ -348,4 +349,5 @@ bool authentication_filter::pre_filter(http_request& request, http_response& res
     return true;
 }
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__

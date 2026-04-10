@@ -2,9 +2,10 @@
 #define NEFORCE_NETWORK_HTTP_SERVER_HPP__
 #include "NeForce/core/numeric/random.hpp"
 #include "NeForce/network/http/http_router.hpp"
-#include "NeForce/network/tcp_server.hpp"
-#include "NeForce/network/websocket.hpp"
+#include "NeForce/network/http/websocket.hpp"
+#include "NeForce/network/tcp/tcp_server.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
 struct NEFORCE_API http_server_base {
 public:
@@ -40,22 +41,20 @@ protected:
 
     static string compute_websocket_accept(string_view key);
 
-    static void parse_cookies(string_view cookie_header, http_request& request);
     static void parse_parameters(http_request& request);
-    static string build_response_str(const http_response& response);
 
-    static http_request parse_request(tcp_socket* client_socket, session_manager& manager, const HTTP_COOKIE_NAME& name,
+    static http_request parse_request(tcp_socket* client_socket, session_manager& manager, const http_cookie_name& name,
                                       size_t max_header_size = http_server_base::max_header_size,
                                       size_t max_body_size = http_server_base::max_body_size);
 
     static void add_session_cookie(const http_request& request, http_response& response, http_session* session,
-                                   const HTTP_COOKIE_NAME& name);
+                                   const http_cookie_name& name);
 
     static http_session* get_or_create_session(http_request& request, bool create, session_manager& manager,
-                                               const HTTP_COOKIE_NAME& name);
+                                               const http_cookie_name& name);
 
     static void send_response(tcp_socket* client_socket, const http_response& response);
-    static void send_error_response(tcp_socket* client_socket, HTTP_STATUS status, const string& message);
+    static void send_error_response(tcp_socket* client_socket, http_status status, const string& message);
 };
 
 
@@ -73,7 +72,7 @@ private:
     websocket_server<socket_type> ws_server_;
     session_manager session_manager_;
 
-    HTTP_COOKIE_NAME cookie_name_{HTTP_COOKIE_NAME::JSESSIONID()};
+    http_cookie_name cookie_name_{http_cookie_name::JSESSIONID()};
 
 public:
     size_t max_header_size_{max_header_size};
@@ -87,7 +86,7 @@ private:
                                                        cookie_name_, max_header_size_, max_body_size_);
 
             if (client_socket.is_ssl()) {
-                request.set_header(HTTP_KEY::X_Forwarded_Proto(), "https");
+                request.set_header(http_key::X_Forwarded_Proto(), "https");
             }
 
             if (enable_websocket_ && this->try_websocket_upgrade(client_socket, request)) {
@@ -97,12 +96,12 @@ private:
             http_session* sess = this->get_or_create_session(request, true, session_manager_, cookie_name_);
             this->handle_request_with_forward(client_socket, request, sess);
         } catch (const http_exception& e) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S4_BAD_REQUEST, e.what());
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S4_BAD_REQUEST, e.what());
         } catch (const exception& e) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S5_INTERNAL_ERROR,
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S5_INTERNAL_ERROR,
                                       e.what());
         } catch (...) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S5_INTERNAL_ERROR,
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S5_INTERNAL_ERROR,
                                       "Unknown internal error");
         }
     }
@@ -123,7 +122,7 @@ private:
         string accept = compute_websocket_accept(key);
 
         http_response upgrade_response;
-        upgrade_response.status = HTTP_STATUS::S1_SWITCH_PROTOCOL;
+        upgrade_response.status = http_status::S1_SWITCH_PROTOCOL;
         upgrade_response.status_message = "Switching Protocols";
         upgrade_response.set_header("Upgrade", "websocket");
         upgrade_response.set_header("Connection", "Upgrade");
@@ -157,7 +156,7 @@ private:
         }
 
         if (forward_count >= max_forward_count) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), HTTP_STATUS::S5_INTERNAL_ERROR,
+            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S5_INTERNAL_ERROR,
                                       "Too many forwards");
         }
     }
@@ -186,9 +185,9 @@ public:
     NEFORCE_NODISCARD websocket_server<socket_type>& websocket() noexcept { return ws_server_; }
     NEFORCE_NODISCARD const websocket_server<socket_type>& websocket() const noexcept { return ws_server_; }
 
-    void set_cookie_name(HTTP_COOKIE_NAME name) noexcept { cookie_name_ = move(name); }
+    void set_cookie_name(http_cookie_name name) noexcept { cookie_name_ = move(name); }
 
-    NEFORCE_NODISCARD const HTTP_COOKIE_NAME& cookie_name() const noexcept { return cookie_name_; }
+    NEFORCE_NODISCARD const http_cookie_name& cookie_name() const noexcept { return cookie_name_; }
 
     void set_session_cleanup_interval(const seconds interval) noexcept {
         session_manager_.set_cleanup_interval(interval);
@@ -212,5 +211,6 @@ public:
 using http_server = basic_http_server<tcp_socket>;
 using https_server = basic_http_server<ssl_socket>;
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_SERVER_HPP__

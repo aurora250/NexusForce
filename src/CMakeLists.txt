@@ -93,35 +93,37 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
 
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/arp.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_address.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/mac_address.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ports.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/websocket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/icmp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/smtp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket_base.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/udp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_protocol.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/icmp_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ip_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/smtp_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/socket_base.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_acceptor.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/tcp_acceptor.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/tcp_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/udp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/websocket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_stream.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_acceptor.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_server.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/util/arp.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/util/ip_address.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/util/mac_address.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/util/ports.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/util/url.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
 )

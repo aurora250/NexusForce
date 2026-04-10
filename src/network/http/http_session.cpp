@@ -1,7 +1,74 @@
 #include <NeForce/core/string/to_string.hpp>
-#include <NeForce/core/time/clocks.hpp>
 #include <NeForce/network/http/http_session.hpp>
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
+
+http_cookie http_cookie::parse(const string_view header) { return parse(header, {}, {}); }
+
+http_cookie http_cookie::parse(const string_view header, string default_domain, string default_path) {
+    http_cookie c{};
+    if (header.empty()) {
+        return c;
+    }
+
+    size_t start = 0;
+    bool first = true;
+
+    while (start < header.size()) {
+        const size_t end = header.find(';', start);
+        const size_t pair_end = (end == string_view::npos) ? header.size() : end;
+        const auto pair = header.view(start, pair_end - start).trim();
+        const size_t eq_pos = pair.find('=');
+
+        if (first) {
+            first = false;
+            if (eq_pos != string_view::npos) {
+                c.name = http_cookie_name(string(pair.substr(0, eq_pos).trim()));
+                c.value = string(pair.substr(eq_pos + 1).trim());
+            }
+            c.domain = default_domain.empty() ? "" : move(default_domain);
+            c.path = default_path.empty() ? "/" : move(default_path);
+        } else {
+            const string_view attr_name = (eq_pos != string_view::npos) ? pair.view(0, eq_pos).trim() : pair;
+            const string_view attr_val = (eq_pos != string_view::npos) ? pair.view(eq_pos + 1).trim() : string_view{};
+
+            auto attr_lower = string(attr_name);
+            attr_lower.lowercase();
+
+            if (attr_lower == "httponly") {
+                c.http_only = true;
+            } else if (attr_lower == "secure") {
+                c.secure = true;
+            } else if (attr_lower == "path") {
+                c.path = string(attr_val);
+            } else if (attr_lower == "domain") {
+                c.domain = string(attr_val);
+            } else if (attr_lower == "samesite") {
+                c.same_site = string(attr_val);
+            } else if (attr_lower == "max-age") {
+                try {
+                    c.max_age = integer32::parse(attr_val).value();
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (...) {
+                    // ignore
+                }
+            } else if (attr_lower == "expires") {
+                try {
+                    c.expires = datetime::parse_GMT(attr_val);
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (...) {
+                    // ignore
+                }
+            }
+        }
+
+        if (end == string_view::npos) {
+            break;
+        }
+        start = end + 1;
+    }
+    return c;
+}
 
 NEFORCE_NODISCARD string http_cookie::to_string() const {
     if (name.cookie_name().empty()) {
@@ -162,4 +229,5 @@ string http_session::to_string() const {
     return result;
 }
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__

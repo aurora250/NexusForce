@@ -15,28 +15,6 @@ namespace {
             -1;
 #endif
 
-    string get_last_error_msg() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        const auto error_code = ::GetLastError();
-        if (error_code == 0) {
-            return {};
-        }
-        ::LPSTR message_buffer = nullptr;
-        const auto size = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
-                                                   FORMAT_MESSAGE_IGNORE_INSERTS,
-                                           nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                                           reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
-
-        string message(message_buffer, size);
-        ::LocalFree(message_buffer);
-        return message;
-
-#else
-        char buffer[256];
-        return ::strerror_r(errno, buffer, sizeof(buffer));
-#endif
-    }
-
 #ifdef NEFORCE_PLATFORM_LINUX
     ::mode_t convert_attributes(const file_attri attr) {
         ::mode_t mode = 0;
@@ -153,12 +131,7 @@ void file::reset_sub_objects() noexcept {
 }
 
 void file::set_last_error() const {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    last_error_code_ = static_cast<int>(::GetLastError());
-#else
-    last_error_code_ = errno;
-#endif
-    last_error_msg_ = get_last_error_msg();
+    last_error_code_ = _NEFORCE last_error();
 }
 
 void file::adjust_buffer_size() {
@@ -203,7 +176,6 @@ read_buffer_pos_(other.read_buffer_pos_),
 read_buffer_size_(other.read_buffer_size_),
 write_buffer_(move(other.write_buffer_)),
 write_buffer_pos_(other.write_buffer_pos_),
-last_error_msg_(move(other.last_error_msg_)),
 last_error_code_(other.last_error_code_) {
     other.handle_ = invalid_handle;
     other.opened_ = false;
@@ -214,7 +186,7 @@ last_error_code_(other.last_error_code_) {
     other.read_buffer_size_ = 0;
     other.write_buffer_.clear();
     other.write_buffer_pos_ = 0;
-    other.last_error_code_ = 0;
+    other.last_error_code_.clear();
 }
 
 file& file::operator=(file&& other) noexcept {
@@ -900,8 +872,7 @@ vector<string> file::read_lines() const {
 
 file::size_type file::size() const {
     if (!opened_ || handle_ == invalid_handle) {
-        last_error_code_ = EBADF;
-        last_error_msg_ = "File not opened";
+        last_error_code_ = errc::bad_file_descriptor;
         return 0;
     }
 
@@ -926,19 +897,17 @@ bool file::size(size_type& out_size) const {
     out_size = 0;
 
     if (!opened_ || handle_ == invalid_handle) {
-        last_error_code_ = EBADF;
-        last_error_msg_ = "File not opened";
+        last_error_code_ = errc::bad_file_descriptor;
         return false;
     }
 
     out_size = size();
-    return last_error_code_ == 0;
+    return last_error_code_ == errc::success;
 }
 
 uint64_t file::size64() const {
     if (!opened_ || handle_ == invalid_handle) {
-        last_error_code_ = EBADF;
-        last_error_msg_ = "File not opened";
+        last_error_code_ = errc::bad_file_descriptor;
         return 0;
     }
 
@@ -958,8 +927,7 @@ uint64_t file::size64() const {
 }
 
 void file::clear_error() noexcept {
-    last_error_msg_.clear();
-    last_error_code_ = 0;
+    last_error_code_.clear();
 }
 
 bool file::seek(const difference_type distance, file_pointer method) const {
@@ -969,8 +937,7 @@ bool file::seek(const difference_type distance, file_pointer method) const {
 
     if (append_mode_) {
         if (method != file_pointer::END || distance != 0) {
-            last_error_code_ = EPERM;
-            last_error_msg_ = "Cannot seek in append mode";
+            last_error_code_ = errc::operation_not_permitted;
             return false;
         }
     }
@@ -985,8 +952,7 @@ bool file::seek(const difference_type distance, file_pointer method) const {
     read_buffer_size_ = 0;
 
     if (map_ && map_->is_mapped()) {
-        last_error_code_ = EPERM;
-        last_error_msg_ = "Cannot seek in mapped file";
+        last_error_code_ = errc::operation_not_permitted;
         return false;
     }
 
@@ -1011,7 +977,7 @@ bool file::seek(const difference_type distance, file_pointer method) const {
 
 file::difference_type file::tell() const {
     if (!opened_ || handle_ == invalid_handle) {
-        last_error_code_ = EBADF;
+        last_error_code_ = errc::bad_file_descriptor;
         return -1;
     }
 
@@ -1071,7 +1037,7 @@ file::difference_type file::system_tell() const {
 
 bool file::prefetch(const size_type hint_size) const {
     if (!opened_ || handle_ == invalid_handle) {
-        last_error_code_ = EBADF;
+        last_error_code_ = errc::bad_file_descriptor;
         return false;
     }
     if (read_buffer_pos_ < read_buffer_size_) {
@@ -1165,19 +1131,17 @@ bool file::prefetch(const size_type hint_size) const {
 
 bool file::truncate(const difference_type size) const {
     if (!opened_ || handle_ == invalid_handle) {
-        last_error_code_ = EBADF;
+        last_error_code_ = errc::bad_file_descriptor;
         return false;
     }
 
     if (size < 0) {
-        last_error_code_ = EINVAL;
-        last_error_msg_ = "Negative file size";
+        last_error_code_ = errc::invalid_argument;
         return false;
     }
 
     if (append_mode_) {
-        last_error_code_ = EPERM;
-        last_error_msg_ = "Cannot truncate file in append mode";
+        last_error_code_ = errc::operation_not_permitted;
         return false;
     }
 
@@ -1199,8 +1163,7 @@ bool file::truncate(const difference_type size) const {
     read_buffer_size_ = 0;
 
     if (map_ && map_->is_mapped()) {
-        last_error_code_ = EPERM;
-        last_error_msg_ = "Cannot truncate memory-mapped file";
+        last_error_code_ = errc::operation_not_permitted;
         return false;
     }
 

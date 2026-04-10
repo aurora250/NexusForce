@@ -25,9 +25,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 内存分配异常
  */
 struct allocate_exception final : memory_exception {
-    explicit allocate_exception(const char* info = "Memory Allocation Failed.", const char* type = static_type,
-                                const int code = 0) noexcept :
-    memory_exception(info, type, code) {}
+    explicit allocate_exception(const char* info = "Memory Allocation Failed.", const char* type = static_type) noexcept
+    :
+    memory_exception(info, type) {}
 
     explicit allocate_exception(const exception& e) :
     memory_exception(e) {}

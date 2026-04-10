@@ -4,8 +4,8 @@
 #include <NeForce/core/string/format.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/dns/dns_client.hpp>
-#include <NeForce/network/socket/tcp_socket.hpp>
-#include <NeForce/network/socket/udp_socket.hpp>
+#include <NeForce/network/tcp/tcp_socket.hpp>
+#include <NeForce/network/udp_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <arpa/inet.h>
 #endif

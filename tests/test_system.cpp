@@ -312,3 +312,40 @@ void test_atomic() {
     atomic<weak_ptr<int>> wptr{aptr.load()};
     println(wptr.load().expired());
 }
+
+
+bool open_file(const char* path, error_code& ec) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    HANDLE h = CreateFileA(path, GENERIC_READ, FILE_SHARE_READ,
+                           nullptr, OPEN_EXISTING, 0, nullptr);
+    if (h == INVALID_HANDLE_VALUE) {
+        ec = last_error();
+        return false;
+    }
+    CloseHandle(h);
+#else
+    if (::open(path, O_RDONLY) < 0) {
+        ec = last_error();
+        return false;
+    }
+#endif
+    ec.clear();
+    return true;
+}
+
+void test_errc() {
+    error_code ec;
+    if (!open_file("/nonexistent/file.txt", ec)) {
+        println("[error] ", ec.message());
+        println("category: ", ec.category().name());
+        println("value:    ", ec.value());
+
+        if (ec == errc::no_such_file_or_directory) {
+            println("-> file not found (portable check)");
+        }
+    }
+
+    error_code enoent(ENOENT, generic_category());
+    println("\n[generic] ", enoent.message());
+    println("== errc:", (enoent == errc::no_such_file_or_directory ? "yes" : "no"));
+}

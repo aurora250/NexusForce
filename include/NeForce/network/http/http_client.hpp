@@ -2,9 +2,10 @@
 #define NEFORCE_NETWORK_HTTP_HTTP_CLIENT_HPP__
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/network/http/http_client_message.hpp"
-#include "NeForce/network/tcp_client.hpp"
-#include "NeForce/network/url.hpp"
+#include "NeForce/network/tcp/tcp_client.hpp"
+#include "NeForce/network/util/url.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
 class NEFORCE_API http_client {
 public:
@@ -164,5 +165,6 @@ public:
     NEFORCE_NODISCARD bool is_connected() const noexcept { return client_.is_connected(); }
 };
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_HTTP_CLIENT_HPP__

@@ -670,6 +670,7 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                             if (group_inner) {
                                 group_inner->decrement();
                             }
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
                         } catch (...) {
                             /* ignore */
                         }

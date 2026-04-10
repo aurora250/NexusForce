@@ -4,18 +4,21 @@
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/network/http/http_constants.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
-struct NEFORCE_API http_cookie : istringify<http_cookie> {
-    HTTP_COOKIE_NAME name{};
+struct NEFORCE_API http_cookie : iobject<http_cookie> {
+    http_cookie_name name{};
     string value{};
     string domain{};
     string path = "/";
     int max_age = -1;
     bool secure = false;
     bool http_only = false;
-    string same_site{HTTP_KEY::Strict()};
+    string same_site{http_key::Strict()};
     datetime expires{};
 
+    NEFORCE_NODISCARD static http_cookie parse(string_view header);
+    NEFORCE_NODISCARD static http_cookie parse(string_view header, string default_domain, string default_path);
     NEFORCE_NODISCARD string to_string() const;
 
     NEFORCE_NODISCARD bool is_valid() const noexcept;
@@ -59,5 +62,6 @@ struct NEFORCE_API http_session : istringify<http_session> {
     NEFORCE_NODISCARD string to_string() const;
 };
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_COOKIE_HPP__

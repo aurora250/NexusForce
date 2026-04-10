@@ -433,6 +433,10 @@
 #define NEFORCE_BEGIN_REFLECT__ namespace __NEFORCE_REFLECT_NAMESPACE__ {
 #define NEFORCE_END_REFLECT__ }
 
+#define __NEFORCE_HTTP_NAMESPACE__ http
+#define NEFORCE_BEGIN_HTTP__ namespace __NEFORCE_HTTP_NAMESPACE__ {
+#define NEFORCE_END_HTTP__ }
+
 
 #ifdef NEFORCE_STANDARD_11
 #    define NEFORCE_CONSTEXPR11 constexpr

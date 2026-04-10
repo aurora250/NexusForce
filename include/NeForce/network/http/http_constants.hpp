@@ -31,6 +31,8 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(http_exception, network_exception, "Http Actions
 
 /** @} */ // Exceptions
 
+NEFORCE_BEGIN_HTTP__
+
 /**
  * @defgroup Http HTTP
  * @brief HTTP协议及操作
@@ -38,7 +40,7 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(http_exception, network_exception, "Http Actions
  */
 
 /**
- * @enum HTTP_STATUS
+ * @enum http_status
  * @brief HTTP状态码枚举
  *
  * 定义了标准的HTTP状态码，按响应类别分组：
@@ -48,7 +50,7 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(http_exception, network_exception, "Http Actions
  * - 4xx：客户端错误状态码
  * - 5xx：服务器错误状态码
  */
-enum class HTTP_STATUS : uint16_t {
+enum class http_status : uint16_t {
     /**
      * @brief 100 Continue
      * 服务器收到请求头，客户端可以继续发送请求体
@@ -200,27 +202,31 @@ enum class HTTP_STATUS : uint16_t {
     S5_HTTP_VERSION_NOT_SUPPORT = 505
 };
 
+NEFORCE_API string http_status_message(http_status status);
+
+NEFORCE_API http_status http_status_from_code(uint16_t code) noexcept;
+
 
 /**
- * @struct HTTP_CONTENT
+ * @struct http_content
  * @brief HTTP内容类型定义
  *
  * 定义了标准的HTTP Content-Type值，并提供类型判断方法。
  */
-struct NEFORCE_API HTTP_CONTENT : istringify<HTTP_CONTENT> {
+struct NEFORCE_API http_content : istringify<http_content> {
 private:
     string content_{"UNKNOWN"}; ///< 内容类型字符串
 
 public:
-    HTTP_CONTENT() = default;
-    HTTP_CONTENT(const HTTP_CONTENT&) = default;
-    HTTP_CONTENT& operator=(const HTTP_CONTENT&) = default;
+    http_content() = default;
+    http_content(const http_content&) = default;
+    http_content& operator=(const http_content&) = default;
 
     /**
      * @brief 移动构造函数
      * @param other 源对象
      */
-    HTTP_CONTENT(HTTP_CONTENT&& other) noexcept :
+    http_content(http_content&& other) noexcept :
     content_(_NEFORCE move(other.content_)) {}
 
     /**
@@ -228,7 +234,7 @@ public:
      * @param other 源对象
      * @return 自身引用
      */
-    HTTP_CONTENT& operator=(HTTP_CONTENT&& other) noexcept {
+    http_content& operator=(http_content&& other) noexcept {
         if (addressof(other) == this) {
             return *this;
         }
@@ -240,7 +246,7 @@ public:
      * @brief 字符串构造函数
      * @param content 内容类型字符串
      */
-    explicit HTTP_CONTENT(const string& content) :
+    explicit http_content(const string& content) :
     content_(content) {}
 
     /**
@@ -248,24 +254,24 @@ public:
      * @param content 内容类型字符串
      * @return 自身引用
      */
-    HTTP_CONTENT& operator=(const string& content) {
+    http_content& operator=(const string& content) {
         content_ = content;
         return *this;
     }
 
-    ~HTTP_CONTENT() = default;
+    ~http_content() = default;
 
-    static const HTTP_CONTENT& HTML_TEXT();  ///< text/html
-    static const HTTP_CONTENT& XML_TEXT();   ///< text/xml
-    static const HTTP_CONTENT& CSS_TEXT();   ///< text/css
-    static const HTTP_CONTENT& PLAIN_TEXT(); ///< text/plain
-    static const HTTP_CONTENT& JSON_APP();   ///< application/json
-    static const HTTP_CONTENT& FORM_APP();   ///< application/x-www-form-urlencoded
-    static const HTTP_CONTENT& JPEG_IMG();   ///< image/jpeg
-    static const HTTP_CONTENT& PNG_IMG();    ///< image/png
-    static const HTTP_CONTENT& BMP_IMG();    ///< image/bmp
-    static const HTTP_CONTENT& WEBP_IMG();   ///< image/webp
-    static const HTTP_CONTENT& HTML_MSG();   ///< message/html
+    static const http_content& HTML_TEXT();  ///< text/html
+    static const http_content& XML_TEXT();   ///< text/xml
+    static const http_content& CSS_TEXT();   ///< text/css
+    static const http_content& PLAIN_TEXT(); ///< text/plain
+    static const http_content& JSON_APP();   ///< application/json
+    static const http_content& FORM_APP();   ///< application/x-www-form-urlencoded
+    static const http_content& JPEG_IMG();   ///< image/jpeg
+    static const http_content& PNG_IMG();    ///< image/png
+    static const http_content& BMP_IMG();    ///< image/bmp
+    static const http_content& WEBP_IMG();   ///< image/webp
+    static const http_content& HTML_MSG();   ///< message/html
 
     NEFORCE_NODISCARD bool is_html_text() const { return content_ == HTML_TEXT().content_; }
     NEFORCE_NODISCARD bool is_xml_text() const { return content_ == XML_TEXT().content_; }
@@ -316,25 +322,25 @@ public:
 #endif
 
 /**
- * @struct HTTP_METHOD
+ * @struct http_method
  * @brief HTTP方法定义
  *
  * 定义了标准的HTTP请求方法，支持方法组合操作。
  */
-struct NEFORCE_API HTTP_METHOD : istringify<HTTP_METHOD> {
+struct NEFORCE_API http_method : istringify<http_method> {
 private:
     string method_{"UNKNOWN"}; ///< HTTP方法字符串
 
 public:
-    HTTP_METHOD() = default;
-    HTTP_METHOD(const HTTP_METHOD&) = default;
-    HTTP_METHOD& operator=(const HTTP_METHOD&) = default;
+    http_method() = default;
+    http_method(const http_method&) = default;
+    http_method& operator=(const http_method&) = default;
 
     /**
      * @brief 移动构造函数
      * @param other 源对象
      */
-    HTTP_METHOD(HTTP_METHOD&& other) noexcept :
+    http_method(http_method&& other) noexcept :
     method_(_NEFORCE move(other.method_)) {}
 
     /**
@@ -342,7 +348,7 @@ public:
      * @param other 源对象
      * @return 自身引用
      */
-    HTTP_METHOD& operator=(HTTP_METHOD&& other) noexcept {
+    http_method& operator=(http_method&& other) noexcept {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
@@ -354,7 +360,7 @@ public:
      * @brief 左值字符串构造函数
      * @param method HTTP方法字符串
      */
-    explicit HTTP_METHOD(const string& method) :
+    explicit http_method(const string& method) :
     method_(method) {}
 
     /**
@@ -362,7 +368,7 @@ public:
      * @param method HTTP方法字符串
      * @return 自身引用
      */
-    HTTP_METHOD& operator=(const string& method) {
+    http_method& operator=(const string& method) {
         method_ = method;
         return *this;
     }
@@ -371,7 +377,7 @@ public:
      * @brief 右值字符串构造函数
      * @param method HTTP方法字符串
      */
-    explicit HTTP_METHOD(string&& method) :
+    explicit http_method(string&& method) :
     method_(_NEFORCE move(method)) {}
 
     /**
@@ -379,23 +385,23 @@ public:
      * @param method HTTP方法字符串
      * @return 自身引用
      */
-    HTTP_METHOD& operator=(string&& method) {
+    http_method& operator=(string&& method) {
         method_ = _NEFORCE move(method);
         return *this;
     }
 
-    ~HTTP_METHOD() = default;
+    ~http_method() = default;
 
-    static const HTTP_METHOD& GET();     ///< GET方法
-    static const HTTP_METHOD& POST();    ///< POST方法
-    static const HTTP_METHOD& HEAD();    ///< HEAD方法
-    static const HTTP_METHOD& PUT();     ///< PUT方法
-    static const HTTP_METHOD& DELETE();  ///< DELETE方法
-    static const HTTP_METHOD& OPTIONS(); ///< OPTIONS方法
-    static const HTTP_METHOD& TRACE();   ///< TRACE方法
-    static const HTTP_METHOD& CONNECT(); ///< CONNECT方法
-    static const HTTP_METHOD& PATCH();   ///< PATCH方法
-    static const HTTP_METHOD& DEFAULT(); ///< 默认方法
+    static const http_method& GET();     ///< GET方法
+    static const http_method& POST();    ///< POST方法
+    static const http_method& HEAD();    ///< HEAD方法
+    static const http_method& PUT();     ///< PUT方法
+    static const http_method& DELETE();  ///< DELETE方法
+    static const http_method& OPTIONS(); ///< OPTIONS方法
+    static const http_method& TRACE();   ///< TRACE方法
+    static const http_method& CONNECT(); ///< CONNECT方法
+    static const http_method& PATCH();   ///< PATCH方法
+    static const http_method& DEFAULT(); ///< 默认方法
 
     /**
      * @brief 获取左值方法
@@ -416,20 +422,20 @@ public:
      *
      * 用于表示允许多种方法的场景，如"GET, POST"
      */
-    NEFORCE_NODISCARD HTTP_METHOD operator&(const HTTP_METHOD& rhs) const& {
-        return HTTP_METHOD(method_ + ", " + rhs.method_);
+    NEFORCE_NODISCARD http_method operator&(const http_method& rhs) const& {
+        return http_method(method_ + ", " + rhs.method_);
     }
 
-    NEFORCE_NODISCARD HTTP_METHOD operator&(HTTP_METHOD&& rhs) const& {
-        return HTTP_METHOD(method_ + ", " + _NEFORCE move(rhs.method_));
+    NEFORCE_NODISCARD http_method operator&(http_method&& rhs) const& {
+        return http_method(method_ + ", " + _NEFORCE move(rhs.method_));
     }
 
-    NEFORCE_NODISCARD HTTP_METHOD operator&(const HTTP_METHOD& rhs) && {
-        return HTTP_METHOD(_NEFORCE move(method_) + ", " + rhs.method_);
+    NEFORCE_NODISCARD http_method operator&(const http_method& rhs) && {
+        return http_method(_NEFORCE move(method_) + ", " + rhs.method_);
     }
 
-    NEFORCE_NODISCARD HTTP_METHOD operator&(HTTP_METHOD&& rhs) && {
-        return HTTP_METHOD(_NEFORCE move(method_) + ", " + _NEFORCE move(rhs.method_));
+    NEFORCE_NODISCARD http_method operator&(http_method&& rhs) && {
+        return http_method(_NEFORCE move(method_) + ", " + _NEFORCE move(rhs.method_));
     }
 
     NEFORCE_NODISCARD bool is_get() const { return method_ == GET().method_; }
@@ -451,25 +457,25 @@ public:
 
 
 /**
- * @struct HTTP_COOKIE_NAME
+ * @struct http_cookie_name
  * @brief HTTP Cookie名称定义
  *
  * 定义了常见的Cookie名称常量，用于会话管理。
  */
-struct NEFORCE_API HTTP_COOKIE_NAME : istringify<HTTP_COOKIE_NAME> {
+struct NEFORCE_API http_cookie_name : istringify<http_cookie_name> {
 private:
     string cookie_{"UNKNOWN"}; ///< Cookie名称字符串
 
 public:
-    HTTP_COOKIE_NAME() = default;
-    HTTP_COOKIE_NAME(const HTTP_COOKIE_NAME&) = default;
-    HTTP_COOKIE_NAME& operator=(const HTTP_COOKIE_NAME&) = default;
+    http_cookie_name() = default;
+    http_cookie_name(const http_cookie_name&) = default;
+    http_cookie_name& operator=(const http_cookie_name&) = default;
 
     /**
      * @brief 移动构造函数
      * @param other 源对象
      */
-    HTTP_COOKIE_NAME(HTTP_COOKIE_NAME&& other) noexcept :
+    http_cookie_name(http_cookie_name&& other) noexcept :
     cookie_(_NEFORCE move(other.cookie_)) {}
 
     /**
@@ -477,7 +483,7 @@ public:
      * @param other 源对象
      * @return 自身引用
      */
-    HTTP_COOKIE_NAME& operator=(HTTP_COOKIE_NAME&& other) noexcept {
+    http_cookie_name& operator=(http_cookie_name&& other) noexcept {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
@@ -489,7 +495,7 @@ public:
      * @brief 字符串构造函数
      * @param cookie Cookie名称
      */
-    explicit HTTP_COOKIE_NAME(const string& cookie) :
+    explicit http_cookie_name(const string& cookie) :
     cookie_(cookie) {}
 
     /**
@@ -497,17 +503,17 @@ public:
      * @param cookie Cookie名称
      * @return 自身引用
      */
-    HTTP_COOKIE_NAME& operator=(const string& cookie) {
+    http_cookie_name& operator=(const string& cookie) {
         cookie_ = cookie;
         return *this;
     }
 
-    ~HTTP_COOKIE_NAME() = default;
+    ~http_cookie_name() = default;
 
-    static const HTTP_COOKIE_NAME& JSESSIONID();   ///< Java/JSP会话ID
-    static const HTTP_COOKIE_NAME& SESSIONID();    ///< 通用会话ID
-    static const HTTP_COOKIE_NAME& PHPSESSID();    ///< PHP会话ID
-    static const HTTP_COOKIE_NAME& ASPSESSIONID(); ///< ASP会话ID
+    static const http_cookie_name& JSESSIONID();   ///< Java/JSP会话ID
+    static const http_cookie_name& SESSIONID();    ///< 通用会话ID
+    static const http_cookie_name& PHPSESSID();    ///< PHP会话ID
+    static const http_cookie_name& ASPSESSIONID(); ///< ASP会话ID
 
     /**
      * @brief 获取左值Cookie名称
@@ -529,7 +535,7 @@ public:
 };
 
 
-struct NEFORCE_API HTTP_KEY {
+struct NEFORCE_API http_key {
     static const string& Access_Control_Allow_Credentials();
     static const string& Access_Control_Allow_Headers();
     static const string& Access_Control_Allow_Methods();
@@ -545,5 +551,6 @@ struct NEFORCE_API HTTP_KEY {
 
 /** @} */ // Http
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_CONSTANTS_HPP__

@@ -1,80 +1,9 @@
 #include <NeForce/core/encrypt/base64.hpp>
 #include <NeForce/core/encrypt/sha1.hpp>
-#include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/http/http_server.hpp>
+#include <NeForce/network/util/url.hpp>
 NEFORCE_BEGIN_NAMESPACE__
-
-namespace {
-    string url_decode(const string_view str) {
-        string result;
-        result.reserve(str.length());
-
-        for (size_t i = 0; i < str.length(); ++i) {
-            if (str[i] == '%' && i + 2 < str.length()) {
-                try {
-                    const auto hex_str = str.view(i + 1, 2);
-                    result += static_cast<char>(hexadecimal::parse(hex_str).value());
-                    i += 2;
-                } catch (...) {
-                    result += str[i];
-                }
-            } else if (str[i] == '+') {
-                result += ' ';
-            } else {
-                result += str[i];
-            }
-        }
-        return result;
-    }
-
-    void parse_url_encoded(const string_view data, unordered_map<string, string>& params) {
-        if (data.empty()) {
-            return;
-        }
-
-        size_t start = 0;
-        while (start < data.length()) {
-            const size_t end = data.find('&', start);
-            const size_t pair_end = (end == string::npos) ? data.length() : end;
-
-            const auto pair = data.view(start, pair_end - start);
-            const size_t eq_pos = pair.find('=');
-
-            if (eq_pos != string::npos) {
-                const string name = url_decode(pair.view(0, eq_pos));
-                string value = url_decode(pair.view(eq_pos + 1));
-                params[name] = _NEFORCE move(value);
-            }
-
-            if (end == string::npos) {
-                break;
-            }
-            start = end + 1;
-        }
-    }
-
-    string get_status_message(const HTTP_STATUS status) {
-        switch (status) {
-            case HTTP_STATUS::S4_BAD_REQUEST:
-                return "Bad Request";
-            case HTTP_STATUS::S4_UNAUTHORIZED:
-                return "Unauthorized";
-            case HTTP_STATUS::S4_FORBIDDEN:
-                return "Forbidden";
-            case HTTP_STATUS::S4_NOT_FOUNT:
-                return "Not Found";
-            case HTTP_STATUS::S4_METHOD_NOT_ALLOWED:
-                return "Method Not Allowed";
-            case HTTP_STATUS::S5_INTERNAL_ERROR:
-                return "Internal Server Error";
-            case HTTP_STATUS::S5_SERVICE_UNAVAILABLE:
-                return "Service Unavailable";
-            default:
-                return "Error";
-        }
-    }
-} // namespace
-
+NEFORCE_BEGIN_HTTP__
 
 string http_server_base::session_manager::generate_session_id() {
     string str;
@@ -181,48 +110,23 @@ string http_server_base::compute_websocket_accept(const string_view key) {
     return base64_encode(cbyte_view{reinterpret_cast<const byte_t*>(sha1_result.data()), sha1_result.size()});
 }
 
-void http_server_base::parse_cookies(const string_view cookie_header, http_request& request) {
-    if (cookie_header.empty()) {
-        return;
-    }
-
-    size_t start = 0;
-    while (start < cookie_header.length()) {
-        const size_t end = cookie_header.find(';', start);
-        const size_t pair_end = (end == string::npos) ? cookie_header.length() : end;
-
-        const auto pair = cookie_header.view(start, pair_end - start).trim();
-        const size_t eq_pos = pair.find('=');
-
-        if (eq_pos != string::npos) {
-            request.set_cookie(pair.substr(0, eq_pos).trim(), pair.substr(eq_pos + 1).trim());
-        }
-
-        if (end == string::npos) {
-            break;
-        }
-        start = end + 1;
-    }
-}
-
 void http_server_base::parse_parameters(http_request& request) {
     if (!request.query.empty()) {
-        parse_url_encoded(request.query.view(), request.parameters);
+        url::parse_query(request.query.view(), request.parameters);
     }
 
     if (request.method.is_post() && !request.body.empty()) {
         const auto content_type = request.content_type();
-        if (HTTP_CONTENT::is_form_app(content_type)) {
-            parse_url_encoded(request.body.view(), request.form_data);
+        if (http_content::is_form_app(content_type)) {
+            url::parse_query(request.body.view(), request.form_data);
         }
     }
 }
 
 http_request http_server_base::parse_request(tcp_socket* client_socket, session_manager& manager,
-                                             const HTTP_COOKIE_NAME& name, const size_t max_header_size,
+                                             const http_cookie_name& name, const size_t max_header_size,
                                              const size_t max_body_size) {
 
-    http_request request;
     string request_data;
     char buffer[8192];
 
@@ -280,63 +184,7 @@ http_request http_server_base::parse_request(tcp_socket* client_socket, session_
         }
     }
 
-    // Parse request line
-    size_t pos = 0;
-    string_view line;
-
-    if (getline(request_data.view(), pos, line)) {
-        line = line.trim();
-        const size_t pos1 = line.find(' ');
-
-        if (pos1 == string::npos) {
-            NEFORCE_THROW_EXCEPTION(http_exception("Invalid request line"));
-        }
-
-        request.method = line.view(0, pos1);
-        const size_t pos2 = line.find(' ', pos1 + 1);
-
-        if (pos2 == string::npos) {
-            NEFORCE_THROW_EXCEPTION(http_exception("Invalid request line"));
-        }
-
-        request.path = line.view(pos1 + 1, pos2 - pos1 - 1);
-        request.version = line.view(pos2 + 1);
-    }
-
-    // Parse query string
-    const size_t query_pos = request.path.find('?');
-    if (query_pos != string::npos) {
-        request.query = request.path.substr(query_pos + 1);
-        request.path = request.path.substr(0, query_pos);
-    }
-
-    // Parse headers
-    while (getline(request_data.view(), pos, line)) {
-        line = line.trim();
-        if (line.empty()) {
-            break;
-        }
-
-        const size_t colon_pos = line.find(':');
-        if (colon_pos != string::npos) {
-            const string key = line.view(0, colon_pos).trim();
-            string value = line.view(colon_pos + 1).trim();
-            request.set_header(key, move(value));
-        }
-    }
-
-    // Extract body
-    const size_t body_start = request_data.find("\r\n\r\n");
-    if (body_start != string::npos && body_start + 4 < request_data.size()) {
-        request.body = request_data.substr(body_start + 4);
-    }
-
-    // Parse cookies
-    const auto cookie_str = request.header("Cookie");
-    if (!cookie_str.empty()) {
-        parse_cookies(cookie_str, request);
-    }
-
+    http_request request = http_request::parse(request_data.view());
     parse_parameters(request);
 
     const string& session_id = request.cookie(name.cookie_name());
@@ -348,7 +196,7 @@ http_request http_server_base::parse_request(tcp_socket* client_socket, session_
 }
 
 http_session* http_server_base::get_or_create_session(http_request& request, const bool create,
-                                                      session_manager& manager, const HTTP_COOKIE_NAME& name) {
+                                                      session_manager& manager, const http_cookie_name& name) {
 
     http_session* sess = request.session;
     if (sess != nullptr) {
@@ -367,49 +215,13 @@ http_session* http_server_base::get_or_create_session(http_request& request, con
     return sess;
 }
 
-string http_server_base::build_response_str(const http_response& response) {
-    string result;
-    result.reserve(1024 + response.body.size());
-
-    // Status line
-    if (!response.redirect_url.empty()) {
-        result += response.version + " 302 Found\r\n";
-        result += "Location: " + response.redirect_url + "\r\n";
-    } else {
-        result += response.version + " " + _NEFORCE to_string(static_cast<uint16_t>(response.status)) + " " +
-                  response.status_message + "\r\n";
-    }
-
-    // Cookies
-    for (const auto& cookie: response.cookies) {
-        result += "Set-Cookie: " + cookie.to_string() + "\r\n";
-    }
-
-    // Content-Length
-    if (response.redirect_url.empty() && !response.has_header(HTTP_KEY::Content_Length())) {
-        result += HTTP_KEY::Content_Length() + ": " + _NEFORCE to_string(response.body.size()) + "\r\n";
-    }
-
-    for (const auto& pair: response.headers) {
-        const auto key = pair.first;
-        const auto value = pair.second;
-        result += move(key) + ": " + move(value) + "\r\n";
-    }
-    result += "\r\n";
-
-    if (response.redirect_url.empty()) {
-        result += response.body;
-    }
-    return result;
-}
-
 void http_server_base::send_response(tcp_socket* client_socket, const http_response& response) {
-    string res_str = build_response_str(response);
+    string res_str = response.to_string();
     client_socket->send_all(memory_view<const char>(res_str.data(), res_str.size()));
 }
 
 void http_server_base::add_session_cookie(const http_request& request, http_response& response, http_session* session,
-                                          const HTTP_COOKIE_NAME& name) {
+                                          const http_cookie_name& name) {
 
     if (session == nullptr || !session->is_new) {
         return;
@@ -420,20 +232,20 @@ void http_server_base::add_session_cookie(const http_request& request, http_resp
     session_cookie.value = session->id;
     session_cookie.http_only = true;
 
-    const bool is_https = request.header(HTTP_KEY::X_Forwarded_Proto()) == "https";
+    const bool is_https = request.header(http_key::X_Forwarded_Proto()) == "https";
     session_cookie.secure = is_https;
-    session_cookie.same_site = is_https ? HTTP_KEY::Strict() : HTTP_KEY::Lax();
+    session_cookie.same_site = is_https ? http_key::Strict() : http_key::Lax();
 
     response.cookies.emplace_back(move(session_cookie));
     session->is_new = false;
 }
 
-void http_server_base::send_error_response(tcp_socket* client_socket, const HTTP_STATUS status, const string& message) {
+void http_server_base::send_error_response(tcp_socket* client_socket, const http_status status, const string& message) {
     try {
         http_response error_response;
         error_response.status = status;
-        error_response.status_message = get_status_message(status);
-        error_response.set_content_type(HTTP_CONTENT::HTML_TEXT());
+        error_response.status_message = http_status_message(status);
+        error_response.set_content_type(http_content::HTML_TEXT());
         error_response.body = "<!DOCTYPE html>"
                               "<html><head><title>Error</title></head>"
                               "<body><h1>" +
@@ -450,4 +262,5 @@ void http_server_base::send_error_response(tcp_socket* client_socket, const HTTP
     }
 }
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__

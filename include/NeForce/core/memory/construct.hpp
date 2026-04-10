@@ -80,6 +80,63 @@ destroy(Iterator first, Iterator last) noexcept {
     return;
 }
 
+
+template <typename T>
+struct temporary_guard {
+    static_assert(is_nothrow_move_constructible_v<T>, "T must be nothrow move constructible");
+
+private:
+    T* guarded_ptr;
+    T temp;
+
+public:
+    constexpr explicit temporary_guard(T& value) :
+    guarded_ptr(_NEFORCE addressof(value)),
+    temp(_NEFORCE move(value)) {
+        _NEFORCE destroy(guarded_ptr);
+    }
+
+    NEFORCE_CONSTEXPR20 ~temporary_guard() {
+        if (guarded_ptr) {
+            _NEFORCE construct(guarded_ptr, _NEFORCE move(temp));
+        }
+    }
+
+    temporary_guard(const temporary_guard&) = delete;
+    temporary_guard& operator=(const temporary_guard&) = delete;
+
+    constexpr T&& release() noexcept {
+        guarded_ptr = nullptr;
+        return _NEFORCE move(temp);
+    }
+};
+
+template <typename NT, typename OT, typename Arg>
+constexpr enable_if_t<is_nothrow_constructible_v<NT, Arg>>
+reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructible_v<NT, Arg>) {
+    _NEFORCE destroy(old_val);
+    _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
+    return;
+}
+
+template <typename NT, typename OT, typename Arg>
+constexpr enable_if_t<!is_nothrow_constructible_v<NT, Arg> && is_nothrow_move_constructible_v<NT>>
+reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructible_v<NT, Arg>) {
+    NT temp(_NEFORCE forward<Arg>(arg));
+    _NEFORCE destroy(old_val);
+    _NEFORCE construct(new_val, _NEFORCE move(temp));
+    return;
+}
+
+template <typename NT, typename OT, typename Arg>
+constexpr enable_if_t<!is_nothrow_constructible_v<NT, Arg> && !is_nothrow_move_constructible_v<NT>>
+reinitialize(NT* new_val, OT* old_val, Arg&& arg) noexcept(is_nothrow_constructible_v<NT, Arg>) {
+    temporary_guard<OT> guard(*old_val);
+    _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
+    guard.release();
+    return;
+}
+
 /** @} */ // InplaceMemoryFunction
 
 NEFORCE_END_NAMESPACE__

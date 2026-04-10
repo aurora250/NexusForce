@@ -2,9 +2,10 @@
 #define NEFORCE_NETWORK_HTTP_SERVER_MESSAGE_HPP__
 #include "NeForce/network/http/http_session.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
-struct http_request {
-    HTTP_METHOD method = HTTP_METHOD::GET();
+struct http_request : iobject<http_request> {
+    http_method method = http_method::GET();
     string path = "/";
     string version = "HTTP/1.1";
     string query{};
@@ -48,10 +49,10 @@ struct http_request {
 
     NEFORCE_NODISCARD bool has_session() const noexcept { return session != nullptr && session->is_valid(); }
 
-    NEFORCE_NODISCARD string_view content_type() const noexcept { return header(HTTP_KEY::Content_Type()); }
+    NEFORCE_NODISCARD string_view content_type() const noexcept { return header(http_key::Content_Type()); }
 
     NEFORCE_NODISCARD bool is_keep_alive() const noexcept {
-        const auto conn = header(HTTP_KEY::Connection());
+        const auto conn = header(http_key::Connection());
         return conn == "keep-alive" || conn == "Keep-Alive";
     }
 
@@ -78,7 +79,7 @@ struct http_request {
     }
 
     void clear() {
-        method = HTTP_METHOD::GET();
+        method = http_method::GET();
         path = "/";
         version = "HTTP/1.1";
         query.clear();
@@ -88,12 +89,15 @@ struct http_request {
         parameters.clear();
         session = nullptr;
     }
+
+    NEFORCE_NODISCARD static http_request parse(string_view str);
+    NEFORCE_NODISCARD string to_string() const;
 };
 
 
-struct NEFORCE_API http_response {
+struct NEFORCE_API http_response : istringify<http_response> {
     string version{"HTTP/1.1"};
-    HTTP_STATUS status = HTTP_STATUS::S4_NOT_FOUNT;
+    http_status status = http_status::S4_NOT_FOUNT;
     string status_message{};
     unordered_map<string, string> headers;
     vector<http_cookie> cookies;
@@ -102,8 +106,8 @@ struct NEFORCE_API http_response {
     string forward_path{};
 
     http_response() {
-        headers[HTTP_KEY::Content_Type()] = HTTP_CONTENT::PLAIN_TEXT().to_string() + "; charset=utf-8";
-        headers[HTTP_KEY::Connection()] = "close";
+        headers[http_key::Content_Type()] = http_content::PLAIN_TEXT().to_string() + "; charset=utf-8";
+        headers[http_key::Connection()] = "close";
     }
 
     NEFORCE_NODISCARD string_view header(const string& name) const noexcept {
@@ -115,10 +119,13 @@ struct NEFORCE_API http_response {
 
     NEFORCE_NODISCARD bool has_header(const string& name) const noexcept { return headers.find(name) != headers.end(); }
 
-    void set_content_type(HTTP_CONTENT value) { headers[HTTP_KEY::Content_Type()] = move(value).content(); }
+    void set_content_type(http_content value) { headers[http_key::Content_Type()] = move(value).content(); }
 
-    void set_content_type(string value) { headers[HTTP_KEY::Content_Type()] = move(value); }
+    void set_content_type(string value) { headers[http_key::Content_Type()] = move(value); }
+
+    NEFORCE_NODISCARD string to_string() const;
 };
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_SERVER_MESSAGE_HPP__

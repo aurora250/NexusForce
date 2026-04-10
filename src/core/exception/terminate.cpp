@@ -53,11 +53,6 @@ namespace {
         __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_exit_group), "D"(status) : "rcx", "r11", "memory");
         return ret;
     }
-    long syscall_close(int fd) {
-        long ret = 0;
-        __asm__ volatile("syscall" : "=a"(ret) : "a"(SYS_close), "D"(fd) : "rcx", "r11", "memory");
-        return ret;
-    }
 #    elif defined(NEFORCE_ARCH_X86_32)
     long syscall_exit(int status) {
         long ret = 0;
@@ -67,11 +62,6 @@ namespace {
     long syscall_exit_group(int status) {
         long ret = 0;
         __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_exit_group), "b"(status) : "memory");
-        return ret;
-    }
-    long syscall_close(int fd) {
-        long ret = 0;
-        __asm__ volatile("int $0x80" : "=a"(ret) : "a"(SYS_close), "b"(fd) : "memory");
         return ret;
     }
 #    elif defined(NEFORCE_ARCH_ARM32)
@@ -84,12 +74,6 @@ namespace {
     long syscall_exit_group(int status) {
         register long r7 __asm__("r7") = SYS_exit_group;
         register long r0 __asm__("r0") = status;
-        __asm__ volatile("swi 0x0" : "=r"(r0) : "r"(r0), "r"(r7) : "memory");
-        return r0;
-    }
-    long syscall_close(int fd) {
-        register long r7 __asm__("r7") = SYS_close;
-        register long r0 __asm__("r0") = fd;
         __asm__ volatile("swi 0x0" : "=r"(r0) : "r"(r0), "r"(r7) : "memory");
         return r0;
     }
@@ -106,12 +90,6 @@ namespace {
         __asm__ volatile("svc #0" : "=r"(x0) : "r"(x0), "r"(x8) : "memory");
         return x0;
     }
-    long syscall_close(int fd) {
-        register long x8 __asm__("x8") = SYS_close;
-        register long x0 __asm__("x0") = fd;
-        __asm__ volatile("svc #0" : "=r"(x0) : "r"(x0), "r"(x8) : "memory");
-        return x0;
-    }
 #    elif defined(NEFORCE_ARCH_RISCV)
     long syscall_exit(int status) {
         register long a7 __asm__("a7") = SYS_exit;
@@ -125,12 +103,6 @@ namespace {
         __asm__ volatile("ecall" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }
-    long syscall_close(int fd) {
-        register long a7 __asm__("a7") = SYS_close;
-        register long a0 __asm__("a0") = fd;
-        __asm__ volatile("ecall" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
-        return a0;
-    }
 #    elif defined(NEFORCE_ARCH_LOONGARCH)
     long syscall_exit(int status) {
         register long a7 __asm__("a7") = SYS_exit;
@@ -141,12 +113,6 @@ namespace {
     long syscall_exit_group(int status) {
         register long a7 __asm__("a7") = SYS_exit_group;
         register long a0 __asm__("a0") = status;
-        __asm__ volatile("syscall 0" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
-        return a0;
-    }
-    long syscall_close(int fd) {
-        register long a7 __asm__("a7") = SYS_close;
-        register long a0 __asm__("a0") = fd;
         __asm__ volatile("syscall 0" : "=r"(a0) : "r"(a0), "r"(a7) : "memory");
         return a0;
     }

@@ -8,6 +8,7 @@
  * 此文件提供了完整的文件操作接口。
  */
 
+#include "NeForce/core/exception/error_code.hpp"
 #include "NeForce/core/file/file_async.hpp"
 #include "NeForce/core/file/file_diff.hpp"
 #include "NeForce/core/file/file_info.hpp"
@@ -150,8 +151,7 @@ private:
     mutable byte_vector write_buffer_{};     ///< 写缓冲区
     mutable size_type write_buffer_pos_ = 0; ///< 写缓冲区位置
 
-    mutable string last_error_msg_;   ///< 最后错误信息
-    mutable int last_error_code_ = 0; ///< 最后错误码
+    mutable error_code last_error_code_; ///< 最后错误码
 
     unique_ptr<file_mapper> map_;    ///< 内存映射对象
     unique_ptr<file_locker> locker_; ///< 文件锁对象
@@ -472,18 +472,11 @@ public:
      */
     NEFORCE_NODISCARD bool is_append() const noexcept { return append_mode_; }
 
-
-    /**
-     * @brief 获取最后错误信息
-     * @return 错误信息
-     */
-    NEFORCE_NODISCARD const string& last_error() const noexcept { return last_error_msg_; }
-
     /**
      * @brief 获取最后错误码
      * @return 错误码
      */
-    NEFORCE_NODISCARD int last_error_code() const noexcept { return last_error_code_; }
+    NEFORCE_NODISCARD const error_code& last_error_code() const noexcept { return last_error_code_; }
 
     /**
      * @brief 清除错误状态

@@ -36,7 +36,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API logger {
 private:
-    LOG_LEVEL level_;    ///< 当前日志级别
+    log_level level_;    ///< 当前日志级别
     atomic<bool> async_; ///< 是否异步模式
 
     vector<shared_ptr<log_sink>> sinks_; ///< 输出目标列表
@@ -93,7 +93,7 @@ private:
      * @param level 初始日志级别
      * @param async 是否异步模式
      */
-    explicit logger(LOG_LEVEL level = LOG_LEVEL::INFO, bool async = false);
+    explicit logger(log_level level = log_level::INFO, bool async = false);
 
 public:
     /**
@@ -129,7 +129,7 @@ public:
      *
      * 低于此级别的日志将被忽略。
      */
-    void set_level(LOG_LEVEL level);
+    void set_level(log_level level);
 
     /**
      * @brief 设置日志过滤器
@@ -175,7 +175,7 @@ public:
      * @param func 函数名
      * @param line 行号
      */
-    void log(LOG_LEVEL level, string msg, string file, string func, int line);
+    void log(log_level level, string msg, string file, string func, int line);
 
     /**
      * @brief 记录TRACE级别日志
@@ -185,7 +185,7 @@ public:
      * @param line 行号
      */
     void trace(string msg, string file, string func, int line) {
-        log(LOG_LEVEL::TRACE, move(msg), move(file), move(func), line);
+        log(log_level::TRACE, move(msg), move(file), move(func), line);
     }
 
     /**
@@ -196,7 +196,7 @@ public:
      * @param line 行号
      */
     void debug(string msg, string file, string func, int line) {
-        log(LOG_LEVEL::DEBUG, move(msg), move(file), move(func), line);
+        log(log_level::DEBUG, move(msg), move(file), move(func), line);
     }
 
     /**
@@ -207,7 +207,7 @@ public:
      * @param line 行号
      */
     void info(string msg, string file, string func, int line) {
-        log(LOG_LEVEL::INFO, move(msg), move(file), move(func), line);
+        log(log_level::INFO, move(msg), move(file), move(func), line);
     }
 
     /**
@@ -218,7 +218,7 @@ public:
      * @param line 行号
      */
     void warn(string msg, string file, string func, int line) {
-        log(LOG_LEVEL::WARN, move(msg), move(file), move(func), line);
+        log(log_level::WARN, move(msg), move(file), move(func), line);
     }
 
     /**
@@ -229,7 +229,7 @@ public:
      * @param line 行号
      */
     void error(string msg, string file, string func, int line) {
-        log(LOG_LEVEL::ERROR, move(msg), move(file), move(func), line);
+        log(log_level::ERROR, move(msg), move(file), move(func), line);
     }
 
     /**
@@ -240,7 +240,7 @@ public:
      * @param line 行号
      */
     void fatal(string msg, string file, string func, int line) {
-        log(LOG_LEVEL::FATAL, move(msg), move(file), move(func), line);
+        log(log_level::FATAL, move(msg), move(file), move(func), line);
     }
 
     /**

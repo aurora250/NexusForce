@@ -544,9 +544,9 @@ void test_vthread() {
 
 void test_logging() {
     auto& logger = logger::instance();
-    logger.set_level(LOG_LEVEL::DEBUG);
+    logger.set_level(log_level::DEBUG);
     logger.add_context("app", "myapp");
-    logger.set_filter([](const log_event& ev) -> bool { return ev.level >= LOG_LEVEL::INFO; });
+    logger.set_filter([](const log_event& ev) -> bool { return ev.level >= log_level::INFO; });
     const auto sink = make_shared<console_sink>();
     sink->set_formatter(make_unique<log_formatter>("[{time}][{level}][{context.app}] {message}"));
     logger.add_sink(sink);

@@ -5,6 +5,12 @@
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup Database 数据库
+ * @brief 数据库相关功能
+ * @{
+ */
+
 struct NEFORCE_API redis_result final : idb_kv_result {
 private:
     ::redisReply* result_ = nullptr;
@@ -39,6 +45,8 @@ public:
     NEFORCE_NODISCARD int type() const noexcept { return result_ ? result_->type : -1; }
     NEFORCE_NODISCARD bool is_nil() const noexcept { return result_ && result_->type == REDIS_REPLY_NIL; }
 };
+
+/** @} */ // Database
 
 NEFORCE_END_NAMESPACE__
 #endif

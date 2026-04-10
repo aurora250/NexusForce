@@ -8,6 +8,7 @@
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/network/http/http_server_message.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
 class NEFORCE_API http_filter {
 public:
@@ -57,7 +58,7 @@ public:
 class NEFORCE_API cors_filter final : public http_filter {
 public:
     string allowed_origins;
-    HTTP_METHOD allowed_methods{HTTP_METHOD::DEFAULT()};
+    http_method allowed_methods{http_method::DEFAULT()};
     string allowed_headers{"Content-Type, Cookie, Accept, X-Requested-With"};
     bool allow_credentials = true;
     size_t max_age = 86400;
@@ -87,7 +88,7 @@ public:
 class NEFORCE_API static_file_filter final : public http_filter {
 public:
     string root_path_;
-    unordered_map<string, HTTP_CONTENT> mime_types_;
+    unordered_map<string, http_content> mime_types_;
     bool enable_cache_ = true;
     size_t max_file_size_ = 10 * 1024 * 1024;
 
@@ -100,8 +101,8 @@ public:
 
     NEFORCE_NODISCARD static bool is_safe_path(const string& path);
 
-    NEFORCE_NODISCARD optional<HTTP_CONTENT> get_mime_type(const string& path) const;
-    void add_mime_type(const string& extension, HTTP_CONTENT content_type);
+    NEFORCE_NODISCARD optional<http_content> get_mime_type(const string& path) const;
+    void add_mime_type(const string& extension, http_content content_type);
 };
 
 class NEFORCE_API rate_limit_filter final : public http_filter {
@@ -159,5 +160,6 @@ public:
     NEFORCE_NODISCARD string name() const override { return "authentication_filter"; }
 };
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_FILTER_HPP__

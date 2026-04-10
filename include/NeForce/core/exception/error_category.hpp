@@ -28,7 +28,7 @@ public:
 };
 
 
-class generic_error_category final : public error_category {
+class NEFORCE_API generic_error_category final : public error_category {
 public:
     NEFORCE_NODISCARD const char* name() const noexcept override { return "generic"; }
 
@@ -37,13 +37,13 @@ public:
     NEFORCE_NODISCARD error_condition default_error_condition(int32_t ev) const noexcept override;
 };
 
-const error_category& generic_category() noexcept;
+NEFORCE_API const error_category& generic_category() noexcept;
 
 inline error_code make_error_code(errc e) noexcept;
 inline error_condition make_error_condition(errc e) noexcept;
 
 
-class system_error_category final : public error_category {
+class NEFORCE_API system_error_category final : public error_category {
 public:
     NEFORCE_NODISCARD const char* name() const noexcept override { return "system"; }
 
@@ -52,7 +52,7 @@ public:
     NEFORCE_NODISCARD error_condition default_error_condition(int32_t ev) const noexcept override;
 };
 
-const error_category& system_category() noexcept;
+NEFORCE_API const error_category& system_category() noexcept;
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__

@@ -3,26 +3,9 @@
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/http/http_client.hpp>
 NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_HTTP__
 
 namespace {
-    string url_encode(const string_view str) {
-        string result;
-        result.reserve(str.size() * 3);
-
-        for (const auto c: str) {
-            if (is_alpha_or_digit(c) || c == '-' || c == '_' || c == '.' || c == '~') {
-                result += c;
-            } else if (c == ' ') {
-                result += '+';
-            } else {
-                result += '%';
-                result += "0123456789ABCDEF"[c >> 4];
-                result += "0123456789ABCDEF"[c & 0x0F];
-            }
-        }
-        return result;
-    }
-
     bool parse_chunked_body(const string_view chunked, string& decoded) {
         decoded.clear();
         size_t pos = 0;
@@ -62,67 +45,6 @@ namespace {
         return true;
     }
 
-
-    http_cookie parse_set_cookie(const string_view str, string default_domain, string default_path) {
-        vector<string_view> tokens;
-        size_t start = 0, end = 0;
-
-        while ((end = str.find(';', start)) != string::npos) {
-            tokens.push_back(str.substr(start, end - start).trim());
-            start = end + 1;
-        }
-        tokens.push_back(str.substr(start).trim());
-
-        http_cookie c{};
-        if (tokens.empty()) {
-            return c;
-        }
-
-        const size_t eq_pos = tokens[0].find('=');
-        if (eq_pos == string::npos) {
-            return c;
-        }
-
-        c.name = tokens[0].substr(0, eq_pos);
-        c.value = tokens[0].substr(eq_pos + 1);
-        c.domain = move(default_domain);
-        c.path = default_path.empty() ? "/" : move(default_path);
-
-        for (size_t i = 1; i < tokens.size(); ++i) {
-            auto& attr = tokens[i];
-            auto lower_attr = string(attr);
-            lower_attr.lowercase();
-
-            if (lower_attr.starts_with("domain=")) {
-                c.domain = attr.substr(7);
-            } else if (lower_attr.starts_with("path=")) {
-                c.path = attr.substr(5);
-            } else if (lower_attr == "secure") {
-                c.secure = true;
-            } else if (lower_attr == "httponly") {
-                c.http_only = true;
-            } else if (lower_attr.starts_with("max-age=")) {
-                try {
-                    c.max_age = integer32::parse(attr.substr(8)).value();
-                    // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
-                }
-            } else if (lower_attr.starts_with("samesite=")) {
-                c.same_site = attr.substr(9);
-            } else if (lower_attr.starts_with("expires=")) {
-                try {
-                    c.expires = datetime::parse_GMT(attr.substr(8));
-                    // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
-                }
-            }
-        }
-
-        return c;
-    }
-
     bool parse_response(const string_view resp_str, http_client_response& resp, const string& request_host,
                         const string& request_path) {
         const size_t line_end = resp_str.find("\r\n");
@@ -160,8 +82,11 @@ namespace {
         }
 
         try {
-            uint16_t code = uinteger16::parse(status_line.substr(sp1 + 1, sp2 - sp1 - 1)).value();
-            resp.status = static_cast<HTTP_STATUS>(code);
+            const uint16_t code = uinteger16::parse(status_line.substr(sp1 + 1, sp2 - sp1 - 1)).value();
+            resp.status = http_status_from_code(code);
+            if (resp.status_message.empty()) {
+                resp.status_message = http_status_message(resp.status);
+            }
             // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
             // ignore
@@ -197,7 +122,7 @@ namespace {
                 key_lower.lowercase();
 
                 if (key_lower == "set-cookie") {
-                    http_cookie c = parse_set_cookie(value, request_host, request_path);
+                    http_cookie c = http_cookie::parse(value, request_host, request_path);
                     resp.cookies.emplace_back(move(c));
                 } else if (key_lower == "transfer-encoding") {
                     resp.chunked = value.contains("chunked");
@@ -236,49 +161,8 @@ namespace {
 
         return true;
     }
-
-    string build_query_string(const unordered_map<string, string>& params) {
-        if (params.empty()) {
-            return "";
-        }
-
-        string result;
-        bool first = true;
-
-        for (const auto& pair: params) {
-            const auto& key = pair.first;
-            const auto& value = pair.second;
-            if (!first) {
-                result += "&";
-            }
-            result += url_encode(key.view()) + "=" + url_encode(value.view());
-            first = false;
-        }
-
-        return result;
-    }
 } // namespace
 
-
-string http_client_request::build_full_path() const {
-    string full_path = path;
-
-    if (!query_params.empty()) {
-        full_path += "?";
-        bool first = true;
-        for (const auto& pair: query_params) {
-            const auto& key = pair.first;
-            const auto& value = pair.second;
-            if (!first) {
-                full_path += "&";
-            }
-            full_path += url_encode(key.view()) + "=" + url_encode(value.view());
-            first = false;
-        }
-    }
-
-    return full_path;
-}
 
 string http_client::build_request_str(const http_client_request& req, const url& req_url) const {
     string req_str;
@@ -489,7 +373,7 @@ http_client_response http_client::do_request(http_client_request request, int re
 
     const auto connect_start = steady_clock::now();
     if (!ensure_connected(request.host, request.port)) {
-        response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_ERROR;
         response.status_message = "Connection failed";
         response.effective_url = req_url.to_string();
         return response;
@@ -499,7 +383,7 @@ http_client_response http_client::do_request(http_client_request request, int re
     const string request_str = build_request_str(request, req_url);
     steady_clock::time_point send_start;
     if (!send_request(request_str.view(), send_start)) {
-        response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_ERROR;
         response.status_message = "Send failed";
         response.effective_url = req_url.to_string();
         return response;
@@ -509,7 +393,7 @@ http_client_response http_client::do_request(http_client_request request, int re
     steady_clock::time_point receive_start;
     auto resp_opt = read_response(receive_start, request.host, request.path);
     if (!resp_opt) {
-        response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_ERROR;
         response.status_message = "Receive/Parse failed";
         response.effective_url = req_url.to_string();
         return response;
@@ -552,11 +436,11 @@ http_client_response http_client::do_request(http_client_request request, int re
 
             const auto status_code = static_cast<uint16_t>(response.status);
             if (status_code == 303) {
-                new_req.method = HTTP_METHOD::GET();
+                new_req.method = http_method::GET();
                 new_req.body.clear();
             } else if (status_code == 301 || status_code == 302) {
                 if (request.method.is_post()) {
-                    new_req.method = HTTP_METHOD::GET();
+                    new_req.method = http_method::GET();
                     new_req.body.clear();
                 } else {
                     new_req.method = request.method;
@@ -673,7 +557,7 @@ http_client_response http_client::get(const string& url, const unordered_map<str
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::GET();
+    req.method = http_method::GET();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -692,7 +576,7 @@ http_client_response http_client::post(const string& url, const string& body, co
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::POST();
+    req.method = http_method::POST();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -714,8 +598,7 @@ http_client_response http_client::post_json(const string& url_str, const string&
 
 http_client_response http_client::post_form(const string& url_str, const unordered_map<string, string>& form_data,
                                             const unordered_map<string, string>& headers) {
-
-    const string body = build_query_string(form_data);
+    const string body = url::build_query(form_data);
     return post(url_str, body, "application/x-www-form-urlencoded", headers);
 }
 
@@ -727,7 +610,7 @@ http_client_response http_client::put(const string& url, const string& body, con
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::PUT();
+    req.method = http_method::PUT();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -747,7 +630,7 @@ http_client_response http_client::del(const string& url, const unordered_map<str
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::DELETE();
+    req.method = http_method::DELETE();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -765,7 +648,7 @@ http_client_response http_client::head(const string& url, const unordered_map<st
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::HEAD();
+    req.method = http_method::HEAD();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -783,7 +666,7 @@ http_client_response http_client::options(const string& url, const unordered_map
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::OPTIONS();
+    req.method = http_method::OPTIONS();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -803,7 +686,7 @@ http_client_response http_client::patch(const string& url, const string& body, c
     http_client_request req;
     req.host = parsed_url.host;
     req.port = ports::parse(parsed_url.scheme.view());
-    req.method = HTTP_METHOD::PATCH();
+    req.method = http_method::PATCH();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
     if (!parsed_url.query.empty()) {
@@ -858,4 +741,5 @@ future<http_client_response> http_client::request_async(http_client_request req)
 
 void http_client::close() { client_.disconnect(); }
 
+NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__

@@ -24,13 +24,13 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @enum LOG_LEVEL
+ * @enum log_level
  * @brief 日志级别枚举
  *
  * 定义了日志的严重性级别，从最详细的TRACE到最严重的FATAL。
  * 用于控制日志输出和过滤。
  */
-enum class LOG_LEVEL {
+enum class log_level {
     TRACE = 0, ///< 跟踪级别，最详细的调试信息
     DEBUG,     ///< 调试级别，用于开发调试
     INFO,      ///< 信息级别，普通信息
@@ -40,19 +40,19 @@ enum class LOG_LEVEL {
 };
 
 
-NEFORCE_CONSTEXPR20 string to_string(const LOG_LEVEL level) {
+NEFORCE_CONSTEXPR20 string to_string(const log_level level) {
     switch (level) {
-        case LOG_LEVEL::TRACE:
+        case log_level::TRACE:
             return "TRACE";
-        case LOG_LEVEL::DEBUG:
+        case log_level::DEBUG:
             return "DEBUG";
-        case LOG_LEVEL::INFO:
+        case log_level::INFO:
             return "INFO";
-        case LOG_LEVEL::WARN:
+        case log_level::WARN:
             return "WARN";
-        case LOG_LEVEL::ERROR:
+        case log_level::ERROR:
             return "ERROR";
-        case LOG_LEVEL::FATAL:
+        case log_level::FATAL:
             return "FATAL";
         default:
             unreachable();
@@ -75,7 +75,7 @@ struct log_event {
     datetime dt;                           ///< 时间戳
     int line;                              ///< 行号
     thread::id thread_id;                  ///< 线程ID
-    LOG_LEVEL level;                       ///< 日志级别
+    log_level level;                       ///< 日志级别
 };
 
 /** @} */ // Logging

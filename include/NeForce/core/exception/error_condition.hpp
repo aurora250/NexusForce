@@ -17,7 +17,7 @@ public:
     value_(val),
     category_(&cat) {}
 
-    error_condition(errc e) noexcept { *this = make_error_condition(e); }
+    explicit error_condition(errc e) noexcept { *this = make_error_condition(e); }
 
     void assign(int val, const error_category& cat) noexcept {
         value_ = val;

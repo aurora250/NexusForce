@@ -24,6 +24,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup Database 数据库
+ * @brief 数据库相关功能
+ * @{
+ */
+
+/**
  * @defgroup DatabaseInterface 数据库接口
  * @brief 数据库相关功能的接口
  * @{
@@ -342,6 +348,8 @@ public:
 };
 
 /** @} */ // DatabaseInterface
+
+/** @} */ // Database
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_DATABASE_DB_INTERFACE_HPP__

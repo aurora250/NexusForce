@@ -11,6 +11,7 @@
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/exception/error_code.hpp"
 #include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/string/string.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX

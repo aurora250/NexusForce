@@ -65,7 +65,7 @@ public:
 
 inline error_code make_error_code(errc e) noexcept { return {static_cast<int>(e), generic_category()}; }
 
-error_code last_error() noexcept;
+error_code NEFORCE_API last_error() noexcept;
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_EXCEPTION_ERROR_CODE_HPP__
