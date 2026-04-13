@@ -11,5 +11,6 @@ var concepts_8hpp =
     [ "is_ranges_input_iter_v", "group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa", null ],
     [ "is_ranges_iter_v", "group___iterator_category_checks.html#ga142cec486a18b3b63ad14037ee94a22b", null ],
     [ "is_ranges_rnd_iter_v", "group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8", null ],
-    [ "is_rnd_iter_v", "group___iterator_category_checks.html#ga5b2553434b80631066f1ae5ca3bb5fa0", null ]
+    [ "is_rnd_iter_v", "group___iterator_category_checks.html#ga5b2553434b80631066f1ae5ca3bb5fa0", null ],
+    [ "is_view_v", "group___view.html#ga69d7607cc0fa8174c64edf674103411c", null ]
 ];

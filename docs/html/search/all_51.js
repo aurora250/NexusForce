@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
+  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
 ];

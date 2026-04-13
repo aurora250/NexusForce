@@ -12,7 +12,7 @@ var searchData=
   ['thread_5fpool_9',['thread_pool',['../classthread__pool.html',1,'']]],
   ['thread_5ftracker_10',['thread_tracker',['../classthread__tracker.html',1,'']]],
   ['time_11',['time',['../classtime.html',1,'']]],
-  ['time_5finfo_12',['time_info',['../structprocess_1_1time__info.html',1,'process']]],
+  ['time_5finfo_12',['time_info',['../structlocale_1_1time__info.html',1,'locale::time_info'],['../structprocess_1_1time__info.html',1,'process::time_info']]],
   ['time_5fpoint_13',['time_point',['../structtime__point.html',1,'']]],
   ['time_5fpoint_3c_20steady_5fclock_20_3e_14',['time_point&lt; steady_clock &gt;',['../structtime__point.html',1,'']]],
   ['timed_5fbackoff_5fspin_5fpolicy_15',['timed_backoff_spin_policy',['../structtimed__backoff__spin__policy.html',1,'']]],

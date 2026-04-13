@@ -2,7 +2,7 @@
 #define NEFORCE_CORE_REFLECT_METATYPE_HPP__
 
 /**
- * @file metatype.hpp
+ * @file type.hpp
  * @brief 类型反射元数据
  *
  * 此文件提供了类型反射的核心元数据类，用于描述一个类型的完整信息，

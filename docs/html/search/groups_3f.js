@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
+  ['无锁队列_0',['无锁队列',['../group___lock_free_queue.html',1,'']]]
 ];

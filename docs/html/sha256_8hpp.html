@@ -100,7 +100,7 @@ $(function(){initNavTree('sha256_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 sha256.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="sha256_8hpp__incl.svg" width="1807" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="sha256_8hpp__incl.svg" width="1574" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="sha256_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -123,7 +123,79 @@ sha256.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SHA-256哈希算法实现 </p>
-<p>此文件提供了SHA-256安全哈希算法的实现。 SHA-256产生256位（32字节）的哈希值，是SHA-2家族的一员。 适用于密码存储、数字签名等安全敏感场景。 </p>
+<p>此文件提供了SHA-256安全哈希算法的实现。SHA-256产生256位（32字节）的哈希值， 是SHA-2家族的一员，广泛应用于密码存储、数字签名、区块链、证书验证和数据完整性保护。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下标准规范：</p>
+<p><b>SHA-2 算法规范：</b></p><ul>
+<li>**NIST FIPS PUB 180-4:2015**：安全哈希标准 (SHS) <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf</a></li>
+<li>**IETF RFC 6234**：US 安全哈希算法 (SHA 和 SHA 基 HMAC 及 HKDF) <a href="https://www.rfc-editor.org/rfc/rfc6234.html">https://www.rfc-editor.org/rfc/rfc6234.html</a></li>
+</ul>
+<p><b>相关国际标准：</b></p><ul>
+<li>**ISO/IEC 10118-3:2018**：信息技术 — 安全技术 — 哈希函数 — 第3部分：专用哈希函数 <a href="https://www.iso.org/standard/67116.html">https://www.iso.org/standard/67116.html</a></li>
+</ul>
+<p><b>密码模块验证标准：</b></p><ul>
+<li>**NIST FIPS PUB 140-3:2019**：密码模块安全要求 <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf</a></li>
+<li>**ISO/IEC 19790:2012**：信息技术 — 安全技术 — 密码模块安全要求 <a href="https://www.iso.org/standard/52906.html">https://www.iso.org/standard/52906.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">算法  </td><td class="markdownTableBodyNone">SHA-256（SHA-2 家族成员）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">输出长度  </td><td class="markdownTableBodyNone">256 位（32 字节）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">内部状态  </td><td class="markdownTableBodyNone">8 个 32 位字（h0-h7）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">分组大小  </td><td class="markdownTableBodyNone">512 位（64 字节）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">轮数  </td><td class="markdownTableBodyNone">64 轮  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">最大输入长度  </td><td class="markdownTableBodyNone">2^64 - 1 位  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">初始向量 (IV)  </td><td class="markdownTableBodyNone">FIPS 180-4 §5.3.3 定义  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">填充方案  </td><td class="markdownTableBodyNone">Merkle–Damgård 强化（FIPS 180-4 §5.1.1）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">字节序  </td><td class="markdownTableBodyNone">大端（FIPS 180-4 §3.2.2）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">安全强度  </td><td class="markdownTableBodyNone">碰撞抗性 128 位，原像抗性 256 位  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="comparison"></a>
+SHA-2 家族对比</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">算法  </th><th class="markdownTableHeadNone">输出长度  </th><th class="markdownTableHeadNone">内部状态字  </th><th class="markdownTableHeadNone">轮数  </th><th class="markdownTableHeadNone">安全强度（碰撞）  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SHA-224  </td><td class="markdownTableBodyNone">224 位  </td><td class="markdownTableBodyNone">8 × 32 位  </td><td class="markdownTableBodyNone">64  </td><td class="markdownTableBodyNone">112 位  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>SHA-256</b>  </td><td class="markdownTableBodyNone"><b>256 位</b>  </td><td class="markdownTableBodyNone"><b>8 × 32 位</b>  </td><td class="markdownTableBodyNone"><b>64</b>  </td><td class="markdownTableBodyNone"><b>128 位</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SHA-384  </td><td class="markdownTableBodyNone">384 位  </td><td class="markdownTableBodyNone">8 × 64 位  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">192 位  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SHA-512  </td><td class="markdownTableBodyNone">512 位  </td><td class="markdownTableBodyNone">8 × 64 位  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">256 位  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SHA-512/256  </td><td class="markdownTableBodyNone">256 位  </td><td class="markdownTableBodyNone">8 × 64 位  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">128 位  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="usage"></a>
+适用场景</h1>
+<p>SHA-256 是目前广泛推荐的安全哈希算法，适用于：</p><ul>
+<li>密码存储（配合盐值和密钥派生函数）</li>
+<li>数字签名（RSA、ECDSA、EdDSA）</li>
+<li>证书验证（X.509 证书链）</li>
+<li>区块链技术（比特币、以太坊的 PoW 和工作量证明）</li>
+<li>数据完整性校验（HMAC-SHA256）</li>
+<li>密钥派生函数（HKDF、PBKDF2）</li>
+<li>确定性随机数生成器（DRBG）</li>
+</ul>
+<dl class="section see"><dt>参见</dt><dd><a href="https://csrc.nist.gov/projects/hash-functions">https://csrc.nist.gov/projects/hash-functions</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc6234">https://www.rfc-editor.org/rfc/rfc6234</a> </dd>
+<dd>
+<a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program">https://csrc.nist.gov/projects/cryptographic-module-validation-program</a> </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="sha256_8hpp_source.html">sha256.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

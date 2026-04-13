@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['正则表达式_0',['正则表达式',['../group___regex.html',1,'']]]
+  ['查找元素算法_0',['查找元素算法',['../group___finding_algorithms.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
 ];

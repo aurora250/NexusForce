@@ -2,7 +2,7 @@ var classtimer__scheduler =
 [
     [ "clock_type", "classtimer__scheduler.html#a63b53abd0cbc9f95d0c55027a1581617", null ],
     [ "duration", "classtimer__scheduler.html#a6ef27e3b872fd24bfeda7f7ec9c70868", null ],
-    [ "handler_type", "classtimer__scheduler.html#abdc99f1aa55fd6e1dac4f65b19aa5806", null ],
+    [ "handler_type", "classtimer__scheduler.html#ada7122813465be5f928c9c7209325731", null ],
     [ "time_point", "classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9", null ],
     [ "token", "classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea", null ],
     [ "timer_scheduler", "classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab", null ],

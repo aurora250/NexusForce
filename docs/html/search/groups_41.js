@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
+  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
 ];

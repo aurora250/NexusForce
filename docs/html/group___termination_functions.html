@@ -107,10 +107,10 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 函数</h2></td></tr>
 <tr class="memitem:gaa390ea32581b8f7c7394ae3751b982f1" id="r_gaa390ea32581b8f7c7394ae3751b982f1"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#gaa390ea32581b8f7c7394ae3751b982f1">set_terminate</a> (<a class="el" href="#ga2f0beb685fa0b492d4bcdde89255ee6a">terminate_handler</a> handler) noexcept</td></tr>
 <tr class="memdesc:gaa390ea32581b8f7c7394ae3751b982f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置终止处理函数  <br /></td></tr>
-<tr class="memitem:ga863241daa5e21a24f2b3eb32822b7298" id="r_ga863241daa5e21a24f2b3eb32822b7298"><td class="memItemLeft">NEFORCE_NORETURN void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga863241daa5e21a24f2b3eb32822b7298">terminate</a> ()</td></tr>
-<tr class="memdesc:ga863241daa5e21a24f2b3eb32822b7298"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止处理  <br /></td></tr>
-<tr class="memitem:ga3662ca40b7089b5cf757f202ef083d22" id="r_ga3662ca40b7089b5cf757f202ef083d22"><td class="memItemLeft">NEFORCE_NORETURN void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga3662ca40b7089b5cf757f202ef083d22">abort</a> ()</td></tr>
-<tr class="memdesc:ga3662ca40b7089b5cf757f202ef083d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止进程  <br /></td></tr>
+<tr class="memitem:ga4030f40bf85ee2fb43e78ec1f2b34b63" id="r_ga4030f40bf85ee2fb43e78ec1f2b34b63"><td class="memItemLeft">NEFORCE_NORETURN void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga4030f40bf85ee2fb43e78ec1f2b34b63">terminate</a> () noexcept</td></tr>
+<tr class="memdesc:ga4030f40bf85ee2fb43e78ec1f2b34b63"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止处理  <br /></td></tr>
+<tr class="memitem:gac2df434e484126f003d8ad56f699b7a2" id="r_gac2df434e484126f003d8ad56f699b7a2"><td class="memItemLeft">NEFORCE_NORETURN void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#gac2df434e484126f003d8ad56f699b7a2">abort</a> () noexcept</td></tr>
+<tr class="memdesc:gac2df434e484126f003d8ad56f699b7a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止进程  <br /></td></tr>
 <tr class="memitem:ga0427d28f8b01f028440ad61b57c35ca4" id="r_ga0427d28f8b01f028440ad61b57c35ca4"><td class="memItemLeft">int NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga0427d28f8b01f028440ad61b57c35ca4">set_exit</a> (<a class="el" href="#ga028f53de40f9115f4f089cacceddce73">exit_handler</a> handler) noexcept</td></tr>
 <tr class="memdesc:ga0427d28f8b01f028440ad61b57c35ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册退出处理函数  <br /></td></tr>
 <tr class="memitem:ga71b7d8bbc81e3efd65f0aee05b89ce50" id="r_ga71b7d8bbc81e3efd65f0aee05b89ce50"><td class="memItemLeft">NEFORCE_NORETURN void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga71b7d8bbc81e3efd65f0aee05b89ce50">exit</a> (int status)</td></tr>
@@ -164,11 +164,14 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga3662ca40b7089b5cf757f202ef083d22" name="ga3662ca40b7089b5cf757f202ef083d22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3662ca40b7089b5cf757f202ef083d22">&#9670;&#160;</a></span>abort()</h2>
+<a id="gac2df434e484126f003d8ad56f699b7a2" name="gac2df434e484126f003d8ad56f699b7a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2df434e484126f003d8ad56f699b7a2">&#9670;&#160;</a></span>abort()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">NEFORCE_NORETURN void NEFORCE_API abort </td>
@@ -177,11 +180,20 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>终止进程 </p>
 <p>强制终止调用进程，不会进行任何析构行为</p>
 <dl class="section note"><dt>注解</dt><dd>此函数不会返回，进程将在执行函数后终止。 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#gac2df434e484126f003d8ad56f699b7a2">abort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#gac2df434e484126f003d8ad56f699b7a2">abort()</a>.</p>
 
 </div>
 </div>
@@ -214,6 +226,10 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 <li>将控制权返回给宿主环境，返回status作为退出码</li>
 </ol>
 <dl class="section note"><dt>注解</dt><dd>此函数不会返回，进程将在执行函数后终止。 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ga71b7d8bbc81e3efd65f0aee05b89ce50">exit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ga71b7d8bbc81e3efd65f0aee05b89ce50">exit()</a>.</p>
 
 </div>
 </div>
@@ -249,6 +265,10 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 </dl>
 <p>不调用set_exit注册的函数，直接终止程序。</p>
 <dl class="section note"><dt>注解</dt><dd>此函数不会返回，进程将在执行函数后终止。 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#gac4b6ba26d96168e202d2228e2d0926f1">immediate_exit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#gac4b6ba26d96168e202d2228e2d0926f1">immediate_exit()</a>.</p>
 
 </div>
 </div>
@@ -288,6 +308,10 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 </ol>
 <dl class="section note"><dt>注解</dt><dd>此函数不会返回，进程将在执行函数后终止。 </dd></dl>
 
+<p class="reference">引用了 <a class="el" href="#ga913eb6779b9e9d8b47307cf75ac7dfc7">quick_exit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ga913eb6779b9e9d8b47307cf75ac7dfc7">quick_exit()</a>.</p>
+
 </div>
 </div>
 <a id="ga0427d28f8b01f028440ad61b57c35ca4" name="ga0427d28f8b01f028440ad61b57c35ca4"></a>
@@ -323,6 +347,10 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>成功返回0，失败返回非0</dd></dl>
 <p>注册在程序正常退出（通过exit）时调用的函数。 注册的函数按照注册顺序的逆序调用。 </p>
 
+<p class="reference">引用了 <a class="el" href="#ga0427d28f8b01f028440ad61b57c35ca4">set_exit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ga0427d28f8b01f028440ad61b57c35ca4">set_exit()</a>.</p>
+
 </div>
 </div>
 <a id="gafbd334b2819679ad18c262637d0317a4" name="gafbd334b2819679ad18c262637d0317a4"></a>
@@ -357,6 +385,10 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>成功返回0，失败返回非0</dd></dl>
 <p>注册在程序通过quick_exit退出时调用的函数。 注册的函数按照注册顺序的逆序调用。 </p>
+
+<p class="reference">引用了 <a class="el" href="#gafbd334b2819679ad18c262637d0317a4">set_quick_exit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#gafbd334b2819679ad18c262637d0317a4">set_quick_exit()</a>.</p>
 
 </div>
 </div>
@@ -394,11 +426,14 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
 
 </div>
 </div>
-<a id="ga863241daa5e21a24f2b3eb32822b7298" name="ga863241daa5e21a24f2b3eb32822b7298"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga863241daa5e21a24f2b3eb32822b7298">&#9670;&#160;</a></span>terminate()</h2>
+<a id="ga4030f40bf85ee2fb43e78ec1f2b34b63" name="ga4030f40bf85ee2fb43e78ec1f2b34b63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4030f40bf85ee2fb43e78ec1f2b34b63">&#9670;&#160;</a></span>terminate()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">NEFORCE_NORETURN void NEFORCE_API terminate </td>
@@ -407,6 +442,11 @@ $(function(){initNavTree('group___termination_functions.html','',''); });
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>终止处理 </p>

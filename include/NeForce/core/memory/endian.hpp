@@ -237,7 +237,7 @@ public:
      * @param data 字节数组指针
      * @return 读取的16位整数
      */
-    static uint16_t read_le16(const byte_t* data) noexcept {
+    static constexpr uint16_t read_le16(const byte_t* data) noexcept {
         return static_cast<uint16_t>(data[0]) | (static_cast<uint16_t>(data[1]) << 8);
     }
 
@@ -246,7 +246,7 @@ public:
      * @param data 字节数组指针
      * @return 读取的32位整数
      */
-    static uint32_t read_le32(const byte_t* data) noexcept {
+    static constexpr uint32_t read_le32(const byte_t* data) noexcept {
         return static_cast<uint32_t>(data[0]) | (static_cast<uint32_t>(data[1]) << 8) |
                (static_cast<uint32_t>(data[2]) << 16) | (static_cast<uint32_t>(data[3]) << 24);
     }
@@ -256,7 +256,7 @@ public:
      * @param data 字节数组指针
      * @return 读取的64位整数
      */
-    static uint64_t read_le64(const byte_t* data) noexcept {
+    static constexpr uint64_t read_le64(const byte_t* data) noexcept {
         return static_cast<uint64_t>(data[0]) | (static_cast<uint64_t>(data[1]) << 8) |
                (static_cast<uint64_t>(data[2]) << 16) | (static_cast<uint64_t>(data[3]) << 24) |
                (static_cast<uint64_t>(data[4]) << 32) | (static_cast<uint64_t>(data[5]) << 40) |
@@ -268,7 +268,7 @@ public:
      * @param data 字节数组指针
      * @return 读取的16位整数
      */
-    static uint16_t read_be16(const byte_t* data) noexcept {
+    static constexpr uint16_t read_be16(const byte_t* data) noexcept {
         return (static_cast<uint16_t>(data[0]) << 8) | static_cast<uint16_t>(data[1]);
     }
 
@@ -277,7 +277,7 @@ public:
      * @param data 字节数组指针
      * @return 读取的32位整数
      */
-    static uint32_t read_be32(const byte_t* data) noexcept {
+    static constexpr uint32_t read_be32(const byte_t* data) noexcept {
         return (static_cast<uint32_t>(data[0]) << 24) | (static_cast<uint32_t>(data[1]) << 16) |
                (static_cast<uint32_t>(data[2]) << 8) | static_cast<uint32_t>(data[3]);
     }
@@ -287,7 +287,7 @@ public:
      * @param data 字节数组指针
      * @return 读取的64位整数
      */
-    static uint64_t read_be64(const byte_t* data) noexcept {
+    static constexpr uint64_t read_be64(const byte_t* data) noexcept {
         return (static_cast<uint64_t>(data[0]) << 56) | (static_cast<uint64_t>(data[1]) << 48) |
                (static_cast<uint64_t>(data[2]) << 40) | (static_cast<uint64_t>(data[3]) << 32) |
                (static_cast<uint64_t>(data[4]) << 24) | (static_cast<uint64_t>(data[5]) << 16) |
@@ -299,7 +299,7 @@ public:
      * @param dest 目标字节数组指针
      * @param value 要写入的值
      */
-    static void write_le16(byte_t* dest, uint16_t value) noexcept {
+    static constexpr void write_le16(byte_t* dest, uint16_t value) noexcept {
         dest[0] = static_cast<byte_t>(value & 0xFF);
         dest[1] = static_cast<byte_t>((value >> 8) & 0xFF);
     }
@@ -309,7 +309,7 @@ public:
      * @param dest 目标字节数组指针
      * @param value 要写入的值
      */
-    static void write_le32(byte_t* dest, uint32_t value) noexcept {
+    static constexpr void write_le32(byte_t* dest, uint32_t value) noexcept {
         for (int i = 0; i < 4; ++i) {
             dest[i] = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
         }
@@ -320,7 +320,7 @@ public:
      * @param dest 目标字节数组指针
      * @param value 要写入的值
      */
-    static void write_le64(byte_t* dest, uint64_t value) noexcept {
+    static constexpr void write_le64(byte_t* dest, uint64_t value) noexcept {
         for (int i = 0; i < 8; ++i) {
             dest[i] = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
         }
@@ -331,7 +331,7 @@ public:
      * @param dest 目标字节数组指针
      * @param value 要写入的值
      */
-    static void write_be16(byte_t* dest, uint16_t value) noexcept {
+    static constexpr void write_be16(byte_t* dest, uint16_t value) noexcept {
         dest[0] = static_cast<byte_t>((value >> 8) & 0xFF);
         dest[1] = static_cast<byte_t>(value & 0xFF);
     }
@@ -341,7 +341,7 @@ public:
      * @param dest 目标字节数组指针
      * @param value 要写入的值
      */
-    static void write_be32(byte_t* dest, uint32_t value) noexcept {
+    static constexpr void write_be32(byte_t* dest, uint32_t value) noexcept {
         for (int i = 0; i < 4; ++i) {
             dest[i] = static_cast<byte_t>((value >> ((3 - i) * 8)) & 0xFF);
         }
@@ -352,7 +352,7 @@ public:
      * @param dest 目标字节数组指针
      * @param value 要写入的值
      */
-    static void write_be64(byte_t* dest, uint64_t value) noexcept {
+    static constexpr void write_be64(byte_t* dest, uint64_t value) noexcept {
         for (int i = 0; i < 8; ++i) {
             dest[i] = static_cast<byte_t>((value >> ((7 - i) * 8)) & 0xFF);
         }

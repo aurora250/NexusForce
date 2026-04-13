@@ -1,5 +1,16 @@
 #ifndef NEFORCE_CORE_ASYNC_GENERATOR_HPP__
 #define NEFORCE_CORE_ASYNC_GENERATOR_HPP__
+
+/**
+ * @file generator.hpp
+ * @details
+ * 本文件提供了协程的异步工具，包括：
+ * - generator<T> 懒序列生成器
+ * - task<T> 异步任务
+ * - cancellation_token 取消令牌
+ * - 组合操作符 (when_all, retry 等)
+ */
+
 #include "NeForce/core/async/coroutine.hpp"
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #    include "NeForce/core/async/atomic.hpp"

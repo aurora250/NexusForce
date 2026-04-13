@@ -125,11 +125,11 @@ using&#160;</td><td class="memItemRight"><b>const_reference</b> = typename Seque
 Public 成员函数</h2></td></tr>
 <tr class="memitem:a31131062bc53f0fc26d9241bf3bec483" id="r_a31131062bc53f0fc26d9241bf3bec483"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a31131062bc53f0fc26d9241bf3bec483">priority_queue</a> ()=default</td></tr>
 <tr class="memdesc:a31131062bc53f0fc26d9241bf3bec483"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
-<tr class="memitem:ad19d9c6bdd5607d7670595fa8bce5b23" id="r_ad19d9c6bdd5607d7670595fa8bce5b23"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad19d9c6bdd5607d7670595fa8bce5b23">priority_queue</a> (const Compare &amp;comp) noexcept(is_nothrow_default_constructible_v&lt; Sequence &gt; &amp;&amp;is_nothrow_copy_constructible_v&lt; Compare &gt;)</td></tr>
+<tr class="memitem:ad19d9c6bdd5607d7670595fa8bce5b23" id="r_ad19d9c6bdd5607d7670595fa8bce5b23"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad19d9c6bdd5607d7670595fa8bce5b23">priority_queue</a> (const Compare &amp;comp) noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga0b194587645e7045dbe1a6a3e188915d">is_nothrow_default_constructible_v</a>&lt; Sequence &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gaf7d75265d0e5d446fa4925ac74ca3396">is_nothrow_copy_constructible_v</a>&lt; Compare &gt;)</td></tr>
 <tr class="memdesc:ad19d9c6bdd5607d7670595fa8bce5b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定比较函数  <br /></td></tr>
 <tr class="memitem:a6689488ed5da7c0c76bdb9e4afc7e632" id="r_a6689488ed5da7c0c76bdb9e4afc7e632"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6689488ed5da7c0c76bdb9e4afc7e632">priority_queue</a> (const Compare &amp;comp, const Sequence &amp;seq)</td></tr>
 <tr class="memdesc:a6689488ed5da7c0c76bdb9e4afc7e632"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定比较函数和底层容器副本  <br /></td></tr>
-<tr class="memitem:a59d76e897e28ec3af7ea993b0a98add8" id="r_a59d76e897e28ec3af7ea993b0a98add8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a59d76e897e28ec3af7ea993b0a98add8">priority_queue</a> (const Compare &amp;comp, Sequence &amp;&amp;seq) noexcept(is_nothrow_move_constructible_v&lt; Sequence &gt; &amp;&amp;is_nothrow_copy_constructible_v&lt; Compare &gt;)</td></tr>
+<tr class="memitem:a59d76e897e28ec3af7ea993b0a98add8" id="r_a59d76e897e28ec3af7ea993b0a98add8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a59d76e897e28ec3af7ea993b0a98add8">priority_queue</a> (const Compare &amp;comp, Sequence &amp;&amp;seq) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; Sequence &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gaf7d75265d0e5d446fa4925ac74ca3396">is_nothrow_copy_constructible_v</a>&lt; Compare &gt;)</td></tr>
 <tr class="memdesc:a59d76e897e28ec3af7ea993b0a98add8"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定比较函数和移动的底层容器  <br /></td></tr>
 <tr class="memitem:af737ecdc2dcabe280fc2c66b79318367" id="r_af737ecdc2dcabe280fc2c66b79318367"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:af737ecdc2dcabe280fc2c66b79318367 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af737ecdc2dcabe280fc2c66b79318367">priority_queue</a> (Iterator first, Iterator last, const Sequence &amp;seq)</td></tr>
@@ -161,7 +161,7 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a91ca4e01d1e1eade8797e7938a8e6863" id="r_a91ca4e01d1e1eade8797e7938a8e6863"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a91ca4e01d1e1eade8797e7938a8e6863 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a91ca4e01d1e1eade8797e7938a8e6863">emplace</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:a91ca4e01d1e1eade8797e7938a8e6863"><td class="mdescLeft">&#160;</td><td class="mdescRight">在优先队列中就地构造元素  <br /></td></tr>
-<tr class="memitem:a1c4626a2521164be8007106c44c4d59a" id="r_a1c4626a2521164be8007106c44c4d59a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1c4626a2521164be8007106c44c4d59a">swap</a> (<a class="el" href="classpriority__queue.html">priority_queue</a> &amp;other) noexcept(is_nothrow_swappable_v&lt; Sequence &gt; &amp;&amp;is_nothrow_swappable_v&lt; Compare &gt;)</td></tr>
+<tr class="memitem:a1c4626a2521164be8007106c44c4d59a" id="r_a1c4626a2521164be8007106c44c4d59a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1c4626a2521164be8007106c44c4d59a">swap</a> (<a class="el" href="classpriority__queue.html">priority_queue</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; Sequence &gt; &amp;&amp;<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; Compare &gt;)</td></tr>
 <tr class="memdesc:a1c4626a2521164be8007106c44c4d59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个优先队列的内容  <br /></td></tr>
 <tr class="memitem:a0a3e09d6abd42f905e92ba2c4cb2a766" id="r_a0a3e09d6abd42f905e92ba2c4cb2a766"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a0a3e09d6abd42f905e92ba2c4cb2a766">operator==</a> (const <a class="el" href="classpriority__queue.html">priority_queue</a> &amp;rhs) const noexcept(noexcept(pair_.value==rhs.pair_.value))</td></tr>
 <tr class="memdesc:a0a3e09d6abd42f905e92ba2c4cb2a766"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
@@ -268,6 +268,8 @@ template&lt;typename T, typename Sequence = vector&lt;T&gt;, typename Compare = 
 
 <p class="definition">在文件 <a class="el" href="priority__queue_8hpp_source.html">priority_queue.hpp</a> 第 <a class="el" href="priority__queue_8hpp_source.html#l00071">71</a> 行定义.</p>
 
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02799">is_nothrow_copy_constructible_v</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l02817">is_nothrow_default_constructible_v</a>.</p>
+
 </div>
 </div>
 <a id="a6689488ed5da7c0c76bdb9e4afc7e632" name="a6689488ed5da7c0c76bdb9e4afc7e632"></a>
@@ -352,7 +354,7 @@ template&lt;typename T, typename Sequence = vector&lt;T&gt;, typename Compare = 
 
 <p class="definition">在文件 <a class="el" href="priority__queue_8hpp_source.html">priority_queue.hpp</a> 第 <a class="el" href="priority__queue_8hpp_source.html#l00090">90</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02799">is_nothrow_copy_constructible_v</a>, <a class="el" href="type__traits_8hpp_source.html#l02835">is_nothrow_move_constructible_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -998,7 +1000,7 @@ template&lt;typename T, typename Sequence = vector&lt;T&gt;, typename Compare = 
 
 <p class="definition">在文件 <a class="el" href="priority__queue_8hpp_source.html">priority_queue.hpp</a> 第 <a class="el" href="priority__queue_8hpp_source.html#l00240">240</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a31131062bc53f0fc26d9241bf3bec483">priority_queue()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03945">is_nothrow_swappable_v</a> , 以及 <a class="el" href="#a31131062bc53f0fc26d9241bf3bec483">priority_queue()</a>.</p>
 
 </div>
 </div>

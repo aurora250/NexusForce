@@ -100,7 +100,7 @@ $(function(){initNavTree('aes256_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 aes256.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="aes256_8hpp__incl.svg" width="1807" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="aes256_8hpp__incl.svg" width="1574" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="aes256_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -121,7 +121,52 @@ aes256.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>AES-256加密算法实现 </p>
-<p>此文件提供了AES-256对称加密算法的实现。 支持ECB模式（电子密码本模式）的加密和解密，并支持PKCS7填充。 AES-256使用256位（32字节）密钥，是当前广泛使用的安全加密标准。 </p>
+<p>此文件提供了AES-256对称加密算法的实现，支持 ECB、CBC 和 GCM 工作模式， 以及 PKCS#7 填充方案。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下密码学与信息安全相关标准规范：</p>
+<p><b>AES 算法标准：</b></p><ul>
+<li>**NIST FIPS PUB 197:2001**：高级加密标准 (AES) <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf</a></li>
+<li>**ISO/IEC 18033-3:2010**：信息技术 — 安全技术 — 加密算法 — 第3部分：分组密码 <a href="https://www.iso.org/standard/54531.html">https://www.iso.org/standard/54531.html</a></li>
+</ul>
+<p><b>工作模式标准：</b></p><ul>
+<li>**NIST SP 800-38A:2001**：分组密码工作模式推荐 (ECB、CBC) <a href="https://csrc.nist.gov/pubs/sp/800/38/a/final">https://csrc.nist.gov/pubs/sp/800/38/a/final</a></li>
+<li>**NIST SP 800-38D:2007**：Galois/Counter Mode (GCM) 推荐 <a href="https://csrc.nist.gov/pubs/sp/800/38/d/final">https://csrc.nist.gov/pubs/sp/800/38/d/final</a></li>
+<li>**ISO/IEC 19772:2020**：认证加密 (包含 GCM 模式) <a href="https://www.iso.org/standard/75999.html">https://www.iso.org/standard/75999.html</a></li>
+</ul>
+<p><b>填充方案标准：</b></p><ul>
+<li>**IETF RFC 5652**：加密消息语法 (PKCS#7 填充) <a href="https://www.rfc-editor.org/rfc/rfc5652.html">https://www.rfc-editor.org/rfc/rfc5652.html</a></li>
+<li>**IETF RFC 8018**：基于密码的加密规范 (PKCS#5 v2.1) <a href="https://www.rfc-editor.org/rfc/rfc8018.html">https://www.rfc-editor.org/rfc/rfc8018.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">算法  </td><td class="markdownTableBodyNone">AES-256 (密钥长度 256 位，分组大小 128 位)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">轮数  </td><td class="markdownTableBodyNone">14 轮  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">密钥扩展  </td><td class="markdownTableBodyNone">240 字节扩展密钥  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ECB 模式  </td><td class="markdownTableBodyNone">电子密码本，无 IV  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">CBC 模式  </td><td class="markdownTableBodyNone">密码分组链接，需 16 字节 IV  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">GCM 模式  </td><td class="markdownTableBodyNone">Galois 计数器模式，认证加密  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">GCM 标签长度  </td><td class="markdownTableBodyNone">12-16 字节 (推荐 16 字节)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">GCM IV 推荐长度  </td><td class="markdownTableBodyNone">12 字节 (96 位)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">填充方案  </td><td class="markdownTableBodyNone">PKCS#7 (RFC 5652)  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本实现使用常量时间比较函数防止时序攻击， 符合 NIST SP 800-38D 附录 C 的安全要求。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>ECB 模式不应单独用于加密多个数据块，因其不能隐藏数据模式。 推荐使用 CBC 或 GCM 模式进行安全加密。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines">https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines</a> </dd>
+<dd>
+<a href="https://www.iso.org/committee/45306.html">https://www.iso.org/committee/45306.html</a> </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="aes256_8hpp_source.html">aes256.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

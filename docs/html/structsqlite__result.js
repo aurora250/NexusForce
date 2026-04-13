@@ -1,0 +1,26 @@
+var structsqlite__result =
+[
+    [ "sqlite_result", "structsqlite__result.html#a3a567d253319df439bbac39a6e0f81a1", null ],
+    [ "sqlite_result", "structsqlite__result.html#a16c38a0dfa700c81e7bafd8efedf4d8e", null ],
+    [ "~sqlite_result", "structsqlite__result.html#ae5a1354b25ea70ae0676772b87f456f3", null ],
+    [ "column_count", "structsqlite__result.html#afbe452776513e6852c1f8d062693b64b", null ],
+    [ "column_names", "structsqlite__result.html#aaf1a0dbd6cc57fc9e5187e8f4fd404d5", null ],
+    [ "column_types", "structsqlite__result.html#aee2cf0d1bab29ec15cb22fefd4fe9d74", null ],
+    [ "empty", "structsqlite__result.html#a5d2b547387e0a27480f57c2d57a865b7", null ],
+    [ "get", "structsqlite__result.html#af9d77e3f02cb8b6014724fdb0cbd8268", null ],
+    [ "get_bit", "structsqlite__result.html#a47f29d0b2c84b36ee9251c1dae86533f", null ],
+    [ "get_blob", "structsqlite__result.html#a51f425bc91e0a6bc9c1907c8819d6740", null ],
+    [ "get_bool", "structsqlite__result.html#a575cf57e04a4ea6ef7464b7983854710", null ],
+    [ "get_date", "structsqlite__result.html#a6c839e55c9b8b322dd535fc6768b0c4b", null ],
+    [ "get_datetime", "structsqlite__result.html#a8ef96401a6e3e3c82071468696e78b94", null ],
+    [ "get_decimal", "structsqlite__result.html#a39bac44cf9bb345feb61ed9480e12fc4", null ],
+    [ "get_float32", "structsqlite__result.html#acf55c850f7d09604aad58caeedace741", null ],
+    [ "get_float64", "structsqlite__result.html#a3c6dbaa2e47ebc7026e7cabd027dfc84", null ],
+    [ "get_int16", "structsqlite__result.html#a33f8fa0337877f30a2cc590afdad4048", null ],
+    [ "get_int32", "structsqlite__result.html#ac6a144f8dc88cc0a5a478001ecc20ad2", null ],
+    [ "get_int64", "structsqlite__result.html#a663a38d34b890c5fb628b8c025258360", null ],
+    [ "get_time", "structsqlite__result.html#a9a42b54361c7efe02e255e376b2f56e5", null ],
+    [ "get_timestamp", "structsqlite__result.html#a0cb92e580c38100830fdbd507151de74", null ],
+    [ "NEFORCE_DEPRECATED_FOR", "structsqlite__result.html#a2cce41c9e2c2c5c6577c5322722a2ed0", null ],
+    [ "next", "structsqlite__result.html#a6f30a6e5fcc595be24a36570c3e4fb3a", null ]
+];

@@ -8,6 +8,12 @@ var searchData=
   ['open_5fforce_5',['OPEN_FORCE',['../group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a5e4067b50d7834bb5ab5421449bad9b4',1,'file_constants.hpp']]],
   ['open_5fonly_6',['open_only',['../classshare__memory.html#a44ac8b8e6ff49cfe0f91b017ad68e23aa3cd050e22f6601441356cc4578b66999',1,'share_memory']]],
   ['open_5for_5fcreate_7',['open_or_create',['../classshare__memory.html#a44ac8b8e6ff49cfe0f91b017ad68e23aaf7a6e5d182e5d5a2e09302a5c3671daf',1,'share_memory']]],
-  ['others_8',['OTHERS',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae',1,'file_constants.hpp']]],
-  ['overlapped_9',['OVERLAPPED',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4',1,'file_constants.hpp']]]
+  ['operation_5fcanceled_8',['operation_canceled',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6afd3d0bdcc9eb9e68534b7d055c5fe586',1,'errc.hpp']]],
+  ['operation_5fin_5fprogress_9',['operation_in_progress',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a4c7eb50b6d86ac8a130ebebc18dbe263',1,'errc.hpp']]],
+  ['operation_5fnot_5fpermitted_10',['operation_not_permitted',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a8344b3d509942f035d5e303022f9b986',1,'errc.hpp']]],
+  ['operation_5fnot_5fsupported_11',['operation_not_supported',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a69bf074bf052ee4c9047b62fe7c24569',1,'errc.hpp']]],
+  ['operation_5fwould_5fblock_12',['operation_would_block',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a738abdaead9cd7b2e2ea19a34764b385',1,'errc.hpp']]],
+  ['others_13',['OTHERS',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae',1,'file_constants.hpp']]],
+  ['overlapped_14',['OVERLAPPED',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4',1,'file_constants.hpp']]],
+  ['owner_5fdead_15',['owner_dead',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a2abac2fa6722c56b2ea17ac6c4097f68',1,'errc.hpp']]]
 ];

@@ -128,8 +128,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a3f7ac3b078b81bae11e2cd63957cca11"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置删除策略  <br /></td></tr>
 <tr class="memitem:ad62f2c7f18a482383090bc40997f81d9" id="r_ad62f2c7f18a482383090bc40997f81d9"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#ac86ed045081faf78d794374e6dca922a">delete_policy</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad62f2c7f18a482383090bc40997f81d9">policy</a> () const noexcept</td></tr>
 <tr class="memdesc:ad62f2c7f18a482383090bc40997f81d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前删除策略  <br /></td></tr>
-<tr class="memitem:a6955b0c7dae1e27dc715335d94ad6160" id="r_a6955b0c7dae1e27dc715335d94ad6160"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6955b0c7dae1e27dc715335d94ad6160">cleanup</a> ()</td></tr>
-<tr class="memdesc:a6955b0c7dae1e27dc715335d94ad6160"><td class="mdescLeft">&#160;</td><td class="mdescRight">手动清理临时文件  <br /></td></tr>
+<tr class="memitem:ab09ff42e5d8867b3115ef10268a4c955" id="r_ab09ff42e5d8867b3115ef10268a4c955"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab09ff42e5d8867b3115ef10268a4c955">cleanup</a> () noexcept</td></tr>
+<tr class="memdesc:ab09ff42e5d8867b3115ef10268a4c955"><td class="mdescLeft">&#160;</td><td class="mdescRight">手动清理临时文件  <br /></td></tr>
 <tr class="memitem:a6bd876203a19428fb3113c30e8ee8269" id="r_a6bd876203a19428fb3113c30e8ee8269"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6bd876203a19428fb3113c30e8ee8269">release</a> ()</td></tr>
 <tr class="memdesc:a6bd876203a19428fb3113c30e8ee8269"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放临时文件的所有权  <br /></td></tr>
 </table><table class="memberdecls">
@@ -353,11 +353,14 @@ Public 成员函数</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a6955b0c7dae1e27dc715335d94ad6160" name="a6955b0c7dae1e27dc715335d94ad6160"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6955b0c7dae1e27dc715335d94ad6160">&#9670;&#160;</a></span>cleanup()</h2>
+<a id="ab09ff42e5d8867b3115ef10268a4c955" name="ab09ff42e5d8867b3115ef10268a4c955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab09ff42e5d8867b3115ef10268a4c955">&#9670;&#160;</a></span>cleanup()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void temp_file::cleanup </td>
@@ -366,6 +369,11 @@ Public 成员函数</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>手动清理临时文件 </p>
@@ -401,6 +409,10 @@ Public 成员函数</h2></td></tr>
 
 <p>清理所有已注册的临时文件 </p>
 <p>遍历全局注册表，删除所有记录的临时文件。 通常在程序退出时由atexit注册的函数调用。 </p>
+
+<p class="reference">引用了 <a class="el" href="#aaf92eee44863689f8e5b39c74ce35570">cleanup_all_temp_files()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aaf92eee44863689f8e5b39c74ce35570">cleanup_all_temp_files()</a>.</p>
 
 </div>
 </div>
@@ -448,7 +460,9 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>新创建的临时文件对象</dd></dl>
 <p>等价于调用带 AUTO_DELETE 策略的构造函数。 </p>
 
-<p class="reference">引用了 <a class="el" href="file__constants_8hpp_source.html#l00125">CREATE_FORCE</a> , 以及 <a class="el" href="#accbc6dd9c82fe1f93704408afc7cf718">temp_file()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ac3839794aef9c8305fa6da30f84d2614">create_temp_file()</a> , 以及 <a class="el" href="#accbc6dd9c82fe1f93704408afc7cf718">temp_file()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ac3839794aef9c8305fa6da30f84d2614">create_temp_file()</a>.</p>
 
 </div>
 </div>
@@ -651,6 +665,10 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>将路径添加到全局注册表，在 cleanup_all_temp_files 中被清理。 通常由 <a class="el" href="classtemp__file.html" title="临时文件管理类">temp_file</a> 构造函数自动调用。 </p>
 
+<p class="reference">引用了 <a class="el" href="#a578d30264589dde27c8837eac175e4e0">register_for_cleanup()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a578d30264589dde27c8837eac175e4e0">register_for_cleanup()</a>.</p>
+
 </div>
 </div>
 <a id="a6bd876203a19428fb3113c30e8ee8269" name="a6bd876203a19428fb3113c30e8ee8269"></a>
@@ -670,6 +688,10 @@ Public 成员函数</h2></td></tr>
 
 <p>释放临时文件的所有权 </p>
 <p>将删除策略设置为 MANUAL_DELETE，并从全局注册表中移除， 但保持文件打开状态，析构时不会自动删除。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a6bd876203a19428fb3113c30e8ee8269">release()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a6bd876203a19428fb3113c30e8ee8269">release()</a>.</p>
 
 </div>
 </div>

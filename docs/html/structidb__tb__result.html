@@ -89,7 +89,7 @@ $(function(){initNavTree('structidb__tb__result.html','','structidb__tb__result-
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">idb_tb_result结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
+  <div class="headertitle"><div class="title">idb_tb_result结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database.html">数据库</a> &raquo; <a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,7 +100,7 @@ $(function(){initNavTree('structidb__tb__result.html','','structidb__tb__result-
 <div class="dynheader">
 类 idb_tb_result 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__tb__result__inherit__graph.svg" width="146" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__tb__result__inherit__graph.svg" width="696" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -173,7 +173,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <div class="textblock"><p>关系型数据库结果集抽象基类 </p>
 <p>提供表格数据的访问接口，支持按列名或索引获取值。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00069">69</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a15bba511bedb7883a9770516e60d0502" name="a15bba511bedb7883a9770516e60d0502"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15bba511bedb7883a9770516e60d0502">&#9670;&#160;</a></span>column_count()</h2>
@@ -200,6 +200,8 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>获取结果集列数 </p>
 <dl class="section return"><dt>返回</dt><dd>列数 </dd></dl>
+
+<p>在 <a class="el" href="classmysql__prepared__result.html#a182d60423c6e882efd96f04462e6f876">mysql_prepared_result</a>, <a class="el" href="structmysql__result.html#aa0c7b8c18b4f7a91d73ee3107a6553e5">mysql_result</a>, <a class="el" href="classpgsql__prepared__result.html#a2708aeb47191b77cdd2f04fa9ae25e5d">pgsql_prepared_result</a>, <a class="el" href="classpgsql__tb__result.html#a157f2cf9be5deee4eca517d5167e148f">pgsql_tb_result</a>, <a class="el" href="structsqlite__prepared__result.html#a135e20f22f845d805969d144a0475f43">sqlite_prepared_result</a> , 以及 <a class="el" href="structsqlite__result.html#afbe452776513e6852c1f8d062693b64b">sqlite_result</a> 内被实现.</p>
 
 </div>
 </div>
@@ -229,6 +231,8 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <p>获取所有列名 </p>
 <dl class="section return"><dt>返回</dt><dd>列名列表（按查询顺序） </dd></dl>
 
+<p>在 <a class="el" href="classmysql__prepared__result.html#af5ab89b9a5871298c7c34e6419b7804f">mysql_prepared_result</a>, <a class="el" href="structmysql__result.html#abc8618955760ea54fe1addb302c2340f">mysql_result</a>, <a class="el" href="classpgsql__prepared__result.html#a117cefcf033608f10ea0996498d7b214">pgsql_prepared_result</a>, <a class="el" href="classpgsql__tb__result.html#a7c310407f039510a73bf0523fec5b714">pgsql_tb_result</a>, <a class="el" href="structsqlite__prepared__result.html#a39af288b0807ff3c77263fdf56cba749">sqlite_prepared_result</a> , 以及 <a class="el" href="structsqlite__result.html#aaf1a0dbd6cc57fc9e5187e8f4fd404d5">sqlite_result</a> 内被实现.</p>
+
 </div>
 </div>
 <a id="aabb704cab81e3fdae2849fcdd6d73c75" name="aabb704cab81e3fdae2849fcdd6d73c75"></a>
@@ -256,6 +260,10 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>获取结果集行数 </p>
 <dl class="section return"><dt>返回</dt><dd>行数 </dd></dl>
+
+<p>在 <a class="el" href="classmysql__prepared__result.html#a29a03fe991af4512b997b1f664af3106">mysql_prepared_result</a>, <a class="el" href="structmysql__result.html#ab0bc025d64deda866a13e2c49cacca96">mysql_result</a>, <a class="el" href="classpgsql__prepared__result.html#a5402e720afdab1ca0d1887d9aa47e756">pgsql_prepared_result</a> , 以及 <a class="el" href="classpgsql__tb__result.html#aa20f494091b5a5f352d6ca0eea224afc">pgsql_tb_result</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sqlite__prepared__result_8hpp_source.html#l00083">sqlite_prepared_result::NEFORCE_DEPRECATED_FOR()</a> , 以及 <a class="el" href="sqlite__result_8hpp_source.html#l00081">sqlite_result::NEFORCE_DEPRECATED_FOR()</a>.</p>
 
 </div>
 </div>

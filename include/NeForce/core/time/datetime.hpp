@@ -12,9 +12,66 @@
  * - 时间戳类
  * - 儒略日转换
  * - 多种格式的解析和格式化
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下日期时间相关标准规范：
+ *
+ * **公历与日期计算标准：**
+ * - **ISO 8601-1:2019**：日期和时间 — 信息交换的表示法 — 第1部分：基本规则
+ *   https://www.iso.org/standard/70907.html
+ * - **ISO 8601-2:2019**：日期和时间 — 信息交换的表示法 — 第2部分：扩展
+ *   https://www.iso.org/standard/70908.html
+ *
+ * **互联网时间格式标准：**
+ * - **IETF RFC 3339**：互联网上的日期和时间格式（ISO 8601 配置文件）
+ *   https://www.rfc-editor.org/rfc/rfc3339.html
+ * - **IETF RFC 1123**：互联网主机要求 — 应用和支持（§5.2.14 日期时间格式）
+ *   https://www.rfc-editor.org/rfc/rfc1123.html
+ * - **IETF RFC 2616**：HTTP/1.1（§3.3.1 完整日期，已由 RFC 7231 更新）
+ *   https://www.rfc-editor.org/rfc/rfc2616.html#section-3.3.1
+ *
+ * **时间戳与系统时钟标准：**
+ * - **POSIX.1-2017 (IEEE Std 1003.1)**：Unix 时间戳定义
+ *   https://pubs.opengroup.org/onlinepubs/9699919799/
+ * - **ISO/IEC 9899:2018**：C 语言标准（time_t 类型定义）
+ *   https://www.iso.org/standard/74528.html
+ *
+ * **儒略日计算标准：**
+ * - **国际天文学联合会 (IAU) 标准**：儒略日计算公式（Fliegel & Van Flandern, 1968）
+ *
+ * @section format_specifications 格式规范
+ * | 格式类型         | 示例                                  | 标准引用                     |
+ * |------------------|---------------------------------------|------------------------------|
+ * | ISO 8601 基本    | 2024-01-15T14:30:00                   | ISO 8601-1:2019 §5.4         |
+ * | ISO 8601 UTC     | 2024-01-15T14:30:00Z                  | ISO 8601-1:2019 §5.4         |
+ * | ISO 8601 带时区  | 2024-01-15T14:30:00+08:00             | ISO 8601-1:2019 §5.4         |
+ * | RFC 3339         | 2024-01-15T14:30:00+08:00             | RFC 3339 §5.6                |
+ * | RFC 1123 (GMT)   | Mon, 15 Jan 2024 14:30:00 GMT         | RFC 1123 §5.2.14             |
+ * | 简单格式         | 2024-01-15 14:30:00                   | 非标准（用于内部表示）        |
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 纪元起始          | 1970-01-01 00:00:00 UTC (Unix 纪元)       |
+ * | 年份范围          | 1900-9999                                 |
+ * | 闰年规则          | 公历闰年（能被4整除但不能被100整除，或能被400整除） |
+ * | 儒略日基准        | 公元前4713年1月1日中午12点                |
+ * | 时区偏移范围      | ±12:00                                    |
+ * | 时间戳精度        | 秒级                                      |
+ *
+ * @section date_calculation 日期计算参考
+ * - **星期计算**：采用 Zeller 同余式变体
+ * - **儒略日转换**：采用 Fliegel & Van Flandern 算法
+ * - **闰年判断**：公历规则（1582年后）
+ *
+ * @note 所有日期验证符合公历规则，年份范围限制为 1900-9999。
+ *       儒略日转换算法支持公元纪年，结果与 IAU 标准一致。
+ *
+ * @see https://www.iso.org/iso-8601-date-and-time-format.html
+ * @see https://www.ietf.org/rfc/rfc3339.txt
+ * @see https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16
  */
 
-#include "NeForce/core/string/format.hpp"
 #include "NeForce/core/utility/packages.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

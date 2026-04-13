@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
+  ['排列算法_0',['排列算法',['../group___permutation_algorithms.html',1,'']]],
+  ['排序算法_1',['排序算法',['../group___sort_algorithms.html',1,'']]]
 ];

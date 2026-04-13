@@ -1,5 +1,14 @@
 #ifndef NEFORCE_CORE_STRING_STRING_VIEW_HPP__
 #define NEFORCE_CORE_STRING_STRING_VIEW_HPP__
+
+/**
+ * @file string_view.hpp
+ * @brief 字符串视图类型别名和实用函数
+ *
+ * 此文件提供了basic_string_view的具体类型别名，
+ * 以及用于创建字符串视图的字面量操作符与工具函数。
+ */
+
 #include "NeForce/core/string/basic_string_view.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

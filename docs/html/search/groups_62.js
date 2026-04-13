@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]]
+  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
+  ['计时器_1',['计时器',['../group___click.html',1,'']]]
 ];

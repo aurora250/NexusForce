@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
-  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
+  ['系统信号_0',['系统信号',['../group___system_signal.html',1,'']]],
+  ['系统信息_1',['系统信息',['../group___system_info.html',1,'']]]
 ];

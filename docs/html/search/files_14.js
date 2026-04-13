@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['weak_5fptr_2ehpp_0',['weak_ptr.hpp',['../weak__ptr_8hpp.html',1,'']]],
-  ['windef_2ehpp_1',['windef.hpp',['../windef_8hpp.html',1,'']]]
+  ['variant_2ehpp_0',['variant.hpp',['../variant_8hpp.html',1,'']]],
+  ['vector_2ehpp_1',['vector.hpp',['../vector_8hpp.html',1,'']]],
+  ['virtual_5fthread_2ehpp_2',['virtual_thread.hpp',['../virtual__thread_8hpp.html',1,'']]],
+  ['vsprintf_2ehpp_3',['vsprintf.hpp',['../vsprintf_8hpp.html',1,'']]]
 ];

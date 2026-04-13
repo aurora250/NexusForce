@@ -107,7 +107,7 @@ $(function(){initNavTree('group___parallel_algorithms.html','',''); });
 <tr class="memitem:gad447586eb3e4c5bd99c06300195deeba template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad447586eb3e4c5bd99c06300195deeba">reduce</a> (Iterator first, Iterator last, BinaryOperation op, Result &amp;res)</td></tr>
 <tr class="memdesc:gad447586eb3e4c5bd99c06300195deeba"><td class="mdescLeft">&#160;</td><td class="mdescRight">并行归约操作  <br /></td></tr>
 <tr class="memitem:ga9c84b149470430f99e5bb9f2de2a03dd" id="r_ga9c84b149470430f99e5bb9f2de2a03dd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Threshhold = 10&gt; </td></tr>
-<tr class="memitem:ga9c84b149470430f99e5bb9f2de2a03dd template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9c84b149470430f99e5bb9f2de2a03dd">transform_reduce</a> (Iterator first, Iterator last, UnaryOperation <a class="el" href="group___shift_algorithms.html#ga08e72453e12c29254c5a5d45e58d648f">transform</a>, BinaryOp <a class="el" href="#gad447586eb3e4c5bd99c06300195deeba">reduce</a>, Result &amp;res)</td></tr>
+<tr class="memitem:ga9c84b149470430f99e5bb9f2de2a03dd template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9c84b149470430f99e5bb9f2de2a03dd">transform_reduce</a> (Iterator first, Iterator last, UnaryOperation transform, BinaryOp <a class="el" href="#gad447586eb3e4c5bd99c06300195deeba">reduce</a>, Result &amp;res)</td></tr>
 <tr class="memdesc:ga9c84b149470430f99e5bb9f2de2a03dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">并行变换归约操作  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
@@ -234,7 +234,7 @@ template&lt;typename Iterator, typename UnaryOperation, typename BinaryOp, typen
 
 <p class="definition">在文件 <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a> 第 <a class="el" href="parallel_8hpp_source.html#l00078">78</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="type__traits_8hpp_source.html#l04314">initialize()</a>, <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>, <a class="el" href="parallel_8hpp_source.html#l00042">reduce()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00132">ref()</a>, <a class="el" href="shift_8hpp_source.html#l00946">transform()</a> , 以及 <a class="el" href="parallel_8hpp_source.html#l00078">transform_reduce()</a>.</p>
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="type__traits_8hpp_source.html#l04317">initialize()</a>, <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>, <a class="el" href="parallel_8hpp_source.html#l00042">reduce()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00132">ref()</a> , 以及 <a class="el" href="parallel_8hpp_source.html#l00078">transform_reduce()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="parallel_8hpp_source.html#l00078">transform_reduce()</a>.</p>
 

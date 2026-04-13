@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
+  ['时钟_0',['时钟',['../group___clocks.html',1,'']]],
+  ['时间点_1',['时间点',['../group___time_point.html',1,'']]]
 ];

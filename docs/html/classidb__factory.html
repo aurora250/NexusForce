@@ -89,7 +89,7 @@ $(function(){initNavTree('classidb__factory.html','','classidb__factory-members'
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">idb_factory类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
+  <div class="headertitle"><div class="title">idb_factory类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database.html">数据库</a> &raquo; <a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,10 +97,15 @@ $(function(){initNavTree('classidb__factory.html','','classidb__factory-members'
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 idb_factory 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classidb__factory__inherit__graph.svg" width="480" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:ad680ec3a992a6a696e3cff3e7f0b34e1" id="r_ad680ec3a992a6a696e3cff3e7f0b34e1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad680ec3a992a6a696e3cff3e7f0b34e1">idb_factory</a> (db_config config)</td></tr>
+<tr class="memitem:ad680ec3a992a6a696e3cff3e7f0b34e1" id="r_ad680ec3a992a6a696e3cff3e7f0b34e1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad680ec3a992a6a696e3cff3e7f0b34e1">idb_factory</a> (<a class="el" href="structdb__config.html">db_config</a> config)</td></tr>
 <tr class="memdesc:ad680ec3a992a6a696e3cff3e7f0b34e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:a9cfd6a805582479a8e07ccee9902e725" id="r_a9cfd6a805582479a8e07ccee9902e725"><td class="memItemLeft">virtual <a class="el" href="structidb__connect.html">idb_connect</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a9cfd6a805582479a8e07ccee9902e725">create_connect</a> ()=0</td></tr>
 <tr class="memdesc:a9cfd6a805582479a8e07ccee9902e725"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建数据库连接对象  <br /></td></tr>
@@ -110,14 +115,14 @@ Public 成员函数</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected 属性</h2></td></tr>
 <tr class="memitem:abf7c46aa20c88d33ddd866b4251c123a" id="r_abf7c46aa20c88d33ddd866b4251c123a"><td class="memItemLeft"><a id="abf7c46aa20c88d33ddd866b4251c123a" name="abf7c46aa20c88d33ddd866b4251c123a"></a>
-db_config&#160;</td><td class="memItemRight"><b>config_</b></td></tr>
+<a class="el" href="structdb__config.html">db_config</a>&#160;</td><td class="memItemRight"><b>config_</b></td></tr>
 <tr class="memdesc:abf7c46aa20c88d33ddd866b4251c123a"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据库配置 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>数据库连接工厂抽象基类 </p>
 <p>使用工厂模式创建具体的数据库连接和结果集对象。 每种数据库实现需要提供对应的工厂子类。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00316">316</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00322">322</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ad680ec3a992a6a696e3cff3e7f0b34e1" name="ad680ec3a992a6a696e3cff3e7f0b34e1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad680ec3a992a6a696e3cff3e7f0b34e1">&#9670;&#160;</a></span>idb_factory()</h2>
@@ -131,7 +136,7 @@ db_config&#160;</td><td class="memItemRight"><b>config_</b></td></tr>
         <tr>
           <td class="memname">idb_factory::idb_factory </td>
           <td>(</td>
-          <td class="paramtype">db_config</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structdb__config.html">db_config</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -150,9 +155,11 @@ db_config&#160;</td><td class="memItemRight"><b>config_</b></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00325">325</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00331">331</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="db__interface_8hpp_source.html#l00318">config_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="db__interface_8hpp_source.html#l00324">config_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="mysql__connect_8hpp_source.html#l00163">mysql_factory::mysql_factory()</a>, <a class="el" href="pgsql__connect_8hpp_source.html#l00159">pgsql_factory::pgsql_factory()</a>, <a class="el" href="redis__connect_8hpp_source.html#l00169">redis_factory::redis_factory()</a> , 以及 <a class="el" href="sqlite__connect_8hpp_source.html#l00160">sqlite_factory::sqlite_factory()</a>.</p>
 
 </div>
 </div>
@@ -182,6 +189,8 @@ db_config&#160;</td><td class="memItemRight"><b>config_</b></td></tr>
 
 <p>创建数据库连接对象 </p>
 <dl class="section return"><dt>返回</dt><dd>连接对象指针 </dd></dl>
+
+<p>在 <a class="el" href="classmysql__factory.html#a4ebf42cc3b6eb2634e67e26d9f197281">mysql_factory</a>, <a class="el" href="classpgsql__factory.html#a8a417fedad8edefaff17a8bae6b5dec7">pgsql_factory</a>, <a class="el" href="classredis__factory.html#a8a6fd92e39cbdb60de258bedf95a4a1b">redis_factory</a> , 以及 <a class="el" href="classsqlite__factory.html#a74ed9445802c58b3d703797a86925d6e">sqlite_factory</a> 内被实现.</p>
 
 </div>
 </div>
@@ -216,6 +225,8 @@ db_config&#160;</td><td class="memItemRight"><b>config_</b></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>结果集对象指针 </dd></dl>
+
+<p>在 <a class="el" href="classmysql__factory.html#a47a360e62336b45f2a738a8c6d6fc729">mysql_factory</a>, <a class="el" href="classpgsql__factory.html#a3877489ce53af0ccebb8f3ac23597fff">pgsql_factory</a>, <a class="el" href="classredis__factory.html#a30ac55ca57a1b6019542877089675b0b">redis_factory</a> , 以及 <a class="el" href="classsqlite__factory.html#aa1d9bbef2b3de564de8203e065453f5f">sqlite_factory</a> 内被实现.</p>
 
 </div>
 </div>

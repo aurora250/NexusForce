@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['加密算法_0',['加密算法',['../group___encryption.html',1,'']]]
+  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
 ];

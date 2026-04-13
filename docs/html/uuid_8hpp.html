@@ -102,7 +102,7 @@ $(function(){initNavTree('uuid_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 uuid.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="uuid_8hpp__incl.svg" width="2088" height="1398"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="uuid_8hpp__incl.svg" width="1928" height="1398"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="uuid_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -121,7 +121,24 @@ uuid.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>UUID实现 </p>
-<p>此文件提供了UUID的生成和操作功能，支持UUID版本4（随机）和版本7（时间戳排序）。 UUID是一个128位的唯一标识符，广泛用于分布式系统中的标识生成。 </p>
+<p>此文件提供了UUID的生成和操作功能，支持UUID版本4（随机）和版本7（时间戳排序）。 UUID是一个128位的唯一标识符，广泛用于分布式系统中的标识生成。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下标准规范：</p>
+<ul>
+<li>**IETF RFC 4122**：UUID 版本 4 的定义（基于随机数） <a href="https://www.rfc-editor.org/rfc/rfc4122.html">https://www.rfc-editor.org/rfc/rfc4122.html</a></li>
+<li>**IETF RFC 9562**：UUID 版本 7 的定义（基于 Unix 时间戳排序） <a href="https://www.rfc-editor.org/rfc/rfc9562.html">https://www.rfc-editor.org/rfc/rfc9562.html</a></li>
+</ul>
+<p>此外，UUID 的结构与编码方式也符合以下 ISO 标准：</p><ul>
+<li><b>ISO/IEC 9834-8:2014**：信息技术 — 对象标识符解析系统 — 第8部分：UUID 的生成与注册 <a href="https://www.iso.org/standard/62795.html">https://www.iso.org/standard/62795.html</a></b></li>
+<li><b>**ISO/IEC 18004:2024</b> 相关附录 <a href="https://www.iso.org/standard/83358.html">https://www.iso.org/standard/83358.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="version_details"></a>
+版本细节</h1>
+<ul>
+<li>**版本 4**：变体位为 10（0b10），版本位为 4（0b0100）</li>
+<li>**版本 7**：变体位为 10（0b10），版本位为 7（0b0111） 时间戳为 Unix 毫秒（占高 48 位），后跟 12 位随机计数器与 62 位随机数 </li>
+</ul>
 
 <p class="definition">在文件 <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

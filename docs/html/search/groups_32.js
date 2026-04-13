@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弱智能指针_0',['弱智能指针',['../group___weak_pointer.html',1,'']]]
+  ['并行算法_0',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

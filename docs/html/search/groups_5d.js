@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['调试与断言_0',['调试与断言',['../group___debug_breakpoints_and_assertions.html',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓存_1',['缓存',['../group___cache.html',1,'']]]
 ];

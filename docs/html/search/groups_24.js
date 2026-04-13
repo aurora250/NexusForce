@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['合并算法_0',['合并算法',['../group___merge_algorithms.html',1,'']]]
+  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
 ];

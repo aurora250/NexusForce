@@ -17,7 +17,7 @@ var group___share_memory =
       [ "close", "classshare__memory.html#af9748141b09b10dcefac10adb833d794", null ],
       [ "data", "classshare__memory.html#aaf6ede34f64ebd8792d6b50bef7f51c6", null ],
       [ "data", "classshare__memory.html#ac44531a2ddc922e11bb5ca90f3c0cd00", null ],
-      [ "flush", "classshare__memory.html#a9d85e05df0898cd87d7d93fda86489e6", null ],
+      [ "flush", "classshare__memory.html#a6cfd0764176b9e974c0bcf0faad9ac61", null ],
       [ "is_mapped", "classshare__memory.html#af97255adba5c58f718a02088bded10c0", null ],
       [ "is_open", "classshare__memory.html#a2b7600b954851180ebb2d1616036d2c2", null ],
       [ "map", "classshare__memory.html#a7f93dd42e93a791947c3ef82d44b7c6f", null ],

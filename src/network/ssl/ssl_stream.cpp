@@ -315,7 +315,7 @@ void ssl_stream::set_sni_hostname(const string& hostname) {
 #endif
 }
 
-::X509* ssl_stream::get_peer_certificate() const {
+ssl_stream::x509_ptr ssl_stream::get_peer_certificate() const {
     if (!ssl_) {
         return nullptr;
     }

@@ -8,7 +8,7 @@ namespace {
         if (ptr_ != nullptr) {
             return;
         }
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Prepared statement not initialized"));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception("Prepared statement not initialized"));
     }
 } // namespace
 
@@ -16,18 +16,18 @@ namespace {
 mysql_prepared_statement::mysql_prepared_statement(::MYSQL* conn, const string_view sql) :
 conn_(conn) {
     if (conn_ == nullptr) {
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Invalid MySQL connection pointer"));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception("Invalid MySQL connection pointer"));
     }
     stmt_ = ::mysql_stmt_init(conn_);
     if (stmt_ == nullptr) {
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("mysql_stmt_init failed"));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception("mysql_stmt_init failed"));
     }
 
     if (::mysql_stmt_prepare(stmt_, sql.data(), sql.size()) != 0) {
         const string_view err = ::mysql_stmt_error(stmt_);
         ::mysql_stmt_close(stmt_);
         stmt_ = nullptr;
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception(err.data()));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception(err.data()));
     }
 
     param_count_ = ::mysql_stmt_param_count(stmt_);
@@ -164,7 +164,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const float64_t 
     }
 }
 
-bool mysql_prepared_statement::bind_param(const uint32_t index, const void* data, const size_t length) {
+bool mysql_prepared_statement::bind_param(const uint32_t index, const cbyte_view value) {
     try {
         throw_if_stmt_null(stmt_);
         if (index >= param_count_) {
@@ -172,14 +172,14 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const void* data
         }
 
         vector<char>& buffer = param_buffers_[index];
-        buffer.resize(length);
-        memory_copy(buffer.data(), data, length);
+        buffer.resize(value.size());
+        memory_copy(buffer.data(), value.data(), value.size());
 
         ::MYSQL_BIND& bind = bind_params_[index];
         memory_zero(&bind);
         bind.buffer_type = ::MYSQL_TYPE_BLOB;
         bind.buffer = buffer.data();
-        bind.buffer_length = length;
+        bind.buffer_length = value.size();
         return true;
     } catch (...) {
         return false;
@@ -193,7 +193,7 @@ bool mysql_prepared_statement::execute() {
             return false;
         }
     }
-    return mysql_stmt_execute(stmt_) == 0;
+    return ::mysql_stmt_execute(stmt_) == 0;
 }
 
 unique_ptr<idb_prepared_result> mysql_prepared_statement::execute_query() {

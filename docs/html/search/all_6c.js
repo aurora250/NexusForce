@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
-  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
+  ['环境变量_0',['环境变量',['../group___environment_variables.html',1,'']]]
 ];

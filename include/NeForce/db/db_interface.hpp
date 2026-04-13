@@ -148,13 +148,13 @@ struct NEFORCE_API idb_prepared_statement {
      */
     virtual uint32_t param_count() const noexcept = 0;
 
-    virtual bool bind_param(uint32_t index, const string& value) = 0;             ///< 绑定字符串
-    virtual bool bind_param(uint32_t index, string_view value) = 0;               ///< 绑定字符串视图
-    virtual bool bind_param(uint32_t index, const char* value) = 0;               ///< 绑定C字符串
-    virtual bool bind_param(uint32_t index, int32_t value) = 0;                   ///< 绑定32位整数
-    virtual bool bind_param(uint32_t index, int64_t value) = 0;                   ///< 绑定64位整数
-    virtual bool bind_param(uint32_t index, float64_t value) = 0;                 ///< 绑定浮点数
-    virtual bool bind_param(uint32_t index, const void* data, size_t length) = 0; ///< 绑定二进制数据
+    virtual bool bind_param(uint32_t index, const string& value) = 0; ///< 绑定字符串
+    virtual bool bind_param(uint32_t index, string_view value) = 0;   ///< 绑定字符串视图
+    virtual bool bind_param(uint32_t index, const char* value) = 0;   ///< 绑定C字符串
+    virtual bool bind_param(uint32_t index, int32_t value) = 0;       ///< 绑定32位整数
+    virtual bool bind_param(uint32_t index, int64_t value) = 0;       ///< 绑定64位整数
+    virtual bool bind_param(uint32_t index, float64_t value) = 0;     ///< 绑定浮点数
+    virtual bool bind_param(uint32_t index, cbyte_view value) = 0;    ///< 绑定二进制数据
 
     /**
      * @brief 执行非查询语句（UPDATE/INSERT/DELETE）

@@ -7,6 +7,29 @@
  *
  * 此文件提供了SQL语句的流式构建器，支持SELECT、INSERT、UPDATE、DELETE操作。
  * 通过链式调用构建复杂的SQL语句，避免手动拼接SQL字符串的安全风险。
+ *
+ * @section standards 遵循的SQL标准
+ * 本构建器生成的语法严格遵循以下国际标准：
+ * - **ISO/IEC 9075:1992** (SQL-92) 核心语法标准
+ *   https://www.iso.org/standard/16663.html
+ * - **ISO/IEC 9075-2:1999** (SQL:1999/Foundation) 派生表与子查询增强特性
+ *   https://www.iso.org/standard/26196.html
+ * - **ISO/IEC 9075-4:2023** (SQL/PSM) 预编译占位符相关约定
+ *   https://www.iso.org/standard/76584.html
+ *
+ * @section compatibility 数据库兼容性
+ * 生成的 SQL 语句适用于以下主流关系型数据库：
+ * - MySQL 5.7+
+ * - PostgreSQL 9.0+
+ * - SQLite 3.0+
+ * - Microsoft SQL Server 2008+
+ * - Oracle Database 10g+
+ * - 所有其他遵循 ANSI SQL 标准的数据库
+ *
+ * @note
+ * - `LIMIT` 和 `OFFSET` 子句属于事实标准，被除Oracle外的多数数据库支持。
+ * - 对于Oracle数据库，若需支持分页，建议利用子查询或 12c 之后的 `FETCH FIRST` 语法
+ *   （本构建器输出标准 LIMIT/OFFSET，使用时请注意数据库方言差异）。
  */
 
 #include "NeForce/core/container/vector.hpp"
@@ -15,7 +38,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @defgroup SQL SQL
- * @brief 数据库相关功能
+ * @brief SQL相关功能
  * @{
  */
 

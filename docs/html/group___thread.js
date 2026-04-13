@@ -69,7 +69,7 @@ var group___thread =
     [ "sleep_for_ms", "group___thread.html#ga369d5171a87b9dcaa7e23d446d5dae91", null ],
     [ "sleep_for_ms", "group___thread.html#ga502974f51f85fd2faba9b8a3241b7e85", null ],
     [ "sleep_for_ns", "group___thread.html#ga806b20f01364f190e884d670c292ca20", null ],
-    [ "sleep_for_us", "group___thread.html#gaaa75c27bf501bf3c77980e5397349d3f", null ],
+    [ "sleep_for_us", "group___thread.html#ga8f01e1722b64e9d1cd66a3d3d46c5b52", null ],
     [ "sleep_until", "group___thread.html#gaafee6defcb6e71227538a97a5b41e235", null ],
     [ "thread_count", "group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee", null ],
     [ "yield", "group___thread.html#gab8ae3d955c7c6a9052597e15e896f96e", null ]

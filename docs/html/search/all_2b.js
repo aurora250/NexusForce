@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['前置依赖_0',['前置依赖',['../index.html#dependency',1,'']]]
+  ['元组_0',['元组',['../group___tuple.html',1,'']]]
 ];

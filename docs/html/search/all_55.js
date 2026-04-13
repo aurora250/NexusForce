@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
+  ['插件_0',['插件',['../group___plugin.html',1,'']]],
+  ['插入迭代器_1',['插入迭代器',['../group___insert_iterators.html',1,'']]]
 ];

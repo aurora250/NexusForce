@@ -1,7 +1,6 @@
 var classregex =
 [
     [ "regex", "classregex.html#a9cc420382e161b3120f0c1fa2b96de1b", null ],
-    [ "regex", "classregex.html#a6e9e9b06beeeb0d24312b527f9ddb816", null ],
     [ "begin", "classregex.html#a733cbc989acbbce57dcbe8f6e848631d", null ],
     [ "capture_count", "classregex.html#ab6f3682c611875bfdaea39f3a9e66848", null ],
     [ "do_match", "classregex.html#a22fd50c40c009e6eb2f6296df34c51ee", null ],

@@ -3,7 +3,7 @@ var group___regex =
     [ "match_result", "classmatch__result.html", [
       [ "iterator", "classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce", null ],
       [ "match_result", "classmatch__result.html#a0ea18f4ed7d8d309b5554677c5f8240a", null ],
-      [ "match_result", "classmatch__result.html#a8309604649cce649cc993ef2fbbea5da", null ],
+      [ "match_result", "classmatch__result.html#a7b341a0bba8ea3d8debc332bedd3bdb2", null ],
       [ "begin", "classmatch__result.html#a6d80e827d6b0bbd37cc7bc277b0aca81", null ],
       [ "data", "classmatch__result.html#a42984c5c848fdb2637ef4621877ecc10", null ],
       [ "end", "classmatch__result.html#aaae69b99847fc9680cb11c9d37bbf34e", null ],
@@ -18,7 +18,6 @@ var group___regex =
     ] ],
     [ "regex", "classregex.html", [
       [ "regex", "classregex.html#a9cc420382e161b3120f0c1fa2b96de1b", null ],
-      [ "regex", "classregex.html#a6e9e9b06beeeb0d24312b527f9ddb816", null ],
       [ "begin", "classregex.html#a733cbc989acbbce57dcbe8f6e848631d", null ],
       [ "capture_count", "classregex.html#ab6f3682c611875bfdaea39f3a9e66848", null ],
       [ "do_match", "classregex.html#a22fd50c40c009e6eb2f6296df34c51ee", null ],
@@ -40,14 +39,14 @@ var group___regex =
       [ "reference", "classregex__iterator.html#a91ac94ae92e726ae490cd7bbc6331c68", null ],
       [ "value_type", "classregex__iterator.html#a008141f536edbdd9cdb6483d231e909f", null ],
       [ "regex_iterator", "classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1", null ],
-      [ "regex_iterator", "classregex__iterator.html#a7ff151b47153c56e747a27b846033d8c", null ],
+      [ "regex_iterator", "classregex__iterator.html#a97363562cbf275b0a41bf156f6404f1f", null ],
       [ "operator!=", "classregex__iterator.html#ab6919a48754b802589a4acd7387b8f5e", null ],
-      [ "operator*", "classregex__iterator.html#a8624e4e94c42b6729674dd82481abdc1", null ],
+      [ "operator*", "classregex__iterator.html#a19aa797d2b2fbf0b6dce9f9b75dec162", null ],
       [ "operator++", "classregex__iterator.html#aed5b19b5be776eb0ac8087be4bd8bad4", null ],
       [ "operator++", "classregex__iterator.html#a0de0979dd96aa54ef5e5a6269980245f", null ],
       [ "operator--", "classregex__iterator.html#abb1bb425c46e2457306ed6f4ad35fea4", null ],
       [ "operator--", "classregex__iterator.html#a70f7da1a7023158550ebe8a259607881", null ],
-      [ "operator->", "classregex__iterator.html#af32e43d6b8094c5d95c3ca7a23f0bc37", null ],
+      [ "operator->", "classregex__iterator.html#a0b0fc6cd60f5094154897adccb4c0dea", null ],
       [ "operator==", "classregex__iterator.html#a5faa8585584a4958609edc84f4987fc8", null ]
     ] ],
     [ "regex_token_iterator", "classregex__token__iterator.html", [
@@ -58,11 +57,11 @@ var group___regex =
         [ "END", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6ab1a326c06d88bf042f73d70f50197905", null ]
       ] ],
       [ "regex_token_iterator", "classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198", null ],
-      [ "regex_token_iterator", "classregex__token__iterator.html#aa0f0f5820cff16647bd444e0cf06e7a2", null ],
+      [ "regex_token_iterator", "classregex__token__iterator.html#a4f8db9feb800354529f9597f01dd4a7e", null ],
       [ "operator!=", "classregex__token__iterator.html#a8dddcc464a56a29889e7bcdb1bd499ad", null ],
       [ "operator*", "classregex__token__iterator.html#a964a698e7c2e358b9b056f4f0576eb8f", null ],
-      [ "operator++", "classregex__token__iterator.html#a87504a82fcf1aa56574ac8919c0935c9", null ],
-      [ "operator++", "classregex__token__iterator.html#a2882fa2cf7e59b947fe5c7a06bb64096", null ],
+      [ "operator++", "classregex__token__iterator.html#a6a5fec20ca17992fbde8263bc9f913db", null ],
+      [ "operator++", "classregex__token__iterator.html#a3dc0675644637602c33ed0fb022c6ec4", null ],
       [ "operator==", "classregex__token__iterator.html#adaaf7a55f8eccce1532148a1e8e09a55", null ]
     ] ]
 ];

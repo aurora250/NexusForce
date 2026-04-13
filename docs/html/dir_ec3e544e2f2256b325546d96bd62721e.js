@@ -5,5 +5,5 @@ var dir_ec3e544e2f2256b325546d96bd62721e =
     [ "property.hpp", "property_8hpp.html", null ],
     [ "reflect.hpp", "reflect_8hpp.html", "reflect_8hpp" ],
     [ "registry.hpp", "registry_8hpp.html", null ],
-    [ "type.hpp", "type_8hpp_source.html", null ]
+    [ "type.hpp", "type_8hpp.html", null ]
 ];

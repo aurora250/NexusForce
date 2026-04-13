@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
+  ['堆栈跟踪_0',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
+  ['堆算法_1',['堆算法',['../group___heap_algorithms.html',1,'']]]
 ];

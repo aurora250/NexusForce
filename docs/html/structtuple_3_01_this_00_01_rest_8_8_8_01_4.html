@@ -123,6 +123,27 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a373da127c566755526a5be15c515caa4" id="r_a373da127c566755526a5be15c515caa4"><td class="memTemplParams" colspan="2">template&lt;typename Tag, typename Tuple, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; Tag, <a class="el" href="structunpack__utility__construct__tag.html">unpack_utility_construct_tag</a> &gt;::value, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:a373da127c566755526a5be15c515caa4 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a373da127c566755526a5be15c515caa4">tuple</a> (Tag, Tuple &amp;&amp;tup)</td></tr>
 <tr class="memdesc:a373da127c566755526a5be15c515caa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">解包工具构造函数  <br /></td></tr>
+<tr class="memitem:ad35acc656ff3865bc1562f71939b8e3f" id="r_ad35acc656ff3865bc1562f71939b8e3f"><td class="memTemplParams" colspan="2">template&lt;typename T = This, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; <a class="el" href="structis__default__constructible.html">is_default_constructible</a>&lt; T &gt;, <a class="el" href="structis__default__constructible.html">is_default_constructible</a>&lt; Rest &gt;... &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ad35acc656ff3865bc1562f71939b8e3f template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad35acc656ff3865bc1562f71939b8e3f">explicit</a> (!<a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; <a class="el" href="structis__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; T &gt;, <a class="el" href="structis__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; Rest &gt;... &gt;) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>() noexcept(<a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; <a class="el" href="structis__nothrow__default__constructible.html">is_nothrow_default_constructible</a>&lt; T &gt;, <a class="el" href="structis__nothrow__default__constructible.html">is_nothrow_default_constructible</a>&lt; Rest &gt;... &gt;)</td></tr>
+<tr class="memdesc:ad35acc656ff3865bc1562f71939b8e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:aa69264836f92d23aed26e79d8b7f6e32" id="r_aa69264836f92d23aed26e79d8b7f6e32"><td class="memTemplParams" colspan="2">template&lt;typename T = This, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T &amp;, const Rest &amp;... &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:aa69264836f92d23aed26e79d8b7f6e32 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa69264836f92d23aed26e79d8b7f6e32">explicit</a> (inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T &amp;, const Rest &amp;... &gt;::value) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>(const T &amp;this_arg</td></tr>
+<tr class="memdesc:aa69264836f92d23aed26e79d8b7f6e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:abf9912c8c5cc9d83c3e7c1bf75fe7ff6" id="r_abf9912c8c5cc9d83c3e7c1bf75fe7ff6"><td class="memTemplParams" colspan="2">template&lt;typename U1, typename... U2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; inner::tuple_perfect_forward&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U1, U2... &gt;, inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U1, U2... &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:abf9912c8c5cc9d83c3e7c1bf75fe7ff6 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abf9912c8c5cc9d83c3e7c1bf75fe7ff6">explicit</a> (inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U1, U2... &gt;::value) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>(U1 &amp;&amp;this_arg</td></tr>
+<tr class="memdesc:abf9912c8c5cc9d83c3e7c1bf75fe7ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">完美转发构造函数  <br /></td></tr>
+<tr class="memitem:a5e89c48cd89c9a017e7944db5bfa44cd" id="r_a5e89c48cd89c9a017e7944db5bfa44cd"><td class="memTemplParams" colspan="2">template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt;, inner::tuple_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;, U... &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a5e89c48cd89c9a017e7944db5bfa44cd template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a5e89c48cd89c9a017e7944db5bfa44cd">explicit</a> (inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt;::value) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>(const <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;tup) noexcept(inner::tuple_nothrow_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt;::value)</td></tr>
+<tr class="memdesc:a5e89c48cd89c9a017e7944db5bfa44cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他元组拷贝构造  <br /></td></tr>
+<tr class="memitem:abf4df8230b41bd752c7f1ee26f4dc56d" id="r_abf4df8230b41bd752c7f1ee26f4dc56d"><td class="memTemplParams" colspan="2">template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt;, inner::tuple_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt;, U... &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:abf4df8230b41bd752c7f1ee26f4dc56d template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abf4df8230b41bd752c7f1ee26f4dc56d">explicit</a> (inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt;::value) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>(<a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;&amp;tup) noexcept(inner::tuple_nothrow_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt;::value)</td></tr>
+<tr class="memdesc:abf4df8230b41bd752c7f1ee26f4dc56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他元组移动构造  <br /></td></tr>
+<tr class="memitem:a933fc19c7505bf14643ecce39611d041" id="r_a933fc19c7505bf14643ecce39611d041"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a933fc19c7505bf14643ecce39611d041 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a933fc19c7505bf14643ecce39611d041">explicit</a> (inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>(const <a class="el" href="structpair.html">pair</a>&lt; T1</td></tr>
+<tr class="memdesc:a933fc19c7505bf14643ecce39611d041"><td class="mdescLeft">&#160;</td><td class="mdescRight">从pair拷贝构造  <br /></td></tr>
+<tr class="memitem:a633be9b06953115660abbca5f620e333" id="r_a633be9b06953115660abbca5f620e333"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a633be9b06953115660abbca5f620e333 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a633be9b06953115660abbca5f620e333">explicit</a> (inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value) <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>(<a class="el" href="structpair.html">pair</a>&lt; T1</td></tr>
+<tr class="memdesc:a633be9b06953115660abbca5f620e333"><td class="mdescLeft">&#160;</td><td class="mdescRight">从pair移动构造  <br /></td></tr>
 <tr class="memitem:a3d566a846202269fb58cefdce8f29fef" id="r_a3d566a846202269fb58cefdce8f29fef"><td class="memItemLeft"><a id="a3d566a846202269fb58cefdce8f29fef" name="a3d566a846202269fb58cefdce8f29fef"></a>
 &#160;</td><td class="memItemRight"><b>tuple</b> (const tuple &amp;)=default</td></tr>
 <tr class="memdesc:a3d566a846202269fb58cefdce8f29fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数 <br /></td></tr>
@@ -258,7 +279,7 @@ template&lt;typename Tag, typename U1, typename... U2, <a class="el" href="group
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="tuple_8hpp_source.html#l00610">equal_to()</a>, <a class="el" href="tuple_8hpp_source.html#l00719">get</a>, <a class="el" href="tuple_8hpp_source.html#l00691">get</a>, <a class="el" href="tuple_8hpp_source.html#l00705">get</a>, <a class="el" href="tuple_8hpp_source.html#l00677">get</a>, <a class="el" href="tuple_8hpp_source.html#l00621">less_to()</a>, <a class="el" href="tuple_8hpp_source.html#l00640">operator&lt;()</a>, <a class="el" href="tuple_8hpp_source.html#l00535">operator=()</a>, <a class="el" href="#a0568fe0377496bbbc0c7e303e0f290d9">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00552">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00503">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00518">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00638">operator==()</a>, <a class="el" href="tuple_8hpp_source.html#l00655">swap()</a>, <a class="el" href="#a3d566a846202269fb58cefdce8f29fef">tuple()</a>, <a class="el" href="tuple_8hpp_source.html#l00284">tuple()</a> , 以及 <a class="el" href="#a46f16f8547cd57ff0eaa28bfccae223c">tuple()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="tuple_8hpp_source.html#l00610">equal_to()</a>, <a class="el" href="tuple_8hpp_source.html#l00296">explicit()</a>, <a class="el" href="#aa69264836f92d23aed26e79d8b7f6e32">explicit()</a>, <a class="el" href="#a933fc19c7505bf14643ecce39611d041">explicit()</a>, <a class="el" href="tuple_8hpp_source.html#l00340">explicit()</a>, <a class="el" href="#a633be9b06953115660abbca5f620e333">explicit()</a>, <a class="el" href="tuple_8hpp_source.html#l00352">explicit()</a>, <a class="el" href="#abf9912c8c5cc9d83c3e7c1bf75fe7ff6">explicit()</a>, <a class="el" href="tuple_8hpp_source.html#l00719">get</a>, <a class="el" href="tuple_8hpp_source.html#l00691">get</a>, <a class="el" href="tuple_8hpp_source.html#l00705">get</a>, <a class="el" href="tuple_8hpp_source.html#l00677">get</a>, <a class="el" href="tuple_8hpp_source.html#l00621">less_to()</a>, <a class="el" href="tuple_8hpp_source.html#l00640">operator&lt;()</a>, <a class="el" href="tuple_8hpp_source.html#l00535">operator=()</a>, <a class="el" href="#a0568fe0377496bbbc0c7e303e0f290d9">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00552">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00503">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00518">operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00638">operator==()</a>, <a class="el" href="tuple_8hpp_source.html#l00655">swap()</a>, <a class="el" href="#a3d566a846202269fb58cefdce8f29fef">tuple()</a>, <a class="el" href="tuple_8hpp_source.html#l00284">tuple()</a> , 以及 <a class="el" href="#a46f16f8547cd57ff0eaa28bfccae223c">tuple()</a>.</p>
 
 </div>
 </div>
@@ -417,6 +438,326 @@ template&lt;typename... U&gt; </div>
 <p class="reference">引用了 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="tuple_8hpp_source.html#l00638">operator==()</a>.</p>
+
+</div>
+</div>
+<a id="ad35acc656ff3865bc1562f71939b8e3f" name="ad35acc656ff3865bc1562f71939b8e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad35acc656ff3865bc1562f71939b8e3f">&#9670;&#160;</a></span>explicit() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename T = This, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; <a class="el" href="structis__default__constructible.html">is_default_constructible</a>&lt; T &gt;, <a class="el" href="structis__default__constructible.html">is_default_constructible</a>&lt; Rest &gt;... &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!<a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; <a class="el" href="structis__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; T &gt;, <a class="el" href="structis__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; Rest &gt;... &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>当前元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00296">296</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00315">conjunction_v</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
+
+</div>
+</div>
+<a id="aa69264836f92d23aed26e79d8b7f6e32" name="aa69264836f92d23aed26e79d8b7f6e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa69264836f92d23aed26e79d8b7f6e32">&#9670;&#160;</a></span>explicit() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename T = This, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T &amp;, const Rest &amp;... &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;, const T &amp;, const Rest &amp;... &gt;::value</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>当前元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">this_arg</td><td>第一个元素 </td></tr>
+    <tr><td class="paramname">rest_arg</td><td>剩余元素 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00315">conjunction_v</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
+
+</div>
+</div>
+<a id="a933fc19c7505bf14643ecce39611d041" name="a933fc19c7505bf14643ecce39611d041"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a933fc19c7505bf14643ecce39611d041">&#9670;&#160;</a></span>explicit() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const T1 &amp;, const T2 &amp; &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;, const T1 &amp;, const T2 &amp; &gt;::value</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从pair拷贝构造 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T1</td><td>第一个元素类型 </td></tr>
+    <tr><td class="paramname">T2</td><td>第二个元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pir</td><td>源pair </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
+
+</div>
+</div>
+<a id="a5e89c48cd89c9a017e7944db5bfa44cd" name="a5e89c48cd89c9a017e7944db5bfa44cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e89c48cd89c9a017e7944db5bfa44cd">&#9670;&#160;</a></span>explicit() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const U &amp;... &gt;, inner::tuple_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, const <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt; &amp;, U... &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;, const U &amp;... &gt;::value</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从其他元组拷贝构造 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U</td><td>源元组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tup</td><td>源元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00340">340</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
+
+</div>
+</div>
+<a id="a633be9b06953115660abbca5f620e333" name="a633be9b06953115660abbca5f620e333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a633be9b06953115660abbca5f620e333">&#9670;&#160;</a></span>explicit() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename T1, typename T2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, T1, T2 &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;, T1, T2 &gt;::value</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从pair移动构造 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T1</td><td>第一个元素类型 </td></tr>
+    <tr><td class="paramname">T2</td><td>第二个元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pir</td><td>源pair </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
+
+</div>
+</div>
+<a id="abf4df8230b41bd752c7f1ee26f4dc56d" name="abf4df8230b41bd752c7f1ee26f4dc56d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf4df8230b41bd752c7f1ee26f4dc56d">&#9670;&#160;</a></span>explicit() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename... U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U... &gt;, inner::tuple_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; U... &gt;, U... &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;, U... &gt;::value</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从其他元组移动构造 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U</td><td>源元组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tup</td><td>源元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00352">352</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
+
+</div>
+</div>
+<a id="abf9912c8c5cc9d83c3e7c1bf75fe7ff6" name="abf9912c8c5cc9d83c3e7c1bf75fe7ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf9912c8c5cc9d83c3e7c1bf75fe7ff6">&#9670;&#160;</a></span>explicit() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename This, typename... Rest&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1, typename... U2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; inner::tuple_perfect_forward&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U1, U2... &gt;, inner::tuple_constructible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>, U1, U2... &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">inner::tuple_explicitly_convertible&lt; <a class="el" href="#a97fb8657e8709050085443a03d9efaf4">tuple</a>&lt; This, Rest... &gt;, U1, U2... &gt;::value</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>完美转发构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>第一个参数类型 </td></tr>
+    <tr><td class="paramname">U2</td><td>剩余参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">this_arg</td><td>第一个元素参数 </td></tr>
+    <tr><td class="paramname">rest_arg</td><td>剩余元素参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00261">tuple()</a>.</p>
 
 </div>
 </div>

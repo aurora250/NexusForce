@@ -26,11 +26,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @class counting_semaphore
- * @brief 计数信号量类模板
+ * @class atomic_semaphore
+ * @brief 原子信号量类模板
  * @tparam LeastMaxValue 信号量的最小最大值
  *
- * 计数信号量是一个轻量级的同步原语，用于控制对共享资源的访问。
+ * 原子信号量是一个轻量级的同步原语，用于控制对共享资源的访问。
  * 基于原子操作和平台无关的等待机制实现，适用于用户态同步场景。
  *
  * LeastMaxValue指定了信号量计数器的最小最大值，实际值可以小于此值。
@@ -39,7 +39,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @note 此信号量不支持递归获取
  */
 template <platform_wait_t LeastMaxValue = numeric_traits<platform_wait_t>::max()>
-class counting_semaphore {
+class atomic_semaphore {
     static_assert(LeastMaxValue >= 0, "LeastMaxValue should be upper than zero.");
 
     alignas(alignof(platform_wait_t)) platform_wait_t counter_; ///< 信号量计数器
@@ -68,15 +68,15 @@ public:
      * 创建计数信号量并设置初始计数值。
      * @note desired不能为负数
      */
-    explicit counting_semaphore(const platform_wait_t desired) noexcept :
+    explicit atomic_semaphore(const platform_wait_t desired) noexcept :
     counter_(desired) {
         NEFORCE_CONSTEXPR_ASSERT(desired >= 0);
     }
 
-    ~counting_semaphore() = default; ///< 析构函数
+    ~atomic_semaphore() = default; ///< 析构函数
 
-    counting_semaphore(const counting_semaphore&) = delete;
-    counting_semaphore& operator=(const counting_semaphore&) = delete;
+    atomic_semaphore(const atomic_semaphore&) = delete;
+    atomic_semaphore& operator=(const atomic_semaphore&) = delete;
 
     /**
      * @brief 获取信号量的最大可能值
@@ -153,10 +153,10 @@ public:
 /**
  * @brief 二元信号量
  *
- * 二元信号量是计数信号量的特化版本，其计数值只能是0或1。
+ * 二元信号量是原子信号量的特化版本，其计数值只能是0或1。
  * 用于实现互斥锁或类似的功能，但比互斥锁更轻量级。
  */
-using binary_semaphore = counting_semaphore<1>;
+using binary_semaphore = atomic_semaphore<1>;
 
 
 /**

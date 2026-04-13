@@ -104,12 +104,16 @@ $(function(){initNavTree('structbase64.html','','structbase64-members'); });
 <tr class="memdesc:a8047e752ee89f690f3859400912eab6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64编码  <br /></td></tr>
 <tr class="memitem:a5705d9bdb878a07ee58ff6adf8b49b20" id="r_a5705d9bdb878a07ee58ff6adf8b49b20"><td class="memItemLeft">static <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5705d9bdb878a07ee58ff6adf8b49b20">decode</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
 <tr class="memdesc:a5705d9bdb878a07ee58ff6adf8b49b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base64解码  <br /></td></tr>
+<tr class="memitem:a1823de59c73938e0b786dd29cb646bcd" id="r_a1823de59c73938e0b786dd29cb646bcd"><td class="memItemLeft">static <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1823de59c73938e0b786dd29cb646bcd">encode_url</a> (<a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, bool padding=false)</td></tr>
+<tr class="memdesc:a1823de59c73938e0b786dd29cb646bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL安全的Base64编码  <br /></td></tr>
+<tr class="memitem:aa903a659224c78ca23e198cea37494c7" id="r_aa903a659224c78ca23e198cea37494c7"><td class="memItemLeft">static <a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa903a659224c78ca23e198cea37494c7">decode_url</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:aa903a659224c78ca23e198cea37494c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL安全的Base64解码  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>Base64编解码结构体 </p>
 <p>提供静态方法进行Base64编码和解码操作。 编码将二进制数据转换为文本格式，解码执行逆操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00028">28</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 第 <a class="el" href="base64_8hpp_source.html#l00071">71</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a5705d9bdb878a07ee58ff6adf8b49b20" name="a5705d9bdb878a07ee58ff6adf8b49b20"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5705d9bdb878a07ee58ff6adf8b49b20">&#9670;&#160;</a></span>decode()</h2>
@@ -151,7 +155,49 @@ $(function(){initNavTree('structbase64.html','','structbase64-members'); });
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="base64_8hpp_source.html#l00085">base64_decode()</a> , 以及 <a class="el" href="base64_8hpp_source.html#l00075">base64_decode()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="base64_8hpp_source.html#l00144">base64_decode()</a> , 以及 <a class="el" href="base64_8hpp_source.html#l00134">base64_decode()</a>.</p>
+
+</div>
+</div>
+<a id="aa903a659224c78ca23e198cea37494c7" name="aa903a659224c78ca23e198cea37494c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa903a659224c78ca23e198cea37494c7">&#9670;&#160;</a></span>decode_url()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> base64::decode_url </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>URL安全的Base64解码 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>URL安全的Base64字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解码后的二进制数据 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>当输入包含非法字符时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
 </div>
 </div>
@@ -189,7 +235,48 @@ $(function(){initNavTree('structbase64.html','','structbase64-members'); });
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="base64_8hpp_source.html#l00058">base64_encode()</a>, <a class="el" href="base64_8hpp_source.html#l00051">base64_encode()</a> , 以及 <a class="el" href="base64_8hpp_source.html#l00065">base64_encode()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="base64_8hpp_source.html#l00117">base64_encode()</a>, <a class="el" href="base64_8hpp_source.html#l00110">base64_encode()</a> , 以及 <a class="el" href="base64_8hpp_source.html#l00124">base64_encode()</a>.</p>
+
+</div>
+</div>
+<a id="a1823de59c73938e0b786dd29cb646bcd" name="a1823de59c73938e0b786dd29cb646bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1823de59c73938e0b786dd29cb646bcd">&#9670;&#160;</a></span>encode_url()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> base64::encode_url </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>padding</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>URL安全的Base64编码 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>要编码的二进制数据 </td></tr>
+    <tr><td class="paramname">padding</td><td>是否添加填充符'='（默认不填充） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>URL安全的Base64字符串 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
 </div>
 </div>

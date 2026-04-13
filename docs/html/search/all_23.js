@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['修改算法_0',['修改算法',['../group___shift_algorithms.html',1,'']]]
+  ['任意类_0',['任意类',['../group___any.html',1,'']]]
 ];

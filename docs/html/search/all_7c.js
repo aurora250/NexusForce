@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['随机数生成器_0',['随机数生成器',['../group___random_generators.html',1,'']]],
-  ['随机重排算法_1',['随机重排算法',['../group___shuffle_algorithms.html',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓存_1',['缓存',['../group___cache.html',1,'']]]
 ];

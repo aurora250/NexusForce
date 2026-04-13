@@ -107,20 +107,20 @@ semaphore.hpp 的引用(Include)关系图:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:counting_5Fsemaphore_3C_20LeastMaxValue_20_3E" id="r_counting_5Fsemaphore_3C_20LeastMaxValue_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcounting__semaphore.html">counting_semaphore&lt; LeastMaxValue &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">计数信号量类模板  <a href="classcounting__semaphore.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:atomic_5Fsemaphore_3C_20LeastMaxValue_20_3E" id="r_atomic_5Fsemaphore_3C_20LeastMaxValue_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classatomic__semaphore.html">atomic_semaphore&lt; LeastMaxValue &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子信号量类模板  <a href="classatomic__semaphore.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:semaphore" id="r_semaphore"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsemaphore.html">semaphore</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">系统信号量类  <a href="classsemaphore.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
-<tr class="memitem:gabee4059f6f5cd4d4218651a4a18cd375" id="r_gabee4059f6f5cd4d4218651a4a18cd375"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___semaphores.html#gabee4059f6f5cd4d4218651a4a18cd375">binary_semaphore</a> = <a class="el" href="classcounting__semaphore.html">counting_semaphore</a>&lt;1&gt;</td></tr>
-<tr class="memdesc:gabee4059f6f5cd4d4218651a4a18cd375"><td class="mdescLeft">&#160;</td><td class="mdescRight">二元信号量  <br /></td></tr>
+<tr class="memitem:gab2a6957724f0f8a6acdf255f36329235" id="r_gab2a6957724f0f8a6acdf255f36329235"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___semaphores.html#gab2a6957724f0f8a6acdf255f36329235">binary_semaphore</a> = <a class="el" href="classatomic__semaphore.html">atomic_semaphore</a>&lt;1&gt;</td></tr>
+<tr class="memdesc:gab2a6957724f0f8a6acdf255f36329235"><td class="mdescLeft">&#160;</td><td class="mdescRight">二元信号量  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>信号量支持 </p>
 <p>此文件提供了信号量的实现，用于控制对共享资源的并发访问。 包含两种信号量类型：</p><ul>
-<li><a class="el" href="classcounting__semaphore.html" title="计数信号量类模板">counting_semaphore</a>: 轻量级计数信号量，基于原子操作和等待机制</li>
+<li>counting_semaphore: 轻量级计数信号量，基于原子操作和等待机制</li>
 <li>semaphore: 系统级信号量，基于操作系统API </li>
 </ul>
 

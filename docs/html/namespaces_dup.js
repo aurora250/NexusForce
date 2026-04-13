@@ -31,5 +31,6 @@ var namespaces_dup =
       [ "p7", "namespaceplaceholders.html#a854d85436e1211e6b826a49c7e762368", null ],
       [ "p8", "namespaceplaceholders.html#ae084d7fc5b9cc26603271cb0a7e4b3a3", null ],
       [ "p9", "namespaceplaceholders.html#a1672d269ff1067da895af8d697afa8ff", null ]
-    ] ]
+    ] ],
+    [ "ranges", "namespaceranges.html", null ]
 ];

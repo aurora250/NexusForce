@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['协程_0',['协程',['../group___coroutine.html',1,'']]]
+  ['删除器_0',['删除器',['../group___deleter.html',1,'']]],
+  ['删除算法_1',['删除算法',['../group___remove_algorithms.html',1,'']]]
 ];

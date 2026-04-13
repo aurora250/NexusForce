@@ -93,7 +93,7 @@ var group___r_b_tree =
       [ "max_size", "classrb__tree.html#aeab19e53dc2649cc06b15cd211f3e23f", null ],
       [ "operator<", "classrb__tree.html#af5162906b90e72a79f56ea96f46d626b", null ],
       [ "operator=", "classrb__tree.html#ae8747e3d3c46c22428e2c96e005177d1", null ],
-      [ "operator=", "classrb__tree.html#a9dd52a0df33f02b54ad4b1a8bc7f7793", null ],
+      [ "operator=", "classrb__tree.html#a9e29029b278954caf4e4ee6b6a5c53fd", null ],
       [ "operator==", "classrb__tree.html#a11a44b4e9a5976175faaac92ac8f0633", null ],
       [ "rbegin", "classrb__tree.html#a702674747e6fd79eb71a91164081f5c9", null ],
       [ "rbegin", "classrb__tree.html#a51a157505b4a3459b5110e50a88f6470", null ],

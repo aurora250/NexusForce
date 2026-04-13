@@ -138,7 +138,7 @@ public:
 
 
 template <typename SocketType>
-class websocket_session : public websocket_session_base, public enable_shared_from_this<websocket_session<SocketType>> {
+class websocket_session : public websocket_session_base, public enable_shared_from<websocket_session<SocketType>> {
 
 public:
     using message_handler = function<void(const string&, websocket_opcode)>;

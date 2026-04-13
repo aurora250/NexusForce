@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: database_pool类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classdatabase__pool.html','','classdatabase__pool-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">database_pool类 参考<div class="ingroups"><a class="el" href="group___database.html">数据库</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>数据库连接池类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:pool_5Fconfig" id="r_pool_5Fconfig"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdatabase__pool_1_1pool__config.html">pool_config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接池配置  <a href="structdatabase__pool_1_1pool__config.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a262a1c859c11ecbfdf03d0ceb5d5beb6" id="r_a262a1c859c11ecbfdf03d0ceb5d5beb6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a> (<a class="el" href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a> type, const <a class="el" href="structdb__config.html">db_config</a> &amp;config)</td></tr>
+<tr class="memdesc:a262a1c859c11ecbfdf03d0ceb5d5beb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:ade5bdda89c4a9369ee5cb19cde8fade0" id="r_ade5bdda89c4a9369ee5cb19cde8fade0"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ade5bdda89c4a9369ee5cb19cde8fade0">database_pool</a> (<a class="el" href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a> type, const <a class="el" href="structdb__config.html">db_config</a> &amp;config, const <a class="el" href="structdatabase__pool_1_1pool__config.html">pool_config</a> &amp;<a class="el" href="structdatabase__pool_1_1pool__config.html">pool_config</a>)</td></tr>
+<tr class="memdesc:ade5bdda89c4a9369ee5cb19cde8fade0"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:af1c193fefa6d542e3e2e0b654734cc05" id="r_af1c193fefa6d542e3e2e0b654734cc05"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af1c193fefa6d542e3e2e0b654734cc05">~database_pool</a> ()</td></tr>
+<tr class="memdesc:af1c193fefa6d542e3e2e0b654734cc05"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a8ee69804050e504438cd86805fbd32f8" id="r_a8ee69804050e504438cd86805fbd32f8"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__connect.html">idb_connect</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8ee69804050e504438cd86805fbd32f8">get_connect</a> ()</td></tr>
+<tr class="memdesc:a8ee69804050e504438cd86805fbd32f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取通用数据库连接  <br /></td></tr>
+<tr class="memitem:a8dfcfdfde1930667868c535548303b11" id="r_a8dfcfdfde1930667868c535548303b11"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__tb__connect.html">idb_tb_connect</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8dfcfdfde1930667868c535548303b11">get_tb_connect</a> ()</td></tr>
+<tr class="memdesc:a8dfcfdfde1930667868c535548303b11"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取关系型数据库连接  <br /></td></tr>
+<tr class="memitem:a9231bb1c7d553a38a23f835310d309b7" id="r_a9231bb1c7d553a38a23f835310d309b7"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__kv__connect.html">idb_kv_connect</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9231bb1c7d553a38a23f835310d309b7">get_kv_connect</a> ()</td></tr>
+<tr class="memdesc:a9231bb1c7d553a38a23f835310d309b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键值存储连接  <br /></td></tr>
+<tr class="memitem:a44cf9a5381a8a4deb4c9c2996557895c" id="r_a44cf9a5381a8a4deb4c9c2996557895c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a44cf9a5381a8a4deb4c9c2996557895c">idle_count</a> () const noexcept</td></tr>
+<tr class="memdesc:a44cf9a5381a8a4deb4c9c2996557895c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取空闲连接数  <br /></td></tr>
+<tr class="memitem:a47817942eeea79eff60c40aac98a2b24" id="r_a47817942eeea79eff60c40aac98a2b24"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47817942eeea79eff60c40aac98a2b24">total_count</a> () const noexcept</td></tr>
+<tr class="memdesc:a47817942eeea79eff60c40aac98a2b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取总连接数  <br /></td></tr>
+<tr class="memitem:ac3cd4dc274c371f558c62ca353702490" id="r_ac3cd4dc274c371f558c62ca353702490"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac3cd4dc274c371f558c62ca353702490">is_running</a> () const noexcept</td></tr>
+<tr class="memdesc:ac3cd4dc274c371f558c62ca353702490"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接池是否正在运行  <br /></td></tr>
+<tr class="memitem:a1ab7c90200d7334d1ad83e4d44899786" id="r_a1ab7c90200d7334d1ad83e4d44899786"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1ab7c90200d7334d1ad83e4d44899786">stop</a> ()</td></tr>
+<tr class="memdesc:a1ab7c90200d7334d1ad83e4d44899786"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止连接池  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>数据库连接池类 </p>
+<p>管理数据库连接的生命周期，提供连接的获取和归还功能。 内部维护一个空闲连接队列，支持多线程安全访问。</p>
+<p>主要特性：</p><ul>
+<li>连接复用，减少连接创建开销</li>
+<li>最小/最大连接数配置</li>
+<li>空闲连接超时回收</li>
+<li>连接健康检查</li>
+<li>自动补充连接</li>
+<li>获取连接超时控制</li>
+<li>支持关系型数据库和键值存储 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00042">42</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a262a1c859c11ecbfdf03d0ceb5d5beb6" name="a262a1c859c11ecbfdf03d0ceb5d5beb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a262a1c859c11ecbfdf03d0ceb5d5beb6">&#9670;&#160;</a></span>database_pool() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_pool::database_pool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structdb__config.html">db_config</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>数据库类型 </td></tr>
+    <tr><td class="paramname">config</td><td>数据库连接配置 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00102">102</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00102">database_pool()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="database__pool_8hpp_source.html#l00102">database_pool()</a> , 以及 <a class="el" href="#af1c193fefa6d542e3e2e0b654734cc05">~database_pool()</a>.</p>
+
+</div>
+</div>
+<a id="ade5bdda89c4a9369ee5cb19cde8fade0" name="ade5bdda89c4a9369ee5cb19cde8fade0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade5bdda89c4a9369ee5cb19cde8fade0">&#9670;&#160;</a></span>database_pool() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_pool::database_pool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structdb__config.html">db_config</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structdatabase__pool_1_1pool__config.html">pool_config</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>pool_config</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>数据库类型 </td></tr>
+    <tr><td class="paramname">config</td><td>数据库连接配置 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structdatabase__pool_1_1pool__config.html" title="连接池配置">pool_config</a></td><td>连接池配置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structdatabase__exception.html" title="数据库行为异常">database_exception</a></td><td>初始化连接失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af1c193fefa6d542e3e2e0b654734cc05" name="af1c193fefa6d542e3e2e0b654734cc05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c193fefa6d542e3e2e0b654734cc05">&#9670;&#160;</a></span>~database_pool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_pool::~database_pool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>停止所有后台线程，释放所有连接资源。 </p>
+
+<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00102">database_pool()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a8ee69804050e504438cd86805fbd32f8" name="a8ee69804050e504438cd86805fbd32f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee69804050e504438cd86805fbd32f8">&#9670;&#160;</a></span>get_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__connect.html">idb_connect</a> &gt; database_pool::get_connect </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取通用数据库连接 </p>
+<dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象</dd></dl>
+<p>返回基类idb_connect指针，适用于不需要特定类型操作的场景。 </p>
+
+</div>
+</div>
+<a id="a9231bb1c7d553a38a23f835310d309b7" name="a9231bb1c7d553a38a23f835310d309b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9231bb1c7d553a38a23f835310d309b7">&#9670;&#160;</a></span>get_kv_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__kv__connect.html">idb_kv_connect</a> &gt; database_pool::get_kv_connect </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取键值存储连接 </p>
+<dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象</dd></dl>
+<p>返回idb_kv_connect指针，支持键值操作。 </p>
+
+</div>
+</div>
+<a id="a8dfcfdfde1930667868c535548303b11" name="a8dfcfdfde1930667868c535548303b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dfcfdfde1930667868c535548303b11">&#9670;&#160;</a></span>get_tb_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__tb__connect.html">idb_tb_connect</a> &gt; database_pool::get_tb_connect </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取关系型数据库连接 </p>
+<dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象</dd></dl>
+<p>返回idb_tb_connect指针，支持SQL查询操作。 </p>
+
+</div>
+</div>
+<a id="a44cf9a5381a8a4deb4c9c2996557895c" name="a44cf9a5381a8a4deb4c9c2996557895c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44cf9a5381a8a4deb4c9c2996557895c">&#9670;&#160;</a></span>idle_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> database_pool::idle_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取空闲连接数 </p>
+<dl class="section return"><dt>返回</dt><dd>当前空闲队列中的连接数量 </dd></dl>
+
+</div>
+</div>
+<a id="ac3cd4dc274c371f558c62ca353702490" name="ac3cd4dc274c371f558c62ca353702490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3cd4dc274c371f558c62ca353702490">&#9670;&#160;</a></span>is_running()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool database_pool::is_running </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查连接池是否正在运行 </p>
+<dl class="section return"><dt>返回</dt><dd>运行中返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00166">166</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00166">is_running()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="database__pool_8hpp_source.html#l00166">is_running()</a>.</p>
+
+</div>
+</div>
+<a id="a1ab7c90200d7334d1ad83e4d44899786" name="a1ab7c90200d7334d1ad83e4d44899786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ab7c90200d7334d1ad83e4d44899786">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void database_pool::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>停止连接池 </p>
+<p>停止所有后台线程，等待当前使用中的连接归还后释放资源。 </p>
+
+</div>
+</div>
+<a id="a47817942eeea79eff60c40aac98a2b24" name="a47817942eeea79eff60c40aac98a2b24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47817942eeea79eff60c40aac98a2b24">&#9670;&#160;</a></span>total_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> database_pool::total_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取总连接数 </p>
+<dl class="section return"><dt>返回</dt><dd>当前总连接数（包括使用中和空闲） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a47817942eeea79eff60c40aac98a2b24">total_count()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a47817942eeea79eff60c40aac98a2b24">total_count()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classdatabase__pool.html">database_pool</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

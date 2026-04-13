@@ -738,7 +738,7 @@ void test_ftp_client() {
         }
 
         client.disconnect();
-    } catch (const ftp_exception& e) {
+    } catch (const exception& e) {
         println(e.what());
     }
 }

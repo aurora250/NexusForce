@@ -3990,6 +3990,7 @@ template <typename T>
 NEFORCE_INLINE17 constexpr bool is_trivially_swappable_v = is_trivially_swappable<T>::value;
 #endif
 
+/// @cond
 
 template <typename T>
 NEFORCE_CONSTEXPR14 enable_if_t<is_move_constructible_v<T> && is_move_assignable_v<T>>
@@ -4022,6 +4023,8 @@ NEFORCE_CONSTEXPR14 T exchange(T& val, U&& new_val) noexcept(is_nothrow_move_con
     val = _NEFORCE forward<U>(new_val);
     return old_val;
 }
+
+/// @endcond
 
 /** @} */ // SwapUtility
 

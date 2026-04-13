@@ -61,7 +61,7 @@ public:
      * 表示路径树中的一个节点，包含路径信息及子节点列表。
      * 节点以共享所有权的方式持有子节点，父节点以弱引用持有。
      */
-    class node : public enable_shared_from_this<node> {
+    class node : public enable_shared_from<node> {
         friend class path_tree;
 
     public:
@@ -145,7 +145,7 @@ public:
          * @param name 要移除的子节点名称
          * @return 是否成功移除
          */
-        bool remove_child(string_view name);
+        bool remove_child(string_view name) noexcept;
     };
 
     /**

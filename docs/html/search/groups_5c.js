@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
-  ['计时器_1',['计时器',['../group___click.html',1,'']]]
+  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
+  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
 ];

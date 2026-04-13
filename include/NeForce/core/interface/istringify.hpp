@@ -50,8 +50,8 @@ public:
 /** @} */ // CRTPInterfaces
 
 /**
- * @defgroup ToString 转换字符串
- * @brief 各类型到字符串的转换函数
+ * @defgroup StringConverts 字符串转换
+ * @brief 字符串与数据类型之间的转换功能
  * @{
  */
 
@@ -69,7 +69,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& obj) {
     return obj.to_string();
 }
 
-/** @} */ // ToString
+/** @} */ // StringConverts
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_INTERFACE_ISTRINGIFY_HPP__

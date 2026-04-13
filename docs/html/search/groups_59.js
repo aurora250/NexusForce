@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['编译器检测_0',['编译器检测',['../group___compiler_detection.html',1,'']]]
+  ['红黑树_0',['红黑树',['../group___r_b_tree.html',1,'']]]
 ];

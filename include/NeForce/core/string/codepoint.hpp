@@ -9,6 +9,100 @@
  * 代理对处理、以及向各种字符串类型的追加操作。
  *
  * Unicode码点范围：U+0000 ~ U+10FFFF（排除代理项范围0xD800-0xDFFF）
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下 Unicode 和字符编码相关标准规范：
+ *
+ * **Unicode 核心标准：**
+ * - **Unicode 15.1.0**：Unicode 字符编码标准
+ *   https://unicode.org/versions/Unicode15.1.0/
+ * - **Unicode 16.0.0**：Unicode 字符编码标准（最新版本）
+ *   https://unicode.org/versions/Unicode16.0.0/
+ *
+ * **UTF 编码格式标准：**
+ * - **IETF RFC 3629**：UTF-8 — ISO 10646 的转换格式（UTF-8 编码规范）
+ *   https://www.rfc-editor.org/rfc/rfc3629.html
+ * - **IETF RFC 2781**：UTF-16 — ISO 10646 的编码格式（UTF-16 编码规范）
+ *   https://www.rfc-editor.org/rfc/rfc2781.html
+ * - **Unicode Standard Annex #15**：Unicode 规范化形式
+ *   https://unicode.org/reports/tr15/
+ *
+ * **通用字符集编码标准：**
+ * - **ISO/IEC 10646:2020**：信息技术 — 通用编码字符集 (UCS)
+ *   https://www.iso.org/standard/76835.html
+ *
+ * **相关编程语言标准：**
+ * - **ISO/IEC 14882:2020**：C++ 编程语言标准（char8_t、char16_t、char32_t 类型）
+ *   https://www.iso.org/standard/79358.html
+ * - **ISO/IEC 9899:2018**：C 语言标准（宽字符与 Unicode 支持）
+ *   https://www.iso.org/standard/74528.html
+ *
+ * @section unicode_ranges Unicode 码点范围定义
+ * 根据 Unicode 15.1.0 §2.4，码点空间划分为以下区域：
+ *
+ * | 范围名称                 | 码点范围           | UTF-8 字节数 | UTF-16 码元数 | 说明                         |
+ * |--------------------------|--------------------|--------------|---------------|------------------------------|
+ * | Basic Latin (ASCII)      | U+0000 - U+007F    | 1            | 1             | 与 ASCII 完全兼容            |
+ * | Latin-1 Supplement       | U+0080 - U+00FF    | 2            | 1             | ISO 8859-1 扩展              |
+ * | BMP (Basic Multilingual) | U+0100 - U+FFFF    | 3            | 1             | 基本多文种平面               |
+ * | Supplementary Planes     | U+10000 - U+10FFFF | 4            | 2 (代理对)    | 16 个辅助平面                |
+ * | High Surrogates          | U+D800 - U+DBFF    | —            | —             | 高代理项（无效码点）         |
+ * | Low Surrogates           | U+DC00 - U+DFFF    | —            | —             | 低代理项（无效码点）         |
+ * | Noncharacters            | U+FDD0 - U+FDEF 等 | —            | —             | 非字符（内部使用）           |
+ * | Private Use Area         | U+E000 - U+F8FF 等 | —            | —             | 私用区                       |
+ *
+ * @section utf8_encoding UTF-8 编码规则
+ * 根据 RFC 3629 §3，UTF-8 编码遵循以下比特模式：
+ *
+ * | 码点范围          | UTF-8 字节序列                                   |
+ * |-------------------|--------------------------------------------------|
+ * | U+0000 - U+007F   | 0xxxxxxx                                         |
+ * | U+0080 - U+07FF   | 110xxxxx 10xxxxxx                                |
+ * | U+0800 - U+FFFF   | 1110xxxx 10xxxxxx 10xxxxxx                       |
+ * | U+10000 - U+10FFFF| 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx              |
+ *
+ * @section utf16_surrogates UTF-16 代理对编码规则
+ * 根据 RFC 2781 §2.1，辅助平面字符使用代理对编码：
+ *
+ * | 组成部分     | 计算方式                                    | 值范围           |
+ * |--------------|---------------------------------------------|------------------|
+ * | 高代理项     | ((cp - 0x10000) >> 10) + 0xD800             | 0xD800 - 0xDBFF  |
+ * | 低代理项     | ((cp - 0x10000) & 0x3FF) + 0xDC00           | 0xDC00 - 0xDFFF  |
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 码点类型          | uint32_t（32 位无符号整数）               |
+ * | 最大合法码点      | 0x10FFFF（Unicode §2.4）                   |
+ * | 替换字符          | U+FFFD（� REPLACEMENT CHARACTER）         |
+ * | 无效序列处理      | 替换为 U+FFFD（RFC 3629 §4）              |
+ * | 过度长序列检测    | 支持（拒绝非最短形式的 UTF-8 序列）       |
+ * | 代理项检测        | 支持（拒绝孤立的代理项）                  |
+ * | 字节序处理        | 支持（decode_utf16 提供 need_swap 参数）  |
+ *
+ * @section validation_rules 码点验证规则
+ * 根据 Unicode 标准，合法码点必须满足以下条件：
+ * - 值不超过 0x10FFFF（Unicode 最大码点）
+ * - 不是高代理项（0xD800-0xDBFF）
+ * - 不是低代理项（0xDC00-0xDFFF）
+ *
+ * 非法的 UTF-8 序列（根据 RFC 3629 §4）：
+ * - 过度长编码（使用超过所需的字节数）
+ * - 无效的后续字节（不以 10xxxxxx 开头）
+ * - 截断序列（字节数不足）
+ * - 孤立的代理项（U+D800-U+DFFF）
+ * - 超出范围的码点（>U+10FFFF）
+ *
+ * @note Unicode 标准规定，处理无效的 UTF 序列时应用替换字符 U+FFFD 替换，
+ *       而不应抛出异常或截断数据。本实现遵循此最佳实践。
+ *
+ * @warning 根据 RFC 3629 §4，UTF-8 解码器必须拒绝过度长序列和非最短形式，
+ *          以防止安全漏洞（如目录遍历攻击）。本实现执行此验证。
+ *
+ * @see https://unicode.org/
+ * @see https://www.rfc-editor.org/rfc/rfc3629
+ * @see https://www.rfc-editor.org/rfc/rfc2781
+ * @see https://www.iso.org/standard/76835.html
  */
 
 #include "NeForce/core/memory/endian.hpp"
@@ -306,7 +400,7 @@ public:
      * @brief 追加UTF-8编码到u8string
      * @param result 目标UTF-8字符串
      *
-     * 将码点以UTF-8编码追加到u8string中（C++20）。
+     * 将码点以UTF-8编码追加到u8string中。
      */
     void append_to(u8string& result) const;
 #endif

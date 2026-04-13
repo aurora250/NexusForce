@@ -433,22 +433,26 @@ void ftp_client::connect(const string& hostname, const ports port, const tls_mod
             data_tls_ = false;
 
             open_and_connect(*addr);
+
+            if (mode == tls_mode::implicit_) {
+                do_ctrl_tls_handshake();
+                clear_buffer();
+            }
+
+            do_post_connect();
+
+            if (mode == tls_mode::explicit_) {
+                expect_code(234, "AUTH TLS");
+                do_ctrl_tls_handshake();
+            }
+
+            return;
+
         } catch (...) {
-            continue;
-        }
-
-        if (mode == tls_mode::implicit_) {
-            do_ctrl_tls_handshake();
+            close();
             clear_buffer();
+            connected_ = false;
         }
-
-        do_post_connect();
-
-        if (mode == tls_mode::explicit_) {
-            expect_code(234, "AUTH TLS");
-            do_ctrl_tls_handshake();
-        }
-        return;
     }
 
     NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to any resolved address for FTP host"));

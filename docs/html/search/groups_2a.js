@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['对齐操作_0',['对齐操作',['../group___alignment.html',1,'']]],
-  ['对齐缓冲区_1',['对齐缓冲区',['../group___aligned_buffer.html',1,'']]]
+  ['哈希模板_0',['哈希模板',['../group___hash_primary.html',1,'']]],
+  ['哈希表_1',['哈希表',['../group___hash_table.html',1,'']]]
 ];

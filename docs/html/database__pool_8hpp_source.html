@@ -92,152 +92,178 @@ $(function(){initNavTree('database__pool_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">database_pool.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_DATABASE_DATABASE_POOL_HPP__</span></div>
+<a href="database__pool_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_DATABASE_DATABASE_POOL_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_DATABASE_DATABASE_POOL_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="condition__variable_8hpp.html">NeForce/core/async/condition_variable.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="queue_8hpp.html">NeForce/core/container/queue.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="shared__ptr_8hpp.html">NeForce/core/memory/shared_ptr.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="db__interface_8hpp.html">NeForce/db/db_interface.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>NEFORCE_BEGIN_NAMESPACE__</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span>NEFORCE_API database_pool {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">struct </span>pool_config {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordtype">size_t</span> init_size = 5;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordtype">size_t</span> min_size = 5;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordtype">size_t</span> max_size = 64;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a> max_idle_time{60};</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> acquire_timeout{3000};</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    };</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">struct </span>connection_entry {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        idb_connect* conn = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> idle_at{0};</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        connection_entry() noexcept = default;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        explicit connection_entry(idb_connect* c) :</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        conn(c),</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        idle_at(current_ms()) {}</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> idle_duration() const noexcept { <span class="keywordflow">return</span> current_ms() - idle_at; }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">static</span> <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> current_ms() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="group___duration.html#gafaba32c48d91da85098ecb115cea65ed">time_cast&lt;milliseconds&gt;</a>(<a class="code hl_function" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</a>().since_epoch()); }</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    };</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    db_config config_;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    pool_config pool_cfg_;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    unique_ptr&lt;idb_factory&gt; factory_;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    queue&lt;connection_entry&gt; idle_queue_;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">mutable</span> mutex queue_mtx_;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    condition_variable cv_;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    atomic&lt;size_t&gt; total_count_{0};</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    atomic&lt;bool&gt; running_{<span class="keyword">false</span>};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    thread replenish_thread_;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    thread scanner_thread_;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    idb_connect* try_create_connect() noexcept;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> return_connect(idb_connect* conn) noexcept;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> replenish_task();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> scanner_task();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    template &lt;typename T&gt;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    shared_ptr&lt;T&gt; acquire_impl();</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="condition__variable_8hpp.html">NeForce/core/async/condition_variable.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="queue_8hpp.html">NeForce/core/container/queue.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="shared__ptr_8hpp.html">NeForce/core/memory/shared_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="db__interface_8hpp.html">NeForce/db/db_interface.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classdatabase__pool.html">   42</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structdatabase__pool_1_1pool__config.html">   48</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structdatabase__pool_1_1pool__config.html">pool_config</a> {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structdatabase__pool_1_1pool__config.html#a69f33d6cfcae3ed2fbec767f5e812612">   49</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structdatabase__pool_1_1pool__config.html#a69f33d6cfcae3ed2fbec767f5e812612">init_size</a> = 5;               </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structdatabase__pool_1_1pool__config.html#a1395067e2971084a8e053499da0f3fcc">   50</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structdatabase__pool_1_1pool__config.html#a1395067e2971084a8e053499da0f3fcc">min_size</a> = 5;                </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structdatabase__pool_1_1pool__config.html#aab983810fd9a07d791596ce24d0b9c91">   51</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structdatabase__pool_1_1pool__config.html#aab983810fd9a07d791596ce24d0b9c91">max_size</a> = 64;               </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structdatabase__pool_1_1pool__config.html#a452a3c8df3af48309528d87f95574d5d">   52</a></span>        <a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a> <a class="code hl_variable" href="structdatabase__pool_1_1pool__config.html#a452a3c8df3af48309528d87f95574d5d">max_idle_time</a>{60};          </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structdatabase__pool_1_1pool__config.html#a65b771fcb07cb55c350d9330907e37b8">   53</a></span>        <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_variable" href="structdatabase__pool_1_1pool__config.html#a65b771fcb07cb55c350d9330907e37b8">acquire_timeout</a>{3000}; </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">struct </span>connection_entry {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_struct" href="structidb__connect.html">idb_connect</a>* conn = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> idle_at{0};</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>public:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    database_pool(db_type type, const db_config&amp; config) :</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    database_pool(type, config, pool_config()) {}</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    database_pool(db_type type, <span class="keyword">const</span> db_config&amp; config, <span class="keyword">const</span> pool_config&amp; pool_config);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        connection_entry() noexcept = default;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        explicit connection_entry(idb_connect* c) :</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        conn(c),</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        idle_at(current_ms()) {}</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ~database_pool();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> idle_duration() const noexcept { <span class="keywordflow">return</span> current_ms() - idle_at; }</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    database_pool(<span class="keyword">const</span> database_pool&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    database_pool&amp; operator=(<span class="keyword">const</span> database_pool&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    database_pool(database_pool&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    database_pool&amp; operator=(database_pool&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    shared_ptr&lt;idb_connect&gt; get_connect();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    shared_ptr&lt;idb_tb_connect&gt; get_tb_connect();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    shared_ptr&lt;idb_kv_connect&gt; get_kv_connect();</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">size_t</span> idle_count() const noexcept;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">size_t</span> total_count() const noexcept;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">bool</span> is_running() const noexcept { <span class="keywordflow">return</span> running_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>); }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">void</span> stop();</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">static</span> <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> current_ms() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="group___duration.html#gafaba32c48d91da85098ecb115cea65ed">time_cast&lt;milliseconds&gt;</a>(<a class="code hl_function" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</a>().since_epoch()); }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    };</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    db_config config_;                </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    pool_config pool_cfg_;            </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    unique_ptr&lt;idb_factory&gt; factory_; </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    queue&lt;connection_entry&gt; idle_queue_; </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">mutable</span> mutex queue_mtx_;            </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    condition_variable cv_;              </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    atomic&lt;size_t&gt; total_count_{0}; </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    atomic&lt;bool&gt; running_{<span class="keyword">false</span>};   </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    thread replenish_thread_; </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    thread scanner_thread_;   </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;T&gt;</a> database_pool::acquire_impl() {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    unique_lock&lt;mutex&gt; lk(queue_mtx_);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    idb_connect* try_create_connect() noexcept;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">void</span> return_connect(idb_connect* conn);</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> got = cv_.wait_for(lk, pool_cfg_.acquire_timeout,</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                                  [<span class="keyword">this</span>] { return !idle_queue_.empty() || !running_.load(memory_order_relaxed); });</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span> replenish_task();</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> scanner_task();</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">if</span> (!running_.load(<a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>)) {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span> (!got || idle_queue_.empty()) {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> cur = total_count_.load(<a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">if</span> (cur &gt;= pool_cfg_.max_size) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        }</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        idb_connect* raw = try_create_connect();</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">if</span> (raw == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        total_count_.fetch_add(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        T* typed = <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">if</span> (typed == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keyword">delete</span> raw;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            total_count_.fetch_sub(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span> shared_ptr&lt;T&gt;(typed, [<span class="keyword">this</span>](T* p) { this-&gt;return_connect(p); });</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">const</span> connection_entry entry = idle_queue_.front();</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    idle_queue_.pop();</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    lk.unlock_quiet();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    template &lt;typename T&gt;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    shared_ptr&lt;T&gt; acquire_impl();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>public:</div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">  102</a></span>    <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>(<a class="code hl_enumeration" href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a> type, const <a class="code hl_struct" href="structdb__config.html">db_config</a>&amp; config) :</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>(type, config, <a class="code hl_struct" href="structdatabase__pool_1_1pool__config.html">pool_config</a>()) {}</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#ade5bdda89c4a9369ee5cb19cde8fade0">  112</a></span>    <a class="code hl_function" href="classdatabase__pool.html#ade5bdda89c4a9369ee5cb19cde8fade0">database_pool</a>(<a class="code hl_enumeration" href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a> type, <span class="keyword">const</span> <a class="code hl_struct" href="structdb__config.html">db_config</a>&amp; config, <span class="keyword">const</span> <a class="code hl_struct" href="structdatabase__pool_1_1pool__config.html">pool_config</a>&amp; <a class="code hl_struct" href="structdatabase__pool_1_1pool__config.html">pool_config</a>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#af1c193fefa6d542e3e2e0b654734cc05">  119</a></span>    <a class="code hl_function" href="classdatabase__pool.html#af1c193fefa6d542e3e2e0b654734cc05">~database_pool</a>();</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    idb_connect* raw = entry.conn;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">if</span> (!raw-&gt;<a class="code hl_function" href="structidb__connect.html#a7b5c48c5ecdb1cdd54463da84cbc92a0">is_valid</a>()) {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> (!raw-&gt;<a class="code hl_function" href="structidb__connect.html#a5faaad097bbdc6d8e530eb9f3ec7af94">reconnect</a>(config_)) {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="keyword">delete</span> raw;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            total_count_.fetch_sub(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            cv_.notify_one();</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    T* typed = <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">if</span> (typed == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        this-&gt;return_connect(raw);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">return</span> shared_ptr&lt;T&gt;(typed, [<span class="keyword">this</span>](T* p) { this-&gt;return_connect(p); });</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_DATABASE_POOL_HPP__</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>(<span class="keyword">const</span> <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>(<a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>&amp; operator=(<a class="code hl_function" href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a8ee69804050e504438cd86805fbd32f8">  132</a></span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;idb_connect&gt;</a> <a class="code hl_function" href="classdatabase__pool.html#a8ee69804050e504438cd86805fbd32f8">get_connect</a>();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a8dfcfdfde1930667868c535548303b11">  140</a></span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;idb_tb_connect&gt;</a> <a class="code hl_function" href="classdatabase__pool.html#a8dfcfdfde1930667868c535548303b11">get_tb_connect</a>();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a9231bb1c7d553a38a23f835310d309b7">  148</a></span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;idb_kv_connect&gt;</a> <a class="code hl_function" href="classdatabase__pool.html#a9231bb1c7d553a38a23f835310d309b7">get_kv_connect</a>();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a44cf9a5381a8a4deb4c9c2996557895c">  154</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classdatabase__pool.html#a44cf9a5381a8a4deb4c9c2996557895c">idle_count</a>() const noexcept;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a47817942eeea79eff60c40aac98a2b24">  160</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classdatabase__pool.html#a47817942eeea79eff60c40aac98a2b24">total_count</a>() const noexcept;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#ac3cd4dc274c371f558c62ca353702490">  166</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classdatabase__pool.html#ac3cd4dc274c371f558c62ca353702490">is_running</a>() const noexcept { <span class="keywordflow">return</span> running_.load(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>); }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classdatabase__pool.html#a1ab7c90200d7334d1ad83e4d44899786">  173</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classdatabase__pool.html#a1ab7c90200d7334d1ad83e4d44899786">stop</a>();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>};</div>
+</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;T&gt;</a> database_pool::acquire_impl() {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> lk(queue_mtx_);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> got = cv_.<a class="code hl_function" href="classcondition__variable.html#a9caf38ad7eec6460fbca1bb971b3837c">wait_for</a>(lk, pool_cfg_.<a class="code hl_variable" href="structdatabase__pool_1_1pool__config.html#a65b771fcb07cb55c350d9330907e37b8">acquire_timeout</a>,</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                                  [<span class="keyword">this</span>] { return !idle_queue_.empty() || !running_.load(memory_order_relaxed); });</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">if</span> (!running_.<a class="code hl_function" href="structatomic_3_01bool_01_4.html#aeae9779b073a62cb0f9dd744433e405f">load</a>(<a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>)) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">if</span> (!got || idle_queue_.empty()) {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> cur = total_count_.load(<a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">if</span> (cur &gt;= pool_cfg_.max_size) {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        idb_connect* raw = try_create_connect();</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordflow">if</span> (raw == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        total_count_.fetch_add(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        T* typed = <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">if</span> (typed == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <span class="keyword">delete</span> raw;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            total_count_.fetch_sub(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordflow">return</span> shared_ptr&lt;T&gt;(typed, [<span class="keyword">this</span>](T* p) { this-&gt;return_connect(p); });</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    }</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keyword">const</span> connection_entry entry = idle_queue_.front();</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    idle_queue_.pop();</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    lk.unlock_quiet();</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    idb_connect* raw = entry.conn;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordflow">if</span> (!raw-&gt;<a class="code hl_function" href="structidb__connect.html#a7b5c48c5ecdb1cdd54463da84cbc92a0">is_valid</a>()) {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">if</span> (!raw-&gt;<a class="code hl_function" href="structidb__connect.html#a5faaad097bbdc6d8e530eb9f3ec7af94">reconnect</a>(config_)) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            <span class="keyword">delete</span> raw;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            total_count_.fetch_sub(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            cv_.notify_one();</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    T* typed = <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">if</span> (typed == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        this-&gt;return_connect(raw);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordflow">return</span> shared_ptr&lt;T&gt;(typed, [<span class="keyword">this</span>](T* p) { this-&gt;return_connect(p); });</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>}</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> <span class="comment">// Database</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_DATABASE_POOL_HPP__</span></div>
 <div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
-<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00267">shared_ptr.hpp:267</a></div></div>
+<div class="ttc" id="aclasscondition__variable_html_a9caf38ad7eec6460fbca1bb971b3837c"><div class="ttname"><a href="classcondition__variable.html#a9caf38ad7eec6460fbca1bb971b3837c">condition_variable::wait_for</a></div><div class="ttdeci">cv_status wait_for(unique_lock&lt; mutex &gt; &amp;lock, const duration&lt; Rep, Period &gt; &amp;rest)</div><div class="ttdoc">等待指定的持续时间</div><div class="ttdef"><b>定义</b> <a href="condition__variable_8hpp_source.html#l00298">condition_variable.hpp:298</a></div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a1ab7c90200d7334d1ad83e4d44899786"><div class="ttname"><a href="classdatabase__pool.html#a1ab7c90200d7334d1ad83e4d44899786">database_pool::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">停止连接池</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a262a1c859c11ecbfdf03d0ceb5d5beb6"><div class="ttname"><a href="classdatabase__pool.html#a262a1c859c11ecbfdf03d0ceb5d5beb6">database_pool::database_pool</a></div><div class="ttdeci">database_pool(db_type type, const db_config &amp;config)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00102">database_pool.hpp:102</a></div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a44cf9a5381a8a4deb4c9c2996557895c"><div class="ttname"><a href="classdatabase__pool.html#a44cf9a5381a8a4deb4c9c2996557895c">database_pool::idle_count</a></div><div class="ttdeci">size_t idle_count() const noexcept</div><div class="ttdoc">获取空闲连接数</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a47817942eeea79eff60c40aac98a2b24"><div class="ttname"><a href="classdatabase__pool.html#a47817942eeea79eff60c40aac98a2b24">database_pool::total_count</a></div><div class="ttdeci">size_t total_count() const noexcept</div><div class="ttdoc">获取总连接数</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a8dfcfdfde1930667868c535548303b11"><div class="ttname"><a href="classdatabase__pool.html#a8dfcfdfde1930667868c535548303b11">database_pool::get_tb_connect</a></div><div class="ttdeci">shared_ptr&lt; idb_tb_connect &gt; get_tb_connect()</div><div class="ttdoc">获取关系型数据库连接</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a8ee69804050e504438cd86805fbd32f8"><div class="ttname"><a href="classdatabase__pool.html#a8ee69804050e504438cd86805fbd32f8">database_pool::get_connect</a></div><div class="ttdeci">shared_ptr&lt; idb_connect &gt; get_connect()</div><div class="ttdoc">获取通用数据库连接</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_a9231bb1c7d553a38a23f835310d309b7"><div class="ttname"><a href="classdatabase__pool.html#a9231bb1c7d553a38a23f835310d309b7">database_pool::get_kv_connect</a></div><div class="ttdeci">shared_ptr&lt; idb_kv_connect &gt; get_kv_connect()</div><div class="ttdoc">获取键值存储连接</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_ac3cd4dc274c371f558c62ca353702490"><div class="ttname"><a href="classdatabase__pool.html#ac3cd4dc274c371f558c62ca353702490">database_pool::is_running</a></div><div class="ttdeci">bool is_running() const noexcept</div><div class="ttdoc">检查连接池是否正在运行</div><div class="ttdef"><b>定义</b> <a href="#l00166">database_pool.hpp:166</a></div></div>
+<div class="ttc" id="aclassdatabase__pool_html_ade5bdda89c4a9369ee5cb19cde8fade0"><div class="ttname"><a href="classdatabase__pool.html#ade5bdda89c4a9369ee5cb19cde8fade0">database_pool::database_pool</a></div><div class="ttdeci">database_pool(db_type type, const db_config &amp;config, const pool_config &amp;pool_config)</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassdatabase__pool_html_af1c193fefa6d542e3e2e0b654734cc05"><div class="ttname"><a href="classdatabase__pool.html#af1c193fefa6d542e3e2e0b654734cc05">database_pool::~database_pool</a></div><div class="ttdeci">~database_pool()</div><div class="ttdoc">析构函数</div></div>
+<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00269">shared_ptr.hpp:269</a></div></div>
+<div class="ttc" id="aclassunique__lock_html"><div class="ttname"><a href="classunique__lock.html">unique_lock</a></div><div class="ttdoc">独占锁管理器模板</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00251">mutex.hpp:251</a></div></div>
 <div class="ttc" id="acondition__variable_8hpp_html"><div class="ttname"><a href="condition__variable_8hpp.html">condition_variable.hpp</a></div><div class="ttdoc">条件变量行为</div></div>
 <div class="ttc" id="adb__interface_8hpp_html"><div class="ttname"><a href="db__interface_8hpp.html">db_interface.hpp</a></div><div class="ttdoc">数据库抽象接口层</div></div>
+<div class="ttc" id="agroup___database_html_ga80fcb4d728eaac384a3edc19d9ad20c6"><div class="ttname"><a href="group___database.html#ga80fcb4d728eaac384a3edc19d9ad20c6">db_type</a></div><div class="ttdeci">db_type</div><div class="ttdoc">数据库类型枚举</div><div class="ttdef"><b>定义</b> <a href="db__config_8hpp_source.html#l00069">db_config.hpp:69</a></div></div>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
 <div class="ttc" id="agroup___duration_html_gafaba32c48d91da85098ecb115cea65ed"><div class="ttname"><a href="group___duration.html#gafaba32c48d91da85098ecb115cea65ed">time_cast</a></div><div class="ttdeci">constexpr ToDur time_cast(const duration&lt; Rep, Period &gt; &amp;value)</div><div class="ttdoc">持续时间类型转换</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00144">duration.hpp:144</a></div></div>
 <div class="ttc" id="agroup___duration_html_gafce1f041e55ef5a119744bb53b2aabd9"><div class="ttname"><a href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a></div><div class="ttdeci">duration&lt; int64_t &gt; seconds</div><div class="ttdoc">秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00158">duration.hpp:158</a></div></div>
@@ -245,7 +271,15 @@ $(function(){initNavTree('database__pool_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___memory_order_html_gac472f4b38d5bc0ba23a6113984118c24"><div class="ttname"><a href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acquire</div><div class="ttdoc">获取内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00044">atomic_base.hpp:44</a></div></div>
 <div class="ttc" id="aqueue_8hpp_html"><div class="ttname"><a href="queue_8hpp.html">queue.hpp</a></div><div class="ttdoc">队列容器适配器</div></div>
 <div class="ttc" id="ashared__ptr_8hpp_html"><div class="ttname"><a href="shared__ptr_8hpp.html">shared_ptr.hpp</a></div><div class="ttdoc">共享智能指针实现</div></div>
-<div class="ttc" id="astructatomic_html_a08238b88fc524dbab833b1f2efbca3ec"><div class="ttname"><a href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">atomic::load</a></div><div class="ttdeci">T load(const memory_order mo=memory_order_seq_cst) const noexcept</div><div class="ttdoc">原子加载操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00124">atomic.hpp:124</a></div></div>
+<div class="ttc" id="astructatomic_3_01bool_01_4_html_aeae9779b073a62cb0f9dd744433e405f"><div class="ttname"><a href="structatomic_3_01bool_01_4.html#aeae9779b073a62cb0f9dd744433e405f">atomic&lt; bool &gt;::load</a></div><div class="ttdeci">bool load(const memory_order mo=memory_order_seq_cst) const noexcept</div><div class="ttdoc">原子加载操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00358">atomic.hpp:358</a></div></div>
+<div class="ttc" id="astructdatabase__pool_1_1pool__config_html"><div class="ttname"><a href="structdatabase__pool_1_1pool__config.html">database_pool::pool_config</a></div><div class="ttdoc">连接池配置</div><div class="ttdef"><b>定义</b> <a href="#l00048">database_pool.hpp:48</a></div></div>
+<div class="ttc" id="astructdatabase__pool_1_1pool__config_html_a1395067e2971084a8e053499da0f3fcc"><div class="ttname"><a href="structdatabase__pool_1_1pool__config.html#a1395067e2971084a8e053499da0f3fcc">database_pool::pool_config::min_size</a></div><div class="ttdeci">size_t min_size</div><div class="ttdoc">最小连接数</div><div class="ttdef"><b>定义</b> <a href="#l00050">database_pool.hpp:50</a></div></div>
+<div class="ttc" id="astructdatabase__pool_1_1pool__config_html_a452a3c8df3af48309528d87f95574d5d"><div class="ttname"><a href="structdatabase__pool_1_1pool__config.html#a452a3c8df3af48309528d87f95574d5d">database_pool::pool_config::max_idle_time</a></div><div class="ttdeci">seconds max_idle_time</div><div class="ttdoc">连接最大空闲时间</div><div class="ttdef"><b>定义</b> <a href="#l00052">database_pool.hpp:52</a></div></div>
+<div class="ttc" id="astructdatabase__pool_1_1pool__config_html_a65b771fcb07cb55c350d9330907e37b8"><div class="ttname"><a href="structdatabase__pool_1_1pool__config.html#a65b771fcb07cb55c350d9330907e37b8">database_pool::pool_config::acquire_timeout</a></div><div class="ttdeci">milliseconds acquire_timeout</div><div class="ttdoc">获取连接超时时间</div><div class="ttdef"><b>定义</b> <a href="#l00053">database_pool.hpp:53</a></div></div>
+<div class="ttc" id="astructdatabase__pool_1_1pool__config_html_a69f33d6cfcae3ed2fbec767f5e812612"><div class="ttname"><a href="structdatabase__pool_1_1pool__config.html#a69f33d6cfcae3ed2fbec767f5e812612">database_pool::pool_config::init_size</a></div><div class="ttdeci">size_t init_size</div><div class="ttdoc">初始连接数</div><div class="ttdef"><b>定义</b> <a href="#l00049">database_pool.hpp:49</a></div></div>
+<div class="ttc" id="astructdatabase__pool_1_1pool__config_html_aab983810fd9a07d791596ce24d0b9c91"><div class="ttname"><a href="structdatabase__pool_1_1pool__config.html#aab983810fd9a07d791596ce24d0b9c91">database_pool::pool_config::max_size</a></div><div class="ttdeci">size_t max_size</div><div class="ttdoc">最大连接数</div><div class="ttdef"><b>定义</b> <a href="#l00051">database_pool.hpp:51</a></div></div>
+<div class="ttc" id="astructdb__config_html"><div class="ttname"><a href="structdb__config.html">db_config</a></div><div class="ttdoc">数据库连接配置结构</div><div class="ttdef"><b>定义</b> <a href="db__config_8hpp_source.html#l00091">db_config.hpp:91</a></div></div>
+<div class="ttc" id="astructidb__connect_html"><div class="ttname"><a href="structidb__connect.html">idb_connect</a></div><div class="ttdoc">数据库连接抽象基类</div><div class="ttdef"><b>定义</b> <a href="db__interface_8hpp_source.html#l00190">db_interface.hpp:190</a></div></div>
 <div class="ttc" id="astructidb__connect_html_a5faaad097bbdc6d8e530eb9f3ec7af94"><div class="ttname"><a href="structidb__connect.html#a5faaad097bbdc6d8e530eb9f3ec7af94">idb_connect::reconnect</a></div><div class="ttdeci">virtual bool reconnect(const db_config &amp;config)=0</div><div class="ttdoc">重新连接</div></div>
 <div class="ttc" id="astructidb__connect_html_a7b5c48c5ecdb1cdd54463da84cbc92a0"><div class="ttname"><a href="structidb__connect.html#a7b5c48c5ecdb1cdd54463da84cbc92a0">idb_connect::is_valid</a></div><div class="ttdeci">virtual bool is_valid() const =0</div><div class="ttdoc">检查连接有效性</div></div>
 <div class="ttc" id="astructsteady__clock_html_a1f01ac9bf1927c8b15b205f69a90c29d"><div class="ttname"><a href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</a></div><div class="ttdeci">static time_point now() noexcept</div><div class="ttdoc">获取当前时间点</div></div>
@@ -256,7 +290,7 @@ $(function(){initNavTree('database__pool_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>db</b></li><li class="navelem"><b>database_pool.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>db</b></li><li class="navelem"><a href="database__pool_8hpp.html">database_pool.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

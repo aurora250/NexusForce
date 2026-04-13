@@ -1,11 +1,9 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/db/database_pool.hpp>
-#ifdef NEFORCE_SUPPORT_DB
-#    include <NeForce/db/mysql/mysql_connect.hpp>
-#    include <NeForce/db/pgsql/pgsql_connect.hpp>
-#    include <NeForce/db/redis/redis_connect.hpp>
-#    include <NeForce/db/sqlite/sqlite_connect.hpp>
-#endif
+#include <NeForce/db/mysql/mysql_connect.hpp>
+#include <NeForce/db/pgsql/pgsql_connect.hpp>
+#include <NeForce/db/redis/redis_connect.hpp>
+#include <NeForce/db/sqlite/sqlite_connect.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 database_pool::database_pool(const db_type type, const db_config& config, const pool_config& pool_config) :

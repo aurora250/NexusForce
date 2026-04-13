@@ -10,9 +10,10 @@ var searchData=
   ['wake_5fbitset_5fprivate_7',['wake_bitset_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49',1,'futex.hpp']]],
   ['wake_5fop_8',['wake_op',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba0f74829cda07f2751c17564ecfb39a41',1,'futex.hpp']]],
   ['wake_5fprivate_9',['wake_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95',1,'futex.hpp']]],
-  ['warn_10',['WARN',['../group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
+  ['warn_10',['WARN',['../group___logging.html#ggac91d55174d383848b976a34de843748ea32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
   ['write_11',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
   ['write_5fthrough_12',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
-  ['ws_13',['ws',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c',1,'ports']]],
-  ['wss_14',['wss',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c',1,'ports']]]
+  ['wrong_5fprotocol_5ftype_13',['wrong_protocol_type',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b',1,'errc.hpp']]],
+  ['ws_14',['ws',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c',1,'ports']]],
+  ['wss_15',['wss',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c',1,'ports']]]
 ];

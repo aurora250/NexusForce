@@ -4,6 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 ftp_protocol::ftp_protocol(ftp_protocol&& other) noexcept :
+ip_socket(move(other)),
 tls_active_(other.tls_active_),
 ctrl_ssl_(move(other.ctrl_ssl_)),
 ssl_ctx_(other.ssl_ctx_),
@@ -11,19 +12,24 @@ data_tls_(other.data_tls_) {
     other.tls_active_ = false;
     other.ssl_ctx_ = nullptr;
     other.data_tls_ = false;
+    memory_copy(buffer_, other.buffer_, other.buffer_size_);
+    buffer_pos_ = exchange(other.buffer_pos_, 0);
+    buffer_size_ = exchange(other.buffer_size_, 0);
 }
 
 ftp_protocol& ftp_protocol::operator=(ftp_protocol&& other) noexcept {
-    if (this != &other) {
-        tls_active_ = other.tls_active_;
-        ctrl_ssl_ = move(other.ctrl_ssl_);
-        ssl_ctx_ = other.ssl_ctx_;
-        data_tls_ = other.data_tls_;
-        other.tls_active_ = false;
-        other.ssl_ctx_ = nullptr;
-        other.data_tls_ = false;
-        other.tls_active_ = false;
+    if (addressof(other) == this) {
+        return *this;
     }
+
+    ip_socket::operator=(move(other));
+    tls_active_ = exchange(other.tls_active_, false);
+    ctrl_ssl_ = move(other.ctrl_ssl_);
+    ssl_ctx_ = exchange(other.ssl_ctx_, nullptr);
+    data_tls_ = exchange(other.data_tls_, false);
+    buffer_pos_ = exchange(other.buffer_pos_, 0);
+    buffer_size_ = exchange(other.buffer_size_, 0);
+
     return *this;
 }
 

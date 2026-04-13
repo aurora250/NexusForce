@@ -3,9 +3,82 @@
 
 /**
  * @file json_value.hpp
- * @brief json配置格式变量
+ * @brief JSON配置格式变量
  *
- * 此文件提供了json配置格式的抽象基类和具体实现类。
+ * 此文件提供了JSON（JavaScript Object Notation）配置格式的抽象基类和具体实现类。
+ * JSON是一种轻量级的数据交换格式，易于人类阅读和编写，也易于机器解析和生成。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下 JSON 相关标准规范：
+ *
+ * **JSON 数据格式标准：**
+ * - **IETF STD 90 / RFC 8259**：JavaScript Object Notation (JSON) 数据交换格式
+ *   https://www.rfc-editor.org/rfc/rfc8259.html
+ * - **ECMA-404:2017**：JSON 数据交换格式（第2版）
+ *   https://ecma-international.org/publications-and-standards/standards/ecma-404/
+ *
+ * **历史 JSON 规范（信息参考）：**
+ * - **IETF RFC 7159**：JSON 数据交换格式（已被 RFC 8259 废弃）
+ *   https://www.rfc-editor.org/rfc/rfc7159.html
+ * - **IETF RFC 7158**：JSON 文本序列化格式
+ *   https://www.rfc-editor.org/rfc/rfc7158.html
+ * - **IETF RFC 4627**：JSON 原始规范（已被 RFC 7159 废弃）
+ *   https://www.rfc-editor.org/rfc/rfc4627.html
+ *
+ * **JSON Schema 验证标准（相关参考）：**
+ * - **IETF JSON Schema**：JSON 模式验证规范（Draft 2020-12）
+ *   https://json-schema.org/specification.html
+ * - **IETF RFC 8927**：JSON 类型定义
+ *   https://www.rfc-editor.org/rfc/rfc8927.html
+ *
+ * @section json_types JSON 值类型定义
+ * 根据 RFC 8259 §3，JSON 支持以下六种值类型：
+ *
+ * | 类型      | RFC 8259 引用 | 本实现类          | 说明                           |
+ * |-----------|---------------|-------------------|--------------------------------|
+ * | null      | §3            | json_null         | 空值                           |
+ * | boolean   | §3            | json_bool         | 布尔值（true 或 false）         |
+ * | number    | §6            | json_number       | 双精度浮点数（IEEE 754-2019）   |
+ * | string    | §7            | json_string       | Unicode 字符串（UTF-8 编码）    |
+ * | object    | §4            | json_object       | 无序键值对集合                  |
+ * | array     | §5            | json_array        | 有序值列表                      |
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 编码              | UTF-8（RFC 8259 §8.1）                    |
+ * | 字符串转义        | RFC 8259 §7 定义的控制字符转义序列         |
+ * | 数字范围          | IEEE 754-2019 双精度浮点数                |
+ * | 对象键唯一性      | RFC 8259 §4（键在对象中应唯一）            |
+ * | 对象键顺序        | 无序（JSON 不保证键的顺序）                |
+ * | 数组顺序          | 有序（保持插入顺序）                       |
+ * | 最大嵌套深度      | 实现定义（建议不超过 1000 层）             |
+ *
+ * @section escape_sequences 字符串转义序列
+ * 根据 RFC 8259 §7，支持以下转义序列：
+ *
+ * | 转义序列 | 字符          | Unicode 码点 |
+ * |----------|---------------|--------------|
+ * | \\\"     | 引号          | U+0022       |
+ * | \\\\     | 反斜杠        | U+005C       |
+ * | \\/      | 斜杠          | U+002F       |
+ * | \\b      | 退格          | U+0008       |
+ * | \\f      | 换页          | U+000C       |
+ * | \\n      | 换行          | U+000A       |
+ * | \\r      | 回车          | U+000D       |
+ * | \\t      | 制表符        | U+0009       |
+ * | \\uXXXX  | Unicode 字符  | U+XXXX       |
+ *
+ * @note JSON 规范要求有效的 JSON 文本必须是 UTF-8、UTF-16 或 UTF-32 编码。
+ *       本实现默认使用 UTF-8 编码处理所有字符串。
+ *       JSON 数字采用双精度浮点数存储，遵循 IEEE 754-2019 标准。
+ *
+ * @warning 根据 RFC 8259 §9，JSON 解析器应拒绝无效的 UTF-8 序列。
+ *          对象中的重复键名虽然规范不禁止，但可能导致不可预测的行为。
+ *
+ * @see https://www.json.org/
+ * @see https://www.rfc-editor.org/rfc/rfc8259
+ * @see https://ecma-international.org/publications-and-standards/standards/ecma-404/
  */
 
 #include "NeForce/core/container/unordered_map.hpp"

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['并行算法_0',['并行算法',['../group___parallel_algorithms.html',1,'']]]
+  ['哈希模板_0',['哈希模板',['../group___hash_primary.html',1,'']]],
+  ['哈希表_1',['哈希表',['../group___hash_table.html',1,'']]]
 ];

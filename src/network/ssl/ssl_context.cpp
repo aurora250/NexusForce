@@ -22,16 +22,16 @@ namespace {
                                  "AES128-SHA256:"
                                  "AES256-SHA256";
 
-    SSL_METHOD* convert_method(const ssl_method method) {
+    ::SSL_METHOD* convert_method(const ssl_method method) {
         switch (method) {
             case ssl_method::TLS_CLIENT: {
-                return const_cast<SSL_METHOD*>(TLS_client_method());
+                return const_cast<::SSL_METHOD*>(::TLS_client_method());
             }
             case ssl_method::TLS_SERVER: {
-                return const_cast<SSL_METHOD*>(TLS_server_method());
+                return const_cast<::SSL_METHOD*>(::TLS_server_method());
             }
             default: {
-                return const_cast<SSL_METHOD*>(TLS_method());
+                return const_cast<::SSL_METHOD*>(::TLS_method());
             }
         }
     }
@@ -82,7 +82,7 @@ ssl_context::ssl_context(const ssl_method method) {
 
 void ssl_context::set_options(const long options) {
     if (ctx_) {
-        SSL_CTX_set_options(ctx_.get(), options);
+        ::SSL_CTX_set_options(ctx_.get(), options);
     }
 }
 
@@ -96,7 +96,7 @@ bool ssl_context::load_certificate(const string& cert_file, const string& key_fi
     if (::SSL_CTX_use_PrivateKey_file(ctx_.get(), key_file.data(), SSL_FILETYPE_PEM) <= 0) {
         return false;
     }
-    return SSL_CTX_check_private_key(ctx_.get()) == 1;
+    return ::SSL_CTX_check_private_key(ctx_.get()) == 1;
 }
 
 void ssl_context::load_certificate_from_memory(const string& cert_pem, const string& key_pem) {
@@ -158,12 +158,12 @@ bool ssl_context::load_verify_locations(const string& ca_file, const string& ca_
     const char* file_ptr = ca_file.empty() ? nullptr : ca_file.data();
     const char* path_ptr = ca_path.empty() ? nullptr : ca_path.data();
 
-    return SSL_CTX_load_verify_locations(ctx_.get(), file_ptr, path_ptr) == 1;
+    return ::SSL_CTX_load_verify_locations(ctx_.get(), file_ptr, path_ptr) == 1;
 }
 
 void ssl_context::set_verify_mode(const int mode) {
     if (ctx_) {
-        SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
+        ::SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
     }
 }
 
@@ -221,7 +221,7 @@ void ssl_context::set_alpn_protos(const vector<string>& protocols) {
         alpn_data.insert(alpn_data.end(), proto.begin(), proto.end());
     }
 
-    if (::SSL_CTX_set_alpn_protos(ctx_.get(), alpn_data.data(), static_cast<unsigned int>(alpn_data.size())) != 0) {
+    if (::SSL_CTX_set_alpn_protos(ctx_.get(), alpn_data.data(), static_cast<uint32_t>(alpn_data.size())) != 0) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set ALPN protocols"));
     }
 }

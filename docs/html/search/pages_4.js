@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['首页_0',['首页',['../index.html',1,'']]]
+  ['sha_202_20家族对比_0',['SHA-2 家族对比',['../sha256_8hpp.html#comparison',1,'']]]
 ];

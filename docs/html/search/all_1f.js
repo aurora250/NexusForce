@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

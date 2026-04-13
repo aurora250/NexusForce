@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['位操作_0',['位操作',['../group___bit_manipulation.html',1,'']]]
+  ['交换性工具_0',['交换性工具',['../group___swap_utility.html',1,'']]]
 ];

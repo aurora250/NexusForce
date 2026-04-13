@@ -101,7 +101,7 @@ $(function(){initNavTree('_ne_force_8hpp.html','',''); });
 <code>#include &quot;<a class="el" href="ext__sort_8hpp_source.html">NeForce/core/algorithm/ext_sort.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="async_8hpp_source.html">NeForce/core/async/async.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="barrier_8hpp_source.html">NeForce/core/async/barrier.hpp</a>&quot;</code><br />
-<code>#include &quot;NeForce/core/async/generator.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="generator_8hpp_source.html">NeForce/core/async/generator.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="hazard__ptr_8hpp_source.html">NeForce/core/async/hazard_ptr.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="latch_8hpp_source.html">NeForce/core/async/latch.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="lock__free__queue_8hpp_source.html">NeForce/core/async/lock_free_queue.hpp</a>&quot;</code><br />
@@ -128,6 +128,7 @@ $(function(){initNavTree('_ne_force_8hpp.html','',''); });
 <code>#include &quot;<a class="el" href="sha256_8hpp_source.html">NeForce/core/encrypt/sha256.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="xor_8hpp_source.html">NeForce/core/encrypt/xor.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="breakpoint_8hpp_source.html">NeForce/core/exception/breakpoint.hpp</a>&quot;</code><br />
+<code>#include &quot;NeForce/core/exception/error_code.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="terminate_8hpp_source.html">NeForce/core/exception/terminate.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="env__builder_8hpp_source.html">NeForce/core/file/env/env_builder.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="env__parser_8hpp_source.html">NeForce/core/file/env/env_parser.hpp</a>&quot;</code><br />
@@ -151,10 +152,10 @@ $(function(){initNavTree('_ne_force_8hpp.html','',''); });
 <code>#include &quot;NeForce/core/serialize/binary_serializer.hpp&quot;</code><br />
 <code>#include &quot;NeForce/core/serialize/json_serializer.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="vsprintf_8hpp_source.html">NeForce/core/string/vsprintf.hpp</a>&quot;</code><br />
-<code>#include &quot;NeForce/core/system/cmdline.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="cmdline_8hpp_source.html">NeForce/core/system/cmdline.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="console_8hpp_source.html">NeForce/core/system/console.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="environment_8hpp_source.html">NeForce/core/system/environment.hpp</a>&quot;</code><br />
-<code>#include &quot;NeForce/core/system/locale.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="locale_8hpp_source.html">NeForce/core/system/locale.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="process_8hpp_source.html">NeForce/core/system/process.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="share__memory_8hpp_source.html">NeForce/core/system/share_memory.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="signal_8hpp_source.html">NeForce/core/system/signal.hpp</a>&quot;</code><br />
@@ -165,30 +166,29 @@ $(function(){initNavTree('_ne_force_8hpp.html','',''); });
 <code>#include &quot;NeForce/core/utility/expected.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="scope_8hpp_source.html">NeForce/core/utility/scope.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="uuid_8hpp_source.html">NeForce/core/utility/uuid.hpp</a>&quot;</code><br />
-<code>#include &quot;NeForce/db/database_pool.hpp&quot;</code><br />
-<code>#include &quot;NeForce/db/mysql/mysql_connect.hpp&quot;</code><br />
-<code>#include &quot;NeForce/db/pgsql/pgsql_connect.hpp&quot;</code><br />
-<code>#include &quot;NeForce/db/redis/redis_connect.hpp&quot;</code><br />
-<code>#include &quot;NeForce/db/redis/redis_result.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="database__pool_8hpp_source.html">NeForce/db/database_pool.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="mysql__connect_8hpp_source.html">NeForce/db/mysql/mysql_connect.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pgsql__connect_8hpp_source.html">NeForce/db/pgsql/pgsql_connect.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="redis__connect_8hpp_source.html">NeForce/db/redis/redis_connect.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="redis__result_8hpp_source.html">NeForce/db/redis/redis_result.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sql__builder_8hpp_source.html">NeForce/db/sql_builder.hpp</a>&quot;</code><br />
-<code>#include &quot;NeForce/db/sqlite/sqlite_connect.hpp&quot;</code><br />
-<code>#include &quot;NeForce/logging/file_sink.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="sqlite__connect_8hpp_source.html">NeForce/db/sqlite/sqlite_connect.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="file__sink_8hpp_source.html">NeForce/logging/file_sink.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="logger_8hpp_source.html">NeForce/logging/logger.hpp</a>&quot;</code><br />
-<code>#include &quot;NeForce/network/arp.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/ftp_client.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/ftp_server.hpp&quot;</code><br />
+<code>#include &quot;NeForce/network/ftp/ftp_client.hpp&quot;</code><br />
+<code>#include &quot;NeForce/network/ftp/ftp_server.hpp&quot;</code><br />
 <code>#include &quot;NeForce/network/http/http_client.hpp&quot;</code><br />
 <code>#include &quot;NeForce/network/http/http_server.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/socket/icmp_socket.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/socket/smtp_socket.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/socket/ssl_acceptor.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/socket/udp_socket.hpp&quot;</code><br />
-<code>#include &quot;NeForce/network/websocket.hpp&quot;</code><br />
+<code>#include &quot;NeForce/network/ssl/ssl_acceptor.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="arp_8hpp_source.html">NeForce/network/util/arp.hpp</a>&quot;</code><br />
+<code>#include &quot;NeForce/network/icmp_socket.hpp&quot;</code><br />
+<code>#include &quot;NeForce/network/smtp_socket.hpp&quot;</code><br />
+<code>#include &quot;NeForce/network/udp_socket.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="plugin__manager_8hpp_source.html">NeForce/plugin/plugin_manager.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 NeForce.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_ne_force_8hpp__incl.svg" width="15242" height="310"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_ne_force_8hpp__incl.svg" width="15414" height="219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_ne_force_8hpp_source.html">浏览该文件的源代码.</a></p>

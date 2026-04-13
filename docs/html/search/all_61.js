@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['端序操作_0',['端序操作',['../group___endian.html',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

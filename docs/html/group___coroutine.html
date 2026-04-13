@@ -112,6 +112,14 @@ $(function(){initNavTree('group___coroutine.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步任务  <a href="classtask.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:task_3C_20void_20_3E" id="r_task_3C_20void_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtask_3_01void_01_4.html">task&lt; void &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">void特化的任务类  <a href="classtask_3_01void_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:virtual_5Fthread_5Ftask" id="r_virtual_5Fthread_5Ftask"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvirtual__thread__task.html">virtual_thread_task</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚拟线程任务  <a href="structvirtual__thread__task.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:virtual_5Fthread_5Fscheduler" id="r_virtual_5Fthread_5Fscheduler"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classvirtual__thread__scheduler.html">virtual_thread_scheduler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚拟线程调度器  <a href="classvirtual__thread__scheduler.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:virtual_5Fthread_5Fawaiter" id="r_virtual_5Fthread_5Fawaiter"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvirtual__thread__awaiter.html">virtual_thread_awaiter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚拟线程等待器  <a href="structvirtual__thread__awaiter.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:virtual_5Fthread" id="r_virtual_5Fthread"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classvirtual__thread.html">virtual_thread</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚拟线程类  <a href="classvirtual__thread.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
@@ -138,6 +146,7 @@ using&#160;</td><td class="memItemRight"><b>noop_coroutine_handle</b> = <a class
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>协程支持 </p>
+<p>协程和虚拟线程相关功能</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">类型定义说明</h2>
 <a id="ga6b28debebaa0f1d57331130e5ccb6181" name="ga6b28debebaa0f1d57331130e5ccb6181"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga6b28debebaa0f1d57331130e5ccb6181">&#9670;&#160;</a></span>coroutine_handle</h2>
@@ -196,7 +205,7 @@ template&lt;typename Promise = void&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="coroutine_8hpp_source.html">coroutine.hpp</a> 第 <a class="el" href="coroutine_8hpp_source.html#l00110">110</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00473">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00489">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>.</p>
 
 </div>
 </div>
@@ -245,9 +254,9 @@ template&lt;typename T, typename Factory&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>任务结果</dd></dl>
 <p>执行异步操作，失败时根据策略重试。 </p>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00840">840</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00862">862</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception()</a> , 以及 <a class="el" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a>.</p>
+<p class="reference">引用了 <a class="el" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception()</a>, <a class="el" href="invoke_8hpp_source.html#l00418">is_invocable_r_v</a> , 以及 <a class="el" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00284">lock_free_queue&lt; T &gt;::try_pop()</a>.</p>
 
@@ -286,7 +295,7 @@ template&lt;typename... Tasks&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>包含所有任务结果的任务</dd></dl>
 <p>并行执行多个任务，等待所有任务完成后返回结果元组。 </p>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00821">821</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00843">843</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
 

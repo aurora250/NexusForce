@@ -102,6 +102,8 @@ $(function(){initNavTree('group___type_attribute_operations.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">模拟函数参数传递中的类型退化  <a href="structdecay.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:common_5Ftype_3C_20Types_20_3E" id="r_common_5Ftype_3C_20Types_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcommon__type.html">common_type&lt; Types &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找多个类型的公共类型  <a href="structcommon__type.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:common_5Freference_3C_20Types_20_3E" id="r_common_5Freference_3C_20Types_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcommon__reference.html">common_reference&lt; Types &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找多个类型的公共引用类型  <a href="structcommon__reference.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fspecialization_3C_20T_2C_20Template_20_3E" id="r_is_5Fspecialization_3C_20T_2C_20Template_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__specialization.html">is_specialization&lt; T, Template &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型T是否为模板Template的特化  <a href="structis__specialization.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -125,12 +127,17 @@ template&lt;typename Default, template&lt; typename... &gt; class Op, typename..
 template&lt;typename... Types&gt; </td></tr>
 <tr class="memitem:ga63597ca81f0a3a80001c836bc4cbbb84 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>common_type_t</b> = typename <a class="el" href="structcommon__type.html">common_type</a>&lt;Types...&gt;::type</td></tr>
 <tr class="memdesc:ga63597ca81f0a3a80001c836bc4cbbb84"><td class="mdescLeft">&#160;</td><td class="mdescRight">common_type的便捷别名 <br /></td></tr>
+<tr class="memitem:ga9159a6bfe7317dea917d34d2a9798fde" id="r_ga9159a6bfe7317dea917d34d2a9798fde"><td class="memTemplParams" colspan="2"><a id="ga9159a6bfe7317dea917d34d2a9798fde" name="ga9159a6bfe7317dea917d34d2a9798fde"></a>
+template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ga9159a6bfe7317dea917d34d2a9798fde template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>common_reference_t</b> = typename <a class="el" href="structcommon__reference.html">common_reference</a>&lt;Types...&gt;::type</td></tr>
+<tr class="memdesc:ga9159a6bfe7317dea917d34d2a9798fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">common_reference的便捷别名 <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-函数</h2></td></tr>
-<tr class="memitem:ga851608b0ce2920ea0c10ab280a9b885c" id="r_ga851608b0ce2920ea0c10ab280a9b885c"><td class="memTemplParams" colspan="2">template&lt;typename T, template&lt; typename... &gt; class Template&gt; </td></tr>
-<tr class="memitem:ga851608b0ce2920ea0c10ab280a9b885c template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga851608b0ce2920ea0c10ab280a9b885c">is_specialization_v</a> ()</td></tr>
-<tr class="memdesc:ga851608b0ce2920ea0c10ab280a9b885c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_specialization的便捷函数模板  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:ga35203a7f9132c2f9c796f524bd5a8f69" id="r_ga35203a7f9132c2f9c796f524bd5a8f69"><td class="memTemplParams" colspan="2"><a id="ga35203a7f9132c2f9c796f524bd5a8f69" name="ga35203a7f9132c2f9c796f524bd5a8f69"></a>
+template&lt;typename T, template&lt; typename... &gt; class Template&gt; </td></tr>
+<tr class="memitem:ga35203a7f9132c2f9c796f524bd5a8f69 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_specialization_v</b> = <a class="el" href="structis__specialization.html">is_specialization</a>&lt;T, Template&gt;::value</td></tr>
+<tr class="memdesc:ga35203a7f9132c2f9c796f524bd5a8f69"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_specialization的便捷变量模板 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>进行类型退化、公共化等操作 </p>
@@ -192,48 +199,6 @@ template&lt;typename Default, template&lt; typename... &gt; class Op, typename..
 </dl>
 
 <p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03578">3578</a> 行定义.</p>
-
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga851608b0ce2920ea0c10ab280a9b885c" name="ga851608b0ce2920ea0c10ab280a9b885c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga851608b0ce2920ea0c10ab280a9b885c">&#9670;&#160;</a></span>is_specialization_v()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, template&lt; typename... &gt; class Template&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool is_specialization_v </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>is_specialization的便捷函数模板 </p>
-<dl class="tparams"><dt>模板参数</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>要检查的类型 </td></tr>
-    <tr><td class="paramname">Template</td><td>要检查的模板 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>如果T是Template的特化返回true，否则返回false </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03801">3801</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00031">integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</a>.</p>
 
 </div>
 </div>

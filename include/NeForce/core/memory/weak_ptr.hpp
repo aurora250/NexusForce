@@ -61,23 +61,20 @@ private:
 public:
     /**
      * @brief 默认构造函数
-     * @param np 空指针字面量
-     *
-     * 创建空的弱指针，不观察任何对象。
      */
-    weak_ptr(nullptr_t np = nullptr) noexcept {}
+    weak_ptr(nullptr_t = nullptr) noexcept {}
 
     /**
      * @brief 共享智能指针构造函数
      * @tparam U 可转换为T*的类型
-     * @param sp 共享指针
+     * @param shared 共享指针
      *
      * 创建观察sp管理的对象的弱指针。
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr(const shared_ptr<U>& sp) noexcept :
-    ptr_(sp.get()),
-    owner_(reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_)) {
+    weak_ptr(const shared_ptr<U>& shared) noexcept :
+    ptr_(shared.get()),
+    owner_(reinterpret_cast<inner::__smart_ptr_counter*>(shared.owner_)) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -85,11 +82,11 @@ public:
 
     /**
      * @brief 拷贝构造函数
-     * @param wp 要拷贝的弱指针
+     * @param other 要拷贝的弱指针
      */
-    weak_ptr(const weak_ptr& wp) noexcept :
-    ptr_(wp.ptr_),
-    owner_(wp.owner_) {
+    weak_ptr(const weak_ptr& other) noexcept :
+    ptr_(other.ptr_),
+    owner_(other.owner_) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -98,12 +95,12 @@ public:
     /**
      * @brief 类型转换拷贝构造函数
      * @tparam U 可转换为T*的类型
-     * @param wp 要拷贝的弱指针
+     * @param other 要拷贝的弱指针
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr(const weak_ptr<U>& wp) noexcept :
-    ptr_(wp.ptr_),
-    owner_(wp.owner_) {
+    weak_ptr(const weak_ptr<U>& other) noexcept :
+    ptr_(other.ptr_),
+    owner_(other.owner_) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -111,26 +108,26 @@ public:
 
     /**
      * @brief 移动构造函数
-     * @param wp 要移动的弱指针
+     * @param other 要移动的弱指针
      */
-    weak_ptr(weak_ptr&& wp) noexcept :
-    ptr_(wp.ptr_),
-    owner_(wp.owner_) {
-        wp.ptr_ = nullptr;
-        wp.owner_ = nullptr;
+    weak_ptr(weak_ptr&& other) noexcept :
+    ptr_(other.ptr_),
+    owner_(other.owner_) {
+        other.ptr_ = nullptr;
+        other.owner_ = nullptr;
     }
 
     /**
      * @brief 类型转换移动构造函数
      * @tparam U 可转换为T*的类型
-     * @param wp 要移动的弱指针
+     * @param other 要移动的弱指针
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr(weak_ptr<U>&& wp) noexcept :
-    ptr_(wp.ptr_),
-    owner_(wp.owner_) {
-        wp.ptr_ = nullptr;
-        wp.owner_ = nullptr;
+    weak_ptr(weak_ptr<U>&& other) noexcept :
+    ptr_(other.ptr_),
+    owner_(other.owner_) {
+        other.ptr_ = nullptr;
+        other.owner_ = nullptr;
     }
 
     /**
@@ -141,18 +138,18 @@ public:
 
     /**
      * @brief 拷贝赋值运算符
-     * @param wp 要拷贝的弱指针
+     * @param other 要拷贝的弱指针
      * @return 当前弱指针的引用
      */
-    weak_ptr& operator=(const weak_ptr& wp) noexcept {
-        if (_NEFORCE addressof(wp) == this) {
+    weak_ptr& operator=(const weak_ptr& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
             return *this;
         }
         if (owner_) {
             owner_->decref_weak();
         }
-        ptr_ = wp.ptr_;
-        owner_ = wp.owner_;
+        ptr_ = other.ptr_;
+        owner_ = other.owner_;
         if (owner_) {
             owner_->incref_weak();
         }
@@ -162,16 +159,16 @@ public:
     /**
      * @brief 类型转换拷贝赋值运算符
      * @tparam U 可转换为T*的类型
-     * @param wp 要拷贝的弱指针
+     * @param other 要拷贝的弱指针
      * @return 当前弱指针的引用
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr& operator=(const weak_ptr<U>& wp) noexcept {
+    weak_ptr& operator=(const weak_ptr<U>& other) noexcept {
         if (owner_) {
             owner_->decref_weak();
         }
-        ptr_ = wp.ptr_;
-        owner_ = wp.owner_;
+        ptr_ = other.ptr_;
+        owner_ = other.owner_;
         if (owner_) {
             owner_->incref_weak();
         }
@@ -181,16 +178,16 @@ public:
     /**
      * @brief 共享智能指针赋值运算符
      * @tparam U 可转换为T*的类型
-     * @param sp 共享指针
+     * @param shared 共享指针
      * @return 当前弱指针的引用
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr& operator=(const shared_ptr<U>& sp) noexcept {
+    weak_ptr& operator=(const shared_ptr<U>& shared) noexcept {
         if (owner_) {
             owner_->decref_weak();
         }
-        ptr_ = sp.get();
-        owner_ = reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_);
+        ptr_ = shared.get();
+        owner_ = reinterpret_cast<inner::__smart_ptr_counter*>(shared.owner_);
         if (owner_) {
             owner_->incref_weak();
         }
@@ -199,38 +196,38 @@ public:
 
     /**
      * @brief 移动赋值运算符
-     * @param wp 要移动的弱指针
+     * @param other 要移动的弱指针
      * @return 当前弱指针的引用
      */
-    weak_ptr& operator=(weak_ptr&& wp) noexcept {
-        if (_NEFORCE addressof(wp) == this) {
+    weak_ptr& operator=(weak_ptr&& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
             return *this;
         }
         if (owner_) {
             owner_->decref_weak();
         }
-        ptr_ = wp.ptr_;
-        owner_ = wp.owner_;
-        wp.ptr_ = nullptr;
-        wp.owner_ = nullptr;
+        ptr_ = other.ptr_;
+        owner_ = other.owner_;
+        other.ptr_ = nullptr;
+        other.owner_ = nullptr;
         return *this;
     }
 
     /**
      * @brief 类型转换移动赋值运算符
      * @tparam U 可转换为T*的类型
-     * @param wp 要移动的弱指针
+     * @param other 要移动的弱指针
      * @return 当前弱指针的引用
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    weak_ptr& operator=(weak_ptr<U>&& wp) noexcept {
+    weak_ptr& operator=(weak_ptr<U>&& other) noexcept {
         if (owner_) {
             owner_->decref_weak();
         }
-        ptr_ = wp.ptr_;
-        owner_ = wp.owner_;
-        wp.ptr_ = nullptr;
-        wp.owner_ = nullptr;
+        ptr_ = other.ptr_;
+        owner_ = other.owner_;
+        other.ptr_ = nullptr;
+        other.owner_ = nullptr;
         return *this;
     }
 
@@ -249,14 +246,14 @@ public:
 
     /**
      * @brief 交换两个弱指针
-     * @param wp 要交换的弱指针
+     * @param other 要交换的弱指针
      */
-    void swap(weak_ptr& wp) noexcept {
-        if (_NEFORCE addressof(wp) == this) {
+    void swap(weak_ptr& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
             return;
         }
-        _NEFORCE swap(ptr_, wp.ptr_);
-        _NEFORCE swap(owner_, wp.owner_);
+        _NEFORCE swap(ptr_, other.ptr_);
+        _NEFORCE swap(owner_, other.owner_);
     }
 
     /**

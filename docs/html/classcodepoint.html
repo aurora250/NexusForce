@@ -126,6 +126,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a81017f2d4c6b74945efef889037ccc21"><td class="mdescLeft">&#160;</td><td class="mdescRight">UTF-16编码后的码元数  <br /></td></tr>
 <tr class="memitem:ad5ec860f3407adf538aac80106f4a13b" id="r_ad5ec860f3407adf538aac80106f4a13b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad5ec860f3407adf538aac80106f4a13b">append_to</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;result) const</td></tr>
 <tr class="memdesc:ad5ec860f3407adf538aac80106f4a13b"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加UTF-8编码到string  <br /></td></tr>
+<tr class="memitem:a7314fbb0bd0caf0852ff3b434d4bc6a5" id="r_a7314fbb0bd0caf0852ff3b434d4bc6a5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7314fbb0bd0caf0852ff3b434d4bc6a5">append_to</a> (<a class="el" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> &amp;result) const</td></tr>
+<tr class="memdesc:a7314fbb0bd0caf0852ff3b434d4bc6a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加UTF-8编码到u8string  <br /></td></tr>
 <tr class="memitem:aec04440229dbf33585649a017be1dae9" id="r_aec04440229dbf33585649a017be1dae9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aec04440229dbf33585649a017be1dae9">append_to</a> (<a class="el" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> &amp;result) const</td></tr>
 <tr class="memdesc:aec04440229dbf33585649a017be1dae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加UTF-16编码到u16string  <br /></td></tr>
 <tr class="memitem:ae92078f825d07e7989a9350cf3251321" id="r_ae92078f825d07e7989a9350cf3251321"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae92078f825d07e7989a9350cf3251321">append_to</a> (<a class="el" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> &amp;result) const</td></tr>
@@ -168,7 +170,7 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 <div class="textblock"><p>Unicode码点包装类 </p>
 <p>封装一个经过验证的Unicode码点（U+0000 ~ U+10FFFF，排除代理项）。 非法值在构造时自动替换为U+FFFD（替换字符）。 提供UTF-8、UTF-16、UTF-32之间的转换功能。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00032">32</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00126">126</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a930add221646e2ffc4cfc77b55512587" name="a930add221646e2ffc4cfc77b55512587"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a930add221646e2ffc4cfc77b55512587">&#9670;&#160;</a></span>codepoint() <span class="overload">[1/3]</span></h2>
@@ -196,9 +198,9 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 <p>默认构造函数 </p>
 <p>构造空字符U+0000 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00199">199</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00293">293</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a7d9fdbda25dae744df0fac4b49444e66">append_to()</a>, <a class="el" href="codepoint_8hpp_source.html#l00215">codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00069">combine_surrogates()</a>, <a class="el" href="codepoint_8hpp_source.html#l00132">decode_utf16()</a>, <a class="el" href="#adf083ce51482394f0364326c9a85b4d7">decode_utf8()</a>, <a class="el" href="codepoint_8hpp_source.html#l00150">from_utf32()</a>, <a class="el" href="codepoint_8hpp_source.html#l00105">null()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00095">replacement()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a7d9fdbda25dae744df0fac4b49444e66">append_to()</a>, <a class="el" href="codepoint_8hpp_source.html#l00309">codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00163">combine_surrogates()</a>, <a class="el" href="codepoint_8hpp_source.html#l00226">decode_utf16()</a>, <a class="el" href="#adf083ce51482394f0364326c9a85b4d7">decode_utf8()</a>, <a class="el" href="codepoint_8hpp_source.html#l00244">from_utf32()</a>, <a class="el" href="codepoint_8hpp_source.html#l00199">null()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00189">replacement()</a>.</p>
 
 </div>
 </div>
@@ -234,9 +236,9 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 </dl>
 <p>如果值非法，自动替换为U+FFFD。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00208">208</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00302">302</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00085">is_valid_codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00035">REPLACEMENT_VALUE</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00227">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00179">is_valid_codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00129">REPLACEMENT_VALUE</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00321">value()</a>.</p>
 
 </div>
 </div>
@@ -271,15 +273,15 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00215">215</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00309">309</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00227">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00321">value()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="ad5ec860f3407adf538aac80106f4a13b" name="ad5ec860f3407adf538aac80106f4a13b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5ec860f3407adf538aac80106f4a13b">&#9670;&#160;</a></span>append_to() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ec860f3407adf538aac80106f4a13b">&#9670;&#160;</a></span>append_to() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,14 +304,12 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 </dl>
 <p>将码点以UTF-8编码追加到string中。 </p>
 
-<p class="reference">引用了 <a class="el" href="#ad5ec860f3407adf538aac80106f4a13b">append_to()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#ad5ec860f3407adf538aac80106f4a13b">append_to()</a>, <a class="el" href="utf_8hpp_source.html#l00497">u16character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00657">u32character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00340">u8character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00191">wcharacter::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00108">character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00567">u16character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00709">u32character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00391">u8character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00248">wcharacter::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00130">character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00595">u16character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00413">u8character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00273">wcharacter::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00085">character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00543">u16character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00691">u32character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00223">wcharacter::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00062">character::to_wstring()</a>, <a class="el" href="utf_8hpp_source.html#l00519">u16character::to_wstring()</a>, <a class="el" href="utf_8hpp_source.html#l00673">u32character::to_wstring()</a> , 以及 <a class="el" href="utf_8hpp_source.html#l00362">u8character::to_wstring()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="utf_8hpp_source.html#l00497">u16character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00657">u32character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00340">u8character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00191">wcharacter::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00108">character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00567">u16character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00709">u32character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00391">u8character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00248">wcharacter::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00130">character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00595">u16character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00413">u8character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00273">wcharacter::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00085">character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00543">u16character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00691">u32character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00223">wcharacter::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00062">character::to_wstring()</a>, <a class="el" href="utf_8hpp_source.html#l00519">u16character::to_wstring()</a>, <a class="el" href="utf_8hpp_source.html#l00673">u32character::to_wstring()</a> , 以及 <a class="el" href="utf_8hpp_source.html#l00362">u8character::to_wstring()</a>.</p>
 
 </div>
 </div>
 <a id="aec04440229dbf33585649a017be1dae9" name="aec04440229dbf33585649a017be1dae9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec04440229dbf33585649a017be1dae9">&#9670;&#160;</a></span>append_to() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aec04440229dbf33585649a017be1dae9">&#9670;&#160;</a></span>append_to() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,7 +335,7 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 </div>
 </div>
 <a id="ae92078f825d07e7989a9350cf3251321" name="ae92078f825d07e7989a9350cf3251321"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae92078f825d07e7989a9350cf3251321">&#9670;&#160;</a></span>append_to() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae92078f825d07e7989a9350cf3251321">&#9670;&#160;</a></span>append_to() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,14 +366,40 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 </dl>
 <p>将码点直接追加到u32string中（一个码元）。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00329">329</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00423">423</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="basic__string_8hpp_source.html#l01531">basic_string&lt; CharT, Traits, Alloc &gt;::push_back()</a>.</p>
 
 </div>
 </div>
+<a id="a7314fbb0bd0caf0852ff3b434d4bc6a5" name="a7314fbb0bd0caf0852ff3b434d4bc6a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7314fbb0bd0caf0852ff3b434d4bc6a5">&#9670;&#160;</a></span>append_to() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void codepoint::append_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>追加UTF-8编码到u8string </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>目标UTF-8字符串</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将码点以UTF-8编码追加到u8string中。 </p>
+
+</div>
+</div>
 <a id="a7d9fdbda25dae744df0fac4b49444e66" name="a7d9fdbda25dae744df0fac4b49444e66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d9fdbda25dae744df0fac4b49444e66">&#9670;&#160;</a></span>append_to() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d9fdbda25dae744df0fac4b49444e66">&#9670;&#160;</a></span>append_to() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +421,7 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a>.</p>
 
 </div>
 </div>
@@ -437,9 +463,9 @@ static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b
 <dl class="section return"><dt>返回</dt><dd>组合后的Unicode码点</dd></dl>
 <p>根据UTF-16编码规则将两个代理项组合为完整的码点。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00069">69</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00163">163</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a>.</p>
 
 </div>
 </div>
@@ -501,9 +527,9 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>解码结果，失败时返回替换符</dd></dl>
 <p>支持单码元和代理对解码，自动处理字节序转换。 无效序列返回替换符。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00132">132</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00226">226</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a>, <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00095">replacement()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a>, <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00189">replacement()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="utf_8hpp_source.html#l00497">u16character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00191">wcharacter::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00567">u16character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00595">u16character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00273">wcharacter::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00543">u16character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00223">wcharacter::to_u8string()</a> , 以及 <a class="el" href="utf_8hpp_source.html#l00519">u16character::to_wstring()</a>.</p>
 
@@ -553,7 +579,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>解码结果，失败时返回替换符</dd></dl>
 <p>支持1-4字节的UTF-8序列，自动验证序列的有效性。 无效序列或截断序列返回替换符。 </p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="utf_8hpp_source.html#l00340">u8character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00108">character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00391">u8character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00130">character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00413">u8character::to_u32string()</a>, <a class="el" href="utf_8hpp_source.html#l00085">character::to_u8string()</a>, <a class="el" href="utf_8hpp_source.html#l00062">character::to_wstring()</a> , 以及 <a class="el" href="utf_8hpp_source.html#l00362">u8character::to_wstring()</a>.</p>
 
@@ -592,9 +618,9 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>码点对象</dd></dl>
 <p>UTF-32编码直接对应Unicode码点值。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00150">150</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00244">244</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00227">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00321">value()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="utf_8hpp_source.html#l00657">u32character::to_string()</a>, <a class="el" href="utf_8hpp_source.html#l00709">u32character::to_u16string()</a>, <a class="el" href="utf_8hpp_source.html#l00691">u32character::to_u8string()</a> , 以及 <a class="el" href="utf_8hpp_source.html#l00673">u32character::to_wstring()</a>.</p>
 
@@ -626,7 +652,7 @@ template&lt;typename T&gt; </div>
 <p>是否为ASCII字符（U+0000 ~ U+007F） </p>
 <dl class="section return"><dt>返回</dt><dd>是ASCII字符返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00245">245</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00339">339</a> 行定义.</p>
 
 </div>
 </div>
@@ -656,7 +682,7 @@ template&lt;typename T&gt; </div>
 <p>是否位于基本多文种平面（BMP, U+0000 ~ U+FFFF） </p>
 <dl class="section return"><dt>返回</dt><dd>在BMP内返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00251">251</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00345">345</a> 行定义.</p>
 
 </div>
 </div>
@@ -693,9 +719,9 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果字符是高代理项则返回true，否则返回false</dd></dl>
 <p>高代理项的范围是0xD800-0xDBFF。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00046">46</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00140">140</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00085">is_valid_codepoint()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00179">is_valid_codepoint()</a>.</p>
 
 </div>
 </div>
@@ -732,9 +758,9 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果字符是低代理项则返回true，否则返回false</dd></dl>
 <p>低代理项的范围是0xDC00-0xDFFF。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00057">57</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00151">151</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00085">is_valid_codepoint()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00179">is_valid_codepoint()</a>.</p>
 
 </div>
 </div>
@@ -764,9 +790,9 @@ template&lt;typename T&gt; </div>
 <p>是否为替换符U+FFFD </p>
 <dl class="section return"><dt>返回</dt><dd>是替换符返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00239">239</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00333">333</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00035">REPLACEMENT_VALUE</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00129">REPLACEMENT_VALUE</a>.</p>
 
 </div>
 </div>
@@ -796,11 +822,11 @@ template&lt;typename T&gt; </div>
 <p>是否为辅助平面字符（需要UTF-16代理对） </p>
 <dl class="section return"><dt>返回</dt><dd>是辅助平面字符返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00257">257</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00351">351</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00037">MAX_VALUE</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00131">MAX_VALUE</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00263">needs_surrogate_pair()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00294">utf16_length()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00357">needs_surrogate_pair()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00388">utf16_length()</a>.</p>
 
 </div>
 </div>
@@ -841,11 +867,11 @@ template&lt;typename T&gt; </div>
 <li>不是低代理项（0xDC00-0xDFFF） </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00085">85</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00179">179</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00046">is_high_surrogate()</a>, <a class="el" href="codepoint_8hpp_source.html#l00057">is_low_surrogate()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00037">MAX_VALUE</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00140">is_high_surrogate()</a>, <a class="el" href="codepoint_8hpp_source.html#l00151">is_low_surrogate()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00131">MAX_VALUE</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00208">codepoint()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00302">codepoint()</a>.</p>
 
 </div>
 </div>
@@ -875,9 +901,9 @@ template&lt;typename T&gt; </div>
 <p>是否需要UTF-16代理对表示 </p>
 <dl class="section return"><dt>返回</dt><dd>需要代理对返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00263">263</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00357">357</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00257">is_supplementary()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00351">is_supplementary()</a>.</p>
 
 </div>
 </div>
@@ -907,9 +933,9 @@ template&lt;typename T&gt; </div>
 <p>构造空字符U+0000 </p>
 <dl class="section return"><dt>返回</dt><dd>空字符码点对象 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00105">105</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00199">199</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a>.</p>
 
 </div>
 </div>
@@ -940,11 +966,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>替换符码点对象</dd></dl>
 <p>用于表示无效或无法表示的Unicode字符。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00095">95</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00189">189</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00199">codepoint()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00035">REPLACEMENT_VALUE</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00293">codepoint()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00129">REPLACEMENT_VALUE</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00132">decode_utf16()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00226">decode_utf16()</a>.</p>
 
 </div>
 </div>
@@ -974,7 +1000,7 @@ template&lt;typename T&gt; </div>
 <p>获取码点的char32_t值 </p>
 <dl class="section return"><dt>返回</dt><dd>UTF-32字符 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00327">327</a> 行定义.</p>
 
 </div>
 </div>
@@ -1005,9 +1031,9 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>码元数（1~2）</dd></dl>
 <p>BMP字符需要1个码元，辅助平面字符需要2个码元（代理对）。 </p>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00294">294</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00388">388</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00257">is_supplementary()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00351">is_supplementary()</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1069,7 @@ template&lt;typename T&gt; </div>
 <li>U+10000 ~ U+10FFFF: 4字节 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00275">275</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00369">369</a> 行定义.</p>
 
 </div>
 </div>
@@ -1073,11 +1099,11 @@ template&lt;typename T&gt; </div>
 <p>获取码点的uint32_t值 </p>
 <dl class="section return"><dt>返回</dt><dd>码点数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00227">227</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 第 <a class="el" href="codepoint_8hpp_source.html#l00321">321</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00227">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="codepoint_8hpp_source.html#l00321">value()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00215">codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00208">codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00150">from_utf32()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00227">value()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="codepoint_8hpp_source.html#l00309">codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00302">codepoint()</a>, <a class="el" href="codepoint_8hpp_source.html#l00244">from_utf32()</a> , 以及 <a class="el" href="codepoint_8hpp_source.html#l00321">value()</a>.</p>
 
 </div>
 </div>

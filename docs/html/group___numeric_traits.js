@@ -14,6 +14,7 @@ var group___numeric_traits =
     [ "numeric_traits&lt; uint32_t &gt;", "classnumeric__traits_3_01uint32__t_01_4.html", null ],
     [ "numeric_traits&lt; uint64_t &gt;", "classnumeric__traits_3_01uint64__t_01_4.html", null ],
     [ "numeric_traits&lt; char &gt;", "classnumeric__traits_3_01char_01_4.html", null ],
+    [ "numeric_traits&lt; char8_t &gt;", "classnumeric__traits_3_01char8__t_01_4.html", null ],
     [ "numeric_traits&lt; char16_t &gt;", "classnumeric__traits_3_01char16__t_01_4.html", null ],
     [ "numeric_traits&lt; char32_t &gt;", "classnumeric__traits_3_01char32__t_01_4.html", null ],
     [ "numeric_traits&lt; float32_t &gt;", "classnumeric__traits_3_01float32__t_01_4.html", null ],

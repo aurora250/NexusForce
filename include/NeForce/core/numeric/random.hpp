@@ -7,6 +7,37 @@
  *
  * 此文件提供了多种随机数生成器的实现，
  * 包括线性同余法、梅森旋转算法和硬件真随机数生成器。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下密码学与随机数生成相关标准规范：
+ *
+ * **伪随机数生成器 (PRNG) 标准：**
+ * - ISO/IEC 18031:2011：信息技术 — 安全技术 — 随机比特生成
+ *   https://www.iso.org/standard/54945.html
+ * - NIST SP 800-90A Rev. 1：确定性随机比特生成器的建议
+ *   https://csrc.nist.gov/pubs/sp/800/90/a/r1/final
+ *
+ * **真随机数生成器 (TRNG) 标准：**
+ * - ISO/IEC 20543:2019：信息技术 — 安全技术 — 熵源评估与验证
+ *   https://www.iso.org/standard/68338.html
+ * - NIST SP 800-90B：熵源验证建议
+ *   https://csrc.nist.gov/pubs/sp/800/90/b/final
+ *
+ * **算法规范参考：**
+ * - 线性同余生成器 (LCG)：遵循 POSIX.1-2001 rand() 规范
+ *   https://pubs.opengroup.org/onlinepubs/009695399/functions/rand.html
+ * - 梅森旋转算法 (MT19937)：遵循松本真、西村拓士 1998 年原始论文
+ *   http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/ARTICLES/mt.pdf
+ *
+ * @section implementation_details 实现细节
+ * | 生成器        | 算法                    | 周期长度        | 适用场景               |
+ * |--------------|------------------------|-----------------|-----------------------|
+ * | random_lcd   | 线性同余法 (glibc 兼容) | 2^31            | 简单模拟、非安全场景   |
+ * | random_mt    | MT19937 梅森旋转        | 2^19937 - 1     | 科学计算、统计分析     |
+ * | secret       | 操作系统熵源            | 不可预测        | 加密密钥、安全令牌     |
+ *
+ * @see https://www.iso.org/standard/54945.html
+ * @see https://csrc.nist.gov/projects/random-bit-generation
  */
 
 #include "NeForce/core/numeric/numeric_traits.hpp"

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
-  ['缓存_1',['缓存',['../group___cache.html',1,'']]]
+  ['索引元组_0',['索引元组',['../group___index_tuple.html',1,'']]]
 ];

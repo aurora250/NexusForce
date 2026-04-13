@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['终止处理_0',['终止处理',['../group___termination_functions.html',1,'']]]
+  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
 ];

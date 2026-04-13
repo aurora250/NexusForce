@@ -7,10 +7,10 @@ var classregex__token__iterator =
       [ "END", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6ab1a326c06d88bf042f73d70f50197905", null ]
     ] ],
     [ "regex_token_iterator", "classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198", null ],
-    [ "regex_token_iterator", "classregex__token__iterator.html#aa0f0f5820cff16647bd444e0cf06e7a2", null ],
+    [ "regex_token_iterator", "classregex__token__iterator.html#a4f8db9feb800354529f9597f01dd4a7e", null ],
     [ "operator!=", "classregex__token__iterator.html#a8dddcc464a56a29889e7bcdb1bd499ad", null ],
     [ "operator*", "classregex__token__iterator.html#a964a698e7c2e358b9b056f4f0576eb8f", null ],
-    [ "operator++", "classregex__token__iterator.html#a87504a82fcf1aa56574ac8919c0935c9", null ],
-    [ "operator++", "classregex__token__iterator.html#a2882fa2cf7e59b947fe5c7a06bb64096", null ],
+    [ "operator++", "classregex__token__iterator.html#a6a5fec20ca17992fbde8263bc9f913db", null ],
+    [ "operator++", "classregex__token__iterator.html#a3dc0675644637602c33ed0fb022c6ec4", null ],
     [ "operator==", "classregex__token__iterator.html#adaaf7a55f8eccce1532148a1e8e09a55", null ]
 ];

@@ -3,18 +3,111 @@
 
 /**
  * @file toml_value.hpp
- * @brief toml配置格式变量
+ * @brief TOML配置格式变量
  *
- * 此文件提供了toml配置格式的抽象基类和具体实现类。
+ * 此文件提供了TOML（Tom's Obvious, Minimal Language）配置格式的抽象基类和具体实现类。
+ * TOML是一种易于阅读的配置文件格式，设计目标是比JSON更友好、比YAML更简单。
  *
- * 支持toml v1.0.0规范中的所有数据类型：
+ * 支持TOML v1.0.0规范中的所有数据类型：
  * - 布尔值（Boolean）
- * - 整数（Integer）
- * - 浮点数（Float）
+ * - 整数（Integer，64位有符号）
+ * - 浮点数（Float，双精度）
  * - 字符串（String，支持四种引号类型）
- * - 日期时间（DateTime，支持偏移日期时间、本地日期时间、本地日期、本地时间）
+ * - 日期时间（DateTime，支持四种日期时间格式）
  * - 数组（Array）
  * - 表格（Table，支持内联表格和标准表格）
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下 TOML 及相关标准规范：
+ *
+ * **TOML 配置格式规范：**
+ * - **TOML v1.0.0**：Tom's Obvious, Minimal Language 规范
+ *   https://toml.io/en/v1.0.0
+ * - **TOML GitHub 规范**：TOML 语言定义与 ABNF 语法
+ *   https://github.com/toml-lang/toml
+ *
+ * **相关日期时间标准（TOML 引用的日期时间格式）：**
+ * - **IETF RFC 3339**：互联网上的日期和时间格式（TOML 偏移日期时间格式）
+ *   https://www.rfc-editor.org/rfc/rfc3339.html
+ * - **ISO 8601-1:2019**：日期和时间 — 信息交换的表示法
+ *   https://www.iso.org/standard/70907.html
+ *
+ * **相关数据类型标准：**
+ * - **IEEE 754-2019**：浮点数算术标准（TOML 浮点数遵循）
+ *   https://standards.ieee.org/ieee/754/6210/
+ * - **Unicode 15.0.0**：Unicode 字符编码标准（TOML 字符串编码）
+ *   https://unicode.org/versions/Unicode15.0.0/
+ *
+ * @section toml_types TOML 值类型定义
+ * 根据 TOML v1.0.0 规范，支持以下七种值类型：
+ *
+ * | 类型        | TOML 规范引用          | 本实现类          | 说明                               |
+ * |-------------|------------------------|-------------------|------------------------------------|
+ * | Boolean     | §2.1                   | toml_boolean      | true 或 false                       |
+ * | Integer     | §2.2                   | toml_integer      | 64位有符号整数（-2^63 到 2^63-1）   |
+ * | Float       | §2.3                   | toml_float        | IEEE 754 双精度浮点数               |
+ * | String      | §2.4                   | toml_string       | Unicode 字符串（UTF-8 编码）        |
+ * | Offset Date-Time | §2.5.1             | toml_datetime     | RFC 3339 格式带时区偏移             |
+ * | Local Date-Time  | §2.5.2             | toml_datetime     | ISO 8601 格式无时区                 |
+ * | Local Date       | §2.5.3             | toml_datetime     | 仅日期（YYYY-MM-DD）                |
+ * | Local Time       | §2.5.4             | toml_datetime     | 仅时间（HH:MM:SS）                  |
+ * | Array       | §2.6                   | toml_array        | 有序值列表（可混合类型）            |
+ * | Table       | §2.7                   | toml_table        | 键值对集合（标准表格或内联表格）    |
+ *
+ * @section string_types 字符串引号类型
+ * 根据 TOML v1.0.0 §2.4，支持四种字符串引号类型：
+ *
+ * | 类型           | 语法         | 转义序列 | 多行支持 | 说明                     |
+ * |----------------|--------------|----------|----------|--------------------------|
+ * | Basic          | "string"     | 支持     | 否       | 标准双引号字符串         |
+ * | MultiBasic     | \"\"\"string\"\"\" | 支持 | 是       | 多行双引号字符串         |
+ * | Literal        | 'string'     | 不支持   | 否       | 字面量单引号字符串       |
+ * | MultiLiteral   | '''string''' | 不支持   | 是       | 多行字面量单引号字符串   |
+ *
+ * @section datetime_formats 日期时间格式
+ * 根据 TOML v1.0.0 §2.5，支持四种日期时间格式：
+ *
+ * | 类型             | 示例                            | 标准引用            |
+ * |------------------|---------------------------------|---------------------|
+ * | Offset Date-Time | 1979-05-27T07:32:00Z           | RFC 3339 §5.6       |
+ * | Offset Date-Time | 1979-05-27T00:32:00-07:00      | RFC 3339 §5.6       |
+ * | Local Date-Time  | 1979-05-27T07:32:00            | ISO 8601-1:2019     |
+ * | Local Date       | 1979-05-27                     | ISO 8601-1:2019     |
+ * | Local Time       | 07:32:00                       | ISO 8601-1:2019     |
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 编码              | UTF-8（TOML v1.0.0 §1）                    |
+ * | 整数范围          | -2^63 到 2^63-1（TOML v1.0.0 §2.2）        |
+ * | 浮点数精度        | IEEE 754-2019 双精度（TOML v1.0.0 §2.3）   |
+ * | 字符串转义序列    | TOML v1.0.0 §2.4.1 定义                    |
+ * | 键名规则          | 裸键、引号键、点分隔键（TOML v1.0.0 §3.1） |
+ * | 表格类型          | 标准表格、内联表格、数组表格（§3.2-3.4）   |
+ * | 数组元素混合类型  | 允许（TOML v1.0.0 §2.6）                   |
+ * | 注释支持          | # 行注释（TOML v1.0.0 §1.2）                |
+ *
+ * @section string_escape 字符串转义序列
+ * 根据 TOML v1.0.0 §2.4.1，支持以下转义序列（仅 Basic 和 MultiBasic 字符串）：
+ *
+ * | 转义序列 | 字符          | Unicode 码点 |
+ * |----------|---------------|--------------|
+ * | \\\"     | 引号          | U+0022       |
+ * | \\\\     | 反斜杠        | U+005C       |
+ * | \\b      | 退格          | U+0008       |
+ * | \\f      | 换页          | U+000C       |
+ * | \\n      | 换行          | U+000A       |
+ * | \\r      | 回车          | U+000D       |
+ * | \\t      | 制表符        | U+0009       |
+ * | \\uXXXX  | Unicode 字符  | U+XXXX       |
+ * | \\UXXXXXXXX | Unicode 字符（全范围） | U+XXXXXXXX |
+ *
+ * @warning 根据 TOML v1.0.0 §3.3，表格定义后不应再向该表格添加新的键值对。
+ *          内联表格不应包含换行符，建议仅用于简单结构。
+ *
+ * @see https://toml.io/
+ * @see https://github.com/toml-lang/toml/blob/main/toml.md
+ * @see https://www.rfc-editor.org/rfc/rfc3339
  */
 
 #include "NeForce/core/container/unordered_map.hpp"

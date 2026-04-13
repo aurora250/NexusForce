@@ -103,8 +103,8 @@ $(function(){initNavTree('group___shared_pointer.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:enable_5Fshared_5Ffrom_5Fthis_3C_20T_20_3E" id="r_enable_5Fshared_5Ffrom_5Fthis_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structenable__shared__from__this.html">enable_shared_from_this&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">启用从this创建共享指针的基类  <a href="structenable__shared__from__this.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:enable_5Fshared_5Ffrom_3C_20T_20_3E" id="r_enable_5Fshared_5Ffrom_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structenable__shared__from.html">enable_shared_from&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">启用从this创建共享指针的基类  <a href="structenable__shared__from.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:shared_5Fptr_3C_20T_20_3E" id="r_shared_5Fptr_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classshared__ptr.html">shared_ptr&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">共享智能指针类模板  <a href="classshared__ptr.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:weak_5Fptr_3C_20T_20_3E" id="r_weak_5Fptr_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classweak__ptr.html">weak_ptr&lt; T &gt;</a></td></tr>
@@ -141,13 +141,13 @@ template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:gaadfe7276368eec5fd9dd7143040e1e05 template"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; U &gt; &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:gaadfe7276368eec5fd9dd7143040e1e05"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于等于比较运算符 <br /></td></tr>
 <tr class="memitem:gab47fa86d2917e14f57f68dfa9e83495e" id="r_gab47fa86d2917e14f57f68dfa9e83495e"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:gab47fa86d2917e14f57f68dfa9e83495e template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gab47fa86d2917e14f57f68dfa9e83495e">make_shared</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memitem:gab47fa86d2917e14f57f68dfa9e83495e template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___base_type_qualifier_check.html#ga5c4bd9266e99bedba2e77f755b5d36a0">is_unbounded_array_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gab47fa86d2917e14f57f68dfa9e83495e">make_shared</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:gab47fa86d2917e14f57f68dfa9e83495e"><td class="mdescLeft">&#160;</td><td class="mdescRight">融合分配创建共享指针  <br /></td></tr>
 <tr class="memitem:ga1caeb7d9a2a15936a6bfa478a70f937e" id="r_ga1caeb7d9a2a15936a6bfa478a70f937e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga1caeb7d9a2a15936a6bfa478a70f937e template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_unbounded_array_v&lt; T &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga1caeb7d9a2a15936a6bfa478a70f937e">make_shared</a> (const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len)</td></tr>
+<tr class="memitem:ga1caeb7d9a2a15936a6bfa478a70f937e template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga5c4bd9266e99bedba2e77f755b5d36a0">is_unbounded_array_v</a>&lt; T &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga1caeb7d9a2a15936a6bfa478a70f937e">make_shared</a> (const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len)</td></tr>
 <tr class="memdesc:ga1caeb7d9a2a15936a6bfa478a70f937e"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建动态数组的共享指针  <br /></td></tr>
 <tr class="memitem:gac6d23654fe34f82cb9ce90e5402945c2" id="r_gac6d23654fe34f82cb9ce90e5402945c2"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Alloc, typename... Args&gt; </td></tr>
-<tr class="memitem:gac6d23654fe34f82cb9ce90e5402945c2 template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!is_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac6d23654fe34f82cb9ce90e5402945c2">allocate_shared</a> (Alloc &amp;alloc, Args &amp;&amp;... args)</td></tr>
+<tr class="memitem:gac6d23654fe34f82cb9ce90e5402945c2 template"><td class="memItemLeft"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___base_type_qualifier_check.html#gae7da5e2383c9a0d42663f07c873d8183">is_array_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac6d23654fe34f82cb9ce90e5402945c2">allocate_shared</a> (Alloc &amp;alloc, Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:gac6d23654fe34f82cb9ce90e5402945c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用分配器创建共享指针  <br /></td></tr>
 <tr class="memitem:gacb7f66310db0ae92421a868921f9dc83" id="r_gacb7f66310db0ae92421a868921f9dc83"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:gacb7f66310db0ae92421a868921f9dc83 template"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gacb7f66310db0ae92421a868921f9dc83">static_pointer_cast</a> (const <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; U &gt; &amp;ptr)</td></tr>
@@ -174,7 +174,7 @@ template&lt;typename T, typename U&gt; </td></tr>
 template&lt;typename T, typename Alloc, typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!is_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt; allocate_shared </td>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___base_type_qualifier_check.html#gae7da5e2383c9a0d42663f07c873d8183">is_array_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt; allocate_shared </td>
           <td>(</td>
           <td class="paramtype">Alloc &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span>, </td>
         </tr>
@@ -211,9 +211,9 @@ template&lt;typename T, typename Alloc, typename... Args&gt; </div>
 </dl>
 <p>使用自定义分配器分配控制块和对象的内存。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00851">851</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00853">853</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="allocator__traits_8hpp_source.html#l00179">allocator_traits&lt; Alloc &gt;::allocate()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00200">allocator_traits&lt; Alloc &gt;::construct()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00189">allocator_traits&lt; Alloc &gt;::deallocate()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00212">allocator_traits&lt; Alloc &gt;::destroy()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00154">max()</a>.</p>
+<p class="reference">引用了 <a class="el" href="allocator__traits_8hpp_source.html#l00179">allocator_traits&lt; Alloc &gt;::allocate()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00200">allocator_traits&lt; Alloc &gt;::construct()</a>, <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00189">allocator_traits&lt; Alloc &gt;::deallocate()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00212">allocator_traits&lt; Alloc &gt;::destroy()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="type__traits_8hpp_source.html#l02347">is_constructible_v</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00154">max()</a>.</p>
 
 </div>
 </div>
@@ -250,9 +250,9 @@ template&lt;typename T, typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>转换后的共享指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00914">914</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00916">916</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00577">shared_ptr&lt; T &gt;::get()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00579">shared_ptr&lt; T &gt;::get()</a>.</p>
 
 </div>
 </div>
@@ -289,9 +289,9 @@ template&lt;typename T, typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>转换后的共享指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00938">938</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00940">940</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00577">shared_ptr&lt; T &gt;::get()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00579">shared_ptr&lt; T &gt;::get()</a>.</p>
 
 </div>
 </div>
@@ -304,7 +304,7 @@ template&lt;typename T, typename U&gt; </div>
 template&lt;typename T, typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt; make_shared </td>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="group___base_type_qualifier_check.html#ga5c4bd9266e99bedba2e77f755b5d36a0">is_unbounded_array_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; T, Args... &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt; make_shared </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
           <td></td>
@@ -335,9 +335,9 @@ template&lt;typename T, typename... Args&gt; </div>
 </dl>
 <p>在单块内存中同时分配控制块和对象，提高内存局部性和性能。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00787">787</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00789">789</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="compare_8hpp_source.html#l00154">max()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00033">construct()</a>, <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>, <a class="el" href="type__traits_8hpp_source.html#l02347">is_constructible_v</a>, <a class="el" href="type__traits_8hpp_source.html#l02960">is_nothrow_destructible_v</a>, <a class="el" href="compare_8hpp_source.html#l00154">max()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="async_8hpp_source.html#l00037">async()</a>, <a class="el" href="signals_8hpp_source.html#l00077">connection::connection()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="path__tree_8hpp_source.html#l00211">path_tree::path_tree()</a>, <a class="el" href="promise_8hpp_source.html#l00064">promise&lt; Res &gt;::promise()</a>, <a class="el" href="promise_8hpp_source.html#l00177">promise&lt; Res &amp; &gt;::promise()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00281">promise&lt; void &gt;::promise()</a>.</p>
 
@@ -352,7 +352,7 @@ template&lt;typename T, typename... Args&gt; </div>
 template&lt;typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_unbounded_array_v&lt; T &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt; make_shared </td>
+          <td class="memname"><a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga5c4bd9266e99bedba2e77f755b5d36a0">is_unbounded_array_v</a>&lt; T &gt;, <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; T &gt; &gt; make_shared </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
           <td></td>
@@ -381,7 +381,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00825">825</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00827">827</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="breakpoint_8hpp_source.html#l00068">unreachable()</a>.</p>
 
@@ -420,9 +420,9 @@ template&lt;typename T, typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>转换后的共享指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00926">926</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00928">928</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00577">shared_ptr&lt; T &gt;::get()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00579">shared_ptr&lt; T &gt;::get()</a>.</p>
 
 </div>
 </div>
@@ -459,9 +459,9 @@ template&lt;typename T, typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>转换后的共享指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00902">902</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__ptr_8hpp_source.html">shared_ptr.hpp</a> 第 <a class="el" href="shared__ptr_8hpp_source.html#l00904">904</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00577">shared_ptr&lt; T &gt;::get()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00579">shared_ptr&lt; T &gt;::get()</a>.</p>
 
 </div>
 </div>

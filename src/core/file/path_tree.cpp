@@ -32,7 +32,7 @@ void path_tree::node::add_child(ptr child) {
     children_.push_back(_NEFORCE move(child));
 }
 
-bool path_tree::node::remove_child(const string_view name) {
+bool path_tree::node::remove_child(const string_view name) noexcept {
     for (auto it = children_.begin(); it != children_.end(); ++it) {
         if ((*it)->get_path().filename() == name) {
             children_.erase(it);
@@ -69,9 +69,9 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
-    WIN32_FIND_DATAA fdata;
+    ::WIN32_FIND_DATAA fdata;
     const path search_path = dir / "*";
-    const HANDLE hFind = ::FindFirstFileA(search_path.data(), &fdata);
+    const ::HANDLE hFind = ::FindFirstFileA(search_path.data(), &fdata);
     if (hFind == INVALID_HANDLE_VALUE) {
         return;
     }

@@ -114,8 +114,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a700d9f262f874c54517b8903fdb131a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符 <br /></td></tr>
 <tr class="memitem:a16c487e5806079fbfd62005d8bffe0e5" id="r_a16c487e5806079fbfd62005d8bffe0e5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a16c487e5806079fbfd62005d8bffe0e5">read</a> (void *buffer, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>) noexcept</td></tr>
 <tr class="memdesc:a16c487e5806079fbfd62005d8bffe0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">从管道读取数据  <br /></td></tr>
-<tr class="memitem:afc3e3f4c175b85ee36ebdafde21f95ca" id="r_afc3e3f4c175b85ee36ebdafde21f95ca"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#afc3e3f4c175b85ee36ebdafde21f95ca">read_available</a> () noexcept</td></tr>
-<tr class="memdesc:afc3e3f4c175b85ee36ebdafde21f95ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">从管道读取所有可用数据（非阻塞）  <br /></td></tr>
+<tr class="memitem:ab6f770ac312b5bcb647020d16cc56c9c" id="r_ab6f770ac312b5bcb647020d16cc56c9c"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab6f770ac312b5bcb647020d16cc56c9c">read_available</a> ()</td></tr>
+<tr class="memdesc:ab6f770ac312b5bcb647020d16cc56c9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">从管道读取所有可用数据（非阻塞）  <br /></td></tr>
 <tr class="memitem:a6834b8e2df04604f490e8eef1e63b148" id="r_a6834b8e2df04604f490e8eef1e63b148"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write</a> (const void *<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>) noexcept</td></tr>
 <tr class="memdesc:a6834b8e2df04604f490e8eef1e63b148"><td class="mdescLeft">&#160;</td><td class="mdescRight">向管道写入数据  <br /></td></tr>
 <tr class="memitem:aab7159a1c68f474b1fb785724954ed96" id="r_aab7159a1c68f474b1fb785724954ed96"><td class="memItemLeft"><a id="aab7159a1c68f474b1fb785724954ed96" name="aab7159a1c68f474b1fb785724954ed96"></a>
@@ -315,14 +315,11 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 
 </div>
 </div>
-<a id="afc3e3f4c175b85ee36ebdafde21f95ca" name="afc3e3f4c175b85ee36ebdafde21f95ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc3e3f4c175b85ee36ebdafde21f95ca">&#9670;&#160;</a></span>read_available()</h2>
+<a id="ab6f770ac312b5bcb647020d16cc56c9c" name="ab6f770ac312b5bcb647020d16cc56c9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6f770ac312b5bcb647020d16cc56c9c">&#9670;&#160;</a></span>read_available()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> pipe::read_available </td>
@@ -331,11 +328,6 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>从管道读取所有可用数据（非阻塞） </p>
@@ -380,9 +372,7 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 </dl>
 <dl class="section return"><dt>返回</dt><dd>实际写入的字节数，-1表示错误 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a> , 以及 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>

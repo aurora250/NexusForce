@@ -100,8 +100,8 @@ struct icharacter : ipackage<T, CharT> {
 /** @} */ // CRTPInterfaces
 
 /**
- * @defgroup ToString 转换字符串
- * @brief 各类型到字符串的转换函数
+ * @defgroup UTFConverts UTF转换
+ * @brief UTF字符串之间的转换功能
  * @{
  */
 
@@ -434,7 +434,7 @@ NEFORCE_CONSTEXPR20 u32string to_u32string<char32_t>(u32string&& x) {
     return _NEFORCE move(x);
 }
 
-/** @} */ // ToString
+/** @} */ // UTFConverts
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_INTERFACE_ICHARACTER_HPP__

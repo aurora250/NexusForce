@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['闩锁_0',['闩锁',['../group___latches.html',1,'']]]
+  ['终止处理_0',['终止处理',['../group___termination_functions.html',1,'']]]
 ];

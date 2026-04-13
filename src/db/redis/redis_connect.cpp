@@ -132,7 +132,7 @@ bool redis_connect::is_valid() const {
     if (!connected()) {
         return false;
     }
-    auto* const reply = execute_command("PING");
+    auto* const reply = execute_command("PING", {});
     if (reply == nullptr || reply->type != REDIS_REPLY_STATUS || string_compare(reply->str, "PONG") != 0) {
         if (reply != nullptr) {
             ::freeReplyObject(reply);

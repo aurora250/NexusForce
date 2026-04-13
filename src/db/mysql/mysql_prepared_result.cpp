@@ -3,7 +3,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    size_t get_buffer_size(const enum_field_types type) {
+    size_t get_buffer_size(const enum_field_types type) noexcept {
         switch (type) {
             case ::MYSQL_TYPE_TINY:
                 return 1;
@@ -48,12 +48,12 @@ namespace {
 mysql_prepared_result::mysql_prepared_result(::MYSQL_STMT* stmt) :
 stmt_(stmt) {
     if (stmt_ == nullptr) {
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Invalid MYSQL_STMT pointer"));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception("Invalid MYSQL_STMT pointer"));
     }
 
     metadata_ = ::mysql_stmt_result_metadata(stmt_);
     if (metadata_ == nullptr) {
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("No result metadata from prepared statement"));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception("No result metadata from prepared statement"));
     }
 
     column_count_ = ::mysql_num_fields(metadata_);
@@ -67,10 +67,10 @@ stmt_(stmt) {
     initialize_bindings();
 
     if (::mysql_stmt_bind_result(stmt_, bind_results_->data())) {
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception(mysql_stmt_error(stmt_)));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception(mysql_stmt_error(stmt_)));
     }
     if (::mysql_stmt_store_result(stmt_) != 0) {
-        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception(mysql_stmt_error(stmt_)));
+        NEFORCE_THROW_EXCEPTION(database_stmt_exception(mysql_stmt_error(stmt_)));
     }
 
     row_count_ = ::mysql_stmt_num_rows(stmt_);
@@ -90,7 +90,7 @@ void mysql_prepared_result::initialize_bindings() const {
     is_null_->resize(column_count_);
     is_error_->resize(column_count_);
 
-    const MYSQL_FIELD* fields = ::mysql_fetch_fields(metadata_);
+    const ::MYSQL_FIELD* fields = ::mysql_fetch_fields(metadata_);
 
     for (uint32_t i = 0; i < column_count_; ++i) {
         memory_zero(&(*bind_results_)[i]);

@@ -127,7 +127,7 @@ using&#160;</td><td class="memItemRight"><b>u32string_view</b> = <a class="el" h
 <tr class="memitem:ga9c1e1b92448d4a5d87c922c39b2b30a2 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9c1e1b92448d4a5d87c922c39b2b30a2">getline</a> (const <a class="el" href="classbasic__string__view.html">basic_string_view</a>&lt; CharT &gt; <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> &amp;pos, <a class="el" href="classbasic__string__view.html">basic_string_view</a>&lt; CharT &gt; &amp;str, CharT delim=static_cast&lt; CharT &gt;('\n'))</td></tr>
 <tr class="memdesc:ga9c1e1b92448d4a5d87c922c39b2b30a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">从字符串视图中按分隔符提取一行  <br /></td></tr>
 <tr class="memitem:gaa9e8a1cad4d3bcde8020e46ec3a16c39" id="r_gaa9e8a1cad4d3bcde8020e46ec3a16c39"><td class="memTemplParams" colspan="2">template&lt;typename CharT, typename Pred&gt; </td></tr>
-<tr class="memitem:gaa9e8a1cad4d3bcde8020e46ec3a16c39 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gaa9e8a1cad4d3bcde8020e46ec3a16c39">getline</a> (const <a class="el" href="classbasic__string__view.html">basic_string_view</a>&lt; CharT &gt; <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> &amp;pos, <a class="el" href="classbasic__string__view.html">basic_string_view</a>&lt; CharT &gt; &amp;str, Pred <a class="el" href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split</a>=[](const CharT ch) { return ch==static_cast&lt; CharT &gt;('\n');})</td></tr>
+<tr class="memitem:gaa9e8a1cad4d3bcde8020e46ec3a16c39 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gaa9e8a1cad4d3bcde8020e46ec3a16c39">getline</a> (const <a class="el" href="classbasic__string__view.html">basic_string_view</a>&lt; CharT &gt; <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> &amp;pos, <a class="el" href="classbasic__string__view.html">basic_string_view</a>&lt; CharT &gt; &amp;str, Pred split=[](const CharT ch) { return ch==static_cast&lt; CharT &gt;('\n');})</td></tr>
 <tr class="memdesc:gaa9e8a1cad4d3bcde8020e46ec3a16c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">从字符串视图中按谓词判断的分隔符提取一行  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
@@ -191,7 +191,7 @@ template&lt;typename CharT&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否成功提取到行（false表示已到达末尾） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="string__view_8hpp_source.html">string_view.hpp</a> 第 <a class="el" href="string__view_8hpp_source.html#l00107">107</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="string__view_8hpp_source.html">string_view.hpp</a> 第 <a class="el" href="string__view_8hpp_source.html#l00116">116</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00041">end()</a>.</p>
 
@@ -256,9 +256,9 @@ template&lt;typename CharT, typename Pred&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否成功提取到行（false表示已到达末尾）</dd></dl>
 <p>使用自定义谓词判断分隔符，可以处理复杂的行分割逻辑。 </p>
 
-<p class="definition">在文件 <a class="el" href="string__view_8hpp_source.html">string_view.hpp</a> 第 <a class="el" href="string__view_8hpp_source.html#l00139">139</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="string__view_8hpp_source.html">string_view.hpp</a> 第 <a class="el" href="string__view_8hpp_source.html#l00148">148</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,14 @@
 #ifndef NEFORCE_CORE_SYSTEM_CMDLINE_HPP__
 #define NEFORCE_CORE_SYSTEM_CMDLINE_HPP__
+
+/**
+ * @file cmdline.hpp
+ * @brief 命令行参数解析工具
+ *
+ * 本文件提供了 cmdline 类，用于解析符合 POSIX 风格和 GNU 风格扩展的命令行参数。
+ * 支持长选项（--option）、短选项（-o）、带值选项、多值选项、默认值、位置参数以及自动生成帮助信息。
+ */
+
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/string/string.hpp"

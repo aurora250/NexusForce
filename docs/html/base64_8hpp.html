@@ -100,7 +100,7 @@ $(function(){initNavTree('base64_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 base64.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="base64_8hpp__incl.svg" width="1807" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="base64_8hpp__incl.svg" width="1574" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="base64_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -127,7 +127,54 @@ base64.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>Base64编解码实现 </p>
-<p>此文件提供了Base64编码和解码功能的实现。 Base64用于将二进制数据转换为ASCII字符表示，常用于数据传输。 </p>
+<p>此文件提供了Base64编码和解码功能的实现，支持标准 Base64 和 URL 安全 Base64 两种变体。 Base64用于将二进制数据转换为ASCII字符表示，常用于电子邮件附件、JSON Web Token、 数据URI等场景的数据传输。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下互联网标准规范：</p>
+<p><b>标准 Base64 编码：</b></p><ul>
+<li>**IETF RFC 4648 Section 4**：Base 64 编码 <a href="https://www.rfc-editor.org/rfc/rfc4648.html#section-4">https://www.rfc-editor.org/rfc/rfc4648.html#section-4</a></li>
+</ul>
+<p><b>URL 安全 Base64 编码：</b></p><ul>
+<li>**IETF RFC 4648 Section 5**：Base 64 编码的 URL 和文件名安全字母表 <a href="https://www.rfc-editor.org/rfc/rfc4648.html#section-5">https://www.rfc-editor.org/rfc/rfc4648.html#section-5</a></li>
+</ul>
+<p><b>MIME Base64 规范（历史参考）：</b></p><ul>
+<li>**IETF RFC 2045 Section 6.8**：MIME Part One — Base64 内容传输编码 <a href="https://www.rfc-editor.org/rfc/rfc2045.html#section-6.8">https://www.rfc-editor.org/rfc/rfc2045.html#section-6.8</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="alphabet_comparison"></a>
+字符表对比</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">索引  </th><th class="markdownTableHeadNone">标准 Base64 (RFC 4648 §4)  </th><th class="markdownTableHeadNone">URL 安全 Base64 (RFC 4648 §5)  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0-25  </td><td class="markdownTableBodyNone">A-Z  </td><td class="markdownTableBodyNone">A-Z  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">26-51  </td><td class="markdownTableBodyNone">a-z  </td><td class="markdownTableBodyNone">a-z  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">52-61  </td><td class="markdownTableBodyNone">0-9  </td><td class="markdownTableBodyNone">0-9  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">62  </td><td class="markdownTableBodyNone">+  </td><td class="markdownTableBodyNone">- (连字符)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">63  </td><td class="markdownTableBodyNone">/  </td><td class="markdownTableBodyNone">_ (下划线)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">填充  </td><td class="markdownTableBodyNone">=  </td><td class="markdownTableBodyNone">= (可选)  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<ul>
+<li>**编码**：每 3 字节（24 位）输入编码为 4 个 Base64 字符输出</li>
+<li>**解码**：自动忽略空白字符（空格、制表符、换行符等）</li>
+<li>**填充处理**：严格遵循 RFC 4648 的填充规则<ul>
+<li>输入长度非 3 的倍数时，标准编码添加 <span class="tt">=</span> 填充至 4 的倍数</li>
+<li>URL 安全编码可选择省略填充符</li>
+</ul>
+</li>
+<li>**错误检测**：解码时检测非法字符和无效填充模式</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>解码时会自动忽略 RFC 4648 Section 3.2 中定义的空白字符： 空格 (SP)、制表符 (HT)、换行 (LF)、回车 (CR)、换页 (FF)、垂直制表 (VT)</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>标准 Base64 中的 <span class="tt">+</span> 和 <span class="tt">/</span> 字符在 URL 中有特殊含义， 在 URL 参数或文件名中使用时应使用 URL 安全版本。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://datatracker.ietf.org/doc/html/rfc4648">https://datatracker.ietf.org/doc/html/rfc4648</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Base64">https://en.wikipedia.org/wiki/Base64</a> </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="base64_8hpp_source.html">base64.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

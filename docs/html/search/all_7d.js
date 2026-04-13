@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['集合算法_0',['集合算法',['../group___set_algorithms.html',1,'']]]
+  ['编码规则_0',['UTF-8 编码规则',['../codepoint_8hpp.html#utf8_encoding',1,'']]],
+  ['编译器检测_1',['编译器检测',['../group___compiler_detection.html',1,'']]]
 ];

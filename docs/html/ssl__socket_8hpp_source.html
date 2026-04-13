@@ -94,8 +94,8 @@ $(function(){initNavTree('ssl__socket_8hpp_source.html','',''); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;NeForce/network/socket/tcp_socket.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;NeForce/network/ssl/ssl_stream.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;NeForce/network/tcp/tcp_socket.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="ssl__stream_8hpp.html">NeForce/network/ssl/ssl_stream.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span>NEFORCE_API ssl_socket final : <span class="keyword">public</span> tcp_socket {</div>
@@ -133,18 +133,19 @@ $(function(){initNavTree('ssl__socket_8hpp_source.html','',''); });
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SOCKET_HPP__</span></div>
-<div class="ttc" id="aclassoptional_html_a7cce9b645768dc9a9124ab67166f4480"><div class="ttname"><a href="classoptional.html#a7cce9b645768dc9a9124ab67166f4480">optional::has_value</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool has_value() const noexcept</div><div class="ttdoc">检查是否包含值</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00485">optional.hpp:485</a></div></div>
+<div class="ttc" id="aclassoptional_html_a7cce9b645768dc9a9124ab67166f4480"><div class="ttname"><a href="classoptional.html#a7cce9b645768dc9a9124ab67166f4480">optional::has_value</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool has_value() const noexcept</div><div class="ttdoc">检查是否包含值</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00488">optional.hpp:488</a></div></div>
 <div class="ttc" id="agroup___core_types_html_gae2333730750b4450551f71afd3bb2182"><div class="ttname"><a href="group___core_types.html#gae2333730750b4450551f71afd3bb2182">native_handle_type</a></div><div class="ttdeci">int native_handle_type</div><div class="ttdoc">系统句柄类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00055">types.hpp:55</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga2f30f05ade8bbe5bda5e59d2698af9f5"><div class="ttname"><a href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00170">types.hpp:170</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00313">shift.hpp:313</a></div></div>
 <div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="assl__stream_8hpp_html"><div class="ttname"><a href="ssl__stream_8hpp.html">ssl_stream.hpp</a></div><div class="ttdoc">SSL/TLS流封装</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>socket</b></li><li class="navelem"><b>ssl_socket.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>ssl</b></li><li class="navelem"><b>ssl_socket.hpp</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['非求值辅助工具_0',['非求值辅助工具',['../group___declval_tools.html',1,'']]]
+  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]]
 ];

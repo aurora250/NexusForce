@@ -18,6 +18,6 @@ var classjson__builder =
     [ "value", "classjson__builder.html#a16cb2e444deed3078fd29c5b5820a457", null ],
     [ "value", "classjson__builder.html#a08a2dee2721ab807b4b229ff236c0086", null ],
     [ "value", "classjson__builder.html#a70896afbe5b4768759a4d233eb2db145", null ],
-    [ "value_array", "classjson__builder.html#ac3efe9500c0e98d37e785e5c6b2b20d3", null ],
-    [ "value_object", "classjson__builder.html#a396e106b358d4647c47310e6668f6a58", null ]
+    [ "value_array", "classjson__builder.html#a690227c3d17d543dca45e275493b36fc", null ],
+    [ "value_object", "classjson__builder.html#aca7679a9dfe53b42792ec6ca136a5feb", null ]
 ];

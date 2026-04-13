@@ -127,7 +127,7 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a14032a2a28739c1d62fab87fa3bb8c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:a58633c699a1868922c36666a2f060473" id="r_a58633c699a1868922c36666a2f060473"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a58633c699a1868922c36666a2f060473">stack</a> (const Sequence &amp;seq)</td></tr>
 <tr class="memdesc:a58633c699a1868922c36666a2f060473"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，使用指定的底层容器副本  <br /></td></tr>
-<tr class="memitem:a7f9135bc4ce629829fab4cddf9ea8af5" id="r_a7f9135bc4ce629829fab4cddf9ea8af5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7f9135bc4ce629829fab4cddf9ea8af5">stack</a> (Sequence &amp;&amp;seq) noexcept(is_nothrow_move_constructible_v&lt; Sequence &gt;)</td></tr>
+<tr class="memitem:a7f9135bc4ce629829fab4cddf9ea8af5" id="r_a7f9135bc4ce629829fab4cddf9ea8af5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7f9135bc4ce629829fab4cddf9ea8af5">stack</a> (Sequence &amp;&amp;seq) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; Sequence &gt;)</td></tr>
 <tr class="memdesc:a7f9135bc4ce629829fab4cddf9ea8af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数，使用指定的底层容器  <br /></td></tr>
 <tr class="memitem:a87136fbbd42d0040be571bb86cbf2912" id="r_a87136fbbd42d0040be571bb86cbf2912"><td class="memItemLeft"><a id="a87136fbbd42d0040be571bb86cbf2912" name="a87136fbbd42d0040be571bb86cbf2912"></a>
 &#160;</td><td class="memItemRight"><b>~stack</b> ()=default</td></tr>
@@ -149,7 +149,7 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:acdb80edf321b2a992339a2347cb1d860"><td class="mdescLeft">&#160;</td><td class="mdescRight">压栈操作（移动版本）  <br /></td></tr>
 <tr class="memitem:abc8b1772549ac2de0233c82cbf96d12b" id="r_abc8b1772549ac2de0233c82cbf96d12b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abc8b1772549ac2de0233c82cbf96d12b">pop</a> () noexcept(noexcept(seq_.pop_back()))</td></tr>
 <tr class="memdesc:abc8b1772549ac2de0233c82cbf96d12b"><td class="mdescLeft">&#160;</td><td class="mdescRight">弹栈操作  <br /></td></tr>
-<tr class="memitem:aa044696ece684e671034971e462cba7d" id="r_aa044696ece684e671034971e462cba7d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa044696ece684e671034971e462cba7d">swap</a> (<a class="el" href="classstack.html">stack</a> &amp;other) noexcept(is_nothrow_swappable_v&lt; Sequence &gt;)</td></tr>
+<tr class="memitem:aa044696ece684e671034971e462cba7d" id="r_aa044696ece684e671034971e462cba7d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa044696ece684e671034971e462cba7d">swap</a> (<a class="el" href="classstack.html">stack</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; Sequence &gt;)</td></tr>
 <tr class="memdesc:aa044696ece684e671034971e462cba7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个栈的内容  <br /></td></tr>
 <tr class="memitem:a96b2661d17490e6f7742c03300174125" id="r_a96b2661d17490e6f7742c03300174125"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a96b2661d17490e6f7742c03300174125">operator==</a> (const <a class="el" href="classstack.html">stack</a> &amp;rhs) const noexcept(noexcept(seq_==rhs.seq_))</td></tr>
 <tr class="memdesc:a96b2661d17490e6f7742c03300174125"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
@@ -292,7 +292,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00068">68</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02835">is_nothrow_move_constructible_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -642,7 +642,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00138">138</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a14032a2a28739c1d62fab87fa3bb8c26">stack()</a> , 以及 <a class="el" href="stack_8hpp_source.html#l00138">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03945">is_nothrow_swappable_v</a>, <a class="el" href="#a14032a2a28739c1d62fab87fa3bb8c26">stack()</a> , 以及 <a class="el" href="stack_8hpp_source.html#l00138">swap()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00138">swap()</a>.</p>
 

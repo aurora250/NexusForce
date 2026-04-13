@@ -32,6 +32,13 @@ var group___tuple =
       [ "tuple", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a3d566a846202269fb58cefdce8f29fef", null ],
       [ "tuple", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a46f16f8547cd57ff0eaa28bfccae223c", null ],
       [ "equal_to", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a5d960beef25f9c8ef3c436ed18baa781", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#ad35acc656ff3865bc1562f71939b8e3f", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#aa69264836f92d23aed26e79d8b7f6e32", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a933fc19c7505bf14643ecce39611d041", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a5e89c48cd89c9a017e7944db5bfa44cd", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a633be9b06953115660abbca5f620e333", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#abf4df8230b41bd752c7f1ee26f4dc56d", null ],
+      [ "explicit", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#abf9912c8c5cc9d83c3e7c1bf75fe7ff6", null ],
       [ "get_rest", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#af34c941870d9dc6ddb8a5ec49c21b0a6", null ],
       [ "get_rest", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a9c50f285fd6f123942f22a4af83b1a7a", null ],
       [ "less_to", "structtuple_3_01_this_00_01_rest_8_8_8_01_4.html#a8420fc53cb4866a1d2741b14cd0b2803", null ],
@@ -63,6 +70,7 @@ var group___tuple =
     [ "make_tuple", "group___tuple.html#ga5ed4cb761dbf974f5a60b613fdebb1bf", null ],
     [ "tie", "group___tuple.html#gab54ee4c01a84cbd2aa161749ed2a04bc", null ],
     [ "tuple_cat", "group___tuple.html#ga9e6784003126d5f538ce419b9b2d9a14", null ],
+    [ "tuple_size_v", "group___tuple.html#ga91606fbeba25897597ab46313b6764d7", null ],
     [ "tuple_size_v< array< T, Size > >", "group___tuple.html#ga168cedcfbcb26262cf9bbb55780056b2", null ],
     [ "tuple_size_v< const array< T, Size > >", "group___tuple.html#ga8b08602bae05890a8ca5ae872ed78ed4", null ]
 ];

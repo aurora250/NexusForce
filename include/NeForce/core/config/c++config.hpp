@@ -31,11 +31,13 @@
  * - 必选依赖：
  *   - pcre2
  *   - OpenSSL
+ *   - GTest
  * - 可选依赖：
  *   - PostGreSQL
  *   - MySQL
  *   - SQLite3
  *   - hiredis
+ *   - lz4
  *   - zlib
  *
  * @section license 开源协议
@@ -483,16 +485,8 @@
 
 #    define NEFORCE_ALLOC_NODISCARD [[nodiscard("discard the return of allocators will cause memory leaks.")]]
 #else
-/**
- * @def NEFORCE_NODISCARD
- * @brief C++17之前的版本为空
- */
 #    define NEFORCE_NODISCARD
 
-/**
- * @def NEFORCE_ALLOC_NODISCARD
- * @brief C++17之前的版本为空
- */
 #    define NEFORCE_ALLOC_NODISCARD
 #endif
 
@@ -546,14 +540,10 @@
 
 #if !defined(NEFORCE_COMPILER_GNUC) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #    define NEFORCE_PURE_FUNCTION
-#    define NEFORCE_MALLOC_FUNCTION
 #    define NEFORCE_CONST_FUNCTION
-#    define NEFORCE_NOTNULL_FUNCTION(PARAMS)
 #else
 #    define NEFORCE_PURE_FUNCTION __attribute__((__pure__))
-#    define NEFORCE_MALLOC_FUNCTION __attribute__((__malloc__))
 #    define NEFORCE_CONST_FUNCTION __attribute__((__const__))
-#    define NEFORCE_NOTNULL_FUNCTION(PARAMS) __attribute__((__nonnull__ PARAMS))
 #endif
 
 

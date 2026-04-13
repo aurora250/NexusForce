@@ -89,7 +89,7 @@ $(function(){initNavTree('structidb__connect.html','','structidb__connect-member
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">idb_connect结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
+  <div class="headertitle"><div class="title">idb_connect结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database.html">数据库</a> &raquo; <a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,7 +100,7 @@ $(function(){initNavTree('structidb__connect.html','','structidb__connect-member
 <div class="dynheader">
 类 idb_connect 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__connect__inherit__graph.svg" width="256" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__connect__inherit__graph.svg" width="506" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -119,10 +119,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:affedca161dc65836d2ecd3ae76e9158d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接空闲时间  <br /></td></tr>
 <tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">连接管理</div></td></tr>
 <tr class="memitem:a7ae3001e8ef72724b952fac4ea66cde7" id="r_a7ae3001e8ef72724b952fac4ea66cde7"><td class="memItemLeft"><a id="a7ae3001e8ef72724b952fac4ea66cde7" name="a7ae3001e8ef72724b952fac4ea66cde7"></a>
-virtual bool&#160;</td><td class="memItemRight"><b>connect</b> (const db_config &amp;config)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight"><b>connect</b> (const <a class="el" href="structdb__config.html">db_config</a> &amp;config)=0</td></tr>
 <tr class="memdesc:a7ae3001e8ef72724b952fac4ea66cde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">建立连接 <br /></td></tr>
 <tr class="memitem:a5faaad097bbdc6d8e530eb9f3ec7af94" id="r_a5faaad097bbdc6d8e530eb9f3ec7af94"><td class="memItemLeft"><a id="a5faaad097bbdc6d8e530eb9f3ec7af94" name="a5faaad097bbdc6d8e530eb9f3ec7af94"></a>
-virtual bool&#160;</td><td class="memItemRight"><b>reconnect</b> (const db_config &amp;config)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight"><b>reconnect</b> (const <a class="el" href="structdb__config.html">db_config</a> &amp;config)=0</td></tr>
 <tr class="memdesc:a5faaad097bbdc6d8e530eb9f3ec7af94"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新连接 <br /></td></tr>
 <tr class="memitem:a689ce6c9a44cdc602e6006615e949e19" id="r_a689ce6c9a44cdc602e6006615e949e19"><td class="memItemLeft"><a id="a689ce6c9a44cdc602e6006615e949e19" name="a689ce6c9a44cdc602e6006615e949e19"></a>
 virtual void&#160;</td><td class="memItemRight"><b>close</b> ()=0</td></tr>
@@ -153,7 +153,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 <div class="textblock"><p>数据库连接抽象基类 </p>
 <p>提供连接管理、错误处理、存活检测等基础功能。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00184">184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00190">190</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="affedca161dc65836d2ecd3ae76e9158d" name="affedca161dc65836d2ecd3ae76e9158d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#affedca161dc65836d2ecd3ae76e9158d">&#9670;&#160;</a></span>get_alive()</h2>
@@ -181,7 +181,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 <p>获取连接空闲时间 </p>
 <dl class="section return"><dt>返回</dt><dd>自上次刷新以来的毫秒数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00245">245</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00251">251</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00144">time_cast()</a>.</p>
 
@@ -213,7 +213,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 <p>刷新连接存活时间 </p>
 <p>标记当前连接为活动状态，用于连接池空闲检测。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00239">239</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00245">245</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00144">time_cast()</a>.</p>
 
@@ -250,6 +250,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>执行成功返回true </dd></dl>
+
+<p>在 <a class="el" href="structmysql__connect.html#a775c5bcf3e396a32a59f7a867749fb20">mysql_connect</a>, <a class="el" href="classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0">pgsql_connect</a>, <a class="el" href="structredis__connect.html#ae1eeac414607310e4c1ce4ba0c01affb">redis_connect</a> , 以及 <a class="el" href="structsqlite__connect.html#a6658a0711918f65ddd98d8291881a7a2">sqlite_connect</a> 内被实现.</p>
 
 </div>
 </div>

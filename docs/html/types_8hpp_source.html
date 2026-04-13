@@ -293,8 +293,17 @@ $(function(){initNavTree('types_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span> <span class="comment">// ConstructionTags</span></div>
 <div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span> </div>
-<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_TYPEINFO_TYPES_HPP__</span></div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span><span class="keyword">struct </span>ignore_t {</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>    NEFORCE_CONSTEXPR14 <span class="keyword">const</span> ignore_t&amp; operator=(<span class="keyword">const</span> T&amp;) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    }</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>};</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span> </div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>NEFORCE_INLINE17 <span class="keyword">constexpr</span> ignore_t ignore{};</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span> </div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_TYPEINFO_TYPES_HPP__</span></div>
 <div class="ttc" id="ac_09_09config_8hpp_html"><div class="ttname"><a href="c_09_09config_8hpp.html">c++config.hpp</a></div><div class="ttdoc">核心配置头文件</div></div>
 <div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00098">types.hpp:98</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga18a5de45c0adec9c9e545674cc14755f"><div class="ttname"><a href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="#l00037">types.hpp:37</a></div></div>

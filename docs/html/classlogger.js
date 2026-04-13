@@ -10,10 +10,10 @@ var classlogger =
     [ "fatal", "classlogger.html#accda3e202af750cbc4750ac8ddb7c91e", null ],
     [ "flush", "classlogger.html#af026254ee95ac41660de5d9010cd7a49", null ],
     [ "info", "classlogger.html#ada300819bc418a229e937e04b24e5603", null ],
-    [ "log", "classlogger.html#ab60290adc63a7f00e22aa528175e60ac", null ],
+    [ "log", "classlogger.html#a11cb34d5b400522b3c80e1f532ac97b7", null ],
     [ "remove_context", "classlogger.html#a3585afd24a1d66f0d98b9421c358835c", null ],
     [ "set_filter", "classlogger.html#a376dadd9adb1d4ad20a8baf4c0eae393", null ],
-    [ "set_level", "classlogger.html#ad61dfa82a2953138ac21bac32de1e76b", null ],
+    [ "set_level", "classlogger.html#a1a0efc0cff2d99ddccfb1e37cdcb7d49", null ],
     [ "trace", "classlogger.html#add2ab5e5a609ed985fea57f08c5339c0", null ],
     [ "warn", "classlogger.html#a4c7c282cf9a88235db72a7804c377e8c", null ]
 ];

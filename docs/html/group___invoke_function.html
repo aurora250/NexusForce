@@ -123,6 +123,21 @@ $(function(){initNavTree('group___invoke_function.html','',''); });
 <tr class="memitem:ga2112b65ec3b25190db36ea014f65503e" id="r_ga2112b65ec3b25190db36ea014f65503e"><td class="memTemplParams" colspan="2">template&lt;typename Res, typename Callable, typename... Args&gt; </td></tr>
 <tr class="memitem:ga2112b65ec3b25190db36ea014f65503e template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__invocable__r.html">is_invocable_r</a>&lt; Res, Callable, Args... &gt;::value, Res &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga2112b65ec3b25190db36ea014f65503e">invoke_r</a> (Callable &amp;&amp;f, Args &amp;&amp;... args) noexcept(<a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>&lt; Callable, Args... &gt;::value)</td></tr>
 <tr class="memdesc:ga2112b65ec3b25190db36ea014f65503e"><td class="mdescLeft">&#160;</td><td class="mdescRight">带返回类型检查的统一调用接口  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:gaa5c3841c54405d3bbf10518ff386eaa6" id="r_gaa5c3841c54405d3bbf10518ff386eaa6"><td class="memTemplParams" colspan="2"><a id="gaa5c3841c54405d3bbf10518ff386eaa6" name="gaa5c3841c54405d3bbf10518ff386eaa6"></a>
+template&lt;typename F, typename... Args&gt; </td></tr>
+<tr class="memitem:gaa5c3841c54405d3bbf10518ff386eaa6 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_invocable_v</b> = <a class="el" href="structis__invocable.html">is_invocable</a>&lt;F, Args...&gt;::value</td></tr>
+<tr class="memdesc:gaa5c3841c54405d3bbf10518ff386eaa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_invocable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gabdbb43df9038587b1f25b2169c305571" id="r_gabdbb43df9038587b1f25b2169c305571"><td class="memTemplParams" colspan="2"><a id="gabdbb43df9038587b1f25b2169c305571" name="gabdbb43df9038587b1f25b2169c305571"></a>
+template&lt;typename Ret, typename F, typename... Args&gt; </td></tr>
+<tr class="memitem:gabdbb43df9038587b1f25b2169c305571 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_invocable_r_v</b> = <a class="el" href="structis__invocable__r.html">is_invocable_r</a>&lt;Ret, F, Args...&gt;::value</td></tr>
+<tr class="memdesc:gabdbb43df9038587b1f25b2169c305571"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_invocable_r的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga058f500ef86860b0d5a226505ce3da2d" id="r_ga058f500ef86860b0d5a226505ce3da2d"><td class="memTemplParams" colspan="2"><a id="ga058f500ef86860b0d5a226505ce3da2d" name="ga058f500ef86860b0d5a226505ce3da2d"></a>
+template&lt;typename F, typename... Args&gt; </td></tr>
+<tr class="memitem:ga058f500ef86860b0d5a226505ce3da2d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_invocable_v</b> = <a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>&lt;F, Args...&gt;::value</td></tr>
+<tr class="memdesc:ga058f500ef86860b0d5a226505ce3da2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_invocable的便捷变量模板 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>可调用函数系列函数的实现 </p>

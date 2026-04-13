@@ -15,5 +15,16 @@ var group___base_type_properties =
     [ "is_unsigned&lt; T &gt;", "structis__unsigned.html", null ],
     [ "package_t", "group___base_type_properties.html#gad3210ef30a41dfbe37f4b0afa11cf9d1", null ],
     [ "unpack_remove_cvref_t", "group___base_type_properties.html#ga9e08ce71ba48276662ca90b1d8b2a4a2", null ],
-    [ "unpackage_t", "group___base_type_properties.html#ga0daf8188b889215ad0478918b10089b7", null ]
+    [ "unpackage_t", "group___base_type_properties.html#ga0daf8188b889215ad0478918b10089b7", null ],
+    [ "is_arithmetic_v", "group___base_type_properties.html#gacba9ef87cf785618c5aa0ac0c49eff38", null ],
+    [ "is_boolean_v", "group___base_type_properties.html#gaed86a4d140433ec8ac77fe7654d6491a", null ],
+    [ "is_character_v", "group___base_type_properties.html#ga299a1c32eb65bb99760c4f3b2acf41a2", null ],
+    [ "is_floating_point_v", "group___base_type_properties.html#ga1233851ade7c3f53dc6b9b0ae01cf978", null ],
+    [ "is_integral_v", "group___base_type_properties.html#ga7ad20d600db4f8084cb853d37a10fa8b", null ],
+    [ "is_packaged_v", "group___base_type_properties.html#ga2097f41e78735e8dfe11d7bce991afc7", null ],
+    [ "is_signed_v", "group___base_type_properties.html#gaacd632d0f1e06e58693fd5a8959d764f", null ],
+    [ "is_standard_integral_v", "group___base_type_properties.html#gaf31b5ea89a776f2151e7c8358c4fdf0e", null ],
+    [ "is_unpackaged_v", "group___base_type_properties.html#ga67eb3297962a9df13909b64373e0430c", null ],
+    [ "is_unsigned_v", "group___base_type_properties.html#gae8135fffbcc40a30cf23ea5e1913ab57", null ],
+    [ "is_void_v", "group___base_type_properties.html#gaef2319490d0b0a89b7de2e5b86332d19", null ]
 ];

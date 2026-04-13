@@ -7,5 +7,7 @@ var hash_8hpp =
     [ "MurmurHash_x32", "group___hash_primary.html#ga10907e3249f281ccbf2ceaa0cd21db77", null ],
     [ "MurmurHash_x64", "group___hash_primary.html#gaa610d5c5365bf2d436f5f6f0c38c91db", null ],
     [ "FNV_OFFSET_BASIS", "group___hash_primary.html#ga7b623749eb368d9c6142805167d8c3e8", null ],
-    [ "FNV_PRIME", "group___hash_primary.html#gac9c1200d5d9591e537701046e3cb0eb0", null ]
+    [ "FNV_PRIME", "group___hash_primary.html#gac9c1200d5d9591e537701046e3cb0eb0", null ],
+    [ "is_hash_v", "group___hash_primary.html#ga017f9314c0e8086c45cbb406983476de", null ],
+    [ "is_nothrow_hashable_v", "group___hash_primary.html#ga6ca9a57793172db99ade654b0232f81f", null ]
 ];

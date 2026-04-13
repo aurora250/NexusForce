@@ -89,7 +89,7 @@ $(function(){initNavTree('structidb__prepared__statement.html','','structidb__pr
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">idb_prepared_statement结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
+  <div class="headertitle"><div class="title">idb_prepared_statement结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database.html">数据库</a> &raquo; <a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,6 +97,11 @@ $(function(){initNavTree('structidb__prepared__statement.html','','structidb__pr
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 idb_prepared_statement 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__prepared__statement__inherit__graph.svg" width="586" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -120,9 +125,9 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <tr class="memitem:af8c65a9348aaa14ca7e0b8cdc3bf92d9" id="r_af8c65a9348aaa14ca7e0b8cdc3bf92d9"><td class="memItemLeft"><a id="af8c65a9348aaa14ca7e0b8cdc3bf92d9" name="af8c65a9348aaa14ca7e0b8cdc3bf92d9"></a>
 virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, <a class="el" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a> value)=0</td></tr>
 <tr class="memdesc:af8c65a9348aaa14ca7e0b8cdc3bf92d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定浮点数 <br /></td></tr>
-<tr class="memitem:ad194131cad5aa306d695dcb5aeb8729b" id="r_ad194131cad5aa306d695dcb5aeb8729b"><td class="memItemLeft"><a id="ad194131cad5aa306d695dcb5aeb8729b" name="ad194131cad5aa306d695dcb5aeb8729b"></a>
-virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, const void *<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> length)=0</td></tr>
-<tr class="memdesc:ad194131cad5aa306d695dcb5aeb8729b"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定二进制数据 <br /></td></tr>
+<tr class="memitem:a7a9038b065d93470a68a23739987ddcc" id="r_a7a9038b065d93470a68a23739987ddcc"><td class="memItemLeft"><a id="a7a9038b065d93470a68a23739987ddcc" name="a7a9038b065d93470a68a23739987ddcc"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> index, <a class="el" href="group___memory_view.html#gadb791ffe50c8af2b91becad1194e2ef9">cbyte_view</a> value)=0</td></tr>
+<tr class="memdesc:a7a9038b065d93470a68a23739987ddcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定二进制数据 <br /></td></tr>
 <tr class="memitem:a5edc6ce541b1a871ee9910ba9ec565f9" id="r_a5edc6ce541b1a871ee9910ba9ec565f9"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a5edc6ce541b1a871ee9910ba9ec565f9">execute</a> ()=0</td></tr>
 <tr class="memdesc:a5edc6ce541b1a871ee9910ba9ec565f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行非查询语句（UPDATE/INSERT/DELETE）  <br /></td></tr>
 <tr class="memitem:a75ad5d2dbd0d97d8cfc70ed5ecea5faf" id="r_a75ad5d2dbd0d97d8cfc70ed5ecea5faf"><td class="memItemLeft">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__prepared__result.html">idb_prepared_result</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query</a> ()=0</td></tr>
@@ -136,7 +141,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <div class="textblock"><p>预处理语句抽象基类 </p>
 <p>提供参数绑定和执行的接口，支持SQL注入防护和性能优化。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00136">136</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00142">142</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a5edc6ce541b1a871ee9910ba9ec565f9" name="a5edc6ce541b1a871ee9910ba9ec565f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5edc6ce541b1a871ee9910ba9ec565f9">&#9670;&#160;</a></span>execute()</h2>
@@ -163,6 +168,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 
 <p>执行非查询语句（UPDATE/INSERT/DELETE） </p>
 <dl class="section return"><dt>返回</dt><dd>执行成功返回true </dd></dl>
+
+<p>在 <a class="el" href="classmysql__prepared__statement.html#a232c3c1affb68ac94af71e1326c45ffa">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#a4dec6eebfb652d049b6af57f78c9537d">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#a86f109f44cc9542c828ad21fd733553d">sqlite_prepared_statement</a> 内被实现.</p>
 
 <p class="reference">引用了 <a class="el" href="#a5edc6ce541b1a871ee9910ba9ec565f9">execute()</a>.</p>
 
@@ -196,6 +203,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <p>执行查询语句（SELECT） </p>
 <dl class="section return"><dt>返回</dt><dd>查询结果集 </dd></dl>
 
+<p>在 <a class="el" href="classmysql__prepared__statement.html#a237b3e3dc7d510b41f48033b8fe77d57">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#a38616e604329c1b75a1a8cdcc9460a71">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#ae1a12499c85927d7748f87614500ad6f">sqlite_prepared_statement</a> 内被实现.</p>
+
 <p class="reference">引用了 <a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query()</a>.</p>
@@ -227,6 +236,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 
 <p>获取错误码 </p>
 <dl class="section return"><dt>返回</dt><dd>数据库错误码 </dd></dl>
+
+<p>在 <a class="el" href="classmysql__prepared__statement.html#aa3fc1b9769a1424d868b716c0145c8f1">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#a96ed8c714d711dda975172617c346a55">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#aac9769d42e12301e2ccb268b320867bd">sqlite_prepared_statement</a> 内被实现.</p>
 
 <p class="reference">引用了 <a class="el" href="#ac2d8c780282f37e5033aa64025cd0435">get_errno()</a>.</p>
 
@@ -260,6 +271,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <p>获取错误信息 </p>
 <dl class="section return"><dt>返回</dt><dd>错误描述字符串 </dd></dl>
 
+<p>在 <a class="el" href="classmysql__prepared__statement.html#af8b9fae314fb3fda7a160cdc867fdf1b">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#aab90cd565b147686a6faf5ea482ec55e">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#ad741d5f90270bd2ca5cdae2e59f6b7b8">sqlite_prepared_statement</a> 内被实现.</p>
+
 <p class="reference">引用了 <a class="el" href="#a67f600d24fe96ea4b26508953e1ac2ed">get_error()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a67f600d24fe96ea4b26508953e1ac2ed">get_error()</a>.</p>
@@ -291,6 +304,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 
 <p>获取参数数量 </p>
 <dl class="section return"><dt>返回</dt><dd>占位符数量 </dd></dl>
+
+<p>在 <a class="el" href="classmysql__prepared__statement.html#afd86fdf8c16847967d5a7c5de2b676e4">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#a92b434c6a3ca0ae10f440d71249c9ee0">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#aed56e499d842ec3b275a5047b76cf3ca">sqlite_prepared_statement</a> 内被实现.</p>
 
 </div>
 </div>

@@ -13,7 +13,7 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "coroutine.hpp", "coroutine_8hpp.html", "coroutine_8hpp" ],
     [ "futex.hpp", "futex_8hpp.html", "futex_8hpp" ],
     [ "future.hpp", "future_8hpp.html", "future_8hpp" ],
-    [ "generator.hpp", "generator_8hpp_source.html", null ],
+    [ "generator.hpp", "generator_8hpp.html", "generator_8hpp" ],
     [ "hazard_ptr.hpp", "hazard__ptr_8hpp.html", "hazard__ptr_8hpp" ],
     [ "latch.hpp", "latch_8hpp.html", null ],
     [ "lock_free_queue.hpp", "lock__free__queue_8hpp.html", null ],
@@ -30,5 +30,5 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "thread_pool.hpp", "thread__pool_8hpp.html", "thread__pool_8hpp" ],
     [ "thread_tracker.hpp", "thread__tracker_8hpp.html", "thread__tracker_8hpp" ],
     [ "timer.hpp", "timer_8hpp.html", "timer_8hpp" ],
-    [ "virtual_thread.hpp", "virtual__thread_8hpp.html", null ]
+    [ "virtual_thread.hpp", "virtual__thread_8hpp.html", "virtual__thread_8hpp" ]
 ];

@@ -3,7 +3,7 @@ var searchData=
   ['scheme_0',['scheme',['../structurl.html#af55eb2e3fc8b82b6869cc1a006fd7b4e',1,'url']]],
   ['second_1',['second',['../structpair.html#a63ae1bbd5a6ce6bd6167b5359fa7a01f',1,'pair']]],
   ['semi_5fcircle_2',['SEMI_CIRCLE',['../group___math_constants.html#ga007d3842f652c65048072924d81d9ed6',1,'math.hpp']]],
-  ['sessionid_3',['SESSIONID',['../struct_h_t_t_p___c_o_o_k_i_e___n_a_m_e.html#a934783b704fa5e9a71a72ecac856425d',1,'HTTP_COOKIE_NAME']]],
+  ['server_3',['server',['../structdns__client_1_1config.html#a73732155d4d146b70fc866a6bfd10eb4',1,'dns_client::config']]],
   ['short_5fname_4',['short_name',['../structcmdline_1_1option.html#a644ebd1405b5cab08309df68aa2c259e',1,'cmdline::option']]],
   ['show_5fsign_5',['show_sign',['../structformat__options.html#a81d3c2f99048f1e908f9176fa5eca827',1,'format_options']]],
   ['size_6',['size',['../structfile_1_1chunk__info.html#a0ba56511244001015a3f747e683e02a2',1,'file::chunk_info::size'],['../structfile__mapper_1_1map__info.html#adc119290182f3ce6c3d598d81eb391b7',1,'file_mapper::map_info::size']]],

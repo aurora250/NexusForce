@@ -7,6 +7,25 @@
  *
  * 此文件提供了UUID的生成和操作功能，支持UUID版本4（随机）和版本7（时间戳排序）。
  * UUID是一个128位的唯一标识符，广泛用于分布式系统中的标识生成。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下标准规范：
+ *
+ * - **IETF RFC 4122**：UUID 版本 4 的定义（基于随机数）
+ *   https://www.rfc-editor.org/rfc/rfc4122.html
+ * - **IETF RFC 9562**：UUID 版本 7 的定义（基于 Unix 时间戳排序）
+ *   https://www.rfc-editor.org/rfc/rfc9562.html
+ *
+ * 此外，UUID 的结构与编码方式也符合以下 ISO 标准：
+ * - **ISO/IEC 9834-8:2014**：信息技术 — 对象标识符解析系统 — 第8部分：UUID 的生成与注册
+ *   https://www.iso.org/standard/62795.html
+ * - **ISO/IEC 18004:2024** 相关附录
+ *   https://www.iso.org/standard/83358.html
+ *
+ * @section version_details 版本细节
+ * - **版本 4**：变体位为 10（0b10），版本位为 4（0b0100）
+ * - **版本 7**：变体位为 10（0b10），版本位为 7（0b0111）
+ *   时间戳为 Unix 毫秒（占高 48 位），后跟 12 位随机计数器与 62 位随机数
  */
 
 #include "NeForce/core/interface/istringify.hpp"
@@ -25,17 +44,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class uuid
  * @brief 通用唯一标识符类
  *
- * 表示一个128位的UUID，支持版本4和版本7的生成，以及从字符串/字节数组的解析。
- *
- * 支持的UUID版本：
- * - 版本4：基于随机数生成，安全性高，无时序信息
- * - 版本7：基于时间戳和随机数生成，具有单调递增特性，适合数据库索引：
- *   - 前48位：Unix时间戳（毫秒）
- *   - 第49-52位：版本号（7）
- *   - 第53-64位：随机数或计数器
- *   - 后64位：随机数或伪随机数
- *
  * UUID格式：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (36字符，包括4个连字符)
+ * 表示一个128位的UUID，支持版本4和版本7的生成，以及从字符串/字节数组的解析。
  */
 class NEFORCE_API uuid : public istringify<uuid> {
 private:

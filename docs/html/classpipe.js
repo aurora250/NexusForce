@@ -14,6 +14,6 @@ var classpipe =
     [ "native_write_handle", "classpipe.html#a1960e935103dcc4ce15bc65b6e38cecf", null ],
     [ "operator=", "classpipe.html#a700d9f262f874c54517b8903fdb131a6", null ],
     [ "read", "classpipe.html#a16c487e5806079fbfd62005d8bffe0e5", null ],
-    [ "read_available", "classpipe.html#afc3e3f4c175b85ee36ebdafde21f95ca", null ],
+    [ "read_available", "classpipe.html#ab6f770ac312b5bcb647020d16cc56c9c", null ],
     [ "write", "classpipe.html#a6834b8e2df04604f490e8eef1e63b148", null ]
 ];

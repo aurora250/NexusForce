@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['索引元组_0',['索引元组',['../group___index_tuple.html',1,'']]]
+  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
 ];

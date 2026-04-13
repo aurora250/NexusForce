@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['单次调用_0',['单次调用',['../group___call_once.html',1,'']]]
+  ['加密算法_0',['加密算法',['../group___encryption.html',1,'']]]
 ];

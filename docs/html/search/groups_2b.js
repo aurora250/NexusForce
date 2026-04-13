@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['屏障_0',['屏障',['../group___barrier.html',1,'']]]
+  ['堆栈跟踪_0',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
+  ['堆算法_1',['堆算法',['../group___heap_algorithms.html',1,'']]]
 ];

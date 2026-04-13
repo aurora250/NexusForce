@@ -7,6 +7,7 @@ var group___code_point =
       [ "append_to", "classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b", null ],
       [ "append_to", "classcodepoint.html#aec04440229dbf33585649a017be1dae9", null ],
       [ "append_to", "classcodepoint.html#ae92078f825d07e7989a9350cf3251321", null ],
+      [ "append_to", "classcodepoint.html#a7314fbb0bd0caf0852ff3b434d4bc6a5", null ],
       [ "append_to", "classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66", null ],
       [ "is_ascii", "classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7", null ],
       [ "is_bmp", "classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd", null ],

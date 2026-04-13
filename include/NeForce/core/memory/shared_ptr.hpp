@@ -222,7 +222,7 @@ NEFORCE_END_INNER__
 
 
 template <typename T>
-struct enable_shared_from_this;
+struct enable_shared_from;
 
 template <typename T>
 class shared_ptr;
@@ -236,7 +236,7 @@ NEFORCE_BEGIN_INNER__
 template <typename T>
 void __setup_enable_shared_from_impl(T* ptr, __smart_ptr_counter* owner, true_type) noexcept {
     if (ptr) {
-        static_cast<enable_shared_from_this<T>*>(ptr)->owner_ = owner;
+        static_cast<enable_shared_from<T>*>(ptr)->owner_ = owner;
     }
 }
 
@@ -245,7 +245,7 @@ void __setup_enable_shared_from_impl(T*, __smart_ptr_counter*, false_type) noexc
 
 template <typename T>
 void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) noexcept {
-    inner::__setup_enable_shared_from_impl(ptr, owner, is_base_of<enable_shared_from_this<T>, T>{});
+    inner::__setup_enable_shared_from_impl(ptr, owner, is_base_of<enable_shared_from<T>, T>{});
 }
 
 template <typename T>
@@ -703,14 +703,14 @@ public:
 
 
 /**
- * @struct enable_shared_from_this
+ * @struct enable_shared_from
  * @brief 启用从this创建共享指针的基类
  * @tparam T 派生类类型
  *
  * 允许在类的成员函数中安全地获取指向自身的共享智能指针。
  */
 template <typename T>
-struct enable_shared_from_this {
+struct enable_shared_from {
 private:
     mutable inner::__smart_ptr_counter* owner_ = nullptr; ///< 控制块指针
 
@@ -730,7 +730,7 @@ protected:
     /**
      * @brief 构造函数
      */
-    enable_shared_from_this() noexcept {}
+    enable_shared_from() noexcept {}
 
     /**
      * @brief 获取指向自身的共享指针
@@ -738,7 +738,7 @@ protected:
      * @throw memory_exception 如果对象不由shared_ptr管理
      */
     shared_ptr<T> shared_from_this() {
-        static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
+        static_assert(is_base_of_v<enable_shared_from, T>, "shared from T requires derived class");
         if (!owner_) {
             NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
@@ -752,7 +752,7 @@ protected:
      * @throw memory_exception 如果对象不由shared_ptr管理
      */
     shared_ptr<const T> shared_from_this() const {
-        static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
+        static_assert(is_base_of_v<enable_shared_from, T>, "shared from T requires derived class");
         if (!owner_) {
             NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }

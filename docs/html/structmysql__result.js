@@ -1,0 +1,26 @@
+var structmysql__result =
+[
+    [ "mysql_result", "structmysql__result.html#a004e5eb68b62f2ea73761bf64a3f9e68", null ],
+    [ "mysql_result", "structmysql__result.html#ad27cac26616b43733d40b513e8bb7218", null ],
+    [ "~mysql_result", "structmysql__result.html#a835a01b9b0c05a7d39e8cc30d976dfaa", null ],
+    [ "column_count", "structmysql__result.html#aa0c7b8c18b4f7a91d73ee3107a6553e5", null ],
+    [ "column_names", "structmysql__result.html#abc8618955760ea54fe1addb302c2340f", null ],
+    [ "column_types", "structmysql__result.html#a392ecf203dd6aa1ff4c9d8b795e0ed63", null ],
+    [ "empty", "structmysql__result.html#a835acf0617caca31a023af9ff8c05dfb", null ],
+    [ "get", "structmysql__result.html#af96b22d3dfbb38be85d8434a35dd584a", null ],
+    [ "get_bit", "structmysql__result.html#a3917bd44ba46d2c58b8821a7bb96ac8c", null ],
+    [ "get_blob", "structmysql__result.html#afb58c96f2761eca692bf47ddcd462dc7", null ],
+    [ "get_bool", "structmysql__result.html#abb1468a12955d0a3316f8babc2bfbf9a", null ],
+    [ "get_date", "structmysql__result.html#a8ecda4af7d98428d7f46d4530598804b", null ],
+    [ "get_datetime", "structmysql__result.html#a743077ec5cc9de7d8418c9819568aebb", null ],
+    [ "get_decimal", "structmysql__result.html#a722676c0ccd8a02fbec9a9e0ba6c62fe", null ],
+    [ "get_float32", "structmysql__result.html#a2fa9988c20c2d9208237c2b37559b953", null ],
+    [ "get_float64", "structmysql__result.html#ac59e799201e8d09dec3655e662c5b490", null ],
+    [ "get_int16", "structmysql__result.html#a47f435df1b10dc9c8cc8effe64c7c41c", null ],
+    [ "get_int32", "structmysql__result.html#ad6e470c3c3327b7d885a8b4fe0cca365", null ],
+    [ "get_int64", "structmysql__result.html#aa5b04af6b06573445ca05f1b190b81c2", null ],
+    [ "get_time", "structmysql__result.html#a4060a3ef269e3dd2551ca2a2acdf92b2", null ],
+    [ "get_timestamp", "structmysql__result.html#a5007e6295e9213c6aec92a9689f0f948", null ],
+    [ "next", "structmysql__result.html#a048f701eff7bb223f7766ec8e0452d91", null ],
+    [ "row_count", "structmysql__result.html#ab0bc025d64deda866a13e2c49cacca96", null ]
+];

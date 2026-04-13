@@ -100,7 +100,7 @@ $(function(){initNavTree('codepoint_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 codepoint.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="codepoint_8hpp__incl.svg" width="1502" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="codepoint_8hpp__incl.svg" width="1415" height="1382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="codepoint_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -113,7 +113,118 @@ codepoint.hpp 的引用(Include)关系图:</div>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>Unicode码点处理类 </p>
 <p>此文件提供了Unicode码点的封装类，支持码点的验证、UTF-8/UTF-16/UTF-32编码解码、 代理对处理、以及向各种字符串类型的追加操作。</p>
-<p>Unicode码点范围：U+0000 ~ U+10FFFF（排除代理项范围0xD800-0xDFFF） </p>
+<p>Unicode码点范围：U+0000 ~ U+10FFFF（排除代理项范围0xD800-0xDFFF）</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下 Unicode 和字符编码相关标准规范：</p>
+<p><b>Unicode 核心标准：</b></p><ul>
+<li>**Unicode 15.1.0**：Unicode 字符编码标准 <a href="https://unicode.org/versions/Unicode15.1.0/">https://unicode.org/versions/Unicode15.1.0/</a></li>
+<li>**Unicode 16.0.0**：Unicode 字符编码标准（最新版本） <a href="https://unicode.org/versions/Unicode16.0.0/">https://unicode.org/versions/Unicode16.0.0/</a></li>
+</ul>
+<p><b>UTF 编码格式标准：</b></p><ul>
+<li>**IETF RFC 3629**：UTF-8 — ISO 10646 的转换格式（UTF-8 编码规范） <a href="https://www.rfc-editor.org/rfc/rfc3629.html">https://www.rfc-editor.org/rfc/rfc3629.html</a></li>
+<li>**IETF RFC 2781**：UTF-16 — ISO 10646 的编码格式（UTF-16 编码规范） <a href="https://www.rfc-editor.org/rfc/rfc2781.html">https://www.rfc-editor.org/rfc/rfc2781.html</a></li>
+<li>**Unicode Standard Annex #15**：Unicode 规范化形式 <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a></li>
+</ul>
+<p><b>通用字符集编码标准：</b></p><ul>
+<li>**ISO/IEC 10646:2020**：信息技术 — 通用编码字符集 (UCS) <a href="https://www.iso.org/standard/76835.html">https://www.iso.org/standard/76835.html</a></li>
+</ul>
+<p><b>相关编程语言标准：</b></p><ul>
+<li>**ISO/IEC 14882:2020**：C++ 编程语言标准（char8_t、char16_t、char32_t 类型） <a href="https://www.iso.org/standard/79358.html">https://www.iso.org/standard/79358.html</a></li>
+<li>**ISO/IEC 9899:2018**：C 语言标准（宽字符与 Unicode 支持） <a href="https://www.iso.org/standard/74528.html">https://www.iso.org/standard/74528.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="unicode_ranges"></a>
+Unicode 码点范围定义</h1>
+<p>根据 Unicode 15.1.0 §2.4，码点空间划分为以下区域：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">范围名称  </th><th class="markdownTableHeadNone">码点范围  </th><th class="markdownTableHeadNone">UTF-8 字节数  </th><th class="markdownTableHeadNone">UTF-16 码元数  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Basic Latin (ASCII)  </td><td class="markdownTableBodyNone">U+0000 - U+007F  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">与 ASCII 完全兼容  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Latin-1 Supplement  </td><td class="markdownTableBodyNone">U+0080 - U+00FF  </td><td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">ISO 8859-1 扩展  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">BMP (Basic Multilingual)  </td><td class="markdownTableBodyNone">U+0100 - U+FFFF  </td><td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">基本多文种平面  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Supplementary Planes  </td><td class="markdownTableBodyNone">U+10000 - U+10FFFF  </td><td class="markdownTableBodyNone">4  </td><td class="markdownTableBodyNone">2 (代理对)  </td><td class="markdownTableBodyNone">16 个辅助平面  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">High Surrogates  </td><td class="markdownTableBodyNone">U+D800 - U+DBFF  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">高代理项（无效码点）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Low Surrogates  </td><td class="markdownTableBodyNone">U+DC00 - U+DFFF  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">低代理项（无效码点）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Noncharacters  </td><td class="markdownTableBodyNone">U+FDD0 - U+FDEF 等  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">非字符（内部使用）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Private Use Area  </td><td class="markdownTableBodyNone">U+E000 - U+F8FF 等  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">私用区  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="utf8_encoding"></a>
+UTF-8 编码规则</h1>
+<p>根据 RFC 3629 §3，UTF-8 编码遵循以下比特模式：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">码点范围  </th><th class="markdownTableHeadNone">UTF-8 字节序列  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">U+0000 - U+007F  </td><td class="markdownTableBodyNone">0xxxxxxx  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">U+0080 - U+07FF  </td><td class="markdownTableBodyNone">110xxxxx 10xxxxxx  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">U+0800 - U+FFFF  </td><td class="markdownTableBodyNone">1110xxxx 10xxxxxx 10xxxxxx  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">U+10000 - U+10FFFF  </td><td class="markdownTableBodyNone">11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="utf16_surrogates"></a>
+UTF-16 代理对编码规则</h1>
+<p>根据 RFC 2781 §2.1，辅助平面字符使用代理对编码：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组成部分  </th><th class="markdownTableHeadNone">计算方式  </th><th class="markdownTableHeadNone">值范围  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">高代理项  </td><td class="markdownTableBodyNone">((cp - 0x10000) &gt;&gt; 10) + 0xD800  </td><td class="markdownTableBodyNone">0xD800 - 0xDBFF  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">低代理项  </td><td class="markdownTableBodyNone">((cp - 0x10000) &amp; 0x3FF) + 0xDC00  </td><td class="markdownTableBodyNone">0xDC00 - 0xDFFF  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">码点类型  </td><td class="markdownTableBodyNone">uint32_t（32 位无符号整数）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">最大合法码点  </td><td class="markdownTableBodyNone">0x10FFFF（Unicode §2.4）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">替换字符  </td><td class="markdownTableBodyNone">U+FFFD（� REPLACEMENT CHARACTER）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">无效序列处理  </td><td class="markdownTableBodyNone">替换为 U+FFFD（RFC 3629 §4）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">过度长序列检测  </td><td class="markdownTableBodyNone">支持（拒绝非最短形式的 UTF-8 序列）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">代理项检测  </td><td class="markdownTableBodyNone">支持（拒绝孤立的代理项）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">字节序处理  </td><td class="markdownTableBodyNone">支持（decode_utf16 提供 need_swap 参数）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="validation_rules"></a>
+码点验证规则</h1>
+<p>根据 Unicode 标准，合法码点必须满足以下条件：</p><ul>
+<li>值不超过 0x10FFFF（Unicode 最大码点）</li>
+<li>不是高代理项（0xD800-0xDBFF）</li>
+<li>不是低代理项（0xDC00-0xDFFF）</li>
+</ul>
+<p>非法的 UTF-8 序列（根据 RFC 3629 §4）：</p><ul>
+<li>过度长编码（使用超过所需的字节数）</li>
+<li>无效的后续字节（不以 10xxxxxx 开头）</li>
+<li>截断序列（字节数不足）</li>
+<li>孤立的代理项（U+D800-U+DFFF）</li>
+<li>超出范围的码点（&gt;U+10FFFF）</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>Unicode 标准规定，处理无效的 UTF 序列时应用替换字符 U+FFFD 替换， 而不应抛出异常或截断数据。本实现遵循此最佳实践。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>根据 RFC 3629 §4，UTF-8 解码器必须拒绝过度长序列和非最短形式， 以防止安全漏洞（如目录遍历攻击）。本实现执行此验证。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://unicode.org/">https://unicode.org/</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc3629">https://www.rfc-editor.org/rfc/rfc3629</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc2781">https://www.rfc-editor.org/rfc/rfc2781</a> </dd>
+<dd>
+<a href="https://www.iso.org/standard/76835.html">https://www.iso.org/standard/76835.html</a> </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="codepoint_8hpp_source.html">codepoint.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

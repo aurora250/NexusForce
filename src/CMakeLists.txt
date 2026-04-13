@@ -14,7 +14,12 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/base64.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/md5.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha1.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha256.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/xor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_category.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp

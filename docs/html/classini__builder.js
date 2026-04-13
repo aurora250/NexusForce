@@ -15,5 +15,5 @@ var classini__builder =
     [ "value", "classini__builder.html#a071e60c05ccc86710d27480398d32b4f", null ],
     [ "value", "classini__builder.html#a9009d53d2d348912fb2bf40f56da982e", null ],
     [ "value", "classini__builder.html#a09330734c323b5fb5de6be2ab390f68f", null ],
-    [ "value_section", "classini__builder.html#aa679a98a37b87316f9fe875058dad9cb", null ]
+    [ "value_section", "classini__builder.html#adba2bba2f7102d2581704291ed3390d0", null ]
 ];

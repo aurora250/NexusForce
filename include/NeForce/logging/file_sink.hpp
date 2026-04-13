@@ -1,5 +1,13 @@
 #ifndef NEFORCE_LOGGING_FILE_SINK_HPP__
 #define NEFORCE_LOGGING_FILE_SINK_HPP__
+
+/**
+ * @file file_sink.hpp
+ * @brief 日志文件输出目标
+ *
+ * 此文件定义了日志文件输出目标的具体实现。
+ */
+
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/file/file.hpp"
 #include "NeForce/logging/log_sink.hpp"

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['支持环境_0',['支持环境',['../index.html#environment',1,'']]]
+  ['8_20编码规则_0',['UTF-8 编码规则',['../codepoint_8hpp.html#utf8_encoding',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]]
+  ['终止处理_0',['终止处理',['../group___termination_functions.html',1,'']]]
 ];

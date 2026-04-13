@@ -37,7 +37,7 @@ stmt_(other.stmt_),
 param_count_(other.param_count_),
 param_buffers_(move(other.param_buffers_)),
 prepared_(other.prepared_),
-last_error_(_NEFORCE move(other.last_error_)) {
+last_error_(move(other.last_error_)) {
     other.stmt_ = nullptr;
     other.db_ = nullptr;
     other.param_count_ = 0;
@@ -57,8 +57,8 @@ sqlite_prepared_statement& sqlite_prepared_statement::operator=(sqlite_prepared_
     db_ = other.db_;
     stmt_ = other.stmt_;
     param_count_ = other.param_count_;
-    param_buffers_ = _NEFORCE move(other.param_buffers_);
-    last_error_ = _NEFORCE move(other.last_error_);
+    param_buffers_ = move(other.param_buffers_);
+    last_error_ = move(other.last_error_);
     prepared_ = other.prepared_;
 
     other.stmt_ = nullptr;
@@ -136,18 +136,18 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const float64_t
     return true;
 }
 
-bool sqlite_prepared_statement::bind_param(const uint32_t index, const void* data, const size_t length) {
-    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_ || data == nullptr) {
+bool sqlite_prepared_statement::bind_param(const uint32_t index, const cbyte_view value) {
+    if (!prepared_ || stmt_ == nullptr || index == 0 || index > param_count_ || value.empty()) {
         last_error_ = "Invalid parameter or null pointer for blob";
         return false;
     }
     if (param_buffers_.size() < index) {
         param_buffers_.resize(index);
     }
-    param_buffers_[index - 1].resize(length);
-    memory_copy(param_buffers_[index - 1].data(), data, length);
+    param_buffers_[index - 1].resize(value.size());
+    memory_copy(param_buffers_[index - 1].data(), value.data(), value.size());
     const int rc = ::sqlite3_bind_blob(stmt_, static_cast<int>(index), param_buffers_[index - 1].data(),
-                                       static_cast<int>(length), SQLITE_TRANSIENT);
+                                       static_cast<int>(value.size()), SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db_);
         return false;

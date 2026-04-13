@@ -1,0 +1,954 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: pgsql_prepared_result类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classpgsql__prepared__result.html','','classpgsql__prepared__result-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">pgsql_prepared_result类 参考<span class="mlabels"><span class="mlabel final">final</span></span><div class="ingroups"><a class="el" href="group___database.html">数据库</a> &raquo; <a class="el" href="group___postgre_s_q_l.html">PostgreSQL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>PostgreSQL预处理语句结果集类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 pgsql_prepared_result 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classpgsql__prepared__result__inherit__graph.svg" width="159" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a871676fa2df76c4a4b9dd21944e8b4b4" id="r_a871676fa2df76c4a4b9dd21944e8b4b4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a871676fa2df76c4a4b9dd21944e8b4b4">pgsql_prepared_result</a> (::PGresult *result) noexcept</td></tr>
+<tr class="memdesc:a871676fa2df76c4a4b9dd21944e8b4b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a2ff9c2154839e32138b6cf21ce9208d4" id="r_a2ff9c2154839e32138b6cf21ce9208d4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2ff9c2154839e32138b6cf21ce9208d4">~pgsql_prepared_result</a> () override=default</td></tr>
+<tr class="memdesc:a2ff9c2154839e32138b6cf21ce9208d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:ab200c333f108658499041e0f71d10d53" id="r_ab200c333f108658499041e0f71d10d53"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ab200c333f108658499041e0f71d10d53">empty</a> () const noexcept override</td></tr>
+<tr class="memdesc:ab200c333f108658499041e0f71d10d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查结果集是否为空  <br /></td></tr>
+<tr class="memitem:a4e6c772bb0a6a957f726b49de49fd196" id="r_a4e6c772bb0a6a957f726b49de49fd196"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a4e6c772bb0a6a957f726b49de49fd196">next</a> () noexcept override</td></tr>
+<tr class="memdesc:a4e6c772bb0a6a957f726b49de49fd196"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动到下一行  <br /></td></tr>
+<tr class="memitem:a5402e720afdab1ca0d1887d9aa47e756" id="r_a5402e720afdab1ca0d1887d9aa47e756"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5402e720afdab1ca0d1887d9aa47e756">row_count</a> () const noexcept override</td></tr>
+<tr class="memdesc:a5402e720afdab1ca0d1887d9aa47e756"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结果集行数  <br /></td></tr>
+<tr class="memitem:a2708aeb47191b77cdd2f04fa9ae25e5d" id="r_a2708aeb47191b77cdd2f04fa9ae25e5d"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2708aeb47191b77cdd2f04fa9ae25e5d">column_count</a> () const noexcept override</td></tr>
+<tr class="memdesc:a2708aeb47191b77cdd2f04fa9ae25e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结果集列数  <br /></td></tr>
+<tr class="memitem:a117cefcf033608f10ea0996498d7b214" id="r_a117cefcf033608f10ea0996498d7b214"><td class="memItemLeft">NEFORCE_NODISCARD const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a117cefcf033608f10ea0996498d7b214">column_names</a> () const override</td></tr>
+<tr class="memdesc:a117cefcf033608f10ea0996498d7b214"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列名列表  <br /></td></tr>
+<tr class="memitem:af4c04e828137110eca9f68688badfcf8" id="r_af4c04e828137110eca9f68688badfcf8"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#af4c04e828137110eca9f68688badfcf8">get</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:af4c04e828137110eca9f68688badfcf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符串值  <br /></td></tr>
+<tr class="memitem:afcc51661f2fa3d703a0a935a8974e1cb" id="r_afcc51661f2fa3d703a0a935a8974e1cb"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#afcc51661f2fa3d703a0a935a8974e1cb">get_bool</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:afcc51661f2fa3d703a0a935a8974e1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取布尔值  <br /></td></tr>
+<tr class="memitem:ae9d62052b592dc5491a5e3a8edccfcec" id="r_ae9d62052b592dc5491a5e3a8edccfcec"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae9d62052b592dc5491a5e3a8edccfcec">get_int16</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:ae9d62052b592dc5491a5e3a8edccfcec"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取16位整数值  <br /></td></tr>
+<tr class="memitem:a130661a5c9b0c0f3bef2480d2c63248b" id="r_a130661a5c9b0c0f3bef2480d2c63248b"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a130661a5c9b0c0f3bef2480d2c63248b">get_int32</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a130661a5c9b0c0f3bef2480d2c63248b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取32位整数值  <br /></td></tr>
+<tr class="memitem:a1bd78d238a1ab4724c0c5819da14b494" id="r_a1bd78d238a1ab4724c0c5819da14b494"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1bd78d238a1ab4724c0c5819da14b494">get_int64</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a1bd78d238a1ab4724c0c5819da14b494"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取64位整数值  <br /></td></tr>
+<tr class="memitem:a579f20ba874590d36d7565d51025575a" id="r_a579f20ba874590d36d7565d51025575a"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga3068631062aaf7da4cc0371da9e7a377">float32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a579f20ba874590d36d7565d51025575a">get_float32</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a579f20ba874590d36d7565d51025575a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取32位浮点值  <br /></td></tr>
+<tr class="memitem:ad581a3f346bbe1345722da7971101522" id="r_ad581a3f346bbe1345722da7971101522"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad581a3f346bbe1345722da7971101522">get_float64</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:ad581a3f346bbe1345722da7971101522"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取64位浮点值  <br /></td></tr>
+<tr class="memitem:a42f919b8b5661f28ea94a9b415951d1c" id="r_a42f919b8b5661f28ea94a9b415951d1c"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a42f919b8b5661f28ea94a9b415951d1c">get_decimal</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a42f919b8b5661f28ea94a9b415951d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取十进制值  <br /></td></tr>
+<tr class="memitem:aadac42ee0baee38b79d10adc652db047" id="r_aadac42ee0baee38b79d10adc652db047"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classvector.html">vector</a>&lt; char &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aadac42ee0baee38b79d10adc652db047">get_blob</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:aadac42ee0baee38b79d10adc652db047"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取BLOB二进制数据  <br /></td></tr>
+<tr class="memitem:af74cce791fa6bf352cfcc2df8ede3da6" id="r_af74cce791fa6bf352cfcc2df8ede3da6"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#af74cce791fa6bf352cfcc2df8ede3da6">get_bit</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:af74cce791fa6bf352cfcc2df8ede3da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取BIT位字段值  <br /></td></tr>
+<tr class="memitem:a22c5af7cce3054ce16463b24b06c0221" id="r_a22c5af7cce3054ce16463b24b06c0221"><td class="memItemLeft">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classdate.html">date</a>&#160;</td><td class="memItemRight"><a class="el" href="#a22c5af7cce3054ce16463b24b06c0221">get_date</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a22c5af7cce3054ce16463b24b06c0221"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取日期值  <br /></td></tr>
+<tr class="memitem:a05205c37ecbbd8da8b6156bbdbeaab10" id="r_a05205c37ecbbd8da8b6156bbdbeaab10"><td class="memItemLeft">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classtime.html">time</a>&#160;</td><td class="memItemRight"><a class="el" href="#a05205c37ecbbd8da8b6156bbdbeaab10">get_time</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a05205c37ecbbd8da8b6156bbdbeaab10"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取时间值  <br /></td></tr>
+<tr class="memitem:aa835d12b4e9c0095d0c890e2b25f48e6" id="r_aa835d12b4e9c0095d0c890e2b25f48e6"><td class="memItemLeft">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classdatetime.html">datetime</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa835d12b4e9c0095d0c890e2b25f48e6">get_datetime</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:aa835d12b4e9c0095d0c890e2b25f48e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取日期时间值  <br /></td></tr>
+<tr class="memitem:a3485b22e9fc74d53a93aa2e7b0852314" id="r_a3485b22e9fc74d53a93aa2e7b0852314"><td class="memItemLeft">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classtimestamp.html">timestamp</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3485b22e9fc74d53a93aa2e7b0852314">get_timestamp</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a3485b22e9fc74d53a93aa2e7b0852314"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取时间戳值  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pub_types_structidb__result"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_structidb__result')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 类型 继承自 <a class="el" href="structidb__result.html">idb_result</a></td></tr>
+<tr class="memitem:ac58a6a1ad6756117bc3eb71bb52df082 inherit pub_types_structidb__result" id="r_ac58a6a1ad6756117bc3eb71bb52df082"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>size_type</b> = <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td></tr>
+<tr class="memdesc:ac58a6a1ad6756117bc3eb71bb52df082 inherit pub_types_structidb__result"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:a679893315e15ca3a6009b495527a89d5 inherit pub_types_structidb__result" id="r_a679893315e15ca3a6009b495527a89d5"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></td></tr>
+<tr class="memdesc:a679893315e15ca3a6009b495527a89d5 inherit pub_types_structidb__result"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>PostgreSQL预处理语句结果集类 </p>
+<p>实现idb_prepared_result接口，提供PostgreSQL预处理语句查询结果的访问功能。</p>
+<p>主要功能：</p><ul>
+<li>结果集元数据获取</li>
+<li>逐行遍历结果集</li>
+<li>支持多种数据类型转换</li>
+<li>BYTEA二进制数据处理</li>
+<li>NULL值检测</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>该类与pgsql_tb_result功能完全相同，但类型上区分了普通查询和预处理语句查询， 便于接口设计和类型安全。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00043">43</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a871676fa2df76c4a4b9dd21944e8b4b4" name="a871676fa2df76c4a4b9dd21944e8b4b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a871676fa2df76c4a4b9dd21944e8b4b4">&#9670;&#160;</a></span>pgsql_prepared_result()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pgsql_prepared_result::pgsql_prepared_result </td>
+          <td>(</td>
+          <td class="paramtype">::PGresult *</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>PostgreSQL结果集句柄</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建预处理语句结果集对象，接管PGresult的所有权。 </p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2ff9c2154839e32138b6cf21ce9208d4" name="a2ff9c2154839e32138b6cf21ce9208d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ff9c2154839e32138b6cf21ce9208d4">&#9670;&#160;</a></span>~pgsql_prepared_result()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pgsql_prepared_result::~pgsql_prepared_result </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>自动释放PGresult资源。 </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a2708aeb47191b77cdd2f04fa9ae25e5d" name="a2708aeb47191b77cdd2f04fa9ae25e5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2708aeb47191b77cdd2f04fa9ae25e5d">&#9670;&#160;</a></span>column_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> pgsql_prepared_result::column_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结果集列数 </p>
+<dl class="section return"><dt>返回</dt><dd>总列数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a15bba511bedb7883a9770516e60d0502">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00086">86</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a117cefcf033608f10ea0996498d7b214" name="a117cefcf033608f10ea0996498d7b214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a117cefcf033608f10ea0996498d7b214">&#9670;&#160;</a></span>column_names()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &amp; pgsql_prepared_result::column_names </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取列名列表 </p>
+<dl class="section return"><dt>返回</dt><dd>列名视图列表 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00092">92</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab200c333f108658499041e0f71d10d53" name="ab200c333f108658499041e0f71d10d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab200c333f108658499041e0f71d10d53">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool pgsql_prepared_result::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查结果集是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>无数据返回true </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__result.html#aa1c85e3b42031de74a7fb1f7a95e2754">idb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00068">68</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af4c04e828137110eca9f68688badfcf8" name="af4c04e828137110eca9f68688badfcf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4c04e828137110eca9f68688badfcf8">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> pgsql_prepared_result::get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引（从0开始） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>字符串视图，NULL返回空字符串 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00099">99</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af74cce791fa6bf352cfcc2df8ede3da6" name="af74cce791fa6bf352cfcc2df8ede3da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74cce791fa6bf352cfcc2df8ede3da6">&#9670;&#160;</a></span>get_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> pgsql_prepared_result::get_bit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取BIT位字段值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>位字段的整数值 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#ab2a5e423b358828cada7a8be14651196">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00164">164</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aadac42ee0baee38b79d10adc652db047" name="aadac42ee0baee38b79d10adc652db047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadac42ee0baee38b79d10adc652db047">&#9670;&#160;</a></span>get_blob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classvector.html">vector</a>&lt; char &gt; pgsql_prepared_result::get_blob </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取BLOB二进制数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>字节向量</dd></dl>
+<p>自动处理PostgreSQL的BYTEA类型解码。 </p>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#ac3feb428fffed8adfa41c28b64bae4ea">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00157">157</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afcc51661f2fa3d703a0a935a8974e1cb" name="afcc51661f2fa3d703a0a935a8974e1cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcc51661f2fa3d703a0a935a8974e1cb">&#9670;&#160;</a></span>get_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool pgsql_prepared_result::get_bool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取布尔值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>布尔值 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#ad35689b23d23b40ed9fe12c425527c58">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00106">106</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a22c5af7cce3054ce16463b24b06c0221" name="a22c5af7cce3054ce16463b24b06c0221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22c5af7cce3054ce16463b24b06c0221">&#9670;&#160;</a></span>get_date()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classdate.html">date</a> pgsql_prepared_result::get_date </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取日期值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>日期对象 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#ac54604a476b6a85e5ff0892304adf0a3">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00171">171</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa835d12b4e9c0095d0c890e2b25f48e6" name="aa835d12b4e9c0095d0c890e2b25f48e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa835d12b4e9c0095d0c890e2b25f48e6">&#9670;&#160;</a></span>get_datetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classdatetime.html">datetime</a> pgsql_prepared_result::get_datetime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取日期时间值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>日期时间对象 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a0148e0ef2825f69afcbf37f1306b96cb">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00185">185</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a42f919b8b5661f28ea94a9b415951d1c" name="a42f919b8b5661f28ea94a9b415951d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42f919b8b5661f28ea94a9b415951d1c">&#9670;&#160;</a></span>get_decimal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> pgsql_prepared_result::get_decimal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取十进制值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>十进制数对象 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a3c7275cb280846f4d59fa4b78411493d">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00148">148</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a579f20ba874590d36d7565d51025575a" name="a579f20ba874590d36d7565d51025575a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a579f20ba874590d36d7565d51025575a">&#9670;&#160;</a></span>get_float32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga3068631062aaf7da4cc0371da9e7a377">float32_t</a> pgsql_prepared_result::get_float32 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取32位浮点值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>32位浮点数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a5ef4af6943ee76fadf05fc2989d56ebd">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00134">134</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad581a3f346bbe1345722da7971101522" name="ad581a3f346bbe1345722da7971101522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad581a3f346bbe1345722da7971101522">&#9670;&#160;</a></span>get_float64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a> pgsql_prepared_result::get_float64 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取64位浮点值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>64位浮点数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a1c4d6dcd48871d296845f934c8218cf9">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00141">141</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae9d62052b592dc5491a5e3a8edccfcec" name="ae9d62052b592dc5491a5e3a8edccfcec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9d62052b592dc5491a5e3a8edccfcec">&#9670;&#160;</a></span>get_int16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a> pgsql_prepared_result::get_int16 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取16位整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>16位整数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#aed5fa0a878a1868a38db6b29308d5299">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a130661a5c9b0c0f3bef2480d2c63248b" name="a130661a5c9b0c0f3bef2480d2c63248b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130661a5c9b0c0f3bef2480d2c63248b">&#9670;&#160;</a></span>get_int32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> pgsql_prepared_result::get_int32 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取32位整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>32位整数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a30c2b4161d1197de423889027ae5272d">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00120">120</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1bd78d238a1ab4724c0c5819da14b494" name="a1bd78d238a1ab4724c0c5819da14b494"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bd78d238a1ab4724c0c5819da14b494">&#9670;&#160;</a></span>get_int64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> pgsql_prepared_result::get_int64 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取64位整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>64位整数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a313b404f40b06095313fdad5a71c36d9">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00127">127</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a05205c37ecbbd8da8b6156bbdbeaab10" name="a05205c37ecbbd8da8b6156bbdbeaab10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05205c37ecbbd8da8b6156bbdbeaab10">&#9670;&#160;</a></span>get_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classtime.html">time</a> pgsql_prepared_result::get_time </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取时间值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>时间对象 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a0501bb1dba04138e9347c6685a8070d2">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00178">178</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3485b22e9fc74d53a93aa2e7b0852314" name="a3485b22e9fc74d53a93aa2e7b0852314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3485b22e9fc74d53a93aa2e7b0852314">&#9670;&#160;</a></span>get_timestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD _NEFORCE <a class="el" href="classtimestamp.html">timestamp</a> pgsql_prepared_result::get_timestamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取时间戳值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>列索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>时间戳对象 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a25e41967e2cd971cb73a691092342f7e">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00194">194</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4e6c772bb0a6a957f726b49de49fd196" name="a4e6c772bb0a6a957f726b49de49fd196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e6c772bb0a6a957f726b49de49fd196">&#9670;&#160;</a></span>next()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool pgsql_prepared_result::next </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动到下一行 </p>
+<dl class="section return"><dt>返回</dt><dd>成功移动返回true，到达末尾返回false </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__result.html#a4ffe1b5d13e654c3cb99f000e7d4d093">idb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00074">74</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5402e720afdab1ca0d1887d9aa47e756" name="a5402e720afdab1ca0d1887d9aa47e756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5402e720afdab1ca0d1887d9aa47e756">&#9670;&#160;</a></span>row_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> pgsql_prepared_result::row_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结果集行数 </p>
+<dl class="section return"><dt>返回</dt><dd>总行数 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#aabb704cab81e3fdae2849fcdd6d73c75">idb_tb_result</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a> 第 <a class="el" href="pgsql__prepared__result_8hpp_source.html#l00080">80</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="pgsql__prepared__result_8hpp_source.html">pgsql_prepared_result.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classpgsql__prepared__result.html">pgsql_prepared_result</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -89,7 +89,7 @@ $(function(){initNavTree('structidb__tb__connect.html','','structidb__tb__connec
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">idb_tb_connect结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
+  <div class="headertitle"><div class="title">idb_tb_connect结构体 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___database.html">数据库</a> &raquo; <a class="el" href="group___database_interface.html">数据库接口</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,7 +100,7 @@ $(function(){initNavTree('structidb__tb__connect.html','','structidb__tb__connec
 <div class="dynheader">
 类 idb_tb_connect 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__tb__connect__inherit__graph.svg" width="120" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__tb__connect__inherit__graph.svg" width="380" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -117,10 +117,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:affedca161dc65836d2ecd3ae76e9158d inherit pub_methods_structidb__connect" id="r_affedca161dc65836d2ecd3ae76e9158d"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95">clock_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#affedca161dc65836d2ecd3ae76e9158d">get_alive</a> () const noexcept</td></tr>
 <tr class="memdesc:affedca161dc65836d2ecd3ae76e9158d inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接空闲时间  <br /></td></tr>
 <tr class="memitem:a7ae3001e8ef72724b952fac4ea66cde7 inherit pub_methods_structidb__connect" id="r_a7ae3001e8ef72724b952fac4ea66cde7"><td class="memItemLeft">
-virtual bool&#160;</td><td class="memItemRight"><b>connect</b> (const db_config &amp;config)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight"><b>connect</b> (const <a class="el" href="structdb__config.html">db_config</a> &amp;config)=0</td></tr>
 <tr class="memdesc:a7ae3001e8ef72724b952fac4ea66cde7 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">建立连接 <br /></td></tr>
 <tr class="memitem:a5faaad097bbdc6d8e530eb9f3ec7af94 inherit pub_methods_structidb__connect" id="r_a5faaad097bbdc6d8e530eb9f3ec7af94"><td class="memItemLeft">
-virtual bool&#160;</td><td class="memItemRight"><b>reconnect</b> (const db_config &amp;config)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight"><b>reconnect</b> (const <a class="el" href="structdb__config.html">db_config</a> &amp;config)=0</td></tr>
 <tr class="memdesc:a5faaad097bbdc6d8e530eb9f3ec7af94 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新连接 <br /></td></tr>
 <tr class="memitem:a689ce6c9a44cdc602e6006615e949e19 inherit pub_methods_structidb__connect" id="r_a689ce6c9a44cdc602e6006615e949e19"><td class="memItemLeft">
 virtual void&#160;</td><td class="memItemRight"><b>close</b> ()=0</td></tr>
@@ -155,7 +155,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 <div class="textblock"><p>关系型数据库连接抽象基类 </p>
 <p>提供表格数据查询和预处理语句功能。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00262">262</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a37513bfd22b7ea67498dbac6f98e8156" name="a37513bfd22b7ea67498dbac6f98e8156"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37513bfd22b7ea67498dbac6f98e8156">&#9670;&#160;</a></span>prepare_statement()</h2>
@@ -188,6 +188,8 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>预处理语句对象 </dd></dl>
+
+<p>在 <a class="el" href="structmysql__connect.html#a8ebdf8fbfa1b212d524978e33f087cba">mysql_connect</a>, <a class="el" href="classpgsql__connect.html#a2b5a9bf1dac1e7b784ab3f07b90d8894">pgsql_connect</a> , 以及 <a class="el" href="structsqlite__connect.html#a195baffb5be8eeacc09f56ecbfb105e3">sqlite_connect</a> 内被实现.</p>
 
 </div>
 </div>
@@ -222,6 +224,8 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>查询结果集 </dd></dl>
+
+<p>在 <a class="el" href="structmysql__connect.html#a051baebdc9585491f709241f1bdb8a64">mysql_connect</a>, <a class="el" href="classpgsql__connect.html#a31806222a34e6b49b6ad4116130da7d4">pgsql_connect</a> , 以及 <a class="el" href="structsqlite__connect.html#ac3d41c38c171431a502fb21b023b281d">sqlite_connect</a> 内被实现.</p>
 
 </div>
 </div>

@@ -55,6 +55,15 @@ private:
         }
     };
 
+    struct x509_deleter {
+        void operator()(::X509* cert) const noexcept {
+            if (cert) {
+                ::X509_free(cert);
+            }
+        }
+    };
+    using x509_ptr = unique_ptr<::X509, x509_deleter>;
+
     unique_ptr<::SSL, ssl_deleter> ssl_; ///< OpenSSL SSL对象
     string last_error_;                  ///< 最后错误信息
 
@@ -191,12 +200,11 @@ public:
 
     /**
      * @brief 获取对等方证书
-     * @return X509证书指针，需要调用方使用X509_free释放
+     * @return X509证书指针
      *
      * 获取TLS握手时对等方提供的证书。
-     * 返回的证书需要调用X509_free释放。
      */
-    NEFORCE_NODISCARD ::X509* get_peer_certificate() const;
+    NEFORCE_NODISCARD x509_ptr get_peer_certificate() const;
 
     /**
      * @brief 验证对等方证书

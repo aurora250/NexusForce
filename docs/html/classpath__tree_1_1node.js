@@ -15,6 +15,6 @@ var classpath__tree_1_1node =
     [ "is_leaf", "classpath__tree_1_1node.html#a35712e285ba823164701f127e88ad7d2", null ],
     [ "is_root", "classpath__tree_1_1node.html#aa5346d90439f7ed7dcd9451444d69560", null ],
     [ "parent", "classpath__tree_1_1node.html#af6ffbb5e22f9b51f3fb93a6610bc5b6b", null ],
-    [ "remove_child", "classpath__tree_1_1node.html#aae4918b9c6ab3c7fe16339bffff203d6", null ],
+    [ "remove_child", "classpath__tree_1_1node.html#a17193f36134699f1e9f07c0cc708a892", null ],
     [ "type", "classpath__tree_1_1node.html#afc1d88c9be325bf014db7ab0ef948994", null ]
 ];

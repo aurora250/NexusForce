@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['单次调用_0',['单次调用',['../group___call_once.html',1,'']]]
+  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
 ];

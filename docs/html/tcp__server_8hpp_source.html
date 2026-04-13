@@ -95,13 +95,13 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="thread__pool_8hpp.html">NeForce/core/async/thread_pool.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;NeForce/network/socket/ssl_socket.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;NeForce/network/socket/tcp_acceptor.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;NeForce/network/ssl/ssl_socket.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;NeForce/network/tcp/tcp_acceptor.hpp&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> SocketT&gt;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">class </span>basic_tcp_server {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">static_assert</span>(is_base_of_v&lt;tcp_socket, SocketT&gt;, <span class="stringliteral">&quot;SocketT must derive from tcp_socket&quot;</span>);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___base_type_qualifier_check.html#ga2dd33cb2936b9c2e75a085b78a7349a1">is_base_of_v&lt;tcp_socket, SocketT&gt;</a>, <span class="stringliteral">&quot;SocketT must derive from tcp_socket&quot;</span>);</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">using </span>socket_type = SocketT;</div>
@@ -168,7 +168,7 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">explicit</span> basic_tcp_server(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> port, <span class="keyword">const</span> <span class="keywordtype">size_t</span> worker_count = <a class="code hl_variable" href="classthread__pool.html#a20545701e2cd9a47ad2355a4e2cd2581">thread_pool::max_threshhold</a>) :</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">explicit</span> basic_tcp_server(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> port, <span class="keyword">const</span> <span class="keywordtype">size_t</span> worker_count = thread_pool::max_thread_threshhold()) :</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    port_(port) {</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">if</span> (worker_count == 0) {</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            NEFORCE_THROW_EXCEPTION(value_exception(<span class="stringliteral">&quot;Worker count must be greater than 0&quot;</span>));</div>
@@ -215,7 +215,7 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        }</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">try</span> {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keyword">const</span> <span class="keyword">auto</span> endpoint = ip_address::any(port_);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keyword">const</span> <span class="keyword">auto</span> endpoint = <a class="code hl_function" href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a>(port_);</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            acceptor_.open(endpoint, backlog);</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            running_ = <span class="keyword">true</span>;</div>
@@ -281,9 +281,9 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">explicit</span> ssl_server(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> port, <span class="keyword">const</span> <span class="keywordtype">size_t</span> worker_count = <a class="code hl_variable" href="classthread__pool.html#a20545701e2cd9a47ad2355a4e2cd2581">thread_pool::max_threshhold</a>) :</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">explicit</span> ssl_server(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> port, <span class="keyword">const</span> <span class="keywordtype">size_t</span> worker_count = thread_pool::max_thread_threshhold()) :</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    basic_tcp_server&lt;ssl_socket&gt;(port, worker_count),</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    ssl_ctx_(ssl_method::TLS_SERVER) {}</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    ssl_ctx_(<a class="code hl_enumeration" href="group___network.html#ga4012ce4e3211cb41f69956042abba0c8">ssl_method</a>::<a class="code hl_enumvalue" href="group___network.html#gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387">TLS_SERVER</a>) {}</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">bool</span> load_certificate(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; cert_file, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key_file)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">if</span> (is_running()) {</div>
@@ -299,7 +299,7 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordflow">if</span> (is_running()) {</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            NEFORCE_THROW_EXCEPTION(ssl_exception(<span class="stringliteral">&quot;Cannot set SSL context while server is running&quot;</span>));</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        }</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">if</span> (!ctx.is_valid()) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">if</span> (!ctx.<a class="code hl_function" href="classssl__context.html#a578442e1760cc9d136347c462611fedf">is_valid</a>()) {</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            NEFORCE_THROW_EXCEPTION(ssl_exception(<span class="stringliteral">&quot;Invalid SSL context&quot;</span>));</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        }</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        ssl_ctx_ = _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(ctx);</div>
@@ -320,9 +320,13 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__</span></div>
 <div class="ttc" id="aclassbasic__string_html_add7a1394ef40179cf7b12b4f98c38f9d"><div class="ttname"><a href="classbasic__string.html#add7a1394ef40179cf7b12b4f98c38f9d">basic_string::empty</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept</div><div class="ttdoc">检查是否为空</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01255">basic_string.hpp:1255</a></div></div>
-<div class="ttc" id="aclassthread__pool_html_a20545701e2cd9a47ad2355a4e2cd2581"><div class="ttname"><a href="classthread__pool.html#a20545701e2cd9a47ad2355a4e2cd2581">thread_pool::max_threshhold</a></div><div class="ttdeci">static const size_t max_threshhold</div><div class="ttdoc">最大线程数阈值</div><div class="ttdef"><b>定义</b> <a href="thread__pool_8hpp_source.html#l00372">thread_pool.hpp:372</a></div></div>
+<div class="ttc" id="aclassip__address_html_a59b769d8f38f49df1d1f60f7880c2c86"><div class="ttname"><a href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::undef, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
+<div class="ttc" id="aclassssl__context_html_a578442e1760cc9d136347c462611fedf"><div class="ttname"><a href="classssl__context.html#a578442e1760cc9d136347c462611fedf">ssl_context::is_valid</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_valid() const noexcept</div><div class="ttdoc">检查上下文是否有效</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00223">ssl_context.hpp:223</a></div></div>
+<div class="ttc" id="agroup___base_type_qualifier_check_html_ga2dd33cb2936b9c2e75a085b78a7349a1"><div class="ttname"><a href="group___base_type_qualifier_check.html#ga2dd33cb2936b9c2e75a085b78a7349a1">is_base_of_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_base_of_v</div><div class="ttdoc">is_base_of的便捷变量模板</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02226">type_traits.hpp:2226</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
+<div class="ttc" id="agroup___network_html_ga4012ce4e3211cb41f69956042abba0c8"><div class="ttname"><a href="group___network.html#ga4012ce4e3211cb41f69956042abba0c8">ssl_method</a></div><div class="ttdeci">ssl_method</div><div class="ttdoc">SSL/TLS方法类型</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00030">ssl_context.hpp:30</a></div></div>
+<div class="ttc" id="agroup___network_html_gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387"><div class="ttname"><a href="group___network.html#gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387">ssl_method::TLS_SERVER</a></div><div class="ttdeci">@ TLS_SERVER</div><div class="ttdoc">TLS服务器端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00031">ssl_context.hpp:31</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00313">shift.hpp:313</a></div></div>
 <div class="ttc" id="athread__pool_8hpp_html"><div class="ttname"><a href="thread__pool_8hpp.html">thread_pool.hpp</a></div><div class="ttdoc">线程池实现</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -331,7 +335,7 @@ $(function(){initNavTree('tcp__server_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>tcp_server.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>tcp</b></li><li class="navelem"><b>tcp_server.hpp</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

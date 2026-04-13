@@ -359,6 +359,8 @@ type_traits.hpp 的引用(Include)关系图:</div>
 概念</h2></td></tr>
 <tr class="memitem:convertible_5Fto" id="r_convertible_5Fto"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptconvertible__to.html">convertible_to</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查类型From是否可以转换为类型To <br /></td></tr>
+<tr class="memitem:is_5Fpair_5Fv" id="r_is_5Fpair_5Fv"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptis__pair__v.html">is_pair_v</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查类型是否具有类似pair的结构 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
@@ -541,6 +543,10 @@ template&lt;typename Default, template&lt; typename... &gt; class Op, typename..
 template&lt;typename... Types&gt; </td></tr>
 <tr class="memitem:ga63597ca81f0a3a80001c836bc4cbbb84 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>common_type_t</b> = typename <a class="el" href="structcommon__type.html">common_type</a>&lt;Types...&gt;::type</td></tr>
 <tr class="memdesc:ga63597ca81f0a3a80001c836bc4cbbb84"><td class="mdescLeft">&#160;</td><td class="mdescRight">common_type的便捷别名 <br /></td></tr>
+<tr class="memitem:ga9159a6bfe7317dea917d34d2a9798fde" id="r_ga9159a6bfe7317dea917d34d2a9798fde"><td class="memTemplParams" colspan="2">
+template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ga9159a6bfe7317dea917d34d2a9798fde template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>common_reference_t</b> = typename <a class="el" href="structcommon__reference.html">common_reference</a>&lt;Types...&gt;::type</td></tr>
+<tr class="memdesc:ga9159a6bfe7317dea917d34d2a9798fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">common_reference的便捷别名 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
@@ -556,6 +562,12 @@ template&lt;typename... Types&gt; </td></tr>
 <tr class="memitem:gaa6a0ce4f78a0270ebbcc18e586d9f0ad" id="r_gaa6a0ce4f78a0270ebbcc18e586d9f0ad"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:gaa6a0ce4f78a0270ebbcc18e586d9f0ad template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___declval_tools.html#gaa6a0ce4f78a0270ebbcc18e586d9f0ad">declvoid</a> (<a class="el" href="group___type_traits_utilities.html#gaca42c1976d1b12998afcabf8f39e8c23">type_identity_t</a>&lt; T &gt;) noexcept</td></tr>
 <tr class="memdesc:gaa6a0ce4f78a0270ebbcc18e586d9f0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">将类型映射为void，仅用于非求值上下文  <br /></td></tr>
+<tr class="memitem:ga30f452753108caa1d26635f5817c8149" id="r_ga30f452753108caa1d26635f5817c8149"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Mem&gt; </td></tr>
+<tr class="memitem:ga30f452753108caa1d26635f5817c8149 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___base_type_qualifier_check.html#ga30f452753108caa1d26635f5817c8149">is_pointer_interconvertible_with_class</a> (Mem T::*mp) noexcept</td></tr>
+<tr class="memdesc:ga30f452753108caa1d26635f5817c8149"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断成员指针是否指向类对象的起始位置  <br /></td></tr>
+<tr class="memitem:ga3ef5774cd5e76fbd9ee680c7ab03c40b" id="r_ga3ef5774cd5e76fbd9ee680c7ab03c40b"><td class="memTemplParams" colspan="2">template&lt;typename S1, typename S2, typename M1, typename M2&gt; </td></tr>
+<tr class="memitem:ga3ef5774cd5e76fbd9ee680c7ab03c40b template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___base_type_qualifier_check.html#ga3ef5774cd5e76fbd9ee680c7ab03c40b">is_corresponding_member</a> (M1 S1::*m1, M2 S2::*m2) noexcept</td></tr>
+<tr class="memdesc:ga3ef5774cd5e76fbd9ee680c7ab03c40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断两个成员指针是否指向对应位置的成员  <br /></td></tr>
 <tr class="memitem:ga48f94c9d04990c7a695f4fc338eba1f8" id="r_ga48f94c9d04990c7a695f4fc338eba1f8"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga48f94c9d04990c7a695f4fc338eba1f8 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr T &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a> (<a class="el" href="group___remove_qualifiers.html#ga5993e4587ccd2777e95893329360358a">remove_reference_t</a>&lt; T &gt; &amp;x) noexcept</td></tr>
 <tr class="memdesc:ga48f94c9d04990c7a695f4fc338eba1f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">完美转发左值  <br /></td></tr>
@@ -574,24 +586,412 @@ template&lt;typename... Types&gt; </td></tr>
 <tr class="memitem:ga47995fab432306dd7e4e0a2a76064b0c" id="r_ga47995fab432306dd7e4e0a2a76064b0c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga47995fab432306dd7e4e0a2a76064b0c template"><td class="memItemLeft">const T *&#160;</td><td class="memItemRight"><a class="el" href="group___args_forward_functions.html#ga47995fab432306dd7e4e0a2a76064b0c">addressof</a> (const T &amp;&amp;)=delete</td></tr>
 <tr class="memdesc:ga47995fab432306dd7e4e0a2a76064b0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止获取const右值的地址  <br /></td></tr>
-<tr class="memitem:ga851608b0ce2920ea0c10ab280a9b885c" id="r_ga851608b0ce2920ea0c10ab280a9b885c"><td class="memTemplParams" colspan="2">template&lt;typename T, template&lt; typename... &gt; class Template&gt; </td></tr>
-<tr class="memitem:ga851608b0ce2920ea0c10ab280a9b885c template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___type_attribute_operations.html#ga851608b0ce2920ea0c10ab280a9b885c">is_specialization_v</a> ()</td></tr>
-<tr class="memdesc:ga851608b0ce2920ea0c10ab280a9b885c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_specialization的便捷函数模板  <br /></td></tr>
-<tr class="memitem:ga31a7d3195aa8a5a94e8c8799f5a73099" id="r_ga31a7d3195aa8a5a94e8c8799f5a73099"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga31a7d3195aa8a5a94e8c8799f5a73099 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structis__move__constructible.html">is_move_constructible</a>&lt; T &gt;, <a class="el" href="structis__move__assignable.html">is_move_assignable</a>&lt; T &gt; &gt;::value &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___swap_utility.html#ga31a7d3195aa8a5a94e8c8799f5a73099">swap</a> (T &amp;lhs, T &amp;rhs) noexcept(<a class="el" href="structis__nothrow__move__constructible.html">is_nothrow_move_constructible</a>&lt; T &gt;::value &amp;&amp;<a class="el" href="structis__nothrow__move__assignable.html">is_nothrow_move_assignable</a>&lt; T &gt;::value)</td></tr>
-<tr class="memdesc:ga31a7d3195aa8a5a94e8c8799f5a73099"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个相同类型的值  <br /></td></tr>
+<tr class="memitem:ga41c0b69a819684ab798eb50897e9a4d3" id="r_ga41c0b69a819684ab798eb50897e9a4d3"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga41c0b69a819684ab798eb50897e9a4d3 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaaa19f0c4fddd4e4d26d8d26de4099667">is_move_constructible_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#ga84885918abc2e4a305c7626bd1d90dd4">is_move_assignable_v</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___swap_utility.html#ga41c0b69a819684ab798eb50897e9a4d3">swap</a> (T &amp;lhs, T &amp;rhs) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#ga4e71583e475165e891f9ea1e02c6b8e4">is_nothrow_move_assignable_v</a>&lt; T &gt;)</td></tr>
+<tr class="memdesc:ga41c0b69a819684ab798eb50897e9a4d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个相同类型的值  <br /></td></tr>
 <tr class="memitem:ga789a3d11d27ddc5c4c03734fd0e6938d" id="r_ga789a3d11d27ddc5c4c03734fd0e6938d"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Size&gt; </td></tr>
 <tr class="memitem:ga789a3d11d27ddc5c4c03734fd0e6938d template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__swappable.html">is_swappable</a>&lt; T &gt;::value &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___swap_utility.html#ga789a3d11d27ddc5c4c03734fd0e6938d">swap</a> (T(&amp;lhs)[Size], T(&amp;rhs)[Size]) noexcept(<a class="el" href="structis__nothrow__swappable.html">is_nothrow_swappable</a>&lt; T &gt;::value)</td></tr>
 <tr class="memdesc:ga789a3d11d27ddc5c4c03734fd0e6938d"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个相同类型的数组  <br /></td></tr>
 <tr class="memitem:ga6a39d376fb4396550fe3dadb383d17df" id="r_ga6a39d376fb4396550fe3dadb383d17df"><td class="memItemLeft">
 void&#160;</td><td class="memItemRight"><b>swap</b> ()=delete</td></tr>
 <tr class="memdesc:ga6a39d376fb4396550fe3dadb383d17df"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除无参数的swap重载 <br /></td></tr>
-<tr class="memitem:ga1ca8af6ed953ac81c0c5ed294d4a0330" id="r_ga1ca8af6ed953ac81c0c5ed294d4a0330"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U = T&gt; </td></tr>
-<tr class="memitem:ga1ca8af6ed953ac81c0c5ed294d4a0330 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 T&#160;</td><td class="memItemRight"><a class="el" href="group___swap_utility.html#ga1ca8af6ed953ac81c0c5ed294d4a0330">exchange</a> (T &amp;val, U &amp;&amp;new_val) noexcept(<a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structis__nothrow__move__constructible.html">is_nothrow_move_constructible</a>&lt; T &gt;, <a class="el" href="structis__nothrow__assignable.html">is_nothrow_assignable</a>&lt; T &amp;, U &gt; &gt;::value)</td></tr>
-<tr class="memdesc:ga1ca8af6ed953ac81c0c5ed294d4a0330"><td class="mdescLeft">&#160;</td><td class="mdescRight">将新值赋给对象并返回旧值  <br /></td></tr>
+<tr class="memitem:ga0c5a3fc6dc35e080dc7f316405327e6e" id="r_ga0c5a3fc6dc35e080dc7f316405327e6e"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U = T&gt; </td></tr>
+<tr class="memitem:ga0c5a3fc6dc35e080dc7f316405327e6e template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 T&#160;</td><td class="memItemRight"><a class="el" href="group___swap_utility.html#ga0c5a3fc6dc35e080dc7f316405327e6e">exchange</a> (T &amp;val, U &amp;&amp;new_val) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#ga167e1b8821cb4036a356540e940cbe08">is_nothrow_assignable_v</a>&lt; T &amp;, U &gt;)</td></tr>
+<tr class="memdesc:ga0c5a3fc6dc35e080dc7f316405327e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">将新值赋给对象并返回旧值  <br /></td></tr>
 <tr class="memitem:gafff7aa9d7280a07a58464ccdf4a8931a" id="r_gafff7aa9d7280a07a58464ccdf4a8931a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:gafff7aa9d7280a07a58464ccdf4a8931a template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE constexpr T&#160;</td><td class="memItemRight"><a class="el" href="group___type_initialize_function.html#gafff7aa9d7280a07a58464ccdf4a8931a">initialize</a> () noexcept(<a class="el" href="structis__nothrow__default__constructible.html">is_nothrow_default_constructible</a>&lt; T &gt;::value)</td></tr>
 <tr class="memdesc:gafff7aa9d7280a07a58464ccdf4a8931a"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回类型T的默认初始化值  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:ga5b6851725df080a5e8ced7b684b7903f" id="r_ga5b6851725df080a5e8ced7b684b7903f"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga5b6851725df080a5e8ced7b684b7903f template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>negation_v</b> = <a class="el" href="structnegation.html">negation</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga5b6851725df080a5e8ced7b684b7903f"><td class="mdescLeft">&#160;</td><td class="mdescRight">negation的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga3f666e0f0741b0a6079f489797b59f2c" id="r_ga3f666e0f0741b0a6079f489797b59f2c"><td class="memTemplParams" colspan="2">
+template&lt;typename T1, typename T2&gt; </td></tr>
+<tr class="memitem:ga3f666e0f0741b0a6079f489797b59f2c template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_same_v</b> = <a class="el" href="structis__same.html">is_same</a>&lt;T1, T2&gt;::value</td></tr>
+<tr class="memdesc:ga3f666e0f0741b0a6079f489797b59f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_same的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa0146faa0d59953b38f3d7cebefbec2c" id="r_gaa0146faa0d59953b38f3d7cebefbec2c"><td class="memTemplParams" colspan="2">
+template&lt;typename T, typename... Types&gt; </td></tr>
+<tr class="memitem:gaa0146faa0d59953b38f3d7cebefbec2c template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_any_of_v</b> = <a class="el" href="structis__any__of.html">is_any_of</a>&lt;T, Types...&gt;::value</td></tr>
+<tr class="memdesc:gaa0146faa0d59953b38f3d7cebefbec2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_any_of的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga07b45a12528ab6274b3945b59508495d" id="r_ga07b45a12528ab6274b3945b59508495d"><td class="memTemplParams" colspan="2">
+template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ga07b45a12528ab6274b3945b59508495d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>disjunction_v</b> = <a class="el" href="structdisjunction.html">disjunction</a>&lt;Args...&gt;::value</td></tr>
+<tr class="memdesc:ga07b45a12528ab6274b3945b59508495d"><td class="mdescLeft">&#160;</td><td class="mdescRight">disjunction的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaf49fb9070ceeed735b3dddc7da0392d7" id="r_gaf49fb9070ceeed735b3dddc7da0392d7"><td class="memTemplParams" colspan="2">
+template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:gaf49fb9070ceeed735b3dddc7da0392d7 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>conjunction_v</b> = <a class="el" href="structconjunction.html">conjunction</a>&lt;Args...&gt;::value</td></tr>
+<tr class="memdesc:gaf49fb9070ceeed735b3dddc7da0392d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">conjunction的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaef2319490d0b0a89b7de2e5b86332d19" id="r_gaef2319490d0b0a89b7de2e5b86332d19"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaef2319490d0b0a89b7de2e5b86332d19 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_void_v</b> = <a class="el" href="structis__void.html">is_void</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaef2319490d0b0a89b7de2e5b86332d19"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_void的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga2097f41e78735e8dfe11d7bce991afc7" id="r_ga2097f41e78735e8dfe11d7bce991afc7"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga2097f41e78735e8dfe11d7bce991afc7 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_packaged_v</b> = <a class="el" href="structis__packaged.html">is_packaged</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga2097f41e78735e8dfe11d7bce991afc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_packaged的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga67eb3297962a9df13909b64373e0430c" id="r_ga67eb3297962a9df13909b64373e0430c"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga67eb3297962a9df13909b64373e0430c template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_unpackaged_v</b> = <a class="el" href="structis__unpackaged.html">is_unpackaged</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga67eb3297962a9df13909b64373e0430c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_unpackaged的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga299a1c32eb65bb99760c4f3b2acf41a2" id="r_ga299a1c32eb65bb99760c4f3b2acf41a2"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga299a1c32eb65bb99760c4f3b2acf41a2 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_character_v</b> = <a class="el" href="structis__character.html">is_character</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga299a1c32eb65bb99760c4f3b2acf41a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_character的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaed86a4d140433ec8ac77fe7654d6491a" id="r_gaed86a4d140433ec8ac77fe7654d6491a"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaed86a4d140433ec8ac77fe7654d6491a template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_boolean_v</b> = <a class="el" href="structis__boolean.html">is_boolean</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaed86a4d140433ec8ac77fe7654d6491a"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_boolean的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaf31b5ea89a776f2151e7c8358c4fdf0e" id="r_gaf31b5ea89a776f2151e7c8358c4fdf0e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf31b5ea89a776f2151e7c8358c4fdf0e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_standard_integral_v</b> = <a class="el" href="structis__standard__integral.html">is_standard_integral</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaf31b5ea89a776f2151e7c8358c4fdf0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_standard_integral的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga7ad20d600db4f8084cb853d37a10fa8b" id="r_ga7ad20d600db4f8084cb853d37a10fa8b"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga7ad20d600db4f8084cb853d37a10fa8b template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_integral_v</b> = <a class="el" href="structis__integral.html">is_integral</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga7ad20d600db4f8084cb853d37a10fa8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_integral的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga1233851ade7c3f53dc6b9b0ae01cf978" id="r_ga1233851ade7c3f53dc6b9b0ae01cf978"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga1233851ade7c3f53dc6b9b0ae01cf978 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_floating_point_v</b> = <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga1233851ade7c3f53dc6b9b0ae01cf978"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_floating_point的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gacba9ef87cf785618c5aa0ac0c49eff38" id="r_gacba9ef87cf785618c5aa0ac0c49eff38"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gacba9ef87cf785618c5aa0ac0c49eff38 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_arithmetic_v</b> = <a class="el" href="structis__arithmetic.html">is_arithmetic</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gacba9ef87cf785618c5aa0ac0c49eff38"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_arithmetic的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaacd632d0f1e06e58693fd5a8959d764f" id="r_gaacd632d0f1e06e58693fd5a8959d764f"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaacd632d0f1e06e58693fd5a8959d764f template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_signed_v</b> = <a class="el" href="structis__signed.html">is_signed</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaacd632d0f1e06e58693fd5a8959d764f"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_signed的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gae8135fffbcc40a30cf23ea5e1913ab57" id="r_gae8135fffbcc40a30cf23ea5e1913ab57"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gae8135fffbcc40a30cf23ea5e1913ab57 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_unsigned_v</b> = <a class="el" href="structis__unsigned.html">is_unsigned</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gae8135fffbcc40a30cf23ea5e1913ab57"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_unsigned的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gabbfb0bef7d0d1148806723f588182cf1" id="r_gabbfb0bef7d0d1148806723f588182cf1"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gabbfb0bef7d0d1148806723f588182cf1 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>rank_v</b> = <a class="el" href="structrank.html">rank</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gabbfb0bef7d0d1148806723f588182cf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">rank的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gafcb76e99467d872575ce22b0a2d8b526" id="r_gafcb76e99467d872575ce22b0a2d8b526"><td class="memTemplParams" colspan="2">
+template&lt;typename T, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> Idx = 0&gt; </td></tr>
+<tr class="memitem:gafcb76e99467d872575ce22b0a2d8b526 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>extent_v</b> = <a class="el" href="structextent.html">extent</a>&lt;T, Idx&gt;::value</td></tr>
+<tr class="memdesc:gafcb76e99467d872575ce22b0a2d8b526"><td class="mdescLeft">&#160;</td><td class="mdescRight">extent的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga218efd7ae1e45541d39fa24a5db89016" id="r_ga218efd7ae1e45541d39fa24a5db89016"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga218efd7ae1e45541d39fa24a5db89016 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_bounded_array_v</b> = <a class="el" href="structis__bounded__array.html">is_bounded_array</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga218efd7ae1e45541d39fa24a5db89016"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_bounded_array的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga5c4bd9266e99bedba2e77f755b5d36a0" id="r_ga5c4bd9266e99bedba2e77f755b5d36a0"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga5c4bd9266e99bedba2e77f755b5d36a0 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_unbounded_array_v</b> = <a class="el" href="structis__unbounded__array.html">is_unbounded_array</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga5c4bd9266e99bedba2e77f755b5d36a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_unbounded_array的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gae7da5e2383c9a0d42663f07c873d8183" id="r_gae7da5e2383c9a0d42663f07c873d8183"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gae7da5e2383c9a0d42663f07c873d8183 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_array_v</b> = <a class="el" href="structis__array.html">is_array</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gae7da5e2383c9a0d42663f07c873d8183"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_array的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa1b38d81ca00c1a6d966572161cf4484" id="r_gaa1b38d81ca00c1a6d966572161cf4484"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaa1b38d81ca00c1a6d966572161cf4484 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_lvalue_reference_v</b> = <a class="el" href="structis__lvalue__reference.html">is_lvalue_reference</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaa1b38d81ca00c1a6d966572161cf4484"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_lvalue_reference的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaca1f428a8d51d494031e643e18325b56" id="r_gaca1f428a8d51d494031e643e18325b56"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaca1f428a8d51d494031e643e18325b56 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_rvalue_reference_v</b> = <a class="el" href="structis__rvalue__reference.html">is_rvalue_reference</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaca1f428a8d51d494031e643e18325b56"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_rvalue_reference的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga4396513c097bb7eeea252191e7156d73" id="r_ga4396513c097bb7eeea252191e7156d73"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga4396513c097bb7eeea252191e7156d73 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_reference_v</b> = <a class="el" href="structis__reference.html">is_reference</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga4396513c097bb7eeea252191e7156d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_reference的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa9667ae24ea273ed13c07a7b4674668b" id="r_gaa9667ae24ea273ed13c07a7b4674668b"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaa9667ae24ea273ed13c07a7b4674668b template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_null_pointer_v</b> = <a class="el" href="structis__null__pointer.html">is_null_pointer</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaa9667ae24ea273ed13c07a7b4674668b"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_null_pointer的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaff2094428071e9bd480d66885ad85043" id="r_gaff2094428071e9bd480d66885ad85043"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaff2094428071e9bd480d66885ad85043 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_pointer_v</b> = <a class="el" href="structis__pointer.html">is_pointer</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaff2094428071e9bd480d66885ad85043"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_pointer的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga77723aa0efd5c3f6fc59e08317c4f807" id="r_ga77723aa0efd5c3f6fc59e08317c4f807"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga77723aa0efd5c3f6fc59e08317c4f807 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_enum_v</b> = <a class="el" href="structis__enum.html">is_enum</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga77723aa0efd5c3f6fc59e08317c4f807"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_enum的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga7d4e35933ca5c3ead34c6547f25b7acb" id="r_ga7d4e35933ca5c3ead34c6547f25b7acb"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga7d4e35933ca5c3ead34c6547f25b7acb template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_integral_like_v</b> = <a class="el" href="structis__integral__like.html">is_integral_like</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga7d4e35933ca5c3ead34c6547f25b7acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_integral_like的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gad90de9e3a84ac849023f5090e3acefc5" id="r_gad90de9e3a84ac849023f5090e3acefc5"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad90de9e3a84ac849023f5090e3acefc5 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_union_v</b> = <a class="el" href="structis__union.html">is_union</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gad90de9e3a84ac849023f5090e3acefc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_union的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gac0af3319d621449fc8884eb5d8d8a4ef" id="r_gac0af3319d621449fc8884eb5d8d8a4ef"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gac0af3319d621449fc8884eb5d8d8a4ef template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_class_v</b> = <a class="el" href="structis__class.html">is_class</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gac0af3319d621449fc8884eb5d8d8a4ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_class的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gabaaf818ce4ec506d82ced736eb80b572" id="r_gabaaf818ce4ec506d82ced736eb80b572"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gabaaf818ce4ec506d82ced736eb80b572 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_fundamental_v</b> = <a class="el" href="structis__fundamental.html">is_fundamental</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gabaaf818ce4ec506d82ced736eb80b572"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_fundamental的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga068afd480efc48e15d17d40a86ca160a" id="r_ga068afd480efc48e15d17d40a86ca160a"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga068afd480efc48e15d17d40a86ca160a template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_compound_v</b> = <a class="el" href="structis__compound.html">is_compound</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga068afd480efc48e15d17d40a86ca160a"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_compound的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga6b799734e6d6a4258cb1fb79ac2551f3" id="r_ga6b799734e6d6a4258cb1fb79ac2551f3"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga6b799734e6d6a4258cb1fb79ac2551f3 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_const_v</b> = <a class="el" href="structis__const.html">is_const</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga6b799734e6d6a4258cb1fb79ac2551f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_const的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa68c2bd736b1c92ad0241e743aeb9c0a" id="r_gaa68c2bd736b1c92ad0241e743aeb9c0a"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaa68c2bd736b1c92ad0241e743aeb9c0a template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_volatile_v</b> = <a class="el" href="structis__volatile.html">is_volatile</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaa68c2bd736b1c92ad0241e743aeb9c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_volatile的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaff6b26bb810adcb9074f1c910fe709ca" id="r_gaff6b26bb810adcb9074f1c910fe709ca"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaff6b26bb810adcb9074f1c910fe709ca template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_function_v</b> = <a class="el" href="structis__function.html">is_function</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaff6b26bb810adcb9074f1c910fe709ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_function的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga95f6ed4714cbd6da0bc1778d2e9cf253" id="r_ga95f6ed4714cbd6da0bc1778d2e9cf253"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga95f6ed4714cbd6da0bc1778d2e9cf253 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_allocable_v</b> = <a class="el" href="structis__allocable.html">is_allocable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga95f6ed4714cbd6da0bc1778d2e9cf253"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_allocable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gad26e8608af957d4388fa3029f2394b6e" id="r_gad26e8608af957d4388fa3029f2394b6e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad26e8608af957d4388fa3029f2394b6e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_object_v</b> = <a class="el" href="structis__object.html">is_object</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gad26e8608af957d4388fa3029f2394b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_object的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga632532c73fe2a0b2060443dd837a2a7b" id="r_ga632532c73fe2a0b2060443dd837a2a7b"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga632532c73fe2a0b2060443dd837a2a7b template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><b>is_cstring_v</b> = <a class="el" href="structis__cstring.html">is_cstring</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga632532c73fe2a0b2060443dd837a2a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_cstring的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gabd8e59beb0cd64f900515cf60501b33f" id="r_gabd8e59beb0cd64f900515cf60501b33f"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gabd8e59beb0cd64f900515cf60501b33f template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_member_function_pointer_v</b> = <a class="el" href="structis__member__function__pointer.html">is_member_function_pointer</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gabd8e59beb0cd64f900515cf60501b33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_member_function_pointer的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga3b4603230dc192a749427c47e24b334f" id="r_ga3b4603230dc192a749427c47e24b334f"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga3b4603230dc192a749427c47e24b334f template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_member_object_pointer_v</b> = <a class="el" href="structis__member__object__pointer.html">is_member_object_pointer</a>&lt;<a class="el" href="group___remove_qualifiers.html#gadb53d365fce2ddba102949e4ad3bf058">remove_cv_t</a>&lt;T&gt;&gt;::value</td></tr>
+<tr class="memdesc:ga3b4603230dc192a749427c47e24b334f"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_member_object_pointer的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga6675bb67417fe686e1a23ee8289c79e9" id="r_ga6675bb67417fe686e1a23ee8289c79e9"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga6675bb67417fe686e1a23ee8289c79e9 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_member_pointer_v</b> = <a class="el" href="structis__member__pointer.html">is_member_pointer</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga6675bb67417fe686e1a23ee8289c79e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_member_pointer的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gacf00b7d970dda6ad6057f14e327d66c7" id="r_gacf00b7d970dda6ad6057f14e327d66c7"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gacf00b7d970dda6ad6057f14e327d66c7 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_scalar_v</b> = <a class="el" href="structis__scalar.html">is_scalar</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gacf00b7d970dda6ad6057f14e327d66c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_scalar的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaf2a894bcd879eb288f29c4be2e71ef85" id="r_gaf2a894bcd879eb288f29c4be2e71ef85"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf2a894bcd879eb288f29c4be2e71ef85 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_empty_v</b> = <a class="el" href="structis__empty.html">is_empty</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaf2a894bcd879eb288f29c4be2e71ef85"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_empty的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga2b35898af823ddbebd3b55eb9da203a9" id="r_ga2b35898af823ddbebd3b55eb9da203a9"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga2b35898af823ddbebd3b55eb9da203a9 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_polymorphic_v</b> = <a class="el" href="structis__polymorphic.html">is_polymorphic</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga2b35898af823ddbebd3b55eb9da203a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_polymorphic的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaef575598a7bc1f1382b3de201a4c8adb" id="r_gaef575598a7bc1f1382b3de201a4c8adb"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaef575598a7bc1f1382b3de201a4c8adb template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_abstract_v</b> = <a class="el" href="structis__abstract.html">is_abstract</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaef575598a7bc1f1382b3de201a4c8adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_abstract的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa34f8aa5429c6aa125f2cebf313988d2" id="r_gaa34f8aa5429c6aa125f2cebf313988d2"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaa34f8aa5429c6aa125f2cebf313988d2 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_final_v</b> = <a class="el" href="structis__final.html">is_final</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaa34f8aa5429c6aa125f2cebf313988d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_final的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga435e8d262aea2a8503306203761fc51e" id="r_ga435e8d262aea2a8503306203761fc51e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga435e8d262aea2a8503306203761fc51e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_standard_layout_v</b> = <a class="el" href="structis__standard__layout.html">is_standard_layout</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga435e8d262aea2a8503306203761fc51e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_standard_layout的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa516bcd475487b8411e509a21e58b8da" id="r_gaa516bcd475487b8411e509a21e58b8da"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaa516bcd475487b8411e509a21e58b8da template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_pod_v</b> = <a class="el" href="structis__pod.html">is_pod</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaa516bcd475487b8411e509a21e58b8da"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_pod的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga9c5edb1dae4bcd29b2bd0cd506b2d123" id="r_ga9c5edb1dae4bcd29b2bd0cd506b2d123"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga9c5edb1dae4bcd29b2bd0cd506b2d123 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>has_unique_object_representations_v</b> = <a class="el" href="structhas__unique__object__representations.html">has_unique_object_representations</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga9c5edb1dae4bcd29b2bd0cd506b2d123"><td class="mdescLeft">&#160;</td><td class="mdescRight">has_unique_object_representations的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga69a112cd33d70ecd8bf9026b0ed159da" id="r_ga69a112cd33d70ecd8bf9026b0ed159da"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga69a112cd33d70ecd8bf9026b0ed159da template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_aggregate_v</b> = <a class="el" href="structis__aggregate.html">is_aggregate</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga69a112cd33d70ecd8bf9026b0ed159da"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_aggregate的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga2dd33cb2936b9c2e75a085b78a7349a1" id="r_ga2dd33cb2936b9c2e75a085b78a7349a1"><td class="memTemplParams" colspan="2">
+template&lt;typename Base, typename Derived&gt; </td></tr>
+<tr class="memitem:ga2dd33cb2936b9c2e75a085b78a7349a1 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_base_of_v</b> = <a class="el" href="structis__base__of.html">is_base_of</a>&lt;Base, Derived&gt;::value</td></tr>
+<tr class="memdesc:ga2dd33cb2936b9c2e75a085b78a7349a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_base_of的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gad48d0231306b8af6bd112942d648b8c7" id="r_gad48d0231306b8af6bd112942d648b8c7"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad48d0231306b8af6bd112942d648b8c7 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivial_v</b> = <a class="el" href="structis__trivial.html">is_trivial</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gad48d0231306b8af6bd112942d648b8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivial的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga8551ab1ada29863e6cdc9dd41151722e" id="r_ga8551ab1ada29863e6cdc9dd41151722e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga8551ab1ada29863e6cdc9dd41151722e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_copyable_v</b> = <a class="el" href="structis__trivially__copyable.html">is_trivially_copyable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga8551ab1ada29863e6cdc9dd41151722e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_copyable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga0d8468869325c9f4396ae2dbdfaeacc1" id="r_ga0d8468869325c9f4396ae2dbdfaeacc1"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga0d8468869325c9f4396ae2dbdfaeacc1 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>has_virtual_destructor_v</b> = <a class="el" href="structhas__virtual__destructor.html">has_virtual_destructor</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga0d8468869325c9f4396ae2dbdfaeacc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">has_virtual_destructor的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa82283ddef45057333aca64ba0787874" id="r_gaa82283ddef45057333aca64ba0787874"><td class="memTemplParams" colspan="2">
+template&lt;typename T, typename... Args&gt; </td></tr>
+<tr class="memitem:gaa82283ddef45057333aca64ba0787874 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_constructible_v</b> = <a class="el" href="structis__constructible.html">is_constructible</a>&lt;T, Args...&gt;::value</td></tr>
+<tr class="memdesc:gaa82283ddef45057333aca64ba0787874"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga27b6602d2b9da1cb2daf37f7c15f9bf2" id="r_ga27b6602d2b9da1cb2daf37f7c15f9bf2"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga27b6602d2b9da1cb2daf37f7c15f9bf2 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_copy_constructible_v</b> = <a class="el" href="structis__copy__constructible.html">is_copy_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga27b6602d2b9da1cb2daf37f7c15f9bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_copy_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga8e22546415017859597e46ff37077164" id="r_ga8e22546415017859597e46ff37077164"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga8e22546415017859597e46ff37077164 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_default_constructible_v</b> = <a class="el" href="structis__default__constructible.html">is_default_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga8e22546415017859597e46ff37077164"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_default_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gadb4c91a5a02e97e167b630290f3e15f0" id="r_gadb4c91a5a02e97e167b630290f3e15f0"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gadb4c91a5a02e97e167b630290f3e15f0 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_implicitly_default_constructible_v</b> = <a class="el" href="structis__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gadb4c91a5a02e97e167b630290f3e15f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_implicitly_default_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaaa19f0c4fddd4e4d26d8d26de4099667" id="r_gaaa19f0c4fddd4e4d26d8d26de4099667"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaaa19f0c4fddd4e4d26d8d26de4099667 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_move_constructible_v</b> = <a class="el" href="structis__move__constructible.html">is_move_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaaa19f0c4fddd4e4d26d8d26de4099667"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_move_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga6d04a3013483ab81be2d926d2323be3c" id="r_ga6d04a3013483ab81be2d926d2323be3c"><td class="memTemplParams" colspan="2">
+template&lt;typename To, typename From&gt; </td></tr>
+<tr class="memitem:ga6d04a3013483ab81be2d926d2323be3c template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_assignable_v</b> = <a class="el" href="structis__assignable.html">is_assignable</a>&lt;To, From&gt;::value</td></tr>
+<tr class="memdesc:ga6d04a3013483ab81be2d926d2323be3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gafecb9221e4a67e55268d4b9f3bf9b879" id="r_gafecb9221e4a67e55268d4b9f3bf9b879"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gafecb9221e4a67e55268d4b9f3bf9b879 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_copy_assignable_v</b> = <a class="el" href="structis__copy__assignable.html">is_copy_assignable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gafecb9221e4a67e55268d4b9f3bf9b879"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_copy_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga84885918abc2e4a305c7626bd1d90dd4" id="r_ga84885918abc2e4a305c7626bd1d90dd4"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga84885918abc2e4a305c7626bd1d90dd4 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_move_assignable_v</b> = <a class="el" href="structis__move__assignable.html">is_move_assignable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga84885918abc2e4a305c7626bd1d90dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_move_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga9c6f84ef4f8fa142f75efb2f4fc17160" id="r_ga9c6f84ef4f8fa142f75efb2f4fc17160"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga9c6f84ef4f8fa142f75efb2f4fc17160 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_destructible_v</b> = <a class="el" href="structis__destructible.html">is_destructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga9c6f84ef4f8fa142f75efb2f4fc17160"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_destructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga711887128ce4f96085da9c690eecc240" id="r_ga711887128ce4f96085da9c690eecc240"><td class="memTemplParams" colspan="2">
+template&lt;typename T, typename... Args&gt; </td></tr>
+<tr class="memitem:ga711887128ce4f96085da9c690eecc240 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_constructible_v</b> = <a class="el" href="structis__trivially__constructible.html">is_trivially_constructible</a>&lt;T, Args...&gt;::value</td></tr>
+<tr class="memdesc:ga711887128ce4f96085da9c690eecc240"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga859f6caddc4ff121ae06d472ff34ed9d" id="r_ga859f6caddc4ff121ae06d472ff34ed9d"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga859f6caddc4ff121ae06d472ff34ed9d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_copy_constructible_v</b> = <a class="el" href="structis__trivially__copy__constructible.html">is_trivially_copy_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga859f6caddc4ff121ae06d472ff34ed9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_copy_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga4361ea90567eb52e02be081f5259678e" id="r_ga4361ea90567eb52e02be081f5259678e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga4361ea90567eb52e02be081f5259678e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_default_constructible_v</b> = <a class="el" href="structis__trivially__default__constructible.html">is_trivially_default_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga4361ea90567eb52e02be081f5259678e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_default_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaab71e5f3367cbc1a17cc095808be5968" id="r_gaab71e5f3367cbc1a17cc095808be5968"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaab71e5f3367cbc1a17cc095808be5968 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_move_constructible_v</b> = <a class="el" href="structis__trivially__move__constructible.html">is_trivially_move_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaab71e5f3367cbc1a17cc095808be5968"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_move_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga3b2be7419e171c3423fd429773f0380d" id="r_ga3b2be7419e171c3423fd429773f0380d"><td class="memTemplParams" colspan="2">
+template&lt;typename To, typename From&gt; </td></tr>
+<tr class="memitem:ga3b2be7419e171c3423fd429773f0380d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_assignable_v</b> = <a class="el" href="structis__trivially__assignable.html">is_trivially_assignable</a>&lt;To, From&gt;::value</td></tr>
+<tr class="memdesc:ga3b2be7419e171c3423fd429773f0380d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gab30848714f461afba3bee3ba5a52bd6f" id="r_gab30848714f461afba3bee3ba5a52bd6f"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gab30848714f461afba3bee3ba5a52bd6f template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_copy_assignable_v</b> = <a class="el" href="structis__trivially__copy__assignable.html">is_trivially_copy_assignable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gab30848714f461afba3bee3ba5a52bd6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_copy_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gad3ecef257e64cfa616a5af49f7974ff1" id="r_gad3ecef257e64cfa616a5af49f7974ff1"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad3ecef257e64cfa616a5af49f7974ff1 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_move_assignable_v</b> = <a class="el" href="structis__trivially__move__assignable.html">is_trivially_move_assignable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gad3ecef257e64cfa616a5af49f7974ff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_move_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga727249a4591032de7a3f90565c1c156e" id="r_ga727249a4591032de7a3f90565c1c156e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga727249a4591032de7a3f90565c1c156e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_destructible_v</b> = <a class="el" href="structis__trivially__destructible.html">is_trivially_destructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga727249a4591032de7a3f90565c1c156e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_destructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga23fadd6947897ddb684f368e1cab7118" id="r_ga23fadd6947897ddb684f368e1cab7118"><td class="memTemplParams" colspan="2">
+template&lt;typename T, typename... Args&gt; </td></tr>
+<tr class="memitem:ga23fadd6947897ddb684f368e1cab7118 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_constructible_v</b> = <a class="el" href="structis__nothrow__constructible.html">is_nothrow_constructible</a>&lt;T, Args...&gt;::value</td></tr>
+<tr class="memdesc:ga23fadd6947897ddb684f368e1cab7118"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaf7d75265d0e5d446fa4925ac74ca3396" id="r_gaf7d75265d0e5d446fa4925ac74ca3396"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf7d75265d0e5d446fa4925ac74ca3396 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_copy_constructible_v</b> = <a class="el" href="structis__nothrow__copy__constructible.html">is_nothrow_copy_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaf7d75265d0e5d446fa4925ac74ca3396"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_copy_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga0b194587645e7045dbe1a6a3e188915d" id="r_ga0b194587645e7045dbe1a6a3e188915d"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga0b194587645e7045dbe1a6a3e188915d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_default_constructible_v</b> = <a class="el" href="structis__nothrow__default__constructible.html">is_nothrow_default_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga0b194587645e7045dbe1a6a3e188915d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_default_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gac3058b8518087cdea482055e5af4577a" id="r_gac3058b8518087cdea482055e5af4577a"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gac3058b8518087cdea482055e5af4577a template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_move_constructible_v</b> = <a class="el" href="structis__nothrow__move__constructible.html">is_nothrow_move_constructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gac3058b8518087cdea482055e5af4577a"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_move_constructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga167e1b8821cb4036a356540e940cbe08" id="r_ga167e1b8821cb4036a356540e940cbe08"><td class="memTemplParams" colspan="2">
+template&lt;typename To, typename From&gt; </td></tr>
+<tr class="memitem:ga167e1b8821cb4036a356540e940cbe08 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_assignable_v</b> = <a class="el" href="structis__nothrow__assignable.html">is_nothrow_assignable</a>&lt;To, From&gt;::value</td></tr>
+<tr class="memdesc:ga167e1b8821cb4036a356540e940cbe08"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga27007a043e0bb0f62ddf1739725a6ec2" id="r_ga27007a043e0bb0f62ddf1739725a6ec2"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga27007a043e0bb0f62ddf1739725a6ec2 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_copy_assignable_v</b> = <a class="el" href="structis__nothrow__copy__assignable.html">is_nothrow_copy_assignable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga27007a043e0bb0f62ddf1739725a6ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_copy_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga4e71583e475165e891f9ea1e02c6b8e4" id="r_ga4e71583e475165e891f9ea1e02c6b8e4"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga4e71583e475165e891f9ea1e02c6b8e4 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_move_assignable_v</b> = <a class="el" href="structis__nothrow__move__assignable.html">is_nothrow_move_assignable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga4e71583e475165e891f9ea1e02c6b8e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_move_assignable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga826320e89a7a8ec2f75d2c960df7011d" id="r_ga826320e89a7a8ec2f75d2c960df7011d"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga826320e89a7a8ec2f75d2c960df7011d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_destructible_v</b> = <a class="el" href="structis__nothrow__destructible.html">is_nothrow_destructible</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga826320e89a7a8ec2f75d2c960df7011d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_destructible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga2ffb745d5afd8983e52ed4e6346bc52e" id="r_ga2ffb745d5afd8983e52ed4e6346bc52e"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga2ffb745d5afd8983e52ed4e6346bc52e template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_location_invariant_v</b> = <a class="el" href="structis__location__invariant.html">is_location_invariant</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga2ffb745d5afd8983e52ed4e6346bc52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_location_invariant的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gae3b2b7a2bd17bf6a7cdca076103e0787" id="r_gae3b2b7a2bd17bf6a7cdca076103e0787"><td class="memTemplParams" colspan="2">
+template&lt;typename From, typename To&gt; </td></tr>
+<tr class="memitem:gae3b2b7a2bd17bf6a7cdca076103e0787 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_convertible_v</b> = <a class="el" href="structis__convertible.html">is_convertible</a>&lt;From, To&gt;::value</td></tr>
+<tr class="memdesc:gae3b2b7a2bd17bf6a7cdca076103e0787"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_convertible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaedc6d8dc4b28b51190d3ad7d0ea5195d" id="r_gaedc6d8dc4b28b51190d3ad7d0ea5195d"><td class="memTemplParams" colspan="2">
+template&lt;typename ToElement, typename FromElement&gt; </td></tr>
+<tr class="memitem:gaedc6d8dc4b28b51190d3ad7d0ea5195d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_array_convertible_v</b> = <a class="el" href="group___convertible_checks.html#gab8efd424ae29f19c10d54d62118c763f">is_array_convertible</a>&lt;ToElement, FromElement&gt;::value</td></tr>
+<tr class="memdesc:gaedc6d8dc4b28b51190d3ad7d0ea5195d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_array_convertible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga50712f600f437f1f09f8bad5f88d7ba3" id="r_ga50712f600f437f1f09f8bad5f88d7ba3"><td class="memTemplParams" colspan="2">
+template&lt;typename From, typename To&gt; </td></tr>
+<tr class="memitem:ga50712f600f437f1f09f8bad5f88d7ba3 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_convertible_v</b> = <a class="el" href="structis__nothrow__convertible.html">is_nothrow_convertible</a>&lt;From, To&gt;::value</td></tr>
+<tr class="memdesc:ga50712f600f437f1f09f8bad5f88d7ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_convertible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gae285e74e4b2e698591c6d5fdb73bcb1c" id="r_gae285e74e4b2e698591c6d5fdb73bcb1c"><td class="memTemplParams" colspan="2">
+template&lt;typename Iterator, typename Ptr&gt; </td></tr>
+<tr class="memitem:gae285e74e4b2e698591c6d5fdb73bcb1c template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_arrow_v</b> = <a class="el" href="structis__nothrow__arrow.html">is_nothrow_arrow</a>&lt;Iterator, Ptr&gt;::value</td></tr>
+<tr class="memdesc:gae285e74e4b2e698591c6d5fdb73bcb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_arrow的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gae7fde4c1b709be147fc5d8f4efc0c605" id="r_gae7fde4c1b709be147fc5d8f4efc0c605"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gae7fde4c1b709be147fc5d8f4efc0c605 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>alignment_of_v</b> = <a class="el" href="structalignment__of.html">alignment_of</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gae7fde4c1b709be147fc5d8f4efc0c605"><td class="mdescLeft">&#160;</td><td class="mdescRight">alignment_of的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga76c6f8991a30f9a97fc11ec55cdb8887" id="r_ga76c6f8991a30f9a97fc11ec55cdb8887"><td class="memTemplParams" colspan="2">
+template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Len, typename... Types&gt; </td></tr>
+<tr class="memitem:ga76c6f8991a30f9a97fc11ec55cdb8887 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>aligned_union_v</b> = <a class="el" href="structaligned__union.html">aligned_union</a>&lt;Len, Types...&gt;::align_value</td></tr>
+<tr class="memdesc:ga76c6f8991a30f9a97fc11ec55cdb8887"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取aligned_union的对齐要求值 <br /></td></tr>
+<tr class="memitem:ga35203a7f9132c2f9c796f524bd5a8f69" id="r_ga35203a7f9132c2f9c796f524bd5a8f69"><td class="memTemplParams" colspan="2">
+template&lt;typename T, template&lt; typename... &gt; class Template&gt; </td></tr>
+<tr class="memitem:ga35203a7f9132c2f9c796f524bd5a8f69 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_specialization_v</b> = <a class="el" href="structis__specialization.html">is_specialization</a>&lt;T, Template&gt;::value</td></tr>
+<tr class="memdesc:ga35203a7f9132c2f9c796f524bd5a8f69"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_specialization的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga9cd979a13f33937f6e8715d2bbe06502" id="r_ga9cd979a13f33937f6e8715d2bbe06502"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga9cd979a13f33937f6e8715d2bbe06502 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_swappable_v</b> = <a class="el" href="structis__swappable.html">is_swappable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga9cd979a13f33937f6e8715d2bbe06502"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_swappable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga9cc217ccd3ddd28edc3ebfd181bba2f3" id="r_ga9cc217ccd3ddd28edc3ebfd181bba2f3"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga9cc217ccd3ddd28edc3ebfd181bba2f3 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_nothrow_swappable_v</b> = <a class="el" href="structis__nothrow__swappable.html">is_nothrow_swappable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga9cc217ccd3ddd28edc3ebfd181bba2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_nothrow_swappable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga28d2e06d13a63326c306cb1d564ebf37" id="r_ga28d2e06d13a63326c306cb1d564ebf37"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga28d2e06d13a63326c306cb1d564ebf37 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_trivially_swappable_v</b> = <a class="el" href="structis__trivially__swappable.html">is_trivially_swappable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga28d2e06d13a63326c306cb1d564ebf37"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_trivially_swappable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa1ef1cea8b6d1f0c3b0bc03672ee5217" id="r_gaa1ef1cea8b6d1f0c3b0bc03672ee5217"><td class="memTemplParams" colspan="2">
+template&lt;typename Alloc&gt; </td></tr>
+<tr class="memitem:gaa1ef1cea8b6d1f0c3b0bc03672ee5217 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_allocator_v</b> = <a class="el" href="structis__allocator.html">is_allocator</a>&lt;Alloc&gt;::value</td></tr>
+<tr class="memdesc:gaa1ef1cea8b6d1f0c3b0bc03672ee5217"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_allocator的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gafbf14f82447a6281486cc1b01f37dda2" id="r_gafbf14f82447a6281486cc1b01f37dda2"><td class="memTemplParams" colspan="2">
+template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gafbf14f82447a6281486cc1b01f37dda2 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_incrementible_v</b> = <a class="el" href="structis__incrementible.html">is_incrementible</a>&lt;Iterator&gt;::value</td></tr>
+<tr class="memdesc:gafbf14f82447a6281486cc1b01f37dda2"><td class="mdescLeft">&#160;</td><td class="mdescRight">iis_incrementible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gadf09497a9433a6ae419e72e643226e4d" id="r_gadf09497a9433a6ae419e72e643226e4d"><td class="memTemplParams" colspan="2">
+template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gadf09497a9433a6ae419e72e643226e4d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_decrementible_v</b> = <a class="el" href="structis__decrementible.html">is_decrementible</a>&lt;Iterator&gt;::value</td></tr>
+<tr class="memdesc:gadf09497a9433a6ae419e72e643226e4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_decrementible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga97b8016a5394d04c7a2f3c1a99b037e9" id="r_ga97b8016a5394d04c7a2f3c1a99b037e9"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga97b8016a5394d04c7a2f3c1a99b037e9 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_iterable_v</b> = <a class="el" href="structis__iterable.html">is_iterable</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:ga97b8016a5394d04c7a2f3c1a99b037e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_iterable的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga88552d33ed7b04e7a0af80ff79883252" id="r_ga88552d33ed7b04e7a0af80ff79883252"><td class="memTemplParams" colspan="2">
+template&lt;typename Map&gt; </td></tr>
+<tr class="memitem:ga88552d33ed7b04e7a0af80ff79883252 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_maplike_v</b> = <a class="el" href="structis__maplike.html">is_maplike</a>&lt;Map&gt;::value</td></tr>
+<tr class="memdesc:ga88552d33ed7b04e7a0af80ff79883252"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_maplike的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaf9f3b4faef5f884b42c07e0319db190b" id="r_gaf9f3b4faef5f884b42c07e0319db190b"><td class="memTemplParams" colspan="2">
+template&lt;typename Alloc, typename T, typename... Args&gt; </td></tr>
+<tr class="memitem:gaf9f3b4faef5f884b42c07e0319db190b template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>has_construct_v</b> = <a class="el" href="structhas__construct.html">has_construct</a>&lt;Alloc, T, Args...&gt;::value</td></tr>
+<tr class="memdesc:gaf9f3b4faef5f884b42c07e0319db190b"><td class="mdescLeft">&#160;</td><td class="mdescRight">has_construct的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaa3543745998171ae8a3d6d6a3b5fc3e9" id="r_gaa3543745998171ae8a3d6d6a3b5fc3e9"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaa3543745998171ae8a3d6d6a3b5fc3e9 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>has_base_v</b> = <a class="el" href="structhas__base.html">has_base</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gaa3543745998171ae8a3d6d6a3b5fc3e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">has_base的便捷变量模板 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>类型萃取 </p>

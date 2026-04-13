@@ -98,13 +98,13 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const float64_t 
     return bind_param(index, _NEFORCE to_string(value));
 }
 
-bool pgsql_prepared_statement::bind_param(const uint32_t index, const void* data, const size_t length) {
+bool pgsql_prepared_statement::bind_param(const uint32_t index, const cbyte_view value) {
     if (index == 0 || index > param_count_) {
         set_error("Parameter index out of range", 3);
         return false;
     }
 
-    if (data == nullptr || length == 0) {
+    if (value.empty()) {
         return bind_param(index, static_cast<const char*>(nullptr));
     }
 
@@ -114,10 +114,11 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const void* data
         param_buffers_.resize(idx + 1);
     }
 
-    param_buffers_[idx].assign(static_cast<const char*>(data), static_cast<const char*>(data) + length);
+    const auto* begin = reinterpret_cast<const char*>(value.data());
+    param_buffers_[idx].assign(begin, begin + value.size());
 
     data_->param_ptrs[idx] = param_buffers_[idx].data();
-    data_->param_lengths[idx] = static_cast<int>(length);
+    data_->param_lengths[idx] = static_cast<int>(value.size());
     data_->param_formats[idx] = 1;
 
     return true;

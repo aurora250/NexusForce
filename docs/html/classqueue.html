@@ -133,7 +133,7 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:abd7fed657dd05479bccc95dd81e59264"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:af06e9f354859a955f0bad9f528230cdc" id="r_af06e9f354859a955f0bad9f528230cdc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af06e9f354859a955f0bad9f528230cdc">queue</a> (const Sequence &amp;other)</td></tr>
 <tr class="memdesc:af06e9f354859a955f0bad9f528230cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，使用指定的底层容器副本  <br /></td></tr>
-<tr class="memitem:a5ac89209ce88932a5ff9cc1c5ee8012d" id="r_a5ac89209ce88932a5ff9cc1c5ee8012d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5ac89209ce88932a5ff9cc1c5ee8012d">queue</a> (Sequence &amp;&amp;other) noexcept(is_nothrow_move_constructible_v&lt; Sequence &gt;)</td></tr>
+<tr class="memitem:a5ac89209ce88932a5ff9cc1c5ee8012d" id="r_a5ac89209ce88932a5ff9cc1c5ee8012d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5ac89209ce88932a5ff9cc1c5ee8012d">queue</a> (Sequence &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; Sequence &gt;)</td></tr>
 <tr class="memdesc:a5ac89209ce88932a5ff9cc1c5ee8012d"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数，使用指定的底层容器  <br /></td></tr>
 <tr class="memitem:aa1467d64e54d75b31692363986f3ce4e" id="r_aa1467d64e54d75b31692363986f3ce4e"><td class="memItemLeft"><a id="aa1467d64e54d75b31692363986f3ce4e" name="aa1467d64e54d75b31692363986f3ce4e"></a>
 &#160;</td><td class="memItemRight"><b>~queue</b> ()=default</td></tr>
@@ -171,7 +171,7 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:addae0f3bd381e35f8860001b562543b7" id="r_addae0f3bd381e35f8860001b562543b7"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:addae0f3bd381e35f8860001b562543b7 template"><td class="memItemLeft">decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#addae0f3bd381e35f8860001b562543b7">emplace</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:addae0f3bd381e35f8860001b562543b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">在队尾就地构造元素  <br /></td></tr>
-<tr class="memitem:ae27e3606a47a29de4d4c0554fbf03c82" id="r_ae27e3606a47a29de4d4c0554fbf03c82"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae27e3606a47a29de4d4c0554fbf03c82">swap</a> (<a class="el" href="classqueue.html">queue</a> &amp;other) noexcept(is_nothrow_swappable_v&lt; Sequence &gt;)</td></tr>
+<tr class="memitem:ae27e3606a47a29de4d4c0554fbf03c82" id="r_ae27e3606a47a29de4d4c0554fbf03c82"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae27e3606a47a29de4d4c0554fbf03c82">swap</a> (<a class="el" href="classqueue.html">queue</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; Sequence &gt;)</td></tr>
 <tr class="memdesc:ae27e3606a47a29de4d4c0554fbf03c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个队列的内容  <br /></td></tr>
 <tr class="memitem:a2293b63a8a49d83560506ef409744e83" id="r_a2293b63a8a49d83560506ef409744e83"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a2293b63a8a49d83560506ef409744e83">operator==</a> (const <a class="el" href="classqueue.html">queue</a> &amp;rhs) const noexcept(noexcept(seq_==rhs.seq_))</td></tr>
 <tr class="memdesc:a2293b63a8a49d83560506ef409744e83"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
@@ -315,7 +315,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="queue_8hpp_source.html">queue.hpp</a> 第 <a class="el" href="queue_8hpp_source.html#l00071">71</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02835">is_nothrow_move_constructible_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1017,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="queue_8hpp_source.html">queue.hpp</a> 第 <a class="el" href="queue_8hpp_source.html#l00189">189</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#abd7fed657dd05479bccc95dd81e59264">queue()</a> , 以及 <a class="el" href="queue_8hpp_source.html#l00189">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03945">is_nothrow_swappable_v</a>, <a class="el" href="#abd7fed657dd05479bccc95dd81e59264">queue()</a> , 以及 <a class="el" href="queue_8hpp_source.html#l00189">swap()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="queue_8hpp_source.html#l00189">swap()</a>.</p>
 

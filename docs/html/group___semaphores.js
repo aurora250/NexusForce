@@ -1,13 +1,13 @@
 var group___semaphores =
 [
-    [ "counting_semaphore&lt; LeastMaxValue &gt;", "classcounting__semaphore.html", [
-      [ "counting_semaphore", "classcounting__semaphore.html#a6af22fbe02ff8b7fcb34863f2687148e", null ],
-      [ "~counting_semaphore", "classcounting__semaphore.html#ab1512dcf36ed39b5efb026bb35be3f61", null ],
-      [ "acquire", "classcounting__semaphore.html#a77f1d60641dab6eae6803504cecb8396", null ],
-      [ "release", "classcounting__semaphore.html#a51df9d6c1bd902991ea59e8631f6e14c", null ],
-      [ "try_acquire", "classcounting__semaphore.html#acc34ef58304f9c081afa544dc80cf10b", null ],
-      [ "try_acquire_for", "classcounting__semaphore.html#a55bb0cf5af604eb65a1b064085afdc86", null ],
-      [ "try_acquire_until", "classcounting__semaphore.html#a618d9e999e88c331b3309484155c55f4", null ]
+    [ "atomic_semaphore&lt; LeastMaxValue &gt;", "classatomic__semaphore.html", [
+      [ "atomic_semaphore", "classatomic__semaphore.html#a90820d8558e3fbed25dfa4040560b942", null ],
+      [ "~atomic_semaphore", "classatomic__semaphore.html#ab13b42fa58aeeb5dd1b16c3a2a39de59", null ],
+      [ "acquire", "classatomic__semaphore.html#a73f427158e7bf8f27648012b342d4043", null ],
+      [ "release", "classatomic__semaphore.html#a8716205f263f66c4d7d4e23a4ac8170d", null ],
+      [ "try_acquire", "classatomic__semaphore.html#a3b7bd76a7fe51421b63473cec1ad97b5", null ],
+      [ "try_acquire_for", "classatomic__semaphore.html#a26b879cbef5727a2c48028e607521726", null ],
+      [ "try_acquire_until", "classatomic__semaphore.html#aefde002d6314ac824dccb0b426fe1a20", null ]
     ] ],
     [ "semaphore", "classsemaphore.html", [
       [ "semaphore", "classsemaphore.html#a6023fe3d87bccedd287a1f2244691f41", null ],
@@ -19,5 +19,5 @@ var group___semaphores =
       [ "try_acquire_until", "classsemaphore.html#aff6123797344a446506be860322273c4", null ],
       [ "value", "classsemaphore.html#ab20020329e57e990088ef2d658a761cf", null ]
     ] ],
-    [ "binary_semaphore", "group___semaphores.html#gabee4059f6f5cd4d4218651a4a18cd375", null ]
+    [ "binary_semaphore", "group___semaphores.html#gab2a6957724f0f8a6acdf255f36329235", null ]
 ];

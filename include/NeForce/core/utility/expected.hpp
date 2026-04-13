@@ -4,8 +4,17 @@
 #include "NeForce/core/memory/construct.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
+struct expected_exception final : exception {
+    explicit expected_exception(const char* info = "Expected Operation Failed.", const char* type = static_type,
+                                const int code = 0) noexcept :
+    exception(info, type, code) {}
 
-NEFORCE_ERROR_BUILD_FINAL_CLASS(expected_exception, memory_exception, "Expected Operation Failed.")
+    explicit expected_exception(const exception& e) :
+    exception(e) {}
+
+    ~expected_exception() override = default;
+    static constexpr auto static_type = "expected_exception";
+};
 
 
 struct inplace_invoke_tag {

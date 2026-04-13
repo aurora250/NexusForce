@@ -12,7 +12,6 @@
 #include "NeForce/core/async/atomic_base.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/array.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -182,7 +181,7 @@ public:
      */
     void arrive_and_drop() {
         expected_adjustment_.fetch_sub(1, memory_order_relaxed);
-        static_cast<void>(arrive(1));
+        ignore = arrive(1);
     }
 };
 

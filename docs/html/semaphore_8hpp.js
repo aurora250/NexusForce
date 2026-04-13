@@ -1,4 +1,4 @@
 var semaphore_8hpp =
 [
-    [ "binary_semaphore", "group___semaphores.html#gabee4059f6f5cd4d4218651a4a18cd375", null ]
+    [ "binary_semaphore", "group___semaphores.html#gab2a6957724f0f8a6acdf255f36329235", null ]
 ];

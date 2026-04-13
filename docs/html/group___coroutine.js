@@ -91,6 +91,42 @@ var group___coroutine =
       [ "set_cancellation_token", "classtask.html#a055a89b2c4ef8ad941976ae9ce12349f", null ]
     ] ],
     [ "task&lt; void &gt;", "classtask_3_01void_01_4.html", null ],
+    [ "virtual_thread_task", "structvirtual__thread__task.html", [
+      [ "promise_type", "structvirtual__thread__task_1_1promise__type.html", [
+        [ "final_suspend", "structvirtual__thread__task_1_1promise__type.html#aaa221a87a605e7d9ad35bc13ae393821", null ],
+        [ "get_return_object", "structvirtual__thread__task_1_1promise__type.html#abfb12fb610b1028ef2ce7a71060256d5", null ],
+        [ "initial_suspend", "structvirtual__thread__task_1_1promise__type.html#a80bb560c74f8fa5a58f6997866816133", null ],
+        [ "return_void", "structvirtual__thread__task_1_1promise__type.html#afb4c03a917686ddef60158995dee2be4", null ],
+        [ "unhandled_exception", "structvirtual__thread__task_1_1promise__type.html#aa0fe2e55596d0c95a0886310f400fb28", null ],
+        [ "exception_", "structvirtual__thread__task_1_1promise__type.html#ac3ddcbd783e23872722f2aa196028cf8", null ]
+      ] ],
+      [ "virtual_thread_task", "structvirtual__thread__task.html#ad999c5bc10cf195db92c5ad7d97f0fdc", null ],
+      [ "~virtual_thread_task", "structvirtual__thread__task.html#affa79416f219f96824fb4a9491ac0125", null ],
+      [ "virtual_thread_task", "structvirtual__thread__task.html#ad6d298c579a2ee733c7896bbb73373c6", null ],
+      [ "virtual_thread_task", "structvirtual__thread__task.html#ae589260f89456025d7bc690df427abdd", null ],
+      [ "operator=", "structvirtual__thread__task.html#ac64cfcafa6371aa3ecba138c9ab361df", null ],
+      [ "operator=", "structvirtual__thread__task.html#ae6a8baf3cd9bb4fe8f972b031248e957", null ],
+      [ "handle_", "structvirtual__thread__task.html#aab9696a7dd5e0aa596d91bd6e71ecbd2", null ]
+    ] ],
+    [ "virtual_thread_scheduler", "classvirtual__thread__scheduler.html", [
+      [ "~virtual_thread_scheduler", "classvirtual__thread__scheduler.html#a0eaf83ca4a7c46f687e07bdade6b359e", null ],
+      [ "schedule", "classvirtual__thread__scheduler.html#ab5f2bf091c5ad0289c46707cc8b83369", null ],
+      [ "shutdown", "classvirtual__thread__scheduler.html#a7334d89ceba9ab3a422db2544a1a49aa", null ],
+      [ "start_workers", "classvirtual__thread__scheduler.html#a2269fc5d6435eca5dcb8b16db7df2f42", null ]
+    ] ],
+    [ "virtual_thread_awaiter", "structvirtual__thread__awaiter.html", [
+      [ "await_ready", "structvirtual__thread__awaiter.html#ad7bdae88963a3294aab9fd693cf23541", null ],
+      [ "await_resume", "structvirtual__thread__awaiter.html#a96d9bfe6591041d9e4ff8233da912417", null ],
+      [ "await_suspend", "structvirtual__thread__awaiter.html#ab2b9357585a921806dde17a797a84a03", null ],
+      [ "handle_", "structvirtual__thread__awaiter.html#a0d9a71b420f6d08c8bcc5c471b5245f9", null ]
+    ] ],
+    [ "virtual_thread", "classvirtual__thread.html", [
+      [ "virtual_thread", "classvirtual__thread.html#ac86354b86d2672940194457282f0ea4b", null ],
+      [ "virtual_thread", "classvirtual__thread.html#a60d118cbde9dd622815e51be0d97bfa8", null ],
+      [ "virtual_thread", "classvirtual__thread.html#acd03e82cfcd86580a796c3dc44da54b8", null ],
+      [ "operator=", "classvirtual__thread.html#a8c308b21f6a630e232bc55d96161acc5", null ],
+      [ "operator=", "classvirtual__thread.html#a09b3fb92daeb54eea55cffac4658abb6", null ]
+    ] ],
     [ "coroutine_handle", "group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181", null ],
     [ "noop_coroutine_handle", "group___coroutine.html#ga8688aa61087dce3a6914a4d6c7f7b55a", null ],
     [ "noop_coroutine_promise", "group___coroutine.html#ga703e941b1a9f15e23513daa24ed4d587", null ],

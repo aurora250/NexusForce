@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['哈希模板_0',['哈希模板',['../group___hash_primary.html',1,'']]],
-  ['哈希表_1',['哈希表',['../group___hash_table.html',1,'']]]
+  ['压缩对_0',['压缩对',['../group___compressed_pair.html',1,'']]],
+  ['压缩解压缩_1',['压缩解压缩',['../group___compression.html',1,'']]]
 ];

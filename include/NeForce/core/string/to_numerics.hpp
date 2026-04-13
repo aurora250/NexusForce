@@ -472,8 +472,8 @@ NEFORCE_END_INNER__
 /// @endcond
 
 /**
- * @defgroup StringNumerics 字符串数值转换
- * @brief 字符串与数值之间的转换功能
+ * @defgroup StringConverts 字符串转换
+ * @brief 字符串与数据类型之间的转换功能
  * @{
  */
 
@@ -680,8 +680,7 @@ NEFORCE_NODISCARD constexpr uint8_t to_uint8(const string_view sv, size_t* idx =
     return static_cast<uint8_t>(val);
 }
 
-/** @} */ // StringNumerics
+/** @} */ // StringConverts
 
 NEFORCE_END_NAMESPACE__
-
 #endif // NEFORCE_CORE_STRING_TO_NUMERICS_HPP__

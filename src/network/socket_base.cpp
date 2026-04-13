@@ -1,7 +1,4 @@
 #include <NeForce/network/socket_base.hpp>
-#ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <NeForce/core/async/atomic.hpp>
-#endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <cerrno>
 #    include <fcntl.h>
@@ -12,34 +9,21 @@ NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
-    struct winsock_initializer {
-        static atomic<int> g_ref_count;
-
-        winsock_initializer() {
-            const int prev = g_ref_count.fetch_add(1);
-            if (prev == 0) {
-                ::WSADATA wsa_data;
-                if (::WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
-                    g_ref_count.fetch_sub(1);
-                    NEFORCE_THROW_EXCEPTION(system_exception("WSAStartup failed"));
-                }
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+    struct winsock_guard {
+        winsock_guard() {
+            ::WSADATA wsa_data;
+            if (::WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
+                NEFORCE_THROW_EXCEPTION(system_exception("WSAStartup failed"));
             }
         }
-
-        ~winsock_initializer() {
-            const int prev = g_ref_count.fetch_sub(1);
-            if (prev == 1) {
-                ::WSACleanup();
-            }
-        }
-
-        winsock_initializer(const winsock_initializer&) = delete;
-        winsock_initializer& operator=(const winsock_initializer&) = delete;
-        winsock_initializer(winsock_initializer&&) = delete;
-        winsock_initializer& operator=(winsock_initializer&&) = delete;
+        ~winsock_guard() { ::WSACleanup(); }
+        winsock_guard(const winsock_guard&) = delete;
+        winsock_guard& operator=(const winsock_guard&) = delete;
     };
 
-    atomic<int> winsock_initializer::g_ref_count{0};
+    void ensure_winsock() { static winsock_guard guard{}; }
+#    endif
 } // namespace
 #endif
 
@@ -62,7 +46,7 @@ bool socket_exception::is_would_block(int error) noexcept {
 
 socket_base::socket_base() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    static winsock_initializer win_sock{};
+    ensure_winsock();
 #endif
 }
 
@@ -120,7 +104,7 @@ bool socket_base::set_nonblocking(const bool enable) noexcept {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    unsigned long mode = enable ? 1 : 0;
+    ::u_long mode = enable ? 1 : 0;
     return ::ioctlsocket(fd_, FIONBIO, &mode) == 0;
 #else
     int flags = ::fcntl(fd_, F_GETFL, 0);
@@ -205,12 +189,12 @@ bool socket_base::set_reuse_port(const bool enable) noexcept {
 }
 
 bool socket_base::set_keep_alive(const bool enable) noexcept {
-    const int value = enable ? 1 : 0;
+    const ::socklen_t value = enable ? 1 : 0;
     return set_option(SOL_SOCKET, SO_KEEPALIVE, &value, sizeof(value));
 }
 
 bool socket_base::set_tcp_nodelay(const bool enable) noexcept {
-    const int value = enable ? 1 : 0;
+    const ::socklen_t value = enable ? 1 : 0;
     return set_option(IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 }
 

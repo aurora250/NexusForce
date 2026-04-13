@@ -18,5 +18,6 @@ var pair_8hpp =
     [ "get", "group___pair.html#ga88fcba61316d5dbeb48991ff865be0fb", null ],
     [ "get", "group___tuple.html#gafb82fa7d5b36f063ae7e53522e2cbdc6", null ],
     [ "get", "group___tuple.html#gaeacfc405517ebd850c9a45a1b00f014e", null ],
-    [ "make_pair", "group___pair.html#ga3fc92626b5f2ddb8e7b4cd5f6ccde69e", null ]
+    [ "make_pair", "group___pair.html#ga3fc92626b5f2ddb8e7b4cd5f6ccde69e", null ],
+    [ "tuple_size_v", "group___tuple.html#ga91606fbeba25897597ab46313b6764d7", null ]
 ];

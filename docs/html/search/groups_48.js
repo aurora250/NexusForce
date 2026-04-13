@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['比率_0',['比率',['../group___ratio_class.html',1,'']]],
-  ['比较算法_1',['比较算法',['../group___compare_algorithms.html',1,'']]],
-  ['比较运算仿函数_2',['比较运算仿函数',['../group___comparison_functors.html',1,'']]]
+  ['标准容器_0',['标准容器',['../group___container.html',1,'']]],
+  ['标准检测_1',['C++标准检测',['../group___cxx_standard_detection.html',1,'']]],
+  ['标准算法_2',['标准算法',['../group___standard_algorithms.html',1,'']]],
+  ['标准迭代器_3',['标准迭代器',['../group___normal_iterators.html',1,'']]]
 ];

@@ -164,9 +164,9 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a0dc753d3295df116e096851ca577f29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
 <tr class="memitem:aaacdc156ac603db1decedf6f5d1555f2" id="r_aaacdc156ac603db1decedf6f5d1555f2"><td class="memItemLeft"><a class="el" href="classmap.html">map</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaacdc156ac603db1decedf6f5d1555f2">operator=</a> (const <a class="el" href="classmap.html">map</a> &amp;other)</td></tr>
 <tr class="memdesc:aaacdc156ac603db1decedf6f5d1555f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
-<tr class="memitem:a149bd63228343b421ce2bdc4c3b85a70" id="r_a149bd63228343b421ce2bdc4c3b85a70"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a149bd63228343b421ce2bdc4c3b85a70">map</a> (<a class="el" href="classmap.html">map</a> &amp;&amp;other) noexcept(is_nothrow_move_constructible_v&lt; base_type &gt;)</td></tr>
+<tr class="memitem:a149bd63228343b421ce2bdc4c3b85a70" id="r_a149bd63228343b421ce2bdc4c3b85a70"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a149bd63228343b421ce2bdc4c3b85a70">map</a> (<a class="el" href="classmap.html">map</a> &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; base_type &gt;)</td></tr>
 <tr class="memdesc:a149bd63228343b421ce2bdc4c3b85a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
-<tr class="memitem:a58f0054d0bacbf9cb364c8b6ad8597b8" id="r_a58f0054d0bacbf9cb364c8b6ad8597b8"><td class="memItemLeft"><a class="el" href="classmap.html">map</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a58f0054d0bacbf9cb364c8b6ad8597b8">operator=</a> (<a class="el" href="classmap.html">map</a> &amp;&amp;other) noexcept(is_nothrow_move_assignable_v&lt; base_type &gt;)</td></tr>
+<tr class="memitem:a58f0054d0bacbf9cb364c8b6ad8597b8" id="r_a58f0054d0bacbf9cb364c8b6ad8597b8"><td class="memItemLeft"><a class="el" href="classmap.html">map</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a58f0054d0bacbf9cb364c8b6ad8597b8">operator=</a> (<a class="el" href="classmap.html">map</a> &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga4e71583e475165e891f9ea1e02c6b8e4">is_nothrow_move_assignable_v</a>&lt; base_type &gt;)</td></tr>
 <tr class="memdesc:a58f0054d0bacbf9cb364c8b6ad8597b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
 <tr class="memitem:a61cd1f103d1c713c0b0b346e2f9e3771" id="r_a61cd1f103d1c713c0b0b346e2f9e3771"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:a61cd1f103d1c713c0b0b346e2f9e3771 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a61cd1f103d1c713c0b0b346e2f9e3771">map</a> (Iterator first, Iterator last)</td></tr>
@@ -437,7 +437,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00132">132</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00098">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02835">is_nothrow_move_constructible_v</a>, <a class="el" href="map_8hpp_source.html#l00098">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -1898,7 +1898,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00140">140</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="map_8hpp_source.html#l00098">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a>, <a class="el" href="type__traits_8hpp_source.html#l02896">is_nothrow_move_assignable_v</a>, <a class="el" href="map_8hpp_source.html#l00098">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -2019,7 +2019,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00468">468</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04314">initialize()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04317">initialize()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a>.</p>
 
 </div>
 </div>
@@ -2060,7 +2060,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00483">483</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04314">initialize()</a>, <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04317">initialize()</a>, <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>

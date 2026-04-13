@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['颜色_0',['颜色',['../group___color.html',1,'']]]
+  ['视图_0',['视图',['../group___view.html',1,'']]]
 ];

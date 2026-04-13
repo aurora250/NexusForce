@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['查找元素算法_0',['查找元素算法',['../group___finding_algorithms.html',1,'']]]
 ];

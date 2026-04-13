@@ -530,7 +530,7 @@ var group___container =
       [ "max_size", "classset.html#a6ae1658a0a8538693162eb20ad36be05", null ],
       [ "operator<", "classset.html#a803614eb2f01ef5603d1b97e04bb5488", null ],
       [ "operator=", "classset.html#aa57c2a45941a264ea21828a640da079f", null ],
-      [ "operator=", "classset.html#ab906440ce4ea519648844c8f3a9cc89f", null ],
+      [ "operator=", "classset.html#aa88cfdc2731f7a0b0f034cc90c7bd58d", null ],
       [ "operator=", "classset.html#a9e28207c2ba1d5cd7c25ce0083f68c13", null ],
       [ "operator==", "classset.html#a6343d64d6b862aed6c8ce876f1c1319a", null ],
       [ "rbegin", "classset.html#acd94e462a344892d97aa6a104e88d300", null ],
