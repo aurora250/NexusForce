@@ -1,6 +1,8 @@
 name: "CodeQL Analysis"
 
 on:
+  schedule:
+    - cron: '0 0 * * 0'
   workflow_dispatch:
 
 jobs:
@@ -19,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
@@ -27,7 +29,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y bear libtirpc-dev libc++abi-dev
 
       - name: Cache vcpkg
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/vcpkg
@@ -46,7 +48,7 @@ jobs:
           echo "$HOME/vcpkg" >> $GITHUB_PATH
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
@@ -64,13 +66,8 @@ jobs:
               - examples
               - tests
               - build
-              - vcpkg
-              - vcpkg_installed
               - third_party
               - submodules
-            query-filters:
-              exclude:
-                - filename:**/vcpkg/**
 
       - name: Capture Build with Bear
         run: |
@@ -96,7 +93,7 @@ jobs:
         shell: bash
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
           upload: true
