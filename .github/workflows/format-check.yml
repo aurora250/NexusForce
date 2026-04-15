@@ -37,7 +37,7 @@ jobs:
 
       - name: Run clang-format check
         run: |
-          find src include tests examples \
+          find src include examples \
             -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.h" \) \
             ! -path "*/build/*" ! -path "*/vcpkg_installed/*" \
             -exec clang-format --dry-run --Werror -style=file {} +

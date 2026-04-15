@@ -26,19 +26,24 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get update && sudo apt-get install -y bear libtirpc-dev libc++abi-dev
 
-      - name: Setup vcpkg
-        uses: lukka/run-vcpkg@v11
+      - name: Cache vcpkg
+        uses: actions/cache@v3
         with:
-          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          vcpkgJsonGlob: '**/vcpkg.json'
-          vcpkgGitCommit: '2024.03.25'
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
 
-      - name: Set VCPKG_ROOT environment variable
-        run: echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
-
-      - name: Install dependencies via vcpkg
+      - name: Setup vcpkg
         run: |
-          $HOME/vcpkg/vcpkg install --triplet x64-linux
+          if [ ! -d "$HOME/vcpkg" ]; then
+            git clone https://github.com/Microsoft/vcpkg.git $HOME/vcpkg
+            $HOME/vcpkg/bootstrap-vcpkg.sh
+          fi
+          echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
+          echo "$HOME/vcpkg" >> $GITHUB_PATH
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
