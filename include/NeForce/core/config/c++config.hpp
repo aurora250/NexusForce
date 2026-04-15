@@ -293,7 +293,8 @@
 #    define NEFORCE_ARCH_RISCV 1 ///< RISC-V架构
 #    if __riscv_xlen == 32 || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_ARCH_RISCV32 1 ///< 32位RISC-V
-#    elif __riscv_xlen == 64 || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    endif
+#    if __riscv_xlen == 64 || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_ARCH_RISCV64 1 ///< 64位RISC-V
 #    endif
 #endif
@@ -304,7 +305,8 @@
 #    define NEFORCE_ARCH_LOONGARCH 1 ///< LoongArch架构
 #    if defined(__loongarch32) || defined(_LOONGARCH_SIM == _ABILP32_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_ARCH_LOONGARCH32 1 ///< 32位LoongArch
-#    elif defined(__loongarch64) || defined(_LOONGARCH_SIM == _ABILP64_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    endif
+#    if defined(__loongarch64) || defined(_LOONGARCH_SIM == _ABILP64_SIM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_ARCH_LOONGARCH64 1 ///< 64位LoongArch
 #    endif
 #endif
