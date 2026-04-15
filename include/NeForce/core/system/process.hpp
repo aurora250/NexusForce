@@ -142,7 +142,8 @@ public:
      * @return 进程信息结构
      * @throws process_exception 创建失败时抛出
      */
-    static state_info create(const string& executable, const vector<string>& args = {}, bool capture_output = false);
+    NEFORCE_NODISCARD static state_info create(const string& executable, const vector<string>& args = {},
+                                               bool capture_output = false);
 
     /**
      * @brief 等待进程结束
@@ -179,27 +180,27 @@ public:
      * @param info 进程信息
      * @return 是否正在运行
      */
-    static bool is_running(const state_info& info) noexcept;
+    NEFORCE_NODISCARD static bool is_running(const state_info& info) noexcept;
 
     /**
      * @brief 获取当前进程ID
      * @return 当前进程ID
      */
-    static native_id_type current_id() noexcept;
+    NEFORCE_NODISCARD static native_id_type current_id() noexcept;
 
     /**
      * @brief 获取进程内存信息
      * @param info 进程信息
      * @return 内存信息结构
      */
-    static memory_info get_memory_info(const state_info& info);
+    NEFORCE_NODISCARD static memory_info get_memory_info(const state_info& info);
 
     /**
      * @brief 获取进程状态
      * @param info 进程信息
      * @return 进程状态枚举值
      */
-    static state get_state(const state_info& info);
+    NEFORCE_NODISCARD static state get_state(const state_info& info);
 
     /**
      * @brief 检查进程权限
@@ -207,14 +208,14 @@ public:
      * @param permission 要检查的权限
      * @return 是否拥有指定权限
      */
-    static bool check_permission(const state_info& info, permission permission);
+    NEFORCE_NODISCARD static bool check_permission(const state_info& info, permission permission);
 
     /**
      * @brief 根据进程ID获取进程名称
      * @param process_id 进程ID
      * @return 进程名称，失败返回空字符串
      */
-    static string name(native_id_type process_id);
+    NEFORCE_NODISCARD static string name(native_id_type process_id);
 };
 
 /** @} */ // Process

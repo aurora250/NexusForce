@@ -18,6 +18,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup ThreadPool 线程池
  * @brief 高性能线程池的实现
  * @{
@@ -854,6 +860,8 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const
 /// @endcond
 
 /** @} */ // ThreadPool
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_THREAD_POOL_HPP__

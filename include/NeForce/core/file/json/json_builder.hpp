@@ -15,8 +15,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup JsonConfig json配置
- * @brief json配置格式管理
+ * @addtogroup ConfigFormat 配置格式操作
+ * @{
+ */
+
+/**
+ * @addtogroup JsonConfig json配置
  * @{
  */
 
@@ -335,6 +339,8 @@ public:
 };
 
 /** @} */ // JsonConfig
+
+/** @} */ // ConfigFormat
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FILE_JSON_JSON_BUILDER_HPP__

@@ -14,6 +14,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup LockFreeQueue 无锁队列
  * @brief 线程安全的无锁队列
  * @{
@@ -360,6 +366,8 @@ template <typename T>
 atomic<int> lock_free_queue<T>::construct_count{0};
 
 /** @} */ // LockFreeQueue
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__

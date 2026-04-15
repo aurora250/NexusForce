@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup CallOnce 单次调用
  * @brief 确保函数在多线程环境中只执行一次
  * @{
@@ -100,6 +106,8 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
 }
 
 /** @} */ // CallOnce
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_CALL_ONCE_HPP__

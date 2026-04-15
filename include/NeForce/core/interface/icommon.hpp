@@ -46,8 +46,7 @@ public:
 /** @} */ // CRTPInterfaces
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @addtogroup HashPrimary 哈希模板
  * @{
  */
 
@@ -65,8 +64,7 @@ struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
 /** @} */ // HashPrimary
 
 /**
- * @defgroup CRTPInterfaces CRTP接口
- * @brief 提供基本功能的CRTP基类
+ * @addtogroup CRTPInterfaces CRTP接口
  * @{
  */
 

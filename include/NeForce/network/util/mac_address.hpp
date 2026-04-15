@@ -20,6 +20,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup NetworkUtil 网络通信工具
+ * @brief 网络通信辅助工具组件
+ * @{
+ */
+
+/**
  * @class mac_address
  * @brief MAC地址封装类
  *
@@ -111,6 +117,8 @@ public:
      */
     const bytes_type& bytes() const noexcept { return bytes_; }
 };
+
+/** @} */ // NetworkUtil
 
 /** @} */ // Network
 

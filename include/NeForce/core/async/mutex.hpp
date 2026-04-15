@@ -25,6 +25,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Mutex 互斥锁
  * @brief 互斥锁类型和工具
  * @{
@@ -427,6 +433,8 @@ public:
 };
 
 /** @} */ // Mutex
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_MUTEX_HPP__

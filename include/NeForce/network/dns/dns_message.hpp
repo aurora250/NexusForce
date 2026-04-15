@@ -29,6 +29,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup DNS DNS
+ * @brief DNS组件
+ * @{
+ */
+
+/**
  * @enum dns_opcode
  * @brief DNS操作码枚举
  *
@@ -69,6 +75,8 @@ enum class dns_response : uint8_t {
     NOT_IMPLEMENTED = 4, ///< 未实现，服务器不支持该查询类型
     REFUSED = 5          ///< 拒绝，服务器拒绝执行查询
 };
+
+/** @} */ // DNS
 
 /** @} */ // Network
 
@@ -147,6 +155,12 @@ public:
 /**
  * @defgroup Network 网络通信
  * @brief 网络通信相关组件
+ * @{
+ */
+
+/**
+ * @defgroup DNS DNS
+ * @brief DNS组件
  * @{
  */
 
@@ -238,6 +252,8 @@ struct dns_header {
     uint16_t nscount = 0; ///< 权威计数
     uint16_t arcount = 0; ///< 附加计数
 };
+
+/** @} */ // DNS
 
 /** @} */ // Network
 

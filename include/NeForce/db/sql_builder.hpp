@@ -5,7 +5,18 @@
  * @file sql_builder.hpp
  * @brief SQL语句构建器
  *
- * 此文件提供了SQL语句的流式构建器，支持SELECT、INSERT、UPDATE、DELETE操作。
+ * 此文件提供了SQL语句的流式构建器。
+ */
+
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup SQL SQL
+ * @brief SQL语句的流式构建器实现
+ *
+ * 支持SELECT、INSERT、UPDATE、DELETE操作，
  * 通过链式调用构建复杂的SQL语句，避免手动拼接SQL字符串的安全风险。
  *
  * @section standards 遵循的SQL标准
@@ -30,15 +41,6 @@
  * - `LIMIT` 和 `OFFSET` 子句属于事实标准，被除Oracle外的多数数据库支持。
  * - 对于Oracle数据库，若需支持分页，建议利用子查询或 12c 之后的 `FETCH FIRST` 语法
  *   （本构建器输出标准 LIMIT/OFFSET，使用时请注意数据库方言差异）。
- */
-
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup SQL SQL
- * @brief SQL相关功能
  * @{
  */
 

@@ -11,6 +11,7 @@
 
 #include "NeForce/core/interface/icommon.hpp"
 #include "NeForce/core/interface/inumeric.hpp"
+#include "NeForce/core/numeric/math.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -185,7 +186,7 @@ public:
      * @exception math_exception 除数为0时
      */
     constexpr T& operator%=(const T& other) {
-        value_ = _NEFORCE float_mod(value_, other.value_);
+        value_ = _NEFORCE mod(value_, other.value_);
         return derived();
     }
 

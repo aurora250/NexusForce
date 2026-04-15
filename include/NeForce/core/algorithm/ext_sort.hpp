@@ -608,7 +608,8 @@ NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last) {
  * 稳定性：不稳定
  *
  * 通过随机打乱并检查是否有序来进行排序。
- * 仅用于教学和娱乐目的，切勿用于实际生产环境。
+ *
+ * @warning 仅用于教学和娱乐目的，切勿用于实际生产环境。
  */
 template <typename Iterator, typename Compare>
 void monkey_sort(Iterator first, Iterator last, Compare comp) {
@@ -622,6 +623,8 @@ void monkey_sort(Iterator first, Iterator last, Compare comp) {
  * @tparam Iterator 随机访问迭代器类型
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
+ *
+ * @warning 仅用于教学和娱乐目的，切勿用于实际生产环境。
  */
 template <typename Iterator>
 void monkey_sort(Iterator first, Iterator last) {

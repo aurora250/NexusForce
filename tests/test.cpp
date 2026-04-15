@@ -302,7 +302,7 @@ void test_color() {
     color adjustableColor = color::red();
     adjustableColor.set_opacity(0.3);
     println(adjustableColor);
-    println(semiRed.premultiply_alpha());
+    println(semiRed.to_premultiplied());
 
 
     color custom(128, 64, 192);

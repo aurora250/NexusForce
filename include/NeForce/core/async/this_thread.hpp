@@ -31,6 +31,12 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_THIS_THREAD__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Thread 线程
  * @brief 线程管理和相关操作
  * @{
@@ -175,6 +181,8 @@ bool NEFORCE_API affinity(size_t cpu_mask) noexcept;
 bool NEFORCE_API priority(int priority) noexcept;
 
 /** @} */ // Thread
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_THIS_THREAD__
 NEFORCE_END_NAMESPACE__

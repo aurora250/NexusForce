@@ -137,7 +137,7 @@ public:
      * @return 映射地址
      * @throws share_memory_exception 映射失败时抛出
      */
-    void* map(size_t offset = 0, size_t length = 0);
+    NEFORCE_NODISCARD void* map(size_t offset = 0, size_t length = 0);
 
     /**
      * @brief 取消映射
@@ -148,7 +148,7 @@ public:
      * @brief 获取映射地址
      * @return 映射地址，未映射则返回nullptr
      */
-    void* data() const noexcept { return mapped_addr_; }
+    NEFORCE_NODISCARD void* data() const noexcept { return mapped_addr_; }
 
     /**
      * @brief 获取映射地址（类型转换版本）
@@ -156,7 +156,7 @@ public:
      * @return 类型转换后的地址
      */
     template <typename T>
-    T* data() const noexcept {
+    NEFORCE_NODISCARD T* data() const noexcept {
         return static_cast<T*>(mapped_addr_);
     }
 
@@ -164,31 +164,31 @@ public:
      * @brief 获取共享内存大小
      * @return 共享内存大小（字节）
      */
-    size_t size() const noexcept { return size_; }
+    NEFORCE_NODISCARD size_t size() const noexcept { return size_; }
 
     /**
      * @brief 获取映射大小
      * @return 映射大小（字节）
      */
-    size_t mapped_size() const noexcept { return mapped_size_; }
+    NEFORCE_NODISCARD size_t mapped_size() const noexcept { return mapped_size_; }
 
     /**
      * @brief 获取共享内存名称
      * @return 共享内存名称
      */
-    const string& name() const noexcept { return name_; }
+    NEFORCE_NODISCARD const string& name() const noexcept { return name_; }
 
     /**
      * @brief 检查是否已打开
      * @return 是否已打开
      */
-    bool is_open() const noexcept { return is_open_; }
+    NEFORCE_NODISCARD bool is_open() const noexcept { return is_open_; }
 
     /**
      * @brief 检查是否已映射
      * @return 是否已映射
      */
-    bool is_mapped() const noexcept { return mapped_addr_ != nullptr; }
+    NEFORCE_NODISCARD bool is_mapped() const noexcept { return mapped_addr_ != nullptr; }
 
     /**
      * @brief 刷新共享内存到磁盘
@@ -209,7 +209,7 @@ public:
      * @param name 共享内存名称
      * @return 是否存在
      */
-    static bool exists(const string& name);
+    NEFORCE_NODISCARD static bool exists(const string& name);
 };
 
 /** @} */ // ShareMemory

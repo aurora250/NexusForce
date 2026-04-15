@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup ThreadExit 线程退出回调
  * @brief 线程退出时的回调管理
  * @{
@@ -41,6 +47,8 @@ struct at_thread_exit_elt {
 void NEFORCE_API thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept;
 
 /** @} */ // ThreadExit
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_AT_THREAD_EXIT_HPP__

@@ -25,6 +25,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup DNS DNS
+ * @brief DNS组件
+ * @{
+ */
+
+/**
  * @class dns_client
  * @brief DNS客户端类
  *
@@ -187,6 +193,8 @@ public:
      */
     vector<dns_query_result> batch_query(const vector<string>& domains, dns_record::raw type = dns_record::A);
 };
+
+/** @} */ // DNS
 
 /** @} */ // Network
 

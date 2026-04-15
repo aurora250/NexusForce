@@ -20,6 +20,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup SQLite3 SQLite3
+ * @brief SQLite3数据库相关功能
+ * @{
+ */
+
+/**
  * @class sqlite_prepared_statement
  * @brief SQLite预处理语句类
  *
@@ -181,6 +187,8 @@ public:
      */
     NEFORCE_NODISCARD uint32_t get_errno() const noexcept override { return db_ ? ::sqlite3_errcode(db_) : 0; }
 };
+
+/** @} */ // SQLite3
 
 /** @} */ // Database
 

@@ -15,8 +15,59 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @defgroup HashPrimary 哈希算法
+ * @brief 哈希模板和哈希算法实现
+ *
+ * @section standards 遵循的国际标准与参考规范
+ * 本实现中的哈希算法参考以下标准规范与学术文献：
+ *
+ * **哈希算法规范参考：**
+ * - **IETF RFC 6234**：US 安全哈希算法 (SHA) 及基于 SHA 的 HMAC 和 HKDF（加密哈希参考）
+ *   https://www.rfc-editor.org/rfc/rfc6234.html
+ *
+ * **非加密哈希算法文献：**
+ * - **FNV-1a 哈希算法**：Fowler–Noll–Vo 哈希函数规范
+ *   https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17
+ * - **MurmurHash3 算法**：Austin Appleby 设计的非加密哈希函数
+ *   https://github.com/aappleby/smhasher/wiki/MurmurHash3
+ * - **DJB2 哈希算法**：Daniel J. Bernstein 设计的字符串哈希函数
+ *   http://www.cse.yorku.ca/~oz/hash.html
+ *
+ * **哈希函数安全标准：**
+ * - **NIST SP 800-185**：SHA-3 派生函数 — cSHAKE、KMAC、TupleHash、ParallelHash
+ *   https://csrc.nist.gov/pubs/sp/800/185/final
+ * - **NIST SP 800-107 Rev. 1**：使用已批准哈希算法的应用推荐
+ *   https://csrc.nist.gov/pubs/sp/800/107/r1/final
+ *
+ * @section algorithm_comparison 哈希算法对比
+ * 本文件提供以下三种非加密哈希算法：
+ *
+ * | 算法           | 输出位数     | 特点                                   | 适用场景                 |
+ * |----------------|--------------|----------------------------------------|--------------------------|
+ * | FNV-1a         | 32/64 位     | 实现简单、雪崩效应好、碰撞率低         | 哈希表、编译时哈希       |
+ * | DJB2           | 32/64 位     | 极简实现、速度快                       | 简单字符串哈希           |
+ * | MurmurHash3    | 32/128 位    | 速度快、分布均匀、可自定义种子         | 高性能哈希表、Bloom Filter |
+ *
+ * @section hash_requirements 哈希函数要求
+ * 根据 ISO/IEC 14882:2020 §16.4.4，C++ 标准库哈希函数应满足：
+ * - 可调用类型：接受 Key 类型参数，返回 size_t
+ * - 相等性：若 k1 == k2，则 hash(k1) == hash(k2)
+ * - 不抛出异常（推荐）：哈希计算不抛出异常
+ *
+ * @section security_note 安全注意事项
+ * @warning **重要安全提示**：
+ *          - FNV-1a、DJB2 和 MurmurHash3 均为**非加密哈希算法**
+ *          - 这些算法不应用于安全敏感场景，如密码存储、数字签名、消息认证码
+ *          - 非加密哈希算法容易受到哈希碰撞攻击和长度扩展攻击
+ *          - 对于安全场景，请使用密码学安全的哈希函数（如 SHA-256、SHA-3、BLAKE2）
+ *
+ * @note 本文件中的哈希函数实现主要用于哈希表、Bloom Filter、数据分片等
+ *       性能敏感的非安全场景。对于需要密码学强度的应用，请使用
+ *       `NeForce/core/encrypt/` 目录下的 SHA-256 等算法。
+ *
+ * @see https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17
+ * @see https://github.com/aappleby/smhasher
+ * @see https://en.wikipedia.org/wiki/Hash_function
  * @{
  */
 
@@ -48,8 +99,7 @@ struct hash<T*> {
 NEFORCE_BEGIN_CONSTANTS__
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @addtogroup HashPrimary 哈希模板
  * @{
  */
 
@@ -82,8 +132,7 @@ NEFORCE_INLINE17 constexpr size_t FNV_PRIME
 NEFORCE_END_CONSTANTS__
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @addtogroup HashPrimary 哈希模板
  * @{
  */
 
@@ -193,8 +242,7 @@ NEFORCE_MACRO_RANGE_FLOAT(__NEFORCE_BUILD_FLOAT_HASH_STRUCT)
 /// @endcond
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @addtogroup HashPrimary 哈希模板
  * @{
  */
 

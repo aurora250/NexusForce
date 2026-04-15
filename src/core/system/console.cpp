@@ -229,11 +229,36 @@ char sys_console::read_char_unsafe() const {
 #endif
 }
 
+sys_console::console_size sys_console::get_console_size_unsafe() const {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
+    if (::GetConsoleScreenBufferInfo(out_, &csbi) == TRUE) {
+        return console_size{csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1};
+    }
+    return console_size{80, 24};
+#else
+    ::winsize ws;
+    if (::ioctl(out_, TIOCGWINSZ, &ws) == 0) {
+        return console_size{ws.ws_col, ws.ws_row};
+    }
+    const string cols = environment::get("COLUMNS");
+    const string rows = environment::get("LINES");
+    if (!cols.empty() && !rows.empty()) {
+        return console_size{_NEFORCE to_int32(cols.view()), _NEFORCE to_int32(rows.view())};
+    }
+    return console_size{80, 24};
+#endif
+}
+
 void sys_console::flush_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::FlushConsoleInputBuffer(in_);
+    if (::GetFileType(out_) != FILE_TYPE_CHAR) {
+        ::FlushFileBuffers(out_);
+    }
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    ::tcflush(in_, TCIFLUSH);
+    if (::isatty(out_) == 0) {
+        ::fsync(out_);
+    }
 #endif
 }
 
@@ -456,6 +481,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     if (::GetConsoleMode(in_, &original_mode) == FALSE) {
         NEFORCE_THROW_EXCEPTION(console_exception("Failed to get console mode"));
     }
+
     ::DWORD new_mode = original_mode;
     new_mode &= ~ENABLE_ECHO_INPUT;
     new_mode &= ~ENABLE_LINE_INPUT;
@@ -464,10 +490,17 @@ string sys_console::password(const string_view prompt, const char mask, const bo
         NEFORCE_THROW_EXCEPTION(console_exception("Failed to set console mode"));
     }
 
+    auto erase_chars = [&](const size_t n) {
+        for (size_t i = 0; i < n; ++i) {
+            print_string_unsafe("\b \b");
+        }
+    };
+
     try {
         while (true) {
             char ch = 0;
             ::DWORD read = 0;
+
             if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) == FALSE || read == 0) {
                 break;
             }
@@ -476,27 +509,22 @@ string sys_console::password(const string_view prompt, const char mask, const bo
                 print_string_unsafe("\n");
                 break;
             }
+
             if (ch == '\b') {
                 if (!password.empty()) {
                     password.pop_back();
 
                     if (mask != '\0') {
                         print_string_unsafe("\b \b");
-                    } else if (show_length) {
-                        size_t display_length = password.length() + 1;
-                        if (password.length() > 9) {
-                            ++display_length;
-                        }
-                        if (password.length() > 99) {
-                            ++display_length;
-                        }
-
-                        print_string_unsafe("\r");
-                        print_string_unsafe(prompt);
+                    }
+                    if (show_length) {
+                        const string old_display = " [" + to_string(password.length() + 1) + "]";
+                        erase_chars(old_display.length());
 
                         if (!password.empty()) {
-                            string length_display = " [" + to_string(password.length()) + "]";
-                            print_string_unsafe(length_display);
+                            const string new_display = " [" + to_string(password.length()) + "]";
+                            print_string_unsafe(new_display);
+                            erase_chars(new_display.length());
                         }
                     }
                 }
@@ -512,11 +540,14 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 
                 if (mask != '\0') {
                     print_string_unsafe(string(1, mask));
-                } else if (show_length) {
-                    print_string_unsafe("\r");
-                    print_string_unsafe(prompt);
-                    string length_display = " [" + to_string(password.length()) + "]";
-                    print_string_unsafe(length_display);
+                }
+                if (show_length) {
+                    const string old_display =
+                            password.length() > 1 ? " [" + to_string(password.length() - 1) + "]" : "";
+                    erase_chars(old_display.length());
+                    const string new_display = " [" + to_string(password.length()) + "]";
+                    print_string_unsafe(new_display);
+                    erase_chars(new_display.length());
                 }
             }
             flush_unsafe();
@@ -530,6 +561,19 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 #elif defined(NEFORCE_PLATFORM_LINUX)
     print_string_unsafe(prompt);
     flush_unsafe();
+
+    auto refresh_length_display = [&](size_t old_len, size_t new_len) {
+        if (!show_length) {
+            return;
+        }
+        const string old_display = old_len > 0 ? " [" + to_string(old_len) + "]" : "";
+        erase_chars(old_display.length());
+        if (new_len > 0) {
+            const string new_display = " [" + to_string(new_len) + "]";
+            print_string_unsafe(new_display);
+            erase_chars(new_display.length());
+        }
+    };
 
     ::termios original_termios;
     ::tcgetattr(in_, &original_termios);
@@ -556,67 +600,45 @@ string sys_console::password(const string_view prompt, const char mask, const bo
                 break;
             } else if (ch == '\x7f' || ch == '\b') {
                 if (!password.empty()) {
+                    const size_t old_len = password.length();
                     password.pop_back();
                     if (mask != '\0') {
                         print_string_unsafe("\b \b");
                     }
-                    if (show_length) {
-                        string length_display = " [" + to_string(password.length()) + "]";
-                        print_string_unsafe(length_display);
-                        for (size_t i = 0; i < length_display.length(); ++i) {
-                            print_string_unsafe("\b");
-                        }
-                    }
+                    refresh_length_display(old_len, password.length());
                 }
-            } else if (ch == '\x03') {
+            } else if (ch == '\x03') { // Ctrl-C
                 print_string_unsafe("^C\n");
                 NEFORCE_THROW_EXCEPTION(console_exception("Interrupted by user"));
-            } else if (ch == '\x15') {
-                while (!password.empty()) {
+            } else if (ch == '\x15') { // Ctrl-U
+                const size_t old_len = password.length();
+                if (mask != '\0') {
+                    erase_chars(old_len);
+                }
+                refresh_length_display(old_len, 0);
+                password.clear();
+            } else if (ch == '\x17') { // Ctrl-W
+                const size_t old_len = password.length();
+                while (!password.empty() && password.back() == ' ') {
                     password.pop_back();
                     if (mask != '\0') {
                         print_string_unsafe("\b \b");
                     }
                 }
-                if (show_length) {
-                    string length_display = " [" + to_string(password.length()) + "]";
-                    print_string_unsafe(length_display);
-                    for (size_t i = 0; i < length_display.length(); ++i) {
-                        print_string_unsafe("\b");
-                    }
-                }
-            } else if (ch == '\x17') {
                 while (!password.empty() && password.back() != ' ') {
                     password.pop_back();
                     if (mask != '\0') {
                         print_string_unsafe("\b \b");
                     }
                 }
-                if (!password.empty() && password.back() == ' ') {
-                    password.pop_back();
-                    if (mask != '\0') {
-                        print_string_unsafe("\b \b");
-                    }
-                }
-                if (show_length) {
-                    string length_display = " [" + to_string(password.length()) + "]";
-                    print_string_unsafe(length_display);
-                    for (size_t i = 0; i < length_display.length(); ++i) {
-                        print_string_unsafe("\b");
-                    }
-                }
+                refresh_length_display(old_len, password.length());
             } else if (ch >= 32 && ch <= 126) {
+                const size_t old_len = password.length();
                 password.push_back(ch);
                 if (mask != '\0') {
                     print_string_unsafe(string(1, mask));
                 }
-                if (show_length) {
-                    string length_display = " [" + to_string(password.length()) + "]";
-                    print_string_unsafe(length_display);
-                    for (size_t i = 0; i < length_display.length(); ++i) {
-                        print_string_unsafe("\b");
-                    }
-                }
+                refresh_length_display(old_len, password.length());
             }
             flush_unsafe();
         }
@@ -749,30 +771,12 @@ void sys_console::show_cursor() {
 
 sys_console::console_size sys_console::get_console_size() const {
     lock<mutex> lock(mutex_);
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
-    if (::GetConsoleScreenBufferInfo(out_, &csbi) == TRUE) {
-        return console_size{csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1};
-    }
-    return console_size{80, 24};
-#else
-    ::winsize ws;
-    if (::ioctl(out_, TIOCGWINSZ, &ws) == 0) {
-        return console_size{ws.ws_col, ws.ws_row};
-    }
-    const string cols = environment::get("COLUMNS");
-    const string rows = environment::get("LINES");
-    if (!cols.empty() && !rows.empty()) {
-        return console_size{_NEFORCE to_int32(cols.view()), _NEFORCE to_int32(rows.view())};
-    }
-    return console_size{80, 24};
-#endif
+    return get_console_size_unsafe();
 }
 
 bool sys_console::is_terminal_resized() {
     lock<mutex> lock(mutex_);
-    const console_size current = get_console_size();
+    const console_size current = get_console_size_unsafe();
     if (current != last_size_) {
         last_size_ = current;
         return true;
@@ -915,5 +919,7 @@ void sys_console::fade_in_out(const string_view text, const milliseconds in_dura
 #endif
     flush_unsafe();
 }
+
+sys_console& console = sys_console::instance();
 
 NEFORCE_END_NAMESPACE__

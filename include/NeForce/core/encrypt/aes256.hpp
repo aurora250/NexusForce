@@ -7,6 +7,20 @@
  *
  * 此文件提供了AES-256对称加密算法的实现，支持 ECB、CBC 和 GCM 工作模式，
  * 以及 PKCS#7 填充方案。
+ */
+
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Encryption 加密算法
+ * @{
+ */
+
+/**
+ * @defgroup AES256 AES-256
+ * @brief AES-256对称加密算法实现
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下密码学与信息安全相关标准规范：
@@ -52,14 +66,6 @@
  *
  * @see https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines
  * @see https://www.iso.org/committee/45306.html
- */
-
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Encryption 加密算法
  * @{
  */
 
@@ -72,7 +78,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API AES256 {
     /**
-     * @brief AES-256加密
+     * @brief AES-256-ECB 加密
      * @param data 要加密的数据（长度必须是16的倍数）
      * @param key 32字节的密钥
      * @return 加密后的数据
@@ -81,7 +87,7 @@ struct NEFORCE_API AES256 {
     static byte_vector encrypt_ecb(cbyte_view data, cbyte_view key);
 
     /**
-     * @brief AES-256解密
+     * @brief AES-256-ECB 解密
      * @param data 要解密的数据（长度必须是16的倍数）
      * @param key 32字节的密钥
      * @return 解密后的数据
@@ -90,7 +96,7 @@ struct NEFORCE_API AES256 {
     static byte_vector decrypt_ecb(cbyte_view data, cbyte_view key);
 
     /**
-     * @brief AES-256加密（PKCS7填充）
+     * @brief AES-256-ECB 加密（PKCS7填充）
      * @param data 要加密的数据
      * @param key 32字节的密钥
      * @return 加密后的数据（自动添加PKCS7填充）
@@ -99,7 +105,7 @@ struct NEFORCE_API AES256 {
     static byte_vector encrypt_ecb_pkcs7(cbyte_view data, cbyte_view key);
 
     /**
-     * @brief AES-256解密（PKCS7填充）
+     * @brief AES-256-ECB 解密（PKCS7填充）
      * @param data 要解密的数据
      * @param key 32字节的密钥
      * @return 解密后的数据（自动移除PKCS7填充）
@@ -108,7 +114,7 @@ struct NEFORCE_API AES256 {
     static byte_vector decrypt_ecb_pkcs7(cbyte_view data, cbyte_view key);
 
     /**
-     * @brief AES-256加密（十六进制接口）
+     * @brief AES-256-ECB 加密（十六进制接口）
      * @param data 要加密的字符串
      * @param key_hex 十六进制表示的密钥（64字符，表示32字节）
      * @return 加密后的十六进制字符串
@@ -116,7 +122,7 @@ struct NEFORCE_API AES256 {
     static string encrypt_ecb_hex(string_view data, string_view key_hex);
 
     /**
-     * @brief AES-256解密（十六进制接口）
+     * @brief AES-256-ECB 解密（十六进制接口）
      * @param encrypted_hex 加密数据的十六进制表示
      * @param key_hex 十六进制表示的密钥（64字符，表示32字节）
      * @return 解密后的字符串
@@ -192,11 +198,6 @@ struct NEFORCE_API AES256 {
 
 
 /**
- * @name AES-256加密便捷函数（十六进制接口）
- * @{
- */
-
-/**
  * @brief AES-256加密便捷函数
  * @param data 要加密的字符串
  * @param key_hex 十六进制密钥
@@ -217,13 +218,6 @@ NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string_view data, const
 NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string& data, const string& key_hex) {
     return AES256::encrypt_ecb_hex(data.view(), key_hex.view());
 }
-
-/** @} */
-
-/**
- * @name AES-256解密便捷函数（十六进制接口）
- * @{
- */
 
 /**
  * @brief AES-256解密便捷函数
@@ -247,7 +241,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string aes256_decrypt(const string& encrypted_hex, 
     return AES256::decrypt_ecb_hex(encrypted_hex.view(), key_hex.view());
 }
 
-/** @} */
+/** @} */ // AES256
 
 /** @} */ // Encryption
 

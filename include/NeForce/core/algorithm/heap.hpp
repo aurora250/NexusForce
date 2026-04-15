@@ -22,6 +22,86 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup HeapAlgorithms 堆算法
  * @brief 堆算法的实现
+ *
+ * 堆是一种满足堆性质的完全二叉树，常用于实现优先队列和堆排序。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下数据结构相关标准规范：
+ *
+ * **算法复杂度标准参考：**
+ * - **ISO/IEC 14882:2020 §25.8.6**：堆操作复杂度要求
+ *
+ * **相关数据结构与算法文献：**
+ * - **J.W.J. Williams (1964)**：Algorithm 232 — Heapsort（堆排序原始论文）
+ *   Communications of the ACM, 7(6): 347-348
+ * - **R.W. Floyd (1964)**：Algorithm 245 — Treesort 3（堆调整优化算法）
+ *   Communications of the ACM, 7(12): 701
+ *
+ * @section heap_properties 堆性质定义
+ * 根据 C++ 标准，堆是满足以下性质的范围 `[first, last)`：
+ *
+ * | 堆类型         | 比较函数要求                    | 性质描述                                 |
+ * |----------------|---------------------------------|------------------------------------------|
+ * | 最大堆         | comp(a, b) 返回 true 表示 a < b | 父节点不小于子节点                        |
+ * | 最小堆         | comp(a, b) 返回 true 表示 a > b | 父节点不大于子节点                        |
+ *
+ * **数学表示**：
+ * - 对于索引 i，左子节点索引：2i + 1
+ * - 对于索引 i，右子节点索引：2i + 2
+ * - 对于索引 i，父节点索引：(i - 1) / 2（整数除法）
+ *
+ * **堆性质公式**（最大堆）：
+ * - comp(*(first + parent), *(first + child)) == false
+ * - 即父节点不小于子节点
+ *
+ * @section algorithm_complexity 算法复杂度
+ * 根据 ISO/IEC 14882:2020 §25.8，各堆操作的时间复杂度如下：
+ *
+ * | 操作          | 函数          | 时间复杂度          | 比较次数上限               |
+ * |---------------|---------------|---------------------|----------------------------|
+ * | 创建堆        | make_heap     | O(n)                | 最多 3n 次比较             |
+ * | 插入元素      | push_heap     | O(log n)            | 最多 log(n) 次比较         |
+ * | 删除堆顶      | pop_heap      | O(log n)            | 最多 2×log(n) 次比较       |
+ * | 堆排序        | sort_heap     | O(n log n)          | 最多 n×log(n) 次比较       |
+ * | 验证堆        | is_heap       | O(n)                | 最多 n 次比较              |
+ * | 查找违规元素  | is_heap_until | O(n)                | 最多 n 次比较              |
+ *
+ * 其中 n = last - first。
+ *
+ * @section floyd_optimization Floyd 堆调整优化
+ * 本实现采用 Floyd 的堆调整算法（Algorithm 245），其核心思想是：
+ * 1. 从空洞位置向下筛选，找到合适的位置
+ * 2. 从找到的位置向上调整，放入待插入的元素
+ *
+ * 相比传统方法，Floyd 算法减少了每次迭代中的元素交换次数，
+ * 将 `push_heap` 操作的比较次数从最多 2×log(n) 优化为最多 log(n) + 1。
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 堆类型            | 二叉堆（完全二叉树）                      |
+ * | 索引基            | 0-based（C 风格数组索引）                 |
+ * | 迭代器要求        | 随机访问迭代器（RandomAccessIterator）    |
+ * | 比较器要求        | 严格弱序（Strict Weak Ordering）          |
+ * | 稳定性            | 不稳定（不保证相等元素的相对顺序）        |
+ * | 内存使用          | 原地操作（O(1) 额外空间）                 |
+ *
+ * @section comparison_strictness 比较器的严格弱序要求
+ * 根据 C++ 标准 §25.7，比较函数 comp 必须满足严格弱序（Strict Weak Ordering）：
+ * - 非自反性：comp(a, a) == false
+ * - 非对称性：若 comp(a, b) == true，则 comp(b, a) == false
+ * - 传递性：若 comp(a, b) == true 且 comp(b, c) == true，则 comp(a, c) == true
+ * - 等价的传递性：若 !comp(a, b) && !comp(b, a)，则 a 和 b 等价
+ *
+ * @note 本实现采用 Floyd 的优化堆调整算法，在插入和删除操作中减少元素移动次数。
+ *       所有操作均为原地操作，不需要额外的内存分配。
+ *
+ * @warning 堆操作要求输入范围满足堆性质（`make_heap` 和 `push_heap` 的特定范围除外）。
+ *          对不满足堆性质的范围调用 `pop_heap` 或 `sort_heap` 会导致未定义行为。
+ *
+ * @see https://en.cppreference.com/w/cpp/algorithm#Heap_operations
+ * @see https://dl.acm.org/doi/10.1145/512274.512284（Floyd）
+ * @see https://en.wikipedia.org/wiki/Binary_heap
  * @{
  */
 

@@ -1,5 +1,14 @@
 #ifndef NEFORCE_NEWORK_SOCKET_SMTP_SOCKET_HPP__
 #define NEFORCE_NEWORK_SOCKET_SMTP_SOCKET_HPP__
+
+/**
+ * @file smtp_socket.hpp
+ * @brief SMTP协议Socket实现
+ *
+ * 此文件提供了SMTP（简单邮件传输协议）客户端的完整实现。
+ * 支持明文、STARTTLS和隐式TLS连接，支持多种认证方式。
+ */
+
 #include "NeForce/core/container/map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/network/dns/dns_client.hpp"
@@ -8,8 +17,16 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup Exceptions 异常类集
+ * @brief 异常类集
+ * @{
+ */
+
+/**
  * @struct smtp_exception
- * @brief SMTP操作异常
+ * @brief SMTP操作异常类
+ *
+ * SMTP协议操作失败时抛出的异常。
  */
 struct NEFORCE_API smtp_exception final : network_exception {
     explicit smtp_exception(const char* info = "SMTP Operation Failed.", const char* type = static_type,
@@ -24,55 +41,134 @@ struct NEFORCE_API smtp_exception final : network_exception {
     static constexpr auto static_type = "smtp_exception";
 };
 
+/** @} */ // Exceptions
 
+/**
+ * @defgroup Network 网络通信
+ * @brief 网络通信相关组件
+ * @{
+ */
+
+/**
+ * @struct smtp_message
+ * @brief SMTP邮件消息结构
+ *
+ * 表示一封完整的邮件，包含发件人、收件人、主题、正文等信息。
+ */
 struct NEFORCE_API smtp_message {
-    string from;
-    vector<string> to;
-    vector<string> cc;
-    vector<string> bcc;
-    string subject;
-    string body;
-    bool is_html = false;
-    map<string, string> extra_headers;
+    string from;                       ///< 发件人地址
+    vector<string> to;                 ///< 收件人地址列表
+    vector<string> cc;                 ///< 抄送地址列表
+    vector<string> bcc;                ///< 密送地址列表
+    string subject;                    ///< 邮件主题
+    string body;                       ///< 邮件正文
+    bool is_html = false;              ///< 是否为HTML格式
+    map<string, string> extra_headers; ///< 额外邮件头
 };
 
-
+/**
+ * @class smtp_socket
+ * @brief SMTP Socket类
+ *
+ * 实现SMTP客户端协议，支持完整的邮件发送流程。
+ * 支持多种连接方式和认证机制。
+ *
+ * 主要功能：
+ * - SMTP服务器连接（支持IP和域名）
+ * - TLS/SSL加密（隐式TLS、STARTTLS）
+ * - 认证（PLAIN、LOGIN）
+ * - 邮件发送（支持收件人、抄送、密送、HTML邮件）
+ * - EHLO/HELO协议协商
+ * - DNS解析
+ *
+ * 使用示例：
+ * @code
+ * // 创建SSL上下文（用于TLS）
+ * ssl_context ctx(ssl_method::TLS_CLIENT);
+ * ctx.load_verify_locations("ca-bundle.crt");
+ *
+ * // 创建SMTP socket
+ * smtp_socket smtp;
+ *
+ * // 连接到QQ邮箱（STARTTLS）
+ * smtp.connect("smtp.qq.com", ports::smtp, "example.com",
+ *              smtp_socket::tls_mode::starttls, nullptr, &ctx);
+ *
+ * // 认证
+ * smtp.authenticate("username@qq.com", "password",
+ *                   smtp_socket::auth_method::login);
+ *
+ * // 构建邮件
+ * smtp_message msg;
+ * msg.from = "sender@qq.com";
+ * msg.to = {"recipient@example.com"};
+ * msg.subject = "Test Email";
+ * msg.body = "Hello, this is a test email!";
+ * msg.is_html = false;
+ *
+ * // 发送邮件
+ * smtp.send(msg);
+ *
+ * // 断开连接
+ * smtp.disconnect();
+ * @endcode
+ */
 class NEFORCE_API smtp_socket final : public ip_socket {
 public:
+    /**
+     * @enum auth_method
+     * @brief SMTP认证方式
+     */
     enum class auth_method {
-        none,
-        plain,
-        login
+        none,  ///< 无认证
+        plain, ///< PLAIN认证
+        login  ///< LOGIN认证
     };
 
+    /**
+     * @enum tls_mode
+     * @brief TLS连接模式
+     */
     enum class tls_mode {
-        none,
-        implicit,
-        starttls
+        none,     ///< 明文连接
+        implicit, ///< 隐式TLS（直接TLS）
+        starttls  ///< STARTTLS（从明文升级到TLS）
     };
 
+    /**
+     * @struct response
+     * @brief SMTP服务器响应
+     */
     struct response {
-        int code;
-        string message;
+        int code;       ///< 响应码
+        string message; ///< 响应消息文本
 
+        /**
+         * @brief 检查响应是否成功
+         * @return 2xx响应返回true
+         */
         NEFORCE_NODISCARD bool is_success() const noexcept { return code >= 200 && code < 400; }
     };
 
+    /**
+     * @struct starttls_result
+     * @brief STARTTLS升级结果
+     */
     struct starttls_result {
-        bool upgraded = false;
-        string cipher_name;
-        string tls_version;
-        bool peer_verified = false;
+        bool upgraded = false;      ///< 是否成功升级
+        string cipher_name;         ///< 当前密码套件名称
+        string tls_version;         ///< TLS协议版本
+        bool peer_verified = false; ///< 对等方证书是否已验证
     };
 
 private:
-    string server_domain_;
-    bool connected_ = false;
+    string server_domain_;   ///< 服务器域名
+    bool connected_ = false; ///< 是否已连接
 
-    tls_mode tls_mode_ = tls_mode::none;
-    bool tls_active_ = false;
+    tls_mode tls_mode_ = tls_mode::none; ///< TLS模式
+    bool tls_active_ = false;            ///< TLS是否已激活
 
-    ssl_stream ssl_;
+    ssl_stream ssl_; ///< SSL流对象
 
     ssize_t raw_send(const char* data, size_t len);
     ssize_t raw_recv(char* buf, size_t len);
@@ -91,37 +187,44 @@ private:
     void open_and_connect(const ip_address& addr);
 
 public:
+    /**
+     * @brief 默认构造函数
+     */
     smtp_socket() = default;
 
+    /**
+     * @brief 从原生句柄构造
+     * @param fd 原生socket句柄
+     */
     explicit smtp_socket(native_handle_type fd) noexcept :
     ip_socket(fd) {}
 
     /**
-     * @brief 连接SMTP服务器
-     * @param addr         服务器地址
-     * @param domain       本机EHLO域名
-     * @param mode         TLS模式
-     * @param ctx          SSL上下文（mode != none时必须提供）
-     * @param sni_hostname SNI主机名，为空则不设置
+     * @brief 连接SMTP服务器（IP）
+     * @param addr 服务器IP地址
+     * @param domain 本机EHLO域名
+     * @param mode TLS模式
+     * @param ctx SSL上下文（mode != none时必须提供）
+     * @param sni_hostname SNI主机名（为空则不设置）
      */
     void connect(const ip_address& addr, const string& domain = "localhost", tls_mode mode = tls_mode::none,
                  const ssl_context* ctx = nullptr, const string& sni_hostname = "");
 
     /**
-     * @brief 通过域名连接SMTP服务器
-     * @param hostname     域名，如 "smtp.qq.com"
-     * @param port         端口
-     * @param domain       EHLO域名
-     * @param mode         TLS模式
-     * @param dns          DNS客户端，为nullptr时使用默认配置
-     * @param ctx          SSL上下文
-     * @param sni_hostname SNI主机名，为空则使用hostname
+     * @brief 连接SMTP服务器（域名）
+     * @param hostname 服务器域名
+     * @param port 端口号
+     * @param domain EHLO域名
+     * @param mode TLS模式
+     * @param dns DNS客户端（为nullptr时使用默认配置）
+     * @param ctx SSL上下文
+     * @param sni_hostname SNI主机名（为空则使用hostname）
      */
     void connect(const string& hostname, ports port, const string& domain = "localhost", tls_mode mode = tls_mode::none,
                  dns_client* dns = nullptr, const ssl_context* ctx = nullptr, const string& sni_hostname = "");
 
     /**
-     * @brief 在已有明文连接上执行STARTTLS升级
+     * @brief 执行STARTTLS升级
      * @param ctx SSL上下文
      * @param sni_hostname SNI主机名
      * @return STARTTLS协商结果
@@ -134,39 +237,56 @@ public:
     void disconnect();
 
     /**
-     * @brief PLAIN认证
+     * @brief SMTP认证
+     * @param username 用户名
+     * @param password 密码
+     * @param method 认证方式
      */
     void authenticate(const string& username, const string& password, auth_method method = auth_method::plain);
 
     /**
      * @brief 发送邮件
+     * @param msg 邮件消息
      */
     void send(const smtp_message& msg);
 
+    /**
+     * @brief 发送NOOP命令
+     */
     void noop();
 
     /**
      * @brief 是否已连接
+     * @return 已连接返回true
      */
     NEFORCE_NODISCARD bool is_connected() const noexcept { return connected_ && is_open(); }
 
+    /**
+     * @brief TLS是否已激活
+     * @return 已激活返回true
+     */
     NEFORCE_NODISCARD bool is_tls_active() const noexcept { return tls_active_; }
 
     /**
      * @brief 验证服务器证书
+     * @return 验证通过返回true
      */
     NEFORCE_NODISCARD bool verify_peer() const { return ssl_.verify_peer(); }
 
     /**
      * @brief 获取当前TLS密码套件名
+     * @return 密码套件名称
      */
     NEFORCE_NODISCARD string cipher_name() const { return ssl_.get_cipher_name(); }
 
     /**
      * @brief 获取当前TLS版本
+     * @return TLS版本字符串
      */
     NEFORCE_NODISCARD string tls_version() const { return ssl_.get_version(); }
 };
+
+/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NEWORK_SOCKET_SMTP_SOCKET_HPP__

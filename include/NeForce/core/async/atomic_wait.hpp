@@ -14,6 +14,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup AtomicOperations 原子操作
  * @brief 原子变量的操作
  * @{
@@ -441,6 +447,8 @@ void atomic_notify_address(const T* addr, const bool all) noexcept {
 }
 
 /** @} */ // AtomicOperations
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ATOMIC_WAIT_HPP__

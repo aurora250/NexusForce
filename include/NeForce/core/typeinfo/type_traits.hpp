@@ -12,6 +12,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup TypeTraits 类型萃取
+ * @brief 类型萃取工具实现
+ * @{
+ */
+
+/**
  * @defgroup TypeTraitsUtilities 类型推导辅助工具
  * @brief 类型推导辅助工具类
  * @{
@@ -4329,6 +4335,8 @@ NEFORCE_MACRO_RANGE_ARITHMETIC(__NEFORCE_INITIALIZE_BASIC_FUNCTION)
 #undef __NEFORCE_INITIALIZE_BASIC_FUNCTION
 
 /** @} */ // TypeInitializeFunction
+
+/** @} */ // TypeTraits
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_TYPEINFO_TYPE_TRAITS_HPP__

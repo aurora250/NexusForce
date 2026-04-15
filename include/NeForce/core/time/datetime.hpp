@@ -12,6 +12,14 @@
  * - 时间戳类
  * - 儒略日转换
  * - 多种格式的解析和格式化
+ */
+
+#include "NeForce/core/utility/packages.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup DateTime 日期时间
+ * @brief 日期时间处理功能
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下日期时间相关标准规范：
@@ -26,7 +34,7 @@
  * - **IETF RFC 3339**：互联网上的日期和时间格式（ISO 8601 配置文件）
  *   https://www.rfc-editor.org/rfc/rfc3339.html
  * - **IETF RFC 1123**：互联网主机要求 — 应用和支持（§5.2.14 日期时间格式）
- *   https://www.rfc-editor.org/rfc/rfc1123.html
+ *   https://www.rfc-editor.org/rfc/rfc1123.html#section-5.2.14
  * - **IETF RFC 2616**：HTTP/1.1（§3.3.1 完整日期，已由 RFC 7231 更新）
  *   https://www.rfc-editor.org/rfc/rfc2616.html#section-3.3.1
  *
@@ -70,14 +78,6 @@
  * @see https://www.iso.org/iso-8601-date-and-time-format.html
  * @see https://www.ietf.org/rfc/rfc3339.txt
  * @see https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16
- */
-
-#include "NeForce/core/utility/packages.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup DateTime 日期时间
- * @brief 日期时间处理功能
  * @{
  */
 
@@ -231,16 +231,13 @@ public:
 
     /**
      * @brief 转换为儒略日
-     * @param year 年份
-     * @param month 月份
-     * @param day 日期
      * @return 儒略日数
      */
-    static constexpr int64_t to_julian_day(date_type year, date_type month, date_type day) noexcept {
-        const int64_t a = (14 - month) / 12;
-        year = year + 4800 - a;
-        month = month + 12 * a - 3;
-        return day + (153 * month + 2) / 5 + 365 * year + year / 4 - year / 100 + year / 400 - 32045;
+    constexpr int64_t to_julian_day() const noexcept {
+        const date_type a = (14 - month_) / 12;
+        const date_type year = year_ + 4800 - a;
+        const date_type month = month_ + 12 * a - 3;
+        return day_ + (153 * month + 2) / 5 + 365 * year + year / 4 - year / 100 + year / 400 - 32045;
     }
 
     /**
@@ -309,7 +306,7 @@ public:
         }
 
         if (day > 365) {
-            const int64_t jd = to_julian_day(year_, month_, day_) + day;
+            const int64_t jd = to_julian_day() + day;
             *this = from_julian_day(jd);
             return *this;
         }
@@ -400,8 +397,7 @@ public:
      * @return 相差的天数
      */
     constexpr date_type operator-(const date& other) const noexcept {
-        return static_cast<date_type>(to_julian_day(year_, month_, day_) -
-                                      to_julian_day(other.year_, other.month_, other.day_));
+        return static_cast<date_type>(to_julian_day() - other.to_julian_day());
     }
 
     /**

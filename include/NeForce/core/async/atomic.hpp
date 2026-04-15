@@ -12,6 +12,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup AtomicOperations 原子操作
  * @brief 原子变量的操作
  * @{
@@ -877,6 +883,8 @@ struct atomic<long double> : atomic_float_base<long double> {
 };
 
 /** @} */ // AtomicOperations
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ATOMIC_HPP__

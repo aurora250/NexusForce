@@ -7,6 +7,20 @@
  *
  * 此文件提供了MD5消息摘要算法的实现。MD5产生128位（16字节）的哈希值，
  * 历史上广泛用于校验和验证与数据完整性检查。
+ */
+
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Encryption 加密算法
+ * @{
+ */
+
+/**
+ * @defgroup MD5 MD5
+ * @brief MD5消息摘要算法的实现
  *
  * @warning **安全警告**：MD5算法已被证明存在密码学弱点，不再适合用于安全敏感场景。
  *          具体漏洞包括：
@@ -48,14 +62,6 @@
  * @see https://www.rfc-editor.org/rfc/rfc1321
  * @see https://csrc.nist.gov/projects/hash-functions
  * @warning **禁止使用**：密码存储、数字签名、SSL/TLS 证书、代码签名、认证令牌等安全场景。
- */
-
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Encryption 加密算法
  * @{
  */
 

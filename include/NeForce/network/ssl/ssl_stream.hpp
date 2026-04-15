@@ -19,6 +19,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @addtogroup SSL SSL/TLS
+ * @{
+ */
+
+/**
  * @class ssl_stream
  * @brief SSL/TLS流封装类
  *
@@ -261,6 +266,8 @@ public:
      */
     NEFORCE_NODISCARD ::SSL* release() noexcept { return ssl_.release(); }
 };
+
+/** @} */ // SSL/TLS
 
 /** @} */ // Network
 

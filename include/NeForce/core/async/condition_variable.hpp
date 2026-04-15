@@ -13,6 +13,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup ConditionVariables 条件变量
  * @brief 条件变量和同步原语
  * @{
@@ -318,6 +324,8 @@ public:
 };
 
 /** @} */ // ConditionVariables
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_CONDITION_VARIABLE_HPP__

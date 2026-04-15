@@ -7,6 +7,20 @@
  *
  * 此文件提供了SHA-1安全哈希算法的实现。SHA-1产生160位（20字节）的哈希值，
  * 历史上广泛用于数字签名、证书验证和数据完整性检查。
+ */
+
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Encryption 加密算法
+ * @{
+ */
+
+/**
+ * @defgroup SHA1 SHA-1
+ * @brief SHA-1安全哈希算法实现
  *
  * @warning **安全警告**：SHA-1算法已被证明存在密码学弱点，不再适合用于安全敏感场景。
  *          具体漏洞包括：
@@ -58,14 +72,6 @@
  * @see https://shattered.io/ （SHAttered 碰撞攻击演示）
  * @warning **禁止使用**：数字签名、SSL/TLS 证书、代码签名、认证令牌等安全场景。
  *          根据 NIST SP 800-131A Rev. 2，SHA-1 已于 2013 年后禁止用于数字签名生成。
- */
-
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Encryption 加密算法
  * @{
  */
 
@@ -125,6 +131,8 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const cbyte_view data) { return SH
  * @return 20字节的哈希值
  */
 NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const byte_vector& data) { return SHA1::hash(data.view()); }
+
+/** @} */ // SHA1
 
 /** @} */ // Encryption
 

@@ -12,6 +12,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Thread 线程
  * @brief 线程管理和相关操作
  * @{
@@ -180,6 +186,8 @@ public:
 };
 
 /** @} */ // Thread
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_SCOPED_THREAD_HPP__

@@ -18,6 +18,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup AsyncTimer 定时调度器
  * @brief 异步定时器工具
  * @{
@@ -367,6 +373,8 @@ using steady_timer = basic_timer<steady_clock>;
 using system_timer = basic_timer<system_clock>;
 
 /** @} */ // AsyncTimer
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_TIMER_HPP__

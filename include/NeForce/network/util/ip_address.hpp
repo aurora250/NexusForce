@@ -33,6 +33,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup NetworkUtil 网络通信工具
+ * @brief 网络通信辅助工具组件
+ * @{
+ */
+
+/**
  * @class ip_address
  * @brief IP地址封装类
  *
@@ -171,7 +177,7 @@ public:
      * 支持IPv4点分十进制和IPv6十六进制格式。
      * 不支持域名解析（如有需要请使用dns_client）。
      */
-    NEFORCE_NODISCARD static optional<ip_address> parse(const string& host, ports port = ports::undef) noexcept;
+    NEFORCE_NODISCARD static optional<ip_address> parse(const string& host, ports port = ports{}) noexcept;
 
     /**
      * @brief 相等比较运算符
@@ -189,6 +195,8 @@ public:
      */
     NEFORCE_NODISCARD bool operator!=(const ip_address& other) const { return !(*this == other); }
 };
+
+/** @} */ // NetworkUtil
 
 /** @} */ // Network
 

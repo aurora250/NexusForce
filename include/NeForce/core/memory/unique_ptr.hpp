@@ -927,8 +927,7 @@ unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
 /** @} */ // UniquePointer
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @addtogroup HashPrimary 哈希模板
  * @{
  */
 

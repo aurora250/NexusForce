@@ -13,8 +13,14 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Latches 闩锁
- * @brief 线程同步闩锁原语
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
+ * @defgroup ThreadSync 线程同步
+ * @brief 线程同步组件实现
  * @{
  */
 
@@ -104,7 +110,9 @@ public:
     }
 };
 
-/** @} */ // Latches
+/** @} */ // ThreadSync
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_LATCH_HPP__

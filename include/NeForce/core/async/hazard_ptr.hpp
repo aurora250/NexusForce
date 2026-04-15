@@ -16,6 +16,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup HazardPointer 险象指针
  * @brief 无锁编程中的内存回收机制
  * @{
@@ -518,6 +524,8 @@ public:
 };
 
 /** @} */ // HazardPointer
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_HAZARD_PTR_HPP__

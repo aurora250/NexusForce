@@ -20,7 +20,7 @@ void test_print() {
 #else
     void (bit_reference::*mfp)() const noexcept = &bit_reference::flip;
 #endif
-    compressed_pair<io_base<int>, int> cp;
+    compressed_pair<plus<int>, int> cp;
     tuple<int, char, decimal_t, int*> tup{1, 't', f, nullptr};
     pair<int, char> pir{1, '1'};
     vector<int> v{1, 2, 3};
@@ -96,26 +96,6 @@ void test_console() {
     // console.flash_screen();
     console.notification("Download completed!", seconds(3));
     console.pause();
-
-    hexadecimal hex("F");
-    println(hex);
-    console.readln(hex);
-    println(hex);
-    int rawi = 3;
-    println(rawi);
-    console.readln(rawi);
-    println(rawi);
-    boolean b;
-    b.try_parse("true");
-    println(b);
-    console.readln(b);
-    println(b);
-    integer32 i32;
-    console.readln(i32);
-    println(i32);
-    float32 fp;
-    console.readln(fp);
-    println(fp);
 }
 
 void test_device() {}
@@ -267,12 +247,12 @@ void test_process() {
 }
 
 void test_rnd() {
-    println(secret::system_supported(), secret::next_float<double>(), secret::next_int(1, 10));
-    println(random_lcd().next_int(10, 20), random_lcd().next_int(10, 20), random_lcd().next_int(10, 20));
-    println(random_mt().next_int(10, 20), random_mt().next_int(10, 20), random_mt().next_int(10, 20));
+    println(secret::system_supported(), " ", secret::next_float<double>(), " ", secret::next_int(1, 10));
+    println(random_lcd().next_int(10, 20), " ", random_lcd().next_int(10, 20), " ", random_lcd().next_int(10, 20));
+    println(random_mt().next_int(10, 20), " ", random_mt().next_int(10, 20), " ", random_mt().next_int(10, 20));
 
-    println("UUID V4:", uuid::v4());
-    println("UUID V7:", uuid::v7());
+    println("UUID V4: ", uuid::v4());
+    println("UUID V7: ", uuid::v7());
 }
 
 void test_locale() {

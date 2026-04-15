@@ -46,8 +46,14 @@ struct future_exception final : exception {
 /** @} */ // Exceptions
 
 /**
- * @defgroup Async 异步行为
+ * @defgroup AsyncComponents 异步组件
  * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
+ * @defgroup Async 异步调用
+ * @brief 异步调用组件
  * @{
  */
 
@@ -1198,6 +1204,8 @@ NEFORCE_ALWAYS_INLINE enable_if_t<!is_void_v<T>, future_result_t<T>> get(future<
 }
 
 /** @} */ // Async
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_FUTURE_HPP__

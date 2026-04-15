@@ -188,31 +188,31 @@ public:
      * @brief 获取系统底层信息
      * @return 系统信息结构引用
      */
-    const system_info& get_system_info() const noexcept { return system_info_; }
+    NEFORCE_NODISCARD const system_info& get_system_info() const noexcept { return system_info_; }
 
     /**
      * @brief 获取内存信息
      * @return 内存信息结构引用
      */
-    const memory_info& get_memory_info() const noexcept { return memory_info_; }
+    NEFORCE_NODISCARD const memory_info& get_memory_info() const noexcept { return memory_info_; }
 
     /**
      * @brief 获取CPU信息
      * @return CPU信息结构引用
      */
-    const CPU_info& get_CPU_info() const noexcept { return cpu_info_; }
+    NEFORCE_NODISCARD const CPU_info& get_CPU_info() const noexcept { return cpu_info_; }
 
     /**
      * @brief 获取操作系统版本信息
      * @return 操作系统版本信息结构引用
      */
-    const os_version_info& get_os_version_info() const noexcept { return os_version_info_; }
+    NEFORCE_NODISCARD const os_version_info& get_os_version_info() const noexcept { return os_version_info_; }
 
     /**
      * @brief 获取系统架构
      * @return 架构枚举值
      */
-    architecture get_architecture() const noexcept { return architecture_; }
+    NEFORCE_NODISCARD architecture get_architecture() const noexcept { return architecture_; }
 
     /**
      * @brief 检查是否已初始化
@@ -225,19 +225,19 @@ public:
      * @param bytes 字节数
      * @return 格式化的字符串（如 "1.23 MB"）
      */
-    static string format_bytes(uint64_t bytes);
+    NEFORCE_NODISCARD static string format_bytes(uint64_t bytes);
 
     /**
      * @brief 获取当前CPU使用率
      * @return CPU使用百分比（0.0-100.0）
      */
-    static float64_t cpu_usage();
+    NEFORCE_NODISCARD static float64_t cpu_usage();
 
     /**
      * @brief 获取当前运行的进程数量
      * @return 进程数量
      */
-    static uint32_t process_count();
+    NEFORCE_NODISCARD static uint32_t process_count();
 };
 
 /** @} */ // SystemInfo

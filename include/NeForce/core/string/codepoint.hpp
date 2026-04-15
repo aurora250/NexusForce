@@ -7,6 +7,15 @@
  *
  * 此文件提供了Unicode码点的封装类，支持码点的验证、UTF-8/UTF-16/UTF-32编码解码、
  * 代理对处理、以及向各种字符串类型的追加操作。
+ */
+
+#include "NeForce/core/memory/endian.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup CodePoint Unicode码点
+ * @brief 码点处理相关功能
  *
  * Unicode码点范围：U+0000 ~ U+10FFFF（排除代理项范围0xD800-0xDFFF）
  *
@@ -103,15 +112,6 @@
  * @see https://www.rfc-editor.org/rfc/rfc3629
  * @see https://www.rfc-editor.org/rfc/rfc2781
  * @see https://www.iso.org/standard/76835.html
- */
-
-#include "NeForce/core/memory/endian.hpp"
-#include "NeForce/core/string/string.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup CodePoint Unicode码点
- * @brief 码点处理相关功能
  * @{
  */
 

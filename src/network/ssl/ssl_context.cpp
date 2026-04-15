@@ -81,9 +81,10 @@ ssl_context::ssl_context(const ssl_method method) {
 }
 
 void ssl_context::set_options(const long options) {
-    if (ctx_) {
-        ::SSL_CTX_set_options(ctx_.get(), options);
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
+    ::SSL_CTX_set_options(ctx_.get(), options);
 }
 
 bool ssl_context::load_certificate(const string& cert_file, const string& key_file) {
@@ -162,22 +163,32 @@ bool ssl_context::load_verify_locations(const string& ca_file, const string& ca_
 }
 
 void ssl_context::set_verify_mode(const int mode) {
-    if (ctx_) {
-        ::SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
+    ::SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
 }
 
 void ssl_context::require_client_certificate() {
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
     ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, nullptr);
 }
 
 void ssl_context::set_cipher_list(const string& ciphers) {
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
     if (::SSL_CTX_set_cipher_list(ctx_.get(), ciphers.data()) <= 0) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set cipher list"));
     }
 }
 
 void ssl_context::set_ciphersuites(const string& ciphersuites) {
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
     if (::SSL_CTX_set_ciphersuites(ctx_.get(), ciphersuites.data()) <= 0) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set ciphersuites"));
     }
@@ -185,7 +196,7 @@ void ssl_context::set_ciphersuites(const string& ciphersuites) {
 
 void ssl_context::set_default_options() {
     if (!ctx_) {
-        return;
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
 
     long options = SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1;
@@ -200,9 +211,19 @@ void ssl_context::set_default_options() {
     set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256");
 }
 
-void ssl_context::set_session_cache_size(long size) { ::SSL_CTX_sess_set_cache_size(ctx_.get(), size); }
+void ssl_context::set_session_cache_size(long size) {
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
+    ::SSL_CTX_sess_set_cache_size(ctx_.get(), size);
+}
 
-void ssl_context::set_timeout(long seconds) { ::SSL_CTX_set_timeout(ctx_.get(), seconds); }
+void ssl_context::set_timeout(long seconds) {
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
+    ::SSL_CTX_set_timeout(ctx_.get(), seconds);
+}
 
 void ssl_context::set_alpn_protos(const vector<string>& protocols) {
     if (!ctx_) {

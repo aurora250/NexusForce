@@ -207,14 +207,10 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
     return received;
 }
 
-void icmp_socket::open(const int family) {
-    if (family != AF_INET) {
-        NEFORCE_THROW_EXCEPTION(value_exception("ICMP socket support IPv4 only"));
-    }
-
+void icmp_socket::open() {
     close();
 
-    fd_ = ::socket(family, SOCK_RAW, IPPROTO_ICMP);
+    fd_ = ::socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(socket_exception("create raw ICMP socket failed (you may need root)"));
     }

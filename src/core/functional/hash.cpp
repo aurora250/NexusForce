@@ -30,9 +30,12 @@ namespace {
 #endif
 } // namespace
 
+
+#ifdef NEFORCE_COMPILER_MSVC
 // use switch penetrate
-#pragma warning(push)
-#pragma warning(disable : 26819)
+#    pragma warning(push)
+#    pragma warning(disable : 26819)
+#endif
 
 uint32_t MurmurHash_x32(const void* key, const size_t len, const uint32_t seed) noexcept {
     const auto* data = static_cast<const byte_t*>(key);
@@ -171,6 +174,8 @@ murmur_hash MurmurHash_x64(const void* key, const size_t len, const uint32_t see
 
 #endif
 
-#pragma warning(pop)
+#ifdef NEFORCE_COMPILER_MSVC
+#    pragma warning(pop)
+#endif
 
 NEFORCE_END_NAMESPACE__

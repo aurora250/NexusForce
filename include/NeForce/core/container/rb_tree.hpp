@@ -22,6 +22,53 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup RBTree 红黑树
  * @brief 自平衡二叉搜索树实现
+ *
+ * @section standards 遵循的国际标准与文献参考
+ * 本实现严格遵循以下计算机科学文献：
+ *
+ * - **Rudolf Bayer (1972)**："Symmetric Binary B-Trees: Data Structure and Maintenance Algorithms"
+ *   Acta Informatica, Vol. 1, pp. 290–306.
+ *   https://doi.org/10.1007/BF00289509
+ * - **Leo J. Guibas & Robert Sedgewick (1978)**："A Dichromatic Framework for Balanced Trees"
+ *   Proceedings of the 19th Annual Symposium on Foundations of Computer Science, pp. 8–21.
+ *   https://doi.org/10.1109/SFCS.1978.3
+ *
+ * @section rb_tree_properties 红黑树性质
+ * 根据 Guibas & Sedgewick (1978) 的定义，红黑树满足以下五条性质：
+ *
+ * 1. **节点颜色**：每个节点要么是红色，要么是黑色。
+ * 2. **根节点颜色**：根节点是黑色的。
+ * 3. **叶子节点颜色**：每个叶子节点（NIL）是黑色的。
+ * 4. **红色节点限制**：如果一个节点是红色的，则它的两个子节点都是黑色的。
+ * 5. **黑色高度**：对于每个节点，从该节点到其所有后代叶子节点的简单路径上，
+ *    包含相同数量的黑色节点。
+ *
+ * @section complexity_guarantees 复杂度保证
+ * 根据红黑树性质，最坏情况下的时间复杂度保证：
+ *
+ * | 操作               | 时间复杂度 | 说明                               |
+ * |--------------------|------------|------------------------------------|
+ * | 插入               | O(log n)   | 最多 2 次旋转                      |
+ * | 删除               | O(log n)   | 最多 3 次旋转                      |
+ * | 查找               | O(log n)   | 二叉搜索树查找                     |
+ * | 最小/最大          | O(log n)   | 沿最左/最右路径查找                |
+ * | 前驱/后继          | O(log n)   | 中序遍历相邻节点                    |
+ * | 范围迭代           | O(k)       | k 为范围内元素数量                  |
+ *
+ * 树的高度上界：`h ≤ 2 log₂(n + 1)`。
+ *
+ * @note 本实现提供了两个插入策略：
+ *       - `insert_unique`：键必须唯一，重复键插入失败并返回已存在元素迭代器
+ *       - `insert_equal`：允许重复键，按插入顺序存储
+ *
+ * @warning 根据 ISO/IEC 14882:2020 §22.2.6：
+ *          - 对关联容器的修改操作不会使任何迭代器失效，除非删除该迭代器指向的元素
+ *          - 比较函数对象（Compare）必须提供严格的弱序关系
+ *          - 键的不可变性：修改已插入元素的键会导致未定义行为
+ *
+ * @see https://en.cppreference.com/w/cpp/container/map
+ * @see https://en.cppreference.com/w/cpp/container/set
+ * @see https://doi.org/10.1109/SFCS.1978.3 (Guibas & Sedgewick)
  * @{
  */
 

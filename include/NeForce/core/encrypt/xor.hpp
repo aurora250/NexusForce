@@ -20,6 +20,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup XOR XOR
+ * @brief XOR异或加密算法实现
+ * @{
+ */
+
+/**
  * @struct XOR
  * @brief XOR异或加密结构体
  *

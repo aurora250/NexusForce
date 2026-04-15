@@ -16,6 +16,140 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup Color 颜色
  * @brief RGB颜色模型的实现
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下颜色表示与合成相关标准规范：
+ *
+ * **CSS 颜色标准：**
+ * - **W3C CSS Color Module Level 4**：CSS 颜色规范（RGB/RGBA 定义）
+ *   https://www.w3.org/TR/css-color-4/
+ * - **W3C CSS Color Module Level 5**：CSS 颜色规范（颜色混合与合成）
+ *   https://www.w3.org/TR/css-color-5/
+ *
+ * **合成与混合标准：**
+ * - **W3C Compositing and Blending Level 1**：合成与混合规范（Alpha 合成）
+ *   https://www.w3.org/TR/compositing-1/
+ *
+ * **色彩空间标准：**
+ * - **IEC 61966-2-1:1999**：多媒体系统与设备 — 色彩测量与管理 — 第2-1部分：sRGB 色彩空间
+ *   https://webstore.iec.ch/publication/6169
+ * - **ITU-R BT.709-6**：高清电视标准参数值（色彩空间定义）
+ *   https://www.itu.int/rec/R-REC-BT.709/
+ *
+ * **ANSI 终端颜色标准：**
+ * - **ECMA-48**：控制功能编码字符集（ANSI 转义序列）
+ *   https://ecma-international.org/publications-and-standards/standards/ecma-48/
+ * - **ISO/IEC 6429:1992**：信息技术 — 编码字符集的控制功能
+ *   https://www.iso.org/standard/12782.html
+ *
+ * **XTerm 256 色规范：**
+ * - **XTerm 256-Color Specification**：XTerm 256 色调色板定义
+ *   https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_
+ *
+ * **图形文件格式标准：**
+ * - **ISO/IEC 15948:2004**：信息技术 — 计算机图形与图像处理 — PNG 规范
+ *   https://www.iso.org/standard/29581.html
+ * - **ISO 32000-2:2020**：文档管理 — 便携式文档格式 — 第2部分：PDF 2.0（透明度组）
+ *   https://www.iso.org/standard/75839.html
+ *
+ * @section color_components 颜色分量定义
+ * 根据 CSS Color Module Level 4 §4.2，RGB 颜色由以下分量组成：
+ *
+ * | 分量   | 范围     | 数据类型 | 说明                              |
+ * |--------|----------|----------|--------------------------------|
+ * | R (红) | 0-255    | int      | 红色通道强度                     |
+ * | G (绿) | 0-255    | int      | 绿色通道强度                     |
+ * | B (蓝) | 0-255    | int      | 蓝色通道强度                     |
+ * | A (透) | 0-255    | int      | Alpha 通道（0=全透明，255=不透明）|
+ *
+ * @section hex_format 十六进制表示
+ * 根据 CSS Color Module Level 4 §5.2，支持以下十六进制格式：
+ *
+ * | 格式        | 示例       | 说明                     |
+ * |-------------|------------|--------------------------|
+ * | #RRGGBB     | #FF0000    | 不透明红色（Alpha=255）   |
+ * | #RRGGBBAA   | #FF000080  | 半透明红色（Alpha=128）   |
+ *
+ * @section alpha_compositing Alpha 合成规则
+ * 根据 W3C Compositing and Blending Level 1 §4，Alpha 合成遵循以下规则：
+ *
+ * | 操作         | 公式                                                            |
+ * |--------------|-----------------------------------------------------------------|
+ * | 合成 Alpha   | α_result = α_src + α_dst × (1 - α_src)                          |
+ * | 合成 RGB     | C_result = (C_src × α_src + C_dst × α_dst × (1 - α_src)) / α_result |
+ *
+ * 本实现的 `blend()` 方法遵循上述规范，在直通 Alpha (straight alpha) 空间进行合成。
+ *
+ * @section grayscale_conversion 灰度转换
+ * 根据 ITU-R BT.709-6 和 sRGB 标准，人眼感知灰度采用以下加权平均：
+ *
+ * | 通道   | 权重   | 说明                         |
+ * |--------|--------|------------------------------|
+ * | 红色   | 0.299  | 人眼对红色敏感度             |
+ * | 绿色   | 0.587  | 人眼对绿色最敏感             |
+ * | 蓝色   | 0.114  | 人眼对蓝色最不敏感           |
+ *
+ * @section ansi_256_palette ANSI 256 色调色板
+ * 根据 XTerm 256-Color 规范，调色板结构如下：
+ *
+ * | 索引范围   | 数量 | 说明                                         |
+ * |------------|------|----------------------------------------------|
+ * | 0-15       | 16   | 系统标准色（0-7 标准，8-15 高亮）            |
+ * | 16-231     | 216  | 6×6×6 RGB 立方体（R,G,B ∈ {0,95,135,175,215,255}）|
+ * | 232-255    | 24   | 灰度渐变（从 #080808 到 #EEEEEE）             |
+ *
+ * 6×6×6 颜色立方体的索引公式：`index = 16 + 36×R_idx + 6×G_idx + B_idx`
+ *
+ * @section basic_ansi_colors 基本 ANSI 8/16 色
+ * 根据 ECMA-48 §8.3.117，基本 ANSI 颜色代码：
+ *
+ * | 颜色   | 前景码 | 背景码 | RGB 近似        |
+ * |--------|--------|--------|-----------------|
+ * | 黑色   | 30     | 40     | #000000         |
+ * | 红色   | 31     | 41     | #CD0000         |
+ * | 绿色   | 32     | 42     | #00CD00         |
+ * | 黄色   | 33     | 43     | #CDCD00         |
+ * | 蓝色   | 34     | 44     | #0000EE         |
+ * | 品红   | 35     | 45     | #CD00CD         |
+ * | 青色   | 36     | 46     | #00CDCD         |
+ * | 白色   | 37     | 47     | #E5E5E5         |
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 分量范围          | 0-255（8 位每通道）                       |
+ * | Alpha 类型        | 直通 Alpha（non-premultiplied）           |
+ * | 混合模式          | Normal（source-over）                      |
+ * | 插值空间          | 直通 Alpha 空间                           |
+ * | 灰度权重          | BT.709 / sRGB（0.299, 0.587, 0.114）      |
+ * | 预乘转换          | 支持（to_premultiplied / from_premultiplied）|
+ *
+ * @section named_colors 预定义颜色常量
+ * 本类提供以下预定义颜色常量：
+ *
+ * | 常量名       | RGB 值           | 说明         |
+ * |--------------|------------------|--------------|
+ * | black()      | 0, 0, 0, 255     | 黑色         |
+ * | white()      | 255, 255, 255, 255 | 白色      |
+ * | gray()       | 128, 128, 128, 255 | 灰色      |
+ * | red()        | 255, 0, 0, 255     | 红色      |
+ * | green()      | 0, 255, 0, 255     | 绿色      |
+ * | blue()       | 0, 0, 255, 255     | 蓝色      |
+ * | yellow()     | 255, 255, 0, 255   | 黄色      |
+ * | magenta()    | 255, 0, 255, 255   | 品红      |
+ * | cyan()       | 0, 255, 255, 255   | 青色      |
+ * | transparent()| 0, 0, 0, 0        | 完全透明    |
+ *
+ * @note 本类采用直通 Alpha（straight alpha）表示，符合 CSS 和 SVG 标准。
+ *       对于需要预乘 Alpha 的图形 API（如 OpenGL、DirectX、Metal），
+ *       可使用 `to_premultiplied()` 方法进行转换。
+ *
+ * @warning 根据 W3C Compositing Level 1，混合操作应在直通 Alpha 空间进行，
+ *          在预乘 Alpha 空间直接混合会产生错误的合成结果。
+ *          在跨进程或跨 API 传输预乘颜色数据时务必注明格式。
+ *
+ * @see https://www.w3.org/TR/css-color-4/
+ * @see https://www.w3.org/TR/compositing-1/
  * @{
  */
 
@@ -302,6 +436,7 @@ public:
      * @param to 目标颜色
      * @param t 插值因子（0.0-1.0）
      * @return 插值结果
+     * @note 插值在直通 Alpha (non-premultiplied) 空间进行，符合 W3C 标准。
      */
     static constexpr color lerp(const color& from, const color& to, double t) noexcept {
         t = clamp_double(t);
@@ -417,7 +552,7 @@ public:
      * @param background 背景色
      * @return 混合后的颜色
      *
-     * 使用Alpha混合算法：前景色与背景色根据透明度混合。
+     * 符合 W3C Compositing and Blending Level 1 规范。
      */
     NEFORCE_NODISCARD constexpr color blend(const color& background) const noexcept {
         if (a == 255) {
@@ -427,25 +562,25 @@ public:
             return background;
         }
 
-        const double alpha = a / 255.0;
-        const double inv_alpha = 1.0 - alpha;
+        const double src_a = a / 255.0;
+        const double dst_a = background.a / 255.0;
+        const double inv_src_a = 1.0 - src_a;
 
-        const int newR = static_cast<int>(_NEFORCE round(r * alpha + background.r * inv_alpha));
-        const int newG = static_cast<int>(_NEFORCE round(g * alpha + background.g * inv_alpha));
-        const int newB = static_cast<int>(_NEFORCE round(b * alpha + background.b * inv_alpha));
-        return color(newR, newG, newB, 255);
-    }
+        // Result_A = Src_A + Dst_A * (1 - Src_A)
+        const double out_a = src_a + dst_a * inv_src_a;
 
-    /**
-     * @brief 预乘Alpha
-     * @return 预乘Alpha后的颜色
-     *
-     * 将RGB分量乘以透明度，用于某些图形处理算法。
-     */
-    NEFORCE_NODISCARD constexpr color premultiply_alpha() const noexcept {
-        const double alpha = a / 255.0;
-        return color(static_cast<int>(_NEFORCE round(r * alpha)), static_cast<int>(_NEFORCE round(g * alpha)),
-                     static_cast<int>(_NEFORCE round(b * alpha)), a);
+        if (out_a <= 0.0) {
+            return transparent();
+        }
+
+        // Result_RGB = (Src_RGB * Src_A + Dst_RGB * Dst_A * (1 - Src_A)) / Result_A
+        const double inv_out_a = 1.0 / out_a;
+        const int newR = static_cast<int>(_NEFORCE round((r * src_a + background.r * dst_a * inv_src_a) * inv_out_a));
+        const int newG = static_cast<int>(_NEFORCE round((g * src_a + background.g * dst_a * inv_src_a) * inv_out_a));
+        const int newB = static_cast<int>(_NEFORCE round((b * src_a + background.b * dst_a * inv_src_a) * inv_out_a));
+        const int newA = static_cast<int>(_NEFORCE round(out_a * 255.0));
+
+        return color(newR, newG, newB, newA);
     }
 
     /**
@@ -494,24 +629,50 @@ public:
     /**
      * @brief 转换为256色ANSI颜色索引
      * @return ANSI 256色索引（0-255）
+     *
+     * 符合 XTerm 256-Color Cube 规范。
+     * 彩色部分使用标准区间: 0, 95, 135, 175, 215, 255
      */
     NEFORCE_NODISCARD constexpr int to_ansi_256() const noexcept {
-        if (r < 8 && g < 8 && b < 8) {
+        if (r == 0 && g == 0 && b == 0) {
             return 16;
         }
-        if (r > 248 && g > 248 && b > 248) {
+        if (r == 255 && g == 255 && b == 255) {
             return 231;
         }
 
         if (r == g && g == b) {
-            const int gray_index = static_cast<int>((r - 8) / 247.0 * 24.0 + 0.5);
-            return 232 + gray_index;
+            if (r < 8) {
+                return 16;
+            }
+            if (r > 248) {
+                return 231;
+            }
+            const int gray_index = (r - 8) / 10;
+            return 232 + (gray_index > 23 ? 23 : gray_index);
         }
 
-        const int r_idx = static_cast<int>((r / 255.0) * 5.0 + 0.5);
-        const int g_idx = static_cast<int>((g / 255.0) * 5.0 + 0.5);
-        const int b_idx = static_cast<int>((b / 255.0) * 5.0 + 0.5);
+        constexpr int cube_levels[6] = {0, 95, 135, 175, 215, 255};
 
+        constexpr auto find_closest = [](const int value, const int levels[6]) -> int {
+            int closest_idx = 0;
+            int min_diff = 255 * 255;
+            for (int i = 0; i < 6; ++i) {
+                const int diff = value - levels[i];
+                const int dist = diff * diff;
+                if (dist < min_diff) {
+                    min_diff = dist;
+                    closest_idx = i;
+                }
+            }
+            return closest_idx;
+        };
+
+        const int r_idx = find_closest(r, cube_levels);
+        const int g_idx = find_closest(g, cube_levels);
+        const int b_idx = find_closest(b, cube_levels);
+
+        // 16 + 36 * R + 6 * G + B
         return 16 + 36 * r_idx + 6 * g_idx + b_idx;
     }
 
@@ -579,6 +740,31 @@ public:
             return integer32{48 * 100 + 5 * 10 + to_ansi_256()};
         }
         return integer32{to_ansi_basic(true)};
+    }
+
+    /**
+     * @brief 转换为标准预乘 Alpha 表示
+     * @return 预乘后的颜色对象
+     * @note 仅用于需要预乘数据的图形 API，结果不宜直接用于 blend 输入。
+     */
+    NEFORCE_NODISCARD constexpr color to_premultiplied() const noexcept {
+        const double alpha = a / 255.0;
+        return color(static_cast<int>(_NEFORCE round(r * alpha)), static_cast<int>(_NEFORCE round(g * alpha)),
+                     static_cast<int>(_NEFORCE round(b * alpha)), a);
+    }
+
+    /**
+     * @brief 从预乘 Alpha 转换回直通 Alpha（Straight Alpha）
+     * @return 还原后的颜色对象
+     * @note 符合 ISO 32000-2 对于 PDF 透明组的处理要求。
+     */
+    NEFORCE_NODISCARD constexpr color from_premultiplied() const noexcept {
+        if (a == 0) {
+            return transparent();
+        }
+        const double inv_alpha = 255.0 / a;
+        return color(static_cast<int>(_NEFORCE round(r * inv_alpha)), static_cast<int>(_NEFORCE round(g * inv_alpha)),
+                     static_cast<int>(_NEFORCE round(b * inv_alpha)), a);
     }
 
     /**

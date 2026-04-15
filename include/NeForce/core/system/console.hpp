@@ -41,9 +41,6 @@ struct console_exception final : device_exception {
  * @{
  */
 
-template <typename T, typename = void>
-struct io_base;
-
 /**
  * @class sys_console
  * @brief 系统控制台单例类
@@ -109,6 +106,7 @@ private:
     string readln_unsafe() const;
     string read_unsafe() const;
     char read_char_unsafe() const;
+    console_size get_console_size_unsafe() const;
 
     void flush_unsafe() const;
 
@@ -166,11 +164,6 @@ public:
     void print_string(const char* str);
 
     /**
-     * @brief 打印换行
-     */
-    void println();
-
-    /**
      * @brief 读取输入（直到空白字符）
      * @return 读取的字符串
      */
@@ -190,12 +183,13 @@ public:
 
     /**
      * @brief 打印任意类型的值
-     * @tparam T 值类型
-     * @param value 要打印的值
+     * @tparam Args 参数类型
+     * @param args 打印参数
      */
-    template <typename T>
-    void print(const T& value) {
-        io_base<T>::write(*this, value);
+    template <typename... Args>
+    void print(Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
     }
 
     /**
@@ -212,91 +206,89 @@ public:
 
     /**
      * @brief 带颜色的打印
-     * @tparam T 值类型
+     * @tparam Args 参数类型
      * @param color 颜色
-     * @param value 要打印的值
+     * @param args 打印参数
      */
-    template <typename T>
-    void printc(const color& color, const T& value) {
-        set_color(color, false);
-        io_base<T>::write(*this, value);
-        reset_color();
+    template <typename... Args>
+    void printc(const color& color, Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->set_color_unsafe(color, false);
+        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe("\033[0m");
     }
 
+    /**
+     * @brief 带颜色的格式化打印
+     * @tparam Args 参数类型
+     * @param color 颜色
+     * @param fmt 格式字符串
+     * @param args 打印参数
+     */
     template <typename... Args>
     void printcf(const color& color, const string_view fmt, Args&&... args) {
-        set_color(color, false);
+        lock<mutex> lock(mutex_);
+        this->set_color_unsafe(color, false);
+        this->print_string_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe("\033[0m");
+    }
+    /**
+     * @brief 打印换行
+     */
+    void println();
+
+    /**
+     * @brief 打印任意类型的值并换行
+     * @tparam Args 参数类型
+     * @param args 打印参数
+     */
+    template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
+    void println(Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe("\n");
+    }
+
+    /**
+     * @brief 格式化打印并换行
+     * @tparam Args 参数类型
+     * @param fmt 格式字符串
+     * @param args 格式化参数
+     */
+    template <typename... Args>
+    void printfln(const string_view fmt, Args&&... args) {
         lock<mutex> lock(mutex_);
         this->print_string_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
-        reset_color();
+        this->print_string_unsafe("\n");
     }
 
     /**
-     * @brief 读取任意类型的值
-     * @tparam T 值类型
-     * @return 读取的值
+     * @brief 带颜色的打印并换行
+     * @tparam Args 参数类型
+     * @param color 颜色
+     * @param args 打印参数
      */
-    template <typename T>
-    T read() {
-        package_t<T> obj;
-        io_base<T>::read(*this, obj);
-        return obj.value();
+    template <typename... Args>
+    void printcln(const color& color, Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->set_color_unsafe(color, false);
+        this->print_string_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe("\033[0m\n");
     }
 
     /**
-     * @brief 读取值到已存在的对象（包装类型）
-     * @tparam T 包装类型
-     * @param value 输出参数
+     * @brief 带颜色的格式化打印并换行
+     * @tparam Args 参数类型
+     * @param color 颜色
+     * @param fmt 格式字符串
+     * @param args 打印参数
      */
-    template <typename T, enable_if_t<is_packaged_v<T>, int> = 0>
-    void read(T& value) {
-        package_t<T> obj;
-        io_base<package_t<T>>::read(*this, obj);
-        value = _NEFORCE move(static_cast<T>(obj));
-    }
-
-    /**
-     * @brief 读取值到已存在的对象（非包装类型）
-     * @tparam T 非包装类型
-     * @param value 输出参数
-     */
-    template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>
-    void read(T& value) {
-        io_base<T>::read(*this, value);
-    }
-
-    /**
-     * @brief 读取一行并转换为任意类型
-     * @tparam T 目标类型
-     * @return 转换后的值
-     */
-    template <typename T>
-    T readln() {
-        package_t<T> obj;
-        io_base<T>::readln(*this, obj);
-        return obj.value();
-    }
-
-    /**
-     * @brief 读取一行到已存在的对象（包装类型）
-     * @tparam T 包装类型
-     * @param value 输出参数
-     */
-    template <typename T, enable_if_t<is_packaged_v<T>, int> = 0>
-    void readln(T& value) {
-        package_t<T> obj;
-        io_base<package_t<T>>::readln(*this, obj);
-        value = _NEFORCE move(static_cast<T>(obj));
-    }
-
-    /**
-     * @brief 读取一行到已存在的对象（非包装类型）
-     * @tparam T 非包装类型
-     * @param value 输出参数
-     */
-    template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>
-    void readln(T& value) {
-        io_base<T>::readln(*this, value);
+    template <typename... Args>
+    void printcfln(const color& color, const string_view fmt, Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->set_color_unsafe(color, false);
+        this->print_string_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
+        this->print_string_unsafe("\033[0m\n");
     }
 
     /**
@@ -396,43 +388,43 @@ public:
      * @brief 获取控制台尺寸
      * @return 控制台尺寸
      */
-    console_size get_console_size() const;
+    NEFORCE_NODISCARD console_size get_console_size() const;
 
     /**
      * @brief 检查终端是否已调整大小
      * @return 如果大小发生变化返回true
      */
-    bool is_terminal_resized();
+    NEFORCE_NODISCARD bool is_terminal_resized();
 
     /**
      * @brief 检查是否支持颜色
      * @return 是否支持
      */
-    bool supports_colors() const;
+    NEFORCE_NODISCARD bool supports_colors() const;
 
     /**
      * @brief 检查是否支持真彩色
      * @return 是否支持
      */
-    bool supports_truecolor() const;
+    NEFORCE_NODISCARD bool supports_truecolor() const;
 
     /**
      * @brief 检查是否支持Unicode
      * @return 是否支持
      */
-    bool supports_unicode() const;
+    NEFORCE_NODISCARD bool supports_unicode() const;
 
     /**
      * @brief 检查是否是交互式终端
      * @return 是否是交互式
      */
-    bool is_interactive() const;
+    NEFORCE_NODISCARD bool is_interactive() const;
 
     /**
      * @brief 获取终端类型
      * @return 终端类型字符串
      */
-    string console_type() const;
+    NEFORCE_NODISCARD string console_type() const;
 
     /**
      * @brief 打字机效果打印
@@ -499,278 +491,49 @@ public:
                      milliseconds hold_duration = milliseconds(1000), milliseconds out_duration = milliseconds(500));
 };
 
-
-#ifdef NEFORCE_STANDARD_20
-template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<ranges::view_base<T>, T>>> {
-    static void write(sys_console& console, const T& value) {
-        string result;
-        if (value.begin() == value.end()) {
-            result = "[]";
-        } else {
-            result += "[ ";
-            for (auto iter = value.begin(); iter != value.end(); ++iter) {
-                if (iter != value.begin()) {
-                    result += ", ";
-                }
-                result += to_string(*iter);
-            }
-            result += " ]";
-        }
-        console.print_string(result.view());
-    }
-};
-#endif
-
-template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<istringify<T>, T> && !is_base_of_v<iobject<T>, T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(value.to_string()); }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<icollector<T>, T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(to_string(value)); }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<iobject<T>, T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(value.to_string()); }
-    static void read(sys_console& console, T& value) { value = iobject<T>::parse(console.read().view()); }
-    static void readln(sys_console& console, T& value) { value = iobject<T>::parse(console.readln().view()); }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_packaged_v<T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(_NEFORCE to_string(value)); }
-    static void read(sys_console& console, T& value) { value = package_t<T>::parse(console.read().view()); }
-    static void readln(sys_console& console, T& value) { value = package_t<T>::parse(console.readln().view()); }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_null_pointer_v<T>>> {
-    static void write(sys_console& console, nullptr_t) { console.print_string(_NEFORCE to_string(nullptr)); }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_pointer_v<T> && !is_cstring_v<T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(_NEFORCE to_string(value)); }
-};
-
-template <typename T, size_t N>
-struct io_base<T[N], enable_if_t<is_character_v<T> && !is_same_v<remove_cvref_t<T>, char>>> {
-    static void write(sys_console& console, const T (&value)[N]) { console.print_string(_NEFORCE to_string(value)); }
-};
-
-template <typename T, size_t N>
-struct io_base<T[N], enable_if_t<is_character_v<T> && is_same_v<remove_cvref_t<T>, char>>> {
-    static void write(sys_console& console, const T (&value)[N]) { console.print_string(string_view(value)); }
-};
-
-template <typename T, size_t N>
-struct io_base<const T[N], enable_if_t<is_character_v<T>>> {
-    static void write(sys_console& console, const T (&value)[N]) { console.print_string(_NEFORCE to_string(value)); }
-};
-
-template <typename T, size_t N>
-struct io_base<const T[N], enable_if_t<is_character_v<T> && is_same_v<remove_cvref_t<T>, char>>> {
-    static void write(sys_console& console, const T (&value)[N]) { console.print_string(string_view(value)); }
-};
-
-template <typename T>
-struct io_base<T*, enable_if_t<is_character_v<T> && !is_same_v<remove_cvref_t<T>, char>>> {
-    static void write(sys_console& console, const T* value) { console.print_string(_NEFORCE to_string(value)); }
-};
-
-template <typename T>
-struct io_base<T*, enable_if_t<is_character_v<T> && is_same_v<remove_cvref_t<T>, char>>> {
-    static void write(sys_console& console, const T* value) { console.print_string(string_view(value)); }
-};
-
-template <typename CharT, typename Traits>
-struct io_base<basic_string_view<CharT, Traits>, enable_if_t<!is_same_v<CharT, char>>> {
-    static void write(sys_console& console, const basic_string_view<CharT, Traits>& value) {
-        console.print_string(_NEFORCE to_string(value));
-    }
-};
-
-template <typename Traits>
-struct io_base<basic_string_view<char, Traits>> {
-    static void write(sys_console& console, const basic_string_view<char, Traits>& value) {
-        console.print_string(string_view{value.data(), value.length()});
-    }
-};
-
-template <typename CharT, typename Traits, typename Alloc>
-struct io_base<basic_string<CharT, Traits, Alloc>, enable_if_t<!is_same_v<CharT, char>>> {
-    static void write(sys_console& console, const basic_string<CharT, Traits, Alloc>& value) {
-        console.print_string(_NEFORCE to_string(value));
-    }
-};
-
-template <typename Traits, typename Alloc>
-struct io_base<basic_string<char, Traits, Alloc>> {
-    static void write(sys_console& console, const basic_string<char, Traits, Alloc>& value) {
-        console.print_string(string_view{value.data(), value.length()});
-    }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_unbounded_array_v<T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(_NEFORCE to_string(value)); }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>>> {
-    static void write(sys_console& console, const T& value) { console.print_string(_NEFORCE to_string(value)); }
-};
-
-template <typename IfEmpty, typename T, bool Compressed>
-struct io_base<compressed_pair<IfEmpty, T, Compressed>> {
-    static void write(sys_console& console, const compressed_pair<IfEmpty, T, Compressed>& value) {
-        io_base<string>::write(console, _NEFORCE to_string(value));
-    }
-};
-
-template <typename T1, typename T2>
-struct io_base<pair<T1, T2>> {
-    static void write(sys_console& console, const pair<T1, T2>& value) {
-        io_base<string>::write(console, _NEFORCE to_string(value));
-    }
-};
-
-template <typename... Args>
-struct io_base<tuple<Args...>> {
-    static void write(sys_console& console, const tuple<Args...>& value) {
-        io_base<string>::write(console, _NEFORCE to_string(value));
-    }
-};
-
 /**
  * @brief 全局控制台实例
  */
-static sys_console& console = sys_console::instance();
+NEFORCE_API extern sys_console& console;
 
-
-/**
- * @brief 打印换行
- */
-NEFORCE_ALWAYS_INLINE_INLINE void println() { console.println(); }
-
-#if defined(NEFORCE_STANDARD_17) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 
 /**
  * @brief 打印多个值
  */
-template <typename This, typename... Rests>
-void print(const This& t, const Rests&... r) {
-    console.print<remove_cvref_t<This>>(t);
-    ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
+template <typename... Args>
+NEFORCE_ALWAYS_INLINE void print(Args&&... args) {
+    console.print(_NEFORCE forward<Args>(args)...);
 }
 
 /**
  * @brief 带颜色打印多个值
  */
-template <typename This, typename... Rests>
-void printc(const color& color, const This& t, const Rests&... r) {
-    console.printc<remove_cvref_t<This>>(color, t);
-    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
+template <typename... Args>
+NEFORCE_ALWAYS_INLINE void printc(const color& color, Args&&... args) {
+    console.printc(color, _NEFORCE forward<Args>(args)...);
 }
 
 /**
  * @brief 打印多个值并换行
  */
-template <typename This, typename... Rests>
-void println(const This& t, const Rests&... r) {
-    console.print<remove_cvref_t<This>>(t);
-    ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
-    println();
+template <typename... Args>
+NEFORCE_ALWAYS_INLINE void println(Args&&... args) {
+    console.println(_NEFORCE forward<Args>(args)...);
 }
 
 /**
  * @brief 带颜色打印多个值并换行
  */
-template <typename This, typename... Rests>
-void printcln(const color& color, const This& t, const Rests&... r) {
-    console.printc<remove_cvref_t<This>>(color, t);
-    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
-    println();
+template <typename... Args>
+NEFORCE_ALWAYS_INLINE void printcln(const color& color, Args&&... args) {
+    console.printcln(color, _NEFORCE forward<Args>(args)...);
 }
-
-#else
-
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-NEFORCE_ALWAYS_INLINE_INLINE void print_rests() {}
-
-template <typename First, typename... Rests>
-void print_rests(const First& first, const Rests&... rests) {
-    console.print(" ");
-    console.print<remove_cvref_t<First>>(first);
-    inner::print_rests(rests...);
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE void printc_rests(const color&) {}
-
-template <typename First, typename... Rests>
-void printc_rests(const color& color, const First& first, const Rests&... rests) {
-    console.print(" ");
-    console.printc<remove_cvref_t<First>>(color, first);
-    inner::printc_rests(color, rests...);
-}
-
-NEFORCE_END_INNER__
-/// @endcond
-
-template <typename This>
-void print(const This& t) {
-    console.print<remove_cvref_t<This>>(t);
-}
-
-template <typename This, typename... Rests>
-void print(const This& t, const Rests&... rests) {
-    console.print<remove_cvref_t<This>>(t);
-    inner::print_rests(rests...);
-}
-
-template <typename This>
-void printc(const color& color, const This& t) {
-    console.print<remove_cvref_t<This>>(color, t);
-}
-
-template <typename This, typename... Rests>
-void printc(const color& color, const This& t, const Rests&... rests) {
-    console.printc<remove_cvref_t<This>>(color, t);
-    inner::printc_rests(color, rests...);
-}
-
-template <typename This>
-void println(const This& t) {
-    console.print<remove_cvref_t<This>>(t);
-    println();
-}
-
-template <typename This, typename... Rests>
-void println(const This& t, const Rests&... rests) {
-    console.print<remove_cvref_t<This>>(t);
-    inner::print_rests(rests...);
-    println();
-}
-
-template <typename This, typename... Rests>
-void printcln(const color& color, const This& t, const Rests&... rests) {
-    console.printc<remove_cvref_t<This>>(color, t);
-    inner::printc_rests(color, rests...);
-    println();
-}
-
-#endif
 
 /**
  * @brief 格式化打印
  */
 template <typename... Args>
-void printf(const string_view fmt, Args&&... args) {
+NEFORCE_ALWAYS_INLINE void printf(const string_view fmt, Args&&... args) {
     console.printf(fmt, _NEFORCE forward<Args>(args)...);
 }
 
@@ -778,16 +541,15 @@ void printf(const string_view fmt, Args&&... args) {
  * @brief 格式化打印并换行
  */
 template <typename... Args>
-void printfln(const string_view fmt, Args&&... args) {
-    console.printf(fmt, _NEFORCE forward<Args>(args)...);
-    println();
+NEFORCE_ALWAYS_INLINE void printfln(const string_view fmt, Args&&... args) {
+    console.printfln(fmt, _NEFORCE forward<Args>(args)...);
 }
 
 /**
  * @brief 格式化颜色打印
  */
 template <typename... Args>
-void printcf(const color& color, const string_view fmt, Args&&... args) {
+NEFORCE_ALWAYS_INLINE void printcf(const color& color, const string_view fmt, Args&&... args) {
     console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);
 }
 
@@ -795,9 +557,8 @@ void printcf(const color& color, const string_view fmt, Args&&... args) {
  * @brief 格式化颜色打印并换行
  */
 template <typename... Args>
-void printcfln(const color& color, const string_view fmt, Args&&... args) {
-    console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);
-    println();
+NEFORCE_ALWAYS_INLINE void printcfln(const color& color, const string_view fmt, Args&&... args) {
+    console.printcfln(color, fmt, _NEFORCE forward<Args>(args)...);
 }
 
 /** @} */ // ConsoleIO

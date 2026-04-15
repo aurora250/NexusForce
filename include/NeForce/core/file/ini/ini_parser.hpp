@@ -15,6 +15,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup ConfigFormat 配置格式操作
+ * @brief env配置格式管理
+ * @{
+ */
+
+/**
  * @defgroup IniConfig ini配置
  * @brief ini配置格式管理
  * @{
@@ -162,6 +168,8 @@ public:
 };
 
 /** @} */ // IniConfig
+
+/** @} */ // ConfigFormat
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FILE_INI_INI_PARSER_HPP__

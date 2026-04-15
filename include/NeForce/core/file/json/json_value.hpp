@@ -7,6 +7,47 @@
  *
  * 此文件提供了JSON（JavaScript Object Notation）配置格式的抽象基类和具体实现类。
  * JSON是一种轻量级的数据交换格式，易于人类阅读和编写，也易于机器解析和生成。
+ */
+
+#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/interface/istringify.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief 异常类集
+ * @{
+ */
+
+/**
+ * @struct json_exception
+ * @brief json格式操作失败
+ */
+struct json_exception final : value_exception {
+    explicit json_exception(const char* info = "JSON Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    value_exception(info, type, code) {}
+
+    explicit json_exception(const exception& e) :
+    value_exception(e) {}
+
+    ~json_exception() override = default;
+    static constexpr auto static_type = "json_exception";
+};
+
+/** @} */ // Exceptions
+
+/**
+ * @defgroup ConfigFormat 配置格式操作
+ * @brief env配置格式管理
+ * @{
+ */
+
+/**
+ * @defgroup JsonConfig json配置
+ * @brief json配置格式管理
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下 JSON 相关标准规范：
@@ -79,41 +120,6 @@
  * @see https://www.json.org/
  * @see https://www.rfc-editor.org/rfc/rfc8259
  * @see https://ecma-international.org/publications-and-standards/standards/ecma-404/
- */
-
-#include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/interface/istringify.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
- * @{
- */
-
-/**
- * @struct json_exception
- * @brief json格式操作失败
- */
-struct json_exception final : value_exception {
-    explicit json_exception(const char* info = "JSON Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    value_exception(info, type, code) {}
-
-    explicit json_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~json_exception() override = default;
-    static constexpr auto static_type = "json_exception";
-};
-
-/** @} */ // Exceptions
-
-/**
- * @defgroup JsonConfig json配置
- * @brief json配置格式管理
  * @{
  */
 
@@ -530,6 +536,8 @@ public:
 };
 
 /** @} */ // JsonConfig
+
+/** @} */ // ConfigFormat
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FILE_JSON_JSON_VALUE_HPP__

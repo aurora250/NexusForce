@@ -33,12 +33,15 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Install Bear
+        run: sudo apt-get update && sudo apt-get install -y bear
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
-          build-mode: none
+          build-mode: manual
           config: |
             paths:
               - src
@@ -53,7 +56,15 @@ jobs:
               - third_party
               - submodules
 
+      - name: Capture Build with Bear
+        run: |
+          mkdir -p build
+          cd build
+          bear -- cmake .. -DCMAKE_BUILD_TYPE=Debug || true
+          bear -- make -j$(nproc) || true
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{ matrix.language }}"
+          upload: true

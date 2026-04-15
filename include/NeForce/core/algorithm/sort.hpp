@@ -24,6 +24,120 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup SortAlgorithms 排序算法
  * @brief 排序算法的实现
+ *
+ * 本模块提供了多种排序算法的完整实现，涵盖基础排序、高级排序、线性时间排序以及
+ * 具有特殊用途或教学价值的排序算法。
+ *
+ * @section standards 遵循的国际标准与学术参考
+ * 本模块中的算法实现参考以下学术文献：
+ *
+ * **经典排序算法学术文献：**
+ * - **C.A.R. Hoare (1961)**：Algorithm 64 — Quicksort
+ *   Communications of the ACM, 4(7): 321
+ * - **Donald E. Knuth (1998)**：The Art of Computer Programming, Volume 3 — Sorting and Searching
+ *   ISBN: 978-0201896855
+ * - **Robert Sedgewick (1978)**：Implementing Quicksort programs
+ *   Communications of the ACM, 21(10): 847-857
+ *
+ * **现代混合排序算法文献：**
+ * - **David R. Musser (1997)**：Introspective Sorting and Selection Algorithms
+ *   Software: Practice and Experience, 27(8): 983-993
+ *   https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23
+ * - **Tim Peters (2002)**：Timsort — Python list sort
+ *   https://svn.python.org/projects/python/trunk/Objects/listsort.txt
+ *
+ * **平滑排序学术文献：**
+ * - **Edsger W. Dijkstra (1981)**：Smoothsort, an alternative for sorting in situ
+ *   EWD796a, Burroughs Corporation
+ *   https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html
+ *
+ * @section algorithm_classification 算法分类
+ * | 类别               | 算法                                   | 时间复杂度（平均） | 空间复杂度 | 稳定性 |
+ * |--------------------|----------------------------------------|--------------------|------------|--------|
+ * | 基础排序           | bubble_sort, cocktail_sort, select_sort | O(N²)              | O(1)       | 部分稳定 |
+ * | 插入排序           | insertion_sort, shell_sort             | O(N²) / O(N log N) | O(1)       | 稳定/不稳定 |
+ * | 分治排序           | merge_sort, quick_sort                 | O(N log N)         | O(N) / O(log N) | 稳定/不稳定 |
+ * | 混合排序           | introspective_sort, tim_sort, smooth_sort | O(N log N)      | O(log N) / O(N) | 不稳定/稳定 |
+ * | 线性时间排序       | counting_sort, bucket_sort, radix_sort | O(N) / O(N+k)      | O(k) / O(N+k) | 稳定 |
+ * | 部分排序           | partial_sort, nth_element              | O(N log k) / O(N)  | O(1)       | 不稳定 |
+ * | 娱乐/教学排序      | monkey_sort                            | O((N+1)!)          | O(1)       | 不稳定 |
+ *
+ * @section hybrid_algorithms 混合排序算法详解
+ * **内省排序（Introspective Sort）**：
+ * - 结合快速排序、堆排序和插入排序
+ * - 默认递归深度限制：2 × ⌊log₂(N)⌋
+ * - 超过深度限制时切换到堆排序，避免 O(N²) 最坏情况
+ * - 小规模子序列（≤阈值）使用插入排序
+ *
+ * **TimSort**：
+ * - 结合归并排序和插入排序
+ * - 识别并利用数据中的自然有序片段（run）
+ * - 最小归并片段大小（minrun）：32
+ * - Python 和 Java 默认排序算法
+ *
+ * **平滑排序（Smoothsort）**：
+ * - 基于莱昂纳多堆（Leonardo Heap）
+ * - 在接近有序的序列上达到 O(N) 时间复杂度
+ * - 由 Edsger W. Dijkstra 设计
+ *
+ * @section linear_time_algorithms 线性时间排序算法
+ * **计数排序（Counting Sort）**：
+ * - 适用于整数或可映射为整数的类型
+ * - 时间复杂度：O(N + k)，k 为元素范围
+ * - 要求元素范围不宜过大
+ *
+ * **桶排序（Bucket Sort）**：
+ * - 适用于均匀分布的整数或浮点数
+ * - 将元素分配到多个桶中，每个桶内部排序
+ *
+ * **基数排序（Radix Sort）**：
+ * - 从最低有效位（LSD）或最高有效位（MSD）开始排序
+ * - 时间复杂度：O(d × (N + k))，d 为位数
+ * - 适合定长整数或字符串
+ *
+ * @section partial_sorting 部分排序
+ * **partial_sort**：
+ * - 找出前 k 个最小（或最大）元素并排序
+ * - 使用堆排序实现，时间复杂度 O(N log k)
+ * - 适用于"Top K"问题
+ *
+ * **nth_element**：
+ * - 找出第 n 个顺序统计量
+ * - 使用快速选择算法，平均时间复杂度 O(N)
+ * - nth 之前元素 ≤ nth ≤ nth 之后元素
+ *
+ * @section stability_notes 稳定性说明
+ * | 算法              | 稳定性 | 说明                                           |
+ * |-------------------|--------|------------------------------------------------|
+ * | bubble_sort       | 稳定   | 相邻元素相等时不交换                           |
+ * | cocktail_sort     | 稳定   | 双向冒泡，保持相等元素相对顺序                 |
+ * | select_sort       | 不稳定 | 交换可能破坏相等元素的相对顺序                 |
+ * | insertion_sort    | 稳定   | 相等元素不移动                                 |
+ * | merge_sort        | 稳定   | 合并时优先取左侧元素                           |
+ * | quick_sort        | 不稳定 | 分区交换破坏相对顺序                           |
+ * | shell_sort        | 不稳定 | 间隔插入排序破坏顺序                           |
+ * | heap_sort         | 不稳定 | 堆操作不保持相对顺序                           |
+ * | introspective_sort| 不稳定 | 结合快速排序和堆排序，均不稳定                 |
+ * | tim_sort          | 稳定   | 插入排序和归并排序均稳定                       |
+ * | smooth_sort       | 不稳定 | 基于堆结构，不保持相对顺序                     |
+ * | counting_sort     | 稳定   | 反向遍历保持稳定性                             |
+ * | bucket_sort       | 稳定   | 桶内保持插入顺序                               |
+ * | radix_sort        | 稳定   | 每轮计数排序保持稳定性                         |
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 迭代器要求        | 各算法要求不同，见各函数文档              |
+ * | 比较器要求        | 严格弱序（Strict Weak Ordering）          |
+ * | 小序列优化        | 默认阈值 MEMORY_ALIGN_THRESHHOLD          |
+ * | 递归深度限制      | 2 × ⌊log₂(N)⌋（内省排序）                 |
+ *
+ * @note 对于大多数应用场景，推荐使用标准排序 `sort`（内省排序），
+ *       它在平均和最坏情况下均表现良好，且经过了充分测试。
+ *
+ * @see https://en.cppreference.com/w/cpp/algorithm/sort
+ * @see https://en.wikipedia.org/wiki/Sorting_algorithm
+ * @see https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html
  * @{
  */
 

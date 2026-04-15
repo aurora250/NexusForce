@@ -22,6 +22,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @defgroup SSL SSL/TLS
+ * @brief SSL/TLS相关组件
+ * @{
+ */
+
+/**
  * @enum ssl_method
  * @brief SSL/TLS方法类型
  *
@@ -99,7 +105,7 @@ public:
      * @brief 加载证书和私钥（从内存）
      * @param cert_pem 证书PEM数据
      * @param key_pem 私钥PEM数据
-     * @throws ssl_exception 解析或设置失败时抛出
+     * @throws ssl_exception SSL上下文为空或解析、设置失败时抛出
      * @throws value_exception 证书或密钥数据为空时抛出
      *
      * 从内存中的PEM数据加载证书和私钥，适用于嵌入式证书。
@@ -120,6 +126,7 @@ public:
     /**
      * @brief 设置SSL选项
      * @param options OpenSSL SSL_OP_*标志位组合
+     * @throws ssl_exception SSL上下文为空时抛出
      *
      * 设置SSL上下文的选项，如禁用特定协议版本、启用特定特性等。
      */
@@ -128,6 +135,7 @@ public:
     /**
      * @brief 设置验证模式
      * @param mode OpenSSL SSL_VERIFY_*模式
+     * @throws ssl_exception SSL上下文为空时抛出
      *
      * 设置对等方证书的验证模式。
      * 常用模式：
@@ -139,6 +147,7 @@ public:
 
     /**
      * @brief 要求客户端提供证书
+     * @throws ssl_exception SSL上下文为空时抛出
      *
      * 服务器端使用，要求客户端必须提供有效证书。
      */
@@ -147,7 +156,7 @@ public:
     /**
      * @brief 设置密码套件列表（TLS 1.2及以下）
      * @param ciphers OpenSSL密码套件字符串
-     * @throws ssl_exception 设置失败时抛出
+     * @throws ssl_exception SSL上下文为空或设置失败时抛出
      *
      * 设置可用的密码套件列表，格式为OpenSSL密码套件字符串。
      * 例如："ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384"
@@ -157,7 +166,7 @@ public:
     /**
      * @brief 设置密码套件列表（TLS 1.3）
      * @param ciphersuites OpenSSL TLS 1.3密码套件字符串
-     * @throws ssl_exception 设置失败时抛出
+     * @throws ssl_exception SSL上下文为空或设置失败时抛出
      *
      * 设置TLS 1.3的密码套件列表。
      * 例如："TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256"
@@ -166,6 +175,7 @@ public:
 
     /**
      * @brief 设置安全的默认选项
+     * @throws ssl_exception SSL上下文为空时抛出
      *
      * 配置推荐的现代安全选项：
      * - 禁用SSLv2/SSLv3/TLSv1/TLSv1.1
@@ -179,6 +189,7 @@ public:
     /**
      * @brief 设置会话缓存大小
      * @param size 缓存大小（会话数）
+     * @throws ssl_exception SSL上下文为空时抛出
      *
      * 设置SSL会话缓存的最大会话数。
      * 会话缓存可以提高重复连接的性能。
@@ -188,6 +199,7 @@ public:
     /**
      * @brief 设置会话超时时间
      * @param seconds 超时时间
+     * @throws ssl_exception SSL上下文为空时抛出
      *
      * 设置SSL会话缓存中会话的超时时间。
      */
@@ -196,7 +208,7 @@ public:
     /**
      * @brief 设置ALPN协议列表
      * @param protocols 协议名称列表
-     * @throws ssl_exception 设置失败时抛出
+     * @throws ssl_exception SSL上下文为空或设置失败时抛出
      * @throws value_exception 协议名称长度无效时抛出
      *
      * 设置应用层协议协商（ALPN）支持的协议列表。
@@ -222,6 +234,8 @@ public:
      */
     NEFORCE_NODISCARD bool is_valid() const noexcept { return ctx_ != nullptr; }
 };
+
+/** @} */ // SSL/TLS
 
 /** @} */ // Network
 

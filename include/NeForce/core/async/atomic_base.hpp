@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/async/atomic_wait.hpp"
+#include "NeForce/core/async/memory_order.hpp"
 #include "NeForce/core/exception/breakpoint.hpp"
 #ifdef NEFORCE_COMPILER_MSVC
 #    include <intrin.h>
@@ -16,112 +17,16 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup MemoryOrder 原子内存序
- * @brief 原子内存顺序行为
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
  * @{
  */
 
 /**
- * @enum memory_order
- * @brief 内存顺序
- *
- * 定义原子操作的内存顺序语义，控制不同线程间的内存可见性顺序。
+ * @defgroup AtomicOperations 原子操作
+ * @brief 原子变量的操作
+ * @{
  */
-enum class memory_order : int32_t {
-    relaxed, ///< 最宽松的内存顺序，只保证原子性
-    consume, ///< 数据依赖顺序，用于依赖读取的场景
-    acquire, ///< 获取操作，确保后续读写不会被重排到前面
-    release, ///< 释放操作，确保前面的读写不会被重排到后面
-    acq_rel, ///< 获取-释放组合操作
-    seq_cst  ///< 顺序一致性，最严格的内存顺序
-};
-
-/// @brief 宽松内存顺序常量
-NEFORCE_INLINE17 constexpr auto memory_order_relaxed = memory_order::relaxed;
-/// @brief 数据依赖内存顺序常量
-NEFORCE_INLINE17 constexpr auto memory_order_consume = memory_order::consume;
-/// @brief 获取内存顺序常量
-NEFORCE_INLINE17 constexpr auto memory_order_acquire = memory_order::acquire;
-/// @brief 释放内存顺序常量
-NEFORCE_INLINE17 constexpr auto memory_order_release = memory_order::release;
-/// @brief 获取-释放内存顺序常量
-NEFORCE_INLINE17 constexpr auto memory_order_acq_rel = memory_order::acq_rel;
-/// @brief 顺序一致性内存顺序常量
-NEFORCE_INLINE17 constexpr auto memory_order_seq_cst = memory_order::seq_cst;
-
-
-/**
- * @enum memory_order_modifier
- * @brief 内存顺序修饰符枚举
- *
- * 用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。
- */
-enum class memory_order_modifier : int64_t {
-    memory_order_mask = 0x0000ffff,          ///< 内存顺序掩码
-    memory_order_modifier_mask = 0xffff0000, ///< 修饰符掩码
-    memory_order_hle_acquire = 0x10000,      ///< HLE获取修饰符
-    memory_order_hle_release = 0x20000       ///< HLE释放修饰符
-};
-
-/**
- * @brief 内存顺序与修饰符的或操作符
- * @param mo 内存顺序
- * @param mod 内存顺序修饰符
- * @return 组合后的内存顺序
- *
- * @note 用于将内存顺序与修饰符组合使用
- */
-constexpr memory_order operator|(memory_order mo, memory_order_modifier mod) noexcept {
-    return static_cast<memory_order>(static_cast<int64_t>(mo) | static_cast<int64_t>(mod));
-}
-
-/**
- * @brief 内存顺序与修饰符的与操作符
- * @param mo 内存顺序
- * @param mod 内存顺序修饰符
- * @return 提取后的内存顺序
- *
- * @note 用于从组合值中提取特定的内存顺序或修饰符
- */
-constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noexcept {
-    return static_cast<memory_order>(static_cast<int64_t>(mo) & static_cast<int64_t>(mod));
-}
-
-
-/**
- * @brief 获取原子比较交换操作失败时的内存顺序
- *
- * 对于原子比较交换（compare-exchange）操作，成功和失败的内存顺序可以不同。
- * 此函数根据给定的内存顺序，返回对应的失败内存顺序。
- *
- * 转换规则：
- * - 如果基础内存顺序为 `memory_order_acq_rel`，失败顺序为 `memory_order_acquire`
- * - 如果基础内存顺序为 `memory_order_release`，失败顺序为 `memory_order_relaxed`
- * - 其他基础内存顺序保持不变
- * - 保留原始内存顺序中的所有修饰符
- */
-constexpr memory_order cmpexch_failure_order(const memory_order mo) noexcept {
-    constexpr auto mask = memory_order_modifier::memory_order_mask;
-    const memory_order base_mo = mo & mask;
-    const memory_order failure_order = base_mo == memory_order_acq_rel   ? memory_order_acquire
-                                       : base_mo == memory_order_release ? memory_order_relaxed
-                                                                         : base_mo;
-    constexpr auto modifier_mask = memory_order_modifier::memory_order_modifier_mask;
-    const auto modifiers = static_cast<memory_order_modifier>(mo & modifier_mask);
-    return failure_order | modifiers;
-}
-
-/**
- * @brief 检查比较交换失败内存顺序是否有效
- * @param mo 待检查的内存顺序
- * @return 是否有效
- * @note 失败内存顺序不能是release或acq_rel
- */
-constexpr bool is_valid_cmpexch_failure_order(const memory_order mo) noexcept {
-    return (mo & memory_order_modifier::memory_order_mask) != memory_order_release &&
-           (mo & memory_order_modifier::memory_order_mask) != memory_order_acq_rel;
-}
-
 
 /**
  * @brief 线程内存屏障
@@ -171,7 +76,6 @@ NEFORCE_ALWAYS_INLINE_INLINE void atomic_signal_fence(const memory_order mo) noe
 #endif
 }
 
-/** @} */ // MemoryOrder
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -465,11 +369,6 @@ struct atomic_is_always_lock_free_impl<16> {
 NEFORCE_END_INNER__
 /// @endcond
 
-/**
- * @defgroup AtomicOperations 原子操作
- * @brief 原子变量的操作
- * @{
- */
 
 /**
  * @brief 原子操作的差值类型
@@ -3405,6 +3304,8 @@ public:
 #endif
 
 /** @} */ // AtomicOperations
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ATOMIC_BASE_HPP__

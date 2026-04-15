@@ -14,8 +14,14 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Async 异步行为
+ * @defgroup AsyncComponents 异步组件
  * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
+ * @defgroup Async 异步调用
+ * @brief 异步调用组件
  * @{
  */
 
@@ -241,6 +247,8 @@ NEFORCE_END_INNER__
 /// @endcond
 
 /** @} */ // Async
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_PACKAGED_TASK_HPP__

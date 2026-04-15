@@ -8,6 +8,20 @@
  * 此文件提供了Base64编码和解码功能的实现，支持标准 Base64 和 URL 安全 Base64 两种变体。
  * Base64用于将二进制数据转换为ASCII字符表示，常用于电子邮件附件、JSON Web Token、
  * 数据URI等场景的数据传输。
+ */
+
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Encryption 加密算法
+ * @{
+ */
+
+/**
+ * @defgroup Base64 Base64
+ * @brief Base64编码和解码功能
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下互联网标准规范：
@@ -50,14 +64,6 @@
  *
  * @see https://datatracker.ietf.org/doc/html/rfc4648
  * @see https://en.wikipedia.org/wiki/Base64
- */
-
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Encryption 加密算法
  * @{
  */
 
@@ -152,6 +158,8 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector base64_decode(const byte_vector& data) 
  * @return 解码后的字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string base64_decode(const string& data) { return base64_decode(data.view()); }
+
+/** @} */ // Base64
 
 /** @} */ // Encryption
 

@@ -5,8 +5,16 @@
  * @file random.hpp
  * @brief 随机数生成器
  *
- * 此文件提供了多种随机数生成器的实现，
- * 包括线性同余法、梅森旋转算法和硬件真随机数生成器。
+ * 此文件提供了多种随机数生成器的实现。
+ */
+
+#include "NeForce/core/numeric/numeric_traits.hpp"
+#include "NeForce/core/typeinfo/type_traits.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup RandomGenerators 随机数生成器
+ * @brief 线性同余法、梅森旋转算法和硬件真随机数生成器实现
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下密码学与随机数生成相关标准规范：
@@ -38,15 +46,6 @@
  *
  * @see https://www.iso.org/standard/54945.html
  * @see https://csrc.nist.gov/projects/random-bit-generation
- */
-
-#include "NeForce/core/numeric/numeric_traits.hpp"
-#include "NeForce/core/typeinfo/type_traits.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup RandomGenerators 随机数生成器
- * @brief 实现了三种随机数生成器
  * @{
  */
 

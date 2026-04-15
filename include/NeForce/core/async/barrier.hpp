@@ -15,8 +15,14 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Barrier 屏障
- * @brief 屏障同步实现
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
+ * @defgroup ThreadSync 线程同步
+ * @brief 线程同步组件实现
  * @{
  */
 
@@ -266,7 +272,9 @@ public:
     void arrive_and_drop() { barrier_impl_.arrive_and_drop(); }
 };
 
-/** @} */ // Barrier
+/** @} */ // ThreadSync
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_BARRIER_HPP__

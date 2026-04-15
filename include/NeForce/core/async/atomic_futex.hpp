@@ -14,6 +14,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Futex FUTEX
  * @brief FUTEX同步原语的跨平台封装
  * @{
@@ -273,6 +279,8 @@ public:
 };
 
 /** @} */ // Futex
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ATOMIC_FUTEX_HPP__

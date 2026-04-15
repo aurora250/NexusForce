@@ -52,6 +52,7 @@ namespace {
     }
 } // namespace
 
+
 ssize_t smtp_socket::raw_send(const char* data, const size_t len) {
     if (tls_active_) {
         return ssl_.write(data, len);

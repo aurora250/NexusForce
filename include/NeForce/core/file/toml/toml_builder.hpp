@@ -15,8 +15,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup TomlConfig toml配置
- * @brief toml配置格式管理
+ * @addtogroup ConfigFormat 配置格式操作
+ * @{
+ */
+
+/**
+ * @addtogroup TomlConfig toml配置
  * @{
  */
 
@@ -442,6 +446,8 @@ public:
 };
 
 /** @} */ // TomlConfig
+
+/** @} */ // ConfigFormat
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FILE_TOML_BUILDER_HPP__

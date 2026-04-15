@@ -6,6 +6,48 @@
  * @brief TOML配置格式变量
  *
  * 此文件提供了TOML（Tom's Obvious, Minimal Language）配置格式的抽象基类和具体实现类。
+ */
+
+#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
+#include "NeForce/core/time/datetime.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief 异常类集
+ * @{
+ */
+
+/**
+ * @struct toml_exception
+ * @brief toml格式操作失败
+ */
+struct toml_exception final : value_exception {
+    explicit toml_exception(const char* info = "TOML Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    value_exception(info, type, code) {}
+
+    explicit toml_exception(const exception& e) :
+    value_exception(e) {}
+
+    ~toml_exception() override = default;
+    static constexpr auto static_type = "toml_exception";
+};
+
+/** @} */ // Exceptions
+
+/**
+ * @defgroup ConfigFormat 配置格式操作
+ * @brief env配置格式管理
+ * @{
+ */
+
+/**
+ * @defgroup TomlConfig toml配置
+ * @brief toml配置格式管理
+ *
  * TOML是一种易于阅读的配置文件格式，设计目标是比JSON更友好、比YAML更简单。
  *
  * 支持TOML v1.0.0规范中的所有数据类型：
@@ -108,41 +150,6 @@
  * @see https://toml.io/
  * @see https://github.com/toml-lang/toml/blob/main/toml.md
  * @see https://www.rfc-editor.org/rfc/rfc3339
- */
-
-#include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
-#include "NeForce/core/time/datetime.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
- * @{
- */
-
-/**
- * @struct toml_exception
- * @brief toml格式操作失败
- */
-struct toml_exception final : value_exception {
-    explicit toml_exception(const char* info = "TOML Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    value_exception(info, type, code) {}
-
-    explicit toml_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~toml_exception() override = default;
-    static constexpr auto static_type = "toml_exception";
-};
-
-/** @} */ // Exceptions
-
-/**
- * @defgroup TomlConfig toml配置
- * @brief toml配置格式管理
  * @{
  */
 
@@ -768,6 +775,8 @@ public:
 };
 
 /** @} */ // TomlConfig
+
+/** @} */ // ConfigFormat
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_FILE_TOML_TOML_VALUE_HPP__

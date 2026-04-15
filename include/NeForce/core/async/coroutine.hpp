@@ -66,8 +66,7 @@ using coroutine_handle = std::coroutine_handle<Promise>;
 /** @} */ // Coroutine
 
 /**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
+ * @addtogroup HashPrimary 哈希模板
  * @{
  */
 

@@ -255,7 +255,7 @@ public:
      * @brief 检查是否正在运行
      * @return 正在运行返回true
      */
-    bool is_running() const;
+    NEFORCE_NODISCARD bool is_running() const;
 
     /**
      * @brief 阻塞信号
@@ -276,7 +276,7 @@ public:
      * @param event 信号事件
      * @return 是平台原生信号返回true
      */
-    static bool is_platform_signal(signal_event event) {
+    NEFORCE_NODISCARD static bool is_platform_signal(signal_event event) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return static_cast<::DWORD>(event) <= CTRL_SHUTDOWN_EVENT;
 #else

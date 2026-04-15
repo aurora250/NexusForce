@@ -44,6 +44,12 @@ struct thread_exception final : system_exception {
 /** @} */ // Exceptions
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Thread 线程
  * @brief 线程管理和相关操作
  * @{
@@ -400,7 +406,15 @@ public:
 
 /** @} */ // Thread
 
+/** @} */ // AsyncComponents
+
 NEFORCE_BEGIN_THIS_THREAD__
+
+/**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
 
 /**
  * @defgroup Thread 线程
@@ -450,6 +464,8 @@ NEFORCE_ALWAYS_INLINE_INLINE bool name(char* buffer, size_t size) {
 NEFORCE_ALWAYS_INLINE_INLINE bool set_name(const char* name) { return thread::set_name(this_thread::handle(), name); }
 
 /** @} */ // Thread
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_THIS_THREAD__
 

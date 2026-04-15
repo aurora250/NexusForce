@@ -20,6 +20,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Semaphores 信号量
  * @brief 信号量同步原语
  * @{
@@ -283,6 +289,8 @@ public:
 };
 
 /** @} */ // Semaphores
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_SEMAPHORE_HPP__

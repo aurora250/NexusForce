@@ -12,6 +12,12 @@
 #include "NeForce/core/time/clocks.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
 /// @cond
 NEFORCE_BEGIN_INNER__
 
@@ -482,6 +488,8 @@ bool atomic_wait_address_for(const platform_wait_t* addr, Pred pred, const durat
 }
 
 /** @} */ // AtomicOperations
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ATOMIC_TIMED_WAIT_HPP__

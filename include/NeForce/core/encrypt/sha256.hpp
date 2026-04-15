@@ -7,6 +7,20 @@
  *
  * 此文件提供了SHA-256安全哈希算法的实现。SHA-256产生256位（32字节）的哈希值，
  * 是SHA-2家族的一员，广泛应用于密码存储、数字签名、区块链、证书验证和数据完整性保护。
+ */
+
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/string/string.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Encryption 加密算法
+ * @{
+ */
+
+/**
+ * @defgroup SHA256 SHA-256
+ * @brief SHA-256安全哈希算法实现。
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下标准规范：
@@ -63,14 +77,6 @@
  * @see https://csrc.nist.gov/projects/hash-functions
  * @see https://www.rfc-editor.org/rfc/rfc6234
  * @see https://csrc.nist.gov/projects/cryptographic-module-validation-program
- */
-
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/string/string.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Encryption 加密算法
  * @{
  */
 

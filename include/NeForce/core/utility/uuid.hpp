@@ -5,7 +5,19 @@
  * @file uuid.hpp
  * @brief UUID实现
  *
- * 此文件提供了UUID的生成和操作功能，支持UUID版本4（随机）和版本7（时间戳排序）。
+ * 此文件提供了UUID的生成和操作功能。
+ */
+
+#include "NeForce/core/interface/istringify.hpp"
+#include "NeForce/core/memory/memory_view.hpp"
+#include "NeForce/core/numeric/random.hpp"
+#include "NeForce/core/utility/optional.hpp"
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup UUID UUID
+ * @brief UUID生成与解析工具实现。
+ *
  * UUID是一个128位的唯一标识符，广泛用于分布式系统中的标识生成。
  *
  * @section standards 遵循的国际标准
@@ -19,24 +31,11 @@
  * 此外，UUID 的结构与编码方式也符合以下 ISO 标准：
  * - **ISO/IEC 9834-8:2014**：信息技术 — 对象标识符解析系统 — 第8部分：UUID 的生成与注册
  *   https://www.iso.org/standard/62795.html
- * - **ISO/IEC 18004:2024** 相关附录
- *   https://www.iso.org/standard/83358.html
  *
  * @section version_details 版本细节
  * - **版本 4**：变体位为 10（0b10），版本位为 4（0b0100）
  * - **版本 7**：变体位为 10（0b10），版本位为 7（0b0111）
  *   时间戳为 Unix 毫秒（占高 48 位），后跟 12 位随机计数器与 62 位随机数
- */
-
-#include "NeForce/core/interface/istringify.hpp"
-#include "NeForce/core/memory/memory_view.hpp"
-#include "NeForce/core/numeric/random.hpp"
-#include "NeForce/core/utility/optional.hpp"
-NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup UUID UUID
- * @brief UUID生成与解析工具
  * @{
  */
 
@@ -47,7 +46,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * UUID格式：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (36字符，包括4个连字符)
  * 表示一个128位的UUID，支持版本4和版本7的生成，以及从字符串/字节数组的解析。
  */
-class NEFORCE_API uuid : public istringify<uuid> {
+class NEFORCE_API uuid : public istringify<uuid>, public ihashable<uuid> {
 private:
     array<byte_t, 16> data_; ///< 16字节的UUID原始数据
 
@@ -59,7 +58,7 @@ public:
      *
      * 创建全零UUID（nil UUID）。
      */
-    uuid() noexcept = default;
+    uuid() noexcept { memory_zero(data_.data(), data_.size()); }
 
     /**
      * @brief 从16字节数组构造UUID
@@ -157,6 +156,8 @@ public:
      * @return 新生成的版本7 UUID
      */
     static uuid v7() noexcept;
+
+    NEFORCE_NODISCARD size_t to_hash() const noexcept;
 };
 
 /** @} */ // UUID
@@ -182,32 +183,6 @@ NEFORCE_NODISCARD inline uuid operator""_uuid(const char* str, size_t len) { ret
 /** @} */ // UserLiterals
 
 NEFORCE_END_LITERALS__
-
-
-/**
- * @defgroup HashPrimary 哈希模板
- * @brief 哈希函数的模板和基础定义
- * @{
- */
-
-/**
- * @brief uuid的哈希特化
- */
-template <>
-struct hash<uuid> {
-    size_t operator()(const uuid& uuid) const noexcept {
-        const auto& bytes = uuid.bytes();
-        size_t hash = 0;
-        for (size_t i = 0; i < 16; i += sizeof(size_t)) {
-            size_t part = 0;
-            memory_copy(&part, bytes.data() + i, sizeof(size_t));
-            hash ^= part;
-        }
-        return hash;
-    }
-};
-
-/** @} */ // HashPrimary
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_UTILITY_UUID_HPP__

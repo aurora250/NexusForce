@@ -41,7 +41,7 @@ struct NEFORCE_API environment {
      * @param name 环境变量名
      * @return 环境变量值，不存在返回空字符串
      */
-    static string get(const string& name);
+    NEFORCE_NODISCARD static string get(const string& name);
 
     /**
      * @brief 设置环境变量
@@ -64,19 +64,19 @@ struct NEFORCE_API environment {
      * @param name 环境变量名
      * @return 是否存在
      */
-    static bool exists(const string& name);
+    NEFORCE_NODISCARD static bool exists(const string& name);
 
     /**
      * @brief 获取所有环境变量
      * @return 环境变量名到值的映射
      */
-    static unordered_map<string, string> all_envs();
+    NEFORCE_NODISCARD static unordered_map<string, string> all_envs();
 
     /**
      * @brief 获取PATH环境变量的路径列表
      * @return 路径列表
      */
-    static vector<string> path_list();
+    NEFORCE_NODISCARD static vector<string> path_list();
 
     /**
      * @brief 向PATH环境变量添加路径
@@ -91,13 +91,13 @@ struct NEFORCE_API environment {
      * @return 当前目录路径
      * @throws system_exception 获取失败时抛出
      */
-    static string current_directory();
+    NEFORCE_NODISCARD static string current_directory();
 
     /**
      * @brief 获取当前用户名
      * @return 用户名
      */
-    static string current_user();
+    NEFORCE_NODISCARD static string current_user();
 
     /**
      * @brief 获取临时目录路径
@@ -107,7 +107,7 @@ struct NEFORCE_API environment {
      * - Windows: TMP, TEMP, USERPROFILE
      * - Linux: TMPDIR, TEMP, TMP, /tmp
      */
-    static string temp_directory();
+    NEFORCE_NODISCARD static string temp_directory();
 
     /**
      * @brief 获取用户主目录路径
@@ -117,7 +117,7 @@ struct NEFORCE_API environment {
      * - Windows: USERPROFILE, HOMEDRIVE+HOMEPATH
      * - Linux: HOME
      */
-    static string home_directory();
+    NEFORCE_NODISCARD static string home_directory();
 };
 
 /** @} */ // EnvironmentVariables

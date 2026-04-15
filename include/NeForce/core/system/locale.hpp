@@ -183,76 +183,76 @@ public:
      * @brief 获取"C"区域设置
      * @return "C"区域设置对象
      */
-    static locale classic();
+    NEFORCE_NODISCARD static locale classic();
 
     /**
      * @brief 获取系统区域设置
      * @return 系统默认区域设置
      */
-    static locale system();
+    NEFORCE_NODISCARD static locale system();
 
     /**
      * @brief 从名称创建区域设置
      * @param name 区域设置名称
      * @return 区域设置对象
      */
-    static locale from_name(const string& name);
+    NEFORCE_NODISCARD static locale from_name(const string& name);
 
     /**
      * @brief 获取区域设置名称
      * @return 区域设置名称
      */
-    const string& name() const noexcept { return name_; }
+    NEFORCE_NODISCARD const string& name() const noexcept { return name_; }
 
     /**
      * @brief 获取字符编码
      * @return 编码名称（如"UTF-8"）
      */
-    const string& encoding() const noexcept { return encoding_; }
+    NEFORCE_NODISCARD const string& encoding() const noexcept { return encoding_; }
 
     /**
      * @brief 相等比较运算符
      * @param o 另一个区域设置
      * @return 名称相同返回true
      */
-    bool operator==(const locale& o) const noexcept { return name_ == o.name_; }
+    NEFORCE_NODISCARD bool operator==(const locale& o) const noexcept { return name_ == o.name_; }
 
     /**
      * @brief 不等比较运算符
      * @param o 另一个区域设置
      * @return 名称不同返回true
      */
-    bool operator!=(const locale& o) const noexcept { return !(*this == o); }
+    NEFORCE_NODISCARD bool operator!=(const locale& o) const noexcept { return !(*this == o); }
 
     /**
      * @brief 获取数字格式信息
      * @return 数字格式信息
      */
-    numeric_info numeric() const;
+    NEFORCE_NODISCARD numeric_info numeric() const;
 
     /**
      * @brief 获取货币格式信息
      * @return 货币格式信息
      */
-    monetary_info monetary() const;
+    NEFORCE_NODISCARD monetary_info monetary() const;
 
     /**
      * @brief 获取时间格式信息
      * @return 时间格式信息
      */
-    time_info time() const;
+    NEFORCE_NODISCARD time_info time() const;
 
-    bool is_alpha(char32_t cp) const noexcept; ///< 是否为字母
-    bool is_digit(char32_t cp) const noexcept; ///< 是否为数字
-    bool is_alnum(char32_t cp) const noexcept; ///< 是否为字母或数字
-    bool is_space(char32_t cp) const noexcept; ///< 是否为空白字符
-    bool is_upper(char32_t cp) const noexcept; ///< 是否为大写字母
-    bool is_lower(char32_t cp) const noexcept; ///< 是否为小写字母
-    bool is_punct(char32_t cp) const noexcept; ///< 是否为标点符号
-    bool is_print(char32_t cp) const noexcept; ///< 是否为可打印字符
+    NEFORCE_NODISCARD bool is_alpha(char32_t cp) const noexcept; ///< 是否为字母
+    NEFORCE_NODISCARD bool is_digit(char32_t cp) const noexcept; ///< 是否为数字
+    NEFORCE_NODISCARD bool is_alnum(char32_t cp) const noexcept; ///< 是否为字母或数字
+    NEFORCE_NODISCARD bool is_space(char32_t cp) const noexcept; ///< 是否为空白字符
+    NEFORCE_NODISCARD bool is_upper(char32_t cp) const noexcept; ///< 是否为大写字母
+    NEFORCE_NODISCARD bool is_lower(char32_t cp) const noexcept; ///< 是否为小写字母
+    NEFORCE_NODISCARD bool is_punct(char32_t cp) const noexcept; ///< 是否为标点符号
+    NEFORCE_NODISCARD bool is_print(char32_t cp) const noexcept; ///< 是否为可打印字符
 
-    char32_t to_upper(char32_t cp) const noexcept; ///< 转换为大写
-    char32_t to_lower(char32_t cp) const noexcept; ///< 转换为小写
+    NEFORCE_NODISCARD char32_t to_upper(char32_t cp) const noexcept; ///< 转换为大写
+    NEFORCE_NODISCARD char32_t to_lower(char32_t cp) const noexcept; ///< 转换为小写
 
     /**
      * @brief 比较两个字符串
@@ -261,7 +261,8 @@ public:
      * @param strength 比较强度
      * @return 负数表示a<b，0表示a=b，正数表示a>b
      */
-    int compare(const string& a, const string& b, collate_strength strength = collate_strength::tertiary) const;
+    NEFORCE_NODISCARD int compare(const string& a, const string& b,
+                                  collate_strength strength = collate_strength::tertiary) const;
 
     /**
      * @brief 生成排序键
@@ -270,27 +271,27 @@ public:
      *
      * 排序键可直接用于快速比较，但需要更多存储空间。
      */
-    string collation_key(const string& s) const;
+    NEFORCE_NODISCARD string collation_key(const string& s) const;
 
     /**
      * @brief 将UTF-32字符串转换为当前区域设置的多字节字符串
      * @param ucs4 UTF-32字符串
      * @return 多字节字符串
      */
-    string to_multibyte(const u32string& ucs4) const;
+    NEFORCE_NODISCARD string to_multibyte(const u32string& ucs4) const;
 
     /**
      * @brief 将当前区域设置的多字节字符串转换为UTF-32
      * @param mb 多字节字符串
      * @return UTF-32字符串
      */
-    u32string to_ucs4(const string& mb) const;
+    NEFORCE_NODISCARD u32string to_ucs4(const string& mb) const;
 
     /**
      * @brief 获取系统所有可用的区域设置列表
      * @return 区域设置名称列表
      */
-    static vector<string> available_locales();
+    NEFORCE_NODISCARD static vector<string> available_locales();
 };
 
 /** @} */ // Locale
