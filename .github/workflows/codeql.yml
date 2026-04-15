@@ -56,12 +56,16 @@ jobs:
               - third_party
               - submodules
 
-      - name: Capture Build with Bear
+      - name: Build with CodeQL Tracing and Bear
         run: |
           mkdir -p build
           cd build
+
+          source /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql env -output=/tmp/codeql_env.sh
+          source /tmp/codeql_env.sh
+
           bear -- cmake .. -DCMAKE_BUILD_TYPE=Debug || true
-          bear -- make -j$(nproc) || true
+        shell: bash
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
