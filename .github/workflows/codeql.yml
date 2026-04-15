@@ -85,8 +85,15 @@ jobs:
 
           if [ -f compile_commands.json ]; then
             echo "✅ compile_commands.json generated successfully"
-            echo "Files captured:"
+            echo "=== Files captured (first 10) ==="
+
+            set +e
             cat compile_commands.json | grep -o '"file": "[^"]*"' | head -10
+            set -e
+            echo "================================="
+
+            TOTAL=$(cat compile_commands.json | grep -o '"file": "[^"]*"' | wc -l)
+            echo "Total files captured: $TOTAL"
           else
             echo "⚠️ compile_commands.json not found"
           fi
