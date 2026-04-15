@@ -3,6 +3,16 @@ name: "CodeQL Analysis"
 on:
   schedule:
     - cron: '0 0 * * 0'
+  push:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
   workflow_dispatch:
 
 jobs:
@@ -53,6 +63,7 @@ jobs:
           languages: ${{ matrix.language }}
           queries: security-and-quality
           build-mode: manual
+          tools: latest
           config: |
             paths:
               - src
@@ -99,8 +110,16 @@ jobs:
           fi
         shell: bash
 
+      - name: Clean Environment for CodeQL
+        run: |
+          unset CODEQL_PATH
+          unset CODEQL_DIST
+          unset CODEQL_JAVA_HOME
+        shell: bash
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
           upload: true
+          cleanup-level: brutal
