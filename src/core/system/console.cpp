@@ -379,7 +379,9 @@ in_(STDIN_FILENO)
         ::GetConsoleMode(out_, &mode);
         mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
         ::SetConsoleMode(out_, mode);
+        // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (...) {
+        // ignore
     }
 #endif
 }

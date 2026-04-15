@@ -4,7 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
-struct http_request : iobject<http_request> {
+struct http_server_request : iobject<http_server_request> {
     http_method method = http_method::GET();
     string path = "/";
     string version = "HTTP/1.1";
@@ -90,12 +90,12 @@ struct http_request : iobject<http_request> {
         session = nullptr;
     }
 
-    NEFORCE_NODISCARD static http_request parse(string_view str);
+    NEFORCE_NODISCARD static http_server_request parse(string_view str);
     NEFORCE_NODISCARD string to_string() const;
 };
 
 
-struct NEFORCE_API http_response : istringify<http_response> {
+struct NEFORCE_API http_server_response : istringify<http_server_response> {
     string version{"HTTP/1.1"};
     http_status status = http_status::S4_NOT_FOUNT;
     string status_message{};
@@ -105,7 +105,7 @@ struct NEFORCE_API http_response : istringify<http_response> {
     string redirect_url{};
     string forward_path{};
 
-    http_response() {
+    http_server_response() {
         headers[http_key::Content_Type()] = http_content::PLAIN_TEXT().to_string() + "; charset=utf-8";
         headers[http_key::Connection()] = "close";
     }
@@ -127,5 +127,10 @@ struct NEFORCE_API http_response : istringify<http_response> {
 };
 
 NEFORCE_END_HTTP__
+
+using http_request = http::http_server_request;
+
+using http_response = http::http_server_response;
+
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_SERVER_MESSAGE_HPP__
