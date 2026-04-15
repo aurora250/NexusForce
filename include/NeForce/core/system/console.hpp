@@ -497,7 +497,7 @@ NEFORCE_API extern sys_console& console;
  * @brief 打印多个值
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void print(Args&&... args) {
+void print(Args&&... args) {
     console.print(_NEFORCE forward<Args>(args)...);
 }
 
@@ -505,7 +505,7 @@ NEFORCE_ALWAYS_INLINE void print(Args&&... args) {
  * @brief 带颜色打印多个值
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void printc(const color& color, Args&&... args) {
+void printc(const color& color, Args&&... args) {
     console.printc(color, _NEFORCE forward<Args>(args)...);
 }
 
@@ -513,7 +513,7 @@ NEFORCE_ALWAYS_INLINE void printc(const color& color, Args&&... args) {
  * @brief 打印多个值并换行
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void println(Args&&... args) {
+void println(Args&&... args) {
     console.println(_NEFORCE forward<Args>(args)...);
 }
 
@@ -521,7 +521,7 @@ NEFORCE_ALWAYS_INLINE void println(Args&&... args) {
  * @brief 带颜色打印多个值并换行
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void printcln(const color& color, Args&&... args) {
+void printcln(const color& color, Args&&... args) {
     console.printcln(color, _NEFORCE forward<Args>(args)...);
 }
 
@@ -529,7 +529,7 @@ NEFORCE_ALWAYS_INLINE void printcln(const color& color, Args&&... args) {
  * @brief 格式化打印
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void printf(const string_view fmt, Args&&... args) {
+void printf(const string_view fmt, Args&&... args) {
     console.printf(fmt, _NEFORCE forward<Args>(args)...);
 }
 
@@ -537,7 +537,7 @@ NEFORCE_ALWAYS_INLINE void printf(const string_view fmt, Args&&... args) {
  * @brief 格式化打印并换行
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void printfln(const string_view fmt, Args&&... args) {
+void printfln(const string_view fmt, Args&&... args) {
     console.printfln(fmt, _NEFORCE forward<Args>(args)...);
 }
 
@@ -545,7 +545,7 @@ NEFORCE_ALWAYS_INLINE void printfln(const string_view fmt, Args&&... args) {
  * @brief 格式化颜色打印
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void printcf(const color& color, const string_view fmt, Args&&... args) {
+void printcf(const color& color, const string_view fmt, Args&&... args) {
     console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);
 }
 
@@ -553,7 +553,7 @@ NEFORCE_ALWAYS_INLINE void printcf(const color& color, const string_view fmt, Ar
  * @brief 格式化颜色打印并换行
  */
 template <typename... Args>
-NEFORCE_ALWAYS_INLINE void printcfln(const color& color, const string_view fmt, Args&&... args) {
+void printcfln(const color& color, const string_view fmt, Args&&... args) {
     console.printcfln(color, fmt, _NEFORCE forward<Args>(args)...);
 }
 

@@ -48,7 +48,7 @@ jobs:
           echo "$HOME/vcpkg" >> $GITHUB_PATH
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
