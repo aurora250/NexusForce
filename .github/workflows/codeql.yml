@@ -74,8 +74,8 @@ jobs:
             -DCMAKE_BUILD_TYPE=Debug \
             -DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake \
             -DVCPKG_TARGET_TRIPLET=x64-linux \
-            -DCONFIG_BUILD_TESTS=OFF \
-            -DCONFIG_BUILD_DOCS=OFF || true
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_TESTS=OFF || true
           
           bear -- make -j$(nproc) || true
 
