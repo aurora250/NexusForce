@@ -61,10 +61,16 @@ jobs:
           mkdir -p build
           cd build
 
-          source /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql env -output=/tmp/codeql_env.sh
-          source /tmp/codeql_env.sh
-
           bear -- cmake .. -DCMAKE_BUILD_TYPE=Debug || true
+          bear -- make -j$(nproc) || true
+
+          if [ -f compile_commands.json ]; then
+            echo "✅ compile_commands.json generated successfully"
+            echo "Files captured:"
+            cat compile_commands.json | grep -o '"file": "[^"]*"' | head -10
+          else
+            echo "⚠️ compile_commands.json not found"
+          fi
         shell: bash
 
       - name: Perform CodeQL Analysis
