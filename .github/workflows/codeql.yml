@@ -36,6 +36,29 @@ jobs:
       - name: Install Bear
         run: sudo apt-get update && sudo apt-get install -y bear
 
+      - name: Cache vcpkg
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
+
+      - name: Setup vcpkg
+        run: |
+          if [ ! -d "$HOME/vcpkg" ]; then
+            git clone https://github.com/Microsoft/vcpkg.git $HOME/vcpkg
+            $HOME/vcpkg/bootstrap-vcpkg.sh
+          fi
+          echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
+          echo "$HOME/vcpkg" >> $GITHUB_PATH
+
+      - name: Install dependencies via vcpkg
+        run: |
+          $HOME/vcpkg/vcpkg install --triplet x64-linux
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
@@ -56,12 +79,18 @@ jobs:
               - third_party
               - submodules
 
-      - name: Build with CodeQL Tracing and Bear
+      - name: Capture Build with Bear
         run: |
           mkdir -p build
           cd build
 
-          bear -- cmake .. -DCMAKE_BUILD_TYPE=Debug || true
+          bear -- cmake .. \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake \
+            -DVCPKG_TARGET_TRIPLET=x64-linux \
+            -DCONFIG_BUILD_TESTS=OFF \
+            -DCONFIG_BUILD_DOCS=OFF || true
+          
           bear -- make -j$(nproc) || true
 
           if [ -f compile_commands.json ]; then
