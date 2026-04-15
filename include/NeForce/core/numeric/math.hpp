@@ -787,7 +787,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t float_apart(decimal_t x, in
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 void reduce_arg_sincos(decimal_t& x, int& quadrant) noexcept {
+NEFORCE_CONSTEXPR14 void reduce_arg_sincos(decimal_t& x, int& quadrant) noexcept {
     if (x < 0.0L) {
         x = -x;
         quadrant = 3;
@@ -809,8 +809,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 void reduce_arg_sincos(decimal_t& x, 
     x = x - t;
 }
 
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 void sincos_taylor(const decimal_t x, decimal_t& sin_val,
-                                                              decimal_t& cos_val) noexcept {
+NEFORCE_CONSTEXPR14 void sincos_taylor(const decimal_t x, decimal_t& sin_val, decimal_t& cos_val) noexcept {
     const decimal_t x2 = x * x;
 
     decimal_t term_sin = x;

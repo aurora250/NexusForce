@@ -82,7 +82,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API ssl_acceptor final : public tcp_acceptor {
 private:
-    ssl_context ctx_;  ///< SSL上下文
+    ssl_context ctx_; ///< SSL上下文
 
 public:
     /**

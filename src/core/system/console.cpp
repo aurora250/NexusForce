@@ -355,7 +355,7 @@ void sys_console::fade_effect_unsafe(const string_view text, const color& from, 
     flush_unsafe();
 }
 
-sys_console::sys_console()
+sys_console::sys_console() noexcept
 #ifdef NEFORCE_PLATFORM_WINDOWS
 :
 out_(::GetStdHandle(STD_OUTPUT_HANDLE)),
@@ -367,17 +367,20 @@ in_(STDIN_FILENO)
 #endif
 {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
-        NEFORCE_THROW_EXCEPTION(console_exception("Failed to get console handles"));
+    try {
+        if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
+            return;
+        }
+
+        ::SetConsoleOutputCP(CP_UTF8);
+        ::SetConsoleCP(CP_UTF8);
+
+        ::DWORD mode = 0;
+        ::GetConsoleMode(out_, &mode);
+        mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+        ::SetConsoleMode(out_, mode);
+    } catch (...) {
     }
-
-    ::SetConsoleOutputCP(CP_UTF8);
-    ::SetConsoleCP(CP_UTF8);
-
-    ::DWORD mode = 0;
-    ::GetConsoleMode(out_, &mode);
-    mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    ::SetConsoleMode(out_, mode);
 #endif
 }
 
@@ -473,6 +476,12 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     }
     string password;
 
+    auto erase_chars = [&](const size_t n) {
+        for (size_t i = 0; i < n; ++i) {
+            print_string_unsafe("\b \b");
+        }
+    };
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     print_string_unsafe(prompt);
     flush_unsafe();
@@ -489,12 +498,6 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     if (::SetConsoleMode(in_, new_mode) == FALSE) {
         NEFORCE_THROW_EXCEPTION(console_exception("Failed to set console mode"));
     }
-
-    auto erase_chars = [&](const size_t n) {
-        for (size_t i = 0; i < n; ++i) {
-            print_string_unsafe("\b \b");
-        }
-    };
 
     try {
         while (true) {
@@ -824,8 +827,7 @@ bool sys_console::supports_unicode() const {
         return false;
     }
 
-    return string_find_pattern(encoding.data(), "UTF-8") != nullptr ||
-           string_find_pattern(encoding.data(), "utf8") != nullptr;
+    return encoding.contains("UTF-8") || encoding.contains("utf8");
 #endif
 }
 

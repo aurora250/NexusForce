@@ -114,7 +114,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *          - 平台间移植性问题（强/弱内存模型差异）
  *
  * @see https://en.cppreference.com/w/cpp/atomic/memory_order
- * @see https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html
+ * @see
+ * https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html
  * @see https://developer.arm.com/documentation/100941/0101/Memory-ordering
  * @{
  */

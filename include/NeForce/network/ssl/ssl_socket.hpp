@@ -78,7 +78,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API ssl_socket final : public tcp_socket {
 private:
-    optional<ssl_stream> ssl_;  ///< SSL流对象（仅TLS激活时）
+    optional<ssl_stream> ssl_; ///< SSL流对象（仅TLS激活时）
 
 public:
     /**

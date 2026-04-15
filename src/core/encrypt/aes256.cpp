@@ -213,7 +213,7 @@ namespace {
         }
     }
 
-    int secure_compare(const byte_t* a, const byte_t* b, size_t len) {
+    bool secure_compare(const byte_t* a, const byte_t* b, size_t len) {
         volatile byte_t diff = 0;
         for (size_t i = 0; i < len; ++i) {
             diff |= a[i] ^ b[i];
@@ -246,7 +246,7 @@ namespace {
             if (i % 2 == 0) {
                 uint64_t hi = ctx.table_hi[i / 2];
                 uint64_t lo = ctx.table_lo[i / 2];
-                bool carry = (hi >> 63) & 1;
+                const bool carry = ((hi >> 63) & 1) != 0U;
                 hi = (hi << 1) | (lo >> 63);
                 lo = lo << 1;
                 if (carry) {
@@ -265,11 +265,11 @@ namespace {
             uint64_t rh = 0, rl = 0;
             uint64_t vh = ctx.H_hi, vl = ctx.H_lo;
             for (int bit = 0; bit < 8; ++bit) {
-                if ((i >> bit) & 1) {
+                if (((i >> bit) & 1) != 0) {
                     rh ^= vh;
                     rl ^= vl;
                 }
-                bool c = (vh >> 63) & 1;
+                bool c = ((vh >> 63) & 1) != 0U;
                 vh = (vh << 1) | (vl >> 63);
                 vl = vl << 1;
                 if (c) {
@@ -293,9 +293,7 @@ namespace {
             endian::write_be64(bytes + 8, state_lo);
 
             uint64_t new_hi = 0, new_lo = 0;
-            for (int i = 0; i < 16; ++i) {
-                const uint8_t idx = bytes[i];
-
+            for (const byte_t idx: bytes) {
                 const uint64_t carry = new_hi >> 56;
                 new_hi = (new_hi << 8) | (new_lo >> 56);
                 new_lo = new_lo << 8;

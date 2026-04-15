@@ -117,11 +117,7 @@ private:
                             bool is_fade_in) const;
 
 private:
-    /**
-     * @brief 私有构造函数
-     * @throws console_exception Windows中如果获取控制台句柄失败
-     */
-    sys_console();
+    sys_console() noexcept;
 
 public:
     sys_console(const sys_console&) = delete;
@@ -135,7 +131,7 @@ public:
      * @brief 获取单例实例
      * @return 控制台实例引用
      */
-    static sys_console& instance() {
+    static sys_console& instance() noexcept {
         static sys_console console;
         return console;
     }
