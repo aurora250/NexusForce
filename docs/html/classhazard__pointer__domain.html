@@ -89,7 +89,7 @@ $(function(){initNavTree('classhazard__pointer__domain.html','','classhazard__po
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">hazard_pointer_domain类 参考<div class="ingroups"><a class="el" href="group___hazard_pointer.html">险象指针</a></div></div></div>
+  <div class="headertitle"><div class="title">hazard_pointer_domain类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___hazard_pointer.html">险象指针</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -120,7 +120,7 @@ void&#160;</td><td class="memItemRight"><b>reclaim</b> ()</td></tr>
 <div class="textblock"><p>险象指针域 </p>
 <p>管理所有险象指针记录和退役对象回收。每个域独立管理一组记录和回收策略。 </p>
 
-<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00160">160</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00166">166</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a96cda2b40cbab07f17120547422f77a9" name="a96cda2b40cbab07f17120547422f77a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a96cda2b40cbab07f17120547422f77a9">&#9670;&#160;</a></span>~hazard_pointer_domain()</h2>
@@ -148,9 +148,9 @@ void&#160;</td><td class="memItemRight"><b>reclaim</b> ()</td></tr>
 <p>析构函数 </p>
 <p>释放所有险象指针记录。 </p>
 
-<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00226">226</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00232">232</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00036">hazard_pointer_record::next</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00042">hazard_pointer_record::next</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
 
 </div>
 </div>
@@ -182,9 +182,9 @@ void&#160;</td><td class="memItemRight"><b>reclaim</b> ()</td></tr>
 <dl class="section return"><dt>返回</dt><dd>可用的记录指针</dd></dl>
 <p>首先尝试重用已有的空闲记录，如果没有则创建新记录。 </p>
 
-<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00244">244</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00250">250</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="hazard__ptr_8hpp_source.html#l00037">hazard_pointer_record::active</a>, <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a>, <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>, <a class="el" href="atomic__base_8hpp_source.html#l00046">memory_order_release</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00036">hazard_pointer_record::next</a>, <a class="el" href="atomic_8hpp_source.html#l00108">atomic&lt; T &gt;::store()</a>, <a class="el" href="atomic_8hpp_source.html#l00344">atomic&lt; bool &gt;::store()</a> , 以及 <a class="el" href="hazard__ptr_8hpp_source.html#l00045">hazard_pointer_record::try_acquire()</a>.</p>
+<p class="reference">引用了 <a class="el" href="hazard__ptr_8hpp_source.html#l00043">hazard_pointer_record::active</a>, <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>, <a class="el" href="memory__order_8hpp_source.html#l00143">memory_order_acquire</a>, <a class="el" href="memory__order_8hpp_source.html#l00139">memory_order_relaxed</a>, <a class="el" href="memory__order_8hpp_source.html#l00145">memory_order_release</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00042">hazard_pointer_record::next</a>, <a class="el" href="atomic_8hpp_source.html#l00114">atomic&lt; T &gt;::store()</a>, <a class="el" href="atomic_8hpp_source.html#l00350">atomic&lt; bool &gt;::store()</a> , 以及 <a class="el" href="hazard__ptr_8hpp_source.html#l00051">hazard_pointer_record::try_acquire()</a>.</p>
 
 </div>
 </div>
@@ -214,9 +214,9 @@ void&#160;</td><td class="memItemRight"><b>reclaim</b> ()</td></tr>
 <p>获取默认的险象指针域 </p>
 <dl class="section return"><dt>返回</dt><dd>默认域的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00296">296</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00302">302</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="hazard__ptr_8hpp_source.html#l00449">make_hazard_pointer()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="hazard__ptr_8hpp_source.html#l00455">make_hazard_pointer()</a>.</p>
 
 </div>
 </div>
@@ -266,7 +266,7 @@ template&lt;typename T, typename Deleter = default_delete&lt;T&gt;&gt; </div>
 </dl>
 <p>将对象添加到当前线程的退役列表，如果列表大小超过阈值则触发回收。 </p>
 
-<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00274">274</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hazard__ptr_8hpp_source.html">hazard_ptr.hpp</a> 第 <a class="el" href="hazard__ptr_8hpp_source.html#l00280">280</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 

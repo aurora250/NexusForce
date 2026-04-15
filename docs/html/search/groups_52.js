@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['端序操作_0',['端序操作',['../group___endian.html',1,'']]]
+  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
 ];

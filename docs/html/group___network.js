@@ -1,205 +1,151 @@
 var group___network =
 [
-    [ "dns_client", "classdns__client.html", [
-      [ "config", "structdns__client_1_1config.html", [
-        [ "port", "structdns__client_1_1config.html#aa384fb64dfaca7d0a77b5afd4a4f9a3f", null ],
-        [ "server", "structdns__client_1_1config.html#a73732155d4d146b70fc866a6bfd10eb4", null ],
-        [ "timeout", "structdns__client_1_1config.html#a639baddffaa46d95c4efc6a81ae0dda1", null ]
+    [ "DNS", "group___d_n_s.html", "group___d_n_s" ],
+    [ "SSL/TLS", "group___s_s_l.html", "group___s_s_l" ],
+    [ "TCP", "group___t_c_p.html", "group___t_c_p" ],
+    [ "网络通信工具", "group___network_util.html", "group___network_util" ],
+    [ "icmp_header", "structicmp__header.html", [
+      [ "checksum", "structicmp__header.html#ab0fa1fd864bba241952cf8fbf8e4f444", null ],
+      [ "code", "structicmp__header.html#ad8a33103c96f7c05e359337ba5db676d", null ],
+      [ "id", "structicmp__header.html#ae39686c403dfab3acde9aef51518c070", null ],
+      [ "sequence", "structicmp__header.html#aa60c9166bcb57ddad63de97452ce10f7", null ],
+      [ "type", "structicmp__header.html#a0c0a702941e23230e08684aa636a196d", null ]
+    ] ],
+    [ "icmp_socket", "classicmp__socket.html", [
+      [ "ping_result", "structicmp__socket_1_1ping__result.html", [
+        [ "destination", "structicmp__socket_1_1ping__result.html#a203019d5e08b4ee86a30bfe50143cc66", null ],
+        [ "reply_size", "structicmp__socket_1_1ping__result.html#a3e1e81da795efec9cee52c8c9f790513", null ],
+        [ "reply_ttl", "structicmp__socket_1_1ping__result.html#a3e8b29d69d1703b33d99b5f65d15f836", null ],
+        [ "rtt", "structicmp__socket_1_1ping__result.html#adf6946af1a6be673bdfba0ea2630630d", null ],
+        [ "success", "structicmp__socket_1_1ping__result.html#a54d97449a4d4823aafdfc1b2d6acd277", null ]
       ] ],
-      [ "dns_client", "classdns__client.html#a8c20c9dde44af13993769f4422981684", null ],
-      [ "dns_client", "classdns__client.html#a370b7017afd3cb7057169a0a57ec055b", null ],
-      [ "batch_query", "classdns__client.html#a8916c88780f4fff4097d783d17f428a8", null ],
-      [ "clear_cache", "classdns__client.html#a293ce1ff50f14a8685267faf71cada91", null ],
-      [ "query", "classdns__client.html#a38a0bcba1bbc6eeb5168799b62f56595", null ],
-      [ "query_async", "classdns__client.html#aeb37b3cc90da866f70312ac3a2e57093", null ],
-      [ "resolve_a", "classdns__client.html#ab1ffb7132c5521d8fc2d63325a3556a2", null ],
-      [ "resolve_aaaa", "classdns__client.html#a0aec8dde61805ee2efcf1d7662dc7bd9", null ],
-      [ "resolve_cname", "classdns__client.html#ad849698d1c498c88ae034fff46776f75", null ],
-      [ "resolve_mx", "classdns__client.html#afb94d5c9b5e963359d20a6dfb3ede162", null ],
-      [ "resolve_txt", "classdns__client.html#a81f5256f98dc39727b4d55a7dbb92e42", null ],
-      [ "reverse_query", "classdns__client.html#a3c24ec3e33330b5d4a6f33a8867ba08f", null ],
-      [ "set_cache_ttl", "classdns__client.html#ad6aac14fe723931fdd23c17c282d7dd6", null ],
-      [ "set_config", "classdns__client.html#a6402a25f9372f93624db6eaf0970113c", null ],
-      [ "set_timeout", "classdns__client.html#a2ceac54fd9b2b6594adc7f8ecb734b19", null ],
-      [ "set_use_tcp", "classdns__client.html#a49de896f0aa09622fc312dc481bf7dcf", null ]
-    ] ],
-    [ "dns_record", "structdns__record.html", [
-      [ "raw", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8", [
-        [ "A", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9", null ],
-        [ "NS", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8aa0859e0465c13a07256b67200b4d6aa9", null ],
-        [ "CNAME", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a0354aba62feb7f3f1cee206d1c1c43d9", null ],
-        [ "SOA", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a2331b3cb4496232affbd2ea2ea18d3f6", null ],
-        [ "PTR", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8aac7155c9eb86cc844d6a294f6403ddf7", null ],
-        [ "MX", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a5a69b683562bdb1a70b5eef64b1fd715", null ],
-        [ "TXT", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8aeee111395b529233f18be5c075163174", null ],
-        [ "AAAA", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a9aa11d437069f6ff3b810d6bc3f77467", null ],
-        [ "SRV", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a202e1e93f74afadffc2f099536a978ce", null ]
+      [ "traceroute_hop", "structicmp__socket_1_1traceroute__hop.html", [
+        [ "address", "structicmp__socket_1_1traceroute__hop.html#af415cdec4d92a7280940fbd2c9941ee6", null ],
+        [ "reached", "structicmp__socket_1_1traceroute__hop.html#a21b126242c47e88372efbb157bfe0cee", null ],
+        [ "rtt", "structicmp__socket_1_1traceroute__hop.html#a625ac742b839eaae6c0d6f8a0e42f54f", null ]
       ] ],
-      [ "dns_record", "structdns__record.html#ada4e684a691e195b704dec1fe2020b18", null ],
-      [ "dns_record", "structdns__record.html#a45df17017ee83165712be7227cb6257f", null ],
-      [ "class_type", "structdns__record.html#a13bbf6573e1f8ef7490e8e59b08ed0d3", null ],
-      [ "data", "structdns__record.html#a58ce6de88c43819be128d7336752d9ed", null ],
-      [ "name", "structdns__record.html#ad21c4f21dcec4c34446903e929b17a50", null ],
-      [ "ttl", "structdns__record.html#adc15bc830564c38b904b792ce4331a57", null ],
-      [ "type", "structdns__record.html#ad71d9704e49d96e8bfac0996454c9bf3", null ]
-    ] ],
-    [ "dns_query_result", "structdns__query__result.html", [
-      [ "is_success", "structdns__query__result.html#ae39bf03cc263fb122efa0a4dca000f40", null ],
-      [ "additional", "structdns__query__result.html#a9beeefa6c0e7822b9a1916b7bd82c18b", null ],
-      [ "answers", "structdns__query__result.html#ace6a20317ab90fc47fec30886b654701", null ],
-      [ "authorities", "structdns__query__result.html#a48baecffcfa14836de44df9058039fc4", null ],
-      [ "query_time", "structdns__query__result.html#a21c9236b9cc4ee8242ecb639d7a45488", null ],
-      [ "recursive_available", "structdns__query__result.html#a8587f8d8175665904ba91f70d161025e", null ],
-      [ "response_code", "structdns__query__result.html#abe18f5e616b4ee16ed33aa2e73a71fc2", null ],
-      [ "truncated", "structdns__query__result.html#a59916cb58111bdf5191b7a09170411ce", null ]
-    ] ],
-    [ "dns_header", "structdns__header.html", [
-      [ "ancount", "structdns__header.html#aca00e490df7ef4c00d2f8dc387c99a5d", null ],
-      [ "arcount", "structdns__header.html#a7b840ee6675cd6935d77f2c89a6f263e", null ],
-      [ "flags", "structdns__header.html#ad3a2139a62129802c538eb699075e7d9", null ],
-      [ "id", "structdns__header.html#a3991d193b0f2a5353c6065d30ad33aa3", null ],
-      [ "nscount", "structdns__header.html#ab59defbc4f2602673c85b1ff32c988c0", null ],
-      [ "qdcount", "structdns__header.html#a4f0ead2328427239ca074b09ae581a55", null ]
-    ] ],
-    [ "ssl_context", "classssl__context.html", [
-      [ "ssl_context", "classssl__context.html#a66547e0420877dfe3109b5c1ebab7437", null ],
-      [ "is_valid", "classssl__context.html#a578442e1760cc9d136347c462611fedf", null ],
-      [ "load_certificate", "classssl__context.html#a22215336ea11c5521366581dec47543f", null ],
-      [ "load_certificate_from_memory", "classssl__context.html#aec13982e180a000537a06105e556ff28", null ],
-      [ "load_verify_locations", "classssl__context.html#af745272315450d6031ef5c672a6e9129", null ],
-      [ "native_handle", "classssl__context.html#aa5b41ad6a5228d7eaeab06dd4d8a33d1", null ],
-      [ "operator bool", "classssl__context.html#a033f21fdfb92c225f5c2dd92a6c1a4ef", null ],
-      [ "require_client_certificate", "classssl__context.html#aa9de73f40d992c24c2e31946a3c35cc1", null ],
-      [ "set_alpn_protos", "classssl__context.html#ab8aad3c116c70eb8fd80c1eae3ebb1ed", null ],
-      [ "set_cipher_list", "classssl__context.html#a4edec8d73877dcbe5e94b2255ff8b940", null ],
-      [ "set_ciphersuites", "classssl__context.html#af64a00239c7cd3d3de7cc91109462f42", null ],
-      [ "set_default_options", "classssl__context.html#ad03da982750376dc73a460eec7498a10", null ],
-      [ "set_options", "classssl__context.html#a716bbb717d41d3f7755c61108b1858b4", null ],
-      [ "set_session_cache_size", "classssl__context.html#a2d95fd9f424a34d0f56af203fca50c53", null ],
-      [ "set_timeout", "classssl__context.html#a9ef857acc354c1ed524fd8d45260b764", null ],
-      [ "set_verify_mode", "classssl__context.html#afc476ac46905f6fe25805d871900542a", null ]
-    ] ],
-    [ "ssl_stream", "classssl__stream.html", [
-      [ "native_handle_type", "classssl__stream.html#afc24338af0bfb2d13cc9b8b900fadbae", null ],
-      [ "ssl_stream", "classssl__stream.html#ab02e87e9e16e91897e6cff777bb29186", null ],
-      [ "ssl_stream", "classssl__stream.html#a08bc78c38c699630bdfd08492fabadfd", null ],
-      [ "accept", "classssl__stream.html#a8d50c0caaf302839aba7a8989a3fa875", null ],
-      [ "close", "classssl__stream.html#a5d919c932bf06d932d0a36dd70faad71", null ],
-      [ "connect", "classssl__stream.html#a33c58ee785d4e58e80eaf07e73e27217", null ],
-      [ "get_cipher_name", "classssl__stream.html#ad3b9dc0ed64e92577c8bb4ba3220c583", null ],
-      [ "get_peer_certificate", "classssl__stream.html#a4cc5b0f74efe484cab6fc0913356c862", null ],
-      [ "get_version", "classssl__stream.html#aa1eace8edd10d671c001391baf0b6a48", null ],
-      [ "is_valid", "classssl__stream.html#a32cc653e8ae7e2eb2dca776a645786d4", null ],
-      [ "last_error", "classssl__stream.html#a094d5e2e161252b4b063939239fef4ee", null ],
-      [ "native_handle", "classssl__stream.html#adb6c7c529d3fc36ee21e27846232f2ac", null ],
-      [ "operator bool", "classssl__stream.html#a497091962274d5219c13b422e0254b50", null ],
-      [ "pending", "classssl__stream.html#a8efce66ec363831e7603e577359f21c6", null ],
-      [ "read", "classssl__stream.html#a4725342e2cbd45353601ea030135487a", null ],
-      [ "read_all", "classssl__stream.html#adc3dfd5b9f969e5a3d5e646c3ae11994", null ],
-      [ "release", "classssl__stream.html#aa1af4e284b6497eb7fdfe79349f6333a", null ],
-      [ "reset", "classssl__stream.html#ad2cdaf860512de64970b322f71be7e6e", null ],
-      [ "set_fd", "classssl__stream.html#a9f63a0a0a510ba7bc733bce6b29fc0b8", null ],
-      [ "set_sni_hostname", "classssl__stream.html#a1d4f7de8ebab2a49cbf631bcdfdf217e", null ],
-      [ "verify_peer", "classssl__stream.html#a39c9de4aa12661b5b908befaa74410cb", null ],
-      [ "write", "classssl__stream.html#aee26c635332fe8806177a5cf52b7a7b4", null ],
-      [ "write_all", "classssl__stream.html#a4ae572dd7e946624dcb3c2048251cdda", null ]
-    ] ],
-    [ "arp", "classarp.html", [
-      [ "arp", "classarp.html#a3192beec9276a483c7ca61d60f648e9f", null ],
-      [ "~arp", "classarp.html#a16f37dcda8efd02c423420d19aba74e5", null ],
-      [ "close", "classarp.html#a4bd0d2c3b08b49ed9129f592fa87d963", null ],
-      [ "open", "classarp.html#ad0ca5dd4ac27dd76ad093f168ceef946", null ],
-      [ "resolve", "classarp.html#a3d96f77c31db48d64ae720c33921f572", null ]
-    ] ],
-    [ "ip_address", "classip__address.html", [
-      [ "address_type", "classip__address.html#a3b98397bf02b3c92bebf8b501b8bfe19", null ],
-      [ "ip_address", "classip__address.html#ac938566448641af3ba1ab6942fca0486", null ],
-      [ "ip_address", "classip__address.html#a80998e8dc8280df952852cffeea393fa", null ],
-      [ "ip_address", "classip__address.html#ae4239b7f69e83b99f451956238b92980", null ],
-      [ "address", "classip__address.html#a51cfbae6deb6526233b8876a9dd47267", null ],
-      [ "data", "classip__address.html#a14ad4d7d5a9fd7243b31a14e59658c61", null ],
-      [ "data", "classip__address.html#a310418dfdef3f8a71f0dfb2ac7142d9a", null ],
-      [ "family", "classip__address.html#a93c640535a6e7d1ec3aa7d3b1befdbb5", null ],
-      [ "is_ipv4", "classip__address.html#a32e935243923f451085130190d79a8d8", null ],
-      [ "is_ipv6", "classip__address.html#a823f8b51cfec4e2ebfcca58f833e4b10", null ],
-      [ "is_valid", "classip__address.html#a139ea4cbc9be4e23f04ae1b08b15539f", null ],
-      [ "operator!=", "classip__address.html#ac514438653e8904c8d3f24a4c08e5740", null ],
-      [ "operator==", "classip__address.html#a214f612df0a95977798fbeb19dd7d266", null ],
-      [ "port", "classip__address.html#a6f4063b742011d1f94d7721630b725f8", null ],
-      [ "size", "classip__address.html#a00979f07fd05c81607664b1152b76b28", null ],
-      [ "to_string", "classip__address.html#adf6d7964b4d29e962340254a36277f16", null ]
-    ] ],
-    [ "mac_address", "classmac__address.html", [
-      [ "bytes_type", "classmac__address.html#a016a26b0735f132f3c0853ed48fec549", null ],
-      [ "mac_address", "classmac__address.html#aa1ded32d3a7d520511d240cf937373b0", null ],
-      [ "mac_address", "classmac__address.html#a71cc5e117db9c63945c421ee6d49a2e8", null ],
-      [ "mac_address", "classmac__address.html#a0816a2699d4bd2f57e7bdbd4edaa0dc9", null ],
-      [ "bytes", "classmac__address.html#a6bc375130c7e39aaee55e3e8c8696bf6", null ],
-      [ "operator!=", "classmac__address.html#a9f59af4eada3c079455bec9c007f7f05", null ],
-      [ "operator==", "classmac__address.html#a5f514425d18e072104db69c298e3e74a", null ],
-      [ "to_string", "classmac__address.html#aa1edbd710bc07f3bdb2d2038be4e0500", null ]
-    ] ],
-    [ "ports", "structports.html", [
-      [ "raw", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8", [
-        [ "undef", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ab5e2128a715d5132f2c9cccfda494a8f", null ],
-        [ "http", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a8c3ac5cd5db2501202cd6d3fafe18cc2", null ],
-        [ "ws", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c", null ],
-        [ "https", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed", null ],
-        [ "wss", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c", null ],
-        [ "ftp", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ae4fe1286c69b67678413921ff7556f10", null ],
-        [ "tftp", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af75e5ea16e3962a4f63feea89b0ff573", null ],
-        [ "ssh", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a313e2ebd44b846ee8dae7459c1d447a3", null ],
-        [ "telnet", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ae5588173ed4bea493048e6d5d87a9271", null ],
-        [ "smtp", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05", null ],
-        [ "dns", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ac58c1dba72d699d01322e9f08ec47861", null ],
-        [ "pop3", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a6aa35b0cf0169ddfeaeb3bfd74284b79", null ],
-        [ "imap", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a6649a8c8c111de3ac78f2311c81ccc1b", null ]
+      [ "icmp_type", "classicmp__socket.html#a3602a3e64eabdf93cf60088a785803fc", [
+        [ "ICMP_ECHO_REPLY", "classicmp__socket.html#a3602a3e64eabdf93cf60088a785803fcaee15c818f098e056c2b3014547f996ed", null ],
+        [ "ICMP_ECHO_REQUEST", "classicmp__socket.html#a3602a3e64eabdf93cf60088a785803fcaad778ab52bf39bd7c027d9a55fb4a1f8", null ],
+        [ "ICMP_TIME_EXCEEDED", "classicmp__socket.html#a3602a3e64eabdf93cf60088a785803fcaeb63a66662e6a29d8be766d64f534963", null ]
       ] ],
-      [ "ports", "structports.html#aed7286a23ab2d5be7c08b47807fa5eb0", null ],
-      [ "ports", "structports.html#ad16ca5a958a7bac673c09ae68918d311", null ],
-      [ "ports", "structports.html#a9971f3b73413357e32b44e4229062f26", null ],
-      [ "operator bool", "structports.html#abd4092003d11db99eda911f01d242bc8", null ],
-      [ "operator uint16_t", "structports.html#a88dc0ead0b9d0c484727d7a04d12f6f0", null ],
-      [ "to_string", "structports.html#ad216c705c2904893b0ff3331ca5f88ab", null ],
-      [ "to_string", "structports.html#ae098763e06d7db0c2b1c5be30c09d5dd", null ],
-      [ "port", "structports.html#ac83896c19af3451bbd0ce66a1b9a233e", null ]
+      [ "icmp_socket", "classicmp__socket.html#aac2cac2399e8a99f0b5ba883d800ddeb", null ],
+      [ "icmp_socket", "classicmp__socket.html#a44e15ef51b407c62986da1db429c56f2", null ],
+      [ "open", "classicmp__socket.html#a5e22d67c0aa794d751b4bee655c762af", null ],
+      [ "ping", "classicmp__socket.html#a2635f1da346bb2d7473d692cd960497f", null ],
+      [ "traceroute", "classicmp__socket.html#a5d7a7d636558ba6fb91d5d4e1ff2811d", null ]
     ] ],
-    [ "url", "structurl.html", [
-      [ "url", "structurl.html#ab48a666ee96b8c6375e699cdf090efe3", null ],
-      [ "is_valid", "structurl.html#a01947768a66022a2fd9604dd1bf5bcf4", null ],
-      [ "to_string", "structurl.html#abde4c78bb02a4338885cb5323a7f1ea4", null ],
-      [ "fragment", "structurl.html#a89602c93ef7655cbcb4969d2f7af7a1b", null ],
-      [ "host", "structurl.html#a32706de92e065e4dad5e0f9944211cc6", null ],
-      [ "path", "structurl.html#a8ea57220960dca945a1b8083920f9950", null ],
-      [ "port", "structurl.html#a28788980da3ace09bf314caa690db3ec", null ],
-      [ "query", "structurl.html#a1b90e78e0ab31835db6f42d399b3415e", null ],
-      [ "scheme", "structurl.html#af55eb2e3fc8b82b6869cc1a006fd7b4e", null ]
+    [ "ip_header", "structip__header.html", [
+      [ "checksum", "structip__header.html#a9d31b15783d26657a395409096c4a7fb", null ],
+      [ "dest_addr", "structip__header.html#ad5ac81eb58c24fe469776774656ab1bc", null ],
+      [ "frag_off", "structip__header.html#a16cd0c5b6490675dd2f664e1f114056a", null ],
+      [ "id", "structip__header.html#acdd6df1c36489e1eeb023ffceba19f9b", null ],
+      [ "ihl", "structip__header.html#ac9e80c1c0657ab8ac9518d450797a6be", null ],
+      [ "protocol", "structip__header.html#a21da8e6419fd42d1b41eb252d0d957f0", null ],
+      [ "src_addr", "structip__header.html#aae09c570dd68d80b20d5e765adb4fa1e", null ],
+      [ "tos", "structip__header.html#a4b8fd75fcf4a0fba56250ecd9fa37ebf", null ],
+      [ "total_len", "structip__header.html#ace5f4d34bd1a5acb66915756908669e4", null ],
+      [ "ttl", "structip__header.html#a166f6113adf8a8a9a741b08198575aee", null ],
+      [ "version", "structip__header.html#aa30d424e1ebdcca84cf42cac98383c29", null ]
     ] ],
-    [ "dns_opcode", "group___network.html#ga973c6b85131920f4de96d7db1206a51b", [
-      [ "dns_opcode::QUERY", "group___network.html#gga973c6b85131920f4de96d7db1206a51ba5662080872eece1e1ceeec5750198283", null ],
-      [ "dns_opcode::IQUERY", "group___network.html#gga973c6b85131920f4de96d7db1206a51ba418263145671bab1c1942979a2f30355", null ],
-      [ "dns_opcode::STATUS", "group___network.html#gga973c6b85131920f4de96d7db1206a51ba5f241c8c8f985b3c51e05d39cf030f4c", null ],
-      [ "dns_opcode::NOTIFY", "group___network.html#gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761", null ],
-      [ "dns_opcode::UPDATE", "group___network.html#gga973c6b85131920f4de96d7db1206a51ba15a8022d0ed9cd9c2a2e756822703eb4", null ]
+    [ "ip_socket", "classip__socket.html", [
+      [ "ip_socket", "classip__socket.html#aaae0820ef1814fdd2299e646e7ce0b88", null ],
+      [ "ip_socket", "classip__socket.html#a8a478205847df7ca0529f15ca8ce50b8", null ],
+      [ "~ip_socket", "classip__socket.html#a4a1d2bcfb15b0d319defef1c9da3c0d4", null ],
+      [ "address_family", "classip__socket.html#a981aa1544d7794182f65c1764fc83443", null ],
+      [ "close", "classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1", null ],
+      [ "connect", "classip__socket.html#a50186a110e9b4e5c67aac5a23e021ace", null ],
+      [ "is_ipv4", "classip__socket.html#a84a515031395f20e2365e46cfabd9fdb", null ],
+      [ "is_ipv6", "classip__socket.html#a33e8a286462c74c4c4eb4df045dac507", null ],
+      [ "family_", "classip__socket.html#a5bef8064a2f2e096f28993a0f6542c87", null ]
     ] ],
-    [ "dns_query", "group___network.html#ga12a6552e04528df27737709ea060c9d1", [
-      [ "dns_query::INTERNET", "group___network.html#gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2", null ],
-      [ "dns_query::CHAOS", "group___network.html#gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7", null ],
-      [ "dns_query::HESIOD", "group___network.html#gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee", null ],
-      [ "dns_query::ANY", "group___network.html#gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f", null ]
+    [ "smtp_message", "structsmtp__message.html", [
+      [ "bcc", "structsmtp__message.html#afd9b01b7cad63e664e41f3cd1d143d18", null ],
+      [ "body", "structsmtp__message.html#a526d9a80b9ae2a75ec1ca257866182d8", null ],
+      [ "cc", "structsmtp__message.html#a58fe8852016839d8953dd73414174583", null ],
+      [ "extra_headers", "structsmtp__message.html#a07c52850f665cb8346b4159ec7ec42e2", null ],
+      [ "from", "structsmtp__message.html#abbdf534a3d79770700b06b77197156d5", null ],
+      [ "is_html", "structsmtp__message.html#a85f459893e45f59ed4d529953f62c21f", null ],
+      [ "subject", "structsmtp__message.html#a785631f3d9af6aa871d32f0aada60be2", null ],
+      [ "to", "structsmtp__message.html#ae2106f6dfab0ac49c0d8e49e3f37be2f", null ]
     ] ],
-    [ "dns_response", "group___network.html#ga4512397ee6460c3c286f1220692348c7", [
-      [ "dns_response::NON_ERROR", "group___network.html#gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21", null ],
-      [ "dns_response::FORMAT_ERROR", "group___network.html#gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862", null ],
-      [ "dns_response::SERVER_FAILURE", "group___network.html#gga4512397ee6460c3c286f1220692348c7af3be33aa3dbdb9c86e55775e9c67ffb5", null ],
-      [ "dns_response::NAME_ERROR", "group___network.html#gga4512397ee6460c3c286f1220692348c7af8776b19ae67c635b8a9dff25f1fae8d", null ],
-      [ "dns_response::NOT_IMPLEMENTED", "group___network.html#gga4512397ee6460c3c286f1220692348c7a3e860a081575fc82cc7b6ed2ca602947", null ],
-      [ "dns_response::REFUSED", "group___network.html#gga4512397ee6460c3c286f1220692348c7a392253eaea22aafdb199bc238bafc082", null ]
+    [ "smtp_socket", "classsmtp__socket.html", [
+      [ "response", "structsmtp__socket_1_1response.html", [
+        [ "is_success", "structsmtp__socket_1_1response.html#ada81b7a63059f2999ba7b913595eb896", null ],
+        [ "code", "structsmtp__socket_1_1response.html#a6c20183bd9127b1e76dea425d3a66906", null ],
+        [ "message", "structsmtp__socket_1_1response.html#ac162b6363e835d8e81ed3a70856d1371", null ]
+      ] ],
+      [ "starttls_result", "structsmtp__socket_1_1starttls__result.html", [
+        [ "cipher_name", "structsmtp__socket_1_1starttls__result.html#afb1ed46aee61cc62fb878774ace7f6fc", null ],
+        [ "peer_verified", "structsmtp__socket_1_1starttls__result.html#a3faac4f005d1d3dcb9685dfc0a48f7bb", null ],
+        [ "tls_version", "structsmtp__socket_1_1starttls__result.html#aa4cc850942eaca286ce307c54597a108", null ],
+        [ "upgraded", "structsmtp__socket_1_1starttls__result.html#a3cf279b670c884fdd65e42d954b904ee", null ]
+      ] ],
+      [ "auth_method", "classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95", [
+        [ "none", "classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+        [ "plain", "classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95aac7938d40cfc2307e2bf325d28e7884e", null ],
+        [ "login", "classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da", null ]
+      ] ],
+      [ "tls_mode", "classsmtp__socket.html#abb07d7f04c19a03d2270597e95c526f6", [
+        [ "none", "classsmtp__socket.html#abb07d7f04c19a03d2270597e95c526f6a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+        [ "implicit", "classsmtp__socket.html#abb07d7f04c19a03d2270597e95c526f6acd1fed5e3277af3a9210b25059d86ff9", null ],
+        [ "starttls", "classsmtp__socket.html#abb07d7f04c19a03d2270597e95c526f6a637dd61b00a5ae25ea8d50639f100e7a", null ]
+      ] ],
+      [ "smtp_socket", "classsmtp__socket.html#ab959dd3f3f1ecdf02657851c582c4d17", null ],
+      [ "smtp_socket", "classsmtp__socket.html#a861843c0e89add1a71153279dc5e6e39", null ],
+      [ "authenticate", "classsmtp__socket.html#a09c1b91cab9c5b57da9d223f096c8638", null ],
+      [ "cipher_name", "classsmtp__socket.html#a58c50adff38004816449ff620e53200c", null ],
+      [ "connect", "classsmtp__socket.html#ab93ec4d19093fbe039d9f5d8e570ebab", null ],
+      [ "connect", "classsmtp__socket.html#a57b58cc49af6f9c9d20a3c256564db9c", null ],
+      [ "disconnect", "classsmtp__socket.html#a401b3422eab88fc6815a258dcd806442", null ],
+      [ "is_connected", "classsmtp__socket.html#a47e5c2bb86d660d89f3bb4d06b95721d", null ],
+      [ "is_tls_active", "classsmtp__socket.html#ae28f42f9d3e6fc3f9768feb8a688af6e", null ],
+      [ "noop", "classsmtp__socket.html#a2ed8dbf9c70d89a0ddcf4f503047cffe", null ],
+      [ "send", "classsmtp__socket.html#a8061b0749c18619a5347903ac858fe5b", null ],
+      [ "starttls", "classsmtp__socket.html#a569696fbcd1afdd62317296fc48e1a43", null ],
+      [ "tls_version", "classsmtp__socket.html#a9ac13685b9444a95d7f163aa4e9c2ce3", null ],
+      [ "verify_peer", "classsmtp__socket.html#a4a85a619b234e77c35d8b574d92986e7", null ]
     ] ],
-    [ "ssl_method", "group___network.html#ga4012ce4e3211cb41f69956042abba0c8", [
-      [ "ssl_method::TLS_SERVER", "group___network.html#gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387", null ],
-      [ "ssl_method::TLS_CLIENT", "group___network.html#gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510", null ],
-      [ "ssl_method::TLS_SERVER_DTLS", "group___network.html#gga4012ce4e3211cb41f69956042abba0c8ae63bbbfff9c05482d04d15b9734b6426", null ],
-      [ "ssl_method::TLS_CLIENT_DTLS", "group___network.html#gga4012ce4e3211cb41f69956042abba0c8a20661d21cf4a40f3d04fac7ca9b4ca3b", null ]
+    [ "socket_base", "classsocket__base.html", [
+      [ "native_handle_type", "classsocket__base.html#a3bd12bce8fd25b7d09ad9294bf16e664", null ],
+      [ "socket_base", "classsocket__base.html#a94270ff7405e94a47c1d4681c7186027", null ],
+      [ "socket_base", "classsocket__base.html#a285abeec7b22821af15b2eea0844aaf3", null ],
+      [ "socket_base", "classsocket__base.html#ac74cda861112114c8d171f323c4e8e99", null ],
+      [ "~socket_base", "classsocket__base.html#ad718ca0872f7a951b40b00da45151d10", null ],
+      [ "bind", "classsocket__base.html#a576e748fadfec602f083eb35c602c003", null ],
+      [ "close", "classsocket__base.html#a5ca6bcc243acaaa75ab86a1e3316a996", null ],
+      [ "get_option", "classsocket__base.html#aef8dd076d9cadcea38fa14252718466c", null ],
+      [ "is_open", "classsocket__base.html#a6187ffba6859cc29fcf0c0b08916dcca", null ],
+      [ "listen", "classsocket__base.html#aa1f872262e5d3464c77ee96de7550df8", null ],
+      [ "local_endpoint", "classsocket__base.html#a698bf7147749c5f0bbfd0a906875eb5e", null ],
+      [ "native_handle", "classsocket__base.html#a7a733151fa76e8e33ebd6d637c06e0fd", null ],
+      [ "open", "classsocket__base.html#ac45ca9c8151fc981e49861f5e85b0434", null ],
+      [ "operator bool", "classsocket__base.html#ade45e5ade072d22d377f6582660a872e", null ],
+      [ "operator=", "classsocket__base.html#ae6442c91cf368fa6c9781f3603a31e8c", null ],
+      [ "release", "classsocket__base.html#ada299429136c0d648e5f8bb59635e9db", null ],
+      [ "remote_endpoint", "classsocket__base.html#a3af835aab3dbb6e477c9833184437b62", null ],
+      [ "set_keep_alive", "classsocket__base.html#a6059faa2b63d09c36188a5aee9b64b83", null ],
+      [ "set_nonblocking", "classsocket__base.html#a7189d507bfa09539dd7fd3abc4d85a34", null ],
+      [ "set_option", "classsocket__base.html#a243eecfa633156956f8eef37d642af6b", null ],
+      [ "set_receive_buffer_size", "classsocket__base.html#aefd6e08bf2d87b655bf01764ee573a48", null ],
+      [ "set_receive_timeout", "classsocket__base.html#ad854cadd121de51d693b0e9182f6dc15", null ],
+      [ "set_reuse_address", "classsocket__base.html#a259bcf1d2f08be76c9c725508dab5f64", null ],
+      [ "set_reuse_port", "classsocket__base.html#ac0a415eba84444ec1e432cd2b5dc600a", null ],
+      [ "set_send_buffer_size", "classsocket__base.html#a7126487c99a283ff1eb6b3475893e280", null ],
+      [ "set_send_timeout", "classsocket__base.html#aedb9dd6b9db120034acabf6ba0da3408", null ],
+      [ "set_tcp_nodelay", "classsocket__base.html#a0c38ed84a8f68fe6a576258f5de32312", null ],
+      [ "shutdown_both", "classsocket__base.html#a40ba63982c83f6427f41e5dddd5effd9", null ],
+      [ "shutdown_receive", "classsocket__base.html#a6562d2f9ca892b9f7e4d979e604ab02d", null ],
+      [ "shutdown_send", "classsocket__base.html#a562c8bfb47f9ba974950ae5e50753a10", null ],
+      [ "try_open", "classsocket__base.html#a0e1b1431d88934a2de83da39b3ece88c", null ],
+      [ "fd_", "classsocket__base.html#aaab1a3ca15c17e54f29e2b85c0a05759", null ]
+    ] ],
+    [ "udp_socket", "classudp__socket.html", [
+      [ "udp_socket", "classudp__socket.html#a328c2c1a4f87834a2f7648274d9eb77c", null ],
+      [ "open", "classudp__socket.html#ac897a23f580e28d04846182d9bf8a54d", null ],
+      [ "receive", "classudp__socket.html#a4410530e9e9c734eff53bc64617eeefb", null ],
+      [ "receive_from", "classudp__socket.html#a37b55826566b881ef590f3e80c24bcb5", null ],
+      [ "send", "classudp__socket.html#ab322f003a3a5ffaa2bf3e07fcbf8e79c", null ],
+      [ "send_to", "classudp__socket.html#a1c4454c1ec0b9d3038cce20e6f308c2e", null ]
     ] ]
 ];

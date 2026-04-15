@@ -153,6 +153,97 @@ template&lt;typename Iterator&gt; </td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>堆算法的实现 </p>
+<p>堆是一种满足堆性质的完全二叉树，常用于实现优先队列和堆排序。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下数据结构相关标准规范：</p>
+<p><b>算法复杂度标准参考：</b></p><ul>
+<li>**ISO/IEC 14882:2020 §25.8.6**：堆操作复杂度要求</li>
+</ul>
+<p><b>相关数据结构与算法文献：</b></p><ul>
+<li>**J.W.J. Williams (1964)**：Algorithm 232 — Heapsort（堆排序原始论文） Communications of the ACM, 7(6): 347-348</li>
+<li>**R.W. Floyd (1964)**：Algorithm 245 — Treesort 3（堆调整优化算法） Communications of the ACM, 7(12): 701</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="heap_properties"></a>
+堆性质定义</h1>
+<p>根据 C++ 标准，堆是满足以下性质的范围 <span class="tt">[first, last)</span>：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">堆类型  </th><th class="markdownTableHeadNone">比较函数要求  </th><th class="markdownTableHeadNone">性质描述  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">最大堆  </td><td class="markdownTableBodyNone">comp(a, b) 返回 true 表示 a &lt; b  </td><td class="markdownTableBodyNone">父节点不小于子节点  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">最小堆  </td><td class="markdownTableBodyNone">comp(a, b) 返回 true 表示 a &gt; b  </td><td class="markdownTableBodyNone">父节点不大于子节点  </td></tr>
+</table>
+<p>**数学表示**：</p><ul>
+<li>对于索引 i，左子节点索引：2i + 1</li>
+<li>对于索引 i，右子节点索引：2i + 2</li>
+<li>对于索引 i，父节点索引：(i - 1) / 2（整数除法）</li>
+</ul>
+<p>**堆性质公式**（最大堆）：</p><ul>
+<li>comp(*(first + parent), *(first + child)) == false</li>
+<li>即父节点不小于子节点</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="algorithm_complexity"></a>
+算法复杂度</h1>
+<p>根据 ISO/IEC 14882:2020 §25.8，各堆操作的时间复杂度如下：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">函数  </th><th class="markdownTableHeadNone">时间复杂度  </th><th class="markdownTableHeadNone">比较次数上限  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">创建堆  </td><td class="markdownTableBodyNone">make_heap  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">最多 3n 次比较  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">插入元素  </td><td class="markdownTableBodyNone">push_heap  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">最多 log(n) 次比较  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">删除堆顶  </td><td class="markdownTableBodyNone">pop_heap  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">最多 2×log(n) 次比较  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">堆排序  </td><td class="markdownTableBodyNone">sort_heap  </td><td class="markdownTableBodyNone">O(n log n)  </td><td class="markdownTableBodyNone">最多 n×log(n) 次比较  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">验证堆  </td><td class="markdownTableBodyNone">is_heap  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">最多 n 次比较  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">查找违规元素  </td><td class="markdownTableBodyNone">is_heap_until  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">最多 n 次比较  </td></tr>
+</table>
+<p>其中 n = last - first。</p>
+<h1 class="doxsection"><a class="anchor" id="floyd_optimization"></a>
+Floyd 堆调整优化</h1>
+<p>本实现采用 Floyd 的堆调整算法（Algorithm 245），其核心思想是：</p><ol type="1">
+<li>从空洞位置向下筛选，找到合适的位置</li>
+<li>从找到的位置向上调整，放入待插入的元素</li>
+</ol>
+<p>相比传统方法，Floyd 算法减少了每次迭代中的元素交换次数， 将 <span class="tt"><a class="el" href="#gad1cbf5c3d9c1780e1da107267de93d21" title="向堆中插入元素">push_heap</a></span> 操作的比较次数从最多 2×log(n) 优化为最多 log(n) + 1。</p>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">堆类型  </td><td class="markdownTableBodyNone">二叉堆（完全二叉树）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">索引基  </td><td class="markdownTableBodyNone">0-based（C 风格数组索引）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">迭代器要求  </td><td class="markdownTableBodyNone">随机访问迭代器（RandomAccessIterator）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">比较器要求  </td><td class="markdownTableBodyNone">严格弱序（Strict Weak Ordering）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">稳定性  </td><td class="markdownTableBodyNone">不稳定（不保证相等元素的相对顺序）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">内存使用  </td><td class="markdownTableBodyNone">原地操作（O(1) 额外空间）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="comparison_strictness"></a>
+比较器的严格弱序要求</h1>
+<p>根据 C++ 标准 §25.7，比较函数 comp 必须满足严格弱序（Strict Weak Ordering）：</p><ul>
+<li>非自反性：comp(a, a) == false</li>
+<li>非对称性：若 comp(a, b) == true，则 comp(b, a) == false</li>
+<li>传递性：若 comp(a, b) == true 且 comp(b, c) == true，则 comp(a, c) == true</li>
+<li>等价的传递性：若 !comp(a, b) &amp;&amp; !comp(b, a)，则 a 和 b 等价</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>本实现采用 Floyd 的优化堆调整算法，在插入和删除操作中减少元素移动次数。 所有操作均为原地操作，不需要额外的内存分配。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>堆操作要求输入范围满足堆性质（<span class="tt"><a class="el" href="#ga8beeb5a9c17ae71c242c05a60f312ea2" title="创建堆">make_heap</a></span> 和 <span class="tt"><a class="el" href="#gad1cbf5c3d9c1780e1da107267de93d21" title="向堆中插入元素">push_heap</a></span> 的特定范围除外）。 对不满足堆性质的范围调用 <span class="tt"><a class="el" href="#ga13c0e8fb3ca2d9f76d823a800c283dc9" title="删除堆顶元素">pop_heap</a></span> 或 <span class="tt"><a class="el" href="#ga6261d7e0da24fa3675dd248b9da5334f" title="将堆转换为有序序列">sort_heap</a></span> 会导致未定义行为。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://en.cppreference.com/w/cpp/algorithm#Heap_operations">https://en.cppreference.com/w/cpp/algorithm#Heap_operations</a> </dd>
+<dd>
+<a href="https://dl.acm.org/doi/10.1145/512274.512284（Floyd）">https://dl.acm.org/doi/10.1145/512274.512284（Floyd）</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Binary_heap">https://en.wikipedia.org/wiki/Binary_heap</a> </dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="ga36c69d89ab0434ee867f42a56a075e7d" name="ga36c69d89ab0434ee867f42a56a075e7d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga36c69d89ab0434ee867f42a56a075e7d">&#9670;&#160;</a></span>adjust_heap()</h2>
@@ -211,9 +302,9 @@ template&lt;typename Iterator, typename T, typename Compare&gt; </div>
 </dl>
 <p>在指定位置向下调整堆，然后在调整后的位置向上调整。 用于删除堆顶元素后的堆调整。 </p>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00184">184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00264">264</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00206">adjust_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00312">make_heap()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00211">partial_sort_copy()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00286">adjust_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00392">make_heap()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00325">partial_sort_copy()</a>.</p>
 
 </div>
 </div>
@@ -254,9 +345,9 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果范围是有效堆则返回 true，否则返回 false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00093">93</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00173">173</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00043">is_heap_until()</a>.</p>
+<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00123">is_heap_until()</a>.</p>
 
 </div>
 </div>
@@ -304,9 +395,9 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果范围是有效堆则返回 true，否则返回 false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00081">81</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00161">161</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00043">is_heap_until()</a>.</p>
+<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00123">is_heap_until()</a>.</p>
 
 </div>
 </div>
@@ -348,9 +439,9 @@ template&lt;typename Iterator&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>破坏堆性质的第一个元素的迭代器，如果范围是有效堆则返回 last</dd></dl>
 <p>默认使用小于比较，创建最大堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00067">67</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00147">147</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00043">is_heap_until()</a>.</p>
+<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00123">is_heap_until()</a>.</p>
 
 </div>
 </div>
@@ -402,11 +493,11 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 <li>对于最小堆，父节点不大于子节点。 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00043">43</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00123">123</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="invoke_8hpp_source.html#l00396">is_invocable_v</a> , 以及 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00093">is_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00081">is_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00067">is_heap_until()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00173">is_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00161">is_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00147">is_heap_until()</a>.</p>
 
 </div>
 </div>
@@ -454,11 +545,11 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 </dl>
 <p>将范围 [first, last) 重新排列，使其满足堆性质。 从最后一个非叶子节点开始，向前调整每个节点。 </p>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00312">312</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00392">392</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00184">adjust_heap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00264">adjust_heap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00335">make_heap()</a>, <a class="el" href="sort_8hpp_source.html#l00169">partial_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00211">partial_sort_copy()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00415">make_heap()</a>, <a class="el" href="sort_8hpp_source.html#l00283">partial_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00325">partial_sort_copy()</a>.</p>
 
 </div>
 </div>
@@ -506,9 +597,9 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 </dl>
 <p>将堆的最大（或最小）元素移动到 last-1 位置， 并使范围 [first, last-1) 成为有效堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00258">258</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00338">338</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="priority__queue_8hpp_source.html#l00218">priority_queue&lt; T, Sequence, Compare &gt;::pop()</a>, <a class="el" href="heap_8hpp_source.html#l00270">pop_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00286">sort_heap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="priority__queue_8hpp_source.html#l00218">priority_queue&lt; T, Sequence, Compare &gt;::pop()</a>, <a class="el" href="heap_8hpp_source.html#l00350">pop_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00366">sort_heap()</a>.</p>
 
 </div>
 </div>
@@ -556,9 +647,9 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 </dl>
 <p>假设范围 [first, last-1) 是有效堆，将 *(last-1) 插入堆中。 调用后范围 [first, last) 是有效堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00154">154</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00234">234</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="priority__queue_8hpp_source.html#l00231">priority_queue&lt; T, Sequence, Compare &gt;::emplace()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00197">priority_queue&lt; T, Sequence, Compare &gt;::push()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00208">priority_queue&lt; T, Sequence, Compare &gt;::push()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00165">push_heap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="priority__queue_8hpp_source.html#l00231">priority_queue&lt; T, Sequence, Compare &gt;::emplace()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00197">priority_queue&lt; T, Sequence, Compare &gt;::push()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00208">priority_queue&lt; T, Sequence, Compare &gt;::push()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00245">push_heap()</a>.</p>
 
 </div>
 </div>
@@ -606,11 +697,11 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 </dl>
 <p>通过反复弹出堆顶元素，将堆转换为升序（或降序）序列。 操作后，范围 [first, last) 不再满足堆性质，而是已排序。 </p>
 
-<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00286">286</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00366">366</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00258">pop_heap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="heap_8hpp_source.html#l00338">pop_heap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00169">partial_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00211">partial_sort_copy()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00296">sort_heap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00283">partial_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00325">partial_sort_copy()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00376">sort_heap()</a>.</p>
 
 </div>
 </div>

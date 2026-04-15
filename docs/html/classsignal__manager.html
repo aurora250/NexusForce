@@ -124,8 +124,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a9ae069f841650e5f7b9bf618cb63ce7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动信号监控  <br /></td></tr>
 <tr class="memitem:ab2cc86e6a36acde3829588a491d327f5" id="r_ab2cc86e6a36acde3829588a491d327f5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab2cc86e6a36acde3829588a491d327f5">stop_monitoring</a> ()</td></tr>
 <tr class="memdesc:ab2cc86e6a36acde3829588a491d327f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止信号监控  <br /></td></tr>
-<tr class="memitem:afcd58d14fcfac6ff48edfe02a07efb85" id="r_afcd58d14fcfac6ff48edfe02a07efb85"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afcd58d14fcfac6ff48edfe02a07efb85">is_running</a> () const</td></tr>
-<tr class="memdesc:afcd58d14fcfac6ff48edfe02a07efb85"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在运行  <br /></td></tr>
+<tr class="memitem:a266cbd641633d169aa349d3925dcfa6a" id="r_a266cbd641633d169aa349d3925dcfa6a"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a266cbd641633d169aa349d3925dcfa6a">is_running</a> () const</td></tr>
+<tr class="memdesc:a266cbd641633d169aa349d3925dcfa6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在运行  <br /></td></tr>
 <tr class="memitem:a7124f74a4220b98a3a2408efe644862b" id="r_a7124f74a4220b98a3a2408efe644862b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7124f74a4220b98a3a2408efe644862b">block_signals</a> (const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___system_signal.html#gaf199cc94062e6ec09f43849c4b072266">signal_event</a> &gt; &amp;signals_to_block) const</td></tr>
 <tr class="memdesc:a7124f74a4220b98a3a2408efe644862b"><td class="mdescLeft">&#160;</td><td class="mdescRight">阻塞信号  <br /></td></tr>
 <tr class="memitem:a2f05a96544502fb9deef4d64f2ad7189" id="r_a2f05a96544502fb9deef4d64f2ad7189"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2f05a96544502fb9deef4d64f2ad7189">unblock_signals</a> (const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___system_signal.html#gaf199cc94062e6ec09f43849c4b072266">signal_event</a> &gt; &amp;signals_to_unblock) const</td></tr>
@@ -135,8 +135,8 @@ Public 成员函数</h2></td></tr>
 静态 Public 成员函数</h2></td></tr>
 <tr class="memitem:acf65a55e7c38e7cb4ad1ec24f7e74496" id="r_acf65a55e7c38e7cb4ad1ec24f7e74496"><td class="memItemLeft">static <a class="el" href="classsignal__manager.html">signal_manager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#acf65a55e7c38e7cb4ad1ec24f7e74496">instance</a> ()</td></tr>
 <tr class="memdesc:acf65a55e7c38e7cb4ad1ec24f7e74496"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取单例实例  <br /></td></tr>
-<tr class="memitem:a705ee91a0c57077abf3c02485cc766e8" id="r_a705ee91a0c57077abf3c02485cc766e8"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a705ee91a0c57077abf3c02485cc766e8">is_platform_signal</a> (<a class="el" href="group___system_signal.html#gaf199cc94062e6ec09f43849c4b072266">signal_event</a> event)</td></tr>
-<tr class="memdesc:a705ee91a0c57077abf3c02485cc766e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为平台原生信号  <br /></td></tr>
+<tr class="memitem:a4a2c7d9e40d8e9b71efebce0d0cf509c" id="r_a4a2c7d9e40d8e9b71efebce0d0cf509c"><td class="memItemLeft">static NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a4a2c7d9e40d8e9b71efebce0d0cf509c">is_platform_signal</a> (<a class="el" href="group___system_signal.html#gaf199cc94062e6ec09f43849c4b072266">signal_event</a> event)</td></tr>
+<tr class="memdesc:a4a2c7d9e40d8e9b71efebce0d0cf509c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为平台原生信号  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>信号管理器 </p>
@@ -232,8 +232,8 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="a705ee91a0c57077abf3c02485cc766e8" name="a705ee91a0c57077abf3c02485cc766e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a705ee91a0c57077abf3c02485cc766e8">&#9670;&#160;</a></span>is_platform_signal()</h2>
+<a id="a4a2c7d9e40d8e9b71efebce0d0cf509c" name="a4a2c7d9e40d8e9b71efebce0d0cf509c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2c7d9e40d8e9b71efebce0d0cf509c">&#9670;&#160;</a></span>is_platform_signal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,7 +242,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool signal_manager::is_platform_signal </td>
+          <td class="memname">NEFORCE_NODISCARD bool signal_manager::is_platform_signal </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___system_signal.html#gaf199cc94062e6ec09f43849c4b072266">signal_event</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
           <td></td>
@@ -268,14 +268,14 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="afcd58d14fcfac6ff48edfe02a07efb85" name="afcd58d14fcfac6ff48edfe02a07efb85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcd58d14fcfac6ff48edfe02a07efb85">&#9670;&#160;</a></span>is_running()</h2>
+<a id="a266cbd641633d169aa349d3925dcfa6a" name="a266cbd641633d169aa349d3925dcfa6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a266cbd641633d169aa349d3925dcfa6a">&#9670;&#160;</a></span>is_running()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool signal_manager::is_running </td>
+          <td class="memname">NEFORCE_NODISCARD bool signal_manager::is_running </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>

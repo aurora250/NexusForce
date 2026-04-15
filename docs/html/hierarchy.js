@@ -311,7 +311,6 @@ var hierarchy =
     [ "hash&lt; T, enable_if_t&lt; is_base_of&lt; ihashable&lt; T &gt;, T &gt;::value &gt; &gt;", "structhash_3_01_t_00_01enable__if__t_3_01is__base__of_3_01ihashable_3_01_t_01_4_00_01_t_01_4_1_1value_01_4_01_4.html", null ],
     [ "hash&lt; T, enable_if_t&lt; is_enum_v&lt; T &gt; &gt; &gt;", "structhash_3_01_t_00_01enable__if__t_3_01is__enum__v_3_01_t_01_4_01_4_01_4.html", null ],
     [ "hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;", "structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html", null ],
-    [ "hash&lt; uuid &gt;", "structhash_3_01uuid_01_4.html", null ],
     [ "hashtable_node&lt; T &gt;", "structhashtable__node.html", null ],
     [ "hazard_pointer", "classhazard__pointer.html", null ],
     [ "hazard_pointer_domain", "classhazard__pointer__domain.html", null ],
@@ -418,6 +417,7 @@ var hierarchy =
     [ "ibinary&lt; timestamp &gt;", "structibinary.html", [
       [ "ipackage< timestamp, int64_t >", "structipackage.html", null ]
     ] ],
+    [ "icmp_header", "structicmp__header.html", null ],
     [ "icomparable&lt; T &gt;", "structicomparable.html", [
       [ "icollector< array< T, Size > >", "structicollector.html", [
         [ "array< T, 0 >", "classarray_3_01_t_00_010_01_4.html", null ],
@@ -1309,6 +1309,9 @@ var hierarchy =
     [ "ihashable&lt; tuple&lt;&gt; &gt;", "structihashable.html", [
       [ "icommon< tuple<> >", "structicommon.html", null ]
     ] ],
+    [ "ihashable&lt; uuid &gt;", "structihashable.html", [
+      [ "uuid", "classuuid.html", null ]
+    ] ],
     [ "ihashable&lt; variant&lt; Types... &gt; &gt;", "structihashable.html", [
       [ "icommon< variant< Types... > >", "structicommon.html", null ]
     ] ],
@@ -1474,7 +1477,7 @@ var hierarchy =
     [ "integral_constant&lt; uint64_t, Value &gt;", "structintegral__constant.html", null ],
     [ "invoke_result&lt; Sign &gt;", "structinvoke__result.html", null ],
     [ "invoke_result&lt; F(Args...)&gt;", "structinvoke__result_3_01_f_07_args_8_8_8_08_4.html", null ],
-    [ "ip_socket", "classip__socket.html", null ],
+    [ "ip_header", "structip__header.html", null ],
     [ "iplugin", "structiplugin.html", null ],
     [ "is_ADL_swappable&lt; T, Dummy &gt;", "structis___a_d_l__swappable.html", null ],
     [ "is_aggregate&lt; T &gt;", "structis__aggregate.html", null ],
@@ -1590,10 +1593,10 @@ var hierarchy =
     [ "istringify&lt; http_method &gt;", "structistringify.html", [
       [ "http_method", "structhttp__method.html", null ]
     ] ],
-    [ "istringify&lt; http_request &gt;", "structistringify.html", [
-      [ "iobject< http_request >", "structiobject.html", null ]
+    [ "istringify&lt; http_server_request &gt;", "structistringify.html", [
+      [ "iobject< http_server_request >", "structiobject.html", null ]
     ] ],
-    [ "istringify&lt; http_response &gt;", "structistringify.html", null ],
+    [ "istringify&lt; http_server_response &gt;", "structistringify.html", null ],
     [ "istringify&lt; http_session &gt;", "structistringify.html", null ],
     [ "istringify&lt; ini_document &gt;", "structistringify.html", [
       [ "ini_document", "classini__document.html", null ]
@@ -1811,6 +1814,7 @@ var hierarchy =
     [ "package&lt; T, Dummy &gt;", "structpackage.html", null ],
     [ "packaged_task&lt; Res(Args...)&gt;", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html", null ],
     [ "thread_pool::periodic_task_state", "structthread__pool_1_1periodic__task__state.html", null ],
+    [ "icmp_socket::ping_result", "structicmp__socket_1_1ping__result.html", null ],
     [ "pipe", "classpipe.html", null ],
     [ "plugin_deleter", "structplugin__deleter.html", null ],
     [ "plugin_info", "structplugin__info.html", null ],
@@ -1863,6 +1867,7 @@ var hierarchy =
     [ "remove_reference&lt; T &gt;", "structremove__reference.html", null ],
     [ "remove_volatile&lt; T &gt;", "structremove__volatile.html", null ],
     [ "replace_first_para&lt; NewFirst, T &gt;", "structreplace__first__para.html", null ],
+    [ "smtp_socket::response", "structsmtp__socket_1_1response.html", null ],
     [ "retire_list", "structretire__list.html", null ],
     [ "reverse_iterator&lt; Iter &gt;", "classreverse__iterator.html", null ],
     [ "safe_multiply&lt; A, B &gt;", "structsafe__multiply.html", null ],
@@ -1895,6 +1900,20 @@ var hierarchy =
     [ "signal_blocker&lt; Types &gt;", "classsignal__blocker.html", null ],
     [ "signal_guard", "classsignal__guard.html", null ],
     [ "signal_manager", "classsignal__manager.html", null ],
+    [ "smtp_message", "structsmtp__message.html", null ],
+    [ "socket_base", "classsocket__base.html", [
+      [ "icmp_socket", "classicmp__socket.html", null ],
+      [ "ip_socket", "classip__socket.html", [
+        [ "smtp_socket", "classsmtp__socket.html", null ],
+        [ "tcp_acceptor", "classtcp__acceptor.html", [
+          [ "ssl_acceptor", "classssl__acceptor.html", null ]
+        ] ],
+        [ "tcp_socket", "classtcp__socket.html", [
+          [ "ssl_socket", "classssl__socket.html", null ]
+        ] ],
+        [ "udp_socket", "classudp__socket.html", null ]
+      ] ]
+    ] ],
     [ "path::split_iterator", "classpath_1_1split__iterator.html", null ],
     [ "sql_builder", "classsql__builder.html", null ],
     [ "ssl_context", "classssl__context.html", null ],
@@ -1902,6 +1921,7 @@ var hierarchy =
     [ "standard_allocator&lt; T &gt;", "classstandard__allocator.html", [
       [ "compressed_pair< standard_allocator, size_t >", "structcompressed__pair.html", null ]
     ] ],
+    [ "smtp_socket::starttls_result", "structsmtp__socket_1_1starttls__result.html", null ],
     [ "process::state_info", "structprocess_1_1state__info.html", null ],
     [ "static_char_digit&lt; Base, Digit &gt;", "structstatic__char__digit.html", null ],
     [ "static_gcd&lt; A, B &gt;", "structstatic__gcd.html", null ],
@@ -1941,6 +1961,7 @@ var hierarchy =
     [ "toml_builder", "classtoml__builder.html", null ],
     [ "toml_parser", "classtoml__parser.html", null ],
     [ "trace_allocator&lt; T &gt;", "classtrace__allocator.html", null ],
+    [ "icmp_socket::traceroute_hop", "structicmp__socket_1_1traceroute__hop.html", null ],
     [ "tree_barrier&lt; CmplFunc &gt;", "classtree__barrier.html", null ],
     [ "try_lock_tag", "structtry__lock__tag.html", null ],
     [ "ttl_cache&lt; Key, Value &gt;", "classttl__cache.html", null ],

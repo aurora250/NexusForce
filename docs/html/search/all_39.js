@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['原子内存序_0',['原子内存序',['../group___memory_order.html',1,'']]],
-  ['原子操作_1',['原子操作',['../group___atomic_operations.html',1,'']]]
+  ['删除器_0',['删除器',['../group___deleter.html',1,'']]],
+  ['删除算法_1',['删除算法',['../group___remove_algorithms.html',1,'']]]
 ];

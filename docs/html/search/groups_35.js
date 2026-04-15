@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['引用包装_0',['引用包装',['../group___reference_wrapper.html',1,'']]]
+  ['平台检测_0',['平台检测',['../group___platform_detection.html',1,'']]],
+  ['平台相关类型_1',['平台相关类型',['../group___platform_dependent_types.html',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['memory_5forder_0',['memory_order',['../group___memory_order.html#gad658351bedece1752acbd72886a7e0e4',1,'atomic_base.hpp']]],
-  ['memory_5forder_5fmodifier_1',['memory_order_modifier',['../group___memory_order.html#gaf6c9980cf35b938ee765508ef4dc6d42',1,'atomic_base.hpp']]]
+  ['launch_0',['launch',['../group___async.html#ga9b3224d19f20667b3b24145a7b395a33',1,'future.hpp']]],
+  ['log_5flevel_1',['log_level',['../group___logging.html#gac91d55174d383848b976a34de843748e',1,'log_event.hpp']]]
 ];

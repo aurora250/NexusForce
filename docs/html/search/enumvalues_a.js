@@ -6,5 +6,6 @@ var searchData=
   ['localdatetime_3',['LocalDateTime',['../classtoml__datetime.html#af54bbeae9035e016f518bf7c0030d581af77460ae7289ab814011fdc5e0a8d890',1,'toml_datetime']]],
   ['localtime_4',['LocalTime',['../classtoml__datetime.html#af54bbeae9035e016f518bf7c0030d581a00a622a95d771bc362e8950916a73bfd',1,'toml_datetime']]],
   ['lock_5fpi_5',['lock_pi',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba7f5377fce9aa415d46efbd06ceca0e07',1,'futex.hpp']]],
-  ['logoff_6',['LOGOFF',['../group___system_signal.html#ggaf199cc94062e6ec09f43849c4b072266aa5ddcf1c01f56182e72d5b0183aefb5f',1,'signal.hpp']]]
+  ['login_6',['login',['../classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da',1,'smtp_socket']]],
+  ['logoff_7',['LOGOFF',['../group___system_signal.html#ggaf199cc94062e6ec09f43849c4b072266aa5ddcf1c01f56182e72d5b0183aefb5f',1,'signal.hpp']]]
 ];

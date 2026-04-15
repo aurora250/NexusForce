@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['随机数生成器_0',['随机数生成器',['../group___random_generators.html',1,'']]],
-  ['随机重排算法_1',['随机重排算法',['../group___shuffle_algorithms.html',1,'']]]
+  ['算术运算仿函数_0',['算术运算仿函数',['../group___arithmetic_functors.html',1,'']]],
+  ['算法分类_1',['算法分类',['../group___sort_algorithms.html#algorithm_classification',1,'']]],
+  ['算法复杂度_2',['算法复杂度',['../group___heap_algorithms.html#algorithm_complexity',1,'']]],
+  ['算法库_20algorithm_3',['📐 算法库 (Algorithm)',['../index.html#autotoc_md36',1,'']]]
 ];

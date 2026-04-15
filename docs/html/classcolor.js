@@ -12,6 +12,7 @@ var classcolor =
     [ "A", "classcolor.html#a5736c9113697868fb8c8c4668f1d71b3", null ],
     [ "B", "classcolor.html#a8af141f465228c0044ccb9eb2f50513e", null ],
     [ "blend", "classcolor.html#abfbe831b605aee870b3481dd2628cf84", null ],
+    [ "from_premultiplied", "classcolor.html#a1be8b70927011419fd814874fcde5cc9", null ],
     [ "G", "classcolor.html#a58fb2e2c9e7d42a38cb52419ade7735c", null ],
     [ "gray_value", "classcolor.html#aa65533e2c41d896a45d8b29ac0cf8d54", null ],
     [ "is_opaque", "classcolor.html#a5909fb3b8f2aa6825ff2d82d355ead87", null ],
@@ -27,7 +28,6 @@ var classcolor =
     [ "operator<", "classcolor.html#a399c8e88dcc1db1936214d4d5937c9c6", null ],
     [ "operator=", "classcolor.html#ada2ef63cecfcfdfc128a50319d1f36a0", null ],
     [ "operator==", "classcolor.html#a428dc60bf071e66127c1f9eef65713aa", null ],
-    [ "premultiply_alpha", "classcolor.html#a237a85d4cf52066614ebe118454c5cd5", null ],
     [ "R", "classcolor.html#aed1fd03a1f9c3b4a78a374e63d06b011", null ],
     [ "set_color", "classcolor.html#a53d6acc3a1267559f1ceab7abe0d46ea", null ],
     [ "set_color", "classcolor.html#ac9f0a468ac549559fdc3f2f20c48935a", null ],
@@ -45,5 +45,6 @@ var classcolor =
     [ "to_ansi_foreground", "classcolor.html#a4ae9cf9c8d6a95ed738730e4e64133e0", null ],
     [ "to_hash", "classcolor.html#ac087e947af900bd3927d86d60a6f1158", null ],
     [ "to_integer32", "classcolor.html#ae447534af06ed922f3243e1653df5593", null ],
+    [ "to_premultiplied", "classcolor.html#a3b446145882d50c135344a34fbfd8de9", null ],
     [ "to_string", "classcolor.html#a21e2440d94ecae6c1e6e448246c0ce41", null ]
 ];

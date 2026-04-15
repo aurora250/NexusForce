@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['边界查找算法_0',['边界查找算法',['../group___bound_algorithms.html',1,'']]]
+  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]]
 ];

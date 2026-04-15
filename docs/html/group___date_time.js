@@ -21,6 +21,7 @@ var group___date_time =
       [ "operator==", "classdate.html#a026c3ee8689ff3bcc49fbf4bdac5330b", null ],
       [ "swap", "classdate.html#a88d8ae28e2103f1757579793737d32a6", null ],
       [ "to_hash", "classdate.html#a23f913f720afaf933bdc405f1ad950ca", null ],
+      [ "to_julian_day", "classdate.html#ae29f568673cd4002a2400597fc719799", null ],
       [ "to_string", "classdate.html#a39083a80ab2ff7a6d8f731c1aa2cfac8", null ],
       [ "year", "classdate.html#a74130178d05c0a806658b4b41f26b046", null ]
     ] ],

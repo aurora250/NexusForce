@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
+  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
 ];

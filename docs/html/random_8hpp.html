@@ -116,37 +116,7 @@ random.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>随机数生成器 </p>
-<p>此文件提供了多种随机数生成器的实现， 包括线性同余法、梅森旋转算法和硬件真随机数生成器。</p>
-<h1 class="doxsection"><a class="anchor" id="standards"></a>
-遵循的国际标准</h1>
-<p>本实现严格遵循以下密码学与随机数生成相关标准规范：</p>
-<p><b>伪随机数生成器 (PRNG) 标准：</b></p><ul>
-<li>ISO/IEC 18031:2011：信息技术 — 安全技术 — 随机比特生成 <a href="https://www.iso.org/standard/54945.html">https://www.iso.org/standard/54945.html</a></li>
-<li>NIST SP 800-90A Rev. 1：确定性随机比特生成器的建议 <a href="https://csrc.nist.gov/pubs/sp/800/90/a/r1/final">https://csrc.nist.gov/pubs/sp/800/90/a/r1/final</a></li>
-</ul>
-<p><b>真随机数生成器 (TRNG) 标准：</b></p><ul>
-<li>ISO/IEC 20543:2019：信息技术 — 安全技术 — 熵源评估与验证 <a href="https://www.iso.org/standard/68338.html">https://www.iso.org/standard/68338.html</a></li>
-<li>NIST SP 800-90B：熵源验证建议 <a href="https://csrc.nist.gov/pubs/sp/800/90/b/final">https://csrc.nist.gov/pubs/sp/800/90/b/final</a></li>
-</ul>
-<p><b>算法规范参考：</b></p><ul>
-<li>线性同余生成器 (LCG)：遵循 POSIX.1-2001 rand() 规范 <a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/rand.html">https://pubs.opengroup.org/onlinepubs/009695399/functions/rand.html</a></li>
-<li>梅森旋转算法 (MT19937)：遵循松本真、西村拓士 1998 年原始论文 <a href="http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/ARTICLES/mt.pdf">http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/ARTICLES/mt.pdf</a></li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
-实现细节</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">生成器  </th><th class="markdownTableHeadNone">算法  </th><th class="markdownTableHeadNone">周期长度  </th><th class="markdownTableHeadNone">适用场景  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="classrandom__lcd.html" title="线性同余随机数生成器">random_lcd</a>  </td><td class="markdownTableBodyNone">线性同余法 (glibc 兼容)  </td><td class="markdownTableBodyNone">2^31  </td><td class="markdownTableBodyNone">简单模拟、非安全场景  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="classrandom__mt.html" title="梅森旋转随机数生成器">random_mt</a>  </td><td class="markdownTableBodyNone">MT19937 梅森旋转  </td><td class="markdownTableBodyNone">2^19937 - 1  </td><td class="markdownTableBodyNone">科学计算、统计分析  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">secret  </td><td class="markdownTableBodyNone">操作系统熵源  </td><td class="markdownTableBodyNone">不可预测  </td><td class="markdownTableBodyNone">加密密钥、安全令牌  </td></tr>
-</table>
-<dl class="section see"><dt>参见</dt><dd><a href="https://www.iso.org/standard/54945.html">https://www.iso.org/standard/54945.html</a> </dd>
-<dd>
-<a href="https://csrc.nist.gov/projects/random-bit-generation">https://csrc.nist.gov/projects/random-bit-generation</a> </dd></dl>
+<p>此文件提供了多种随机数生成器的实现。 </p>
 
 <p class="definition">在文件 <a class="el" href="random_8hpp_source.html">random.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

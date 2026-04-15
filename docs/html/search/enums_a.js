@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['permission_0',['permission',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242',1,'process']]],
-  ['point_1',['point',['../structthread_1_1hook.html#ad2fdcf6ba77f77062ce7fe773bd2d2cf',1,'thread::hook']]],
-  ['pool_5fmode_2',['pool_mode',['../classthread__pool.html#a4c640f1911280a2e33221d6d2a8148d3',1,'thread_pool']]]
+  ['open_5fmode_0',['open_mode',['../classshare__memory.html#a44ac8b8e6ff49cfe0f91b017ad68e23a',1,'share_memory']]]
 ];

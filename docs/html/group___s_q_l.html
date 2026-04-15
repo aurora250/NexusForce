@@ -93,7 +93,7 @@ $(function(){initNavTree('group___s_q_l.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>SQL相关功能  
+<p>SQL语句的流式构建器实现  
 <a href="#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -121,7 +121,30 @@ $(function(){initNavTree('group___s_q_l.html','',''); });
 <tr class="memdesc:ga9ae417fadc6859de056601afc47ffb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">排序方向枚举  <a href="#ga9ae417fadc6859de056601afc47ffb4a">更多...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>SQL相关功能 </p>
+<div class="textblock"><p>SQL语句的流式构建器实现 </p>
+<p>支持SELECT、INSERT、UPDATE、DELETE操作， 通过链式调用构建复杂的SQL语句，避免手动拼接SQL字符串的安全风险。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本构建器生成的语法严格遵循以下国际标准：</p><ul>
+<li><b>ISO/IEC 9075:1992</b> (SQL-92) 核心语法标准 <a href="https://www.iso.org/standard/16663.html">https://www.iso.org/standard/16663.html</a></li>
+<li><b>ISO/IEC 9075-2:1999</b> (SQL:1999/Foundation) 派生表与子查询增强特性 <a href="https://www.iso.org/standard/26196.html">https://www.iso.org/standard/26196.html</a></li>
+<li><b>ISO/IEC 9075-4:2023</b> (SQL/PSM) 预编译占位符相关约定 <a href="https://www.iso.org/standard/76584.html">https://www.iso.org/standard/76584.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="compatibility"></a>
+数据库兼容性</h1>
+<p>生成的 SQL 语句适用于以下主流关系型数据库：</p><ul>
+<li>MySQL 5.7+</li>
+<li>PostgreSQL 9.0+</li>
+<li>SQLite 3.0+</li>
+<li>Microsoft SQL Server 2008+</li>
+<li>Oracle Database 10g+</li>
+<li>所有其他遵循 ANSI SQL 标准的数据库</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd><ul>
+<li><span class="tt">LIMIT</span> 和 <span class="tt">OFFSET</span> 子句属于事实标准，被除Oracle外的多数数据库支持。</li>
+<li>对于Oracle数据库，若需支持分页，建议利用子查询或 12c 之后的 <span class="tt">FETCH FIRST</span> 语法 （本构建器输出标准 LIMIT/OFFSET，使用时请注意数据库方言差异）。 </li>
+</ul>
+</dd></dl>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
 <a id="gaf35aeadb60139f2c65a19c4e8d61ec72" name="gaf35aeadb60139f2c65a19c4e8d61ec72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf35aeadb60139f2c65a19c4e8d61ec72">&#9670;&#160;</a></span>sql_join</h2>
@@ -155,7 +178,7 @@ $(function(){initNavTree('group___s_q_l.html','',''); });
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00064">64</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00066">66</a> 行定义.</p>
 
 </div>
 </div>
@@ -191,7 +214,7 @@ $(function(){initNavTree('group___s_q_l.html','',''); });
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00053">53</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00055">55</a> 行定义.</p>
 
 </div>
 </div>
@@ -223,7 +246,7 @@ $(function(){initNavTree('group___s_q_l.html','',''); });
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00075">75</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 第 <a class="el" href="sql__builder_8hpp_source.html#l00077">77</a> 行定义.</p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
+  ['修改算法_0',['修改算法',['../group___shift_algorithms.html',1,'']]]
 ];

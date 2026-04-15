@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['redis_0',['Redis',['../group___redis.html',1,'']]]
+  ['ini配置_0',['ini配置',['../group___ini_config.html',1,'']]]
 ];

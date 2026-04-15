@@ -89,12 +89,17 @@ $(function(){initNavTree('group___json_config.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">json配置 </div></div>
+  <div class="headertitle"><div class="title">json配置 <div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>json配置格式管理  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+json配置 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___json_config.svg" width="294" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
@@ -119,6 +124,93 @@ $(function(){initNavTree('group___json_config.html','',''); });
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>json配置格式管理 </p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下 JSON 相关标准规范：</p>
+<p><b>JSON 数据格式标准：</b></p><ul>
+<li>**IETF STD 90 / RFC 8259**：JavaScript Object Notation (JSON) 数据交换格式 <a href="https://www.rfc-editor.org/rfc/rfc8259.html">https://www.rfc-editor.org/rfc/rfc8259.html</a></li>
+<li>**ECMA-404:2017**：JSON 数据交换格式（第2版） <a href="https://ecma-international.org/publications-and-standards/standards/ecma-404/">https://ecma-international.org/publications-and-standards/standards/ecma-404/</a></li>
+</ul>
+<p><b>历史 JSON 规范（信息参考）：</b></p><ul>
+<li>**IETF RFC 7159**：JSON 数据交换格式（已被 RFC 8259 废弃） <a href="https://www.rfc-editor.org/rfc/rfc7159.html">https://www.rfc-editor.org/rfc/rfc7159.html</a></li>
+<li>**IETF RFC 7158**：JSON 文本序列化格式 <a href="https://www.rfc-editor.org/rfc/rfc7158.html">https://www.rfc-editor.org/rfc/rfc7158.html</a></li>
+<li>**IETF RFC 4627**：JSON 原始规范（已被 RFC 7159 废弃） <a href="https://www.rfc-editor.org/rfc/rfc4627.html">https://www.rfc-editor.org/rfc/rfc4627.html</a></li>
+</ul>
+<p><b>JSON Schema 验证标准（相关参考）：</b></p><ul>
+<li>**IETF JSON Schema**：JSON 模式验证规范（Draft 2020-12） <a href="https://json-schema.org/specification.html">https://json-schema.org/specification.html</a></li>
+<li>**IETF RFC 8927**：JSON 类型定义 <a href="https://www.rfc-editor.org/rfc/rfc8927.html">https://www.rfc-editor.org/rfc/rfc8927.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="json_types"></a>
+JSON 值类型定义</h1>
+<p>根据 RFC 8259 §3，JSON 支持以下六种值类型：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">RFC 8259 引用  </th><th class="markdownTableHeadNone">本实现类  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">null  </td><td class="markdownTableBodyNone">§3  </td><td class="markdownTableBodyNone"><a class="el" href="classjson__null.html" title="json null值类">json_null</a>  </td><td class="markdownTableBodyNone">空值  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">boolean  </td><td class="markdownTableBodyNone">§3  </td><td class="markdownTableBodyNone"><a class="el" href="classjson__bool.html" title="json布尔值类">json_bool</a>  </td><td class="markdownTableBodyNone">布尔值（true 或 false）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">number  </td><td class="markdownTableBodyNone">§6  </td><td class="markdownTableBodyNone"><a class="el" href="classjson__number.html" title="json数字值类">json_number</a>  </td><td class="markdownTableBodyNone">双精度浮点数（IEEE 754-2019）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">§7  </td><td class="markdownTableBodyNone"><a class="el" href="classjson__string.html" title="json字符串值类">json_string</a>  </td><td class="markdownTableBodyNone">Unicode 字符串（UTF-8 编码）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">object  </td><td class="markdownTableBodyNone">§4  </td><td class="markdownTableBodyNone"><a class="el" href="classjson__object.html" title="json对象类">json_object</a>  </td><td class="markdownTableBodyNone">无序键值对集合  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">array  </td><td class="markdownTableBodyNone">§5  </td><td class="markdownTableBodyNone"><a class="el" href="classjson__array.html" title="json数组类">json_array</a>  </td><td class="markdownTableBodyNone">有序值列表  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">编码  </td><td class="markdownTableBodyNone">UTF-8（RFC 8259 §8.1）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">字符串转义  </td><td class="markdownTableBodyNone">RFC 8259 §7 定义的控制字符转义序列  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">数字范围  </td><td class="markdownTableBodyNone">IEEE 754-2019 双精度浮点数  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">对象键唯一性  </td><td class="markdownTableBodyNone">RFC 8259 §4（键在对象中应唯一）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">对象键顺序  </td><td class="markdownTableBodyNone">无序（JSON 不保证键的顺序）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">数组顺序  </td><td class="markdownTableBodyNone">有序（保持插入顺序）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">最大嵌套深度  </td><td class="markdownTableBodyNone">实现定义（建议不超过 1000 层）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="escape_sequences"></a>
+字符串转义序列</h1>
+<p>根据 RFC 8259 §7，支持以下转义序列：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">转义序列  </th><th class="markdownTableHeadNone">字符  </th><th class="markdownTableHeadNone">Unicode 码点  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\"  </td><td class="markdownTableBodyNone">引号  </td><td class="markdownTableBodyNone">U+0022  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\\  </td><td class="markdownTableBodyNone">反斜杠  </td><td class="markdownTableBodyNone">U+005C  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\/  </td><td class="markdownTableBodyNone">斜杠  </td><td class="markdownTableBodyNone">U+002F  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\b  </td><td class="markdownTableBodyNone">退格  </td><td class="markdownTableBodyNone">U+0008  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\f  </td><td class="markdownTableBodyNone">换页  </td><td class="markdownTableBodyNone">U+000C  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\n  </td><td class="markdownTableBodyNone">换行  </td><td class="markdownTableBodyNone">U+000A  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\r  </td><td class="markdownTableBodyNone">回车  </td><td class="markdownTableBodyNone">U+000D  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\t  </td><td class="markdownTableBodyNone">制表符  </td><td class="markdownTableBodyNone">U+0009  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\uXXXX  </td><td class="markdownTableBodyNone">Unicode 字符  </td><td class="markdownTableBodyNone">U+XXXX  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>JSON 规范要求有效的 JSON 文本必须是 UTF-8、UTF-16 或 UTF-32 编码。 本实现默认使用 UTF-8 编码处理所有字符串。 JSON 数字采用双精度浮点数存储，遵循 IEEE 754-2019 标准。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>根据 RFC 8259 §9，JSON 解析器应拒绝无效的 UTF-8 序列。 对象中的重复键名虽然规范不禁止，但可能导致不可预测的行为。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.json.org/">https://www.json.org/</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a> </dd>
+<dd>
+<a href="https://ecma-international.org/publications-and-standards/standards/ecma-404/">https://ecma-international.org/publications-and-standards/standards/ecma-404/</a></dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['标准容器_0',['标准容器',['../group___container.html',1,'']]],
-  ['标准检测_1',['C++标准检测',['../group___cxx_standard_detection.html',1,'']]],
-  ['标准算法_2',['标准算法',['../group___standard_algorithms.html',1,'']]],
-  ['标准迭代器_3',['标准迭代器',['../group___normal_iterators.html',1,'']]]
+  ['条件变量_0',['条件变量',['../group___condition_variables.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ini配置_0',['ini配置',['../group___ini_config.html',1,'']]]
+  ['dns_0',['DNS',['../group___d_n_s.html',1,'']]]
 ];

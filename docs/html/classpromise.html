@@ -89,7 +89,7 @@ $(function(){initNavTree('classpromise.html','','classpromise-members'); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">promise&lt; Res &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async.html">异步行为</a></div></div></div>
+  <div class="headertitle"><div class="title">promise&lt; Res &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___async.html">异步调用</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -151,7 +151,7 @@ class promise&lt; Res &gt;</div><p>Promise类模板 </p>
 <p>表示一个异步计算的结果提供者，与future配对使用。 可以将计算结果或异常设置到promise中，关联的future可以获取这些结果。</p>
 <dl class="section note"><dt>注解</dt><dd>结果类型不能是数组、函数，必须是可析构类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00031">31</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00037">37</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a980a39afa21321c8e9ec5022b0a0123c" name="a980a39afa21321c8e9ec5022b0a0123c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a980a39afa21321c8e9ec5022b0a0123c">&#9670;&#160;</a></span>promise() <span class="overload">[1/2]</span></h2>
@@ -181,11 +181,11 @@ template&lt;typename Res&gt; </div>
 <p>默认构造函数 </p>
 <p>创建新的promise对象，初始化共享状态和结果存储。 </p>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00064">64</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00070">70</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00789">make_shared()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00489">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>, <a class="el" href="#a4f73b1bc32d04a4051b70f93279a5d23">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00081">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00295">promise&lt; void &gt;::operator=()</a>, <a class="el" href="#accc51c0d31121acce00d75341b18cd34">promise()</a>, <a class="el" href="promise_8hpp_source.html#l00072">promise()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00104">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00489">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>, <a class="el" href="#a4f73b1bc32d04a4051b70f93279a5d23">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00087">operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00301">promise&lt; void &gt;::operator=()</a>, <a class="el" href="#accc51c0d31121acce00d75341b18cd34">promise()</a>, <a class="el" href="promise_8hpp_source.html#l00078">promise()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00110">swap()</a>.</p>
 
 </div>
 </div>
@@ -222,9 +222,9 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00072">72</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00078">78</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00064">promise()</a>.</p>
+<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00070">promise()</a>.</p>
 
 </div>
 </div>
@@ -256,7 +256,7 @@ template&lt;typename Res&gt; </div>
 <p>析构函数 </p>
 <p>如果存在关联的future且promise未被设置结果，会自动设置broken_promise异常。 </p>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00094">94</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00100">100</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
@@ -297,7 +297,7 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00114">114</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00120">120</a> 行定义.</p>
 
 </div>
 </div>
@@ -335,9 +335,9 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00081">81</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00087">87</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00064">promise()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00070">promise()</a>.</p>
 
 </div>
 </div>
@@ -380,7 +380,7 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00128">128</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00134">134</a> 行定义.</p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00145">145</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00151">151</a> 行定义.</p>
 
 </div>
 </div>
@@ -466,9 +466,9 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00121">121</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00127">127</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
 
 </div>
 </div>
@@ -512,9 +512,9 @@ template&lt;typename Res&gt; </div>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>结果会在当前线程退出时设置，适用于需要保证某些资源在结果设置前有效的场景 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00136">136</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00142">142</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03001">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
 
 </div>
 </div>
@@ -551,9 +551,9 @@ template&lt;typename Res&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00104">104</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="promise_8hpp_source.html">promise.hpp</a> 第 <a class="el" href="promise_8hpp_source.html#l00110">110</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00064">promise()</a>.</p>
+<p class="reference">引用了 <a class="el" href="promise_8hpp_source.html#l00070">promise()</a>.</p>
 
 </div>
 </div>

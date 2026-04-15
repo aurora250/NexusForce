@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
+  ['redis_0',['Redis',['../group___redis.html',1,'']]]
 ];

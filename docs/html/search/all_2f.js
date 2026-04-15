@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
+  ['信号槽_0',['信号槽',['../group___signals.html',1,'']]],
+  ['信号量_1',['信号量',['../group___semaphores.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['颜色_0',['颜色',['../group___color.html',1,'']]]
+  ['集合算法_0',['集合算法',['../group___set_algorithms.html',1,'']]]
 ];

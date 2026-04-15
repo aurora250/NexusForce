@@ -14,7 +14,7 @@ var searchData=
   ['float_11',['Float',['../classtoml__value.html#a4b6fe229629c77a296512ebfd5278150ade4fc71e5fc7265167856c0c62c2436b',1,'toml_value']]],
   ['floating_5fpoint_12',['FLOATING_POINT',['../group___system_signal.html#ggaf199cc94062e6ec09f43849c4b072266a30ccd51223e55d0a8ce2bd253733f579',1,'signal.hpp']]],
   ['force_5fexit_13',['FORCE_EXIT',['../group___system_signal.html#ggaf199cc94062e6ec09f43849c4b072266ae0c9af36ecdf6234e3375848ba086f0c',1,'signal.hpp']]],
-  ['format_5ferror_14',['FORMAT_ERROR',['../group___network.html#gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862',1,'dns_message.hpp']]],
+  ['format_5ferror_14',['FORMAT_ERROR',['../group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862',1,'dns_message.hpp']]],
   ['ftp_15',['ftp',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ae4fe1286c69b67678413921ff7556f10',1,'ports']]],
   ['full_16',['FULL',['../group___s_q_l.html#ggaf35aeadb60139f2c65a19c4e8d61ec72aba7de5bc6888294e5884b024a4c894f1',1,'sql_builder.hpp']]],
   ['function_5fnot_5fsupported_17',['function_not_supported',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6aa33c516bbdfb179cef733c8daeb97bed',1,'errc.hpp']]],

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['格式规范_0',['格式规范',['../datetime_8hpp.html#format_specifications',1,'']]]
+  ['排列算法_0',['排列算法',['../group___permutation_algorithms.html',1,'']]],
+  ['排序算法_1',['排序算法',['../group___sort_algorithms.html',1,'']]]
 ];

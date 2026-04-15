@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
+  ['整数序列_0',['整数序列',['../group___integer_sequence.html',1,'']]]
 ];

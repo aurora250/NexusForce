@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: memory_order.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('memory__order_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">memory_order.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>原子内存序定义  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="types_8hpp_source.html">NeForce/core/typeinfo/types.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+memory_order.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="memory__order_8hpp__incl.svg" width="162" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="memory__order_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:gad658351bedece1752acbd72886a7e0e4" id="r_gad658351bedece1752acbd72886a7e0e4"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> : int32_t { <br />
+&#160;&#160;<a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b">memory_order::relaxed</a>
+, <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0">memory_order::consume</a>
+, <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144">memory_order::acquire</a>
+, <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">memory_order::release</a>
+, <br />
+&#160;&#160;<a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c">memory_order::acq_rel</a>
+, <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604">memory_order::seq_cst</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gad658351bedece1752acbd72886a7e0e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序  <a href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">更多...</a><br /></td></tr>
+<tr class="memitem:gaf6c9980cf35b938ee765508ef4dc6d42" id="r_gaf6c9980cf35b938ee765508ef4dc6d42"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___memory_order.html#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> : int64_t { <a class="el" href="group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8">memory_order_modifier::memory_order_mask</a> = 0x0000ffff
+, <a class="el" href="group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42a834c94b6d984318439c48a75a9d20fb2">memory_order_modifier::memory_order_modifier_mask</a> = 0xffff0000
+, <a class="el" href="group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42adee853427a8a845e55317c88dd81f69c">memory_order_modifier::memory_order_hle_acquire</a> = 0x10000
+, <a class="el" href="group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783">memory_order_modifier::memory_order_hle_release</a> = 0x20000
+ }</td></tr>
+<tr class="memdesc:gaf6c9980cf35b938ee765508ef4dc6d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序修饰符枚举  <a href="group___memory_order.html#gaf6c9980cf35b938ee765508ef4dc6d42">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga4d9a876d4d53afcbc2b20efdf7f0d170" id="r_ga4d9a876d4d53afcbc2b20efdf7f0d170"><td class="memItemLeft">constexpr <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a>&#160;</td><td class="memItemRight"><a class="el" href="group___memory_order.html#ga4d9a876d4d53afcbc2b20efdf7f0d170">operator|</a> (<a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo, <a class="el" href="group___memory_order.html#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> <a class="el" href="group___math_functions.html#gac2fc02d8beaa56845fd51333276c1ca0">mod</a>) noexcept</td></tr>
+<tr class="memdesc:ga4d9a876d4d53afcbc2b20efdf7f0d170"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序与修饰符的或操作符  <br /></td></tr>
+<tr class="memitem:gaa412d48215ac5173e7fc457a4e9443e6" id="r_gaa412d48215ac5173e7fc457a4e9443e6"><td class="memItemLeft">constexpr <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a>&#160;</td><td class="memItemRight"><a class="el" href="group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6">operator&amp;</a> (<a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo, <a class="el" href="group___memory_order.html#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> <a class="el" href="group___math_functions.html#gac2fc02d8beaa56845fd51333276c1ca0">mod</a>) noexcept</td></tr>
+<tr class="memdesc:gaa412d48215ac5173e7fc457a4e9443e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序与修饰符的与操作符  <br /></td></tr>
+<tr class="memitem:gafda3e5c6834532546b1eaef81affc2b2" id="r_gafda3e5c6834532546b1eaef81affc2b2"><td class="memItemLeft">constexpr <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a>&#160;</td><td class="memItemRight"><a class="el" href="group___memory_order.html#gafda3e5c6834532546b1eaef81affc2b2">cmpexch_failure_order</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gafda3e5c6834532546b1eaef81affc2b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原子比较交换操作失败时的内存顺序  <br /></td></tr>
+<tr class="memitem:ga0ebbd1fbd5cee109f313d7ef89dd257f" id="r_ga0ebbd1fbd5cee109f313d7ef89dd257f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___memory_order.html#ga0ebbd1fbd5cee109f313d7ef89dd257f">is_valid_cmpexch_failure_order</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga0ebbd1fbd5cee109f313d7ef89dd257f"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查比较交换失败内存顺序是否有效  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:gab7d3a13cfab1d0d9d1e747ac3d774d61" id="r_gab7d3a13cfab1d0d9d1e747ac3d774d61"><td class="memItemLeft">
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_relaxed</b> = <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b">memory_order::relaxed</a></td></tr>
+<tr class="memdesc:gab7d3a13cfab1d0d9d1e747ac3d774d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">宽松内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga5f22a1191ac5d936f9fc1c7b3b72eddd" id="r_ga5f22a1191ac5d936f9fc1c7b3b72eddd"><td class="memItemLeft">
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_consume</b> = <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0">memory_order::consume</a></td></tr>
+<tr class="memdesc:ga5f22a1191ac5d936f9fc1c7b3b72eddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据依赖内存顺序常量 <br /></td></tr>
+<tr class="memitem:gac472f4b38d5bc0ba23a6113984118c24" id="r_gac472f4b38d5bc0ba23a6113984118c24"><td class="memItemLeft">
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_acquire</b> = <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144">memory_order::acquire</a></td></tr>
+<tr class="memdesc:gac472f4b38d5bc0ba23a6113984118c24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga80883e2cd37a8e670dc016e91059d936" id="r_ga80883e2cd37a8e670dc016e91059d936"><td class="memItemLeft">
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_release</b> = <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">memory_order::release</a></td></tr>
+<tr class="memdesc:ga80883e2cd37a8e670dc016e91059d936"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga3b921278ed46859e35eae165a2f2e96d" id="r_ga3b921278ed46859e35eae165a2f2e96d"><td class="memItemLeft">
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_acq_rel</b> = <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c">memory_order::acq_rel</a></td></tr>
+<tr class="memdesc:ga3b921278ed46859e35eae165a2f2e96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取-释放内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga9e670570506f24d28d99c8e004906bb3" id="r_ga9e670570506f24d28d99c8e004906bb3"><td class="memItemLeft">
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_seq_cst</b> = <a class="el" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604">memory_order::seq_cst</a></td></tr>
+<tr class="memdesc:ga9e670570506f24d28d99c8e004906bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">顺序一致性内存顺序常量 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>原子内存序定义 </p>
+<p>此文件提供了内存模型中的原子内存顺序枚举定义， 用于控制多线程环境下原子操作的内存可见性和指令重排行为。 </p>
+
+<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="memory__order_8hpp.html">memory_order.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

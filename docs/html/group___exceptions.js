@@ -56,6 +56,7 @@ var group___exceptions =
       [ "dns_exception", "classdns__exception.html#a679b632e255aeab18256582bd2d787ef", null ],
       [ "dns_exception", "classdns__exception.html#adb3c3ab68e7adae06a059e167e2d6948", null ]
     ] ],
+    [ "smtp_exception", "structsmtp__exception.html", null ],
     [ "socket_exception", "structsocket__exception.html", null ],
     [ "ssl_exception", "structssl__exception.html", null ],
     [ "http_exception", "structhttp__exception.html", null ]

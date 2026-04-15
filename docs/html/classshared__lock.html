@@ -89,7 +89,7 @@ $(function(){initNavTree('classshared__lock.html','','classshared__lock-members'
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">shared_lock&lt; SharedMutex &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___mutex.html">互斥锁</a></div></div></div>
+  <div class="headertitle"><div class="title">shared_lock&lt; SharedMutex &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___mutex.html">互斥锁</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -146,7 +146,7 @@ class shared_lock&lt; SharedMutex &gt;</div><p>共享锁类模板 </p>
 </dl>
 <p>RAII共享锁管理器，专门用于管理共享互斥锁的读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00126">126</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00132">132</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a54df05d7997d6de8dcabfa916773934b" name="a54df05d7997d6de8dcabfa916773934b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54df05d7997d6de8dcabfa916773934b">&#9670;&#160;</a></span>shared_lock() <span class="overload">[1/5]</span></h2>
@@ -176,7 +176,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>默认构造函数 </p>
 <p>创建不管理任何共享互斥锁的共享锁。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__mutex_8hpp_source.html#l00198">operator=()</a> , 以及 <a class="el" href="shared__mutex_8hpp_source.html#l00184">shared_lock()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__mutex_8hpp_source.html#l00204">operator=()</a> , 以及 <a class="el" href="shared__mutex_8hpp_source.html#l00190">shared_lock()</a>.</p>
 
 </div>
 </div>
@@ -214,7 +214,7 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>构造时立即获取共享互斥锁的读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00148">148</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00154">154</a> 行定义.</p>
 
 </div>
 </div>
@@ -257,7 +257,7 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>构造时不锁定共享互斥锁，稍后可以手动获取读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00161">161</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00167">167</a> 行定义.</p>
 
 </div>
 </div>
@@ -300,7 +300,7 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>构造时尝试获取共享互斥锁的读锁，如果失败不会阻塞。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00171">171</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00177">177</a> 行定义.</p>
 
 </div>
 </div>
@@ -338,7 +338,7 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>转移共享互斥锁的所有权和锁定状态。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00184">184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00190">190</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a54df05d7997d6de8dcabfa916773934b">shared_lock()</a>.</p>
 
@@ -372,7 +372,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>析构函数 </p>
 <p>如果拥有共享锁的所有权，则释放读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00217">217</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00223">223</a> 行定义.</p>
 
 </div>
 </div>
@@ -405,7 +405,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>获取读锁 </p>
 <p>如果已拥有锁或未管理共享互斥锁，则不执行任何操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00252">252</a> 行定义.</p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>获取管理的共享互斥锁指针 </p>
 <dl class="section return"><dt>返回</dt><dd>指向管理的共享互斥锁的指针，如果没有管理则返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00239">239</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00245">245</a> 行定义.</p>
 
 </div>
 </div>
@@ -469,7 +469,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>转换为布尔值 </p>
 <dl class="section return"><dt>返回</dt><dd>是否拥有共享锁的所有权 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00227">227</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00233">233</a> 行定义.</p>
 
 </div>
 </div>
@@ -508,9 +508,9 @@ template&lt;typename SharedMutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用</dd></dl>
 <p>释放当前锁，然后转移所有权。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00198">198</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00204">204</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03057">addressof()</a> , 以及 <a class="el" href="#a54df05d7997d6de8dcabfa916773934b">shared_lock()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a> , 以及 <a class="el" href="#a54df05d7997d6de8dcabfa916773934b">shared_lock()</a>.</p>
 
 </div>
 </div>
@@ -542,7 +542,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>检查是否拥有共享锁 </p>
 <dl class="section return"><dt>返回</dt><dd>是否拥有共享锁的所有权 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00239">239</a> 行定义.</p>
 
 </div>
 </div>
@@ -575,7 +575,7 @@ template&lt;typename SharedMutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>之前管理的共享互斥锁指针</dd></dl>
 <p>放弃对共享互斥锁的管理权，返回互斥锁指针但不释放锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00296">296</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00302">302</a> 行定义.</p>
 
 </div>
 </div>
@@ -608,7 +608,7 @@ template&lt;typename SharedMutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果成功获得读锁则返回true，否则返回false</dd></dl>
 <p>非阻塞地尝试获取共享互斥锁的读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00279">279</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00285">285</a> 行定义.</p>
 
 </div>
 </div>
@@ -640,7 +640,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>释放读锁 </p>
 <p>如果未拥有锁或未管理共享互斥锁，则不执行任何操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00262">262</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00268">268</a> 行定义.</p>
 
 </div>
 </div>

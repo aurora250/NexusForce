@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['前置依赖_0',['前置依赖',['../index.html#dependency',1,'']]]
+  ['linux_0',['🐧 Linux',['../index.html#autotoc_md43',1,'']]],
+  ['logging_1',['📝 日志系统 (Logging)',['../index.html#autotoc_md25',1,'']]]
 ];

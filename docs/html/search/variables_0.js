@@ -7,7 +7,7 @@ var searchData=
   ['active_4',['active',['../structhazard__pointer__record.html#af442cb95513e29efbe1c46a6d5fd33ec',1,'hazard_pointer_record']]],
   ['active_5fprocessor_5fmask_5',['active_processor_mask',['../structsysinfo_1_1system__info.html#ab4cccf7a5a08e7b3fd531e4013e4e9a5',1,'sysinfo::system_info']]],
   ['additional_6',['additional',['../structdns__query__result.html#a9beeefa6c0e7822b9a1916b7bd82c18b',1,'dns_query_result']]],
-  ['address_7',['address',['../structfile__mapper_1_1map__info.html#ad2778e421d2982a7cc70caf24faf3130',1,'file_mapper::map_info']]],
+  ['address_7',['address',['../structfile__mapper_1_1map__info.html#ad2778e421d2982a7cc70caf24faf3130',1,'file_mapper::map_info::address'],['../structicmp__socket_1_1traceroute__hop.html#af415cdec4d92a7280940fbd2c9941ee6',1,'icmp_socket::traceroute_hop::address']]],
   ['align_8',['align',['../structformat__options.html#a1e59e7d1603c5aed7c9329f9497455b6',1,'format_options']]],
   ['aligned_5funion_5fv_9',['aligned_union_v',['../group___alignment.html#ga76c6f8991a30f9a97fc11ec55cdb8887',1,'type_traits.hpp']]],
   ['alignment_5fof_5fv_10',['alignment_of_v',['../group___alignment.html#gae7fde4c1b709be147fc5d8f4efc0c605',1,'type_traits.hpp']]],

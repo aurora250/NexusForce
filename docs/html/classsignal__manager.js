@@ -3,7 +3,7 @@ var classsignal__manager =
     [ "signal_handler", "classsignal__manager.html#a18cf513c0b627274a34d9a05cb7e4a7b", null ],
     [ "~signal_manager", "classsignal__manager.html#a954d53122ecfcf86491bbc22d2356874", null ],
     [ "block_signals", "classsignal__manager.html#a7124f74a4220b98a3a2408efe644862b", null ],
-    [ "is_running", "classsignal__manager.html#afcd58d14fcfac6ff48edfe02a07efb85", null ],
+    [ "is_running", "classsignal__manager.html#a266cbd641633d169aa349d3925dcfa6a", null ],
     [ "register_handler", "classsignal__manager.html#a1abe3fbf45226ea34f5999ba34c008b1", null ],
     [ "register_handlers", "classsignal__manager.html#a43e722ee9c50d40361e90893d77ccce9", null ],
     [ "remove_handler", "classsignal__manager.html#add44037b2ca74ed54c7a744ed4e62ed4", null ],

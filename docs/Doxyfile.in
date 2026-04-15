@@ -3,16 +3,18 @@ PROJECT_NUMBER         = @PROJECT_VERSION@
 PROJECT_BRIEF          = "A Modern C++ Library with extended functionality, web components, and utility libraries"
 OUTPUT_DIRECTORY       = "@DOXYGEN_OUTPUT_DIR@"
 
-INPUT                  = "@DOXYGEN_INPUT_DIRS@"
+INPUT                  = "@DOXYGEN_INPUT_DIRS@" \
+                         "@CMAKE_SOURCE_DIR@/README.md"
 
 RECURSIVE              = YES
-MARKDOWN_SUPPORT = YES
+MARKDOWN_SUPPORT       = YES
 
 FILE_PATTERNS          = *.hpp \
                          *.cpp \
                          *.md
 
 HTML_DYNAMIC_SECTIONS  = NO
+USE_MDFILE_AS_MAINPAGE = @CMAKE_SOURCE_DIR@/README.md
 PREDEFINED             = NEXUSFORCE_ENABLE_DOXYGEN=1 \
                          NEFORCE_USING_SSO \
                          NEFORCE_SUPPORT_POSTGRESQL \

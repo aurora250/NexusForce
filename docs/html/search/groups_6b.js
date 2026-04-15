@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['闩锁_0',['闩锁',['../group___latches.html',1,'']]]
+  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]]
 ];

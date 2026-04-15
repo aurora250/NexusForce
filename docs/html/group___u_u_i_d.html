@@ -93,7 +93,7 @@ $(function(){initNavTree('group___u_u_i_d.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>UUID生成与解析工具  
+<p>UUID生成与解析工具实现。  
 <a href="#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -102,7 +102,24 @@ $(function(){initNavTree('group___u_u_i_d.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用唯一标识符类  <a href="classuuid.html#details">更多...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>UUID生成与解析工具 </p>
+<div class="textblock"><p>UUID生成与解析工具实现。 </p>
+<p>UUID是一个128位的唯一标识符，广泛用于分布式系统中的标识生成。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下标准规范：</p>
+<ul>
+<li>**IETF RFC 4122**：UUID 版本 4 的定义（基于随机数） <a href="https://www.rfc-editor.org/rfc/rfc4122.html">https://www.rfc-editor.org/rfc/rfc4122.html</a></li>
+<li>**IETF RFC 9562**：UUID 版本 7 的定义（基于 Unix 时间戳排序） <a href="https://www.rfc-editor.org/rfc/rfc9562.html">https://www.rfc-editor.org/rfc/rfc9562.html</a></li>
+</ul>
+<p>此外，UUID 的结构与编码方式也符合以下 ISO 标准：</p><ul>
+<li>**ISO/IEC 9834-8:2014**：信息技术 — 对象标识符解析系统 — 第8部分：UUID 的生成与注册 <a href="https://www.iso.org/standard/62795.html">https://www.iso.org/standard/62795.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="version_details"></a>
+版本细节</h1>
+<ul>
+<li>**版本 4**：变体位为 10（0b10），版本位为 4（0b0100）</li>
+<li>**版本 7**：变体位为 10（0b10），版本位为 7（0b0111） 时间戳为 Unix 毫秒（占高 48 位），后跟 12 位随机计数器与 62 位随机数 </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

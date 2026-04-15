@@ -131,6 +131,59 @@ NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>RB_TREE_BL
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>自平衡二叉搜索树实现 </p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下计算机科学文献：</p>
+<ul>
+<li>**Rudolf Bayer (1972)**："Symmetric Binary B-Trees: Data Structure and Maintenance Algorithms" Acta Informatica, Vol. 1, pp. 290–306. <a href="https://doi.org/10.1007/BF00289509">https://doi.org/10.1007/BF00289509</a></li>
+<li>**Leo J. Guibas &amp; Robert Sedgewick (1978)**："A Dichromatic Framework for Balanced Trees" Proceedings of the 19th Annual Symposium on Foundations of Computer Science, pp. 8–21. <a href="https://doi.org/10.1109/SFCS.1978.3">https://doi.org/10.1109/SFCS.1978.3</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="rb_tree_properties"></a>
+红黑树性质</h1>
+<p>根据 Guibas &amp; Sedgewick (1978) 的定义，红黑树满足以下五条性质：</p>
+<ol type="1">
+<li>**节点颜色**：每个节点要么是红色，要么是黑色。</li>
+<li>**根节点颜色**：根节点是黑色的。</li>
+<li>**叶子节点颜色**：每个叶子节点（NIL）是黑色的。</li>
+<li>**红色节点限制**：如果一个节点是红色的，则它的两个子节点都是黑色的。</li>
+<li>**黑色高度**：对于每个节点，从该节点到其所有后代叶子节点的简单路径上， 包含相同数量的黑色节点。</li>
+</ol>
+<h1 class="doxsection"><a class="anchor" id="complexity_guarantees"></a>
+复杂度保证</h1>
+<p>根据红黑树性质，最坏情况下的时间复杂度保证：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">时间复杂度  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">插入  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">最多 2 次旋转  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">删除  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">最多 3 次旋转  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">查找  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">二叉搜索树查找  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">最小/最大  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">沿最左/最右路径查找  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">前驱/后继  </td><td class="markdownTableBodyNone">O(log n)  </td><td class="markdownTableBodyNone">中序遍历相邻节点  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">范围迭代  </td><td class="markdownTableBodyNone">O(k)  </td><td class="markdownTableBodyNone">k 为范围内元素数量  </td></tr>
+</table>
+<p>树的高度上界：<span class="tt">h ≤ 2 log₂(n + 1)</span>。</p>
+<dl class="section note"><dt>注解</dt><dd>本实现提供了两个插入策略：<ul>
+<li><span class="tt">insert_unique</span>：键必须唯一，重复键插入失败并返回已存在元素迭代器</li>
+<li><span class="tt">insert_equal</span>：允许重复键，按插入顺序存储</li>
+</ul>
+</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>根据 ISO/IEC 14882:2020 §22.2.6：<ul>
+<li>对关联容器的修改操作不会使任何迭代器失效，除非删除该迭代器指向的元素</li>
+<li>比较函数对象（Compare）必须提供严格的弱序关系</li>
+<li>键的不可变性：修改已插入元素的键会导致未定义行为</li>
+</ul>
+</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://en.cppreference.com/w/cpp/container/map">https://en.cppreference.com/w/cpp/container/map</a> </dd>
+<dd>
+<a href="https://en.cppreference.com/w/cpp/container/set">https://en.cppreference.com/w/cpp/container/set</a> </dd>
+<dd>
+<a href="https://doi.org/10.1109/SFCS.1978.3">https://doi.org/10.1109/SFCS.1978.3</a> (Guibas &amp; Sedgewick) </dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="gad1daa78f4ed31af1fbc76e03d80a749a" name="gad1daa78f4ed31af1fbc76e03d80a749a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad1daa78f4ed31af1fbc76e03d80a749a">&#9670;&#160;</a></span>rb_tree_erase_rebalance()</h2>
@@ -182,11 +235,11 @@ NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>RB_TREE_BL
 <dl class="section return"><dt>返回</dt><dd>实际被删除的节点</dd></dl>
 <p>执行节点删除后的重新平衡操作，并更新最左最右节点。 </p>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00239">239</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00046">rb_tree_node_base::color_</a>, <a class="el" href="remove_8hpp_source.html#l00149">erase()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00048">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00068">rb_tree_node_base::maximum()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00056">rb_tree_node_base::minimum()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00028">NEFORCE_DEBUG_VERIFY</a>, <a class="el" href="rb__tree_8hpp_source.html#l00047">rb_tree_node_base::parent_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00032">RB_TREE_BLACK</a>, <a class="el" href="rb__tree_8hpp_source.html#l00029">RB_TREE_RED</a>, <a class="el" href="rb__tree_8hpp_source.html#l00084">rb_tree_rotate_left()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00112">rb_tree_rotate_right()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00049">rb_tree_node_base::right_</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00093">rb_tree_node_base::color_</a>, <a class="el" href="remove_8hpp_source.html#l00149">erase()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00095">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00115">rb_tree_node_base::maximum()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00103">rb_tree_node_base::minimum()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00028">NEFORCE_DEBUG_VERIFY</a>, <a class="el" href="rb__tree_8hpp_source.html#l00094">rb_tree_node_base::parent_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00079">RB_TREE_BLACK</a>, <a class="el" href="rb__tree_8hpp_source.html#l00076">RB_TREE_RED</a>, <a class="el" href="rb__tree_8hpp_source.html#l00131">rb_tree_rotate_left()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00159">rb_tree_rotate_right()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00096">rb_tree_node_base::right_</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01297">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01344">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>.</p>
 
 </div>
 </div>
@@ -227,9 +280,9 @@ NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>RB_TREE_BL
 </dl>
 <p>通过旋转和重新着色恢复红黑树的平衡性质。 </p>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00139">139</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00186">186</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00046">rb_tree_node_base::color_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00048">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00047">rb_tree_node_base::parent_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00032">RB_TREE_BLACK</a>, <a class="el" href="rb__tree_8hpp_source.html#l00029">RB_TREE_RED</a>, <a class="el" href="rb__tree_8hpp_source.html#l00084">rb_tree_rotate_left()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00112">rb_tree_rotate_right()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00049">rb_tree_node_base::right_</a>.</p>
+<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00093">rb_tree_node_base::color_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00095">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00094">rb_tree_node_base::parent_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00079">RB_TREE_BLACK</a>, <a class="el" href="rb__tree_8hpp_source.html#l00076">RB_TREE_RED</a>, <a class="el" href="rb__tree_8hpp_source.html#l00131">rb_tree_rotate_left()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00159">rb_tree_rotate_right()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00096">rb_tree_node_base::right_</a>.</p>
 
 </div>
 </div>
@@ -270,11 +323,11 @@ NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>RB_TREE_BL
 </dl>
 <p>执行左旋转操作，保持红黑树性质。 </p>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00084">84</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00131">131</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00048">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00047">rb_tree_node_base::parent_</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00049">rb_tree_node_base::right_</a>.</p>
+<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00095">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00094">rb_tree_node_base::parent_</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00096">rb_tree_node_base::right_</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00192">rb_tree_erase_rebalance()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00139">rb_tree_insert_rebalance()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00239">rb_tree_erase_rebalance()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00186">rb_tree_insert_rebalance()</a>.</p>
 
 </div>
 </div>
@@ -315,11 +368,11 @@ NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>RB_TREE_BL
 </dl>
 <p>执行右旋转操作，保持红黑树性质。 </p>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00112">112</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00159">159</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00048">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00047">rb_tree_node_base::parent_</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00049">rb_tree_node_base::right_</a>.</p>
+<p class="reference">引用了 <a class="el" href="rb__tree_8hpp_source.html#l00095">rb_tree_node_base::left_</a>, <a class="el" href="rb__tree_8hpp_source.html#l00094">rb_tree_node_base::parent_</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00096">rb_tree_node_base::right_</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00192">rb_tree_erase_rebalance()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00139">rb_tree_insert_rebalance()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00239">rb_tree_erase_rebalance()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00186">rb_tree_insert_rebalance()</a>.</p>
 
 </div>
 </div>

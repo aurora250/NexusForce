@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['编码规则_0',['UTF-8 编码规则',['../codepoint_8hpp.html#utf8_encoding',1,'']]],
-  ['编译器检测_1',['编译器检测',['../group___compiler_detection.html',1,'']]]
+  ['正则表达式_0',['正则表达式',['../group___regex.html',1,'']]]
 ];

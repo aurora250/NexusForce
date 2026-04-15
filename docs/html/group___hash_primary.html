@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NexusForce: 哈希模板</title>
+<title>NexusForce: 哈希算法</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,11 +89,11 @@ $(function(){initNavTree('group___hash_primary.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">哈希模板 </div></div>
+  <div class="headertitle"><div class="title">哈希算法 </div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>哈希函数的模板和基础定义  
+<p>哈希模板和哈希算法实现  
 <a href="#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -118,8 +118,6 @@ $(function(){initNavTree('group___hash_primary.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">shared_ptr的哈希特化  <a href="structhash_3_01shared__ptr_3_01_t_01_4_01_4.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:hash_3C_20unique_5Fptr_3C_20T_2C_20Deleter_20_3E_20_3E" id="r_hash_3C_20unique_5Fptr_3C_20T_2C_20Deleter_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html">hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">unique_ptr的哈希特化  <a href="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:hash_3C_20uuid_20_3E" id="r_hash_3C_20uuid_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhash_3_01uuid_01_4.html">hash&lt; uuid &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">uuid的哈希特化  <a href="structhash_3_01uuid_01_4.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
@@ -154,7 +152,59 @@ template&lt;typename Func, typename Arg&gt; </td></tr>
 <tr class="memdesc:ga017f9314c0e8086c45cbb406983476de"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_hash的便捷变量模板 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>哈希函数的模板和基础定义 </p>
+<div class="textblock"><p>哈希模板和哈希算法实现 </p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现中的哈希算法参考以下标准规范与学术文献：</p>
+<p><b>哈希算法规范参考：</b></p><ul>
+<li>**IETF RFC 6234**：US 安全哈希算法 (SHA) 及基于 SHA 的 HMAC 和 HKDF（加密哈希参考） <a href="https://www.rfc-editor.org/rfc/rfc6234.html">https://www.rfc-editor.org/rfc/rfc6234.html</a></li>
+</ul>
+<p><b>非加密哈希算法文献：</b></p><ul>
+<li>**FNV-1a 哈希算法**：Fowler–Noll–Vo 哈希函数规范 <a href="https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17">https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17</a></li>
+<li>**MurmurHash3 算法**：Austin Appleby 设计的非加密哈希函数 <a href="https://github.com/aappleby/smhasher/wiki/MurmurHash3">https://github.com/aappleby/smhasher/wiki/MurmurHash3</a></li>
+<li>**DJB2 哈希算法**：Daniel J. Bernstein 设计的字符串哈希函数 <a href="http://www.cse.yorku.ca/~oz/hash.html">http://www.cse.yorku.ca/~oz/hash.html</a></li>
+</ul>
+<p><b>哈希函数安全标准：</b></p><ul>
+<li>**NIST SP 800-185**：SHA-3 派生函数 — cSHAKE、KMAC、TupleHash、ParallelHash <a href="https://csrc.nist.gov/pubs/sp/800/185/final">https://csrc.nist.gov/pubs/sp/800/185/final</a></li>
+<li>**NIST SP 800-107 Rev. 1**：使用已批准哈希算法的应用推荐 <a href="https://csrc.nist.gov/pubs/sp/800/107/r1/final">https://csrc.nist.gov/pubs/sp/800/107/r1/final</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="algorithm_comparison"></a>
+哈希算法对比</h1>
+<p>本文件提供以下三种非加密哈希算法：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">算法  </th><th class="markdownTableHeadNone">输出位数  </th><th class="markdownTableHeadNone">特点  </th><th class="markdownTableHeadNone">适用场景  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FNV-1a  </td><td class="markdownTableBodyNone">32/64 位  </td><td class="markdownTableBodyNone">实现简单、雪崩效应好、碰撞率低  </td><td class="markdownTableBodyNone">哈希表、编译时哈希  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DJB2  </td><td class="markdownTableBodyNone">32/64 位  </td><td class="markdownTableBodyNone">极简实现、速度快  </td><td class="markdownTableBodyNone">简单字符串哈希  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">MurmurHash3  </td><td class="markdownTableBodyNone">32/128 位  </td><td class="markdownTableBodyNone">速度快、分布均匀、可自定义种子  </td><td class="markdownTableBodyNone">高性能哈希表、Bloom Filter  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="hash_requirements"></a>
+哈希函数要求</h1>
+<p>根据 ISO/IEC 14882:2020 §16.4.4，C++ 标准库哈希函数应满足：</p><ul>
+<li>可调用类型：接受 Key 类型参数，返回 <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875" title="无符号大小类型">size_t</a></li>
+<li>相等性：若 k1 == k2，则 <a class="el" href="structhash.html" title="哈希函数的主模板">hash(k1)</a> == <a class="el" href="structhash.html" title="哈希函数的主模板">hash(k2)</a></li>
+<li>不抛出异常（推荐）：哈希计算不抛出异常</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="security_note"></a>
+安全注意事项</h1>
+<dl class="section warning"><dt>警告</dt><dd><b>重要安全提示**：<ul>
+<li>FNV-1a、DJB2 和 MurmurHash3 均为**非加密哈希算法</li>
+</ul>
+</b><ul>
+<li>这些算法不应用于安全敏感场景，如密码存储、数字签名、消息认证码</li>
+<li>非加密哈希算法容易受到哈希碰撞攻击和长度扩展攻击</li>
+<li>对于安全场景，请使用密码学安全的哈希函数（如 SHA-256、SHA-3、BLAKE2）</li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>注解</dt><dd>本文件中的哈希函数实现主要用于哈希表、Bloom Filter、数据分片等 性能敏感的非安全场景。对于需要密码学强度的应用，请使用 <span class="tt">NeForce/core/encrypt/</span> 目录下的 SHA-256 等算法。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17">https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17</a> </dd>
+<dd>
+<a href="https://github.com/aappleby/smhasher">https://github.com/aappleby/smhasher</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Hash_function">https://en.wikipedia.org/wiki/Hash_function</a></dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="ga874816e8d77feae51451b53f8c026b57" name="ga874816e8d77feae51451b53f8c026b57"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga874816e8d77feae51451b53f8c026b57">&#9670;&#160;</a></span>DJB2_hash()</h2>
@@ -199,7 +249,7 @@ template&lt;typename Func, typename Arg&gt; </td></tr>
 </ol>
 <p>但在某些特殊情况下仍可能出现哈希冲突。 </p>
 
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00226">226</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00274">274</a> 行定义.</p>
 
 </div>
 </div>
@@ -246,11 +296,11 @@ template&lt;typename Func, typename Arg&gt; </td></tr>
 </ol>
 <p>FNV_hash函数使用FNV-1a版本算法，先异或再乘法的顺序。 </p>
 
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00103">103</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00152">152</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00392">count()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00106">thread::id::to_hash()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00112">thread::id::to_hash()</a>.</p>
 
 </div>
 </div>
@@ -294,9 +344,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>整数的哈希值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00119">119</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00168">168</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00031">integral_constant&lt; bool, Value &gt;::value</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00037">integral_constant&lt; bool, Value &gt;::value</a>.</p>
 
 </div>
 </div>
@@ -345,9 +395,9 @@ template&lt;typename CharT&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>字符串的哈希值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00139">139</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00188">188</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00031">integral_constant&lt; bool, Value &gt;::value</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00037">integral_constant&lt; bool, Value &gt;::value</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02737">basic_string&lt; char &gt;::to_hash()</a> , 以及 <a class="el" href="basic__string__view_8hpp_source.html#l00993">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash()</a>.</p>
 
@@ -480,7 +530,7 @@ template&lt;typename CharT&gt; </div>
 <p>FNV哈希算法的偏移基础值 </p>
 <dl class="section note"><dt>注解</dt><dd>根据平台位数使用不同的值，文档以64位为例。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00111">111</a> 行定义.</p>
 
 </div>
 </div>
@@ -507,7 +557,7 @@ template&lt;typename CharT&gt; </div>
 <p>FNV哈希算法的质数乘数 </p>
 <dl class="section note"><dt>注解</dt><dd>根据平台位数使用不同的值，文档以64位为例。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00073">73</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00123">123</a> 行定义.</p>
 
 </div>
 </div>

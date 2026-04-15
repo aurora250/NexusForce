@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['模式匹配算法_0',['模式匹配算法',['../group___pattern_matching_algorithms.html',1,'']]],
-  ['模板操作工具_1',['模板操作工具',['../group___template_traits_utilities.html',1,'']]]
+  ['插件系统_20plugin_0',['🔌 插件系统 (Plugin)',['../index.html#autotoc_md34',1,'']]],
+  ['插件_1',['插件',['../group___plugin.html',1,'']]],
+  ['插入迭代器_2',['插入迭代器',['../group___insert_iterators.html',1,'']]]
 ];

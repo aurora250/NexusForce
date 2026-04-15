@@ -89,7 +89,7 @@ $(function(){initNavTree('classtimer__scheduler.html','','classtimer__scheduler-
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">timer_scheduler&lt; Clock &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_timer.html">定时调度器</a></div></div></div>
+  <div class="headertitle"><div class="title">timer_scheduler&lt; Clock &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___async_timer.html">定时调度器</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -145,7 +145,7 @@ class timer_scheduler&lt; Clock &gt;</div><p>定时任务调度器 </p>
 </dl>
 <p>管理所有定时任务的调度和执行。使用独立的线程运行调度循环， 基于时间点对任务进行排序，并在任务到期时执行回调函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00035">35</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00041">41</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="ad7e2861340ab12370ceaec61a82c9129" name="ad7e2861340ab12370ceaec61a82c9129"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7e2861340ab12370ceaec61a82c9129">&#9670;&#160;</a></span>add_task()</h2>
@@ -187,9 +187,9 @@ template&lt;typename Clock&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>任务标识符，可用于取消任务</dd></dl>
 <p>如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00166">166</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00172">172</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00415">id()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00429">id()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -228,7 +228,7 @@ template&lt;typename Clock&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否成功取消</dd></dl>
 <p>如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00198">198</a> 行定义.</p>
 
 </div>
 </div>
@@ -260,7 +260,7 @@ template&lt;typename Clock&gt; </div>
 <p>获取当前待处理的任务数量 </p>
 <dl class="section return"><dt>返回</dt><dd>任务数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00227">227</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00233">233</a> 行定义.</p>
 
 </div>
 </div>

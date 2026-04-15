@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['日志系统_0',['日志系统',['../group___logging.html',1,'']]],
-  ['日期时间格式_1',['日期时间格式',['../toml__value_8hpp.html#datetime_formats',1,'']]],
-  ['日期时间_2',['日期时间',['../group___date_time.html',1,'']]],
-  ['日期计算参考_3',['日期计算参考',['../datetime_8hpp.html#date_calculation',1,'']]]
+  ['并发与异步_20async_0',['🔄 并发与异步 (Async)',['../index.html#autotoc_md19',1,'']]],
+  ['并行算法_1',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

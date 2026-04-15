@@ -93,7 +93,7 @@ $(function(){initNavTree('structsocket__exception.html','','structsocket__except
 </div><!--header-->
 <div class="contents">
 
-<p>socket操作异常  
+<p>Socket操作异常类  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a>&gt;</code></p>
@@ -103,6 +103,13 @@ $(function(){initNavTree('structsocket__exception.html','','structsocket__except
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structsocket__exception__inherit__graph.svg" width="142" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a33a91e5eb9896fd1543ec91aa05a514a" id="r_a33a91e5eb9896fd1543ec91aa05a514a"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a33a91e5eb9896fd1543ec91aa05a514a">last_error</a> () noexcept</td></tr>
+<tr class="memdesc:a33a91e5eb9896fd1543ec91aa05a514a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最后系统Socket错误码  <br /></td></tr>
+<tr class="memitem:ac120faa4a48b9c05bb4e0632ce707a38" id="r_ac120faa4a48b9c05bb4e0632ce707a38"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ac120faa4a48b9c05bb4e0632ce707a38">is_would_block</a> (int error) noexcept</td></tr>
+<tr class="memdesc:ac120faa4a48b9c05bb4e0632ce707a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查错误码是否表示操作会阻塞  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 额外继承的成员函数</h2></td></tr>
 <tr class="inherit_header pub_methods_structexception"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structexception')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structexception.html">exception</a></td></tr>
@@ -138,10 +145,80 @@ static constexpr auto&#160;</td><td class="memItemRight"><b>static_type</b> = &q
 <tr class="memdesc:ade1d02c50895124bd90aa63d569a91ed inherit pub_static_attribs_structexception"><td class="mdescLeft">&#160;</td><td class="mdescRight">静态类型字符串 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>socket操作异常 </p>
+<div class="textblock"><p>Socket操作异常类 </p>
+<p>Socket操作失败时抛出的异常，封装了系统错误码。 </p>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00017">17</a> 行定义.</p>
-</div><hr/>该结构体的文档由以下文件生成:<ul>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00027">27</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ac120faa4a48b9c05bb4e0632ce707a38" name="ac120faa4a48b9c05bb4e0632ce707a38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac120faa4a48b9c05bb4e0632ce707a38">&#9670;&#160;</a></span>is_would_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool socket_exception::is_would_block </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>error</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查错误码是否表示操作会阻塞 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>错误码 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是会阻塞返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="exception_8hpp_source.html#l00183">exception::code()</a>, <a class="el" href="#ac120faa4a48b9c05bb4e0632ce707a38">is_would_block()</a>, <a class="el" href="#a33a91e5eb9896fd1543ec91aa05a514a">last_error()</a> , 以及 <a class="el" href="exception_8hpp_source.html#l00177">exception::type()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ac120faa4a48b9c05bb4e0632ce707a38">is_would_block()</a>.</p>
+
+</div>
+</div>
+<a id="a33a91e5eb9896fd1543ec91aa05a514a" name="a33a91e5eb9896fd1543ec91aa05a514a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33a91e5eb9896fd1543ec91aa05a514a">&#9670;&#160;</a></span>last_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int socket_exception::last_error </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最后系统Socket错误码 </p>
+<dl class="section return"><dt>返回</dt><dd>错误码 </dd></dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ac120faa4a48b9c05bb4e0632ce707a38">is_would_block()</a>.</p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
 <li><a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a></li>
 </ul>
 </div><!-- contents -->

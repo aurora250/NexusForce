@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['元组_0',['元组',['../group___tuple.html',1,'']]]
+  ['位操作_0',['位操作',['../group___bit_manipulation.html',1,'']]]
 ];

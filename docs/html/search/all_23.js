@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['任意类_0',['任意类',['../group___any.html',1,'']]]
+  ['❗_20异常处理_20exception_0',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]]
 ];

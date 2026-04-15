@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['简介_0',['简介',['../index.html#intro',1,'']]]
+  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
 ];

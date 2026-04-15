@@ -100,7 +100,7 @@ $(function(){initNavTree('sql__builder_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 sql_builder.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="sql__builder_8hpp__incl.svg" width="1675" height="1200"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="sql__builder_8hpp__incl.svg" width="1843" height="1200"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="sql__builder_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -137,29 +137,7 @@ sql_builder.hpp 的引用(Include)关系图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SQL语句构建器 </p>
-<p>此文件提供了SQL语句的流式构建器，支持SELECT、INSERT、UPDATE、DELETE操作。 通过链式调用构建复杂的SQL语句，避免手动拼接SQL字符串的安全风险。</p>
-<h1 class="doxsection"><a class="anchor" id="standards"></a>
-遵循的国际标准</h1>
-<p>本构建器生成的语法严格遵循以下国际标准：</p><ul>
-<li><b>ISO/IEC 9075:1992</b> (SQL-92) 核心语法标准 <a href="https://www.iso.org/standard/16663.html">https://www.iso.org/standard/16663.html</a></li>
-<li><b>ISO/IEC 9075-2:1999</b> (SQL:1999/Foundation) 派生表与子查询增强特性 <a href="https://www.iso.org/standard/26196.html">https://www.iso.org/standard/26196.html</a></li>
-<li><b>ISO/IEC 9075-4:2023</b> (SQL/PSM) 预编译占位符相关约定 <a href="https://www.iso.org/standard/76584.html">https://www.iso.org/standard/76584.html</a></li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="compatibility"></a>
-数据库兼容性</h1>
-<p>生成的 SQL 语句适用于以下主流关系型数据库：</p><ul>
-<li>MySQL 5.7+</li>
-<li>PostgreSQL 9.0+</li>
-<li>SQLite 3.0+</li>
-<li>Microsoft SQL Server 2008+</li>
-<li>Oracle Database 10g+</li>
-<li>所有其他遵循 ANSI SQL 标准的数据库</li>
-</ul>
-<dl class="section note"><dt>注解</dt><dd><ul>
-<li><span class="tt">LIMIT</span> 和 <span class="tt">OFFSET</span> 子句属于事实标准，被除Oracle外的多数数据库支持。</li>
-<li>对于Oracle数据库，若需支持分页，建议利用子查询或 12c 之后的 <span class="tt">FETCH FIRST</span> 语法 （本构建器输出标准 LIMIT/OFFSET，使用时请注意数据库方言差异）。 </li>
-</ul>
-</dd></dl>
+<p>此文件提供了SQL语句的流式构建器。 </p>
 
 <p class="definition">在文件 <a class="el" href="sql__builder_8hpp_source.html">sql_builder.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

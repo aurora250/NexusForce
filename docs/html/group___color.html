@@ -110,6 +110,169 @@ $(function(){initNavTree('group___color.html','',''); });
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>RGB颜色模型的实现 </p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下颜色表示与合成相关标准规范：</p>
+<p><b>CSS 颜色标准：</b></p><ul>
+<li>**W3C CSS Color Module Level 4**：CSS 颜色规范（RGB/RGBA 定义） <a href="https://www.w3.org/TR/css-color-4/">https://www.w3.org/TR/css-color-4/</a></li>
+<li>**W3C CSS Color Module Level 5**：CSS 颜色规范（颜色混合与合成） <a href="https://www.w3.org/TR/css-color-5/">https://www.w3.org/TR/css-color-5/</a></li>
+</ul>
+<p><b>合成与混合标准：</b></p><ul>
+<li>**W3C Compositing and Blending Level 1**：合成与混合规范（Alpha 合成） <a href="https://www.w3.org/TR/compositing-1/">https://www.w3.org/TR/compositing-1/</a></li>
+</ul>
+<p><b>色彩空间标准：</b></p><ul>
+<li>**IEC 61966-2-1:1999**：多媒体系统与设备 — 色彩测量与管理 — 第2-1部分：sRGB 色彩空间 <a href="https://webstore.iec.ch/publication/6169">https://webstore.iec.ch/publication/6169</a></li>
+<li>**ITU-R BT.709-6**：高清电视标准参数值（色彩空间定义） <a href="https://www.itu.int/rec/R-REC-BT.709/">https://www.itu.int/rec/R-REC-BT.709/</a></li>
+</ul>
+<p><b>ANSI 终端颜色标准：</b></p><ul>
+<li>**ECMA-48**：控制功能编码字符集（ANSI 转义序列） <a href="https://ecma-international.org/publications-and-standards/standards/ecma-48/">https://ecma-international.org/publications-and-standards/standards/ecma-48/</a></li>
+<li>**ISO/IEC 6429:1992**：信息技术 — 编码字符集的控制功能 <a href="https://www.iso.org/standard/12782.html">https://www.iso.org/standard/12782.html</a></li>
+</ul>
+<p><b>XTerm 256 色规范：</b></p><ul>
+<li>**XTerm 256-Color Specification**：XTerm 256 色调色板定义 <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_">https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_</a></li>
+</ul>
+<p><b>图形文件格式标准：</b></p><ul>
+<li>**ISO/IEC 15948:2004**：信息技术 — 计算机图形与图像处理 — PNG 规范 <a href="https://www.iso.org/standard/29581.html">https://www.iso.org/standard/29581.html</a></li>
+<li>**ISO 32000-2:2020**：文档管理 — 便携式文档格式 — 第2部分：PDF 2.0（透明度组） <a href="https://www.iso.org/standard/75839.html">https://www.iso.org/standard/75839.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="color_components"></a>
+颜色分量定义</h1>
+<p>根据 CSS Color Module Level 4 §4.2，RGB 颜色由以下分量组成：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">分量  </th><th class="markdownTableHeadNone">范围  </th><th class="markdownTableHeadNone">数据类型  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">R (红)  </td><td class="markdownTableBodyNone">0-255  </td><td class="markdownTableBodyNone">int  </td><td class="markdownTableBodyNone">红色通道强度  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">G (绿)  </td><td class="markdownTableBodyNone">0-255  </td><td class="markdownTableBodyNone">int  </td><td class="markdownTableBodyNone">绿色通道强度  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">B (蓝)  </td><td class="markdownTableBodyNone">0-255  </td><td class="markdownTableBodyNone">int  </td><td class="markdownTableBodyNone">蓝色通道强度  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">A (透)  </td><td class="markdownTableBodyNone">0-255  </td><td class="markdownTableBodyNone">int  </td><td class="markdownTableBodyNone">Alpha 通道（0=全透明，255=不透明）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="hex_format"></a>
+十六进制表示</h1>
+<p>根据 CSS Color Module Level 4 §5.2，支持以下十六进制格式：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">格式  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">#RRGGBB  </td><td class="markdownTableBodyNone">#FF0000  </td><td class="markdownTableBodyNone">不透明红色（Alpha=255）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">#RRGGBBAA  </td><td class="markdownTableBodyNone">#FF000080  </td><td class="markdownTableBodyNone">半透明红色（Alpha=128）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="alpha_compositing"></a>
+Alpha 合成规则</h1>
+<p>根据 W3C Compositing and Blending Level 1 §4，Alpha 合成遵循以下规则：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">公式  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">合成 Alpha  </td><td class="markdownTableBodyNone">α_result = α_src + α_dst × (1 - α_src)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">合成 RGB  </td><td class="markdownTableBodyNone">C_result = (C_src × α_src + C_dst × α_dst × (1 - α_src)) / α_result  </td></tr>
+</table>
+<p>本实现的 <span class="tt">blend()</span> 方法遵循上述规范，在直通 Alpha (straight alpha) 空间进行合成。</p>
+<h1 class="doxsection"><a class="anchor" id="grayscale_conversion"></a>
+灰度转换</h1>
+<p>根据 ITU-R BT.709-6 和 sRGB 标准，人眼感知灰度采用以下加权平均：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">通道  </th><th class="markdownTableHeadNone">权重  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">红色  </td><td class="markdownTableBodyNone">0.299  </td><td class="markdownTableBodyNone">人眼对红色敏感度  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">绿色  </td><td class="markdownTableBodyNone">0.587  </td><td class="markdownTableBodyNone">人眼对绿色最敏感  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">蓝色  </td><td class="markdownTableBodyNone">0.114  </td><td class="markdownTableBodyNone">人眼对蓝色最不敏感  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="ansi_256_palette"></a>
+ANSI 256 色调色板</h1>
+<p>根据 XTerm 256-Color 规范，调色板结构如下：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">索引范围  </th><th class="markdownTableHeadNone">数量  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0-15  </td><td class="markdownTableBodyNone">16  </td><td class="markdownTableBodyNone">系统标准色（0-7 标准，8-15 高亮）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">16-231  </td><td class="markdownTableBodyNone">216  </td><td class="markdownTableBodyNone">6×6×6 RGB 立方体（R,G,B ∈ {0,95,135,175,215,255}）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">232-255  </td><td class="markdownTableBodyNone">24  </td><td class="markdownTableBodyNone">灰度渐变（从 #080808 到 #EEEEEE）  </td></tr>
+</table>
+<p>6×6×6 颜色立方体的索引公式：<span class="tt">index = 16 + 36×R_idx + 6×G_idx + B_idx</span></p>
+<h1 class="doxsection"><a class="anchor" id="basic_ansi_colors"></a>
+基本 ANSI 8/16 色</h1>
+<p>根据 ECMA-48 §8.3.117，基本 ANSI 颜色代码：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">颜色  </th><th class="markdownTableHeadNone">前景码  </th><th class="markdownTableHeadNone">背景码  </th><th class="markdownTableHeadNone">RGB 近似  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">黑色  </td><td class="markdownTableBodyNone">30  </td><td class="markdownTableBodyNone">40  </td><td class="markdownTableBodyNone">#000000  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">红色  </td><td class="markdownTableBodyNone">31  </td><td class="markdownTableBodyNone">41  </td><td class="markdownTableBodyNone">#CD0000  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">绿色  </td><td class="markdownTableBodyNone">32  </td><td class="markdownTableBodyNone">42  </td><td class="markdownTableBodyNone">#00CD00  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">黄色  </td><td class="markdownTableBodyNone">33  </td><td class="markdownTableBodyNone">43  </td><td class="markdownTableBodyNone">#CDCD00  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">蓝色  </td><td class="markdownTableBodyNone">34  </td><td class="markdownTableBodyNone">44  </td><td class="markdownTableBodyNone">#0000EE  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">品红  </td><td class="markdownTableBodyNone">35  </td><td class="markdownTableBodyNone">45  </td><td class="markdownTableBodyNone">#CD00CD  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">青色  </td><td class="markdownTableBodyNone">36  </td><td class="markdownTableBodyNone">46  </td><td class="markdownTableBodyNone">#00CDCD  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">白色  </td><td class="markdownTableBodyNone">37  </td><td class="markdownTableBodyNone">47  </td><td class="markdownTableBodyNone">#E5E5E5  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">分量范围  </td><td class="markdownTableBodyNone">0-255（8 位每通道）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Alpha 类型  </td><td class="markdownTableBodyNone">直通 Alpha（non-premultiplied）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">混合模式  </td><td class="markdownTableBodyNone">Normal（source-over）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">插值空间  </td><td class="markdownTableBodyNone">直通 Alpha 空间  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">灰度权重  </td><td class="markdownTableBodyNone">BT.709 / sRGB（0.299, 0.587, 0.114）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">预乘转换  </td><td class="markdownTableBodyNone">支持（to_premultiplied / from_premultiplied）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="named_colors"></a>
+预定义颜色常量</h1>
+<p>本类提供以下预定义颜色常量：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">常量名  </th><th class="markdownTableHeadNone">RGB 值  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">black()  </td><td class="markdownTableBodyNone">0, 0, 0, 255  </td><td class="markdownTableBodyNone">黑色  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">white()  </td><td class="markdownTableBodyNone">255, 255, 255, 255  </td><td class="markdownTableBodyNone">白色  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">gray()  </td><td class="markdownTableBodyNone">128, 128, 128, 255  </td><td class="markdownTableBodyNone">灰色  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">red()  </td><td class="markdownTableBodyNone">255, 0, 0, 255  </td><td class="markdownTableBodyNone">红色  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">green()  </td><td class="markdownTableBodyNone">0, 255, 0, 255  </td><td class="markdownTableBodyNone">绿色  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">blue()  </td><td class="markdownTableBodyNone">0, 0, 255, 255  </td><td class="markdownTableBodyNone">蓝色  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">yellow()  </td><td class="markdownTableBodyNone">255, 255, 0, 255  </td><td class="markdownTableBodyNone">黄色  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">magenta()  </td><td class="markdownTableBodyNone">255, 0, 255, 255  </td><td class="markdownTableBodyNone">品红  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">cyan()  </td><td class="markdownTableBodyNone">0, 255, 255, 255  </td><td class="markdownTableBodyNone">青色  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">transparent()  </td><td class="markdownTableBodyNone">0, 0, 0, 0  </td><td class="markdownTableBodyNone">完全透明  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本类采用直通 Alpha（straight alpha）表示，符合 CSS 和 SVG 标准。 对于需要预乘 Alpha 的图形 API（如 OpenGL、DirectX、Metal）， 可使用 <span class="tt">to_premultiplied()</span> 方法进行转换。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>根据 W3C Compositing Level 1，混合操作应在直通 Alpha 空间进行， 在预乘 Alpha 空间直接混合会产生错误的合成结果。 在跨进程或跨 API 传输预乘颜色数据时务必注明格式。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.w3.org/TR/css-color-4/">https://www.w3.org/TR/css-color-4/</a> </dd>
+<dd>
+<a href="https://www.w3.org/TR/compositing-1/">https://www.w3.org/TR/compositing-1/</a> </dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="ga51172fa58193f273f3b792449b16c896" name="ga51172fa58193f273f3b792449b16c896"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga51172fa58193f273f3b792449b16c896">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
@@ -148,7 +311,7 @@ $(function(){initNavTree('group___color.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>缩放后的颜色 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="color_8hpp_source.html">color.hpp</a> 第 <a class="el" href="color_8hpp_source.html#l00652">652</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="color_8hpp_source.html">color.hpp</a> 第 <a class="el" href="color_8hpp_source.html#l00838">838</a> 行定义.</p>
 
 </div>
 </div>
@@ -189,7 +352,7 @@ $(function(){initNavTree('group___color.html','',''); });
 </dl>
 <dl class="section return"><dt>返回</dt><dd>缩放后的颜色 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="color_8hpp_source.html">color.hpp</a> 第 <a class="el" href="color_8hpp_source.html#l00660">660</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="color_8hpp_source.html">color.hpp</a> 第 <a class="el" href="color_8hpp_source.html#l00846">846</a> 行定义.</p>
 
 </div>
 </div>

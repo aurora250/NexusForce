@@ -48,11 +48,11 @@ var group___system_info =
         [ "ARM64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4", null ],
         [ "IA64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a4c2c294c51f3230d47a6bf0fb0cbe47a", null ]
       ] ],
-      [ "get_architecture", "classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9", null ],
-      [ "get_CPU_info", "classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5", null ],
-      [ "get_memory_info", "classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6", null ],
-      [ "get_os_version_info", "classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f", null ],
-      [ "get_system_info", "classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602", null ],
+      [ "get_architecture", "classsysinfo.html#a2969c1689b21d9bc883071ccb353bbfd", null ],
+      [ "get_CPU_info", "classsysinfo.html#a3bd522897d213009f59aae487346d179", null ],
+      [ "get_memory_info", "classsysinfo.html#a2f66e2dc6fe96e9419e1920d6cdf0760", null ],
+      [ "get_os_version_info", "classsysinfo.html#ad81387f467fedd67a87a8cc5c927ff44", null ],
+      [ "get_system_info", "classsysinfo.html#ac5e05b4839bb2b63b4b2b7f51bb9e5c5", null ],
       [ "is_initialized", "classsysinfo.html#ab9331206875e9553e338c5a34d601498", null ],
       [ "refresh", "classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb", null ]
     ] ]

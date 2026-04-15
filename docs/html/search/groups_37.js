@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

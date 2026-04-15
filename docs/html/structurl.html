@@ -89,7 +89,7 @@ $(function(){initNavTree('structurl.html','','structurl-members'); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">url结构体 参考<div class="ingroups"><a class="el" href="group___network.html">网络通信</a></div></div></div>
+  <div class="headertitle"><div class="title">url结构体 参考<div class="ingroups"><a class="el" href="group___network.html">网络通信</a> &raquo; <a class="el" href="group___network_util.html">网络通信工具</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -162,9 +162,108 @@ Public 属性</h2></td></tr>
 <li>query：查询字符串</li>
 <li>fragment：片段标识符</li>
 </ul>
-<p>提供URL的解析、字符串化、编码和解码功能。 </p>
+<p>提供了URL的解析和构建功能。</p>
+<p>URL是互联网上标识和定位资源的标准方式，由多个组成部分构成。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下URL规范与编码标准：</p>
+<p><b>URL语法标准：</b></p><ul>
+<li>**IETF STD 66 / RFC 3986**：统一资源标识符（URI）通用语法 <a href="https://www.rfc-editor.org/rfc/rfc3986.html">https://www.rfc-editor.org/rfc/rfc3986.html</a></li>
+<li>**IETF RFC 3987**：国际化资源标识符（IRI） <a href="https://www.rfc-editor.org/rfc/rfc3987.html">https://www.rfc-editor.org/rfc/rfc3987.html</a></li>
+</ul>
+<p><b>WHATWG URL标准：</b></p><ul>
+<li>**WHATWG URL Living Standard**：URL标准（浏览器实现参考） <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a></li>
+</ul>
+<p><b>URL编码标准：</b></p><ul>
+<li>**IETF RFC 3986 §2.1**：百分号编码（Percent-Encoding） <a href="https://www.rfc-editor.org/rfc/rfc3986.html#section-2.1">https://www.rfc-editor.org/rfc/rfc3986.html#section-2.1</a></li>
+</ul>
+<p><b>HTML表单编码标准：</b></p><ul>
+<li>**WHATWG HTML Living Standard §4.10.21**：application/x-www-form-urlencoded 序列化 <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#url-encoded-form-data">https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#url-encoded-form-data</a></li>
+<li>**W3C HTML 4.01 Specification §17.13.4**：表单内容类型（历史参考） <a href="https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4">https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4</a></li>
+</ul>
+<p><b>URI与URL区分：</b></p><ul>
+<li>**IETF RFC 3305**：统一资源标识符（URI）、统一资源定位符（URL）和统一资源名称（URN）术语澄清 <a href="https://www.rfc-editor.org/rfc/rfc3305.html">https://www.rfc-editor.org/rfc/rfc3305.html</a></li>
+</ul>
+<p><b>相关安全标准：</b></p><ul>
+<li>**IETF RFC 6874**：URI中IPv6区域标识符的表示 <a href="https://www.rfc-editor.org/rfc/rfc6874.html">https://www.rfc-editor.org/rfc/rfc6874.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="url_structure"></a>
+URL结构定义</h1>
+<p>根据RFC 3986 §3，URL（URI的定位子集）的通用语法为：</p>
+<div class="fragment"><div class="line"><a class="code hl_variable" href="#af55eb2e3fc8b82b6869cc1a006fd7b4e">scheme</a> <span class="stringliteral">&quot;:&quot;</span> hier-part [ <span class="stringliteral">&quot;?&quot;</span> <a class="code hl_variable" href="#a1b90e78e0ab31835db6f42d399b3415e">query</a> ] [ <span class="stringliteral">&quot;#&quot;</span> <a class="code hl_variable" href="#a89602c93ef7655cbcb4969d2f7af7a1b">fragment</a> ]</div>
+<div class="ttc" id="astructurl_html_a1b90e78e0ab31835db6f42d399b3415e"><div class="ttname"><a href="#a1b90e78e0ab31835db6f42d399b3415e">url::query</a></div><div class="ttdeci">string query</div><div class="ttdoc">查询字符串</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00152">url.hpp:152</a></div></div>
+<div class="ttc" id="astructurl_html_a89602c93ef7655cbcb4969d2f7af7a1b"><div class="ttname"><a href="#a89602c93ef7655cbcb4969d2f7af7a1b">url::fragment</a></div><div class="ttdeci">string fragment</div><div class="ttdoc">片段标识符</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00153">url.hpp:153</a></div></div>
+<div class="ttc" id="astructurl_html_af55eb2e3fc8b82b6869cc1a006fd7b4e"><div class="ttname"><a href="#af55eb2e3fc8b82b6869cc1a006fd7b4e">url::scheme</a></div><div class="ttdeci">string scheme</div><div class="ttdoc">协议类型</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00148">url.hpp:148</a></div></div>
+</div><!-- fragment --><p>其中hier-part对于基于权限的URL为： </p><div class="fragment"><div class="line"><span class="stringliteral">&quot;//&quot;</span> authority <a class="code hl_variable" href="#a8ea57220960dca945a1b8083920f9950">path</a>-abempty</div>
+<div class="ttc" id="astructurl_html_a8ea57220960dca945a1b8083920f9950"><div class="ttname"><a href="#a8ea57220960dca945a1b8083920f9950">url::path</a></div><div class="ttdeci">string path</div><div class="ttdoc">资源路径</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00151">url.hpp:151</a></div></div>
+</div><!-- fragment --><p>authority部分为： </p><div class="fragment"><div class="line">[ userinfo <span class="stringliteral">&quot;@&quot;</span> ] <a class="code hl_variable" href="#a32706de92e065e4dad5e0f9944211cc6">host</a> [ <span class="stringliteral">&quot;:&quot;</span> <a class="code hl_variable" href="#a28788980da3ace09bf314caa690db3ec">port</a> ]</div>
+<div class="ttc" id="astructurl_html_a28788980da3ace09bf314caa690db3ec"><div class="ttname"><a href="#a28788980da3ace09bf314caa690db3ec">url::port</a></div><div class="ttdeci">ports port</div><div class="ttdoc">端口号</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00150">url.hpp:150</a></div></div>
+<div class="ttc" id="astructurl_html_a32706de92e065e4dad5e0f9944211cc6"><div class="ttname"><a href="#a32706de92e065e4dad5e0f9944211cc6">url::host</a></div><div class="ttdeci">string host</div><div class="ttdoc">主机名或IP地址</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00149">url.hpp:149</a></div></div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="url_components"></a>
+URL组成部分</h1>
+<p>本实现解析和存储以下URL组成部分：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组成部分  </th><th class="markdownTableHeadNone">RFC 3986引用  </th><th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">scheme  </td><td class="markdownTableBodyNone">§3.1  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">"https"  </td><td class="markdownTableBodyNone">协议类型（不区分大小写）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">host  </td><td class="markdownTableBodyNone">§3.2.2  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">"example.com"  </td><td class="markdownTableBodyNone">主机名或IP地址  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">port  </td><td class="markdownTableBodyNone">§3.2.3  </td><td class="markdownTableBodyNone">ports  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">端口号  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">path  </td><td class="markdownTableBodyNone">§3.3  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">"/path/to/resource"  </td><td class="markdownTableBodyNone">资源路径  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">query  </td><td class="markdownTableBodyNone">§3.4  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">"key=value&amp;foo=bar"  </td><td class="markdownTableBodyNone">查询字符串  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">fragment  </td><td class="markdownTableBodyNone">§3.5  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">"section1"  </td><td class="markdownTableBodyNone">片段标识符  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="percent_encoding"></a>
+百分号编码规则</h1>
+<p>根据RFC 3986 §2.1，百分号编码规则：</p>
+<p>**保留字符**（在特定上下文中具有特殊含义）： </p><div class="fragment"><div class="line">! * <span class="stringliteral">&#39; ( ) ; : @ &amp; = + $ , / ? % # [ ]</span></div>
+</div><!-- fragment --><p>**非保留字符**（可直接使用无需编码）： </p><div class="fragment"><div class="line">A-Z a-z 0-9 - . _ ~</div>
+</div><!-- fragment --><p>**编码格式**：<span class="tt">%</span> + 两个十六进制数字（大写），如空格编码为 <span class="tt">%20</span>。</p>
+<h1 class="doxsection"><a class="anchor" id="form_encoding"></a>
+表单编码规则</h1>
+<p>根据WHATWG HTML标准§4.10.21，application/x-www-form-urlencoded编码规则：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">规则  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">空格编码  </td><td class="markdownTableBodyNone">空格替换为 <span class="tt">+</span>（而非 <span class="tt">%20</span>）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">保留字符  </td><td class="markdownTableBodyNone"><span class="tt">* - . _</span> 不编码，其他保留字符进行百分号编码  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">键值对分隔  </td><td class="markdownTableBodyNone"><span class="tt">&amp;</span> 分隔多个参数  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">键值赋值  </td><td class="markdownTableBodyNone"><span class="tt">=</span> 连接键和值  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Scheme解析  </td><td class="markdownTableBodyNone">大小写不敏感，存储为小写  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">端口推断  </td><td class="markdownTableBodyNone">省略时根据scheme自动推断默认端口  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">默认路径  </td><td class="markdownTableBodyNone">空路径自动设为"/"  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">IPv6支持  </td><td class="markdownTableBodyNone">主机部分支持[::]格式  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">编码字符集  </td><td class="markdownTableBodyNone">UTF-8（RFC 3986推荐）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">无效URL处理  </td><td class="markdownTableBodyNone">抛出network_exception异常  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本实现兼容RFC 3986的URI语法和WHATWG的URL标准。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>根据RFC 3986 §7.3，百分号编码中未保留字符不应被编码，否则可能影响与旧实现的兼容性。 userinfo部分（username:password@host）已被RFC 3986废弃，本实现不解析该部分。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a> </dd>
+<dd>
+<a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a> </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="url_8hpp_source.html">url.hpp</a> 第 <a class="el" href="url_8hpp_source.html#l00036">36</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="url_8hpp_source.html">url.hpp</a> 第 <a class="el" href="url_8hpp_source.html#l00147">147</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a359e5967e16cb6df4f2d7e634f61095d" name="a359e5967e16cb6df4f2d7e634f61095d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a359e5967e16cb6df4f2d7e634f61095d">&#9670;&#160;</a></span>decode()</h2>
@@ -199,7 +298,7 @@ Public 属性</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>解码后的字符串，如果格式无效返回none</dd></dl>
 <p>将XX格式转换回原始字符 </p>
 
-<p class="reference">引用了 <a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode()</a> , 以及 <a class="el" href="url_8hpp_source.html#l00041">query</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode()</a> , 以及 <a class="el" href="url_8hpp_source.html#l00152">query</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode()</a>.</p>
 

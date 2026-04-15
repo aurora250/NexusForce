@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['字符串操作_0',['字符串操作',['../group___string_operations.html',1,'']]],
-  ['字符串格式化_1',['字符串格式化',['../group___format.html',1,'']]],
-  ['字符串视图_2',['字符串视图',['../group___string_view.html',1,'']]],
-  ['字符串转换_3',['字符串转换',['../group___string_converts.html',1,'']]],
-  ['字符串_4',['字符串',['../group___string.html',1,'']]],
-  ['字符特征_5',['字符特征',['../group___char_traits.html',1,'']]],
-  ['字符类型检查_6',['字符类型检查',['../group___char_type_checking.html',1,'']]],
-  ['字符转换_7',['字符转换',['../group___char_case_conversion.html',1,'']]],
-  ['字面量_8',['字面量',['../group___user_literals.html',1,'']]]
+  ['可读类型名_0',['可读类型名',['../group___check_type.html',1,'']]],
+  ['可调用函数_1',['可调用函数',['../group___invoke_function.html',1,'']]],
+  ['可转换性检查_2',['可转换性检查',['../group___convertible_checks.html',1,'']]],
+  ['可选值_3',['可选值',['../group___optional.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['元组_0',['元组',['../group___tuple.html',1,'']]]
+  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
 ];

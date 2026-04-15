@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
+  ['正则表达式_0',['正则表达式',['../group___regex.html',1,'']]]
 ];

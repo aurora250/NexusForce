@@ -8,6 +8,6 @@ var searchData=
   ['line_5',['line',['../structlog__event.html#a53b14a83bf184849eadebdf9ccebcada',1,'log_event']]],
   ['logical_5fprocessors_6',['logical_processors',['../structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530',1,'sysinfo::CPU_info']]],
   ['long_5fname_7',['long_name',['../structcmdline_1_1option.html#aa2268c75f8b3c5ae85a6a596c343591e',1,'cmdline::option']]],
-  ['low_8',['low',['../structmurmur__hash.html#ac68d97d442636f69b0fdd1a976fb166b',1,'murmur_hash']]],
-  ['low_5fprecise_5ftolerance_9',['LOW_PRECISE_TOLERANCE',['../group___math_constants.html#ga4824a7640629417cfd86f30d8a00b4f5',1,'math.hpp']]]
+  ['loose_5ftolerance_8',['LOOSE_TOLERANCE',['../group___math_constants.html#ga2036acdefc1770536397367e313b3f8e',1,'math.hpp']]],
+  ['low_9',['low',['../structmurmur__hash.html#ac68d97d442636f69b0fdd1a976fb166b',1,'murmur_hash']]]
 ];

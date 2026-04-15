@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['8_20编码规则_0',['UTF-8 编码规则',['../codepoint_8hpp.html#utf8_encoding',1,'']]]
+  ['2_20与_20json_20兼容性_0',['YAML 1.2 与 JSON 兼容性',['../yaml__value_8hpp.html#yaml_vs_json',1,'']]],
+  ['2_20家族对比_1',['SHA-2 家族对比',['../group___s_h_a256.html#comparison',1,'']]],
+  ['256_2',['256',['../group___a_e_s256.html',1,'AES-256'],['../group___s_h_a256.html',1,'SHA-256']]],
+  ['256_20色调色板_3',['ANSI 256 色调色板',['../group___color.html#ansi_256_palette',1,'']]]
 ];

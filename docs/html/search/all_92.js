@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['颜色_0',['颜色',['../group___color.html',1,'']]]
+  ['索引元组_0',['索引元组',['../group___index_tuple.html',1,'']]]
 ];

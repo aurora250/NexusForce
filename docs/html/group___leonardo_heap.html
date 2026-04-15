@@ -121,6 +121,92 @@ $(function(){initNavTree('group___leonardo_heap.html','',''); });
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>莱昂纳多堆算法实现 </p>
+<p>莱昂纳多堆基于莱昂纳多数（Leonardo Numbers），由 Edsger W. Dijkstra 设计， 具有自平衡特性，在接近有序的序列上表现出接近线性的时间复杂度。</p>
+<h1 class="doxsection"><a class="anchor" id="references"></a>
+学术文献与算法来源</h1>
+<p>本实现基于以下原创学术论文和算法出版物：</p>
+<p><b>平滑排序（Smoothsort）原始论文：</b></p><ul>
+<li>**Edsger W. Dijkstra (1981)**：Smoothsort, an alternative for sorting in situ EWD796a, Burroughs Corporation <a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</a></li>
+</ul>
+<p><b>算法分析与实现参考：</b></p><ul>
+<li>**Edsger W. Dijkstra (1982)**：Smoothsort, an alternative for sorting in situ Science of Computer Programming, Volume 1, Issue 3, Pages 223-233 <a href="https://doi.org/10.1016/0167-6423(82)90016-8">https://doi.org/10.1016/0167-6423(82)90016-8</a></li>
+</ul>
+<p><b>莱昂纳多数（Leonardo Numbers）定义：</b></p><ul>
+<li>**Keith Schwarz (2010)**：Smoothsort Demystified Stanford CS166 Lecture Notes <a href="https://www.keithschwarz.com/smoothsort/">https://www.keithschwarz.com/smoothsort/</a></li>
+</ul>
+<p><b>现代算法描述：</b></p><ul>
+<li>**Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein**： Introduction to Algorithms (3rd Edition), Problem 6-2 (Smoothsort)</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="leonardo_numbers"></a>
+莱昂纳多数列</h1>
+<p>莱昂纳多数由 Dijkstra 为平滑排序专门设计，定义如下：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">索引 n  </th><th class="markdownTableHeadNone">递推公式  </th><th class="markdownTableHeadNone">前几项  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">n  </td><td class="markdownTableBodyNone">L(0) = 1, L(1) = 1, L(n) = L(n-1) + L(n-2) + 1  </td><td class="markdownTableBodyNone">1, 1, 3, 5, 9, 15, 25, 41, 67  </td></tr>
+</table>
+<p>**递推公式**：L(n) = L(n-1) + L(n-2) + 1</p>
+<p>**闭式表示**：L(n) = 2 × F(n+1) - 1，其中 F 为斐波那契数</p>
+<h1 class="doxsection"><a class="anchor" id="heap_structure"></a>
+莱昂纳多堆结构</h1>
+<p>莱昂纳多堆是一系列满足堆性质的二叉树的集合，每棵树的大小均为莱昂纳多数：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">描述  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">堆性质  </td><td class="markdownTableBodyNone">父节点 ≥ 子节点（最大堆）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">树大小  </td><td class="markdownTableBodyNone">每棵树的大小为 L(n)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">树结构  </td><td class="markdownTableBodyNone">根节点左子树大小为 L(n-1)，右子树大小为 L(n-2)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">多树组合  </td><td class="markdownTableBodyNone">堆由多棵大小递减的莱昂纳多树组成  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">大小约束  </td><td class="markdownTableBodyNone">相邻树的大小差至少为 2  </td></tr>
+</table>
+<p>**树结构示意**（L(4) = 9）： </p><div class="fragment"><div class="line">       root</div>
+<div class="line">      /    \</div>
+<div class="line">  L(3)=5  L(2)=3</div>
+<div class="line">  /   \    /  \</div>
+<div class="line">L(2) L(1) L(1) L(0)</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="comparison_with_heapsort"></a>
+与堆排序对比</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">平滑排序（Smoothsort）  </th><th class="markdownTableHeadNone">堆排序（Heapsort）  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">最坏时间复杂度  </td><td class="markdownTableBodyNone">O(n log n)  </td><td class="markdownTableBodyNone">O(n log n)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">最优时间复杂度  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">O(n log n)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">自适应  </td><td class="markdownTableBodyNone">是  </td><td class="markdownTableBodyNone">否  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">代码复杂度  </td><td class="markdownTableBodyNone">较高  </td><td class="markdownTableBodyNone">较低  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">实现难度  </td><td class="markdownTableBodyNone">困难  </td><td class="markdownTableBodyNone">简单  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="tree_merging"></a>
+树的合并规则</h1>
+<p>莱昂纳多堆中的树合并遵循以下规则：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">条件  </th><th class="markdownTableHeadNone">操作  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">最后两棵树大小分别为 L(k+1) 和 L(k)  </td><td class="markdownTableBodyNone">合并为大小为 L(k+2) 的树  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">最后两棵树大小不满足 L(k+1) 和 L(k) 关系  </td><td class="markdownTableBodyNone">添加大小为 L(1) 或 L(0) 的新树  </td></tr>
+</table>
+<p>**合并后结构**：</p><ul>
+<li>新根节点：原第二棵树的根</li>
+<li>左子树：原第一棵树（大小为 L(k+1)）</li>
+<li>右子树：原第二棵树的右子树（大小为 L(k)）</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>平滑排序是 Edsger W. Dijkstra（图灵奖得主，结构化程序设计倡导者） 在 1981 年设计的算法，旨在证明原地排序算法可以具有自适应性。 尽管代码复杂，但其在理论上的优雅性使其成为算法教材中的经典案例。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>对于大多数应用场景，推荐使用 <span class="tt"><a class="el" href="group___sort_algorithms.html#ga3d93e28bad28595d49e09ec5e08a7895" title="标准排序">sort</a></span>。 平滑排序的常数因子较大，在随机数据上通常慢于快速排序。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</a> </dd>
+<dd>
+<a href="https://www.keithschwarz.com/smoothsort/">https://www.keithschwarz.com/smoothsort/</a> </dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
 <a id="gac60b0313c9a99501982d00f52c3017c4" name="gac60b0313c9a99501982d00f52c3017c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac60b0313c9a99501982d00f52c3017c4">&#9670;&#160;</a></span>adjust_leonardo_heap()</h2>
@@ -171,11 +257,11 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <p>调整指定位置的莱昂纳多堆，确保堆性质得以维护。 如果父节点小于子节点，则进行交换并递归调整。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">40</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">128</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00088">leonardo()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00186">leonardo()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00231">make_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00144">pop_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00101">push_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00186">sort_leonardo_heap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00319">make_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00232">pop_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00189">push_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00274">sort_leonardo_heap()</a>.</p>
 
 </div>
 </div>
@@ -216,9 +302,9 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <p>将指定范围内的元素构建成一个莱昂纳多堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00231">231</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00319">319</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00549">smooth_sort()</a>.</p>
 
@@ -261,9 +347,9 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <p>移除堆顶元素，并重新调整堆。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00144">144</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00232">232</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="math_8hpp_source.html#l00088">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="math_8hpp_source.html#l00186">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>
@@ -304,9 +390,9 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <p>将最后一个元素插入到莱昂纳多堆中，并调整堆以维持堆性质。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00101">101</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00189">189</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>
@@ -347,9 +433,9 @@ template&lt;typename Iterator&gt; </div>
 </dl>
 <p>实现平滑排序算法，时间复杂度O(n log n)，在接近有序的序列上表现优异。 </p>
 
-<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00186">186</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="leonardo__heap_8hpp_source.html">leonardo_heap.hpp</a> 第 <a class="el" href="leonardo__heap_8hpp_source.html#l00274">274</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00040">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="math_8hpp_source.html#l00088">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">adjust_leonardo_heap()</a>, <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="math_8hpp_source.html#l00186">leonardo()</a>, <a class="el" href="vector_8hpp_source.html#l00902">vector&lt; T, Alloc &gt;::push_back()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00549">smooth_sort()</a>.</p>
 

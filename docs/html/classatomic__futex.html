@@ -89,7 +89,7 @@ $(function(){initNavTree('classatomic__futex.html','','classatomic__futex-member
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">atomic_futex&lt; WaiterBit &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___futex.html">FUTEX</a></div></div></div>
+  <div class="headertitle"><div class="title">atomic_futex&lt; WaiterBit &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___futex.html">FUTEX</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -134,7 +134,7 @@ class atomic_futex&lt; WaiterBit &gt;</div><p>原子快速用户态互斥锁类�
 </dl>
 <p>基于FUTEX实现的用户态互斥锁， 提供高效的线程同步机制，减少不必要的上下文切换。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00031">31</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00037">37</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a50cfc12a191471e9630e01f530091686" name="a50cfc12a191471e9630e01f530091686"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50cfc12a191471e9630e01f530091686">&#9670;&#160;</a></span>atomic_futex()</h2>
@@ -169,7 +169,7 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00136">136</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00142">142</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
@@ -211,9 +211,9 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
 <dl class="section return"><dt>返回</dt><dd>加载的数据值（清除等待者标志位）</dd></dl>
 <dl class="section note"><dt>注解</dt><dd>清除等待者标志位，只返回实际数据 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00146">146</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00152">152</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00173">load_when_equal()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00250">load_when_equal_until()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00231">load_when_equal_until()</a> , 以及 <a class="el" href="atomic__futex_8hpp_source.html#l00158">load_when_not_equal()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00179">load_when_equal()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00256">load_when_equal_until()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00237">load_when_equal_until()</a> , 以及 <a class="el" href="atomic__futex_8hpp_source.html#l00164">load_when_not_equal()</a>.</p>
 
 </div>
 </div>
@@ -256,9 +256,9 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
 </dl>
 <p>阻塞当前线程，直到数据值等于指定的值。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00173">173</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00179">179</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00146">load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00152">load()</a>.</p>
 
 </div>
 </div>
@@ -316,9 +316,9 @@ template&lt;typename Rep, typename Period&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前等到相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00191">191</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00197">197</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00472">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00209">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00586">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
 </div>
 </div>
@@ -377,11 +377,11 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前等到相等</dd></dl>
 <dl class="section note"><dt>注解</dt><dd>将其他时钟转换为单调时钟进行处理 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00209">209</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00215">215</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00472">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00209">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00586">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00191">load_when_equal_for()</a> , 以及 <a class="el" href="atomic__futex_8hpp_source.html#l00209">load_when_equal_until()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00197">load_when_equal_for()</a> , 以及 <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a>.</p>
 
 </div>
 </div>
@@ -438,9 +438,9 @@ template&lt;typename Dur&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前等到相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00250">250</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00256">256</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00146">load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00152">load()</a>.</p>
 
 </div>
 </div>
@@ -497,9 +497,9 @@ template&lt;typename Dur&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否在超时前等到相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00231">231</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00237">237</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00146">load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00152">load()</a>.</p>
 
 </div>
 </div>
@@ -543,9 +543,9 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
 <dl class="section return"><dt>返回</dt><dd>当前值（当不等于指定值时）</dd></dl>
 <p>阻塞当前线程，直到数据值不等于指定的值。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00158">158</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00164">164</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00146">load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__futex_8hpp_source.html#l00152">load()</a>.</p>
 
 </div>
 </div>
@@ -588,7 +588,7 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
 </dl>
 <p>原子地存储新值，如果有等待线程，则唤醒所有等待线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00267">267</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00273">273</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19">futex_notify()</a>.</p>
 

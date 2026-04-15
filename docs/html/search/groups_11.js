@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
+  ['xor_0',['XOR',['../group___x_o_r.html',1,'']]]
 ];

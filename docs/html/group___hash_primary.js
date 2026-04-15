@@ -14,7 +14,6 @@ var group___hash_primary =
     [ "hash&lt; T, enable_if_t&lt; is_base_of&lt; ihashable&lt; T &gt;, T &gt;::value &gt; &gt;", "structhash_3_01_t_00_01enable__if__t_3_01is__base__of_3_01ihashable_3_01_t_01_4_00_01_t_01_4_1_1value_01_4_01_4.html", null ],
     [ "hash&lt; shared_ptr&lt; T &gt; &gt;", "structhash_3_01shared__ptr_3_01_t_01_4_01_4.html", null ],
     [ "hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;", "structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html", null ],
-    [ "hash&lt; uuid &gt;", "structhash_3_01uuid_01_4.html", null ],
     [ "DJB2_hash", "group___hash_primary.html#ga874816e8d77feae51451b53f8c026b57", null ],
     [ "FNV_hash", "group___hash_primary.html#ga20409000240b9904721f7918223dc731", null ],
     [ "FNV_hash_integer", "group___hash_primary.html#ga7ba8ee96f866b11a393bb705b97132fe", null ],

@@ -100,55 +100,57 @@ $(function(){initNavTree('thread__tracker_8hpp_source.html','',''); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classthread__tracker.html">   28</a></span><span class="keyword">class </span>thread_tracker {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static</span> <a class="code hl_struct" href="structatomic.html">atomic&lt;int&gt;</a> count_; </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">friend</span> <span class="keyword">class </span>thread;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">void</span> on_thread_create() <span class="keyword">noexcept</span> { ++count_; }</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">void</span> on_thread_destroy() <span class="keyword">noexcept</span> { --count_; }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classthread__tracker.html">   34</a></span><span class="keyword">class </span>thread_tracker {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">static</span> <a class="code hl_struct" href="structatomic.html">atomic&lt;int&gt;</a> count_; </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    thread_tracker() {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        on_thread_create(); <span class="comment">// main thread</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">friend</span> <span class="keyword">class </span>thread;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">void</span> on_thread_create() <span class="keyword">noexcept</span> { ++count_; }</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    ~thread_tracker() {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        on_thread_destroy(); <span class="comment">// main thread</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">   53</a></span>    <span class="keyword">static</span> thread_tracker&amp; <a class="code hl_function" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">instance</a>() noexcept {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keyword">static</span> thread_tracker tracker;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> tracker;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">void</span> on_thread_destroy() <span class="keyword">noexcept</span> { --count_; }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    thread_tracker() {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        on_thread_create(); <span class="comment">// main thread</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    ~thread_tracker() {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        on_thread_destroy(); <span class="comment">// main thread</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">   59</a></span>    <span class="keyword">static</span> thread_tracker&amp; <a class="code hl_function" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">instance</a>() noexcept {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keyword">static</span> thread_tracker tracker;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> tracker;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
 </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">   64</a></span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">bool</span> <a class="code hl_function" href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">is_single_threaded</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">instance</a>().count_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>() == 1; }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">   72</a></span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">int</span> <a class="code hl_function" href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">thread_count</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">instance</a>().count_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>(); }</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">   70</a></span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">bool</span> <a class="code hl_function" href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">is_single_threaded</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">instance</a>().count_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>() == 1; }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">   78</a></span>    <span class="keyword">static</span> NEFORCE_ALWAYS_INLINE <span class="keywordtype">int</span> <a class="code hl_function" href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">thread_count</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">instance</a>().count_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>(); }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>};</div>
 </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb">   80</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">bool</span> <a class="code hl_function" href="group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb">is_single_threaded</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">thread_tracker::is_single_threaded</a>(); }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee">   86</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">int</span> <a class="code hl_function" href="group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee">thread_count</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">thread_tracker::thread_count</a>(); }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> <span class="comment">// Thread</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_THREAD_TRACKER_HPP__</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb">   86</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">bool</span> <a class="code hl_function" href="group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb">is_single_threaded</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">thread_tracker::is_single_threaded</a>(); }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee">   92</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">int</span> <a class="code hl_function" href="group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee">thread_count</a>() noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">thread_tracker::thread_count</a>(); }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> <span class="comment">// Thread</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> <span class="comment">// AsyncComponents</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_THREAD_TRACKER_HPP__</span></div>
 <div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
-<div class="ttc" id="aclassthread__tracker_html_a2bd02c75012fa7b74dbbbbdb64ef86f9"><div class="ttname"><a href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">thread_tracker::instance</a></div><div class="ttdeci">static thread_tracker &amp; instance() noexcept</div><div class="ttdoc">获取线程跟踪器单例实例</div><div class="ttdef"><b>定义</b> <a href="#l00053">thread_tracker.hpp:53</a></div></div>
-<div class="ttc" id="aclassthread__tracker_html_a6266f094bc8153c30cb699a45d9fa099"><div class="ttname"><a href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">thread_tracker::thread_count</a></div><div class="ttdeci">static NEFORCE_ALWAYS_INLINE int thread_count() noexcept</div><div class="ttdoc">获取当前活动线程数量</div><div class="ttdef"><b>定义</b> <a href="#l00072">thread_tracker.hpp:72</a></div></div>
-<div class="ttc" id="aclassthread__tracker_html_adc75c1a5adf3e99832c446b7fe622dd2"><div class="ttname"><a href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">thread_tracker::is_single_threaded</a></div><div class="ttdeci">static NEFORCE_ALWAYS_INLINE bool is_single_threaded() noexcept</div><div class="ttdoc">检查是否处于单线程模式</div><div class="ttdef"><b>定义</b> <a href="#l00064">thread_tracker.hpp:64</a></div></div>
-<div class="ttc" id="agroup___thread_html_ga48979ba9a5dbca2adc1b3b94bf0edbee"><div class="ttname"><a href="group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee">thread_count</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE int thread_count() noexcept</div><div class="ttdoc">获取当前活动线程数量</div><div class="ttdef"><b>定义</b> <a href="#l00086">thread_tracker.hpp:86</a></div></div>
-<div class="ttc" id="agroup___thread_html_gaaaab5bab899d6f3e7f2bb2c2867254fb"><div class="ttname"><a href="group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb">is_single_threaded</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE bool is_single_threaded() noexcept</div><div class="ttdoc">检查当前是否处于单线程模式</div><div class="ttdef"><b>定义</b> <a href="#l00080">thread_tracker.hpp:80</a></div></div>
-<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00031">atomic.hpp:31</a></div></div>
-<div class="ttc" id="astructatomic_html_a08238b88fc524dbab833b1f2efbca3ec"><div class="ttname"><a href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">atomic::load</a></div><div class="ttdeci">T load(const memory_order mo=memory_order_seq_cst) const noexcept</div><div class="ttdoc">原子加载操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00124">atomic.hpp:124</a></div></div>
+<div class="ttc" id="aclassthread__tracker_html_a2bd02c75012fa7b74dbbbbdb64ef86f9"><div class="ttname"><a href="classthread__tracker.html#a2bd02c75012fa7b74dbbbbdb64ef86f9">thread_tracker::instance</a></div><div class="ttdeci">static thread_tracker &amp; instance() noexcept</div><div class="ttdoc">获取线程跟踪器单例实例</div><div class="ttdef"><b>定义</b> <a href="#l00059">thread_tracker.hpp:59</a></div></div>
+<div class="ttc" id="aclassthread__tracker_html_a6266f094bc8153c30cb699a45d9fa099"><div class="ttname"><a href="classthread__tracker.html#a6266f094bc8153c30cb699a45d9fa099">thread_tracker::thread_count</a></div><div class="ttdeci">static NEFORCE_ALWAYS_INLINE int thread_count() noexcept</div><div class="ttdoc">获取当前活动线程数量</div><div class="ttdef"><b>定义</b> <a href="#l00078">thread_tracker.hpp:78</a></div></div>
+<div class="ttc" id="aclassthread__tracker_html_adc75c1a5adf3e99832c446b7fe622dd2"><div class="ttname"><a href="classthread__tracker.html#adc75c1a5adf3e99832c446b7fe622dd2">thread_tracker::is_single_threaded</a></div><div class="ttdeci">static NEFORCE_ALWAYS_INLINE bool is_single_threaded() noexcept</div><div class="ttdoc">检查是否处于单线程模式</div><div class="ttdef"><b>定义</b> <a href="#l00070">thread_tracker.hpp:70</a></div></div>
+<div class="ttc" id="agroup___thread_html_ga48979ba9a5dbca2adc1b3b94bf0edbee"><div class="ttname"><a href="group___thread.html#ga48979ba9a5dbca2adc1b3b94bf0edbee">thread_count</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE int thread_count() noexcept</div><div class="ttdoc">获取当前活动线程数量</div><div class="ttdef"><b>定义</b> <a href="#l00092">thread_tracker.hpp:92</a></div></div>
+<div class="ttc" id="agroup___thread_html_gaaaab5bab899d6f3e7f2bb2c2867254fb"><div class="ttname"><a href="group___thread.html#gaaaab5bab899d6f3e7f2bb2c2867254fb">is_single_threaded</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE bool is_single_threaded() noexcept</div><div class="ttdoc">检查当前是否处于单线程模式</div><div class="ttdef"><b>定义</b> <a href="#l00086">thread_tracker.hpp:86</a></div></div>
+<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00037">atomic.hpp:37</a></div></div>
+<div class="ttc" id="astructatomic_html_a08238b88fc524dbab833b1f2efbca3ec"><div class="ttname"><a href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">atomic::load</a></div><div class="ttdeci">T load(const memory_order mo=memory_order_seq_cst) const noexcept</div><div class="ttdoc">原子加载操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00130">atomic.hpp:130</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

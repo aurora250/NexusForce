@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NexusForce: 首页</title>
+<title>NexusForce: NexusForce V1.0.0</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,51 +89,468 @@ $(function(){initNavTree('index.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">首页 </div></div>
+  <div class="headertitle"><div class="title">NexusForce V1.0.0 </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="intro"></a>
-简介</h1>
-<p>本项目旨在建立功能健全、风格统一、可读性强、社区共建、跨平台兼容的现代C++开发库。 通过清晰的架构设计、规范的代码实现、丰富的设计模式应用， 为项目开发提供实用的工具集， 同时也为C++学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。</p>
-<p>有劳各位多多issue，使本项目趋于健全。如有不足，还望斧正。</p>
-<p>本库使用IO设备时默认您的操作系统字符集为UTF-8，如不是，请尝试设置，否则可能乱码。</p>
-<h1 class="doxsection"><a class="anchor" id="environment"></a>
-支持环境</h1>
+<div class="textblock"><p><a class="anchor" id="md__d_1_2_workspace_2_cpp_01_workspace_2_c_line_01_workspace_2_nexus_force_2_r_e_a_d_m_e"></a></p>
+<p><a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&amp;logo=vcpkg&amp;logoColor=white" alt="vcpkg" class="inline"/></a> <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&amp;logo=cmake&amp;logoColor=white" alt="CMake" class="inline"/></a> <a href="https://isocpp.org"><img src="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white" alt="C++" class="inline"/></a> <a href="https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml"><img src="https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg" alt="CodeQL" style="pointer-events: none;" class="inline"/></a> [<img src="https://img.shields.io/badge/Quality%20Gate-Passed-success?style=flat-square&amp;logo=sonarqube&amp;logoColor=white" alt="Quality Gate" class="inline"/>]() <a href="https://clang.llvm.org/docs/ClangFormat.html"><img src="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Format" class="inline"/></a> <a href="https://clang.llvm.org/extra/clang-tidy/"><img src="https://img.shields.io/badge/Clang--Tidy-Passed-brightgreen?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Tidy" class="inline"/></a> <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"><img src="https://img.shields.io/badge/C%2B%2B%20Core%20Guidelines-Checked-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white" alt="C++ Core Guidelines" class="inline"/></a> <a href="https://valgrind.org"><img src="https://img.shields.io/badge/Valgrind-Tested-2E8B57?style=flat-square&amp;logo=valgrind&amp;logoColor=white" alt="Valgrind" class="inline"/></a> [<img src="https://img.shields.io/badge/Memory%20Leak-None-00C853?style=flat-square" alt="Memory Leak" class="inline"/>](valgrind) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-F9A825?style=flat-square" alt="License" class="inline"/></a> <a href="https://nexusforce.org.cn"><img src="https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&amp;logo=readthedocs&amp;logoColor=white" alt="Docs" class="inline"/></a> <a href="https://github.com/aurora250/NexusForce/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&amp;logo=git&amp;logoColor=white" alt="PRs Welcome" class="inline"/></a></p>
+<blockquote class="doxtable">
+<p>🌐 <b>语言</b> / <b>Language</b> <br  />
+ 通过其他语言阅读: English </p>
+</blockquote>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+📑 目录</h1>
+<ul>
+<li>项目简介</li>
+<li>支持环境</li>
+<li>工程质量</li>
+<li>标准合规</li>
+<li>特性</li>
+<li>编译指南</li>
+<li>文档</li>
+<li>协议</li>
+<li>更新日志</li>
+<li>贡献者</li>
+<li>TODO</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+📖 项目简介</h1>
+<p>本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，为项目开发提供实用的工具集，同时也为 C++ 学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。</p>
+<p>💡 有劳各位多多 <a href="https://github.com/aurora250/NexusForce/issues">提交 Issue</a>，使本项目趋于健全。如有不足，还望斧正。</p>
+<blockquote class="doxtable">
+<p>ℹ️ <b>字符编码说明</b> <br  />
+ 本库假定运行环境的默认系统代码页为 **UTF-8**。若在非 UTF-8 环境下使用 IO 相关功能，请确保已正确配置 UTF-8 区域设置，以避免潜在的字符行为异常。 </p>
+</blockquote>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+🖥️ 支持环境</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">平台  </th><th class="markdownTableHeadNone">指令集  </th><th class="markdownTableHeadNone">位宽  </th><th class="markdownTableHeadNone">编译器  </th><th class="markdownTableHeadNone">C++标准  </th></tr>
+<th class="markdownTableHeadNone">平台  </th><th class="markdownTableHeadNone">指令集  </th><th class="markdownTableHeadNone">位宽  </th><th class="markdownTableHeadNone">编译器  </th><th class="markdownTableHeadNone">C++ 标准  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">WINDOWS  </td><td class="markdownTableBodyNone">X86  </td><td class="markdownTableBodyNone">32位  </td><td class="markdownTableBodyNone">MSVC  </td><td class="markdownTableBodyNone">14  </td></tr>
+<td class="markdownTableBodyNone">🪟 WINDOWS  </td><td class="markdownTableBodyNone">X86  </td><td class="markdownTableBodyNone">32位  </td><td class="markdownTableBodyNone">MSVC  </td><td class="markdownTableBodyNone">14  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">LINUX  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">64位  </td><td class="markdownTableBodyNone">MinGW  </td><td class="markdownTableBodyNone">17  </td></tr>
+<td class="markdownTableBodyNone">🐧 LINUX  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">64位  </td><td class="markdownTableBodyNone">MinGW  </td><td class="markdownTableBodyNone">17  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">GCC  </td><td class="markdownTableBodyNone">20  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">CLANG  </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Clang  </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="dependency"></a>
-前置依赖</h1>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+✨ 工程质量</h1>
+<p>NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化检查确保代码健壮性与可读性。</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">指标  </th><th class="markdownTableHeadNone">状态  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">📊 <b>代码规模</b>  </td><td class="markdownTableBodyNone">12万+ 行  </td><td class="markdownTableBodyNone">核心库源码与头文件  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">🔒 <b>CodeQL 安全分析</b>  </td><td class="markdownTableBodyNone"><b>0 漏洞</b>  </td><td class="markdownTableBodyNone"><span class="tt">security-and-quality</span> 全规则集，零安全告警  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">🔍 <b>Clang-Tidy 静态检查</b>  </td><td class="markdownTableBodyNone"><b>零警告</b>  </td><td class="markdownTableBodyNone">全量规则集（<span class="tt">bugprone</span>/<span class="tt">cppcoreguidelines</span>/<span class="tt">hicpp</span>/<span class="tt">modernize</span>/<span class="tt">performance</span>/<span class="tt">readability</span>），警告即错误  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">🎨 <b>Clang-Format 代码风格</b>  </td><td class="markdownTableBodyNone"><b>强制统一</b>  </td><td class="markdownTableBodyNone">120 列、4 空格、K&amp;R 变体大括号、强制大括号插入等  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">⚠️ <b>警告即错误</b>  </td><td class="markdownTableBodyNone"><b><span class="tt">-Werror</span></b>  </td><td class="markdownTableBodyNone">所有 Clang-Tidy 警告视为编译错误，CI 阻断  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">💧 <b>动态内存检查</b>  </td><td class="markdownTableBodyNone"><b>0 泄漏</b>  </td><td class="markdownTableBodyNone">Valgrind 全量测试，无内存泄漏与越界访问  </td></tr>
+</table>
+<blockquote class="doxtable">
+<p>📋 **关于规则豁免**：<a href=".clang-tidy"><span class="tt">.clang-tidy</span></a> 包含约 60 项显式豁免，<a href=".clang-format"><span class="tt">.clang-format</span></a> 包含多项风格定制。每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。 </p>
+</blockquote>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+📡 标准合规</h1>
+<p>NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，确保行为可预测、互操作性强且安全可靠。以下为关键组件的标准映射：</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+🌐 网络协议与互联网标准</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组件  </th><th class="markdownTableHeadNone">遵循标准  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>URL 解析与编码</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc3986">RFC 3986</a>, <a href="https://www.rfc-editor.org/rfc/rfc3987">RFC 3987</a>, <a href="https://url.spec.whatwg.org/">WHATWG URL</a>  </td><td class="markdownTableBodyNone">URI 通用语法、百分号编码及国际化资源标识符  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>网络端口定义</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iana.org/assignments/service-names-port-numbers/">IANA 端口号注册表</a>, <a href="https://www.rfc-editor.org/rfc/rfc6335">RFC 6335</a>  </td><td class="markdownTableBodyNone">HTTP/HTTPS/FTP/SSH/DNS 等知名端口分配  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Base64 编码</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc4648">RFC 4648</a>  </td><td class="markdownTableBodyNone">标准 Base64 与 URL 安全 Base64 字符表  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>JSON 数据格式</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc8259">RFC 8259</a>, <a href="https://ecma-international.org/publications-and-standards/standards/ecma-404/">ECMA-404</a>  </td><td class="markdownTableBodyNone">JSON 语法、数据类型与 UTF-8 编码要求  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>TOML 配置格式</b>  </td><td class="markdownTableBodyNone"><a href="https://toml.io/en/v1.0.0">TOML v1.0.0</a>  </td><td class="markdownTableBodyNone">包含日期时间格式遵循 <a href="https://www.rfc-editor.org/rfc/rfc3339">RFC 3339</a> / ISO 8601  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>UUID 生成</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc4122">RFC 4122</a>, <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a>  </td><td class="markdownTableBodyNone">UUID v4（随机）与 v7（时间有序）生成规范  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+🔐 密码学与安全算法</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组件  </th><th class="markdownTableHeadNone">遵循标准  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>AES-256 加密</b>  </td><td class="markdownTableBodyNone"><a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf">NIST FIPS 197</a>, <a href="https://www.iso.org/standard/54531.html">ISO/IEC 18033-3</a>  </td><td class="markdownTableBodyNone">高级加密标准，支持 ECB/CBC/GCM 模式（<a href="https://csrc.nist.gov/pubs/sp/800/38/a/final">NIST SP 800-38A</a> / <a href="https://csrc.nist.gov/pubs/sp/800/38/d/final">SP 800-38D</a>）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>SHA-256 哈希</b>  </td><td class="markdownTableBodyNone"><a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">NIST FIPS 180-4</a>, <a href="https://www.rfc-editor.org/rfc/rfc6234">RFC 6234</a>  </td><td class="markdownTableBodyNone">安全哈希算法（SHA-2 家族），256 位输出  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>SHA-1 哈希</b>  </td><td class="markdownTableBodyNone"><a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">NIST FIPS 180-4</a> (历史兼容)  </td><td class="markdownTableBodyNone">⚠️ 已标注安全警告（<a href="https://shattered.io/">SHAttered</a> 碰撞攻击）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b><a class="el" href="struct_m_d5.html" title="MD5哈希算法结构体">MD5</a> 哈希</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc1321">RFC 1321</a> (历史兼容)  </td><td class="markdownTableBodyNone">⚠️ 已标注安全警告，仅用于非安全校验场景  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>PKCS#7 填充</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc5652">RFC 5652</a>, <a href="https://www.rfc-editor.org/rfc/rfc8018">RFC 8018</a>  </td><td class="markdownTableBodyNone">加密消息语法与基于密码的加密填充方案  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+🔤 字符编码与国际化</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组件  </th><th class="markdownTableHeadNone">遵循标准  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>UTF-8 / UTF-16 / UTF-32</b>  </td><td class="markdownTableBodyNone"><a href="https://unicode.org/versions/Unicode15.1.0/">Unicode 15.1.0</a>, <a href="https://www.iso.org/standard/76835.html">ISO/IEC 10646</a>, <a href="https://www.rfc-editor.org/rfc/rfc3629">RFC 3629</a> / <a href="https://www.rfc-editor.org/rfc/rfc2781">RFC 2781</a>  </td><td class="markdownTableBodyNone">Unicode 码点操作、规范化与编码转换，含无效序列检测  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Unicode 码点处理</b>  </td><td class="markdownTableBodyNone"><a href="https://unicode.org/versions/Unicode15.1.0/">Unicode 15.1.0</a> §2.4, §2.13  </td><td class="markdownTableBodyNone">代理对处理、BOM 检测与替换字符 (U+FFFD) 规则  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+📐 数据结构与算法</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组件  </th><th class="markdownTableHeadNone">遵循标准 / 学术文献  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>堆算法</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iso.org/standard/79358.html">ISO/IEC 14882:2020</a> §25.8.6  </td><td class="markdownTableBodyNone">复杂度保证与 Floyd 堆调整优化 (<a href="https://dl.acm.org/doi/10.1145/512274.512284">Algorithm 245</a>)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>红黑树</b>  </td><td class="markdownTableBodyNone"><a href="https://doi.org/10.1109/SFCS.1978.3">Guibas &amp; Sedgewick (1978)</a>  </td><td class="markdownTableBodyNone">自平衡二叉搜索树经典实现，O(log n) 复杂度保证  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>莱昂纳多堆 / 平滑排序</b>  </td><td class="markdownTableBodyNone"><a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">Dijkstra (1981) EWD796a</a>  </td><td class="markdownTableBodyNone">自适应排序算法，最优时间复杂度 O(n)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>内省排序</b>  </td><td class="markdownTableBodyNone"><a href="https://doi.org/10.1002/(SICI)1097-024X(199708)27:8&lt;983::AID-SPE117&gt;3.0.CO;2-%23">Musser (1997)</a>  </td><td class="markdownTableBodyNone">混合快速/堆/插入排序，C++ 标准库 sort 默认算法  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>非加密哈希</b>  </td><td class="markdownTableBodyNone"><a href="https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17">FNV-1a 草案</a>, <a href="https://github.com/aappleby/smhasher/wiki/MurmurHash3">MurmurHash3</a>  </td><td class="markdownTableBodyNone">高性能哈希表与布隆过滤器专用  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+⚙️ 系统、并发与命令行</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组件  </th><th class="markdownTableHeadNone">遵循标准  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>原子内存序</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iso.org/standard/79358.html">ISO/IEC 14882:2020</a> §31.4  </td><td class="markdownTableBodyNone">C++ 内存模型，含 x86/ARM 硬件屏障等价与 Intel TSX HLE 支持  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>命令行解析</b>  </td><td class="markdownTableBodyNone"><a href="https://pubs.opengroup.org/onlinepubs/9699919799/">POSIX.1-2017 (IEEE 1003.1)</a> 第12章, <a href="https://man7.org/linux/man-pages/man3/getopt.3.html">GNU getopt_long</a>  </td><td class="markdownTableBodyNone">支持短选项组合、长选项、<span class="tt">--</span> 分隔符与可选值  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>日期与时间</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iso.org/standard/70907.html">ISO 8601-1:2019</a>, <a href="https://www.rfc-editor.org/rfc/rfc3339">RFC 3339</a>, <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">POSIX 时间戳</a>  </td><td class="markdownTableBodyNone">公历计算、儒略日转换与 Unix 纪元处理  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>SQL 语句构建器</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iso.org/standard/16663.html">ISO/IEC 9075</a> (SQL-92 及后续版本)  </td><td class="markdownTableBodyNone">生成符合 ANSI SQL 的 SELECT/INSERT/UPDATE/DELETE 语句  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+🎨 图形、色彩与数学</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">组件  </th><th class="markdownTableHeadNone">遵循标准  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>RGB 颜色模型</b>  </td><td class="markdownTableBodyNone"><a href="https://www.w3.org/TR/css-color-4/">W3C CSS Color Level 4</a>, <a href="https://www.w3.org/TR/compositing-1/">Compositing Level 1</a>  </td><td class="markdownTableBodyNone">直通 Alpha 合成、十六进制格式与 ANSI 256 色调色板  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>灰度转换</b>  </td><td class="markdownTableBodyNone"><a href="https://www.itu.int/rec/R-REC-BT.709/">ITU-R BT.709</a> / <a href="https://webstore.iec.ch/publication/6169">IEC 61966-2-1 (sRGB)</a>  </td><td class="markdownTableBodyNone">人眼感知加权（0.299R + 0.587G + 0.114B）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>数学函数与常量</b>  </td><td class="markdownTableBodyNone"><a href="https://standards.ieee.org/ieee/754/6210/">IEEE 754-2019</a>, <a href="https://www.iso.org/standard/24417.html">ISO/IEC 10967 (LIA)</a>  </td><td class="markdownTableBodyNone">三角函数归约、牛顿迭代法与机器精度容差  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>随机数生成</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iso.org/standard/54945.html">ISO/IEC 18031:2011</a>, <a href="https://csrc.nist.gov/pubs/sp/800/90/a/r1/final">NIST SP 800-90A</a>  </td><td class="markdownTableBodyNone">梅森旋转 (MT19937) 与操作系统熵源真随机数  </td></tr>
+</table>
+<blockquote class="doxtable">
+<p>📖 **文档完整性**：所有涉及上述标准的类与函数，均在其 API 注释（Doxygen 格式）中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。 </p>
+</blockquote>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+🚀 特性</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+🔄 并发与异步 (Async)</h2>
 <ul>
-<li>CMake 3.19+</li>
-<li>必选依赖：<ul>
-<li>pcre2</li>
-<li>OpenSSL</li>
-<li>GTest</li>
+<li><b>线程池</b> - 基于任务窃取的多策略线程池</li>
+<li><b>协程支持</b> - 协程原语和生成器</li>
+<li><b>虚拟线程</b> - 基于协程的轻量级虚拟线程</li>
+<li><b>无锁队列</b> - 线程安全的无锁队列实现</li>
+<li><b>同步原语</b> - 互斥锁、读写锁、信号量、线程屏障与闩锁</li>
+<li><b>原子操作</b> - 原子类型、FUTEX、定时等待</li>
+<li><b>Future/Promise</b> - 异步编程模型</li>
+<li><b>危险指针</b> - 无锁数据结构的内存管理</li>
+<li><b>停止令牌</b> - 可取消的异步操作</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+📦 容器 (Container)</h2>
+<ul>
+<li><b>标准容器</b> - vector、list、deque、map、set 等</li>
+<li><b>红黑树</b> - 自平衡二叉搜索树实现</li>
+<li><b>哈希表</b> - 开放寻址哈希表</li>
+<li><b>布隆过滤器</b> - 概率性数据结构</li>
+<li><b>LRU/TTL 缓存</b> - 基于最近最少使用/过期时间的缓存策略</li>
+<li><b>位图/位集</b> - 高效位操作容器</li>
+<li><b>莱昂纳多堆</b> - 莱昂纳多堆算法实现</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+🔐 加密与安全 (Encrypt)</h2>
+<ul>
+<li><b><a class="el" href="struct_a_e_s256.html" title="AES-256加密算法结构体">AES256</a></b> - 高级加密标准实现</li>
+<li><b>SHA1/SHA256</b> - 安全哈希算法</li>
+<li><b><a class="el" href="struct_m_d5.html" title="MD5哈希算法结构体">MD5</a></b> - 消息摘要算法</li>
+<li><b>Base64</b> - 二进制数据编码</li>
+<li><b><a class="el" href="struct_x_o_r.html" title="XOR异或加密结构体">XOR</a></b> - 简单异或加密</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+📁 文件系统 (File)</h2>
+<ul>
+<li><b>路径/文件操作</b> - 路径/文件系统操作</li>
+<li><b>文件监控</b> - 实时文件系统变更监控</li>
+<li><b>配置文件解析</b> - JSON/TOML/INI/ENV 格式解析与流式构建</li>
+<li><b>临时文件</b> - 安全的临时文件管理</li>
+<li><b>系统管道</b> - 管道操作类</li>
+<li><b>共享内存</b> - 跨进程共享内存</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
+🌐 网络库 (Network)</h2>
+<ul>
+<li><b>WebSocket</b> - 全双工通信协议</li>
+<li><b>TCP/UDP 套接字</b> - 高性能网络通信</li>
+<li><b>SSL/TLS</b> - 加密网络传输</li>
+<li><b>HTTP 客户端/服务器</b> - HTTP 协议实现，包含路由器、过滤器</li>
+<li><b>DNS 客户端</b> - 域名解析</li>
+<li><b>URL 解析</b> - URL 处理</li>
+<li><b>ICMP/SMTP</b> - ICMP 和 SMTP 协议操作</li>
+<li><b>ARP/MAC/IP/Ports</b> - 底层网络操作</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
+🗄️ 数据库 (DB)</h2>
+<ul>
+<li><b>数据库连接池</b> - 连接复用与管理</li>
+<li><b>SQL 构建器</b> - 标准 SQL 语句流式构建</li>
+<li><b>多数据库支持</b>:<ul>
+<li>MySQL 客户端</li>
+<li>PostgreSQL 客户端</li>
+<li>SQLite 客户端</li>
+<li>Redis 客户端</li>
 </ul>
 </li>
-<li>可选依赖：<ul>
-<li>PostGreSQL</li>
-<li>MySQL</li>
-<li>SQLite3</li>
-<li>hiredis</li>
-<li>lz4</li>
-<li>zlib</li>
+<li><b>预处理语句</b> - 防止 SQL 注入</li>
+<li><b>结果集封装</b> - 统一结果访问接口</li>
 </ul>
-</li>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
+📝 日志系统 (Logging)</h2>
+<ul>
+<li><b>多级别日志</b> - 支持不同日志级别</li>
+<li><b>日志输出</b> - 日志文件管理与轮转</li>
+<li><b>日志格式化</b> - 自定义日志格式</li>
+<li><b>多接收器</b> - 可扩展的日志输出目标</li>
+<li><b>日志器</b> - 灵活可配置的日志器</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="license"></a>
-开源协议</h1>
-<p>本项目基于 MIT 开源协议。 </p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
+🔤 字符串处理 (String)</h2>
+<ul>
+<li><b>PCRE2 正则表达式</b> - 支持 JIT 的高效正则匹配</li>
+<li><b>Unicode 支持</b> - UTF 转换系统、码点操作类</li>
+<li><b>字符串格式化</b> - 类型安全的格式化输出</li>
+<li><b>字符串视图</b> - 大量使用字符串视图优化操作</li>
+<li><b>数值转换</b> - 字符串与数值互转</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
+⚙️ 系统接口 (System)</h2>
+<ul>
+<li><b>进程管理</b> - 进程创建与控制</li>
+<li><b>管道操作</b> - 管道创建与管理</li>
+<li><b>动态库加载</b> - 运行时库加载</li>
+<li><b>控制台操作</b> - 终端交互</li>
+<li><b>进程参数解析</b> - 进程参数分析与操作</li>
+<li><b>堆栈跟踪</b> - 异常调试</li>
+<li><b>系统信息</b> - 硬件与 OS 信息</li>
+<li><b>环境变量</b> - 环境变量操作</li>
+<li><b>信号管理</b> - 信号控制</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+⏰ 时间处理 (Time)</h2>
+<ul>
+<li><b>高精度时钟</b> - 多种时钟源</li>
+<li><b>时间点/时长</b> - 时间计算</li>
+<li><b>日期时间</b> - 日历操作</li>
+<li><b>范围计时</b> - 代码块执行时间测量</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+🛠️ 工具库 (Utility)</h2>
+<ul>
+<li><b>Optional</b> - 可选值处理</li>
+<li><b>Variant</b> - 类型安全联合体</li>
+<li><b>Expected</b> - 错误处理</li>
+<li><b>Any</b> - 类型擦除容器</li>
+<li><b>Tuple</b> - 编译期元组</li>
+<li><b>Color</b> - RGB 颜色操作</li>
+<li><b>Scope 操作</b> - 作用域守卫</li>
+<li><b>数值信息</b> - 数值极限信息</li>
+<li><b>数学比率</b> - 编译期比率计算</li>
+<li><b>UUID</b> - UUID v4/v7 生成器</li>
+<li><b>端序操作</b> - 大小端转换</li>
+<li><b>断点调用</b> - 调试断点触发</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+🔍 反射系统 (Reflection)</h2>
+<ul>
+<li><b>反射注册表</b> - 类型反射与元信息管理</li>
+<li><b>类型信息</b> - 运行时类型查询</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+🧬 类型与特性 (TypeInfo)</h2>
+<ul>
+<li><b>类型萃取</b> - 编译期类型判断</li>
+<li><b>概念约束</b> - C++20 概念支持</li>
+<li><b>类型检查</b> - 运行时类型信息</li>
+<li><b>CRTP 静态多态</b> - 零开销接口统一</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+💾 内存管理 (Memory)</h2>
+<ul>
+<li><b>智能指针</b> - shared_ptr、unique_ptr、weak_ptr</li>
+<li><b>原子智能指针</b> - <span class="tt"><a class="el" href="structatomic.html" title="通用原子类型模板">atomic</a>&lt;shared_ptr/weak_ptr&gt;</span> 无锁操作</li>
+<li><b>内存视图</b> - 安全内存访问</li>
+<li><b>构造/析构工具</b> - 对象生命周期管理</li>
+<li><b>内存跟踪</b> - 调试用内存监控</li>
+<li><b>标准分配器</b> - 基于编译器特性的策略特化分配器</li>
+<li><b>空基类压缩</b> - <span class="tt"><a class="el" href="structcompressed__pair.html" title="压缩对主模板，使用EBCO优化">compressed_pair</a></span> 优化</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+📦 压缩 (Compress)</h2>
+<ul>
+<li><b>lz4 压缩</b> - 高速数据压缩/解压</li>
+<li><b>zlib 压缩</b> - 通用数据压缩/解压</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+🔌 插件系统 (Plugin)</h2>
+<ul>
+<li><b>动态插件管理</b> - 运行时加载卸载插件</li>
+<li><b>插件接口</b> - 标准化插件开发</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+❗ 异常处理 (Exception)</h2>
+<ul>
+<li><b>异常指针</b> - 跨线程异常传递</li>
+<li><b>终止处理</b> - 程序终止管理</li>
+<li><b>异常系统</b> - 标准异常体系</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+📐 算法库 (Algorithm)</h2>
+<ul>
+<li><b>标准算法</b> - sort、find、transform 等</li>
+<li><b>并行算法</b> - 并行执行策略</li>
+<li><b>数值算法</b> - 数值计算与累加</li>
+<li><b>堆算法</b> - 堆操作与优先级队列</li>
+<li><b>范围操作</b> - ranges 库支持</li>
+<li><b>哈希算法</b> - 多种哈希函数实现</li>
+<li><b>位操作</b> - 位操作函数系列</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+📊 数学库 (Math)</h2>
+<ul>
+<li><b>数学常量</b> - 常用数学常数</li>
+<li><b>数学函数</b> - 超越函数与数值计算</li>
+<li><b>随机数生成</b> - LC、梅森旋转、硬件噪声算法</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
+🔧 编译指南</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
+📋 前置依赖</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">依赖  </th><th class="markdownTableHeadNone">版本要求  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">🔨 构建工具  </td><td class="markdownTableBodyNone"><a href="https://cmake.org/">CMake</a>  </td><td class="markdownTableBodyNone">3.19+  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">📦 包管理器  </td><td class="markdownTableBodyNone"><a href="https://github.com/microsoft/vcpkg">vcpkg</a>  </td><td class="markdownTableBodyNone">Latest  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">🎨 代码格式化  </td><td class="markdownTableBodyNone"><a href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a>  </td><td class="markdownTableBodyNone">19+  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">🔍 静态分析  </td><td class="markdownTableBodyNone"><a href="https://clang.llvm.org/extra/clang-tidy/">clang-tidy</a>  </td><td class="markdownTableBodyNone">19+  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">⚠️ 必选依赖  </td><td class="markdownTableBodyNone"><a href="https://google.github.io/googletest/">GTest</a>  </td><td class="markdownTableBodyNone">1.17.0#2  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.pcre.org/">pcre2</a>  </td><td class="markdownTableBodyNone">10.47  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.openssl.org/">OpenSSL</a>  </td><td class="markdownTableBodyNone">3.6.1#2  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">📦 可选依赖  </td><td class="markdownTableBodyNone"><a href="https://www.postgresql.org/">libpq</a>  </td><td class="markdownTableBodyNone">16.9#3  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.mysql.com/">libmysql</a>  </td><td class="markdownTableBodyNone">8.0.40#1  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://sqlite.org/index.html">sqlite3</a>  </td><td class="markdownTableBodyNone">3.51.2  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://redis.ac.cn/docs/latest/develop/clients/hiredis/">hiredis</a>  </td><td class="markdownTableBodyNone">1.3.0  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://lz4.org/">lz4</a>  </td><td class="markdownTableBodyNone">1.10.0  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.zlib.net/">zlib</a>  </td><td class="markdownTableBodyNone">1.3.1  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
+🏗️ 编译步骤</h2>
+<blockquote class="doxtable">
+<p>💡 您可以在项目根目录的 <span class="tt">config.json</span> 中更改对外配置项以进行个性化编译。 </p>
+</blockquote>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
+🪟 Windows</h3>
+<div class="fragment"><div class="line"># 克隆最新发布版</div>
+<div class="line">git clone --depth 1 https://github.com/aurora250/NexusForce.git</div>
+<div class="line">cd NexusForce</div>
+<div class="line"> </div>
+<div class="line"># 创建构建目录</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="line"> </div>
+<div class="line"># 编译选项配置</div>
+<div class="line">cmake .. -G &quot;Visual Studio 17 2022&quot; -A x64</div>
+<div class="line"> </div>
+<div class="line"># 编译</div>
+<div class="line">cmake --build . --config Release</div>
+<div class="line"> </div>
+<div class="line"># 安装到系统目录</div>
+<div class="line">cmake --install . --config Release</div>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
+🐧 Linux</h3>
+<div class="fragment"><div class="line"># 克隆最新发布版</div>
+<div class="line">git clone --depth 1 https://github.com/aurora250/NexusForce.git</div>
+<div class="line">cd NexusForce</div>
+<div class="line"> </div>
+<div class="line"># 创建构建目录</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="line"> </div>
+<div class="line"># 编译选项配置</div>
+<div class="line">cmake ..</div>
+<div class="line"> </div>
+<div class="line"># 编译</div>
+<div class="line">make -j$(nproc)</div>
+<div class="line"> </div>
+<div class="line"># 安装到系统目录</div>
+<div class="line">sudo make install</div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
+📚 文档</h1>
+<p>完整 API 文档请访问 <a href="https://nexusforce.org.cn">NexusForce 文档网站</a></p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
+⚖️ 协议</h1>
+<p>本项目基于 [MIT 开源协议](LICENSE) 发布。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
+📝 更新日志</h1>
+<p>详细更新记录请参见 CHANGELOG</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
+👥 贡献者</h1>
+<p>感谢所有为本项目做出贡献的开发者！查看 CONTRIBUTORS 获取完整名单。</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
+📌 TODO</h1>
+<ul class="check">
+<li class="unchecked">📊 Google Benchmark 性能基准测试</li>
+</ul>
+<ul class="check">
+<li class="unchecked">⚡ 热点代码优化</li>
+</ul>
+<ul class="check">
+<li class="unchecked">🍎 支持 macOS 平台</li>
+</ul>
+<ul class="check">
+<li class="unchecked">🖥️ 支持 ARM / RISC-V / LOONG ARCH 架构 </li>
+</ul>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

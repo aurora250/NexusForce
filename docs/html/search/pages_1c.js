@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['适用场景_0',['适用场景',['../sha256_8hpp.html#usage',1,'']]]
+  ['三角函数实现_0',['三角函数实现',['../group___math_functions.html#trigonometric_functions',1,'']]]
 ];

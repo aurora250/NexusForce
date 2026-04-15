@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['停止令牌_0',['停止令牌',['../group___stop_tokens.html',1,'']]]
+  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
 ];

@@ -89,7 +89,7 @@ $(function(){initNavTree('classtree__barrier.html','','classtree__barrier-member
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">tree_barrier&lt; CmplFunc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___barrier.html">屏障</a></div></div></div>
+  <div class="headertitle"><div class="title">tree_barrier&lt; CmplFunc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___thread_sync.html">线程同步</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -131,7 +131,7 @@ class tree_barrier&lt; CmplFunc &gt;</div><p>树形屏障 </p>
 </dl>
 <p>基于树形算法的屏障实现，使用分层的票证机制减少竞争。 提供高性能的多线程同步，支持动态调整参与线程数。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00043">43</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00049">49</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a58cc248b4aeee58f81e06cc34a84bc24" name="a58cc248b4aeee58f81e06cc34a84bc24"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58cc248b4aeee58f81e06cc34a84bc24">&#9670;&#160;</a></span>tree_barrier()</h2>
@@ -171,9 +171,9 @@ template&lt;typename CmplFunc&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00128">128</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00134">134</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00392">count()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00964">make_unique()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00392">count()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>
@@ -213,11 +213,11 @@ template&lt;typename CmplFunc&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>到达令牌</dd></dl>
 <p>线程到达屏障点，可能触发完成函数并进入下一阶段。 支持批量到达。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00145">145</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00151">151</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00046">memory_order_release</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00139">memory_order_relaxed</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00145">memory_order_release</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00182">arrive_and_drop()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00188">arrive_and_drop()</a>.</p>
 
 </div>
 </div>
@@ -249,11 +249,11 @@ template&lt;typename CmplFunc&gt; </div>
 <p>到达并退出 </p>
 <p>线程到达屏障点后退出参与，减少期望线程数。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00182">182</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00188">188</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00145">arrive()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00040">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00151">arrive()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00139">memory_order_relaxed</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00266">barrier&lt; CmplFunc &gt;::arrive_and_drop()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00272">barrier&lt; CmplFunc &gt;::arrive_and_drop()</a>.</p>
 
 </div>
 </div>
@@ -285,11 +285,11 @@ template&lt;typename CmplFunc&gt; </div>
 <p>获取最大线程数 </p>
 <dl class="section return"><dt>返回</dt><dd>支持的最大线程数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00121">121</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00127">127</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00153">numeric_traits&lt; T, Dummy &gt;::max()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00228">barrier&lt; CmplFunc &gt;::max()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00234">barrier&lt; CmplFunc &gt;::max()</a>.</p>
 
 </div>
 </div>
@@ -327,9 +327,9 @@ template&lt;typename CmplFunc&gt; </div>
 </dl>
 <p>等待屏障进入下一阶段，使用原子等待机制避免忙等待。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00171">171</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00177">177</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__wait_8hpp_source.html#l00423">atomic_wait_address()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00044">memory_order_acquire</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__wait_8hpp_source.html#l00429">atomic_wait_address()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00143">memory_order_acquire</a>.</p>
 
 </div>
 </div>

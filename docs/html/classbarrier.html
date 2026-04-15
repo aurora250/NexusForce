@@ -89,7 +89,7 @@ $(function(){initNavTree('classbarrier.html','','classbarrier-members'); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">barrier&lt; CmplFunc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___barrier.html">屏障</a></div></div></div>
+  <div class="headertitle"><div class="title">barrier&lt; CmplFunc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___thread_sync.html">线程同步</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -132,7 +132,7 @@ class barrier&lt; CmplFunc &gt;</div><p>通用屏障类 </p>
 </dl>
 <p>屏障的用户友好接口，包装树形屏障实现。 提供类型安全的到达令牌和简化API。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00198">198</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00204">204</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ae15bef6ea846f718e16a574b368bb90a" name="ae15bef6ea846f718e16a574b368bb90a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae15bef6ea846f718e16a574b368bb90a">&#9670;&#160;</a></span>barrier()</h2>
@@ -172,7 +172,7 @@ template&lt;typename CmplFunc = empty_completion&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00235">235</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00241">241</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00392">count()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
@@ -213,9 +213,9 @@ template&lt;typename CmplFunc = empty_completion&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>到达令牌 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00252">252</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00259">arrive_and_wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00265">arrive_and_wait()</a>.</p>
 
 </div>
 </div>
@@ -247,9 +247,9 @@ template&lt;typename CmplFunc = empty_completion&gt; </div>
 <p>到达并退出 </p>
 <p>线程到达屏障点后退出参与。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00266">266</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00272">272</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00182">tree_barrier&lt; CmplFunc &gt;::arrive_and_drop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00188">tree_barrier&lt; CmplFunc &gt;::arrive_and_drop()</a>.</p>
 
 </div>
 </div>
@@ -281,9 +281,9 @@ template&lt;typename CmplFunc = empty_completion&gt; </div>
 <p>到达并等待 </p>
 <p>组合操作：到达屏障点并等待所有线程到达。 </p>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00259">259</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00265">265</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00246">arrive()</a> , 以及 <a class="el" href="barrier_8hpp_source.html#l00252">wait()</a>.</p>
+<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00252">arrive()</a> , 以及 <a class="el" href="barrier_8hpp_source.html#l00258">wait()</a>.</p>
 
 </div>
 </div>
@@ -315,9 +315,9 @@ template&lt;typename CmplFunc = empty_completion&gt; </div>
 <p>获取最大线程数 </p>
 <dl class="section return"><dt>返回</dt><dd>支持的最大线程数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00228">228</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00234">234</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00121">tree_barrier&lt; CmplFunc &gt;::max()</a>.</p>
+<p class="reference">引用了 <a class="el" href="barrier_8hpp_source.html#l00127">tree_barrier&lt; CmplFunc &gt;::max()</a>.</p>
 
 </div>
 </div>
@@ -354,11 +354,11 @@ template&lt;typename CmplFunc = empty_completion&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00252">252</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a> 第 <a class="el" href="barrier_8hpp_source.html#l00258">258</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00259">arrive_and_wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="barrier_8hpp_source.html#l00265">arrive_and_wait()</a>.</p>
 
 </div>
 </div>

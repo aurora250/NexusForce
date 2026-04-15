@@ -89,12 +89,17 @@ $(function(){initNavTree('group___futex.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">FUTEX </div></div>
+  <div class="headertitle"><div class="title">FUTEX <div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>FUTEX同步原语的跨平台封装  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+FUTEX 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___futex.svg" width="230" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
@@ -170,7 +175,7 @@ $(function(){initNavTree('group___futex.html','',''); });
 <p>平台等待类型别名 </p>
 <p>用于FUTEX操作的等待类型 </p>
 
-<p class="definition">在文件 <a class="el" href="futex_8hpp_source.html">futex.hpp</a> 第 <a class="el" href="futex_8hpp_source.html#l00026">26</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="futex_8hpp_source.html">futex.hpp</a> 第 <a class="el" href="futex_8hpp_source.html#l00032">32</a> 行定义.</p>
 
 </div>
 </div>
@@ -236,7 +241,7 @@ $(function(){initNavTree('group___futex.html','',''); });
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="futex_8hpp_source.html">futex.hpp</a> 第 <a class="el" href="futex_8hpp_source.html#l00040">40</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="futex_8hpp_source.html">futex.hpp</a> 第 <a class="el" href="futex_8hpp_source.html#l00046">46</a> 行定义.</p>
 
 </div>
 </div>
@@ -279,7 +284,7 @@ $(function(){initNavTree('group___futex.html','',''); });
 <p>唤醒正在等待addr处值变化的线程。 如果all为true，唤醒所有等待线程；否则只唤醒一个等待线程。</p>
 <dl class="section warning"><dt>警告</dt><dd>调用者必须确保 addr 在等待期间保持有效且可访问 </dd></dl>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00267">atomic_futex&lt; WaiterBit &gt;::store_notify_all()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00273">atomic_futex&lt; WaiterBit &gt;::store_notify_all()</a>.</p>
 
 </div>
 </div>
@@ -368,9 +373,9 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>等待是否成功</dd></dl>
 <p>公共的FUTEX定时等待接口，支持任意时钟类型。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00134">134</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__timed__wait_8hpp_source.html">atomic_timed_wait.hpp</a> 第 <a class="el" href="atomic__timed__wait_8hpp_source.html#l00140">140</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>.</p>
+<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00035">timeout</a>.</p>
 
 </div>
 </div>

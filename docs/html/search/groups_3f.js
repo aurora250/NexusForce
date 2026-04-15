@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['无锁队列_0',['无锁队列',['../group___lock_free_queue.html',1,'']]]
+  ['插件_0',['插件',['../group___plugin.html',1,'']]],
+  ['插入迭代器_1',['插入迭代器',['../group___insert_iterators.html',1,'']]]
 ];

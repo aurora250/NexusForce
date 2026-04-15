@@ -14,8 +14,6 @@ var group___memory_order =
       [ "memory_order_modifier::memory_order_hle_acquire", "group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42adee853427a8a845e55317c88dd81f69c", null ],
       [ "memory_order_modifier::memory_order_hle_release", "group___memory_order.html#ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783", null ]
     ] ],
-    [ "atomic_signal_fence", "group___memory_order.html#ga68dc6572818e290f920ee64fad9f0d62", null ],
-    [ "atomic_thread_fence", "group___memory_order.html#gad09904472351069bf4052ca1aa2cef7b", null ],
     [ "cmpexch_failure_order", "group___memory_order.html#gafda3e5c6834532546b1eaef81affc2b2", null ],
     [ "is_valid_cmpexch_failure_order", "group___memory_order.html#ga0ebbd1fbd5cee109f313d7ef89dd257f", null ],
     [ "operator&", "group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6", null ],

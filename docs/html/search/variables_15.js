@@ -5,5 +5,5 @@ var searchData=
   ['values_2',['values',['../structcmdline_1_1option.html#a0b8549fa7fe3fa6f754a3cdacdd1849e',1,'cmdline::option']]],
   ['variant_5findex_5fv_3',['variant_index_v',['../group___variant.html#gaca4a54afdcd78a7f88a4e5231bcffddc',1,'variant.hpp']]],
   ['vendor_4',['vendor',['../structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b',1,'sysinfo::CPU_info']]],
-  ['version_5',['version',['../structplugin__info.html#a899b491fc4007aeae0431f4d030e904a',1,'plugin_info']]]
+  ['version_5',['version',['../structip__header.html#aa30d424e1ebdcca84cf42cac98383c29',1,'ip_header::version'],['../structplugin__info.html#a899b491fc4007aeae0431f4d030e904a',1,'plugin_info::version']]]
 ];

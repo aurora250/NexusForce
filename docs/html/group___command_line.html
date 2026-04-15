@@ -103,6 +103,128 @@ $(function(){initNavTree('group___command_line.html','',''); });
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>命令行参数解析工具 </p>
+<p>用于解析符合 POSIX 风格和 GNU 风格扩展的命令行参数。 支持长选项（&ndash;option）、短选项（-o）、带值选项、多值选项、默认值、位置参数以及自动生成帮助信息。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下命令行接口与实用程序规范：</p>
+<p><b>命令行接口规范：</b></p><ul>
+<li>**POSIX.1-2017 (IEEE Std 1003.1)**：第12章 — 实用程序约定（命令行参数语法） <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html</a></li>
+<li>**POSIX.1-2017 Utility Syntax Guidelines**：实用程序语法指南（指南3-13） <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_02">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_02</a></li>
+</ul>
+<p><b>GNU 扩展规范：</b></p><ul>
+<li>**GNU Coding Standards**：第4.6节 — 命令行接口标准 <a href="https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html">https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html</a></li>
+<li>**GNU libc Manual**：第25.1.1节 — 程序参数语法约定 <a href="https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html">https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html</a></li>
+<li>**GNU getopt_long(3)**：长选项扩展规范 <a href="https://man7.org/linux/man-pages/man3/getopt.3.html">https://man7.org/linux/man-pages/man3/getopt.3.html</a></li>
+</ul>
+<p><b>C/C++ 程序入口标准：</b></p><ul>
+<li>**ISO/IEC 9899:2018**：C 语言标准（§5.1.2.2.1 程序启动） <a href="https://www.iso.org/standard/74528.html">https://www.iso.org/standard/74528.html</a></li>
+<li>**ISO/IEC 14882:2020**：C++ 编程语言标准（§6.9.3.1 main 函数） <a href="https://www.iso.org/standard/79358.html">https://www.iso.org/standard/79358.html</a></li>
+</ul>
+<p><b>帮助信息格式化标准：</b></p><ul>
+<li>**The Linux Man-pages Project**：手册页格式化规范 <a href="https://man7.org/linux/man-pages/man7/man-pages.7.html">https://man7.org/linux/man-pages/man7/man-pages.7.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="option_syntax"></a>
+选项语法规则</h1>
+<p>根据 POSIX.1-2017 实用程序语法指南和 GNU 编码标准，支持的语法如下：</p>
+<p><b>短选项（POSIX 指南3-5）：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">语法  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">-o  </td><td class="markdownTableBodyNone">-v  </td><td class="markdownTableBodyNone">单字符短选项  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">-o value  </td><td class="markdownTableBodyNone">-f input.txt  </td><td class="markdownTableBodyNone">短选项带值（空格分隔）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">-ovalue  </td><td class="markdownTableBodyNone">-finput.txt  </td><td class="markdownTableBodyNone">短选项带值（无空格）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">-abc  </td><td class="markdownTableBodyNone">-xvf  </td><td class="markdownTableBodyNone">多个短选项组合（布尔型选项）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">-abco value  </td><td class="markdownTableBodyNone">-xvfo output  </td><td class="markdownTableBodyNone">组合短选项，最后一个带值  </td></tr>
+</table>
+<p><b>长选项（GNU 扩展）：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">语法  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">&ndash;option  </td><td class="markdownTableBodyNone">&ndash;verbose  </td><td class="markdownTableBodyNone">长选项（布尔型）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">&ndash;option=value  </td><td class="markdownTableBodyNone">&ndash;file=config.json  </td><td class="markdownTableBodyNone">长选项带值（等号分隔）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">&ndash;option value  </td><td class="markdownTableBodyNone">&ndash;file config.json  </td><td class="markdownTableBodyNone">长选项带值（空格分隔）  </td></tr>
+</table>
+<p><b>特殊参数（POSIX 指南10-11）：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">语法  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">&ndash;  </td><td class="markdownTableBodyNone">选项结束标记，后续参数视为位置参数  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">短横线单独出现，视为位置参数  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="guideline_reference"></a>
+POSIX 实用程序语法指南</h1>
+<p>本实现遵循的 POSIX 语法指南：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">指南编号  </th><th class="markdownTableHeadNone">内容  </th><th class="markdownTableHeadNone">支持状态  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">选项名应为单字符（-o）  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">4  </td><td class="markdownTableBodyNone">所有选项前应有 '-' 字符  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">无参数的选项可以组合（-abc 等价于 -a -b -c）  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">6  </td><td class="markdownTableBodyNone">带参数的选项参数应用空格或直接跟随  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">7  </td><td class="markdownTableBodyNone">选项参数不应可选（明确区分需要值和不需要值）  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">8  </td><td class="markdownTableBodyNone">选项应先于操作数出现  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">'&ndash;' 参数应被识别为选项结束标记  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10  </td><td class="markdownTableBodyNone">第一个 '&ndash;' 后的参数视为操作数（位置参数）  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">11  </td><td class="markdownTableBodyNone">'-' 作为操作数时不应被解释为选项  </td><td class="markdownTableBodyNone">✓  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="gnu_extensions"></a>
+GNU 扩展特性</h1>
+<p>本实现额外支持的 GNU 编码标准扩展：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">扩展特性  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">长选项  </td><td class="markdownTableBodyNone">&ndash;help  </td><td class="markdownTableBodyNone">多字符选项名  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">长选项带等号  </td><td class="markdownTableBodyNone">&ndash;file=config.json  </td><td class="markdownTableBodyNone">等号分隔选项和值  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">选项值可选  </td><td class="markdownTableBodyNone">&ndash;color[=when]  </td><td class="markdownTableBodyNone">通过 requires_value 控制  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">多值选项  </td><td class="markdownTableBodyNone">-I/usr/include -I/opt/include  </td><td class="markdownTableBodyNone">allow_multiple 支持  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">短选项字符  </td><td class="markdownTableBodyNone">ASCII 字母数字（a-z, A-Z, 0-9）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">长选项名称  </td><td class="markdownTableBodyNone">字母数字、连字符、下划线  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">值分隔符  </td><td class="markdownTableBodyNone">空格或 '='（仅长选项）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">选项结束标记  </td><td class="markdownTableBodyNone">'&ndash;'  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">最大选项数  </td><td class="markdownTableBodyNone">无限制  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">多值选项存储  </td><td class="markdownTableBodyNone"><a class="el" href="classvector.html" title="动态大小数组容器">vector&lt;string&gt;</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">重复选项行为  </td><td class="markdownTableBodyNone">覆盖或追加（由 allow_multiple 控制）  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本实现同时支持 POSIX 标准的短选项语法和 GNU 标准的长选项扩展， 适用于大多数命令行工具的开发。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>根据 POSIX 指南8，选项应先于位置参数出现。虽然本实现支持选项与位置参数 混合出现（GNU 风格），但为了最大兼容性，建议将选项放在位置参数之前。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html</a> </dd>
+<dd>
+<a href="https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html">https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html</a> </dd>
+<dd>
+<a href="https://man7.org/linux/man-pages/man3/getopt.3.html">https://man7.org/linux/man-pages/man3/getopt.3.html</a> </dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

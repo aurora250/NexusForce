@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['位操作_0',['位操作',['../group___bit_manipulation.html',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

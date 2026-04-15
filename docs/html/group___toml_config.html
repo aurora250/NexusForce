@@ -89,12 +89,17 @@ $(function(){initNavTree('group___toml_config.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">toml配置 </div></div>
+  <div class="headertitle"><div class="title">toml配置 <div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>toml配置格式管理  
 <a href="#details">更多...</a></p>
+<div class="dynheader">
+toml配置 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group___toml_config.svg" width="295" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
@@ -121,6 +126,143 @@ $(function(){initNavTree('group___toml_config.html','',''); });
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>toml配置格式管理 </p>
+<p>TOML是一种易于阅读的配置文件格式，设计目标是比JSON更友好、比YAML更简单。</p>
+<p>支持TOML v1.0.0规范中的所有数据类型：</p><ul>
+<li>布尔值（Boolean）</li>
+<li>整数（Integer，64位有符号）</li>
+<li>浮点数（Float，双精度）</li>
+<li>字符串（String，支持四种引号类型）</li>
+<li>日期时间（DateTime，支持四种日期时间格式）</li>
+<li>数组（Array）</li>
+<li>表格（Table，支持内联表格和标准表格）</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下 TOML 及相关标准规范：</p>
+<p><b>TOML 配置格式规范：</b></p><ul>
+<li>**TOML v1.0.0**：Tom's Obvious, Minimal Language 规范 <a href="https://toml.io/en/v1.0.0">https://toml.io/en/v1.0.0</a></li>
+<li>**TOML GitHub 规范**：TOML 语言定义与 ABNF 语法 <a href="https://github.com/toml-lang/toml">https://github.com/toml-lang/toml</a></li>
+</ul>
+<p><b>相关日期时间标准（TOML 引用的日期时间格式）：</b></p><ul>
+<li>**IETF RFC 3339**：互联网上的日期和时间格式（TOML 偏移日期时间格式） <a href="https://www.rfc-editor.org/rfc/rfc3339.html">https://www.rfc-editor.org/rfc/rfc3339.html</a></li>
+<li>**ISO 8601-1:2019**：日期和时间 — 信息交换的表示法 <a href="https://www.iso.org/standard/70907.html">https://www.iso.org/standard/70907.html</a></li>
+</ul>
+<p><b>相关数据类型标准：</b></p><ul>
+<li>**IEEE 754-2019**：浮点数算术标准（TOML 浮点数遵循） <a href="https://standards.ieee.org/ieee/754/6210/">https://standards.ieee.org/ieee/754/6210/</a></li>
+<li>**Unicode 15.0.0**：Unicode 字符编码标准（TOML 字符串编码） <a href="https://unicode.org/versions/Unicode15.0.0/">https://unicode.org/versions/Unicode15.0.0/</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="toml_types"></a>
+TOML 值类型定义</h1>
+<p>根据 TOML v1.0.0 规范，支持以下七种值类型：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">TOML 规范引用  </th><th class="markdownTableHeadNone">本实现类  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Boolean  </td><td class="markdownTableBodyNone">§2.1  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__boolean.html" title="toml布尔值类">toml_boolean</a>  </td><td class="markdownTableBodyNone">true 或 false  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Integer  </td><td class="markdownTableBodyNone">§2.2  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__integer.html" title="toml整数值类">toml_integer</a>  </td><td class="markdownTableBodyNone">64位有符号整数（-2^63 到 2^63-1）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Float  </td><td class="markdownTableBodyNone">§2.3  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__float.html" title="toml浮点数值类">toml_float</a>  </td><td class="markdownTableBodyNone">IEEE 754 双精度浮点数  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">String  </td><td class="markdownTableBodyNone">§2.4  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__string.html" title="toml字符串值类">toml_string</a>  </td><td class="markdownTableBodyNone">Unicode 字符串（UTF-8 编码）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Offset Date-Time  </td><td class="markdownTableBodyNone">§2.5.1  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__datetime.html" title="toml日期时间值类">toml_datetime</a>  </td><td class="markdownTableBodyNone">RFC 3339 格式带时区偏移  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Local Date-Time  </td><td class="markdownTableBodyNone">§2.5.2  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__datetime.html" title="toml日期时间值类">toml_datetime</a>  </td><td class="markdownTableBodyNone">ISO 8601 格式无时区  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Local Date  </td><td class="markdownTableBodyNone">§2.5.3  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__datetime.html" title="toml日期时间值类">toml_datetime</a>  </td><td class="markdownTableBodyNone">仅日期（YYYY-MM-DD）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Local Time  </td><td class="markdownTableBodyNone">§2.5.4  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__datetime.html" title="toml日期时间值类">toml_datetime</a>  </td><td class="markdownTableBodyNone">仅时间（HH:MM:SS）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Array  </td><td class="markdownTableBodyNone">§2.6  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__array.html" title="toml数组类">toml_array</a>  </td><td class="markdownTableBodyNone">有序值列表（可混合类型）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Table  </td><td class="markdownTableBodyNone">§2.7  </td><td class="markdownTableBodyNone"><a class="el" href="classtoml__table.html" title="toml表格类">toml_table</a>  </td><td class="markdownTableBodyNone">键值对集合（标准表格或内联表格）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="string_types"></a>
+字符串引号类型</h1>
+<p>根据 TOML v1.0.0 §2.4，支持四种字符串引号类型：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">语法  </th><th class="markdownTableHeadNone">转义序列  </th><th class="markdownTableHeadNone">多行支持  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Basic  </td><td class="markdownTableBodyNone">"string"  </td><td class="markdownTableBodyNone">支持  </td><td class="markdownTableBodyNone">否  </td><td class="markdownTableBodyNone">标准双引号字符串  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MultiBasic  </td><td class="markdownTableBodyNone">"""string"""  </td><td class="markdownTableBodyNone">支持  </td><td class="markdownTableBodyNone">是  </td><td class="markdownTableBodyNone">多行双引号字符串  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Literal  </td><td class="markdownTableBodyNone">'string'  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">否  </td><td class="markdownTableBodyNone">字面量单引号字符串  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MultiLiteral  </td><td class="markdownTableBodyNone">'''string'''  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">是  </td><td class="markdownTableBodyNone">多行字面量单引号字符串  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="datetime_formats"></a>
+日期时间格式</h1>
+<p>根据 TOML v1.0.0 §2.5，支持四种日期时间格式：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">标准引用  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Offset Date-Time  </td><td class="markdownTableBodyNone">1979-05-27T07:32:00Z  </td><td class="markdownTableBodyNone">RFC 3339 §5.6  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Offset Date-Time  </td><td class="markdownTableBodyNone">1979-05-27T00:32:00-07:00  </td><td class="markdownTableBodyNone">RFC 3339 §5.6  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Local Date-Time  </td><td class="markdownTableBodyNone">1979-05-27T07:32:00  </td><td class="markdownTableBodyNone">ISO 8601-1:2019  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Local Date  </td><td class="markdownTableBodyNone">1979-05-27  </td><td class="markdownTableBodyNone">ISO 8601-1:2019  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Local Time  </td><td class="markdownTableBodyNone">07:32:00  </td><td class="markdownTableBodyNone">ISO 8601-1:2019  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">编码  </td><td class="markdownTableBodyNone">UTF-8（TOML v1.0.0 §1）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">整数范围  </td><td class="markdownTableBodyNone">-2^63 到 2^63-1（TOML v1.0.0 §2.2）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">浮点数精度  </td><td class="markdownTableBodyNone">IEEE 754-2019 双精度（TOML v1.0.0 §2.3）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">字符串转义序列  </td><td class="markdownTableBodyNone">TOML v1.0.0 §2.4.1 定义  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">键名规则  </td><td class="markdownTableBodyNone">裸键、引号键、点分隔键（TOML v1.0.0 §3.1）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">表格类型  </td><td class="markdownTableBodyNone">标准表格、内联表格、数组表格（§3.2-3.4）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">数组元素混合类型  </td><td class="markdownTableBodyNone">允许（TOML v1.0.0 §2.6）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">注释支持  </td><td class="markdownTableBodyNone"># 行注释（TOML v1.0.0 §1.2）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="string_escape"></a>
+字符串转义序列</h1>
+<p>根据 TOML v1.0.0 §2.4.1，支持以下转义序列（仅 Basic 和 MultiBasic 字符串）：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">转义序列  </th><th class="markdownTableHeadNone">字符  </th><th class="markdownTableHeadNone">Unicode 码点  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\"  </td><td class="markdownTableBodyNone">引号  </td><td class="markdownTableBodyNone">U+0022  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\\  </td><td class="markdownTableBodyNone">反斜杠  </td><td class="markdownTableBodyNone">U+005C  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\b  </td><td class="markdownTableBodyNone">退格  </td><td class="markdownTableBodyNone">U+0008  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\f  </td><td class="markdownTableBodyNone">换页  </td><td class="markdownTableBodyNone">U+000C  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\n  </td><td class="markdownTableBodyNone">换行  </td><td class="markdownTableBodyNone">U+000A  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\r  </td><td class="markdownTableBodyNone">回车  </td><td class="markdownTableBodyNone">U+000D  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\t  </td><td class="markdownTableBodyNone">制表符  </td><td class="markdownTableBodyNone">U+0009  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\uXXXX  </td><td class="markdownTableBodyNone">Unicode 字符  </td><td class="markdownTableBodyNone">U+XXXX  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\UXXXXXXXX  </td><td class="markdownTableBodyNone">Unicode 字符（全范围）  </td><td class="markdownTableBodyNone">U+XXXXXXXX  </td></tr>
+</table>
+<dl class="section warning"><dt>警告</dt><dd>根据 TOML v1.0.0 §3.3，表格定义后不应再向该表格添加新的键值对。 内联表格不应包含换行符，建议仅用于简单结构。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://toml.io/">https://toml.io/</a> </dd>
+<dd>
+<a href="https://github.com/toml-lang/toml/blob/main/toml.md">https://github.com/toml-lang/toml/blob/main/toml.md</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc3339">https://www.rfc-editor.org/rfc/rfc3339</a></dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

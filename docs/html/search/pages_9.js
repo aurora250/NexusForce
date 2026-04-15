@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['代理对编码规则_0',['UTF-16 代理对编码规则',['../codepoint_8hpp.html#utf16_surrogates',1,'']]]
+  ['gnu_20扩展特性_0',['GNU 扩展特性',['../group___command_line.html#gnu_extensions',1,'']]]
 ];

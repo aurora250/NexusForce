@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
+  ['三角函数实现_0',['三角函数实现',['../group___math_functions.html#trigonometric_functions',1,'']]]
 ];

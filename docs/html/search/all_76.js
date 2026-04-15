@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['系统信号_0',['系统信号',['../group___system_signal.html',1,'']]],
-  ['系统信息_1',['系统信息',['../group___system_info.html',1,'']]]
+  ['查找元素算法_0',['查找元素算法',['../group___finding_algorithms.html',1,'']]]
 ];

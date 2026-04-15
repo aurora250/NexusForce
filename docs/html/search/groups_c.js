@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['unicode码点_0',['Unicode码点',['../group___code_point.html',1,'']]],
-  ['utf转换_1',['UTF转换',['../group___u_t_f_converts.html',1,'']]],
-  ['uuid_2',['UUID',['../group___u_u_i_d.html',1,'']]]
+  ['postgresql_0',['PostgreSQL',['../group___postgre_s_q_l.html',1,'']]]
 ];

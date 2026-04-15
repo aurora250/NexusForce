@@ -89,7 +89,7 @@ $(function(){initNavTree('structports.html','','structports-members'); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ports结构体 参考<div class="ingroups"><a class="el" href="group___network.html">网络通信</a></div></div></div>
+  <div class="headertitle"><div class="title">ports结构体 参考<div class="ingroups"><a class="el" href="group___network.html">网络通信</a> &raquo; <a class="el" href="group___network_util.html">网络通信工具</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -165,9 +165,126 @@ Public 属性</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>网络端口封装类 </p>
-<p>提供类型安全的端口表示，封装了常见协议的端口号，支持从协议名称解析和反向转换。 </p>
+<p>提供类型安全的端口表示，封装了常见协议的端口号，支持从协议名称解析和反向转换。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下网络服务与端口分配相关标准规范：</p>
+<p><b>端口号分配权威机构：</b></p><ul>
+<li>**IANA Service Name and Transport Protocol Port Number Registry**：服务名称与端口号注册表 <a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</a></li>
+</ul>
+<p><b>核心互联网协议标准：</b></p><ul>
+<li>**IETF RFC 1340**：Assigned Numbers（已废弃，由 IANA 在线数据库取代） <a href="https://www.rfc-editor.org/rfc/rfc1340.html">https://www.rfc-editor.org/rfc/rfc1340.html</a></li>
+<li>**IETF RFC 6335**：Internet 号码分配机构（IANA）服务名称和传输协议端口号注册程序 <a href="https://www.rfc-editor.org/rfc/rfc6335.html">https://www.rfc-editor.org/rfc/rfc6335.html</a></li>
+<li>**IETF STD 2**：Assigned Internet Protocol Numbers（已废弃，由 RFC 3232 取代） <a href="https://www.rfc-editor.org/rfc/rfc3232.html">https://www.rfc-editor.org/rfc/rfc3232.html</a></li>
+</ul>
+<p><b>各协议端口规范：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">协议  </th><th class="markdownTableHeadNone">端口号  </th><th class="markdownTableHeadNone">标准引用  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">HTTP  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">RFC 7230 §2.7.1（HTTP/1.1 消息语法与路由）  </td><td class="markdownTableBodyNone">万维网协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">HTTPS  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">RFC 2818 §2.4（HTTP Over TLS）  </td><td class="markdownTableBodyNone">HTTP over TLS/SSL  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FTP  </td><td class="markdownTableBodyNone">21  </td><td class="markdownTableBodyNone">RFC 959 §3.2（文件传输协议）  </td><td class="markdownTableBodyNone">文件传输协议（控制端口）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SSH  </td><td class="markdownTableBodyNone">22  </td><td class="markdownTableBodyNone">RFC 4251 §4.1（安全 Shell 协议架构）  </td><td class="markdownTableBodyNone">安全 Shell 协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Telnet  </td><td class="markdownTableBodyNone">23  </td><td class="markdownTableBodyNone">RFC 854（Telnet 协议规范）  </td><td class="markdownTableBodyNone">远程登录协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SMTP  </td><td class="markdownTableBodyNone">25  </td><td class="markdownTableBodyNone">RFC 5321 §4.5.3.2（简单邮件传输协议）  </td><td class="markdownTableBodyNone">电子邮件传输  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DNS  </td><td class="markdownTableBodyNone">53  </td><td class="markdownTableBodyNone">RFC 1035 §4.2（域名实现与规范）  </td><td class="markdownTableBodyNone">域名系统  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">TFTP  </td><td class="markdownTableBodyNone">69  </td><td class="markdownTableBodyNone">RFC 1350 §5（简单文件传输协议）  </td><td class="markdownTableBodyNone">简单文件传输协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">POP3  </td><td class="markdownTableBodyNone">110  </td><td class="markdownTableBodyNone">RFC 1939 §4（邮局协议版本3）  </td><td class="markdownTableBodyNone">电子邮件接收协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">IMAP  </td><td class="markdownTableBodyNone">143  </td><td class="markdownTableBodyNone">RFC 3501 §2.1（互联网消息访问协议）  </td><td class="markdownTableBodyNone">电子邮件访问协议  </td></tr>
+</table>
+<p><b>WebSocket 协议端口规范：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">协议  </th><th class="markdownTableHeadNone">端口号  </th><th class="markdownTableHeadNone">标准引用  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WS  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">RFC 6455 §11.1（WebSocket 协议）  </td><td class="markdownTableBodyNone">WebSocket over HTTP  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">WSS  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">RFC 6455 §11.1（WebSocket 协议）  </td><td class="markdownTableBodyNone">WebSocket over TLS/SSL  </td></tr>
+</table>
+<p><b>相关安全标准：</b></p><ul>
+<li>**IETF RFC 2818**：HTTP Over TLS（HTTPS 端口定义） <a href="https://www.rfc-editor.org/rfc/rfc2818.html">https://www.rfc-editor.org/rfc/rfc2818.html</a></li>
+<li>**IETF RFC 6455**：WebSocket 协议（WS/WSS 端口定义） <a href="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="port_registry"></a>
+IANA 端口号注册表</h1>
+<p>根据 IANA 服务名称和端口号注册表，端口号分为三类：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">范围  </th><th class="markdownTableHeadNone">类别  </th><th class="markdownTableHeadNone">说明  </th><th class="markdownTableHeadNone">分配要求  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0-1023  </td><td class="markdownTableBodyNone">知名端口  </td><td class="markdownTableBodyNone">系统端口，由 IANA 分配和管控  </td><td class="markdownTableBodyNone">需要 IETF 共识或 IESG 批准  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1024-49151  </td><td class="markdownTableBodyNone">注册端口  </td><td class="markdownTableBodyNone">用户端口，由 IANA 注册  </td><td class="markdownTableBodyNone">需要 IETF 审核或专家审核  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">49152-65535  </td><td class="markdownTableBodyNone">动态/私有端口  </td><td class="markdownTableBodyNone">临时使用，自动分配  </td><td class="markdownTableBodyNone">无需分配  </td></tr>
+</table>
+<p>本文件中定义的所有端口均属于知名端口（0-1023）范围。</p>
+<h1 class="doxsection"><a class="anchor" id="protocol_mapping"></a>
+协议名称与端口映射</h1>
+<p>本实现支持的协议名称到端口号的映射关系：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">协议名称  </th><th class="markdownTableHeadNone">端口号  </th><th class="markdownTableHeadNone">别名  </th><th class="markdownTableHeadNone">传输协议  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">http  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">超文本传输协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ws  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">http（端口相同）  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">WebSocket 协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">https  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">HTTP over TLS/SSL  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">wss  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">https（端口相同）  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">WebSocket Secure  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ftp  </td><td class="markdownTableBodyNone">21  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">文件传输协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">tftp  </td><td class="markdownTableBodyNone">69  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">UDP  </td><td class="markdownTableBodyNone">简单文件传输协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ssh  </td><td class="markdownTableBodyNone">22  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">安全 Shell  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">telnet  </td><td class="markdownTableBodyNone">23  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">远程登录  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">smtp  </td><td class="markdownTableBodyNone">25  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">简单邮件传输协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">dns  </td><td class="markdownTableBodyNone">53  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP/UDP  </td><td class="markdownTableBodyNone">域名系统  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">pop3  </td><td class="markdownTableBodyNone">110  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">邮局协议版本3  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">imap  </td><td class="markdownTableBodyNone">143  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">TCP  </td><td class="markdownTableBodyNone">互联网消息访问协议  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">端口数值类型  </td><td class="markdownTableBodyNone">uint16_t（0-65535）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">知名端口范围  </td><td class="markdownTableBodyNone">0-1023  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">默认端口值  </td><td class="markdownTableBodyNone">undef（0）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">大小  </td><td class="markdownTableBodyNone">2 字节（uint16_t）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">协议名称解析  </td><td class="markdownTableBodyNone">大小写不敏感  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">未知协议处理  </td><td class="markdownTableBodyNone">返回 undef  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本实现中定义的端口号均取自 IANA 注册表。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>端口号 80 和 443 同时服务于 HTTP/HTTPS 和 WebSocket（WS/WSS）协议。 使用 <span class="tt">to_string(bool is_ws)</span> 方法可明确区分协议类型。 动态/私有端口（49152-65535）不在本文件中预定义，可使用 <span class="tt"><a class="el" href="#a9971f3b73413357e32b44e4229062f26" title="从uint16_t构造">ports(uint16_t)</a></span> 构造。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.iana.org/assignments/service-names-port-numbers/">https://www.iana.org/assignments/service-names-port-numbers/</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc6335">https://www.rfc-editor.org/rfc/rfc6335</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers">https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers</a> </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00027">27</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00123">123</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="ac669b0e3aadb23af41c8fb0d20d8b9d8" name="ac669b0e3aadb23af41c8fb0d20d8b9d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac669b0e3aadb23af41c8fb0d20d8b9d8">&#9670;&#160;</a></span>raw</h2>
@@ -211,7 +328,7 @@ Public 属性</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00032">32</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00128">128</a> 行定义.</p>
 
 </div>
 </div>
@@ -242,7 +359,7 @@ Public 属性</h2></td></tr>
 <p>默认构造函数 </p>
 <p>创建未定义端口的对象。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#af8fe0623e057c4f2f93f8b7fc6cfe251">parse()</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00061">ports()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#af8fe0623e057c4f2f93f8b7fc6cfe251">parse()</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00157">ports()</a>.</p>
 
 </div>
 </div>
@@ -277,9 +394,9 @@ Public 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00157">157</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a> , 以及 <a class="el" href="#aed7286a23ab2d5be7c08b47807fa5eb0">ports()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00144">port</a> , 以及 <a class="el" href="#aed7286a23ab2d5be7c08b47807fa5eb0">ports()</a>.</p>
 
 </div>
 </div>
@@ -314,9 +431,9 @@ Public 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00068">68</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00164">164</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a>.</p>
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00144">port</a>.</p>
 
 </div>
 </div>
@@ -348,9 +465,9 @@ Public 属性</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>端口有效返回true</dd></dl>
 <p>检查端口是否为undef。 </p>
 
-<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00077">77</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00173">173</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00033">undef</a>.</p>
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00144">port</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00129">undef</a>.</p>
 
 </div>
 </div>
@@ -380,9 +497,9 @@ Public 属性</h2></td></tr>
 <p>uint16_t转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>端口的数值表示 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00083">83</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00179">179</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00048">port</a>.</p>
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00144">port</a>.</p>
 
 </div>
 </div>

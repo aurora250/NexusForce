@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['异常处理_0',['异常处理',['../group___exception_handling.html',1,'']]],
-  ['异常类集_1',['异常类集',['../group___exceptions.html',1,'']]],
-  ['异步行为_2',['异步行为',['../group___async.html',1,'']]]
+  ['堆性质定义_0',['堆性质定义',['../group___heap_algorithms.html#heap_properties',1,'']]],
+  ['堆栈跟踪_1',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
+  ['堆算法_2',['堆算法',['../group___heap_algorithms.html',1,'']]],
+  ['堆调整优化_3',['Floyd 堆调整优化',['../group___heap_algorithms.html#floyd_optimization',1,'']]]
 ];

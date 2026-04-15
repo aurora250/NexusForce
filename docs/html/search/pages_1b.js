@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['编码规则_0',['UTF-8 编码规则',['../codepoint_8hpp.html#utf8_encoding',1,'']]]
+  ['❗_20异常处理_20exception_0',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]]
 ];

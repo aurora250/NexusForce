@@ -89,7 +89,7 @@ $(function(){initNavTree('classthread__tracker.html','','classthread__tracker-me
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">thread_tracker类 参考<div class="ingroups"><a class="el" href="group___thread.html">线程</a></div></div></div>
+  <div class="headertitle"><div class="title">thread_tracker类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___thread.html">线程</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,7 +112,7 @@ $(function(){initNavTree('classthread__tracker.html','','classthread__tracker-me
 <p>单例类，自动记录主线程的创建和销毁，并提供线程计数查询功能。</p>
 <dl class="section note"><dt>注解</dt><dd>仅跟踪通过NexusForce线程库创建的线程，不跟踪OS原生线程 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00028">28</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00034">34</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a2bd02c75012fa7b74dbbbbdb64ef86f9" name="a2bd02c75012fa7b74dbbbbdb64ef86f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2bd02c75012fa7b74dbbbbdb64ef86f9">&#9670;&#160;</a></span>instance()</h2>
@@ -141,9 +141,9 @@ $(function(){initNavTree('classthread__tracker.html','','classthread__tracker-me
 <dl class="section return"><dt>返回</dt><dd>线程跟踪器实例的引用</dd></dl>
 <p>首次调用时创建跟踪器实例并记录主线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00053">53</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00059">59</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread__tracker_8hpp_source.html#l00064">is_single_threaded()</a> , 以及 <a class="el" href="thread__tracker_8hpp_source.html#l00072">thread_count()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread__tracker_8hpp_source.html#l00070">is_single_threaded()</a> , 以及 <a class="el" href="thread__tracker_8hpp_source.html#l00078">thread_count()</a>.</p>
 
 </div>
 </div>
@@ -174,11 +174,11 @@ $(function(){initNavTree('classthread__tracker.html','','classthread__tracker-me
 <dl class="section return"><dt>返回</dt><dd>如果只有主线程运行则返回true，否则返回false</dd></dl>
 <p>当线程计数为1时表示当前只有主线程在运行。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00064">64</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00070">70</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread__tracker_8hpp_source.html#l00053">instance()</a> , 以及 <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread__tracker_8hpp_source.html#l00059">instance()</a> , 以及 <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread__tracker_8hpp_source.html#l00080">is_single_threaded()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread__tracker_8hpp_source.html#l00086">is_single_threaded()</a>.</p>
 
 </div>
 </div>
@@ -209,11 +209,11 @@ $(function(){initNavTree('classthread__tracker.html','','classthread__tracker-me
 <dl class="section return"><dt>返回</dt><dd>活动的NexusForce线程数量</dd></dl>
 <p>返回由NexusForce线程库创建且尚未销毁的线程数量。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00072">72</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__tracker_8hpp_source.html">thread_tracker.hpp</a> 第 <a class="el" href="thread__tracker_8hpp_source.html#l00078">78</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread__tracker_8hpp_source.html#l00053">instance()</a> , 以及 <a class="el" href="atomic_8hpp_source.html#l00124">atomic&lt; T &gt;::load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread__tracker_8hpp_source.html#l00059">instance()</a> , 以及 <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread__tracker_8hpp_source.html#l00086">thread_count()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread__tracker_8hpp_source.html#l00092">thread_count()</a>.</p>
 
 </div>
 </div>

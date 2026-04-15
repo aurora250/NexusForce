@@ -1,0 +1,73 @@
+var group___s_s_l =
+[
+    [ "ssl_acceptor", "classssl__acceptor.html", [
+      [ "ssl_acceptor", "classssl__acceptor.html#ada1e952a280a99f5567f305c0ecff956", null ],
+      [ "accept_ssl", "classssl__acceptor.html#a1ff931d086904393ce22cf28c1f14272", null ],
+      [ "context", "classssl__acceptor.html#a45f9df7877e1461231a545a9cf3d1c79", null ],
+      [ "context", "classssl__acceptor.html#aa70f758579060382935f09a1f84dd672", null ],
+      [ "set_ssl_context", "classssl__acceptor.html#a4bc3e8b4220ad110f3a073cd49df9375", null ]
+    ] ],
+    [ "ssl_context", "classssl__context.html", [
+      [ "ssl_context", "classssl__context.html#a66547e0420877dfe3109b5c1ebab7437", null ],
+      [ "is_valid", "classssl__context.html#a578442e1760cc9d136347c462611fedf", null ],
+      [ "load_certificate", "classssl__context.html#a22215336ea11c5521366581dec47543f", null ],
+      [ "load_certificate_from_memory", "classssl__context.html#aec13982e180a000537a06105e556ff28", null ],
+      [ "load_verify_locations", "classssl__context.html#af745272315450d6031ef5c672a6e9129", null ],
+      [ "native_handle", "classssl__context.html#aa5b41ad6a5228d7eaeab06dd4d8a33d1", null ],
+      [ "operator bool", "classssl__context.html#a033f21fdfb92c225f5c2dd92a6c1a4ef", null ],
+      [ "require_client_certificate", "classssl__context.html#aa9de73f40d992c24c2e31946a3c35cc1", null ],
+      [ "set_alpn_protos", "classssl__context.html#ab8aad3c116c70eb8fd80c1eae3ebb1ed", null ],
+      [ "set_cipher_list", "classssl__context.html#a4edec8d73877dcbe5e94b2255ff8b940", null ],
+      [ "set_ciphersuites", "classssl__context.html#af64a00239c7cd3d3de7cc91109462f42", null ],
+      [ "set_default_options", "classssl__context.html#ad03da982750376dc73a460eec7498a10", null ],
+      [ "set_options", "classssl__context.html#a716bbb717d41d3f7755c61108b1858b4", null ],
+      [ "set_session_cache_size", "classssl__context.html#a2d95fd9f424a34d0f56af203fca50c53", null ],
+      [ "set_timeout", "classssl__context.html#a9ef857acc354c1ed524fd8d45260b764", null ],
+      [ "set_verify_mode", "classssl__context.html#afc476ac46905f6fe25805d871900542a", null ]
+    ] ],
+    [ "ssl_socket", "classssl__socket.html", [
+      [ "ssl_socket", "classssl__socket.html#a1917d1f6f10b83ef3a396fe9fbc1d7d8", null ],
+      [ "ssl_socket", "classssl__socket.html#a8e99620bef12b00c9b56639b5ad41fd7", null ],
+      [ "ssl_socket", "classssl__socket.html#ac28d7742ab7ed2ac7386598c872b7615", null ],
+      [ "~ssl_socket", "classssl__socket.html#a76cf3d2ca514fa1fe702c82f5e534c79", null ],
+      [ "init_client_ssl", "classssl__socket.html#a33d98abb79c38434ba74f2eb5834261e", null ],
+      [ "init_server_ssl", "classssl__socket.html#a2d62a9aa4ed97ff2e56f51cdacd833bf", null ],
+      [ "is_ssl", "classssl__socket.html#a85a6a693fc16faed64ebf66f8773571c", null ],
+      [ "peer_certificate_info", "classssl__socket.html#a271fe19c9c420fae1c45191813cd962e", null ],
+      [ "receive", "classssl__socket.html#a0607573c4459e1ea3cb7c95dceaf3f8a", null ],
+      [ "send", "classssl__socket.html#a23a2685c9657643210f24d9f52e9acd9", null ],
+      [ "ssl", "classssl__socket.html#a778081c4962efbb3a44a79f7b86bf751", null ],
+      [ "ssl", "classssl__socket.html#aef4e77b2860d6c93a77742211a060d93", null ]
+    ] ],
+    [ "ssl_stream", "classssl__stream.html", [
+      [ "native_handle_type", "classssl__stream.html#afc24338af0bfb2d13cc9b8b900fadbae", null ],
+      [ "ssl_stream", "classssl__stream.html#ab02e87e9e16e91897e6cff777bb29186", null ],
+      [ "ssl_stream", "classssl__stream.html#a08bc78c38c699630bdfd08492fabadfd", null ],
+      [ "accept", "classssl__stream.html#a8d50c0caaf302839aba7a8989a3fa875", null ],
+      [ "close", "classssl__stream.html#a5d919c932bf06d932d0a36dd70faad71", null ],
+      [ "connect", "classssl__stream.html#a33c58ee785d4e58e80eaf07e73e27217", null ],
+      [ "get_cipher_name", "classssl__stream.html#ad3b9dc0ed64e92577c8bb4ba3220c583", null ],
+      [ "get_peer_certificate", "classssl__stream.html#a4cc5b0f74efe484cab6fc0913356c862", null ],
+      [ "get_version", "classssl__stream.html#aa1eace8edd10d671c001391baf0b6a48", null ],
+      [ "is_valid", "classssl__stream.html#a32cc653e8ae7e2eb2dca776a645786d4", null ],
+      [ "last_error", "classssl__stream.html#a094d5e2e161252b4b063939239fef4ee", null ],
+      [ "native_handle", "classssl__stream.html#adb6c7c529d3fc36ee21e27846232f2ac", null ],
+      [ "operator bool", "classssl__stream.html#a497091962274d5219c13b422e0254b50", null ],
+      [ "pending", "classssl__stream.html#a8efce66ec363831e7603e577359f21c6", null ],
+      [ "read", "classssl__stream.html#a4725342e2cbd45353601ea030135487a", null ],
+      [ "read_all", "classssl__stream.html#adc3dfd5b9f969e5a3d5e646c3ae11994", null ],
+      [ "release", "classssl__stream.html#aa1af4e284b6497eb7fdfe79349f6333a", null ],
+      [ "reset", "classssl__stream.html#ad2cdaf860512de64970b322f71be7e6e", null ],
+      [ "set_fd", "classssl__stream.html#a9f63a0a0a510ba7bc733bce6b29fc0b8", null ],
+      [ "set_sni_hostname", "classssl__stream.html#a1d4f7de8ebab2a49cbf631bcdfdf217e", null ],
+      [ "verify_peer", "classssl__stream.html#a39c9de4aa12661b5b908befaa74410cb", null ],
+      [ "write", "classssl__stream.html#aee26c635332fe8806177a5cf52b7a7b4", null ],
+      [ "write_all", "classssl__stream.html#a4ae572dd7e946624dcb3c2048251cdda", null ]
+    ] ],
+    [ "ssl_method", "group___s_s_l.html#ga4012ce4e3211cb41f69956042abba0c8", [
+      [ "ssl_method::TLS_SERVER", "group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387", null ],
+      [ "ssl_method::TLS_CLIENT", "group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510", null ],
+      [ "ssl_method::TLS_SERVER_DTLS", "group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8ae63bbbfff9c05482d04d15b9734b6426", null ],
+      [ "ssl_method::TLS_CLIENT_DTLS", "group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8a20661d21cf4a40f3d04fac7ca9b4ca3b", null ]
+    ] ]
+];

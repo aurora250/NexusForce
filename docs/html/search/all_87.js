@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];
