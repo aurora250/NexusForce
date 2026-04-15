@@ -19,6 +19,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+#pragma pack(push, 1)
 /**
  * @struct icmp_header
  * @brief ICMP头部结构定义
@@ -32,7 +33,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 标识符(16位)：用于匹配请求和响应
  * - 序列号(16位)：用于匹配请求和响应
  */
-#pragma pack(push, 1)
 struct icmp_header {
     uint8_t type;      ///< ICMP消息类型
     uint8_t code;      ///< 消息代码

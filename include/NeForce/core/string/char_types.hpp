@@ -109,7 +109,7 @@ NEFORCE_END_CONSTANTS__
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_ctype(const CharT c, uint64_t mask_low, uint64_t mask_high) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
         return false;
@@ -155,7 +155,6 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntrl(const CharT c) noexcept 
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_print(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc <= 127 && !_NEFORCE is_cntrl(c);
 }
@@ -170,7 +169,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_print(const CharT c) noexcept 
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blank(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc < 64 && (constants::BLANK_MASK & (1ULL << uc)) != 0;
 }
@@ -198,7 +197,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_graph(const CharT c) noexcept 
  */
 template <typename CharT>
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_ascii(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc <= 127;
 }
@@ -213,7 +212,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_ascii(const CharT c) noexcept
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc < 64 && (constants::SPACE_MASK & (1ULL << uc)) != 0;
 }
@@ -228,7 +227,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space(const CharT c) noexcept 
  */
 template <typename CharT>
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
         return false;
@@ -246,7 +245,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha(const CharT c) noexcept
  */
 template <typename CharT>
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
         return false;
@@ -264,7 +263,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit(const CharT c) noexcept
  */
 template <typename CharT>
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_xdigit(const CharT c) noexcept {
-    static_assert(is_character_v<CharT>, "character type is necessary");
+    static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) {
         return false;

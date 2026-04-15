@@ -56,14 +56,21 @@ jobs:
               - src
               - include
             paths-ignore:
+              - '**/vcpkg/**'
+              - '**/vcpkg_installed/**'
+              - '**/build/_deps/**'
               - cmake
               - docs
               - examples
               - tests
               - build
               - vcpkg
+              - vcpkg_installed
               - third_party
               - submodules
+            query-filters:
+              exclude:
+                - filename:**/vcpkg/**
 
       - name: Capture Build with Bear
         run: |
@@ -76,7 +83,7 @@ jobs:
             -DVCPKG_TARGET_TRIPLET=x64-linux \
             -DNEXUSFORCE_BUILD_DOCS=OFF \
             -DNEXUSFORCE_BUILD_TESTS=OFF || true
-          
+
           bear -- make -j$(nproc) || true
 
           if [ -f compile_commands.json ]; then

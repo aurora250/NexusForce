@@ -562,19 +562,19 @@ public:
             return background;
         }
 
-        const double src_a = a / 255.0;
-        const double dst_a = background.a / 255.0;
-        const double inv_src_a = 1.0 - src_a;
+        const decimal_t src_a = a / 255.0;
+        const decimal_t dst_a = background.a / 255.0;
+        const decimal_t inv_src_a = 1.0 - src_a;
 
         // Result_A = Src_A + Dst_A * (1 - Src_A)
-        const double out_a = src_a + dst_a * inv_src_a;
+        const decimal_t out_a = src_a + dst_a * inv_src_a;
 
         if (out_a <= 0.0) {
             return transparent();
         }
 
         // Result_RGB = (Src_RGB * Src_A + Dst_RGB * Dst_A * (1 - Src_A)) / Result_A
-        const double inv_out_a = 1.0 / out_a;
+        const decimal_t inv_out_a = 1.0 / out_a;
         const int newR = static_cast<int>(_NEFORCE round((r * src_a + background.r * dst_a * inv_src_a) * inv_out_a));
         const int newG = static_cast<int>(_NEFORCE round((g * src_a + background.g * dst_a * inv_src_a) * inv_out_a));
         const int newB = static_cast<int>(_NEFORCE round((b * src_a + background.b * dst_a * inv_src_a) * inv_out_a));
@@ -652,9 +652,9 @@ public:
             return 232 + (gray_index > 23 ? 23 : gray_index);
         }
 
-        constexpr int cube_levels[6] = {0, 95, 135, 175, 215, 255};
+        constexpr auto find_closest = [](const int value) -> int {
+            constexpr int levels[6] = {0, 95, 135, 175, 215, 255};
 
-        constexpr auto find_closest = [](const int value, const int levels[6]) -> int {
             int closest_idx = 0;
             int min_diff = 255 * 255;
             for (int i = 0; i < 6; ++i) {
@@ -668,9 +668,9 @@ public:
             return closest_idx;
         };
 
-        const int r_idx = find_closest(r, cube_levels);
-        const int g_idx = find_closest(g, cube_levels);
-        const int b_idx = find_closest(b, cube_levels);
+        const int r_idx = find_closest(r);
+        const int g_idx = find_closest(g);
+        const int b_idx = find_closest(b);
 
         // 16 + 36 * R + 6 * G + B
         return 16 + 36 * r_idx + 6 * g_idx + b_idx;
@@ -748,7 +748,7 @@ public:
      * @note 仅用于需要预乘数据的图形 API，结果不宜直接用于 blend 输入。
      */
     NEFORCE_NODISCARD constexpr color to_premultiplied() const noexcept {
-        const double alpha = a / 255.0;
+        const decimal_t alpha = a / 255.0;
         return color(static_cast<int>(_NEFORCE round(r * alpha)), static_cast<int>(_NEFORCE round(g * alpha)),
                      static_cast<int>(_NEFORCE round(b * alpha)), a);
     }
@@ -762,7 +762,7 @@ public:
         if (a == 0) {
             return transparent();
         }
-        const double inv_alpha = 255.0 / a;
+        const decimal_t inv_alpha = 255.0 / a;
         return color(static_cast<int>(_NEFORCE round(r * inv_alpha)), static_cast<int>(_NEFORCE round(g * inv_alpha)),
                      static_cast<int>(_NEFORCE round(b * inv_alpha)), a);
     }

@@ -29,8 +29,9 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * @note 此函数区分正零和负零。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool signbit(const T x) noexcept {
+    static_assert(is_floating_point_v<T>, "floating point required");
     using UInt = make_integer_t<sizeof(T), false>;
 
     const UInt bits = *reinterpret_cast<const UInt*>(&x);
@@ -47,8 +48,9 @@ NEFORCE_CONST_FUNCTION constexpr bool signbit(const T x) noexcept {
  *
  * NaN的特性：NaN != NaN 总是成立。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_nan(const T x) noexcept {
+    static_assert(is_floating_point_v<T>, "floating point required");
     return x != x;
 }
 
@@ -58,8 +60,9 @@ NEFORCE_CONST_FUNCTION constexpr bool is_nan(const T x) noexcept {
  * @param x 待检查的浮点数
  * @return 如果x是正无穷大则返回true，否则返回false
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_pos_infinity(const T x) noexcept {
+    static_assert(is_floating_point_v<T>, "floating point required");
     return x == numeric_traits<T>::infinity();
 }
 
@@ -69,8 +72,9 @@ NEFORCE_CONST_FUNCTION constexpr bool is_pos_infinity(const T x) noexcept {
  * @param x 待检查的浮点数
  * @return 如果x是负无穷大则返回true，否则返回false
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_neg_infinity(const T x) noexcept {
+    static_assert(is_floating_point_v<T>, "floating point required");
     return x == -numeric_traits<T>::infinity();
 }
 
@@ -81,7 +85,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_neg_infinity(const T x) noexcept {
  * @return 如果x是无穷大则返回true，否则返回false
  * @note 此函数不区分正无穷和负无穷
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_infinity(const T x) noexcept {
     return _NEFORCE is_pos_infinity(x) || _NEFORCE is_neg_infinity(x);
 }
@@ -94,7 +98,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_infinity(const T x) noexcept {
  *
  * 有限值包括：正常数、负零、正零、次正规数、正规数。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_finite(const T x) noexcept {
     return !_NEFORCE is_infinity(x) && !_NEFORCE is_nan(x);
 }
@@ -108,7 +112,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_finite(const T x) noexcept {
  * 正规数：绝对值大于等于最小正正规数的有限非零浮点数。
  * 不包括：零、次正规数、无穷大、NaN。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_normal(const T x) noexcept {
     if (!_NEFORCE is_finite(x)) {
         return false;
@@ -129,7 +133,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_normal(const T x) noexcept {
  * 次正规数（非正规数）：绝对值小于最小正正规数的非零浮点数。
  * 用于表示接近零的非常小的数值。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_subnormal(const T x) noexcept {
     if (!_NEFORCE is_finite(x)) {
         return false;
@@ -151,7 +155,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_subnormal(const T x) noexcept {
  *
  * @note 此函数区分正零和负零。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_positive(const T x) noexcept {
     return x > 0 || (x == 0 && !_NEFORCE signbit(x));
 }
@@ -166,7 +170,7 @@ NEFORCE_CONST_FUNCTION constexpr bool is_positive(const T x) noexcept {
  *
  * @note 此函数区分正零和负零。
  */
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T>
 NEFORCE_CONST_FUNCTION constexpr bool is_negative(const T x) noexcept {
     return x < 0 || (x == 0 && _NEFORCE signbit(x));
 }
