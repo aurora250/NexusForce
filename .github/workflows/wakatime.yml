@@ -2,21 +2,25 @@ name: WakaTime Readme
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # 每天 UTC 0点运行
   workflow_dispatch:
 
 jobs:
   update-readme:
     name: Update WakaTime Stats
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - uses: actions/checkout@v4
+
       - name: Waka Readme Stats
         uses: athul/waka-readme@master
         with:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+
           SHOW_TITLE: true
           BLOCKS: "⬛🟨🟩"
           TIME_RANGE: all_time
