@@ -97,31 +97,31 @@ $(function(){initNavTree('ssl__exception_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structssl__exception.html">   16</a></span><span class="keyword">struct </span>NEFORCE_API ssl_exception final : thirdparty_exception {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <span class="keywordtype">int</span> last_error() <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static</span> <span class="keywordtype">string</span> last_error_message();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">explicit</span> ssl_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;SSL Operation Failed.&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structexception.html#a50dcb7544585c5cda232c3133d027eff">type</a> = static_type,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                           <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a> = last_error()) noexcept :</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    thirdparty_exception(info, <a class="code hl_function" href="structexception.html#a50dcb7544585c5cda232c3133d027eff">type</a>, <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) {}</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">explicit</span> ssl_exception(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) :</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    thirdparty_exception(last_error_message().<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>(), static_type, <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) {}</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">explicit</span> ssl_exception(<span class="keyword">const</span> <a class="code hl_function" href="structexception.html#a33710bd2e564614575128e2c3de94883">exception</a>&amp; e) :</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    thirdparty_exception(e) {}</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    ~ssl_exception() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> static_type = <span class="stringliteral">&quot;ssl_exception&quot;</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structssl__exception.html">   15</a></span><span class="keyword">struct </span>NEFORCE_API ssl_exception final : thirdparty_exception {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">static</span> <span class="keywordtype">int</span> last_error() <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <span class="keywordtype">string</span> last_error_message();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">explicit</span> ssl_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;SSL Operation Failed.&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structexception.html#a50dcb7544585c5cda232c3133d027eff">type</a> = static_type,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                           <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a> = last_error()) noexcept :</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    thirdparty_exception(info, <a class="code hl_function" href="structexception.html#a50dcb7544585c5cda232c3133d027eff">type</a>, <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) {}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">explicit</span> ssl_exception(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) :</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    thirdparty_exception(last_error_message().<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>(), static_type, <a class="code hl_function" href="structexception.html#a4b5c972aaec8251632ca72bdfc9820fb">code</a>) {}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">explicit</span> ssl_exception(<span class="keyword">const</span> <a class="code hl_function" href="structexception.html#a33710bd2e564614575128e2c3de94883">exception</a>&amp; e) :</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    thirdparty_exception(e) {}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    ~ssl_exception() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> static_type = <span class="stringliteral">&quot;ssl_exception&quot;</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> <span class="comment">// Exceptions</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> <span class="comment">// Exceptions</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__</span></div>
 <div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
 <div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
 <div class="ttc" id="astructexception_html_a33710bd2e564614575128e2c3de94883"><div class="ttname"><a href="structexception.html#a33710bd2e564614575128e2c3de94883">exception::exception</a></div><div class="ttdeci">exception(const char *info=static_type, const char *type=static_type, const int code=0)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00092">exception.hpp:92</a></div></div>

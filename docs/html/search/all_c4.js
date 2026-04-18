@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['📦_20压缩_20compress_0',['📦 压缩 (Compress)',['../index.html#autotoc_md33',1,'']]],
-  ['📦_20容器_20container_1',['📦 容器 (Container)',['../index.html#autotoc_md20',1,'']]]
+  ['预定义颜色常量_0',['预定义颜色常量',['../group___color.html#named_colors',1,'']]]
 ];

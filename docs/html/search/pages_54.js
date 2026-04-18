@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['稳定性说明_0',['稳定性说明',['../group___sort_algorithms.html#stability_notes',1,'']]]
+  ['更新日志_0',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
 ];

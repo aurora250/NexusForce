@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['平台差异_0',['平台差异',['../group___u_t_f.html#platform_differences',1,'']]]
+  ['学术文献与算法来源_0',['学术文献与算法来源',['../group___bloom_filter.html#references',1,'']]]
 ];

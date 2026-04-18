@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
-  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
+  ['模式匹配算法_0',['模式匹配算法',['../group___pattern_matching_algorithms.html',1,'']]],
+  ['模板操作工具_1',['模板操作工具',['../group___template_traits_utilities.html',1,'']]]
 ];

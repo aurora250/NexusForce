@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['time_0',['⏰ 时间处理 (Time)',['../index.html#autotoc_md28',1,'']]],
-  ['todo_1',['📌 TODO',['../index.html#autotoc_md53',1,'']]],
-  ['toml_20值类型定义_2',['TOML 值类型定义',['../group___toml_config.html#toml_types',1,'']]],
-  ['typeinfo_3',['🧬 类型与特性 (TypeInfo)',['../index.html#autotoc_md31',1,'']]]
+  ['sha_202_20家族对比_0',['SHA-2 家族对比',['../group___s_h_a256.html#comparison',1,'']]],
+  ['string_1',['🔤 字符串处理 (String)',['../index.html#autotoc_md26',1,'']]],
+  ['system_2',['⚙️ 系统接口 (System)',['../index.html#autotoc_md27',1,'']]]
 ];

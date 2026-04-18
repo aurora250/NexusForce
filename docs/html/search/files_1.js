@@ -9,5 +9,6 @@ var searchData=
   ['bitmap_2ehpp_6',['bitmap.hpp',['../bitmap_8hpp.html',1,'']]],
   ['bitset_2ehpp_7',['bitset.hpp',['../bitset_8hpp.html',1,'']]],
   ['bloom_5ffilter_2ehpp_8',['bloom_filter.hpp',['../bloom__filter_8hpp.html',1,'']]],
-  ['breakpoint_2ehpp_9',['breakpoint.hpp',['../breakpoint_8hpp.html',1,'']]]
+  ['breakpoint_2ehpp_9',['breakpoint.hpp',['../breakpoint_8hpp.html',1,'']]],
+  ['byte_5fsize_2ehpp_10',['byte_size.hpp',['../byte__size_8hpp.html',1,'']]]
 ];

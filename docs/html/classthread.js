@@ -15,5 +15,6 @@ var classthread =
     [ "native_handle", "classthread.html#a972490197894f12244e23509d79c969a", null ],
     [ "operator=", "classthread.html#aa3c72628994c7bdd2eaf62ae547b6a10", null ],
     [ "set_name", "classthread.html#a11943219b9d0cef98e433e6663e8b000", null ],
+    [ "start", "classthread.html#ad74c6a1b7c5631e54eba313a5e53637e", null ],
     [ "swap", "classthread.html#a4d4f770a1048122b6b9954f780e3640c", null ]
 ];

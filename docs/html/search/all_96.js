@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
-  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
+  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
+  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
 ];

@@ -11,7 +11,11 @@ var searchData=
   ['having_5fconditions_8',['having_conditions',['../structsql__builder_1_1select__data.html#a2b8ccff59d56d55a11878d92c816f1e3',1,'sql_builder::select_data']]],
   ['hazard_5fptr_9',['hazard_ptr',['../structhazard__pointer__record.html#aa72ef496c7d823531af21d92f7f7cc88',1,'hazard_pointer_record']]],
   ['head_10',['head',['../structretire__list.html#a883604f763908f6360de2d705f8a1589',1,'retire_list']]],
-  ['height_11',['height',['../structsys__console_1_1console__size.html#a26e1d110917902b4030622a3502b3523',1,'sys_console::console_size']]],
-  ['high_12',['high',['../structmurmur__hash.html#ad3183fe437a07552a8d4c2c7da4de244',1,'murmur_hash']]],
-  ['host_13',['host',['../structdb__config.html#aa97419dbe5968aca02bd2a52e30dd266',1,'db_config::host'],['../structurl.html#a32706de92e065e4dad5e0f9944211cc6',1,'url::host']]]
+  ['headers_11',['headers',['../structhttp__client__response.html#a757f686263b9196de5ab6e40d235ba0c',1,'http_client_response::headers'],['../structhttp__client__request.html#ab25a4a4086617398da7ceda0d6695131',1,'http_client_request::headers'],['../structhttp__server__request.html#a4c96548479749086efc85c3af339747a',1,'http_server_request::headers'],['../structhttp__server__response.html#a530666d68831a0d53ff4cafe85266a3d',1,'http_server_response::headers']]],
+  ['height_12',['height',['../structsys__console_1_1console__size.html#a26e1d110917902b4030622a3502b3523',1,'sys_console::console_size']]],
+  ['high_13',['high',['../structmurmur__hash.html#ad3183fe437a07552a8d4c2c7da4de244',1,'murmur_hash']]],
+  ['host_14',['host',['../structdb__config.html#aa97419dbe5968aca02bd2a52e30dd266',1,'db_config::host'],['../structhttp__client__request.html#ae04ba00e9bdbdde135298d9c1ac20091',1,'http_client_request::host'],['../structurl.html#a32706de92e065e4dad5e0f9944211cc6',1,'url::host']]],
+  ['http_5fonly_15',['http_only',['../structhttp__cookie.html#a5f622b6255d7aa131034d17a4e5db76b',1,'http_cookie']]],
+  ['http_5fversion_5fmajor_16',['http_version_major',['../structhttp__client__response.html#adc754da17b0d10285fb0c6ade4e7b54c',1,'http_client_response']]],
+  ['http_5fversion_5fminor_17',['http_version_minor',['../structhttp__client__response.html#aff6fe5bdb5d36260219abd5fb41fcfd3',1,'http_client_response']]]
 ];

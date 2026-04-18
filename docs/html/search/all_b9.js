@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../index.html#autotoc_md32',1,'']]]
+  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
 ];

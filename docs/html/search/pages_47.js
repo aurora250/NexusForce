@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['更新日志_0',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
+  ['建议_0',['IEEE 1541-2021 建议',['../group___byte_size.html#ieee_1541',1,'']]]
 ];

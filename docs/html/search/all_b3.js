@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
-  ['颜色_1',['颜色',['../group___color.html',1,'']]]
+  ['边界查找算法_0',['边界查找算法',['../group___bound_algorithms.html',1,'']]]
 ];

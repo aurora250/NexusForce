@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['系统、并发与命令行_0',['⚙️ 系统、并发与命令行',['../index.html#autotoc_md15',1,'']]],
-  ['系统信号_1',['系统信号',['../group___system_signal.html',1,'']]],
-  ['系统信息_2',['系统信息',['../group___system_info.html',1,'']]],
-  ['系统接口_20system_3',['⚙️ 系统接口 (System)',['../index.html#autotoc_md27',1,'']]]
+  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
 ];

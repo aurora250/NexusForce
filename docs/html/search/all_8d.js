@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['灰度转换_0',['灰度转换',['../group___color.html#grayscale_conversion',1,'']]]
 ];

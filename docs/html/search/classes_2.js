@@ -33,7 +33,7 @@ var searchData=
   ['compressed_5fpair_3c_20standard_5fallocator_2c_20size_5ft_20_3e_30',['compressed_pair&lt; standard_allocator, size_t &gt;',['../structcompressed__pair.html',1,'']]],
   ['condition_5fvariable_31',['condition_variable',['../classcondition__variable.html',1,'']]],
   ['conditional_32',['conditional',['../structconditional.html',1,'']]],
-  ['config_33',['config',['../structdns__client_1_1config.html',1,'dns_client']]],
+  ['config_33',['config',['../structdns__client_1_1config.html',1,'dns_client::config'],['../structhttp__client_1_1config.html',1,'http_client::config']]],
   ['conjunction_34',['conjunction',['../structconjunction.html',1,'']]],
   ['conjunction_3c_20disjunction_3c_20disjunction_3c_20is_5fsame_3c_20u_2c_20pointer_20_3e_2c_20is_5fsame_3c_20u_2c_20nullptr_5ft_20_3e_20_3e_2c_20conjunction_3c_20is_5fpointer_3c_20u_20_3e_2c_20is_5fsame_3c_20pointer_2c_20element_5ftype_20_2a_20_3e_2c_20is_5fconvertible_3c_20remove_5fpointer_5ft_3c_20u_20_3e_28_2a_29_5b_5d_2c_20element_5ftype_28_2a_29_5b_5d_3e_20_3e_20_3e_20_3e_35',['conjunction&lt; disjunction&lt; disjunction&lt; is_same&lt; U, pointer &gt;, is_same&lt; U, nullptr_t &gt; &gt;, conjunction&lt; is_pointer&lt; U &gt;, is_same&lt; pointer, element_type * &gt;, is_convertible&lt; remove_pointer_t&lt; U &gt;(*)[], element_type(*)[]&gt; &gt; &gt; &gt;',['../structconjunction.html',1,'']]],
   ['conjunction_3c_20is_5farray_3c_20u_20_3e_2c_20is_5fsame_3c_20pointer_2c_20element_5ftype_20_2a_20_3e_2c_20is_5fsame_3c_20up_5fpointer_2c_20up_5felement_5ftype_20_2a_20_3e_2c_20is_5fconvertible_3c_20up_5felement_5ftype_28_2a_29_5b_5d_2c_20element_5ftype_28_2a_29_5b_5d_3e_20_3e_36',['conjunction&lt; is_array&lt; U &gt;, is_same&lt; pointer, element_type * &gt;, is_same&lt; UP_pointer, UP_element_type * &gt;, is_convertible&lt; UP_element_type(*)[], element_type(*)[]&gt; &gt;',['../structconjunction.html',1,'']]],
@@ -46,5 +46,6 @@ var searchData=
   ['const_5fiterator_43',['const_iterator',['../classvector.html',1,'']]],
   ['contiguous_5fiterator_5ftag_44',['contiguous_iterator_tag',['../structcontiguous__iterator__tag.html',1,'']]],
   ['coroutine_5ftraits_45',['coroutine_traits',['../structcoroutine__traits.html',1,'']]],
-  ['cpu_5finfo_46',['CPU_info',['../structsysinfo_1_1_c_p_u__info.html',1,'sysinfo']]]
+  ['cors_5ffilter_46',['cors_filter',['../classcors__filter.html',1,'']]],
+  ['cpu_5finfo_47',['CPU_info',['../structsysinfo_1_1_c_p_u__info.html',1,'sysinfo']]]
 ];

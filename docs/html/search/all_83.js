@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['树的合并规则_0',['树的合并规则',['../group___leonardo_heap.html#tree_merging',1,'']]]
 ];

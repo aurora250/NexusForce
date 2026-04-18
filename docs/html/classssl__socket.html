@@ -265,7 +265,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="line"><a class="code hl_function" href="#a1917d1f6f10b83ef3a396fe9fbc1d7d8">ssl_socket</a> client;</div>
 <div class="line">client.<a class="code hl_function" href="classtcp__socket.html#a4d419854509a10778b43c8561f9794b3">open</a>(AF_INET);</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> server = <a class="code hl_function" href="classip__address.html#afa18a9a0c627ef20bd148be8670cf46a">ip_address::parse</a>(<span class="stringliteral">&quot;example.com&quot;</span>, <a class="code hl_enumvalue" href="structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed">ports::https</a>);</div>
+<div class="line"><span class="keyword">auto</span> server = <a class="code hl_function" href="classip__address.html#afa18a9a0c627ef20bd148be8670cf46a">ip_address::parse</a>(<span class="stringliteral">&quot;example.com&quot;</span>, ports::https);</div>
 <div class="line">client.<a class="code hl_function" href="classtcp__socket.html#a5edcc5a4efa0c0cdb1cf61f7fa07c66b">connect</a>(*server, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(3000));</div>
 <div class="line">client.<a class="code hl_function" href="#a33d98abb79c38434ba74f2eb5834261e">init_client_ssl</a>(ctx, <span class="stringliteral">&quot;example.com&quot;</span>);</div>
 <div class="line"> </div>
@@ -288,17 +288,17 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="line">server_ctx.load_certificate(<span class="stringliteral">&quot;server.crt&quot;</span>, <span class="stringliteral">&quot;server.key&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">ssl_acceptor acceptor;</div>
-<div class="line">acceptor.<a class="code hl_function" href="classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a">open</a>(<a class="code hl_function" href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a>(<a class="code hl_enumvalue" href="structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed">ports::https</a>));</div>
+<div class="line">acceptor.<a class="code hl_function" href="classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a">open</a>(<a class="code hl_function" href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a>(ports::https));</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> client_sock = acceptor.<a class="code hl_function" href="classssl__acceptor.html#a1ff931d086904393ce22cf28c1f14272">accept_ssl</a>();</div>
 <div class="line">client_sock.set_ssl_context(server_ctx);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 与客户端进行加密通信</span></div>
 <div class="ttc" id="aclassbasic__string_html_a123c35595a7addcd463a2ca11eba7a32"><div class="ttname"><a href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">basic_string::view</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 view_type view() const noexcept</div><div class="ttdoc">获取字符串视图</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l02114">basic_string.hpp:2114</a></div></div>
-<div class="ttc" id="aclassip__address_html_a59b769d8f38f49df1d1f60f7880c2c86"><div class="ttname"><a href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::undef, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
+<div class="ttc" id="aclassip__address_html_a180ec03fa7dd1c0cca46fcbc2e1ded1c"><div class="ttname"><a href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::UNDEF, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
 <div class="ttc" id="aclassip__address_html_afa18a9a0c627ef20bd148be8670cf46a"><div class="ttname"><a href="classip__address.html#afa18a9a0c627ef20bd148be8670cf46a">ip_address::parse</a></div><div class="ttdeci">static NEFORCE_NODISCARD optional&lt; ip_address &gt; parse(const string &amp;host, ports port=ports{}) noexcept</div><div class="ttdoc">从字符串解析IP地址</div></div>
 <div class="ttc" id="aclassssl__acceptor_html_a1ff931d086904393ce22cf28c1f14272"><div class="ttname"><a href="classssl__acceptor.html#a1ff931d086904393ce22cf28c1f14272">ssl_acceptor::accept_ssl</a></div><div class="ttdeci">NEFORCE_NODISCARD ssl_socket accept_ssl()</div><div class="ttdoc">接受TLS客户端连接</div></div>
-<div class="ttc" id="aclassssl__context_html"><div class="ttname"><a href="classssl__context.html">ssl_context</a></div><div class="ttdoc">SSL/TLS上下文管理类</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00060">ssl_context.hpp:60</a></div></div>
+<div class="ttc" id="aclassssl__context_html"><div class="ttname"><a href="classssl__context.html">ssl_context</a></div><div class="ttdoc">SSL/TLS上下文管理类</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00059">ssl_context.hpp:59</a></div></div>
 <div class="ttc" id="aclassssl__socket_html_a0607573c4459e1ea3cb7c95dceaf3f8a"><div class="ttname"><a href="#a0607573c4459e1ea3cb7c95dceaf3f8a">ssl_socket::receive</a></div><div class="ttdeci">ssize_t receive(memory_view&lt; char &gt; buffer, int flags=0) override</div><div class="ttdoc">接收解密数据</div></div>
 <div class="ttc" id="aclassssl__socket_html_a1917d1f6f10b83ef3a396fe9fbc1d7d8"><div class="ttname"><a href="#a1917d1f6f10b83ef3a396fe9fbc1d7d8">ssl_socket::ssl_socket</a></div><div class="ttdeci">ssl_socket()=default</div><div class="ttdoc">默认构造函数</div></div>
 <div class="ttc" id="aclassssl__socket_html_a271fe19c9c420fae1c45191813cd962e"><div class="ttname"><a href="#a271fe19c9c420fae1c45191813cd962e">ssl_socket::peer_certificate_info</a></div><div class="ttdeci">NEFORCE_NODISCARD string peer_certificate_info() const</div><div class="ttdoc">获取对等方证书信息</div></div>
@@ -310,12 +310,11 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00516">console.hpp:516</a></div></div>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga2f30f05ade8bbe5bda5e59d2698af9f5"><div class="ttname"><a href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00170">types.hpp:170</a></div></div>
-<div class="ttc" id="agroup___s_s_l_html_gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387"><div class="ttname"><a href="group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387">ssl_method::TLS_SERVER</a></div><div class="ttdeci">@ TLS_SERVER</div><div class="ttdoc">TLS服务器端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00037">ssl_context.hpp:37</a></div></div>
-<div class="ttc" id="agroup___s_s_l_html_gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510"><div class="ttname"><a href="group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510">ssl_method::TLS_CLIENT</a></div><div class="ttdeci">@ TLS_CLIENT</div><div class="ttdoc">TLS客户端端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00038">ssl_context.hpp:38</a></div></div>
+<div class="ttc" id="agroup___s_s_l_html_gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387"><div class="ttname"><a href="group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387">ssl_method::TLS_SERVER</a></div><div class="ttdeci">@ TLS_SERVER</div><div class="ttdoc">TLS服务器端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00036">ssl_context.hpp:36</a></div></div>
+<div class="ttc" id="agroup___s_s_l_html_gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510"><div class="ttname"><a href="group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510">ssl_method::TLS_CLIENT</a></div><div class="ttdeci">@ TLS_CLIENT</div><div class="ttdoc">TLS客户端端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00037">ssl_context.hpp:37</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00022">string_view.hpp:22</a></div></div>
-<div class="ttc" id="astructports_html_ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed"><div class="ttname"><a href="structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa8aedacea2bb6adcde87c1cc1ba8b6ed">ports::https</a></div><div class="ttdeci">@ https</div><div class="ttdoc">HTTPS协议端口</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00132">ports.hpp:132</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00079">79</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00078">78</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a8e99620bef12b00c9b56639b5ad41fd7" name="a8e99620bef12b00c9b56639b5ad41fd7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e99620bef12b00c9b56639b5ad41fd7">&#9670;&#160;</a></span>ssl_socket() <span class="overload">[1/2]</span></h2>
@@ -348,7 +347,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00093">93</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00092">92</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="classtcp__socket.html#a72e6e572e36c55fb4b110a315e79fe13">tcp_socket::tcp_socket()</a>.</p>
 
@@ -386,7 +385,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 </dl>
 <p>将普通TCP socket转换为SSL socket。 适用于接受连接后升级为TLS的场景。 </p>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00103">103</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00102">102</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="classtcp__socket.html#a72e6e572e36c55fb4b110a315e79fe13">tcp_socket::tcp_socket()</a>.</p>
 
@@ -492,7 +491,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 
 <p>重载 <a class="el" href="classtcp__socket.html#a8045db40be599a4c4b409004f6617a3a">tcp_socket</a> .</p>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00169">169</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00168">168</a> 行定义.</p>
 
 </div>
 </div>
@@ -641,7 +640,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>获取SSL流对象的常量引用 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL流常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00181">181</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00180">180</a> 行定义.</p>
 
 </div>
 </div>
@@ -671,7 +670,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>获取SSL流对象的引用 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL流引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00175">175</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00174">174</a> 行定义.</p>
 
 </div>
 </div>

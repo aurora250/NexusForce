@@ -12,8 +12,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
+ * @addtogroup Network 网络通信
  * @{
  */
 

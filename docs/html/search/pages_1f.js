@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['使用指南_0',['使用指南',['../group___memory_order.html#usage_guidelines',1,'']]]
+  ['二进制与十进制前缀对比_0',['二进制与十进制前缀对比',['../group___byte_size.html#binary_vs_decimal',1,'']]]
 ];

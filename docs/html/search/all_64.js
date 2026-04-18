@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['指针萃取_0',['指针萃取',['../group___pointer_traits.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

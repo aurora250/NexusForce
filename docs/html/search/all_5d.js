@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['异常处理_0',['异常处理',['../group___exception_handling.html',1,'']]],
-  ['异常处理_20exception_1',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]],
-  ['异常类集_2',['异常类集',['../group___exceptions.html',1,'']]],
-  ['异步组件_3',['异步组件',['../group___async_components.html',1,'']]],
-  ['异步调用_4',['异步调用',['../group___async.html',1,'']]]
+  ['对数函数实现_0',['对数函数实现',['../group___math_functions.html#logarithm_implementation',1,'']]],
+  ['对齐操作_1',['对齐操作',['../group___alignment.html',1,'']]],
+  ['对齐缓冲区_2',['对齐缓冲区',['../group___aligned_buffer.html',1,'']]]
 ];

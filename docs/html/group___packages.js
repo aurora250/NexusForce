@@ -32,5 +32,6 @@ var group___packages =
     [ "uinteger64", "structuinteger64.html", null ],
     [ "float32", "structfloat32.html", null ],
     [ "float64", "structfloat64.html", null ],
-    [ "decimal", "structdecimal.html", null ]
+    [ "decimal", "structdecimal.html", null ],
+    [ "byte", "group___packages.html#ga8272194b0ac3062bc8183f769e367900", null ]
 ];

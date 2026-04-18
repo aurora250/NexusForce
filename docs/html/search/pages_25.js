@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['十六进制表示_0',['十六进制表示',['../group___color.html#hex_format',1,'']]]
+  ['兼容性_0',['YAML 1.2 与 JSON 兼容性',['../yaml__value_8hpp.html#yaml_vs_json',1,'']]]
 ];

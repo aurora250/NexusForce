@@ -257,14 +257,14 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="line"><span class="comment">// TCP服务器示例</span></div>
 <div class="line"><a class="code hl_function" href="#a72e6e572e36c55fb4b110a315e79fe13">tcp_socket</a> server;</div>
 <div class="line">server.<a class="code hl_function" href="#a4d419854509a10778b43c8561f9794b3">open</a>(AF_INET);</div>
-<div class="line"><span class="keyword">auto</span> local = <a class="code hl_function" href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a>(ports(8080));</div>
+<div class="line"><span class="keyword">auto</span> local = <a class="code hl_function" href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a>(ports(8080));</div>
 <div class="line">server.<a class="code hl_function" href="classsocket__base.html#a576e748fadfec602f083eb35c602c003">bind</a>(local);</div>
 <div class="line">server.<a class="code hl_function" href="classsocket__base.html#aa1f872262e5d3464c77ee96de7550df8">listen</a>(128);</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> client_sock = server.accept();  <span class="comment">// 接受连接</span></div>
 <div class="line"><span class="comment">// 与客户端通信...</span></div>
 <div class="ttc" id="aclassbasic__string_html_a123c35595a7addcd463a2ca11eba7a32"><div class="ttname"><a href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">basic_string::view</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 view_type view() const noexcept</div><div class="ttdoc">获取字符串视图</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l02114">basic_string.hpp:2114</a></div></div>
-<div class="ttc" id="aclassip__address_html_a59b769d8f38f49df1d1f60f7880c2c86"><div class="ttname"><a href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::undef, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
+<div class="ttc" id="aclassip__address_html_a180ec03fa7dd1c0cca46fcbc2e1ded1c"><div class="ttname"><a href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::UNDEF, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
 <div class="ttc" id="aclassip__address_html_afa18a9a0c627ef20bd148be8670cf46a"><div class="ttname"><a href="classip__address.html#afa18a9a0c627ef20bd148be8670cf46a">ip_address::parse</a></div><div class="ttdeci">static NEFORCE_NODISCARD optional&lt; ip_address &gt; parse(const string &amp;host, ports port=ports{}) noexcept</div><div class="ttdoc">从字符串解析IP地址</div></div>
 <div class="ttc" id="aclasssocket__base_html_a576e748fadfec602f083eb35c602c003"><div class="ttname"><a href="classsocket__base.html#a576e748fadfec602f083eb35c602c003">socket_base::bind</a></div><div class="ttdeci">void bind(const ip_address &amp;endpoint)</div><div class="ttdoc">绑定socket到本地地址</div></div>
 <div class="ttc" id="aclasssocket__base_html_aa1f872262e5d3464c77ee96de7550df8"><div class="ttname"><a href="classsocket__base.html#aa1f872262e5d3464c77ee96de7550df8">socket_base::listen</a></div><div class="ttdeci">void listen(int backlog)</div><div class="ttdoc">开始监听连接（TCP）</div></div>
@@ -277,9 +277,9 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga2f30f05ade8bbe5bda5e59d2698af9f5"><div class="ttname"><a href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00170">types.hpp:170</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00022">string_view.hpp:22</a></div></div>
-<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00123">ports.hpp:123</a></div></div>
+<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00130">ports.hpp:130</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="tcp__socket_8hpp_source.html">tcp_socket.hpp</a> 第 <a class="el" href="tcp__socket_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__socket_8hpp_source.html">tcp_socket.hpp</a> 第 <a class="el" href="tcp__socket_8hpp_source.html#l00069">69</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="aef337d72fe3a8446418aa979771e3bf3" name="aef337d72fe3a8446418aa979771e3bf3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef337d72fe3a8446418aa979771e3bf3">&#9670;&#160;</a></span>tcp_socket()</h2>
@@ -312,7 +312,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__socket_8hpp_source.html">tcp_socket.hpp</a> 第 <a class="el" href="tcp__socket_8hpp_source.html#l00084">84</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__socket_8hpp_source.html">tcp_socket.hpp</a> 第 <a class="el" href="tcp__socket_8hpp_source.html#l00083">83</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="classip__socket.html#aaae0820ef1814fdd2299e646e7ce0b88">ip_socket::ip_socket()</a>.</p>
 
@@ -392,7 +392,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 
 <p>被 <a class="el" href="classssl__socket.html#a85a6a693fc16faed64ebf66f8773571c">ssl_socket</a> 重载.</p>
 
-<p class="definition">在文件 <a class="el" href="tcp__socket_8hpp_source.html">tcp_socket.hpp</a> 第 <a class="el" href="tcp__socket_8hpp_source.html#l00178">178</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__socket_8hpp_source.html">tcp_socket.hpp</a> 第 <a class="el" href="tcp__socket_8hpp_source.html#l00177">177</a> 行定义.</p>
 
 </div>
 </div>

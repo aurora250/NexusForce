@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['灰度转换_0',['灰度转换',['../group___color.html#grayscale_conversion',1,'']]]
+  ['操作码与响应码_0',['操作码与响应码',['../group___d_n_s.html#dns_opcodes',1,'']]]
 ];

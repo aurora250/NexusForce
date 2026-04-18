@@ -13,8 +13,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
+ * @addtogroup Exceptions 异常类集
  * @{
  */
 
@@ -53,8 +52,7 @@ struct NEFORCE_API socket_exception final : network_exception {
 /** @} */ // Exceptions
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
+ * @addtogroup Network 网络通信
  * @{
  */
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
+  ['百分号编码规则_0',['百分号编码规则',['../structurl.html#percent_encoding',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['项目简介_0',['📖 项目简介',['../index.html#autotoc_md4',1,'']]]
+  ['空值同义词_0',['空值同义词',['../yaml__value_8hpp.html#null_synonyms',1,'']]]
 ];

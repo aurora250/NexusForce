@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
-  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
+  ['日志系统_20logging_0',['📝 日志系统 (Logging)',['../index.html#autotoc_md25',1,'']]],
+  ['日期时间格式_1',['日期时间格式',['../group___toml_config.html#datetime_formats',1,'']]],
+  ['日期计算参考_2',['日期计算参考',['../group___date_time.html#date_calculation',1,'']]]
 ];

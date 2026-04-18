@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['合成规则_0',['Alpha 合成规则',['../group___color.html#alpha_compositing',1,'']]]
+  ['十六进制表示_0',['十六进制表示',['../group___color.html#hex_format',1,'']]]
 ];

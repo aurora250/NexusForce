@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['密码学与安全算法_0',['🔐 密码学与安全算法',['../index.html#autotoc_md12',1,'']]]
+  ['基本_20ansi_208_2016_20色_0',['基本 ANSI 8/16 色',['../group___color.html#basic_ansi_colors',1,'']]]
 ];

@@ -208,7 +208,7 @@ Protected 属性</h2></td></tr>
 <div class="line">sock.<a class="code hl_function" href="#a7189d507bfa09539dd7fd3abc4d85a34">set_nonblocking</a>(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 绑定端口</span></div>
-<div class="line"><span class="keyword">auto</span> addr = <a class="code hl_function" href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a>(<a class="code hl_struct" href="structports.html">ports</a>(8080));</div>
+<div class="line"><span class="keyword">auto</span> addr = <a class="code hl_function" href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a>(<a class="code hl_struct" href="structports.html">ports</a>(8080));</div>
 <div class="line">sock.<a class="code hl_function" href="#a576e748fadfec602f083eb35c602c003">bind</a>(addr);</div>
 <div class="line">sock.<a class="code hl_function" href="#aa1f872262e5d3464c77ee96de7550df8">listen</a>(128);</div>
 <div class="line"> </div>
@@ -217,7 +217,7 @@ Protected 属性</h2></td></tr>
 <div class="line"><span class="keywordflow">if</span> (local) {</div>
 <div class="line">    <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(local);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassip__address_html_a59b769d8f38f49df1d1f60f7880c2c86"><div class="ttname"><a href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::undef, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
+<div class="ttc" id="aclassip__address_html_a180ec03fa7dd1c0cca46fcbc2e1ded1c"><div class="ttname"><a href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::UNDEF, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
 <div class="ttc" id="aclasssocket__base_html_a0c38ed84a8f68fe6a576258f5de32312"><div class="ttname"><a href="#a0c38ed84a8f68fe6a576258f5de32312">socket_base::set_tcp_nodelay</a></div><div class="ttdeci">bool set_tcp_nodelay(bool enable=true) noexcept</div><div class="ttdoc">设置TCP_NODELAY（禁用Nagle算法）</div></div>
 <div class="ttc" id="aclasssocket__base_html_a259bcf1d2f08be76c9c725508dab5f64"><div class="ttname"><a href="#a259bcf1d2f08be76c9c725508dab5f64">socket_base::set_reuse_address</a></div><div class="ttdeci">bool set_reuse_address(bool enable=true) noexcept</div><div class="ttdoc">设置地址重用（SO_REUSEADDR）</div></div>
 <div class="ttc" id="aclasssocket__base_html_a576e748fadfec602f083eb35c602c003"><div class="ttname"><a href="#a576e748fadfec602f083eb35c602c003">socket_base::bind</a></div><div class="ttdeci">void bind(const ip_address &amp;endpoint)</div><div class="ttdoc">绑定socket到本地地址</div></div>
@@ -227,9 +227,9 @@ Protected 属性</h2></td></tr>
 <div class="ttc" id="aclasssocket__base_html_aa1f872262e5d3464c77ee96de7550df8"><div class="ttname"><a href="#aa1f872262e5d3464c77ee96de7550df8">socket_base::listen</a></div><div class="ttdeci">void listen(int backlog)</div><div class="ttdoc">开始监听连接（TCP）</div></div>
 <div class="ttc" id="aclasssocket__base_html_ac45ca9c8151fc981e49861f5e85b0434"><div class="ttname"><a href="#ac45ca9c8151fc981e49861f5e85b0434">socket_base::open</a></div><div class="ttdeci">void open(int family, int type, int protocol)</div><div class="ttdoc">打开socket</div></div>
 <div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00516">console.hpp:516</a></div></div>
-<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00123">ports.hpp:123</a></div></div>
+<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00130">ports.hpp:130</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00101">101</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00099">99</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a285abeec7b22821af15b2eea0844aaf3" name="a285abeec7b22821af15b2eea0844aaf3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a285abeec7b22821af15b2eea0844aaf3">&#9670;&#160;</a></span>socket_base() <span class="overload">[1/2]</span></h2>
@@ -262,9 +262,9 @@ Protected 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00133">133</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00131">131</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00121">fd_</a>.</p>
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00119">fd_</a>.</p>
 
 </div>
 </div>
@@ -299,9 +299,9 @@ Protected 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00143">143</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00141">141</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00121">fd_</a>, <a class="el" href="socket__base_8hpp_source.html#l00113">invalid_handle</a> , 以及 <a class="el" href="#a94270ff7405e94a47c1d4681c7186027">socket_base()</a>.</p>
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00119">fd_</a>, <a class="el" href="socket__base_8hpp_source.html#l00111">invalid_handle</a> , 以及 <a class="el" href="#a94270ff7405e94a47c1d4681c7186027">socket_base()</a>.</p>
 
 </div>
 </div>
@@ -370,7 +370,7 @@ Protected 属性</h2></td></tr>
 
 <p>被 <a class="el" href="classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1">ip_socket</a> 重载.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ip__socket_8hpp_source.html#l00137">ip_socket::close()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00156">~socket_base()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ip__socket_8hpp_source.html#l00136">ip_socket::close()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00154">~socket_base()</a>.</p>
 
 </div>
 </div>
@@ -455,11 +455,11 @@ Protected 属性</h2></td></tr>
 <p>检查socket是否已打开 </p>
 <dl class="section return"><dt>返回</dt><dd>已打开返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00168">168</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00166">166</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00121">fd_</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00113">invalid_handle</a>.</p>
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00119">fd_</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00111">invalid_handle</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="smtp__socket_8hpp_source.html#l00262">smtp_socket::is_connected()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00174">operator bool()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="smtp__socket_8hpp_source.html#l00260">smtp_socket::is_connected()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00172">operator bool()</a>.</p>
 
 </div>
 </div>
@@ -549,9 +549,9 @@ Protected 属性</h2></td></tr>
 <p>获取原生句柄 </p>
 <dl class="section return"><dt>返回</dt><dd>原生socket句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00162">162</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00160">160</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00121">fd_</a>.</p>
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00119">fd_</a>.</p>
 
 </div>
 </div>
@@ -624,9 +624,9 @@ Protected 属性</h2></td></tr>
 <p>布尔转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>已打开返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00174">174</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00172">172</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00168">is_open()</a>.</p>
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00166">is_open()</a>.</p>
 
 </div>
 </div>
@@ -693,11 +693,11 @@ Protected 属性</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>原生socket句柄</dd></dl>
 <p>释放后当前对象不再管理该socket，调用者负责关闭。 </p>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00336">336</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00334">334</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="group___swap_utility.html#ga0c5a3fc6dc35e080dc7f316405327e6e">exchange()</a>, <a class="el" href="socket__base_8hpp_source.html#l00121">fd_</a>, <a class="el" href="socket__base_8hpp_source.html#l00113">invalid_handle</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00336">release()</a>.</p>
+<p class="reference">引用了 <a class="el" href="group___swap_utility.html#ga0c5a3fc6dc35e080dc7f316405327e6e">exchange()</a>, <a class="el" href="socket__base_8hpp_source.html#l00119">fd_</a>, <a class="el" href="socket__base_8hpp_source.html#l00111">invalid_handle</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00334">release()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="socket__base_8hpp_source.html#l00336">release()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="socket__base_8hpp_source.html#l00334">release()</a>.</p>
 
 </div>
 </div>
@@ -1296,9 +1296,9 @@ Protected 属性</h2></td></tr>
 <p>无效句柄常量 </p>
 <p>无效句柄 </p>
 
-<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00113">113</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00111">111</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="socket__base_8hpp_source.html#l00168">is_open()</a>, <a class="el" href="socket__base_8hpp_source.html#l00336">release()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00143">socket_base()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="socket__base_8hpp_source.html#l00166">is_open()</a>, <a class="el" href="socket__base_8hpp_source.html#l00334">release()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00141">socket_base()</a>.</p>
 
 </div>
 </div>

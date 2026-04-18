@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
+  ['并行算法_0',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

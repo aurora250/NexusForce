@@ -25,7 +25,7 @@ var searchData=
   ['pair_3c_20const_20basic_5fstring_3c_20char_20_3e_2c_20vector_3c_20basic_5fstring_3c_20char_20_3e_20_3e_20_3e_22',['pair&lt; const basic_string&lt; char &gt;, vector&lt; basic_string&lt; char &gt; &gt; &gt;',['../structpair.html',1,'']]],
   ['pair_3c_20const_20basic_5fstring_3c_20char_20_3e_2c_20vector_3c_20route_5fentry_20_3e_20_3e_23',['pair&lt; const basic_string&lt; char &gt;, vector&lt; route_entry &gt; &gt;',['../structpair.html',1,'']]],
   ['pair_3c_20const_20char_2c_20cmdline_3a_3aoption_20_2a_20_3e_24',['pair&lt; const char, cmdline::option * &gt;',['../structpair.html',1,'']]],
-  ['pair_3c_20const_20id_5ftype_2c_20unique_5fptr_3c_20inner_3a_3amanual_5fthread_20_3e_20_3e_25',['pair&lt; const id_type, unique_ptr&lt; inner::manual_thread &gt; &gt;',['../structpair.html',1,'']]],
+  ['pair_3c_20const_20id_5ftype_2c_20unique_5fptr_3c_20lazy_5fthread_20_3e_20_3e_25',['pair&lt; const id_type, unique_ptr&lt; lazy_thread &gt; &gt;',['../structpair.html',1,'']]],
   ['pair_3c_20const_20id_5ftype_2c_20worker_5fcontext_20_3e_26',['pair&lt; const id_type, worker_context &gt;',['../structpair.html',1,'']]],
   ['pair_3c_20const_20key_2c_20list_5fiterator_20_3e_27',['pair&lt; const Key, list_iterator &gt;',['../structpair.html',1,'']]],
   ['pair_3c_20const_20key_2c_20t_20_3e_28',['pair&lt; const Key, T &gt;',['../structpair.html',1,'']]],

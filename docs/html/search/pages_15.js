@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['windows_0',['🪟 Windows',['../index.html#autotoc_md42',1,'']]]
+  ['v1_200_200_0',['NexusForce V1.0.0',['../index.html',1,'']]]
 ];

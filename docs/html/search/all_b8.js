@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['👥_20贡献者_0',['👥 贡献者',['../index.html#autotoc_md51',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___h_t_t_p.html#standards',1,'']]]
 ];

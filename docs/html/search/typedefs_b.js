@@ -8,11 +8,12 @@ var searchData=
   ['mapped_5ftype_5',['mapped_type',['../classmap.html#a9a21bb24c4fcf4248d6708afc734dc50',1,'map::mapped_type'],['../classmultimap.html#a76c4172b8de4587017b3fab9ef0d3e25',1,'multimap::mapped_type']]],
   ['max_5falign_5ft_6',['max_align_t',['../group___core_types.html#ga682e63d2daefd96d4e75e4239210e233',1,'types.hpp']]],
   ['mega_7',['mega',['../group___s_i_units.html#ga0b57ff86506a53baf7278f91182faac6',1,'ratio.hpp']]],
-  ['micro_8',['micro',['../group___s_i_units.html#ga19d116a46fc802cce0d0bfd466d959d8',1,'ratio.hpp']]],
-  ['microseconds_9',['microseconds',['../group___duration.html#ga014446ec8cd4a3db5f57b3572f2844d4',1,'duration.hpp']]],
-  ['milli_10',['milli',['../group___s_i_units.html#ga0a928b82578dba2851a4f3b34c0928b9',1,'ratio.hpp']]],
-  ['milliseconds_11',['milliseconds',['../group___duration.html#ga0c9e480a0040ed5977448019fb74cd55',1,'duration.hpp']]],
-  ['minutes_12',['minutes',['../group___duration.html#ga9e5521f8c307af553c2d7e25ed300429',1,'duration.hpp']]],
-  ['months_13',['months',['../group___duration.html#gaa86dd6948fa2f24d156ef787e45137db',1,'duration.hpp']]],
-  ['mutex_5ftype_14',['mutex_type',['../classlock.html#a84a083c123993bf411cc52cc47fc7766',1,'lock::mutex_type'],['../classunique__lock.html#a7b0e20ed2032e613a03c2883d3df7b0c',1,'unique_lock::mutex_type'],['../classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d',1,'shared_lock::mutex_type']]]
+  ['message_5fhandler_8',['message_handler',['../classwebsocket__session.html#a4abaa8761a35b3f6cbd39301a6710bcf',1,'websocket_session']]],
+  ['micro_9',['micro',['../group___s_i_units.html#ga19d116a46fc802cce0d0bfd466d959d8',1,'ratio.hpp']]],
+  ['microseconds_10',['microseconds',['../group___duration.html#ga014446ec8cd4a3db5f57b3572f2844d4',1,'duration.hpp']]],
+  ['milli_11',['milli',['../group___s_i_units.html#ga0a928b82578dba2851a4f3b34c0928b9',1,'ratio.hpp']]],
+  ['milliseconds_12',['milliseconds',['../group___duration.html#ga0c9e480a0040ed5977448019fb74cd55',1,'duration.hpp']]],
+  ['minutes_13',['minutes',['../group___duration.html#ga9e5521f8c307af553c2d7e25ed300429',1,'duration.hpp']]],
+  ['months_14',['months',['../group___duration.html#gaa86dd6948fa2f24d156ef787e45137db',1,'duration.hpp']]],
+  ['mutex_5ftype_15',['mutex_type',['../classlock.html#a84a083c123993bf411cc52cc47fc7766',1,'lock::mutex_type'],['../classunique__lock.html#a7b0e20ed2032e613a03c2883d3df7b0c',1,'unique_lock::mutex_type'],['../classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d',1,'shared_lock::mutex_type']]]
 ];

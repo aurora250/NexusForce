@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['数学常量定义_0',['数学常量定义',['../group___math_constants.html#math_constants',1,'']]],
-  ['数学库_20math_1',['📊 数学库 (Math)',['../index.html#autotoc_md37',1,'']]],
-  ['数据库兼容性_2',['数据库兼容性',['../group___s_q_l.html#compatibility',1,'']]],
-  ['数据库_20db_3',['🗄️ 数据库 (DB)',['../index.html#autotoc_md24',1,'']]],
-  ['数据结构与算法_4',['📐 数据结构与算法',['../index.html#autotoc_md14',1,'']]]
+  ['属性说明_0',['Cookie 属性说明',['../group___h_t_t_p.html#cookie_attributes',1,'']]]
 ];

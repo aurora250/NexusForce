@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📁_20文件系统_20file_0',['📁 文件系统 (File)',['../index.html#autotoc_md22',1,'']]]
+  ['网络协议与互联网标准_0',['🌐 网络协议与互联网标准',['../index.html#autotoc_md11',1,'']]],
+  ['网络库_20network_1',['🌐 网络库 (Network)',['../index.html#autotoc_md23',1,'']]]
 ];

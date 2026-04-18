@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔌_20插件系统_20plugin_0',['🔌 插件系统 (Plugin)',['../index.html#autotoc_md34',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___h_t_t_p.html#standards',1,'']]]
 ];

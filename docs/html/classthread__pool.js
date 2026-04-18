@@ -2,7 +2,7 @@ var classthread__pool =
 [
     [ "periodic_task_state", "structthread__pool_1_1periodic__task__state.html", "structthread__pool_1_1periodic__task__state" ],
     [ "pool_statistics", "structthread__pool_1_1pool__statistics.html", "structthread__pool_1_1pool__statistics" ],
-    [ "id_type", "classthread__pool.html#a26496f9992ff6fcd1b06fa276445e379", null ],
+    [ "id_type", "classthread__pool.html#a11c3d03ee2141f13727cbd973c24134e", null ],
     [ "periodic_token", "classthread__pool.html#a441d12dda9edd4d083d844279f1ae91d", null ],
     [ "priority_type", "classthread__pool.html#a0f86abfce93a05b67165f166c653a82b", null ],
     [ "steal_strategy", "classthread__pool.html#a9177f65ba06f1f7371a69890ece9503d", null ],

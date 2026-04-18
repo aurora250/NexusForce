@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
+  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
 ];

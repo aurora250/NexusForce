@@ -1,9 +1,9 @@
 var group___shared_pointer =
 [
-    [ "enable_shared_from&lt; T &gt;", "structenable__shared__from.html", [
-      [ "enable_shared_from", "structenable__shared__from.html#a9c7b70fd274a220c9e0e39182f32197d", null ],
-      [ "shared_from_this", "structenable__shared__from.html#abde57546abab6388896cb0bdd197be30", null ],
-      [ "shared_from_this", "structenable__shared__from.html#a6022120de9c89dfc38ec421ad4f61145", null ]
+    [ "enable_shared_from_this&lt; T &gt;", "structenable__shared__from__this.html", [
+      [ "enable_shared_from_this", "structenable__shared__from__this.html#a6badcf3b2e323032ff5766796093f96f", null ],
+      [ "shared_from_this", "structenable__shared__from__this.html#ad048382df1fdf3e976e6e443d6bb61c6", null ],
+      [ "shared_from_this", "structenable__shared__from__this.html#aae5792ea877c713e199f549c155eece7", null ]
     ] ],
     [ "shared_ptr&lt; T &gt;", "classshared__ptr.html", [
       [ "element_type", "classshared__ptr.html#a9719b09c9168249b3ff078146ea554d0", null ],

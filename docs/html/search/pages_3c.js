@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['异常处理_20exception_0',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]]
+  ['实现细节_0',['实现细节',['../group___h_t_t_p.html#implementation_details',1,'']]],
+  ['实用程序语法指南_1',['POSIX 实用程序语法指南',['../group___command_line.html#guideline_reference',1,'']]]
 ];

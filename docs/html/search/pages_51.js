@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['目录_0',['📑 目录',['../index.html#autotoc_md2',1,'']]]
+  ['方根函数实现_0',['方根函数实现',['../group___math_functions.html#root_functions',1,'']]]
 ];

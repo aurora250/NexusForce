@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['支持环境_0',['🖥️ 支持环境',['../index.html#autotoc_md6',1,'']]]
+  ['引用包装_0',['引用包装',['../group___reference_wrapper.html',1,'']]]
 ];

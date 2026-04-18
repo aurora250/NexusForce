@@ -14,9 +14,11 @@ var searchData=
   ['destination_5faddress_5frequired_11',['destination_address_required',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a326032e01f2a5e14c7f730f4d03d753a',1,'errc.hpp']]],
   ['device_12',['DEVICE',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d',1,'file_constants.hpp']]],
   ['device_5for_5fresource_5fbusy_13',['device_or_resource_busy',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6ab3ab5338a00f49c4451851cc5442f370',1,'errc.hpp']]],
-  ['directory_14',['DIRECTORY',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48',1,'file_constants.hpp']]],
-  ['directory_15',['directory',['../classpath__tree.html#ab55e0606b796ecf83a0c16b83475abe8a5f8f22b8cdbaeee8cf857673a9b6ba20',1,'path_tree']]],
-  ['directory_5fnot_5fempty_16',['directory_not_empty',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a6a336135d33e62f49edc55f29354e12e',1,'errc.hpp']]],
-  ['dns_17',['dns',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ac58c1dba72d699d01322e9f08ec47861',1,'ports']]],
-  ['double_18',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]]
+  ['dhcp_5fclient_14',['DHCP_CLIENT',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a1fb9a6c8c8afd2bc8ed3c40e2e573784',1,'ports']]],
+  ['dhcp_5fserver_15',['DHCP_SERVER',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ad771e78a2c51e74ccbfa36b50143a772',1,'ports']]],
+  ['directory_16',['DIRECTORY',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48',1,'file_constants.hpp']]],
+  ['directory_17',['directory',['../classpath__tree.html#ab55e0606b796ecf83a0c16b83475abe8a5f8f22b8cdbaeee8cf857673a9b6ba20',1,'path_tree']]],
+  ['directory_5fnot_5fempty_18',['directory_not_empty',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a6a336135d33e62f49edc55f29354e12e',1,'errc.hpp']]],
+  ['dns_19',['DNS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93',1,'ports']]],
+  ['double_20',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
+  ['并发与异步_20async_0',['🔄 并发与异步 (Async)',['../index.html#autotoc_md19',1,'']]],
+  ['并行算法_1',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

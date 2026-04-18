@@ -225,7 +225,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="line"><a class="code hl_function" href="#a7a7be44b5b84d5114202f0abc78dca02">tcp_acceptor</a> acceptor;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 绑定并监听端口</span></div>
-<div class="line"><span class="keyword">auto</span> endpoint = <a class="code hl_function" href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a>(<a class="code hl_struct" href="structports.html">ports</a>(8080));</div>
+<div class="line"><span class="keyword">auto</span> endpoint = <a class="code hl_function" href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a>(<a class="code hl_struct" href="structports.html">ports</a>(8080));</div>
 <div class="line">acceptor.<a class="code hl_function" href="#a01f29ebfd1e0f953d9f1f5ca7ec9896a">open</a>(endpoint, 128);</div>
 <div class="line">acceptor.<a class="code hl_function" href="classsocket__base.html#a7189d507bfa09539dd7fd3abc4d85a34">set_nonblocking</a>(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
@@ -253,7 +253,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;Accept error: &quot;</span>, e.<a class="code hl_function" href="structexception.html#ac635798f4eb88397f79b995966b26683">what</a>());</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassip__address_html_a59b769d8f38f49df1d1f60f7880c2c86"><div class="ttname"><a href="classip__address.html#a59b769d8f38f49df1d1f60f7880c2c86">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::undef, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
+<div class="ttc" id="aclassip__address_html_a180ec03fa7dd1c0cca46fcbc2e1ded1c"><div class="ttname"><a href="classip__address.html#a180ec03fa7dd1c0cca46fcbc2e1ded1c">ip_address::any</a></div><div class="ttdeci">static NEFORCE_NODISCARD ip_address any(ports port=ports::UNDEF, int family=AF_INET) noexcept</div><div class="ttdoc">获取通配地址</div></div>
 <div class="ttc" id="aclasssocket__base_html_a7189d507bfa09539dd7fd3abc4d85a34"><div class="ttname"><a href="classsocket__base.html#a7189d507bfa09539dd7fd3abc4d85a34">socket_base::set_nonblocking</a></div><div class="ttdeci">bool set_nonblocking(bool enable) noexcept</div><div class="ttdoc">设置非阻塞模式</div></div>
 <div class="ttc" id="aclasstcp__acceptor_html_a01f29ebfd1e0f953d9f1f5ca7ec9896a"><div class="ttname"><a href="#a01f29ebfd1e0f953d9f1f5ca7ec9896a">tcp_acceptor::open</a></div><div class="ttdeci">void open(const ip_address &amp;endpoint, int backlog=SOMAXCONN)</div><div class="ttdoc">打开并开始监听</div></div>
 <div class="ttc" id="aclasstcp__acceptor_html_a6300cbb9eec6e11bb1df9870f7ac8675"><div class="ttname"><a href="#a6300cbb9eec6e11bb1df9870f7ac8675">tcp_acceptor::accept_nonblock</a></div><div class="ttdeci">NEFORCE_NODISCARD optional&lt; tcp_socket &gt; accept_nonblock()</div><div class="ttdoc">接受客户端连接（非阻塞模式）</div></div>
@@ -261,10 +261,10 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00516">console.hpp:516</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga2f30f05ade8bbe5bda5e59d2698af9f5"><div class="ttname"><a href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00170">types.hpp:170</a></div></div>
 <div class="ttc" id="astructexception_html_ac635798f4eb88397f79b995966b26683"><div class="ttname"><a href="structexception.html#ac635798f4eb88397f79b995966b26683">exception::what</a></div><div class="ttdeci">NEFORCE_NODISCARD const char * what() const noexcept</div><div class="ttdoc">获取错误信息</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00171">exception.hpp:171</a></div></div>
-<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00123">ports.hpp:123</a></div></div>
+<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00130">ports.hpp:130</a></div></div>
 </div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>默认启用地址重用选项，允许在关闭后立即重用端口。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__acceptor_8hpp_source.html">tcp_acceptor.hpp</a> 第 <a class="el" href="tcp__acceptor_8hpp_source.html#l00076">76</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__acceptor_8hpp_source.html">tcp_acceptor.hpp</a> 第 <a class="el" href="tcp__acceptor_8hpp_source.html#l00075">75</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a61ceb34c57bc0b322be30c33ecfa9eef" name="a61ceb34c57bc0b322be30c33ecfa9eef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a61ceb34c57bc0b322be30c33ecfa9eef">&#9670;&#160;</a></span>accept()</h2>

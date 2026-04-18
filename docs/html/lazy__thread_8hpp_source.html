@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: lazy_thread.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('lazy__thread_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">lazy_thread.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="lazy__thread_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_LAZY_THREAD_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_LAZY_THREAD_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classlazy__thread.html">   42</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classlazy__thread.html#ad8d63a7d6d604fff58306287d1c2f09f">   44</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classlazy__thread.html#ad8d63a7d6d604fff58306287d1c2f09f">id</a> = <a class="code hl_struct" href="structthread_1_1id.html">thread::id</a>;                                 </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classlazy__thread.html#a9897ed3e16e1740ed55757e4082e8328">   45</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classlazy__thread.html#a9897ed3e16e1740ed55757e4082e8328">native_handle_type</a> = <a class="code hl_typedef" href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a>; </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_class" href="classfunction.html">function</a>&lt;void()&gt; func_; </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classthread.html">thread</a> thread_;         </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">   55</a></span>    <a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a>() noexcept = default;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    template &lt;typename F, typename... Args&gt;</div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classlazy__thread.html#a79f5dcfdf332aa22a250383562636bc9">   67</a></span>    explicit <a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a>(F&amp;&amp; f, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        func_ = [func = _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;F&gt;</a>(f), args = _NEFORCE <a class="code hl_function" href="group___tuple.html#ga5ed4cb761dbf974f5a60b613fdebb1bf">make_tuple</a>(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...)]() <span class="keyword">mutable</span> {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            _NEFORCE <a class="code hl_function" href="group___tuple.html#gaf1f69e67ec55772495eca5813b38070a">apply</a>(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(func), _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(args));</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        };</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_class" href="classlazy__thread.html">lazy_thread</a>(<span class="keyword">const</span> <a class="code hl_class" href="classlazy__thread.html">lazy_thread</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_class" href="classlazy__thread.html">lazy_thread</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classlazy__thread.html">lazy_thread</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classlazy__thread.html#aef771805bfc6658451fc93a39e8ac8c9">   82</a></span>    <a class="code hl_function" href="classlazy__thread.html#aef771805bfc6658451fc93a39e8ac8c9">lazy_thread</a>(<a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classlazy__thread.html#a76060a04028e7a08eecc0ed8667c77f9">   91</a></span>    <a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a>&amp; <a class="code hl_function" href="classlazy__thread.html#a76060a04028e7a08eecc0ed8667c77f9">operator=</a>(<a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classlazy__thread.html#aebde6e64fafbe18220ce94e7437da9cc">   98</a></span>    <a class="code hl_function" href="classlazy__thread.html#aebde6e64fafbe18220ce94e7437da9cc">~lazy_thread</a>();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classlazy__thread.html#af5ad65601a47cf16fd2a5e197302e5c9">  107</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classlazy__thread.html#af5ad65601a47cf16fd2a5e197302e5c9">start</a>();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classlazy__thread.html#a043a36213ec0d1a93082f7fa70f40076">  113</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classlazy__thread.html#a043a36213ec0d1a93082f7fa70f40076">joinable</a>() const noexcept { <span class="keywordflow">return</span> thread_.joinable(); }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classlazy__thread.html#aa98aecc24aaac5f441f94b766d2ac506">  121</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classlazy__thread.html#aa98aecc24aaac5f441f94b766d2ac506">join</a>() { thread_.join(); }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classlazy__thread.html#ac16c452b006a583840349fce76bfaeef">  129</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classlazy__thread.html#ac16c452b006a583840349fce76bfaeef">detach</a>() { thread_.detach(); }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classlazy__thread.html#a5a53b3b3509e86104c4f3dbe894037fa">  135</a></span>    <a class="code hl_struct" href="structthread_1_1id.html">thread::id</a> <a class="code hl_function" href="classlazy__thread.html#a5a53b3b3509e86104c4f3dbe894037fa">get_id</a>() const noexcept { <span class="keywordflow">return</span> thread_.get_id(); }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classlazy__thread.html#a8991c84dc19cf83aeabb25c397fe8bbc">  141</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classlazy__thread.html#a8991c84dc19cf83aeabb25c397fe8bbc">swap</a>(<a class="code hl_function" href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        _NEFORCE <a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(func_, other.func_);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        _NEFORCE <a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(thread_, other.thread_);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
+</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>};</div>
+</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> <span class="comment">// Thread</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> <span class="comment">// AsyncComponents</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_LAZY_THREAD_HPP__</span></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html"><div class="ttname"><a href="classlazy__thread.html">lazy_thread</a></div><div class="ttdoc">延迟启动线程类</div><div class="ttdef"><b>定义</b> <a href="#l00042">lazy_thread.hpp:42</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_a043a36213ec0d1a93082f7fa70f40076"><div class="ttname"><a href="classlazy__thread.html#a043a36213ec0d1a93082f7fa70f40076">lazy_thread::joinable</a></div><div class="ttdeci">bool joinable() const noexcept</div><div class="ttdoc">检查线程是否可被等待</div><div class="ttdef"><b>定义</b> <a href="#l00113">lazy_thread.hpp:113</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_a5a53b3b3509e86104c4f3dbe894037fa"><div class="ttname"><a href="classlazy__thread.html#a5a53b3b3509e86104c4f3dbe894037fa">lazy_thread::get_id</a></div><div class="ttdeci">thread::id get_id() const noexcept</div><div class="ttdoc">获取线程标识符</div><div class="ttdef"><b>定义</b> <a href="#l00135">lazy_thread.hpp:135</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_a76060a04028e7a08eecc0ed8667c77f9"><div class="ttname"><a href="classlazy__thread.html#a76060a04028e7a08eecc0ed8667c77f9">lazy_thread::operator=</a></div><div class="ttdeci">lazy_thread &amp; operator=(lazy_thread &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div></div>
+<div class="ttc" id="aclasslazy__thread_html_a8991c84dc19cf83aeabb25c397fe8bbc"><div class="ttname"><a href="classlazy__thread.html#a8991c84dc19cf83aeabb25c397fe8bbc">lazy_thread::swap</a></div><div class="ttdeci">void swap(lazy_thread &amp;other) noexcept</div><div class="ttdoc">交换两个延迟线程对象</div><div class="ttdef"><b>定义</b> <a href="#l00141">lazy_thread.hpp:141</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_a9897ed3e16e1740ed55757e4082e8328"><div class="ttname"><a href="classlazy__thread.html#a9897ed3e16e1740ed55757e4082e8328">lazy_thread::native_handle_type</a></div><div class="ttdeci">thread::native_handle_type native_handle_type</div><div class="ttdoc">原生句柄类型</div><div class="ttdef"><b>定义</b> <a href="#l00045">lazy_thread.hpp:45</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_aa98aecc24aaac5f441f94b766d2ac506"><div class="ttname"><a href="classlazy__thread.html#aa98aecc24aaac5f441f94b766d2ac506">lazy_thread::join</a></div><div class="ttdeci">void join()</div><div class="ttdoc">等待线程结束</div><div class="ttdef"><b>定义</b> <a href="#l00121">lazy_thread.hpp:121</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_ac16c452b006a583840349fce76bfaeef"><div class="ttname"><a href="classlazy__thread.html#ac16c452b006a583840349fce76bfaeef">lazy_thread::detach</a></div><div class="ttdeci">void detach()</div><div class="ttdoc">分离线程</div><div class="ttdef"><b>定义</b> <a href="#l00129">lazy_thread.hpp:129</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_ad8d63a7d6d604fff58306287d1c2f09f"><div class="ttname"><a href="classlazy__thread.html#ad8d63a7d6d604fff58306287d1c2f09f">lazy_thread::id</a></div><div class="ttdeci">thread::id id</div><div class="ttdoc">线程ID类型</div><div class="ttdef"><b>定义</b> <a href="#l00044">lazy_thread.hpp:44</a></div></div>
+<div class="ttc" id="aclasslazy__thread_html_ae8d01420c6d4f8815cecd42d78833ee2"><div class="ttname"><a href="classlazy__thread.html#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread::lazy_thread</a></div><div class="ttdeci">lazy_thread() noexcept=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclasslazy__thread_html_aebde6e64fafbe18220ce94e7437da9cc"><div class="ttname"><a href="classlazy__thread.html#aebde6e64fafbe18220ce94e7437da9cc">lazy_thread::~lazy_thread</a></div><div class="ttdeci">~lazy_thread()</div><div class="ttdoc">析构函数</div></div>
+<div class="ttc" id="aclasslazy__thread_html_aef771805bfc6658451fc93a39e8ac8c9"><div class="ttname"><a href="classlazy__thread.html#aef771805bfc6658451fc93a39e8ac8c9">lazy_thread::lazy_thread</a></div><div class="ttdeci">lazy_thread(lazy_thread &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclasslazy__thread_html_af5ad65601a47cf16fd2a5e197302e5c9"><div class="ttname"><a href="classlazy__thread.html#af5ad65601a47cf16fd2a5e197302e5c9">lazy_thread::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">启动线程</div></div>
+<div class="ttc" id="aclassthread_html"><div class="ttname"><a href="classthread.html">thread</a></div><div class="ttdoc">线程类</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00065">thread.hpp:65</a></div></div>
+<div class="ttc" id="aclassthread_html_a892af261639992f04c59a3cdf167356d"><div class="ttname"><a href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a></div><div class="ttdeci">::pthread_t native_handle_type</div><div class="ttdoc">系统线程句柄类型</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00255">thread.hpp:255</a></div></div>
+<div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03007">type_traits.hpp:3007</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00313">shift.hpp:313</a></div></div>
+<div class="ttc" id="agroup___swap_utility_html_ga6a39d376fb4396550fe3dadb383d17df"><div class="ttname"><a href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a></div><div class="ttdeci">void swap()=delete</div><div class="ttdoc">删除无参数的swap重载</div></div>
+<div class="ttc" id="agroup___tuple_html_ga5ed4cb761dbf974f5a60b613fdebb1bf"><div class="ttname"><a href="group___tuple.html#ga5ed4cb761dbf974f5a60b613fdebb1bf">make_tuple</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr tuple&lt; unwrap_ref_decay_t&lt; Types &gt;... &gt; make_tuple(Types &amp;&amp;... args)</div><div class="ttdoc">从参数创建元组</div><div class="ttdef"><b>定义</b> <a href="tuple_8hpp_source.html#l00757">tuple.hpp:757</a></div></div>
+<div class="ttc" id="agroup___tuple_html_gaf1f69e67ec55772495eca5813b38070a"><div class="ttname"><a href="group___tuple.html#gaf1f69e67ec55772495eca5813b38070a">apply</a></div><div class="ttdeci">constexpr decltype(auto) apply(Func &amp;&amp;f, Tuple &amp;&amp;t) noexcept(inner::__apply_unpack_tuple&lt; _NEFORCE is_nothrow_invocable, Func, Tuple &gt;::value)</div><div class="ttdoc">将元组元素解包作为参数调用函数</div><div class="ttdef"><b>定义</b> <a href="apply_8hpp_source.html#l00063">apply.hpp:63</a></div></div>
+<div class="ttc" id="astructthread_1_1id_html"><div class="ttname"><a href="structthread_1_1id.html">thread::id</a></div><div class="ttdoc">线程唯一标识符类</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00073">thread.hpp:73</a></div></div>
+<div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">线程管理类</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="lazy__thread_8hpp.html">lazy_thread.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

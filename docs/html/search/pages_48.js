@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['标准合规_0',['📡 标准合规',['../index.html#autotoc_md10',1,'']]]
+  ['异常处理_20exception_0',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]]
 ];

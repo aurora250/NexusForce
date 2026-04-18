@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../index.html#autotoc_md21',1,'']]]
+  ['典型应用场景_0',['典型应用场景',['../group___bloom_filter.html#applications',1,'']]]
 ];

@@ -14,6 +14,6 @@ var searchData=
   ['write_11',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
   ['write_5fthrough_12',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
   ['wrong_5fprotocol_5ftype_13',['wrong_protocol_type',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b',1,'errc.hpp']]],
-  ['ws_14',['ws',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a5d6eddae31dd81a25cf82936b52ac44c',1,'ports']]],
-  ['wss_15',['wss',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a672930bdc43c9d241169caf0965d375c',1,'ports']]]
+  ['ws_14',['WS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740',1,'ports']]],
+  ['wss_15',['WSS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce',1,'ports']]]
 ];

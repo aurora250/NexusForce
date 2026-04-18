@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['学术文献与算法来源_0',['学术文献与算法来源',['../group___leonardo_heap.html#references',1,'']]]
+  ['同步模式_0',['同步模式',['../group___memory_order.html#synchronization_patterns',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['类型与特性_20typeinfo_0',['🧬 类型与特性 (TypeInfo)',['../index.html#autotoc_md31',1,'']]]
+  ['树的合并规则_0',['树的合并规则',['../group___leonardo_heap.html#tree_merging',1,'']]]
 ];

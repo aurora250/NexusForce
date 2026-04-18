@@ -368,6 +368,12 @@ NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>shrink_to_fit</b>
 <tr class="memdesc:a1be4c468f228a8e45e91bb4af07356c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较子串与C风格字符串  <br /></td></tr>
 <tr class="memitem:a739fa1050f5732ec8703867b5a4088ab" id="r_a739fa1050f5732ec8703867b5a4088ab"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int&#160;</td><td class="memItemRight"><a class="el" href="#a739fa1050f5732ec8703867b5a4088ab">compare</a> (const <a class="el" href="#ab13bee2cd31c31552cc12dcd65c772f6">size_type</a> off, const <a class="el" href="#ab13bee2cd31c31552cc12dcd65c772f6">size_type</a> n, const CharT *str, <a class="el" href="#ab13bee2cd31c31552cc12dcd65c772f6">size_type</a> <a class="el" href="#ad3daf38b6f67120d3be74facf1d1d7c6">count</a>) const</td></tr>
 <tr class="memdesc:a739fa1050f5732ec8703867b5a4088ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较子串与指定长度的字符数组  <br /></td></tr>
+<tr class="memitem:a31dced4b761170548e4baf6030418aa1" id="r_a31dced4b761170548e4baf6030418aa1"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int&#160;</td><td class="memItemRight"><a class="el" href="#a31dced4b761170548e4baf6030418aa1">compare_ignore_case</a> (const <a class="el" href="#a4b3fcd29afecec593f620204889a4041">view_type</a> <a class="el" href="#a123c35595a7addcd463a2ca11eba7a32">view</a>) const noexcept</td></tr>
+<tr class="memdesc:a31dced4b761170548e4baf6030418aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">忽略大小写三路比较  <br /></td></tr>
+<tr class="memitem:a4061b22e33c4524d6f650154ab3b80b0" id="r_a4061b22e33c4524d6f650154ab3b80b0"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int&#160;</td><td class="memItemRight"><a class="el" href="#a4061b22e33c4524d6f650154ab3b80b0">compare_ignore_case</a> (<a class="el" href="#a306d8fa30ad9983191742071b5b614ce">const_pointer</a> str) const noexcept</td></tr>
+<tr class="memdesc:a4061b22e33c4524d6f650154ab3b80b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">忽略大小写比较另一个字符串  <br /></td></tr>
+<tr class="memitem:acc67149ced84bbf663561cbf6d395417" id="r_acc67149ced84bbf663561cbf6d395417"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int&#160;</td><td class="memItemRight"><a class="el" href="#acc67149ced84bbf663561cbf6d395417">compare_ignore_case</a> (const <a class="el" href="classbasic__string.html">basic_string</a> &amp;str) const noexcept</td></tr>
+<tr class="memdesc:acc67149ced84bbf663561cbf6d395417"><td class="mdescLeft">&#160;</td><td class="mdescRight">忽略大小写与C风格字符串三路比较  <br /></td></tr>
 <tr class="memitem:a5bf51eb9977ef3ec3871d57e8ac95f86" id="r_a5bf51eb9977ef3ec3871d57e8ac95f86"><td class="memItemLeft"><a id="a5bf51eb9977ef3ec3871d57e8ac95f86" name="a5bf51eb9977ef3ec3871d57e8ac95f86"></a>
 NEFORCE_CONSTEXPR20 <a class="el" href="classbasic__string.html">basic_string</a> &amp;&#160;</td><td class="memItemRight"><b>replace</b> (const <a class="el" href="#ab13bee2cd31c31552cc12dcd65c772f6">size_type</a> position, const <a class="el" href="#ab13bee2cd31c31552cc12dcd65c772f6">size_type</a> n, const <a class="el" href="classbasic__string.html">basic_string</a> &amp;other)</td></tr>
 <tr class="memdesc:a5bf51eb9977ef3ec3871d57e8ac95f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">替换子串为另一个字符串 <br /></td></tr>
@@ -2300,7 +2306,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01346">1346</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02565">basic_string&lt; char &gt;::ends_with()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02606">basic_string&lt; char &gt;::ends_with()</a>.</p>
 
 </div>
 </div>
@@ -2366,7 +2372,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01143">1143</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01940">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01485">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01396">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01434">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l02694">basic_string&lt; char &gt;::lowercase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01128">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l01185">basic_string&lt; char &gt;::rend()</a>, <a class="el" href="basic__string_8hpp_source.html#l02220">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02226">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02267">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02239">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02253">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02284">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02293">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="basic__string_8hpp_source.html#l02617">basic_string&lt; char &gt;::trim_left_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02703">basic_string&lt; char &gt;::uppercase()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01940">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01485">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01396">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01434">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l02735">basic_string&lt; char &gt;::lowercase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01128">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l01185">basic_string&lt; char &gt;::rend()</a>, <a class="el" href="basic__string_8hpp_source.html#l02261">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02267">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02308">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02280">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02294">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02325">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02334">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="basic__string_8hpp_source.html#l02658">basic_string&lt; char &gt;::trim_left_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02744">basic_string&lt; char &gt;::uppercase()</a>.</p>
 
 </div>
 </div>
@@ -2508,7 +2514,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02147">2147</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02147">basic_string&lt; char &gt;::compare()</a>, <a class="el" href="basic__string_8hpp_source.html#l02182">basic_string&lt; char &gt;::compare()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02732">basic_string&lt; char &gt;::operator&lt;()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02147">basic_string&lt; char &gt;::compare()</a>, <a class="el" href="basic__string_8hpp_source.html#l02182">basic_string&lt; char &gt;::compare()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02773">basic_string&lt; char &gt;::operator&lt;()</a>.</p>
 
 </div>
 </div>
@@ -2802,6 +2808,122 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 </div>
 </div>
+<a id="acc67149ced84bbf663561cbf6d395417" name="acc67149ced84bbf663561cbf6d395417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc67149ced84bbf663561cbf6d395417">&#9670;&#160;</a></span>compare_ignore_case() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename Alloc = allocator&lt;CharT&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int <a class="el" href="classbasic__string.html">basic_string</a>&lt; CharT, Traits, Alloc &gt;::compare_ignore_case </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic__string.html">basic_string</a>&lt; CharT, Traits, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>忽略大小写与C风格字符串三路比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>C风格字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02256">2256</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a31dced4b761170548e4baf6030418aa1" name="a31dced4b761170548e4baf6030418aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31dced4b761170548e4baf6030418aa1">&#9670;&#160;</a></span>compare_ignore_case() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename Alloc = allocator&lt;CharT&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int <a class="el" href="classbasic__string.html">basic_string</a>&lt; CharT, Traits, Alloc &gt;::compare_ignore_case </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a4b3fcd29afecec593f620204889a4041">view_type</a></td>          <td class="paramname"><span class="paramname"><em>view</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>忽略大小写三路比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">view</td><td>要比较的视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>负值（*this &lt; view）、0（相等）、正值（*this &gt; view） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02224">2224</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02256">basic_string&lt; char &gt;::compare_ignore_case()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02247">basic_string&lt; char &gt;::compare_ignore_case()</a>.</p>
+
+</div>
+</div>
+<a id="a4061b22e33c4524d6f650154ab3b80b0" name="a4061b22e33c4524d6f650154ab3b80b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4061b22e33c4524d6f650154ab3b80b0">&#9670;&#160;</a></span>compare_ignore_case() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename Alloc = allocator&lt;CharT&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int <a class="el" href="classbasic__string.html">basic_string</a>&lt; CharT, Traits, Alloc &gt;::compare_ignore_case </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a306d8fa30ad9983191742071b5b614ce">const_pointer</a></td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>忽略大小写比较另一个字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02247">2247</a> 行定义.</p>
+
+</div>
+</div>
 <a id="a76422abed6598e70dc7ec756bb824978" name="a76422abed6598e70dc7ec756bb824978"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76422abed6598e70dc7ec756bb824978">&#9670;&#160;</a></span>copy()</h2>
 
@@ -2890,7 +3012,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 </dl>
 <dl class="section return"><dt>返回</dt><dd>字符出现的次数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02521">2521</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02562">2562</a> 行定义.</p>
 
 </div>
 </div>
@@ -3024,7 +3146,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01364">1364</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01613">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01699">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01751">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01559">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01355">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l01346">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l00808">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01026">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01037">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01143">basic_string&lt; char &gt;::begin()</a>, <a class="el" href="basic__string_8hpp_source.html#l01167">basic_string&lt; char &gt;::cbegin()</a>, <a class="el" href="basic__string_8hpp_source.html#l01173">basic_string&lt; char &gt;::cend()</a>, <a class="el" href="basic__string_8hpp_source.html#l02191">basic_string&lt; char &gt;::compare()</a>, <a class="el" href="basic__string_8hpp_source.html#l02135">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l02521">basic_string&lt; char &gt;::count()</a>, <a class="el" href="basic__string_8hpp_source.html#l01149">basic_string&lt; char &gt;::end()</a>, <a class="el" href="basic__string_8hpp_source.html#l02552">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02559">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02679">basic_string&lt; char &gt;::equal_to()</a>, <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02304">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02315">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02321">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02310">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02326">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02332">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02444">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02456">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02462">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02450">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02468">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02474">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02372">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02384">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02390">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02378">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02396">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02402">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02480">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02492">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02498">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02486">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02504">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02510">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02408">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02420">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02426">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02414">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02432">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02438">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l01337">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l01328">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l00835">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l01305">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l01295">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l02220">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02233">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02260">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02246">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02275">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02226">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02338">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02349">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02355">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02344">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02360">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02366">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02532">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02537">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02104">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="basic__string_8hpp_source.html#l02737">basic_string&lt; char &gt;::to_hash()</a>, <a class="el" href="basic__string_8hpp_source.html#l02114">basic_string&lt; char &gt;::view()</a>, <a class="el" href="basic__string_8hpp_source.html#l02122">basic_string&lt; char &gt;::view()</a>, <a class="el" href="xor_8hpp_source.html#l00118">XOR_decrypt()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00085">XOR_encrypt()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01613">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01699">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01751">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01559">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01355">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l01346">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l00808">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01026">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01037">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01143">basic_string&lt; char &gt;::begin()</a>, <a class="el" href="basic__string_8hpp_source.html#l01167">basic_string&lt; char &gt;::cbegin()</a>, <a class="el" href="basic__string_8hpp_source.html#l01173">basic_string&lt; char &gt;::cend()</a>, <a class="el" href="basic__string_8hpp_source.html#l02191">basic_string&lt; char &gt;::compare()</a>, <a class="el" href="basic__string_8hpp_source.html#l02224">basic_string&lt; char &gt;::compare_ignore_case()</a>, <a class="el" href="basic__string_8hpp_source.html#l02135">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l02562">basic_string&lt; char &gt;::count()</a>, <a class="el" href="basic__string_8hpp_source.html#l01149">basic_string&lt; char &gt;::end()</a>, <a class="el" href="basic__string_8hpp_source.html#l02593">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02600">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02720">basic_string&lt; char &gt;::equal_to()</a>, <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02345">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02356">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02362">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02351">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02367">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02373">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02485">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02497">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02503">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02491">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02509">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02515">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02413">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02425">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02431">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02419">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02437">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02443">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02521">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02533">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02539">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02527">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02545">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02551">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02449">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02461">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02467">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02455">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02473">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02479">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l01337">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l01328">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l00835">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l01305">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l01295">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l02261">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02274">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02301">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02287">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02316">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02267">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02379">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02390">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02396">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02385">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02401">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02407">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02573">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02578">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02104">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="basic__string_8hpp_source.html#l02778">basic_string&lt; char &gt;::to_hash()</a>, <a class="el" href="basic__string_8hpp_source.html#l02114">basic_string&lt; char &gt;::view()</a>, <a class="el" href="basic__string_8hpp_source.html#l02122">basic_string&lt; char &gt;::view()</a>, <a class="el" href="xor_8hpp_source.html#l00118">XOR_decrypt()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00085">XOR_encrypt()</a>.</p>
 
 </div>
 </div>
@@ -3058,7 +3180,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01255">1255</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01355">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l01346">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l02565">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l01337">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l01328">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l01536">basic_string&lt; char &gt;::pop_back()</a>, <a class="el" href="basic__string_8hpp_source.html#l02542">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02617">basic_string&lt; char &gt;::trim_left_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02640">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01355">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l01346">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l02606">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l01337">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l01328">basic_string&lt; char &gt;::front()</a>, <a class="el" href="basic__string_8hpp_source.html#l01536">basic_string&lt; char &gt;::pop_back()</a>, <a class="el" href="basic__string_8hpp_source.html#l02583">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02658">basic_string&lt; char &gt;::trim_left_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02681">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
 
 </div>
 </div>
@@ -3124,7 +3246,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01149">1149</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01955">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02694">basic_string&lt; char &gt;::lowercase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01179">basic_string&lt; char &gt;::rbegin()</a>, <a class="el" href="basic__string_8hpp_source.html#l02226">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02267">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02239">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02253">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02284">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02293">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="basic__string_8hpp_source.html#l02617">basic_string&lt; char &gt;::trim_left_if()</a>, <a class="el" href="basic__string_8hpp_source.html#l02640">basic_string&lt; char &gt;::trim_right_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02703">basic_string&lt; char &gt;::uppercase()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01955">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02735">basic_string&lt; char &gt;::lowercase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01179">basic_string&lt; char &gt;::rbegin()</a>, <a class="el" href="basic__string_8hpp_source.html#l02267">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02308">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02280">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02294">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02325">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02334">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="basic__string_8hpp_source.html#l02658">basic_string&lt; char &gt;::trim_left_if()</a>, <a class="el" href="basic__string_8hpp_source.html#l02681">basic_string&lt; char &gt;::trim_right_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02744">basic_string&lt; char &gt;::uppercase()</a>.</p>
 
 </div>
 </div>
@@ -3162,9 +3284,9 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02672">2672</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02713">2713</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02672">basic_string&lt; char &gt;::equal_to()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02727">basic_string&lt; char &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02713">basic_string&lt; char &gt;::equal_to()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02768">basic_string&lt; char &gt;::operator==()</a>.</p>
 
 </div>
 </div>
@@ -3202,9 +3324,9 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02688">2688</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02729">2729</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02688">basic_string&lt; char &gt;::equal_to()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02729">basic_string&lt; char &gt;::equal_to()</a>.</p>
 
 </div>
 </div>
@@ -3242,7 +3364,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否相等 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02679">2679</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02720">2720</a> 行定义.</p>
 
 </div>
 </div>
@@ -3368,7 +3490,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01904">1904</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01955">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01940">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02617">basic_string&lt; char &gt;::trim_left_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02640">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01955">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01940">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02658">basic_string&lt; char &gt;::trim_left_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02681">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
 
 </div>
 </div>
@@ -3477,7 +3599,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01328">1328</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02542">basic_string&lt; char &gt;::starts_with()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02583">basic_string&lt; char &gt;::starts_with()</a>.</p>
 
 </div>
 </div>
@@ -4065,7 +4187,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01179">1179</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02640">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02681">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
 
 </div>
 </div>
@@ -4131,7 +4253,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01185">1185</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02640">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02681">basic_string&lt; char &gt;::trim_right_if()</a>.</p>
 
 </div>
 </div>
@@ -4323,7 +4445,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 
 <p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l01219">1219</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01646">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01627">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01635">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01613">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01699">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01751">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01559">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01355">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l01346">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l00808">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01026">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01037">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01173">basic_string&lt; char &gt;::cend()</a>, <a class="el" href="basic__string_8hpp_source.html#l02191">basic_string&lt; char &gt;::compare()</a>, <a class="el" href="basic__string_8hpp_source.html#l02135">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l02521">basic_string&lt; char &gt;::count()</a>, <a class="el" href="basic__string_8hpp_source.html#l01255">basic_string&lt; char &gt;::empty()</a>, <a class="el" href="basic__string_8hpp_source.html#l01149">basic_string&lt; char &gt;::end()</a>, <a class="el" href="basic__string_8hpp_source.html#l02552">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02559">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02679">basic_string&lt; char &gt;::equal_to()</a>, <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01940">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02304">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02315">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02321">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02310">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02326">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02332">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02444">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02456">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02462">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02450">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02468">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02474">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02372">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02384">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02390">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02378">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02396">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02402">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02480">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02492">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02498">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02486">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02504">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02510">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02408">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02420">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02426">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02414">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02432">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02438">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l01485">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01396">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01249">basic_string&lt; char &gt;::length()</a>, <a class="el" href="basic__string_8hpp_source.html#l00835">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l01305">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l01295">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l01536">basic_string&lt; char &gt;::pop_back()</a>, <a class="el" href="basic__string_8hpp_source.html#l02089">basic_string&lt; char &gt;::repeat()</a>, <a class="el" href="basic__string_8hpp_source.html#l02220">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02233">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02260">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02246">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02275">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02226">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l01261">basic_string&lt; char &gt;::reserve()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02293">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="basic__string_8hpp_source.html#l02338">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02349">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02355">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02344">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02360">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02366">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02047">basic_string&lt; char &gt;::shrink_to_fit()</a>, <a class="el" href="basic__string_8hpp_source.html#l02532">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02537">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02104">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="basic__string_8hpp_source.html#l02737">basic_string&lt; char &gt;::to_hash()</a>, <a class="el" href="basic__string_8hpp_source.html#l02114">basic_string&lt; char &gt;::view()</a>, <a class="el" href="basic__string_8hpp_source.html#l02122">basic_string&lt; char &gt;::view()</a>, <a class="el" href="xor_8hpp_source.html#l00118">XOR_decrypt()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00085">XOR_encrypt()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01646">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01627">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01635">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01613">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01699">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01751">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01559">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01355">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l01346">basic_string&lt; char &gt;::back()</a>, <a class="el" href="basic__string_8hpp_source.html#l00808">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01026">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01037">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="basic__string_8hpp_source.html#l01173">basic_string&lt; char &gt;::cend()</a>, <a class="el" href="basic__string_8hpp_source.html#l02191">basic_string&lt; char &gt;::compare()</a>, <a class="el" href="basic__string_8hpp_source.html#l02224">basic_string&lt; char &gt;::compare_ignore_case()</a>, <a class="el" href="basic__string_8hpp_source.html#l02135">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l02562">basic_string&lt; char &gt;::count()</a>, <a class="el" href="basic__string_8hpp_source.html#l01255">basic_string&lt; char &gt;::empty()</a>, <a class="el" href="basic__string_8hpp_source.html#l01149">basic_string&lt; char &gt;::end()</a>, <a class="el" href="basic__string_8hpp_source.html#l02593">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02600">basic_string&lt; char &gt;::ends_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02720">basic_string&lt; char &gt;::equal_to()</a>, <a class="el" href="basic__string_8hpp_source.html#l01969">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01904">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01940">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l02345">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02356">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02362">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02351">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02367">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02373">basic_string&lt; char &gt;::find()</a>, <a class="el" href="basic__string_8hpp_source.html#l02485">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02497">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02503">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02491">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02509">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02515">basic_string&lt; char &gt;::find_first_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02413">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02425">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02431">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02419">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02437">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02443">basic_string&lt; char &gt;::find_first_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02521">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02533">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02539">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02527">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02545">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02551">basic_string&lt; char &gt;::find_last_not_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02449">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02461">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02467">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02455">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02473">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l02479">basic_string&lt; char &gt;::find_last_of()</a>, <a class="el" href="basic__string_8hpp_source.html#l01485">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01396">basic_string&lt; char &gt;::insert()</a>, <a class="el" href="basic__string_8hpp_source.html#l01249">basic_string&lt; char &gt;::length()</a>, <a class="el" href="basic__string_8hpp_source.html#l00835">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l01305">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l01295">basic_string&lt; char &gt;::operator[]()</a>, <a class="el" href="basic__string_8hpp_source.html#l01536">basic_string&lt; char &gt;::pop_back()</a>, <a class="el" href="basic__string_8hpp_source.html#l02089">basic_string&lt; char &gt;::repeat()</a>, <a class="el" href="basic__string_8hpp_source.html#l02261">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02274">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02301">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02287">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02316">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l02267">basic_string&lt; char &gt;::replace()</a>, <a class="el" href="basic__string_8hpp_source.html#l01261">basic_string&lt; char &gt;::reserve()</a>, <a class="el" href="basic__string_8hpp_source.html#l02011">basic_string&lt; char &gt;::resize()</a>, <a class="el" href="basic__string_8hpp_source.html#l02334">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="basic__string_8hpp_source.html#l02379">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02390">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02396">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02385">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02401">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02407">basic_string&lt; char &gt;::rfind()</a>, <a class="el" href="basic__string_8hpp_source.html#l02047">basic_string&lt; char &gt;::shrink_to_fit()</a>, <a class="el" href="basic__string_8hpp_source.html#l02573">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02578">basic_string&lt; char &gt;::starts_with()</a>, <a class="el" href="basic__string_8hpp_source.html#l02104">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="basic__string_8hpp_source.html#l02778">basic_string&lt; char &gt;::to_hash()</a>, <a class="el" href="basic__string_8hpp_source.html#l02114">basic_string&lt; char &gt;::view()</a>, <a class="el" href="basic__string_8hpp_source.html#l02122">basic_string&lt; char &gt;::view()</a>, <a class="el" href="xor_8hpp_source.html#l00118">XOR_decrypt()</a> , 以及 <a class="el" href="xor_8hpp_source.html#l00085">XOR_encrypt()</a>.</p>
 
 </div>
 </div>
@@ -4403,7 +4525,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02712">2712</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02753">2753</a> 行定义.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02047">basic_string&lt; char &gt;::shrink_to_fit()</a>.</p>
 
@@ -4437,7 +4559,7 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 <p>去除两侧空白字符 </p>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02608">2608</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02649">2649</a> 行定义.</p>
 
 </div>
 </div>
@@ -4483,7 +4605,7 @@ template&lt;typename Predicate&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02663">2663</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02704">2704</a> 行定义.</p>
 
 </div>
 </div>
@@ -4515,9 +4637,9 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 <p>去除左侧空白字符 </p>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02592">2592</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02633">2633</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02608">basic_string&lt; char &gt;::trim()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02649">basic_string&lt; char &gt;::trim()</a>.</p>
 
 </div>
 </div>
@@ -4563,9 +4685,9 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02617">2617</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02658">2658</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02663">basic_string&lt; char &gt;::trim_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02592">basic_string&lt; char &gt;::trim_left()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02704">basic_string&lt; char &gt;::trim_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02633">basic_string&lt; char &gt;::trim_left()</a>.</p>
 
 </div>
 </div>
@@ -4597,9 +4719,9 @@ template&lt;typename CharT, typename Traits = char_traits&lt;CharT&gt;, typename
 <p>去除右侧空白字符 </p>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02600">2600</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02641">2641</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02608">basic_string&lt; char &gt;::trim()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02649">basic_string&lt; char &gt;::trim()</a>.</p>
 
 </div>
 </div>
@@ -4645,9 +4767,9 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02640">2640</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="basic__string_8hpp_source.html">basic_string.hpp</a> 第 <a class="el" href="basic__string_8hpp_source.html#l02681">2681</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02663">basic_string&lt; char &gt;::trim_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02600">basic_string&lt; char &gt;::trim_right()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02704">basic_string&lt; char &gt;::trim_if()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02641">basic_string&lt; char &gt;::trim_right()</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['修改算法_0',['修改算法',['../group___shift_algorithms.html',1,'']]]
+  ['使用指南_0',['使用指南',['../group___memory_order.html#usage_guidelines',1,'']]]
 ];

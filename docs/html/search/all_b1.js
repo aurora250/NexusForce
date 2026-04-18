@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['项目简介_0',['📖 项目简介',['../index.html#autotoc_md4',1,'']]]
+  ['负载因子管理_0',['负载因子管理',['../group___hash_table.html#load_factor_management',1,'']]]
 ];

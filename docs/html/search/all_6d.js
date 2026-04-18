@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['无锁队列_0',['无锁队列',['../group___lock_free_queue.html',1,'']]]
+  ['指针萃取_0',['指针萃取',['../group___pointer_traits.html',1,'']]]
 ];

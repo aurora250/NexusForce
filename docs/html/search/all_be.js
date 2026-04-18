@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['📐_20数据结构与算法_0',['📐 数据结构与算法',['../index.html#autotoc_md14',1,'']]],
-  ['📐_20算法库_20algorithm_1',['📐 算法库 (Algorithm)',['../index.html#autotoc_md36',1,'']]]
+  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
 ];

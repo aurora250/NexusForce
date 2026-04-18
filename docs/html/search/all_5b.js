@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['并发与异步_20async_0',['🔄 并发与异步 (Async)',['../index.html#autotoc_md19',1,'']]],
-  ['并行算法_1',['并行算法',['../group___parallel_algorithms.html',1,'']]]
+  ['容器_20container_0',['📦 容器 (Container)',['../index.html#autotoc_md20',1,'']]]
 ];

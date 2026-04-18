@@ -17,6 +17,88 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup ByteSize 字节大小
  * @brief 进制安全的字节大小表示实现
+ *
+ * 支持不同单位之间的转换、字符串解析和格式化输出。支持二进制和十进制两种标准。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下数据存储单位与度量衡相关标准规范：
+ *
+ * **二进制前缀标准（IEC 标准）：**
+ * - **IEC 80000-13:2008**：量和单位 — 第13部分：信息科学与技术
+ *   https://www.iso.org/standard/31898.html
+ *   （注：IEC 80000-13 已整合入 ISO/IEC 80000 系列）
+ * - **ISO/IEC 80000-13:2008**：信息科学与技术中的量和单位
+ *   https://www.iso.org/standard/31898.html
+ * - **IEEE 1541-2021**：数字和电子设备中使用的二进制倍数前缀标准
+ *   https://standards.ieee.org/ieee/1541/10790/
+ *
+ * **国际单位制（SI）十进制前缀标准：**
+ * - **BIPM SI Brochure (9th Edition, 2019)**：国际单位制（SI）前缀定义
+ *   https://www.bipm.org/en/publications/si-brochure
+ * - **ISO 80000-1:2009**：量和单位 — 第1部分：总则（含 SI 前缀）
+ *   https://www.iso.org/standard/30669.html
+ *
+ * **网络协议与数据大小表示标准：**
+ * - **IETF RFC 8949**：简明二进制对象表示（CBOR）中的字节大小约定
+ *   https://www.rfc-editor.org/rfc/rfc8949.html
+ *
+ * **编程语言与系统标准：**
+ * - **POSIX.1-2017 (IEEE Std 1003.1)**：系统接口中的字节定义
+ *   https://pubs.opengroup.org/onlinepubs/9699919799/
+ *
+ * @section binary_vs_decimal 二进制与十进制前缀对比
+ * 根据 IEC 80000-13 和 IEEE 1541，字节单位存在两套并行的标准：
+ *
+ * | 二进制前缀 | 符号 | 2的幂 | 字节数（近似） | 十进制前缀 | 符号 | 10的幂 | 字节数（精确） |
+ * |------------|------|-------|----------------|------------|------|--------|----------------|
+ * | kibibyte   | KiB  | 2^10  | 1,024          | kilobyte   | kB   | 10^3   | 1,000          |
+ * | mebibyte   | MiB  | 2^20  | 1,048,576      | megabyte   | MB   | 10^6   | 1,000,000      |
+ * | gibibyte   | GiB  | 2^30  | 1,073,741,824  | gigabyte   | GB   | 10^9   | 1,000,000,000  |
+ * | tebibyte   | TiB  | 2^40  | ≈1.1×10^12     | terabyte   | TB   | 10^12  | 1,000,000,000,000 |
+ * | pebibyte   | PiB  | 2^50  | ≈1.13×10^15    | petabyte   | PB   | 10^15  | 1,000,000,000,000,000 |
+ * | exbibyte   | EiB  | 2^60  | ≈1.15×10^18    | exabyte    | EB   | 10^18  | 1,000,000,000,000,000,000 |
+ *
+ * @section unit_suffixes 单位后缀说明
+ * 本实现支持的单位字符串（不区分大小写）：
+ *
+ * | 单位 | 全名（二进制） | 全名（十进制） | 支持的别名 | 进制       |
+ * |------|----------------|----------------|------------|------------|
+ * | B    | byte           | byte           | -          | 1          |
+ * | KB/K | kibibyte       | kilobyte       | K          | 二进制/十进制 |
+ * | MB/M | mebibyte       | megabyte       | M          | 二进制/十进制 |
+ * | GB/G | gibibyte       | gigabyte       | G          | 二进制/十进制 |
+ * | TB/T | tebibyte       | terabyte       | T          | 二进制/十进制 |
+ * | PB/P | pebibyte       | petabyte       | P          | 二进制/十进制 |
+ * | EB/E | exbibyte       | exabyte        | E          | 二进制/十进制 |
+ *
+ * @section ieee_1541 IEEE 1541-2021 建议
+ * IEEE 1541 标准建议：
+ * - 使用明确的二进制前缀（KiB, MiB, GiB 等）表示 2 的幂
+ * - 使用 SI 前缀（kB, MB, GB 等）仅表示 10 的幂
+ * - 符号中 "B" 应为大写，前缀首字母大写（如 KiB、MiB）
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                  |
+ * |-------------------|-------------------------------------------|
+ * | 内部存储          | uint64_t（最大约 16 EiB）                 |
+ * | 最大可表示值      | 2^64 - 1 字节 ≈ 18.4 EB                   |
+ * | 二进制乘数表      | 1, 1024, 1024², ..., 1024⁶                |
+ * | 十进制乘数表      | 1, 1000, 1000², ..., 1000⁶                |
+ * | 自动单位选择      | 选择使数值 < 1024（二进制）或 < 1000（十进制）的最大单位 |
+ * | 解析容错          | 忽略大小写，支持简写别名（K、M、G等）     |
+ * | 小数精度          | decimal_t（通常为 80 位扩展精度）          |
+ *
+ * @note 本实现默认使用二进制解释（`binary = true`），这符合计算机科学中的
+ *       传统惯例（1 KB = 1024 B）。如需使用十进制解释（1 KB = 1000 B），
+ *       请在构造或解析时显式指定 `binary = false`。
+ *
+ * @warning 存储容量制造商（如硬盘、SSD）通常使用十进制单位标注容量，
+ *          因此标称 "1 TB" 的硬盘实际约为 931 GiB。解析用户输入的存储大小时，
+ *          应注意区分这两种标准以避免混淆。
+ *
+ * @see https://www.bipm.org/en/measurement-units/prefixes.html
+ * @see https://physics.nist.gov/cuu/Units/binary.html
+ * @see https://en.wikipedia.org/wiki/Binary_prefix
  * @{
  */
 

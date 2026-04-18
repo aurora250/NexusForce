@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📁_20文件系统_20file_0',['📁 文件系统 (File)',['../index.html#autotoc_md22',1,'']]]
+  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
 ];

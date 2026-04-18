@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['密码学与安全算法_0',['🔐 密码学与安全算法',['../index.html#autotoc_md12',1,'']]]
+  ['学术文献与算法来源_0',['学术文献与算法来源',['../group___bloom_filter.html#references',1,'']]]
 ];

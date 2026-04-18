@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📊_20数学库_20math_0',['📊 数学库 (Math)',['../index.html#autotoc_md37',1,'']]]
+  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
 ];

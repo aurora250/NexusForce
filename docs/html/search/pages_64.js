@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['遵循的国际标准_0',['遵循的国际标准',['../group___s_q_l.html#standards',1,'']]]
+  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
+  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
 ];

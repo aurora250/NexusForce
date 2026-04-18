@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔄_20并发与异步_20async_0',['🔄 并发与异步 (Async)',['../index.html#autotoc_md19',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
+  ['颜色_1',['颜色',['../group___color.html',1,'']]]
 ];

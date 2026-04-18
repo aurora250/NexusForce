@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['哈希函数要求_0',['哈希函数要求',['../group___hash_primary.html#hash_requirements',1,'']]],
-  ['哈希算法对比_1',['哈希算法对比',['../group___hash_primary.html#algorithm_comparison',1,'']]]
+  ['单位后缀说明_0',['单位后缀说明',['../group___byte_size.html#unit_suffixes',1,'']]]
 ];

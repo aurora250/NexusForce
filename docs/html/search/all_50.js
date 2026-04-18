@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['学术文献与算法来源_0',['学术文献与算法来源',['../group___leonardo_heap.html#references',1,'']]]
+  ['唯一键与允许重复键_0',['唯一键与允许重复键',['../group___hash_table.html#unique_vs_equal',1,'']]]
 ];

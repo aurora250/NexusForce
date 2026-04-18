@@ -22,7 +22,7 @@ var group___thread_pool =
       [ "try_pop", "classlocal__queue.html#a4a7dfd98b0eceb8f752a61a2573c8881", null ]
     ] ],
     [ "worker_context", "structworker__context.html", [
-      [ "id_type", "structworker__context.html#a6c12b2ea6534553716c3e9ee650b47b9", null ],
+      [ "id_type", "structworker__context.html#a9819ca5bea261e9484d75f512fc38326", null ],
       [ "consecutive_idle_count", "structworker__context.html#aa4cb896c147fd86efed7b3f176e8a233", null ],
       [ "id", "structworker__context.html#a0ce42d0b767acc53e81ba0e89aa4e3c4", null ],
       [ "is_stealing", "structworker__context.html#a0708436cfb366b691690600be934454e", null ],
@@ -45,7 +45,7 @@ var group___thread_pool =
       [ "start_time", "structtask__info.html#a16acfc5751d1fd71ef6bf34ae7658fe9", null ],
       [ "status", "structtask__info.html#a326631a3e74e507ba2cbe9118cb9e06f", null ],
       [ "submit_time", "structtask__info.html#a14d284999110a0f2049de841fc52b3fd", null ],
-      [ "worker_thread_id", "structtask__info.html#a4ec1db2bc11bed508d3c310a83bc17ed", null ]
+      [ "worker_thread_id", "structtask__info.html#ab1a355b154149595c310c3592e7ce9b6", null ]
     ] ],
     [ "submit_result&lt; T &gt;", "structsubmit__result.html", [
       [ "operator bool", "structsubmit__result.html#a1e7d1255b5e726d50bc742e63cdd4769", null ],
@@ -66,7 +66,7 @@ var group___thread_pool =
         [ "total_submitted", "structthread__pool_1_1pool__statistics.html#af23fd661d07ca3aede5ae96d47de07ff", null ],
         [ "total_threads", "structthread__pool_1_1pool__statistics.html#abf2cb7bccc5cd7e308bce4996093d35b", null ]
       ] ],
-      [ "id_type", "classthread__pool.html#a26496f9992ff6fcd1b06fa276445e379", null ],
+      [ "id_type", "classthread__pool.html#a11c3d03ee2141f13727cbd973c24134e", null ],
       [ "periodic_token", "classthread__pool.html#a441d12dda9edd4d083d844279f1ae91d", null ],
       [ "priority_type", "classthread__pool.html#a0f86abfce93a05b67165f166c653a82b", null ],
       [ "steal_strategy", "classthread__pool.html#a9177f65ba06f1f7371a69890ece9503d", null ],

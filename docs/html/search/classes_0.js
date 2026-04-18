@@ -105,5 +105,6 @@ var searchData=
   ['atomic_5fref_5fbase_3c_20t_2c_20true_2c_20false_20_3e_102',['atomic_ref_base&lt; T, true, false &gt;',['../structatomic__ref__base_3_01_t_00_01true_00_01false_01_4.html',1,'']]],
   ['atomic_5fsemaphore_103',['atomic_semaphore',['../classatomic__semaphore.html',1,'']]],
   ['atomic_5fsemaphore_3c_201_20_3e_104',['atomic_semaphore&lt; 1 &gt;',['../classatomic__semaphore.html',1,'']]],
-  ['awaiter_105',['awaiter',['../structtask_1_1awaiter.html',1,'task']]]
+  ['authentication_5ffilter_105',['authentication_filter',['../classauthentication__filter.html',1,'']]],
+  ['awaiter_106',['awaiter',['../structtask_1_1awaiter.html',1,'task']]]
 ];

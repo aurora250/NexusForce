@@ -16,6 +16,7 @@ var dir_929902eb0e8583dec3e7168f06be60e2 =
     [ "generator.hpp", "generator_8hpp.html", "generator_8hpp" ],
     [ "hazard_ptr.hpp", "hazard__ptr_8hpp.html", "hazard__ptr_8hpp" ],
     [ "latch.hpp", "latch_8hpp.html", null ],
+    [ "lazy_thread.hpp", "lazy__thread_8hpp.html", null ],
     [ "lock_free_queue.hpp", "lock__free__queue_8hpp.html", null ],
     [ "memory_order.hpp", "memory__order_8hpp.html", "memory__order_8hpp" ],
     [ "mutex.hpp", "mutex_8hpp.html", "mutex_8hpp" ],

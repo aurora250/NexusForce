@@ -37,7 +37,7 @@ namespace {
 
     uint64_t get_multiplier(byte_size::unit u, const bool binary) {
         const auto& table = binary ? binary_multipliers : decimal_multipliers;
-        const size_t index = static_cast<size_t>(u);
+        const auto index = static_cast<size_t>(u);
         if (index >= size(table)) {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid unit for multiplier"));
         }
@@ -50,10 +50,10 @@ namespace {
         }
 
         for (const auto& mapping: unit_mappings) {
-            if (unit_str.compare_ignore_case(mapping.name)) {
+            if (unit_str.compare_ignore_case(mapping.name) != 0) {
                 return mapping.unit;
             }
-            if (!mapping.alt_name.empty() && unit_str.compare_ignore_case(mapping.alt_name)) {
+            if (!mapping.alt_name.empty() && unit_str.compare_ignore_case(mapping.alt_name) != 0) {
                 return mapping.unit;
             }
         }
@@ -93,7 +93,7 @@ byte_size::byte_size(const decimal_t value, const unit u, const bool binary) {
     }
 
     const uint64_t multiplier = get_multiplier(u, binary);
-    const decimal_t bytes = value * multiplier;
+    const decimal_t bytes = value * static_cast<decimal_t>(multiplier);
 
     if (bytes > static_cast<decimal_t>(numeric_traits<uint64_t>::max())) {
         NEFORCE_THROW_EXCEPTION(value_exception("Memory size exceeds maximum representable value"));
@@ -118,7 +118,7 @@ byte_size byte_size::parse(string_view str, const bool binary) {
         NEFORCE_THROW_EXCEPTION(value_exception("Missing numeric value"));
     }
 
-    decimal_t value;
+    decimal_t value = numeric_traits<decimal_t>::quiet_nan();
     try {
         value = decimal::parse(num_str).value();
     } catch (...) {
@@ -134,7 +134,7 @@ byte_size byte_size::parse(string_view str, const bool binary) {
         NEFORCE_THROW_EXCEPTION(value_exception(("Unknown unit: " + unit_str).data()));
     }
 
-    return byte_size(value, unit, binary);
+    return {value, unit, binary};
 }
 
 decimal_t byte_size::as(const unit u, const bool binary) const {
@@ -153,7 +153,7 @@ string byte_size::to_string(const unit u, const int precision, const bool binary
             return "0 B";
         }
         const uint64_t base = binary ? 1024 : 1000;
-        decimal_t val = static_cast<decimal_t>(bytes_);
+        auto val = static_cast<decimal_t>(bytes_);
         auto current_unit = unit::B;
 
         constexpr unit units[] = {unit::B, unit::KB, unit::MB, unit::GB, unit::TB, unit::PB, unit::EB};

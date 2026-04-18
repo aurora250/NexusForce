@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['混合排序算法详解_0',['混合排序算法详解',['../group___sort_algorithms.html#hybrid_algorithms',1,'']]]
+  ['插件系统_20plugin_0',['🔌 插件系统 (Plugin)',['../index.html#autotoc_md34',1,'']]]
 ];

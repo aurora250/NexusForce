@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📑_20目录_0',['📑 目录',['../index.html#autotoc_md2',1,'']]]
+  ['随机数生成器_0',['随机数生成器',['../group___random_generators.html',1,'']]],
+  ['随机重排算法_1',['随机重排算法',['../group___shuffle_algorithms.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🖥️_20支持环境_0',['🖥️ 支持环境',['../index.html#autotoc_md6',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]]
 ];

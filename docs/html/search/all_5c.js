@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
+  ['密码学与安全算法_0',['🔐 密码学与安全算法',['../index.html#autotoc_md12',1,'']]]
 ];

@@ -60,5 +60,6 @@ var searchData=
   ['bitset_57',['bitset',['../classbitset.html',1,'']]],
   ['bloom_5ffilter_58',['bloom_filter',['../classbloom__filter.html',1,'']]],
   ['boolean_59',['boolean',['../structboolean.html',1,'']]],
-  ['build_5findex_5ftuple_60',['build_index_tuple',['../structbuild__index__tuple.html',1,'']]]
+  ['build_5findex_5ftuple_60',['build_index_tuple',['../structbuild__index__tuple.html',1,'']]],
+  ['byte_5fsize_61',['byte_size',['../classbyte__size.html',1,'']]]
 ];

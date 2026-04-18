@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['方根函数实现_0',['方根函数实现',['../group___math_functions.html#root_functions',1,'']]]
+  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
 ];

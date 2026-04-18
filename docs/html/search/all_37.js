@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
+  ['典型应用场景_0',['典型应用场景',['../group___bloom_filter.html#applications',1,'']]]
 ];

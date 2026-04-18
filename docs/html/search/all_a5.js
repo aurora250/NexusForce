@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]],
-  ['选项语法规则_1',['选项语法规则',['../group___command_line.html#option_syntax',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓存机制_1',['DNS 缓存机制',['../group___d_n_s.html#dns_caching',1,'']]],
+  ['缓存_2',['缓存',['../group___cache.html',1,'']]]
 ];

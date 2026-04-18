@@ -4,8 +4,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
+ * @addtogroup Exceptions 异常类集
  * @{
  */
 

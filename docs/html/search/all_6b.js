@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['文件系统_20file_0',['📁 文件系统 (File)',['../index.html#autotoc_md22',1,'']]],
-  ['文件_1',['文件',['../group___file.html',1,'']]],
-  ['文档_2',['📚 文档',['../index.html#autotoc_md45',1,'']]]
+  ['扩展特性_0',['GNU 扩展特性',['../group___command_line.html#gnu_extensions',1,'']]]
 ];

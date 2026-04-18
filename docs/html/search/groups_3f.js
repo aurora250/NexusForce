@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['插件_0',['插件',['../group___plugin.html',1,'']]],
-  ['插入迭代器_1',['插入迭代器',['../group___insert_iterators.html',1,'']]]
+  ['控制台io_0',['控制台IO',['../group___console_i_o.html',1,'']]]
 ];

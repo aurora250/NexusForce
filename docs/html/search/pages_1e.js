@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['代理对编码规则_0',['UTF-16 代理对编码规则',['../group___code_point.html#utf16_surrogates',1,'']]]
+  ['与堆排序对比_0',['与堆排序对比',['../group___leonardo_heap.html#comparison_with_heapsort',1,'']]],
+  ['与_20json_20兼容性_1',['YAML 1.2 与 JSON 兼容性',['../yaml__value_8hpp.html#yaml_vs_json',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['线性时间排序算法_0',['线性时间排序算法',['../group___sort_algorithms.html#linear_time_algorithms',1,'']]]
+  ['比较交换失败顺序规则_0',['比较交换失败顺序规则',['../group___memory_order.html#cmpexch_failure_order',1,'']]],
+  ['比较器的严格弱序要求_1',['比较器的严格弱序要求',['../group___heap_algorithms.html#comparison_strictness',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
+  ['日志系统_0',['日志系统',['../group___logging.html',1,'']]],
+  ['日期时间_1',['日期时间',['../group___date_time.html',1,'']]]
 ];

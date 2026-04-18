@@ -47,6 +47,8 @@ var group___string_view =
       [ "compare", "classbasic__string__view.html#a19d5ca673db1a922eac3e031d7d43a0c", null ],
       [ "compare", "classbasic__string__view.html#a865eac429b983cef196c485396a45b00", null ],
       [ "compare", "classbasic__string__view.html#a3a1f56f4efe035ed73500f32c37b5219", null ],
+      [ "compare_ignore_case", "classbasic__string__view.html#a4f83d288d98ea94ce3398ee9803dd14a", null ],
+      [ "compare_ignore_case", "classbasic__string__view.html#a32f71797eac485f0dfbe16aa1b726c59", null ],
       [ "contains", "classbasic__string__view.html#aaf2ac9aa4bfdac9eaa0013195fa12257", null ],
       [ "contains", "classbasic__string__view.html#a6277b890706c62aff7bbba806c97991e", null ],
       [ "contains", "classbasic__string__view.html#a11fdddfa4781817b9b22139459d406a9", null ],

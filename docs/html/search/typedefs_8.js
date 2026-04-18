@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['id_0',['id',['../classscoped__thread.html#a6dec7b5a66f0c65ae0ae5dd6feac3c90',1,'scoped_thread']]],
-  ['id_5ftype_1',['id_type',['../structworker__context.html#a6c12b2ea6534553716c3e9ee650b47b9',1,'worker_context::id_type'],['../classthread__pool.html#a26496f9992ff6fcd1b06fa276445e379',1,'thread_pool::id_type']]],
+  ['id_0',['id',['../classlazy__thread.html#ad8d63a7d6d604fff58306287d1c2f09f',1,'lazy_thread::id'],['../classscoped__thread.html#a6dec7b5a66f0c65ae0ae5dd6feac3c90',1,'scoped_thread::id']]],
+  ['id_5ftype_1',['id_type',['../structworker__context.html#a9819ca5bea261e9484d75f512fc38326',1,'worker_context::id_type'],['../classthread__pool.html#a11c3d03ee2141f13727cbd973c24134e',1,'thread_pool::id_type']]],
   ['index_5fsequence_2',['index_sequence',['../group___integer_sequence.html#ga26720e99f9258f846d2e957f81425b71',1,'integer_sequence.hpp']]],
   ['index_5fsequence_5ffor_3',['index_sequence_for',['../group___integer_sequence.html#ga7b762cc05183be4d9e4f4f271add4c1e',1,'integer_sequence.hpp']]],
   ['int16_5ft_4',['int16_t',['../group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19',1,'types.hpp']]],

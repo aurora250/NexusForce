@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['堆栈跟踪_0',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
-  ['堆算法_1',['堆算法',['../group___heap_algorithms.html',1,'']]]
+  ['哈希算法_0',['哈希算法',['../group___hash_primary.html',1,'']]],
+  ['哈希表_1',['哈希表',['../group___hash_table.html',1,'']]]
 ];

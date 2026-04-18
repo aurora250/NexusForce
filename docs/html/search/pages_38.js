@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['工具库_20utility_0',['🛠️ 工具库 (Utility)',['../index.html#autotoc_md29',1,'']]],
-  ['工程质量_1',['✨ 工程质量',['../index.html#autotoc_md8',1,'']]]
+  ['复杂度保证_0',['复杂度保证',['../group___r_b_tree.html#complexity_guarantees',1,'']]]
 ];

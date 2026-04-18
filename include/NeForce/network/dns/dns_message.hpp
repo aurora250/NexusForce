@@ -169,6 +169,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @see https://www.rfc-editor.org/rfc/rfc1035.html
  * @see https://developers.google.com/speed/public-dns
  * @see https://www.cloudflare.com/learning/dns/what-is-dns/
+ * @{
  */
 
 /**
@@ -218,8 +219,7 @@ enum class dns_response : uint8_t {
 /** @} */ // Network
 
 /**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
+ * @addtogroup Exceptions 异常类集
  * @{
  */
 
@@ -244,18 +244,9 @@ public:
         NO_RECORD       ///< 无记录
     };
 
-    /**
-     * @brief 构造函数
-     * @param what 错误描述
-     */
     explicit dns_exception(const string& what) :
     network_exception(what.data()) {}
 
-    /**
-     * @brief 构造函数
-     * @param what 错误描述
-     * @param code 错误码
-     */
     dns_exception(const string& what, const code code) :
     network_exception(what.data(), static_type, static_cast<int>(code)) {}
 
@@ -290,14 +281,12 @@ public:
 /** @} */ // Exceptions
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
+ * @addtogroup Network 网络通信
  * @{
  */
 
 /**
- * @defgroup DNS DNS
- * @brief DNS组件
+ * @addtogroup DNS DNS
  * @{
  */
 

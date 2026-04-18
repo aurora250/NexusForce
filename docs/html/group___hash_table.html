@@ -116,6 +116,147 @@ NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>基于哈希表的无序容器实现 </p>
+<p>哈希表是一种基于键直接访问数据的数据结构，通过哈希函数将键映射到桶， 提供平均常数时间复杂度的插入、删除和查找操作。 作为无序关联式容器的底层实现。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下数据结构相关标准规范：</p>
+<p><b>哈希表算法与数据结构文献：</b></p><ul>
+<li>**Donald E. Knuth (1998)**：The Art of Computer Programming, Volume 3 — Sorting and Searching §6.4 Hashing（哈希表经典理论分析）</li>
+<li>**Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein**： Introduction to Algorithms (3rd Edition), Chapter 11 — Hash Tables</li>
+</ul>
+<p><b>哈希函数设计参考：</b></p><ul>
+<li>**Maurice V. Wilkes (1965)**：Slave Memories and Dynamic Storage Allocation IEEE Transactions on Electronic Computers, EC-14(2): 270-271</li>
+<li>**Donald E. Knuth (1973)**：The Art of Computer Programming, Volume 1 — Fundamental Algorithms</li>
+</ul>
+<p><b>负载因子与性能分析：</b></p><ul>
+<li>**Gaston H. Gonnet, Per-Åke Larson (1988)**：External hashing with limited internal storage Journal of the ACM, 35(1): 161-184</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="hash_table_principles"></a>
+哈希表原理</h1>
+<p>哈希表通过哈希函数将键映射到数组索引（桶），实现 O(1) 平均时间复杂度的操作：</p>
+<p>**核心概念**： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">概念  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">哈希函数  </td><td class="markdownTableBodyNone">将键映射到整数索引的函数  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">桶  </td><td class="markdownTableBodyNone">存储具有相同哈希值元素的容器  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">负载因子  </td><td class="markdownTableBodyNone">元素数量 / 桶数量，决定哈希表的拥挤程度  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">冲突  </td><td class="markdownTableBodyNone">不同键产生相同哈希值的现象  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">冲突解决  </td><td class="markdownTableBodyNone">链地址法（本实现）或开放寻址法  </td></tr>
+</table>
+<p>**链地址法**：</p><ul>
+<li>每个桶存储一个链表头指针</li>
+<li>冲突的元素追加到链表末尾</li>
+<li>查找时需要遍历链表</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="bucket_size_strategy"></a>
+桶大小策略</h1>
+<p>本实现使用素数表确定桶数量，以改善哈希分布的均匀性：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">位数  </th><th class="markdownTableHeadNone">最大素数  </th><th class="markdownTableHeadNone">素数个数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">32位  </td><td class="markdownTableBodyNone">1,610,612,741  </td><td class="markdownTableBodyNone">28  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">64位  </td><td class="markdownTableBodyNone">6,477,510,814,054,053,699  </td><td class="markdownTableBodyNone">78  </td></tr>
+</table>
+<p>素数表的选择基于以下原因：</p><ul>
+<li>素数作为模数可减少哈希冲突的规律性</li>
+<li>避免与哈希函数中的乘数产生公因子</li>
+<li>改善分布均匀性（参考 Knuth 分析）</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="load_factor_management"></a>
+负载因子管理</h1>
+<p>负载因子 α = size / buckets，控制哈希表的时空权衡：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">α 范围  </th><th class="markdownTableHeadNone">性能特征  </th><th class="markdownTableHeadNone">操作  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">α &lt; 0.5  </td><td class="markdownTableBodyNone">稀疏，空间浪费，冲突极少  </td><td class="markdownTableBodyNone">适合高频率查找  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">0.5 ≤ α ≤ 1.0  </td><td class="markdownTableBodyNone">平衡，推荐默认值（本实现默认 1.0）  </td><td class="markdownTableBodyNone">一般场景最优  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">α &gt; 1.0  </td><td class="markdownTableBodyNone">密集，空间效率高，查找性能下降  </td><td class="markdownTableBodyNone">触发 rehash  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">α &gt; 2.0  </td><td class="markdownTableBodyNone">过度拥挤，查找退化为 O(n)  </td><td class="markdownTableBodyNone">强制 rehash  </td></tr>
+</table>
+<p>当负载因子超过 max_load_factor() 时，自动触发 rehash 扩容。</p>
+<h1 class="doxsection"><a class="anchor" id="time_complexity"></a>
+时间复杂度</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">平均情况  </th><th class="markdownTableHeadNone">最坏情况  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">insert  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">冲突时遍历链表，rehash 时 O(n)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">erase  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">定位桶后删除节点  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">遍历桶内链表  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">count  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">同 find  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">rehash  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">重新分配所有元素  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">clear  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">O(n)  </td><td class="markdownTableBodyNone">释放所有节点  </td></tr>
+</table>
+<p>其中 n = <a class="el" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba" title="获取容器的大小">size()</a>。</p>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">冲突解决  </td><td class="markdownTableBodyNone">链地址法（Separate Chaining）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">桶大小增长策略  </td><td class="markdownTableBodyNone">素数表（约 1.5 倍增长）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">最大负载因子  </td><td class="markdownTableBodyNone">1.0（默认，可配置）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">迭代器类别  </td><td class="markdownTableBodyNone">前向迭代器（Forward Iterator）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">异常安全  </td><td class="markdownTableBodyNone">基本保证（insert 时分配失败不影响原有状态）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">线程安全  </td><td class="markdownTableBodyNone">不安全（需外部同步）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">节点分配  </td><td class="markdownTableBodyNone">使用 Alloc 分配器  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="iterator_invalidation"></a>
+迭代器失效规则</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">操作  </th><th class="markdownTableHeadNone">失效范围  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">insert  </td><td class="markdownTableBodyNone">不失效任何迭代器  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">erase  </td><td class="markdownTableBodyNone">仅失效指向被删除元素的迭代器  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">rehash  </td><td class="markdownTableBodyNone">全部迭代器失效  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">clear  </td><td class="markdownTableBodyNone">全部迭代器失效  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">swap  </td><td class="markdownTableBodyNone">迭代器交换，指向元素保持有效  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="unique_vs_equal"></a>
+唯一键与允许重复键</h1>
+<p>本实现提供两种插入模式：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">模式  </th><th class="markdownTableHeadNone">方法后缀  </th><th class="markdownTableHeadNone">行为  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">唯一键  </td><td class="markdownTableBodyNone">_unique  </td><td class="markdownTableBodyNone">键已存在时替换或忽略（取决于实现）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">允许重复键  </td><td class="markdownTableBodyNone">_equal  </td><td class="markdownTableBodyNone">允许相同键的多个值共存  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本实现采用链地址法处理冲突，在负载因子适当时性能最优。 对于需要稳定迭代器的场景，哈希表是理想选择。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://en.cppreference.com/w/cpp/container/unordered_map">https://en.cppreference.com/w/cpp/container/unordered_map</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Hash_table">https://en.wikipedia.org/wiki/Hash_table</a> </dd>
+<dd>
+<a href="https://dl.acm.org/doi/10.1145/356643.356645">https://dl.acm.org/doi/10.1145/356643.356645</a> </dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

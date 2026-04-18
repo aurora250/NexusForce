@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../index.html#autotoc_md32',1,'']]]
+  ['编码规则_0',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]],
+  ['编译指南_1',['🔧 编译指南',['../index.html#autotoc_md39',1,'']]],
+  ['编译步骤_2',['🏗️ 编译步骤',['../index.html#autotoc_md41',1,'']]]
 ];

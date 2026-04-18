@@ -120,15 +120,15 @@ $(function(){initNavTree('classfilesystem.html','','classfilesystem-members'); }
 <tr class="memdesc:a8e989451bef412a36b77dc87051480b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">重命名文件或目录  <br /></td></tr>
 <tr class="memitem:aad8c0155a1d1097921a4cdd83687c2df" id="r_aad8c0155a1d1097921a4cdd83687c2df"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#aad8c0155a1d1097921a4cdd83687c2df">create_and_write</a> (const <a class="el" href="classpath.html">path</a> &amp;p, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;content, bool append=false)</td></tr>
 <tr class="memdesc:aad8c0155a1d1097921a4cdd83687c2df"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建并写入文件  <br /></td></tr>
-<tr class="memitem:a64873092ac720a8878bb701afe75fff9" id="r_a64873092ac720a8878bb701afe75fff9"><td class="memItemLeft">static <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a64873092ac720a8878bb701afe75fff9">size</a> (const <a class="el" href="classpath.html">path</a> &amp;p) noexcept</td></tr>
-<tr class="memdesc:a64873092ac720a8878bb701afe75fff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取文件大小  <br /></td></tr>
+<tr class="memitem:a378d13185b1114861abae6b6c0a7e8e4" id="r_a378d13185b1114861abae6b6c0a7e8e4"><td class="memItemLeft">static <a class="el" href="classbyte__size.html">byte_size</a>&#160;</td><td class="memItemRight"><a class="el" href="#a378d13185b1114861abae6b6c0a7e8e4">size</a> (const <a class="el" href="classpath.html">path</a> &amp;p) noexcept</td></tr>
+<tr class="memdesc:a378d13185b1114861abae6b6c0a7e8e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取文件大小  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>文件系统操作工具类 </p>
 <p>提供文件与目录的创建、删除、复制、移动、重命名等操作。</p>
 <dl class="section note"><dt>注解</dt><dd>文件系统操作可能因权限不足而失败。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a> 第 <a class="el" href="filesystem_8hpp_source.html#l00030">30</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a> 第 <a class="el" href="filesystem_8hpp_source.html#l00031">31</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="aec6a7a04ac30a3ca486bf5dc41495cbd" name="aec6a7a04ac30a3ca486bf5dc41495cbd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec6a7a04ac30a3ca486bf5dc41495cbd">&#9670;&#160;</a></span>copy()</h2>
@@ -534,8 +534,8 @@ $(function(){initNavTree('classfilesystem.html','','classfilesystem-members'); }
 
 </div>
 </div>
-<a id="a64873092ac720a8878bb701afe75fff9" name="a64873092ac720a8878bb701afe75fff9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64873092ac720a8878bb701afe75fff9">&#9670;&#160;</a></span>size()</h2>
+<a id="a378d13185b1114861abae6b6c0a7e8e4" name="a378d13185b1114861abae6b6c0a7e8e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a378d13185b1114861abae6b6c0a7e8e4">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -544,7 +544,7 @@ $(function(){initNavTree('classfilesystem.html','','classfilesystem-members'); }
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> filesystem::size </td>
+          <td class="memname"><a class="el" href="classbyte__size.html">byte_size</a> filesystem::size </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classpath.html">path</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
           <td></td>
@@ -564,7 +564,7 @@ $(function(){initNavTree('classfilesystem.html','','classfilesystem-members'); }
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>文件大小（字节），如果文件不存在或获取失败返回0</dd></dl>
+<dl class="section return"><dt>返回</dt><dd>文件大小，如果文件不存在或获取失败返回0</dd></dl>
 <p>对于目录，返回0。 对于大文件可能返回截断值。 </p>
 
 </div>

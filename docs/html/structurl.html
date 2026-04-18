@@ -127,6 +127,14 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:aa2eb25e12788929337fa39708b5aa31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL编码字符串  <br /></td></tr>
 <tr class="memitem:a359e5967e16cb6df4f2d7e634f61095d" id="r_a359e5967e16cb6df4f2d7e634f61095d"><td class="memItemLeft">static NEFORCE_NODISCARD <a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str)</td></tr>
 <tr class="memdesc:a359e5967e16cb6df4f2d7e634f61095d"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL解码字符串  <br /></td></tr>
+<tr class="memitem:a11f938e4fa1b046a40f42d77272ea29e" id="r_a11f938e4fa1b046a40f42d77272ea29e"><td class="memItemLeft">static NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a11f938e4fa1b046a40f42d77272ea29e">encode_form</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str)</td></tr>
+<tr class="memdesc:a11f938e4fa1b046a40f42d77272ea29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">表单编码（application/x-www-form-urlencoded）  <br /></td></tr>
+<tr class="memitem:aabeca8a5da5c3f8341919884016252c3" id="r_aabeca8a5da5c3f8341919884016252c3"><td class="memItemLeft">static NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#aabeca8a5da5c3f8341919884016252c3">decode_tolerant</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str)</td></tr>
+<tr class="memdesc:aabeca8a5da5c3f8341919884016252c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">宽容解码  <br /></td></tr>
+<tr class="memitem:a26042ce16f3fdb91130f5f027be51b0d" id="r_a26042ce16f3fdb91130f5f027be51b0d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a26042ce16f3fdb91130f5f027be51b0d">parse_query</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="#a1b90e78e0ab31835db6f42d399b3415e">query</a>, <a class="el" href="classunordered__map.html">unordered_map</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;params)</td></tr>
+<tr class="memdesc:a26042ce16f3fdb91130f5f027be51b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析查询字符串  <br /></td></tr>
+<tr class="memitem:af425702cea140fa7f8567110db828eef" id="r_af425702cea140fa7f8567110db828eef"><td class="memItemLeft">static NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#af425702cea140fa7f8567110db828eef">build_query</a> (const <a class="el" href="classunordered__map.html">unordered_map</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;params)</td></tr>
+<tr class="memdesc:af425702cea140fa7f8567110db828eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建查询字符串  <br /></td></tr>
 <tr class="inherit_header pub_static_methods_structiobject"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_structiobject')"><span class="dynarrow"><span class="arrowhead closed"></span></span>静态 Public 成员函数 继承自 <a class="el" href="structiobject.html">iobject&lt; url &gt;</a></td></tr>
 <tr class="memitem:acdd491e003107626c192fc9701c05c0a inherit pub_static_methods_structiobject" id="r_acdd491e003107626c192fc9701c05c0a"><td class="memItemLeft">static NEFORCE_NODISCARD constexpr <a class="el" href="structurl.html">url</a>&#160;</td><td class="memItemRight"><a class="el" href="structiobject.html#acdd491e003107626c192fc9701c05c0a">parse</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str)</td></tr>
 <tr class="memdesc:acdd491e003107626c192fc9701c05c0a inherit pub_static_methods_structiobject"><td class="mdescLeft">&#160;</td><td class="mdescRight">从字符串解析对象  <br /></td></tr>
@@ -191,14 +199,14 @@ Public 属性</h2></td></tr>
 URL结构定义</h1>
 <p>根据RFC 3986 §3，URL（URI的定位子集）的通用语法为：</p>
 <div class="fragment"><div class="line"><a class="code hl_variable" href="#af55eb2e3fc8b82b6869cc1a006fd7b4e">scheme</a> <span class="stringliteral">&quot;:&quot;</span> hier-part [ <span class="stringliteral">&quot;?&quot;</span> <a class="code hl_variable" href="#a1b90e78e0ab31835db6f42d399b3415e">query</a> ] [ <span class="stringliteral">&quot;#&quot;</span> <a class="code hl_variable" href="#a89602c93ef7655cbcb4969d2f7af7a1b">fragment</a> ]</div>
-<div class="ttc" id="astructurl_html_a1b90e78e0ab31835db6f42d399b3415e"><div class="ttname"><a href="#a1b90e78e0ab31835db6f42d399b3415e">url::query</a></div><div class="ttdeci">string query</div><div class="ttdoc">查询字符串</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00152">url.hpp:152</a></div></div>
-<div class="ttc" id="astructurl_html_a89602c93ef7655cbcb4969d2f7af7a1b"><div class="ttname"><a href="#a89602c93ef7655cbcb4969d2f7af7a1b">url::fragment</a></div><div class="ttdeci">string fragment</div><div class="ttdoc">片段标识符</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00153">url.hpp:153</a></div></div>
-<div class="ttc" id="astructurl_html_af55eb2e3fc8b82b6869cc1a006fd7b4e"><div class="ttname"><a href="#af55eb2e3fc8b82b6869cc1a006fd7b4e">url::scheme</a></div><div class="ttdeci">string scheme</div><div class="ttdoc">协议类型</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00148">url.hpp:148</a></div></div>
+<div class="ttc" id="astructurl_html_a1b90e78e0ab31835db6f42d399b3415e"><div class="ttname"><a href="#a1b90e78e0ab31835db6f42d399b3415e">url::query</a></div><div class="ttdeci">string query</div><div class="ttdoc">查询字符串</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00150">url.hpp:150</a></div></div>
+<div class="ttc" id="astructurl_html_a89602c93ef7655cbcb4969d2f7af7a1b"><div class="ttname"><a href="#a89602c93ef7655cbcb4969d2f7af7a1b">url::fragment</a></div><div class="ttdeci">string fragment</div><div class="ttdoc">片段标识符</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00151">url.hpp:151</a></div></div>
+<div class="ttc" id="astructurl_html_af55eb2e3fc8b82b6869cc1a006fd7b4e"><div class="ttname"><a href="#af55eb2e3fc8b82b6869cc1a006fd7b4e">url::scheme</a></div><div class="ttdeci">string scheme</div><div class="ttdoc">协议类型</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00146">url.hpp:146</a></div></div>
 </div><!-- fragment --><p>其中hier-part对于基于权限的URL为： </p><div class="fragment"><div class="line"><span class="stringliteral">&quot;//&quot;</span> authority <a class="code hl_variable" href="#a8ea57220960dca945a1b8083920f9950">path</a>-abempty</div>
-<div class="ttc" id="astructurl_html_a8ea57220960dca945a1b8083920f9950"><div class="ttname"><a href="#a8ea57220960dca945a1b8083920f9950">url::path</a></div><div class="ttdeci">string path</div><div class="ttdoc">资源路径</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00151">url.hpp:151</a></div></div>
+<div class="ttc" id="astructurl_html_a8ea57220960dca945a1b8083920f9950"><div class="ttname"><a href="#a8ea57220960dca945a1b8083920f9950">url::path</a></div><div class="ttdeci">string path</div><div class="ttdoc">资源路径</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00149">url.hpp:149</a></div></div>
 </div><!-- fragment --><p>authority部分为： </p><div class="fragment"><div class="line">[ userinfo <span class="stringliteral">&quot;@&quot;</span> ] <a class="code hl_variable" href="#a32706de92e065e4dad5e0f9944211cc6">host</a> [ <span class="stringliteral">&quot;:&quot;</span> <a class="code hl_variable" href="#a28788980da3ace09bf314caa690db3ec">port</a> ]</div>
-<div class="ttc" id="astructurl_html_a28788980da3ace09bf314caa690db3ec"><div class="ttname"><a href="#a28788980da3ace09bf314caa690db3ec">url::port</a></div><div class="ttdeci">ports port</div><div class="ttdoc">端口号</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00150">url.hpp:150</a></div></div>
-<div class="ttc" id="astructurl_html_a32706de92e065e4dad5e0f9944211cc6"><div class="ttname"><a href="#a32706de92e065e4dad5e0f9944211cc6">url::host</a></div><div class="ttdeci">string host</div><div class="ttdoc">主机名或IP地址</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00149">url.hpp:149</a></div></div>
+<div class="ttc" id="astructurl_html_a28788980da3ace09bf314caa690db3ec"><div class="ttname"><a href="#a28788980da3ace09bf314caa690db3ec">url::port</a></div><div class="ttdeci">ports port</div><div class="ttdoc">端口号</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00148">url.hpp:148</a></div></div>
+<div class="ttc" id="astructurl_html_a32706de92e065e4dad5e0f9944211cc6"><div class="ttname"><a href="#a32706de92e065e4dad5e0f9944211cc6">url::host</a></div><div class="ttdeci">string host</div><div class="ttdoc">主机名或IP地址</div><div class="ttdef"><b>定义</b> <a href="url_8hpp_source.html#l00147">url.hpp:147</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="url_components"></a>
 URL组成部分</h1>
 <p>本实现解析和存储以下URL组成部分：</p>
@@ -263,8 +271,47 @@ URL组成部分</h1>
 <dd>
 <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a> </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="url_8hpp_source.html">url.hpp</a> 第 <a class="el" href="url_8hpp_source.html#l00147">147</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="url_8hpp_source.html">url.hpp</a> 第 <a class="el" href="url_8hpp_source.html#l00145">145</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="af425702cea140fa7f8567110db828eef" name="af425702cea140fa7f8567110db828eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af425702cea140fa7f8567110db828eef">&#9670;&#160;</a></span>build_query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> url::build_query </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__map.html">unordered_map</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>params</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构建查询字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">params</td><td>参数映射 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>查询字符串</dd></dl>
+<p>将键值对转换为"key1=value1&amp;key2=value2"格式的查询字符串。 键和值会自动进行表单编码。 </p>
+
+<p class="reference">引用了 <a class="el" href="#af425702cea140fa7f8567110db828eef">build_query()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af425702cea140fa7f8567110db828eef">build_query()</a>.</p>
+
+</div>
+</div>
 <a id="a359e5967e16cb6df4f2d7e634f61095d" name="a359e5967e16cb6df4f2d7e634f61095d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a359e5967e16cb6df4f2d7e634f61095d">&#9670;&#160;</a></span>decode()</h2>
 
@@ -298,9 +345,48 @@ URL组成部分</h1>
 <dl class="section return"><dt>返回</dt><dd>解码后的字符串，如果格式无效返回none</dd></dl>
 <p>将XX格式转换回原始字符 </p>
 
-<p class="reference">引用了 <a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode()</a> , 以及 <a class="el" href="url_8hpp_source.html#l00152">query</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a359e5967e16cb6df4f2d7e634f61095d">decode()</a>.</p>
+
+</div>
+</div>
+<a id="aabeca8a5da5c3f8341919884016252c3" name="aabeca8a5da5c3f8341919884016252c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabeca8a5da5c3f8341919884016252c3">&#9670;&#160;</a></span>decode_tolerant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> url::decode_tolerant </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>宽容解码 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>待解码的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解码后的字符串</dd></dl>
+<p>尝试解码，如果遇到无效的XX格式，保留原字符。 适用于处理不规范的URL编码。 </p>
+
+<p class="reference">引用了 <a class="el" href="#aabeca8a5da5c3f8341919884016252c3">decode_tolerant()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aabeca8a5da5c3f8341919884016252c3">decode_tolerant()</a>.</p>
 
 </div>
 </div>
@@ -345,6 +431,49 @@ URL组成部分</h1>
 <p class="reference">引用了 <a class="el" href="#aa2eb25e12788929337fa39708b5aa31b">encode()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#aa2eb25e12788929337fa39708b5aa31b">encode()</a>.</p>
+
+</div>
+</div>
+<a id="a11f938e4fa1b046a40f42d77272ea29e" name="a11f938e4fa1b046a40f42d77272ea29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11f938e4fa1b046a40f42d77272ea29e">&#9670;&#160;</a></span>encode_form()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> url::encode_form </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>表单编码（application/x-www-form-urlencoded） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>待编码的字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>编码后的字符串</dd></dl>
+<p>符合WHATWG HTML标准的表单编码规则：</p><ul>
+<li>空格编码为'+'</li>
+<li>非保留字符不编码</li>
+<li>其他字符进行百分号编码 </li>
+</ul>
+
+<p class="reference">引用了 <a class="el" href="#a11f938e4fa1b046a40f42d77272ea29e">encode_form()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a11f938e4fa1b046a40f42d77272ea29e">encode_form()</a>.</p>
 
 </div>
 </div>
@@ -423,6 +552,49 @@ URL组成部分</h1>
 <p class="reference">引用了 <a class="el" href="#a05c7ca9853f05d7dd8edb9ee1a4ac244">parse()</a> , 以及 <a class="el" href="#ab48a666ee96b8c6375e699cdf090efe3">url()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a05c7ca9853f05d7dd8edb9ee1a4ac244">parse()</a>.</p>
+
+</div>
+</div>
+<a id="a26042ce16f3fdb91130f5f027be51b0d" name="a26042ce16f3fdb91130f5f027be51b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26042ce16f3fdb91130f5f027be51b0d">&#9670;&#160;</a></span>parse_query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void url::parse_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>query</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classunordered__map.html">unordered_map</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>params</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解析查询字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">query</td><td>查询字符串 </td></tr>
+    <tr><td class="paramname">params</td><td>输出参数映射</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将"key1=value1&amp;key2=value2"格式的查询字符串解析为键值对。 键和值会自动进行URL解码。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a26042ce16f3fdb91130f5f027be51b0d">parse_query()</a> , 以及 <a class="el" href="url_8hpp_source.html#l00150">query</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a26042ce16f3fdb91130f5f027be51b0d">parse_query()</a>.</p>
 
 </div>
 </div>

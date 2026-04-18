@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['实现细节_0',['实现细节',['../group___color.html#implementation_details',1,'']]],
-  ['实用程序语法指南_1',['POSIX 实用程序语法指南',['../group___command_line.html#guideline_reference',1,'']]]
+  ['响应头_0',['CORS 响应头',['../group___h_t_t_p.html#cors_headers',1,'']]]
 ];

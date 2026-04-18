@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
+  ['xor_0',['XOR',['../group___x_o_r.html',1,'']]]
 ];

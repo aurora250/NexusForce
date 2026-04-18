@@ -106,6 +106,7 @@ var topics =
     [ "迭代器标签", "group___iterator_tags.html", "group___iterator_tags" ],
     [ "构造标签", "group___construction_tags.html", "group___construction_tags" ],
     [ "任意类", "group___any.html", "group___any" ],
+    [ "字节大小", "group___byte_size.html", "group___byte_size" ],
     [ "颜色", "group___color.html", "group___color" ],
     [ "压缩对", "group___compressed_pair.html", "group___compressed_pair" ],
     [ "删除器", "group___deleter.html", "group___deleter" ],
@@ -122,6 +123,6 @@ var topics =
     [ "SQL", "group___s_q_l.html", "group___s_q_l" ],
     [ "日志系统", "group___logging.html", "group___logging" ],
     [ "网络通信", "group___network.html", "group___network" ],
-    [ "HTTP", "group___http.html", "group___http" ],
+    [ "HTTP", "group___h_t_t_p.html", "group___h_t_t_p" ],
     [ "插件", "group___plugin.html", "group___plugin" ]
 ];

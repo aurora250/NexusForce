@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚀_20特性_0',['🚀 特性',['../index.html#autotoc_md18',1,'']]]
+  ['🎨_20图形、色彩与数学_0',['🎨 图形、色彩与数学',['../index.html#autotoc_md16',1,'']]]
 ];

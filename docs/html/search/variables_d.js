@@ -1,7 +1,7 @@
 var searchData=
 [
   ['n_5fcs_5fprecedes_0',['n_cs_precedes',['../structlocale_1_1monetary__info.html#aa436c031dec438591eb415a5d5a8dfdc',1,'locale::monetary_info']]],
-  ['name_1',['name',['../structdns__record.html#ad21c4f21dcec4c34446903e929b17a50',1,'dns_record::name'],['../structplugin__info.html#a5808cef84f5064e059009a108108c7f0',1,'plugin_info::name']]],
+  ['name_1',['name',['../structdns__record.html#ad21c4f21dcec4c34446903e929b17a50',1,'dns_record::name'],['../structhttp__cookie.html#a4fbd6a009dfbd85c9a4156fb01da7575',1,'http_cookie::name'],['../structplugin__info.html#a5808cef84f5064e059009a108108c7f0',1,'plugin_info::name']]],
   ['negation_5fv_2',['negation_v',['../group___type_traits_utilities.html#ga5b6851725df080a5e8ced7b684b7903f',1,'type_traits.hpp']]],
   ['negative_5fsign_3',['negative_sign',['../structlocale_1_1monetary__info.html#aa14340056f5e7a669c3ac9944e821d12',1,'locale::monetary_info']]],
   ['next_4',['next',['../structat__thread__exit__elt.html#a692007f00c36108543837f724b973a2a',1,'at_thread_exit_elt::next'],['../structhazard__pointer__record.html#a9ea9b24dfd31f335203fe15ac7dd6725',1,'hazard_pointer_record::next'],['../classhazard__pointer__obj__base.html#ade76a3fc1006cff9269564b074937bf7',1,'hazard_pointer_obj_base::next'],['../structhashtable__node.html#a77213bae6911536f4b33e83ca57c151e',1,'hashtable_node::next'],['../structlist__node.html#a636545536d9cdfa8d913e7bd6b285343',1,'list_node::next']]],

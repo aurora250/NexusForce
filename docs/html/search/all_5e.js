@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
+  ['局限性_0',['局限性',['../group___bloom_filter.html#limitations',1,'']]]
 ];

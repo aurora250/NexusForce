@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: lazy_thread类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classlazy__thread.html','','classlazy__thread-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">lazy_thread类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___thread.html">线程</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>延迟启动线程类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ad8d63a7d6d604fff58306287d1c2f09f" id="r_ad8d63a7d6d604fff58306287d1c2f09f"><td class="memItemLeft"><a id="ad8d63a7d6d604fff58306287d1c2f09f" name="ad8d63a7d6d604fff58306287d1c2f09f"></a>
+using&#160;</td><td class="memItemRight"><b>id</b> = <a class="el" href="structthread_1_1id.html">thread::id</a></td></tr>
+<tr class="memdesc:ad8d63a7d6d604fff58306287d1c2f09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程ID类型 <br /></td></tr>
+<tr class="memitem:a9897ed3e16e1740ed55757e4082e8328" id="r_a9897ed3e16e1740ed55757e4082e8328"><td class="memItemLeft"><a id="a9897ed3e16e1740ed55757e4082e8328" name="a9897ed3e16e1740ed55757e4082e8328"></a>
+using&#160;</td><td class="memItemRight"><b>native_handle_type</b> = <a class="el" href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a></td></tr>
+<tr class="memdesc:a9897ed3e16e1740ed55757e4082e8328"><td class="mdescLeft">&#160;</td><td class="mdescRight">原生句柄类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ae8d01420c6d4f8815cecd42d78833ee2" id="r_ae8d01420c6d4f8815cecd42d78833ee2"><td class="memItemLeft"><a id="ae8d01420c6d4f8815cecd42d78833ee2" name="ae8d01420c6d4f8815cecd42d78833ee2"></a>
+&#160;</td><td class="memItemRight"><b>lazy_thread</b> () noexcept=default</td></tr>
+<tr class="memdesc:ae8d01420c6d4f8815cecd42d78833ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a79f5dcfdf332aa22a250383562636bc9" id="r_a79f5dcfdf332aa22a250383562636bc9"><td class="memTemplParams" colspan="2">template&lt;typename F, typename... Args&gt; </td></tr>
+<tr class="memitem:a79f5dcfdf332aa22a250383562636bc9 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a79f5dcfdf332aa22a250383562636bc9">lazy_thread</a> (F &amp;&amp;f, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a79f5dcfdf332aa22a250383562636bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:aef771805bfc6658451fc93a39e8ac8c9" id="r_aef771805bfc6658451fc93a39e8ac8c9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aef771805bfc6658451fc93a39e8ac8c9">lazy_thread</a> (<a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:aef771805bfc6658451fc93a39e8ac8c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a76060a04028e7a08eecc0ed8667c77f9" id="r_a76060a04028e7a08eecc0ed8667c77f9"><td class="memItemLeft"><a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a76060a04028e7a08eecc0ed8667c77f9">operator=</a> (<a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a76060a04028e7a08eecc0ed8667c77f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:aebde6e64fafbe18220ce94e7437da9cc" id="r_aebde6e64fafbe18220ce94e7437da9cc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aebde6e64fafbe18220ce94e7437da9cc">~lazy_thread</a> ()</td></tr>
+<tr class="memdesc:aebde6e64fafbe18220ce94e7437da9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:af5ad65601a47cf16fd2a5e197302e5c9" id="r_af5ad65601a47cf16fd2a5e197302e5c9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af5ad65601a47cf16fd2a5e197302e5c9">start</a> ()</td></tr>
+<tr class="memdesc:af5ad65601a47cf16fd2a5e197302e5c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动线程  <br /></td></tr>
+<tr class="memitem:a043a36213ec0d1a93082f7fa70f40076" id="r_a043a36213ec0d1a93082f7fa70f40076"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a043a36213ec0d1a93082f7fa70f40076">joinable</a> () const noexcept</td></tr>
+<tr class="memdesc:a043a36213ec0d1a93082f7fa70f40076"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查线程是否可被等待  <br /></td></tr>
+<tr class="memitem:aa98aecc24aaac5f441f94b766d2ac506" id="r_aa98aecc24aaac5f441f94b766d2ac506"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa98aecc24aaac5f441f94b766d2ac506">join</a> ()</td></tr>
+<tr class="memdesc:aa98aecc24aaac5f441f94b766d2ac506"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待线程结束  <br /></td></tr>
+<tr class="memitem:ac16c452b006a583840349fce76bfaeef" id="r_ac16c452b006a583840349fce76bfaeef"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac16c452b006a583840349fce76bfaeef">detach</a> ()</td></tr>
+<tr class="memdesc:ac16c452b006a583840349fce76bfaeef"><td class="mdescLeft">&#160;</td><td class="mdescRight">分离线程  <br /></td></tr>
+<tr class="memitem:a5a53b3b3509e86104c4f3dbe894037fa" id="r_a5a53b3b3509e86104c4f3dbe894037fa"><td class="memItemLeft"><a class="el" href="structthread_1_1id.html">thread::id</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5a53b3b3509e86104c4f3dbe894037fa">get_id</a> () const noexcept</td></tr>
+<tr class="memdesc:a5a53b3b3509e86104c4f3dbe894037fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程标识符  <br /></td></tr>
+<tr class="memitem:a8991c84dc19cf83aeabb25c397fe8bbc" id="r_a8991c84dc19cf83aeabb25c397fe8bbc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8991c84dc19cf83aeabb25c397fe8bbc">swap</a> (<a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a8991c84dc19cf83aeabb25c397fe8bbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个延迟线程对象  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>延迟启动线程类 </p>
+<p>允许创建线程对象时仅存储可调用对象，而不立即创建和执行线程。 线程的实际创建由start()方法触发。</p>
+<p>使用场景：</p><ul>
+<li>需要将线程作为对象存储，但执行时机未定</li>
+<li>需要在不同作用域间传递线程任务</li>
+<li>需要在某些条件满足后才启动线程</li>
+<li>避免不必要的线程创建开销</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>lazy_thread在析构时会自动join而不是terminate。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00042">42</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a79f5dcfdf332aa22a250383562636bc9" name="a79f5dcfdf332aa22a250383562636bc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79f5dcfdf332aa22a250383562636bc9">&#9670;&#160;</a></span>lazy_thread() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">lazy_thread::lazy_thread </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>要执行的可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>传递给可调用对象的参数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建延迟线程对象，存储可调用对象和参数，但不立即启动线程。 </p>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00067">67</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="apply_8hpp_source.html#l00063">apply()</a>, <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>, <a class="el" href="#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread()</a>, <a class="el" href="tuple_8hpp_source.html#l00757">make_tuple()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+</div>
+</div>
+<a id="aef771805bfc6658451fc93a39e8ac8c9" name="aef771805bfc6658451fc93a39e8ac8c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef771805bfc6658451fc93a39e8ac8c9">&#9670;&#160;</a></span>lazy_thread() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">lazy_thread::lazy_thread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要移动的延迟线程对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>转移任务和线程的所有权，other变为空状态。 </p>
+
+<p class="reference">引用了 <a class="el" href="#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread()</a>.</p>
+
+</div>
+</div>
+<a id="aebde6e64fafbe18220ce94e7437da9cc" name="aebde6e64fafbe18220ce94e7437da9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebde6e64fafbe18220ce94e7437da9cc">&#9670;&#160;</a></span>~lazy_thread()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">lazy_thread::~lazy_thread </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>如果线程已启动且仍可连接，会等待其完成。 </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ac16c452b006a583840349fce76bfaeef" name="ac16c452b006a583840349fce76bfaeef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16c452b006a583840349fce76bfaeef">&#9670;&#160;</a></span>detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lazy_thread::detach </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>分离线程 </p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structthread__exception.html" title="线程操作异常">thread_exception</a></td><td>如果线程不可被等待或分离失败</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使线程在后台独立运行，线程结束后自动释放资源。 </p>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00129">129</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5a53b3b3509e86104c4f3dbe894037fa" name="a5a53b3b3509e86104c4f3dbe894037fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a53b3b3509e86104c4f3dbe894037fa">&#9670;&#160;</a></span>get_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structthread_1_1id.html">thread::id</a> lazy_thread::get_id </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取线程标识符 </p>
+<dl class="section return"><dt>返回</dt><dd>线程标识符 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00135">135</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa98aecc24aaac5f441f94b766d2ac506" name="aa98aecc24aaac5f441f94b766d2ac506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa98aecc24aaac5f441f94b766d2ac506">&#9670;&#160;</a></span>join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lazy_thread::join </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待线程结束 </p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structthread__exception.html" title="线程操作异常">thread_exception</a></td><td>如果线程不可被等待或等待失败</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>阻塞当前线程，直到目标线程执行完毕。 </p>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00121">121</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a043a36213ec0d1a93082f7fa70f40076" name="a043a36213ec0d1a93082f7fa70f40076"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a043a36213ec0d1a93082f7fa70f40076">&#9670;&#160;</a></span>joinable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool lazy_thread::joinable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查线程是否可被等待 </p>
+<dl class="section return"><dt>返回</dt><dd>线程已启动且尚未被等待或分离时返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a76060a04028e7a08eecc0ed8667c77f9" name="a76060a04028e7a08eecc0ed8667c77f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76060a04028e7a08eecc0ed8667c77f9">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlazy__thread.html">lazy_thread</a> &amp; lazy_thread::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要移动的延迟线程对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用</dd></dl>
+<p>如果当前对象已有线程且可连接，会等待其完成后再转移所有权。 </p>
+
+<p class="reference">引用了 <a class="el" href="#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread()</a>.</p>
+
+</div>
+</div>
+<a id="af5ad65601a47cf16fd2a5e197302e5c9" name="af5ad65601a47cf16fd2a5e197302e5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5ad65601a47cf16fd2a5e197302e5c9">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lazy_thread::start </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>启动线程 </p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structthread__exception.html" title="线程操作异常">thread_exception</a></td><td>没有可调用对象或线程已启动时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建实际线程并执行存储的任务。 只能调用一次，调用后线程立即开始执行。 </p>
+
+</div>
+</div>
+<a id="a8991c84dc19cf83aeabb25c397fe8bbc" name="a8991c84dc19cf83aeabb25c397fe8bbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8991c84dc19cf83aeabb25c397fe8bbc">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lazy_thread::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classlazy__thread.html">lazy_thread</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个延迟线程对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00141">141</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classlazy__thread.html">lazy_thread</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

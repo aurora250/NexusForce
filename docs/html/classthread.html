@@ -124,6 +124,9 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:aa3c72628994c7bdd2eaf62ae547b6a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
 <tr class="memitem:a117e0892c1d1a90bece03424311676f6" id="r_a117e0892c1d1a90bece03424311676f6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a117e0892c1d1a90bece03424311676f6">~thread</a> ()</td></tr>
 <tr class="memdesc:a117e0892c1d1a90bece03424311676f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:ad74c6a1b7c5631e54eba313a5e53637e" id="r_ad74c6a1b7c5631e54eba313a5e53637e"><td class="memTemplParams" colspan="2">template&lt;typename F, typename... Args&gt; </td></tr>
+<tr class="memitem:ad74c6a1b7c5631e54eba313a5e53637e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad74c6a1b7c5631e54eba313a5e53637e">start</a> (F &amp;&amp;f, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ad74c6a1b7c5631e54eba313a5e53637e"><td class="mdescLeft">&#160;</td><td class="mdescRight">延迟启动线程  <br /></td></tr>
 <tr class="memitem:a21249ff125493aa13fad2c9551dc85bb" id="r_a21249ff125493aa13fad2c9551dc85bb"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structthread_1_1id.html">id</a>&#160;</td><td class="memItemRight"><a class="el" href="#a21249ff125493aa13fad2c9551dc85bb">get_id</a> () const noexcept</td></tr>
 <tr class="memdesc:a21249ff125493aa13fad2c9551dc85bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程标识符  <br /></td></tr>
 <tr class="memitem:a972490197894f12244e23509d79c969a" id="r_a972490197894f12244e23509d79c969a"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a892af261639992f04c59a3cdf167356d">native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a972490197894f12244e23509d79c969a">native_handle</a> () const noexcept</td></tr>
@@ -353,7 +356,7 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 <p>获取线程标识符 </p>
 <dl class="section return"><dt>返回</dt><dd>线程标识符 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00335">335</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00355">355</a> 行定义.</p>
 
 </div>
 </div>
@@ -410,7 +413,7 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 <dl class="section return"><dt>返回</dt><dd>线程是否处于可被等待状态</dd></dl>
 <p>线程在创建后、被等待结束或分离前是可被等待的。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00349">349</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00369">369</a> 行定义.</p>
 
 </div>
 </div>
@@ -445,7 +448,7 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00455">name()</a>, <a class="el" href="#a11943219b9d0cef98e433e6663e8b000">set_name()</a> , 以及 <a class="el" href="#ad7c681ee3c6085a87309f040467b19cb">set_name()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>, <a class="el" href="#a11943219b9d0cef98e433e6663e8b000">set_name()</a> , 以及 <a class="el" href="#ad7c681ee3c6085a87309f040467b19cb">set_name()</a>.</p>
 
 </div>
 </div>
@@ -492,7 +495,7 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否获取成功 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00441">handle()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00461">handle()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>
@@ -522,7 +525,7 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 <p>获取原生句柄 </p>
 <dl class="section return"><dt>返回</dt><dd>平台特定的线程句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00341">341</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00361">361</a> 行定义.</p>
 
 </div>
 </div>
@@ -594,7 +597,7 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 
 <p class="reference">引用了 <a class="el" href="#ac1c3666fcd10451cee601dec58c32c00">name()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00464">set_name()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00484">set_name()</a>.</p>
 
 </div>
 </div>
@@ -635,7 +638,64 @@ template&lt;typename F, typename... Args, typename = enable_if_t&lt;!is_same_v&l
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否设置成功 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00441">handle()</a> , 以及 <a class="el" href="#ac1c3666fcd10451cee601dec58c32c00">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00461">handle()</a> , 以及 <a class="el" href="#ac1c3666fcd10451cee601dec58c32c00">name()</a>.</p>
+
+</div>
+</div>
+<a id="ad74c6a1b7c5631e54eba313a5e53637e" name="ad74c6a1b7c5631e54eba313a5e53637e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad74c6a1b7c5631e54eba313a5e53637e">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void thread::start </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>延迟启动线程 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>要执行的可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>传递给可调用对象的参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structthread__exception.html" title="线程操作异常">thread_exception</a></td><td>如果线程已启动或已结束/分离 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00340">340</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="apply_8hpp_source.html#l00063">apply()</a>, <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00757">make_tuple()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
 
 </div>
 </div>

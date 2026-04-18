@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['端口号注册表_0',['IANA 端口号注册表',['../structports.html#port_registry',1,'']]],
-  ['端序操作_1',['端序操作',['../group___endian.html',1,'']]]
+  ['混合排序算法详解_0',['混合排序算法详解',['../group___sort_algorithms.html#hybrid_algorithms',1,'']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['实现细节_0',['实现细节',['../group___color.html#implementation_details',1,'']]],
-  ['实用程序语法指南_1',['POSIX 实用程序语法指南',['../group___command_line.html#guideline_reference',1,'']]]
+  ['堆性质定义_0',['堆性质定义',['../group___heap_algorithms.html#heap_properties',1,'']]],
+  ['堆栈跟踪_1',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
+  ['堆算法_2',['堆算法',['../group___heap_algorithms.html',1,'']]],
+  ['堆调整优化_3',['Floyd 堆调整优化',['../group___heap_algorithms.html#floyd_optimization',1,'']]]
 ];

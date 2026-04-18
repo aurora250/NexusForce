@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['更新日志_0',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
+  ['操作码与响应码_0',['操作码与响应码',['../group___d_n_s.html#dns_opcodes',1,'']]]
 ];

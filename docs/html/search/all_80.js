@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['灰度转换_0',['灰度转换',['../group___color.html#grayscale_conversion',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

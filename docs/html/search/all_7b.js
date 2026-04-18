@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
+  ['更新日志_0',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
 ];

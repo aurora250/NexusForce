@@ -18,6 +18,117 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup HashTable 哈希表
  * @brief 基于哈希表的无序容器实现
+ *
+ * 哈希表是一种基于键直接访问数据的数据结构，通过哈希函数将键映射到桶，
+ * 提供平均常数时间复杂度的插入、删除和查找操作。
+ * 作为无序关联式容器的底层实现。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下数据结构相关标准规范：
+ *
+ * **哈希表算法与数据结构文献：**
+ * - **Donald E. Knuth (1998)**：The Art of Computer Programming, Volume 3 — Sorting and Searching
+ *   §6.4 Hashing（哈希表经典理论分析）
+ * - **Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein**：
+ *   Introduction to Algorithms (3rd Edition), Chapter 11 — Hash Tables
+ *
+ * **哈希函数设计参考：**
+ * - **Maurice V. Wilkes (1965)**：Slave Memories and Dynamic Storage Allocation
+ *   IEEE Transactions on Electronic Computers, EC-14(2): 270-271
+ * - **Donald E. Knuth (1973)**：The Art of Computer Programming, Volume 1 — Fundamental Algorithms
+ *
+ * **负载因子与性能分析：**
+ * - **Gaston H. Gonnet, Per-Åke Larson (1988)**：External hashing with limited internal storage
+ *   Journal of the ACM, 35(1): 161-184
+ *
+ * @section hash_table_principles 哈希表原理
+ * 哈希表通过哈希函数将键映射到数组索引（桶），实现 O(1) 平均时间复杂度的操作：
+ *
+ * **核心概念**：
+ * | 概念           | 说明                                           |
+ * |----------------|------------------------------------------------|
+ * | 哈希函数       | 将键映射到整数索引的函数                       |
+ * | 桶             | 存储具有相同哈希值元素的容器                   |
+ * | 负载因子       | 元素数量 / 桶数量，决定哈希表的拥挤程度        |
+ * | 冲突           | 不同键产生相同哈希值的现象                     |
+ * | 冲突解决       | 链地址法（本实现）或开放寻址法                 |
+ *
+ * **链地址法**：
+ * - 每个桶存储一个链表头指针
+ * - 冲突的元素追加到链表末尾
+ * - 查找时需要遍历链表
+ *
+ * @section bucket_size_strategy 桶大小策略
+ * 本实现使用素数表确定桶数量，以改善哈希分布的均匀性：
+ *
+ * | 位数   | 最大素数                  | 素数个数 |
+ * |--------|---------------------------|----------|
+ * | 32位   | 1,610,612,741             | 28       |
+ * | 64位   | 6,477,510,814,054,053,699 | 78       |
+ *
+ * 素数表的选择基于以下原因：
+ * - 素数作为模数可减少哈希冲突的规律性
+ * - 避免与哈希函数中的乘数产生公因子
+ * - 改善分布均匀性（参考 Knuth 分析）
+ *
+ * @section load_factor_management 负载因子管理
+ * 负载因子 α = size / buckets，控制哈希表的时空权衡：
+ *
+ * | α 范围     | 性能特征                                    | 操作                                   |
+ * |-----------|--------------------------------------------|----------------------------------------|
+ * | α < 0.5   | 稀疏，空间浪费，冲突极少                   | 适合高频率查找                         |
+ * | 0.5 ≤ α ≤ 1.0 | 平衡，推荐默认值（本实现默认 1.0）      | 一般场景最优                           |
+ * | α > 1.0   | 密集，空间效率高，查找性能下降              | 触发 rehash                           |
+ * | α > 2.0   | 过度拥挤，查找退化为 O(n)                  | 强制 rehash                           |
+ *
+ * 当负载因子超过 max_load_factor() 时，自动触发 rehash 扩容。
+ *
+ * @section time_complexity 时间复杂度
+ * | 操作        | 平均情况         | 最坏情况           | 说明                               |
+ * |------------|-----------------|-------------------|------------------------------------|
+ * | insert     | O(1)            | O(n)              | 冲突时遍历链表，rehash 时 O(n)       |
+ * | erase      | O(1)            | O(n)              | 定位桶后删除节点                    |
+ * | find       | O(1)            | O(n)              | 遍历桶内链表                       |
+ * | count      | O(1)            | O(n)              | 同 find                            |
+ * | rehash     | O(n)            | O(n)              | 重新分配所有元素                    |
+ * | clear      | O(n)            | O(n)              | 释放所有节点                       |
+ *
+ * 其中 n = size()。
+ *
+ * @section implementation_details 实现细节
+ * | 特性              | 规范参数                                    |
+ * |-------------------|-------------------------------------------|
+ * | 冲突解决          | 链地址法（Separate Chaining）                |
+ * | 桶大小增长策略    | 素数表（约 1.5 倍增长）                        |
+ * | 最大负载因子      | 1.0（默认，可配置）                           |
+ * | 迭代器类别        | 前向迭代器（Forward Iterator）               |
+ * | 异常安全          | 基本保证（insert 时分配失败不影响原有状态）     |
+ * | 线程安全          | 不安全（需外部同步）                          |
+ * | 节点分配          | 使用 Alloc 分配器                           |
+ *
+ * @section iterator_invalidation 迭代器失效规则
+ * | 操作           | 失效范围                                    |
+ * |----------------|--------------------------------------------|
+ * | insert         | 不失效任何迭代器                             |
+ * | erase          | 仅失效指向被删除元素的迭代器                   |
+ * | rehash         | 全部迭代器失效                               |
+ * | clear          | 全部迭代器失效                               |
+ * | swap           | 迭代器交换，指向元素保持有效                   |
+ *
+ * @section unique_vs_equal 唯一键与允许重复键
+ * 本实现提供两种插入模式：
+ *
+ * | 模式          | 方法后缀      | 行为                                   |
+ * |---------------|---------------|----------------------------------------|
+ * | 唯一键        | _unique       | 键已存在时替换或忽略（取决于实现）     |
+ * | 允许重复键    | _equal        | 允许相同键的多个值共存                 |
+ *
+ * @note 本实现采用链地址法处理冲突，在负载因子适当时性能最优。
+ *       对于需要稳定迭代器的场景，哈希表是理想选择。
+ *
+ * @see https://en.cppreference.com/w/cpp/container/unordered_map
+ * @see https://en.wikipedia.org/wiki/Hash_table
+ * @see https://dl.acm.org/doi/10.1145/356643.356645
  * @{
  */
 

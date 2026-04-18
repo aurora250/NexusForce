@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['表单编码规则_0',['表单编码规则',['../structurl.html#form_encoding',1,'']]]
+  ['特性_0',['🚀 特性',['../index.html#autotoc_md18',1,'']]],
+  ['特殊值处理_1',['特殊值处理',['../group___math_functions.html#special_values',1,'']]]
 ];

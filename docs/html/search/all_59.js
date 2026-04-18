@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['布尔值同义词_0',['布尔值同义词',['../yaml__value_8hpp.html#boolean_synonyms',1,'']]],
-  ['布隆过滤器_1',['布隆过滤器',['../group___bloom_filter.html',1,'']]]
+  ['实现细节_0',['实现细节',['../group___h_t_t_p.html#implementation_details',1,'']]],
+  ['实用程序语法指南_1',['POSIX 实用程序语法指南',['../group___command_line.html#guideline_reference',1,'']]]
 ];

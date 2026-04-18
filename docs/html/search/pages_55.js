@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['空值同义词_0',['空值同义词',['../yaml__value_8hpp.html#null_synonyms',1,'']]]
+  ['最优参数推导_0',['最优参数推导',['../group___bloom_filter.html#optimal_parameters',1,'']]]
 ];

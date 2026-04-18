@@ -274,7 +274,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="line"><a class="code hl_function" href="#ab959dd3f3f1ecdf02657851c582c4d17">smtp_socket</a> smtp;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 连接到QQ邮箱（STARTTLS）</span></div>
-<div class="line">smtp.<a class="code hl_function" href="#ab93ec4d19093fbe039d9f5d8e570ebab">connect</a>(<span class="stringliteral">&quot;smtp.qq.com&quot;</span>, <a class="code hl_enumvalue" href="structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05">ports::smtp</a>, <span class="stringliteral">&quot;example.com&quot;</span>,</div>
+<div class="line">smtp.<a class="code hl_function" href="#ab93ec4d19093fbe039d9f5d8e570ebab">connect</a>(<span class="stringliteral">&quot;smtp.qq.com&quot;</span>, ports::smtp, <span class="stringliteral">&quot;example.com&quot;</span>,</div>
 <div class="line">             <a class="code hl_enumvalue" href="#abb07d7f04c19a03d2270597e95c526f6a637dd61b00a5ae25ea8d50639f100e7a">smtp_socket::tls_mode::starttls</a>, <span class="keyword">nullptr</span>, &amp;ctx);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 认证</span></div>
@@ -299,19 +299,18 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <div class="ttc" id="aclasssmtp__socket_html_a8061b0749c18619a5347903ac858fe5b"><div class="ttname"><a href="#a8061b0749c18619a5347903ac858fe5b">smtp_socket::send</a></div><div class="ttdeci">void send(const smtp_message &amp;msg)</div><div class="ttdoc">发送邮件</div></div>
 <div class="ttc" id="aclasssmtp__socket_html_ab93ec4d19093fbe039d9f5d8e570ebab"><div class="ttname"><a href="#ab93ec4d19093fbe039d9f5d8e570ebab">smtp_socket::connect</a></div><div class="ttdeci">void connect(const ip_address &amp;addr, const string &amp;domain=&quot;localhost&quot;, tls_mode mode=tls_mode::none, const ssl_context *ctx=nullptr, const string &amp;sni_hostname=&quot;&quot;)</div><div class="ttdoc">连接SMTP服务器（IP）</div></div>
 <div class="ttc" id="aclasssmtp__socket_html_ab959dd3f3f1ecdf02657851c582c4d17"><div class="ttname"><a href="#ab959dd3f3f1ecdf02657851c582c4d17">smtp_socket::smtp_socket</a></div><div class="ttdeci">smtp_socket()=default</div><div class="ttdoc">默认构造函数</div></div>
-<div class="ttc" id="aclasssmtp__socket_html_abb07d7f04c19a03d2270597e95c526f6a637dd61b00a5ae25ea8d50639f100e7a"><div class="ttname"><a href="#abb07d7f04c19a03d2270597e95c526f6a637dd61b00a5ae25ea8d50639f100e7a">smtp_socket::tls_mode::starttls</a></div><div class="ttdeci">@ starttls</div><div class="ttdoc">STARTTLS（从明文升级到TLS）</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00135">smtp_socket.hpp:135</a></div></div>
-<div class="ttc" id="aclasssmtp__socket_html_ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da"><div class="ttname"><a href="#ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da">smtp_socket::auth_method::login</a></div><div class="ttdeci">@ login</div><div class="ttdoc">LOGIN认证</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00125">smtp_socket.hpp:125</a></div></div>
-<div class="ttc" id="aclassssl__context_html"><div class="ttname"><a href="classssl__context.html">ssl_context</a></div><div class="ttdoc">SSL/TLS上下文管理类</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00060">ssl_context.hpp:60</a></div></div>
-<div class="ttc" id="agroup___s_s_l_html_gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510"><div class="ttname"><a href="group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510">ssl_method::TLS_CLIENT</a></div><div class="ttdeci">@ TLS_CLIENT</div><div class="ttdoc">TLS客户端端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00038">ssl_context.hpp:38</a></div></div>
-<div class="ttc" id="astructports_html_ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05"><div class="ttname"><a href="structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8aa48eafaf5e14c5a1ca4cecd56f49fa05">ports::smtp</a></div><div class="ttdeci">@ smtp</div><div class="ttdoc">SMTP协议端口</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00138">ports.hpp:138</a></div></div>
-<div class="ttc" id="astructsmtp__message_html"><div class="ttname"><a href="structsmtp__message.html">smtp_message</a></div><div class="ttdoc">SMTP邮件消息结构</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00058">smtp_socket.hpp:58</a></div></div>
-<div class="ttc" id="astructsmtp__message_html_a526d9a80b9ae2a75ec1ca257866182d8"><div class="ttname"><a href="structsmtp__message.html#a526d9a80b9ae2a75ec1ca257866182d8">smtp_message::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">邮件正文</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00064">smtp_socket.hpp:64</a></div></div>
-<div class="ttc" id="astructsmtp__message_html_a785631f3d9af6aa871d32f0aada60be2"><div class="ttname"><a href="structsmtp__message.html#a785631f3d9af6aa871d32f0aada60be2">smtp_message::subject</a></div><div class="ttdeci">string subject</div><div class="ttdoc">邮件主题</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00063">smtp_socket.hpp:63</a></div></div>
-<div class="ttc" id="astructsmtp__message_html_a85f459893e45f59ed4d529953f62c21f"><div class="ttname"><a href="structsmtp__message.html#a85f459893e45f59ed4d529953f62c21f">smtp_message::is_html</a></div><div class="ttdeci">bool is_html</div><div class="ttdoc">是否为HTML格式</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00065">smtp_socket.hpp:65</a></div></div>
-<div class="ttc" id="astructsmtp__message_html_abbdf534a3d79770700b06b77197156d5"><div class="ttname"><a href="structsmtp__message.html#abbdf534a3d79770700b06b77197156d5">smtp_message::from</a></div><div class="ttdeci">string from</div><div class="ttdoc">发件人地址</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00059">smtp_socket.hpp:59</a></div></div>
-<div class="ttc" id="astructsmtp__message_html_ae2106f6dfab0ac49c0d8e49e3f37be2f"><div class="ttname"><a href="structsmtp__message.html#ae2106f6dfab0ac49c0d8e49e3f37be2f">smtp_message::to</a></div><div class="ttdeci">vector&lt; string &gt; to</div><div class="ttdoc">收件人地址列表</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00060">smtp_socket.hpp:60</a></div></div>
+<div class="ttc" id="aclasssmtp__socket_html_abb07d7f04c19a03d2270597e95c526f6a637dd61b00a5ae25ea8d50639f100e7a"><div class="ttname"><a href="#abb07d7f04c19a03d2270597e95c526f6a637dd61b00a5ae25ea8d50639f100e7a">smtp_socket::tls_mode::starttls</a></div><div class="ttdeci">@ starttls</div><div class="ttdoc">STARTTLS（从明文升级到TLS）</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00133">smtp_socket.hpp:133</a></div></div>
+<div class="ttc" id="aclasssmtp__socket_html_ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da"><div class="ttname"><a href="#ac7a4dad72a3278c790807d7ab64efc95ad56b699830e77ba53855679cb1d252da">smtp_socket::auth_method::login</a></div><div class="ttdeci">@ login</div><div class="ttdoc">LOGIN认证</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00123">smtp_socket.hpp:123</a></div></div>
+<div class="ttc" id="aclassssl__context_html"><div class="ttname"><a href="classssl__context.html">ssl_context</a></div><div class="ttdoc">SSL/TLS上下文管理类</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00059">ssl_context.hpp:59</a></div></div>
+<div class="ttc" id="agroup___s_s_l_html_gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510"><div class="ttname"><a href="group___s_s_l.html#gga4012ce4e3211cb41f69956042abba0c8ae30c722b632bcb61025edd98637bb510">ssl_method::TLS_CLIENT</a></div><div class="ttdeci">@ TLS_CLIENT</div><div class="ttdoc">TLS客户端端</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00037">ssl_context.hpp:37</a></div></div>
+<div class="ttc" id="astructsmtp__message_html"><div class="ttname"><a href="structsmtp__message.html">smtp_message</a></div><div class="ttdoc">SMTP邮件消息结构</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00056">smtp_socket.hpp:56</a></div></div>
+<div class="ttc" id="astructsmtp__message_html_a526d9a80b9ae2a75ec1ca257866182d8"><div class="ttname"><a href="structsmtp__message.html#a526d9a80b9ae2a75ec1ca257866182d8">smtp_message::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">邮件正文</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00062">smtp_socket.hpp:62</a></div></div>
+<div class="ttc" id="astructsmtp__message_html_a785631f3d9af6aa871d32f0aada60be2"><div class="ttname"><a href="structsmtp__message.html#a785631f3d9af6aa871d32f0aada60be2">smtp_message::subject</a></div><div class="ttdeci">string subject</div><div class="ttdoc">邮件主题</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00061">smtp_socket.hpp:61</a></div></div>
+<div class="ttc" id="astructsmtp__message_html_a85f459893e45f59ed4d529953f62c21f"><div class="ttname"><a href="structsmtp__message.html#a85f459893e45f59ed4d529953f62c21f">smtp_message::is_html</a></div><div class="ttdeci">bool is_html</div><div class="ttdoc">是否为HTML格式</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00063">smtp_socket.hpp:63</a></div></div>
+<div class="ttc" id="astructsmtp__message_html_abbdf534a3d79770700b06b77197156d5"><div class="ttname"><a href="structsmtp__message.html#abbdf534a3d79770700b06b77197156d5">smtp_message::from</a></div><div class="ttdeci">string from</div><div class="ttdoc">发件人地址</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00057">smtp_socket.hpp:57</a></div></div>
+<div class="ttc" id="astructsmtp__message_html_ae2106f6dfab0ac49c0d8e49e3f37be2f"><div class="ttname"><a href="structsmtp__message.html#ae2106f6dfab0ac49c0d8e49e3f37be2f">smtp_message::to</a></div><div class="ttdeci">vector&lt; string &gt; to</div><div class="ttdoc">收件人地址列表</div><div class="ttdef"><b>定义</b> <a href="smtp__socket_8hpp_source.html#l00058">smtp_socket.hpp:58</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00116">116</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00114">114</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="ac7a4dad72a3278c790807d7ab64efc95" name="ac7a4dad72a3278c790807d7ab64efc95"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac7a4dad72a3278c790807d7ab64efc95">&#9670;&#160;</a></span>auth_method</h2>
@@ -343,7 +342,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00122">122</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00120">120</a> 行定义.</p>
 
 </div>
 </div>
@@ -377,7 +376,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00132">132</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00130">130</a> 行定义.</p>
 
 </div>
 </div>
@@ -413,7 +412,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00199">199</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00197">197</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="classip__socket.html#aaae0820ef1814fdd2299e646e7ce0b88">ip_socket::ip_socket()</a>.</p>
 
@@ -454,7 +453,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="smtp__socket_8hpp_source.html#l00124">plain</a>.</p>
+<p class="reference">引用了 <a class="el" href="smtp__socket_8hpp_source.html#l00122">plain</a>.</p>
 
 </div>
 </div>
@@ -484,7 +483,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>获取当前TLS密码套件名 </p>
 <dl class="section return"><dt>返回</dt><dd>密码套件名称 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00280">280</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00278">278</a> 行定义.</p>
 
 </div>
 </div>
@@ -534,7 +533,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="smtp__socket_8hpp_source.html#l00133">none</a>.</p>
+<p class="reference">引用了 <a class="el" href="smtp__socket_8hpp_source.html#l00131">none</a>.</p>
 
 </div>
 </div>
@@ -596,7 +595,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="smtp__socket_8hpp_source.html#l00133">none</a>.</p>
+<p class="reference">引用了 <a class="el" href="smtp__socket_8hpp_source.html#l00131">none</a>.</p>
 
 </div>
 </div>
@@ -626,9 +625,9 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>是否已连接 </p>
 <dl class="section return"><dt>返回</dt><dd>已连接返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00262">262</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00260">260</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00168">socket_base::is_open()</a>.</p>
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00166">socket_base::is_open()</a>.</p>
 
 </div>
 </div>
@@ -658,7 +657,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>TLS是否已激活 </p>
 <dl class="section return"><dt>返回</dt><dd>已激活返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00268">268</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00266">266</a> 行定义.</p>
 
 </div>
 </div>
@@ -744,7 +743,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>获取当前TLS版本 </p>
 <dl class="section return"><dt>返回</dt><dd>TLS版本字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00286">286</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00284">284</a> 行定义.</p>
 
 </div>
 </div>
@@ -774,7 +773,7 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 <p>验证服务器证书 </p>
 <dl class="section return"><dt>返回</dt><dd>验证通过返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00274">274</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="smtp__socket_8hpp_source.html">smtp_socket.hpp</a> 第 <a class="el" href="smtp__socket_8hpp_source.html#l00272">272</a> 行定义.</p>
 
 </div>
 </div>

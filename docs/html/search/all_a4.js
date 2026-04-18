@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
+  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
+  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
 ];

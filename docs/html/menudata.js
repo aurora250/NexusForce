@@ -152,6 +152,7 @@ var menudata={children:[
 {text:"n",url:"functions_eval.html#index_n"},
 {text:"o",url:"functions_eval.html#index_o"},
 {text:"p",url:"functions_eval.html#index_p"},
+{text:"r",url:"functions_eval.html#index_r"},
 {text:"s",url:"functions_eval.html#index_s"},
 {text:"t",url:"functions_eval.html#index_t"},
 {text:"u",url:"functions_eval.html#index_u"},
@@ -260,6 +261,7 @@ var menudata={children:[
 {text:"l",url:"globals_enum.html#index_l"},
 {text:"m",url:"globals_enum.html#index_m"},
 {text:"n",url:"globals_enum.html#index_n"},
-{text:"s",url:"globals_enum.html#index_s"}]},
+{text:"s",url:"globals_enum.html#index_s"},
+{text:"w",url:"globals_enum.html#index_w"}]},
 {text:"宏定义",url:"globals_defs.html",children:[
 {text:"n",url:"globals_defs.html#index_n"}]}]}]}]}

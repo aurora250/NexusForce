@@ -144,6 +144,175 @@ DNS 的协作图:</div>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>DNS组件 </p>
+<p>本模块提供了 DNS（域名系统）协议的完整客户端实现，支持消息构建、查询发送、 响应解析、缓存管理以及多种记录类型的查询。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下 IETF RFC 规范与相关标准：</p>
+<p><b>DNS 核心协议规范：</b></p><ul>
+<li>**IETF STD 13 / RFC 1034**：域名 — 概念与设施 <a href="https://www.rfc-editor.org/rfc/rfc1034.html">https://www.rfc-editor.org/rfc/rfc1034.html</a></li>
+<li>**IETF STD 13 / RFC 1035**：域名 — 实现与规范 <a href="https://www.rfc-editor.org/rfc/rfc1035.html">https://www.rfc-editor.org/rfc/rfc1035.html</a></li>
+</ul>
+<p><b>DNS 扩展与更新：</b></p><ul>
+<li>**IETF RFC 2181**：DNS 规范的澄清 <a href="https://www.rfc-editor.org/rfc/rfc2181.html">https://www.rfc-editor.org/rfc/rfc2181.html</a></li>
+<li>**IETF RFC 6891**：DNS 扩展机制 (EDNS0) <a href="https://www.rfc-editor.org/rfc/rfc6891.html">https://www.rfc-editor.org/rfc/rfc6891.html</a></li>
+</ul>
+<p><b>DNS 记录类型定义：</b></p><ul>
+<li>**IANA DNS Parameters Registry**：DNS 参数注册表 <a href="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml</a></li>
+</ul>
+<p><b>DNS 传输协议：</b></p><ul>
+<li>**IETF RFC 7766**：DNS over TCP 实现要求 <a href="https://www.rfc-editor.org/rfc/rfc7766.html">https://www.rfc-editor.org/rfc/rfc7766.html</a></li>
+<li>**IETF RFC 8484**：DNS over HTTPS (DoH)（参考） <a href="https://www.rfc-editor.org/rfc/rfc8484.html">https://www.rfc-editor.org/rfc/rfc8484.html</a></li>
+</ul>
+<p><b>IPv6 地址记录：</b></p><ul>
+<li>**IETF RFC 3596**：DNS 对 IPv6 的扩展 (AAAA 记录) <a href="https://www.rfc-editor.org/rfc/rfc3596.html">https://www.rfc-editor.org/rfc/rfc3596.html</a></li>
+</ul>
+<p><b>邮件交换记录：</b></p><ul>
+<li>**IETF RFC 1035 §3.3.9**：MX 记录定义</li>
+<li>**IETF RFC 7505**：空 MX 记录（"." 表示不接收邮件） <a href="https://www.rfc-editor.org/rfc/rfc7505.html">https://www.rfc-editor.org/rfc/rfc7505.html</a></li>
+</ul>
+<p><b>服务定位记录：</b></p><ul>
+<li>**IETF RFC 2782**：DNS SRV 记录 <a href="https://www.rfc-editor.org/rfc/rfc2782.html">https://www.rfc-editor.org/rfc/rfc2782.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="dns_message_structure"></a>
+DNS 消息结构</h1>
+<p>根据 RFC 1035 §4.1，DNS 消息由以下部分组成：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">部分  </th><th class="markdownTableHeadNone">大小  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Header  </td><td class="markdownTableBodyNone">12 字节  </td><td class="markdownTableBodyNone">包含 ID、标志位、各段计数  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Question  </td><td class="markdownTableBodyNone">可变  </td><td class="markdownTableBodyNone">查询的域名、类型、类  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Answer  </td><td class="markdownTableBodyNone">可变  </td><td class="markdownTableBodyNone">回答的资源记录  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Authority  </td><td class="markdownTableBodyNone">可变  </td><td class="markdownTableBodyNone">指向权威名称服务器的资源记录  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Additional  </td><td class="markdownTableBodyNone">可变  </td><td class="markdownTableBodyNone">附加信息记录（如 EDNS0）  </td></tr>
+</table>
+<p>**头部标志位**（RFC 1035 §4.1.1）： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">位偏移  </th><th class="markdownTableHeadNone">名称  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">QR  </td><td class="markdownTableBodyNone">0=查询，1=响应  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1-4  </td><td class="markdownTableBodyNone">OPCODE  </td><td class="markdownTableBodyNone">操作码：0=QUERY, 1=IQUERY, 2=STATUS, 4=NOTIFY, 5=UPDATE  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">AA  </td><td class="markdownTableBodyNone">权威回答  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">6  </td><td class="markdownTableBodyNone">TC  </td><td class="markdownTableBodyNone">截断标志（响应被截断，需使用 TCP 重试）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">7  </td><td class="markdownTableBodyNone">RD  </td><td class="markdownTableBodyNone">期望递归查询  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">8  </td><td class="markdownTableBodyNone">RA  </td><td class="markdownTableBodyNone">递归可用  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">9-11  </td><td class="markdownTableBodyNone">Z  </td><td class="markdownTableBodyNone">保留位（必须为0）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">12-15  </td><td class="markdownTableBodyNone">RCODE  </td><td class="markdownTableBodyNone">响应码：0=无错误, 1=格式错误, 2=服务器失败, 3=名称错误等  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="dns_record_types"></a>
+DNS 记录类型</h1>
+<p>根据 IANA DNS 参数注册表，本模块支持以下常见记录类型：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">值  </th><th class="markdownTableHeadNone">RFC 引用  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">A  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">主机地址（IPv4）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NS  </td><td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">权威名称服务器  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">CNAME  </td><td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">规范名称（别名）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOA  </td><td class="markdownTableBodyNone">6  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">授权区域起始  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">PTR  </td><td class="markdownTableBodyNone">12  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">域名指针（反向查询）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MX  </td><td class="markdownTableBodyNone">15  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">邮件交换  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TXT  </td><td class="markdownTableBodyNone">16  </td><td class="markdownTableBodyNone">RFC 1035  </td><td class="markdownTableBodyNone">文本字符串  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">AAAA  </td><td class="markdownTableBodyNone">28  </td><td class="markdownTableBodyNone">RFC 3596  </td><td class="markdownTableBodyNone">IPv6 地址  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SRV  </td><td class="markdownTableBodyNone">33  </td><td class="markdownTableBodyNone">RFC 2782  </td><td class="markdownTableBodyNone">服务定位器  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="dns_opcodes"></a>
+操作码与响应码</h1>
+<p>**操作码（OPCODE）**（RFC 1035 §4.1.1，RFC 1996，RFC 2136）： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">值  </th><th class="markdownTableHeadNone">名称  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">QUERY  </td><td class="markdownTableBodyNone">标准查询  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">IQUERY  </td><td class="markdownTableBodyNone">反向查询（已废弃）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">STATUS  </td><td class="markdownTableBodyNone">服务器状态请求  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">4  </td><td class="markdownTableBodyNone">NOTIFY  </td><td class="markdownTableBodyNone">区域变更通知  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">UPDATE  </td><td class="markdownTableBodyNone">动态更新  </td></tr>
+</table>
+<p>**响应码（RCODE）**（RFC 1035 §4.1.1，RFC 6891 扩展）： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">值  </th><th class="markdownTableHeadNone">名称  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">NoError  </td><td class="markdownTableBodyNone">无错误  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">FormErr  </td><td class="markdownTableBodyNone">格式错误  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">ServFail  </td><td class="markdownTableBodyNone">服务器失败  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">NXDomain  </td><td class="markdownTableBodyNone">不存在的域名  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">4  </td><td class="markdownTableBodyNone">NotImp  </td><td class="markdownTableBodyNone">未实现  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">Refused  </td><td class="markdownTableBodyNone">拒绝查询  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="dns_classes"></a>
+查询类（CLASS）</h1>
+<p>根据 RFC 1035 §3.2.4： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">值  </th><th class="markdownTableHeadNone">名称  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">IN  </td><td class="markdownTableBodyNone">Internet（最常用）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">CH  </td><td class="markdownTableBodyNone">CHAOS 类  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">4  </td><td class="markdownTableBodyNone">HS  </td><td class="markdownTableBodyNone">Hesiod  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">255  </td><td class="markdownTableBodyNone">ANY  </td><td class="markdownTableBodyNone">任何类（通配）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="dns_transport"></a>
+DNS 传输协议</h1>
+<p>根据 RFC 1035 §4.2 和 RFC 7766：</p><ul>
+<li>**UDP**：默认传输协议，消息大小限制为 512 字节（EDNS0 可扩展）</li>
+<li>**TCP**：当响应被截断（TC 标志置位）或消息超过 UDP 限制时自动切换</li>
+<li>**本实现**：优先使用 UDP，若响应截断则自动通过 TCP 重试</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="dns_caching"></a>
+DNS 缓存机制</h1>
+<p>根据 RFC 1035 §7.2 的 TTL 规范：</p><ul>
+<li>每条资源记录包含 TTL（生存时间，秒）</li>
+<li>缓存条目按记录的 TTL 值过期</li>
+<li>本实现支持自定义缓存 TTL 上限（默认 300 秒）</li>
+<li>缓存条目在查询前检查有效期，过期后自动刷新</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="reverse_dns"></a>
+反向 DNS 查询</h1>
+<p>根据 RFC 1035 §3.5，PTR 记录用于 IP 地址到域名的映射：</p><ul>
+<li>IPv4 地址转换为特殊域名：<span class="tt">x.x.x.x.in-addr.arpa</span></li>
+<li>例如 IP <span class="tt">8.8.8.8</span> 查询 <span class="tt">8.8.8.8.in-addr.arpa</span> 的 PTR 记录</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>DNS 消息使用大端字节序编码，本实现自动处理字节序转换。 对于超过 512 字节的 UDP 响应，建议启用 EDNS0 或依赖 TCP 自动切换机制。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>缓存 TTL 应根据实际业务需求设置，过长的 TTL 可能导致 IP 变更后无法及时更新。 反向查询（PTR）并非所有 IP 地址都有对应的记录。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc1034.html">https://www.rfc-editor.org/rfc/rfc1034.html</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc1035.html">https://www.rfc-editor.org/rfc/rfc1035.html</a> </dd>
+<dd>
+<a href="https://developers.google.com/speed/public-dns">https://developers.google.com/speed/public-dns</a> </dd>
+<dd>
+<a href="https://www.cloudflare.com/learning/dns/what-is-dns/">https://www.cloudflare.com/learning/dns/what-is-dns/</a></dd></dl>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
 <a id="ga973c6b85131920f4de96d7db1206a51b" name="ga973c6b85131920f4de96d7db1206a51b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga973c6b85131920f4de96d7db1206a51b">&#9670;&#160;</a></span>dns_opcode</h2>
@@ -180,7 +349,7 @@ DNS 的协作图:</div>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00043">43</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00181">181</a> 行定义.</p>
 
 </div>
 </div>
@@ -217,7 +386,7 @@ DNS 的协作图:</div>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00057">57</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00195">195</a> 行定义.</p>
 
 </div>
 </div>
@@ -258,7 +427,7 @@ DNS 的协作图:</div>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00208">208</a> 行定义.</p>
 
 </div>
 </div>
