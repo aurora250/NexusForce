@@ -1,0 +1,1653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: tcp_client_base类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classtcp__client__base.html','','classtcp__client__base-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">tcp_client_base类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___network.html">网络通信</a> &raquo; <a class="el" href="group___t_c_p.html">TCP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>TCP客户端基类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 tcp_client_base 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classtcp__client__base__inherit__graph.svg" width="190" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ae623bfbec50de5d6d23c4ab5e92c9264" id="r_ae623bfbec50de5d6d23c4ab5e92c9264"><td class="memItemLeft"><a id="ae623bfbec50de5d6d23c4ab5e92c9264" name="ae623bfbec50de5d6d23c4ab5e92c9264"></a>
+using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void(const <a class="el" href="structexception.html">exception</a>&amp;)&gt;</td></tr>
+<tr class="memdesc:ae623bfbec50de5d6d23c4ab5e92c9264"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常处理器类型 <br /></td></tr>
+<tr class="memitem:ad09db647aea484d8b3fa32368c41da67" id="r_ad09db647aea484d8b3fa32368c41da67"><td class="memItemLeft"><a id="ad09db647aea484d8b3fa32368c41da67" name="ad09db647aea484d8b3fa32368c41da67"></a>
+using&#160;</td><td class="memItemRight"><b>connect_callback_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void(const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&amp;, <a class="el" href="structports.html">ports</a>)&gt;</td></tr>
+<tr class="memdesc:ad09db647aea484d8b3fa32368c41da67"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接回调类型 <br /></td></tr>
+<tr class="memitem:adb8a5f228722c6db09638ab34761236a" id="r_adb8a5f228722c6db09638ab34761236a"><td class="memItemLeft"><a id="adb8a5f228722c6db09638ab34761236a" name="adb8a5f228722c6db09638ab34761236a"></a>
+using&#160;</td><td class="memItemRight"><b>disconnect_callback_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:adb8a5f228722c6db09638ab34761236a"><td class="mdescLeft">&#160;</td><td class="mdescRight">断开回调类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a5f445fbc003f62fbec15cf13422eaf5d" id="r_a5f445fbc003f62fbec15cf13422eaf5d"><td class="memItemLeft"><a id="a5f445fbc003f62fbec15cf13422eaf5d" name="a5f445fbc003f62fbec15cf13422eaf5d"></a>
+&#160;</td><td class="memItemRight"><b>tcp_client_base</b> ()=default</td></tr>
+<tr class="memdesc:a5f445fbc003f62fbec15cf13422eaf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:ae871291551e7990a0716bb07ce8aa850" id="r_ae871291551e7990a0716bb07ce8aa850"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae871291551e7990a0716bb07ce8aa850">tcp_client_base</a> (<a class="el" href="classdns__client.html">dns_client</a> dns)</td></tr>
+<tr class="memdesc:ae871291551e7990a0716bb07ce8aa850"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（带DNS客户端）  <br /></td></tr>
+<tr class="memitem:a81d04e7bbfd939b65c6a3bbb394f148c" id="r_a81d04e7bbfd939b65c6a3bbb394f148c"><td class="memItemLeft"><a id="a81d04e7bbfd939b65c6a3bbb394f148c" name="a81d04e7bbfd939b65c6a3bbb394f148c"></a>
+virtual&#160;</td><td class="memItemRight"><b>~tcp_client_base</b> ()</td></tr>
+<tr class="memdesc:a81d04e7bbfd939b65c6a3bbb394f148c"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a354774a0fd2b9eaebefdd8e7d31bf902" id="r_a354774a0fd2b9eaebefdd8e7d31bf902"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a354774a0fd2b9eaebefdd8e7d31bf902">set_connect_timeout</a> (<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> timeout)</td></tr>
+<tr class="memdesc:a354774a0fd2b9eaebefdd8e7d31bf902"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置连接超时时间  <br /></td></tr>
+<tr class="memitem:ac9f7a0c0e90e96e15b24c281e2d98f4f" id="r_ac9f7a0c0e90e96e15b24c281e2d98f4f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac9f7a0c0e90e96e15b24c281e2d98f4f">connect_timeout</a> () const noexcept</td></tr>
+<tr class="memdesc:ac9f7a0c0e90e96e15b24c281e2d98f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接超时时间  <br /></td></tr>
+<tr class="memitem:ad9d43d91b7a30b89aef97521588ae402" id="r_ad9d43d91b7a30b89aef97521588ae402"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad9d43d91b7a30b89aef97521588ae402">set_send_timeout</a> (<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> timeout)</td></tr>
+<tr class="memdesc:ad9d43d91b7a30b89aef97521588ae402"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置发送超时时间  <br /></td></tr>
+<tr class="memitem:a4eff17012fac02e68690e63f36c34b48" id="r_a4eff17012fac02e68690e63f36c34b48"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4eff17012fac02e68690e63f36c34b48">send_timeout</a> () const noexcept</td></tr>
+<tr class="memdesc:a4eff17012fac02e68690e63f36c34b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取发送超时时间  <br /></td></tr>
+<tr class="memitem:aad18c6f111cd198e33c7634ba6950dd9" id="r_aad18c6f111cd198e33c7634ba6950dd9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aad18c6f111cd198e33c7634ba6950dd9">set_recv_timeout</a> (<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> timeout)</td></tr>
+<tr class="memdesc:aad18c6f111cd198e33c7634ba6950dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置接收超时时间  <br /></td></tr>
+<tr class="memitem:aa387738fb13cfdd0fc217a2695f7f252" id="r_aa387738fb13cfdd0fc217a2695f7f252"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa387738fb13cfdd0fc217a2695f7f252">recv_timeout</a> () const noexcept</td></tr>
+<tr class="memdesc:aa387738fb13cfdd0fc217a2695f7f252"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取接收超时时间  <br /></td></tr>
+<tr class="memitem:a931464775f1cdd1f17846fa43bc8c090" id="r_a931464775f1cdd1f17846fa43bc8c090"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a931464775f1cdd1f17846fa43bc8c090">set_auto_reconnect</a> (bool enable, int max_attempts=3)</td></tr>
+<tr class="memdesc:a931464775f1cdd1f17846fa43bc8c090"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置自动重连  <br /></td></tr>
+<tr class="memitem:a9940a605bbff2145e0a220080b1660dc" id="r_a9940a605bbff2145e0a220080b1660dc"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a9940a605bbff2145e0a220080b1660dc">is_auto_reconnect</a> () const noexcept</td></tr>
+<tr class="memdesc:a9940a605bbff2145e0a220080b1660dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否启用自动重连  <br /></td></tr>
+<tr class="memitem:a96c9be0f37fd6cf689d80567367ce50d" id="r_a96c9be0f37fd6cf689d80567367ce50d"><td class="memItemLeft">NEFORCE_NODISCARD int&#160;</td><td class="memItemRight"><a class="el" href="#a96c9be0f37fd6cf689d80567367ce50d">reconnect_attempts</a> () const noexcept</td></tr>
+<tr class="memdesc:a96c9be0f37fd6cf689d80567367ce50d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大重连次数  <br /></td></tr>
+<tr class="memitem:a4c2371c71b6c950a3fa9f2cc83fad52d" id="r_a4c2371c71b6c950a3fa9f2cc83fad52d"><td class="memItemLeft">NEFORCE_NODISCARD int&#160;</td><td class="memItemRight"><a class="el" href="#a4c2371c71b6c950a3fa9f2cc83fad52d">current_reconnect_attempt</a> () const noexcept</td></tr>
+<tr class="memdesc:a4c2371c71b6c950a3fa9f2cc83fad52d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前重连尝试次数  <br /></td></tr>
+<tr class="memitem:a22a71f422f46e0ebd3f190b84f90c80a" id="r_a22a71f422f46e0ebd3f190b84f90c80a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a22a71f422f46e0ebd3f190b84f90c80a">set_reconnect_delay</a> (<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> delay)</td></tr>
+<tr class="memdesc:a22a71f422f46e0ebd3f190b84f90c80a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置重连延迟时间  <br /></td></tr>
+<tr class="memitem:a3b61e041a3f5b1c55119d69627631dd5" id="r_a3b61e041a3f5b1c55119d69627631dd5"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3b61e041a3f5b1c55119d69627631dd5">reconnect_delay</a> () const noexcept</td></tr>
+<tr class="memdesc:a3b61e041a3f5b1c55119d69627631dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取重连延迟时间  <br /></td></tr>
+<tr class="memitem:a27bca1156f14a8e17cfe4edf6420b0aa" id="r_a27bca1156f14a8e17cfe4edf6420b0aa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a27bca1156f14a8e17cfe4edf6420b0aa">set_prefer_ipv6</a> (bool prefer) noexcept</td></tr>
+<tr class="memdesc:a27bca1156f14a8e17cfe4edf6420b0aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置是否优先使用IPv6  <br /></td></tr>
+<tr class="memitem:aa5accb1dc9ed4cad96d5d3eafeda31cd" id="r_aa5accb1dc9ed4cad96d5d3eafeda31cd"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#aa5accb1dc9ed4cad96d5d3eafeda31cd">prefer_ipv6</a> () const noexcept</td></tr>
+<tr class="memdesc:aa5accb1dc9ed4cad96d5d3eafeda31cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否优先使用IPv6  <br /></td></tr>
+<tr class="memitem:ac94e9cb80fb0db0d5c142da213811a0e" id="r_ac94e9cb80fb0db0d5c142da213811a0e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac94e9cb80fb0db0d5c142da213811a0e">set_dns_server</a> (<a class="el" href="structdns__client_1_1config.html">dns_client::config</a> cfg)</td></tr>
+<tr class="memdesc:ac94e9cb80fb0db0d5c142da213811a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置DNS服务器配置  <br /></td></tr>
+<tr class="memitem:a90666e1622d3694ce3465251bfd994e1" id="r_a90666e1622d3694ce3465251bfd994e1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a90666e1622d3694ce3465251bfd994e1">set_exception_handler</a> (<a class="el" href="#ae623bfbec50de5d6d23c4ab5e92c9264">exception_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a90666e1622d3694ce3465251bfd994e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置异常处理器  <br /></td></tr>
+<tr class="memitem:a492a80d5437b81e4aff2c0c25f5505ef" id="r_a492a80d5437b81e4aff2c0c25f5505ef"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a492a80d5437b81e4aff2c0c25f5505ef">set_connect_callback</a> (<a class="el" href="#ad09db647aea484d8b3fa32368c41da67">connect_callback_t</a> callback)</td></tr>
+<tr class="memdesc:a492a80d5437b81e4aff2c0c25f5505ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置连接成功回调  <br /></td></tr>
+<tr class="memitem:ae3a863e0ff3966b4da4af6ea23cc87c0" id="r_ae3a863e0ff3966b4da4af6ea23cc87c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae3a863e0ff3966b4da4af6ea23cc87c0">set_disconnect_callback</a> (<a class="el" href="#adb8a5f228722c6db09638ab34761236a">disconnect_callback_t</a> callback)</td></tr>
+<tr class="memdesc:ae3a863e0ff3966b4da4af6ea23cc87c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置断开连接回调  <br /></td></tr>
+<tr class="memitem:aff2ce3b983291c2d894d6077b0882d5a" id="r_aff2ce3b983291c2d894d6077b0882d5a"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#aff2ce3b983291c2d894d6077b0882d5a">connect</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;host, <a class="el" href="structports.html">ports</a> port)</td></tr>
+<tr class="memdesc:aff2ce3b983291c2d894d6077b0882d5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接到服务器  <br /></td></tr>
+<tr class="memitem:ad668ea445e32510902c22e6fc378e58b" id="r_ad668ea445e32510902c22e6fc378e58b"><td class="memItemLeft"><a id="ad668ea445e32510902c22e6fc378e58b" name="ad668ea445e32510902c22e6fc378e58b"></a>
+void&#160;</td><td class="memItemRight"><b>disconnect</b> () noexcept</td></tr>
+<tr class="memdesc:ad668ea445e32510902c22e6fc378e58b"><td class="mdescLeft">&#160;</td><td class="mdescRight">断开连接 <br /></td></tr>
+<tr class="memitem:ab82d9541a6e63484559c1d4af9daf45b" id="r_ab82d9541a6e63484559c1d4af9daf45b"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send</a> (const void *<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> length)</td></tr>
+<tr class="memdesc:ab82d9541a6e63484559c1d4af9daf45b"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送数据  <br /></td></tr>
+<tr class="memitem:a0437808975f8def1d0715cbd435b0f76" id="r_a0437808975f8def1d0715cbd435b0f76"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0437808975f8def1d0715cbd435b0f76">send</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:a0437808975f8def1d0715cbd435b0f76"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送字符串数据  <br /></td></tr>
+<tr class="memitem:a80790a2a3798f6e591107ccec2bf4809" id="r_a80790a2a3798f6e591107ccec2bf4809"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a80790a2a3798f6e591107ccec2bf4809">send_all</a> (const void *<a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> length)</td></tr>
+<tr class="memdesc:a80790a2a3798f6e591107ccec2bf4809"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送所有数据（保证全部发送）  <br /></td></tr>
+<tr class="memitem:a7615d24c8dcdc3146d02525cc5421608" id="r_a7615d24c8dcdc3146d02525cc5421608"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7615d24c8dcdc3146d02525cc5421608">send_all</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>)</td></tr>
+<tr class="memdesc:a7615d24c8dcdc3146d02525cc5421608"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送所有字符串数据  <br /></td></tr>
+<tr class="memitem:a728e996ae56a5d407649463d9d49bcb3" id="r_a728e996ae56a5d407649463d9d49bcb3"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a728e996ae56a5d407649463d9d49bcb3">receive</a> (void *buffer, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> length)</td></tr>
+<tr class="memdesc:a728e996ae56a5d407649463d9d49bcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">接收数据  <br /></td></tr>
+<tr class="memitem:a018c24813fbccad0045b4eb6404ee725" id="r_a018c24813fbccad0045b4eb6404ee725"><td class="memItemLeft"><a class="el" href="classvector.html">vector</a>&lt; char &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a018c24813fbccad0045b4eb6404ee725">receive_all</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> max_size=0)</td></tr>
+<tr class="memdesc:a018c24813fbccad0045b4eb6404ee725"><td class="mdescLeft">&#160;</td><td class="mdescRight">接收所有可用数据  <br /></td></tr>
+<tr class="memitem:aea78ea646c0739b73700dc5916f79174" id="r_aea78ea646c0739b73700dc5916f79174"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aea78ea646c0739b73700dc5916f79174">receive_exact</a> (<a class="el" href="classmemory__view.html">memory_view</a>&lt; char &gt; buffer)</td></tr>
+<tr class="memdesc:aea78ea646c0739b73700dc5916f79174"><td class="mdescLeft">&#160;</td><td class="mdescRight">接收指定大小的数据  <br /></td></tr>
+<tr class="memitem:a42885668defcd03eb61f5cc8da19d058" id="r_a42885668defcd03eb61f5cc8da19d058"><td class="memItemLeft"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a42885668defcd03eb61f5cc8da19d058">receive_line</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> max_length=8192)</td></tr>
+<tr class="memdesc:a42885668defcd03eb61f5cc8da19d058"><td class="mdescLeft">&#160;</td><td class="mdescRight">接收一行数据（以\n结尾）  <br /></td></tr>
+<tr class="memitem:a32b3945937b1f70cb9bceb2cad417d05" id="r_a32b3945937b1f70cb9bceb2cad417d05"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a32b3945937b1f70cb9bceb2cad417d05">is_connected</a> () const noexcept</td></tr>
+<tr class="memdesc:a32b3945937b1f70cb9bceb2cad417d05"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已连接  <br /></td></tr>
+<tr class="memitem:a33d7454cccff7e88e3dedf116d59910b" id="r_a33d7454cccff7e88e3dedf116d59910b"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a33d7454cccff7e88e3dedf116d59910b">is_reconnecting</a> () const noexcept</td></tr>
+<tr class="memdesc:a33d7454cccff7e88e3dedf116d59910b"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在重连  <br /></td></tr>
+<tr class="memitem:aa3899d6ba07fea1fe4d89f5b962f787e" id="r_aa3899d6ba07fea1fe4d89f5b962f787e"><td class="memItemLeft">NEFORCE_NODISCARD const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa3899d6ba07fea1fe4d89f5b962f787e">connected_host</a> () const noexcept</td></tr>
+<tr class="memdesc:aa3899d6ba07fea1fe4d89f5b962f787e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前连接的主机名  <br /></td></tr>
+<tr class="memitem:a4076544741ebf84139c45eaa105bfde0" id="r_a4076544741ebf84139c45eaa105bfde0"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structports.html">ports</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4076544741ebf84139c45eaa105bfde0">connected_port</a> () const noexcept</td></tr>
+<tr class="memdesc:a4076544741ebf84139c45eaa105bfde0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前连接的端口  <br /></td></tr>
+<tr class="memitem:aabe3dcb7d46b2e6a01b5524efa6db9cb" id="r_aabe3dcb7d46b2e6a01b5524efa6db9cb"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classtcp__socket.html">tcp_socket</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aabe3dcb7d46b2e6a01b5524efa6db9cb">socket</a> ()</td></tr>
+<tr class="memdesc:aabe3dcb7d46b2e6a01b5524efa6db9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取底层socket引用  <br /></td></tr>
+<tr class="memitem:a3259c489209999a1b1d045f12e508043" id="r_a3259c489209999a1b1d045f12e508043"><td class="memItemLeft">NEFORCE_NODISCARD const <a class="el" href="classtcp__socket.html">tcp_socket</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3259c489209999a1b1d045f12e508043">socket</a> () const</td></tr>
+<tr class="memdesc:a3259c489209999a1b1d045f12e508043"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取底层socket常量引用  <br /></td></tr>
+<tr class="memitem:a38cccfd0727c229c39422c0d92233694" id="r_a38cccfd0727c229c39422c0d92233694"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classdns__client.html">dns_client</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a38cccfd0727c229c39422c0d92233694">get_dns_client</a> () noexcept</td></tr>
+<tr class="memdesc:a38cccfd0727c229c39422c0d92233694"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取DNS客户端  <br /></td></tr>
+<tr class="memitem:a9d32205948f3438493ddf192f3563301" id="r_a9d32205948f3438493ddf192f3563301"><td class="memItemLeft">NEFORCE_NODISCARD const <a class="el" href="classdns__client.html">dns_client</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9d32205948f3438493ddf192f3563301">get_dns_client</a> () const noexcept</td></tr>
+<tr class="memdesc:a9d32205948f3438493ddf192f3563301"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取DNS客户端常量引用  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected 成员函数</h2></td></tr>
+<tr class="memitem:a4aa3eb851f96deeb6286b6cd782c9be7" id="r_a4aa3eb851f96deeb6286b6cd782c9be7"><td class="memItemLeft">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4aa3eb851f96deeb6286b6cd782c9be7">create_socket</a> ()=0</td></tr>
+<tr class="memdesc:a4aa3eb851f96deeb6286b6cd782c9be7"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建新的socket对象  <br /></td></tr>
+<tr class="memitem:a97c21cec9d599cc696f26f7b27981827" id="r_a97c21cec9d599cc696f26f7b27981827"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a97c21cec9d599cc696f26f7b27981827">post_connect</a> ()</td></tr>
+<tr class="memdesc:a97c21cec9d599cc696f26f7b27981827"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接建立后的额外处理  <br /></td></tr>
+<tr class="memitem:a151253188e7d17a9a85f657c24445ca8" id="r_a151253188e7d17a9a85f657c24445ca8"><td class="memItemLeft"><a id="a151253188e7d17a9a85f657c24445ca8" name="a151253188e7d17a9a85f657c24445ca8"></a>
+virtual void&#160;</td><td class="memItemRight"><b>pre_disconnect</b> ()</td></tr>
+<tr class="memdesc:a151253188e7d17a9a85f657c24445ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接断开前的清理工作 <br /></td></tr>
+<tr class="memitem:a1f61b161f3a5771e1a03e59dc3783dde" id="r_a1f61b161f3a5771e1a03e59dc3783dde"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1f61b161f3a5771e1a03e59dc3783dde">try_connect_to_ip</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;ip, <a class="el" href="structports.html">ports</a> port)</td></tr>
+<tr class="memdesc:a1f61b161f3a5771e1a03e59dc3783dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试连接到指定IP  <br /></td></tr>
+<tr class="memitem:a8e8daee93857653ebe71413cd72b94e8" id="r_a8e8daee93857653ebe71413cd72b94e8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8e8daee93857653ebe71413cd72b94e8">reconnect_if_needed</a> ()</td></tr>
+<tr class="memdesc:a8e8daee93857653ebe71413cd72b94e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">需要时执行重连  <br /></td></tr>
+<tr class="memitem:a8f37f7991aee0a91ae4078f60446ff12" id="r_a8f37f7991aee0a91ae4078f60446ff12"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a8f37f7991aee0a91ae4078f60446ff12">handle_exception</a> (const <a class="el" href="structexception.html">exception</a> &amp;e) const</td></tr>
+<tr class="memdesc:a8f37f7991aee0a91ae4078f60446ff12"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理异常  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:ab8584da06a5e778efd18bbd35a08a425" id="r_ab8584da06a5e778efd18bbd35a08a425"><td class="memItemLeft"><a id="ab8584da06a5e778efd18bbd35a08a425" name="ab8584da06a5e778efd18bbd35a08a425"></a>
+<a class="el" href="classdns__client.html">dns_client</a>&#160;</td><td class="memItemRight"><b>dns_</b></td></tr>
+<tr class="memdesc:ab8584da06a5e778efd18bbd35a08a425"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS解析客户端 <br /></td></tr>
+<tr class="memitem:ae3f0cb8189dc0880404cdb1c331197a8" id="r_ae3f0cb8189dc0880404cdb1c331197a8"><td class="memItemLeft"><a id="ae3f0cb8189dc0880404cdb1c331197a8" name="ae3f0cb8189dc0880404cdb1c331197a8"></a>
+<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt;&#160;</td><td class="memItemRight"><b>socket_</b></td></tr>
+<tr class="memdesc:ae3f0cb8189dc0880404cdb1c331197a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">TCP socket <br /></td></tr>
+<tr class="memitem:a7d2d1a53ec558a06102823e38a18be74" id="r_a7d2d1a53ec558a06102823e38a18be74"><td class="memItemLeft"><a id="a7d2d1a53ec558a06102823e38a18be74" name="a7d2d1a53ec558a06102823e38a18be74"></a>
+<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><b>connected_host_</b></td></tr>
+<tr class="memdesc:a7d2d1a53ec558a06102823e38a18be74"><td class="mdescLeft">&#160;</td><td class="mdescRight">已连接的主机名 <br /></td></tr>
+<tr class="memitem:a73bde0cc117b889468d6d90f8a185270" id="r_a73bde0cc117b889468d6d90f8a185270"><td class="memItemLeft"><a id="a73bde0cc117b889468d6d90f8a185270" name="a73bde0cc117b889468d6d90f8a185270"></a>
+<a class="el" href="structports.html">ports</a>&#160;</td><td class="memItemRight"><b>connected_port_</b></td></tr>
+<tr class="memdesc:a73bde0cc117b889468d6d90f8a185270"><td class="mdescLeft">&#160;</td><td class="mdescRight">已连接的端口 <br /></td></tr>
+<tr class="memitem:a01cf950d1d8bcfba1225dc9b90992bbd" id="r_a01cf950d1d8bcfba1225dc9b90992bbd"><td class="memItemLeft"><a id="a01cf950d1d8bcfba1225dc9b90992bbd" name="a01cf950d1d8bcfba1225dc9b90992bbd"></a>
+int&#160;</td><td class="memItemRight"><b>reconnect_attempts_</b> = 3</td></tr>
+<tr class="memdesc:a01cf950d1d8bcfba1225dc9b90992bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大重连次数 <br /></td></tr>
+<tr class="memitem:a6084cc447e8b87ae52079de26bcaf7da" id="r_a6084cc447e8b87ae52079de26bcaf7da"><td class="memItemLeft"><a id="a6084cc447e8b87ae52079de26bcaf7da" name="a6084cc447e8b87ae52079de26bcaf7da"></a>
+<a class="el" href="structatomic.html">atomic</a>&lt; int &gt;&#160;</td><td class="memItemRight"><b>current_reconnect_attempt_</b> {0}</td></tr>
+<tr class="memdesc:a6084cc447e8b87ae52079de26bcaf7da"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前重连次数 <br /></td></tr>
+<tr class="memitem:af6fc164073d83b5229ddc400865b15a3" id="r_af6fc164073d83b5229ddc400865b15a3"><td class="memItemLeft"><a id="af6fc164073d83b5229ddc400865b15a3" name="af6fc164073d83b5229ddc400865b15a3"></a>
+<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><b>connect_timeout_</b> {5000}</td></tr>
+<tr class="memdesc:af6fc164073d83b5229ddc400865b15a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接超时 <br /></td></tr>
+<tr class="memitem:af0a5d66000060e7af7f1294b95154800" id="r_af0a5d66000060e7af7f1294b95154800"><td class="memItemLeft"><a id="af0a5d66000060e7af7f1294b95154800" name="af0a5d66000060e7af7f1294b95154800"></a>
+<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><b>send_timeout_</b> {5000}</td></tr>
+<tr class="memdesc:af0a5d66000060e7af7f1294b95154800"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送超时 <br /></td></tr>
+<tr class="memitem:a560e938b392471264bfe53ef587cd2c3" id="r_a560e938b392471264bfe53ef587cd2c3"><td class="memItemLeft"><a id="a560e938b392471264bfe53ef587cd2c3" name="a560e938b392471264bfe53ef587cd2c3"></a>
+<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><b>recv_timeout_</b> {5000}</td></tr>
+<tr class="memdesc:a560e938b392471264bfe53ef587cd2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">接收超时 <br /></td></tr>
+<tr class="memitem:a2e711aeb58408fe79f3234a137ef15f7" id="r_a2e711aeb58408fe79f3234a137ef15f7"><td class="memItemLeft"><a id="a2e711aeb58408fe79f3234a137ef15f7" name="a2e711aeb58408fe79f3234a137ef15f7"></a>
+<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><b>reconnect_delay_</b> {1000}</td></tr>
+<tr class="memdesc:a2e711aeb58408fe79f3234a137ef15f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">重连延迟 <br /></td></tr>
+<tr class="memitem:acf721307adb69e3f6a6c9d18f295170e" id="r_acf721307adb69e3f6a6c9d18f295170e"><td class="memItemLeft"><a id="acf721307adb69e3f6a6c9d18f295170e" name="acf721307adb69e3f6a6c9d18f295170e"></a>
+bool&#160;</td><td class="memItemRight"><b>auto_reconnect_</b> = false</td></tr>
+<tr class="memdesc:acf721307adb69e3f6a6c9d18f295170e"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否自动重连 <br /></td></tr>
+<tr class="memitem:adc606871aad1d2ecc27dc92fbdbb3eaa" id="r_adc606871aad1d2ecc27dc92fbdbb3eaa"><td class="memItemLeft"><a id="adc606871aad1d2ecc27dc92fbdbb3eaa" name="adc606871aad1d2ecc27dc92fbdbb3eaa"></a>
+bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
+<tr class="memdesc:adc606871aad1d2ecc27dc92fbdbb3eaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否优先IPv6 <br /></td></tr>
+<tr class="memitem:a46713f7e7056ef28662b6f3cb2337018" id="r_a46713f7e7056ef28662b6f3cb2337018"><td class="memItemLeft"><a id="a46713f7e7056ef28662b6f3cb2337018" name="a46713f7e7056ef28662b6f3cb2337018"></a>
+<a class="el" href="structatomic.html">atomic</a>&lt; bool &gt;&#160;</td><td class="memItemRight"><b>is_reconnecting_</b> {false}</td></tr>
+<tr class="memdesc:a46713f7e7056ef28662b6f3cb2337018"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否正在重连 <br /></td></tr>
+<tr class="memitem:a075da50abfe240fcf1722b34eb715297" id="r_a075da50abfe240fcf1722b34eb715297"><td class="memItemLeft"><a id="a075da50abfe240fcf1722b34eb715297" name="a075da50abfe240fcf1722b34eb715297"></a>
+<a class="el" href="#ad09db647aea484d8b3fa32368c41da67">connect_callback_t</a>&#160;</td><td class="memItemRight"><b>connect_callback_</b></td></tr>
+<tr class="memdesc:a075da50abfe240fcf1722b34eb715297"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接成功回调 <br /></td></tr>
+<tr class="memitem:a7b8f7559db533ecff45f052ad4352803" id="r_a7b8f7559db533ecff45f052ad4352803"><td class="memItemLeft"><a id="a7b8f7559db533ecff45f052ad4352803" name="a7b8f7559db533ecff45f052ad4352803"></a>
+<a class="el" href="#adb8a5f228722c6db09638ab34761236a">disconnect_callback_t</a>&#160;</td><td class="memItemRight"><b>disconnect_callback_</b></td></tr>
+<tr class="memdesc:a7b8f7559db533ecff45f052ad4352803"><td class="mdescLeft">&#160;</td><td class="mdescRight">断开连接回调 <br /></td></tr>
+<tr class="memitem:a43b7dfb431c521c2cba6daa833efe6eb" id="r_a43b7dfb431c521c2cba6daa833efe6eb"><td class="memItemLeft"><a id="a43b7dfb431c521c2cba6daa833efe6eb" name="a43b7dfb431c521c2cba6daa833efe6eb"></a>
+<a class="el" href="#ae623bfbec50de5d6d23c4ab5e92c9264">exception_handler_t</a>&#160;</td><td class="memItemRight"><b>exception_handler_</b></td></tr>
+<tr class="memdesc:a43b7dfb431c521c2cba6daa833efe6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常处理器 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>TCP客户端基类 </p>
+<p>提供TCP客户端的核心功能，包括连接管理、DNS解析、 数据收发和自动重连。派生类实现具体的socket创建。 </p>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00042">42</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ae871291551e7990a0716bb07ce8aa850" name="ae871291551e7990a0716bb07ce8aa850"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae871291551e7990a0716bb07ce8aa850">&#9670;&#160;</a></span>tcp_client_base()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tcp_client_base::tcp_client_base </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classdns__client.html">dns_client</a></td>          <td class="paramname"><span class="paramname"><em>dns</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数（带DNS客户端） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dns</td><td>DNS客户端 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00121">121</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00049">dns_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aff2ce3b983291c2d894d6077b0882d5a" name="aff2ce3b983291c2d894d6077b0882d5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff2ce3b983291c2d894d6077b0882d5a">&#9670;&#160;</a></span>connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tcp_client_base::connect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structports.html">ports</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>连接到服务器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host</td><td>主机名或IP地址 </td></tr>
+    <tr><td class="paramname">port</td><td>端口 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>连接成功返回true</dd></dl>
+<p>支持域名解析，自动尝试所有解析到的IP地址。 根据prefer_ipv6_设置决定IPv4/IPv6优先级。 </p>
+
+</div>
+</div>
+<a id="ac9f7a0c0e90e96e15b24c281e2d98f4f" name="ac9f7a0c0e90e96e15b24c281e2d98f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f7a0c0e90e96e15b24c281e2d98f4f">&#9670;&#160;</a></span>connect_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> tcp_client_base::connect_timeout </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取连接超时时间 </p>
+<dl class="section return"><dt>返回</dt><dd>超时时间 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00145">145</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00145">connect_timeout()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00057">connect_timeout_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00145">connect_timeout()</a>.</p>
+
+</div>
+</div>
+<a id="aa3899d6ba07fea1fe4d89f5b962f787e" name="aa3899d6ba07fea1fe4d89f5b962f787e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3899d6ba07fea1fe4d89f5b962f787e">&#9670;&#160;</a></span>connected_host()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp; tcp_client_base::connected_host </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前连接的主机名 </p>
+<dl class="section return"><dt>返回</dt><dd>主机名 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00349">349</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00052">connected_host_</a>.</p>
+
+</div>
+</div>
+<a id="a4076544741ebf84139c45eaa105bfde0" name="a4076544741ebf84139c45eaa105bfde0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4076544741ebf84139c45eaa105bfde0">&#9670;&#160;</a></span>connected_port()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structports.html">ports</a> tcp_client_base::connected_port </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前连接的端口 </p>
+<dl class="section return"><dt>返回</dt><dd>端口 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00355">355</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00053">connected_port_</a>.</p>
+
+</div>
+</div>
+<a id="a4aa3eb851f96deeb6286b6cd782c9be7" name="a4aa3eb851f96deeb6286b6cd782c9be7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aa3eb851f96deeb6286b6cd782c9be7">&#9670;&#160;</a></span>create_socket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt; tcp_client_base::create_socket </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建新的socket对象 </p>
+<dl class="section return"><dt>返回</dt><dd>socket智能指针 </dd></dl>
+
+<p>在 <a class="el" href="classssl__client.html#a8eb86cc4819094bb2f562bf63e871cc2">ssl_client</a> , 以及 <a class="el" href="classtcp__client.html#a1c6ad9cebb50df86eb1a086cf9654a04">tcp_client</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a4c2371c71b6c950a3fa9f2cc83fad52d" name="a4c2371c71b6c950a3fa9f2cc83fad52d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2371c71b6c950a3fa9f2cc83fad52d">&#9670;&#160;</a></span>current_reconnect_attempt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD int tcp_client_base::current_reconnect_attempt </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前重连尝试次数 </p>
+<dl class="section return"><dt>返回</dt><dd>当前次数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00197">197</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00055">current_reconnect_attempt_</a>.</p>
+
+</div>
+</div>
+<a id="a9d32205948f3438493ddf192f3563301" name="a9d32205948f3438493ddf192f3563301"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d32205948f3438493ddf192f3563301">&#9670;&#160;</a></span>get_dns_client() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD const <a class="el" href="classdns__client.html">dns_client</a> &amp; tcp_client_base::get_dns_client </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取DNS客户端常量引用 </p>
+<dl class="section return"><dt>返回</dt><dd>DNS客户端常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00381">381</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00049">dns_</a>.</p>
+
+</div>
+</div>
+<a id="a38cccfd0727c229c39422c0d92233694" name="a38cccfd0727c229c39422c0d92233694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38cccfd0727c229c39422c0d92233694">&#9670;&#160;</a></span>get_dns_client() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classdns__client.html">dns_client</a> &amp; tcp_client_base::get_dns_client </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取DNS客户端 </p>
+<dl class="section return"><dt>返回</dt><dd>DNS客户端引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00375">375</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00049">dns_</a>.</p>
+
+</div>
+</div>
+<a id="a8f37f7991aee0a91ae4078f60446ff12" name="a8f37f7991aee0a91ae4078f60446ff12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f37f7991aee0a91ae4078f60446ff12">&#9670;&#160;</a></span>handle_exception()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE void tcp_client_base::handle_exception </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structexception.html">exception</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>处理异常 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>异常对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00105">105</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00068">exception_handler_</a>.</p>
+
+</div>
+</div>
+<a id="a9940a605bbff2145e0a220080b1660dc" name="a9940a605bbff2145e0a220080b1660dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9940a605bbff2145e0a220080b1660dc">&#9670;&#160;</a></span>is_auto_reconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool tcp_client_base::is_auto_reconnect </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否启用自动重连 </p>
+<dl class="section return"><dt>返回</dt><dd>启用返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00185">185</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00062">auto_reconnect_</a>.</p>
+
+</div>
+</div>
+<a id="a32b3945937b1f70cb9bceb2cad417d05" name="a32b3945937b1f70cb9bceb2cad417d05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32b3945937b1f70cb9bceb2cad417d05">&#9670;&#160;</a></span>is_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool tcp_client_base::is_connected </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否已连接 </p>
+<dl class="section return"><dt>返回</dt><dd>已连接返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00337">337</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00050">socket_</a>.</p>
+
+</div>
+</div>
+<a id="a33d7454cccff7e88e3dedf116d59910b" name="a33d7454cccff7e88e3dedf116d59910b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d7454cccff7e88e3dedf116d59910b">&#9670;&#160;</a></span>is_reconnecting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool tcp_client_base::is_reconnecting </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否正在重连 </p>
+<dl class="section return"><dt>返回</dt><dd>正在重连返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00343">343</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00064">is_reconnecting_</a>.</p>
+
+</div>
+</div>
+<a id="a97c21cec9d599cc696f26f7b27981827" name="a97c21cec9d599cc696f26f7b27981827"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c21cec9d599cc696f26f7b27981827">&#9670;&#160;</a></span>post_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tcp_client_base::post_connect </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>连接建立后的额外处理 </p>
+<dl class="section return"><dt>返回</dt><dd>处理成功返回true </dd></dl>
+
+<p>被 <a class="el" href="classssl__client.html#a5fbd0e9862f7eaa89c627cd6c3a0da50">ssl_client</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00080">80</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa5accb1dc9ed4cad96d5d3eafeda31cd" name="aa5accb1dc9ed4cad96d5d3eafeda31cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5accb1dc9ed4cad96d5d3eafeda31cd">&#9670;&#160;</a></span>prefer_ipv6()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool tcp_client_base::prefer_ipv6 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否优先使用IPv6 </p>
+<dl class="section return"><dt>返回</dt><dd>优先返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00222">222</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00063">prefer_ipv6_</a>.</p>
+
+</div>
+</div>
+<a id="a728e996ae56a5d407649463d9d49bcb3" name="a728e996ae56a5d407649463d9d49bcb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a728e996ae56a5d407649463d9d49bcb3">&#9670;&#160;</a></span>receive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> tcp_client_base::receive </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>接收数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+    <tr><td class="paramname">length</td><td>缓冲区大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>实际接收字节数，0表示连接关闭，-1表示错误 </dd></dl>
+
+</div>
+</div>
+<a id="a018c24813fbccad0045b4eb6404ee725" name="a018c24813fbccad0045b4eb6404ee725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a018c24813fbccad0045b4eb6404ee725">&#9670;&#160;</a></span>receive_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvector.html">vector</a>&lt; char &gt; tcp_client_base::receive_all </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>max_size</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>接收所有可用数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max_size</td><td>最大接收字节数（0表示无限制） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>接收到的数据</dd></dl>
+<p>持续接收直到连接关闭或达到最大大小。 </p>
+
+</div>
+</div>
+<a id="aea78ea646c0739b73700dc5916f79174" name="aea78ea646c0739b73700dc5916f79174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea78ea646c0739b73700dc5916f79174">&#9670;&#160;</a></span>receive_exact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tcp_client_base::receive_exact </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmemory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>接收指定大小的数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>接收缓冲区（指定大小） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>接收成功返回true</dd></dl>
+<p>循环接收直到缓冲区填满或连接关闭。 </p>
+
+</div>
+</div>
+<a id="a42885668defcd03eb61f5cc8da19d058" name="a42885668defcd03eb61f5cc8da19d058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42885668defcd03eb61f5cc8da19d058">&#9670;&#160;</a></span>receive_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; tcp_client_base::receive_line </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>max_length</em></span><span class="paramdefsep"> = </span><span class="paramdefval">8192</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>接收一行数据（以\n结尾） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max_length</td><td>最大行长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>行字符串（不含\n），失败返回none</dd></dl>
+<p>支持\r\n和\n换行符。 </p>
+
+</div>
+</div>
+<a id="a96c9be0f37fd6cf689d80567367ce50d" name="a96c9be0f37fd6cf689d80567367ce50d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c9be0f37fd6cf689d80567367ce50d">&#9670;&#160;</a></span>reconnect_attempts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD int tcp_client_base::reconnect_attempts </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大重连次数 </p>
+<dl class="section return"><dt>返回</dt><dd>重连次数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00191">191</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00054">reconnect_attempts_</a>.</p>
+
+</div>
+</div>
+<a id="a3b61e041a3f5b1c55119d69627631dd5" name="a3b61e041a3f5b1c55119d69627631dd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b61e041a3f5b1c55119d69627631dd5">&#9670;&#160;</a></span>reconnect_delay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> tcp_client_base::reconnect_delay </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取重连延迟时间 </p>
+<dl class="section return"><dt>返回</dt><dd>延迟时间 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00210">210</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00060">reconnect_delay_</a>.</p>
+
+</div>
+</div>
+<a id="a8e8daee93857653ebe71413cd72b94e8" name="a8e8daee93857653ebe71413cd72b94e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e8daee93857653ebe71413cd72b94e8">&#9670;&#160;</a></span>reconnect_if_needed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tcp_client_base::reconnect_if_needed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>需要时执行重连 </p>
+<dl class="section return"><dt>返回</dt><dd>重连成功返回true </dd></dl>
+
+</div>
+</div>
+<a id="aa387738fb13cfdd0fc217a2695f7f252" name="aa387738fb13cfdd0fc217a2695f7f252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa387738fb13cfdd0fc217a2695f7f252">&#9670;&#160;</a></span>recv_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> tcp_client_base::recv_timeout </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取接收超时时间 </p>
+<dl class="section return"><dt>返回</dt><dd>超时时间 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00171">171</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00059">recv_timeout_</a>.</p>
+
+</div>
+</div>
+<a id="ab82d9541a6e63484559c1d4af9daf45b" name="ab82d9541a6e63484559c1d4af9daf45b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab82d9541a6e63484559c1d4af9daf45b">&#9670;&#160;</a></span>send() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> tcp_client_base::send </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>发送数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>数据指针 </td></tr>
+    <tr><td class="paramname">length</td><td>数据长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>实际发送字节数，失败返回-1</dd></dl>
+<p>自动重连机制生效时，连接断开会尝试重连后发送。 </p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00279">send()</a>.</p>
+
+</div>
+</div>
+<a id="a0437808975f8def1d0715cbd435b0f76" name="a0437808975f8def1d0715cbd435b0f76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0437808975f8def1d0715cbd435b0f76">&#9670;&#160;</a></span>send() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> tcp_client_base::send </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>发送字符串数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>字符串视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>实际发送字节数，失败返回-1 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00279">279</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00279">send()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00279">send()</a>.</p>
+
+</div>
+</div>
+<a id="a80790a2a3798f6e591107ccec2bf4809" name="a80790a2a3798f6e591107ccec2bf4809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80790a2a3798f6e591107ccec2bf4809">&#9670;&#160;</a></span>send_all() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tcp_client_base::send_all </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>发送所有数据（保证全部发送） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>数据指针 </td></tr>
+    <tr><td class="paramname">length</td><td>数据长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>发送成功返回true</dd></dl>
+<p>循环调用send()直到所有数据发送完毕。 </p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
+
+</div>
+</div>
+<a id="a7615d24c8dcdc3146d02525cc5421608" name="a7615d24c8dcdc3146d02525cc5421608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7615d24c8dcdc3146d02525cc5421608">&#9670;&#160;</a></span>send_all() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tcp_client_base::send_all </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>发送所有字符串数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>字符串视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>发送成功返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00296">296</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00296">send_all()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00296">send_all()</a>.</p>
+
+</div>
+</div>
+<a id="a4eff17012fac02e68690e63f36c34b48" name="a4eff17012fac02e68690e63f36c34b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eff17012fac02e68690e63f36c34b48">&#9670;&#160;</a></span>send_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> tcp_client_base::send_timeout </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取发送超时时间 </p>
+<dl class="section return"><dt>返回</dt><dd>超时时间 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00158">158</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00058">send_timeout_</a>.</p>
+
+</div>
+</div>
+<a id="a931464775f1cdd1f17846fa43bc8c090" name="a931464775f1cdd1f17846fa43bc8c090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a931464775f1cdd1f17846fa43bc8c090">&#9670;&#160;</a></span>set_auto_reconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_auto_reconnect </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>max_attempts</em></span><span class="paramdefsep"> = </span><span class="paramdefval">3</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置自动重连 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>是否启用 </td></tr>
+    <tr><td class="paramname">max_attempts</td><td>最大重连次数（默认3） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>max_attempts为0或负数时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a492a80d5437b81e4aff2c0c25f5505ef" name="a492a80d5437b81e4aff2c0c25f5505ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a492a80d5437b81e4aff2c0c25f5505ef">&#9670;&#160;</a></span>set_connect_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_connect_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ad09db647aea484d8b3fa32368c41da67">connect_callback_t</a></td>          <td class="paramname"><span class="paramname"><em>callback</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置连接成功回调 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td>回调函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00240">240</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00066">connect_callback_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+</div>
+</div>
+<a id="a354774a0fd2b9eaebefdd8e7d31bf902" name="a354774a0fd2b9eaebefdd8e7d31bf902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354774a0fd2b9eaebefdd8e7d31bf902">&#9670;&#160;</a></span>set_connect_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_connect_timeout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置连接超时时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>超时时间（毫秒） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>timeout为0或负数时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a354774a0fd2b9eaebefdd8e7d31bf902">set_connect_timeout()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a354774a0fd2b9eaebefdd8e7d31bf902">set_connect_timeout()</a>.</p>
+
+</div>
+</div>
+<a id="ae3a863e0ff3966b4da4af6ea23cc87c0" name="ae3a863e0ff3966b4da4af6ea23cc87c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3a863e0ff3966b4da4af6ea23cc87c0">&#9670;&#160;</a></span>set_disconnect_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_disconnect_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#adb8a5f228722c6db09638ab34761236a">disconnect_callback_t</a></td>          <td class="paramname"><span class="paramname"><em>callback</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置断开连接回调 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td>回调函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00246">246</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00067">disconnect_callback_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+</div>
+</div>
+<a id="ac94e9cb80fb0db0d5c142da213811a0e" name="ac94e9cb80fb0db0d5c142da213811a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac94e9cb80fb0db0d5c142da213811a0e">&#9670;&#160;</a></span>set_dns_server()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_dns_server </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdns__client_1_1config.html">dns_client::config</a></td>          <td class="paramname"><span class="paramname"><em>cfg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置DNS服务器配置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cfg</td><td>DNS配置 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00228">228</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00049">dns_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+</div>
+</div>
+<a id="a90666e1622d3694ce3465251bfd994e1" name="a90666e1622d3694ce3465251bfd994e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90666e1622d3694ce3465251bfd994e1">&#9670;&#160;</a></span>set_exception_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_exception_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ae623bfbec50de5d6d23c4ab5e92c9264">exception_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置异常处理器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>处理函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00234">234</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00068">exception_handler_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+
+</div>
+</div>
+<a id="a27bca1156f14a8e17cfe4edf6420b0aa" name="a27bca1156f14a8e17cfe4edf6420b0aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27bca1156f14a8e17cfe4edf6420b0aa">&#9670;&#160;</a></span>set_prefer_ipv6()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_prefer_ipv6 </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>prefer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置是否优先使用IPv6 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prefer</td><td>是否优先 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00216">216</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00063">prefer_ipv6_</a>.</p>
+
+</div>
+</div>
+<a id="a22a71f422f46e0ebd3f190b84f90c80a" name="a22a71f422f46e0ebd3f190b84f90c80a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a71f422f46e0ebd3f190b84f90c80a">&#9670;&#160;</a></span>set_reconnect_delay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_reconnect_delay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></td>          <td class="paramname"><span class="paramname"><em>delay</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置重连延迟时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay</td><td>延迟时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>delay为负数时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aad18c6f111cd198e33c7634ba6950dd9" name="aad18c6f111cd198e33c7634ba6950dd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad18c6f111cd198e33c7634ba6950dd9">&#9670;&#160;</a></span>set_recv_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_recv_timeout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置接收超时时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>超时时间（毫秒） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>timeout为0或负数时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad9d43d91b7a30b89aef97521588ae402" name="ad9d43d91b7a30b89aef97521588ae402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d43d91b7a30b89aef97521588ae402">&#9670;&#160;</a></span>set_send_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tcp_client_base::set_send_timeout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置发送超时时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>超时时间（毫秒） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>timeout为0或负数时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aabe3dcb7d46b2e6a01b5524efa6db9cb" name="aabe3dcb7d46b2e6a01b5524efa6db9cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabe3dcb7d46b2e6a01b5524efa6db9cb">&#9670;&#160;</a></span>socket() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classtcp__socket.html">tcp_socket</a> &amp; tcp_client_base::socket </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取底层socket引用 </p>
+<dl class="section return"><dt>返回</dt><dd>socket引用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>未连接时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3259c489209999a1b1d045f12e508043" name="a3259c489209999a1b1d045f12e508043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3259c489209999a1b1d045f12e508043">&#9670;&#160;</a></span>socket() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD const <a class="el" href="classtcp__socket.html">tcp_socket</a> &amp; tcp_client_base::socket </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取底层socket常量引用 </p>
+<dl class="section return"><dt>返回</dt><dd>socket常量引用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structvalue__exception.html" title="变量处理异常">value_exception</a></td><td>未连接时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1f61b161f3a5771e1a03e59dc3783dde" name="a1f61b161f3a5771e1a03e59dc3783dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f61b161f3a5771e1a03e59dc3783dde">&#9670;&#160;</a></span>try_connect_to_ip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tcp_client_base::try_connect_to_ip </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ip</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structports.html">ports</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>尝试连接到指定IP </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ip</td><td>IP地址 </td></tr>
+    <tr><td class="paramname">port</td><td>端口 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>连接成功返回true </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classtcp__client__base.html">tcp_client_base</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+var classwebsocket__session =
+[
+    [ "close_handler", "classwebsocket__session.html#a3046e7a8e4c7d218190d5dd0267f3dd8", null ],
+    [ "error_handler", "classwebsocket__session.html#a9357893528e04fa9e0ccaeef3fd1d9a2", null ],
+    [ "message_handler", "classwebsocket__session.html#a4abaa8761a35b3f6cbd39301a6710bcf", null ],
+    [ "websocket_session", "classwebsocket__session.html#a780f8dbdf6a0c7a69be53a00177d74c5", null ],
+    [ "~websocket_session", "classwebsocket__session.html#a9c38f9d9dfabe97dc0dcbaf19266c7e6", null ],
+    [ "close", "classwebsocket__session.html#a4293edef06962564c57229989f755905", null ],
+    [ "is_open", "classwebsocket__session.html#a518747318c8d053b64accbab5c2753ca", null ],
+    [ "send", "classwebsocket__session.html#a63462f1a714a2520dca8fd4c6e6a36f6", null ],
+    [ "send_binary", "classwebsocket__session.html#a74a5734c8df72ad7544fd3636704c665", null ],
+    [ "set_close_handler", "classwebsocket__session.html#af77e313e481b77c5a125ef3c9819dcd6", null ],
+    [ "set_error_handler", "classwebsocket__session.html#a40df249d0e94b96b4a736c8ff752f5ea", null ],
+    [ "set_message_handler", "classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca", null ],
+    [ "socket", "classwebsocket__session.html#a8c5e17fbe27db7ab514b45e5af7364df", null ],
+    [ "socket", "classwebsocket__session.html#ab75d9beacbd176cff4c40fe06af47e19", null ],
+    [ "ssl_socket_ptr", "classwebsocket__session.html#acb75b5583b665b601f4c3346eed8c3e6", null ],
+    [ "ssl_socket_ptr", "classwebsocket__session.html#a0b9fbe90fb51dc56e8cccc2b29c23e8c", null ],
+    [ "start", "classwebsocket__session.html#a191ca2f118812d4c03f30fc1076c2ff8", null ],
+    [ "stop", "classwebsocket__session.html#ac0a53b632fc017fae2dec768d24b7c65", null ]
+];

@@ -177,13 +177,27 @@ write_basic_package_version_file(
         COMPATIBILITY SameMajorVersion
 )
 
+
+set(PACKAGE_VERSION_VARS
+        NEXUSFORCE_VERSION
+        NEXUSFORCE_ENABLE_POSTGRESQL
+        NEXUSFORCE_ENABLE_MYSQL
+        NEXUSFORCE_ENABLE_SQLITE3
+        NEXUSFORCE_ENABLE_REDIS
+        NEXUSFORCE_ENABLE_ZLIB
+        NEXUSFORCE_ENABLE_LZ4
+        NEXUSFORCE_USING_SSO
+)
+
+foreach(_var ${PACKAGE_VERSION_VARS})
+    set(${_var} ${${_var}})
+endforeach()
+
 configure_package_config_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/NexusForceConfig.cmake.in
         ${CMAKE_CURRENT_BINARY_DIR}/NexusForceConfig.cmake
         INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
-        PATH_VARS
-            CMAKE_INSTALL_INCLUDEDIR
-            CMAKE_INSTALL_LIBDIR
+        PATH_VARS CMAKE_INSTALL_INCLUDEDIR CMAKE_INSTALL_LIBDIR
         NO_SET_AND_CHECK_MACRO
         NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )

@@ -1,0 +1,26 @@
+var structhttp__client__response =
+[
+    [ "content_type", "structhttp__client__response.html#a8140456b549c143dc9138f23d9492d3f", null ],
+    [ "has_header", "structhttp__client__response.html#a1be49eeb42894752297fe81b3485f3ca", null ],
+    [ "header", "structhttp__client__response.html#a060897bc15fa5fdefa3d89444520d776", null ],
+    [ "headers_all", "structhttp__client__response.html#a5a671d927d3ee1020e210f2268c054fd", null ],
+    [ "is_client_error", "structhttp__client__response.html#ab875e4038aae7d93b973c5dec823306b", null ],
+    [ "is_redirect", "structhttp__client__response.html#abb2c2fd19bfad6a7006cb35d381454e6", null ],
+    [ "is_server_error", "structhttp__client__response.html#a7774c351153f4c8591c7853fdf8dd26b", null ],
+    [ "is_success", "structhttp__client__response.html#a148b49407c1ed0321eab6266ee7cce63", null ],
+    [ "body", "structhttp__client__response.html#aef283f5e8b8cbb20c4a43e8f49429e68", null ],
+    [ "chunked", "structhttp__client__response.html#a421388c834ec20f6a93fa464edb8db15", null ],
+    [ "connect_time", "structhttp__client__response.html#a5762c73c7a27350aa4e2db629e8b58c4", null ],
+    [ "content_length", "structhttp__client__response.html#ac241dacb85f9e84ac30f578ab1b5e500", null ],
+    [ "cookies", "structhttp__client__response.html#a8247f9ceb69f1fc9603551de2317c425", null ],
+    [ "effective_url", "structhttp__client__response.html#ac28850a046ef940399b3a8919b90f98d", null ],
+    [ "headers", "structhttp__client__response.html#a757f686263b9196de5ab6e40d235ba0c", null ],
+    [ "http_version_major", "structhttp__client__response.html#adc754da17b0d10285fb0c6ade4e7b54c", null ],
+    [ "http_version_minor", "structhttp__client__response.html#aff6fe5bdb5d36260219abd5fb41fcfd3", null ],
+    [ "receive_time", "structhttp__client__response.html#adb0a994d3782d344e29f8ec0a15367ea", null ],
+    [ "redirect_count", "structhttp__client__response.html#a7cb64e5735a8e563251c0f18036e5f21", null ],
+    [ "send_time", "structhttp__client__response.html#a1420d42ed1dd0acdba6f1856c78bd17b", null ],
+    [ "status", "structhttp__client__response.html#a529d4ad3b38d7b57f4446e77e973fdbb", null ],
+    [ "status_message", "structhttp__client__response.html#ae9c4b98972bd9f5c5baeca3111b3edd3", null ],
+    [ "total_time", "structhttp__client__response.html#a4fc9fa359bc9ba19e0603b578286d1aa", null ]
+];

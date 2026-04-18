@@ -15,25 +15,6 @@ set(NEXUSFORCE_USING_PCRE2_JIT @NEXUSFORCE_USING_PCRE2_JIT@)
 include(CMakeFindDependencyMacro)
 
 
-include("${CMAKE_CURRENT_LIST_DIR}/NexusForceCompilerOptions.cmake")
-
-function(nexusforce_apply_compiler_options target)
-    nexusforce_compiler_options(${target})
-endfunction()
-
-
-if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    message(STATUS "NexusForce: vcpkg toolchain not detected. Please ensure dependencies are available.")
-endif()
-
-if(@NEXUSFORCE_ENABLE_ZLIB@)
-    find_dependency(ZLIB)
-endif()
-
-if(@NEXUSFORCE_ENABLE_OPENSSL@)
-    find_dependency(OpenSSL COMPONENTS Crypto SSL)
-endif()
-
 if(@NEXUSFORCE_ENABLE_POSTGRESQL@)
     find_dependency(PostgreSQL)
 endif()
@@ -50,15 +31,21 @@ if(@NEXUSFORCE_ENABLE_REDIS@)
     find_dependency(hiredis CONFIG)
 endif()
 
-if(@NEXUSFORCE_ENABLE_PCRE2@)
-    find_dependency(pcre2 CONFIG COMPONENTS 8BIT)
-
-    if(pcre2_FOUND AND @NEXUSFORCE_USING_PCRE2_JIT@)
-        message(STATUS "NexusForce: PCRE2 JIT requested - ensure PCRE2 was built with JIT support")
-    endif()
+if(@NEXUSFORCE_ENABLE_ZLIB@)
+    find_dependency(ZLIB)
 endif()
 
+if(@NEXUSFORCE_ENABLE_LZ4@)
+    find_dependency(lz4 CONFIG)
+endif()
 
+find_dependency(OpenSSL COMPONENTS Crypto SSL)
+find_dependency(pcre2 CONFIG COMPONENTS 8BIT)
+
+find_dependency(Threads)
+
+
+include("${CMAKE_CURRENT_LIST_DIR}/NexusForceCompilerOptions.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceTargets.cmake")
 
 
