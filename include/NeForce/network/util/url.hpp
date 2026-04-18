@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_URL_HPP__
-#define NEFORCE_NETWORK_URL_HPP__
+#ifndef NEFORCE_NETWORK_UTIL_URL_HPP__
+#define NEFORCE_NETWORK_UTIL_URL_HPP__
 
 /**
  * @file url.hpp
@@ -209,12 +209,46 @@ struct url : iobject<url> {
      */
     NEFORCE_NODISCARD static optional<string> decode(string_view str);
 
+    /**
+     * @brief 表单编码（application/x-www-form-urlencoded）
+     * @param str 待编码的字符串
+     * @return 编码后的字符串
+     *
+     * 符合WHATWG HTML标准的表单编码规则：
+     * - 空格编码为'+'
+     * - 非保留字符不编码
+     * - 其他字符进行百分号编码
+     */
     NEFORCE_NODISCARD static string encode_form(string_view str);
 
+    /**
+     * @brief 宽容解码
+     * @param str 待解码的字符串
+     * @return 解码后的字符串
+     *
+     * 尝试解码，如果遇到无效的%XX格式，保留原字符。
+     * 适用于处理不规范的URL编码。
+     */
     NEFORCE_NODISCARD static string decode_tolerant(string_view str);
 
+    /**
+     * @brief 解析查询字符串
+     * @param query 查询字符串
+     * @param params 输出参数映射
+     *
+     * 将"key1=value1&key2=value2"格式的查询字符串解析为键值对。
+     * 键和值会自动进行URL解码。
+     */
     static void parse_query(string_view query, unordered_map<string, string>& params);
 
+    /**
+     * @brief 构建查询字符串
+     * @param params 参数映射
+     * @return 查询字符串
+     *
+     * 将键值对转换为"key1=value1&key2=value2"格式的查询字符串。
+     * 键和值会自动进行表单编码。
+     */
     NEFORCE_NODISCARD static string build_query(const unordered_map<string, string>& params);
 };
 
@@ -223,4 +257,4 @@ struct url : iobject<url> {
 /** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_URL_HPP__
+#endif // NEFORCE_NETWORK_UTIL_URL_HPP__

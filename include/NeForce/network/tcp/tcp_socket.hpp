@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_SOCKET_TCP_SOCKET_HPP__
-#define NEFORCE_NETWORK_SOCKET_TCP_SOCKET_HPP__
+#ifndef NEFORCE_NETWORK_TCP_TCP_SOCKET_HPP__
+#define NEFORCE_NETWORK_TCP_TCP_SOCKET_HPP__
 
 /**
  * @file tcp_socket.hpp
@@ -13,8 +13,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
+ * @addtogroup Network 网络通信
  * @{
  */
 
@@ -183,4 +182,4 @@ public:
 /** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_SOCKET_TCP_SOCKET_HPP__
+#endif // NEFORCE_NETWORK_TCP_TCP_SOCKET_HPP__

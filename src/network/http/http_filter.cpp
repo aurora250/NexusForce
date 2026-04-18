@@ -92,7 +92,7 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
     response.headers[http_key::Access_Control_Allow_Credentials()] = to_string(allow_credentials);
     response.headers[http_key::Access_Control_Allow_Methods()] = allowed_methods.to_string();
     response.headers[http_key::Access_Control_Allow_Headers()] = allowed_headers;
-    response.headers[http_key::Access_Control_Max_Age()] = to_string(max_age);
+    response.headers[http_key::Access_Control_Max_Age()] = to_string(max_age.count());
 
     if (request.method.is_options()) {
         response.status = http_status::S2_NO_CONTENT;
@@ -122,9 +122,10 @@ bool logging_filter::pre_filter(http_request& request, http_response& response) 
 
     if (log_body && !request.body.empty()) {
         const size_t body_size = request.body.size();
-        const size_t log_size = (body_size > max_body_log_size) ? max_body_log_size : body_size;
+        const size_t max_size = max_body_log_size.bytes();
+        const size_t log_size = (body_size > max_size) ? max_size : body_size;
         log_msg += "\nBody (" + to_string(body_size) + " bytes): " + request.body.view(0, log_size);
-        if (body_size > max_body_log_size) {
+        if (body_size > max_size) {
             log_msg += "...";
         }
     }
@@ -154,9 +155,10 @@ void logging_filter::post_filter(http_request& request, http_response& response)
 
     if (log_body && !response.body.empty()) {
         const size_t body_size = response.body.size();
-        const size_t log_size = (body_size > max_body_log_size) ? max_body_log_size : body_size;
+        const size_t max_size = max_body_log_size.bytes();
+        const size_t log_size = (body_size > max_size) ? max_size : body_size;
         log_msg += "\nBody (" + to_string(body_size) + " bytes): " + response.body.view(0, log_size);
-        if (body_size > max_body_log_size) {
+        if (body_size > max_size) {
             log_msg += "...";
         }
     }
@@ -231,7 +233,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             return true;
         }
 
-        const size_t file_size = filesystem::size(file_path);
+        const auto file_size = filesystem::size(file_path);
         if (file_size > max_file_size_) {
             response.status = http_status::S4_PAYLOAD_LARGE;
             response.status_message = "Payload Too Large";

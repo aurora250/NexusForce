@@ -61,7 +61,7 @@ public:
      * 表示路径树中的一个节点，包含路径信息及子节点列表。
      * 节点以共享所有权的方式持有子节点，父节点以弱引用持有。
      */
-    class node : public enable_shared_from<node> {
+    class node : public enable_shared_from_this<node> {
         friend class path_tree;
 
     public:

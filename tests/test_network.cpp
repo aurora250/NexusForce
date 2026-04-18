@@ -27,9 +27,9 @@ void handle_session_api(http_request& request, http_response& response, http_ser
                                 .key("sessionId")
                                 .value(sess->id)
                                 .key("createTime")
-                                .value(sess->create_time.to_string_ISO_UTC())
+                                .value(sess->create_time.to_RFC3339())
                                 .key("lastAccess")
-                                .value(sess->last_access.to_string_ISO_UTC())
+                                .value(sess->last_access.to_RFC3339())
                                 .key("attributes")
                                 .value(sess->data)
                                 .end_object()
@@ -151,7 +151,7 @@ void handle_cookie_api(http_request& request, http_response& response) {
             ck.name = name;
             ck.value = value;
             if (!max_age_str.empty()) {
-                ck.max_age = integer32::parse(max_age_str.view()).value();
+                ck.max_age = seconds{integer32::parse(max_age_str.view()).value()};
             }
             response.cookies.emplace_back(move(ck));
 
@@ -179,7 +179,7 @@ void handle_cookie_api(http_request& request, http_response& response) {
         if (!name.cookie_name().empty()) {
             http_cookie ck;
             ck.name = name;
-            ck.max_age = 0;
+            ck.max_age = 0_s;
             ck.expires = datetime::epoch();
             response.cookies.emplace_back(move(ck));
 
@@ -198,7 +198,7 @@ void handle_cookie_api(http_request& request, http_response& response) {
 
 void test_https_server() {
     try {
-        https_server server(8443, 128);
+        http_server server(ports(8443), 128);
         server.load_certificate(
 #ifdef NEFORCE_PLATFORM_LINUX
                 "/home/huenqi/server.crt", "/home/huenqi/server.key"
@@ -310,7 +310,7 @@ void test_https_server() {
 
 void test_http_server() {
     try {
-        http_server server(8080, 128);
+        http_server server(ports(8080), 128);
 
         http_router& router = server.router();
         router.use(make_unique<logging_filter>());
@@ -373,7 +373,7 @@ void test_http_server() {
         });
 
         router.get("/test", [](http_request&, http_response& response) {
-            static file test{res_root() / "index.html"};
+            static file test{res_root() / "test.html"};
             response.status = http_status::S2_OK;
             response.status_message = "OK";
             response.set_content_type(http_content::HTML_TEXT());
@@ -390,10 +390,10 @@ void test_http_server() {
 
         auto& ws = server.websocket();
 
-        ws.route("/chat", [](shared_ptr<websocket_session<tcp_socket>> session) {
+        ws.route("/chat", [](shared_ptr<websocket_session> session) {
             println("New WebSocket connection established");
 
-            weak_ptr<websocket_session<tcp_socket>> weak_session = session;
+            weak_ptr<websocket_session> weak_session{session};
 
             session->set_message_handler([weak_session](const string& message, websocket_opcode opcode) {
                 println("Received: ", message);
@@ -496,7 +496,7 @@ void test_download() {
     config.receive_timeout = seconds(15);
     config.follow_redirects = true;
     config.max_redirects = 5;
-    config.max_response_size = numeric_traits<size_t>::max();
+    config.max_response_size = byte_size{numeric_traits<size_t>::max()};
     config.verify_ssl = true;
     http_client client(config);
 

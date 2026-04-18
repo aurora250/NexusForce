@@ -10,7 +10,7 @@
  * 并为每种数据库提供便捷的配置工厂方法。
  */
 
-#include "NeForce/core/string/string.hpp"
+#include "NeForce/network/util/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -94,7 +94,7 @@ struct NEFORCE_API db_config {
     string database{};         ///< 数据库名
     string host = "127.0.0.1"; ///< 数据库主机地址
     string charset{};          ///< 数据库字符集
-    uint16_t port = 0;         ///< 数据库端口号
+    ports port{};              ///< 数据库端口号
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
     /**

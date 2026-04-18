@@ -1,8 +1,6 @@
 name: WakaTime Readme
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # 每天 UTC 0点运行
   workflow_dispatch:
 
 jobs:
@@ -22,7 +20,7 @@ jobs:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
 
           SHOW_TITLE: true
-          BLOCKS: "⬛🟨🟩"
+          BLOCKS: "░▒▓█"
           TIME_RANGE: all_time
           SHOW_TIME: true
           SHOW_MASKED_TIME: true

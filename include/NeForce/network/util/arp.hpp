@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_ARP_HPP__
-#define NEFORCE_NETWORK_ARP_HPP__
+#ifndef NEFORCE_NETWORK_UTIL_ARP_HPP__
+#define NEFORCE_NETWORK_UTIL_ARP_HPP__
 
 /**
  * @file arp.hpp
@@ -99,4 +99,4 @@ public:
 /** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_ARP_HPP__
+#endif // NEFORCE_NETWORK_UTIL_ARP_HPP__

@@ -12,7 +12,7 @@ namespace {
         if (!config.host.empty()) {
             result += "host=" + config.host + " ";
         }
-        if (config.port > 0) {
+        if (config.port) {
             result += "port=" + _NEFORCE to_string(config.port) + " ";
         }
         if (!config.database.empty()) {

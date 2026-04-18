@@ -496,6 +496,38 @@ public:
     }
 
     /**
+     * @brief 忽略大小写三路比较
+     * @param view 要比较的视图
+     * @return 负值（*this < view）、0（相等）、正值（*this > view）
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const basic_string_view view) const noexcept {
+        const size_type min_len = _NEFORCE min(size_, view.size_);
+        for (size_type i = 0; i < min_len; ++i) {
+            const auto lc = _NEFORCE to_lowercase(data_[i]);
+            const auto rc = _NEFORCE to_lowercase(view.data_[i]);
+            if (lc != rc) {
+                return (lc < rc) ? -1 : 1;
+            }
+        }
+        if (size_ < view.size_) {
+            return -1;
+        }
+        if (size_ > view.size_) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * @brief 忽略大小写与C风格字符串三路比较
+     * @param str C风格字符串
+     * @return 比较结果
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const_pointer str) const noexcept {
+        return this->compare_ignore_case(basic_string_view(str));
+    }
+
+    /**
      * @brief 查找子串
      * @param view 要查找的子串
      * @param n 起始位置

@@ -296,7 +296,7 @@ private:
 public:
     explicit yaml_timestamp(const string_view v) {
         datetime dt;
-        if (dt.try_parse_ISO_UTC(v) || dt.try_parse_ISO(v)) {
+        if (dt.try_parse_RFC3339(v) || dt.try_parse_ISO8601(v)) {
             value = dt;
         } else {
             NEFORCE_THROW_EXCEPTION(yaml_exception(("Invalid timestamp format: " + string(v)).data()));
@@ -310,7 +310,7 @@ public:
     NEFORCE_NODISCARD const yaml_timestamp* as_timestamp() const noexcept override { return this; }
     NEFORCE_NODISCARD const datetime& get_value() const noexcept { return value; }
 
-    NEFORCE_NODISCARD string get_string_value() const noexcept { return value.to_string_ISO_UTC(); }
+    NEFORCE_NODISCARD string get_string_value() const noexcept { return value.to_RFC3339(); }
 };
 
 class NEFORCE_API yaml_sequence final : public yaml_value {

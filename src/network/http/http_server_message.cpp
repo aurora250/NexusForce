@@ -30,6 +30,31 @@ namespace {
 } // namespace
 
 
+string_view http_request::client_ip() const noexcept {
+    const auto xff = header("X-Forwarded-For");
+    if (!xff.empty()) {
+        const auto comma = xff.find(',');
+        return comma != string::npos ? xff.view(0, comma) : xff;
+    }
+    const auto xri = header("X-Real-IP");
+    if (!xri.empty()) {
+        return xri;
+    }
+    return "";
+}
+
+void http_request::clear() {
+    method = http_method::GET();
+    path = "/";
+    version = "HTTP/1.1";
+    query.clear();
+    body.clear();
+    headers.clear();
+    cookies.clear();
+    parameters.clear();
+    session = nullptr;
+}
+
 http_request http_request::parse(const string_view str) {
     http_request request;
     size_t pos = 0;

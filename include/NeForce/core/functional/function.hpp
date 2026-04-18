@@ -73,6 +73,8 @@ union __nocopy_type {
  * 提供类型安全的存储访问，支持不同类型数据的存储和访问。
  */
 union storage_data {
+    storage_data() noexcept = default;
+
     NEFORCE_NODISCARD void* access() noexcept { return &data_[0]; }
     NEFORCE_NODISCARD const void* access() const noexcept { return &data_[0]; }
 
@@ -198,7 +200,7 @@ public:
     manage_type manager_ = nullptr;
 
 
-    __function_base() = default;
+    __function_base() noexcept = default;
     ~__function_base() {
         if (manager_) {
             manager_(func_, func_, FUNCTION_OPERATE::DESTROY_PTR);

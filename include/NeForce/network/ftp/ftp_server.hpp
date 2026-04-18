@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_FTP_SERVER_HPP__
-#define NEFORCE_NETWORK_FTP_SERVER_HPP__
+#ifndef NEFORCE_NETWORK_FTP_FTP_SERVER_HPP__
+#define NEFORCE_NETWORK_FTP_FTP_SERVER_HPP__
 #include "NeForce/network/ftp/ftp_protocol.hpp"
 #include "NeForce/network/tcp/tcp_acceptor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -59,4 +59,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_FTP_SERVER_HPP__
+#endif // NEFORCE_NETWORK_FTP_FTP_SERVER_HPP__

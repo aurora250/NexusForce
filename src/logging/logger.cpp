@@ -20,7 +20,7 @@ void logger::enqueue(const log_event& event) {
 
 void logger::start_worker() {
     running_ = true;
-    worker_ = thread([this] { worker_loop(); });
+    worker_.start([this] { worker_loop(); });
 }
 
 void logger::stop_worker() {

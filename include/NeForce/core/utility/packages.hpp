@@ -220,6 +220,15 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u, U, 64)
 
 #undef __NEFORCE_BUILD_INTEGER_STRUCT
 
+/**
+ * @typedef byte
+ * @brief 字节包装类
+ *
+ * 提供字节包装，支持类型转换、字符串表示、解析等功能。
+ */
+using byte = uinteger8;
+
+
 #ifdef NEFORCE_PLATFORM_LINUX64
 template <>
 struct package<long long> {

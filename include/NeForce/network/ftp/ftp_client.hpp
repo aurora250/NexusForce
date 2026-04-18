@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_FTP_CLIENT_HPP__
-#define NEFORCE_NETWORK_FTP_CLIENT_HPP__
+#ifndef NEFORCE_NETWORK_FTP_FTP_CLIENT_HPP__
+#define NEFORCE_NETWORK_FTP_FTP_CLIENT_HPP__
 #include "NeForce/network/dns/dns_client.hpp"
 #include "NeForce/network/ftp/ftp_protocol.hpp"
 #include "NeForce/network/tcp/tcp_socket.hpp"
@@ -22,7 +22,7 @@ private:
     transfer_mode transfer_mode_ = transfer_mode::binary;
     passive_mode passive_mode_ = passive_mode::passive;
     string server_host_;
-    ports server_port_{ports::ftp};
+    ports server_port_{ports::FTP};
 
     static constexpr int kActiveAcceptTimeoutSec = 30;
 
@@ -59,7 +59,7 @@ public:
     void connect(const ip_address& addr, tls_mode mode = tls_mode::none, ssl_context* ctx = nullptr,
                  const string& sni_hostname = "");
 
-    void connect(const string& hostname, ports port = ports::ftp, tls_mode mode = tls_mode::none,
+    void connect(const string& hostname, ports port = ports::FTP, tls_mode mode = tls_mode::none,
                  dns_client* dns = nullptr, ssl_context* ctx = nullptr, const string& sni = "");
 
     tls_info upgrade_tls(ssl_context& ctx, const string& sni_hostname = "");
@@ -101,4 +101,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_FTP_CLIENT_HPP__
+#endif // NEFORCE_NETWORK_FTP_FTP_CLIENT_HPP__

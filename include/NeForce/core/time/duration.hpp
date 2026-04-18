@@ -394,16 +394,34 @@ public:
      */
     static constexpr duration max() noexcept { return duration(numeric_traits<Rep>::max()); }
 
-    NEFORCE_ALWAYS_INLINE duration<Rep, nano> to_nano() const { return _NEFORCE time_cast<nanoseconds>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, micro> to_micro() const { return _NEFORCE time_cast<microseconds>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, milli> to_milli() const { return _NEFORCE time_cast<milliseconds>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep> to_sec() const { return _NEFORCE time_cast<seconds>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, ratio<60>> to_minu() const { return _NEFORCE time_cast<minutes>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, ratio<3600>> to_hour() const { return _NEFORCE time_cast<hours>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, ratio<86400>> to_day() const { return _NEFORCE time_cast<days>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, ratio<604800>> to_week() const { return _NEFORCE time_cast<weeks>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, ratio<31556952>> to_year() const { return _NEFORCE time_cast<years>(*this); }
-    NEFORCE_ALWAYS_INLINE duration<Rep, ratio<2629746>> to_month() const { return _NEFORCE time_cast<months>(*this); }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, nano> to_nano() const {
+        return _NEFORCE time_cast<nanoseconds>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, micro> to_micro() const {
+        return _NEFORCE time_cast<microseconds>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, milli> to_milli() const {
+        return _NEFORCE time_cast<milliseconds>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep> to_sec() const { return _NEFORCE time_cast<seconds>(*this); }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<60>> to_minu() const {
+        return _NEFORCE time_cast<minutes>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<3600>> to_hour() const {
+        return _NEFORCE time_cast<hours>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<86400>> to_day() const {
+        return _NEFORCE time_cast<days>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<604800>> to_week() const {
+        return _NEFORCE time_cast<weeks>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<31556952>> to_year() const {
+        return _NEFORCE time_cast<years>(*this);
+    }
+    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<2629746>> to_month() const {
+        return _NEFORCE time_cast<months>(*this);
+    }
 };
 
 /// @cond

@@ -9,6 +9,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/hazard_ptr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/lazy_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/semaphore.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
@@ -75,6 +76,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/byte_size.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/uuid.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp

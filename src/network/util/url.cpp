@@ -176,8 +176,11 @@ optional<string> url::decode(const string_view str) {
     string result;
     result.reserve(str.size());
 
-    for (size_t i = 0; i < str.size(); ++i) {
-        if (str[i] == '%') {
+    size_t i = 0;
+    while (i < str.size()) {
+        const char c = str[i];
+
+        if (c == '%') {
             if (i + 2 >= str.size()) {
                 return none;
             }
@@ -186,12 +189,15 @@ optional<string> url::decode(const string_view str) {
             if (!xpair.first) {
                 return none;
             }
+
             result += static_cast<char>(xpair.second);
-            i += 2;
-        } else if (str[i] == '+') {
+            i += 3;
+        } else if (c == '+') {
             result += ' ';
+            ++i;
         } else {
-            result += str[i];
+            result += c;
+            ++i;
         }
     }
 
@@ -226,21 +232,28 @@ string url::decode_tolerant(const string_view str) {
 
     string fallback;
     fallback.reserve(str.size());
-    for (size_t i = 0; i < str.size(); ++i) {
-        if (str[i] == '%' && i + 2 < str.size()) {
+
+    size_t i = 0;
+    while (i < str.size()) {
+        const char c = str[i];
+
+        if (c == '%' && i + 2 < str.size()) {
             auto decoded = url::decode(str.substr(i, 3));
             if (decoded && decoded->size() == 1) {
                 fallback += (*decoded)[0];
-                i += 2;
-            } else {
-                fallback += str[i];
+                i += 3;
+                continue;
             }
-        } else if (str[i] == '+') {
+        }
+
+        if (c == '+') {
             fallback += ' ';
         } else {
-            fallback += str[i];
+            fallback += c;
         }
+        ++i;
     }
+
     return fallback;
 }
 

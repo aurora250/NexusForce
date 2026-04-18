@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_DNS_CLIENT_HPP__
-#define NEFORCE_NETWORK_DNS_CLIENT_HPP__
+#ifndef NEFORCE_NETWORK_DNS_DNS_CLIENT_HPP__
+#define NEFORCE_NETWORK_DNS_DNS_CLIENT_HPP__
 
 /**
  * @file dns_client.hpp
@@ -19,14 +19,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
+ * @addtogroup Network 网络通信
  * @{
  */
 
 /**
- * @defgroup DNS DNS
- * @brief DNS组件
+ * @addtogroup DNS DNS
  * @{
  */
 
@@ -52,7 +50,7 @@ public:
      */
     struct config {
         string server{"8.8.8.8"};   ///< DNS服务器地址
-        ports port{ports::dns};     ///< DNS服务器端口
+        ports port{ports::DNS};     ///< DNS服务器端口
         milliseconds timeout{5000}; ///< 查询超时时间
     };
 
@@ -199,4 +197,4 @@ public:
 /** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_DNS_CLIENT_HPP__
+#endif // NEFORCE_NETWORK_DNS_DNS_CLIENT_HPP__

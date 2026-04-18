@@ -62,6 +62,7 @@ void test_tuple();
 void test_variant();
 void test_option();
 void test_any();
+void test_bsize();
 
 void test_cache();
 void test_math();

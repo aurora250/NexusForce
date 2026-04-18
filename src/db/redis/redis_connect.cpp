@@ -61,7 +61,7 @@ bool redis_connect::select_database(const string& db_index) const {
 }
 
 bool redis_connect::connect(const db_config& config) {
-    link_ = ::redisConnect(config.host.data(), config.port);
+    link_ = ::redisConnect(config.host.data(), static_cast<int>(config.port.value()));
     if (link_ == nullptr || link_->err != 0) {
         if (link_ != nullptr) {
             last_error_ = link_->errstr;

@@ -31,23 +31,25 @@ namespace {
         char vendor[13] = {};
         char brand[49] = {};
 
+        // 获取 CPU 厂商信息
         ::__cpuid(cpu_info_data, 0);
-        _NEFORCE memory_copy(vendor, &cpu_info_data[1], 4);
-        _NEFORCE memory_copy(vendor + 4, &cpu_info_data[3], 4);
-        _NEFORCE memory_copy(vendor + 8, &cpu_info_data[2], 4);
+        memory_copy(vendor, &cpu_info_data[1], 4);
+        memory_copy(vendor + 4, &cpu_info_data[3], 4);
+        memory_copy(vendor + 8, &cpu_info_data[2], 4);
         vendor[12] = '\0';
 
         cpu_info.vendor = vendor;
 
+        // 获取 CPU 品牌字符串
         for (int i = static_cast<int>(0x80000002); i <= static_cast<int>(0x80000004); i++) {
             ::__cpuid(cpu_info_data, i);
-            _NEFORCE memory_copy(brand + static_cast<ptrdiff_t>((i - 0x80000002) * 16), cpu_info_data,
-                                 sizeof(cpu_info_data));
+            memory_copy(brand + static_cast<ptrdiff_t>((i - 0x80000002) * 16), cpu_info_data, sizeof(cpu_info_data));
         }
         brand[48] = '\0';
         cpu_info.brand = brand;
         cpu_info.brand.trim_right();
 
+        // 获取 NUMA 和处理器核心关系
         ::DWORD buffer_size = 0;
         ::GetLogicalProcessorInformation(nullptr, &buffer_size);
 
@@ -74,14 +76,15 @@ namespace {
             }
         }
 
+        // 从注册表获取当前 CPU 频率
         ::HKEY hkey = nullptr;
-        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE, R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
-                           &hkey) == ERROR_SUCCESS) {
+        if (::RegOpenKeyExA(HKEY_LOCAL_MACHINE, R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
+                            &hkey) == ERROR_SUCCESS) {
 
             ::DWORD mhz = 0;
             ::DWORD size = sizeof(::DWORD);
 
-            if (::RegQueryValueEx(hkey, "~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
+            if (::RegQueryValueExA(hkey, "~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
                 ERROR_SUCCESS) {
                 cpu_info.current_MHZ = mhz;
             }
@@ -101,6 +104,7 @@ namespace {
                 continue;
             }
 
+            // 统计 processor 条目数量
             if (line.starts_with("processor")) {
                 processor_count++;
                 continue;
@@ -130,6 +134,7 @@ namespace {
                 }
             }
 
+            // 提取当前频率
             if (line.starts_with("cpu MHz") && cpu_info.current_MHZ == 0) {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
@@ -138,11 +143,13 @@ namespace {
             }
         }
 
+        // 当前在线的逻辑处理器数
         cpu_info.logical_processors = ::sysconf(::_SC_NPROCESSORS_ONLN);
         if (cpu_info.cores == 0) {
             cpu_info.cores = ::sysconf(::_SC_NPROCESSORS_CONF);
         }
 
+        // 最大频率
         const path cpuinfo_max_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
         const file cpu_max_freq(cpuinfo_max_freq);
         if (cpu_max_freq.is_opened()) {
@@ -295,13 +302,12 @@ string sysinfo::os_version_info::version() const {
     return to_string(major) + "." + to_string(minor) + "." + to_string(build);
 }
 
-sysinfo::sysinfo() {
+sysinfo::sysinfo() noexcept {
     try {
         lock<mutex> lock(sysinfo_mutex());
         init();
     } catch (...) {
         initialized_.store(false);
-        throw;
     }
 }
 
@@ -456,18 +462,6 @@ void sysinfo::refresh() {
     lock<mutex> lock(sysinfo_mutex());
     initialized_.store(false, memory_order_release);
     init();
-}
-
-string sysinfo::format_bytes(const uint64_t bytes) {
-    constexpr string_view units[] = {"B", "KB", "MB", "GB", "TB", "PB"};
-    int unit_index = 0;
-    auto size = static_cast<double>(bytes);
-
-    while (size >= 1024.0 && unit_index < 5) {
-        size /= 1024.0;
-        unit_index++;
-    }
-    return to_string_with_precision(size, 2) + " " + units[unit_index];
 }
 
 float64_t sysinfo::cpu_usage() {

@@ -11,6 +11,7 @@
 
 #include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/file/path.hpp"
+#include "NeForce/core/utility/byte_size.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -142,12 +143,12 @@ public:
     /**
      * @brief 获取文件大小
      * @param p 文件路径
-     * @return 文件大小（字节），如果文件不存在或获取失败返回0
+     * @return 文件大小，如果文件不存在或获取失败返回0
      *
      * 对于目录，返回0。
      * 对于大文件可能返回截断值。
      */
-    static size_t size(const path& p) noexcept;
+    static byte_size size(const path& p) noexcept;
 };
 
 /** @} */ // File

@@ -1,5 +1,24 @@
-#ifndef NEFORCE_NETWORK_HTTP_SERVER_HPP__
-#define NEFORCE_NETWORK_HTTP_SERVER_HPP__
+#ifndef NEFORCE_NETWORK_HTTP_HTTP_SERVER_HPP__
+#define NEFORCE_NETWORK_HTTP_HTTP_SERVER_HPP__
+
+/**
+ * @file http_server.hpp
+ * @brief HTTP/HTTPS服务器实现
+ *
+ * 此文件提供了完整的HTTP/HTTPS服务器实现，支持路由、会话管理、
+ * WebSocket升级、SSL/TLS加密等功能。
+ *
+ * 主要功能：
+ * - HTTP/HTTPS服务器
+ * - 路由管理（RESTful风格）
+ * - 会话管理
+ * - WebSocket支持
+ * - SSL/TLS加密
+ * - 请求转发
+ * - 自动会话清理
+ * - 大请求处理
+ */
+
 #include "NeForce/core/numeric/random.hpp"
 #include "NeForce/network/http/http_router.hpp"
 #include "NeForce/network/http/websocket.hpp"
@@ -7,30 +26,78 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
-struct NEFORCE_API http_server_base {
-public:
-    static constexpr size_t max_header_size = 16 * 1024;
-    static constexpr size_t max_body_size = 100 * 1024 * 1024; // 100MB
-    static constexpr int max_forward_count = 5;
+/**
+ * @addtogroup HTTP HTTP
+ * @{
+ */
 
-protected:
+/**
+ * @class http_server
+ * @brief HTTP/HTTPS服务器类
+ *
+ * 提供完整的HTTP/HTTPS服务器功能，包括请求解析、路由分发、
+ * 会话管理、WebSocket升级等。
+ *
+ * 使用示例：
+ * @code
+ * // HTTP服务器
+ * http_server server(ports{8080});
+ *
+ * // 设置路由
+ * server.router().get("/", [](http_request& req, http_response& res) {
+ *     res.body = "<h1>Hello World</h1>";
+ *     res.set_content_type(http_content::HTML_TEXT());
+ * });
+ *
+ * server.router().get("/api/users", [](http_request& req, http_response& res) {
+ *     res.body = R"({"users": [{"id": 1, "name": "John"}]})";
+ *     res.set_content_type(http_content::JSON_APP());
+ * });
+ *
+ * // WebSocket路由
+ * server.websocket().route("/ws", [](websocket_server::session_ptr session) {
+ *     session->set_message_handler([](const string& msg, websocket_opcode opcode) {
+ *         session->send("Echo: " + msg);
+ *     });
+ * });
+ *
+ * // 启动服务器
+ * server.start();
+ * @endcode
+ */
+class NEFORCE_API http_server {
+public:
+    using socket_type = tcp_socket; ///< Socket类型
+
+private:
+    /**
+     * @struct session_manager
+     * @brief 会话管理器
+     *
+     * 管理所有HTTP会话，包括创建、查找、删除和过期清理。
+     */
     struct NEFORCE_API session_manager {
-        unordered_map<string, http_session> sessions_;
-        mutable mutex mutex_;
-        atomic<bool> cleanup_running_;
-        thread cleanup_thread_;
-        random_mt rand_;
-        seconds cleanup_interval_{300};
-        size_t max_sessions_{10000};
+        unordered_map<string, http_session> sessions_; ///< 会话存储
+        mutable mutex mutex_;                          ///< 会话互斥锁
+        atomic<bool> cleanup_running_;                 ///< 清理线程运行标志
+        thread cleanup_thread_;                        ///< 清理线程
+        random_mt rand_;                               ///< 随机数生成器
+        seconds cleanup_interval_{300};                ///< 清理间隔
+        size_t max_sessions_{10000};                   ///< 最大会话数
 
         string generate_session_id();
 
         session_manager();
         ~session_manager();
 
+        session_manager(const session_manager&) = delete;
+        session_manager& operator=(const session_manager&) = delete;
+
+        session_manager(session_manager&&) noexcept = default;
+        session_manager& operator=(session_manager&&) noexcept = default;
+
         http_session* get_session(const string& session_id, bool create = true);
         void remove_session(const string& session_id) noexcept;
-
         void cleanup_expired_sessions();
         bool session_exists(const string& session_id) const noexcept;
 
@@ -39,178 +106,156 @@ protected:
         void set_max_sessions(size_t max) noexcept;
     };
 
-    static string compute_websocket_accept(string_view key);
+    unique_ptr<tcp_server_base> server_; ///< TCP/SSL服务器
+    http_router router_;                 ///< HTTP路由器
+    websocket_server ws_server_;         ///< WebSocket服务器
+    session_manager session_manager_;    ///< 会话管理器
 
-    static void parse_parameters(http_request& request);
+    http_cookie_name cookie_name_{http_cookie_name::JSESSIONID()}; ///< 会话Cookie名称
 
     static http_request parse_request(tcp_socket* client_socket, session_manager& manager, const http_cookie_name& name,
-                                      size_t max_header_size = http_server_base::max_header_size,
-                                      size_t max_body_size = http_server_base::max_body_size);
-
-    static void add_session_cookie(const http_request& request, http_response& response, http_session* session,
-                                   const http_cookie_name& name);
+                                      byte_size max_header_size, byte_size max_body_size);
 
     static http_session* get_or_create_session(http_request& request, bool create, session_manager& manager,
                                                const http_cookie_name& name);
 
-    static void send_response(tcp_socket* client_socket, const http_response& response);
-    static void send_error_response(tcp_socket* client_socket, http_status status, const string& message);
-};
-
-
-template <typename SocketType>
-class basic_http_server final : public http_server_base {
-    static_assert(is_base_of_v<tcp_socket, SocketType>, "SocketType must be a tcp_socket");
-
 public:
-    using socket_type = SocketType;
-    using server_type = basic_tcp_server<socket_type>;
+    byte_size max_server_header_size; ///< 最大请求头大小
+    byte_size max_server_body_size;   ///< 最大请求体大小
+    bool enable_websocket{true};      ///< 是否启用WebSocket
 
 private:
-    server_type server_;
-    http_router router_;
-    websocket_server<socket_type> ws_server_;
-    session_manager session_manager_;
-
-    http_cookie_name cookie_name_{http_cookie_name::JSESSIONID()};
+    void handle_client(tcp_socket client_socket);
+    bool try_websocket_upgrade(tcp_socket& client_socket, http_request& request);
+    void handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess);
 
 public:
-    size_t max_header_size_{max_header_size};
-    size_t max_body_size_{max_body_size};
-    bool enable_websocket_{true};
+    /**
+     * @brief 构造HTTP服务器
+     * @param port 监听端口
+     * @param worker_count 工作线程数（默认最大）
+     */
+    explicit http_server(ports port, size_t worker_count = thread_pool::max_thread_threshhold());
 
-private:
-    void handle_client(socket_type client_socket) {
-        try {
-            http_request request = this->parse_request(static_cast<tcp_socket*>(&client_socket), session_manager_,
-                                                       cookie_name_, max_header_size_, max_body_size_);
+    /**
+     * @brief 构造HTTPS服务器
+     * @param port 监听端口
+     * @param ctx SSL上下文（必须已加载证书）
+     * @param worker_count 工作线程数（默认最大）
+     */
+    http_server(ports port, ssl_context ctx, size_t worker_count = thread_pool::max_thread_threshhold());
 
-            if (client_socket.is_ssl()) {
-                request.set_header(http_key::X_Forwarded_Proto(), "https");
-            }
+    ~http_server() = default;
 
-            if (enable_websocket_ && this->try_websocket_upgrade(client_socket, request)) {
-                return;
-            }
+    http_server(const http_server&) = delete;
+    http_server& operator=(const http_server&) = delete;
 
-            http_session* sess = this->get_or_create_session(request, true, session_manager_, cookie_name_);
-            this->handle_request_with_forward(client_socket, request, sess);
-        } catch (const http_exception& e) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S4_BAD_REQUEST, e.what());
-        } catch (const exception& e) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S5_INTERNAL_ERROR,
-                                      e.what());
-        } catch (...) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S5_INTERNAL_ERROR,
-                                      "Unknown internal error");
-        }
-    }
+    http_server(http_server&&) noexcept = default;
+    http_server& operator=(http_server&&) noexcept = default;
 
-    bool try_websocket_upgrade(socket_type& client_socket, http_request& request) {
-        const string_view upgrade = request.header("Upgrade");
-        const string_view connection = request.header("Connection");
+    /**
+     * @brief 加载SSL证书
+     * @param cert_file 证书文件路径
+     * @param key_file 私钥文件路径
+     * @return 加载成功返回true
+     */
+    bool load_certificate(const string& cert_file, const string& key_file);
 
-        if (upgrade != "websocket" || connection.find("Upgrade") == string::npos) {
-            return false;
-        }
-
-        const string_view key = request.header("Sec-WebSocket-Key");
-        if (key.empty()) {
-            return false;
-        }
-
-        string accept = compute_websocket_accept(key);
-
-        http_response upgrade_response;
-        upgrade_response.status = http_status::S1_SWITCH_PROTOCOL;
-        upgrade_response.status_message = "Switching Protocols";
-        upgrade_response.set_header("Upgrade", "websocket");
-        upgrade_response.set_header("Connection", "Upgrade");
-        upgrade_response.set_header("Sec-WebSocket-Accept", move(accept));
-
-        send_response(static_cast<tcp_socket*>(&client_socket), upgrade_response);
-
-        return ws_server_.handle_upgrade(request, _NEFORCE move(client_socket));
-    }
-
-    void handle_request_with_forward(socket_type& client_socket, http_request& request, http_session* sess) {
-        int forward_count = 0;
-
-        while (forward_count < max_forward_count) {
-            http_response response = router_.handle_request(request);
-
-            if (sess) {
-                add_session_cookie(request, response, sess, cookie_name_);
-            }
-
-            if (!response.forward_path.empty()) {
-                request.path = move(response.forward_path);
-                request.parameters.clear();
-                parse_parameters(request);
-                forward_count++;
-                continue;
-            }
-
-            send_response(static_cast<tcp_socket*>(&client_socket), response);
-            break;
-        }
-
-        if (forward_count >= max_forward_count) {
-            this->send_error_response(static_cast<tcp_socket*>(&client_socket), http_status::S5_INTERNAL_ERROR,
-                                      "Too many forwards");
-        }
-    }
-
-public:
-    explicit basic_http_server(uint16_t port, int backlog = 128) :
-    server_(port, backlog) {
-        server_.set_client_handler([this](socket_type sock) { this->handle_client(_NEFORCE move(sock)); });
-    }
-
-    ~basic_http_server() = default;
-
-    basic_http_server(const basic_http_server&) = delete;
-    basic_http_server& operator=(const basic_http_server&) = delete;
-
-    basic_http_server(basic_http_server&&) noexcept = default;
-    basic_http_server& operator=(basic_http_server&&) noexcept = default;
-
-    bool load_certificate(const string& cert_file, const string& key_file) {
-        return server_.load_certificate(cert_file, key_file);
-    }
-
+    /**
+     * @brief 获取路由器引用
+     * @return 路由器引用
+     */
     NEFORCE_NODISCARD http_router& router() noexcept { return router_; }
+
+    /**
+     * @brief 获取路由器常量引用
+     * @return 路由器常量引用
+     */
     NEFORCE_NODISCARD const http_router& router() const noexcept { return router_; }
 
-    NEFORCE_NODISCARD websocket_server<socket_type>& websocket() noexcept { return ws_server_; }
-    NEFORCE_NODISCARD const websocket_server<socket_type>& websocket() const noexcept { return ws_server_; }
+    /**
+     * @brief 获取WebSocket服务器引用
+     * @return WebSocket服务器引用
+     */
+    NEFORCE_NODISCARD websocket_server& websocket() noexcept { return ws_server_; }
 
+    /**
+     * @brief 获取WebSocket服务器常量引用
+     * @return WebSocket服务器常量引用
+     */
+    NEFORCE_NODISCARD const websocket_server& websocket() const noexcept { return ws_server_; }
+
+    /**
+     * @brief 设置会话Cookie名称
+     * @param name Cookie名称
+     */
     void set_cookie_name(http_cookie_name name) noexcept { cookie_name_ = move(name); }
 
+    /**
+     * @brief 获取会话Cookie名称
+     * @return Cookie名称
+     */
     NEFORCE_NODISCARD const http_cookie_name& cookie_name() const noexcept { return cookie_name_; }
 
-    void set_session_cleanup_interval(const seconds interval) noexcept {
-        session_manager_.set_cleanup_interval(interval);
-    }
+    /**
+     * @brief 设置会话清理间隔
+     * @param interval 间隔时间
+     */
+    void set_session_cleanup_interval(seconds interval) noexcept { session_manager_.set_cleanup_interval(interval); }
 
-    void set_max_sessions(const size_t max) noexcept { session_manager_.set_max_sessions(max); }
+    /**
+     * @brief 设置最大会话数
+     * @param max 最大数量
+     */
+    void set_max_sessions(size_t max) noexcept { session_manager_.set_max_sessions(max); }
 
-    NEFORCE_NODISCARD uint16_t port() const noexcept { return server_.port(); }
+    /**
+     * @brief 获取监听端口
+     * @return 端口号
+     */
+    NEFORCE_NODISCARD ports port() const noexcept { return server_->port(); }
 
-    NEFORCE_NODISCARD bool is_running() const noexcept { return server_.is_running(); }
+    /**
+     * @brief 检查服务器是否运行中
+     * @return 运行中返回true
+     */
+    NEFORCE_NODISCARD bool is_running() const noexcept { return server_->is_running(); }
 
-    NEFORCE_NODISCARD http_session* get_session(http_request& request, bool create = false) {
-        return get_or_create_session(request, create, session_manager_, cookie_name_);
-    }
+    /**
+     * @brief 获取会话（从请求中）
+     * @param request HTTP请求
+     * @param create 不存在时是否创建
+     * @return 会话指针
+     */
+    NEFORCE_NODISCARD http_session* get_session(http_request& request, bool create = false);
 
-    bool start(int backlog = SOMAXCONN) { return server_.start(backlog); }
+    /**
+     * @brief 启动服务器
+     * @param backlog 连接队列大小
+     * @return 启动成功返回true
+     */
+    bool start(int backlog = SOMAXCONN) { return server_->start(backlog); }
 
-    void stop() noexcept { server_.stop(); }
+    /**
+     * @brief 停止服务器
+     */
+    void stop() noexcept { server_->stop(); }
+
+    /**
+     * @brief 获取底层服务器指针
+     * @return 服务器指针
+     */
+    NEFORCE_NODISCARD tcp_server_base* server() noexcept { return server_.get(); }
+
+    /**
+     * @brief 获取底层服务器常量指针
+     * @return 服务器常量指针
+     */
+    NEFORCE_NODISCARD const tcp_server_base* server() const noexcept { return server_.get(); }
 };
 
-using http_server = basic_http_server<tcp_socket>;
-using https_server = basic_http_server<ssl_socket>;
+/** @} */ // HTTP
 
 NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_HTTP_SERVER_HPP__
+#endif // NEFORCE_NETWORK_HTTP_HTTP_SERVER_HPP__

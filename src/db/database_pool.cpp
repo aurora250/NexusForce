@@ -72,8 +72,8 @@ pool_cfg_(pool_config) {
     }
 
     running_.store(true, memory_order_release);
-    replenish_thread_ = thread([this] { replenish_task(); });
-    scanner_thread_ = thread([this] { scanner_task(); });
+    replenish_thread_.start([this] { replenish_task(); });
+    scanner_thread_.start([this] { scanner_task(); });
 }
 
 database_pool::~database_pool() { stop(); }

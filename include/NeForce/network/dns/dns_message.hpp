@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_DNS_MESSAGE_HPP
-#define NEFORCE_NETWORK_DNS_MESSAGE_HPP
+#ifndef NEFORCE_NETWORK_DNS_DNS_MESSAGE_HPP__
+#define NEFORCE_NETWORK_DNS_DNS_MESSAGE_HPP__
 
 /**
  * @file dns_message.hpp
@@ -31,7 +31,144 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @defgroup DNS DNS
  * @brief DNS组件
- * @{
+ *
+ * 本模块提供了 DNS（域名系统）协议的完整客户端实现，支持消息构建、查询发送、
+ * 响应解析、缓存管理以及多种记录类型的查询。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下 IETF RFC 规范与相关标准：
+ *
+ * **DNS 核心协议规范：**
+ * - **IETF STD 13 / RFC 1034**：域名 — 概念与设施
+ *   https://www.rfc-editor.org/rfc/rfc1034.html
+ * - **IETF STD 13 / RFC 1035**：域名 — 实现与规范
+ *   https://www.rfc-editor.org/rfc/rfc1035.html
+ *
+ * **DNS 扩展与更新：**
+ * - **IETF RFC 2181**：DNS 规范的澄清
+ *   https://www.rfc-editor.org/rfc/rfc2181.html
+ * - **IETF RFC 6891**：DNS 扩展机制 (EDNS0)
+ *   https://www.rfc-editor.org/rfc/rfc6891.html
+ *
+ * **DNS 记录类型定义：**
+ * - **IANA DNS Parameters Registry**：DNS 参数注册表
+ *   https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml
+ *
+ * **DNS 传输协议：**
+ * - **IETF RFC 7766**：DNS over TCP 实现要求
+ *   https://www.rfc-editor.org/rfc/rfc7766.html
+ * - **IETF RFC 8484**：DNS over HTTPS (DoH)（参考）
+ *   https://www.rfc-editor.org/rfc/rfc8484.html
+ *
+ * **IPv6 地址记录：**
+ * - **IETF RFC 3596**：DNS 对 IPv6 的扩展 (AAAA 记录)
+ *   https://www.rfc-editor.org/rfc/rfc3596.html
+ *
+ * **邮件交换记录：**
+ * - **IETF RFC 1035 §3.3.9**：MX 记录定义
+ * - **IETF RFC 7505**：空 MX 记录（"." 表示不接收邮件）
+ *   https://www.rfc-editor.org/rfc/rfc7505.html
+ *
+ * **服务定位记录：**
+ * - **IETF RFC 2782**：DNS SRV 记录
+ *   https://www.rfc-editor.org/rfc/rfc2782.html
+ *
+ * @section dns_message_structure DNS 消息结构
+ * 根据 RFC 1035 §4.1，DNS 消息由以下部分组成：
+ *
+ * | 部分           | 大小       | 说明                                           |
+ * |----------------|------------|------------------------------------------------|
+ * | Header         | 12 字节    | 包含 ID、标志位、各段计数                       |
+ * | Question       | 可变       | 查询的域名、类型、类                           |
+ * | Answer         | 可变       | 回答的资源记录                                 |
+ * | Authority      | 可变       | 指向权威名称服务器的资源记录                   |
+ * | Additional     | 可变       | 附加信息记录（如 EDNS0）                       |
+ *
+ * **头部标志位**（RFC 1035 §4.1.1）：
+ * | 位偏移 | 名称  | 说明                                                         |
+ * |--------|-------|--------------------------------------------------------------|
+ * | 0      | QR    | 0=查询，1=响应                                                |
+ * | 1-4    | OPCODE| 操作码：0=QUERY, 1=IQUERY, 2=STATUS, 4=NOTIFY, 5=UPDATE      |
+ * | 5      | AA    | 权威回答                                                      |
+ * | 6      | TC    | 截断标志（响应被截断，需使用 TCP 重试）                       |
+ * | 7      | RD    | 期望递归查询                                                  |
+ * | 8      | RA    | 递归可用                                                      |
+ * | 9-11   | Z     | 保留位（必须为0）                                             |
+ * | 12-15  | RCODE | 响应码：0=无错误, 1=格式错误, 2=服务器失败, 3=名称错误等      |
+ *
+ * @section dns_record_types DNS 记录类型
+ * 根据 IANA DNS 参数注册表，本模块支持以下常见记录类型：
+ *
+ * | 类型   | 值  | RFC 引用      | 说明                                   |
+ * |--------|-----|---------------|----------------------------------------|
+ * | A      | 1   | RFC 1035      | 主机地址（IPv4）                       |
+ * | NS     | 2   | RFC 1035      | 权威名称服务器                         |
+ * | CNAME  | 5   | RFC 1035      | 规范名称（别名）                       |
+ * | SOA    | 6   | RFC 1035      | 授权区域起始                           |
+ * | PTR    | 12  | RFC 1035      | 域名指针（反向查询）                   |
+ * | MX     | 15  | RFC 1035      | 邮件交换                               |
+ * | TXT    | 16  | RFC 1035      | 文本字符串                             |
+ * | AAAA   | 28  | RFC 3596      | IPv6 地址                              |
+ * | SRV    | 33  | RFC 2782      | 服务定位器                             |
+ *
+ * @section dns_opcodes 操作码与响应码
+ * **操作码（OPCODE）**（RFC 1035 §4.1.1，RFC 1996，RFC 2136）：
+ * | 值 | 名称     | 说明                     |
+ * |----|----------|--------------------------|
+ * | 0  | QUERY    | 标准查询                 |
+ * | 1  | IQUERY   | 反向查询（已废弃）       |
+ * | 2  | STATUS   | 服务器状态请求           |
+ * | 4  | NOTIFY   | 区域变更通知             |
+ * | 5  | UPDATE   | 动态更新                 |
+ *
+ * **响应码（RCODE）**（RFC 1035 §4.1.1，RFC 6891 扩展）：
+ * | 值 | 名称             | 说明                           |
+ * |----|------------------|--------------------------------|
+ * | 0  | NoError          | 无错误                         |
+ * | 1  | FormErr          | 格式错误                       |
+ * | 2  | ServFail         | 服务器失败                     |
+ * | 3  | NXDomain         | 不存在的域名                   |
+ * | 4  | NotImp           | 未实现                         |
+ * | 5  | Refused          | 拒绝查询                       |
+ *
+ * @section dns_classes 查询类（CLASS）
+ * 根据 RFC 1035 §3.2.4：
+ * | 值  | 名称     | 说明               |
+ * |-----|----------|--------------------|
+ * | 1   | IN       | Internet（最常用） |
+ * | 3   | CH       | CHAOS 类           |
+ * | 4   | HS       | Hesiod             |
+ * | 255 | ANY      | 任何类（通配）     |
+ *
+ * @section dns_transport DNS 传输协议
+ * 根据 RFC 1035 §4.2 和 RFC 7766：
+ * - **UDP**：默认传输协议，消息大小限制为 512 字节（EDNS0 可扩展）
+ * - **TCP**：当响应被截断（TC 标志置位）或消息超过 UDP 限制时自动切换
+ * - **本实现**：优先使用 UDP，若响应截断则自动通过 TCP 重试
+ *
+ * @section dns_caching DNS 缓存机制
+ * 根据 RFC 1035 §7.2 的 TTL 规范：
+ * - 每条资源记录包含 TTL（生存时间，秒）
+ * - 缓存条目按记录的 TTL 值过期
+ * - 本实现支持自定义缓存 TTL 上限（默认 300 秒）
+ * - 缓存条目在查询前检查有效期，过期后自动刷新
+ *
+ * @section reverse_dns 反向 DNS 查询
+ * 根据 RFC 1035 §3.5，PTR 记录用于 IP 地址到域名的映射：
+ * - IPv4 地址转换为特殊域名：`x.x.x.x.in-addr.arpa`
+ * - 例如 IP `8.8.8.8` 查询 `8.8.8.8.in-addr.arpa` 的 PTR 记录
+ *
+ * @note DNS 消息使用大端字节序编码，本实现自动处理字节序转换。
+ *       对于超过 512 字节的 UDP 响应，建议启用 EDNS0 或依赖 TCP 自动切换机制。
+ *
+ * @warning 缓存 TTL 应根据实际业务需求设置，过长的 TTL 可能导致 IP 变更后无法及时更新。
+ *          反向查询（PTR）并非所有 IP 地址都有对应的记录。
+ *
+ * @see https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml
+ * @see https://www.rfc-editor.org/rfc/rfc1034.html
+ * @see https://www.rfc-editor.org/rfc/rfc1035.html
+ * @see https://developers.google.com/speed/public-dns
+ * @see https://www.cloudflare.com/learning/dns/what-is-dns/
  */
 
 /**
@@ -258,4 +395,4 @@ struct dns_header {
 /** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_DNS_MESSAGE_HPP
+#endif // NEFORCE_NETWORK_DNS_DNS_MESSAGE_HPP__

@@ -50,7 +50,7 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
         return false;
     }
 
-    watch_thread_ = thread(&file_watcher::watch_thread_func, this);
+    watch_thread_.start(&file_watcher::watch_thread_func, this);
 
 #else
     inotify_fd_ = ::inotify_init1(IN_NONBLOCK);
@@ -91,7 +91,7 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
         return false;
     }
 
-    watch_thread_ = thread(&file_watcher::watch_thread_func, this);
+    watch_thread_.start(&file_watcher::watch_thread_func, this);
 
 #endif
 

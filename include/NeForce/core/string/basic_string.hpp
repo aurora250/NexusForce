@@ -2216,6 +2216,47 @@ public:
         return view(off, n).compare(view_type(str, count));
     }
 
+    /**
+     * @brief 忽略大小写三路比较
+     * @param view 要比较的视图
+     * @return 负值（*this < view）、0（相等）、正值（*this > view）
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const view_type view) const noexcept {
+        const size_type min_len = _NEFORCE min(size(), view.size());
+        for (size_type i = 0; i < min_len; ++i) {
+            const auto lc = _NEFORCE to_lowercase(data()[i]);
+            const auto rc = _NEFORCE to_lowercase(view.data()[i]);
+            if (lc != rc) {
+                return (lc < rc) ? -1 : 1;
+            }
+        }
+        if (size() < view.size()) {
+            return -1;
+        }
+        if (size() > view.size()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * @brief 忽略大小写比较另一个字符串
+     * @param str 字符串
+     * @return 比较结果
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const_pointer str) const noexcept {
+        return this->compare_ignore_case(basic_string_view(str));
+    }
+
+    /**
+     * @brief 忽略大小写与C风格字符串三路比较
+     * @param str C风格字符串
+     * @return 比较结果
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const basic_string& str) const noexcept {
+        return this->compare_ignore_case(str.view());
+    }
+
     /// 替换子串为另一个字符串
     NEFORCE_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n, const basic_string& other) {
         NEFORCE_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");

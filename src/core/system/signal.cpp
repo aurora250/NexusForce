@@ -166,8 +166,8 @@ void signal_manager::start_monitoring() {
     running_ = true;
     force_exit_ = false;
 
-    signal_thread_ = thread(&signal_manager::signal_thread_func, this);
-    timeout_thread_ = thread(&signal_manager::timeout_monitor_thread, this);
+    signal_thread_.start(&signal_manager::signal_thread_func, this);
+    timeout_thread_.start(&signal_manager::timeout_monitor_thread, this);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetThreadPriority(signal_thread_.native_handle(), THREAD_PRIORITY_HIGHEST);

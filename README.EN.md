@@ -67,7 +67,6 @@ NexusForce strictly adheres to modern C++ engineering best practices, ensuring c
 | 🔒 **CodeQL Security Analysis** | **0 Vulnerabilities** | Full `security-and-quality` suite, zero security alerts |
 | 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings** | Full ruleset (`bugprone`/`cppcoreguidelines`/`hicpp`/`modernize`/`performance`/`readability`), warnings as errors |
 | 🎨 **Clang-Format Code Style** | **Strictly Enforced** | 120 columns, 4 spaces, K&R variant braces, mandatory brace insertion, etc. |
-| ⚠️ **Warnings as Errors** | **`-Werror`** | All Clang-Tidy warnings treated as compilation errors, CI blocks |
 | 💧 **Dynamic Memory Check** | **0 Leaks** | Valgrind full test suite, zero memory leaks or out-of-bounds access |
 
 > 📋 **Regarding Rule Exemptions**: [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, and [`.clang-format`](.clang-format) includes several style customizations. Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."

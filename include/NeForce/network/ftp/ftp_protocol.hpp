@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_FTP_PROTOCOL_HPP__
-#define NEFORCE_NETWORK_FTP_PROTOCOL_HPP__
+#ifndef NEFORCE_NETWORK_FTP_FTP_PROTOCOL_HPP__
+#define NEFORCE_NETWORK_FTP_FTP_PROTOCOL_HPP__
 #include "NeForce/network/ssl/ssl_stream.hpp"
 #include "NeForce/network/ip_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -91,4 +91,4 @@ protected:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_FTP_PROTOCOL_HPP__
+#endif // NEFORCE_NETWORK_FTP_FTP_PROTOCOL_HPP__

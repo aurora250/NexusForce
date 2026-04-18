@@ -47,14 +47,14 @@ http_cookie http_cookie::parse(const string_view header, string default_domain, 
                 c.same_site = string(attr_val);
             } else if (attr_lower == "max-age") {
                 try {
-                    c.max_age = integer32::parse(attr_val).value();
+                    c.max_age = seconds{integer32::parse(attr_val).value()};
                     // NOLINTNEXTLINE(bugprone-empty-catch)
                 } catch (...) {
                     // ignore
                 }
             } else if (attr_lower == "expires") {
                 try {
-                    c.expires = datetime::parse_GMT(attr_val);
+                    c.expires = datetime::parse_RFC1123(attr_val);
                     // NOLINTNEXTLINE(bugprone-empty-catch)
                 } catch (...) {
                     // ignore
@@ -88,12 +88,12 @@ NEFORCE_NODISCARD string http_cookie::to_string() const {
         result += "; Path=" + path;
     }
 
-    if (max_age >= 0) {
-        result += "; Max-Age=" + _NEFORCE to_string(max_age);
+    if (max_age >= 0_s) {
+        result += "; Max-Age=" + _NEFORCE to_string(max_age.count());
     }
 
     if (expires > datetime::epoch()) {
-        result += "; Expires=" + expires.to_string_GMT();
+        result += "; Expires=" + expires.to_RFC1123();
     }
 
     if (secure) {
@@ -130,12 +130,12 @@ bool http_cookie::is_expired() const noexcept {
     return expires < datetime::now();
 }
 
-void http_cookie::set_expires_from_now(const int64_t seconds) {
-    if (seconds <= 0) {
+void http_cookie::set_expires_from_now(const seconds sec) {
+    if (sec <= 0_s) {
         expires = datetime::epoch();
         return;
     }
-    expires = datetime::now() + seconds;
+    expires = datetime::now() + sec.count();
 }
 
 string& http_session::operator[](const string& key) {
@@ -190,17 +190,14 @@ bool http_session::is_valid() const noexcept {
     return !expired();
 }
 
-bool http_session::expired(int max_inactive) const noexcept {
-    if (max_inactive <= 0) {
+bool http_session::expired(seconds max_inactive) const noexcept {
+    if (max_inactive <= 0_s) {
         max_inactive = max_age;
     }
-
-    if (max_inactive <= 0) {
+    if (max_inactive <= 0_s) {
         return false;
     }
-
-    const int64_t idle = idle_time();
-    return idle > max_inactive;
+    return idle_time() > max_inactive;
 }
 
 string http_session::to_string() const {
@@ -210,9 +207,9 @@ string http_session::to_string() const {
     result += "Session ID: [" + id + "]\n";
     result += "Created: " + create_time.to_string() + "\n";
     result += "Last Access: " + last_access.to_string() + "\n";
-    result += "Age: " + _NEFORCE to_string(age()) + "s\n";
-    result += "Idle: " + _NEFORCE to_string(idle_time()) + "s\n";
-    result += "Max Age: " + _NEFORCE to_string(max_age) + "s\n";
+    result += "Age: " + _NEFORCE to_string(age().count()) + "s\n";
+    result += "Idle: " + _NEFORCE to_string(idle_time().count()) + "s\n";
+    result += "Max Age: " + _NEFORCE to_string(max_age.count()) + "s\n";
     result += "Is New: " + _NEFORCE to_string(is_new) + "\n";
     result += "Valid: " + _NEFORCE to_string(is_valid()) + "\n";
     result += "Data Count: " + _NEFORCE to_string(data.size()) + "\n";

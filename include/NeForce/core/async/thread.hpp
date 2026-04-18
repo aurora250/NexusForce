@@ -329,6 +329,26 @@ public:
     ~thread();
 
     /**
+     * @brief 延迟启动线程
+     * @tparam F 可调用对象类型
+     * @tparam Args 参数类型
+     * @param f 要执行的可调用对象
+     * @param args 传递给可调用对象的参数
+     * @throw thread_exception 如果线程已启动或已结束/分离
+     */
+    template <typename F, typename... Args>
+    void start(F&& f, Args&&... args) {
+        if (state_ != NOT_A_THREAD) {
+            NEFORCE_THROW_EXCEPTION(thread_exception("Thread already started or has been joined/detached."));
+        }
+        auto func = [func = _NEFORCE forward<F>(f),
+                     args = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...)]() mutable {
+            return _NEFORCE apply(_NEFORCE move(func), _NEFORCE move(args));
+        };
+        this->start_thread(_NEFORCE move(func));
+    }
+
+    /**
      * @brief 获取线程标识符
      * @return 线程标识符
      */

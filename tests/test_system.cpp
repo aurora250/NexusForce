@@ -111,8 +111,8 @@ void test_sysinfo() {
 
     const auto& mem_info = sysinfo.get_memory_info();
     printfln("Memory: {:.1f}% used", mem_info.physical_memory_usage());
-    printfln("RAM: {} / {}", sysinfo::format_bytes(mem_info.total_physical - mem_info.available_physical),
-             sysinfo::format_bytes(mem_info.total_physical));
+    printfln("RAM: {} / {}", byte_size(mem_info.total_physical - mem_info.available_physical).to_string(),
+             byte_size(mem_info.total_physical).to_string());
 
     const auto arch = sysinfo.get_architecture();
     printfln("Architecture: {}", arch == sysinfo::architecture::X64   ? "x64"

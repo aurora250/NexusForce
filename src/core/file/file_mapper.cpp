@@ -20,7 +20,7 @@ namespace {
     void do_unmap(void*& ptr, file_mapper::size_type& size, file_mapper::size_type& offset
 #ifdef NEFORCE_PLATFORM_WINDOWS
                   ,
-                  file_mapper::native_handle_type& mapping_handle, const file_mapper::native_handle_type invalid
+                  file_mapper::native_handle_type& mapping_handle
 #endif
                   ) noexcept {
         if (ptr == nullptr) {
@@ -33,9 +33,9 @@ namespace {
                                     (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1U));
         ::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_addr));
 
-        if (mapping_handle != invalid) {
+        if (mapping_handle != invalid_handle) {
             ::CloseHandle(mapping_handle);
-            mapping_handle = invalid;
+            mapping_handle = invalid_handle;
         }
 #else
         const long page_size = ::sysconf(_SC_PAGESIZE);
@@ -111,7 +111,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     lock<mutex> lk(mutex_);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    do_unmap(ptr_, size_, offset_, mapping_handle_, invalid_handle);
+    do_unmap(ptr_, size_, offset_, mapping_handle_);
 #else
     do_unmap(ptr_, size_, offset_);
 #endif
@@ -229,7 +229,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 void file_mapper::unmap() noexcept {
     lock<mutex> lk(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    do_unmap(ptr_, size_, offset_, mapping_handle_, invalid_handle);
+    do_unmap(ptr_, size_, offset_, mapping_handle_);
 #else
     do_unmap(ptr_, size_, offset_);
 #endif

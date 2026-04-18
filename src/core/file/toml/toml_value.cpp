@@ -9,6 +9,7 @@ namespace {
         }
 
         switch (value->type()) {
+            //  标量直接转换为字符串
             case toml_value::Boolean: {
                 return _NEFORCE to_string(value->as_boolean()->get_value());
             }
@@ -18,6 +19,7 @@ namespace {
             case toml_value::Float: {
                 return _NEFORCE to_string(value->as_float()->get_value());
             }
+            // 字符串类型根据 TOML 四种字符串格式进行转义包装
             case toml_value::String: {
                 const toml_string* str_val = value->as_string();
                 const string& str = str_val->get_value();
@@ -56,9 +58,11 @@ namespace {
                     }
                 }
             }
+            // 日期使用其预格式化的字符串值
             case toml_value::DateTime: {
                 return value->as_datetime()->get_string_value();
             }
+            // 数组递归处理每个元素
             case toml_value::Array: {
                 const toml_array* arr = value->as_array();
                 string result = "[";
@@ -73,6 +77,7 @@ namespace {
             }
             case toml_value::Table: {
                 const toml_table* table = value->as_table();
+                // 内联表
                 if (table->is_inline()) {
                     string result = "{ ";
                     bool first = true;
@@ -103,6 +108,7 @@ namespace {
                     result += " }";
                     return result;
                 }
+                // 非内联表在此上下文中不展开
                 return "{ /* non-inline table */ }";
             }
             default: {
@@ -228,14 +234,7 @@ namespace {
                 return _NEFORCE to_string(value->as_integer()->get_value());
             }
             case toml_value::Float: {
-                const double val = value->as_float()->get_value();
-                if (is_nan(val)) {
-                    return "nan";
-                }
-                if (is_infinity(val)) {
-                    return signbit(val) ? "-inf" : "inf";
-                }
-                return _NEFORCE to_string(val);
+                return _NEFORCE to_string(value->as_float()->get_value());
             }
             case toml_value::String: {
                 const toml_string* str_val = value->as_string();
@@ -260,6 +259,7 @@ namespace {
                     }
                     case toml_string::MultiBasic: {
                         string escaped = escape(str);
+                        // 防止结尾的双引号与多行终止符混淆
                         if (!escaped.empty() && escaped.back() == '"') {
                             escaped.pop_back();
                             escaped += R"(\")";
@@ -292,6 +292,7 @@ namespace {
             case toml_value::Table: {
                 const toml_table* table = value->as_table();
 
+                // 内联表单行表示
                 if (table->is_inline()) {
                     string result = "{ ";
                     bool first = true;
@@ -310,6 +311,7 @@ namespace {
                     result += " }";
                     return result;
                 }
+                // 非内联表委托给递归展开
                 return toml_table_to_string_with_path(table);
             }
             default: {

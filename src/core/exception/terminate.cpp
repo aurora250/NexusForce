@@ -150,7 +150,7 @@ namespace {
             return manager;
         }
 
-        int register_atexit(const exit_handler handler) {
+        int register_exit(const exit_handler handler) {
             if (handler == nullptr) {
                 return -1;
             }
@@ -266,7 +266,7 @@ void abort() noexcept {
     unreachable();
 }
 
-int set_exit(const exit_handler handler) noexcept { return exit_handler_manager::instance().register_atexit(handler); }
+int set_exit(const exit_handler handler) noexcept { return exit_handler_manager::instance().register_exit(handler); }
 
 int set_quick_exit(const exit_handler handler) noexcept {
     return exit_handler_manager::instance().register_quick_exit(handler);

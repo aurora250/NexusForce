@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_IP_ADDRESS_HPP__
-#define NEFORCE_NETWORK_IP_ADDRESS_HPP__
+#ifndef NEFORCE_NETWORK_UTIL_IP_ADDRESS_HPP__
+#define NEFORCE_NETWORK_UTIL_IP_ADDRESS_HPP__
 
 /**
  * @file ip_address.hpp
@@ -113,7 +113,7 @@ public:
      *
      * 通配地址用于绑定到所有网络接口。
      */
-    NEFORCE_NODISCARD static ip_address any(ports port = ports::undef, int family = AF_INET) noexcept;
+    NEFORCE_NODISCARD static ip_address any(ports port = ports::UNDEF, int family = AF_INET) noexcept;
 
     /**
      * @brief 获取回环地址
@@ -121,7 +121,7 @@ public:
      * @param family 地址族（AF_INET或AF_INET6），默认为IPv4
      * @return 回环地址对象
      */
-    NEFORCE_NODISCARD static ip_address loopback(ports port = ports::undef, int family = AF_INET) noexcept;
+    NEFORCE_NODISCARD static ip_address loopback(ports port = ports::UNDEF, int family = AF_INET) noexcept;
 
     /**
      * @brief 获取底层指针
@@ -201,4 +201,4 @@ public:
 /** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_IP_ADDRESS_HPP__
+#endif // NEFORCE_NETWORK_UTIL_IP_ADDRESS_HPP__

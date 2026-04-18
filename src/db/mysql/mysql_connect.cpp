@@ -6,7 +6,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 bool mysql_connect::connect(const db_config& config) noexcept {
     const ::MYSQL* p = ::mysql_real_connect(link_, config.host.data(), config.username.data(), config.password.data(),
-                                            config.database.data(), config.port, nullptr, 0);
+                                            config.database.data(), static_cast<int>(config.port.value()), nullptr, 0);
     if (p == nullptr) {
         return false;
     }

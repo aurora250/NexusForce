@@ -3,17 +3,6 @@
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
-namespace {
-    struct thread_pool_id_generator {
-        static uint32_t& get_id() noexcept {
-            static uint32_t pool_thread_id = 0;
-            return pool_thread_id;
-        }
-        static uint32_t get_new_id() noexcept { return get_id()++; }
-        static void reset_id() noexcept { get_id() = 0; }
-    };
-} // namespace
-
 
 local_queue::steal_strategy local_queue::steal_strategy_ = steal_strategy::adaptive;
 
@@ -29,7 +18,6 @@ shared_ptr<task_group>& get_current_task_group() noexcept {
     thread_local shared_ptr<task_group> t_current_task_group{nullptr};
     return t_current_task_group;
 }
-
 
 uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tail) {
     uint64_t cur_src_head = head_.load(memory_order_acquire);
@@ -187,20 +175,7 @@ worker_context& worker_context::operator=(worker_context&& other) noexcept {
     return *this;
 }
 
-NEFORCE_BEGIN_INNER__
-
-manual_thread::manual_thread(thread_func func) noexcept :
-func_(move(func)),
-thread_id_(thread_pool_id_generator::get_new_id()) {}
-
-void manual_thread::start() {
-    thread t(move(func_), thread_id_);
-    t.detach();
-}
-
-NEFORCE_END_INNER__
-
-size_t thread_pool::max_thread_threshhold() {
+size_t thread_pool::max_thread_threshhold() noexcept {
     static size_t max_threshhold = sysinfo::instance().get_system_info().processor_numbers;
     return max_threshhold;
 }
@@ -466,24 +441,25 @@ bool thread_pool::start(const size_t init_thread_size) {
     unique_lock<mutex> lk(task_queue_mtx_);
 
     for (id_type i = 0; i < init_thread_size_; i++) {
-        auto ptr = make_unique<inner::manual_thread>([this](const id_type id) { thread_function(id); });
-        id_type thread_id = ptr->id();
-        auto* t_ptr = ptr.get();
+        id_type thread_id = thread_pool_id_generator::get_new_id();
+        auto worker_func = [this, thread_id]() { thread_function(thread_id); };
+        auto ptr = _NEFORCE make_unique<lazy_thread>(_NEFORCE move(worker_func));
 
         {
             lock<mutex> ctx_lock(worker_contexts_mtx_);
             if (thread_id >= worker_contexts_ptr_.size()) {
                 worker_contexts_ptr_.reserve(thread_id + 1);
-                for (size_t j = worker_contexts_ptr_.size(); j <= thread_id; j++) {
+                for (size_t j = worker_contexts_ptr_.size(); j <= thread_id; ++j) {
                     atomic<worker_context*> tmp;
                     tmp.store(nullptr, memory_order_relaxed);
-                    worker_contexts_ptr_.emplace_back(move(tmp));
+                    worker_contexts_ptr_.emplace_back(_NEFORCE move(tmp));
                 }
             }
         }
 
-        threads_map_.emplace(thread_id, move(ptr));
-        t_ptr->start();
+        threads_map_.emplace(thread_id, _NEFORCE move(ptr));
+        threads_map_[thread_id]->start();
+        threads_map_[thread_id]->detach();
     }
 
     return true;

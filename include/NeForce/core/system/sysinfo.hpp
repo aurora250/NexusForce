@@ -148,7 +148,7 @@ private:
     /**
      * @brief 私有构造函数
      */
-    sysinfo();
+    sysinfo() noexcept;
 
     /**
      * @brief 析构函数
@@ -167,7 +167,7 @@ public:
      * @brief 获取单例实例
      * @return 系统信息实例引用
      */
-    static sysinfo& instance() {
+    static sysinfo& instance() noexcept {
         static sysinfo instance;
         return instance;
     }
@@ -219,13 +219,6 @@ public:
      * @return 是否已成功初始化
      */
     NEFORCE_NODISCARD bool is_initialized() const noexcept { return initialized_.load(memory_order_acquire); }
-
-    /**
-     * @brief 格式化字节数为可读字符串
-     * @param bytes 字节数
-     * @return 格式化的字符串（如 "1.23 MB"）
-     */
-    NEFORCE_NODISCARD static string format_bytes(uint64_t bytes);
 
     /**
      * @brief 获取当前CPU使用率

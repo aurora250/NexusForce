@@ -1212,10 +1212,10 @@ public:
     }
 
     /**
-     * @brief 转换为ISO格式带时区
+     * @brief 转换为 RFC 3339
      * @return 格式为 YYYY-MM-DDTHH:MM:SS±HH:MM 或 YYYY-MM-DDTHH:MM:SSZ
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_ISO_UTC() const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_RFC3339() const {
         if (has_timezone_) {
             return date_.to_string() + "T" + time_.to_string() + to_offset_string();
         } else {
@@ -1224,14 +1224,14 @@ public:
     }
 
     /**
-     * @brief 解析ISO格式带时区
-     * @param view ISO格式字符串
+     * @brief 解析 RFC 3339
+     * @param view RFC 3339 格式字符串
      * @return 解析得到的日期时间
      * @throws value_exception 格式错误时抛出
      */
-    NEFORCE_NODISCARD static constexpr datetime parse_ISO_UTC(const string_view view) {
+    NEFORCE_NODISCARD static constexpr datetime parse_RFC3339(const string_view view) {
         if (view.size() < 20 || view[10] != 'T') {
-            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ISO UTC datetime format."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid RFC3339 datetime format."));
         }
 
         const _NEFORCE date d = date::parse(view.substr(0, 10));
@@ -1264,13 +1264,13 @@ public:
     }
 
     /**
-     * @brief 尝试解析ISO格式带时区
-     * @param view ISO格式字符串
+     * @brief 尝试解析 RFC 3339
+     * @param view RFC 3339 格式字符串
      * @return 是否解析成功
      */
-    NEFORCE_CONSTEXPR20 bool try_parse_ISO_UTC(const string_view view) noexcept {
+    NEFORCE_CONSTEXPR20 bool try_parse_RFC3339(const string_view view) noexcept {
         try {
-            datetime tmp = datetime::parse_ISO_UTC(view);
+            datetime tmp = datetime::parse_RFC3339(view);
             this->swap(tmp);
         } catch (...) {
             return false;
@@ -1279,10 +1279,10 @@ public:
     }
 
     /**
-     * @brief 转换为GMT格式（RFC 1123）
+     * @brief 转换为 RFC 1123
      * @return 格式为 "Wed, 21 Dec 2022 10:00:00 GMT"
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_GMT() const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_RFC1123() const noexcept {
         constexpr string_view months_string[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
@@ -1306,12 +1306,12 @@ public:
     }
 
     /**
-     * @brief 解析GMT格式
-     * @param view GMT格式字符串
+     * @brief 解析 RFC 1123
+     * @param view RFC 1123 格式字符串
      * @return 解析得到的日期时间
      * @throws value_exception 格式错误时抛出
      */
-    NEFORCE_NODISCARD static constexpr datetime parse_GMT(string_view view) {
+    NEFORCE_NODISCARD static constexpr datetime parse_RFC1123(string_view view) {
         if (view.size() < 29) {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid date length."));
         }
@@ -1343,13 +1343,13 @@ public:
     }
 
     /**
-     * @brief 尝试解析GMT格式
-     * @param view GMT格式字符串
+     * @brief 尝试解析 RFC 1123
+     * @param view RFC 1123 格式字符串
      * @return 是否解析成功
      */
-    NEFORCE_CONSTEXPR20 bool try_parse_GMT(const string_view view) noexcept {
+    NEFORCE_CONSTEXPR20 bool try_parse_RFC1123(const string_view view) noexcept {
         try {
-            datetime tmp = datetime::parse_GMT(view);
+            datetime tmp = datetime::parse_RFC1123(view);
             this->swap(tmp);
         } catch (...) {
             return false;
@@ -1358,22 +1358,22 @@ public:
     }
 
     /**
-     * @brief 转换为ISO格式（无时区）
+     * @brief 转换为 ISO 8601
      * @return 格式为 YYYY-MM-DDTHH:MM:SS
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_ISO() const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_ISO8601() const {
         return date_.to_string() + "T" + time_.to_string();
     }
 
     /**
-     * @brief 解析ISO格式（无时区）
-     * @param view ISO格式字符串
+     * @brief 解析 ISO 8601
+     * @param view ISO 8601 格式字符串
      * @return 解析得到的日期时间
      * @throws value_exception 格式错误时抛出
      */
-    NEFORCE_NODISCARD static constexpr datetime parse_ISO(const string_view view) {
+    NEFORCE_NODISCARD static constexpr datetime parse_ISO8601(const string_view view) {
         if (view.size() < 19 || view[10] != 'T') {
-            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ISO datetime format."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ISO 8601 datetime format."));
         }
         const _NEFORCE date d = _NEFORCE date::parse(view.substr(0, 10));
         size_t time_len = 8;
@@ -1385,13 +1385,13 @@ public:
     }
 
     /**
-     * @brief 尝试解析ISO格式（无时区）
-     * @param view ISO格式字符串
+     * @brief 尝试解析 ISO 8601
+     * @param view ISO 8601 格式字符串
      * @return 是否解析成功
      */
-    NEFORCE_CONSTEXPR20 bool try_parse_ISO(const string_view view) noexcept {
+    NEFORCE_CONSTEXPR20 bool try_parse_ISO8601(const string_view view) noexcept {
         try {
-            datetime tmp = datetime::parse_ISO(view);
+            datetime tmp = datetime::parse_ISO8601(view);
             this->swap(tmp);
         } catch (...) {
             return false;

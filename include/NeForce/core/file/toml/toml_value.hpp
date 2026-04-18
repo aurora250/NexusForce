@@ -507,13 +507,13 @@ public:
         switch (type_) {
             case datetime_type::OffsetDateTime: {
                 datetime dt;
-                dt.try_parse_ISO_UTC(value);
+                dt.try_parse_RFC3339(value);
                 value_ = dt;
                 break;
             }
             case datetime_type::LocalDateTime: {
                 datetime dt;
-                dt.try_parse_ISO(value);
+                dt.try_parse_ISO8601(value);
                 value_ = dt;
                 break;
             }
@@ -560,10 +560,10 @@ public:
     NEFORCE_NODISCARD string get_string_value() const noexcept {
         switch (type_) {
             case datetime_type::OffsetDateTime: {
-                return value_.to_string_ISO_UTC();
+                return value_.to_RFC3339();
             }
             case datetime_type::LocalDateTime: {
-                return value_.to_string_ISO();
+                return value_.to_ISO8601();
             }
             case datetime_type::LocalDate: {
                 return value_.date().to_string();

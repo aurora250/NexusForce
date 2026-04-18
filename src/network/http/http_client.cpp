@@ -252,7 +252,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
     receive_start = steady_clock::now();
 
     string response_data;
-    vector<char> buffer(config_.buffer_size);
+    vector<char> buffer(config_.buffer_size.bytes());
 
     try {
         size_t header_end_pos = string::npos;
@@ -276,7 +276,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
         size_t body_received = response_data.size() - body_start;
 
         if (meta.content_length > 0) {
-            if (meta.content_length > config_.max_response_size) {
+            if (meta.content_length > config_.max_response_size.bytes()) {
                 return none;
             }
 
@@ -303,7 +303,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
                 if (response_data.find("0\r\n\r\n", body_start) != string::npos) {
                     break;
                 }
-                if (response_data.size() >= config_.max_response_size) {
+                if (response_data.size() >= config_.max_response_size.bytes()) {
                     break;
                 }
 
@@ -314,7 +314,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
                 response_data.append(buffer.data(), n);
             }
         } else {
-            while (response_data.size() < config_.max_response_size) {
+            while (response_data.size() < config_.max_response_size.bytes()) {
                 const ssize_t n = client_.receive(buffer.data(), buffer.size());
                 if (n <= 0) {
                     break;
@@ -338,7 +338,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
 }
 
 bool http_client::ensure_connected(const string& host, const ports port) {
-    const bool is_https = port == ports::https;
+    const bool is_https = port == ports::HTTPS;
 
     if (client_.is_connected()) {
         if (client_.connected_host() == host && client_.connected_port() == port) {
@@ -467,7 +467,7 @@ void http_client::update_cookies(const vector<http_cookie>& resp_cookies, const 
         string key = c.name.cookie_name() + "@" + domain + path;
 
         const bool should_delete =
-                (c.max_age == 0) || (c.max_age > 0 && c.is_valid() && c.expires.is_valid() && c.is_expired());
+                (c.max_age == 0_s) || (c.max_age > 0_s && c.is_valid() && c.expires.is_valid() && c.is_expired());
 
         if (should_delete) {
             cookie_jar_.erase(key);
@@ -482,10 +482,10 @@ string http_client::build_cookie_header(const url& request_url) const {
 
     for (const auto& pair: cookie_jar_) {
         const auto& c = pair.second;
-        if (c.max_age == 0) {
+        if (c.max_age == 0_s) {
             continue;
         }
-        if (c.max_age > 0 && c.is_valid() && c.expires.is_valid() && c.is_expired()) {
+        if (c.max_age > 0_s && c.is_valid() && c.expires.is_valid() && c.is_expired()) {
             continue;
         }
 

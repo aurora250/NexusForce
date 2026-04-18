@@ -193,7 +193,7 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 
     path actual_to = to;
     if (to.is_directory()) {
-        actual_to = to / path{string{from.filename()}};
+        actual_to = to / path{from.filename()};
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -410,22 +410,22 @@ bool filesystem::create_and_write(const path& p, const string& content, const bo
 #endif
 }
 
-size_t filesystem::size(const path& p) noexcept {
+byte_size filesystem::size(const path& p) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::WIN32_FILE_ATTRIBUTE_DATA data{};
-    if (::GetFileAttributesExA(p.data(), GetFileExInfoStandard, &data) == FALSE) {
-        return 0;
+    if (::GetFileAttributesExA(p.data(), ::GetFileExInfoStandard, &data) == FALSE) {
+        return byte_size{0};
     }
     ::ULARGE_INTEGER ul{};
     ul.LowPart = data.nFileSizeLow;
     ul.HighPart = data.nFileSizeHigh;
-    return static_cast<size_t>(ul.QuadPart);
+    return byte_size{ul.QuadPart};
 #else
     struct ::stat64 st{};
     if (::stat64(p.data(), &st) == -1) {
-        return 0;
+        return byte_size{0};
     }
-    return static_cast<size_t>(st.st_size);
+    return byte_size{st.st_size};
 #endif
 }
 

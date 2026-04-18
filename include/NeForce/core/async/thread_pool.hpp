@@ -9,6 +9,7 @@
  * 延迟任务和周期性任务等功能。线程池支持固定模式和缓存模式两种运行方式。
  */
 
+#include "NeForce/core/async/lazy_thread.hpp"
 #include "NeForce/core/async/packaged_task.hpp"
 #include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
@@ -28,31 +29,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 高性能线程池的实现
  * @{
  */
-
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-class NEFORCE_API manual_thread {
-public:
-    using id_type = uint32_t;
-
-private:
-    using thread_func = function<void(id_type)>;
-
-    thread_func func_;
-    id_type thread_id_;
-
-public:
-    explicit manual_thread(thread_func func) noexcept;
-    ~manual_thread() = default;
-
-    NEFORCE_NODISCARD id_type id() const noexcept { return thread_id_; }
-    void start();
-};
-
-NEFORCE_END_INNER__
-/// @endcond
-
 
 /**
  * @struct task_group
@@ -223,7 +199,7 @@ public:
  * 存储每个工作线程的本地状态信息。
  */
 struct NEFORCE_API worker_context {
-    using id_type = inner::manual_thread::id_type; ///< 线程ID类型
+    using id_type = uint32_t; ///< 线程ID类型
 
     local_queue queue{};               ///< 本地任务队列
     id_type id{0};                     ///< 线程ID
@@ -259,14 +235,14 @@ struct task_info {
     enum class priority_type : uint32_t {
     }; ///< 优先级类型
 
-    const uint64_t id;                                 ///< 任务ID
-    atomic<status> status{status::pending};            ///< 任务状态
-    timestamp submit_time{timestamp::now()};           ///< 提交时间
-    timestamp start_time{0};                           ///< 开始执行时间
-    timestamp finish_time{0};                          ///< 完成时间
-    inner::manual_thread::id_type worker_thread_id{0}; ///< 执行任务的线程ID
-    string error{};                                    ///< 错误信息
-    priority_type priority;                            ///< 任务优先级
+    const uint64_t id;                       ///< 任务ID
+    atomic<status> status{status::pending};  ///< 任务状态
+    timestamp submit_time{timestamp::now()}; ///< 提交时间
+    timestamp start_time{0};                 ///< 开始执行时间
+    timestamp finish_time{0};                ///< 完成时间
+    uint32_t worker_thread_id{0};            ///< 执行任务的线程ID
+    string error{};                          ///< 错误信息
+    priority_type priority;                  ///< 任务优先级
 
     /**
      * @brief 构造函数
@@ -369,14 +345,14 @@ public:
     };
 
     using steal_strategy = local_queue::steal_strategy;     ///< 窃取策略类型别名
-    using id_type = inner::manual_thread::id_type;          ///< 线程ID类型别名
+    using id_type = uint32_t;                               ///< 线程ID类型别名
     using periodic_token = shared_ptr<periodic_task_state>; ///< 周期性任务令牌
     using priority_type = task_info::priority_type;         ///< 优先级类型别名
 
     static constexpr size_t task_max_threshhold = numeric_traits<int32_t>::max(); ///< 最大任务队列阈值
     static constexpr size_t max_idle_seconds = 60;                                ///< 最大空闲秒数
 
-    static size_t max_thread_threshhold();
+    static size_t max_thread_threshhold() noexcept;
 
 private:
     using task_type = function<void()>; ///< 任务类型
@@ -398,10 +374,19 @@ private:
         bool operator<(const priority_task& other) const noexcept { return priority < other.priority; }
     };
 
-    unordered_map<id_type, unique_ptr<inner::manual_thread>> threads_map_; ///< 线程映射
-    unordered_map<id_type, worker_context> worker_contexts_;               ///< 工作线程上下文映射
-    vector<atomic<worker_context*>> worker_contexts_ptr_;                  ///< 工作线程上下文指针数组
-    mutex worker_contexts_mtx_;                                            ///< 工作线程上下文互斥锁
+    struct thread_pool_id_generator {
+        static uint32_t& get_id() noexcept {
+            static uint32_t pool_thread_id = 0;
+            return pool_thread_id;
+        }
+        static uint32_t get_new_id() noexcept { return get_id()++; }
+        static void reset_id() noexcept { get_id() = 0; }
+    };
+
+    unordered_map<id_type, unique_ptr<lazy_thread>> threads_map_; ///< 线程映射
+    unordered_map<id_type, worker_context> worker_contexts_;      ///< 工作线程上下文映射
+    vector<atomic<worker_context*>> worker_contexts_ptr_;         ///< 工作线程上下文指针数组
+    mutex worker_contexts_mtx_;                                   ///< 工作线程上下文互斥锁
 
     timer_scheduler<steady_clock> timer_{}; ///< 定时器调度器
 
@@ -743,40 +728,37 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
     }
 
     if (pool_mode_.load() == pool_mode::cached && task_size_.load() > idle_thread_size_) {
-
-        inner::manual_thread* t_ptr = nullptr;
         id_type thread_id = 0;
 
         {
             unique_lock<mutex> lock(task_queue_mtx_);
             if (threads_map_.size() < thread_threshhold_) {
-                auto ptr =
-                        _NEFORCE make_unique<inner::manual_thread>([this](const id_type id) { thread_function(id); });
-
-                thread_id = ptr->id();
-                t_ptr = ptr.get();
-                threads_map_.emplace(thread_id, move(ptr));
+                thread_id = thread_pool_id_generator::get_new_id();
+                auto worker_func = [this, thread_id]() { thread_function(thread_id); };
+                auto ptr = _NEFORCE make_unique<lazy_thread>(_NEFORCE move(worker_func));
+                threads_map_.emplace(thread_id, _NEFORCE move(ptr));
             }
         }
 
-        if (t_ptr != nullptr) {
+        if (thread_id != 0) {
             {
                 lock<mutex> ctx_lock(worker_contexts_mtx_);
                 if (thread_id >= worker_contexts_ptr_.size()) {
                     worker_contexts_ptr_.reserve(thread_id + 1);
-                    for (size_t i = worker_contexts_ptr_.size(); i <= thread_id; i++) {
+                    for (size_t i = worker_contexts_ptr_.size(); i <= thread_id; ++i) {
                         atomic<worker_context*> tmp;
                         tmp.store(nullptr, memory_order_relaxed);
-                        worker_contexts_ptr_.emplace_back(move(tmp));
+                        worker_contexts_ptr_.emplace_back(_NEFORCE move(tmp));
                     }
                 }
             }
 
-            t_ptr->start();
+            threads_map_[thread_id]->start();
+            threads_map_[thread_id]->detach();
         }
     }
 
-    return submit_result<Result>{move(res), move(info)};
+    return submit_result<Result>{_NEFORCE move(res), _NEFORCE move(info)};
 }
 
 template <typename Func, typename... Args>
@@ -827,7 +809,7 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
         this->submit_task(priority, [task]() { (*task)(); });
     });
 
-    return submit_result<Result>{_NEFORCE move(res), info};
+    return submit_result<Result>{_NEFORCE move(res), _NEFORCE move(info)};
 }
 
 template <typename Func, typename... Args>

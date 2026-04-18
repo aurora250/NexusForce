@@ -117,29 +117,35 @@ path path::lexically_normal() const {
     bool is_absolute = false;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    // 处理 "C:" 驱动器字母或 "\\" 网络路径前缀
     if (length >= 2 && path_[1] == ':') {
         drive_prefix = path_.view(0, 2);
         start = 2;
+        // 若驱动器后紧跟分隔符，则路径为绝对路径
         if (length > 2 && (path_[2] == '\\' || path_[2] == '/')) {
             is_absolute = true;
             start = 3;
         }
     } else if (length >= 2 && path_[0] == '\\' && path_[1] == '\\') {
+        // UNC 路径
         is_absolute = true;
         drive_prefix = "\\\\";
         start = 2;
     } else if (!path_.empty() && (path_[0] == '\\' || path_[0] == '/')) {
+        // 无驱动器字母的绝对路径
         is_absolute = true;
         start = 1;
     }
 
 #else
+    // 检查是否以 '/' 开头
     if (!path_.empty() && path_[0] == '/') {
         is_absolute = true;
         start = 1;
     }
 #endif
 
+    // 将路径拆分为组件
     size_t pos = start;
     while (pos < length) {
         size_t next_sep = pos;
@@ -155,6 +161,7 @@ path path::lexically_normal() const {
         pos = (next_sep < length) ? next_sep + 1 : length;
     }
 
+    // 规范化组件
     vector<string_view> normalized;
     for (const auto& part: parts) {
         if (part.empty() || part == ".") {
@@ -171,6 +178,7 @@ path path::lexically_normal() const {
         }
     }
 
+    // 重建规范化后的路径字符串
 #ifdef NEFORCE_PLATFORM_WINDOWS
     result = drive_prefix;
     if (is_absolute) {
@@ -193,6 +201,7 @@ path path::lexically_normal() const {
         return path(".");
     }
 
+    // 处理绝对路径下所有组件都被消除的情况
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (is_absolute && normalized.empty()) {
         return path(drive_prefix + preferred_separator);
@@ -448,7 +457,7 @@ bool path::operator==(const path& rhs) const {
     const path rhs_norm = rhs.lexically_normal();
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return string_compare_ignore_case(lhs_norm.data(), rhs_norm.data()) == 0;
+    return lhs_norm.str().compare_ignore_case(rhs_norm.str()) == 0;
 #else
     return lhs_norm.str() == rhs_norm.str();
 #endif
@@ -459,7 +468,7 @@ bool path::operator<(const path& rhs) const {
     const path rhs_norm = rhs.lexically_normal();
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return string_compare_ignore_case(lhs_norm.data(), rhs_norm.data()) < 0;
+    return lhs_norm.str().compare_ignore_case(rhs_norm.str()) < 0;
 #else
     return lhs_norm.str() < rhs_norm.str();
 #endif

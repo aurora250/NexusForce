@@ -22,7 +22,7 @@ void test_file_basic_operations() {
         NEFORCE_ASSERTION(TEST_FILE.exists());
         NEFORCE_ASSERTION(TEST_FILE.is_file());
         NEFORCE_ASSERTION(!TEST_FILE.is_directory());
-        NEFORCE_ASSERTION(filesystem::size(TEST_FILE) == TEST_CONTENT.size());
+        NEFORCE_ASSERTION(filesystem::size(TEST_FILE).bytes() == TEST_CONTENT.size());
     }
     {
         file read_file(TEST_FILE);
@@ -186,7 +186,7 @@ void test_pathtree() {
         if (!n.is_file()) {
             return true;
         }
-        return filesystem::size(n.get_path()) > 1024;
+        return filesystem::size(n.get_path()) > 1_KB;
     });
     println(large_files);
 }

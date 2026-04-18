@@ -489,6 +489,23 @@ void test_json() {
     }
 }
 
+void test_bsize() {
+    byte_size a(1024);
+    byte_size b(2.5, byte_size::unit::GB);
+    byte_size c(1.5, byte_size::unit::TB, false);
+    byte_size d = byte_size::parse("1.5 MB");
+
+    println(a);
+    println(b);
+    println(c.to_string(byte_size::unit::GB, 3, false));
+
+    byte_size total = a + b + d;
+    println("total = ", total);
+    if (b > byte_size::parse("2 GB")) {
+        println("b is larger than 2 GB");
+    }
+}
+
 void test_timer() {
     _NEFORCE steady_timer timer1;
     timer1.expires_after(seconds(5));
@@ -744,6 +761,7 @@ void test_tpool() {
             pool.submit_task(test_atomic);
             pool.submit_task(test_regex);
             pool.submit_task(test_format);
+            pool.submit_task(test_bsize);
             pool.submit_task(test_color);
             pool.submit_task(test_enctype);
             pool.submit_task(test_ini);
