@@ -36,6 +36,8 @@ NEFORCE_BEGIN_NAMESPACE__
  *   https://pubs.opengroup.org/onlinepubs/009695399/functions/rand.html
  * - 梅森旋转算法 (MT19937)：遵循松本真、西村拓士 1998 年原始论文
  *   http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/ARTICLES/mt.pdf
+ * - 无偏整数映射算法：Daniel Lemire, 2019
+ *   https://arxiv.org/abs/1805.10941
  *
  * @section implementation_details 实现细节
  * | 生成器        | 算法                    | 周期长度        | 适用场景               |
@@ -44,10 +46,39 @@ NEFORCE_BEGIN_NAMESPACE__
  * | random_mt    | MT19937 梅森旋转        | 2^19937 - 1     | 科学计算、统计分析     |
  * | secret       | 操作系统熵源            | 不可预测        | 加密密钥、安全令牌     |
  *
+ * @section next_int_algorithm next_int 无偏映射算法
+ * 使用 Lemire 算法将均匀分布的 64 位随机数无偏映射到 [0, max)：
+ *
+ *   设 r 为 64 位随机数，计算 m = r * max（128 位中间结果）
+ *   取 m 的高 64 位作为结果候选值
+ *   若 m 的低 64 位 < max，则进行拒绝采样消除边界偏差
+ *
+ * 相比简单取模（% max），此算法：
+ *   1. 避免了取模操作引入的分布偏差
+ *   2. 期望拒绝次数 < 1 次，性能接近无拒绝情况
+ *
  * @see https://www.iso.org/standard/54945.html
  * @see https://csrc.nist.gov/projects/random-bit-generation
  * @{
  */
+
+NEFORCE_API uint64_t mul128_high(uint64_t a, uint64_t b, uint64_t* lo_out) noexcept;
+
+template <typename Generator>
+uint64_t lemire_bounded(Generator&& gen, const uint64_t max) noexcept {
+    uint64_t lo = 0;
+    uint64_t hi = _NEFORCE mul128_high(gen(), max, &lo);
+
+    if (lo >= max) {
+        return hi;
+    }
+
+    const uint64_t threshold = (static_cast<uint64_t>(0) - max) % max;
+    while (lo < threshold) {
+        hi = _NEFORCE mul128_high(gen(), max, &lo);
+    }
+    return hi;
+}
 
 /**
  * @class random_lcd
@@ -73,14 +104,12 @@ private:
     }
 
     uint64_t generate_64bit() noexcept {
-        uint64_t result = 0;
-        result = static_cast<uint64_t>(generate_32bit()) << 32;
-        result |= generate_32bit();
-        return result;
+        const uint64_t hi = static_cast<uint64_t>(generate_32bit()) << 32;
+        const uint64_t lo = static_cast<uint64_t>(generate_32bit());
+        return hi | lo;
     }
 
     decltype(auto) generate(true_type) noexcept { return generate_32bit(); }
-
     decltype(auto) generate(false_type) noexcept { return generate_64bit(); }
 
 public:
@@ -107,16 +136,11 @@ public:
     T next_int(T max) noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
 
-        if (max <= 0) {
+        if (max <= 0 || max == 1) {
             return 0;
         }
-        if (max == 1) {
-            return 0;
-        }
-
-        const uint64_t value = generate_64bit();
-        const uint64_t product = value * static_cast<uint64_t>(max);
-        return static_cast<T>(product >> 32);
+        return static_cast<T>(
+                _NEFORCE lemire_bounded([this]() noexcept { return generate_64bit(); }, static_cast<uint64_t>(max)));
     }
 
     /**
@@ -151,15 +175,10 @@ public:
      * @return [0, max) 范围内的随机 64 位整数
      */
     uint64_t next_uint64(uint64_t max) noexcept {
-        if (max <= 0) {
+        if (max == 0 || max == 1) {
             return 0;
         }
-        if (max == 1) {
-            return 0;
-        }
-
-        const uint64_t value = generate_64bit();
-        return value % max;
+        return lemire_bounded([this]() noexcept { return generate_64bit(); }, max);
     }
 
     /**
@@ -176,9 +195,9 @@ public:
     template <typename T>
     T next_float() noexcept {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-        auto gen = static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
+        auto gen = this->generate(bool_constant<sizeof(T) <= 4>());
         using IntT = decay_t<decltype(gen)>;
-        return gen / numeric_traits<IntT>::max();
+        return static_cast<T>(gen) / numeric_traits<IntT>::max();
     }
 
     /**
@@ -240,7 +259,6 @@ private:
     uint64_t generate_64bit() noexcept;
 
     decltype(auto) generate(true_type) noexcept { return generate_32bit(); }
-
     decltype(auto) generate(false_type) noexcept { return generate_64bit(); }
 
 public:
@@ -272,16 +290,11 @@ public:
     T next_int(T max) noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
 
-        if (max <= 0) {
+        if (max <= 0 || max == 1) {
             return 0;
         }
-        if (max == 1) {
-            return 0;
-        }
-
-        const uint64_t value = generate_64bit();
-        const uint64_t product = value * static_cast<uint64_t>(max);
-        return static_cast<T>(product >> 32);
+        return static_cast<T>(
+                _NEFORCE lemire_bounded([this]() noexcept { return generate_64bit(); }, static_cast<uint64_t>(max)));
     }
 
     /**
@@ -316,15 +329,10 @@ public:
      * @return [0, max) 范围内的随机 64 位整数
      */
     uint64_t next_uint64(uint64_t max) noexcept {
-        if (max <= 0) {
+        if (max == 0 || max == 1) {
             return 0;
         }
-        if (max == 1) {
-            return 0;
-        }
-
-        const uint64_t value = generate_64bit();
-        return value % max;
+        return _NEFORCE lemire_bounded([this]() noexcept { return generate_64bit(); }, max);
     }
 
     /**
@@ -341,9 +349,9 @@ public:
     template <typename T>
     T next_float() noexcept {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-        auto gen = static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
+        auto gen = this->generate(bool_constant<sizeof(T) <= 4>());
         using IntT = decay_t<decltype(gen)>;
-        return gen / numeric_traits<IntT>::max();
+        return static_cast<T>(gen) / numeric_traits<IntT>::max();
     }
 
     /**
@@ -398,7 +406,6 @@ private:
     }
 
     static decltype(auto) generate(true_type) { return generate_32bit(); }
-
     static decltype(auto) generate(false_type) { return generate_64bit(); }
 
 public:
@@ -418,10 +425,8 @@ public:
         if (max == 1) {
             return 0;
         }
-
-        const uint64_t value = generate_64bit();
-        const uint64_t product = value * static_cast<uint64_t>(max);
-        return static_cast<T>(product >> 32);
+        return static_cast<T>(_NEFORCE lemire_bounded([]() noexcept { return secret::generate_64bit(); },
+                                                      static_cast<uint64_t>(max)));
     }
 
     /**
@@ -456,15 +461,10 @@ public:
      * @return [0, max) 范围内的随机 64 位整数
      */
     static uint64_t next_uint64(uint64_t max) {
-        if (max <= 0) {
+        if (max == 0 || max == 1) {
             return 0;
         }
-        if (max == 1) {
-            return 0;
-        }
-
-        const uint64_t value = generate_64bit();
-        return value % max;
+        return lemire_bounded([]() noexcept { return secret::generate_64bit(); }, max);
     }
 
     /**
@@ -481,9 +481,9 @@ public:
     template <typename T>
     static T next_float() {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-        auto gen = static_cast<T>(secret::generate(bool_constant<sizeof(T) <= 4>()));
+        auto gen = secret::generate(bool_constant<sizeof(T) <= 4>());
         using IntT = decay_t<decltype(gen)>;
-        return gen / numeric_traits<IntT>::max();
+        return static_cast<T>(gen) / numeric_traits<IntT>::max();
     }
 
     /**
@@ -499,7 +499,7 @@ public:
         if (min >= max) {
             return min;
         }
-        return min + (max - min) * next_float<T>();
+        return min + (max - min) * secret::next_float<T>();
     }
 
     /**
@@ -511,7 +511,7 @@ public:
     template <typename T>
     static T next_float(T max) {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-        return next_float(static_cast<T>(0), max);
+        return secret::next_float(static_cast<T>(0), max);
     }
 
     /**

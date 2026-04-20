@@ -23,8 +23,8 @@ http_cookie http_cookie::parse(const string_view header, string default_domain, 
         if (first) {
             first = false;
             if (eq_pos != string_view::npos) {
-                c.name = http_cookie_name(string(pair.substr(0, eq_pos).trim()));
-                c.value = string(pair.substr(eq_pos + 1).trim());
+                c.name = http_cookie_name(string(pair.head(eq_pos).trim()));
+                c.value = string(pair.tail(eq_pos + 1).trim());
             }
             c.domain = default_domain.empty() ? "" : move(default_domain);
             c.path = default_path.empty() ? "/" : move(default_path);

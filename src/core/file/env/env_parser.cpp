@@ -150,14 +150,14 @@ bool env_parser::parse_variable_line(const string& line, string& name, unique_pt
     bool is_exported = false;
     if (trimmed.starts_with("export ")) {
         is_exported = true;
-        trimmed = trimmed.substr(7);
+        trimmed = trimmed.tail(7);
         trimmed.trim();
     }
     const size_t eq_pos = trimmed.find('=');
     if (eq_pos == string::npos) {
         return false;
     }
-    name = trimmed.substr(0, eq_pos);
+    name = trimmed.head(eq_pos);
     name.trim();
     if (name.empty()) {
         return false;
@@ -199,7 +199,7 @@ void env_parser::parse_line(const string& line) const {
         string comment = line;
         comment.trim();
         if (comment.size() > 1) {
-            root_->add_comment(comment.substr(1).trim());
+            root_->add_comment(comment.tail(1).trim());
         }
         return;
     }

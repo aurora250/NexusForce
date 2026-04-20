@@ -1320,20 +1320,20 @@ public:
         }
 
         view.remove_prefix(5);
-        const int day = integer32::parse(view.substr(0, 2)).value();
+        const int day = integer32::parse(view.head(2)).value();
         view.remove_prefix(3);
-        const int mon = months_to_int(view.substr(0, 3));
+        const int mon = months_to_int(view.head(3));
         if (mon == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid month in date"));
         }
         view.remove_prefix(4);
-        const int year = integer32::parse(view.substr(0, 4)).value();
+        const int year = integer32::parse(view.head(4)).value();
         view.remove_prefix(5);
-        const int hour = integer32::parse(view.substr(0, 2)).value();
+        const int hour = integer32::parse(view.head(2)).value();
         view.remove_prefix(3);
-        const int minute = integer32::parse(view.substr(0, 2)).value();
+        const int minute = integer32::parse(view.head(2)).value();
         view.remove_prefix(3);
-        const int second = integer32::parse(view.substr(0, 2)).value();
+        const int second = integer32::parse(view.head(2)).value();
         view.remove_prefix(3);
 
         if (view != "GMT") {

@@ -114,12 +114,12 @@ namespace {
                 if (line.starts_with("vendor_id")) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.vendor = line.substr(colon + 2);
+                        cpu_info.vendor = line.tail(colon + 2);
                     }
                 } else if (line.starts_with("model name")) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.brand = line.substr(colon + 2);
+                        cpu_info.brand = line.tail(colon + 2);
                     }
                 } else if (line.starts_with("cpu cores")) {
                     const size_t colon = line.find(':');
@@ -129,7 +129,7 @@ namespace {
                 } else if (line.starts_with("flags") || line.starts_with("Features")) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.features = line.substr(colon + 2);
+                        cpu_info.features = line.tail(colon + 2);
                     }
                 }
             }
@@ -269,7 +269,7 @@ namespace {
             if (line.starts_with("PRETTY_NAME")) {
                 const size_t eq_pos = line.find('=');
                 if (eq_pos != string::npos) {
-                    string_view value = line.substr(eq_pos + 1);
+                    string_view value = line.tail(eq_pos + 1);
                     if (value.front() == '"' && value.back() == '"') {
                         value = value.substr(1, value.length() - 2);
                     }

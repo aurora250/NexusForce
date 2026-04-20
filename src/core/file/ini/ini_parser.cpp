@@ -67,8 +67,8 @@ bool ini_parser::parse_key_value(const string& line, string& key, string& value)
         return false;
     }
 
-    key = line.substr(0, pos).trim();
-    value = line.substr(pos + 1).trim();
+    key = line.head(pos).trim();
+    value = line.tail(pos + 1).trim();
 
     if (value.size() >= 2 &&
         ((value.front() == '"' && value.back() == '"') || (value.front() == '\'' && value.back() == '\''))) {

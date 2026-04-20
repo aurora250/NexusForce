@@ -215,7 +215,7 @@ NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options
     char existing_sign = '\0';
     if (!raw.empty() && (raw[0] == '-' || raw[0] == '+' || raw[0] == ' ')) {
         char sign = raw[0];
-        raw = raw.substr(1);
+        raw = raw.tail(1);
         existing_sign = sign;
     }
 
@@ -508,7 +508,7 @@ struct formatter<string> {
     NEFORCE_CONSTEXPR20 string operator()(const string& value, const format_options& options) const {
         string raw = value;
         if (options.precision >= 0 && raw.size() > static_cast<size_t>(options.precision)) {
-            raw = raw.substr(0, static_cast<size_t>(options.precision));
+            raw = raw.head(static_cast<size_t>(options.precision));
         }
         return inner::apply_format_options(_NEFORCE move(raw), options, false);
     }
@@ -645,7 +645,7 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
             if (spec_str.empty()) {
                 opts = inner::parse_number_format("");
             } else if (spec_str[0] == ':') {
-                opts = inner::parse_number_format(spec_str.substr(1));
+                opts = inner::parse_number_format(spec_str.tail(1));
             } else {
                 opts = format_options{};
             }

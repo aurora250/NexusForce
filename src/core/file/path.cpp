@@ -27,7 +27,7 @@ void path::split_iterator::find_next() {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (pos == 0 && sz > 1 && (*path_)[1] == ':') {
-        current_part_ = path_->substr(0, 2);
+        current_part_ = path_->head(2);
         start_ = 2;
         while (start_ < sz && ((*path_)[start_] == '/' || (*path_)[start_] == '\\')) {
             ++start_;
@@ -40,7 +40,7 @@ void path::split_iterator::find_next() {
 
     const size_t sep_pos = path_->find_first_of(spliter, pos);
     if (sep_pos == string::npos) {
-        current_part_ = path_->substr(pos);
+        current_part_ = path_->tail(pos);
         end_ = sz;
     } else {
         current_part_ = path_->substr(pos, sep_pos - pos);
@@ -61,7 +61,7 @@ path path::parent_path() const {
         return path{"/"};
     }
 
-    return path{path_.substr(0, last_sep)};
+    return path{path_.head(last_sep)};
 }
 
 string_view path::filename() const noexcept {
@@ -73,7 +73,7 @@ string_view path::filename() const noexcept {
     if (last_sep == string::npos) {
         return path_.view();
     }
-    return path_.view().substr(last_sep + 1);
+    return path_.view().tail(last_sep + 1);
 }
 
 string_view path::stem() const noexcept {
@@ -87,20 +87,20 @@ string_view path::stem() const noexcept {
         return fname;
     }
 
-    return fname.substr(0, last_dot);
+    return fname.head(last_dot);
 }
 
 string_view path::extension() const noexcept { return path::extension(path_.view()); }
 
 string_view path::extension(const string_view path) noexcept {
     const size_t last_sep = path.find_last_of(spliter);
-    const string_view filename = last_sep == string::npos ? path : path.substr(last_sep + 1);
+    const string_view filename = last_sep == string::npos ? path : path.tail(last_sep + 1);
 
     const size_t last_dot = filename.find_last_of('.');
     if (last_dot == string::npos || last_dot == 0 || last_dot == filename.size() - 1) {
         return {};
     }
-    return filename.substr(last_dot + 1);
+    return filename.tail(last_dot + 1);
 }
 
 path path::lexically_normal() const {
@@ -313,7 +313,7 @@ path& path::operator/=(const path& other) {
     const bool right_has_sep = (front == '/' || front == '\\');
 
     if (left_has_sep && right_has_sep) {
-        path_ += other.path_.substr(1);
+        path_ += other.path_.tail(1);
     } else if (!left_has_sep && !right_has_sep) {
         path_ += preferred_separator;
         path_ += other.path_;
@@ -339,7 +339,7 @@ path& path::operator/=(const string_view other) {
     const bool right_has_sep = (!other.empty() && (other.front() == '/' || other.front() == '\\'));
 
     if (left_has_sep && right_has_sep) {
-        path_ += other.substr(1);
+        path_ += other.tail(1);
     } else if (!left_has_sep && !right_has_sep) {
         path_ += preferred_separator;
         path_ += other;

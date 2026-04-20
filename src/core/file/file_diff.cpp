@@ -87,7 +87,7 @@ bool file_diff::compare_text(const path& file1, const path& file2, const bool ig
         while (start < content.size()) {
             const size_t end = content.find('\n', start);
             if (end == string::npos) {
-                string line = content.substr(start);
+                string line = content.tail(start);
                 if (!line.empty() && line.back() == '\r') {
                     line.pop_back();
                 }

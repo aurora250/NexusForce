@@ -44,7 +44,7 @@ url url::parse(const string_view str) {
     if (scheme_end == string::npos) {
         NEFORCE_THROW_EXCEPTION(network_exception("URL missing scheme"));
     }
-    target.scheme = str.substr(0, scheme_end);
+    target.scheme = str.head(scheme_end);
     size_t pos = scheme_end + 3;
     if (pos >= len) {
         NEFORCE_THROW_EXCEPTION(network_exception("URL scheme invalid"));
@@ -80,7 +80,7 @@ url url::parse(const string_view str) {
     } else {
         colon_pos = host_port.find_last_of(':');
         if (colon_pos != string::npos) {
-            target.host = host_port.substr(0, colon_pos);
+            target.host = host_port.head(colon_pos);
         } else {
             target.host = host_port;
         }
@@ -121,7 +121,7 @@ url url::parse(const string_view str) {
     }
 
     if (fragment_pos != string::npos && fragment_pos < len - 1) {
-        target.fragment = str.substr(fragment_pos + 1);
+        target.fragment = str.tail(fragment_pos + 1);
     }
 
     return target;

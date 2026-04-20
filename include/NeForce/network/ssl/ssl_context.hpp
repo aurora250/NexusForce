@@ -10,7 +10,7 @@
  */
 
 #include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
+#include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/network/ssl/ssl_exception.hpp"
 #include <openssl/ssl.h>
 NEFORCE_BEGIN_NAMESPACE__
@@ -67,6 +67,7 @@ private:
     };
 
     unique_ptr<::SSL_CTX, ctx_deleter> ctx_; ///< OpenSSL SSL_CTX对象
+    ssl_method method_;                      ///< 记录创建时使用的方法
 
 public:
     /**
@@ -88,6 +89,21 @@ public:
 
     ssl_context(ssl_context&& other) noexcept = default;
     ssl_context& operator=(ssl_context&& other) noexcept = default;
+
+    /**
+     * @brief 克隆当前SSL上下文
+     * @return 新的ssl_context实例
+     * @throws ssl_exception 克隆失败时抛出
+     * @note 克隆的上下文与原上下文共享同一底层SSL_CTX，对任意一个的配置修改将影响所有克隆实例。
+     */
+    ssl_context clone() const;
+
+    /**
+     * @brief 克隆为共享指针
+     * @return 克隆的上下文共享指针
+     * @throws ssl_exception 克隆失败时抛出
+     */
+    NEFORCE_NODISCARD shared_ptr<ssl_context> clone_shared() const;
 
     /**
      * @brief 加载证书和私钥（从文件）

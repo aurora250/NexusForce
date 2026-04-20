@@ -214,7 +214,7 @@ void cmdline::parse_long_option(const string& arg, const vector<string>& args, s
     if (opt->requires_value) {
         string value;
         if (eq_pos != string::npos) {
-            value = arg.substr(eq_pos + 1);
+            value = arg.tail(eq_pos + 1);
         } else {
             if (index + 1 >= args.size()) {
                 NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option requires a value: --" + name).data()));
@@ -260,7 +260,7 @@ void cmdline::parse_short_options(const string& arg, const vector<string>& args,
                     opt->values.push_back(move(value));
                 }
             } else {
-                const string value = arg.substr(j + 1);
+                const string value = arg.tail(j + 1);
                 if (opt->allow_multiple) {
                     opt->values.push_back(move(value));
                 } else {

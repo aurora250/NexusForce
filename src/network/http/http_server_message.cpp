@@ -18,7 +18,7 @@ namespace {
             const size_t eq_pos = pair.find('=');
 
             if (eq_pos != string::npos) {
-                request.set_cookie(pair.substr(0, eq_pos).trim(), pair.substr(eq_pos + 1).trim());
+                request.set_cookie(pair.head(eq_pos).trim(), pair.tail(eq_pos + 1).trim());
             }
 
             if (end == string::npos) {

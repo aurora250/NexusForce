@@ -23,7 +23,7 @@ bool filesystem::create_directories(const path& p) {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     while ((pos = ps.find_first_of(path::spliter, pos + 1)) != string::npos) {
-        subdir = ps.substr(0, pos);
+        subdir = ps.head(pos);
         if (!subdir.empty() && !path(subdir).is_directory()) {
             if (::CreateDirectoryA(subdir.data(), nullptr) == FALSE && ::GetLastError() != ERROR_ALREADY_EXISTS) {
                 return false;
@@ -34,7 +34,7 @@ bool filesystem::create_directories(const path& p) {
 
 #else
     while ((pos = ps.find_first_of(path::spliter, pos + 1)) != string::npos) {
-        subdir = ps.substr(0, pos);
+        subdir = ps.head(pos);
         if (::mkdir(subdir.data(), 0755) == -1 && errno != EEXIST) {
             return false;
         }

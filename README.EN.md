@@ -298,15 +298,15 @@ The core components of NexusForce strictly adhere to relevant international stan
 | 📦 Package Manager | [vcpkg](https://github.com/microsoft/vcpkg) | Latest |
 | 🎨 Code Formatter | [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | 19+ |
 | 🔍 Static Analyzer | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | 19+ |
-| ⚠️ Mandatory Dependencies | [GTest](https://google.github.io/googletest/) | 1.17.0#2 |
-| | [pcre2](https://www.pcre.org/) | 10.47 |
-| | [OpenSSL](https://www.openssl.org/) | 3.6.1#2 |
-| 📦 Optional Dependencies | [libpq](https://www.postgresql.org/) | 16.9#3 |
-| | [libmysql](https://www.mysql.com/) | 8.0.40#1 |
-| | [sqlite3](https://sqlite.org/index.html) | 3.51.2 |
-| | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0 |
-| | [lz4](https://lz4.org/) | 1.10.0 |
-| | [zlib](https://www.zlib.net/) | 1.3.1 |
+| ⚠️ Mandatory Dependencies | [GTest](https://google.github.io/googletest/) | 1.17.0#2+ |
+| | [pcre2](https://www.pcre.org/) | 10.47+ |
+| | [OpenSSL](https://www.openssl.org/) | 3.6.1#2+ |
+| 📦 Optional Dependencies | [libpq](https://www.postgresql.org/) | 16.9#3+ |
+| | [libmysql](https://www.mysql.com/) | 8.0.40#1+ |
+| | [sqlite3](https://sqlite.org/index.html) | 3.51.2+ |
+| | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+ |
+| | [lz4](https://lz4.org/) | 1.10.0+ |
+| | [zlib](https://www.zlib.net/) | 1.3.1+ |
 
 ### 🏗️ Build Steps
 

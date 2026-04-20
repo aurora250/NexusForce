@@ -266,14 +266,29 @@ void abort() noexcept {
     unreachable();
 }
 
-int set_exit(const exit_handler handler) noexcept { return exit_handler_manager::instance().register_exit(handler); }
+int set_exit(const exit_handler handler) noexcept {
+    try {
+        return exit_handler_manager::instance().register_exit(handler);
+    } catch (...) {
+        return -1;
+    }
+}
 
 int set_quick_exit(const exit_handler handler) noexcept {
-    return exit_handler_manager::instance().register_quick_exit(handler);
+    try {
+        return exit_handler_manager::instance().register_quick_exit(handler);
+    } catch (...) {
+        return -1;
+    }
 }
 
 void exit(const int status) {
-    exit_handler_manager::instance().execute_exit_handlers();
+    try {
+        exit_handler_manager::instance().execute_exit_handlers();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
 
     ::fflush(nullptr);
 
@@ -297,7 +312,12 @@ void immediate_exit(const int status) noexcept {
 }
 
 void quick_exit(const int status) noexcept {
-    exit_handler_manager::instance().execute_quick_exit_handlers();
+    try {
+        exit_handler_manager::instance().execute_quick_exit_handlers();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
     immediate_exit(status);
 }
 

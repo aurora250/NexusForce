@@ -53,6 +53,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/int128.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/binary_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
@@ -216,7 +217,7 @@ nexusforce_compiler_options(NexusForce)
 # 链接系统库
 if(WIN32)
     target_link_libraries(NexusForce PUBLIC
-            cfgmgr32 DbgHelp iphlpapi Psapi pdh
+            bcrypt cfgmgr32 DbgHelp iphlpapi Psapi pdh
             SetupAPI Shell32 synchronization ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)

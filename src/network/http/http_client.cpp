@@ -20,7 +20,7 @@ namespace {
             auto size_str = chunked.substr(pos, line_end - pos).trim();
             const size_t semicolon = size_str.find(';');
             if (semicolon != string::npos) {
-                size_str = size_str.substr(0, semicolon);
+                size_str = size_str.head(semicolon);
             }
 
             size_t chunk_size = 0;
@@ -52,7 +52,7 @@ namespace {
             return false;
         }
 
-        const string_view status_line = resp_str.substr(0, line_end);
+        const string_view status_line = resp_str.head(line_end);
 
         const size_t sp1 = status_line.find(' ');
         if (sp1 == string::npos) {
@@ -60,14 +60,14 @@ namespace {
         }
 
         // Parse HTTP version
-        const string_view version_str = status_line.substr(0, sp1);
+        const string_view version_str = status_line.head(sp1);
         if (version_str.starts_with("HTTP/")) {
             const string_view ver = version_str.substr(5);
             const size_t dot = ver.find('.');
             if (dot != string::npos) {
                 try {
-                    resp.http_version_major = uinteger16::parse(ver.substr(0, dot)).value();
-                    resp.http_version_minor = uinteger16::parse(ver.substr(dot + 1)).value();
+                    resp.http_version_major = uinteger16::parse(ver.head(dot)).value();
+                    resp.http_version_minor = uinteger16::parse(ver.tail(dot + 1)).value();
                     // NOLINTNEXTLINE(bugprone-empty-catch)
                 } catch (...) {
                     // ignore
@@ -91,7 +91,7 @@ namespace {
         } catch (...) {
             // ignore
         }
-        resp.status_message = status_line.substr(sp2 + 1);
+        resp.status_message = status_line.tail(sp2 + 1);
 
         // Parse headers
         const size_t header_start = line_end + 2;
@@ -114,8 +114,8 @@ namespace {
             const size_t colon = line.find(':');
 
             if (colon != string::npos) {
-                const auto key = line.substr(0, colon).trim();
-                const auto value = line.substr(colon + 1).trim();
+                const auto key = line.head(colon).trim();
+                const auto value = line.tail(colon + 1).trim();
                 resp.headers[key].push_back(value);
 
                 string key_lower = key;
@@ -151,7 +151,7 @@ namespace {
             }
         } else if (resp.content_length > 0) {
             const size_t to_copy = min(body_part.size(), resp.content_length);
-            resp.body += body_part.substr(0, to_copy);
+            resp.body += body_part.head(to_copy);
             if (to_copy < resp.content_length) {
                 return false;
             }
@@ -421,7 +421,7 @@ http_client_response http_client::do_request(http_client_request request, int re
                 new_url = move(req_url);
                 size_t last_slash = new_url.path.find_last_of('/');
                 if (last_slash != string::npos) {
-                    new_url.path = new_url.path.substr(0, last_slash + 1) + location;
+                    new_url.path = new_url.path.head(last_slash + 1) + location;
                 } else {
                     new_url.path = "/"_s + location;
                 }

@@ -606,7 +606,7 @@ public:
     static NEFORCE_CONSTEXPR20 color parse(const string_view hex) {
         string_view clean_hex = hex;
         if (clean_hex[0] == '#') {
-            clean_hex = clean_hex.substr(1);
+            clean_hex = clean_hex.tail(1);
         }
 
         if (clean_hex.length() == 6) {

@@ -12,7 +12,7 @@ pair<string, string> ftp_session::read_command() {
         return {line, ""};
     }
 
-    return {line.substr(0, space_pos), line.substr(space_pos + 1)};
+    return {line.head(space_pos), line.tail(space_pos + 1)};
 }
 
 void ftp_session::accept_tls(ssl_context& ctx) {

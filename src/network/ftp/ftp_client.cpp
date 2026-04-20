@@ -124,7 +124,7 @@ tcp_socket ftp_client::open_data_channel() {
         int idx = 0;
         while (idx < 6 && pos < nums_str.size()) {
             const size_t comma = nums_str.find(',', pos);
-            const auto token = (comma == string::npos) ? nums_str.substr(pos) : nums_str.substr(pos, comma - pos);
+            const auto token = (comma == string::npos) ? nums_str.tail(pos) : nums_str.substr(pos, comma - pos);
             nums[idx++] = integer32::parse(token).value();
             if (comma == string::npos) {
                 break;

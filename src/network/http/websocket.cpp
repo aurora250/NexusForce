@@ -350,7 +350,7 @@ void websocket_session::handle_close_frame(string payload) {
         const uint16_t code = (static_cast<uint8_t>(payload[0]) << 8) | static_cast<uint8_t>(payload[1]);
         status = static_cast<websocket_status>(code);
         if (payload.size() > 2) {
-            reason = payload.substr(2);
+            reason = payload.tail(2);
         }
     }
 

@@ -134,15 +134,15 @@ ftp_protocol::response ftp_protocol::read_response() {
             if (line.size() > 3 && line[3] == '-') {
                 in_multiline = true;
                 expected_code = current_code;
-                resp.message += line.substr(4);
+                resp.message += line.tail(4);
                 continue;
             }
-            resp.message = (line.size() > 4) ? line.substr(4) : "";
+            resp.message = (line.size() > 4) ? line.tail(4) : "";
             break;
         }
         if (has_code && current_code == expected_code && line.size() >= 3 && (line.size() == 3 || line[3] == ' ')) {
             if (line.size() > 4) {
-                resp.message += "\n" + line.substr(4);
+                resp.message += "\n" + line.tail(4);
             }
             break;
         }

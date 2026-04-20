@@ -65,7 +65,7 @@ public:
      *
      * 创建一个未初始化的管道对象。
      */
-    pipe() noexcept {}
+    pipe() noexcept = default;
 
     /**
      * @brief 创建管道

@@ -261,7 +261,7 @@ vector<string> regex::split(const string& str, const int max_splits) const {
         splits++;
     }
 
-    parts.push_back(str.substr(last_pos));
+    parts.push_back(str.tail(last_pos));
     return parts;
 }
 

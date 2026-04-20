@@ -164,8 +164,8 @@ include(cmake/NexusForceClangFormat.cmake)
 include(cmake/NexusForceClangTidy.cmake)
 
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/NexusForce/
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/NexusForce
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/NeForce/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/NeForce
         FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h" PATTERN "*.asm"
 )
 

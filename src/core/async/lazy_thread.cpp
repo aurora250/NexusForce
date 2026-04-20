@@ -1,4 +1,5 @@
 #include <NeForce/core/async/lazy_thread.hpp>
+#include <NeForce/core/exception/terminate.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 lazy_thread::lazy_thread(lazy_thread&& other) noexcept :

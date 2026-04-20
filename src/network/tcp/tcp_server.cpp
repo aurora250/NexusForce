@@ -1,14 +1,56 @@
 #include <NeForce/network/tcp/tcp_server.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <poll.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+namespace {
+    struct wsa_event_guard {
+        ::WSAEVENT event;
+
+        explicit wsa_event_guard(::WSAEVENT e) :
+        event(e) {}
+
+        ~wsa_event_guard() {
+            if (event != WSA_INVALID_EVENT) {
+                ::WSACloseEvent(event);
+            }
+        }
+
+        wsa_event_guard(const wsa_event_guard&) = delete;
+        wsa_event_guard& operator=(const wsa_event_guard&) = delete;
+    };
+} // namespace
+#endif
+
+
+void tcp_server_base::notify_stop() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (wake_event_ != WSA_INVALID_EVENT) {
+        ::WSASetEvent(wake_event_);
+    }
+#else
+    if (wake_pipe_.is_valid()) {
+        constexpr char byte = 1;
+        (void) wake_pipe_.write(&byte, 1);
+    }
+#endif
+}
 
 void tcp_server_base::accept_loop() {
     if (!acceptor_->set_nonblocking(true)) {
-        if (exception_handler_) {
-            exception_handler_(socket_exception("Failed to set acceptor to non-blocking mode"));
+        {
+            shared_lock lock(handler_mutex_);
+            if (exception_handler_) {
+                exception_handler_(socket_exception("Failed to set acceptor to non-blocking mode"));
+            }
         }
         running_ = false;
         return;
     }
+
+#if 1
 
     while (running_) {
         try {
@@ -21,11 +63,25 @@ void tcp_server_base::accept_loop() {
                 continue;
             }
 
-            client_pool_.submit_task([this, sock = move(*client_opt)]() mutable {
+            client_handler_t handler;
+            {
+                shared_lock lock(handler_mutex_);
+                handler = client_handler_;
+            }
+
+            if (!handler) {
+                continue;
+            }
+
+            client_pool_.submit_task([handler = move(handler), sock = move(*client_opt), this]() mutable {
                 try {
-                    handle_client(move(sock));
+                    handler(move(sock));
                 } catch (const exception& e) {
-                    if (running_ && exception_handler_) {
+                    if (!running_) {
+                        return;
+                    }
+                    shared_lock lock(handler_mutex_);
+                    if (exception_handler_) {
                         exception_handler_(e);
                     }
                 }
@@ -36,6 +92,150 @@ void tcp_server_base::accept_loop() {
             }
         }
     }
+
+#else
+
+    const auto acceptor_fd = acceptor_->native_handle();
+
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+
+    wsa_event_guard accept_guard(::WSACreateEvent());
+    if (accept_guard.event == WSA_INVALID_EVENT) {
+        running_ = false;
+        return;
+    }
+    if (::WSAEventSelect(acceptor_fd, accept_guard.event, FD_ACCEPT) == SOCKET_ERROR) {
+        running_ = false;
+        return;
+    }
+
+    ::HANDLE events[2] = {accept_guard.event, wake_event_};
+
+    while (running_) {
+        ::DWORD ret = ::WaitForMultipleObjects(2, events, FALSE, INFINITE);
+
+        if (ret == WAIT_OBJECT_0 + 1) {
+            break;
+        }
+        if (ret == WAIT_FAILED) {
+            // error
+            break;
+        }
+        if (ret != WAIT_OBJECT_0) {
+            continue;
+        }
+
+        ::WSAResetEvent(accept_guard.event);
+
+        try {
+            auto client_opt = accept_one();
+            if (!client_opt) {
+                continue;
+            }
+
+            client_handler_t handler;
+            {
+                shared_lock lock(handler_mutex_);
+                handler = client_handler_;
+            }
+
+            if (!handler) {
+                continue;
+            }
+
+            client_pool_.submit_task([handler = move(handler), sock = move(*client_opt), this]() mutable {
+                try {
+                    handler(move(sock));
+                } catch (const exception& e) {
+                    if (!running_) {
+                        return;
+                    }
+                    shared_lock lock(handler_mutex_);
+                    if (exception_handler_) {
+                        exception_handler_(e);
+                    }
+                }
+            });
+        } catch (const exception& e) {
+            if (!running_) {
+                break;
+            }
+            shared_lock lock(handler_mutex_);
+            if (exception_handler_) {
+                exception_handler_(e);
+            }
+        }
+    }
+
+#    else
+    const auto wake_read_fd = wake_pipe_.native_read_handle();
+
+    pollfd pfds[2];
+    pfds[0].fd = acceptor_fd;
+    pfds[0].events = POLLIN;
+    pfds[1].fd = wake_read_fd;
+    pfds[1].events = POLLIN;
+
+    while (running_) {
+        pfds[0].revents = 0;
+        pfds[1].revents = 0;
+
+        const int ret = ::poll(pfds, 2, -1);
+
+        if (ret < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            break;
+        }
+        if (pfds[1].revents & POLLIN) {
+            break;
+        }
+
+        if (!(pfds[0].revents & POLLIN)) {
+            continue;
+        }
+
+        try {
+            auto client_opt = accept_one();
+            if (!client_opt) {
+                continue;
+            }
+
+            client_handler_t handler;
+            {
+                shared_lock lock(handler_mutex_);
+                handler = client_handler_;
+            }
+
+            client_pool_.submit_task([this, handler = move(handler), sock = move(*client_opt)]() mutable {
+                try {
+                    if (handler) {
+                        handler(move(sock));
+                    }
+                } catch (const exception& e) {
+                    if (!running_) {
+                        return;
+                    }
+                    shared_lock lock(handler_mutex_);
+                    if (exception_handler_) {
+                        exception_handler_(e);
+                    }
+                }
+            });
+        } catch (const exception& e) {
+            if (!running_) {
+                break;
+            }
+            shared_lock lock(handler_mutex_);
+            if (exception_handler_) {
+                exception_handler_(e);
+            }
+        }
+    }
+#    endif
+
+#endif
 }
 
 tcp_server_base::tcp_server_base(const ports port, const size_t worker_count) :
@@ -48,6 +248,7 @@ port_(port) {
 }
 
 bool tcp_server_base::set_client_handler(client_handler_t handler) {
+    unique_lock<shared_mutex> lock(handler_mutex_);
     if (running_) {
         return false;
     }
@@ -56,6 +257,7 @@ bool tcp_server_base::set_client_handler(client_handler_t handler) {
 }
 
 bool tcp_server_base::set_exception_handler(exception_handler_t handler) {
+    unique_lock<shared_mutex> lock(handler_mutex_);
     if (running_) {
         return false;
     }
@@ -70,8 +272,33 @@ bool tcp_server_base::start(const int backlog) noexcept {
     if (backlog <= 0) {
         return false;
     }
-    if (!client_handler_) {
+
+    {
+        shared_lock lock(handler_mutex_);
+        if (!client_handler_) {
+            return false;
+        }
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (wake_event_ == WSA_INVALID_EVENT) {
+        wake_event_ = ::WSACreateEvent();
+        if (wake_event_ == WSA_INVALID_EVENT) {
+            return false;
+        }
+    } else {
+        ::WSAResetEvent(wake_event_);
+    }
+#else
+    try {
+        wake_pipe_ = pipe(false);
+    } catch (...) {
         return false;
+    }
+#endif
+
+    if (!client_pool_.running()) {
+        client_pool_.start();
     }
 
     try {
@@ -84,19 +311,23 @@ bool tcp_server_base::start(const int backlog) noexcept {
     } catch (...) {
         running_ = false;
         acceptor_.reset();
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        ::WSACloseEvent(wake_event_);
+        wake_event_ = WSA_INVALID_EVENT;
+#else
+        wake_pipe_.close();
+#endif
         return false;
     }
 }
 
 void tcp_server_base::stop() {
-    if (!running_) {
+    bool expected = true;
+    if (!running_.compare_exchange_strong(expected, false)) {
         return;
     }
 
-    running_ = false;
-    if (acceptor_) {
-        acceptor_->close();
-    }
+    notify_stop();
 
     for (auto& t: worker_threads_) {
         if (t.joinable()) {
@@ -105,7 +336,23 @@ void tcp_server_base::stop() {
     }
     worker_threads_.clear();
 
+    {
+        lock<mutex> lock(acceptor_mutex_);
+        if (acceptor_) {
+            acceptor_->close();
+            acceptor_.reset();
+        }
+    }
+
     client_pool_.stop();
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (wake_event_ != WSA_INVALID_EVENT) {
+        ::WSACloseEvent(wake_event_);
+        wake_event_ = WSA_INVALID_EVENT;
+    }
+#else
+    wake_pipe_.close();
+#endif
 }
 
 void tcp_server::create_acceptor(const ip_address& endpoint, int backlog) {
@@ -116,6 +363,9 @@ void tcp_server::create_acceptor(const ip_address& endpoint, int backlog) {
 
 optional<tcp_socket> tcp_server::accept_one() {
     auto* acc = static_cast<tcp_acceptor*>(acceptor_.get());
+    if (!acc) {
+        return none;
+    }
     return acc->accept_nonblock();
 }
 
@@ -155,16 +405,25 @@ void ssl_server::create_acceptor(const ip_address& endpoint, int backlog) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is invalid"));
     }
     auto acc = make_unique<ssl_acceptor>();
-    acc->set_ssl_context(move(ssl_ctx_));
+    acc->set_ssl_context(ssl_ctx_.clone());
     acc->open(endpoint, backlog);
     acceptor_ = move(acc);
 }
 
 optional<tcp_socket> ssl_server::accept_one() {
     auto* acc = static_cast<ssl_acceptor*>(acceptor_.get());
+    if (!acc) {
+        return none;
+    }
     try {
         return acc->accept_ssl();
-    } catch (...) {
+    } catch (const exception& e) {
+        if (running_) {
+            shared_lock hl(handler_mutex_);
+            if (exception_handler_) {
+                exception_handler_(e);
+            }
+        }
         return none;
     }
 }

@@ -62,7 +62,7 @@ namespace {
             start = pos + 1;
             pos = method_str.find(',', start);
         }
-        result.push_back(method_str.substr(start));
+        result.push_back(method_str.tail(start));
 
         return result;
     }
@@ -172,7 +172,7 @@ http_router::route_entry* http_router::find_handler(const http_method& method, c
 
     string search_path = path;
     if (!strict_routing && search_path.length() > 1 && search_path.ends_with("/")) {
-        search_path = search_path.substr(0, search_path.length() - 1);
+        search_path = search_path.head(search_path.length() - 1);
     }
 
     for (auto& entry: method_it->second) {
@@ -187,7 +187,7 @@ http_router::route_entry* http_router::find_handler(const http_method& method, c
         } else {
             string pattern = entry.pattern;
             if (!strict_routing && pattern.length() > 1 && pattern.ends_with("/")) {
-                pattern = pattern.substr(0, pattern.length() - 1);
+                pattern = pattern.head(pattern.length() - 1);
             }
 
             bool match = case_sensitive ? search_path == pattern : search_path.lowercase() == pattern.lowercase();

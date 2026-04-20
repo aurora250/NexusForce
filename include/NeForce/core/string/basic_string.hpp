@@ -2101,11 +2101,28 @@ public:
      * @param count 长度
      * @return 子串
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string substr(const size_type off = 0, size_type count = npos) const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string substr(const size_type off = 0,
+                                                              const size_type count = npos) const {
         NEFORCE_DEBUG_VERIFY(off <= size(), "basic_string index out of ranges.");
-        count = _NEFORCE min(count, size() - off);
-        return basic_string(data() + off, count);
+        const size_type clamp = _NEFORCE min(count, size() - off);
+        return basic_string(data() + off, clamp);
     }
+
+    /**
+     * @brief 获取头部子串
+     * @param count 长度
+     * @return 子串
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string head(const size_type count = npos) const {
+        return substr(0, count);
+    }
+
+    /**
+     * @brief 获取尾部子串
+     * @param off 起始偏移
+     * @return 子串
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string tail(const size_type off = 0) const { return substr(off); }
 
     /**
      * @brief 获取字符串视图

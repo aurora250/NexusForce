@@ -50,10 +50,10 @@ namespace {
         }
 
         for (const auto& mapping: unit_mappings) {
-            if (unit_str.compare_ignore_case(mapping.name) != 0) {
+            if (unit_str.compare_ignore_case(mapping.name) == 0) {
                 return mapping.unit;
             }
-            if (!mapping.alt_name.empty() && unit_str.compare_ignore_case(mapping.alt_name) != 0) {
+            if (!mapping.alt_name.empty() && unit_str.compare_ignore_case(mapping.alt_name) == 0) {
                 return mapping.unit;
             }
         }

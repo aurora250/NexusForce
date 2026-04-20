@@ -110,7 +110,7 @@ smtp_socket::response smtp_socket::read_response() {
             resp.message += '\n';
         }
         if (line.size() > 4) {
-            resp.message += line.substr(4);
+            resp.message += line.tail(4);
         }
         resp.code = code;
 
@@ -137,7 +137,7 @@ smtp_socket::response smtp_socket::send_command(const string& cmd) {
 void smtp_socket::expect_code(const int expected, const string& cmd) {
     const auto resp = send_command(cmd);
     if (resp.code != expected) {
-        const string err = "SMTP command failed: " + cmd.substr(0, cmd.find(' ')) + " expected " + to_string(expected) +
+        const string err = "SMTP command failed: " + cmd.head(cmd.find(' ')) + " expected " + to_string(expected) +
                            " got " + to_string(resp.code) + ": " + resp.message;
         NEFORCE_THROW_EXCEPTION(smtp_exception(err.data()));
     }
@@ -178,7 +178,7 @@ vector<string> smtp_socket::do_ehlo(const string& domain) {
         }
 
         if (line.size() > 4) {
-            caps.push_back(line.substr(4));
+            caps.push_back(line.tail(4));
         }
 
         if (line.size() <= 3 || line[3] != '-') {

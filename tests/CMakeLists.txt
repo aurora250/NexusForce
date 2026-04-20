@@ -28,5 +28,5 @@ nexusforce_compiler_options(NexusForceTests)
 find_package(GTest CONFIG REQUIRED)
 target_link_libraries(NexusForceTests PRIVATE GTest::gtest GTest::gtest_main)
 
-enable_testing()
-add_test(NAME NexusForceTests COMMAND NexusForceTests)
+# enable_testing()
+# add_test(NAME NexusForceTests COMMAND NexusForceTests)

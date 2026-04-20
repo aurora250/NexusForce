@@ -25,7 +25,7 @@ void log_formatter::parse_pattern() {
     while (pos < pattern_.size()) {
         const size_t start = pattern_.find('{', pos);
         if (start == string::npos) {
-            parts_.emplace_back(false, pattern_.substr(pos));
+            parts_.emplace_back(false, pattern_.tail(pos));
             break;
         }
         if (start > pos) {
@@ -33,7 +33,7 @@ void log_formatter::parse_pattern() {
         }
         const size_t end = pattern_.find('}', start);
         if (end == string::npos) {
-            parts_.emplace_back(false, pattern_.substr(start));
+            parts_.emplace_back(false, pattern_.tail(start));
             break;
         }
         const string placeholder = pattern_.substr(start + 1, end - start - 1);

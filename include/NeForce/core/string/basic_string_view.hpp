@@ -411,11 +411,27 @@ public:
      * @param count 子视图长度，默认为npos
      * @return 子字符串视图
      */
-    NEFORCE_NODISCARD constexpr basic_string_view substr(const size_type off = 0, size_type count = npos) const {
+    NEFORCE_NODISCARD constexpr basic_string_view substr(const size_type off = 0, const size_type count = npos) const {
         NEFORCE_DEBUG_VERIFY(off <= size_, "basic string view index out of ranges.");
-        count = clamp_size(off, count);
-        return basic_string_view(data_ + off, count);
+        const size_type clamp = clamp_size(off, count);
+        return basic_string_view(data_ + off, clamp);
     }
+
+    /**
+     * @brief 获取头部子串
+     * @param count 长度
+     * @return 子串
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view head(const size_type count = npos) const {
+        return substr(0, count);
+    }
+
+    /**
+     * @brief 获取尾部子串
+     * @param off 起始偏移
+     * @return 子串
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string_view tail(const size_type off = 0) const { return substr(off); }
 
     /**
      * @brief 获取子视图
@@ -423,7 +439,7 @@ public:
      * @param count 子视图长度
      * @return 子字符串视图
      */
-    NEFORCE_NODISCARD constexpr basic_string_view view(const size_type off, size_type count = npos) const {
+    NEFORCE_NODISCARD constexpr basic_string_view view(const size_type off, const size_type count = npos) const {
         return substr(off, count);
     }
 

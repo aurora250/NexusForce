@@ -22,27 +22,88 @@ namespace {
                                  "AES128-SHA256:"
                                  "AES256-SHA256";
 
-    ::SSL_METHOD* convert_method(const ssl_method method) {
+    const ::SSL_METHOD* convert_method(const ssl_method method) {
         switch (method) {
-            case ssl_method::TLS_CLIENT: {
-                return const_cast<::SSL_METHOD*>(::TLS_client_method());
-            }
-            case ssl_method::TLS_SERVER: {
-                return const_cast<::SSL_METHOD*>(::TLS_server_method());
-            }
-            default: {
-                return const_cast<::SSL_METHOD*>(::TLS_method());
-            }
+            case ssl_method::TLS_CLIENT:
+                return ::TLS_client_method();
+            case ssl_method::TLS_SERVER:
+                return ::TLS_server_method();
+#ifdef OPENSSL_NO_DTLS
+            case ssl_method::TLS_SERVER_DTLS:
+            case ssl_method::TLS_CLIENT_DTLS:
+                return ::TLS_method();
+#else
+            case ssl_method::TLS_SERVER_DTLS:
+                return ::DTLS_server_method();
+            case ssl_method::TLS_CLIENT_DTLS:
+                return ::DTLS_client_method();
+#endif
+            default:
+                return ::TLS_method();
         }
     }
+
+    struct bio_guard {
+        ::BIO* bio{nullptr};
+
+        explicit bio_guard(::BIO* b) :
+        bio(b) {}
+        ~bio_guard() {
+            if (bio) {
+                ::BIO_free(bio);
+            }
+        }
+
+        bio_guard(const bio_guard&) = delete;
+        bio_guard& operator=(const bio_guard&) = delete;
+
+        ::BIO* get() const noexcept { return bio; }
+        explicit operator bool() const noexcept { return bio != nullptr; }
+    };
+
+    struct x509_guard {
+        ::X509* cert{nullptr};
+
+        explicit x509_guard(::X509* c) :
+        cert(c) {}
+        ~x509_guard() {
+            if (cert) {
+                ::X509_free(cert);
+            }
+        }
+
+        x509_guard(const x509_guard&) = delete;
+        x509_guard& operator=(const x509_guard&) = delete;
+
+        ::X509* get() const noexcept { return cert; }
+        explicit operator bool() const noexcept { return cert != nullptr; }
+    };
+
+    struct evp_pkey_guard {
+        ::EVP_PKEY* key{nullptr};
+
+        explicit evp_pkey_guard(::EVP_PKEY* k) :
+        key(k) {}
+        ~evp_pkey_guard() {
+            if (key) {
+                ::EVP_PKEY_free(key);
+            }
+        }
+
+        evp_pkey_guard(const evp_pkey_guard&) = delete;
+        evp_pkey_guard& operator=(const evp_pkey_guard&) = delete;
+
+        ::EVP_PKEY* get() const noexcept { return key; }
+        explicit operator bool() const noexcept { return key != nullptr; }
+    };
 } // namespace
 
 
-int ssl_exception::last_error() noexcept { return static_cast<int>(::ERR_get_error()); }
+int ssl_exception::last_error() noexcept { return static_cast<int>(::ERR_peek_last_error()); }
 
 string ssl_exception::last_error_message() {
     char buf[256];
-    const auto err = ::ERR_get_error();
+    const auto err = ::ERR_peek_last_error();
     if (err == 0) {
         return "";
     }
@@ -50,8 +111,9 @@ string ssl_exception::last_error_message() {
     return {static_cast<char*>(buf)};
 }
 
-ssl_context::ssl_context(const ssl_method method) {
-    ctx_ = ::SSL_CTX_new(convert_method(method));
+ssl_context::ssl_context(const ssl_method method) :
+method_(method) {
+    ctx_.reset(::SSL_CTX_new(convert_method(method)));
     if (!ctx_) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create SSL context"));
     }
@@ -68,24 +130,38 @@ ssl_context::ssl_context(const ssl_method method) {
                                            "TLS_CHACHA20_POLY1305_SHA256");
 #endif
 
-    if (::SSL_CTX_set_default_verify_paths(ctx_.get()) != 1) {
-        const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",
-                                  "/etc/ssl/cert.pem"};
+    bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx_.get()) == 1);
+
+    if (!ca_loaded) {
+        static constexpr const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",
+                                                   "/etc/ssl/cert.pem"};
 
         for (const auto& path: ca_paths) {
-            ::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, path);
+            if (::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, path) == 1) {
+                ca_loaded = true;
+                break;
+            }
         }
     }
 
     ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER, nullptr);
 }
 
-void ssl_context::set_options(const long options) {
+ssl_context ssl_context::clone() const {
     if (!ctx_) {
-        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot clone an invalid SSL context"));
     }
-    ::SSL_CTX_set_options(ctx_.get(), options);
+
+    if (::SSL_CTX_up_ref(ctx_.get()) != 1) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to increment SSL_CTX reference count"));
+    }
+
+    ssl_context cloned(method_);
+    cloned.ctx_.reset(ctx_.get());
+    return cloned;
 }
+
+shared_ptr<ssl_context> ssl_context::clone_shared() const { return make_shared<ssl_context>(clone()); }
 
 bool ssl_context::load_certificate(const string& cert_file, const string& key_file) {
     if (!ctx_) {
@@ -108,40 +184,22 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
         NEFORCE_THROW_EXCEPTION(value_exception("Certificate or key PEM data is empty"));
     }
 
-    ::BIO* cert_bio = ::BIO_new_mem_buf(cert_pem.data(), static_cast<int>(cert_pem.size()));
-    ::BIO* key_bio = ::BIO_new_mem_buf(key_pem.data(), static_cast<int>(key_pem.size()));
+    bio_guard cert_bio{::BIO_new_mem_buf(cert_pem.data(), static_cast<int>(cert_pem.size()))};
+    bio_guard key_bio{::BIO_new_mem_buf(key_pem.data(), static_cast<int>(key_pem.size()))};
 
-    if (cert_bio == nullptr || key_bio == nullptr) {
-        if (cert_bio != nullptr) {
-            ::BIO_free(cert_bio);
-        }
-        if (key_bio != nullptr) {
-            ::BIO_free(key_bio);
-        }
+    if (!cert_bio || !key_bio) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create BIO"));
     }
 
-    ::X509* cert = ::PEM_read_bio_X509(cert_bio, nullptr, nullptr, nullptr);
-    ::EVP_PKEY* key = ::PEM_read_bio_PrivateKey(key_bio, nullptr, nullptr, nullptr);
+    x509_guard cert{::PEM_read_bio_X509(cert_bio.get(), nullptr, nullptr, nullptr)};
+    evp_pkey_guard key{::PEM_read_bio_PrivateKey(key_bio.get(), nullptr, nullptr, nullptr)};
 
-    ::BIO_free(cert_bio);
-    ::BIO_free(key_bio);
-
-    if (cert == nullptr || key == nullptr) {
-        if (cert != nullptr) {
-            ::X509_free(cert);
-        }
-        if (key != nullptr) {
-            ::EVP_PKEY_free(key);
-        }
+    if (!cert || !key) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to parse PEM data"));
     }
 
-    const int cert_result = ::SSL_CTX_use_certificate(ctx_.get(), cert);
-    const int key_result = ::SSL_CTX_use_PrivateKey(ctx_.get(), key);
-
-    ::X509_free(cert);
-    ::EVP_PKEY_free(key);
+    const int cert_result = ::SSL_CTX_use_certificate(ctx_.get(), cert.get());
+    const int key_result = ::SSL_CTX_use_PrivateKey(ctx_.get(), key.get());
 
     if (cert_result <= 0 || key_result <= 0) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set certificate or private key"));
@@ -159,7 +217,18 @@ bool ssl_context::load_verify_locations(const string& ca_file, const string& ca_
     const char* file_ptr = ca_file.empty() ? nullptr : ca_file.data();
     const char* path_ptr = ca_path.empty() ? nullptr : ca_path.data();
 
+    if (file_ptr == nullptr && path_ptr == nullptr) {
+        return false;
+    }
+
     return ::SSL_CTX_load_verify_locations(ctx_.get(), file_ptr, path_ptr) == 1;
+}
+
+void ssl_context::set_options(const long options) {
+    if (!ctx_) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
+    ::SSL_CTX_set_options(ctx_.get(), options);
 }
 
 void ssl_context::set_verify_mode(const int mode) {
@@ -236,7 +305,8 @@ void ssl_context::set_alpn_protos(const vector<string>& protocols) {
     byte_vector alpn_data;
     for (const auto& proto: protocols) {
         if (proto.empty() || proto.size() > 255) {
-            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ALPN protocol length"));
+            NEFORCE_THROW_EXCEPTION(
+                    value_exception(("Invalid ALPN protocol name length (must be 1-255): " + proto).data()));
         }
         alpn_data.push_back(static_cast<byte_t>(proto.size()));
         alpn_data.insert(alpn_data.end(), proto.begin(), proto.end());

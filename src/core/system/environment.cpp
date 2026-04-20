@@ -87,8 +87,8 @@ unordered_map<string, string> environment::all_envs() {
         string env_str(current);
         size_t eq_pos = env_str.find('=');
         if (eq_pos != string::npos) {
-            string name = env_str.substr(0, eq_pos);
-            string value = env_str.substr(eq_pos + 1);
+            string name = env_str.head(eq_pos);
+            string value = env_str.tail(eq_pos + 1);
             env_map[name] = value;
         }
         current += env_str.length() + 1;
@@ -99,8 +99,8 @@ unordered_map<string, string> environment::all_envs() {
         const string_view env_str(*env);
         size_t eq_pos = env_str.find('=');
         if (eq_pos != string::npos) {
-            const string name = env_str.substr(0, eq_pos);
-            const string value = (env_str.back() == '=') ? "" : env_str.substr(eq_pos + 1);
+            const string name = env_str.head(eq_pos);
+            const string value = (env_str.back() == '=') ? "" : env_str.tail(eq_pos + 1);
             env_map[name] = _NEFORCE move(value);
         }
     }
@@ -124,7 +124,7 @@ vector<string> environment::path_list() {
     }
 
     if (start < path_str.length()) {
-        paths.push_back(path_str.substr(start));
+        paths.push_back(path_str.tail(start));
     }
 
     return paths;

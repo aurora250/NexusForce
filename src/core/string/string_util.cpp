@@ -17,7 +17,7 @@ vector<string_view> split(const string_view str, const string_view delimiters, c
         end = str.find_first_of(delimiters, start);
     }
 
-    const string_view last_token = str.substr(start);
+    const string_view last_token = str.tail(start);
     if (!skip_empty || !last_token.empty()) {
         tokens.push_back(last_token);
     }
@@ -39,7 +39,7 @@ vector<string> split(const string& str, const string& delimiters, const bool ski
         end = str.find_first_of(delimiters, start);
     }
 
-    const string last_token = str.substr(start);
+    const string last_token = str.tail(start);
     if (!skip_empty || !last_token.empty()) {
         tokens.push_back(last_token);
     }

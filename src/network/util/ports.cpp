@@ -66,91 +66,91 @@ namespace {
 
 
 ports ports::parse(const string_view scheme) noexcept {
-    if (scheme.compare_ignore_case("http")) {
+    if (scheme.compare_ignore_case("http") == 0) {
         return ports::HTTP;
     }
-    if (scheme.compare_ignore_case("ws")) {
+    if (scheme.compare_ignore_case("ws") == 0) {
         return ports::WS;
     }
-    if (scheme.compare_ignore_case("https")) {
+    if (scheme.compare_ignore_case("https") == 0) {
         return ports::HTTPS;
     }
-    if (scheme.compare_ignore_case("wss")) {
+    if (scheme.compare_ignore_case("wss") == 0) {
         return ports::WSS;
     }
-    if (scheme.compare_ignore_case("ftp")) {
+    if (scheme.compare_ignore_case("ftp") == 0) {
         return ports::FTP;
     }
-    if (scheme.compare_ignore_case("ftp-data")) {
+    if (scheme.compare_ignore_case("ftp-data") == 0) {
         return ports::FTP_DATA;
     }
-    if (scheme.compare_ignore_case("tftp")) {
+    if (scheme.compare_ignore_case("tftp") == 0) {
         return ports::TFTP;
     }
-    if (scheme.compare_ignore_case("ssh")) {
+    if (scheme.compare_ignore_case("ssh") == 0) {
         return ports::SSH;
     }
-    if (scheme.compare_ignore_case("telnet")) {
+    if (scheme.compare_ignore_case("telnet") == 0) {
         return ports::TELNET;
     }
-    if (scheme.compare_ignore_case("smtp")) {
+    if (scheme.compare_ignore_case("smtp") == 0) {
         return ports::SMTP;
     }
-    if (scheme.compare_ignore_case("smtps")) {
+    if (scheme.compare_ignore_case("smtps") == 0) {
         return ports::SMTPS;
     }
-    if (scheme.compare_ignore_case("smtp-submit") || scheme.compare_ignore_case("submission")) {
+    if (scheme.compare_ignore_case("smtp-submit") == 0 || scheme.compare_ignore_case("submission") == 0) {
         return ports::SMTP_SUBMIT;
     }
-    if (scheme.compare_ignore_case("pop3")) {
+    if (scheme.compare_ignore_case("pop3") == 0) {
         return ports::POP3;
     }
-    if (scheme.compare_ignore_case("pop3s")) {
+    if (scheme.compare_ignore_case("pop3s") == 0) {
         return ports::POP3S;
     }
-    if (scheme.compare_ignore_case("imap")) {
+    if (scheme.compare_ignore_case("imap") == 0) {
         return ports::IMAP;
     }
-    if (scheme.compare_ignore_case("imaps")) {
+    if (scheme.compare_ignore_case("imaps") == 0) {
         return ports::IMAPS;
     }
-    if (scheme.compare_ignore_case("dns")) {
+    if (scheme.compare_ignore_case("dns") == 0) {
         return ports::DNS;
     }
-    if (scheme.compare_ignore_case("ldap")) {
+    if (scheme.compare_ignore_case("ldap") == 0) {
         return ports::LDAP;
     }
-    if (scheme.compare_ignore_case("ldaps")) {
+    if (scheme.compare_ignore_case("ldaps") == 0) {
         return ports::LDAPS;
     }
-    if (scheme.compare_ignore_case("dhcp-server") || scheme.compare_ignore_case("dhcps")) {
+    if (scheme.compare_ignore_case("dhcp-server") == 0 || scheme.compare_ignore_case("dhcps") == 0) {
         return ports::DHCP_SERVER;
     }
-    if (scheme.compare_ignore_case("dhcp-client") || scheme.compare_ignore_case("dhcpc")) {
+    if (scheme.compare_ignore_case("dhcp-client") == 0 || scheme.compare_ignore_case("dhcpc") == 0) {
         return ports::DHCP_CLIENT;
     }
-    if (scheme.compare_ignore_case("ntp")) {
+    if (scheme.compare_ignore_case("ntp") == 0) {
         return ports::NTP;
     }
-    if (scheme.compare_ignore_case("snmp")) {
+    if (scheme.compare_ignore_case("snmp") == 0) {
         return ports::SNMP;
     }
-    if (scheme.compare_ignore_case("snmp-trap") || scheme.compare_ignore_case("snmptrap")) {
+    if (scheme.compare_ignore_case("snmp-trap") == 0 || scheme.compare_ignore_case("snmptrap") == 0) {
         return ports::SNMP_TRAP;
     }
-    if (scheme.compare_ignore_case("smb") || scheme.compare_ignore_case("cifs")) {
+    if (scheme.compare_ignore_case("smb") == 0 || scheme.compare_ignore_case("cifs") == 0) {
         return ports::SMB;
     }
-    if (scheme.compare_ignore_case("mysql")) {
+    if (scheme.compare_ignore_case("mysql") == 0) {
         return ports::MYSQL;
     }
-    if (scheme.compare_ignore_case("postgresql") || scheme.compare_ignore_case("postgres")) {
+    if (scheme.compare_ignore_case("postgresql") == 0 || scheme.compare_ignore_case("postgres") == 0) {
         return ports::POSTGRESQL;
     }
-    if (scheme.compare_ignore_case("redis")) {
+    if (scheme.compare_ignore_case("redis") == 0) {
         return ports::REDIS;
     }
-    if (scheme.compare_ignore_case("mongodb") || scheme.compare_ignore_case("mongo")) {
+    if (scheme.compare_ignore_case("mongodb") == 0 || scheme.compare_ignore_case("mongo") == 0) {
         return ports::MONGODB;
     }
     return ports::UNDEF;

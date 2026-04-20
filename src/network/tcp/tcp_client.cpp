@@ -167,7 +167,7 @@ bool tcp_client_base::connect(const string& host, ports port) {
             connected_host_ = host;
             connected_port_ = port;
             if (connect_callback_) {
-                connect_callback_(host, move(port));
+                connect_callback_(host, ports(port));
             }
             return true;
         }
@@ -188,7 +188,9 @@ void tcp_client_base::disconnect() noexcept {
             disconnect_callback_();
         }
         socket_->close();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (...) {
+        // ignore
     }
 
     socket_.reset();
@@ -405,8 +407,8 @@ const tcp_socket& tcp_client_base::socket() const {
 bool ssl_client::post_connect() {
     if (!ssl_ctx_) {
         ssl_ctx_ = ssl_context(ssl_method::TLS_CLIENT);
-        ssl_ctx_->set_verify_mode(verify_peer_ ? SSL_VERIFY_PEER : SSL_VERIFY_NONE);
     }
+    ssl_ctx_->set_verify_mode(verify_peer_ ? SSL_VERIFY_PEER : SSL_VERIFY_NONE);
 
     if (!ssl_ctx_->is_valid()) {
         handle_exception(ssl_exception("SSL context is invalid"));

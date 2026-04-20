@@ -9,7 +9,9 @@
  * 使用线程池处理客户端连接，支持非阻塞接受和自定义处理器。
  */
 
+#include "NeForce/core/async/shared_mutex.hpp"
 #include "NeForce/core/async/thread_pool.hpp"
+#include "NeForce/core/system/pipe.hpp"
 #include "NeForce/network/ssl/ssl_acceptor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -42,14 +44,24 @@ protected:
     vector<thread> worker_threads_;     ///< 工作线程列表
     thread_pool client_pool_;           ///< 客户端处理线程池
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::WSAEVENT wake_event_{WSA_INVALID_EVENT};
+#else
+    pipe wake_pipe_;
+#endif
+    mutable shared_mutex handler_mutex_;
+
     client_handler_t client_handler_;       ///< 客户端处理器
     exception_handler_t exception_handler_; ///< 异常处理器
+    mutex acceptor_mutex_;                  ///< TCP接受器互斥锁
+
+    /**
+     * @brief 向 wake_pipe_ 写端写入一个字节，唤醒 accept_loop
+     */
+    void notify_stop() noexcept;
 
     /**
      * @brief 接受连接的主循环
-     *
-     * 该循环调用派生类实现的 accept_one() 获取已就绪的客户端 socket。
-     * 获取成功后提交至线程池，由 handle_client() 处理。
      */
     void accept_loop();
 
@@ -103,8 +115,8 @@ public:
     tcp_server_base(const tcp_server_base&) = delete;
     tcp_server_base& operator=(const tcp_server_base&) = delete;
 
-    tcp_server_base(tcp_server_base&& other) noexcept = default;
-    tcp_server_base& operator=(tcp_server_base&& other) noexcept = default;
+    tcp_server_base(tcp_server_base&& other) noexcept = delete;
+    tcp_server_base& operator=(tcp_server_base&& other) noexcept = delete;
 
     /**
      * @brief 设置客户端处理器

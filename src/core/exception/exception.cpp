@@ -10,7 +10,6 @@ extern "C" int __cxa_uncaught_exception() __attribute__((weak));
 #    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-// predeclared here and impl in c++abi
 extern "C" int __cxa_uncaught_exceptions();
 #endif
 NEFORCE_BEGIN_NAMESPACE__

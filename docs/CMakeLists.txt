@@ -53,12 +53,6 @@ add_custom_target(doc-clean
         COMMENT "Cleaning documentation output"
 )
 
-install(
-        DIRECTORY ${DOXYGEN_OUTPUT_DIR}/html
-        DESTINATION ${CMAKE_INSTALL_DOCDIR}
-        COMPONENT documentation
-)
-
 message(STATUS "Doc Configuration:")
 message(STATUS "Output directory:  ${DOXYGEN_OUTPUT_DIR}")
 message(STATUS "Input directories: ${DOXYGEN_INPUT_DIRS}")
