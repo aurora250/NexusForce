@@ -39,9 +39,6 @@ public:
 
     explicit constexpr uint128_t(string_view str, int base = 10);
 
-    explicit constexpr uint128_t(const char* str, int base = 10) :
-    uint128_t(string_view{str}, base) {}
-
     constexpr int128_t to_int128() const noexcept;
 
     explicit constexpr operator bool() const noexcept { return lo || hi; }
@@ -146,7 +143,7 @@ public:
     static constexpr uint128_t parse(const string_view view) { return uint128_t{view}; }
     NEFORCE_CONSTEXPR20 string to_string() const;
 
-    static constexpr uint128_t min() noexcept { return uint128_t(0ULL, 0ULL); }
+    static constexpr uint128_t min() noexcept { return uint128_t(static_cast<uint64_t>(0), static_cast<uint64_t>(0)); }
     static constexpr uint128_t max() noexcept {
         return uint128_t(~static_cast<uint64_t>(0), ~static_cast<uint64_t>(0));
     }
@@ -188,9 +185,6 @@ public:
     int128_t(str.view(), base) {}
 
     explicit constexpr int128_t(string_view str, int base = 10);
-
-    explicit constexpr int128_t(const char* str, int base = 10) :
-    int128_t(string_view{str}, base) {}
 
     constexpr uint128_t to_uint128() const noexcept { return uint128_t(hi, lo); }
 
@@ -267,7 +261,7 @@ public:
         }
         const bool neg = is_negative();
         if (shift >= 128) {
-            *this = neg ? int128_t(~0ULL, ~0ULL) : int128_t(0);
+            *this = neg ? int128_t(~static_cast<uint64_t>(0), ~static_cast<uint64_t>(0)) : int128_t(0);
             return *this;
         }
         if (shift >= 64) {
@@ -290,7 +284,7 @@ public:
     static constexpr int128_t parse(const string_view view) { return int128_t{view}; }
     NEFORCE_CONSTEXPR20 string to_string() const;
 
-    static constexpr int128_t min() noexcept { return int128_t(0x8000000000000000ULL, 0ULL); }
+    static constexpr int128_t min() noexcept { return int128_t(static_cast<uint64_t>(0x8000000000000000ULL), static_cast<uint64_t>(0ULL)); }
     static constexpr int128_t max() noexcept { return int128_t(0x7FFFFFFFFFFFFFFFULL, ~static_cast<uint64_t>(0)); }
 };
 
@@ -350,8 +344,8 @@ constexpr uint128_t::operator int128_t() const noexcept { return int128_t(hi, lo
 
 NEFORCE_BEGIN_LITERALS__
 
-constexpr uint128_t operator""_u128(const uint64_t val) noexcept { return uint128_t(val); }
-constexpr int128_t operator""_i128(const uint64_t val) noexcept { return int128_t(val); }
+constexpr uint128_t operator""_u128(const unsigned long long val) noexcept { return uint128_t(static_cast<uint64_t>(val)); }
+constexpr int128_t operator""_i128(const unsigned long long val) noexcept { return int128_t(static_cast<uint64_t>(val)); }
 
 constexpr uint128_t operator""_u128(const char* str, const size_t len) { return uint128_t(string_view{str, len}); }
 constexpr int128_t operator""_i128(const char* str, const size_t len) { return int128_t(string_view{str, len}); }

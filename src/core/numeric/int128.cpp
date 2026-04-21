@@ -34,11 +34,11 @@ namespace {
         }
         if (divisor == uint128_t(1)) {
             quotient = dividend;
-            remainder = uint128_t(0ULL);
+            remainder = uint128_t(static_cast<uint64_t>(0ULL));
             return;
         }
         if (dividend < divisor) {
-            quotient = uint128_t(0ULL);
+            quotient = uint128_t(static_cast<uint64_t>(0ULL));
             remainder = dividend;
             return;
         }
@@ -55,8 +55,8 @@ namespace {
         const int bits =
                 dividend.hi != 0 ? (128 - clz64(dividend.hi)) : (dividend.lo != 0 ? (64 - clz64(dividend.lo)) : 0);
 
-        quotient = uint128_t(0ULL);
-        remainder = uint128_t(0ULL);
+        quotient = uint128_t(static_cast<uint64_t>(0ULL));
+        remainder = uint128_t(static_cast<uint64_t>(0ULL));
 
         for (int i = bits - 1; i >= 0; --i) {
             remainder <<= 1;

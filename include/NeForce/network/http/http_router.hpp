@@ -51,7 +51,7 @@ NEFORCE_BEGIN_HTTP__
  * });
  *
  * // 通配符
- * router.get("/files/*", [](http_request& req, http_response& res) {
+ * router.get("/files\ *", [](http_request& req, http_response& res) {
  *     string path = req.parameter("*");
  *     // 处理文件请求
  * });
@@ -158,7 +158,7 @@ public:
      *
      * 路由模式语法：
      * - `/users/:id` - 路径参数，匹配`/users/123`，提取id=123
-     * - `/files/*` - 通配符，匹配`/files/a/b/c`，提取*=a/b/c
+     * - `/files/ *` - 通配符，匹配`/files/a/b/c`，提取*=a/b/c
      * - `/user/([0-9]+)` - 正则表达式，匹配数字ID
      */
     void route(const http_method& method, const string& path, const http_handler_t& handler);

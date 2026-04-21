@@ -317,8 +317,8 @@ void test_color() {
 }
 
 void test_int128() {
-    uint128_t a{100ULL};
-    uint128_t b{30ULL};
+    uint128_t a{100};
+    uint128_t b{30};
     uint128_t c = a - b;
     println("100 - 30 = ", c);
 
@@ -332,8 +332,8 @@ void test_int128() {
     int128_t r = p - q;
     println("-100 - 25 = ", r);
 
-    uint128_t huge1{1ULL, 1000ULL};
-    uint128_t huge2{0ULL, 500ULL};
+    uint128_t huge1{static_cast<uint64_t>(1), static_cast<uint64_t>(1000)};
+    uint128_t huge2{static_cast<uint64_t>(0), static_cast<uint64_t>(500)};
     uint128_t result = huge1 - huge2;
 
     println("huge1: 2^64 + 1000");

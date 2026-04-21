@@ -425,7 +425,7 @@ byte_size filesystem::size(const path& p) noexcept {
     if (::stat64(p.data(), &st) == -1) {
         return byte_size{0};
     }
-    return byte_size{st.st_size};
+    return byte_size{static_cast<uint64_t>(st.st_size)};
 #endif
 }
 

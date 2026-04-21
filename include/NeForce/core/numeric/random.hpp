@@ -197,7 +197,7 @@ public:
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         auto gen = this->generate(bool_constant<sizeof(T) <= 4>());
         using IntT = decay_t<decltype(gen)>;
-        return static_cast<T>(gen) / numeric_traits<IntT>::max();
+        return static_cast<T>(gen) / static_cast<T>(numeric_traits<IntT>::max());
     }
 
     /**
@@ -351,7 +351,7 @@ public:
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         auto gen = this->generate(bool_constant<sizeof(T) <= 4>());
         using IntT = decay_t<decltype(gen)>;
-        return static_cast<T>(gen) / numeric_traits<IntT>::max();
+        return static_cast<T>(gen) / static_cast<T>(numeric_traits<IntT>::max());
     }
 
     /**
@@ -483,7 +483,7 @@ public:
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
         auto gen = secret::generate(bool_constant<sizeof(T) <= 4>());
         using IntT = decay_t<decltype(gen)>;
-        return static_cast<T>(gen) / numeric_traits<IntT>::max();
+        return static_cast<T>(gen) / static_cast<T>(numeric_traits<IntT>::max());
     }
 
     /**
