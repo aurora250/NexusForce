@@ -58,6 +58,7 @@ void test_rbtree();
 void test_hashtable();
 
 void test_color();
+void test_int128();
 void test_tuple();
 void test_variant();
 void test_option();

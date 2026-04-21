@@ -285,9 +285,9 @@ NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept 
     auto holder = static_cast<uint32_t>(ux);
 #endif
     do {
-        *--riter = static_cast<CharT>('0' + holder % static_cast<UT>(10));
+        *--riter = static_cast<CharT>(static_cast<UT>('0') + holder % static_cast<UT>(10));
         holder /= static_cast<UT>(10);
-    } while (static_cast<UT>(holder) != static_cast<UT>(0));
+    } while (holder != static_cast<UT>(0));
     return riter;
 }
 
@@ -302,13 +302,13 @@ template <typename CharT, typename T>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
     static_assert(is_integral_v<T>, "T must be a integral type");
 
-    CharT buffer[21];
-    CharT* const buffer_end = buffer + 21;
+    CharT buffer[40]; // digits10 + sign + '\0'
+    CharT* const buffer_end = buffer + 40;
     CharT* rnext = buffer_end;
     using UT = make_unsigned_t<T>;
     const auto unsigned_x = static_cast<UT>(x);
     if (x < 0) {
-        rnext = inner::__uint_to_buff(rnext, static_cast<UT>(0 - unsigned_x));
+        rnext = inner::__uint_to_buff(rnext, static_cast<UT>(static_cast<UT>(0) - unsigned_x));
         *--rnext = '-';
     } else {
         rnext = inner::__uint_to_buff(rnext, unsigned_x);
@@ -328,49 +328,19 @@ template <typename CharT, typename T>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     static_assert(is_unsigned_v<T>, "T must be a integral type");
 
-    CharT buffer[numeric_traits<uintmax_t>::digits10 + 2]; // digits10 + sign + '\0'
-    constexpr size_t buffer_size = extent_v<decltype(buffer)>;
-    CharT* const buffer_end = buffer + buffer_size;
+    CharT buffer[40]; // digits10 + sign + '\0'
+    CharT* const buffer_end = buffer + 40;
     CharT* const rnext = inner::__uint_to_buff(buffer_end, x);
     const size_t count = buffer_end - rnext;
     return basic_string<CharT>(rnext, count);
 }
 
-/**
- * @brief 将无符号整数转换为指定进制的字符串
- * @param value 要转换的值
- * @param base 进制基数（2-36）
- * @param uppercase 是否使用大写字母
- * @return 进制字符串
- */
-NEFORCE_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
-    if (value == 0) {
-        return "0";
-    }
-
-    string result;
-    result.reserve(20);
-
-    constexpr auto digits_lower = "0123456789abcdef";
-    constexpr auto digits_upper = "0123456789ABCDEF";
-    const auto digits = uppercase ? digits_upper : digits_lower;
-
-    while (value > 0) {
-        const uint64_t remainder = value % base;
-        value /= base;
-        result.push_back(digits[remainder]);
-    }
-
-    result.reverse();
-    return result;
-}
-
-template <typename T, enable_if_t<disjunction_v<conjunction<is_standard_integral<T>, is_signed<T>>>, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
+template <typename T, enable_if_t<is_signed_v<T>, int> = 0>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(T x) {
     return inner::__int_to_string<char>(x);
 }
-template <typename T, enable_if_t<disjunction_v<conjunction<is_standard_integral<T>, is_unsigned<T>>>, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
+template <typename T, enable_if_t<is_unsigned_v<T>, int> = 0>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(T x) {
     return inner::__uint_to_string<char>(x);
 }
 

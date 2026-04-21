@@ -68,6 +68,28 @@ struct format_options {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
+NEFORCE_CONSTEXPR20 string uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
+    if (value == 0) {
+        return "0";
+    }
+
+    string result;
+    result.reserve(20);
+
+    constexpr auto digits_lower = "0123456789abcdef";
+    constexpr auto digits_upper = "0123456789ABCDEF";
+    const auto digits = uppercase ? digits_upper : digits_lower;
+
+    while (value > 0) {
+        const uint64_t remainder = value % base;
+        value /= base;
+        result.push_back(digits[remainder]);
+    }
+
+    result.reverse();
+    return result;
+}
+
 constexpr format_align to_number_alignment(const char c) {
     switch (c) {
         case '<':
@@ -324,15 +346,15 @@ struct integer_formatter_impl {
 
         switch (options.type) {
             case format_type::BINARY: {
-                raw = inner::__uint_to_string_base(compatible, 2, options.uppercase);
+                raw = inner::uint_to_string_base(compatible, 2, options.uppercase);
                 break;
             }
             case format_type::OCTAL: {
-                raw = inner::__uint_to_string_base(compatible, 8, options.uppercase);
+                raw = inner::uint_to_string_base(compatible, 8, options.uppercase);
                 break;
             }
             case format_type::HEX: {
-                raw = inner::__uint_to_string_base(compatible, 16, options.uppercase);
+                raw = inner::uint_to_string_base(compatible, 16, options.uppercase);
                 break;
             }
             case format_type::CHAR: {

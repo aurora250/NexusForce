@@ -1,4 +1,5 @@
 #include <NeForce/core/async/this_thread.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
@@ -21,6 +22,13 @@ namespace {
             return f.QuadPart;
         }();
         return freq;
+    }
+
+    uint64_t filetime_to_ms(const ::FILETIME& ft) noexcept {
+        ::ULARGE_INTEGER li;
+        li.LowPart = ft.dwLowDateTime;
+        li.HighPart = ft.dwHighDateTime;
+        return li.QuadPart / 10000;
     }
 } // namespace
 #endif
@@ -174,7 +182,7 @@ void sleep_for_ns(uint64_t ns) noexcept {
 #endif
 }
 
-bool affinity(size_t cpu_mask) noexcept {
+bool set_affinity(size_t cpu_mask) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetThreadAffinityMask(::GetCurrentThread(), static_cast<::DWORD_PTR>(cpu_mask)) != 0;
 #else
@@ -186,6 +194,62 @@ bool affinity(size_t cpu_mask) noexcept {
         }
     }
     return ::pthread_setaffinity_np(::pthread_self(), sizeof(::cpu_set_t), &cpuset) == 0;
+#endif
+}
+
+bool affinity(uint64_t& affi) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::DWORD_PTR mask = ::SetThreadAffinityMask(::GetCurrentThread(), 0);
+    if (mask == 0) {
+        return false;
+    }
+    ::SetThreadAffinityMask(::GetCurrentThread(), mask);
+    affi = static_cast<uint64_t>(mask);
+    return true;
+#else
+    ::cpu_set_t cpuset{};
+    CPU_ZERO(&cpuset);
+    if (::pthread_getaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset) != 0) {
+        return false;
+    }
+    uint64_t mask = 0;
+    for (int i = 0; i < CPU_SETSIZE; ++i) {
+        if (CPU_ISSET(i, &cpuset)) {
+            mask |= (1ULL << i);
+        }
+    }
+    affi = mask;
+    return true;
+#endif
+}
+
+bool bind_core(const uint32_t core_index) noexcept {
+    thread_local auto pcount = sysinfo::instance().get_system_info().processor_numbers;
+    if (core_index >= pcount) {
+        return false;
+    }
+    return this_thread::set_affinity(1ULL << core_index);
+}
+
+bool cpu_time(cpu_times& times) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::FILETIME create, exit, kernel, user;
+    if (!::GetThreadTimes(::GetCurrentThread(), &create, &exit, &kernel, &user)) {
+        return false;
+    }
+    times.kernel = filetime_to_ms(kernel);
+    times.user = filetime_to_ms(user);
+    times.idle = 0;
+    return true;
+#else
+    ::timespec ts;
+    if (clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts) != 0) {
+        return false;
+    }
+    times.user = ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+    times.kernel = 0;
+    times.idle = 0;
+    return true;
 #endif
 }
 

@@ -96,27 +96,27 @@ constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char*
     bool overflow = false;
 
     while (p != end) {
-        uint32_t digit = 0;
+        UT digit(0);
         const char c = *p;
         if (c >= '0' && c <= '9') {
-            digit = static_cast<uint32_t>(c - '0');
+            digit = static_cast<UT>(c - '0');
         } else if (c >= 'a' && c <= 'z') {
-            digit = static_cast<uint32_t>(c - 'a' + 10);
+            digit = static_cast<UT>(c - 'a' + 10);
         } else if (c >= 'A' && c <= 'Z') {
-            digit = static_cast<uint32_t>(c - 'A' + 10);
+            digit = static_cast<UT>(c - 'A' + 10);
         } else {
             break;
         }
-        if (digit >= static_cast<uint32_t>(base)) {
+        if (digit >= static_cast<UT>(base)) {
             break;
         }
 
         any_converted = true;
         if (!overflow) {
-            if (result > cutoff || (result == cutoff && static_cast<UT>(digit) > cutlim)) {
+            if (result > cutoff || (result == cutoff && digit > cutlim)) {
                 overflow = true;
             } else {
-                result = result * static_cast<UT>(base) + static_cast<UT>(digit);
+                result = result * static_cast<UT>(base) + digit;
             }
         }
         ++p;
@@ -136,12 +136,11 @@ constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char*
 
     if (sign > 0) {
         return static_cast<T>(result);
-    } else {
-        if (result == umin_abs) {
-            return numeric_traits<T>::min();
-        }
-        return static_cast<T>(~result + static_cast<UT>(1));
     }
+    if (result == umin_abs) {
+        return numeric_traits<T>::min();
+    }
+    return static_cast<T>(~result + static_cast<UT>(1));
 }
 
 /**
@@ -208,23 +207,23 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
 
     const T cutoff = numeric_traits<T>::max() / base;
     const T cutlim = numeric_traits<T>::max() % base;
-    T result = 0;
+    T result(0);
     bool any_converted = false;
     bool overflow = false;
 
     while (p != end) {
-        unsigned int digit = 0;
+        T digit(0);
         const char c = *p;
         if (c >= '0' && c <= '9') {
-            digit = c - '0';
+            digit = static_cast<T>(c - '0');
         } else if (c >= 'a' && c <= 'z') {
-            digit = c - 'a' + 10;
+            digit = static_cast<T>(c - 'a' + 10);
         } else if (c >= 'A' && c <= 'Z') {
-            digit = c - 'A' + 10;
+            digit = static_cast<T>(c - 'A' + 10);
         } else {
             break;
         }
-        if (digit >= static_cast<unsigned int>(base)) {
+        if (digit >= static_cast<T>(base)) {
             break;
         }
 
@@ -233,7 +232,7 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
             if (result > cutoff || (result == cutoff && digit > cutlim)) {
                 overflow = true;
             } else {
-                result = result * base + digit;
+                result = result * static_cast<T>(base) + digit;
             }
         }
         ++p;
@@ -244,7 +243,7 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
     }
 
     if (!any_converted) {
-        return 0;
+        return static_cast<T>(0);
     }
     if (overflow) {
         return numeric_traits<T>::max();
@@ -254,7 +253,7 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
         // for unsigned, negative sign yields two's complement wrap,
         // but we follow C standard: strtoul("-1", ...) returns ULLONG_MAX.
         // So just cast via signed negation then to unsigned.
-        return static_cast<T>(-static_cast<make_signed_t<T>>(result));
+        return static_cast<T>(-static_cast<typename make_signed<T>::type>(result));
     }
     return result;
 }
@@ -486,7 +485,7 @@ NEFORCE_END_INNER__
  */
 NEFORCE_NODISCARD constexpr float32_t to_float32(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const float32_t num = inner::str_to_floats<float>(sv, &endptr);
+    const float32_t num = inner::str_to_floats<float32_t>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -505,7 +504,7 @@ NEFORCE_NODISCARD constexpr float32_t to_float32(const string_view sv, size_t* i
  */
 NEFORCE_NODISCARD constexpr float64_t to_float64(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const float64_t num = inner::str_to_floats<double>(sv, &endptr);
+    const float64_t num = inner::str_to_floats<float64_t>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -524,7 +523,7 @@ NEFORCE_NODISCARD constexpr float64_t to_float64(const string_view sv, size_t* i
  */
 NEFORCE_NODISCARD constexpr decimal_t to_decimal(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const decimal_t num = inner::str_to_floats<long double>(sv, &endptr);
+    const decimal_t num = inner::str_to_floats<decimal_t>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -584,7 +583,7 @@ NEFORCE_NODISCARD constexpr uint64_t to_uint64(const string_view sv, size_t* idx
  */
 NEFORCE_NODISCARD constexpr int32_t to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const int32_t num = inner::str_to_ints<int>(sv, &endptr, base);
+    const int32_t num = inner::str_to_ints<int32_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }

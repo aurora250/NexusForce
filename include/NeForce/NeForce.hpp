@@ -63,6 +63,7 @@
 #include "NeForce/core/iterator/ranges.hpp"
 #include "NeForce/core/memory/endian.hpp"
 #include "NeForce/core/memory/trace_memory.hpp"
+#include "NeForce/core/numeric/int128.hpp"
 #include "NeForce/core/serialize/binary_serializer.hpp"
 #include "NeForce/core/serialize/json_serializer.hpp"
 #include "NeForce/core/string/vsprintf.hpp"

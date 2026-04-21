@@ -28,6 +28,18 @@
 #    include <riscv_pause.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @struct cpu_times
+ * @brief CPU时间信息类
+ */
+struct cpu_times {
+    uint64_t user;   ///< 用户态时间
+    uint64_t kernel; ///< 内核态时间
+    uint64_t idle;   ///< 空闲时间
+    uint64_t total() const noexcept { return user + kernel + idle; }
+};
+
 NEFORCE_BEGIN_THIS_THREAD__
 
 /**
@@ -163,13 +175,27 @@ void NEFORCE_API sleep_for_us(uint64_t us) noexcept;
 void NEFORCE_API sleep_for_ns(uint64_t ns) noexcept;
 
 /**
- * @brief 设置线程的CPU亲和性
- * @param cpu_mask CPU掩码，每个位表示一个CPU核心
+ * @brief 设置线程的 CPU 亲和性
+ * @param cpu_mask CPU 掩码，每个位表示一个 CPU 核心
  * @return 设置是否成功
  *
- * 设置当前线程可以在哪些CPU核心上运行。
+ * 设置当前线程可以在哪些 CPU 核心上运行。
  */
-bool NEFORCE_API affinity(size_t cpu_mask) noexcept;
+bool NEFORCE_API set_affinity(size_t cpu_mask) noexcept;
+
+/**
+ * @brief 获取线程的 CPU 亲和性
+ * @param affi CPU 亲和性
+ * @return 获取是否成功
+ */
+bool NEFORCE_API affinity(uint64_t& affi) noexcept;
+
+/**
+ * @brief 获取当前线程的 CPU 时间
+ * @param times 用户态和内核态时间
+ * @return 成功返回 true
+ */
+bool NEFORCE_API cpu_time(cpu_times& times) noexcept;
 
 /**
  * @brief 设置线程优先级

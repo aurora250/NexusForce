@@ -316,6 +316,30 @@ void test_color() {
     console.reset_color();
 }
 
+void test_int128() {
+    uint128_t a{100ULL};
+    uint128_t b{30ULL};
+    uint128_t c = a - b;
+    println("100 - 30 = ", c);
+
+    int128_t x{50};
+    int128_t y{80};
+    int128_t z = x - y;
+    println("50 - 80 = ", z);
+
+    int128_t p{-100};
+    int128_t q{25};
+    int128_t r = p - q;
+    println("-100 - 25 = ", r);
+
+    uint128_t huge1{1ULL, 1000ULL};
+    uint128_t huge2{0ULL, 500ULL};
+    uint128_t result = huge1 - huge2;
+
+    println("huge1: 2^64 + 1000");
+    println("huge2: 500");
+    println("result: ", result);
+}
 
 void test_enctype() {
     string encrypted = XOR_encrypt("Hello", "key");
@@ -762,6 +786,7 @@ void test_tpool() {
             pool.submit_task(test_regex);
             pool.submit_task(test_format);
             pool.submit_task(test_bsize);
+            pool.submit_task(test_int128);
             pool.submit_task(test_color);
             pool.submit_task(test_enctype);
             pool.submit_task(test_ini);

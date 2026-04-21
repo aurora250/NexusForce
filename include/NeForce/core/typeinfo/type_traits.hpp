@@ -3263,7 +3263,7 @@ struct __sign_byte_aux<4> {
     template <typename T>
     using unsigned_t =
             conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, unsigned long, unsigned int>;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     template <typename>
     using signed_t = signed int;
     template <typename>
@@ -3277,7 +3277,7 @@ struct __sign_byte_aux<8> {
     using signed_t = signed long long;
     template <typename>
     using unsigned_t = unsigned long long;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     template <typename T>
     using signed_t = conditional_t<is_same<T, signed long>::value || is_same<T, unsigned long>::value, signed long,
                                    signed long long>;
@@ -3286,20 +3286,6 @@ struct __sign_byte_aux<8> {
     using unsigned_t = conditional_t<is_same<T, signed long>::value || is_same<T, unsigned long>::value, unsigned long,
                                      unsigned long long>;
 #endif
-};
-
-template <typename T>
-using __set_signed_byte = typename __sign_byte_aux<sizeof(T)>::template signed_t<T>;
-template <typename T>
-using __set_unsigned_byte = typename __sign_byte_aux<sizeof(T)>::template unsigned_t<T>;
-
-template <typename T>
-struct __set_sign {
-    static_assert(is_integral_like<T>::value && !is_boolean<T>::value,
-                  "make signed only support non-bool && integral-like types");
-
-    using signed_type = copy_cv_t<T, __set_signed_byte<T>>;
-    using unsigned_type = copy_cv_t<T, __set_unsigned_byte<T>>;
 };
 NEFORCE_END_INNER__
 /// @endcond
@@ -3313,7 +3299,7 @@ NEFORCE_END_INNER__
  */
 template <typename T>
 struct make_signed {
-    using type = typename inner::__set_sign<T>::signed_type;
+    using type = copy_cv_t<T, typename inner::__sign_byte_aux<sizeof(T)>::template signed_t<T>>;
 };
 
 /**
@@ -3332,7 +3318,7 @@ using make_signed_t = typename make_signed<T>::type;
  */
 template <typename T>
 struct make_unsigned {
-    using type = typename inner::__set_sign<T>::unsigned_type;
+    using type = copy_cv_t<T, typename inner::__sign_byte_aux<sizeof(T)>::template unsigned_t<T>>;
 };
 
 /**
