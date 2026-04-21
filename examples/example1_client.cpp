@@ -319,7 +319,9 @@ public:
             if (client_.is_connected()) {
                 client_.socket().close();
             }
+            // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
+            // ignore
         }
 
         send_queue_cv_.notify_all();
@@ -344,17 +346,21 @@ public:
 };
 
 int main() {
-    worker_client client;
+    try {
+        worker_client client;
 
-    if (!client.connect("127.0.0.1", neforce::ports{8080})) {
-        neforce::printcln(neforce::color::red(), "Failed to connect to server");
+        if (!client.connect("127.0.0.1", neforce::ports{8080})) {
+            neforce::printcln(neforce::color::red(), "Failed to connect to server");
+            return 1;
+        }
+
+        while (client.is_running()) {
+            neforce::this_thread::sleep_for(neforce::seconds(1));
+        }
+        client.close();
+    } catch (...) {
         return 1;
     }
-
-    while (client.is_running()) {
-        neforce::this_thread::sleep_for(neforce::seconds(1));
-    }
-    client.close();
 
     return 0;
 }

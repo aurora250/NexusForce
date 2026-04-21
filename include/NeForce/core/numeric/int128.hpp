@@ -303,17 +303,17 @@ struct make_unsigned<int128_t> {
     using type = uint128_t;
 };
 
-#define __NEFORCE_DEFINE_MAKE_SIGN(CV) \
-template <> \
-struct make_signed<uint128_t CV> { \
-    using type = int128_t; \
-}; \
-template <> \
-struct make_unsigned<int128_t CV> { \
-    using type = uint128_t; \
-};
+#    define __NEFORCE_DEFINE_MAKE_SIGN(CV)  \
+        template <>                         \
+        struct make_signed<uint128_t CV> {  \
+            using type = int128_t;          \
+        };                                  \
+        template <>                         \
+        struct make_unsigned<int128_t CV> { \
+            using type = uint128_t;         \
+        };
 NEFORCE_MACRO_RANGES_CV_REF(__NEFORCE_DEFINE_MAKE_SIGN)
-#undef __NEFORCE_DEFINE_MAKE_SIGN
+#    undef __NEFORCE_DEFINE_MAKE_SIGN
 
 
 template <>
