@@ -5,6 +5,15 @@
 #    include <sys/stat.h>
 #    include <unistd.h>
 #endif
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <memoryapi.h>
+#if (_WIN32_WINNT < _WIN32_WINNT_WIN8)
+typedef struct _WIN32_MEMORY_RANGE_ENTRY {
+    PVOID VirtualAddress;
+    SIZE_T NumberOfBytes;
+} WIN32_MEMORY_RANGE_ENTRY, *PWIN32_MEMORY_RANGE_ENTRY;
+#endif
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {

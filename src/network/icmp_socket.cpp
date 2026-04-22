@@ -3,9 +3,7 @@
 #include <NeForce/core/time/clocks.hpp>
 #include <NeForce/network/icmp_socket.hpp>
 #include <NeForce/network/ip_socket.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
-#    include <cerrno>
-#endif
+#include <cerrno>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {

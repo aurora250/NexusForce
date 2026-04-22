@@ -6,8 +6,8 @@
 #    endif
 #    ifdef NEFORCE_COMPILER_MINGW
 #        include <windef.h>
-#        include <wincon.h>
 #        include <wingdi.h>
+#        include <wincon.h>
 #    endif
 #    include <WinBase.h>
 #    include <WinNls.h>
