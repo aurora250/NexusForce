@@ -539,12 +539,6 @@
 #endif
 
 
-#if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_BITS_64)) || \
-        (defined(NEFORCE_COMPILER_GNUC) && defined(__SIZEOF_INT128__))
-#    define NEFORCE_SUPPORT_INT128
-#endif
-
-
 /**
  * @defgroup TypeRangeMacros 类型范围宏
  * @brief 用于遍历类型列表的宏

@@ -119,18 +119,18 @@ string http_request::to_string() const {
     }
     result += method.to_string() + " " + full_path + " " + version + "\r\n";
 
-    for (const auto& [key, value]: headers) {
-        result += key + ": " + value + "\r\n";
+    for (const auto& header: headers) {
+        result += header.first + ": " + header.second + "\r\n";
     }
 
     if (!cookies.empty()) {
         result += "Cookie: ";
         bool first = true;
-        for (const auto& [name, value]: cookies) {
+        for (const auto& cookie: cookies) {
             if (!first) {
                 result += "; ";
             }
-            result += name + "=" + value;
+            result += cookie.first + "=" + cookie.second;
             first = false;
         }
         result += "\r\n";
@@ -164,8 +164,8 @@ string http_response::to_string() const {
         result += http_key::Content_Length() + ": " + _NEFORCE to_string(body.size()) + "\r\n";
     }
 
-    for (const auto& [key, value]: headers) {
-        result += key + ": " + value + "\r\n";
+    for (const auto& header: headers) {
+        result += header.first + ": " + header.second + "\r\n";
     }
     result += "\r\n";
 

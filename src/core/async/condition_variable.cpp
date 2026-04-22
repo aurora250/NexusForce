@@ -15,7 +15,7 @@ NEFORCE_BEGIN_INNER__
 condition_variable_base::condition_variable_base()
 #ifdef NEFORCE_PLATFORM_WINDOWS
 :
-cond_(nullptr) {
+cond_(CONDITION_VARIABLE_INIT) {
     ::InitializeConditionVariable(&cond_);
 #else
 :

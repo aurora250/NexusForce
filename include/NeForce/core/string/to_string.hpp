@@ -95,6 +95,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& c) {
     return inner::collector_to_string(c);
 }
 
+#ifdef NEFORCE_STANDARD_20
 template <typename T, enable_if_t<is_base_of_v<ranges::view_base<T>, T>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& value) {
     string result;
@@ -112,6 +113,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& value) {
     }
     return result;
 }
+#endif
 
 /**
  * @brief 将无界数组转换为字符串

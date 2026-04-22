@@ -4,7 +4,6 @@
 #include "NeForce/core/string/to_string.hpp"
 #include "NeForce/core/interface/iobject.hpp"
 #include "NeForce/core/interface/inumeric.hpp"
-#ifdef NEFORCE_SUPPORT_INT128
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API int128_t;
@@ -284,7 +283,9 @@ public:
     static constexpr int128_t parse(const string_view view) { return int128_t{view}; }
     NEFORCE_CONSTEXPR20 string to_string() const;
 
-    static constexpr int128_t min() noexcept { return int128_t(static_cast<uint64_t>(0x8000000000000000ULL), static_cast<uint64_t>(0ULL)); }
+    static constexpr int128_t min() noexcept {
+        return int128_t(static_cast<uint64_t>(0x8000000000000000ULL), static_cast<uint64_t>(0ULL));
+    }
     static constexpr int128_t max() noexcept { return int128_t(0x7FFFFFFFFFFFFFFFULL, ~static_cast<uint64_t>(0)); }
 };
 
@@ -297,17 +298,17 @@ struct make_unsigned<int128_t> {
     using type = uint128_t;
 };
 
-#    define __NEFORCE_DEFINE_MAKE_SIGN(CV)  \
-        template <>                         \
-        struct make_signed<uint128_t CV> {  \
-            using type = int128_t;          \
-        };                                  \
-        template <>                         \
-        struct make_unsigned<int128_t CV> { \
-            using type = uint128_t;         \
-        };
+#define __NEFORCE_DEFINE_MAKE_SIGN(CV)  \
+    template <>                         \
+    struct make_signed<uint128_t CV> {  \
+        using type = int128_t;          \
+    };                                  \
+    template <>                         \
+    struct make_unsigned<int128_t CV> { \
+        using type = uint128_t;         \
+    };
 NEFORCE_MACRO_RANGES_CV_REF(__NEFORCE_DEFINE_MAKE_SIGN)
-#    undef __NEFORCE_DEFINE_MAKE_SIGN
+#undef __NEFORCE_DEFINE_MAKE_SIGN
 
 
 template <>
@@ -344,8 +345,12 @@ constexpr uint128_t::operator int128_t() const noexcept { return int128_t(hi, lo
 
 NEFORCE_BEGIN_LITERALS__
 
-constexpr uint128_t operator""_u128(const unsigned long long val) noexcept { return uint128_t(static_cast<uint64_t>(val)); }
-constexpr int128_t operator""_i128(const unsigned long long val) noexcept { return int128_t(static_cast<uint64_t>(val)); }
+constexpr uint128_t operator""_u128(const unsigned long long val) noexcept {
+    return uint128_t(static_cast<uint64_t>(val));
+}
+constexpr int128_t operator""_i128(const unsigned long long val) noexcept {
+    return int128_t(static_cast<uint64_t>(val));
+}
 
 constexpr uint128_t operator""_u128(const char* str, const size_t len) { return uint128_t(string_view{str, len}); }
 constexpr int128_t operator""_i128(const char* str, const size_t len) { return int128_t(string_view{str, len}); }
@@ -474,5 +479,4 @@ constexpr uint128_t::uint128_t(const string_view str, const int base) { *this = 
 constexpr int128_t::int128_t(const string_view str, const int base) { *this = to_int128(str, nullptr, base); }
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_CORE_NUMERIC_INT128_HPP__

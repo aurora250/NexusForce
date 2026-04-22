@@ -2262,7 +2262,7 @@ public:
      * @return 比较结果
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 int compare_ignore_case(const_pointer str) const noexcept {
-        return this->compare_ignore_case(basic_string_view(str));
+        return this->compare_ignore_case(view_type(str));
     }
 
     /**

@@ -41,7 +41,7 @@ void tcp_server_base::notify_stop() noexcept {
 void tcp_server_base::accept_loop() {
     if (!acceptor_->set_nonblocking(true)) {
         {
-            shared_lock lock(handler_mutex_);
+            shared_lock<shared_mutex> lock(handler_mutex_);
             if (exception_handler_) {
                 exception_handler_(socket_exception("Failed to set acceptor to non-blocking mode"));
             }
@@ -65,7 +65,7 @@ void tcp_server_base::accept_loop() {
 
             client_handler_t handler;
             {
-                shared_lock lock(handler_mutex_);
+                shared_lock<shared_mutex> lock(handler_mutex_);
                 handler = client_handler_;
             }
 
@@ -80,7 +80,7 @@ void tcp_server_base::accept_loop() {
                     if (!running_) {
                         return;
                     }
-                    shared_lock lock(handler_mutex_);
+                    shared_lock<shared_mutex> lock(handler_mutex_);
                     if (exception_handler_) {
                         exception_handler_(e);
                     }
@@ -135,7 +135,7 @@ void tcp_server_base::accept_loop() {
 
             client_handler_t handler;
             {
-                shared_lock lock(handler_mutex_);
+                shared_lock<shared_mutex> lock(handler_mutex_);
                 handler = client_handler_;
             }
 
@@ -150,7 +150,7 @@ void tcp_server_base::accept_loop() {
                     if (!running_) {
                         return;
                     }
-                    shared_lock lock(handler_mutex_);
+                    shared_lock<shared_mutex> lock(handler_mutex_);
                     if (exception_handler_) {
                         exception_handler_(e);
                     }
@@ -204,7 +204,7 @@ void tcp_server_base::accept_loop() {
 
             client_handler_t handler;
             {
-                shared_lock lock(handler_mutex_);
+                shared_lock<shared_mutex> lock(handler_mutex_);
                 handler = client_handler_;
             }
 
@@ -217,7 +217,7 @@ void tcp_server_base::accept_loop() {
                     if (!running_) {
                         return;
                     }
-                    shared_lock lock(handler_mutex_);
+                    shared_lock<shared_mutex> lock(handler_mutex_);
                     if (exception_handler_) {
                         exception_handler_(e);
                     }
@@ -227,7 +227,7 @@ void tcp_server_base::accept_loop() {
             if (!running_) {
                 break;
             }
-            shared_lock lock(handler_mutex_);
+            shared_lock<shared_mutex> lock(handler_mutex_);
             if (exception_handler_) {
                 exception_handler_(e);
             }
@@ -274,7 +274,7 @@ bool tcp_server_base::start(const int backlog) noexcept {
     }
 
     {
-        shared_lock lock(handler_mutex_);
+        shared_lock<shared_mutex> lock(handler_mutex_);
         if (!client_handler_) {
             return false;
         }
@@ -419,7 +419,7 @@ optional<tcp_socket> ssl_server::accept_one() {
         return acc->accept_ssl();
     } catch (const exception& e) {
         if (running_) {
-            shared_lock hl(handler_mutex_);
+            shared_lock<shared_mutex> hl(handler_mutex_);
             if (exception_handler_) {
                 exception_handler_(e);
             }

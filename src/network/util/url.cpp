@@ -287,11 +287,11 @@ string url::build_query(const unordered_map<string, string>& params) {
 
     string result;
     bool first = true;
-    for (const auto& [key, value]: params) {
+    for (const auto& param: params) {
         if (!first) {
             result += '&';
         }
-        result += url::encode_form(key.view()) + '=' + url::encode_form(value.view());
+        result += url::encode_form(param.first.view()) + '=' + url::encode_form(param.second.view());
         first = false;
     }
     return result;

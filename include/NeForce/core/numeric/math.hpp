@@ -499,7 +499,7 @@ square_root(const decimal_t x, const decimal_t precise = constants::DEFAULT_TOLE
     }
 
     decimal_t guess = x * 0.5L;
-    decimal_t prev;
+    decimal_t prev = 0.0L;
     do {
         prev = guess;
         guess = 0.5L * (prev + x / prev);
@@ -531,7 +531,7 @@ cube_root(const decimal_t x, const decimal_t precise = constants::DEFAULT_TOLERA
     const decimal_t v = negative ? -x : x;
 
     decimal_t guess = v > 1.0L ? v / 3.0L : v;
-    decimal_t prev;
+    decimal_t prev = 0.0L;
     do {
         prev = guess;
         guess = (2.0L * prev + v / (prev * prev)) / 3.0L;
@@ -858,10 +858,10 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t sine(decimal_t x) noexcept {
         return numeric_traits<decimal_t>::quiet_nan();
     }
 
-    int quadrant;
+    int quadrant = 0;
     inner::reduce_arg_sincos(x, quadrant);
 
-    decimal_t sin_x, cos_x;
+    decimal_t sin_x = 0.0L, cos_x = 0.0L;
     inner::sincos_taylor(x, sin_x, cos_x);
 
     switch (quadrant) {
@@ -888,9 +888,9 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cosine(decimal_t x) noexcept
         return numeric_traits<decimal_t>::quiet_nan();
     }
 
-    int quadrant;
+    int quadrant = 0;
     inner::reduce_arg_sincos(x, quadrant);
-    decimal_t sin_x, cos_x;
+    decimal_t sin_x = 0.0L, cos_x = 0.0L;
     inner::sincos_taylor(x, sin_x, cos_x);
 
     switch (quadrant) {
@@ -916,12 +916,12 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t tangent(decimal_t x) noexcep
         return numeric_traits<decimal_t>::quiet_nan();
     }
 
-    int quadrant;
+    int quadrant = 0;
     inner::reduce_arg_sincos(x, quadrant);
-    decimal_t sin_x, cos_x;
+    decimal_t sin_x = 0.0L, cos_x = 0.0L;
     inner::sincos_taylor(x, sin_x, cos_x);
 
-    decimal_t s, c;
+    decimal_t s = 0.0L, c = 0.0L;
     switch (quadrant) {
         case 0:
             s = sin_x;

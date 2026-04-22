@@ -210,6 +210,22 @@ private:
         return static_cast<int>(_NEFORCE round(result));
     }
 
+    static constexpr int find_closest(const int value) noexcept {
+        constexpr int levels[6] = {0, 95, 135, 175, 215, 255};
+
+        int closest_idx = 0;
+        int min_diff = 255 * 255;
+        for (int i = 0; i < 6; ++i) {
+            const int diff = value - levels[i];
+            const int dist = diff * diff;
+            if (dist < min_diff) {
+                min_diff = dist;
+                closest_idx = i;
+            }
+        }
+        return closest_idx;
+    };
+
 public:
     /**
      * @brief 默认构造函数，创建黑色（0,0,0,255）
@@ -651,22 +667,6 @@ public:
             const int gray_index = (r - 8) / 10;
             return 232 + (gray_index > 23 ? 23 : gray_index);
         }
-
-        constexpr auto find_closest = [](const int value) -> int {
-            constexpr int levels[6] = {0, 95, 135, 175, 215, 255};
-
-            int closest_idx = 0;
-            int min_diff = 255 * 255;
-            for (int i = 0; i < 6; ++i) {
-                const int diff = value - levels[i];
-                const int dist = diff * diff;
-                if (dist < min_diff) {
-                    min_diff = dist;
-                    closest_idx = i;
-                }
-            }
-            return closest_idx;
-        };
 
         const int r_idx = find_closest(r);
         const int g_idx = find_closest(g);

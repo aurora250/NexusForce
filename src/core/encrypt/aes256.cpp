@@ -41,25 +41,25 @@ namespace {
     constexpr byte_t AES256_rcon[15] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80,
                                         0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a};
 
-    constexpr void AES256_sub_bytes(byte_t state[16]) {
+    void AES256_sub_bytes(byte_t state[16]) {
         for (int i = 0; i < 16; ++i) {
             state[i] = AES256_sbox[state[i]];
         }
     }
 
-    constexpr void AES256_inv_sub_bytes(byte_t state[16]) {
+    void AES256_inv_sub_bytes(byte_t state[16]) {
         for (int i = 0; i < 16; ++i) {
             state[i] = AES256_inv_sbox[state[i]];
         }
     }
 
-    constexpr void AES256_add_round_key(byte_t state[16], const byte_t* round_key) {
+    void AES256_add_round_key(byte_t state[16], const byte_t* round_key) {
         for (int i = 0; i < 16; ++i) {
             state[i] ^= round_key[i];
         }
     }
 
-    constexpr byte_t AES256_gf_mult(byte_t a, byte_t b) {
+    byte_t AES256_gf_mult(byte_t a, byte_t b) {
         byte_t result = 0;
         for (int i = 0; i < 8; ++i) {
             if ((b & 1) == 1) {
@@ -75,7 +75,7 @@ namespace {
         return result;
     }
 
-    constexpr void AES256_key_expansion(const byte_t* key, byte_t* expanded_key) {
+    void AES256_key_expansion(const byte_t* key, byte_t* expanded_key) {
         memory_copy(expanded_key, key, 32);
         for (int i = 8; i < 60; ++i) {
             byte_t temp[4];
@@ -103,7 +103,7 @@ namespace {
         }
     }
 
-    constexpr void AES256_shift_rows(byte_t state[16]) {
+    void AES256_shift_rows(byte_t state[16]) {
         byte_t temp = state[1];
         state[1] = state[5];
         state[5] = state[9];
@@ -124,7 +124,7 @@ namespace {
         state[7] = temp;
     }
 
-    constexpr void AES256_inv_shift_rows(byte_t state[16]) {
+    void AES256_inv_shift_rows(byte_t state[16]) {
         byte_t temp = state[13];
         state[13] = state[9];
         state[9] = state[5];
@@ -145,7 +145,7 @@ namespace {
         state[3] = temp;
     }
 
-    constexpr void AES256_mix_columns(byte_t state[16]) {
+    void AES256_mix_columns(byte_t state[16]) {
         for (ptrdiff_t c = 0; c < 4; ++c) {
             const byte_t s0 = state[c * 4];
             const byte_t s1 = state[c * 4 + 1];
@@ -159,7 +159,7 @@ namespace {
         }
     }
 
-    constexpr void AES256_inv_mix_columns(byte_t state[16]) {
+    void AES256_inv_mix_columns(byte_t state[16]) {
         for (ptrdiff_t c = 0; c < 4; ++c) {
             const byte_t s0 = state[c * 4];
             const byte_t s1 = state[c * 4 + 1];
@@ -177,7 +177,7 @@ namespace {
         }
     }
 
-    constexpr void encrypt_block(byte_t block[16], const byte_t* expanded_key) {
+    void encrypt_block(byte_t block[16], const byte_t* expanded_key) {
         AES256_add_round_key(block, expanded_key);
 
         for (int round = 1; round < 14; ++round) {
@@ -192,7 +192,7 @@ namespace {
         AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(14 * 16));
     }
 
-    constexpr void decrypt_block(byte_t block[16], const byte_t* expanded_key) {
+    void decrypt_block(byte_t block[16], const byte_t* expanded_key) {
         AES256_add_round_key(block, expanded_key + static_cast<ptrdiff_t>(14 * 16));
 
         for (int round = 13; round >= 1; --round) {
@@ -207,7 +207,7 @@ namespace {
         AES256_add_round_key(block, expanded_key);
     }
 
-    constexpr void xor_block(byte_t* dst, const byte_t* src) {
+    void xor_block(byte_t* dst, const byte_t* src) {
         for (int i = 0; i < 16; ++i) {
             dst[i] ^= src[i];
         }
@@ -233,7 +233,7 @@ namespace {
     constexpr uint64_t R_hi = 0xE100000000000000ULL;
     constexpr uint64_t R_lo = 0;
 
-    constexpr void ghash_init(ghash_context& ctx, const byte_t H[16]) {
+    void ghash_init(ghash_context& ctx, const byte_t H[16]) {
         ctx.H_hi = endian::read_be64(H);
         ctx.H_lo = endian::read_be64(H + 8);
 
@@ -282,8 +282,8 @@ namespace {
         }
     }
 
-    constexpr void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
-                                size_t len) {
+    void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
+                      size_t len) {
         while (len >= 16) {
             state_hi ^= endian::read_be64(data);
             state_lo ^= endian::read_be64(data + 8);
@@ -318,8 +318,8 @@ namespace {
         }
     }
 
-    constexpr void ghash_final(const ghash_context& ctx, uint64_t state_hi, uint64_t state_lo, size_t a_len,
-                               size_t c_len, byte_t out_tag[16]) {
+    void ghash_final(const ghash_context& ctx, uint64_t state_hi, uint64_t state_lo, size_t a_len, size_t c_len,
+                     byte_t out_tag[16]) {
         byte_t len_block[16] = {0};
         endian::write_be64(len_block, a_len * 8);
         endian::write_be64(len_block + 8, c_len * 8);
@@ -330,7 +330,7 @@ namespace {
         endian::write_be64(out_tag + 8, state_lo);
     }
 
-    constexpr void inc32(byte_t* counter) {
+    void inc32(byte_t* counter) {
         const uint32_t n = endian::read_be32(counter + 12);
         endian::write_be32(counter + 12, n + 1);
     }

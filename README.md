@@ -87,6 +87,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **JSON 数据格式** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404](https://ecma-international.org/publications-and-standards/standards/ecma-404/) | JSON 语法、数据类型与 UTF-8 编码要求 |
 | **TOML 配置格式** | [TOML v1.0.0](https://toml.io/en/v1.0.0) | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601 |
 | **UUID 生成** | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562) | UUID v4（随机）与 v7（时间有序）生成规范 |
+| **HTTP 与 WebSocket** | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) (WebSocket), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | 完整 HTTP 语义与路由、Cookie 管理、CORS 跨域策略、WebSocket 升级与帧协议 |
 
 ### 🔐 密码学与安全算法
 
@@ -114,6 +115,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **莱昂纳多堆 / 平滑排序** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html) | 自适应排序算法，最优时间复杂度 O(n) |
 | **内省排序** | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23) | 混合快速/堆/插入排序，C++ 标准库 sort 默认算法 |
 | **非加密哈希** | [FNV-1a 草案](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3) | 高性能哈希表与布隆过滤器专用 |
+| **字节大小单位** | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure) | 二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB) |
 
 ### ⚙️ 系统、并发与命令行
 

@@ -136,7 +136,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * byte_size half = total / 2;
  *
  * // 单位转换
- * double in_mb = size2.get_as(byte_size::unit::MB);
+ * double in_mb = size2.as(byte_size::unit::MB);
  *
  * // 格式化输出
  * println(size2.to_string(byte_size::unit::KB, 0));  // "1536 KB"
