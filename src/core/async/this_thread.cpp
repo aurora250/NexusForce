@@ -170,7 +170,7 @@ void sleep_for_ns(uint64_t ns) noexcept {
     ::LARGE_INTEGER now{};
     do {
         ::QueryPerformanceCounter(&now);
-        ::_mm_pause();
+        this_thread::relax();
     } while (now.QuadPart < target_ticks);
 #else
     using clock = steady_clock;

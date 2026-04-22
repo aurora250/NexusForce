@@ -88,7 +88,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void yield() noexcept {
  * 适用于自旋锁等场景中的忙等待。
  */
 NEFORCE_ALWAYS_INLINE_INLINE void relax() noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#ifdef NEFORCE_COMPILER_MSVC
     ::_mm_pause();
 #else
 #    if defined(NEFORCE_ARCH_X86)

@@ -15,6 +15,7 @@
 #    ifdef min
 #        undef min
 #    endif
+#    include <NeForce/core/config/msvc_intrinsic.hpp>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <sys/random.h>
@@ -25,9 +26,9 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 uint64_t mul128_high(uint64_t a, uint64_t b, uint64_t* lo_out) noexcept {
-#ifdef NEFORCE_COMPILER_MSVC
+#ifdef NEFORCE_PLATFORM_WINDOWS
     uint64_t hi = 0;
-    *lo_out = ::_umul128(a, b, &hi);
+    *lo_out = _umul128(a, b, &hi);
     return hi;
 #else
     const __uint128_t m = static_cast<__uint128_t>(a) * b;

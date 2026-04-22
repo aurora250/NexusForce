@@ -46,8 +46,6 @@ NEFORCE_END_CONSTANTS__
  * @{
  */
 
-#ifdef NEFORCE_ARCH_BITS_64
-
 /**
  * @brief 计算64位整数中1的个数
  * @param x 64位无符号整数
@@ -103,8 +101,6 @@ NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
     }
     return n;
 }
-
-#endif
 
 /**
  * @brief 计算32位整数中1的个数
@@ -252,8 +248,6 @@ NEFORCE_CONSTEXPR14 bool parity32(uint32_t x) noexcept {
     return (x & 1) != 0;
 }
 
-#ifdef NEFORCE_ARCH_BITS_64
-
 /**
  * @brief 计算64位整数的奇偶性
  * @param x 64位无符号整数
@@ -268,8 +262,6 @@ NEFORCE_CONSTEXPR14 bool parity64(uint64_t x) noexcept {
     x ^= x >> 1;
     return (x & 1) != 0;
 }
-
-#endif
 
 /**
  * @brief 计算整数的奇偶性
@@ -350,8 +342,6 @@ NEFORCE_CONSTEXPR14 uint32_t rotate_l32(const uint32_t x, const int s) noexcept 
  */
 NEFORCE_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept { return rotate_l32(x, -s); }
 
-#ifdef NEFORCE_ARCH_BITS_64
-
 /**
  * @brief 64位整数循环左移
  * @param x 64位无符号整数
@@ -374,8 +364,6 @@ NEFORCE_CONSTEXPR14 uint64_t rotate_l64(const uint64_t x, const int s) noexcept 
  * @return 循环右移后的结果
  */
 NEFORCE_CONSTEXPR14 uint64_t rotate_r64(const uint64_t x, const int s) noexcept { return rotate_l64(x, -s); }
-
-#endif
 
 /**
  * @brief 整数循环左移
@@ -450,8 +438,6 @@ NEFORCE_CONSTEXPR14 uint32_t reverse_bits32(uint32_t x) noexcept {
     return x;
 }
 
-#ifdef NEFORCE_ARCH_BITS_64
-
 /**
  * @brief 反转64位整数的位顺序
  * @param x 64位无符号整数
@@ -466,8 +452,6 @@ NEFORCE_CONSTEXPR14 uint64_t reverse_bits64(uint64_t x) noexcept {
     x = (x >> 32) | (x << 32);
     return x;
 }
-
-#endif
 
 /**
  * @brief 反转整数的位顺序

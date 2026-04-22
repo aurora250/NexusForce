@@ -113,8 +113,13 @@ template <>
 struct interlocked_exchange_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
+#    ifdef NEFORCE_ARCH_BITS_64
         return static_cast<T>(
                 ::_InterlockedExchange64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    else
+        return static_cast<T>(
+                ::_interlockedexchange64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    endif
     }
 };
 
@@ -179,15 +184,58 @@ struct interlocked_compare_exchange_impl<8> {
 };
 template <>
 struct interlocked_compare_exchange_impl<16> {
+#    if !(defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_ARCH_AARCH64))
+private:
+    struct futex_lock_128 {
+        alignas(64) volatile platform_wait_t state_ = 0;
+
+        static futex_lock_128& for_addr(const void* addr) noexcept {
+            constexpr uintptr_t pool_size = 64;
+            static futex_lock_128 pool[pool_size];
+            return pool[(reinterpret_cast<uintptr_t>(addr) >> 4) % pool_size];
+        }
+
+        void lock(const void* /*addr*/) noexcept {
+            for (;;) {
+                if (::_InterlockedCompareExchange(&state_, 1, 0) == 0) {
+                    return;
+                }
+                _NEFORCE atomic_wait_address_v(const_cast<platform_wait_t*>(&state_), static_cast<platform_wait_t>(1),
+                                               [this] { return ::_InterlockedExchangeAdd(&state_, 0); });
+            }
+        }
+
+        void unlock(const void* /*addr*/) noexcept {
+            ::_InterlockedExchange(&state_, 0);
+            _NEFORCE atomic_notify_address(const_cast<platform_wait_t*>(&state_), false);
+        }
+    };
+#    endif
+
     template <typename T>
     static bool call(volatile T* target, T* expected, T desired) {
         alignas(16) long long exp_arr[2];
         alignas(16) long long des_arr[2];
-        memory_copy(exp_arr, expected, 16);
+        _NEFORCE memory_copy(exp_arr, expected, 16);
         _NEFORCE memory_copy(des_arr, &desired, 16);
+        bool result = false;
 
-        const bool result = ::_InterlockedCompareExchange128(reinterpret_cast<volatile long long*>(target), des_arr[1],
-                                                             des_arr[0], exp_arr) != 0;
+#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_ARCH_AARCH64)
+        result = ::_InterlockedCompareExchange128(reinterpret_cast<volatile long long*>(target), des_arr[1], des_arr[0],
+                                                  exp_arr) != 0;
+#    else
+        auto& flock = futex_lock_128::for_addr(target);
+        flock.lock(target);
+        if (_NEFORCE memory_compare(const_cast<T*>(target), exp_arr, 16) == 0) {
+            _NEFORCE memory_copy(const_cast<T*>(target), des_arr, 16);
+            flock.unlock(target);
+            result = true;
+        } else {
+            _NEFORCE memory_copy(exp_arr, const_cast<T*>(target), 16);
+            flock.unlock(target);
+            result = false;
+        }
+#    endif
 
         if (!result) {
             _NEFORCE memory_copy(expected, exp_arr, 16);
@@ -227,8 +275,13 @@ template <>
 struct interlocked_fetch_add_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
+#    ifdef NEFORCE_ARCH_BITS_64
         return static_cast<T>(::_InterlockedExchangeAdd64(reinterpret_cast<volatile long long*>(target),
                                                           static_cast<long long>(value)));
+#    else
+        return static_cast<T>(::_interlockedexchangeadd64(reinterpret_cast<volatile long long*>(target),
+                                                          static_cast<long long>(value)));
+#    endif
     }
 };
 
@@ -261,8 +314,13 @@ template <>
 struct interlocked_fetch_and_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
+#    ifdef NEFORCE_ARCH_BITS_64
         return static_cast<T>(
                 ::_InterlockedAnd64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    else
+        return static_cast<T>(
+                ::_interlockedadd64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    endif
     }
 };
 
@@ -294,8 +352,13 @@ template <>
 struct interlocked_fetch_or_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
+#    ifdef NEFORCE_ARCH_BITS_64
         return static_cast<T>(
                 ::_InterlockedOr64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    else
+        return static_cast<T>(
+                ::_interlockedor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    endif
     }
 };
 
@@ -328,8 +391,13 @@ template <>
 struct interlocked_fetch_xor_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
+#    ifdef NEFORCE_ARCH_BITS_64
         return static_cast<T>(
                 ::_InterlockedXor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    else
+        return static_cast<T>(
+                ::_interlockedxor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#    endif
     }
 };
 

@@ -15,6 +15,7 @@ public:
     uint64_t hi{0};
 
     constexpr uint128_t() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~uint128_t() = default;
 
     constexpr uint128_t(const int32_t low) noexcept :
     lo(static_cast<uint64_t>(static_cast<int64_t>(low))),
@@ -32,13 +33,15 @@ public:
 
     constexpr uint128_t(const uint128_t&) noexcept = default;
     constexpr uint128_t& operator=(const uint128_t&) noexcept = default;
+    constexpr uint128_t(uint128_t&&) noexcept = default;
+    constexpr uint128_t& operator=(uint128_t&&) noexcept = default;
 
     explicit NEFORCE_CONSTEXPR20 uint128_t(const string& str, int base = 10) :
     uint128_t(str.view(), base) {}
 
     explicit constexpr uint128_t(string_view str, int base = 10);
 
-    constexpr int128_t to_int128() const noexcept;
+    NEFORCE_NODISCARD constexpr int128_t to_int128() const noexcept;
 
     explicit constexpr operator bool() const noexcept { return lo || hi; }
     explicit constexpr operator char() const noexcept { return static_cast<char>(lo); }
@@ -57,7 +60,7 @@ public:
     constexpr uint128_t operator-() const noexcept {
         const uint64_t new_lo = ~lo + 1ULL;
         const uint64_t new_hi = ~hi + (lo == 0ULL ? 1ULL : 0ULL);
-        return uint128_t(new_hi, new_lo);
+        return {new_hi, new_lo};
     }
 
     uint128_t& operator+=(const uint128_t& other);
@@ -132,7 +135,7 @@ public:
     static uint128_t mul64(uint64_t a, uint64_t b) noexcept;
     uint64_t div64(uint64_t divisor, uint64_t* remainder = nullptr) const noexcept;
 
-    constexpr size_t to_hash() const noexcept {
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
         constexpr uint64_t GOLDEN = 0x9E3779B97F4A7C15ULL;
         size_t seed = hash<uint64_t>()(lo);
         seed ^= hash<uint64_t>()(hi) + GOLDEN + (seed << 6) + (seed >> 2);
@@ -140,12 +143,10 @@ public:
     }
 
     static constexpr uint128_t parse(const string_view view) { return uint128_t{view}; }
-    NEFORCE_CONSTEXPR20 string to_string() const;
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const;
 
-    static constexpr uint128_t min() noexcept { return uint128_t(static_cast<uint64_t>(0), static_cast<uint64_t>(0)); }
-    static constexpr uint128_t max() noexcept {
-        return uint128_t(~static_cast<uint64_t>(0), ~static_cast<uint64_t>(0));
-    }
+    static constexpr uint128_t min() noexcept { return {static_cast<uint64_t>(0), static_cast<uint64_t>(0)}; }
+    static constexpr uint128_t max() noexcept { return {~static_cast<uint64_t>(0), ~static_cast<uint64_t>(0)}; }
 };
 
 
@@ -155,6 +156,7 @@ public:
     uint64_t hi{0};
 
     constexpr int128_t() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~int128_t() = default;
 
     constexpr int128_t(const int32_t value) noexcept :
     int128_t(static_cast<int64_t>(value)) {}
@@ -173,6 +175,8 @@ public:
 
     constexpr int128_t(const int128_t&) noexcept = default;
     constexpr int128_t& operator=(const int128_t&) noexcept = default;
+    constexpr int128_t(int128_t&&) noexcept = default;
+    constexpr int128_t& operator=(int128_t&&) noexcept = default;
 
     constexpr int128_t& operator=(const uint128_t& other) noexcept {
         lo = other.lo;
@@ -185,9 +189,9 @@ public:
 
     explicit constexpr int128_t(string_view str, int base = 10);
 
-    constexpr uint128_t to_uint128() const noexcept { return uint128_t(hi, lo); }
+    NEFORCE_NODISCARD constexpr uint128_t to_uint128() const noexcept { return {hi, lo}; }
 
-    explicit constexpr operator bool() const noexcept { return lo || hi; }
+    explicit constexpr operator bool() const noexcept { return (lo != 0U) || (hi != 0U); }
     explicit constexpr operator char() const noexcept { return static_cast<char>(lo); }
     explicit constexpr operator int8_t() const noexcept { return static_cast<int8_t>(lo); }
     explicit constexpr operator int16_t() const noexcept { return static_cast<int16_t>(lo); }
@@ -199,7 +203,7 @@ public:
     explicit constexpr operator uint64_t() const noexcept { return lo; }
     explicit constexpr operator uint128_t() const noexcept { return to_uint128(); }
 
-    constexpr bool is_negative() const noexcept { return static_cast<int64_t>(hi) < 0; }
+    NEFORCE_NODISCARD constexpr bool is_negative() const noexcept { return static_cast<int64_t>(hi) < 0; }
 
     constexpr bool operator==(const int128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
     constexpr bool operator<(const int128_t& rhs) const noexcept {
@@ -215,7 +219,7 @@ public:
     constexpr int128_t operator-() const noexcept {
         const uint64_t new_lo = ~lo + 1ULL;
         const uint64_t new_hi = ~hi + (lo == 0ULL ? 1ULL : 0ULL);
-        return int128_t(new_hi, new_lo);
+        return {new_hi, new_lo};
     }
 
     int128_t& operator+=(const int128_t& other);
@@ -273,7 +277,7 @@ public:
         return *this;
     }
 
-    constexpr size_t to_hash() const noexcept {
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
         constexpr uint64_t GOLDEN = 0x9E3779B97F4A7C15ULL;
         size_t seed = hash<uint64_t>()(lo);
         seed ^= hash<uint64_t>()(hi) + GOLDEN + (seed << 6) + (seed >> 2);
@@ -281,12 +285,12 @@ public:
     }
 
     static constexpr int128_t parse(const string_view view) { return int128_t{view}; }
-    NEFORCE_CONSTEXPR20 string to_string() const;
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const;
 
     static constexpr int128_t min() noexcept {
-        return int128_t(static_cast<uint64_t>(0x8000000000000000ULL), static_cast<uint64_t>(0ULL));
+        return {static_cast<uint64_t>(0x8000000000000000ULL), static_cast<uint64_t>(0ULL)};
     }
-    static constexpr int128_t max() noexcept { return int128_t(0x7FFFFFFFFFFFFFFFULL, ~static_cast<uint64_t>(0)); }
+    static constexpr int128_t max() noexcept { return {0x7FFFFFFFFFFFFFFFULL, ~static_cast<uint64_t>(0)}; }
 };
 
 template <>

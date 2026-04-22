@@ -282,14 +282,18 @@ NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept 
 
 #ifdef NEFORCE_ARCH_BITS_64
     UT holder = ux;
-#else
-    inner::__uint_to_buff_aux(riter, ux);
-    auto holder = static_cast<uint32_t>(ux);
-#endif
     do {
         *--riter = static_cast<CharT>(static_cast<UT>('0') + holder % static_cast<UT>(10));
         holder /= static_cast<UT>(10);
     } while (holder != static_cast<UT>(0));
+#else
+    inner::__uint_to_buff_aux(riter, ux);
+    auto holder = static_cast<uint32_t>(ux);
+    do {
+        *--riter = static_cast<CharT>('0' + holder % 10);
+        holder /= 10;
+    } while (holder != 0);
+#endif
     return riter;
 }
 

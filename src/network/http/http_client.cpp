@@ -150,7 +150,7 @@ namespace {
                 return false;
             }
         } else if (resp.content_length > 0) {
-            const size_t to_copy = min(body_part.size(), resp.content_length);
+            const size_t to_copy = min<uint64_t>(body_part.size(), resp.content_length);
             resp.body += body_part.head(to_copy);
             if (to_copy < resp.content_length) {
                 return false;

@@ -39,21 +39,31 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake build-essential ninja-build libtirpc-dev libc++abi-dev
 
-      - name: Cache vcpkg
+      - name: Restore vcpkg and binary cache
         uses: actions/cache@v4
+        id: cache-vcpkg
         with:
           path: |
             ${{ github.workspace }}/vcpkg
             ~/.cache/vcpkg
-          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+            ${{ github.workspace }}/vcpkg_cache
+            ${{ github.workspace }}/build/vcpkg_installed
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}-${{ hashFiles('.github/workflows/clang-tidy.yml') }}
           restore-keys: |
+            ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}-
             ${{ runner.os }}-vcpkg-
+
+      - name: Setup vcpkg with binary caching
+        run: |
+          echo "VCPKG_BINARY_SOURCES=clear;files,${{ github.workspace }}/vcpkg_cache,readwrite" >> $GITHUB_ENV
+          echo "VCPKG_FEATURE_FLAGS=versions,manifests,binarycaching" >> $GITHUB_ENV
 
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
           vcpkgJsonGlob: '**/vcpkg.json'
+          doNotCache: true
 
       - name: Set VCPKG_ROOT environment variable
         run: echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
