@@ -120,12 +120,14 @@
  * @{
  */
 
-#if defined(__GNUC__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(__GNUC__) || defined(__clang__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if defined(__GNUC__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /**
  * @def NEFORCE_COMPILER_GNUC
  * @brief 定义使用GNU编译器编译
  */
-#    define NEFORCE_COMPILER_GNUC 1
+#        define NEFORCE_COMPILER_GNUC 1
+#    endif
 
 #    if defined(__clang__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 /**
@@ -158,6 +160,14 @@
  * @brief 定义使用Microsoft Visual C++编译器编译
  */
 #    define NEFORCE_COMPILER_MSVC 1
+#endif
+
+#if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_COMPILER_CLANG)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_COMPILER_LLVM_MINGW
+ * @brief 定义使用LLVM MinGW编译器编译
+ */
+#    define NEFORCE_COMPILER_LLVM_MINGW 1
 #endif
 
 #if !(defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_MSVC))

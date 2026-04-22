@@ -207,7 +207,7 @@ target_include_directories(NexusForce
 )
 
 # 定义宏
-if(MSVC)
+if(WIN32)
     target_compile_definitions(NexusForce PRIVATE NEFORCE_DLLEXPORTS)
 endif()
 

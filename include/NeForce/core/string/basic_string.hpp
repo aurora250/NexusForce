@@ -3038,14 +3038,15 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(const basic_string<CharT, 
     return !(rhs < lhs);
 }
 
-
+#ifndef NEFORCE_COMPILER_LLVM_MINGW
 extern template class basic_string<char>;
 extern template class basic_string<wchar_t>;
-#ifdef NEFORCE_STANDARD_20
+#    ifdef NEFORCE_STANDARD_20
 extern template class basic_string<char8_t>;
-#endif
+#    endif
 extern template class basic_string<char16_t>;
 extern template class basic_string<char32_t>;
+#endif
 
 /** @} */ // String
 

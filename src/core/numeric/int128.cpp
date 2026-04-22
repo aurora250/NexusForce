@@ -3,7 +3,16 @@
 #include <NeForce/core/numeric/int128.hpp>
 #if defined(NEFORCE_PLATFORM_WINDOWS) && defined(NEFORCE_ARCH_BITS_64)
 #    include <intrin.h>
-#    pragma intrinsic(_umul128, _udiv128, _addcarry_u64, _subborrow_u64, __shiftright128, __shiftleft128)
+#    if defined(NEFORCE_COMPILER_MINGW)
+#        pragma intrinsic(_umul128, _addcarry_u64, _subborrow_u64, __shiftright128, __shiftleft128)
+#        define NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
+#    elif defined(NEFORCE_COMPILER_LLVM_MINGW)
+#        include <adcintrin.h>
+#        pragma intrinsic(_umul128, __shiftright128, __shiftleft128)
+#        define NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
+#    else
+#        pragma intrinsic(_umul128, _udiv128, _addcarry_u64, _subborrow_u64, __shiftright128, __shiftleft128)
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -54,7 +63,11 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         if (divisor.hi == 0) {
             uint64_t rem = 0;
+#    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
+            quotient.lo = _udiv128(dividend.hi, dividend.lo, divisor.lo, &rem);
+#    else
             quotient.lo = NF_128 _udiv128(dividend.hi, dividend.lo, divisor.lo, &rem);
+#    endif
             quotient.hi = 0;
             remainder = uint128_t(rem);
             return;
@@ -142,7 +155,11 @@ uint128_t uint128_t::mul64(uint64_t a, uint64_t b) noexcept {
 uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     uint64_t rem = 0;
+#    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
+    uint64_t quot = _udiv128(hi, lo, divisor, &rem);
+#    else
     uint64_t quot = NF_128 _udiv128(hi, lo, divisor, &rem);
+#    endif
     if (remainder != nullptr) {
         *remainder = rem;
     }

@@ -1041,14 +1041,15 @@ public:
     }
 };
 
-
+#ifndef NEFORCE_COMPILER_LLVM_MINGW
 extern template class basic_string_view<char>;
 extern template class basic_string_view<wchar_t>;
-#ifdef NEFORCE_STANDARD_20
+#    ifdef NEFORCE_STANDARD_20
 extern template class basic_string_view<char8_t>;
-#endif
+#    endif
 extern template class basic_string_view<char16_t>;
 extern template class basic_string_view<char32_t>;
+#endif
 
 /** @} */ // StringView
 

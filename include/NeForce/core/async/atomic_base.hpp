@@ -2011,7 +2011,7 @@ public:
      * @param ptr 要存储的指针
      * @param mo 内存顺序
      */
-    NEFORCE_ALWAYS_INLINE void store(const value_type ptr, const memory_order mo = memory_order_seq_cst) noexcept {
+    NEFORCE_ALWAYS_INLINE void store(value_type ptr, const memory_order mo = memory_order_seq_cst) noexcept {
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
@@ -2020,7 +2020,7 @@ public:
 #ifdef NEFORCE_COMPILER_GNUC
         __atomic_store_n(&ptr_, ptr, static_cast<int32_t>(mo));
 #else
-        ::_InterlockedExchangePointer(reinterpret_cast<void* volatile*>(&ptr_), ptr);
+        ::_InterlockedExchangePointer(reinterpret_cast<void* volatile*>(&ptr_), reinterpret_cast<void*>(ptr));
         if (mo == memory_order_seq_cst || mo == memory_order_release) {
             ::_ReadWriteBarrier();
         }
