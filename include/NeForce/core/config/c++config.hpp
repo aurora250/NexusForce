@@ -319,47 +319,42 @@
  * @{
  */
 
-#if (__cplusplus >= 202100L) || (_MSVC_LANG >= 202100L) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (__cplusplus >= 202100L) || (_MSVC_LANG >= 202100L)
 /**
  * @def NEFORCE_STANDARD_23
  * @brief 使用C++23或更高标准编译
  */
 #    define NEFORCE_STANDARD_23 1
 #endif
-#if (__cplusplus >= 202002L) || defined(NEFORCE_STANDARD_23) || (_MSVC_LANG >= 202002L) || \
-        defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (__cplusplus >= 202002L) || defined(NEFORCE_STANDARD_23) || (_MSVC_LANG >= 202002L)
 /**
  * @def NEFORCE_STANDARD_20
  * @brief 使用C++20或更高标准编译
  */
 #    define NEFORCE_STANDARD_20 1
 #endif
-#if (__cplusplus >= 201703L) || defined(NEFORCE_STANDARD_20) || (_MSVC_LANG >= 201703L) || \
-        defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (__cplusplus >= 201703L) || defined(NEFORCE_STANDARD_20) || (_MSVC_LANG >= 201703L)
 /**
  * @def NEFORCE_STANDARD_17
  * @brief 使用C++17或更高标准编译
  */
 #    define NEFORCE_STANDARD_17 1
 #endif
-#if (__cplusplus >= 201402L) || defined(NEFORCE_STANDARD_17) || (_MSVC_LANG >= 201402L) || \
-        defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (__cplusplus >= 201402L) || defined(NEFORCE_STANDARD_17) || (_MSVC_LANG >= 201402L)
 /**
  * @def NEFORCE_STANDARD_14
  * @brief 使用C++14或更高标准编译
  */
 #    define NEFORCE_STANDARD_14 1
 #endif
-#if (__cplusplus >= 201103L) || defined(NEFORCE_STANDARD_14) || (_MSVC_LANG >= 201103L) || \
-        defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (__cplusplus >= 201103L) || defined(NEFORCE_STANDARD_14) || (_MSVC_LANG >= 201103L)
 /**
  * @def NEFORCE_STANDARD_11
  * @brief 使用C++11或更高标准编译
  */
 #    define NEFORCE_STANDARD_11 1
 #endif
-#if (__cplusplus >= 199711L) || defined(NEFORCE_STANDARD_11) || (_MSVC_LANG >= 199711L) || \
-        defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if (__cplusplus >= 199711L) || defined(NEFORCE_STANDARD_11) || (_MSVC_LANG >= 199711L)
 /**
  * @def NEFORCE_STANDARD_98
  * @brief 使用C++98或更高标准编译
@@ -459,10 +454,7 @@
 #endif
 
 
-#ifdef NEXUSFORCE_ENABLE_DOXYGEN
-#    define NEFORCE_ALWAYS_INLINE inline
-#    define NEFORCE_ALWAYS_INLINE_INLINE inline
-#elif defined(NEFORCE_COMPILER_GNUC)
+#ifdef NEFORCE_COMPILER_GNUC
 #    define NEFORCE_ALWAYS_INLINE __attribute__((always_inline))
 #    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE inline
 #elif defined(NEFORCE_COMPILER_MSVC)
@@ -506,7 +498,7 @@
 #endif
 
 
-#if !defined(NEFORCE_COMPILER_GNUC) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifndef NEFORCE_COMPILER_GNUC
 #    define NEFORCE_PURE_FUNCTION
 #    define NEFORCE_CONST_FUNCTION
 #else
@@ -557,7 +549,7 @@
  * @{
  */
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /**
  * @def NEFORCE_MACRO_RANGE_UNICODE_CHARS
  * @brief Unicode字符类型列表宏

@@ -489,7 +489,7 @@ NEFORCE_NODISCARD constexpr float32_t to_float32(const string_view sv, size_t* i
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;
@@ -508,7 +508,7 @@ NEFORCE_NODISCARD constexpr float64_t to_float64(const string_view sv, size_t* i
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;
@@ -527,7 +527,7 @@ NEFORCE_NODISCARD constexpr decimal_t to_decimal(const string_view sv, size_t* i
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;
@@ -547,7 +547,7 @@ NEFORCE_NODISCARD constexpr int64_t to_int64(const string_view sv, size_t* idx =
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;
@@ -567,7 +567,7 @@ NEFORCE_NODISCARD constexpr uint64_t to_uint64(const string_view sv, size_t* idx
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;
@@ -587,7 +587,7 @@ NEFORCE_NODISCARD constexpr int32_t to_int32(const string_view sv, size_t* idx =
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;
@@ -607,7 +607,7 @@ NEFORCE_NODISCARD constexpr uint32_t to_uint32(const string_view sv, size_t* idx
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
-    if (idx) {
+    if (idx != nullptr) {
         *idx = static_cast<size_t>(endptr - sv.data());
     }
     return num;

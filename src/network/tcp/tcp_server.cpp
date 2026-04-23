@@ -6,6 +6,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
+    // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
     struct wsa_event_guard {
         ::WSAEVENT event;
 
@@ -363,7 +364,7 @@ void tcp_server::create_acceptor(const ip_address& endpoint, int backlog) {
 
 optional<tcp_socket> tcp_server::accept_one() {
     auto* acc = static_cast<tcp_acceptor*>(acceptor_.get());
-    if (!acc) {
+    if (acc == nullptr) {
         return none;
     }
     return acc->accept_nonblock();
@@ -411,8 +412,9 @@ void ssl_server::create_acceptor(const ip_address& endpoint, int backlog) {
 }
 
 optional<tcp_socket> ssl_server::accept_one() {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     auto* acc = static_cast<ssl_acceptor*>(acceptor_.get());
-    if (!acc) {
+    if (acc == nullptr) {
         return none;
     }
     try {

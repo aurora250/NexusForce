@@ -43,13 +43,14 @@ namespace {
         }
     }
 
+    // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
     struct bio_guard {
         ::BIO* bio{nullptr};
 
         explicit bio_guard(::BIO* b) :
         bio(b) {}
         ~bio_guard() {
-            if (bio) {
+            if (bio != nullptr) {
                 ::BIO_free(bio);
             }
         }
@@ -57,17 +58,18 @@ namespace {
         bio_guard(const bio_guard&) = delete;
         bio_guard& operator=(const bio_guard&) = delete;
 
-        ::BIO* get() const noexcept { return bio; }
+        NEFORCE_NODISCARD ::BIO* get() const noexcept { return bio; }
         explicit operator bool() const noexcept { return bio != nullptr; }
     };
 
+    // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
     struct x509_guard {
         ::X509* cert{nullptr};
 
         explicit x509_guard(::X509* c) :
         cert(c) {}
         ~x509_guard() {
-            if (cert) {
+            if (cert != nullptr) {
                 ::X509_free(cert);
             }
         }
@@ -75,17 +77,18 @@ namespace {
         x509_guard(const x509_guard&) = delete;
         x509_guard& operator=(const x509_guard&) = delete;
 
-        ::X509* get() const noexcept { return cert; }
+        NEFORCE_NODISCARD ::X509* get() const noexcept { return cert; }
         explicit operator bool() const noexcept { return cert != nullptr; }
     };
 
+    // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
     struct evp_pkey_guard {
         ::EVP_PKEY* key{nullptr};
 
         explicit evp_pkey_guard(::EVP_PKEY* k) :
         key(k) {}
         ~evp_pkey_guard() {
-            if (key) {
+            if (key != nullptr) {
                 ::EVP_PKEY_free(key);
             }
         }
@@ -93,7 +96,7 @@ namespace {
         evp_pkey_guard(const evp_pkey_guard&) = delete;
         evp_pkey_guard& operator=(const evp_pkey_guard&) = delete;
 
-        ::EVP_PKEY* get() const noexcept { return key; }
+        NEFORCE_NODISCARD ::EVP_PKEY* get() const noexcept { return key; }
         explicit operator bool() const noexcept { return key != nullptr; }
     };
 } // namespace
@@ -130,15 +133,13 @@ method_(method) {
                                            "TLS_CHACHA20_POLY1305_SHA256");
 #endif
 
-    bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx_.get()) == 1);
-
+    const bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx_.get()) == 1);
     if (!ca_loaded) {
         static constexpr const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",
                                                    "/etc/ssl/cert.pem"};
 
         for (const auto& path: ca_paths) {
             if (::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, path) == 1) {
-                ca_loaded = true;
                 break;
             }
         }

@@ -132,42 +132,41 @@ bool websocket_session::queue_frame(byte_vector frame, const bool is_control) {
 }
 
 void websocket_session::write_loop() noexcept {
-    while (running_) {
-        byte_vector frame;
-        {
-            unique_lock<mutex> lk(write_mutex_);
-            write_cv_.wait(lk, [this] { return !running_ || !ctrl_queue_.empty() || !write_queue_.empty(); });
-            if (!running_ && ctrl_queue_.empty() && write_queue_.empty()) {
-                break;
-            }
+    try {
+        while (running_) {
+            byte_vector frame;
+            {
+                unique_lock<mutex> lk(write_mutex_);
+                write_cv_.wait(lk, [this] { return !running_ || !ctrl_queue_.empty() || !write_queue_.empty(); });
+                if (!running_ && ctrl_queue_.empty() && write_queue_.empty()) {
+                    break;
+                }
 
-            if (!ctrl_queue_.empty()) {
-                frame = ctrl_queue_.front();
-                ctrl_queue_.pop();
-            } else if (!write_queue_.empty()) {
-                frame = write_queue_.front();
-                write_queue_.pop();
-            } else {
-                continue;
-            }
-        }
-
-        try {
-            socket_->send_all(memory_view<const char>(reinterpret_cast<const char*>(frame.data()), frame.size()));
-        } catch (const exception& e) {
-            if (on_error_) {
-                try {
-                    on_error_(e);
-                    // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                if (!ctrl_queue_.empty()) {
+                    frame = ctrl_queue_.front();
+                    ctrl_queue_.pop();
+                } else if (!write_queue_.empty()) {
+                    frame = write_queue_.front();
+                    write_queue_.pop();
+                } else {
+                    continue;
                 }
             }
-            break;
+
+            socket_->send_all(memory_view<const char>(reinterpret_cast<const char*>(frame.data()), frame.size()));
         }
+    } catch (const exception& e) {
+        if (on_error_) {
+            try {
+                on_error_(e);
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
+        }
+        return;
     }
 
-    // 尝试清空控制帧队列
     try {
         lock<mutex> lk(write_mutex_);
         while (!ctrl_queue_.empty()) {
@@ -175,17 +174,31 @@ void websocket_session::write_loop() noexcept {
             socket_->send_all(memory_view<const char>(reinterpret_cast<const char*>(f.data()), f.size()));
             ctrl_queue_.pop();
         }
+        // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (...) {
+        // ignore
     }
 }
 
 void websocket_session::read_loop() noexcept {
-    while (running_) {
-        if (!read_frame()) {
-            break;
+    try {
+        while (running_) {
+            if (!read_frame()) {
+                break;
+            }
         }
+        do_stop(websocket_status::ABNORMAL_CLOSURE, "Connection lost");
+    } catch (const exception& e) {
+        if (on_error_) {
+            try {
+                on_error_(e);
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
+        }
+        return;
     }
-    do_stop(websocket_status::ABNORMAL_CLOSURE, "Connection lost");
 }
 
 bool websocket_session::read_frame() noexcept {
@@ -249,9 +262,10 @@ bool websocket_session::read_frame() noexcept {
         }
 
         if (hdr.masked && payload_len > 0) {
-            const auto* key_bytes = reinterpret_cast<const char*>(&masking_key);
+            const auto* key_bytes = reinterpret_cast<const byte_t*>(&masking_key);
+            auto* payload_bytes = reinterpret_cast<byte_t*>(payload.data());
             for (size_t i = 0; i < static_cast<size_t>(payload_len); ++i) {
-                payload[i] ^= key_bytes[i % 4];
+                payload_bytes[i] ^= key_bytes[i % 4];
             }
         }
 
@@ -359,28 +373,40 @@ void websocket_session::handle_close_frame(string payload) {
 }
 
 void websocket_session::heartbeat_loop() noexcept {
-    last_pong_ms_ = now_ms();
+    try {
+        last_pong_ms_ = now_ms();
 
-    while (running_) {
-        for (int i = 0; i < heartbeat_interval_sec.count() * 10 && running_; ++i) {
-            this_thread::sleep_for(milliseconds(100));
-        }
-        if (!running_) {
-            break;
-        }
+        while (running_) {
+            for (int i = 0; i < heartbeat_interval_sec.count() * 10 && running_; ++i) {
+                this_thread::sleep_for(milliseconds(100));
+            }
+            if (!running_) {
+                break;
+            }
 
-        const int64_t elapsed_ms = now_ms() - last_pong_ms_.load();
-        constexpr milliseconds timeout_ms = heartbeat_timeout_sec.to_milli();
+            const int64_t elapsed_ms = now_ms() - last_pong_ms_.load();
+            constexpr milliseconds timeout_ms = heartbeat_timeout_sec.to_milli();
 
-        if (ping_pending_.load() && elapsed_ms > timeout_ms.count()) {
-            do_stop(websocket_status::ABNORMAL_CLOSURE, "Heartbeat timeout");
-            return;
-        }
+            if (ping_pending_.load() && elapsed_ms > timeout_ms.count()) {
+                do_stop(websocket_status::ABNORMAL_CLOSURE, "Heartbeat timeout");
+                return;
+            }
 
-        if (!ping_pending_.load()) {
-            ping_pending_ = true;
-            queue_frame(build_frame(websocket_opcode::PING, "", false), true);
+            if (!ping_pending_.load()) {
+                ping_pending_ = true;
+                queue_frame(build_frame(websocket_opcode::PING, "", false), true);
+            }
         }
+    } catch (const exception& e) {
+        if (on_error_) {
+            try {
+                on_error_(e);
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
+        }
+        return;
     }
 }
 
@@ -408,11 +434,13 @@ void websocket_session::do_stop(websocket_status status, const string& reason) n
     if (on_close_) {
         try {
             on_close_(move(status), reason);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
+            // ignore
         }
     }
 
-    if (server_) {
+    if (server_ != nullptr) {
         server_->remove_session(shared_from_this());
     }
 }

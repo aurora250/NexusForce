@@ -104,8 +104,8 @@ private:
     }
 
     uint64_t generate_64bit() noexcept {
-        const uint64_t hi = static_cast<uint64_t>(generate_32bit()) << 32;
-        const uint64_t lo = static_cast<uint64_t>(generate_32bit());
+        const auto hi = static_cast<uint64_t>(generate_32bit()) << 32;
+        const auto lo = static_cast<uint64_t>(generate_32bit());
         return hi | lo;
     }
 

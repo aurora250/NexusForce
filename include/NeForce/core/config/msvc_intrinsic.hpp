@@ -1,8 +1,38 @@
 #ifndef NEFORCE_CORE_CONFIG_MSVC_INTRINSIC_HPP__
 #define NEFORCE_CORE_CONFIG_MSVC_INTRINSIC_HPP__
+
+/**
+ * @file msvc_intrinsic.hpp
+ * @brief MSVC内部函数的替代实现
+ *
+ * 此文件提供了MSVC编译器内部函数的替代实现，使得这些函数在其他环境也能使用。
+ *
+ * 主要功能：
+ * - 带进位的64位加法
+ * - 带借位的64位减法
+ * - 64位无符号乘法
+ * - 128位无符号除法
+ */
+
 #include "NeForce/core/memory/bit.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup MSVCCompilerIntrinsics MSVC编译器内部函数替代实现
+ * @brief MSVC编译器内部函数的替代实现
+ * @{
+ */
+
+/**
+ * @brief 带进位的64位无符号加法
+ * @param carry_in 进位输入（0或1）
+ * @param a 第一个加数
+ * @param b 第二个加数
+ * @param out 输出结果（低64位）
+ * @return 进位输出（0或1）
+ *
+ * 计算 a + b + carry_in，结果存入out，返回进位标志。
+ */
 NEFORCE_CONSTEXPR14 uint8_t _addcarry_u64(const uint8_t carry_in, const uint64_t a, const uint64_t b,
                                           uint64_t* out) noexcept {
     const auto a_lo = static_cast<uint32_t>(a);
@@ -17,6 +47,16 @@ NEFORCE_CONSTEXPR14 uint8_t _addcarry_u64(const uint8_t carry_in, const uint64_t
     return static_cast<uint8_t>(sum_hi >> 32);
 }
 
+/**
+ * @brief 带借位的64位无符号减法
+ * @param borrow_in 借位输入（0或1）
+ * @param a 被减数
+ * @param b 减数
+ * @param out 输出结果（低64位）
+ * @return 借位输出（0或1）
+ *
+ * 计算 a - b - borrow_in，结果存入out，返回借位标志。
+ */
 NEFORCE_CONSTEXPR14 uint8_t _subborrow_u64(const uint8_t borrow_in, const uint64_t a, const uint64_t b,
                                            uint64_t* out) noexcept {
     const auto a_lo = static_cast<uint32_t>(a);
@@ -34,6 +74,15 @@ NEFORCE_CONSTEXPR14 uint8_t _subborrow_u64(const uint8_t borrow_in, const uint64
     return static_cast<uint8_t>(borrow_hi);
 }
 
+/**
+ * @brief 64位无符号乘法
+ * @param a 第一个乘数
+ * @param b 第二个乘数
+ * @param hi_out 输出结果的高64位
+ * @return 结果的低64位
+ *
+ * 计算 a * b 的128位结果，低64位作为返回值，高64位存入hi_out。
+ */
 NEFORCE_CONSTEXPR14 uint64_t _umul128(const uint64_t a, const uint64_t b, uint64_t* hi_out) noexcept {
     const auto a_lo = static_cast<uint32_t>(a);
     const auto a_hi = static_cast<uint32_t>(a >> 32);
@@ -53,6 +102,7 @@ NEFORCE_CONSTEXPR14 uint64_t _umul128(const uint64_t a, const uint64_t b, uint64
     return lo;
 }
 
+NEFORCE_BEGIN_INNER__
 NEFORCE_CONSTEXPR14 uint32_t div_digit(const uint64_t u_hi32_lo32, const uint32_t v_hi, const uint32_t v_lo,
                                        uint64_t* rem_out) noexcept {
     const auto u_hi32 = static_cast<uint32_t>(u_hi32_lo32 >> 32);
@@ -82,7 +132,20 @@ NEFORCE_CONSTEXPR14 uint32_t div_digit(const uint64_t u_hi32_lo32, const uint32_
     *rem_out = uhat - qhat * v_hi;
     return static_cast<uint32_t>(qhat);
 }
+NEFORCE_END_INNER__
 
+/**
+ * @brief 128位无符号除法
+ * @param dividend_hi 被除数的高64位
+ * @param dividend_lo 被除数的低64位
+ * @param divisor 除数（64位）
+ * @param remainder 输出余数（可为空）
+ * @return 商（64位）
+ *
+ * 计算 (dividend_hi << 64 | dividend_lo) / divisor，返回商，余数存入remainder。
+ *
+ * 算法基于Knuth的D算法（长除法），支持任意64位除数。
+ */
 NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t dividend_lo, uint64_t divisor,
                                       uint64_t* remainder) noexcept {
     if (dividend_hi == 0) {
@@ -113,7 +176,7 @@ NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t
     const auto d_lo = static_cast<uint32_t>(d);
 
     uint64_t rem1 = 0;
-    uint32_t q1hat = div_digit((u2 << 32) | (u1 >> 32), d_hi, d_lo, &rem1);
+    uint32_t q1hat = inner::div_digit((u2 << 32) | (u1 >> 32), d_hi, d_lo, &rem1);
     (void) rem1;
 
     {
@@ -141,7 +204,7 @@ NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t
     }
 
     uint64_t rem0 = 0;
-    uint32_t q0hat = div_digit((u1 << 32) | (u0 >> 32), d_hi, d_lo, &rem0);
+    uint32_t q0hat = inner::div_digit((u1 << 32) | (u0 >> 32), d_hi, d_lo, &rem0);
     (void) rem0;
 
     {
@@ -171,6 +234,8 @@ NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t
 
     return (static_cast<uint64_t>(q1hat) << 32) | static_cast<uint64_t>(q0hat);
 }
+
+/** @} */ // MSVCCompilerIntrinsics
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_CONFIG_MSVC_INTRINSIC_HPP__

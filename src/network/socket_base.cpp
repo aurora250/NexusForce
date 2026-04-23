@@ -9,7 +9,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
-#    ifdef NEFORCE_PLATFORM_WINDOWS
+    // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
     struct winsock_guard {
         winsock_guard() {
             ::WSADATA wsa_data;
@@ -23,7 +23,6 @@ namespace {
     };
 
     void ensure_winsock() { static winsock_guard guard{}; }
-#    endif
 } // namespace
 #endif
 

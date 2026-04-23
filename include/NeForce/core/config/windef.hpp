@@ -3,7 +3,7 @@
 
 /**
  * @file windef.hpp
- * @brief NeForce WindowsAPI 平台宏
+ * @brief WindowsAPI 平台宏
  *
  * 此头文件定义了WindowsAPI所需的平台宏，它从<Windows.h>的部分中复制出来，
  * 用以在不引入<Windows.h>的情况下使用子头文件

@@ -28,12 +28,8 @@ else()
 endif()
 
 
-set(DOXYGEN_OUTPUT_DIR "${CMAKE_BINARY_DIR}/docs")
+set(DOXYGEN_OUTPUT_DIR "${CMAKE_BINARY_DIR}/doxygen_output")
 set(DOXYGEN_INPUT_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../include")
-
-if(NEXUSFORCE_BUILD_EXAMPLES)
-    list(APPEND DOXYGEN_INPUT_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../examples")
-endif()
 
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in

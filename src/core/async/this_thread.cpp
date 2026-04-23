@@ -234,7 +234,7 @@ bool bind_core(const uint32_t core_index) noexcept {
 bool cpu_time(cpu_times& times) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FILETIME create, exit, kernel, user;
-    if (!::GetThreadTimes(::GetCurrentThread(), &create, &exit, &kernel, &user)) {
+    if (::GetThreadTimes(::GetCurrentThread(), &create, &exit, &kernel, &user) == 0) {
         return false;
     }
     times.kernel = filetime_to_ms(kernel);

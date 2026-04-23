@@ -232,7 +232,7 @@ struct char_traits<char> : narrow_char_traits<char, int32_t> {};
 template <>
 struct char_traits<wchar_t> : base_char_traits<wchar_t, uint32_t> {};
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /// char8_t类型的特化
 template <>
 struct char_traits<char8_t> : narrow_char_traits<char8_t, uint32_t> {};

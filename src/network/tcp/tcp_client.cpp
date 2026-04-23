@@ -137,11 +137,15 @@ bool tcp_client_base::connect(const string& host, ports port) {
             vector<string> ipv4s, ipv6s;
             try {
                 ipv4s = dns_.resolve_a(host.view());
+                // NOLINTNEXTLINE(bugprone-empty-catch)
             } catch (...) {
+                // ignore
             }
             try {
                 ipv6s = dns_.resolve_aaaa(host.view());
+                // NOLINTNEXTLINE(bugprone-empty-catch)
             } catch (...) {
+                // ignore
             }
 
             if (prefer_ipv6_) {
@@ -238,9 +242,9 @@ bool tcp_client_base::send_all(const void* data, size_t length) {
     }
 
     size_t total_sent = 0;
-    const auto ptr = static_cast<const char*>(data);
+    const auto* ptr = static_cast<const char*>(data);
     while (total_sent < length) {
-        ssize_t sent = send(ptr + total_sent, length - total_sent);
+        const ssize_t sent = send(ptr + total_sent, length - total_sent);
         if (sent <= 0) {
             return false;
         }
@@ -363,9 +367,9 @@ optional<string> tcp_client_base::receive_line(size_t max_length) {
     try {
         string line;
         line.reserve(128);
-        char ch;
+        char ch = 0;
         while (line.size() < max_length) {
-            ssize_t n = socket_->receive(memory_view<char>(&ch, 1));
+            const ssize_t n = socket_->receive(memory_view<char>(&ch, 1));
             if (n <= 0) {
                 if (auto_reconnect_) {
                     disconnect();
@@ -418,9 +422,11 @@ bool ssl_client::post_connect() {
     try {
         const string& hostname = sni_hostname_.empty() ? connected_host() : sni_hostname_;
 
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         static_cast<ssl_socket*>(socket_.get())->init_client_ssl(*ssl_ctx_, hostname);
 
         if (verify_peer_) {
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
             if (!static_cast<ssl_socket*>(socket_.get())->ssl().verify_peer()) {
                 handle_exception(ssl_exception("Peer certificate verification failed"));
                 return false;
@@ -488,6 +494,7 @@ NEFORCE_NODISCARD string_view ssl_client::peer_certificate_info() const {
     if (!is_connected() || !ssl_initialized_) {
         return "";
     }
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return static_cast<const ssl_socket*>(socket_.get())->peer_certificate_info().view();
 }
 
@@ -495,6 +502,7 @@ NEFORCE_NODISCARD string_view ssl_client::cipher_name() const {
     if (!is_connected() || !ssl_initialized_) {
         return "";
     }
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return static_cast<const ssl_socket*>(socket_.get())->ssl().get_cipher_name().view();
 }
 
@@ -502,6 +510,7 @@ NEFORCE_NODISCARD string_view ssl_client::protocol_version() const {
     if (!is_connected() || !ssl_initialized_) {
         return "";
     }
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return static_cast<const ssl_socket*>(socket_.get())->ssl().get_version().view();
 }
 
@@ -509,6 +518,7 @@ ssl_socket& ssl_client::ssl_socket_ref() {
     if (!socket_ || !ssl_initialized_) {
         NEFORCE_THROW_EXCEPTION(value_exception("SSL socket is not available"));
     }
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return *static_cast<ssl_socket*>(socket_.get());
 }
 
@@ -516,6 +526,7 @@ const ssl_socket& ssl_client::ssl_socket_ref() const {
     if (!socket_ || !ssl_initialized_) {
         NEFORCE_THROW_EXCEPTION(value_exception("SSL socket is not available"));
     }
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return *static_cast<const ssl_socket*>(socket_.get());
 }
 

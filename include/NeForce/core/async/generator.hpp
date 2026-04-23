@@ -3,7 +3,8 @@
 
 /**
  * @file generator.hpp
- * @details
+ * @brief 协程工具
+ *
  * 本文件提供了协程的异步工具，包括：
  * - generator<T> 懒序列生成器
  * - task<T> 异步任务

@@ -181,7 +181,7 @@ struct character : icharacter<character, char> {
         return result;
     }
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图
@@ -319,7 +319,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      */
     static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) { return wstring{obj}; }
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图
@@ -407,7 +407,7 @@ struct unpackage<wcharacter> {
 };
 
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 
 /**
  * @struct u8character
@@ -639,7 +639,7 @@ public:
         return result;
     }
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图
@@ -787,7 +787,7 @@ struct u32character : icharacter<u32character, char32_t> {
         return result;
     }
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图

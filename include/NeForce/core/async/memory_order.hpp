@@ -157,6 +157,7 @@ NEFORCE_INLINE17 constexpr auto memory_order_seq_cst = memory_order::seq_cst;
  * // TODO: deprecated memory_order_modifier
  */
 enum class memory_order_modifier : int64_t {
+    memory_order_none = 0,                   ///< 无修饰符
     memory_order_mask = 0x0000ffff,          ///< 内存顺序掩码
     memory_order_modifier_mask = 0xffff0000, ///< 修饰符掩码
     memory_order_hle_acquire = 0x10000,      ///< HLE获取修饰符

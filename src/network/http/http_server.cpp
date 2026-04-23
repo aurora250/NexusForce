@@ -225,6 +225,7 @@ http_session* http_server::get_or_create_session(http_request& request, const bo
 
 void send_response(tcp_socket* client_socket, const http_response& response) {
     string res_str = response.to_string();
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
     client_socket->send_all(memory_view<const char>(res_str.data(), res_str.size()));
 }
 
@@ -318,7 +319,8 @@ bool http_server::try_websocket_upgrade(tcp_socket& client_socket, http_request&
 
     send_response(&client_socket, upgrade_response);
 
-    return ws_server_.handle_upgrade(request, make_unique<tcp_socket>(_NEFORCE move(client_socket)));
+    auto sock_ptr = make_unique<tcp_socket>(_NEFORCE move(client_socket));
+    return ws_server_.handle_upgrade(request, move(sock_ptr));
 }
 
 void http_server::handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess) {
@@ -327,7 +329,7 @@ void http_server::handle_request_with_forward(tcp_socket& client_socket, http_re
     while (forward_count < max_forward_count) {
         http_response response = router_.handle_request(request);
 
-        if (sess) {
+        if (sess != nullptr) {
             add_session_cookie(request, response, sess, cookie_name_);
         }
 
@@ -359,14 +361,16 @@ http_server::http_server(ports port, ssl_context ctx, size_t worker_count) :
 server_(make_unique<ssl_server>(port, worker_count)),
 max_server_header_size(max_header_size),
 max_server_body_size(max_body_size) {
-    auto* ssl_srv = static_cast<ssl_server*>(server_.get());
-    ssl_srv->set_ssl_context(_NEFORCE move(ctx));
+    auto* ssl_srv = dynamic_cast<ssl_server*>(server_.get());
+    if (ssl_srv != nullptr) {
+        ssl_srv->set_ssl_context(_NEFORCE move(ctx));
+    }
     server_->set_client_handler([this](tcp_socket sock) { this->handle_client(_NEFORCE move(sock)); });
 }
 
 bool http_server::load_certificate(const string& cert_file, const string& key_file) {
     auto* ssl_srv = dynamic_cast<ssl_server*>(server_.get());
-    if (!ssl_srv) {
+    if (ssl_srv == nullptr) {
         return false;
     }
     return ssl_srv->load_certificate(cert_file, key_file);

@@ -65,8 +65,8 @@ random_mt::seed_type random_mt::generate_32bit() noexcept {
 }
 
 uint64_t random_mt::generate_64bit() noexcept {
-    const uint64_t hi = static_cast<uint64_t>(generate_32bit()) << 32;
-    const uint64_t lo = static_cast<uint64_t>(generate_32bit());
+    const auto hi = static_cast<uint64_t>(generate_32bit()) << 32;
+    const auto lo = static_cast<uint64_t>(generate_32bit());
     return hi | lo;
 }
 

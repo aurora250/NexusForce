@@ -24,10 +24,10 @@ using string_view = basic_string_view<char>;
 /// 宽字符字符串视图
 using wstring_view = basic_string_view<wchar_t>;
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /// UTF-8字符串视图
 using u8string_view = basic_string_view<char8_t>;
-#endif // NEFORCE_STANDARD_20
+#endif
 
 /// UTF-16字符串视图
 using u16string_view = basic_string_view<char16_t>;
@@ -62,7 +62,7 @@ NEFORCE_NODISCARD constexpr string_view operator""_sv(const char* str, size_t le
  */
 NEFORCE_NODISCARD constexpr wstring_view operator""_sv(const wchar_t* str, size_t len) noexcept { return {str, len}; }
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /**
  * @brief 创建char8_t字符串视图的字面量操作符
  * @param str UTF-8字符串字面量
@@ -70,7 +70,7 @@ NEFORCE_NODISCARD constexpr wstring_view operator""_sv(const wchar_t* str, size_
  * @return u8string_view对象
  */
 NEFORCE_NODISCARD constexpr u8string_view operator""_sv(const char8_t* str, size_t len) noexcept { return {str, len}; }
-#endif // NEFORCE_STANDARD_20
+#endif
 
 /**
  * @brief 创建char16_t字符串视图的字面量操作符

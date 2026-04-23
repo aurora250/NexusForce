@@ -24,7 +24,7 @@ using string = basic_string<char>;
 /// 宽字符字符串
 using wstring = basic_string<wchar_t>;
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /// UTF-8字符串
 using u8string = basic_string<char8_t>;
 #endif
@@ -63,7 +63,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator""_s(const wchar_t* str, s
     return {str, len};
 }
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /**
  * @brief 创建char8_t字符串的字面量操作符
  * @param str UTF-8字符串字面量
@@ -73,7 +73,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator""_s(const wchar_t* str, s
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator""_s(const char8_t* str, size_t len) noexcept {
     return {str, len};
 }
-#endif // NEFORCE_STANDARD_20
+#endif
 
 /**
  * @brief 创建char16_t字符串的字面量操作符
