@@ -149,6 +149,10 @@ if(NEXUSFORCE_USING_SSO)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_SSO)
 endif()
 
+if(NEXUSFORCE_USING_INTEL_TSX)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_INTEL_TSX)
+endif()
+
 
 # 编译设置
 if (WIN32)

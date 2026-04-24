@@ -1366,10 +1366,16 @@ struct atomic_flag {
      * @param mo 内存顺序
      */
     NEFORCE_ALWAYS_INLINE void clear(const memory_order mo = memory_order_seq_cst) noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_consume);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acquire);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
 
 #ifdef NEFORCE_COMPILER_GNUC
         __atomic_clear(&flag_, static_cast<int32_t>(mo));
@@ -1382,10 +1388,16 @@ struct atomic_flag {
      * @brief volatile版本的清除标志
      */
     NEFORCE_ALWAYS_INLINE_INLINE void clear(const memory_order mo = memory_order_seq_cst) volatile noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_consume);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acquire);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
 
 #ifdef NEFORCE_COMPILER_GNUC
         __atomic_clear(&flag_, static_cast<int32_t>(mo));
@@ -1600,10 +1612,16 @@ public:
      * @param mo 内存顺序
      */
     NEFORCE_ALWAYS_INLINE void store(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
+        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
-        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_consume);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acquire);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
         _NEFORCE atomic_store(&value_, value, mo);
     }
 
@@ -1611,10 +1629,16 @@ public:
      * @brief volatile版本的原子存储操作
      */
     NEFORCE_ALWAYS_INLINE void store(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
+        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
-        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_consume);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acquire);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
         _NEFORCE atomic_store(&value_, value, mo);
     }
 
@@ -1624,9 +1648,14 @@ public:
      * @return 加载的值
      */
     NEFORCE_ALWAYS_INLINE value_type load(const memory_order mo = memory_order_seq_cst) const noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_release);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_release);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
         return _NEFORCE atomic_load(&value_, mo);
     }
 
@@ -1634,9 +1663,14 @@ public:
      * @brief volatile版本的原子加载操作
      */
     NEFORCE_ALWAYS_INLINE value_type load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_release);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_release);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
         return _NEFORCE atomic_load(&value_, mo);
     }
 
@@ -2009,10 +2043,16 @@ public:
      * @param mo 内存顺序
      */
     NEFORCE_ALWAYS_INLINE void store(value_type ptr, const memory_order mo = memory_order_seq_cst) noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
+        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
-        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_consume);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acquire);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
 
 #ifdef NEFORCE_COMPILER_GNUC
         __atomic_store_n(&ptr_, ptr, static_cast<int32_t>(mo));
@@ -2029,10 +2069,16 @@ public:
      */
     NEFORCE_ALWAYS_INLINE_INLINE void store(const value_type ptr,
                                             const memory_order mo = memory_order_seq_cst) volatile noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
+        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
-        NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_consume);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_consume);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acquire);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
 
 #ifdef NEFORCE_COMPILER_GNUC
         __atomic_store_n(&ptr_, ptr, static_cast<int32_t>(mo));
@@ -2050,9 +2096,15 @@ public:
      * @return 加载的指针
      */
     NEFORCE_ALWAYS_INLINE value_type load(const memory_order mo = memory_order_seq_cst) const noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_release);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_release);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
+
 #ifdef NEFORCE_COMPILER_GNUC
         return __atomic_load_n(&ptr_, static_cast<int32_t>(mo));
 #else
@@ -2068,9 +2120,15 @@ public:
      * @brief volatile版本的原子加载指针操作
      */
     NEFORCE_ALWAYS_INLINE_INLINE value_type load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
         memory_order rmo NEFORCE_UNUSED = mo & memory_order_modifier::memory_order_mask;
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_release);
         NEFORCE_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
+#else
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_release);
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_acq_rel);
+#endif
+
 #ifdef NEFORCE_COMPILER_GNUC
         return __atomic_load_n(&ptr_, static_cast<int32_t>(mo));
 #else

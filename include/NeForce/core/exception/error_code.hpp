@@ -59,7 +59,7 @@ public:
     NEFORCE_NODISCARD size_t to_hash() const noexcept {
         const size_t h1 = hash<const error_category*>{}(category_);
         const size_t h2 = hash<int>{}(value_);
-#ifdef NEFORCE_ARCH_X86_64
+#ifdef NEFORCE_ARCH_BITS_64
         return h1 ^ (h2 << 32 | h2 >> 32);
 #else
         return h1 ^ h2;

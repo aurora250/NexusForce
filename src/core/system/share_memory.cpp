@@ -104,7 +104,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
     const ::DWORD protect = (access == access_mode::read_only) ? PAGE_READONLY : PAGE_READWRITE;
     const ::DWORD access_flags = (access == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
 
-#    ifdef NEFORCE_ARCH_X86_64
+#    ifdef NEFORCE_ARCH_BITS_64
     const auto size_high = static_cast<::DWORD>(size >> 32);
     const auto size_low = static_cast<::DWORD>(size & 0xFFFFFFFF);
 #    else
@@ -240,7 +240,7 @@ void* share_memory::map(size_t offset, size_t length) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::DWORD access = (access_mode_ == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
 
-#    ifdef NEFORCE_ARCH_X86_64
+#    ifdef NEFORCE_ARCH_BITS_64
     const auto offset_high = static_cast<::DWORD>(offset >> 32);
     const auto offset_low = static_cast<::DWORD>(offset & 0xFFFFFFFF);
 #    else

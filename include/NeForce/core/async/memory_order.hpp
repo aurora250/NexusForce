@@ -90,6 +90,40 @@ NEFORCE_BEGIN_NAMESPACE__
  * | memory_order_hle_release | 0x20000 | 事务结束（相当于 XRELEASE 前缀）       |
  *
  * @note HLE 修饰符仅在支持 Intel TSX 的处理器上有效，在不支持的平台上自动退化为普通原子操作。
+ * @warning **已弃用声明**：根据 Intel 的安全公告与软件开发者手册更新，
+ *          Intel® TSX 指令集扩展（包括 HLE 和 RTM）已在后续处理器中被弃用或默认禁用。
+ *          使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好 fallback 处理。
+ *
+ * @section rtm_instructions RTM指令集
+ * RTM（Restricted Transactional Memory）是Intel TSX扩展的另一种事务内存模式，
+ * 通过XBEGIN/XEND/XABORT指令提供显式的事务控制。
+ *
+ * 与HLE的区别：
+ * - HLE：硬件自动处理，对程序员透明，使用锁前缀触发
+ * - RTM：程序员显式控制事务边界，需提供fallback路径
+ *
+ * | 指令     | 操作码       | 说明                                    |
+ * |----------|--------------|-----------------------------------------|
+ * | XBEGIN   | C7 F8        | 开始事务，失败时跳转到fallback地址      |
+ * | XEND     | 0F 01 D5     | 结束事务                                |
+ * | XABORT   | C6 F8        | 显式中止事务，可附带8位状态码           |
+ * | XTEST    | 0F 01 D6     | 检测是否在事务中                        |
+ *
+ * @warning 根据Intel的安全公告与软件开发者手册更新，Intel® TSX指令集扩展（包括HLE和RTM）
+ *          已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过CPUID检查处理器是否支持
+ *          RTM功能，并在运行时做好fallback处理。
+ *
+ * @section rtm_abort_codes 事务中止状态码
+ * 通过XABORT指令和事务中止时EAX寄存器的值可以判断中止原因：
+ *
+ * | 状态位  | 含义                    |
+ * |---------|-------------------------|
+ * | EAX[0] | XABORT显式中止           |
+ * | EAX[1] | 可能重试成功            |
+ * | EAX[2] | 内存冲突引起的中止      |
+ * | EAX[3] | 缓冲区溢出              |
+ * | EAX[4] | 调试断点命中            |
+ * | EAX[5] | 嵌套事务中止            |
  *
  * @section implementation_details 实现细节
  * | 特性              | 规范参数                                  |
@@ -149,19 +183,30 @@ NEFORCE_INLINE17 constexpr auto memory_order_acq_rel = memory_order::acq_rel;
 NEFORCE_INLINE17 constexpr auto memory_order_seq_cst = memory_order::seq_cst;
 
 
+#if defined(NEFORCE_ARCH_X86) && defined(NEFORCE_USING_INTEL_TSX)
+
 /**
  * @enum memory_order_modifier
  * @brief 内存顺序修饰符枚举
  *
  * 用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。
- * // TODO: deprecated memory_order_modifier
+ *
+ * @warning 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
+ * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
+ * 功能，并在运行时做好fallback 处理。
+ *
+ * @see
+ * https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html
  */
 enum class memory_order_modifier : int64_t {
     memory_order_none = 0,                   ///< 无修饰符
     memory_order_mask = 0x0000ffff,          ///< 内存顺序掩码
     memory_order_modifier_mask = 0xffff0000, ///< 修饰符掩码
     memory_order_hle_acquire = 0x10000,      ///< HLE获取修饰符
-    memory_order_hle_release = 0x20000       ///< HLE释放修饰符
+    memory_order_hle_release = 0x20000,      ///< HLE释放修饰符
+    memory_order_rtm_begin = 0x40000,        ///< RTM事务开始修饰符
+    memory_order_rtm_end = 0x80000,          ///< RTM事务结束修饰符
+    memory_order_rtm_abort = 0x100000        ///< RTM事务中止修饰符
 };
 
 /**
@@ -190,6 +235,29 @@ constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noe
 
 
 /**
+ * @enum rtm_status_flag
+ * @brief RTM事务状态标志位定义
+ *
+ * @warning 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
+ * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
+ * 功能，并在运行时做好fallback 处理。
+ *
+ * @see
+ * https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html
+ */
+enum class rtm_status_flag : uint32_t {
+    xabort_explicit = 1 << 0, ///< 由XABORT指令显式中止
+    retry_possible = 1 << 1,  ///< 重试可能成功
+    memory_conflict = 1 << 2, ///< 与其他逻辑处理器内存冲突
+    buffer_overflow = 1 << 3, ///< 事务缓冲区溢出
+    debug_hit = 1 << 4,       ///< 调试断点命中
+    nested_abort = 1 << 5     ///< 嵌套事务中止
+};
+
+#endif
+
+
+/**
  * @brief 获取原子比较交换操作失败时的内存顺序
  *
  * 对于原子比较交换（compare-exchange）操作，成功和失败的内存顺序可以不同。
@@ -202,6 +270,7 @@ constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noe
  * - 保留原始内存顺序中的所有修饰符
  */
 constexpr memory_order cmpexch_failure_order(const memory_order mo) noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
     constexpr auto mask = memory_order_modifier::memory_order_mask;
     const memory_order base_mo = mo & mask;
     const memory_order failure_order = base_mo == memory_order_acq_rel   ? memory_order_acquire
@@ -210,6 +279,12 @@ constexpr memory_order cmpexch_failure_order(const memory_order mo) noexcept {
     constexpr auto modifier_mask = memory_order_modifier::memory_order_modifier_mask;
     const auto modifiers = static_cast<memory_order_modifier>(mo & modifier_mask);
     return failure_order | modifiers;
+#else
+    const memory_order failure_order = mo == memory_order_acq_rel   ? memory_order_acquire
+                                       : mo == memory_order_release ? memory_order_relaxed
+                                                                    : mo;
+    return failure_order;
+#endif
 }
 
 /**
@@ -219,8 +294,12 @@ constexpr memory_order cmpexch_failure_order(const memory_order mo) noexcept {
  * @note 失败内存顺序不能是release或acq_rel
  */
 constexpr bool is_valid_cmpexch_failure_order(const memory_order mo) noexcept {
+#ifdef NEFORCE_SUPPORT_INTEL_TSX
     return (mo & memory_order_modifier::memory_order_mask) != memory_order_release &&
            (mo & memory_order_modifier::memory_order_mask) != memory_order_acq_rel;
+#else
+    return mo != memory_order_release && mo != memory_order_acq_rel;
+#endif
 }
 
 /** @} */ // MemoryOrder

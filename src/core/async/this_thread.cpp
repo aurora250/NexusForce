@@ -253,7 +253,7 @@ bool cpu_time(cpu_times& times) noexcept {
 #endif
 }
 
-bool priority(int priority) noexcept {
+bool set_priority(int priority) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     int win_priority = THREAD_PRIORITY_LOWEST;
     if (priority >= 90) {
@@ -278,6 +278,40 @@ bool priority(int priority) noexcept {
     const int max_p = ::sched_get_priority_max(policy);
     param.sched_priority = min_p + (priority * (max_p - min_p)) / 100;
     return ::pthread_setschedparam(::pthread_self(), policy, &param) == 0;
+#endif
+}
+
+int priority() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const int win_priority = ::GetThreadPriority(::GetCurrentThread());
+    if (win_priority == THREAD_PRIORITY_ERROR_RETURN) {
+        return 0;
+    }
+    if (win_priority == THREAD_PRIORITY_TIME_CRITICAL) {
+        return 90;
+    } else if (win_priority >= THREAD_PRIORITY_HIGHEST) {
+        return 70;
+    } else if (win_priority >= THREAD_PRIORITY_ABOVE_NORMAL) {
+        return 50;
+    } else if (win_priority >= THREAD_PRIORITY_NORMAL) {
+        return 30;
+    } else if (win_priority >= THREAD_PRIORITY_BELOW_NORMAL) {
+        return 10;
+    } else {
+        return 0;
+    }
+#else
+    int policy = 0;
+    ::sched_param param;
+    if (::pthread_getschedparam(::pthread_self(), &policy, &param) != 0) {
+        return 0;
+    }
+    const int min_p = ::sched_get_priority_min(policy);
+    const int max_p = ::sched_get_priority_max(policy);
+    if (max_p == min_p) {
+        return 0;
+    }
+    return (param.sched_priority - min_p) * 100 / (max_p - min_p);
 #endif
 }
 

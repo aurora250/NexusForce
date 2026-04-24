@@ -38,8 +38,8 @@ struct NEFORCE_API int128_t;
  */
 struct NEFORCE_API uint128_t : icommon<uint128_t>, iarithmetic<uint128_t>, ibinary<uint128_t>, iobject<uint128_t> {
 public:
-    uint64_t lo{0};  ///< 低64位
-    uint64_t hi{0};  ///< 高64位
+    uint64_t lo{0}; ///< 低64位
+    uint64_t hi{0}; ///< 高64位
 
     constexpr uint128_t() noexcept = default;
     NEFORCE_CONSTEXPR20 ~uint128_t() = default;
@@ -312,8 +312,8 @@ public:
  */
 struct NEFORCE_API int128_t : icommon<int128_t>, iarithmetic<int128_t>, ibinary<int128_t>, iobject<int128_t> {
 public:
-    uint64_t lo{0};  ///< 低64位
-    uint64_t hi{0};  ///< 高64位
+    uint64_t lo{0}; ///< 低64位
+    uint64_t hi{0}; ///< 高64位
 
     constexpr int128_t() noexcept = default;
     NEFORCE_CONSTEXPR20 ~int128_t() = default;

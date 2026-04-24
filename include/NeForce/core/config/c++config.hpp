@@ -313,6 +313,12 @@
 
 /** @} */ // DataBusWidth
 
+
+#if defined(NEFORCE_ARCH_X86) && defined(NEFORCE_USING_INTEL_TSX)
+#    define NEFORCE_SUPPORT_INTEL_TSX 1
+#endif
+
+
 /**
  * @defgroup CxxStandardDetection C++标准检测
  * @brief 检测和定义C++语言标准的宏

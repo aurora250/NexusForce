@@ -3,7 +3,7 @@
 
 /**
  * @file msvc_intrinsic.hpp
- * @brief MSVC内部函数的替代实现
+ * @brief MSVC内部函数替代实现
  *
  * 此文件提供了MSVC编译器内部函数的替代实现，使得这些函数在其他环境也能使用。
  *
@@ -18,7 +18,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup MSVCCompilerIntrinsics MSVC编译器内部函数替代实现
+ * @defgroup MSVCCompilerIntrinsics MSVC内部函数替代实现
  * @brief MSVC编译器内部函数的替代实现
  * @{
  */

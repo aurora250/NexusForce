@@ -204,7 +204,16 @@ bool NEFORCE_API cpu_time(cpu_times& times) noexcept;
  *
  * 设置当前线程的调度优先级。
  */
-bool NEFORCE_API priority(int priority) noexcept;
+bool NEFORCE_API set_priority(int priority) noexcept;
+
+/**
+ * @brief 获取线程优先级
+ * @return 当前线程的优先级值（0-100，0为最低）
+ *
+ * 获取当前线程的调度优先级。
+ * 若获取失败，返回 0。
+ */
+int NEFORCE_API priority() noexcept;
 
 /** @} */ // Thread
 
