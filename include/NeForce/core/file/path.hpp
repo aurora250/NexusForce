@@ -439,14 +439,14 @@ public:
      * @param rhs 另一个路径
      * @return 是否相等
      */
-    NEFORCE_NODISCARD bool operator==(const path& rhs) const;
+    NEFORCE_NODISCARD bool equal_to(const path& rhs) const;
 
     /**
      * @brief 小于比较
      * @param rhs 另一个路径
      * @return 是否小于
      */
-    NEFORCE_NODISCARD bool operator<(const path& rhs) const;
+    NEFORCE_NODISCARD bool less_than(const path& rhs) const;
 
     /**
      * @brief 计算哈希值

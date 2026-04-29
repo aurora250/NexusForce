@@ -2877,7 +2877,7 @@ TEST(TupleEmpty, ExactArgConstructTag) {
 TEST(TupleEmpty, Comparison) {
     tuple<> a, b;
     EXPECT_TRUE(a.equal_to(b));
-    EXPECT_FALSE(a.less_to(b));
+    EXPECT_FALSE(a.less_than(b));
     EXPECT_TRUE(a == b);
     EXPECT_FALSE(a < b);
 }
@@ -3018,7 +3018,7 @@ TEST(TupleMain, Comparison) {
     EXPECT_TRUE(a < c);
     EXPECT_TRUE(a < d);
     EXPECT_FALSE(c < a);
-    EXPECT_TRUE(a.less_to(c));
+    EXPECT_TRUE(a.less_than(c));
 }
 
 TEST(TupleMain, Swap) {

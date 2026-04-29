@@ -551,7 +551,7 @@ public:
      * @param other 另一个颜色
      * @return 是否相等
      */
-    constexpr bool operator==(const color& other) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const color& other) const noexcept {
         return r == other.r && g == other.g && b == other.b && a == other.a;
     }
 
@@ -560,7 +560,7 @@ public:
      * @param other 另一个颜色
      * @return 是否小于
      */
-    constexpr bool operator<(const color& other) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const color& other) const noexcept {
         if (r != other.r) {
             return r < other.r;
         }

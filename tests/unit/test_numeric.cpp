@@ -136,19 +136,29 @@ TEST(LcmTest, ZeroInput) {
     EXPECT_EQ(lcm(5, 0), 0);
 }
 
+TEST(Debug, TestCatch) {
+    try {
+        throw math_exception("test");
+    } catch (const math_exception&) {
+        SUCCEED();
+    } catch (...) {
+        FAIL() << "Caught as unknown";
+    }
+}
+
 TEST(ModTest, FloatingPoint) {
     EXPECT_DOUBLE_EQ(static_cast<double>(mod(5.5L, 2.0L)), 1.5);
     EXPECT_DOUBLE_EQ(static_cast<double>(mod(5.0L, 2.0L)), 1.0);
-    EXPECT_THROW(mod(1.0L, 0.0L), math_exception);
-    EXPECT_TRUE(is_nan(mod(numeric_traits<decimal_t>::quiet_nan(), 1.0)));
-    EXPECT_TRUE(is_nan(mod(1.0, numeric_traits<decimal_t>::quiet_nan())));
-    EXPECT_TRUE(is_nan(mod(numeric_traits<decimal_t>::infinity(), 1.0)));
+    EXPECT_THROW(ignore = mod<decimal_t>(1.0L, 0.0L), math_exception);
+    EXPECT_TRUE(is_nan(mod<decimal_t>(numeric_traits<decimal_t>::quiet_nan(), 1.0)));
+    EXPECT_TRUE(is_nan(mod<decimal_t>(1.0, numeric_traits<decimal_t>::quiet_nan())));
+    EXPECT_TRUE(is_nan(mod<decimal_t>(numeric_traits<decimal_t>::infinity(), 1.0)));
 }
 
 TEST(ModTest, Integral) {
     EXPECT_EQ(mod(7, 3), 1);
     EXPECT_EQ(mod(-7, 3), -1);
-    EXPECT_THROW(mod(1, 0), math_exception);
+    EXPECT_THROW(ignore = mod(1, 0), math_exception);
 }
 
 TEST(PowerTest, IntegerBase) {
@@ -299,7 +309,7 @@ TEST(AroundMultipleTest, Basic) {
     EXPECT_FALSE(around_multiple(3.5L, 1.0L));
 }
 
-TEST(AroundMultipleTest, ZeroAxis) { EXPECT_THROW(around_multiple(1.0L, 0.0L), math_exception); }
+TEST(AroundMultipleTest, ZeroAxis) { EXPECT_THROW(ignore = around_multiple(1.0L, 0.0L), math_exception); }
 
 TEST(AroundPiTest, Basic) {
     EXPECT_TRUE(around_pi(constants::PI));

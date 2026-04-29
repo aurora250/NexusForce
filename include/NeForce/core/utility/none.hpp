@@ -42,14 +42,14 @@ struct none_t : icommon<none_t> {
      * @param other 另一个空状态对象
      * @return 总是返回true，因为所有空状态都是相等的
      */
-    constexpr bool operator==(const none_t& other) const noexcept { return true; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const none_t& other) const noexcept { return true; }
 
     /**
      * @brief 小于比较运算符
      * @param other 另一个空状态对象
      * @return 总是返回false，因为空状态不小于任何其他空状态
      */
-    constexpr bool operator<(const none_t& other) const noexcept { return false; }
+    NEFORCE_NODISCARD constexpr bool less_than(const none_t& other) const noexcept { return false; }
 
     /**
      * @brief 计算哈希值

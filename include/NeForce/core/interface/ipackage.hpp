@@ -126,14 +126,14 @@ public:
      * @param other 右侧对象
      * @return 两个对象的数值是否相等
      */
-    NEFORCE_NODISCARD constexpr bool operator==(const T& other) const noexcept { return value_ == other.value_; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const T& other) const noexcept { return value_ == other.value_; }
 
     /**
      * @brief 小于比较操作符
      * @param other 右侧对象
      * @return 当前对象的数值是否小于右侧对象的数值
      */
-    NEFORCE_NODISCARD constexpr bool operator<(const T& other) const noexcept { return value_ < other.value_; }
+    NEFORCE_NODISCARD constexpr bool less_than(const T& other) const noexcept { return value_ < other.value_; }
 
     /**
      * @brief 加法赋值操作符

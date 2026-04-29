@@ -115,12 +115,12 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator==(const uint128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const uint128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
 
     /**
      * @brief 小于比较
      */
-    constexpr bool operator<(const uint128_t& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const uint128_t& rhs) const noexcept {
         return hi < rhs.hi || (hi == rhs.hi && lo < rhs.lo);
     }
 
@@ -405,12 +405,12 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator==(const int128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const int128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
 
     /**
      * @brief 小于比较（考虑符号）
      */
-    constexpr bool operator<(const int128_t& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const int128_t& rhs) const noexcept {
         const bool a_neg = is_negative();
         const bool b_neg = rhs.is_negative();
         if (a_neg != b_neg) {

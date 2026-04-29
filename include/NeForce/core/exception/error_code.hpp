@@ -30,6 +30,7 @@ public:
     }
 
     NEFORCE_NODISCARD int value() const noexcept { return value_; }
+    NEFORCE_NODISCARD errc error() const noexcept { return static_cast<errc>(value_); }
     NEFORCE_NODISCARD const error_category& category() const noexcept { return *category_; }
 
     error_condition default_error_condition() const noexcept { return category_->default_error_condition(value_); }
@@ -38,10 +39,10 @@ public:
 
     explicit operator bool() const noexcept { return value_ != 0; }
 
-    NEFORCE_NODISCARD bool operator==(const error_code& rhs) const noexcept {
+    NEFORCE_NODISCARD bool equal_to(const error_code& rhs) const noexcept {
         return category_ == rhs.category_ && value_ == rhs.value_;
     }
-    NEFORCE_NODISCARD bool operator<(const error_code& rhs) const noexcept {
+    NEFORCE_NODISCARD bool less_than(const error_code& rhs) const noexcept {
         if (*category_ < *rhs.category_) {
             return true;
         }

@@ -506,7 +506,7 @@ public:
      * @param rhs 右侧unordered_map
      * @return 如果两个unordered_map大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator==(const unordered_map& rhs) const noexcept(noexcept(ht_ == rhs.ht_)) {
+    NEFORCE_NODISCARD bool equal_to(const unordered_map& rhs) const noexcept(noexcept(ht_ == rhs.ht_)) {
         return ht_ == rhs.ht_;
     }
 
@@ -515,7 +515,7 @@ public:
      * @param rhs 右侧unordered_map
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator<(const unordered_map& rhs) const noexcept(noexcept(ht_ < rhs.ht_)) {
+    NEFORCE_NODISCARD bool less_than(const unordered_map& rhs) const noexcept(noexcept(ht_ < rhs.ht_)) {
         return ht_ < rhs.ht_;
     }
 };

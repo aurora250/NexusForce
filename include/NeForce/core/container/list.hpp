@@ -1057,7 +1057,7 @@ public:
      * @param rhs 右侧链表
      * @return 如果两个链表大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator==(const list& rhs) const
+    NEFORCE_NODISCARD bool equal_to(const list& rhs) const
             noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
         return size() == rhs.size() && _NEFORCE equal(cbegin(), cend(), rhs.cbegin());
     }
@@ -1067,7 +1067,7 @@ public:
      * @param rhs 右侧链表
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator<(const list& rhs) const
+    NEFORCE_NODISCARD bool less_than(const list& rhs) const
             noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }

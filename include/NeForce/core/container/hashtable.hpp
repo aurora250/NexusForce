@@ -1477,7 +1477,7 @@ public:
      * @param rhs 右侧哈希表
      * @return 如果两个哈希表大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator==(const hashtable& rhs) const {
+    NEFORCE_NODISCARD bool equal_to(const hashtable& rhs) const {
         if (size_ != rhs.size_) {
             return false;
         }
@@ -1499,7 +1499,7 @@ public:
      * @param rhs 右侧哈希表
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator<(const hashtable& rhs) const
+    NEFORCE_NODISCARD bool less_than(const hashtable& rhs) const
             noexcept(noexcept(_NEFORCE lexicographical_compare(hashtable::cbegin(), hashtable::cend(), rhs.cbegin(),
                                                                rhs.cend()))) {
         return _NEFORCE lexicographical_compare(hashtable::cbegin(), hashtable::cend(), rhs.cbegin(), rhs.cend());

@@ -414,7 +414,7 @@ struct pair : icommon<pair<T1, T2>> {
      *
      * 如果两个pair的所有元素都相等则返回true
      */
-    constexpr bool operator==(const pair& y) const
+    constexpr bool equal_to(const pair& y) const
             noexcept(noexcept(this->first == y.first && this->second == y.second)) {
         return this->first == y.first && this->second == y.second;
     }
@@ -426,7 +426,7 @@ struct pair : icommon<pair<T1, T2>> {
      *
      * 先比较first，如果相等则比较second
      */
-    constexpr bool operator<(const pair& y) const
+    constexpr bool less_than(const pair& y) const
             noexcept(noexcept(this->first < y.first || (!(y.first < this->first) && this->second < y.second))) {
         return this->first < y.first || (!(y.first < this->first) && this->second < y.second);
     }

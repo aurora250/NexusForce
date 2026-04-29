@@ -390,7 +390,7 @@ public:
      * @param rhs 右侧数组
      * @return 如果两个数组元素相等返回true
      */
-    NEFORCE_NODISCARD constexpr bool operator==(const array& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const array& rhs) const noexcept {
         return _NEFORCE equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
     /**
@@ -398,7 +398,7 @@ public:
      * @param rhs 右侧数组
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD constexpr bool operator<(const array& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const array& rhs) const noexcept {
         return _NEFORCE lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
@@ -526,9 +526,8 @@ public:
     NEFORCE_ALWAYS_INLINE constexpr void fill(const T&) {}
     NEFORCE_ALWAYS_INLINE constexpr void swap(array&) noexcept {}
 
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool operator==(const array&) const noexcept { return true; }
-
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool operator<(const array&) const noexcept { return false; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool equal_to(const array&) const noexcept { return true; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_than(const array&) const noexcept { return false; }
 };
 
 #ifdef NEFORCE_STANDARD_17

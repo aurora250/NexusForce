@@ -35,10 +35,10 @@ public:
 
     explicit operator bool() const noexcept { return value_ != 0; }
 
-    NEFORCE_NODISCARD bool operator==(const error_condition& rhs) const noexcept {
+    NEFORCE_NODISCARD bool equal_to(const error_condition& rhs) const noexcept {
         return category_ == rhs.category_ && value_ == rhs.value_;
     }
-    NEFORCE_NODISCARD bool operator<(const error_condition& rhs) const noexcept {
+    NEFORCE_NODISCARD bool less_than(const error_condition& rhs) const noexcept {
         if (*category_ < *rhs.category_) {
             return true;
         }

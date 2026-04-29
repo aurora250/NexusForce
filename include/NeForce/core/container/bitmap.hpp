@@ -133,7 +133,7 @@ public:
      * @param rhs 右侧位引用
      * @return 两个位是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const bit_reference& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const bit_reference& rhs) const noexcept {
         return static_cast<bool>(*this) == static_cast<bool>(rhs);
     }
 
@@ -142,7 +142,7 @@ public:
      * @param rhs 右侧位引用
      * @return 比较结果（false < true）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const bit_reference& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const bit_reference& rhs) const noexcept {
         return static_cast<bool>(*this) < static_cast<bool>(rhs);
     }
 
@@ -1134,7 +1134,7 @@ public:
      * @param rhs 右侧位图
      * @return 如果两个位图大小相等且对应位相等返回true
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const bitmap& rhs) const
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const bitmap& rhs) const
             noexcept(noexcept(_NEFORCE equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
         return this->size() == rhs.size() && _NEFORCE equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
@@ -1144,7 +1144,7 @@ public:
      * @param rhs 右侧位图
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const bitmap& rhs) const
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const bitmap& rhs) const
             noexcept(noexcept(_NEFORCE lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(),
                                                                rhs.cend()))) {
         return _NEFORCE lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());

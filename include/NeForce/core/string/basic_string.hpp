@@ -2728,14 +2728,14 @@ public:
      * @param other 另一个字符串
      * @return 是否相等
      */
-    NEFORCE_CONSTEXPR20 bool equal_to(const basic_string& other) const noexcept { return equal_to(other.view()); }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const basic_string& other) const noexcept { return equal_to(other.view()); }
 
     /**
      * @brief 与字符串视图相等比较
      * @param view 字符串视图
      * @return 是否相等
      */
-    NEFORCE_CONSTEXPR20 bool equal_to(const view_type view) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const view_type view) const noexcept {
         return _NEFORCE char_traits_equal<Traits>(data(), size(), view.data(), view.size());
     }
 
@@ -2744,7 +2744,7 @@ public:
      * @param str C风格字符串
      * @return 是否相等
      */
-    NEFORCE_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept { return equal_to(view_type(str)); }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept { return equal_to(view_type(str)); }
 
     /**
      * @brief 转换为小写
@@ -2782,13 +2782,8 @@ public:
 #endif
     }
 
-    /// 相等比较操作符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const basic_string& rhs) const noexcept {
-        return equal_to(rhs);
-    }
-
     /// 小于比较操作符
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const basic_string& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const basic_string& rhs) const noexcept {
         return compare(rhs) < 0;
     }
 

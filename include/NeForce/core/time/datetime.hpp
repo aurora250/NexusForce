@@ -272,14 +272,14 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator==(const date& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const date& rhs) const noexcept {
         return year_ == rhs.year_ && month_ == rhs.month_ && day_ == rhs.day_;
     }
 
     /**
      * @brief 小于比较
      */
-    constexpr bool operator<(const date& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const date& rhs) const noexcept {
         if (year_ < rhs.year_) {
             return true;
         }
@@ -545,14 +545,14 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator==(const time& other) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const time& other) const noexcept {
         return hours_ == other.hours_ && minutes_ == other.minutes_ && seconds_ == other.seconds_;
     }
 
     /**
      * @brief 小于比较
      */
-    constexpr bool operator<(const time& other) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const time& other) const noexcept {
         if (hours_ < other.hours_) {
             return true;
         }
@@ -1013,7 +1013,7 @@ public:
     /**
      * @brief 相等比较
      */
-    constexpr bool operator==(const datetime& other) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const datetime& other) const noexcept {
         return date_ == other.date_ && time_ == other.time_ && has_timezone_ == other.has_timezone_ &&
                offset_seconds_ == other.offset_seconds_;
     }
@@ -1021,7 +1021,7 @@ public:
     /**
      * @brief 小于比较
      */
-    constexpr bool operator<(const datetime& other) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const datetime& other) const noexcept {
         if (date_ < other.date_) {
             return true;
         } else if (date_ == other.date_) {

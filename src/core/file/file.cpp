@@ -909,7 +909,7 @@ bool file::size(size_type& out_size) const {
     }
 
     out_size = size();
-    return last_error_code_ == errc::success;
+    return static_cast<errc>(last_error_code_.value()) == errc::success;
 }
 
 uint64_t file::size64() const {

@@ -452,7 +452,7 @@ bool path::is_file(const string& path) noexcept {
 #endif
 }
 
-bool path::operator==(const path& rhs) const {
+bool path::equal_to(const path& rhs) const {
     const path lhs_norm = this->lexically_normal();
     const path rhs_norm = rhs.lexically_normal();
 
@@ -463,7 +463,7 @@ bool path::operator==(const path& rhs) const {
 #endif
 }
 
-bool path::operator<(const path& rhs) const {
+bool path::less_than(const path& rhs) const {
     const path lhs_norm = lexically_normal();
     const path rhs_norm = rhs.lexically_normal();
 

@@ -69,7 +69,7 @@ TEST(MD5Test, HashRepeating1234567890) {
 }
 
 TEST(MD5Test, HashExact64Bytes) {
-    const char* const msg = "1234567890123456789012345678901234567890123456789012345678901234";
+    constexpr const char* const msg = "1234567890123456789012345678901234567890123456789012345678901234";
     static_assert(char_traits<char>::length(msg) == 64, "must be 64 bytes");
     const cbyte_view input{reinterpret_cast<const byte_t*>(msg), 64};
     const byte_vector result = MD5::hash(input);
@@ -79,7 +79,7 @@ TEST(MD5Test, HashExact64Bytes) {
 }
 
 TEST(MD5Test, HashExact120Bytes) {
-    const char* const msg = "1234567890123456789012345678901234567890"
+    constexpr const char* const msg = "1234567890123456789012345678901234567890"
                             "1234567890123456789012345678901234567890"
                             "1234567890123456789012345678901234567890";
     static_assert(char_traits<char>::length(msg) == 120, "must be 120 bytes");

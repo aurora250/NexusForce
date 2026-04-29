@@ -247,7 +247,7 @@ public:
      * @return 如果两个优先队列的底层容器相等返回true
      * @note 此比较基于底层容器的元素顺序，而非优先级顺序。
      */
-    NEFORCE_NODISCARD bool operator==(const priority_queue& rhs) const
+    NEFORCE_NODISCARD bool equal_to(const priority_queue& rhs) const
             noexcept(noexcept(pair_.value == rhs.pair_.value)) {
         return pair_.value == rhs.pair_.value;
     }
@@ -258,7 +258,7 @@ public:
      * @return 按字典序比较底层容器的结果
      * @note 此比较基于底层容器的元素顺序，而非优先级顺序。
      */
-    NEFORCE_NODISCARD bool operator<(const priority_queue& rhs) const
+    NEFORCE_NODISCARD bool less_than(const priority_queue& rhs) const
             noexcept(noexcept(pair_.value < rhs.pair_.value)) {
         return pair_.value < rhs.pair_.value;
     }

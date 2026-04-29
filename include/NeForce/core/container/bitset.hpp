@@ -528,14 +528,14 @@ public:
      * @param other 另一个bitset
      * @return 如果所有位相等返回true
      */
-    NEFORCE_NODISCARD constexpr bool operator==(const bitset& other) const noexcept { return blocks == other.blocks; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const bitset& other) const noexcept { return blocks == other.blocks; }
 
     /**
      * @brief 小于比较操作符（按字典序）
      * @param other 另一个bitset
      * @return 比较结果
      */
-    NEFORCE_NODISCARD constexpr bool operator<(const bitset& other) const noexcept { return blocks < other.blocks; }
+    NEFORCE_NODISCARD constexpr bool less_than(const bitset& other) const noexcept { return blocks < other.blocks; }
 
     /**
      * @brief 计算哈希值

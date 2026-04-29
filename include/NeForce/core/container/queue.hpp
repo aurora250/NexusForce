@@ -193,7 +193,7 @@ public:
      * @param rhs 右侧队列
      * @return 如果两个队列大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator==(const queue& rhs) const noexcept(noexcept(seq_ == rhs.seq_)) {
+    NEFORCE_NODISCARD bool equal_to(const queue& rhs) const noexcept(noexcept(seq_ == rhs.seq_)) {
         return seq_ == rhs.seq_;
     }
 
@@ -202,7 +202,7 @@ public:
      * @param rhs 右侧队列
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator<(const queue& rhs) const noexcept(noexcept(seq_ < rhs.seq_)) {
+    NEFORCE_NODISCARD bool less_than(const queue& rhs) const noexcept(noexcept(seq_ < rhs.seq_)) {
         return seq_ < rhs.seq_;
     }
 };

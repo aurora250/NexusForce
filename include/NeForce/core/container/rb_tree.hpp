@@ -1560,7 +1560,7 @@ public:
      * @param rhs 右侧红黑树
      * @return 如果两个红黑树大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator==(const rb_tree& rhs) const
+    NEFORCE_NODISCARD bool equal_to(const rb_tree& rhs) const
             noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
         return size() == rhs.size() && _NEFORCE equal(cbegin(), cend(), rhs.cbegin());
     }
@@ -1570,7 +1570,7 @@ public:
      * @param rhs 右侧红黑树
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator<(const rb_tree& rhs) const
+    NEFORCE_NODISCARD bool less_than(const rb_tree& rhs) const
             noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }

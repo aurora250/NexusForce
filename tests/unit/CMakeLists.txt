@@ -22,15 +22,6 @@ set_target_properties(NexusForceUnitTests PROPERTIES
 target_link_libraries(NexusForceUnitTests PRIVATE NexusForce::NexusForce)
 nexusforce_compiler_options(NexusForceUnitTests)
 
-if(NEXUSFORCE_BUILD_COVERAGE)
-    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-        target_compile_options(NexusForceUnitTests PRIVATE --coverage)
-        target_link_libraries(NexusForceUnitTests PRIVATE --coverage)
-    else()
-        message(WARNING "Coverage analysis need GCC/Clang")
-    endif()
-endif()
-
 find_package(GTest CONFIG REQUIRED)
 target_link_libraries(NexusForceUnitTests PRIVATE GTest::gtest)
 

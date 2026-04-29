@@ -595,7 +595,7 @@ public:
      *
      * 两个变体相等当且仅当它们存储相同类型的值且值相等。
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const variant& rhs) const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const variant& rhs) const {
         if (index_ != rhs.index_) {
             return false;
         }
@@ -609,7 +609,7 @@ public:
      * @param rhs 要比较的变体
      * @return 如果当前变体小于另一个变体返回true，否则返回false
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const variant& rhs) const {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const variant& rhs) const {
         if (index_ != rhs.index_) {
             return false;
         }

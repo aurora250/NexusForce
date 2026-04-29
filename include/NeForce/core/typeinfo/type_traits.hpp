@@ -3287,6 +3287,15 @@ struct __sign_byte_aux<8> {
                                      unsigned long long>;
 #endif
 };
+#if defined(NEFORCE_COMPILER_GNUC) && defined(__SIZEOF_INT128__)
+template <>
+struct __sign_byte_aux<16> {
+    template <typename>
+    using signed_t = signed __int128;
+    template <typename>
+    using unsigned_t = unsigned __int128;
+};
+#endif
 NEFORCE_END_INNER__
 /// @endcond
 

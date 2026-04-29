@@ -38,7 +38,7 @@ public:
      *
      * 实际调用派生类的to_hash()方法
      */
-    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept(noexcept(derived().to_hash())) {
+    NEFORCE_NODISCARD constexpr size_t to_ihash() const noexcept(noexcept(derived().to_hash())) {
         return derived().to_hash();
     }
 };
@@ -56,8 +56,8 @@ public:
  */
 template <typename T>
 struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
-    NEFORCE_NODISCARD constexpr size_t operator()(const T& obj) const noexcept(noexcept(obj.to_hash())) {
-        return obj.to_hash();
+    NEFORCE_NODISCARD constexpr size_t operator()(const T& obj) const noexcept(noexcept(obj.to_ihash())) {
+        return obj.to_ihash();
     }
 };
 
@@ -73,7 +73,7 @@ struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
  * @brief 可比较对象接口模板
  * @tparam T 派生类类型
  *
- * 通过CRTP模式实现，派生类只需实现operator ==和operator <两个基本比较操作，
+ * 通过CRTP模式实现，派生类只需实现 equal_to(const T&) 和 less_than(const T&) 两个基本比较操作，
  * 即可自动获得所有比较运算符的完整实现。
  */
 template <typename T>
@@ -89,8 +89,8 @@ public:
      *
      * 调用派生类实现的operator ==进行相等性判断。
      */
-    NEFORCE_NODISCARD constexpr bool operator==(const T& rhs) const noexcept(noexcept(derived() == rhs)) {
-        return derived() == rhs;
+    NEFORCE_NODISCARD constexpr bool operator==(const T& rhs) const noexcept(noexcept(derived().equal_to(rhs))) {
+        return derived().equal_to(rhs);
     }
 
     /**
@@ -100,8 +100,8 @@ public:
      *
      * 基于operator ==的结果取反得到不等比较结果。
      */
-    NEFORCE_NODISCARD constexpr bool operator!=(const T& rhs) const noexcept(noexcept(derived() == rhs)) {
-        return !(*this == rhs);
+    NEFORCE_NODISCARD constexpr bool operator!=(const T& rhs) const noexcept(noexcept(!(derived().equal_to(rhs)))) {
+        return !(derived().equal_to(rhs));
     }
 
     /**
@@ -111,8 +111,8 @@ public:
      *
      * 调用派生类实现的operator <进行小于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator<(const T& rhs) const noexcept(noexcept(derived() < rhs)) {
-        return derived() < rhs;
+    NEFORCE_NODISCARD constexpr bool operator<(const T& rhs) const noexcept(noexcept(derived().less_than(rhs))) {
+        return derived().less_than(rhs);
     }
 
     /**
@@ -122,8 +122,8 @@ public:
      *
      * 通过交换操作数并调用operator <来实现大于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator>(const T& rhs) const noexcept(noexcept(rhs < derived())) {
-        return rhs < derived();
+    NEFORCE_NODISCARD constexpr bool operator>(const T& rhs) const noexcept(noexcept(rhs.less_than(derived()))) {
+        return rhs.less_than(derived());
     }
 
     /**
@@ -133,8 +133,8 @@ public:
      *
      * 通过取反operator >的结果实现小于等于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator<=(const T& rhs) const noexcept(noexcept(!(derived() > rhs))) {
-        return !(derived() > rhs);
+    NEFORCE_NODISCARD constexpr bool operator<=(const T& rhs) const noexcept(noexcept(!(rhs.less_than(derived())))) {
+        return !(rhs.less_than(derived()));
     }
 
     /**
@@ -144,10 +144,40 @@ public:
      *
      * 通过取反operator <的结果实现大于等于比较。
      */
-    NEFORCE_NODISCARD constexpr bool operator>=(const T& rhs) const noexcept(noexcept(!(derived() < rhs))) {
-        return !(derived() < rhs);
+    NEFORCE_NODISCARD constexpr bool operator>=(const T& rhs) const noexcept(noexcept(!(derived().less_than(rhs)))) {
+        return !(derived().less_than(rhs));
     }
 };
+
+template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
+NEFORCE_NODISCARD constexpr bool operator==(const T& lhs, const T& rhs) {
+    return lhs.equal_to(rhs);
+}
+
+template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
+NEFORCE_NODISCARD constexpr bool operator!=(const T& lhs, const T& rhs) {
+    return !(lhs.equal_to(rhs));
+}
+
+template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
+NEFORCE_NODISCARD constexpr bool operator<(const T& lhs, const T& rhs) {
+    return lhs.less_than(rhs);
+}
+
+template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
+NEFORCE_NODISCARD constexpr bool operator>(const T& lhs, const T& rhs) {
+    return rhs.less_than(lhs);
+}
+
+template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
+NEFORCE_NODISCARD constexpr bool operator<=(const T& lhs, const T& rhs) {
+    return !(rhs.less_than(lhs));
+}
+
+template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
+NEFORCE_NODISCARD constexpr bool operator>=(const T& lhs, const T& rhs) {
+    return !(lhs.less_than(rhs));
+}
 
 
 /**
@@ -157,10 +187,10 @@ public:
  *
  * 这是一个便利类，同时继承自icomparable和ihashable，
  * 为派生类提供完整的比较和哈希支持。派生类需实现三个核心方法：
- * operator ==, operator < 和 to_hash()。
+ * equal_to(const T&), less_than(const T&) 和 to_hash()。
  */
 template <typename T>
-struct icommon : icomparable<T>, ihashable<T> {};
+struct icommon : public icomparable<T>, public ihashable<T> {};
 
 /** @} */ // CRTPInterfaces
 

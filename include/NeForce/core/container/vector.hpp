@@ -1220,7 +1220,7 @@ public:
      * @param rhs 右侧向量
      * @return 如果两个向量大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const vector& rhs) const
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const vector& rhs) const
             noexcept(noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))) {
         return size() == rhs.size() && _NEFORCE equal(cbegin(), cend(), rhs.cbegin());
     }
@@ -1230,7 +1230,7 @@ public:
      * @param rhs 右侧向量
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator<(const vector& rhs) const
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const vector& rhs) const
             noexcept(noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }

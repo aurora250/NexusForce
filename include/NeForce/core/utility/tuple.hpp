@@ -165,7 +165,7 @@ NEFORCE_END_INNER__
  * 表示不包含任何元素的元组，作为递归基类。
  */
 template <>
-struct tuple<> : icommon<tuple<>> {
+struct tuple<> : public icommon<tuple<>> {
     constexpr tuple() noexcept = default;             ///< 默认构造函数
     constexpr tuple(const tuple&) noexcept = default; ///< 拷贝构造函数
 
@@ -188,28 +188,12 @@ struct tuple<> : icommon<tuple<>> {
      * @brief 比较两个空元组的大小关系
      * @return 总是返回false
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_to(const tuple&) const noexcept { return false; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_than(const tuple&) const noexcept { return false; }
 
     /**
      * @brief 交换操作
      */
     NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void swap(tuple&) noexcept {}
-
-    /**
-     * @brief 相等比较运算符
-     * @return 总是返回true
-     */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool operator==(const tuple& rhs) const noexcept {
-        return this->equal_to(rhs);
-    }
-
-    /**
-     * @brief 小于比较运算符
-     * @return 总是返回false
-     */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool operator<(const tuple& rhs) const noexcept {
-        return this->less_to(rhs);
-    }
 
     /**
      * @brief 计算空元组的哈希值
@@ -229,7 +213,7 @@ struct tuple<> : icommon<tuple<>> {
  * 使用递归继承实现元组，每个元组包含当前元素和继承自剩余元素的元组。
  */
 template <typename This, typename... Rest>
-struct tuple<This, Rest...> : private tuple<Rest...>, icommon<tuple<This, Rest...>> {
+struct tuple<This, Rest...> : private tuple<Rest...>, public icommon<tuple<This, Rest...>> {
     using this_type = This;           ///< 当前元素类型
     using base_type = tuple<Rest...>; ///< 基类类型，即剩余元素的元组
 
@@ -245,7 +229,7 @@ private:
      * @return 计算得到的哈希值
      */
     template <typename Tuple, size_t... Idx>
-    static constexpr size_t __broaden_tuple(const Tuple& tup, _NEFORCE index_sequence<Idx...> idx) noexcept;
+    static constexpr size_t __broaden_tuple(const Tuple& tup, index_sequence<Idx...> idx) noexcept;
 
     template <typename... Args>
     friend struct tuple;
@@ -621,9 +605,16 @@ public:
      * @return 如果当前元组小于其他元组则返回true，否则返回false
      */
     template <typename... U>
-    NEFORCE_NODISCARD constexpr bool less_to(const tuple<U...>& rhs) const {
-        return data_ < rhs.data_ || (!(rhs.data_ < data_) && base_type::less_to(rhs.get_rest()));
+    NEFORCE_NODISCARD constexpr bool less_than(const tuple<U...>& rhs) const {
+        return data_ < rhs.data_ || (!(rhs.data_ < data_) && base_type::less_than(rhs.get_rest()));
     }
+
+    using icommon<tuple<This, Rest...>>::operator==;
+    using icommon<tuple<This, Rest...>>::operator!=;
+    using icommon<tuple<This, Rest...>>::operator<;
+    using icommon<tuple<This, Rest...>>::operator>;
+    using icommon<tuple<This, Rest...>>::operator<=;
+    using icommon<tuple<This, Rest...>>::operator>=;
 
     template <size_t Index, typename... Types>
     friend constexpr tuple_element_t<Index, Types...>& get(tuple<Types...>&) noexcept;
@@ -636,11 +627,6 @@ public:
 
     template <size_t Index, typename... Types>
     friend constexpr tuple_element_t<Index, Types...>&& pair_get_from_tuple(tuple<Types...>&&) noexcept;
-
-    /// 相等比较运算符
-    NEFORCE_NODISCARD constexpr bool operator==(const tuple& rhs) const noexcept { return this->equal_to(rhs); }
-    /// 小于比较运算符
-    NEFORCE_NODISCARD constexpr bool operator<(const tuple& rhs) const noexcept { return this->less_to(rhs); }
 
     /**
      * @brief 计算元组的哈希值

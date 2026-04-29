@@ -23,8 +23,8 @@ public:
     virtual bool equivalent(int code, const error_condition& condition) const noexcept;
     virtual bool equivalent(const error_code& code, int condition) const noexcept;
 
-    bool operator==(const error_category& rhs) const noexcept { return this == &rhs; }
-    bool operator<(const error_category& rhs) const noexcept { return less<const error_category*>()(this, &rhs); }
+    NEFORCE_NODISCARD bool equal_to(const error_category& rhs) const noexcept { return this == &rhs; }
+    NEFORCE_NODISCARD bool less_than(const error_category& rhs) const noexcept { return less<const error_category*>()(this, &rhs); }
 };
 
 

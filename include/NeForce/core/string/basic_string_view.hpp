@@ -1015,20 +1015,11 @@ public:
     }
 
     /**
-     * @brief 相等比较操作符
-     * @param rhs 右侧字符串视图
-     * @return 是否相等
-     */
-    NEFORCE_NODISCARD constexpr bool operator==(const basic_string_view& rhs) const noexcept {
-        return this->equal_to(rhs);
-    }
-
-    /**
      * @brief 小于比较操作符
      * @param rhs 右侧字符串视图
      * @return 是否小于
      */
-    NEFORCE_NODISCARD constexpr bool operator<(const basic_string_view& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const basic_string_view& rhs) const noexcept {
         return this->compare(rhs) < 0;
     }
 

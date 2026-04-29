@@ -67,7 +67,7 @@ NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
  * 表示一个可能包含值也可能为空的对象。类似于指针，但拥有值语义。
  */
 template <typename T>
-class optional : icommon<optional<T>> {
+class optional : public icommon<optional<T>> {
     static_assert(!is_any_of_v<remove_cv_t<T>, none_t, inplace_construct_tag>,
                   "optional do not contains none_t and inplace_construct_tag types.");
     static_assert(is_object_v<T> && !is_array_v<T>, "optional only contains non-array object types.");
@@ -740,7 +740,7 @@ public:
      * @param rhs 右操作数
      * @return 两个可选值是否相等
      */
-    constexpr bool operator==(const optional& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const optional& rhs) const noexcept {
         if (have_value_ != rhs.have_value_) {
             return false;
         }
@@ -755,7 +755,7 @@ public:
      * @param rhs 右操作数
      * @return 当前值是否小于右操作数值
      */
-    constexpr bool operator<(const optional& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool less_than(const optional& rhs) const noexcept {
         if (!have_value_ || !rhs.have_value_) {
             return false;
         }
@@ -816,7 +816,7 @@ public:
  * 对存储引用的optional的任何赋值行为都被定义为更新引用位置，而非更新引用的地址的值，这是optional<T&>两种设计方式中的一种
  */
 template <typename T>
-class optional<T&> : icommon<optional<T&>> {
+class optional<T&> : public icommon<optional<T&>> {
     static_assert(is_object_v<T> && !is_array_v<T>, "optional<T&> requires T to be an object type.");
 
 public:
@@ -1253,7 +1253,7 @@ public:
      * @param rhs 右操作数
      * @return 两个可选值是否相等
      */
-    constexpr bool operator==(const optional& rhs) const noexcept {
+    constexpr bool equal_to(const optional& rhs) const noexcept {
         if (ptr_ == nullptr || rhs.ptr_ == nullptr) {
             return ptr_ == rhs.ptr_;
         }
@@ -1265,7 +1265,7 @@ public:
      * @param rhs 右操作数
      * @return 当前值是否小于右操作数值
      */
-    constexpr bool operator<(const optional& rhs) const noexcept { return ptr_ && rhs.ptr_ && *ptr_ < *rhs.ptr_; }
+    constexpr bool less_than(const optional& rhs) const noexcept { return ptr_ && rhs.ptr_ && *ptr_ < *rhs.ptr_; }
 
     constexpr bool operator==(none_t) const noexcept { return ptr_ == nullptr; }
     constexpr bool operator!=(none_t) const noexcept { return ptr_ != nullptr; }

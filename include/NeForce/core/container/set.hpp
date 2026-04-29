@@ -414,7 +414,7 @@ public:
      * @param rhs 右侧set
      * @return 如果两个set大小相等且对应元素相等返回true
      */
-    NEFORCE_NODISCARD bool operator==(const set& rhs) const noexcept(noexcept(tree_ == rhs.tree_)) {
+    NEFORCE_NODISCARD bool equal_to(const set& rhs) const noexcept(noexcept(tree_ == rhs.tree_)) {
         return tree_ == rhs.tree_;
     }
 
@@ -423,7 +423,7 @@ public:
      * @param rhs 右侧set
      * @return 按字典序比较结果
      */
-    NEFORCE_NODISCARD bool operator<(const set& rhs) const noexcept(noexcept(tree_ < rhs.tree_)) {
+    NEFORCE_NODISCARD bool less_than(const set& rhs) const noexcept(noexcept(tree_ < rhs.tree_)) {
         return tree_ < rhs.tree_;
     }
 };
