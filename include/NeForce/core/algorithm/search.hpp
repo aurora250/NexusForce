@@ -105,11 +105,11 @@ constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value, Co
         middle = first;
         _NEFORCE advance(middle, half);
         if (comp(value, *middle)) {
+            len = half;
+        } else {
             first = middle;
             ++first;
             len = len - half - 1;
-        } else {
-            len = half;
         }
     }
     return first;
@@ -124,11 +124,11 @@ constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value, Co
  * @param value 要查找的值
  * @return 指向第一个大于value的元素的迭代器，或last如果未找到
  *
- * 使用默认的greater比较器执行upper_bound查找。
+ * 使用默认的less比较器执行upper_bound查找。
  */
 template <typename Iterator, typename T>
 constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value) {
-    return _NEFORCE upper_bound(first, last, value, _NEFORCE greater<iter_value_t<Iterator>>());
+    return _NEFORCE upper_bound(first, last, value, _NEFORCE less<iter_value_t<Iterator>>());
 }
 
 /**
@@ -184,7 +184,6 @@ constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Ite
         if (comp(*first2, *first1)) {
             return false;
         }
-
         if (comp(*first1, *first2)) {
             ++first1;
         } else {
@@ -485,7 +484,7 @@ constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, 
     static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>,
                   "Iterator must be forward_iterator");
 
-    const auto d1 = _NEFORCE distance(first1, last1);
+    auto d1 = _NEFORCE distance(first1, last1);
     const auto d2 = _NEFORCE distance(first2, last2);
     if (d1 < d2) {
         return last1;
@@ -540,6 +539,10 @@ template <typename Iterator, typename T>
 constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T& value) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
+    if (count == 0) {
+        return first;
+    }
+
     first = _NEFORCE find(first, last, value);
     while (first != last) {
         size_t n = count - 1;
@@ -574,6 +577,10 @@ template <typename Iterator, typename T, typename BinaryPredicate>
 constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T& value,
                             BinaryPredicate binary_pred) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
+    if (count == 0) {
+        return first;
+    }
 
     while (first != last) {
         if (binary_pred(*first, value)) {

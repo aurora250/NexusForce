@@ -236,6 +236,24 @@ private:
         return variant::try_construct_impl<I>(_NEFORCE forward<Args>(args)...);
     }
 
+    template <typename T, typename U>
+    static NEFORCE_CONSTEXPR20 enable_if_t<is_same_v<T, U>, bool> equal_to_impl(const T& lhs, const U& rhs) {
+        return lhs == rhs;
+    }
+    template <typename T, typename U>
+    static NEFORCE_CONSTEXPR20 enable_if_t<!is_same_v<T, U>, bool> equal_to_impl(const T&, const U&) {
+        return false;
+    }
+
+    template <typename T, typename U>
+    static NEFORCE_CONSTEXPR20 enable_if_t<is_same_v<T, U>, bool> less_than_impl(const T& lhs, const U& rhs) {
+        return lhs < rhs;
+    }
+    template <typename T, typename U>
+    static NEFORCE_CONSTEXPR20 enable_if_t<!is_same_v<T, U>, bool> less_than_impl(const T&, const U&) {
+        return false;
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -324,7 +342,7 @@ public:
      */
     template <size_t Idx, typename... Args,
               enable_if_t<is_constructible_v<variant_alternative_t<variant, Idx>, Args...>, int> = 0>
-    NEFORCE_CONSTEXPR20 explicit variant(inplace_construct_tag, Args&&... args) noexcept(
+    NEFORCE_CONSTEXPR20 explicit variant(pass_size_construct_tag<Idx>, Args&&... args) noexcept(
             is_nothrow_constructible_v<variant_alternative_t<variant, Idx>, Args...>) :
     index_(Idx) {
         new (union_) variant_alternative_t<variant, Idx>(_NEFORCE forward<Args>(args)...);
@@ -344,7 +362,7 @@ public:
               enable_if_t<is_constructible_v<variant_alternative_t<variant, Idx>, std::initializer_list<U>&, Args...>,
                           int> = 0>
     NEFORCE_CONSTEXPR20 explicit variant(
-            inplace_construct_tag, std::initializer_list<U> ilist,
+            pass_size_construct_tag<Idx>, std::initializer_list<U> ilist,
             Args&&... args) noexcept(is_nothrow_constructible_v<variant_alternative_t<variant, Idx>,
                                                                 std::initializer_list<U>&, Args...>) :
     index_(Idx) {
@@ -582,7 +600,7 @@ public:
             return false;
         }
         return this->visit([&](const auto& value) {
-            return rhs.visit([&](const auto& other_value) { return value == other_value; });
+            return rhs.visit([&](const auto& other_value) { return variant::equal_to_impl(value, other_value); });
         });
     }
 
@@ -596,7 +614,7 @@ public:
             return false;
         }
         return this->visit([&](const auto& value) {
-            return rhs.visit([&](const auto& other_value) { return value < other_value; });
+            return rhs.visit([&](const auto& other_value) { return variant::less_than_impl(value, other_value); });
         });
     }
 

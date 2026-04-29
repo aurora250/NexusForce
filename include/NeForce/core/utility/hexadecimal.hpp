@@ -52,13 +52,22 @@ public:
         return invalid_xdigit;
     }
 
+    /**
+     * @brief 将两个十六进制数字字符转换为对应的字节值。
+     * @param high 高半字节十六进制字符（'0'-'9', 'A'-'F', 'a'-'f'）
+     * @param low  低半字节十六进制字符（'0'-'9', 'A'-'F', 'a'-'f'）
+     * @return pair<bool, byte_t>
+     *         - `first`: `true` 表示转换成功，`false` 表示存在非法字符。
+     *         - `second`: 转换成功时为 `(xdigit_value(high) << 4) | xdigit_value(low)` 的字节值；
+     *                     失败时为 #invalid_xdigit。
+     */
     static NEFORCE_CONSTEXPR20 pair<bool, byte_t> xdigit_value(const char high, const char low) noexcept {
         const byte_t xhigh = xdigit_value(high);
         const byte_t xlow = xdigit_value(low);
         if (xhigh == invalid_xdigit || xlow == invalid_xdigit) {
             return {false, invalid_xdigit};
         }
-        return pair<bool, byte_t>{true, high << 4 | low};
+        return pair<bool, byte_t>{true, xhigh << 4 | xlow};
     }
 
 private:

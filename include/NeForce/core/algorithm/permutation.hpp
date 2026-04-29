@@ -44,50 +44,49 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Iterator1, typename Iterator2, typename BinaryPred>
 constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPred pred) {
-    static_assert(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>,
-                  "Iterator must be bidirectional_iterator");
-
-    const auto len1 = _NEFORCE distance(first1, last1);
-    const auto len2 = _NEFORCE distance(first2, last2);
-    if (len1 != len2) {
-        return false;
-    }
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>,
+                  "Iterator must be forward_iterator");
 
     for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
         if (!pred(*first1, *first2)) {
             break;
         }
     }
-    if (first1 == last1) {
+
+    if (first1 == last1 && first2 == last2) {
         return true;
+    }
+    if (first1 == last1 || first2 == last2) {
+        return false;
     }
 
     for (Iterator1 i = first1; i != last1; ++i) {
-        bool is_repeated = false;
+        bool already_counted = false;
         for (Iterator1 j = first1; j != i; ++j) {
             if (pred(*j, *i)) {
-                is_repeated = true;
+                already_counted = true;
                 break;
             }
         }
-        if (!is_repeated) {
-            size_t c2 = 0;
+        if (!already_counted) {
+            size_t cnt2 = 0;
             for (Iterator2 j = first2; j != last2; ++j) {
                 if (pred(*i, *j)) {
-                    ++c2;
+                    ++cnt2;
                 }
             }
-            if (c2 == 0) {
+            if (cnt2 == 0) {
                 return false;
             }
-            size_t c1 = 1;
+
+            size_t cnt1 = 1;
             Iterator1 j = i;
             for (++j; j != last1; ++j) {
                 if (pred(*i, *j)) {
-                    ++c1;
+                    ++cnt1;
                 }
             }
-            if (c1 != c2) {
+            if (cnt1 != cnt2) {
                 return false;
             }
         }
@@ -107,7 +106,7 @@ constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first
  */
 template <typename Iterator1, typename Iterator2>
 constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
-    return _NEFORCE is_permutation(first1, last1, first2, last2, _NEFORCE equal_to<iter_value_t<Iterator1>>());
+    return _NEFORCE is_permutation(first1, last1, first2, last2, _NEFORCE equal_to<>());
 }
 
 /**
@@ -169,7 +168,7 @@ constexpr bool next_permutation(Iterator first, Iterator last, Compare comp) {
  */
 template <typename Iterator>
 constexpr bool next_permutation(Iterator first, Iterator last) {
-    return _NEFORCE next_permutation(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+    return _NEFORCE next_permutation(first, last, _NEFORCE less<>());
 }
 
 /**
@@ -231,7 +230,7 @@ constexpr bool prev_permutation(Iterator first, Iterator last, Compare comp) {
  */
 template <typename Iterator>
 constexpr bool prev_permutation(Iterator first, Iterator last) {
-    return _NEFORCE prev_permutation(first, last, _NEFORCE less<iter_value_t<Iterator>>());
+    return _NEFORCE prev_permutation(first, last, _NEFORCE less<>());
 }
 
 /** @} */ // PermutationAlgorithms

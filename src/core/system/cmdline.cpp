@@ -49,7 +49,7 @@ void cmdline::parse_os_args() {
     parse(args);
 }
 
-void cmdline::parse(const int argc, char* argv[]) {
+void cmdline::parse(const int argc, const char* argv[]) {
     vector<string> args;
     for (int i = 0; i < argc; ++i) {
         args.push_back(argv[i]);
@@ -87,12 +87,18 @@ void cmdline::parse(const vector<string>& args) {
 
 string cmdline::get(const string& long_name, const size_t index) const {
     const auto it = options_long_.find(long_name);
-    if (it == options_long_.end() || index >= it->second->values.size()) {
+
+    if (it == options_long_.end()) {
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option not found: " + long_name).data()));
+    }
+
+    if (index >= it->second->values.size()) {
         if (!it->second->default_value.empty()) {
             return it->second->default_value;
         }
-        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option not found or no value: " + long_name).data()));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("No value for option: " + long_name).data()));
     }
+
     return it->second->values[index];
 }
 

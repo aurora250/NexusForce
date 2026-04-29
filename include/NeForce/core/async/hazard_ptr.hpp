@@ -97,7 +97,7 @@ public:
  *
  * 包装需要回收的对象，包含自定义删除器。
  */
-template <typename T, typename Deleter = default_delete<void>>
+template <typename T, typename Deleter = default_deleter<void>>
 class hazard_pointer_obj final : public hazard_pointer_obj_base {
     T* ptr;          ///< 实际对象指针
     Deleter deleter; ///< 删除器
@@ -276,7 +276,7 @@ public:
      *
      * 将对象添加到当前线程的退役列表，如果列表大小超过阈值则触发回收。
      */
-    template <typename T, typename Deleter = default_delete<T>>
+    template <typename T, typename Deleter = default_deleter<T>>
     void retire(T* ptr, Deleter deleter = Deleter()) {
         if (!ptr) {
             return;

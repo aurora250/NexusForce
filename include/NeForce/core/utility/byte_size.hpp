@@ -9,9 +9,7 @@
  * 字符串解析和格式化输出。支持二进制和十进制两种标准。
  */
 
-#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/interface/iobject.hpp"
-#include "NeForce/core/string/format.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -149,14 +147,14 @@ public:
      * @brief 字节大小单位枚举
      */
     enum class unit {
-        AUTO, ///< 自动选择合适单位
-        B,    ///< 字节
-        KB,   ///< 千字节
-        MB,   ///< 兆字节
-        GB,   ///< 吉字节
-        TB,   ///< 太字节
-        PB,   ///< 拍字节
-        EB    ///< 艾字节
+        B,   ///< 字节
+        KB,  ///< 千字节
+        MB,  ///< 兆字节
+        GB,  ///< 吉字节
+        TB,  ///< 太字节
+        PB,  ///< 拍字节
+        EB,  ///< 艾字节
+        AUTO ///< 自动选择合适单位
     };
 
 private:

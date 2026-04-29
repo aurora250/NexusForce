@@ -9,6 +9,7 @@
  * 用于将两个已排序的序列合并成一个有序序列。
  */
 
+#include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/memory/temporary_buffer.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -49,8 +50,9 @@ NEFORCE_BEGIN_NAMESPACE__
 template <typename Iterator1, typename Iterator2, typename Iterator3, typename Compare>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result,
                           Compare comp) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
-                  "Iterator must be forward_iterator");
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2> &&
+                          is_ranges_input_iter_v<Iterator3>,
+                  "Iterator must be input_iterator");
 
     while (first1 != last1 && first2 != last2) {
         if (comp(*first2, *first1)) {
@@ -79,7 +81,7 @@ constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, I
  */
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
-    return _NEFORCE merge(first1, last1, first2, last2, result, _NEFORCE less<iter_value_t<Iterator1>>());
+    return _NEFORCE merge(first1, last1, first2, last2, result, _NEFORCE less<>());
 }
 
 /// @cond
@@ -248,6 +250,29 @@ constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator
     }
 }
 
+template <typename Iterator, typename Compare>
+NEFORCE_CONSTEXPR20 enable_if_t<is_ranges_rnd_iter_v<Iterator>>
+__inplace_merge_dispatch(Iterator first, Iterator middle, Iterator last, iter_difference_t<Iterator> len1,
+                         iter_difference_t<Iterator> len2, Compare comp) {
+    inner::__merge_without_buffer_aux(first, middle, last, len1, len2, comp);
+    return;
+}
+
+template <typename Iterator, typename Compare>
+NEFORCE_CONSTEXPR20 enable_if_t<!is_ranges_rnd_iter_v<Iterator>>
+__inplace_merge_dispatch(Iterator first, Iterator middle, Iterator last, iter_difference_t<Iterator> len1,
+                         iter_difference_t<Iterator> len2, Compare comp) {
+    temporary_buffer<Iterator> buffer;
+    try {
+        buffer = temporary_buffer<Iterator>(first, last);
+    } catch (...) {
+        inner::__merge_without_buffer_aux(first, middle, last, len1, len2, comp);
+        return;
+    }
+    inner::__merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
+    return;
+}
+
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -274,12 +299,7 @@ NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator
     }
     auto len1 = _NEFORCE distance(first, middle);
     auto len2 = _NEFORCE distance(middle, last);
-    try {
-        temporary_buffer<Iterator> buffer(first, last);
-        inner::__merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
-    } catch (...) {
-        inner::__merge_without_buffer_aux(first, middle, last, len1, len2, comp);
-    }
+    inner::__inplace_merge_dispatch(first, middle, last, len1, len2, comp);
 }
 
 /**
@@ -291,7 +311,7 @@ NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator
  */
 template <typename Iterator>
 NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last) {
-    return _NEFORCE inplace_merge(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
+    return _NEFORCE inplace_merge(first, middle, last, _NEFORCE less<>());
 }
 
 /** @} */ // MergeAlgorithms

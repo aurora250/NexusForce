@@ -99,7 +99,7 @@ byte_size::byte_size(const decimal_t value, const unit u, const bool binary) {
         NEFORCE_THROW_EXCEPTION(value_exception("Memory size exceeds maximum representable value"));
     }
 
-    bytes_ = static_cast<uint64_t>(_NEFORCE round(bytes));
+    bytes_ = static_cast<uint64_t>(bytes + static_cast<decimal_t>(0.5));
 }
 
 byte_size byte_size::parse(string_view str, const bool binary) {
@@ -146,12 +146,13 @@ decimal_t byte_size::as(const unit u, const bool binary) const {
 }
 
 string byte_size::to_string(const unit u, const int precision, const bool binary) const {
-    const string fmt = "{" + format(":.{}f", precision) + "} {}";
-
     if (u == unit::AUTO) {
         if (bytes_ == 0) {
-            return "0 B";
+            const string fmt = "{" + format(":.{}f", precision) + "} B";
+            return format(fmt.view(), static_cast<decimal_t>(0));
         }
+
+        const string fmt = "{" + format(":.{}f", precision) + "} {}";
         const uint64_t base = binary ? 1024 : 1000;
         auto val = static_cast<decimal_t>(bytes_);
         auto current_unit = unit::B;
@@ -169,6 +170,7 @@ string byte_size::to_string(const unit u, const int precision, const bool binary
         return format(fmt.view(), val, unit_to_string(current_unit));
     }
 
+    const string fmt = "{" + format(":.{}f", precision) + "} {}";
     const decimal_t val = as(u, binary);
     return format(fmt.view(), val, unit_to_string(u));
 }

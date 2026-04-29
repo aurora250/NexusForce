@@ -1,7 +1,18 @@
-#include "test.h"
-
+#include <NeForce/NeForce.hpp>
+using namespace neforce;
 using namespace neforce::http;
 
+namespace {
+    const neforce::path& res_root() {
+        static neforce::path res_root
+#ifdef NEFORCE_PLATFORM_WINDOWS
+                {R"(D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
+#elif defined(NEFORCE_PLATFORM_LINUX)
+                {R"(/media/huenqi/Programming/Workspace/Cpp Workspace/CLine Workspace/NexusForce-Linux/tests/resource)"};
+#endif
+        return res_root;
+    }
+} // namespace
 
 void handle_session_api(http_request& request, http_response& response, http_server& server) {
     http_session* sess = server.get_session(request);

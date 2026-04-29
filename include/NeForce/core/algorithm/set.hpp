@@ -45,8 +45,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 set_union(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
-                  "Iterator must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator1>, "Iterator1 must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator2>, "Iterator2 must be forward_iterator");
+    static_assert(is_iter_v<Iterator3>, "Iterator3 must be iterator");
 
     while (first1 != last1 && first2 != last2) {
         if (*first1 < *first2) {
@@ -83,13 +84,14 @@ constexpr Iterator3 set_union(Iterator1 first1, Iterator1 last1, Iterator2 first
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 set_intersection(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,
                                      Iterator3 result) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
-                  "Iterator must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator1>, "Iterator1 must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator2>, "Iterator2 must be forward_iterator");
+    static_assert(is_iter_v<Iterator3>, "Iterator3 must be iterator");
 
     while (first1 != last1 && first2 != last2) {
         if (*first1 < *first2) {
             ++first1;
-        } else if (*first2 < first1) {
+        } else if (*first2 < *first1) {
             ++first2;
         } else {
             *result = *first1;
@@ -119,15 +121,16 @@ constexpr Iterator3 set_intersection(Iterator1 first1, Iterator1 last1, Iterator
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 set_difference(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,
                                    Iterator3 result) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
-                  "Iterator must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator1>, "Iterator1 must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator2>, "Iterator2 must be forward_iterator");
+    static_assert(is_iter_v<Iterator3>, "Iterator3 must be iterator");
 
     while (first1 != last1 && first2 != last2) {
         if (*first1 < *first2) {
             *result = *first1;
             ++first1;
             ++result;
-        } else if (*first2 < first1) {
+        } else if (*first2 < *first1) {
             ++first2;
         } else {
             ++first1;
@@ -156,17 +159,18 @@ constexpr Iterator3 set_difference(Iterator1 first1, Iterator1 last1, Iterator2 
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 set_symmetric_difference(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,
                                              Iterator3 result) {
-    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
-                  "Iterator must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator1>, "Iterator1 must be forward_iterator");
+    static_assert(is_ranges_fwd_iter_v<Iterator2>, "Iterator2 must be forward_iterator");
+    static_assert(is_iter_v<Iterator3>, "Iterator3 must be iterator");
 
     while (first1 != last1 && first2 != last2) {
         if (*first1 < *first2) {
             *result = *first1;
             ++first1;
             ++result;
-        } else if (*first2 < first1) {
+        } else if (*first2 < *first1) {
             *result = *first2;
-            ++first1;
+            ++first2;
             ++result;
         } else {
             ++first1;

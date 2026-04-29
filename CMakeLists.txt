@@ -34,6 +34,7 @@ string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
 string(JSON CONFIG_BUILD_EXAMPLES    GET ${JSON_CONTENT} build examples)
 string(JSON CONFIG_BUILD_DOCS        GET ${JSON_CONTENT} build docs)
+string(JSON CONFIG_BUILD_COVERAGE    GET ${JSON_CONTENT} build coverage)
 
 
 set(NEXUSFORCE_VERSION_MAJOR 1)
@@ -126,6 +127,7 @@ option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                    ${CONFI
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
 option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
+option(NEXUSFORCE_BUILD_COVERAGE    "Build coverage analysis "           ${CONFIG_BUILD_COVERAGE})
 
 option(NEXUSFORCE_FORMAT            "Enable clang-format code formatting"   ON)
 option(NEXUSFORCE_CLANG_TIDY        "Enable clang-tidy static analysis"     ON)
@@ -152,6 +154,7 @@ message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")
 message(STATUS "  NEXUSFORCE_BUILD_DOCS:          ${NEXUSFORCE_BUILD_DOCS}")
+message(STATUS "  NEXUSFORCE_BUILD_COVERAGE:      ${NEXUSFORCE_BUILD_COVERAGE}")
 message(STATUS "")
 
 
@@ -187,6 +190,7 @@ set(PACKAGE_VERSION_VARS
         NEXUSFORCE_ENABLE_ZLIB
         NEXUSFORCE_ENABLE_LZ4
         NEXUSFORCE_USING_SSO
+        NEXUSFORCE_USING_INTEL_TSX
 )
 
 foreach(_var ${PACKAGE_VERSION_VARS})

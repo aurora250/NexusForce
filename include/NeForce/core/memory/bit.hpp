@@ -373,7 +373,7 @@ NEFORCE_CONSTEXPR14 uint64_t rotate_r64(const uint64_t x, const int s) noexcept 
  *
  * 根据平台位数调用相应的循环左移函数。
  */
-NEFORCE_CONSTEXPR14 int rotate_l(const uintptr_t x, const int s) noexcept {
+NEFORCE_CONSTEXPR14 uintptr_t rotate_l(const uintptr_t x, const int s) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
     return rotate_l64(x, s);
 #else
@@ -389,7 +389,7 @@ NEFORCE_CONSTEXPR14 int rotate_l(const uintptr_t x, const int s) noexcept {
  *
  * 根据平台位数调用相应的循环右移函数。
  */
-NEFORCE_CONSTEXPR14 int rotate_r(const uintptr_t x, const int s) noexcept {
+NEFORCE_CONSTEXPR14 uintptr_t rotate_r(const uintptr_t x, const int s) noexcept {
 #ifdef NEFORCE_ARCH_BITS_64
     return rotate_r64(x, s);
 #else

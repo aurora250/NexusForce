@@ -54,7 +54,7 @@ public:
         } catch (...) {
             return false;
         }
-        *this = _NEFORCE move(tmp);
+        static_cast<T&>(*this) = _NEFORCE move(tmp);
         return true;
     }
 };

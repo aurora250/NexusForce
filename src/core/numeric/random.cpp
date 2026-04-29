@@ -15,7 +15,6 @@
 #    ifdef min
 #        undef min
 #    endif
-#    include <NeForce/core/config/msvc_intrinsic.hpp>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <sys/random.h>
@@ -24,19 +23,6 @@
 #    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
-
-uint64_t mul128_high(uint64_t a, uint64_t b, uint64_t* lo_out) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    uint64_t hi = 0;
-    *lo_out = _umul128(a, b, &hi);
-    return hi;
-#else
-    const __uint128_t m = static_cast<__uint128_t>(a) * b;
-    *lo_out = static_cast<uint64_t>(m);
-    return static_cast<uint64_t>(m >> 64);
-#endif
-}
-
 
 random_lcd::random_lcd() noexcept :
 seed_(static_cast<seed_type>(timestamp::now().value())) {}

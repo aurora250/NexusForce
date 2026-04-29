@@ -76,62 +76,84 @@ constexpr Iterator partition(Iterator first, Iterator last, Predicate pred) {
     }
 }
 
+/// @cond
+NEFORCE_BEGIN_INNER__
+
+template <typename Iterator, typename Compare>
+constexpr Iterator median_iter(Iterator a, Iterator b, Iterator c, Compare comp) {
+    if (comp(*a, *b)) {
+        if (comp(*b, *c)) {
+            return b;
+        } else if (comp(*a, *c)) {
+            return c;
+        } else {
+            return a;
+        }
+    } else {
+        if (comp(*a, *c)) {
+            return a;
+        } else if (comp(*b, *c)) {
+            return c;
+        } else {
+            return b;
+        }
+    }
+}
+
+NEFORCE_END_INNER__
+/// @endcond
+
 /**
- * @brief Lomuto分区算法
+ * @brief Lomuto 分区算法（基准值归位）
  * @tparam Iterator 随机访问迭代器类型
- * @tparam T 基准值类型
  * @tparam Compare 比较函数类型
  * @param first 范围起始
  * @param last 范围结束
- * @param pivot 基准值
  * @param comp 比较函数对象
- * @return 指向基准值最终位置的迭代器
+ * @return 基准值最终的迭代器位置
  *
- * Lomuto分区算法，常用于快速排序。
- * 将范围重新排列，使得所有小于基准值的元素出现在基准值之前或等于基准值的元素之前，
- * 所有大于基准值的元素出现在基准值之后。
- *
- * 算法步骤：
- * 1. 从两端向中间扫描
- * 2. 从左找到第一个不小于基准值的元素
- * 3. 从右找到第一个不大于基准值的元素
- * 4. 交换这两个元素
- * 5. 重复直到指针相遇
+ * 选择 first、mid、last-1 的中位数作为基准值，将其交换到 first，
+ * 使用 Lomuto 方案分区，最后将基准值放置到正确位置并返回。
  */
-template <typename Iterator, typename T, typename Compare>
-constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivot, Compare comp) {
+template <typename Iterator, typename Compare>
+constexpr Iterator lomuto_partition(Iterator first, Iterator last, Compare comp) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
-    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
 
-    while (first < last) {
-        while (comp(*first, pivot)) {
-            ++first;
-        }
-        --last;
-        while (comp(pivot, *last)) {
-            --last;
-        }
-        if (!(first < last)) {
-            break;
-        }
-        _NEFORCE iter_swap(first, last);
-        ++first;
+    if (last - first < 2) {
+        return first;
     }
-    return first;
+
+    Iterator mid = first + (last - first) / 2;
+    Iterator piv_iter = inner::median_iter(first, mid, last - 1, comp);
+    _NEFORCE iter_swap(first, piv_iter);
+    auto pivot = *first;
+
+    Iterator i = first + 1;
+    Iterator j = first;
+
+    while (i != last) {
+        if (comp(*i, pivot)) {
+            ++j;
+            if (i != j) {
+                _NEFORCE iter_swap(i, j);
+            }
+        }
+        ++i;
+    }
+    _NEFORCE iter_swap(first, j);
+    return j;
 }
 
 /**
- * @brief Lomuto分区算法
+ * @brief Lomuto 分区算法（基准值归位）
  * @tparam Iterator 随机访问迭代器类型
- * @tparam T 基准值类型
  * @param first 范围起始
  * @param last 范围结束
- * @param pivot 基准值
- * @return 指向第一部分结束位置的迭代器
+ * @return 基准值最终的迭代器位置
  */
-template <typename Iterator, typename T>
-constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivot) {
-    return _NEFORCE lomuto_partition(first, last, pivot);
+template <typename Iterator>
+constexpr Iterator lomuto_partition(Iterator first, Iterator last) {
+    return _NEFORCE lomuto_partition(first, last, less<>{});
 }
 
 /** @} */ // PartitionAlgorithms

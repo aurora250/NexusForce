@@ -86,7 +86,7 @@ public:
      * 转移所有权，原守卫对象被释放。
      */
     scope_exit(scope_exit&& rhs) noexcept(is_nothrow_move_constructible_v<Func>) :
-    func_pair_(move(rhs.func_pair_)) {
+    func_pair_(_NEFORCE move(rhs.func_pair_)) {
         rhs.release();
     }
 
@@ -167,7 +167,7 @@ public:
      * @param rhs 要移动的守卫对象
      */
     scope_fail(scope_fail&& rhs) noexcept :
-    func_pair_(move(rhs.func_pair_)) {
+    func_pair_(_NEFORCE move(rhs.func_pair_)) {
         rhs.release();
     }
 
@@ -248,7 +248,7 @@ public:
      * @param rhs 要移动的守卫对象
      */
     scope_success(scope_success&& rhs) noexcept(is_nothrow_move_assignable_v<Func>) :
-    func_pair_(move(rhs.func_pair_)) {
+    func_pair_(_NEFORCE move(rhs.func_pair_)) {
         rhs.release();
     }
 

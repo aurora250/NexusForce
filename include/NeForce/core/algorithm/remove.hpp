@@ -103,8 +103,15 @@ constexpr Iterator remove(Iterator first, Iterator last, const T& value) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
     first = _NEFORCE find(first, last, value);
-    Iterator next = first;
-    return first == last ? first : _NEFORCE remove_copy(++next, last, first, value);
+    if (first != last) {
+        for (Iterator i = first; ++i != last;) {
+            if (!(*i == value)) {
+                *first = _NEFORCE move(*i);
+                ++first;
+            }
+        }
+    }
+    return first;
 }
 
 /**
@@ -127,8 +134,15 @@ constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
 
     first = _NEFORCE find_if(first, last, pred);
-    Iterator next = first;
-    return first == last ? first : _NEFORCE remove_copy_if(++next, last, first, pred);
+    if (first != last) {
+        for (Iterator i = first; ++i != last;) {
+            if (!pred(*i)) {
+                *first = _NEFORCE move(*i);
+                ++first;
+            }
+        }
+    }
+    return first;
 }
 
 /**
@@ -143,16 +157,14 @@ constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
  * 此操作会实际删除元素，容器大小会改变。
  *
  * @note 要求容器提供 begin(), end(), erase() 方法
- * @note 值类型 U 必须与容器的元素类型相同
  */
 template <typename Container, typename U>
 constexpr size_t erase(Container& cont, const U& value) {
-    static_assert(declval<decltype(*cont.begin())>().operator==(declval<U>()),
-                  "U must be comparable to the value type of Container");
+    using value_type = typename Container::value_type;
 
     const auto old_size = cont.size();
     const auto end = cont.end();
-    auto removed = _NEFORCE remove_if(cont.begin(), end, [&value](const auto& iter) { return *iter == value; });
+    auto removed = _NEFORCE remove_if(cont.begin(), end, [&value](const value_type& iter) { return iter == value; });
     cont.erase(removed, end);
     return old_size - cont.size();
 }
@@ -173,10 +185,12 @@ constexpr size_t erase(Container& cont, const U& value) {
  */
 template <typename Container, typename Predicate>
 constexpr size_t erase_if(Container& cont, Predicate pred) {
+    using value_type = typename Container::value_type;
+
     const size_t old_size = cont.size();
     const auto end = cont.end();
-    auto removed = _NEFORCE remove_if(cont.begin(), end,
-                                      [ref_pred = _NEFORCE ref(pred)](const auto& iter) { return ref_pred(*iter); });
+    auto removed = _NEFORCE remove_if(
+            cont.begin(), end, [ref_pred = _NEFORCE ref(pred)](const value_type& iter) { return ref_pred(iter); });
     cont.erase(removed, end);
     return old_size - cont.size();
 }

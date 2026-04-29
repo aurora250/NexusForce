@@ -203,7 +203,7 @@ NEFORCE_CONSTEXPR20 void push_heap_aux(Iterator first, iter_difference_t<Iterato
         hole_index = parent;
         parent = (hole_index - 1) / 2;
     }
-    *(first + hole_index) = value;
+    *(first + hole_index) = _NEFORCE move(value);
 }
 
 /**
@@ -390,9 +390,6 @@ NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last) {
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp) {
-    if (last - first < 2) {
-        return;
-    }
     const auto len = last - first;
     if (len < 2) {
         return;

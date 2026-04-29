@@ -141,8 +141,9 @@ struct __smart_ptr_counter_impl final : __smart_ptr_counter {
     explicit __smart_ptr_counter_impl(T* ptr) noexcept(is_nothrow_default_constructible_v<Deleter>) :
     ptr_pair_(default_construct_tag{}, ptr) {}
 
-    explicit __smart_ptr_counter_impl(T* ptr, Deleter&& deleter) noexcept(is_nothrow_move_constructible_v<Deleter>) :
-    ptr_pair_(exact_arg_construct_tag{}, _NEFORCE move(deleter), ptr) {}
+    template <typename Del = Deleter, enable_if_t<is_constructible_v<Deleter, Del>, int> = 0>
+    explicit __smart_ptr_counter_impl(T* ptr, Del&& deleter) noexcept(is_nothrow_constructible_v<Deleter, Del>) :
+    ptr_pair_(exact_arg_construct_tag{}, _NEFORCE forward<Del>(deleter), ptr) {}
 
     void delete_object() override {
         ptr_pair_.get_base()(ptr_pair_.value);
@@ -277,7 +278,7 @@ private:
     using owner_deleter = inner::__smart_ptr_counter_impl<U, Deleter>;
 
     template <typename U>
-    using owner_default = inner::__smart_ptr_counter_impl<U, default_delete<U>>;
+    using owner_default = inner::__smart_ptr_counter_impl<U, default_deleter<U>>;
 
     element_type* ptr_ = nullptr; ///< 管理的对象指针
     owner_type* owner_ = nullptr; ///< 控制块指针
@@ -320,7 +321,7 @@ public:
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr(U* ptr) :
     ptr_(ptr),
-    owner_(new owner_default<U>(ptr_)) {
+    owner_(new owner_default<U>(ptr)) {
         inner::__setup_enable_shared_from(ptr_, owner_);
     }
 
@@ -732,6 +733,7 @@ protected:
      */
     enable_shared_from_this() noexcept {}
 
+public:
     /**
      * @brief 获取指向自身的共享指针
      * @return 指向当前对象的共享指针
@@ -829,7 +831,7 @@ enable_if_t<is_unbounded_array_v<T>, shared_ptr<T>> make_shared(const size_t len
     value* tmp = nullptr;
     try {
         tmp = new value[len];
-        return shared_ptr<T[]>(tmp, default_delete<value[]>{});
+        return shared_ptr<value[]>(tmp, default_deleter<value[]>{});
     } catch (...) {
         operator delete[](tmp);
         NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr construction failed."));

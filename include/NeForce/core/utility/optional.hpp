@@ -194,7 +194,7 @@ public:
      * @param other 源可选值
      */
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
-                                              is_convertible_v<const U&, T> && convertible_from_optional<U>::value,
+                                              is_convertible_v<const U&, T> && !convertible_from_optional<U>::value,
                                       int> = 0>
     constexpr optional(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (other) {
@@ -209,7 +209,7 @@ public:
      * @param other 源可选值
      */
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
-                                              !is_convertible_v<const U&, T> && convertible_from_optional<U>::value,
+                                              !is_convertible_v<const U&, T> && !convertible_from_optional<U>::value,
                                       int> = 0>
     constexpr explicit optional(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (other) {
@@ -232,9 +232,6 @@ public:
     NEFORCE_CONSTEXPR20 optional&
     operator=(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&> &&
                                                  is_nothrow_assignable_v<T&, const U&>) {
-        if (_NEFORCE addressof(other) == this) {
-            return *this;
-        }
         if (other) {
             if (have_value_) {
                 *get_ptr() = *other;
@@ -287,7 +284,7 @@ public:
      * @param other 源可选值
      */
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> && is_convertible_v<U, T> &&
-                                              convertible_from_optional<U>::value,
+                                              !convertible_from_optional<U>::value,
                                       int> = 0>
     constexpr optional(optional<U>&& other) noexcept(is_nothrow_constructible_v<T, U>) {
         if (other) {
@@ -302,7 +299,7 @@ public:
      * @param other 源可选值
      */
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> && !is_convertible_v<U, T> &&
-                                              convertible_from_optional<U>::value,
+                                              !convertible_from_optional<U>::value,
                                       int> = 0>
     constexpr optional(optional<U>&& other) noexcept(is_nothrow_constructible_v<T, U>) {
         if (other) {
@@ -323,9 +320,6 @@ public:
                                           int> = 0>
     NEFORCE_CONSTEXPR20 optional& operator=(optional<U>&& other) noexcept(is_nothrow_constructible_v<T, U> &&
                                                                           is_nothrow_assignable_v<T&, U>) {
-        if (_NEFORCE addressof(other) == this) {
-            return *this;
-        }
         if (other) {
             if (have_value_) {
                 *get_ptr() = _NEFORCE move(*other);
@@ -901,39 +895,27 @@ public:
     }
 
     /**
-     * @brief 从引用赋值
+     * @brief 从引用赋值（重新绑定）
      * @tparam U 源引用类型
      * @param value 引用值
      * @return 当前对象的引用
      */
     template <typename U = T, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
     NEFORCE_CONSTEXPR20 optional& operator=(U& value) {
-        if (ptr_) {
-            *ptr_ = value;
-        } else {
-            ptr_ = _NEFORCE addressof(value);
-        }
+        ptr_ = _NEFORCE addressof(value);
         return *this;
     }
 
     /**
-     * @brief 从引用可选值赋值
+     * @brief 从引用可选值赋值（重新绑定）
      * @tparam U 源引用类型
      * @param other 源可选值
      * @return 当前对象的引用
      */
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    NEFORCE_CONSTEXPR20 optional& operator=(const _NEFORCE optional<U&>& other) {
+    NEFORCE_CONSTEXPR20 optional& operator=(const optional<U&>& other) {
         if (this != _NEFORCE addressof(other)) {
-            if (other.ptr_) {
-                if (ptr_) {
-                    *ptr_ = *other.ptr_;
-                } else {
-                    ptr_ = other.ptr_;
-                }
-            } else {
-                ptr_ = nullptr;
-            }
+            ptr_ = other.ptr_;
         }
         return *this;
     }
@@ -1321,17 +1303,6 @@ optional(T) -> optional<T>;
 
 
 /**
- * @brief 从值创建可选值
- * @tparam T 值类型
- * @param value 要包装的值
- * @return 包装值的可选值
- */
-template <typename T, enable_if_t<is_constructible_v<decay_t<T>, T>, int> = 0>
-constexpr optional<decay_t<T>> make_optional(T&& value) noexcept(is_nothrow_constructible_v<optional<decay_t<T>>, T>) {
-    return optional<decay_t<T>>{_NEFORCE forward<T>(value)};
-}
-
-/**
  * @brief 原位构造可选值
  * @tparam T 值类型
  * @tparam Args 参数类型
@@ -1358,23 +1329,6 @@ make_optional(std::initializer_list<U> ilist,
               Args&&... args) noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
     return optional<T>{inplace_construct_tag{}, ilist, _NEFORCE forward<Args>(args)...};
 }
-
-/**
- * @brief 创建引用可选值
- * @tparam T 引用类型
- * @param value 引用值
- * @return 包装引用的可选值
- */
-template <typename T>
-constexpr optional<T&> make_optional(T& value) noexcept {
-    return optional<T&>{value};
-}
-
-/**
- * @note 禁用从右值创建引用可选值，防止悬垂引用
- */
-template <typename T>
-constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
 
 
 /**

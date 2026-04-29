@@ -135,12 +135,12 @@ constexpr void advance(Iterator& i, Distance n) {
  * @param n 后退距离，默认为1
  * @return 后退n个位置后的迭代器
  *
- * 将迭代器后退n个位置，n必须为非正数。
+ * 将迭代器后退n个位置，n必须为非负数。
  */
 template <typename Iterator>
-constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
-    NEFORCE_DEBUG_VERIFY(n <= 0, "negative advance in previous operation function.");
-    _NEFORCE advance(iter, n);
+constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = 1) {
+    NEFORCE_DEBUG_VERIFY(n >= 0, "negative advance in previous operation function.");
+    _NEFORCE advance(iter, -n);
     return iter;
 }
 

@@ -522,7 +522,6 @@ public:
      */
     template <typename Iterator, enable_if_t<is_ranges_iter_v<Iterator>, int> = 0>
     NEFORCE_CONSTEXPR20 vector(Iterator first, Iterator last) {
-        NEFORCE_DEBUG_VERIFY(first <= last, "vector iterator-constructor out of ranges.");
         vector::range_initialize(first, last);
     }
 
@@ -534,7 +533,7 @@ public:
      */
     template <typename Iterator>
     NEFORCE_CONSTEXPR20 vector(Iterator first, const size_type n) :
-    vector(first, first + n) {}
+    vector(first, _NEFORCE next(first, n)) {}
 
     /**
      * @brief 初始化列表构造函数

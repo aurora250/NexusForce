@@ -29,7 +29,7 @@ class back_insert_iterator {
 public:
     using iterator_category = output_iterator_tag; ///< 迭代器类别
     using value_type = void;                       ///< 值类型
-    using difference_type = void;                  ///< 差值类型
+    using difference_type = ptrdiff_t;             ///< 差值类型
     using pointer = void;                          ///< 指针类型
     using reference = void;                        ///< 引用类型
 
@@ -67,8 +67,14 @@ public:
     NEFORCE_CONSTEXPR20 ~back_insert_iterator() noexcept = default; ///< 析构函数
 
     NEFORCE_NODISCARD constexpr back_insert_iterator& operator*() noexcept { return *this; } ///< 解引用操作符
-    constexpr back_insert_iterator& operator++() noexcept { return *this; }                  ///< 前置自增操作符
-    constexpr back_insert_iterator& operator++(int) noexcept { return *this; }               ///< 后置自增操作符
+
+    // 前置自增操作符
+    constexpr back_insert_iterator& operator++() noexcept { return *this; }
+    // 后置自增操作符
+    constexpr back_insert_iterator operator++(int) noexcept {
+        back_insert_iterator tmp = *this;
+        return tmp;
+    }
 };
 
 /**
@@ -95,7 +101,7 @@ class front_insert_iterator {
 public:
     using iterator_category = output_iterator_tag; ///< 迭代器类别
     using value_type = void;                       ///< 值类型
-    using difference_type = void;                  ///< 差值类型
+    using difference_type = ptrdiff_t;             ///< 差值类型
     using pointer = void;                          ///< 指针类型
     using reference = void;                        ///< 引用类型
 
@@ -133,8 +139,14 @@ public:
     NEFORCE_CONSTEXPR20 ~front_insert_iterator() noexcept = default; ///< 析构函数
 
     NEFORCE_NODISCARD constexpr front_insert_iterator& operator*() noexcept { return *this; } ///< 解引用操作符
-    constexpr front_insert_iterator& operator++() noexcept { return *this; }                  ///< 前置自增操作符
-    constexpr front_insert_iterator& operator++(int) noexcept { return *this; }               ///< 后置自增操作符
+
+    // 前置自增操作符
+    constexpr front_insert_iterator& operator++() noexcept { return *this; }
+    // 后置自增操作符
+    constexpr front_insert_iterator operator++(int) noexcept {
+        front_insert_iterator tmp = *this;
+        return tmp;
+    }
 };
 
 /**
@@ -161,7 +173,7 @@ class insert_iterator {
 public:
     using iterator_category = output_iterator_tag; ///< 迭代器类别
     using value_type = void;                       ///< 值类型
-    using difference_type = void;                  ///< 差值类型
+    using difference_type = ptrdiff_t;             ///< 差值类型
     using pointer = void;                          ///< 指针类型
     using reference = void;                        ///< 引用类型
 
@@ -204,8 +216,14 @@ public:
     NEFORCE_CONSTEXPR20 ~insert_iterator() noexcept = default; ///< 析构函数
 
     NEFORCE_NODISCARD constexpr insert_iterator& operator*() noexcept { return *this; } ///< 解引用操作符
-    constexpr insert_iterator& operator++() noexcept { return *this; }                  ///< 前置自增操作符
-    constexpr insert_iterator& operator++(int) noexcept { return *this; }               ///< 后置自增操作符
+
+    // 前置自增操作符
+    constexpr insert_iterator& operator++() noexcept { return *this; }
+    // 后置自增操作符
+    constexpr insert_iterator operator++(int) noexcept {
+        insert_iterator tmp = *this;
+        return tmp;
+    }
 };
 
 /**

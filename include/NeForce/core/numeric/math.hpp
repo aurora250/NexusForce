@@ -155,6 +155,19 @@ NEFORCE_CONST_FUNCTION constexpr int64_t safe_trunc(const decimal_t x) noexcept 
 }
 
 /**
+ * @brief 将非负 decimal_t 安全转换为 uint64_t（避免 >= 2^63 时的 UB）
+ * @return 对应的 uint64_t 值
+ */
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 uint64_t safe_decimal_to_uint64(const decimal_t x) noexcept {
+    constexpr decimal_t TWO_POW_63 = 9223372036854775808.0L;
+    if (x >= TWO_POW_63) {
+        return static_cast<uint64_t>(x - TWO_POW_63) + 9223372036854775808ULL;
+    } else {
+        return static_cast<uint64_t>(x);
+    }
+}
+
+/**
  * @brief 计算斐波那契数
  * @param n 索引位置
  * @return 第n个斐波那契数
@@ -562,9 +575,25 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x) no
     if (!is_finite(x)) {
         return x;
     }
-    const int64_t i = safe_trunc(x);
-    const decimal_t di = static_cast<decimal_t>(i);
-    return (x < 0.0L && x != di) ? di - 1.0L : di;
+
+    constexpr decimal_t TWO_POW_64 = static_cast<decimal_t>(numeric_traits<uint64_t>::max());
+    if (x >= 0.0L) {
+        if (x >= TWO_POW_64) {
+            return x;
+        }
+        return static_cast<decimal_t>(safe_decimal_to_uint64(x));
+    } else {
+        const decimal_t pos = -x;
+        if (pos >= TWO_POW_64) {
+            return x;
+        }
+        const decimal_t floor_pos = static_cast<decimal_t>(safe_decimal_to_uint64(pos));
+        if (pos == floor_pos) {
+            return -floor_pos;
+        } else {
+            return -(floor_pos + 1.0L);
+        }
+    }
 }
 
 /**
@@ -578,6 +607,11 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x, co
     return floor(x * factor) / factor;
 }
 
+NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_even_integer(const decimal_t x) noexcept {
+    const decimal_t half = x * 0.5L;
+    return (half == floor(half));
+}
+
 /**
  * @brief 向上取整
  * @param x 原数值
@@ -587,9 +621,26 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil(const decimal_t x) noe
     if (!is_finite(x)) {
         return x;
     }
-    const int64_t i = safe_trunc(x);
-    const decimal_t di = static_cast<decimal_t>(i);
-    return (x > 0.0L && x != di) ? di + 1.0L : di;
+
+    constexpr decimal_t TWO_POW_64 = static_cast<decimal_t>(numeric_traits<uint64_t>::max());
+    if (x >= 0.0L) {
+        if (x >= TWO_POW_64) {
+            return x;
+        }
+        const decimal_t floor_x = static_cast<decimal_t>(safe_decimal_to_uint64(x));
+        if (x == floor_x) {
+            return floor_x;
+        } else {
+            return floor_x + 1.0L;
+        }
+    } else {
+        const decimal_t pos = -x;
+        if (pos >= TWO_POW_64) {
+            return x;
+        }
+        const uint64_t floor_pos = safe_decimal_to_uint64(pos);
+        return -static_cast<decimal_t>(floor_pos);
+    }
 }
 
 /**
@@ -613,19 +664,21 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round(const decimal_t x) no
         return x;
     }
 
-    const decimal_t int_part = floor(absolute(x));
-    const decimal_t frac = absolute(x) - int_part;
+    const decimal_t abs_x = absolute(x);
+    const decimal_t int_part = floor(abs_x);
+    const decimal_t frac = abs_x - int_part;
+
     if (frac < 0.5L) {
-        return x < 0 ? -int_part : int_part;
+        return (x < 0.0L) ? -int_part : int_part;
     }
     if (frac > 0.5L) {
-        return x < 0 ? -(int_part + 1) : (int_part + 1);
+        return (x < 0.0L) ? -(int_part + 1.0L) : (int_part + 1.0L);
     }
 
-    if (static_cast<int64_t>(int_part) % 2 == 0) {
-        return x < 0 ? -int_part : int_part;
+    if (is_even_integer(int_part)) {
+        return (x < 0.0L) ? -int_part : int_part;
     } else {
-        return x < 0 ? -(int_part + 1) : (int_part + 1);
+        return (x < 0.0L) ? -(int_part + 1.0L) : (int_part + 1.0L);
     }
 }
 

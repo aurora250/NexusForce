@@ -36,7 +36,7 @@ namespace {
         const uint64_t t2_lo = NF_128 _umul128(a.hi, b.lo, &t2_hi);
         const byte_t c1 = NF_128 _addcarry_u64(0, result.hi, t1_lo, &result.hi);
         (void) NF_128 _addcarry_u64(c1, result.hi, t2_lo, &result.hi);
-        // 最终进位超出128位，截断丢弃
+        // The final carry exceeds 128 bits, truncated and discarded
 #else
         unsigned __int128 prod = (static_cast<unsigned __int128>(a.hi) << 64 | a.lo) *
                                  (static_cast<unsigned __int128>(b.hi) << 64 | b.lo);
@@ -97,7 +97,7 @@ namespace {
 } // namespace
 
 
-uint128_t& uint128_t::operator+=(const uint128_t& other) {
+uint128_t& uint128_t::operator+=(const uint128_t& other) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const byte_t carry = NF_128 _addcarry_u64(0, lo, other.lo, &lo);
     NF_128 _addcarry_u64(carry, hi, other.hi, &hi);
@@ -109,7 +109,7 @@ uint128_t& uint128_t::operator+=(const uint128_t& other) {
     return *this;
 }
 
-uint128_t& uint128_t::operator-=(const uint128_t& other) {
+uint128_t& uint128_t::operator-=(const uint128_t& other) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const byte_t borrow = NF_128 _subborrow_u64(0, lo, other.lo, &lo);
     NF_128 _subborrow_u64(borrow, hi, other.hi, &hi);
@@ -121,7 +121,7 @@ uint128_t& uint128_t::operator-=(const uint128_t& other) {
     return *this;
 }
 
-uint128_t& uint128_t::operator*=(const uint128_t& other) {
+uint128_t& uint128_t::operator*=(const uint128_t& other) noexcept {
     *this = mul128(*this, other);
     return *this;
 }
@@ -174,21 +174,21 @@ uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const noexcept 
 #endif
 }
 
-int128_t& int128_t::operator+=(const int128_t& other) {
+int128_t& int128_t::operator+=(const int128_t& other) noexcept {
     const uint128_t a = to_uint128();
     const uint128_t b = other.to_uint128();
     *this = a + b;
     return *this;
 }
 
-int128_t& int128_t::operator-=(const int128_t& other) {
+int128_t& int128_t::operator-=(const int128_t& other) noexcept {
     const uint128_t a = to_uint128();
     const uint128_t b = other.to_uint128();
     *this = a - b;
     return *this;
 }
 
-int128_t& int128_t::operator*=(const int128_t& other) {
+int128_t& int128_t::operator*=(const int128_t& other) noexcept {
     const uint128_t a = to_uint128();
     const uint128_t b = other.to_uint128();
     *this = a * b;

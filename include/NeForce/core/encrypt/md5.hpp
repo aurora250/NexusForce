@@ -111,14 +111,24 @@ NEFORCE_ALWAYS_INLINE_INLINE string md5(const string& data) {
  * @param data 输入数据
  * @return 16字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector md5(const cbyte_view data) { return MD5::hash(data); }
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector md5(const cbyte_view data) {
+    if (data.empty()) {
+        return MD5::hash(cbyte_view{});
+    }
+    return MD5::hash(data);
+}
 
 /**
  * @brief MD5哈希便捷函数（字节向量版本）
  * @param data 输入数据
  * @return 16字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector md5(const byte_vector& data) { return MD5::hash(data.view()); }
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector md5(const byte_vector& data) {
+    if (data.empty()) {
+        return MD5::hash(cbyte_view{});
+    }
+    return MD5::hash(data.view());
+}
 
 /** @} */ // Encryption
 

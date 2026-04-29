@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/algorithm/compare.hpp"
+#include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"

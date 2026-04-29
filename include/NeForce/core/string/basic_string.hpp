@@ -8,6 +8,7 @@
  * 此文件提供了动态字符串容器的实现。
  */
 
+#include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/memory/uninitialized.hpp"

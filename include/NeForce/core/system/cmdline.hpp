@@ -254,7 +254,7 @@ public:
      * @param argv 参数数组
      * @throws cmdline_exception 解析失败时抛出
      */
-    void parse(int argc, char* argv[]);
+    void parse(int argc, const char* argv[]);
 
     /**
      * @brief 解析字符串向量参数

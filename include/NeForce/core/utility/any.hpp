@@ -311,24 +311,16 @@ public:
      */
     template <typename T, typename... Args, typename VT = decay_t<T>, typename Manager = manage_t<VT>,
               enable_if_t<conjunction_v<is_copy_constructible<VT>, is_constructible<VT, Args&&...>>, int> = 0>
-    explicit any(inplace_construct_tag, Args&&... args) :
+    explicit any(pass_template_construct_tag<T>, Args&&... args) :
     manage_(&Manager::manage) {
         Manager::create(storage_, _NEFORCE forward<Args>(args)...);
     }
 
-    /**
-     * @brief 使用初始化列表就地构造
-     * @tparam T 值类型
-     * @tparam U 初始化列表元素类型
-     * @tparam Args 参数类型
-     * @param ilist 初始化列表
-     * @param args 构造参数
-     */
     template <typename T, typename U, typename... Args, typename VT = decay_t<T>, typename Manager = manage_t<VT>,
               enable_if_t<conjunction_v<is_copy_constructible<VT>,
                                         is_constructible<VT, std::initializer_list<U>&, Args&&...>>,
                           int> = 0>
-    explicit any(inplace_construct_tag, std::initializer_list<U> ilist, Args&&... args) :
+    explicit any(pass_template_construct_tag<T>, std::initializer_list<U> ilist, Args&&... args) :
     manage_(&Manager::manage) {
         Manager::create(storage_, ilist, _NEFORCE forward<Args>(args)...);
     }
@@ -406,24 +398,10 @@ public:
  * @param args 构造参数
  * @return 构造的any对象
  */
-template <typename T, typename... Args, enable_if_t<is_constructible_v<any, inplace_construct_tag, Args...>, int> = 0>
+template <typename T, typename... Args,
+          enable_if_t<is_constructible_v<any, pass_template_construct_tag<T>, Args...>, int> = 0>
 any make_any(Args&&... args) {
-    return any(inplace_construct_tag{}, _NEFORCE forward<Args>(args)...);
-}
-
-/**
- * @brief 使用初始化列表创建any对象
- * @tparam T 值类型
- * @tparam U 初始化列表元素类型
- * @tparam Args 参数类型
- * @param ilist 初始化列表
- * @param args 构造参数
- * @return 构造的any对象
- */
-template <typename T, typename U, typename... Args,
-          enable_if_t<is_constructible_v<any, inplace_construct_tag, std::initializer_list<U>&, Args...>, int> = 0>
-any make_any(std::initializer_list<U> ilist, Args&&... args) {
-    return any(inplace_construct_tag{}, ilist, _NEFORCE forward<Args>(args)...);
+    return any(pass_template_construct_tag<T>{}, _NEFORCE forward<Args>(args)...);
 }
 
 /// @cond
@@ -501,7 +479,7 @@ T any_cast(const any& value) {
                   "type T must be valid to cast from any.");
 
     auto ptr = any_cast<U>(&value);
-    if (ptr) {
+    if (ptr != nullptr) {
         return static_cast<T>(*ptr);
     }
     NEFORCE_THROW_EXCEPTION(anycast_exception());

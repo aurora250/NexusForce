@@ -12,6 +12,7 @@
 #include "NeForce/core/algorithm/compare.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
+#include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -127,6 +128,24 @@ public:
         NEFORCE_DEBUG_VERIFY(current_ && container_, "Attempting to decrement a null pointer");
         NEFORCE_DEBUG_VERIFY(current_->prev != container_->head_, "Attempting to decrement out of boundary");
         current_ = current_->prev;
+    }
+
+    /**
+     * @brief 计算当前迭代器到另一个迭代器的距离
+     * @param other 目标迭代器，必须与当前迭代器指向同一容器
+     * @return 从当前迭代器到 other 的步数
+     */
+    NEFORCE_NODISCARD difference_type distance_to(const list_iterator& other) const noexcept {
+        NEFORCE_DEBUG_VERIFY(container_ == other.container_,
+                             "Attempting distance_to on iterators from different containers");
+        difference_type dist = 0;
+        const node_type* p = current_;
+        while (p != other.current_) {
+            NEFORCE_DEBUG_VERIFY(p != container_->head_, "Attempting distance_to past end iterator");
+            p = p->next;
+            ++dist;
+        }
+        return dist;
     }
 
     /**
@@ -260,12 +279,11 @@ public:
      * @param n 元素数量
      * @param value 初始值
      */
-    list(size_type n, T&& value) {
+    list(size_type n, const T& value) {
         list::init_header();
-        iterator pos = end();
         try {
             while (n--) {
-                pos = list::emplace(pos, _NEFORCE forward<T>(value));
+                emplace_back(value);
             }
         } catch (...) {
             clear();
@@ -282,10 +300,9 @@ public:
     template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
     list(Iterator first, Iterator last) {
         list::init_header();
-        iterator pos = end();
         try {
             while (first != last) {
-                pos = list::emplace(pos, *first);
+                emplace_back(*first);
                 ++first;
             }
         } catch (...) {

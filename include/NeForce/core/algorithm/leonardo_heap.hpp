@@ -193,6 +193,10 @@ void push_leonardo_heap(Iterator first, Iterator last) {
         return;
     }
     const size_t size = _NEFORCE distance(first, last);
+    if (size < 2) {
+        return;
+    }
+
     vector<int> levels = {1};
     int toplevel = 0;
     for (size_t i = 1; i < size - 1; ++i) {
@@ -278,6 +282,10 @@ void sort_leonardo_heap(Iterator first, Iterator last) {
         return;
     }
     const size_t size = _NEFORCE distance(first, last);
+    if (size < 2) {
+        return;
+    }
+
     vector<int> levels = {1};
     int toplevel = 0;
     for (size_t i = 1; i < size; ++i) {
@@ -342,6 +350,32 @@ void make_leonardo_heap(Iterator first, Iterator last) {
 }
 
 /** @} */ // LeonardoHeap
+
+/**
+ * @addtogroup SortAlgorithms 排序算法
+ * @{
+ */
+
+/**
+ * @brief 平滑排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ *
+ * 时间复杂度：O(N log N)
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
+ *
+ * 基于莱昂纳多堆的排序算法，是堆排序的改进版本，
+ * 在部分有序的序列上表现优异。
+ */
+template <typename Iterator>
+NEFORCE_CONSTEXPR20 void smooth_sort(Iterator first, Iterator last) {
+    _NEFORCE make_leonardo_heap(first, last);
+    _NEFORCE sort_leonardo_heap(first, last);
+}
+
+/** @} */ // SortAlgorithms
 
 /** @} */ // StandardAlgorithms
 

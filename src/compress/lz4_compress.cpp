@@ -57,19 +57,14 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
 
         if (result > 0) {
             decompressed.resize(result);
-            break;
+            return decompressed;
         }
-        if (result == 0) {
-            attempt++;
-            if (attempt >= max_attempts) {
-                NEFORCE_THROW_EXCEPTION(lz4_exception("Exceeded maximum decompression buffer attempts"));
-            }
-        } else {
-            NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 decompression failed"));
-        }
-    } while (result <= 0);
 
-    return decompressed;
+        ++attempt;
+        if (attempt >= max_attempts) {
+            NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 decompression failed after maximum retries"));
+        }
+    } while (true);
 }
 
 lz4_compressor::stream_compressor::stream_compressor(const int level) { reset(level); }

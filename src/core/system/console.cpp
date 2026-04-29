@@ -11,6 +11,7 @@
 #    endif
 #    include <WinBase.h>
 #    include <WinNls.h>
+#    include <conio.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/system/environment.hpp>
@@ -44,9 +45,9 @@ void sys_console::print_string_unsafe(const string_view str) const {
 
 void sys_console::set_color_unsafe(const color& color, const bool use_256_color) const {
     if (use_256_color) {
-        this->print_string_unsafe("\033[38;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
+        print_string_unsafe("\033[38;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
     } else {
-        this->print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(false)) + "m");
+        print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(false)) + "m");
     }
 }
 
@@ -189,29 +190,22 @@ char sys_console::read_char_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD original_mode = 0;
     ::GetConsoleMode(in_, &original_mode);
-    ::SetConsoleMode(in_, original_mode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT));
+    ::DWORD new_mode = original_mode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
+    ::SetConsoleMode(in_, new_mode);
     char ch = '\0';
     ::DWORD read = 0;
     try {
-        if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) == TRUE && read > 0) {
-            ::SetConsoleMode(in_, original_mode);
+        if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) != FALSE && read > 0) {
             if (ch == '\r') {
-                char next_ch = '\0';
-                if (::ReadConsoleA(in_, &next_ch, 1, &read, nullptr) == TRUE && read > 0) {
-                    if (next_ch == '\n') {
-                        return '\n';
-                    }
-                }
-                return '\n';
+                ch = '\n';
             }
-            return ch;
         }
     } catch (...) {
         ::SetConsoleMode(in_, original_mode);
         throw;
     }
     ::SetConsoleMode(in_, original_mode);
-    return '\0';
+    return (read > 0) ? ch : '\0';
 #elif defined(NEFORCE_PLATFORM_LINUX)
     ::termios old_tio, new_tio;
     ::tcgetattr(in_, &old_tio);
@@ -261,6 +255,8 @@ void sys_console::flush_unsafe() const {
     }
 #endif
 }
+
+void sys_console::ignore_unsafe() const { (void) readln_unsafe(); }
 
 void sys_console::beep_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -388,42 +384,47 @@ in_(STDIN_FILENO)
 
 void sys_console::flush() {
     lock<mutex> lock(mutex_);
-    this->flush_unsafe();
+    flush_unsafe();
+}
+
+void sys_console::ignore() {
+    lock<mutex> lock(mutex_);
+    ignore_unsafe();
 }
 
 void sys_console::print_string(const string& str) {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe(str.view());
+    print_string_unsafe(str.view());
 }
 
 void sys_console::print_string(const string_view& view) {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe(view);
+    print_string_unsafe(view);
 }
 
 void sys_console::print_string(const char* str) {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe(str);
+    print_string_unsafe(str);
 }
 
 string sys_console::read() {
     lock<mutex> lock(mutex_);
-    return this->read_unsafe();
+    return read_unsafe();
 }
 
 string sys_console::readln() {
     lock<mutex> lock(mutex_);
-    return this->readln_unsafe();
+    return readln_unsafe();
 }
 
 char sys_console::read_char() {
     lock<mutex> lock(mutex_);
-    return this->read_char_unsafe();
+    return read_char_unsafe();
 }
 
 void sys_console::println() {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe("\n");
+    print_string_unsafe("\n");
 }
 
 void sys_console::clear() {
@@ -439,26 +440,26 @@ void sys_console::clear() {
     ::FillConsoleOutputAttribute(out_, screen.wAttributes, length, top_left, &written);
     ::SetConsoleCursorPosition(out_, top_left);
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    this->print_string_unsafe("\033[2J\033[1;1H");
+    print_string_unsafe("\033[2J\033[1;1H");
 #endif
 }
 
 void sys_console::pause(const string_view msg) {
     lock<mutex> lock(mutex_);
-    this->flush_unsafe();
-    this->print_string_unsafe(msg);
-    ignore = this->readln_unsafe();
-    this->flush_unsafe();
+    flush_unsafe();
+    print_string_unsafe(msg);
+    ignore_unsafe();
+    flush_unsafe();
 }
 
 bool sys_console::confirmation(const string_view prompt, const char yes, const char no) {
     lock<mutex> lock(mutex_);
     while (true) {
-        this->print_string_unsafe(prompt);
-        this->flush_unsafe();
+        print_string_unsafe(prompt);
+        flush_unsafe();
 
         const char input = read_char_unsafe();
-        this->print_string_unsafe("\n");
+        print_string_unsafe("\n");
 
         if (to_uppercase(input) == to_uppercase(yes)) {
             return true;
@@ -467,7 +468,7 @@ bool sys_console::confirmation(const string_view prompt, const char yes, const c
             return false;
         }
         const string error_msg = "Please enter '"_s + yes + "' or '" + no + "'.\n";
-        this->print_string_unsafe(error_msg);
+        print_string_unsafe(error_msg);
     }
 }
 
@@ -659,7 +660,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 
 void sys_console::set_color(const integer32& color) {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe("\033[" + color.to_string() + "m");
+    print_string_unsafe("\033[" + color.to_string() + "m");
 }
 
 void sys_console::set_color(const color& color, const bool use_256_color) {
@@ -670,15 +671,154 @@ void sys_console::set_color(const color& color, const bool use_256_color) {
 void sys_console::set_background_color(const color& color, const bool use_256_color) {
     lock<mutex> lock(mutex_);
     if (use_256_color) {
-        this->print_string_unsafe("\033[48;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
+        print_string_unsafe("\033[48;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
     } else {
-        this->print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(true)) + "m");
+        print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(true)) + "m");
     }
 }
 
 void sys_console::reset_color() {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe("\033[0m");
+    print_string_unsafe("\033[39;49m");
+}
+
+void sys_console::set_bold(const bool enable) {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe(enable ? "\033[1m" : "\033[22m");
+}
+
+void sys_console::set_underline(const bool enable) {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe(enable ? "\033[4m" : "\033[24m");
+}
+
+void sys_console::set_blink(const bool enable) {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe(enable ? "\033[5m" : "\033[25m");
+}
+
+void sys_console::set_reverse(const bool enable) {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe(enable ? "\033[7m" : "\033[27m");
+}
+
+void sys_console::reset_text_attributes() {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe("\033[0m");
+}
+
+void sys_console::set_window_title(const string_view title) {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe("\033]0;"_s + title + "\033\\");
+}
+
+void sys_console::enable_alternate_screen_buffer(const bool enable) {
+    lock<mutex> lock(mutex_);
+    if (enable == alt_buffer_active_) {
+        return;
+    }
+    print_string_unsafe(enable ? "\033[?1049h" : "\033[?1049l");
+    alt_buffer_active_ = enable;
+}
+
+void sys_console::disable_alternate_screen_buffer() { enable_alternate_screen_buffer(false); }
+
+void sys_console::set_scroll_region(const int top, const int bottom) {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe("\033["_s + to_string(top) + ";" + to_string(bottom) + "r");
+}
+
+void sys_console::reset_scroll_region() {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe("\033[r");
+}
+
+void sys_console::enable_mouse(const bool enable) {
+    lock<mutex> lock(mutex_);
+    if (enable == mouse_enabled_) {
+        return;
+    }
+    print_string_unsafe(enable ? "\033[?1000h\033[?1006h" : "\033[?1006l\033[?1000l");
+    mouse_enabled_ = enable;
+}
+
+void sys_console::disable_mouse() { enable_mouse(false); }
+
+bool sys_console::is_mouse_enabled() const {
+    lock<mutex> lock(mutex_);
+    return mouse_enabled_;
+}
+
+bool sys_console::kbhit() {
+    lock<mutex> lock(mutex_);
+    if (pending_char_ != -1) {
+        return true;
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (::_kbhit() != 0) {
+        pending_char_ = ::_getch();
+        if (pending_char_ == '\r') {
+            pending_char_ = '\n';
+        }
+        return true;
+    }
+#else
+    ::termios old_tio, new_tio;
+    ::tcgetattr(in_, &old_tio);
+    new_tio = old_tio;
+    new_tio.c_lflag &= ~(ICANON | ECHO);
+    new_tio.c_cc[VMIN] = 0;
+    new_tio.c_cc[VTIME] = 0;
+    ::tcsetattr(in_, TCSANOW, &new_tio);
+
+    unsigned char ch = 0;
+    const ssize_t n = ::read(in_, &ch, 1);
+    ::tcsetattr(in_, TCSANOW, &old_tio);
+
+    if (n > 0) {
+        pending_char_ = ch;
+        return true;
+    }
+#endif
+    return false;
+}
+
+int sys_console::getch() {
+    lock<mutex> lock(mutex_);
+    if (pending_char_ != -1) {
+        int ch = pending_char_;
+        pending_char_ = -1;
+        return ch;
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    int ch = ::_getch();
+    if (ch == '\r') {
+        ch = '\n';
+    }
+    return ch;
+#else
+    ::termios old_tio, new_tio;
+    ::tcgetattr(in_, &old_tio);
+    new_tio = old_tio;
+    new_tio.c_lflag &= ~(ICANON | ECHO);
+    new_tio.c_cc[VMIN] = 1;
+    new_tio.c_cc[VTIME] = 0;
+    ::tcsetattr(in_, TCSANOW, &new_tio);
+
+    unsigned char ch = 0;
+    ssize_t n = ::read(in_, &ch, 1);
+    while (n == -1 && errno == EINTR) {
+        n = ::read(in_, &ch, 1);
+    }
+    ::tcsetattr(in_, TCSANOW, &old_tio);
+
+    if (n > 0) {
+        return ch;
+    }
+    return -1;
+#endif
 }
 
 void sys_console::progress_bar(double percentage, const int width, const bool show_percentage, const char fill_char,
@@ -724,7 +864,7 @@ void sys_console::set_cursor_position(int row, int column) {
     const ::COORD pos{static_cast<::SHORT>(column), static_cast<::SHORT>(row)};
     ::SetConsoleCursorPosition(out_, pos);
 #else
-    this->print_string_unsafe("\033[" + _NEFORCE to_string(row) + ";" + _NEFORCE to_string(column) + "H");
+    print_string_unsafe("\033[" + _NEFORCE to_string(row) + ";" + _NEFORCE to_string(column) + "H");
 #endif
 }
 
@@ -736,7 +876,7 @@ void sys_console::save_cursor_position() {
     const auto pos = csbi.dwCursorPosition;
     saved_cursor_pos_ = console_size{pos.X, pos.Y};
 #else
-    this->print_string_unsafe("\033[s");
+    print_string_unsafe("\033[s");
 #endif
 }
 
@@ -746,7 +886,7 @@ void sys_console::restore_cursor_position() {
     ::SetConsoleCursorPosition(out_, ::COORD{static_cast<::SHORT>(saved_cursor_pos_.width),
                                              static_cast<::SHORT>(saved_cursor_pos_.height)});
 #else
-    this->print_string_unsafe("\033[u");
+    print_string_unsafe("\033[u");
 #endif
 }
 
@@ -758,7 +898,7 @@ void sys_console::hide_cursor() {
     cursor_info.bVisible = FALSE;
     ::SetConsoleCursorInfo(out_, &cursor_info);
 #else
-    this->print_string_unsafe("\033[?25l");
+    print_string_unsafe("\033[?25l");
 #endif
 }
 
@@ -770,7 +910,7 @@ void sys_console::show_cursor() {
     cursor_info.bVisible = TRUE;
     ::SetConsoleCursorInfo(out_, &cursor_info);
 #else
-    this->print_string_unsafe("\033[?25h");
+    print_string_unsafe("\033[?25h");
 #endif
 }
 

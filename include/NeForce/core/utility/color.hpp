@@ -282,20 +282,23 @@ public:
     /**
      * @brief 从十六进制字符串构造
      * @param str 十六进制字符串（格式：RRGGBB 或 RRGGBBAA）
+     * @throws value_exception 格式无效时抛出
      */
-    NEFORCE_CONSTEXPR20 explicit color(const string_view str) { try_parse(str); }
+    NEFORCE_CONSTEXPR20 explicit color(const string_view str) { *this = parse(str); }
 
     /**
      * @brief 从字符串对象构造
      * @param str 十六进制字符串
+     * @throws value_exception 格式无效时抛出
      */
-    NEFORCE_CONSTEXPR20 explicit color(const string& str) { try_parse(str.view()); }
+    NEFORCE_CONSTEXPR20 explicit color(const string& str) { *this = parse(str.view()); }
 
     /**
      * @brief 从C风格字符串构造
      * @param str 十六进制字符串
+     * @throws value_exception 格式无效时抛出
      */
-    NEFORCE_CONSTEXPR20 explicit color(const char* str) { try_parse(string_view{str}); }
+    NEFORCE_CONSTEXPR20 explicit color(const char* str) { *this = parse(string_view{str}); }
 
     /**
      * @brief 移动构造函数
@@ -318,7 +321,14 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        this->swap(other);
+        r = other.r;
+        g = other.g;
+        b = other.b;
+        a = other.a;
+        other.r = 0;
+        other.g = 0;
+        other.b = 0;
+        other.a = 255;
         return *this;
     }
 

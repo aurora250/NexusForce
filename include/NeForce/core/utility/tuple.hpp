@@ -247,6 +247,9 @@ private:
     template <typename Tuple, size_t... Idx>
     static constexpr size_t __broaden_tuple(const Tuple& tup, _NEFORCE index_sequence<Idx...> idx) noexcept;
 
+    template <typename... Args>
+    friend struct tuple;
+
 public:
     /**
      * @brief 精确参数构造函数

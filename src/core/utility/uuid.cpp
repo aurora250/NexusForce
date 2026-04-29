@@ -120,15 +120,4 @@ uuid uuid::v7() noexcept {
     return u;
 }
 
-size_t uuid::to_hash() const noexcept {
-    const auto* bytes = data_.data();
-    size_t hash = 0;
-    for (size_t i = 0; i < 16; i += sizeof(size_t)) {
-        size_t part = 0;
-        memory_copy(&part, bytes + i, sizeof(size_t));
-        hash ^= part;
-    }
-    return hash;
-}
-
 NEFORCE_END_NAMESPACE__

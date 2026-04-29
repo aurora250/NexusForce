@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## [1.0.0] - 2026-04-08
+## [1.0.0] - 2026-04-26
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
+- 添加 GTest 全量测试
 - 导出 cmake 配置函数
 - 添加代码格式化与检测配置
 - 添加 lz4 压缩操作

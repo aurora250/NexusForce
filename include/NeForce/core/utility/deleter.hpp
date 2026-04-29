@@ -19,22 +19,22 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @struct default_delete
+ * @struct default_deleter
  * @brief 默认删除器
  * @tparam T 元素类型
  *
  * 使用delete运算符释放单个对象的默认删除器。
  */
 template <typename T>
-struct default_delete {
-    constexpr default_delete() noexcept = default; ///< 默认构造函数
+struct default_deleter {
+    constexpr default_deleter() noexcept = default; ///< 默认构造函数
 
     /**
      * @brief 从其他default_delete转换构造
      * @tparam U 可转换为T*的类型
      */
     template <typename U, enable_if_t<is_convertible<U*, T*>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 default_delete(const default_delete<U>&) noexcept {}
+    NEFORCE_CONSTEXPR20 default_deleter(const default_deleter<U>&) noexcept {}
 
     /**
      * @brief 删除操作符
@@ -48,8 +48,8 @@ struct default_delete {
      * @return 绑定到U的新删除器
      */
     template <typename U>
-    NEFORCE_CONSTEXPR20 default_delete<U> rebind() && noexcept {
-        return default_delete<U>();
+    NEFORCE_CONSTEXPR20 default_deleter<U> rebind() && noexcept {
+        return default_deleter<U>();
     }
 };
 
@@ -58,15 +58,15 @@ struct default_delete {
  * @tparam T 数组元素类型
  */
 template <typename T>
-struct default_delete<T[]> {
-    constexpr default_delete() noexcept = default; ///< 默认构造函数
+struct default_deleter<T[]> {
+    constexpr default_deleter() noexcept = default; ///< 默认构造函数
 
     /**
      * @brief 从其他数组删除器转换构造
      * @tparam U 可转换为T的数组类型
      */
     template <typename U, enable_if_t<is_convertible<U (*)[], T (*)[]>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 default_delete(const default_delete<U[]>&) noexcept {}
+    NEFORCE_CONSTEXPR20 default_deleter(const default_deleter<U[]>&) noexcept {}
 
     /**
      * @brief 删除操作符
@@ -84,8 +84,8 @@ struct default_delete<T[]> {
      * @return 绑定到U[]的新删除器
      */
     template <typename U>
-    NEFORCE_CONSTEXPR20 default_delete<U[]> rebind() && noexcept {
-        return default_delete<U[]>();
+    NEFORCE_CONSTEXPR20 default_deleter<U[]> rebind() && noexcept {
+        return default_deleter<U[]>();
     }
 };
 

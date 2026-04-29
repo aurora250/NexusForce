@@ -137,17 +137,17 @@ public:
     /**
      * @brief 加法赋值
      */
-    uint128_t& operator+=(const uint128_t& other);
+    uint128_t& operator+=(const uint128_t& other) noexcept;
 
     /**
      * @brief 减法赋值
      */
-    uint128_t& operator-=(const uint128_t& other);
+    uint128_t& operator-=(const uint128_t& other) noexcept;
 
     /**
      * @brief 乘法赋值
      */
-    uint128_t& operator*=(const uint128_t& other);
+    uint128_t& operator*=(const uint128_t& other) noexcept;
 
     /**
      * @brief 除法赋值
@@ -420,11 +420,6 @@ public:
     }
 
     /**
-     * @brief 正号
-     */
-    constexpr int128_t operator+() const noexcept { return *this; }
-
-    /**
      * @brief 负号
      */
     constexpr int128_t operator-() const noexcept {
@@ -436,17 +431,17 @@ public:
     /**
      * @brief 加法赋值
      */
-    int128_t& operator+=(const int128_t& other);
+    int128_t& operator+=(const int128_t& other) noexcept;
 
     /**
      * @brief 减法赋值
      */
-    int128_t& operator-=(const int128_t& other);
+    int128_t& operator-=(const int128_t& other) noexcept;
 
     /**
      * @brief 乘法赋值
      */
-    int128_t& operator*=(const int128_t& other);
+    int128_t& operator*=(const int128_t& other) noexcept;
 
     /**
      * @brief 除法赋值

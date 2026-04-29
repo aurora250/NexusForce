@@ -279,7 +279,7 @@ public:
             explicit(Extent != dynamic_extent && OE == dynamic_extent)
 #endif
                     memory_view(const memory_view<U, OE>& other) noexcept :
-    extent_pair_(exact_arg_construct_tag{}, other.extent_pair_.get_base(),
+    extent_pair_(exact_arg_construct_tag{}, static_cast<size_t>(other.size()),
                  static_cast<pointer>(other.extent_pair_.value)) {
         memory_view::check_extend<Extent>(other.size());
     }

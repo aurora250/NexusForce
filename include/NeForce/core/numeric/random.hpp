@@ -8,6 +8,7 @@
  * 此文件提供了多种随机数生成器的实现。
  */
 
+#include "NeForce/core/config/msvc_intrinsic.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
 #include "NeForce/core/typeinfo/type_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -62,12 +63,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-NEFORCE_API uint64_t mul128_high(uint64_t a, uint64_t b, uint64_t* lo_out) noexcept;
-
 template <typename Generator>
 uint64_t lemire_bounded(Generator&& gen, const uint64_t max) noexcept {
-    uint64_t lo = 0;
-    uint64_t hi = _NEFORCE mul128_high(gen(), max, &lo);
+    uint64_t hi = 0;
+    uint64_t lo = _NEFORCE _umul128(gen(), max, &hi);
 
     if (lo >= max) {
         return hi;
@@ -75,7 +74,7 @@ uint64_t lemire_bounded(Generator&& gen, const uint64_t max) noexcept {
 
     const uint64_t threshold = (static_cast<uint64_t>(0) - max) % max;
     while (lo < threshold) {
-        hi = _NEFORCE mul128_high(gen(), max, &lo);
+        lo = _NEFORCE _umul128(gen(), max, &hi);
     }
     return hi;
 }

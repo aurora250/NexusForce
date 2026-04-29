@@ -1,4 +1,12 @@
-#include "test.h"
+#include <NeForce/db/database_pool.hpp>
+#include <NeForce/db/sql_builder.hpp>
+#include <NeForce/core/system/console.hpp>
+#include <NeForce/core/time/click.hpp>
+#include <NeForce/db/mysql/mysql_connect.hpp>
+#include <NeForce/db/pgsql/pgsql_connect.hpp>
+#include <NeForce/db/redis/redis_connect.hpp>
+#include <NeForce/db/redis/redis_result.hpp>
+using namespace neforce;
 
 void test_sql() {
     auto sql1 = sql_builder()
@@ -119,7 +127,7 @@ void test_redis() {
     auto conn = dynamic_pointer_cast<redis_connect>(pool.get_kv_connect());
     println(conn->is_valid());
     println(conn->update("SET age 20"));
-    auto res = dynamic_pointer_cast<redis_result>(conn->get("age"));
+    auto res = dynamic_pointer_cast<redis_result, default_deleter<redis_result>>(conn->get("age"));
     if (res) {
         println(res->empty());
         while (res->next()) {

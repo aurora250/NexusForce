@@ -100,7 +100,7 @@ public:
      *
      * 基于operator ==的结果取反得到不等比较结果。
      */
-    NEFORCE_NODISCARD constexpr bool operator!=(const T& rhs) const noexcept(noexcept(!(*this == rhs))) {
+    NEFORCE_NODISCARD constexpr bool operator!=(const T& rhs) const noexcept(noexcept(derived() == rhs)) {
         return !(*this == rhs);
     }
 

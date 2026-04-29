@@ -497,6 +497,22 @@ struct inplace_construct_tag {
 };
 
 /**
+ * @struct pass_template_construct_tag
+ * @brief 传递模板参数构造标签
+ *
+ * 表示在原位置传递模板参数构造对象。
+ */
+template <typename... Args>
+struct pass_template_construct_tag {
+    constexpr explicit pass_template_construct_tag() noexcept = default;
+};
+
+template <size_t Size>
+struct pass_size_construct_tag {
+    constexpr explicit pass_size_construct_tag() noexcept = default;
+};
+
+/**
  * @struct unpack_utility_construct_tag
  * @brief 解包工具构造标签
  *

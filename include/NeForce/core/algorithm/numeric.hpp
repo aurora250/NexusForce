@@ -60,7 +60,7 @@ NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init, Binary
  */
 template <typename Iterator, typename T>
 NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init) {
-    return _NEFORCE accumulate(first, second, init, _NEFORCE plus<T>());
+    return _NEFORCE accumulate(first, second, init, _NEFORCE plus<>());
 }
 
 /**
@@ -229,6 +229,22 @@ NEFORCE_CONSTEXPR20 void sequence_fill(Iterator first, Iterator last, T value) {
         *first++ = value;
         ++value;
     }
+}
+
+/**
+ * @brief 顺序填充递增序列（别名）
+ * @tparam Iterator 输出迭代器类型
+ * @tparam T 值类型
+ * @param first 范围起始迭代器
+ * @param last 范围结束迭代器
+ * @param value 起始值
+ *
+ * 用从value开始的连续值填充范围 [first, last)。
+ */
+template <typename Iterator, typename T>
+NEFORCE_DEPRECATED_FOR("using sequence_fill instead of iota")
+NEFORCE_CONSTEXPR20 void iota(Iterator first, Iterator last, T value) {
+    _NEFORCE sequence_fill(first, last, _NEFORCE move(value));
 }
 
 /** @} */ // NumericAlgorithms

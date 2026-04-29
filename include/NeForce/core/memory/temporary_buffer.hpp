@@ -48,13 +48,6 @@ private:
     pointer buffer_ = nullptr;   ///< 缓冲区指针
 
 private:
-    /**
-     * @brief 分配缓冲区内存
-     * @throws allocate_exception 如果内存分配失败
-     *
-     * 尝试分配请求大小的内存，如果失败则尝试分配一半大小，直到成功或大小为0。
-     * 调整内存大小以避开数值溢出问题。
-     */
     NEFORCE_CONSTEXPR20 void allocate_buffer() {
         original_len_ = len_;
         buffer_ = 0;
@@ -72,32 +65,40 @@ private:
         }
     }
 
-    /**
-     * @brief 初始化缓冲区（平凡可复制类型特化）
-     * @tparam U 值类型
-     * @param val 初始化值
-     *
-     * 对于平凡可复制类型，不需要初始化缓冲区。
-     */
     template <typename U = value_type, enable_if_t<is_trivially_copy_assignable_v<U>, int> = 0>
-    NEFORCE_CONSTEXPR20 void initialize_buffer(const U& val) noexcept {}
+    NEFORCE_CONSTEXPR20 void initialize_buffer(const U&) noexcept {}
 
-    /**
-     * @brief 初始化缓冲区（非平凡可复制类型）
-     * @tparam U 值类型
-     * @param val 初始化值
-     * @throws memory_exception 当值类型为非平凡类型时，如果构造过程中发生异常
-     *
-     * 对于非平凡可复制类型，使用未初始化填充算法初始化缓冲区。
-     */
     template <typename U = value_type, enable_if_t<!is_trivially_copy_assignable_v<U>, int> = 0>
-    NEFORCE_CONSTEXPR20 void initialize_buffer(const U& val) {
-        _NEFORCE uninitialized_fill_n(buffer_, len_, val);
+    NEFORCE_CONSTEXPR20 void initialize_buffer(const U& value) {
+        _NEFORCE uninitialized_fill_n(buffer_, len_, value);
     }
 
 public:
-    temporary_buffer(const temporary_buffer&) = delete; ///< 禁止复制构造
-    void operator=(const temporary_buffer&) = delete;   ///< 禁止复制赋值
+    temporary_buffer() noexcept = default;
+
+    temporary_buffer(const temporary_buffer&) = delete;            ///< 禁止复制构造
+    temporary_buffer& operator=(const temporary_buffer&) = delete; ///< 禁止复制赋值
+
+    temporary_buffer(temporary_buffer&& other) noexcept :
+    original_len_(other.original_len_),
+    len_(other.len_),
+    buffer_(other.buffer_) {
+        other.original_len_ = 0;
+        other.len_ = 0;
+        other.buffer_ = nullptr;
+    }
+    temporary_buffer& operator=(temporary_buffer&& other) noexcept {
+        if (addressof(other) == this) {
+            return *this;
+        }
+        original_len_ = other.original_len_;
+        len_ = other.len_;
+        buffer_ = other.buffer_;
+        other.original_len_ = 0;
+        other.len_ = 0;
+        other.buffer_ = nullptr;
+        return *this;
+    }
 
     /**
      * @brief 构造函数
@@ -118,7 +119,9 @@ public:
                 this->initialize_buffer(*first);
             }
         } catch (...) {
-            allocator_type::deallocate(buffer_);
+            if (buffer_ != nullptr) {
+                allocator_type::deallocate(buffer_);
+            }
             buffer_ = 0;
             len_ = 0;
             throw;
@@ -131,8 +134,10 @@ public:
      * 销毁缓冲区中的对象并释放内存。
      */
     NEFORCE_CONSTEXPR20 ~temporary_buffer() {
-        _NEFORCE destroy(buffer_, buffer_ + len_);
-        allocator_type::deallocate(buffer_);
+        if (buffer_ != nullptr) {
+            _NEFORCE destroy(buffer_, buffer_ + len_);
+            allocator_type::deallocate(buffer_);
+        }
     }
 
     /**

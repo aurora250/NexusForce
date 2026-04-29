@@ -12,7 +12,7 @@
 #include "NeForce/compress/lz4_compress.hpp"
 #include "NeForce/compress/zlib_compress.hpp"
 #include "NeForce/core/algorithm/algorithm.hpp"
-#include "NeForce/core/algorithm/ext_sort.hpp"
+#include "NeForce/core/algorithm/leonardo_heap.hpp"
 #include "NeForce/core/async/async.hpp"
 #include "NeForce/core/async/barrier.hpp"
 #include "NeForce/core/async/generator.hpp"

@@ -95,6 +95,10 @@ private:
     mutable mutex mutex_{};        ///< 互斥锁
     console_size last_size_{0, 0}; ///< 上次记录的控制台尺寸
 
+    bool alt_buffer_active_ = false; // 交替缓冲区是否激活
+    bool mouse_enabled_ = false;     // 鼠标输入是否开启
+    int pending_char_ = -1;          // kbhit 预读的字符，-1 表示无待处理字符
+
 private:
     void print_string_unsafe(const string& str) const { print_string_unsafe(str.view()); }
     void print_string_unsafe(string_view str) const;
@@ -109,6 +113,7 @@ private:
     console_size get_console_size_unsafe() const;
 
     void flush_unsafe() const;
+    void ignore_unsafe() const;
 
     void beep_unsafe() const;
     void flash_screen_unsafe() const;
@@ -140,6 +145,11 @@ public:
      * @brief 刷新输出缓冲区
      */
     void flush();
+
+    /**
+     * @brief 抛弃输入缓冲区中的一行
+     */
+    void ignore();
 
     /**
      * @brief 打印字符串
@@ -341,6 +351,94 @@ public:
      * @brief 重置颜色
      */
     void reset_color();
+
+    /**
+     * @brief 设置粗体
+     * @param enable 是否启用粗体
+     */
+    void set_bold(bool enable = true);
+
+    /**
+     * @brief 设置下划线
+     * @param enable 是否启用下划线
+     */
+    void set_underline(bool enable = true);
+
+    /**
+     * @brief 设置闪烁
+     * @param enable 是否启用闪烁
+     */
+    void set_blink(bool enable = true);
+
+    /**
+     * @brief 设置反色（交换前景色与背景色）
+     * @param enable 是否启用反色
+     */
+    void set_reverse(bool enable = true);
+
+    /**
+     * @brief 重置所有文本属性
+     */
+    void reset_text_attributes();
+
+    /**
+     * @brief 设置控制台窗口标题
+     * @param title 标题字符串
+     */
+    void set_window_title(string_view title);
+
+    /**
+     * @brief 启用或禁用交替屏幕缓冲区
+     * @param enable 是否启用交替屏幕缓冲区
+     */
+    void enable_alternate_screen_buffer(bool enable = true);
+
+    /**
+     * @brief 禁用交替屏幕缓冲区
+     */
+    void disable_alternate_screen_buffer();
+
+    /**
+     * @brief 设置滚动区域
+     * @param top 滚动区域起始行（从 1 开始）
+     * @param bottom 滚动区域结束行（从 1 开始）
+     */
+    void set_scroll_region(int top, int bottom);
+
+    /**
+     * @brief 重置滚动区域为整个屏幕
+     */
+    void reset_scroll_region();
+
+    /**
+     * @brief 启用或禁用鼠标输入捕获
+     * @param enable 是否启用鼠标输入捕获
+     * @note 鼠标事件序列以 ESC [< 开头，需通过 read() 或 getch() 自行解析
+     */
+    void enable_mouse(bool enable = true);
+
+    /**
+     * @brief 禁用鼠标输入捕获
+     */
+    void disable_mouse();
+
+    /**
+     * @brief 检测当前是否已启用鼠标输入
+     * @return 是否已启用鼠标输入
+     */
+    NEFORCE_NODISCARD bool is_mouse_enabled() const;
+
+    /**
+     * @brief 检查是否有键盘输入可读（非阻塞）
+     * @return 是否有键盘输入可读
+     */
+    NEFORCE_NODISCARD bool kbhit();
+
+    /**
+     * @brief 读取一个字符（无回显，若无按键则阻塞）
+     * @return 读取的字符（可能为负值表示出错）
+     */
+    int getch();
 
     /**
      * @brief 显示进度条
