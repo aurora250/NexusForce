@@ -80,8 +80,8 @@ TEST(MD5Test, HashExact64Bytes) {
 
 TEST(MD5Test, HashExact120Bytes) {
     constexpr const char* const msg = "1234567890123456789012345678901234567890"
-                            "1234567890123456789012345678901234567890"
-                            "1234567890123456789012345678901234567890";
+                                      "1234567890123456789012345678901234567890"
+                                      "1234567890123456789012345678901234567890";
     static_assert(char_traits<char>::length(msg) == 120, "must be 120 bytes");
     const cbyte_view input{reinterpret_cast<const byte_t*>(msg), 120};
     const byte_vector result = MD5::hash(input);

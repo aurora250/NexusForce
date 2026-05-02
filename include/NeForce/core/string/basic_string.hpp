@@ -2728,7 +2728,9 @@ public:
      * @param other 另一个字符串
      * @return 是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const basic_string& other) const noexcept { return equal_to(other.view()); }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const basic_string& other) const noexcept {
+        return equal_to(other.view());
+    }
 
     /**
      * @brief 与字符串视图相等比较
@@ -2744,7 +2746,9 @@ public:
      * @param str C风格字符串
      * @return 是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept { return equal_to(view_type(str)); }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept {
+        return equal_to(view_type(str));
+    }
 
     /**
      * @brief 转换为小写

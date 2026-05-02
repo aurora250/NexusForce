@@ -115,7 +115,9 @@ public:
     /**
      * @brief 相等比较
      */
-    NEFORCE_NODISCARD constexpr bool equal_to(const uint128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const uint128_t& rhs) const noexcept {
+        return hi == rhs.hi && lo == rhs.lo;
+    }
 
     /**
      * @brief 小于比较
@@ -405,7 +407,9 @@ public:
     /**
      * @brief 相等比较
      */
-    NEFORCE_NODISCARD constexpr bool equal_to(const int128_t& rhs) const noexcept { return hi == rhs.hi && lo == rhs.lo; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const int128_t& rhs) const noexcept {
+        return hi == rhs.hi && lo == rhs.lo;
+    }
 
     /**
      * @brief 小于比较（考虑符号）

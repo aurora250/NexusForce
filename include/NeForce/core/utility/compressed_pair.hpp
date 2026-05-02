@@ -143,7 +143,8 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * @param y 要比较的压缩对
      * @return 如果值相等返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool equal_to(const compressed_pair& y) const noexcept(noexcept(this->value == y.value)) {
+    NEFORCE_NODISCARD constexpr bool equal_to(const compressed_pair& y) const
+            noexcept(noexcept(this->value == y.value)) {
         return this->value == y.value;
     }
 
@@ -152,7 +153,8 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * @param y 要比较的压缩对
      * @return 如果当前值小于另一个值返回true，否则返回false
      */
-    NEFORCE_NODISCARD constexpr bool less_than(const compressed_pair& y) const noexcept(noexcept(this->value < y.value)) {
+    NEFORCE_NODISCARD constexpr bool less_than(const compressed_pair& y) const
+            noexcept(noexcept(this->value < y.value)) {
         return this->value < y.value;
     }
 };

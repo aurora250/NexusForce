@@ -147,12 +147,12 @@ TEST(Debug, TestCatch) {
 }
 
 TEST(ModTest, FloatingPoint) {
-    EXPECT_DOUBLE_EQ(static_cast<double>(mod(5.5L, 2.0L)), 1.5);
-    EXPECT_DOUBLE_EQ(static_cast<double>(mod(5.0L, 2.0L)), 1.0);
-    EXPECT_THROW(ignore = mod<decimal_t>(1.0L, 0.0L), math_exception);
-    EXPECT_TRUE(is_nan(mod<decimal_t>(numeric_traits<decimal_t>::quiet_nan(), 1.0)));
-    EXPECT_TRUE(is_nan(mod<decimal_t>(1.0, numeric_traits<decimal_t>::quiet_nan())));
-    EXPECT_TRUE(is_nan(mod<decimal_t>(numeric_traits<decimal_t>::infinity(), 1.0)));
+    EXPECT_DOUBLE_EQ(mod(5.5, 2.0), 1.5);
+    EXPECT_DOUBLE_EQ(mod(5.0, 2.0), 1.0);
+    EXPECT_THROW(ignore = mod<float64_t>(1.0, 0.0), math_exception);
+    EXPECT_TRUE(is_nan(mod<float64_t>(numeric_traits<float64_t>::quiet_nan(), 1.0)));
+    EXPECT_TRUE(is_nan(mod<float64_t>(1.0, numeric_traits<float64_t>::quiet_nan())));
+    EXPECT_TRUE(is_nan(mod<float64_t>(numeric_traits<float64_t>::infinity(), 1.0)));
 }
 
 TEST(ModTest, Integral) {

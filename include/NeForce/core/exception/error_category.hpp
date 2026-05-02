@@ -24,7 +24,9 @@ public:
     virtual bool equivalent(const error_code& code, int condition) const noexcept;
 
     NEFORCE_NODISCARD bool equal_to(const error_category& rhs) const noexcept { return this == &rhs; }
-    NEFORCE_NODISCARD bool less_than(const error_category& rhs) const noexcept { return less<const error_category*>()(this, &rhs); }
+    NEFORCE_NODISCARD bool less_than(const error_category& rhs) const noexcept {
+        return less<const error_category*>()(this, &rhs);
+    }
 };
 
 
