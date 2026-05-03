@@ -1176,7 +1176,7 @@ public:
         total_sec = total_sec >= 0 ? total_sec : -total_sec;
         const int64_t hours = total_sec / 3600;
         const int64_t minutes = (total_sec % 3600) / 60;
-        return _NEFORCE format("{}{:02d}:{:02d}", sign, hours, minutes);
+        return sign + _NEFORCE format("{:02d}:{:02d}", hours, minutes);
     }
 
     /**
@@ -1213,13 +1213,14 @@ public:
 
     /**
      * @brief 转换为 RFC 3339
-     * @return 格式为 YYYY-MM-DDTHH:MM:SS±HH:MM 或 YYYY-MM-DDTHH:MM:SSZ
+     * @return 格式为 YYYY-MM-DDTHH:MM:SSZ 或 YYYY-MM-DDTHH:MM:SS±HH:MM
+     * @note RFC 3339 要求必须包含时区信息
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_RFC3339() const {
         if (has_timezone_) {
             return date_.to_string() + "T" + time_.to_string() + to_offset_string();
         } else {
-            return date_.to_string() + "T" + time_.to_string();
+            return date_.to_string() + "T" + time_.to_string() + "Z";
         }
     }
 
@@ -1227,7 +1228,7 @@ public:
      * @brief 解析 RFC 3339
      * @param view RFC 3339 格式字符串
      * @return 解析得到的日期时间
-     * @throws value_exception 格式错误时抛出
+     * @throws value_exception 格式错误或缺少时区信息时抛出
      */
     NEFORCE_NODISCARD static constexpr datetime parse_RFC3339(const string_view view) {
         if (view.size() < 20 || view[10] != 'T') {
@@ -1237,21 +1238,29 @@ public:
         const _NEFORCE date d = date::parse(view.substr(0, 10));
         const _NEFORCE time t = time::parse(view.substr(11, 8));
 
+        if (view.size() == 19) {
+            NEFORCE_THROW_EXCEPTION(value_exception("RFC3339 requires timezone offset (Z or ±HH:MM)."));
+        }
+
         if (view.size() > 19 && view[19] == 'Z') {
+            if (view.size() != 20) {
+                NEFORCE_THROW_EXCEPTION(value_exception("Invalid RFC3339 format: trailing characters after 'Z'."));
+            }
             return datetime(d, t, 0);
         } else if (view.size() > 19 && (view[19] == '+' || view[19] == '-')) {
+            if (view.size() != 25) {
+                NEFORCE_THROW_EXCEPTION(value_exception("Invalid RFC3339 timezone offset format."));
+            }
+            if (view[22] != ':') {
+                NEFORCE_THROW_EXCEPTION(value_exception("Invalid RFC3339 timezone offset format, expected ':'."));
+            }
+
             const char sign = view[19];
-            int hours = 0, minutes = 0;
-            size_t pos = 20;
-            if (view.size() >= pos + 2) {
-                hours = integer32::parse(view.substr(pos, 2)).value();
-                pos += 2;
-                if (view.size() >= pos + 3 && view[pos] == ':') {
-                    pos++;
-                    if (view.size() >= pos + 2) {
-                        minutes = integer32::parse(view.substr(pos, 2)).value();
-                    }
-                }
+            const int hours = integer32::parse(view.substr(20, 2)).value();
+            const int minutes = integer32::parse(view.substr(23, 2)).value();
+
+            if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+                NEFORCE_THROW_EXCEPTION(value_exception("Invalid RFC3339 timezone offset values."));
             }
 
             int32_t total_offset = hours * 3600 + minutes * 60;
@@ -1260,7 +1269,8 @@ public:
             }
             return datetime(d, t, total_offset);
         }
-        return datetime(d, t);
+
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid RFC3339 datetime format."));
     }
 
     /**

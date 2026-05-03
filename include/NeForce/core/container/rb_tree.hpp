@@ -565,7 +565,8 @@ public:
      */
     NEFORCE_CONSTEXPR20 void decrement() noexcept {
         NEFORCE_DEBUG_VERIFY(node_ && container_, "Attempting to decrement a null pointer");
-        NEFORCE_DEBUG_VERIFY(node_ != container_->header_, "Attempting to decrement out of boundary");
+        NEFORCE_DEBUG_VERIFY(!container_->empty() || node_ != container_->header_,
+                             "Attempting to decrement on empty container");
         base_type::decrement();
     }
 
@@ -574,7 +575,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD bool equal(const rb_tree_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD bool equal_to(const rb_tree_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return node_ == rhs.node_;
     }

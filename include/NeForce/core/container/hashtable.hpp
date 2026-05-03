@@ -241,7 +241,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD bool equal(const hashtable_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD bool equal_to(const hashtable_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }
@@ -250,7 +250,13 @@ public:
      * @brief 获取底层指针
      * @return 当前节点指针
      */
-    NEFORCE_NODISCARD pointer base() const noexcept { return current_; }
+    NEFORCE_NODISCARD const node_type* base() const noexcept { return current_; }
+
+    /**
+     * @brief 获取桶索引
+     * @return 当前桶索引
+     */
+    NEFORCE_NODISCARD size_type bucket() const noexcept { return bucket_; }
 
     /**
      * @brief 获取关联容器
@@ -752,21 +758,45 @@ private:
      * @return 是否相等
      */
     bool equal_large(const hashtable& rhs) const {
-        vector<value_type> elements_lhs, elements_rhs;
-        elements_lhs.reserve(size_);
-        elements_rhs.reserve(size_);
+        if (size_ != rhs.size_) {
+            return false;
+        }
+
+        vector<const value_type*> ptrs_lhs, ptrs_rhs;
+        ptrs_lhs.reserve(size_);
+        ptrs_rhs.reserve(size_);
 
         for (const_iterator it = begin(); it != end(); ++it) {
-            elements_lhs.push_back(*it);
+            ptrs_lhs.push_back(&(*it));
         }
         for (const_iterator it = rhs.begin(); it != rhs.end(); ++it) {
-            elements_rhs.push_back(*it);
+            ptrs_rhs.push_back(&(*it));
         }
 
-        _NEFORCE sort(elements_lhs.begin(), elements_lhs.end());
-        _NEFORCE sort(elements_rhs.begin(), elements_rhs.end());
+        auto key_less = [this](const value_type* a, const value_type* b) {
+            return extracter_(*a) < extracter_(*b);
+        };
+        auto rhs_key_less = [&rhs](const value_type* a, const value_type* b) {
+            return rhs.extracter_(*a) < rhs.extracter_(*b);
+        };
 
-        return elements_lhs == elements_rhs;
+        _NEFORCE sort(ptrs_lhs.begin(), ptrs_lhs.end(), key_less);
+        _NEFORCE sort(ptrs_rhs.begin(), ptrs_rhs.end(), rhs_key_less);
+
+        for (size_type i = 0; i < size_; ++i) {
+            if (!(*ptrs_lhs[i] == *ptrs_rhs[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static iterator to_iterator(const const_iterator& iter) noexcept {
+        return iterator(const_cast<node_type*>(iter.base()), iter.bucket(), iter.container());
+    }
+
+    static const_iterator to_const_iterator(const iterator& iter) noexcept {
+        return const_iterator(const_cast<node_type*>(iter.base()), iter.bucket(), iter.container());
     }
 
 public:
@@ -1294,7 +1324,7 @@ public:
      * @return 指向被删除元素之后位置的常量迭代器
      */
     const_iterator erase(const const_iterator& position) noexcept(is_nothrow_hashable_v<key_type>) {
-        return hashtable::erase(iterator(position));
+        return hashtable::to_const_iterator(hashtable::erase(hashtable::to_iterator(position)));
     }
 
     /**
@@ -1304,7 +1334,8 @@ public:
      * @return 指向最后一个被删除元素之后位置的常量迭代器
      */
     const_iterator erase(const_iterator first, const_iterator last) noexcept(is_nothrow_hashable_v<key_type>) {
-        return hashtable::erase(iterator(first), iterator(last));
+        return hashtable::to_const_iterator(
+                hashtable::erase(hashtable::to_iterator(first), hashtable::to_iterator(last)));
     }
 
     /**
@@ -1401,25 +1432,21 @@ public:
 
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
         link_type first_match = nullptr;
-        link_type last_match = nullptr;
+        link_type after_last = nullptr;
 
         for (link_type curr = buckets_[n]; curr != nullptr; curr = curr->next) {
             if (equals_(extracter_(curr->data), key)) {
                 if (first_match == nullptr) {
                     first_match = curr;
                 }
-                last_match = curr;
-            } else if (first_match != nullptr) {
-                break;
+                after_last = curr->next;
             }
         }
 
         if (first_match == nullptr) {
             return {hashtable::end(), hashtable::end()};
         }
-
-        link_type range_end = (last_match != nullptr) ? last_match->next : nullptr;
-        return {iterator(first_match, n, this), iterator(range_end, n, this)};
+        return {iterator(first_match, n, this), iterator(after_last, n, this)};
     }
 
     /**
@@ -1433,26 +1460,22 @@ public:
         }
 
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
-        const link_type first_match = nullptr;
-        const link_type last_match = nullptr;
+        link_type first_match = nullptr;
+        link_type after_last = nullptr;
 
-        for (const link_type curr = buckets_[n]; curr != nullptr; curr = curr->next) {
+        for (link_type curr = buckets_[n]; curr != nullptr; curr = curr->next) {
             if (equals_(extracter_(curr->data), key)) {
                 if (first_match == nullptr) {
                     first_match = curr;
                 }
-                last_match = curr;
-            } else if (first_match != nullptr) {
-                break;
+                after_last = curr->next;
             }
         }
 
         if (first_match == nullptr) {
             return {hashtable::cend(), hashtable::cend()};
         }
-
-        const link_type range_end = (last_match != nullptr) ? last_match->next : nullptr;
-        return {const_iterator(first_match, n, this), const_iterator(range_end, n, this)};
+        return {const_iterator(first_match, n, this), const_iterator(after_last, n, this)};
     }
 
     /**

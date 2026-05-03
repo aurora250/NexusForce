@@ -58,6 +58,9 @@ public:
         friend class multimap;
 
     public:
+        explicit value_compare(Compare comp) :
+        comp_(comp) {}
+
         /**
          * @brief 比较两个键值对
          * @param lhs 左侧值
@@ -289,13 +292,13 @@ public:
      * @brief 获取键比较函数对象
      * @return 键比较函数对象的副本
      */
-    NEFORCE_NODISCARD key_compare key_comp() const noexcept { return tree_.key_comp(); }
+    NEFORCE_NODISCARD key_compare key_comp() const noexcept { return tree_.key_compare(); }
 
     /**
      * @brief 获取值比较函数对象
      * @return 值比较函数对象的副本
      */
-    NEFORCE_NODISCARD value_compare value_comp() const noexcept { return value_compare(tree_.key_comp()); }
+    NEFORCE_NODISCARD value_compare value_comp() const noexcept { return value_compare(tree_.key_compare()); }
 
     /**
      * @brief 在multimap中就地构造元素

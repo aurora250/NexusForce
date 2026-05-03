@@ -111,7 +111,7 @@ public:
      */
     NEFORCE_NODISCARD constexpr difference_type distance_to(const array_iterator& other) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == other.container_, "Attempting to distance to a different container");
-        return static_cast<difference_type>(other.current_ - current_);
+        return static_cast<difference_type>(current_ - other.current_);
     }
 
     /**
@@ -128,7 +128,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD constexpr bool equal(const array_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const array_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }
@@ -271,13 +271,17 @@ public:
      * @brief 获取常量反向起始迭代器
      * @return 指向无效元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept { return reverse_iterator(cend()); }
+    NEFORCE_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept {
+        return const_reverse_iterator(cend());
+    }
 
     /**
      * @brief 获取常量反向结束迭代器
      * @return 指向第一个元素的常量反向迭代器
      */
-    NEFORCE_NODISCARD constexpr const_reverse_iterator crend() const noexcept { return reverse_iterator(cbegin()); }
+    NEFORCE_NODISCARD constexpr const_reverse_iterator crend() const noexcept {
+        return const_reverse_iterator(cbegin());
+    }
 
     /**
      * @brief 获取数组大小
@@ -490,30 +494,30 @@ public:
         return array_[0];
     }
 
-    NEFORCE_NODISCARD reference operator[](size_type) noexcept {
+    NEFORCE_NODISCARD reference operator[](size_type) {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array index out of range"));
         return *data();
     }
-    NEFORCE_NODISCARD const_reference operator[](size_type) const noexcept {
+    NEFORCE_NODISCARD const_reference operator[](size_type) const {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array index out of range"));
         return *data();
     }
 
-    NEFORCE_NODISCARD reference front() noexcept {
+    NEFORCE_NODISCARD reference front() {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
-    NEFORCE_NODISCARD const_reference front() const noexcept {
-        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
-        return *data();
-    }
-
-    NEFORCE_NODISCARD reference back() noexcept {
+    NEFORCE_NODISCARD const_reference front() const {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
 
-    NEFORCE_NODISCARD const_reference back() const noexcept {
+    NEFORCE_NODISCARD reference back() {
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
+        return *data();
+    }
+
+    NEFORCE_NODISCARD const_reference back() const {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
@@ -617,6 +621,12 @@ NEFORCE_NODISCARD constexpr const T&& get(const array<T, Size>&& arr) noexcept {
 template <typename T, size_t Size>
 struct tuple_size<array<T, Size>> : integral_constant<size_t, Size> {};
 
+#define __NEFORCE_BUILD_ARRAY_TUPLE_SIZE(CV) \
+    template <typename T, size_t Size>       \
+    struct tuple_size<array<T, Size> CV> : integral_constant<size_t, Size> {};
+NEFORCE_MACRO_RANGES_CV(__NEFORCE_BUILD_ARRAY_TUPLE_SIZE)
+#undef __NEFORCE_BUILD_ARRAY_TUPLE_SIZE
+
 /**
  * @brief 数组的元组元素类型特化
  * @tparam Idx 索引位置
@@ -638,4 +648,18 @@ NEFORCE_INLINE17 constexpr size_t tuple_size_v<const array<T, Size>> = Size; ///
 /** @} */ // Tuple
 
 NEFORCE_END_NAMESPACE__
+
+#ifdef NEFORCE_STANDARD_17
+#    include <utility>
+namespace std {
+    template <typename T, size_t Size>
+    struct tuple_size<_NEFORCE array<T, Size>> : _NEFORCE integral_constant<_NEFORCE size_t, Size> {};
+
+    template <size_t Idx, typename T, size_t Size>
+    struct tuple_element<Idx, _NEFORCE array<T, Size>> {
+        using type = _NEFORCE tuple_element_t<Idx, _NEFORCE array<T, Size>>;
+    };
+} // namespace std
+#endif
+
 #endif // NEFORCE_CORE_CONTAINER_ARRAY_HPP__

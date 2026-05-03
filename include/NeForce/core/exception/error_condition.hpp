@@ -3,7 +3,7 @@
 #include "NeForce/core/exception/error_category.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-class error_condition : icomparable<error_condition> {
+class error_condition : public icomparable<error_condition> {
 private:
     int value_;
     const error_category* category_;

@@ -8,7 +8,9 @@ add_executable(NexusForceUnitTests
         test_file.cpp
         test_memory.cpp
         test_numeric.cpp
+        test_string.cpp
         test_system.cpp
+        test_time.cpp
         test_utility.cpp
 )
 

@@ -130,7 +130,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal(const basic_string_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const basic_string_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(str_ == rhs.str_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }

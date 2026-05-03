@@ -58,6 +58,9 @@ public:
         friend class map;
 
     public:
+        explicit value_compare(Compare comp) :
+        comp_(comp) {}
+
         /**
          * @brief 比较两个键值对
          * @param lhs 左侧值

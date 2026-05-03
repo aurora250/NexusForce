@@ -153,7 +153,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否指向同一节点
      */
-    NEFORCE_NODISCARD bool equal(const list_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD bool equal_to(const list_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }
@@ -804,7 +804,7 @@ public:
      * 此操作为常数时间，不涉及元素构造和析构。
      */
     void transfer(iterator position, iterator first, iterator last) {
-        if (position == last) {
+        if (position.base() == last.base()) {
             return;
         }
         last.base()->prev->next = position.base();
@@ -868,7 +868,7 @@ public:
     void splice(iterator position, list& other, iterator iter) {
         iterator j = iter;
         ++j;
-        if (iter == position || j == position) {
+        if (iter.base() == position.base() || j.base() == position.base()) {
             return;
         }
         list::transfer(position, iter, j);

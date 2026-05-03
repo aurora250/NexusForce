@@ -96,6 +96,9 @@ public:
      * @return 自身引用
      */
     NEFORCE_CONSTEXPR20 bit_reference& operator=(const bool value) noexcept {
+        if (ptr_ == nullptr) {
+            return *this;
+        }
         if (value) {
             *ptr_ |= mask_;
         } else {
@@ -108,12 +111,22 @@ public:
      * @brief 转换为布尔值
      * @return 位的布尔值
      */
-    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept { return *ptr_ & mask_; }
+    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept {
+        if (ptr_ == nullptr) {
+            return false;
+        }
+        return *ptr_ & mask_;
+    }
 
     /**
      * @brief 翻转位值
      */
-    NEFORCE_CONSTEXPR20 void flip() const noexcept { *ptr_ ^= mask_; }
+    NEFORCE_CONSTEXPR20 void flip() const noexcept {
+        if (ptr_ == nullptr) {
+            return;
+        }
+        *ptr_ ^= mask_;
+    }
 
     /**
      * @brief 交换两个位引用
@@ -214,6 +227,13 @@ public:
 
     /**
      * @brief 构造函数
+     * @param bm 位图指针
+     */
+    explicit NEFORCE_CONSTEXPR20 bitmap_iterator(const container_type* bm) noexcept :
+    container_(bm) {}
+
+    /**
+     * @brief 构造函数
      * @param ptr 指向字的指针
      * @param offset 位偏移
      * @param bm 位图指针
@@ -304,7 +324,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_CONSTEXPR20 bool equal(const bitmap_iterator& rhs) const noexcept {
+    NEFORCE_CONSTEXPR20 bool equal_to(const bitmap_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return ptr_ == rhs.ptr_ && off_ == rhs.off_;
     }
@@ -323,7 +343,7 @@ public:
      * @brief 获取底层指针
      * @return 当前字的指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer base() const noexcept { return ptr_; }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 decltype(auto) base() const noexcept { return ptr_; }
 
     /**
      * @brief 获取关联容器
@@ -340,7 +360,7 @@ public:
  * 位图是一种内存高效的布尔值容器，每个元素只占用一个位。
  * 支持随机访问、动态增长和标准容器操作。
  */
-class bitmap : public icollector<bitmap> {
+class bitmap : public icomparable<bitmap> {
 public:
     using value_type = bool;                                                  ///< 值类型
     using pointer = bit_reference*;                                           ///< 指针类型
@@ -417,6 +437,7 @@ private:
             }
 
             reset();
+            ptr = other.ptr;
             cpair = _NEFORCE move(other.cpair);
             other.ptr = nullptr;
             other.cpair.value = 0;
@@ -456,8 +477,8 @@ private:
         NEFORCE_CONSTEXPR20 size_t capacity() const noexcept { return cpair.value; }
     };
 
-    iterator start_{};      ///< 起始迭代器
-    iterator finish_{};     ///< 结束迭代器
+    iterator start_{this};  ///< 起始迭代器
+    iterator finish_{this}; ///< 结束迭代器
     bit_storage storage_{}; ///< 底层存储
 
 private:
@@ -542,8 +563,7 @@ private:
         auto new_finish = bitmap::bit_copy(begin(), position, new_start);
         _NEFORCE fill_n(new_finish, extra_len, value);
         new_finish += static_cast<difference_type>(extra_len);
-        bitmap::bit_copy(position, end(), new_finish);
-        new_finish += (end() - position);
+        new_finish = bitmap::bit_copy(position, end(), new_finish);
 
         storage_ = _NEFORCE move(new_storage);
         start_ = new_start;

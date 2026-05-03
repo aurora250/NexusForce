@@ -125,7 +125,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal(const vector_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const vector_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }
@@ -921,7 +921,7 @@ public:
      */
     NEFORCE_CONSTEXPR20 T pop_back_v() noexcept(is_nothrow_destructible_v<T> && is_nothrow_move_constructible_v<T>) {
         NEFORCE_DEBUG_VERIFY(!empty(), "pop called in an empty vector")
-        T value{_NEFORCE move(finish_ - 1)};
+        T value{_NEFORCE move(*(finish_ - 1))};
         _NEFORCE destroy(finish_ - 1);
         --finish_;
         return _NEFORCE move(value);

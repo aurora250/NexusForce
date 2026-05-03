@@ -493,6 +493,13 @@ make_pair(T1&& x, T2&& y) noexcept(conjunction<is_nothrow_constructible<unwrap_r
 template <typename... Types>
 struct tuple_size<tuple<Types...>> : integral_constant<size_t, sizeof...(Types)> {};
 
+#define __NEFORCE_BUILD_TUPLE_TUPLE_SIZE(CV) \
+    template <typename... Types>             \
+    struct tuple_size<tuple<Types...> CV> : integral_constant<size_t, sizeof...(Types)> {};
+NEFORCE_MACRO_RANGES_CV(__NEFORCE_BUILD_TUPLE_TUPLE_SIZE)
+#undef __NEFORCE_BUILD_TUPLE_TUPLE_SIZE
+
+
 /**
  * @struct tuple_element
  * @brief 获取tuple元素类型的特化
@@ -538,6 +545,12 @@ struct tuple_element : tuple_element<Index, tuple<Types...>> {};
  */
 template <typename T1, typename T2>
 struct tuple_size<pair<T1, T2>> : integral_constant<size_t, 2> {};
+
+#define __NEFORCE_BUILD_PAIR_TUPLE_SIZE(CV) \
+    template <typename T1, typename T2>     \
+    struct tuple_size<pair<T1, T2> CV> : integral_constant<size_t, 2> {};
+NEFORCE_MACRO_RANGES_CV(__NEFORCE_BUILD_PAIR_TUPLE_SIZE)
+#undef __NEFORCE_BUILD_PAIR_TUPLE_SIZE
 
 /**
  * @brief pair的tuple_element特化

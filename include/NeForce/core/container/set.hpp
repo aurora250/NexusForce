@@ -185,6 +185,18 @@ public:
      * @brief 获取常量起始迭代器
      * @return 指向最小元素的常量迭代器
      */
+    NEFORCE_NODISCARD const_iterator begin() const noexcept { return tree_.cbegin(); }
+
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向最后一个元素之后位置的常量迭代器
+     */
+    NEFORCE_NODISCARD const_iterator end() const noexcept { return tree_.cend(); }
+
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向最小元素的常量迭代器
+     */
     NEFORCE_NODISCARD const_iterator cbegin() const noexcept { return tree_.cbegin(); }
 
     /**
@@ -204,6 +216,18 @@ public:
      * @return 指向最小元素之前位置的反向迭代器
      */
     NEFORCE_NODISCARD reverse_iterator rend() noexcept { return tree_.rend(); }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最大元素的常量反向迭代器
+     */
+    NEFORCE_NODISCARD const_reverse_iterator rbegin() const noexcept { return tree_.crbegin(); }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向最小元素之前位置的常量反向迭代器
+     */
+    NEFORCE_NODISCARD const_reverse_iterator rend() const noexcept { return tree_.crend(); }
 
     /**
      * @brief 获取常量反向起始迭代器
@@ -239,13 +263,13 @@ public:
      * @brief 获取键比较函数对象
      * @return 键比较函数对象的副本
      */
-    NEFORCE_NODISCARD key_compare key_comp() const noexcept { return tree_.key_comp(); }
+    NEFORCE_NODISCARD key_compare key_comp() const noexcept { return tree_.key_compare(); }
 
     /**
      * @brief 获取值比较函数对象
      * @return 值比较函数对象的副本
      */
-    NEFORCE_NODISCARD value_compare value_comp() const noexcept { return value_compare(tree_.key_comp()); }
+    NEFORCE_NODISCARD value_compare value_comp() const noexcept { return value_compare(tree_.key_compare()); }
 
     /**
      * @brief 在set中就地构造元素

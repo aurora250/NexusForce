@@ -8,7 +8,7 @@
  * 此文件定义了迭代器接口，为迭代器类型提供统一的操作接口。
  */
 
-#include "NeForce/core/typeinfo/type_traits.hpp"
+#include "NeForce/core/interface/icommon.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -26,7 +26,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 基于CRTP模式，要求派生类实现核心操作方法。
  */
 template <typename Iterator>
-struct iiterator {
+struct iiterator : icomparable<Iterator> {
 private:
     constexpr Iterator& derived() noexcept { return static_cast<Iterator&>(*this); }
 
@@ -149,48 +149,6 @@ public:
     NEFORCE_NODISCARD constexpr decltype(auto) operator-(const Iterator& other) const noexcept {
         return derived().distance_to(other);
     }
-
-    /**
-     * @brief 相等比较操作符
-     * @param rhs 右侧迭代器
-     * @return 如果迭代器相等返回true，否则返回false
-     */
-    NEFORCE_NODISCARD constexpr bool operator==(const Iterator& rhs) const noexcept { return derived().equal(rhs); }
-
-    /**
-     * @brief 不等比较操作符
-     * @param rhs 右侧迭代器
-     * @return 如果迭代器不相等返回true，否则返回false
-     */
-    NEFORCE_NODISCARD constexpr bool operator!=(const Iterator& rhs) const noexcept { return !(*this == rhs); }
-
-    /**
-     * @brief 小于比较操作符
-     * @param rhs 右侧迭代器
-     * @return 如果当前迭代器在rhs之前返回true，否则返回false
-     */
-    NEFORCE_NODISCARD constexpr bool operator<(const Iterator& rhs) const noexcept { return derived().less_than(rhs); }
-
-    /**
-     * @brief 大于比较操作符
-     * @param rhs 右侧迭代器
-     * @return 如果当前迭代器在rhs之后返回true，否则返回false
-     */
-    NEFORCE_NODISCARD constexpr bool operator>(const Iterator& rhs) const noexcept { return rhs < derived(); }
-
-    /**
-     * @brief 小于等于比较操作符
-     * @param rhs 右侧迭代器
-     * @return 如果当前迭代器不在rhs之后返回true，否则返回false
-     */
-    NEFORCE_NODISCARD constexpr bool operator<=(const Iterator& rhs) const noexcept { return !(derived() > rhs); }
-
-    /**
-     * @brief 大于等于比较操作符
-     * @param rhs 右侧迭代器
-     * @return 如果当前迭代器不在rhs之前返回true，否则返回false
-     */
-    NEFORCE_NODISCARD constexpr bool operator>=(const Iterator& rhs) const noexcept { return !(derived() < rhs); }
 };
 
 /** @} */ // CRTPInterfaces

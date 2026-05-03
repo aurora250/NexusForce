@@ -214,14 +214,14 @@ public:
      * @param n 偏移量
      * @return 偏移位置元素的引用
      */
-    NEFORCE_NODISCARD reference operator[](const difference_type n) noexcept { return *(*this + n); }
+    NEFORCE_NODISCARD reference operator[](const difference_type n) const noexcept { return *(*this + n); }
 
     /**
      * @brief 相等比较
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD bool equal(const deque_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD bool equal_to(const deque_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }
@@ -487,7 +487,7 @@ private:
         if (first1 != last1) {
             deque::erase(first1, last1);
         } else {
-            deque::insert(first1, last1);
+            deque::insert(first1, first, last);
         }
         return;
     }
@@ -643,10 +643,6 @@ private:
      */
     template <typename Iterator>
     enable_if_t<!is_ranges_fwd_iter_v<Iterator>> insert_ranges(iterator position, Iterator first, Iterator last) {
-        if (last <= first) {
-            return;
-        }
-
         const size_type n = _NEFORCE distance(first, last);
         const size_type dist_before = position - start_;
 
@@ -674,9 +670,6 @@ private:
      */
     template <typename Iterator>
     enable_if_t<is_ranges_fwd_iter_v<Iterator>> insert_ranges(iterator position, Iterator first, Iterator last) {
-        if (last <= first) {
-            return;
-        }
         const size_type n = _NEFORCE distance(first, last);
 
         if (position.current_ == start_.current_) {

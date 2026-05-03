@@ -132,7 +132,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_NODISCARD constexpr bool equal(const basic_string_view_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD constexpr bool equal_to(const basic_string_view_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(data_ == rhs.data_ && size_ == rhs.size_, "Attempting to equal to a different container");
         return idx_ == rhs.idx_;
     }

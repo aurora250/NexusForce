@@ -11,6 +11,7 @@
  */
 
 #include "NeForce/core/container/array.hpp"
+#include "NeForce/core/interface/inumeric.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/memory/bit.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -31,7 +32,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 位数N在编译时确定，因此不能动态改变大小。
  */
 template <size_t N>
-class bitset : public icommon<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
+class bitset : public icomparable<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
 public:
     /**
      * @class reference
@@ -96,11 +97,14 @@ private:
 
 private:
     static constexpr block_type last_block_mask() noexcept {
+        if constexpr (block_count == 0) {
+            return 0;
+        }
         const size_t excess = block_count * bits_per_block - N;
         if (excess == 0) {
             return static_cast<block_type>(~0ULL);
         }
-        return (static_cast<block_type>(1ULL) << (bits_per_block - excess)) - 1;
+        return static_cast<block_type>(~0ULL) >> excess;
     }
 
     NEFORCE_ALWAYS_INLINE constexpr void check_range(const size_t pos) const noexcept {
@@ -145,7 +149,7 @@ public:
 
         for (size_t i = 0; i < M; ++i) {
             const char c = str[i];
-            size_t pos = N - 1 - i;
+            size_t pos = M - 1 - i;
             if (c == one) {
                 set(pos);
             } else if (c == zero) {
@@ -182,7 +186,7 @@ public:
         for (auto& b: blocks) {
             b = ~static_cast<block_type>(0ULL);
         }
-        blocks[block_count - 1] &= last_block_mask();
+        NEFORCE_IF_CONSTEXPR(N > 0) { blocks[block_count - 1] &= last_block_mask(); }
         return *this;
     }
 
@@ -297,7 +301,7 @@ public:
      * @param other 另一个bitset
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator&=(const bitset& other) noexcept {
+    constexpr bitset& operator&=(const bitset& other) noexcept {
         for (size_t i = 0; i < block_count; ++i) {
             blocks[i] &= other.blocks[i];
         }
@@ -309,7 +313,7 @@ public:
      * @param other 另一个bitset
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator|=(const bitset& other) noexcept {
+    constexpr bitset& operator|=(const bitset& other) noexcept {
         for (size_t i = 0; i < block_count; ++i) {
             blocks[i] |= other.blocks[i];
         }
@@ -321,7 +325,7 @@ public:
      * @param other 另一个bitset
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator^=(const bitset& other) noexcept {
+    constexpr bitset& operator^=(const bitset& other) noexcept {
         for (size_t i = 0; i < block_count; ++i) {
             blocks[i] ^= other.blocks[i];
         }
@@ -343,7 +347,7 @@ public:
      * @param pos 左移位数
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator<<=(const uint32_t pos) noexcept {
+    constexpr bitset& operator<<=(const uint32_t pos) noexcept {
         if (pos >= N) {
             reset();
             return *this;
@@ -375,7 +379,7 @@ public:
      * @param pos 右移位数
      * @return 自身引用
      */
-    NEFORCE_NODISCARD constexpr bitset& operator>>=(const uint32_t pos) noexcept {
+    constexpr bitset& operator>>=(const uint32_t pos) noexcept {
         if (pos >= N) {
             reset();
             return *this;
@@ -418,6 +422,7 @@ public:
      * @return 如果所有位都是1返回true
      */
     NEFORCE_NODISCARD constexpr bool all() const noexcept {
+        NEFORCE_IF_CONSTEXPR(N == 0) { return true; }
         for (size_t i = 0; i < block_count - 1; ++i) {
             if (blocks[i] != ~static_cast<block_type>(0ULL)) {
                 return false;
@@ -536,12 +541,6 @@ public:
      * @return 比较结果
      */
     NEFORCE_NODISCARD constexpr bool less_than(const bitset& other) const noexcept { return blocks < other.blocks; }
-
-    /**
-     * @brief 计算哈希值
-     * @return 哈希值
-     */
-    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept { return blocks.to_hash(); }
 
     /**
      * @brief 转换为字符串

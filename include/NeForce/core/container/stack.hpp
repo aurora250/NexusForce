@@ -105,7 +105,7 @@ public:
      */
     template <typename... Args>
     decltype(auto) emplace(Args&&... args) {
-        return seq_.emplace(_NEFORCE forward<Args>(args)...);
+        return seq_.emplace_back(_NEFORCE forward<Args>(args)...);
     }
 
     /**

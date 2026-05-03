@@ -292,7 +292,7 @@ public:
      * @brief 获取最大桶数量
      * @return 最大桶数量
      */
-    NEFORCE_NODISCARD size_type buckets_max_count() const noexcept { return ht_.buckets_max_count(); }
+    NEFORCE_NODISCARD size_type buckets_max_size() const noexcept { return ht_.buckets_max_size(); }
 
     /**
      * @brief 获取指定桶的大小
