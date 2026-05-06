@@ -47,7 +47,7 @@ public:
      *
      * 用于路径分割操作，包含所有可能的路径分隔符。
      */
-    static constexpr auto spliter =
+    static constexpr string_view spliter =
 #ifdef NEFORCE_PLATFORM_WINDOWS
             "\\/";
 #elif defined(NEFORCE_PLATFORM_LINUX)
@@ -73,7 +73,7 @@ public:
      *
      * 使用前向迭代器接口，适用于范围for循环和标准算法。
      */
-    class split_iterator {
+    class NEFORCE_API split_iterator {
     public:
         using value_type = string_view;                 ///< 值类型
         using reference = value_type;                   ///< 引用类型

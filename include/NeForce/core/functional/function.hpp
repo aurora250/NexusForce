@@ -241,7 +241,7 @@ public:
         return false;
     }
 
-    static Res invoke(const storage_data& f, Args&&... args) {
+    static Res invoke(const storage_data& f, Args... args) {
         return _NEFORCE invoke_r<Res>(*base_type::get_pointer(f), _NEFORCE forward<Args>(args)...);
     }
 
@@ -276,7 +276,7 @@ NEFORCE_END_INNER__
 template <typename Res, typename... Args>
 class function<Res(Args...)> : inner::__function_base {
 private:
-    using invoker_type = Res (*)(const inner::storage_data&, Args&&...); ///< 调用器类型
+    using invoker_type = Res (*)(const inner::storage_data&, Args...); ///< 调用器类型
 
 private:
     invoker_type invoker_ = nullptr; ///< 调用器函数指针
@@ -446,7 +446,7 @@ public:
      * @return 调用结果
      * @throw memory_exception 如果function为空
      */
-    Res operator()(Args&&... args) const {
+    Res operator()(Args... args) const {
         if (empty()) {
             NEFORCE_THROW_EXCEPTION(memory_exception("functional pointing to null."));
         }

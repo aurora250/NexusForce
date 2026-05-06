@@ -525,7 +525,7 @@ TEST(StringCompare, Nullptrs) {
 
 TEST(StringCompare, WithCount) {
     EXPECT_EQ(_NEFORCE string_compare("abc", "abd", 2), 0);
-    EXPECT_EQ(_NEFORCE string_compare("abc", "abd", 3), 0);
+    EXPECT_LT(_NEFORCE string_compare("abc", "abd", 3), 0);
 }
 
 TEST(StringCompareIgnoreCase, Equal) { EXPECT_EQ(_NEFORCE string_compare_ignore_case("AbC", "aBc"), 0); }

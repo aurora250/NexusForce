@@ -282,7 +282,11 @@ NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
     if (exp < 0 && -exp <= max_table_exp) {
         return neg_pow10_table[-exp];
     }
-    return static_cast<T>(power(10.0, exp));
+
+    if (exp >= 0) {
+        return static_cast<T>(_NEFORCE power(T(10), static_cast<uint32_t>(exp)));
+    }
+    return static_cast<T>(1) / static_cast<T>(_NEFORCE power(T(10), static_cast<uint32_t>(-exp)));
 }
 
 /**
@@ -325,19 +329,34 @@ constexpr enable_if_t<is_floating_point_v<T>, T> str_to_floats(const string_view
     const char* p_start = p;
 
     if (p != end && (p[0] == 'i' || p[0] == 'I')) {
-        if (p + 3 <= end) {
-            const char c1 = p[1], c2 = p[2];
-            if ((c1 == 'n' || c1 == 'N') && (c2 == 'f' || c2 == 'F')) {
-                const bool terminated = (p + 3 == end) || !is_alpha_or_digit(p[3]);
-                if (terminated) {
-                    p += 3;
-                    if (endptr) {
-                        *endptr = const_cast<char*>(p);
-                    }
-                    const T inf_val = numeric_traits<T>::infinity();
-                    return (sign < 0) ? -inf_val : inf_val;
+        bool is_inf = false;
+
+        if (p + 8 <= end) {
+            if ((p[1] == 'n' || p[1] == 'N') && (p[2] == 'f' || p[2] == 'F') && (p[3] == 'i' || p[3] == 'I') &&
+                (p[4] == 'n' || p[4] == 'N') && (p[5] == 'i' || p[5] == 'I') && (p[6] == 't' || p[6] == 'T') &&
+                (p[7] == 'y' || p[7] == 'Y')) {
+                if (p + 8 == end || !is_alpha_or_digit(p[8])) {
+                    p += 8;
+                    is_inf = true;
                 }
             }
+        }
+
+        if (!is_inf && p + 3 <= end) {
+            if ((p[1] == 'n' || p[1] == 'N') && (p[2] == 'f' || p[2] == 'F')) {
+                if (p + 3 == end || !is_alpha_or_digit(p[3])) {
+                    p += 3;
+                    is_inf = true;
+                }
+            }
+        }
+
+        if (is_inf) {
+            if (endptr) {
+                *endptr = const_cast<char*>(p);
+            }
+            const T inf_val = numeric_traits<T>::infinity();
+            return (sign < 0) ? -inf_val : inf_val;
         }
     }
 
@@ -375,7 +394,7 @@ constexpr enable_if_t<is_floating_point_v<T>, T> str_to_floats(const string_view
 
     while (p != end && *p >= '0' && *p <= '9') {
         has_digits = true;
-        if (digits_count < numeric_traits<T>::digits10) {
+        if (digits_count < numeric_traits<T>::max_digits10) {
             significand = significand * static_cast<T>(10) + static_cast<T>(*p - '0');
         } else {
             exponent++;
@@ -388,7 +407,7 @@ constexpr enable_if_t<is_floating_point_v<T>, T> str_to_floats(const string_view
         ++p;
         while (p != end && *p >= '0' && *p <= '9') {
             has_digits = true;
-            if (digits_count < numeric_traits<T>::digits10) {
+            if (digits_count < numeric_traits<T>::max_digits10) {
                 significand = significand * static_cast<T>(10) + static_cast<T>(*p - '0');
                 exponent--;
             }

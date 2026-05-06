@@ -55,7 +55,7 @@ public:
      *
      * 提供按行遍历文件内容的迭代器接口，只读。
      */
-    class line_iterator {
+    class NEFORCE_API line_iterator {
     public:
         using value_type = string;                    ///< 元素类型
         using reference = const string&;              ///< 引用类型
@@ -308,6 +308,13 @@ public:
      * @return 文件内容字符串
      */
     NEFORCE_NODISCARD string read() const;
+
+    /**
+     * @brief 读取指定字节数到字符串
+     * @param n 要读取的字节数
+     * @return 读取到的字符串，实际长度可能小于 n
+     */
+    NEFORCE_NODISCARD string read(size_type n) const;
 
     /**
      * @brief 读取二进制数据到缓冲区

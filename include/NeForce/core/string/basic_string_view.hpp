@@ -190,8 +190,8 @@ public:
     static constexpr auto npos = static_cast<size_type>(-1);
 
 private:
-    const_pointer data_ = ""; ///< 数据指针
-    size_type size_ = 0;      ///< 字符串长度
+    const_pointer data_ = nullptr; ///< 数据指针
+    size_type size_ = 0;           ///< 字符串长度
 
     /**
      * @brief 限制大小不超过可用范围

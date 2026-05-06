@@ -26,7 +26,7 @@ namespace {
 
         const auto nanos = system_clock::now().since_epoch().to_nano();
         const auto pid = process::current_id();
-        random_mt rand;
+        thread_local random_mt rand{static_cast<uint32_t>(nanos.count())};
         const uint64_t random_part = rand.next_uint64();
 
         const string filename = format("{}_{}_{}_{}_{}{}", prefix, nanos.count(), pid,
@@ -73,18 +73,17 @@ temp_file::temp_file(const string& prefix, const string& suffix, const file_crea
 file_(generate_unique_path(prefix, suffix), false, file_access::READ_WRITE, file_shared::SHARE_READ, mode),
 delete_policy_(policy) {
     constexpr int max_retries = 8;
-    bool opened = false;
 
     for (int i = 0; i < max_retries; ++i) {
         const path candidate = generate_unique_path(prefix, suffix);
-        file_ = _NEFORCE file(candidate, false, file_access::READ_WRITE, file_shared::SHARE_READ, mode);
-        if (file_.is_opened()) {
-            opened = true;
+        _NEFORCE file f(candidate, false, file_access::READ_WRITE, file_shared::SHARE_READ, mode);
+        if (f.is_opened()) {
+            file_ = move(f);
             break;
         }
     }
 
-    if (!opened) {
+    if (!file_.is_opened()) {
         NEFORCE_THROW_EXCEPTION(system_exception("Failed to create temporary file"));
     }
 

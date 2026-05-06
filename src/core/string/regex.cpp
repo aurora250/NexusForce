@@ -257,6 +257,13 @@ vector<string> regex::split(const string& str, const int max_splits) const {
         }
 
         parts.push_back(str.substr(last_pos, match.position() - last_pos));
+
+        if (match.size() > 1) {
+            for (size_t i = 1; i < match.size(); ++i) {
+                parts.emplace_back(match[i].data(), match[i].size());
+            }
+        }
+
         last_pos = match.position() + match.length();
         splits++;
     }
@@ -378,36 +385,25 @@ void regex_token_iterator::find_next() {
         current_ = "";
         return;
     }
-
-    if (index_ >= 0) {
-        while (match_iterator_ != end_iterator_) {
-            if (index_ < static_cast<int>(match_iterator_->size())) {
-                current_ = (*match_iterator_)[index_];
-                ++match_iterator_;
-                return;
-            }
-            ++match_iterator_;
-        }
-        state_ = state::END;
+    if (state_ == state::AFTER_LAST) {
         current_ = "";
-    } else {
+        state_ = state::END;
+        return;
+    }
+
+    if (index_ < 0) {
         switch (state_) {
             case state::BEFORE_FIRST: {
                 if (match_iterator_ != end_iterator_) {
                     size_t start = 0;
                     size_t end = match_iterator_->position();
-                    if (start < end) {
-                        current_ = subject_.view(start, end - start);
-                        last_pos_ = end;
-                        state_ = state::BETWEEN_MATCHES;
-                    } else {
-                        last_pos_ = match_iterator_->position() + match_iterator_->length();
-                        ++match_iterator_;
-                        find_next();
-                    }
+                    current_ = (start < end) ? subject_.view(start, end - start) : "";
+                    last_pos_ = match_iterator_->position() + match_iterator_->length();
+                    ++match_iterator_;
+                    state_ = state::BETWEEN_MATCHES;
                 } else {
                     current_ = subject_.view();
-                    state_ = state::END;
+                    state_ = state::AFTER_LAST;
                 }
                 break;
             }
@@ -415,31 +411,17 @@ void regex_token_iterator::find_next() {
                 if (match_iterator_ != end_iterator_) {
                     size_t start = last_pos_;
                     size_t end = match_iterator_->position();
-                    if (start < end) {
-                        current_ = subject_.view(start, end - start);
-                        last_pos_ = end;
+                    current_ = (start < end) ? subject_.view(start, end - start) : "";
+                    last_pos_ = match_iterator_->position() + match_iterator_->length();
+                    ++match_iterator_;
+                } else {
+                    if (last_pos_ < subject_.length()) {
+                        current_ = subject_.view(last_pos_);
                     } else {
                         current_ = "";
-                        last_pos_ = match_iterator_->position() + match_iterator_->length();
-                        ++match_iterator_;
                     }
-
-                    if (current_.empty()) {
-                        find_next();
-                    }
-                } else {
                     state_ = state::AFTER_LAST;
-                    find_next();
                 }
-                break;
-            }
-            case state::AFTER_LAST: {
-                if (last_pos_ < subject_.length()) {
-                    current_ = subject_.view(last_pos_);
-                } else {
-                    current_ = "";
-                }
-                state_ = state::END;
                 break;
             }
             default: {
@@ -447,6 +429,43 @@ void regex_token_iterator::find_next() {
                 current_ = "";
                 break;
             }
+        }
+        return;
+    }
+
+    switch (state_) {
+        case state::BEFORE_FIRST: {
+            if (match_iterator_ != end_iterator_) {
+                if (static_cast<size_t>(index_) < match_iterator_->size()) {
+                    current_ = (*match_iterator_)[index_];
+                } else {
+                    current_ = "";
+                }
+                ++match_iterator_;
+                state_ = state::BETWEEN_MATCHES;
+            } else {
+                state_ = state::END;
+                current_ = "";
+            }
+            break;
+        }
+        case state::BETWEEN_MATCHES: {
+            if (match_iterator_ != end_iterator_) {
+                if (static_cast<size_t>(index_) < match_iterator_->size()) {
+                    current_ = (*match_iterator_)[index_];
+                } else {
+                    current_ = "";
+                }
+                ++match_iterator_;
+            } else {
+                state_ = state::END;
+            }
+            break;
+        }
+        default: {
+            state_ = state::END;
+            current_ = "";
+            break;
         }
     }
 }
@@ -465,7 +484,7 @@ index_(index) {
         } else {
             if (match_iterator_ == end_iterator_) {
                 current_ = subject_.view();
-                state_ = state::END;
+                state_ = state::AFTER_LAST;
             } else {
                 state_ = state::BEFORE_FIRST;
                 find_next();

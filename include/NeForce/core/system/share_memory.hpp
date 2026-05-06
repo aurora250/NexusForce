@@ -137,12 +137,17 @@ public:
      * @return 映射地址
      * @throws share_memory_exception 映射失败时抛出
      */
-    NEFORCE_NODISCARD void* map(size_t offset = 0, size_t length = 0);
+    void* map(size_t offset = 0, size_t length = 0);
 
     /**
      * @brief 取消映射
      */
     void unmap() noexcept;
+
+    /**
+     * @brief 释放资源
+     */
+    void destroy();
 
     /**
      * @brief 获取映射地址

@@ -61,7 +61,7 @@ public:
      * 表示路径树中的一个节点，包含路径信息及子节点列表。
      * 节点以共享所有权的方式持有子节点，父节点以弱引用持有。
      */
-    class node : public enable_shared_from_this<node> {
+    class NEFORCE_API node : public enable_shared_from_this<node> {
         friend class path_tree;
 
     public:
@@ -70,11 +70,11 @@ public:
         using children_list = vector<ptr>;        ///< 子节点列表
 
     private:
-        path path_;              ///< 节点对应路径
-        node_type type_;         ///< 节点类型
-        weak_ptr parent_;        ///< 父节点
-        children_list children_; ///< 子节点列表
-        size_t depth_;           ///< 节点深度
+        path path_;                          ///< 节点对应路径
+        node_type type_{node_type::unknown}; ///< 节点类型
+        weak_ptr parent_;                    ///< 父节点
+        children_list children_;             ///< 子节点列表
+        size_t depth_{0};                    ///< 节点深度
 
     public:
         node() = default;

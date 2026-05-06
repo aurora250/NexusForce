@@ -2423,7 +2423,7 @@ public:
 
     /// 从后向前查找字符串视图
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type rfind(const view_type& view,
-                                                          const size_type off = 0) const noexcept {
+                                                          const size_type off = npos) const noexcept {
         return (char_traits_rfind<Traits>) (data(), size(), off, view.data(), view.size());
     }
 

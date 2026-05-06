@@ -552,16 +552,21 @@ NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const Char
     if (count == 0) {
         return 0;
     }
+
     size_t i = 0;
-    while (*dest == *src && *dest != static_cast<CharT>(0) && i < count - 1) {
-        ++dest;
-        ++src;
+    while (i < count) {
+        if (dest[i] != src[i]) {
+            if (dest[i] == static_cast<CharT>(0) || src[i] == static_cast<CharT>(0)) {
+                return 0;
+            }
+            return dest[i] < src[i] ? -1 : 1;
+        }
+        if (dest[i] == static_cast<CharT>(0)) {
+            return 0;
+        }
         ++i;
     }
-    if (i == count - 1) {
-        return 0;
-    }
-    return *dest < *src ? -1 : *dest > *src ? 1 : 0;
+    return 0;
 }
 
 /**

@@ -17,7 +17,6 @@ namespace {
 file_async::async_context::async_context(string d) :
 data(move(d)),
 is_write(true),
-// NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
 cb(new aiocb_type{}) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
@@ -26,7 +25,6 @@ cb(new aiocb_type{}) {
 
 file_async::async_context::async_context(string* buf) :
 buffer(buf),
-// NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
 cb(new aiocb_type{}) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
@@ -39,12 +37,10 @@ file_async::async_context::~async_context() {
         if (cb->hEvent != nullptr) {
             ::CloseHandle(cb->hEvent);
         }
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete cb;
         cb = nullptr;
     }
 #else
-    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     delete cb;
     cb = nullptr;
 #endif
@@ -53,7 +49,7 @@ file_async::async_context::~async_context() {
 bool file_async::complete_result(async_result& result, const size_type bytes) noexcept {
     result.completed = true;
     result.bytes_transferred = bytes;
-    result.error_code = 0;
+    result.error.clear();
 
     lock<mutex> lk(mutex_);
     const auto it = find(operations_.begin(), operations_.end(), result.cb);
@@ -63,7 +59,6 @@ bool file_async::complete_result(async_result& result, const size_type bytes) no
 
     const auto ci = contexts_.find(result.cb);
     if (ci != contexts_.end()) {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ci->second;
         contexts_.erase(ci);
     }
@@ -79,7 +74,7 @@ bool file_async::check_completion(async_result& result) noexcept {
     if (ret >= 0) {
         return complete_result(result, static_cast<size_type>(ret));
     }
-    result.error_code = ::aio_error(result.cb);
+    result.error = static_cast<errc>(::aio_error(result.cb));
     return false;
 #else
     return false;
@@ -102,7 +97,6 @@ file_async::~file_async() {
 #endif
     }
     for (auto& context: contexts_) {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete context.second;
     }
     contexts_.clear();
@@ -136,11 +130,30 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
         return result;
     }
 
+    difference_type resolved_offset = offset;
+    if (offset < 0) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        ::LARGE_INTEGER current{};
+        if (::SetFilePointerEx(handle_, {}, &current, FILE_CURRENT) == FALSE) {
+            result.error = _NEFORCE last_error();
+            return result;
+        }
+        resolved_offset = current.QuadPart;
+#else
+        const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
+        if (pos == static_cast<difference_type>(-1)) {
+            result.error = _NEFORCE last_error();
+            return result;
+        }
+        resolved_offset = pos;
+#endif
+    }
+
     if (buffer.capacity() < size) {
         try {
             buffer.reserve(size);
         } catch (...) {
-            result.error_code = ENOMEM;
+            result.error = errc::not_enough_memory;
             return result;
         }
     }
@@ -148,19 +161,17 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
         buffer.resize(size);
     }
 
-    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto* ctx = new async_context(&buffer);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (ctx->cb->hEvent == nullptr) {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
-        result.error_code = static_cast<int>(::GetLastError());
+        result.error = _NEFORCE last_error();
         return result;
     }
 
-    if (offset >= 0) {
-        const auto off64 = static_cast<uint64_t>(offset);
+    {
+        const auto off64 = static_cast<uint64_t>(resolved_offset);
         ctx->cb->Offset = static_cast<::DWORD>(off64 & 0xFFFFFFFF);
         ctx->cb->OffsetHigh = static_cast<::DWORD>(off64 >> 32);
     }
@@ -169,7 +180,6 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
     if (::ReadFile(handle_, buffer.data(), size, &bytes_read, ctx->cb) == TRUE) {
         result.completed = true;
         result.bytes_transferred = bytes_read;
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
     } else {
         const ::DWORD err = ::GetLastError();
@@ -182,8 +192,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
             operations_.push_back(ctx->cb);
             contexts_[ctx->cb] = ctx;
         } else {
-            result.error_code = static_cast<int>(err);
-            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+            result.error = static_cast<errc>(err);
             delete ctx;
         }
     }
@@ -192,7 +201,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
     ctx->cb->aio_fildes = handle_;
     ctx->cb->aio_buf = const_cast<volatile void*>(static_cast<const volatile void*>(buffer.data()));
     ctx->cb->aio_nbytes = size;
-    ctx->cb->aio_offset = (offset >= 0) ? offset : 0;
+    ctx->cb->aio_offset = resolved_offset;
     ctx->cb->aio_sigevent.sigev_notify = SIGEV_NONE;
 
     if (::aio_read(ctx->cb) == 0) {
@@ -204,8 +213,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
         operations_.push_back(ctx->cb);
         contexts_[ctx->cb] = ctx;
     } else {
-        result.error_code = errno;
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+        result.error = _NEFORCE last_error();
         delete ctx;
     }
 #endif
@@ -216,23 +224,40 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
 file_async::async_result file_async::write(string data, const size_type size, const difference_type offset) {
     async_result result;
 
+    difference_type resolved_offset = offset;
+    if (offset < 0) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        LARGE_INTEGER current{};
+        if (::SetFilePointerEx(handle_, {}, &current, FILE_CURRENT) == FALSE) {
+            result.error = _NEFORCE last_error();
+            return result;
+        }
+        resolved_offset = current.QuadPart;
+#else
+        const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
+        if (pos == static_cast<difference_type>(-1)) {
+            result.error_code = _NEFORCE last_error();
+            return result;
+        }
+        resolved_offset = pos;
+#endif
+    }
+
     const size_type real_size = (size == numeric_traits<size_type>::max())
                                         ? static_cast<size_type>(data.size())
                                         : min(size, static_cast<size_type>(data.size()));
 
-    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto* ctx = new async_context(move(data));
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (ctx->cb->hEvent == nullptr) {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
-        result.error_code = static_cast<int>(::GetLastError());
+        result.error = _NEFORCE last_error();
         return result;
     }
 
-    if (offset >= 0) {
-        const auto off64 = static_cast<uint64_t>(offset);
+    {
+        const auto off64 = static_cast<uint64_t>(resolved_offset);
         ctx->cb->Offset = static_cast<::DWORD>(off64 & 0xFFFFFFFF);
         ctx->cb->OffsetHigh = static_cast<::DWORD>(off64 >> 32);
     }
@@ -241,7 +266,6 @@ file_async::async_result file_async::write(string data, const size_type size, co
     if (::WriteFile(handle_, ctx->data.data(), real_size, &bytes_written, ctx->cb) == TRUE) {
         result.completed = true;
         result.bytes_transferred = bytes_written;
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ctx;
     } else {
         const ::DWORD err = ::GetLastError();
@@ -254,8 +278,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
             operations_.push_back(ctx->cb);
             contexts_[ctx->cb] = ctx;
         } else {
-            result.error_code = static_cast<int>(err);
-            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+            result.error = static_cast<errc>(err);
             delete ctx;
         }
     }
@@ -264,7 +287,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
     ctx->cb->aio_fildes = handle_;
     ctx->cb->aio_buf = const_cast<char*>(ctx->data.data());
     ctx->cb->aio_nbytes = real_size;
-    ctx->cb->aio_offset = (offset >= 0) ? offset : 0;
+    ctx->cb->aio_offset = resolved_offset;
     ctx->cb->aio_sigevent.sigev_notify = SIGEV_NONE;
 
     if (::aio_write(ctx->cb) == 0) {
@@ -276,8 +299,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
         operations_.push_back(ctx->cb);
         contexts_[ctx->cb] = ctx;
     } else {
-        result.error_code = errno;
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+        result.error = _NEFORCE last_error();
         delete ctx;
     }
 #endif
@@ -290,11 +312,7 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
         return true;
     }
     if (result.cb == nullptr) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        result.error_code = ERROR_INVALID_PARAMETER;
-#else
-        result.error_code = EINVAL;
-#endif
+        result.error = errc::invalid_argument;
         return false;
     }
 
@@ -314,15 +332,15 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
                     return complete_result(result, bytes_transferred);
                 }
             } else if (wr == WAIT_TIMEOUT) {
-                result.error_code = WAIT_TIMEOUT;
+                result.error = errc::timed_out;
                 return false;
             } else {
-                result.error_code = static_cast<int>(::GetLastError());
+                result.error = _NEFORCE last_error();
                 return false;
             }
         }
     }
-    result.error_code = static_cast<int>(::GetLastError());
+    result.error = _NEFORCE last_error();
     return false;
 
 #else
@@ -340,12 +358,11 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
         if (::aio_suspend(list, 1, &ts) == 0) {
             return check_completion(result);
         } else {
-            const int err = errno;
-            result.error_code = (err == EAGAIN || err == ETIMEDOUT) ? ETIMEDOUT : err;
+            result.error = _NEFORCE last_error();
             return false;
         }
     }
-    result.error_code = errno;
+    result.error = _NEFORCE last_error();
     return false;
 #endif
 }
@@ -366,23 +383,23 @@ void file_async::cancel(async_result& result) noexcept {
         if (::GetOverlappedResult(handle_, result.cb, &bytes, FALSE) == TRUE) {
             result.bytes_transferred = bytes;
         } else {
-            result.error_code = static_cast<int>(::GetLastError());
+            result.error = _NEFORCE last_error();
         }
     } else {
-        result.error_code = ERROR_OPERATION_ABORTED;
+        result.error = errc::operation_canceled;
     }
     result.completed = true;
 
 #else
     const int cr = ::aio_cancel(handle_, result.cb);
     if (cr == AIO_CANCELED) {
-        result.error_code = ECANCELED;
+        result.error = errc::operation_canceled;
     } else {
         const ::aiocb* list[1] = {result.cb};
         ::aio_suspend(list, 1, nullptr);
         const ssize_t ret = ::aio_return(result.cb);
         result.bytes_transferred = (ret > 0) ? static_cast<size_t>(ret) : 0;
-        result.error_code = (ret >= 0) ? 0 : errno;
+        result.error = (ret >= 0) ? errc::success : _NEFORCE last_error();
     }
     result.completed = true;
 
@@ -395,13 +412,11 @@ void file_async::cancel(async_result& result) noexcept {
 
     const auto ci = contexts_.find(result.cb);
     if (ci != contexts_.end()) {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete ci->second;
         contexts_.erase(ci);
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     else {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete result.cb;
     }
 #endif

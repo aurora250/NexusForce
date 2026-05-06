@@ -3,8 +3,339 @@
 #include <NeForce/core/numeric/math.hpp>
 #include <NeForce/core/numeric/random.hpp>
 #include <gtest/gtest.h>
+#include <limits>
 using namespace neforce;
 
+template <typename T>
+class NumericTraitsConsistencyTest : public ::testing::Test {
+protected:
+    using Traits = numeric_traits<T>;
+    using StdLimits = std::numeric_limits<T>;
+};
+
+using TestTypes = ::testing::Types<bool, int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t, uint64_t, char,
+                                   char16_t, char32_t, float32_t, float64_t>;
+
+TYPED_TEST_SUITE(NumericTraitsConsistencyTest, TestTypes);
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsSpecialized) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_specialized, StdLimits::is_specialized);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, MinValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        EXPECT_FLOAT_EQ(Traits::min(), StdLimits::min());
+    } else {
+        EXPECT_EQ(Traits::min(), StdLimits::min());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, MaxValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        EXPECT_FLOAT_EQ(Traits::max(), StdLimits::max());
+    } else {
+        EXPECT_EQ(Traits::max(), StdLimits::max());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, LowestValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        EXPECT_FLOAT_EQ(Traits::lowest(), StdLimits::lowest());
+    } else if constexpr (is_signed_v<TypeParam> && !is_floating_point_v<TypeParam>) {
+        EXPECT_EQ(Traits::lowest(), StdLimits::lowest());
+    } else {
+        EXPECT_EQ(Traits::lowest(), StdLimits::lowest());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, EpsilonValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        EXPECT_FLOAT_EQ(Traits::epsilon(), StdLimits::epsilon());
+    } else {
+        EXPECT_EQ(Traits::epsilon(), StdLimits::epsilon());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, RoundErrorValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        EXPECT_FLOAT_EQ(Traits::round_error(), StdLimits::round_error());
+    } else {
+        EXPECT_EQ(Traits::round_error(), StdLimits::round_error());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, DenormMinValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        EXPECT_FLOAT_EQ(Traits::denorm_min(), StdLimits::denorm_min());
+    } else {
+        EXPECT_EQ(Traits::denorm_min(), StdLimits::denorm_min());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, InfinityValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        const auto custom_inf = Traits::infinity();
+        const auto std_inf = StdLimits::infinity();
+        EXPECT_EQ(_NEFORCE is_infinity(custom_inf), _NEFORCE is_infinity(std_inf));
+        EXPECT_EQ(_NEFORCE signbit(custom_inf), _NEFORCE signbit(std_inf));
+    } else {
+        EXPECT_EQ(Traits::infinity(), StdLimits::infinity());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, QuietNaNValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        const auto custom_qnan = Traits::quiet_nan();
+        const auto std_qnan = StdLimits::quiet_NaN();
+        EXPECT_EQ(_NEFORCE is_nan(custom_qnan), _NEFORCE is_nan(std_qnan));
+    } else {
+        EXPECT_EQ(Traits::quiet_nan(), StdLimits::quiet_NaN());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, SignalingNaNValue) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    if constexpr (is_floating_point_v<TypeParam>) {
+        const auto custom_snan = Traits::signaling_nan();
+        if constexpr (is_same_v<TypeParam, float64_t>) {
+            const auto std_snan = StdLimits::signaling_NaN();
+            EXPECT_EQ(_NEFORCE is_nan(custom_snan), _NEFORCE is_nan(std_snan));
+        } else {
+            EXPECT_TRUE(_NEFORCE is_nan(custom_snan));
+        }
+    } else {
+        EXPECT_EQ(Traits::signaling_nan(), StdLimits::signaling_NaN());
+    }
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsInteger) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_integer, StdLimits::is_integer);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsSigned) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_signed, StdLimits::is_signed);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsExact) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_exact, StdLimits::is_exact);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsBounded) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_bounded, StdLimits::is_bounded);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsModulo) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_modulo, StdLimits::is_modulo);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, Radix) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::radix, StdLimits::radix);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, Digits) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::digits, StdLimits::digits);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, Digits10) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::digits10, StdLimits::digits10);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, HasInfinity) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::has_infinity, StdLimits::has_infinity);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, HasQuietNaN) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::has_quiet_nan, StdLimits::has_quiet_NaN);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, HasSignalingNaN) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::has_signaling_nan, StdLimits::has_signaling_NaN);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, IsIec559) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    EXPECT_EQ(Traits::is_iec559, StdLimits::is_iec559);
+}
+
+TYPED_TEST(NumericTraitsConsistencyTest, Traps) {
+    using Traits = typename TestFixture::Traits;
+    using StdLimits = typename TestFixture::StdLimits;
+    constexpr bool custom_traps = Traits::traps;
+    constexpr bool std_traps = StdLimits::traps;
+    EXPECT_EQ(custom_traps, std_traps);
+}
+
+class Float32TraitsTest : public ::testing::Test {};
+class Float64TraitsTest : public ::testing::Test {};
+
+TEST_F(Float32TraitsTest, MaxDigits10) {
+    EXPECT_EQ(numeric_traits<float32_t>::max_digits10, std::numeric_limits<float32_t>::max_digits10);
+}
+
+TEST_F(Float32TraitsTest, MaxExponent) {
+    EXPECT_EQ(numeric_traits<float32_t>::max_exponent, std::numeric_limits<float32_t>::max_exponent);
+}
+
+TEST_F(Float32TraitsTest, MaxExponent10) {
+    EXPECT_EQ(numeric_traits<float32_t>::max_exponent10, std::numeric_limits<float32_t>::max_exponent10);
+}
+
+TEST_F(Float32TraitsTest, MinExponent) {
+    EXPECT_EQ(numeric_traits<float32_t>::min_exponent, std::numeric_limits<float32_t>::min_exponent);
+}
+
+TEST_F(Float32TraitsTest, MinExponent10) {
+    EXPECT_EQ(numeric_traits<float32_t>::min_exponent10, std::numeric_limits<float32_t>::min_exponent10);
+}
+
+TEST_F(Float32TraitsTest, HasDenorm) {
+    EXPECT_EQ(static_cast<int>(numeric_traits<float32_t>::has_denorm),
+              static_cast<int>(std::numeric_limits<float32_t>::has_denorm));
+}
+
+TEST_F(Float32TraitsTest, RoundStyle) {
+    EXPECT_EQ(static_cast<int>(numeric_traits<float32_t>::round_style),
+              static_cast<int>(std::numeric_limits<float32_t>::round_style));
+}
+
+TEST_F(Float32TraitsTest, HasDenormLoss) {
+    EXPECT_EQ(numeric_traits<float32_t>::has_denorm_loss, std::numeric_limits<float32_t>::has_denorm_loss);
+}
+
+TEST_F(Float32TraitsTest, TinynessBefore) {
+    EXPECT_EQ(numeric_traits<float32_t>::tinyness_before, std::numeric_limits<float32_t>::tinyness_before);
+}
+
+TEST_F(Float64TraitsTest, MaxDigits10) {
+    EXPECT_EQ(numeric_traits<float64_t>::max_digits10, std::numeric_limits<float64_t>::max_digits10);
+}
+
+TEST_F(Float64TraitsTest, MaxExponent) {
+    EXPECT_EQ(numeric_traits<float64_t>::max_exponent, std::numeric_limits<float64_t>::max_exponent);
+}
+
+TEST_F(Float64TraitsTest, MaxExponent10) {
+    EXPECT_EQ(numeric_traits<float64_t>::max_exponent10, std::numeric_limits<float64_t>::max_exponent10);
+}
+
+TEST_F(Float64TraitsTest, MinExponent) {
+    EXPECT_EQ(numeric_traits<float64_t>::min_exponent, std::numeric_limits<float64_t>::min_exponent);
+}
+
+TEST_F(Float64TraitsTest, MinExponent10) {
+    EXPECT_EQ(numeric_traits<float64_t>::min_exponent10, std::numeric_limits<float64_t>::min_exponent10);
+}
+
+TEST_F(Float64TraitsTest, HasDenorm) {
+    EXPECT_EQ(static_cast<int>(numeric_traits<float64_t>::has_denorm),
+              static_cast<int>(std::numeric_limits<float64_t>::has_denorm));
+}
+
+TEST_F(Float64TraitsTest, RoundStyle) {
+    EXPECT_EQ(static_cast<int>(numeric_traits<float64_t>::round_style),
+              static_cast<int>(std::numeric_limits<float64_t>::round_style));
+}
+
+TEST_F(Float64TraitsTest, HasDenormLoss) {
+    EXPECT_EQ(numeric_traits<float64_t>::has_denorm_loss, std::numeric_limits<float64_t>::has_denorm_loss);
+}
+
+TEST_F(Float64TraitsTest, TinynessBefore) {
+    EXPECT_EQ(numeric_traits<float64_t>::tinyness_before, std::numeric_limits<float64_t>::tinyness_before);
+}
+
+class SignedInt32RangeTest : public ::testing::Test {};
+
+TEST_F(SignedInt32RangeTest, MinBoundary) {
+    EXPECT_EQ(numeric_traits<int32_t>::min(), std::numeric_limits<int32_t>::min());
+}
+
+TEST_F(SignedInt32RangeTest, MaxBoundary) {
+    EXPECT_EQ(numeric_traits<int32_t>::max(), std::numeric_limits<int32_t>::max());
+}
+
+class UnsignedInt64RangeTest : public ::testing::Test {};
+
+TEST_F(UnsignedInt64RangeTest, MinBoundary) {
+    EXPECT_EQ(numeric_traits<uint64_t>::min(), std::numeric_limits<uint64_t>::min());
+}
+
+TEST_F(UnsignedInt64RangeTest, MaxBoundary) {
+    EXPECT_EQ(numeric_traits<uint64_t>::max(), std::numeric_limits<uint64_t>::max());
+}
+
+class ConstVolatileSpecializationTest : public ::testing::Test {};
+
+TEST_F(ConstVolatileSpecializationTest, ConstInt32Matches) {
+    EXPECT_EQ(numeric_traits<const int32_t>::max(), std::numeric_limits<int32_t>::max());
+    EXPECT_EQ(numeric_traits<const int32_t>::min(), std::numeric_limits<int32_t>::min());
+}
+
+TEST_F(ConstVolatileSpecializationTest, VolatileFloat64Matches) {
+    EXPECT_FLOAT_EQ(numeric_traits<volatile float64_t>::epsilon(), std::numeric_limits<float64_t>::epsilon());
+}
+
+TEST_F(ConstVolatileSpecializationTest, ConstVolatileUint16Matches) {
+    EXPECT_EQ(numeric_traits<const volatile uint16_t>::max(), std::numeric_limits<uint16_t>::max());
+}
+
+class WCharTComparisonTest : public ::testing::Test {};
+
+TEST_F(WCharTComparisonTest, MinMaxDigits) {
+    EXPECT_EQ(numeric_traits<wchar_t>::min(), std::numeric_limits<wchar_t>::min());
+    EXPECT_EQ(numeric_traits<wchar_t>::max(), std::numeric_limits<wchar_t>::max());
+    EXPECT_EQ(numeric_traits<wchar_t>::digits, std::numeric_limits<wchar_t>::digits);
+}
+
+class BoolTypeSpecialTest : public ::testing::Test {};
+
+TEST_F(BoolTypeSpecialTest, BooleanTraitsConsistency) {
+    EXPECT_EQ(numeric_traits<bool>::is_signed, std::numeric_limits<bool>::is_signed);
+    EXPECT_EQ(numeric_traits<bool>::is_integer, std::numeric_limits<bool>::is_integer);
+    EXPECT_EQ(numeric_traits<bool>::is_exact, std::numeric_limits<bool>::is_exact);
+}
 
 TEST(SafeTruncTest, NormalValues) {
     EXPECT_EQ(safe_trunc(0.0L), 0);

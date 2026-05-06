@@ -163,6 +163,16 @@ void locale::load_locale(const string& name) {
     win_name_ = posix_to_win(name);
     name_ = name.empty() ? "C" : name;
 
+    wstring wname_storage;
+    const wchar_t* lname = nullptr;
+    if (!win_name_.empty()) {
+        wname_storage = character::to_wstring(win_name_.view());
+        lname = wname_storage.data();
+    }
+    if (!win_name_.empty() && !::IsValidLocaleName(lname)) {
+        throw locale_exception(("locale: cannot open '" + name_ + "'").data());
+    }
+
     const auto cp = query_info(LOCALE_IDEFAULTANSICODEPAGE, win_name_.view());
     if (cp == L"65001") {
         encoding_ = "UTF-8";
@@ -331,8 +341,17 @@ locale::monetary_info locale::monetary() const {
     info.int_curr_symbol = query_info_utf8(LOCALE_SINTLSYMBOL, win_name_.view());
     info.mon_decimal_point = query_info_utf8(LOCALE_SMONDECIMALSEP, win_name_.view());
     info.mon_thousands_sep = query_info_utf8(LOCALE_SMONTHOUSANDSEP, win_name_.view());
+
     info.positive_sign = query_info_utf8(LOCALE_SPOSITIVESIGN, win_name_.view());
+    if (info.positive_sign.empty()) {
+        info.positive_sign = "+";
+    }
+
     info.negative_sign = query_info_utf8(LOCALE_SNEGATIVESIGN, win_name_.view());
+    if (info.negative_sign.empty()) {
+        info.negative_sign = "-";
+    }
+
     {
         const auto s = query_info_utf8(LOCALE_ICURRDIGITS, win_name_.view());
         info.frac_digits = s.empty() ? 2 : integer32::parse(s.view()).value();
@@ -461,15 +480,19 @@ int locale::compare(const string& a, const string& b, const collate_strength str
             flags = NORM_IGNORECASE | NORM_IGNORENONSPACE | NORM_IGNORESYMBOLS;
             break;
         case collate_strength::secondary:
-            flags = NORM_IGNORECASE | NORM_IGNORENONSPACE;
+            flags = NORM_IGNORECASE;
             break;
         case collate_strength::tertiary:
-            flags = NORM_IGNORECASE;
+            flags = 0;
+            break;
+        case collate_strength::identical:
+            flags = 0;
             break;
         default:
             flags = 0;
             break;
     }
+
     wstring wa = character::to_wstring(a.view());
     wstring wb = character::to_wstring(b.view());
 
@@ -483,9 +506,21 @@ int locale::compare(const string& a, const string& b, const collate_strength str
     const int r = ::CompareStringEx(lname, flags, wa.data(), static_cast<int>(wa.size()), wb.data(),
                                     static_cast<int>(wb.size()), nullptr, nullptr, 0);
     if (r == 0) {
+        throw locale_exception("CompareStringEx failed");
+    }
+
+    const int linguistic_result = r - 2;
+    if (strength == collate_strength::identical && linguistic_result == 0) {
+        if (wa < wb) {
+            return -1;
+        }
+        if (wa > wb) {
+            return 1;
+        }
         return 0;
     }
-    return r - 2; // CSTR_LESS=1,CSTR_EQUAL=2,CSTR_GREATER=3
+    return linguistic_result;
+
 #else
     auto to_wide = [&](const string& s) -> wstring {
         wstring out(s.size() + 1, L'\0');
@@ -498,9 +533,67 @@ int locale::compare(const string& a, const string& b, const collate_strength str
         out.resize(n);
         return out;
     };
+
     auto wa = to_wide(a);
     auto wb = to_wide(b);
-    return ::wcscoll_l(wa.data(), wb.data(), loc_);
+
+    switch (strength) {
+        case collate_strength::primary: {
+#    ifdef __GLIBC__
+            {
+                int r = ::wcscasecmp_l(wa.c_str(), wb.c_str(), loc_);
+                return (r < 0) ? -1 : (r > 0) ? 1 : 0;
+            }
+#    else
+            {
+                wstring wa_lower, wb_lower;
+                wa_lower.reserve(wa.size());
+                wb_lower.reserve(wb.size());
+                for (wchar_t c: wa) {
+                    wa_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
+                }
+                for (wchar_t c: wb) {
+                    wb_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
+                }
+                return ::wcscoll_l(wa_lower.c_str(), wb_lower.c_str(), loc_);
+            }
+#    endif
+        }
+        case collate_strength::secondary: {
+#    ifdef __GLIBC__
+            {
+                int r = ::wcscasecmp_l(wa.c_str(), wb.c_str(), loc_);
+                return (r < 0) ? -1 : (r > 0) ? 1 : 0;
+            }
+#    else
+            {
+                wstring wa_lower, wb_lower;
+                wa_lower.reserve(wa.size());
+                wb_lower.reserve(wb.size());
+                for (wchar_t c: wa) {
+                    wa_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
+                }
+                for (wchar_t c: wb) {
+                    wb_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
+                }
+                return ::wcscoll_l(wa_lower.c_str(), wb_lower.c_str(), loc_);
+            }
+#    endif
+        }
+        case collate_strength::tertiary: {
+            return ::wcscoll_l(wa.c_str(), wb.c_str(), loc_);
+        }
+        case collate_strength::identical: {
+            int rc = ::wcscoll_l(wa.c_str(), wb.c_str(), loc_);
+            if (rc != 0) {
+                return (rc < 0) ? -1 : 1;
+            }
+            rc = ::wcscmp(wa.c_str(), wb.c_str());
+            return (rc < 0) ? -1 : (rc > 0) ? 1 : 0;
+        }
+    }
+
+    return 0;
 #endif
 }
 
@@ -517,6 +610,9 @@ string locale::collation_key(const string& s) const {
     int sz = ::LCMapStringEx(lname, LCMAP_SORTKEY, ws.data(), static_cast<int>(ws.size()), nullptr, 0, nullptr, nullptr,
                              0);
     if (sz <= 0) {
+        if (ws.empty()) {
+            return string(1, '\0');
+        }
         return {};
     }
     string key(static_cast<size_t>(sz), '\0');
@@ -642,6 +738,13 @@ vector<string> locale::available_locales() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     enum_ctx ctx;
     ::EnumSystemLocalesEx(enum_proc, LOCALE_ALL, reinterpret_cast<::LPARAM>(&ctx), nullptr);
+
+    for (string_view b: {"C", "POSIX"}) {
+        if (find(ctx.list.begin(), ctx.list.end(), b) == ctx.list.end()) {
+            ctx.list.push_back(b);
+        }
+    }
+
     sort(ctx.list.begin(), ctx.list.end());
     return ctx.list;
 

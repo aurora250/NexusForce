@@ -156,9 +156,12 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     ptr_ = static_cast<char*>(base) + static_cast<ptrdiff_t>(offset_delta);
 
     if (size == 0) {
-        ::MEMORY_BASIC_INFORMATION mbi{};
-        if (::VirtualQuery(ptr_, &mbi, sizeof(mbi)) == TRUE) {
-            size = static_cast<size_type>(mbi.RegionSize);
+        ::LARGE_INTEGER fileSize{};
+        if (::GetFileSizeEx(file_handle_, &fileSize)) {
+            uint64_t file_size = static_cast<uint64_t>(fileSize.QuadPart);
+            if (file_size > static_cast<uint64_t>(offset)) {
+                size = static_cast<size_type>(file_size - static_cast<uint64_t>(offset));
+            }
         }
     }
 

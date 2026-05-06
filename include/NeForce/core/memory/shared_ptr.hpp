@@ -684,6 +684,50 @@ NEFORCE_NODISCARD bool operator>=(const shared_ptr<T>& lhs, const shared_ptr<U>&
     return !(lhs < rhs);
 }
 
+/**
+ * @brief 与nullptr相等比较
+ * @param lhs 左侧共享指针
+ * @param np 空指针字面量
+ * @return 是否为空
+ */
+template <typename T>
+NEFORCE_NODISCARD bool operator==(const shared_ptr<T>& lhs, nullptr_t np) noexcept {
+    return lhs.get() == nullptr;
+}
+
+/**
+ * @brief nullptr与共享指针相等比较
+ * @param np 空指针字面量
+ * @param rhs 右侧共享指针
+ * @return 是否为空
+ */
+template <typename T>
+NEFORCE_NODISCARD bool operator==(nullptr_t np, const shared_ptr<T>& rhs) noexcept {
+    return rhs.get() == nullptr;
+}
+
+/**
+ * @brief 与nullptr不等比较
+ * @param lhs 左侧共享指针
+ * @param np 空指针字面量
+ * @return 是否不为空
+ */
+template <typename T>
+NEFORCE_NODISCARD bool operator!=(const shared_ptr<T>& lhs, nullptr_t np) noexcept {
+    return lhs.get() != nullptr;
+}
+
+/**
+ * @brief nullptr与共享指针不等比较
+ * @param np 空指针字面量
+ * @param rhs 右侧共享指针
+ * @return 是否不为空
+ */
+template <typename T>
+NEFORCE_NODISCARD bool operator!=(nullptr_t np, const shared_ptr<T>& rhs) noexcept {
+    return rhs.get() != nullptr;
+}
+
 
 /**
  * @brief 数组特化的共享指针

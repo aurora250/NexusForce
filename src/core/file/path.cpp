@@ -248,12 +248,12 @@ path path::relative(const path& base) const {
     const path abs_path = this->absolute();
     const path abs_base = base.absolute();
 
-    vector<string_view> this_parts;
+    vector<string> this_parts;
     for (auto it = abs_path.begin(); it != abs_path.end(); ++it) {
         this_parts.push_back(*it);
     }
 
-    vector<string_view> base_parts;
+    vector<string> base_parts;
     for (auto it = abs_base.begin(); it != abs_base.end(); ++it) {
         base_parts.push_back(*it);
     }

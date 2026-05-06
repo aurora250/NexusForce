@@ -1,11 +1,7 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_diff.hpp>
+#include <NeForce/core/string/string_util.hpp>
 NEFORCE_BEGIN_NAMESPACE__
-
-namespace {
-    constexpr size_t buffer_size = 8192;
-}
-
 
 bool file_diff::compare(const path& file1, const path& file2, const bool binary) {
     return binary ? compare_binary(file1, file2) : compare_text(file1, file2);
@@ -30,12 +26,12 @@ bool file_diff::compare_binary(const path& file1, const path& file2) {
         return true;
     }
 
-    string buf1(buffer_size, '\0');
-    string buf2(buffer_size, '\0');
+    string buf1(file::buffer_size, '\0');
+    string buf2(file::buffer_size, '\0');
     size_type remaining = size1;
 
     while (remaining > 0) {
-        const size_type chunk = min(remaining, static_cast<size_type>(buffer_size));
+        const size_type chunk = min(remaining, static_cast<size_type>(file::buffer_size));
         const size_type r1 = f1.read_binary(buf1, chunk);
         const size_type r2 = f2.read_binary(buf2, chunk);
         if (r1 != chunk || r2 != chunk) {
@@ -51,16 +47,9 @@ bool file_diff::compare_binary(const path& file1, const path& file2) {
 
 bool file_diff::compare_text(const path& file1, const path& file2, const bool ignore_case,
                              const bool ignore_whitespace) {
-    if (!ignore_case && !ignore_whitespace) {
-        return compare_binary(file1, file2);
-    }
-
     file f1, f2;
-
-    if (!f1.open(file1, false, file_access::READ, file_shared::SHARE_READ)) {
-        return false;
-    }
-    if (!f2.open(file2, false, file_access::READ, file_shared::SHARE_READ)) {
+    if (!f1.open(file1, false, file_access::READ, file_shared::SHARE_READ) ||
+        !f2.open(file2, false, file_access::READ, file_shared::SHARE_READ)) {
         return false;
     }
 
@@ -70,43 +59,23 @@ bool file_diff::compare_text(const path& file1, const path& file2, const bool ig
         const size_type sz2 = f2.info().size();
         content1.resize(sz1);
         content2.resize(sz2);
-        if (f1.read_binary(content1, sz1) != sz1) {
-            return false;
-        }
-        if (f2.read_binary(content2, sz2) != sz2) {
+        if (f1.read_binary(content1, sz1) != sz1 || f2.read_binary(content2, sz2) != sz2) {
             return false;
         }
     }
 
-    auto split_lines = [](const string& content, vector<string>& lines) {
-        if (content.empty()) {
-            return;
-        }
-        size_t start = 0;
-
-        while (start < content.size()) {
-            const size_t end = content.find('\n', start);
-            if (end == string::npos) {
-                string line = content.tail(start);
-                if (!line.empty() && line.back() == '\r') {
-                    line.pop_back();
-                }
-                lines.emplace_back(move(line));
-                break;
-            }
-
-            string line = content.substr(start, end - start);
+    auto get_lines = [](const string& content) {
+        vector<string> lines = split(content, "\n", false);
+        for (auto& line: lines) {
             if (!line.empty() && line.back() == '\r') {
                 line.pop_back();
             }
-            lines.emplace_back(move(line));
-            start = end + 1;
         }
+        return lines;
     };
 
-    vector<string> lines1, lines2;
-    split_lines(content1, lines1);
-    split_lines(content2, lines2);
+    vector<string> lines1 = get_lines(content1);
+    vector<string> lines2 = get_lines(content2);
 
     if (lines1.size() != lines2.size()) {
         return false;
@@ -183,12 +152,13 @@ vector<file_diff::binary_diff_entry> file_diff::binary_diff(const path& file1, c
         return diffs;
     }
 
-    string buf1(buffer_size, '\0');
-    string buf2(buffer_size, '\0');
+    string buf1(file::buffer_size, '\0');
+    string buf2(file::buffer_size, '\0');
     difference_type offset = 0;
 
     while (static_cast<size_type>(offset) < min_size && diffs.size() < max_diffs) {
-        const size_type chunk = min(min_size - static_cast<size_type>(offset), static_cast<size_type>(buffer_size));
+        const size_type chunk =
+                min(min_size - static_cast<size_type>(offset), static_cast<size_type>(file::buffer_size));
 
         const size_type r1 = f1.read_binary(buf1, chunk);
         const size_type r2 = f2.read_binary(buf2, chunk);

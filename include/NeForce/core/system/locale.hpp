@@ -115,9 +115,9 @@ public:
      */
     enum class collate_strength : int32_t {
         primary = 1,   ///< 一级比较：忽略大小写、变音符号、标点符号
-        secondary = 2, ///< 二级比较：忽略大小写、变音符号
-        tertiary = 3,  ///< 三级比较：忽略大小写
-        identical = 4  ///< 完全比较：区分所有字符
+        secondary = 2, ///< 二级比较：忽略大小写、区分变音符号
+        tertiary = 3,  ///< 三级比较：区分大小写
+        identical = 4  ///< 完全比较：完全比较
     };
 
 private:

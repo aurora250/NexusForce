@@ -89,6 +89,13 @@ pipe& pipe::operator=(pipe&& other) noexcept {
 }
 
 int pipe::read(void* buffer, size_t size) noexcept {
+    if (size == 0) {
+        return 0;
+    }
+    if (buffer == nullptr) {
+        return -1;
+    }
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (read_handle_ == nullptr) {
         return -1;

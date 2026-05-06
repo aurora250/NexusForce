@@ -4,26 +4,34 @@ NEFORCE_BEGIN_NAMESPACE__
 file_locker::file_locker(const native_handle_type handle) noexcept :
 handle_(handle) {}
 
-bool file_locker::lock(const difference_type offset, const difference_type length,
-                       const file_lock mode) const noexcept {
+bool file_locker::lock(const difference_type offset, difference_type length, const file_lock mode) const noexcept {
     if (offset < 0 || length < 0) {
         return false;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    if (length == 0) {
+        ::LARGE_INTEGER file_size;
+        if (::GetFileSizeEx(handle_, &file_size) == FALSE) {
+            return false;
+        }
+        const uint64_t file_sz = static_cast<uint64_t>(file_size.QuadPart);
+        if (static_cast<uint64_t>(offset) >= file_sz) {
+            return true;
+        }
+        length = static_cast<difference_type>(file_sz - static_cast<uint64_t>(offset));
+    }
+
     ::OVERLAPPED ov{};
     const ::ULARGE_INTEGER off_ul = {static_cast<::DWORD>(offset & 0xFFFFFFFF),
                                      static_cast<::DWORD>(static_cast<uint64_t>(offset) >> 32)};
     ov.Offset = off_ul.LowPart;
     ov.OffsetHigh = off_ul.HighPart;
 
-    ::DWORD len_lo = 0xFFFFFFFF, len_hi = 0xFFFFFFFF;
-    if (length != 0) {
-        const ::ULARGE_INTEGER len_ul = {static_cast<::DWORD>(length & 0xFFFFFFFF),
-                                         static_cast<::DWORD>(static_cast<uint64_t>(length) >> 32)};
-        len_lo = len_ul.LowPart;
-        len_hi = len_ul.HighPart;
-    }
+    const ::ULARGE_INTEGER len_ul = {static_cast<::DWORD>(length & 0xFFFFFFFF),
+                                     static_cast<::DWORD>(static_cast<uint64_t>(length) >> 32)};
+    const ::DWORD len_lo = len_ul.LowPart;
+    const ::DWORD len_hi = len_ul.HighPart;
 
     ::DWORD flags = 0;
     if ((static_cast<fud_t>(mode) & LOCKFILE_EXCLUSIVE_LOCK) != 0) {
@@ -52,25 +60,35 @@ bool file_locker::lock(const difference_type offset, const difference_type lengt
 #endif
 }
 
-bool file_locker::unlock(const difference_type offset, const difference_type length) const noexcept {
+bool file_locker::unlock(const difference_type offset, difference_type length) const noexcept {
     if (offset < 0 || length < 0) {
         return false;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    if (length == 0) {
+        ::LARGE_INTEGER file_size;
+        if (::GetFileSizeEx(handle_, &file_size) == FALSE) {
+            return false;
+        }
+        const uint64_t file_sz = static_cast<uint64_t>(file_size.QuadPart);
+        if (static_cast<uint64_t>(offset) >= file_sz) {
+            return true;
+        }
+        length = static_cast<difference_type>(file_sz - static_cast<uint64_t>(offset));
+    }
+
     ::OVERLAPPED ov{};
     const ::ULARGE_INTEGER off_ul = {static_cast<::DWORD>(offset & 0xFFFFFFFF),
                                      static_cast<::DWORD>(static_cast<uint64_t>(offset) >> 32)};
     ov.Offset = off_ul.LowPart;
     ov.OffsetHigh = off_ul.HighPart;
 
-    ::DWORD len_lo = 0xFFFFFFFF, len_hi = 0xFFFFFFFF;
-    if (length != 0) {
-        const ::ULARGE_INTEGER len_ul = {static_cast<::DWORD>(length & 0xFFFFFFFF),
-                                         static_cast<::DWORD>(static_cast<uint64_t>(length) >> 32)};
-        len_lo = len_ul.LowPart;
-        len_hi = len_ul.HighPart;
-    }
+    const ::ULARGE_INTEGER len_ul = {static_cast<::DWORD>(length & 0xFFFFFFFF),
+                                     static_cast<::DWORD>(static_cast<uint64_t>(length) >> 32)};
+    const ::DWORD len_lo = len_ul.LowPart;
+    const ::DWORD len_hi = len_ul.HighPart;
+
     return ::UnlockFileEx(handle_, 0, len_lo, len_hi, &ov) != 0;
 
 #else
@@ -91,10 +109,7 @@ bool file_locker::try_lock(const difference_type offset, const difference_type l
 bool file_locker::is_locked(const difference_type offset, const difference_type length,
                             file_lock* lock_out) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    // Windows cannot directly check the lock status;
-    // it can only detect it by attempting a non-blocking shared lock
-    // This operation will temporarily lock the file area
-    if (try_lock(offset, length, file_lock::SHARED)) {
+    if (try_lock(offset, length, file_lock::EXCLUSIVE)) {
         ignore = unlock(offset, length);
         if (lock_out != nullptr) {
             *lock_out = file_lock::SHARED;

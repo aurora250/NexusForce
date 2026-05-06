@@ -23,24 +23,28 @@ default_value(move(def_val)) {}
 
 void cmdline::add_option(const string& long_name, const char short_name, const string& description,
                          const bool requires_value, const bool allow_multiple, const string& default_value) {
-    if (long_name.empty() && short_name == 0) {
+    string actual_long_name = long_name;
+    if (actual_long_name.empty() && short_name != 0) {
+        actual_long_name = string(1, short_name);
+    }
+
+    if (actual_long_name.empty() && short_name == 0) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception("Option must have at least one name"));
     }
-    if (!long_name.empty() && options_long_.count(long_name) != 0U) {
-        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate long option: " + long_name).data()));
+    if (!actual_long_name.empty() && options_long_.count(actual_long_name) != 0U) {
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate long option: " + actual_long_name).data()));
     }
     if (short_name != 0 && options_short_.count(short_name) != 0U) {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate short option: "_s + short_name).data()));
     }
 
-    const option opt(long_name, short_name, description, requires_value, allow_multiple, default_value);
+    const option opt(actual_long_name, short_name, description, requires_value, allow_multiple, default_value);
     options_.push_back(move(opt));
+    const size_t index = options_.size() - 1;
 
-    if (!long_name.empty()) {
-        options_long_[long_name] = &options_.back();
-    }
+    options_long_[actual_long_name] = index;
     if (short_name != 0) {
-        options_short_[short_name] = &options_.back();
+        options_short_[short_name] = index;
     }
 }
 
@@ -92,14 +96,16 @@ string cmdline::get(const string& long_name, const size_t index) const {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option not found: " + long_name).data()));
     }
 
-    if (index >= it->second->values.size()) {
-        if (!it->second->default_value.empty()) {
-            return it->second->default_value;
+    const option* opt = &options_[it->second];
+
+    if (index >= opt->values.size()) {
+        if (!opt->default_value.empty()) {
+            return opt->default_value;
         }
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("No value for option: " + long_name).data()));
     }
 
-    return it->second->values[index];
+    return opt->values[index];
 }
 
 bool cmdline::has(const string& name) const {
@@ -107,7 +113,7 @@ bool cmdline::has(const string& name) const {
     if (it == options_long_.end()) {
         return false;
     }
-    return !it->second->values.empty();
+    return !options_[it->second].values.empty();
 }
 
 size_t cmdline::count(const string& name) const {
@@ -115,7 +121,7 @@ size_t cmdline::count(const string& name) const {
     if (it == options_long_.end()) {
         return 0;
     }
-    return it->second->values.size();
+    return options_[it->second].values.size();
 }
 
 void cmdline::print_help() const {
@@ -200,12 +206,18 @@ vector<string> cmdline::get_os_argv() {
 
 cmdline::option* cmdline::find_option_long(const string& name) {
     const auto it = options_long_.find(name);
-    return it == options_long_.end() ? nullptr : it->second;
+    if (it == options_long_.end()) {
+        return nullptr;
+    }
+    return &options_[it->second];
 }
 
 cmdline::option* cmdline::find_option_short(const char name) {
     const auto it = options_short_.find(name);
-    return it == options_short_.end() ? nullptr : it->second;
+    if (it == options_short_.end()) {
+        return nullptr;
+    }
+    return &options_[it->second];
 }
 
 void cmdline::parse_long_option(const string& arg, const vector<string>& args, size_t& index) {

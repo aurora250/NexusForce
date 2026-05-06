@@ -8,6 +8,7 @@
  * 此文件提供了函数绑定相关的实现，用于创建可调用对象的适配器，支持参数绑定和占位符。
  */
 
+#include "NeForce/core/functional/functor.hpp"
 #include "NeForce/core/functional/invoke.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -257,13 +258,6 @@ NEFORCE_INLINE17 constexpr bool is_bind_expression_v = is_bind_expression<T>::va
 template <uint32_t Num>
 struct placeholder : uint32_constant<Num> {};
 
-/**
- * @var placeholder_v
- * @brief placeholder值的便捷变量模板
- */
-template <uint32_t Num>
-NEFORCE_INLINE17 constexpr uint32_t placeholder_v = placeholder<Num>::value;
-
 
 /**
  * @struct is_placeholder
@@ -271,17 +265,17 @@ NEFORCE_INLINE17 constexpr uint32_t placeholder_v = placeholder<Num>::value;
  * @tparam T 待检查类型
  */
 template <typename T>
-struct is_placeholder;
+struct is_placeholder : uint32_constant<0> {};
 
 template <uint32_t Num>
-struct is_placeholder<placeholder<Num>> : true_type {};
+struct is_placeholder<placeholder<Num>> : uint32_constant<Num> {};
 
 /**
  * @var is_placeholder_v
  * @brief is_placeholder的便捷变量模板
  */
 template <typename T>
-NEFORCE_INLINE17 constexpr bool is_placeholder_v = is_placeholder<T>::value;
+NEFORCE_INLINE17 constexpr uint32_t is_placeholder_v = is_placeholder<T>::value;
 
 /**
  * @namespace placeholders
@@ -338,7 +332,7 @@ NEFORCE_BEGIN_INNER__
  * 3. 占位符：从参数元组中提取对应位置的参数
  * 4. 普通参数：直接转发
  */
-template <typename Arg, bool IsBindExp = is_bind_expression_v<Arg>, bool IsPlaceholder = is_placeholder_v<Arg>>
+template <typename Arg, bool IsBindExp = is_bind_expression_v<Arg>, bool IsPlaceholder = is_placeholder_v<Arg> != 0>
 class bind_arg_mapper;
 
 template <typename T>
@@ -379,7 +373,7 @@ public:
     NEFORCE_CONSTEXPR20 safe_tuple_element_t<(is_placeholder_v<Arg> - 1), Tuple>&& operator()(const volatile Arg&,
                                                                                               Tuple& tuple_ref) const
             volatile {
-        return _NEFORCE get<(is_placeholder<Arg>::value - 1)>(_NEFORCE move(tuple_ref));
+        return _NEFORCE get<(is_placeholder_v<Arg> - 1)>(_NEFORCE move(tuple_ref));
     }
 };
 
@@ -523,7 +517,7 @@ public:
      * @param args 绑定的参数
      */
     template <typename... Args>
-    explicit NEFORCE_CONSTEXPR20 binder(Func&& func, Args&&... args) :
+    explicit NEFORCE_CONSTEXPR20 binder(Func func, Args&&... args) :
     functor_(_NEFORCE forward<Func>(func)),
     bound_args_(_NEFORCE forward<Args>(args)...) {}
 
@@ -537,7 +531,7 @@ public:
      * @return 函数调用结果
      */
     template <typename... Args>
-    NEFORCE_CONSTEXPR20 auto operator()(Args&&... args) -> result_type<tuple<Args&&...>> {
+    NEFORCE_CONSTEXPR20 decltype(auto) operator()(Args&&... args) {
         using Res = result_type<tuple<Args&&...>>;
         return binder::call<Res>(_NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...), BoundIndexes());
     }
@@ -549,7 +543,7 @@ public:
      * @return 函数调用结果
      */
     template <typename... Args>
-    NEFORCE_CONSTEXPR20 auto operator()(Args&&... args) const -> result_type_const<tuple<Args&&...>> {
+    NEFORCE_CONSTEXPR20 decltype(auto) operator()(Args&&... args) const {
         using Res = result_type_const<tuple<Args&&...>>;
         return binder::call_const<Res>(_NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...), BoundIndexes());
     }
@@ -625,7 +619,7 @@ public:
      * @param args 绑定的参数
      */
     template <typename... Args>
-    explicit NEFORCE_CONSTEXPR20 bindrer(Func&& func, Args&&... args) :
+    explicit NEFORCE_CONSTEXPR20 bindrer(Func func, Args&&... args) :
     functor_(_NEFORCE forward<Func>(func)),
     bound_args_(_NEFORCE forward<Args>(args)...) {}
 
@@ -811,20 +805,25 @@ private:
     tuple<BoundArgs...> bound_args_; ///< 存储的绑定参数
 
 private:
-    /**
-     * @brief 调用辅助函数
-     * @tparam T binder_front对象的类型
-     * @tparam Indices 索引序列
-     * @tparam CallArgs 调用参数类型
-     * @param bind_object binder_front对象
-     * @param idx 索引序列对象
-     * @param call_args 调用参数
-     * @return 函数调用结果
-     */
-    template <typename T, size_t... Indices, typename... CallArgs>
-    static constexpr decltype(auto) call(T&& bind_object, index_sequence<Indices...> idx, CallArgs&&... call_args) {
-        return _NEFORCE invoke(_NEFORCE forward<T>(bind_object).func_,
-                               _NEFORCE get<Indices>(_NEFORCE forward<T>(bind_object).bound_args_)...,
+    template <size_t... Indices, typename... CallArgs>
+    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) & {
+        return _NEFORCE invoke(func_, _NEFORCE get<Indices>(bound_args_)..., _NEFORCE forward<CallArgs>(call_args)...);
+    }
+
+    template <size_t... Indices, typename... CallArgs>
+    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) const& {
+        return _NEFORCE invoke(func_, _NEFORCE get<Indices>(bound_args_)..., _NEFORCE forward<CallArgs>(call_args)...);
+    }
+
+    template <size_t... Indices, typename... CallArgs>
+    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) && {
+        return _NEFORCE invoke(_NEFORCE move(func_), _NEFORCE get<Indices>(_NEFORCE move(bound_args_))...,
+                               _NEFORCE forward<CallArgs>(call_args)...);
+    }
+
+    template <size_t... Indices, typename... CallArgs>
+    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) const&& {
+        return _NEFORCE invoke(_NEFORCE move(func_), _NEFORCE get<Indices>(_NEFORCE move(bound_args_))...,
                                _NEFORCE forward<CallArgs>(call_args)...);
     }
 
@@ -838,7 +837,7 @@ public:
      * @param args 绑定的参数
      */
     template <typename Fn, typename... Args>
-    explicit constexpr binder_front(int p, Fn&& func, Args&&... args) noexcept(
+    constexpr binder_front(int p, Fn&& func, Args&&... args) noexcept(
             conjunction<is_nothrow_constructible<Func, Fn>, is_nothrow_constructible<BoundArgs, Args>...>::value) :
     func_(_NEFORCE forward<Fn>(func)),
     bound_args_(_NEFORCE forward<Args>(args)...) {
@@ -859,9 +858,9 @@ public:
      * @return 函数调用结果
      */
     template <typename... CallArgs>
-    constexpr invoke_result_t<Func&, BoundArgs&..., CallArgs...>
+    constexpr decltype(auto)
     operator()(CallArgs&&... call_args) & noexcept(is_nothrow_invocable_v<Func&, BoundArgs&..., CallArgs...>) {
-        return binder_front::call(*this, BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
+        return call_impl(BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
     }
 
     /**
@@ -871,9 +870,9 @@ public:
      * @return 函数调用结果
      */
     template <typename... CallArgs>
-    constexpr invoke_result_t<const Func&, const BoundArgs&..., CallArgs...> operator()(CallArgs&&... call_args)
-            const& noexcept(is_nothrow_invocable_v<const Func&, const BoundArgs&..., CallArgs...>) {
-        return binder_front::call(*this, BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
+    constexpr decltype(auto) operator()(CallArgs&&... call_args) const& noexcept(
+            is_nothrow_invocable_v<const Func&, const BoundArgs&..., CallArgs...>) {
+        return call_impl(BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
     }
 
     /**
@@ -883,9 +882,9 @@ public:
      * @return 函数调用结果
      */
     template <typename... CallArgs>
-    constexpr invoke_result_t<Func, BoundArgs..., CallArgs...>
+    constexpr decltype(auto)
     operator()(CallArgs&&... call_args) && noexcept(is_nothrow_invocable_v<Func, BoundArgs..., CallArgs...>) {
-        return binder_front::call(_NEFORCE move(*this), BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
+        return _NEFORCE move(*this).call_impl(BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
     }
 
     /**
@@ -895,9 +894,9 @@ public:
      * @return 函数调用结果
      */
     template <typename... CallArgs>
-    constexpr invoke_result_t<const Func, const BoundArgs..., CallArgs...> operator()(CallArgs&&... call_args)
-            const&& noexcept(is_nothrow_invocable_v<const Func, const BoundArgs..., CallArgs...>) {
-        return binder_front::call(_NEFORCE move(*this), BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
+    constexpr decltype(auto) operator()(CallArgs&&... call_args) const&& noexcept(
+            is_nothrow_invocable_v<const Func, const BoundArgs..., CallArgs...>) {
+        return _NEFORCE move(*this).call_impl(BoundIndices(), _NEFORCE forward<CallArgs>(call_args)...);
     }
 };
 

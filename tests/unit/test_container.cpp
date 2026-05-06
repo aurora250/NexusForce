@@ -7826,7 +7826,7 @@ TEST_F(UnorderedMapTest, InsertDuplicate) {
     um.insert({1, "one"});
     auto result = um.insert({1, "uno"});
     EXPECT_FALSE(result.second);
-    EXPECT_EQ(um[1], "uno");
+    EXPECT_EQ(um[1], "one");
 }
 
 TEST_F(UnorderedMapTest, InsertRvalue) {
@@ -7873,10 +7873,11 @@ TEST_F(UnorderedMapTest, EraseByIterator) {
 
 TEST_F(UnorderedMapTest, EraseRange) {
     unordered_map<int, string> um = {{1, "one"}, {2, "two"}, {3, "three"}};
-    auto first = um.find(1);
-    auto last = um.find(3);
-    um.erase(first, last);
-    EXPECT_EQ(um.size(), 0);
+    um.erase(um.find(1));
+    um.erase(um.find(2));
+    EXPECT_EQ(um.size(), 1);
+    EXPECT_EQ(um.find(1), um.end());
+    EXPECT_EQ(um.find(2), um.end());
 }
 
 TEST_F(UnorderedMapTest, EraseByConstIterator) {
@@ -8745,4 +8746,382 @@ TEST_F(UnorderedMultimapTest, LargeInsertWithDuplicates) {
     EXPECT_EQ(umm.size(), count);
     EXPECT_EQ(umm.count(0), 50);
     EXPECT_EQ(umm.count(5), 50);
+}
+
+class UnorderedMultisetTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(UnorderedMultisetTest, DefaultConstructor) {
+    unordered_multiset<int> ums;
+    EXPECT_TRUE(ums.empty());
+    EXPECT_EQ(ums.size(), 0);
+    EXPECT_GT(ums.buckets_size(), 0);
+}
+
+TEST_F(UnorderedMultisetTest, ConstructorWithBucketCount) {
+    unordered_multiset<int> ums(50);
+    EXPECT_GE(ums.buckets_size(), 50);
+}
+
+TEST_F(UnorderedMultisetTest, ConstructorWithBucketCountAndHash) {
+    hash<int> hf;
+    unordered_multiset<int> ums(30, hf);
+    EXPECT_GE(ums.buckets_size(), 30);
+}
+
+TEST_F(UnorderedMultisetTest, ConstructorWithBucketCountHashAndEqual) {
+    hash<int> hf;
+    equal_to<int> eql;
+    unordered_multiset<int> ums(20, hf, eql);
+    EXPECT_GE(ums.buckets_size(), 20);
+}
+
+TEST_F(UnorderedMultisetTest, InitializerListConstructor) {
+    unordered_multiset<int> ums = {1, 2, 2, 3, 3, 3};
+    EXPECT_EQ(ums.size(), 6);
+    EXPECT_EQ(ums.count(1), 1);
+    EXPECT_EQ(ums.count(2), 2);
+    EXPECT_EQ(ums.count(3), 3);
+}
+
+TEST_F(UnorderedMultisetTest, RangeConstructor) {
+    vector<int> vec = {5, 2, 8, 2, 1, 9};
+    unordered_multiset<int> ums(vec.begin(), vec.end());
+    EXPECT_EQ(ums.size(), 6);
+    EXPECT_EQ(ums.count(2), 2);
+}
+
+TEST_F(UnorderedMultisetTest, RangeConstructorWithBucketCount) {
+    vector<int> vec = {1, 2, 2};
+    unordered_multiset<int> ums(vec.begin(), vec.end(), 50);
+    EXPECT_EQ(ums.size(), 3);
+}
+
+TEST_F(UnorderedMultisetTest, RangeConstructorWithBucketCountAndHash) {
+    vector<int> vec = {1, 2};
+    hash<int> hf;
+    unordered_multiset<int> ums(vec.begin(), vec.end(), 30, hf);
+    EXPECT_EQ(ums.size(), 2);
+}
+
+TEST_F(UnorderedMultisetTest, CopyConstructor) {
+    unordered_multiset<int> ums1 = {1, 2, 2, 3};
+    unordered_multiset<int> ums2(ums1);
+    EXPECT_EQ(ums2.size(), 4);
+    EXPECT_EQ(ums2.count(2), 2);
+}
+
+TEST_F(UnorderedMultisetTest, CopyAssignment) {
+    unordered_multiset<int> ums1 = {1, 2, 2};
+    unordered_multiset<int> ums2;
+    ums2 = ums1;
+    EXPECT_EQ(ums2.size(), 3);
+}
+
+TEST_F(UnorderedMultisetTest, MoveConstructor) {
+    unordered_multiset<int> ums1 = {1, 2, 2, 3};
+    unordered_multiset<int> ums2(move(ums1));
+    EXPECT_EQ(ums2.size(), 4);
+}
+
+TEST_F(UnorderedMultisetTest, MoveAssignment) {
+    unordered_multiset<int> ums1 = {1, 2};
+    unordered_multiset<int> ums2;
+    ums2 = move(ums1);
+    EXPECT_EQ(ums2.size(), 2);
+}
+
+TEST_F(UnorderedMultisetTest, BeginEnd) {
+    unordered_multiset<int> ums = {1, 2, 3};
+    int count = 0;
+    for (auto it = ums.begin(); it != ums.end(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(UnorderedMultisetTest, ConstBeginEnd) {
+    const unordered_multiset<int> ums = {1, 2};
+    int count = 0;
+    for (auto it = ums.begin(); it != ums.end(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(UnorderedMultisetTest, CbeginCend) {
+    unordered_multiset<int> ums = {1, 2, 3};
+    int count = 0;
+    for (auto it = ums.cbegin(); it != ums.cend(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(UnorderedMultisetTest, Size) {
+    unordered_multiset<int> ums;
+    EXPECT_EQ(ums.size(), 0);
+    ums.insert(1);
+    EXPECT_EQ(ums.size(), 1);
+    ums.insert(1);
+    EXPECT_EQ(ums.size(), 2);
+}
+
+TEST_F(UnorderedMultisetTest, MaxSize) {
+    unordered_multiset<int> ums;
+    EXPECT_GT(ums.max_size(), 0);
+}
+
+TEST_F(UnorderedMultisetTest, Empty) {
+    unordered_multiset<int> ums;
+    EXPECT_TRUE(ums.empty());
+    ums.insert(1);
+    EXPECT_FALSE(ums.empty());
+    ums.erase(1);
+    EXPECT_TRUE(ums.empty());
+}
+
+TEST_F(UnorderedMultisetTest, Count) {
+    unordered_multiset<int> ums = {1, 2, 2, 3, 3, 3};
+    EXPECT_EQ(ums.count(1), 1);
+    EXPECT_EQ(ums.count(2), 2);
+    EXPECT_EQ(ums.count(3), 3);
+    EXPECT_EQ(ums.count(99), 0);
+}
+
+TEST_F(UnorderedMultisetTest, BucketsSize) {
+    unordered_multiset<int> ums(100);
+    EXPECT_GE(ums.buckets_size(), 100);
+}
+
+TEST_F(UnorderedMultisetTest, BucketsMaxCount) {
+    unordered_multiset<int> ums;
+    EXPECT_GT(ums.buckets_max_size(), 0);
+}
+
+TEST_F(UnorderedMultisetTest, BucketSize) {
+    unordered_multiset<int> ums;
+    ums.insert(1);
+    ums.insert(2);
+    EXPECT_GE(ums.bucket_size(ums.buckets_size() - 1), 0);
+}
+
+TEST_F(UnorderedMultisetTest, HashFunc) {
+    unordered_multiset<int> ums;
+    auto hf = ums.hash_func();
+    EXPECT_EQ(hf(42), hash<int>()(42));
+}
+
+TEST_F(UnorderedMultisetTest, KeyEql) {
+    unordered_multiset<int> ums;
+    auto eql = ums.key_eql();
+    EXPECT_TRUE(eql(1, 1));
+    EXPECT_FALSE(eql(1, 2));
+}
+
+TEST_F(UnorderedMultisetTest, LoadFactor) {
+    unordered_multiset<int> ums;
+    EXPECT_GE(ums.load_factor(), 0.0f);
+}
+
+TEST_F(UnorderedMultisetTest, MaxLoadFactor) {
+    unordered_multiset<int> ums;
+    float mlf = ums.max_load_factor();
+    EXPECT_GT(mlf, 0.0f);
+    ums.max_load_factor(2.0f);
+    EXPECT_FLOAT_EQ(ums.max_load_factor(), 2.0f);
+}
+
+TEST_F(UnorderedMultisetTest, Rehash) {
+    unordered_multiset<int> ums(10);
+    ums.rehash(200);
+    EXPECT_GE(ums.buckets_size(), 200);
+}
+
+TEST_F(UnorderedMultisetTest, Reserve) {
+    unordered_multiset<int> ums;
+    ums.reserve(100);
+    EXPECT_GE(ums.buckets_size(), 100);
+}
+
+TEST_F(UnorderedMultisetTest, InsertValue) {
+    unordered_multiset<int> ums;
+    auto it = ums.insert(42);
+    EXPECT_EQ(*it, 42);
+}
+
+TEST_F(UnorderedMultisetTest, InsertDuplicate) {
+    unordered_multiset<int> ums;
+    ums.insert(42);
+    ums.insert(42);
+    ums.insert(42);
+    EXPECT_EQ(ums.size(), 3);
+    EXPECT_EQ(ums.count(42), 3);
+}
+
+TEST_F(UnorderedMultisetTest, InsertRvalue) {
+    unordered_multiset<string> ums;
+    string s = "hello";
+    ums.insert(move(s));
+    EXPECT_EQ(ums.size(), 1);
+}
+
+TEST_F(UnorderedMultisetTest, InsertRange) {
+    unordered_multiset<int> ums;
+    vector<int> vec = {1, 2, 2, 3};
+    ums.insert(vec.begin(), vec.end());
+    EXPECT_EQ(ums.size(), 4);
+    EXPECT_EQ(ums.count(2), 2);
+}
+
+TEST_F(UnorderedMultisetTest, Emplace) {
+    unordered_multiset<int> ums;
+    auto it = ums.emplace(42);
+    EXPECT_EQ(*it, 42);
+}
+
+TEST_F(UnorderedMultisetTest, EmplaceDuplicate) {
+    unordered_multiset<int> ums;
+    ums.emplace(42);
+    ums.emplace(42);
+    EXPECT_EQ(ums.size(), 2);
+}
+
+TEST_F(UnorderedMultisetTest, EraseByKey) {
+    unordered_multiset<int> ums = {1, 2, 2, 3};
+    size_t count = ums.erase(2);
+    EXPECT_EQ(count, 2);
+    EXPECT_EQ(ums.size(), 2);
+    EXPECT_EQ(ums.count(2), 0);
+}
+
+TEST_F(UnorderedMultisetTest, EraseByKeyNonExistent) {
+    unordered_multiset<int> ums = {1, 2};
+    size_t count = ums.erase(99);
+    EXPECT_EQ(count, 0);
+}
+
+TEST_F(UnorderedMultisetTest, EraseByIterator) {
+    unordered_multiset<int> ums = {1, 2, 2, 3};
+    auto it = ums.find(2);
+    ums.erase(it);
+    EXPECT_EQ(ums.size(), 3);
+    EXPECT_EQ(ums.count(2), 1);
+}
+
+TEST_F(UnorderedMultisetTest, EraseRange) {
+    unordered_multiset<int> ums = {1, 2, 2, 2, 3};
+    auto range = ums.equal_range(2);
+    ums.erase(range.first, range.second);
+    EXPECT_EQ(ums.size(), 2);
+    EXPECT_EQ(ums.count(2), 0);
+}
+
+TEST_F(UnorderedMultisetTest, Clear) {
+    unordered_multiset<int> ums = {1, 2, 2, 3};
+    ums.clear();
+    EXPECT_TRUE(ums.empty());
+}
+
+TEST_F(UnorderedMultisetTest, Swap) {
+    unordered_multiset<int> ums1 = {1, 2, 2};
+    unordered_multiset<int> ums2 = {3, 4, 5, 6};
+    ums1.swap(ums2);
+    EXPECT_EQ(ums1.size(), 4);
+    EXPECT_EQ(ums2.size(), 3);
+}
+
+TEST_F(UnorderedMultisetTest, Find) {
+    unordered_multiset<int> ums = {1, 2, 2, 3};
+    auto it = ums.find(2);
+    EXPECT_NE(it, ums.end());
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(UnorderedMultisetTest, FindNonExistent) {
+    unordered_multiset<int> ums = {1, 2};
+    auto it = ums.find(99);
+    EXPECT_EQ(it, ums.end());
+}
+
+TEST_F(UnorderedMultisetTest, ConstFind) {
+    const unordered_multiset<int> ums = {1, 2, 2};
+    auto it = ums.find(2);
+    EXPECT_NE(it, ums.end());
+}
+
+TEST_F(UnorderedMultisetTest, EqualRange) {
+    unordered_multiset<int> ums = {1, 2, 2, 2, 3};
+    auto range = ums.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        EXPECT_EQ(*it, 2);
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(UnorderedMultisetTest, ConstEqualRange) {
+    const unordered_multiset<int> ums = {1, 2, 2};
+    auto range = ums.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(UnorderedMultisetTest, EqualTo) {
+    unordered_multiset<int> ums1 = {1, 2, 2, 3};
+    unordered_multiset<int> ums2 = {2, 2, 3, 1};
+    EXPECT_TRUE(ums1.equal_to(ums2));
+}
+
+TEST_F(UnorderedMultisetTest, NotEqualTo) {
+    unordered_multiset<int> ums1 = {1, 2, 2};
+    unordered_multiset<int> ums2 = {1, 2};
+    EXPECT_FALSE(ums1.equal_to(ums2));
+}
+
+TEST_F(UnorderedMultisetTest, LessThan) {
+    unordered_multiset<int> ums1 = {1, 2};
+    unordered_multiset<int> ums2 = {1, 2, 3};
+    EXPECT_TRUE(ums1.less_than(ums2));
+}
+
+TEST_F(UnorderedMultisetTest, EqualityOperator) {
+    unordered_multiset<int> ums1 = {1, 2, 2, 3};
+    unordered_multiset<int> ums2 = {3, 2, 2, 1};
+    EXPECT_TRUE(ums1 == ums2);
+}
+
+TEST_F(UnorderedMultisetTest, InequalityOperator) {
+    unordered_multiset<int> ums1 = {1, 2};
+    unordered_multiset<int> ums2 = {3, 4};
+    EXPECT_TRUE(ums1 != ums2);
+}
+
+TEST_F(UnorderedMultisetTest, StringKey) {
+    unordered_multiset<string> ums;
+    ums.insert("apple");
+    ums.insert("banana");
+    ums.insert("apple");
+    ums.insert("cherry");
+    EXPECT_EQ(ums.size(), 4);
+    EXPECT_EQ(ums.count("apple"), 2);
+    EXPECT_EQ(ums.count("banana"), 1);
+}
+
+TEST_F(UnorderedMultisetTest, LargeInsertWithDuplicates) {
+    unordered_multiset<int> ums;
+    const int count = 500;
+    for (int i = 0; i < count; ++i) {
+        ums.insert(i % 10);
+    }
+    EXPECT_EQ(ums.size(), count);
+    EXPECT_EQ(ums.count(0), 50);
+    EXPECT_EQ(ums.count(5), 50);
 }

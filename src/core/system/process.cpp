@@ -24,9 +24,28 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string build_command_line(const string& executable, const vector<string>& args) {
-        string cmd_line = "\"" + executable + "\"";
+        auto needs_quoting = [](const string& s) -> bool {
+            if (s.empty()) {
+                return true;
+            }
+            for (const char c: s) {
+                if (c == ' ' || c == '\t' || c == '"' || c == '&' || c == '|' || c == '<' || c == '>' || c == '^' ||
+                    c == '%') {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        string cmd_line = needs_quoting(executable) ? ("\"" + executable + "\"") : executable;
+
         for (const auto& arg: args) {
-            cmd_line += " \"" + arg + "\"";
+            cmd_line += ' ';
+            if (needs_quoting(arg)) {
+                cmd_line += '"' + arg + '"';
+            } else {
+                cmd_line += arg;
+            }
         }
         return cmd_line;
     }
@@ -158,12 +177,16 @@ int process::wait_for(state_info& info, int timeout_ms) {
     if (result == WAIT_FAILED) {
         NEFORCE_THROW_EXCEPTION(process_exception("WaitForSingleObject failed"));
     }
-    info.stdout_output = info.stdout_pipe.read_available();
+
+    if (info.stdout_pipe.native_read_handle() != nullptr) {
+        info.stdout_output = info.stdout_pipe.read_available();
+    }
 
     ::DWORD exit_code = 0;
     if (::GetExitCodeProcess(info.process_handle, &exit_code) == FALSE) {
         NEFORCE_THROW_EXCEPTION(process_exception("GetExitCodeProcess failed"));
     }
+    info.is_running = false;
     return static_cast<int>(exit_code);
 #else
     int status = 0;
@@ -198,8 +221,11 @@ int process::wait_for(state_info& info, int timeout_ms) {
         }
     }
 
-    info.stdout_output = info.stdout_pipe.read_available();
-    info.stdout_pipe.close();
+    if (info.stdout_pipe.native_read_handle() != -1) {
+        info.stdout_output = info.stdout_pipe.read_available();
+        info.stdout_pipe.close();
+    }
+
     info.is_running = false;
 
     if (WIFEXITED(status)) {
@@ -211,12 +237,7 @@ int process::wait_for(state_info& info, int timeout_ms) {
 
 bool process::terminate(const state_info& info) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::BOOL result = ::TerminateProcess(info.process_handle, 1);
-    if (result == TRUE) {
-        ::CloseHandle(info.process_handle);
-        ::CloseHandle(info.thread_handle);
-    }
-    return result != 0;
+    return ::TerminateProcess(info.process_handle, 1) == TRUE;
 #else
     if (::kill(info.process_id, SIGTERM) == 0) {
         ::usleep(100000);

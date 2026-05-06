@@ -343,6 +343,7 @@ bool file::flush() noexcept {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    ::SetEndOfFile(handle_);
     return ::FlushFileBuffers(handle_) != 0;
 #else
     return ::fdatasync(handle_) == 0;
@@ -443,12 +444,16 @@ file::size_type file::read(string& out, const size_type size) const {
     if (!opened_ || handle_ == invalid_handle) {
         return 0;
     }
-    out.clear();
     if (size == 0) {
         return 0;
     }
+
     out.resize(size);
-    return read(out.data(), size);
+    const size_type bytes_read = read(out.data(), size);
+    if (bytes_read < size) {
+        out.resize(bytes_read);
+    }
+    return bytes_read;
 }
 
 file::size_type file::read(void* buffer, const size_type size) const {
@@ -483,7 +488,23 @@ file::size_type file::read(void* buffer, const size_type size) const {
     return total_read;
 }
 
-file::size_type file::read(string& out) const { return read(out, out.size()); }
+file::size_type file::read(string& out) const {
+    if (!opened_ || handle_ == invalid_handle) {
+        return 0;
+    }
+    const difference_type pos = tell();
+    if (pos < 0) {
+        set_last_error();
+        return 0;
+    }
+    const uint64_t file_sz = size64();
+    if (file_sz < static_cast<uint64_t>(pos)) {
+        last_error_code_ = errc::invalid_seek;
+        return 0;
+    }
+    const size_type remaining = static_cast<size_type>(file_sz - static_cast<uint64_t>(pos));
+    return read(out, remaining);
+}
 
 string file::read() const {
     if (!opened_ || handle_ == invalid_handle) {
@@ -512,6 +533,21 @@ string file::read() const {
         content.resize(bytes_read);
     }
     return content;
+}
+
+string file::read(const size_type n) const {
+    if (!opened_ || handle_ == invalid_handle) {
+        return {};
+    }
+    if (n == 0) {
+        return {};
+    }
+
+    string result;
+    result.resize(n);
+    const size_type bytes_read = read(result.data(), n);
+    result.resize(bytes_read);
+    return result;
 }
 
 vector<string> file::read_chunks(const size_type chunk_size) const {
@@ -884,6 +920,7 @@ file::size_type file::size() const {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    ::SetFilePointer(handle_, 0, nullptr, FILE_CURRENT);
     ::LARGE_INTEGER sz{};
     if (::GetFileSizeEx(handle_, &sz) == FALSE) {
         set_last_error();
@@ -946,6 +983,43 @@ bool file::seek(const difference_type distance, file_pointer method) const {
             return false;
         }
     }
+
+    const difference_type current_logical_pos = tell();
+    if (current_logical_pos < 0) {
+        set_last_error();
+        return false;
+    }
+
+    difference_type target_pos = 0;
+    switch (static_cast<fud_t>(method)) {
+        case static_cast<fud_t>(file_pointer::BEGIN): {
+            target_pos = distance;
+            break;
+        }
+        case static_cast<fud_t>(file_pointer::CURRENT): {
+            target_pos = current_logical_pos + distance;
+            break;
+        }
+        case static_cast<fud_t>(file_pointer::END): {
+            const uint64_t file_sz = size64();
+            if (file_sz > static_cast<uint64_t>(numeric_traits<difference_type>::max())) {
+                last_error_code_ = errc::file_too_large;
+                return false;
+            }
+            target_pos = static_cast<difference_type>(file_sz) + distance;
+            break;
+        }
+        default: {
+            last_error_code_ = errc::invalid_argument;
+            return false;
+        }
+    }
+
+    if (target_pos < 0) {
+        last_error_code_ = errc::invalid_seek;
+        return false;
+    }
+
     if (write_buffer_pos_ > 0) {
         if (!flush_write_buffer()) {
             set_last_error();
@@ -963,16 +1037,13 @@ bool file::seek(const difference_type distance, file_pointer method) const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
-    li.QuadPart = distance;
-
-    ::LARGE_INTEGER new_pointer{};
-    if (::SetFilePointerEx(handle_, li, &new_pointer, static_cast<fud_t>(method)) == FALSE) {
+    li.QuadPart = target_pos;
+    if (::SetFilePointerEx(handle_, li, nullptr, FILE_BEGIN) == FALSE) {
         set_last_error();
         return false;
     }
 #else
-    const difference_type new_pos = ::lseek(handle_, distance, static_cast<fud_t>(method));
-    if (new_pos == -1) {
+    if (::lseek(handle_, target_pos, SEEK_SET) == static_cast<difference_type>(-1)) {
         set_last_error();
         return false;
     }
@@ -990,29 +1061,27 @@ file::difference_type file::tell() const {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::LARGE_INTEGER li_zero{};
-    ::LARGE_INTEGER current_pos;
+    ::LARGE_INTEGER current_pos{};
     if (::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT) == FALSE) {
         set_last_error();
         return -1;
     }
     system_pos = current_pos.QuadPart;
-
 #else
     const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
-    if (pos == -1) {
+    if (pos == static_cast<difference_type>(-1)) {
         set_last_error();
         return -1;
     }
     system_pos = pos;
-
 #endif
 
     difference_type adjusted_pos = system_pos;
     if (write_buffer_pos_ > 0) {
         adjusted_pos += static_cast<difference_type>(write_buffer_pos_);
-    } else if (read_buffer_size_ > 0) {
-        const size_type unread = read_buffer_size_ - read_buffer_pos_;
-        adjusted_pos -= static_cast<difference_type>(unread);
+    } else if (read_buffer_size_ > 0 && read_buffer_pos_ <= read_buffer_size_) {
+        const size_type consumed = read_buffer_pos_;
+        adjusted_pos -= static_cast<difference_type>(read_buffer_size_ - consumed);
     }
 
     return adjusted_pos;

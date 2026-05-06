@@ -59,7 +59,7 @@ bool environment::set(const string& name, const string& value, const bool overwr
 bool environment::unset(const string& name) {
     lock<shared_mutex> lock(get_mutex());
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::SetEnvironmentVariableA(name.data(), nullptr) != 0;
+    return set_unsafe(name, "");
 #else
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     return ::unsetenv(name.data()) == 0;
@@ -114,13 +114,18 @@ vector<string> environment::path_list() {
     const string path_str = get_unsafe("PATH");
     vector<string> paths;
 
-    size_t start = 0;
-    size_t end = path_str.find(delimiter);
+    if (path_str.empty()) {
+        return paths;
+    }
 
-    while (end != string::npos) {
-        paths.push_back(path_str.substr(start, end - start));
+    size_t start = 0;
+    size_t end = 0;
+
+    while ((end = path_str.find(delimiter, start)) != string::npos) {
+        if (end > start) {
+            paths.push_back(path_str.substr(start, end - start));
+        }
         start = end + 1;
-        end = path_str.find(delimiter, start);
     }
 
     if (start < path_str.length()) {
@@ -132,6 +137,11 @@ vector<string> environment::path_list() {
 
 bool environment::add_to_path(const string& path, const int position) {
     lock<shared_mutex> lock(get_mutex());
+
+    if (path.empty()) {
+        return false;
+    }
+
     const string original_path = get_unsafe("PATH");
 
     if (original_path.empty()) {

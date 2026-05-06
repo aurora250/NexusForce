@@ -165,7 +165,7 @@ public:
      *
      * 描述一个命令行选项的所有属性。
      */
-    struct option {
+    struct NEFORCE_API option {
         string long_name;            ///< 长选项名称
         char short_name = 0;         ///< 短选项字符
         string description;          ///< 选项描述
@@ -190,11 +190,11 @@ public:
     };
 
 private:
-    string program_name_;                         ///< 程序名称
-    vector<option> options_;                      ///< 选项列表
-    unordered_map<string, option*> options_long_; ///< 长选项名到选项的映射
-    unordered_map<char, option*> options_short_;  ///< 短选项字符到选项的映射
-    vector<string> positional_;                   ///< 位置参数
+    string program_name_;                        ///< 程序名称
+    vector<option> options_;                     ///< 选项列表
+    unordered_map<string, size_t> options_long_; ///< 长选项名索引
+    unordered_map<char, size_t> options_short_;  ///< 短选项字符索引
+    vector<string> positional_;                  ///< 位置参数
 
     /**
      * @brief 根据长选项名查找选项

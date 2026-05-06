@@ -91,7 +91,7 @@ public:
     struct async_result {
         bool completed = false;                ///< 操作是否已完成
         size_t bytes_transferred = 0;          ///< 实际传输的字节数
-        int error_code = 0;                    ///< 错误码（0表示成功）
+        error_code error;                      ///< 错误码
         aiocb_type* cb = nullptr;              ///< 异步I/O控制块指针
         async_context* user_context = nullptr; ///< 用户上下文指针
     };

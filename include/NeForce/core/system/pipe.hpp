@@ -43,7 +43,7 @@ struct pipe_exception final : system_exception {
 
 /**
  * @class pipe
- * @brief 管道类
+ * @brief 阻塞式匿名管道类
  *
  * 支持管道的创建、读写和关闭。
  */

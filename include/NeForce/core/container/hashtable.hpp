@@ -225,9 +225,6 @@ public:
      */
     void increment() noexcept {
         NEFORCE_DEBUG_VERIFY(current_ && container_, "Attempting to increment a null pointer");
-        NEFORCE_DEBUG_VERIFY(bucket_ < container_->buckets_.size() &&
-                                     !(bucket_ + 1 == container_->buckets_.size() && current_->next != nullptr),
-                             "Attempting to increment out of boundary");
         current_ = current_->next;
         if (current_ == nullptr) {
             while (current_ == nullptr && ++bucket_ < container_->buckets_.size()) {
@@ -545,13 +542,13 @@ private:
         node_type** buckets_ptr = &buckets_[n];
         while (*buckets_ptr != nullptr) {
             if (equals_(extracter_((*buckets_ptr)->data), extracter_(ptr->data))) {
-                ptr->next = (*buckets_ptr)->next;
-                hashtable::delete_node(*buckets_ptr);
-                *buckets_ptr = ptr;
-                return {{ptr, n, this}, false};
+                link_type existing = *buckets_ptr;
+                hashtable::delete_node(ptr);
+                return {iterator(existing, n, this), false};
             }
             buckets_ptr = &(*buckets_ptr)->next;
         }
+
         ptr->next = nullptr;
         *buckets_ptr = ptr;
         ++size_;
@@ -669,7 +666,6 @@ private:
             link_type next = curr->next;
             hashtable::delete_node(curr);
             curr = next;
-            --size_;
             ++count;
         }
         buckets_[bucket] = last;
@@ -773,9 +769,7 @@ private:
             ptrs_rhs.push_back(&(*it));
         }
 
-        auto key_less = [this](const value_type* a, const value_type* b) {
-            return extracter_(*a) < extracter_(*b);
-        };
+        auto key_less = [this](const value_type* a, const value_type* b) { return extracter_(*a) < extracter_(*b); };
         auto rhs_key_less = [&rhs](const value_type* a, const value_type* b) {
             return rhs.extracter_(*a) < rhs.extracter_(*b);
         };
@@ -783,11 +777,53 @@ private:
         _NEFORCE sort(ptrs_lhs.begin(), ptrs_lhs.end(), key_less);
         _NEFORCE sort(ptrs_rhs.begin(), ptrs_rhs.end(), rhs_key_less);
 
-        for (size_type i = 0; i < size_; ++i) {
-            if (!(*ptrs_lhs[i] == *ptrs_rhs[i])) {
+        size_type i = 0, j = 0;
+        const size_type n = ptrs_lhs.size();
+
+        while (i < n && j < n) {
+            const key_type& key_l = extracter_(*ptrs_lhs[i]);
+            const key_type& key_r = rhs.extracter_(*ptrs_rhs[j]);
+
+            if (!equals_(key_l, key_r)) {
                 return false;
             }
+
+            size_type i_start = i, j_start = j;
+            while (i < n && equals_(extracter_(*ptrs_lhs[i]), key_l)) {
+                ++i;
+            }
+            while (j < n && rhs.equals_(rhs.extracter_(*ptrs_rhs[j]), key_l)) {
+                ++j;
+            }
+
+            const size_type count_l = i - i_start;
+            const size_type count_r = j - j_start;
+            if (count_l != count_r) {
+                return false;
+            }
+
+            for (size_type k = i_start; k < i; ++k) {
+                const value_type& val = *ptrs_lhs[k];
+                bool found = false;
+                for (size_type l = j_start; l < j; ++l) {
+                    if (ptrs_rhs[l] && *ptrs_rhs[l] == val) {
+                        ptrs_rhs[l] = nullptr;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    return false;
+                }
+            }
+
+            for (size_type l = j_start; l < j; ++l) {
+                if (ptrs_rhs[l] != nullptr) {
+                    return false;
+                }
+            }
         }
+
         return true;
     }
 
@@ -1247,7 +1283,7 @@ public:
      */
     iterator erase(const iterator& position) noexcept(is_nothrow_hashable_v<key_type>) {
         if (position.current_ == nullptr || position.container_ != this) {
-            return hashtable::end();
+            return end();
         }
 
         const size_type n = position.bucket_;
@@ -1262,7 +1298,7 @@ public:
         }
 
         if (curr == nullptr) {
-            return hashtable::end();
+            return end();
         }
 
         if (prev == nullptr) {
@@ -1283,7 +1319,7 @@ public:
                 return iterator(buckets_[bucket], bucket, this);
             }
         }
-        return hashtable::end();
+        return end();
     }
 
     /**
@@ -1298,7 +1334,7 @@ public:
         }
 
         if (first.container_ != this || (last.container_ != this && last != end())) {
-            return hashtable::end();
+            return end();
         }
 
         size_type count_erased = 0;
@@ -1361,7 +1397,7 @@ public:
      */
     NEFORCE_NODISCARD iterator find(const key_type& key) noexcept(is_nothrow_hashable_v<key_type>) {
         if (buckets_.empty()) {
-            return hashtable::end();
+            return end();
         }
 
         size_type n = hashtable::bucket_index_key(key, buckets_.size());
@@ -1370,7 +1406,7 @@ public:
                 return iterator(first, n, this);
             }
         }
-        return hashtable::end();
+        return end();
     }
 
     /**
@@ -1380,7 +1416,7 @@ public:
      */
     NEFORCE_NODISCARD const_iterator find(const key_type& key) const noexcept(is_nothrow_hashable_v<key_type>) {
         if (buckets_.empty()) {
-            return hashtable::cend();
+            return cend();
         }
 
         size_type n = hashtable::bucket_index_key(key, buckets_.size());
@@ -1389,7 +1425,7 @@ public:
                 return const_iterator(first, n, this);
             }
         }
-        return hashtable::cend();
+        return cend();
     }
 
     /**
@@ -1427,26 +1463,41 @@ public:
      */
     NEFORCE_NODISCARD pair<iterator, iterator> equal_range(const key_type& key) {
         if (buckets_.empty()) {
-            return {hashtable::end(), hashtable::end()};
+            return {end(), end()};
         }
 
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
-        link_type first_match = nullptr;
-        link_type after_last = nullptr;
 
-        for (link_type curr = buckets_[n]; curr != nullptr; curr = curr->next) {
-            if (equals_(extracter_(curr->data), key)) {
-                if (first_match == nullptr) {
-                    first_match = curr;
-                }
-                after_last = curr->next;
+        link_type first = buckets_[n];
+        while (first && !equals_(extracter_(first->data), key)) {
+            first = first->next;
+        }
+
+        if (!first) {
+            return {end(), end()};
+        }
+
+        link_type last = first;
+        while (last && equals_(extracter_(last->data), key)) {
+            last = last->next;
+        }
+
+        iterator second_it;
+        if (last != nullptr) {
+            second_it = iterator(last, n, this);
+        } else {
+            size_type next_bucket = n + 1;
+            while (next_bucket < buckets_.size() && buckets_[next_bucket] == nullptr) {
+                ++next_bucket;
+            }
+            if (next_bucket < buckets_.size()) {
+                second_it = iterator(buckets_[next_bucket], next_bucket, this);
+            } else {
+                second_it = end();
             }
         }
 
-        if (first_match == nullptr) {
-            return {hashtable::end(), hashtable::end()};
-        }
-        return {iterator(first_match, n, this), iterator(after_last, n, this)};
+        return {iterator(first, n, this), second_it};
     }
 
     /**
@@ -1460,22 +1511,37 @@ public:
         }
 
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
-        link_type first_match = nullptr;
-        link_type after_last = nullptr;
 
-        for (link_type curr = buckets_[n]; curr != nullptr; curr = curr->next) {
-            if (equals_(extracter_(curr->data), key)) {
-                if (first_match == nullptr) {
-                    first_match = curr;
-                }
-                after_last = curr->next;
+        link_type first = buckets_[n];
+        while (first && !equals_(extracter_(first->data), key)) {
+            first = first->next;
+        }
+
+        if (!first) {
+            return {cend(), cend()};
+        }
+
+        link_type last = first;
+        while (last && equals_(extracter_(last->data), key)) {
+            last = last->next;
+        }
+
+        const_iterator second_it;
+        if (last != nullptr) {
+            second_it = const_iterator(last, n, this);
+        } else {
+            size_type next_bucket = n + 1;
+            while (next_bucket < buckets_.size() && buckets_[next_bucket] == nullptr) {
+                ++next_bucket;
+            }
+            if (next_bucket < buckets_.size()) {
+                second_it = const_iterator(buckets_[next_bucket], next_bucket, this);
+            } else {
+                second_it = cend();
             }
         }
 
-        if (first_match == nullptr) {
-            return {hashtable::cend(), hashtable::cend()};
-        }
-        return {const_iterator(first_match, n, this), const_iterator(after_last, n, this)};
+        return {const_iterator(first, n, this), second_it};
     }
 
     /**
