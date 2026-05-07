@@ -2112,12 +2112,24 @@ TEST(PrevPermutationTest, WithDuplicates) {
     EXPECT_EQ(v, (vector<int>{2, 1, 1}));
 }
 
-TEST(PrevPermutationTest, DISABLED_CustomComparator) {
+TEST(PrevPermutationTest, CustomComparator) {
     vector<int> v = {1, 2, 3};
+
     EXPECT_TRUE(prev_permutation(v.begin(), v.end(), greater<int>()));
     EXPECT_EQ(v, (vector<int>{1, 3, 2}));
+
+    EXPECT_TRUE(prev_permutation(v.begin(), v.end(), greater<int>()));
+    EXPECT_EQ(v, (vector<int>{2, 1, 3}));
+
+    EXPECT_TRUE(prev_permutation(v.begin(), v.end(), greater<int>()));
+    EXPECT_EQ(v, (vector<int>{2, 3, 1}));
+
+    EXPECT_TRUE(prev_permutation(v.begin(), v.end(), greater<int>()));
+    EXPECT_EQ(v, (vector<int>{3, 1, 2}));
+
     EXPECT_TRUE(prev_permutation(v.begin(), v.end(), greater<int>()));
     EXPECT_EQ(v, (vector<int>{3, 2, 1}));
+
     EXPECT_FALSE(prev_permutation(v.begin(), v.end(), greater<int>()));
     EXPECT_EQ(v, (vector<int>{1, 2, 3}));
 }

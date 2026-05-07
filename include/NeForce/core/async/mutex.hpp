@@ -68,9 +68,8 @@ public:
 
     mutex(const mutex&) = delete;
     mutex& operator=(const mutex&) = delete;
-
-    mutex(mutex&&) = default;
-    mutex& operator=(mutex&&) = default;
+    mutex(mutex&&) = delete;
+    mutex& operator=(mutex&&) = delete;
 
     /**
      * @brief 获取原生句柄

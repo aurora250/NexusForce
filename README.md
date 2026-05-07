@@ -295,21 +295,21 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📋 前置依赖
 
-| 类型 | 依赖 | 版本要求      |
-|------|------|-----------|
-| 🔨 构建工具 | [CMake](https://cmake.org/) | 3.19+     |
-| 📦 包管理器 | [vcpkg](https://github.com/microsoft/vcpkg) | Latest    |
-| 🎨 代码格式化 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | 19+       |
-| 🔍 静态分析 | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | 19+       |
-| ⚠️ 必选依赖 | [GTest](https://google.github.io/googletest/) | 1.17.0#2+ |
-| | [pcre2](https://www.pcre.org/) | 10.47+     |
-| | [OpenSSL](https://www.openssl.org/) | 3.6.1#2+   |
-| 📦 可选依赖 | [libpq](https://www.postgresql.org/) | 16.9#3+    |
-| | [libmysql](https://www.mysql.com/) | 8.0.40#1+  |
-| | [sqlite3](https://sqlite.org/index.html) | 3.51.2+    |
-| | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+     |
-| | [lz4](https://lz4.org/) | 1.10.0+    |
-| | [zlib](https://www.zlib.net/) | 1.3.1+     |
+| 类型 | 依赖 | 版本要求   |
+|------|------|--------|
+| 🔨 构建工具 | [CMake](https://cmake.org/) | 3.19+  |
+| 📦 包管理器 | [vcpkg](https://github.com/microsoft/vcpkg) | Latest |
+| 🎨 代码格式化 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | 19+    |
+| 🔍 静态分析 | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | 19+    |
+| ⚠️ 必选依赖 | [GTest](https://google.github.io/googletest/) | 1.17.0+ |
+| | [pcre2](https://www.pcre.org/) | 10.47+ |
+| | [OpenSSL](https://www.openssl.org/) | 3.6.1+ |
+| 📦 可选依赖 | [libpq](https://www.postgresql.org/) | 16.9+  |
+| | [libmysql](https://www.mysql.com/) | 8.0.40+ |
+| | [sqlite3](https://sqlite.org/index.html) | 3.51.2+ |
+| | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+ |
+| | [lz4](https://lz4.org/) | 1.10.0+ |
+| | [zlib](https://www.zlib.net/) | 1.3.1+ |
 
 ### 🏗️ 编译步骤
 

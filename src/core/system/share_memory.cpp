@@ -1,4 +1,5 @@
 #include <NeForce/core/system/share_memory.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
@@ -40,6 +41,13 @@ namespace {
 #else
             -1;
 #endif
+
+    const auto granularity =
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            sysinfo::instance().get_system_info().allocation_granularity;
+#else
+            sysinfo::instance().get_system_info().page_size;
+#endif
 } // namespace
 
 
@@ -55,13 +63,17 @@ share_memory::share_memory(share_memory&& other) noexcept :
 handle_(other.handle_),
 name_(move(other.name_)),
 size_(other.size_),
+internal_mapped_size_(other.internal_mapped_size_),
 mapped_size_(other.mapped_size_),
+original_mapped_addr_(other.original_mapped_addr_),
 mapped_addr_(other.mapped_addr_),
 access_mode_(other.access_mode_),
 is_open_(other.is_open_) {
     other.handle_ = g_invalid_handle;
     other.size_ = 0;
+    other.internal_mapped_size_ = 0;
     other.mapped_size_ = 0;
+    other.original_mapped_addr_ = nullptr;
     other.mapped_addr_ = nullptr;
     other.is_open_ = false;
 }
@@ -71,26 +83,30 @@ share_memory& share_memory::operator=(share_memory&& other) noexcept {
         return *this;
     }
 
-    destroy();
+    close();
 
     handle_ = other.handle_;
     name_ = move(other.name_);
     size_ = other.size_;
+    internal_mapped_size_ = other.internal_mapped_size_;
     mapped_size_ = other.mapped_size_;
+    original_mapped_addr_ = other.original_mapped_addr_;
     mapped_addr_ = other.mapped_addr_;
     access_mode_ = other.access_mode_;
     is_open_ = other.is_open_;
 
     other.handle_ = g_invalid_handle;
     other.size_ = 0;
+    other.internal_mapped_size_ = 0;
     other.mapped_size_ = 0;
+    other.original_mapped_addr_ = nullptr;
     other.mapped_addr_ = nullptr;
     other.is_open_ = false;
 
     return *this;
 }
 
-share_memory::~share_memory() { destroy(); }
+share_memory::~share_memory() { close(); }
 
 void share_memory::open(const string& name, size_t size, open_mode mode, access_mode access) {
     if (is_open_) {
@@ -170,15 +186,15 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
             }
         } else {
             if (size == 0) {
-                NEFORCE_THROW_EXCEPTION(share_memory_exception(
-                    "Size must be greater than 0 when creating new shared memory"));
+                NEFORCE_THROW_EXCEPTION(
+                        share_memory_exception("Size must be greater than 0 when creating new shared memory"));
             }
 #    ifdef NEFORCE_ARCH_BITS_64
             const auto size_high = static_cast<::DWORD>(size >> 32);
-            const auto size_low  = static_cast<::DWORD>(size & 0xFFFFFFFF);
+            const auto size_low = static_cast<::DWORD>(size & 0xFFFFFFFF);
 #    else
             constexpr ::DWORD size_high = 0;
-            const auto size_low         = static_cast<::DWORD>(size);
+            const auto size_low = static_cast<::DWORD>(size);
 #    endif
             handle_ = ::CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr, protect, size_high, size_low, name.data());
             if (handle_ == g_invalid_handle) {
@@ -207,15 +223,15 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 
     auto get_error_string = [](int error_code) -> string {
         char errbuf[256];
-#if (_POSIX_C_SOURCE >= 200112L) && !_GNU_SOURCE
+#    if (_POSIX_C_SOURCE >= 200112L) && !_GNU_SOURCE
         if (::strerror_r(error_code, errbuf, sizeof(errbuf)) == 0) {
             return string(errbuf);
         }
         return "Unknown error";
-#else
+#    else
         const char* msg = ::strerror_r(error_code, errbuf, sizeof(errbuf));
         return string(msg);
-#endif
+#    endif
     };
 
     if (mode == open_mode::create_only) {
@@ -316,94 +332,6 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 void share_memory::close() noexcept {
     unmap();
 
-#ifdef NEFORCE_PLATFORM_LINUX
-    if (handle_ != g_invalid_handle) {
-        ::close(handle_);
-        handle_ = g_invalid_handle;
-    }
-#endif
-
-    is_open_ = false;
-}
-
-void* share_memory::map(size_t offset, const size_t length) {
-    if (!is_open_) {
-        NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory not open"));
-    }
-
-    if (mapped_addr_ != nullptr) {
-        unmap();
-    }
-
-    if (offset > size_) {
-        NEFORCE_THROW_EXCEPTION(share_memory_exception((
-            "Offset " + to_string(offset) + " exceeds shared memory size " + to_string(size_)).data()));
-    }
-
-    const size_t map_length = (length == 0) ? (size_ - offset) : length;
-
-    if (length != 0 && (map_length > size_ || offset > size_ - map_length)) {
-        NEFORCE_THROW_EXCEPTION(share_memory_exception(
-            ("Map region [offset=" + to_string(offset) +
-            ", length=" + to_string(map_length) +
-            "] exceeds shared memory size (" + to_string(size_) + ")").data()));
-    }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::DWORD access = (access_mode_ == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
-
-#    ifdef NEFORCE_ARCH_BITS_64
-    const auto offset_high = static_cast<::DWORD>(offset >> 32);
-    const auto offset_low = static_cast<::DWORD>(offset & 0xFFFFFFFF);
-#    else
-    constexpr ::DWORD offset_high = 0;
-    const auto offset_low = static_cast<::DWORD>(offset);
-#    endif
-
-    mapped_addr_ = ::MapViewOfFile(handle_, access, offset_high, offset_low, map_length);
-    if (mapped_addr_ == nullptr) {
-        NEFORCE_THROW_EXCEPTION(share_memory_exception("MapViewOfFile failed"));
-    }
-#else
-    int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
-
-    mapped_addr_ = ::mmap(nullptr, map_length, prot, MAP_SHARED, handle_, static_cast<::off_t>(offset));
-
-    if (mapped_addr_ == MAP_FAILED) {
-        mapped_addr_ = nullptr;
-        char errbuf[256];
-#if (_POSIX_C_SOURCE >= 200112L) && !_GNU_SOURCE
-        ::strerror_r(errno, errbuf, sizeof(errbuf));
-        NEFORCE_THROW_EXCEPTION(share_memory_exception(errbuf));
-#else
-        const char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-        NEFORCE_THROW_EXCEPTION(share_memory_exception(msg));
-#endif
-    }
-#endif
-
-    mapped_size_ = map_length;
-    return mapped_addr_;
-}
-
-void share_memory::unmap() noexcept {
-    if (mapped_addr_ == nullptr) {
-        return;
-    }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::UnmapViewOfFile(mapped_addr_);
-#else
-    ::munmap(mapped_addr_, mapped_size_);
-#endif
-
-    mapped_addr_ = nullptr;
-    mapped_size_ = 0;
-}
-
-void share_memory::destroy() {
-    unmap();
-
     if (handle_ != g_invalid_handle) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         ::CloseHandle(handle_);
@@ -418,22 +346,110 @@ void share_memory::destroy() {
     size_ = 0;
 }
 
+void* share_memory::map(size_t offset, const size_t length) {
+    if (!is_open_) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory not open"));
+    }
+
+    if (mapped_addr_ != nullptr) {
+        unmap();
+    }
+
+    if (offset > size_) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception(
+                ("Offset " + to_string(offset) + " exceeds shared memory size " + to_string(size_)).data()));
+    }
+
+    size_t map_length = (length == 0) ? (size_ - offset) : length;
+
+    if (length != 0 && (map_length > size_ || offset > size_ - map_length)) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception(("Map region [offset=" + to_string(offset) +
+                                                        ", length=" + to_string(map_length) +
+                                                        "] exceeds shared memory size (" + to_string(size_) + ")")
+                                                               .data()));
+    }
+
+    const size_t aligned_offset = (offset / granularity) * granularity;
+    const size_t padding = offset - aligned_offset;
+    map_length += padding;
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::DWORD access = (access_mode_ == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
+
+#    ifdef NEFORCE_ARCH_BITS_64
+    const auto offset_high = static_cast<::DWORD>(aligned_offset >> 32);
+    const auto offset_low = static_cast<::DWORD>(aligned_offset & 0xFFFFFFFF);
+#    else
+    constexpr ::DWORD offset_high = 0;
+    const auto offset_low = static_cast<::DWORD>(aligned_offset);
+#    endif
+
+    original_mapped_addr_ = ::MapViewOfFile(handle_, access, offset_high, offset_low, map_length);
+    if (original_mapped_addr_ == nullptr) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("MapViewOfFile failed"));
+    }
+#else
+    int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
+
+    original_mapped_addr_ =
+            ::mmap(nullptr, map_length, prot, MAP_SHARED, handle_, static_cast<::off_t>(aligned_offset));
+
+    if (original_mapped_addr_ == MAP_FAILED) {
+        original_mapped_addr_ = nullptr;
+        const auto error = _NEFORCE last_error();
+        NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
+    }
+#endif
+
+    mapped_addr_ = static_cast<char*>(original_mapped_addr_) + padding;
+    internal_mapped_size_ = map_length;
+    mapped_size_ = (length == 0) ? (size_ - offset) : length;
+    return mapped_addr_;
+}
+
+void share_memory::unmap() noexcept {
+    if (original_mapped_addr_ == nullptr) {
+        return;
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::UnmapViewOfFile(original_mapped_addr_);
+#else
+    ::munmap(original_mapped_addr_, internal_mapped_size_);
+#endif
+
+    original_mapped_addr_ = nullptr;
+    mapped_addr_ = nullptr;
+    mapped_size_ = 0;
+    internal_mapped_size_ = 0;
+}
+
 bool share_memory::flush(bool async) {
-    if (mapped_addr_ == nullptr) {
+    if (original_mapped_addr_ == nullptr) {
         return false;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::FlushViewOfFile(mapped_addr_, mapped_size_) != 0;
+    (void) async;
+    return ::FlushViewOfFile(original_mapped_addr_, internal_mapped_size_) != 0;
 #else
     const int flags = async ? MS_ASYNC : MS_SYNC;
-    return ::msync(mapped_addr_, mapped_size_, flags) == 0;
+    return ::msync(original_mapped_addr_, internal_mapped_size_, flags) == 0;
 #endif
 }
 
 bool share_memory::remove(const string& name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    // auto remove when handle is closed in Windows
+    native_handle_type h = ::OpenFileMappingA(FILE_MAP_ALL_ACCESS, FALSE, name.data());
+    if (h != nullptr) {
+        ::CloseHandle(h);
+        h = ::OpenFileMappingA(FILE_MAP_READ, FALSE, name.data());
+        if (h != nullptr) {
+            ::CloseHandle(h);
+            return false;
+        }
+        return true;
+    }
     return true;
 #else
     const string shm_name = normalize_name(name);
@@ -443,7 +459,7 @@ bool share_memory::remove(const string& name) {
 
 bool share_memory::exists(const string& name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::HANDLE h = ::OpenFileMappingA(FILE_MAP_READ, FALSE, name.data());
+    const native_handle_type h = ::OpenFileMappingA(FILE_MAP_READ, FALSE, name.data());
     if (h != g_invalid_handle) {
         ::CloseHandle(h);
         return true;

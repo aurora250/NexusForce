@@ -74,7 +74,9 @@ private:
     native_handle_type handle_;                        ///< 映射句柄
     string name_;                                      ///< 共享内存名称
     size_t size_{0};                                   ///< 共享内存大小
+    size_t internal_mapped_size_{0};                   ///< 含填充的映射大小
     size_t mapped_size_{0};                            ///< 映射大小
+    void* original_mapped_addr_{nullptr};              ///< 原始映射地址
     void* mapped_addr_{nullptr};                       ///< 映射地址
     access_mode access_mode_{access_mode::read_write}; ///< 访问模式
     bool is_open_{false};                              ///< 是否已打开
@@ -145,11 +147,6 @@ public:
     void unmap() noexcept;
 
     /**
-     * @brief 释放资源
-     */
-    void destroy();
-
-    /**
      * @brief 获取映射地址
      * @return 映射地址，未映射则返回nullptr
      */
@@ -203,14 +200,16 @@ public:
     bool flush(bool async = false);
 
     /**
-     * @brief 静态方法：删除共享内存对象
+     * @brief 删除共享内存对象
      * @param name 共享内存名称
      * @return 是否成功删除
+     * @note 即使关闭句柄，如果还有其他进程持有句柄，对象仍会存在
+     *       可以尝试打开以检查是否真的被移除
      */
     static bool remove(const string& name);
 
     /**
-     * @brief 静态方法：检查共享内存是否存在
+     * @brief 检查共享内存是否存在
      * @param name 共享内存名称
      * @return 是否存在
      */

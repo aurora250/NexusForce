@@ -73,6 +73,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/sysinfo.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/system_event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
@@ -222,7 +223,7 @@ nexusforce_compiler_options(NexusForce)
 if(WIN32)
     target_link_libraries(NexusForce PUBLIC
             bcrypt cfgmgr32 DbgHelp iphlpapi Psapi pdh
-            SetupAPI Shell32 synchronization ws2_32 wsock32
+            SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)
     target_link_libraries(NexusForce PUBLIC

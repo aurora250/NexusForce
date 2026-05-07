@@ -23,6 +23,9 @@ set_target_properties(NexusForceUnitTests PROPERTIES
 )
 
 target_link_libraries(NexusForceUnitTests PRIVATE NexusForce::NexusForce)
+if(MSVC)
+    target_compile_options(NexusForceUnitTests PRIVATE /bigobj)
+endif()
 nexusforce_compiler_options(NexusForceUnitTests)
 
 find_package(GTest CONFIG REQUIRED)

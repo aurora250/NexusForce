@@ -30,7 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 系统架构
  * - 系统页面大小、分配粒度等底层信息
  *
- * 使用单例模式，确保全局只有一个系统信息实例。
+ * @note 全局保持唯一的系统信息实例。
  */
 class NEFORCE_API sysinfo {
 public:
@@ -93,7 +93,7 @@ public:
         string vendor{};                ///< 厂商名称
         string brand{};                 ///< 型号名称
         uint32_t max_MHz{0};            ///< 最大频率
-        uint32_t current_MHZ{0};        ///< 当前频率
+        uint32_t current_MHz{0};        ///< 当前频率
         uint32_t cores{0};              ///< 物理核心数
         uint32_t logical_processors{0}; ///< 逻辑处理器数
         string features{};              ///< 支持的指令集特性

@@ -9,6 +9,7 @@
 #    include <pdh.h>
 #    include <psapi.h>
 #    include <winternl.h>
+#    include <wbemcli.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/file/file.hpp>
@@ -54,7 +55,6 @@ namespace {
         ::GetLogicalProcessorInformation(nullptr, &buffer_size);
 
         if (::GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
-            // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
             auto* const buffer = static_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*>(::malloc(buffer_size));
             if (buffer != nullptr) {
                 if (::GetLogicalProcessorInformation(buffer, &buffer_size) == TRUE) {
@@ -71,7 +71,6 @@ namespace {
                     cpu_info.cores = processor_core_count;
                     cpu_info.logical_processors = logical_processor_count;
                 }
-                // NOLINTNEXTLINE(cppcoreguidelines-no-malloc,hicpp-no-malloc,cppcoreguidelines-owning-memory)
                 ::free(buffer);
             }
         }
@@ -86,11 +85,95 @@ namespace {
 
             if (::RegQueryValueExA(hkey, "~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
                 ERROR_SUCCESS) {
-                cpu_info.current_MHZ = mhz;
+                cpu_info.current_MHz = mhz;
+            }
+
+            mhz = 0;
+            size = sizeof(::DWORD);
+
+            LONG result = ::RegQueryValueExA(hkey, "MaxMHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size);
+
+            if (result != ERROR_SUCCESS) {
+                mhz = 0;
+                size = sizeof(::DWORD);
+                result = ::RegQueryValueExA(hkey, "MaxClockSpeed", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz),
+                                            &size);
+            }
+
+            if (result == ERROR_SUCCESS && mhz > 0) {
+                cpu_info.max_MHz = mhz;
             }
 
             ::RegCloseKey(hkey);
         }
+
+        if (cpu_info.max_MHz == 0) {
+            ::__cpuid(cpu_info_data, 0x16);
+            if (cpu_info_data[0] != 0) {
+                cpu_info.max_MHz = cpu_info_data[1];
+                if (cpu_info.current_MHz == 0) {
+                    cpu_info.current_MHz = cpu_info_data[0];
+                }
+            }
+        }
+
+        if (cpu_info.max_MHz == 0) {
+            ::__cpuid(cpu_info_data, 0x15);
+            if (cpu_info_data[0] != 0 && cpu_info_data[1] != 0 && cpu_info_data[2] != 0) {
+                uint32_t crystal_clock = cpu_info_data[2];
+                if (crystal_clock == 0) {
+                    crystal_clock = 38400000;
+                }
+
+                cpu_info.max_MHz = (crystal_clock / 1000000) * cpu_info_data[1] / cpu_info_data[0];
+            }
+        }
+
+        if (cpu_info.max_MHz == 0) {
+            const char* ghz_pos = string_find_pattern(brand, "GHz");
+            if (ghz_pos != nullptr) {
+                const char* num_start = ghz_pos - 1;
+                while (num_start >= brand && (is_digit(*num_start) || *num_start == '.')) {
+                    num_start--;
+                }
+                num_start++;
+
+                if (num_start < ghz_pos) {
+                    try {
+                        const float freq_ghz = float32::parse(num_start).value();
+                        cpu_info.max_MHz = static_cast<uint32_t>(freq_ghz * 1000);
+                        if (cpu_info.current_MHz == 0) {
+                            cpu_info.current_MHz = cpu_info.max_MHz;
+                        }
+                        // NOLINTNEXTLINE(bugprone-empty-catch)
+                    } catch (...) {
+                        // ignore
+                    }
+                }
+            } else {
+                const char* mhz_pos = string_find_pattern(brand, "MHz");
+                if (mhz_pos != nullptr) {
+                    const char* num_start = mhz_pos - 1;
+                    while (num_start >= brand && is_digit(*num_start)) {
+                        num_start--;
+                    }
+                    num_start++;
+
+                    if (num_start < mhz_pos) {
+                        try {
+                            cpu_info.max_MHz = uinteger32::parse(num_start).value();
+                            if (cpu_info.current_MHz == 0) {
+                                cpu_info.current_MHz = cpu_info.max_MHz;
+                            }
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
+                        } catch (...) {
+                            // ignore
+                        }
+                    }
+                }
+            }
+        }
+
 #else
         const file cpuinfo(path("/proc/cpuinfo"));
         string_view line;
@@ -135,10 +218,10 @@ namespace {
             }
 
             // 提取当前频率
-            if (line.starts_with("cpu MHz") && cpu_info.current_MHZ == 0) {
+            if (line.starts_with("cpu MHz") && cpu_info.current_MHz == 0) {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
-                    cpu_info.current_MHZ = to_uint32(line.view(colon + 2));
+                    cpu_info.current_MHz = to_uint32(line.view(colon + 2));
                 }
             }
         }
@@ -164,7 +247,7 @@ namespace {
             }
         }
 
-        if (cpu_info.current_MHZ == 0) {
+        if (cpu_info.current_MHz == 0) {
             const path scaling_cur_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
             const file cpu_cur_freq(scaling_cur_freq);
             if (cpu_cur_freq.is_opened()) {
@@ -175,7 +258,7 @@ namespace {
                 getline(data.view(), cmf_pos, freq_str, [](const char c) { return is_space(c); });
 
                 if (!freq_str.empty()) {
-                    cpu_info.current_MHZ = to_uint64(freq_str) / 1000;
+                    cpu_info.current_MHz = to_uint64(freq_str) / 1000;
                 }
             }
         }

@@ -61,9 +61,8 @@ public:
 
     condition_variable_base(const condition_variable_base&) = delete;
     condition_variable_base& operator=(const condition_variable_base&) = delete;
-
-    condition_variable_base(condition_variable_base&&) = default;
-    condition_variable_base& operator=(condition_variable_base&&) = default;
+    condition_variable_base(condition_variable_base&&) = delete;
+    condition_variable_base& operator=(condition_variable_base&&) = delete;
 
     ~condition_variable_base();
 
@@ -179,9 +178,8 @@ public:
 
     condition_variable(const condition_variable&) = delete;
     condition_variable& operator=(const condition_variable&) = delete;
-
-    condition_variable(condition_variable&& other) = default;
-    condition_variable& operator=(condition_variable&& other) = default;
+    condition_variable(condition_variable&& other) = delete;
+    condition_variable& operator=(condition_variable&& other) = delete;
 
     /**
      * @brief 获取原生句柄

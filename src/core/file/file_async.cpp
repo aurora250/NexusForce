@@ -16,8 +16,8 @@ namespace {
 
 file_async::async_context::async_context(string d) :
 data(move(d)),
-is_write(true),
-cb(new aiocb_type{}) {
+cb(new aiocb_type{}),
+is_write(true) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
 #endif
