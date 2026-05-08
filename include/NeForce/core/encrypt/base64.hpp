@@ -113,14 +113,24 @@ struct NEFORCE_API base64 {
  * @param data 要编码的数据
  * @return 编码后的字符串
  */
-NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const cbyte_view data) { return base64::encode(data); }
+NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const cbyte_view data) {
+    if (data.empty()) {
+        return {};
+    }
+    return base64::encode(data);
+}
 
 /**
  * @brief Base64编码便捷函数（字节向量版本）
  * @param data 要编码的数据
  * @return 编码后的字符串
  */
-NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const byte_vector& data) { return base64::encode(data.view()); }
+NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const byte_vector& data) {
+    if (data.empty()) {
+        return {};
+    }
+    return base64::encode(data.view());
+}
 
 /**
  * @brief Base64编码便捷函数（字符串版本）
@@ -128,6 +138,9 @@ NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const byte_vector& data) { ret
  * @return 编码后的字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const string& data) {
+    if (data.empty()) {
+        return {};
+    }
     return base64::encode(cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()});
 }
 
@@ -138,6 +151,9 @@ NEFORCE_ALWAYS_INLINE_INLINE string base64_encode(const string& data) {
  * @return 解码后的字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string base64_decode(const string_view data) {
+    if (data.empty()) {
+        return {};
+    }
     const byte_vector d = base64::decode(data);
     return string{reinterpret_cast<const char*>(d.data()), d.size()};
 }
@@ -148,6 +164,9 @@ NEFORCE_ALWAYS_INLINE_INLINE string base64_decode(const string_view data) {
  * @return 解码后的字节向量
  */
 NEFORCE_ALWAYS_INLINE_INLINE byte_vector base64_decode(const byte_vector& data) {
+    if (data.empty()) {
+        return {};
+    }
     const string_view view{reinterpret_cast<const char*>(data.data()), data.size()};
     return base64::decode(view);
 }
@@ -157,7 +176,12 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector base64_decode(const byte_vector& data) 
  * @param data Base64编码的字符串
  * @return 解码后的字符串
  */
-NEFORCE_ALWAYS_INLINE_INLINE string base64_decode(const string& data) { return base64_decode(data.view()); }
+NEFORCE_ALWAYS_INLINE_INLINE string base64_decode(const string& data) {
+    if (data.empty()) {
+        return "";
+    }
+    return base64_decode(data.view());
+}
 
 /** @} */ // Base64
 

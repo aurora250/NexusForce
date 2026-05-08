@@ -12,11 +12,20 @@ optional<mac_address> mac_address::parse(const string_view str) {
     byte_t* ptr = result.bytes_.data();
     size_t pos = 0;
 
+    char expected_sep = '\0';
+
     for (int i = 0; i < 6; ++i) {
         if (i > 0) {
             const char sep = str[pos++];
-            if (sep != ':' && sep != '-') {
-                return none;
+            if (i == 1) {
+                if (sep != ':' && sep != '-') {
+                    return none;
+                }
+                expected_sep = sep;
+            } else {
+                if (sep != expected_sep) {
+                    return none;
+                }
             }
         }
         if (pos + 2 > str.size()) {

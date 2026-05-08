@@ -157,8 +157,8 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 
     if (size == 0) {
         ::LARGE_INTEGER fileSize{};
-        if (::GetFileSizeEx(file_handle_, &fileSize)) {
-            uint64_t file_size = static_cast<uint64_t>(fileSize.QuadPart);
+        if (::GetFileSizeEx(file_handle_, &fileSize) == TRUE) {
+            const auto file_size = static_cast<uint64_t>(fileSize.QuadPart);
             if (file_size > static_cast<uint64_t>(offset)) {
                 size = static_cast<size_type>(file_size - static_cast<uint64_t>(offset));
             }

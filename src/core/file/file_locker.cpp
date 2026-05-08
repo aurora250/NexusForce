@@ -15,7 +15,7 @@ bool file_locker::lock(const difference_type offset, difference_type length, con
         if (::GetFileSizeEx(handle_, &file_size) == FALSE) {
             return false;
         }
-        const uint64_t file_sz = static_cast<uint64_t>(file_size.QuadPart);
+        const auto file_sz = static_cast<uint64_t>(file_size.QuadPart);
         if (static_cast<uint64_t>(offset) >= file_sz) {
             return true;
         }
@@ -71,7 +71,7 @@ bool file_locker::unlock(const difference_type offset, difference_type length) c
         if (::GetFileSizeEx(handle_, &file_size) == FALSE) {
             return false;
         }
-        const uint64_t file_sz = static_cast<uint64_t>(file_size.QuadPart);
+        const auto file_sz = static_cast<uint64_t>(file_size.QuadPart);
         if (static_cast<uint64_t>(offset) >= file_sz) {
             return true;
         }

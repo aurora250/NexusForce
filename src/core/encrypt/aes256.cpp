@@ -213,7 +213,7 @@ namespace {
         }
     }
 
-    bool secure_compare(const byte_t* a, const byte_t* b, size_t len) {
+    bool secure_compare(const byte_t* a, const byte_t* b, const size_t len) {
         volatile byte_t diff = 0;
         for (size_t i = 0; i < len; ++i) {
             diff |= a[i] ^ b[i];
@@ -221,91 +221,45 @@ namespace {
         return diff != 0;
     }
 
+    void gf128_multiply(uint64_t& hi, uint64_t& lo, const uint64_t H_hi, const uint64_t H_lo) {
+        uint64_t Z_hi = 0, Z_lo = 0;
+        uint64_t V_hi = H_hi, V_lo = H_lo;
+        uint64_t X_hi = hi, X_lo = lo;
+
+        for (int i = 0; i < 128; ++i) {
+            if ((X_hi >> 63) & 1) {
+                Z_hi ^= V_hi;
+                Z_lo ^= V_lo;
+            }
+            X_hi = (X_hi << 1) | (X_lo >> 63);
+            X_lo <<= 1;
+            bool carry = (V_hi >> 63) & 1;
+            V_hi = (V_hi << 1) | (V_lo >> 63);
+            V_lo <<= 1;
+            if (carry) V_lo ^= 0x87;
+        }
+        hi = Z_hi;
+        lo = Z_lo;
+    }
+
     struct ghash_context {
         uint64_t H_hi;
         uint64_t H_lo;
-        uint64_t table_hi[256];
-        uint64_t table_lo[256];
-        uint64_t red_hi[256];
-        uint64_t red_lo[256];
     };
-
-    constexpr uint64_t R_hi = 0xE100000000000000ULL;
-    constexpr uint64_t R_lo = 0;
 
     void ghash_init(ghash_context& ctx, const byte_t H[16]) {
         ctx.H_hi = endian::read_be64(H);
         ctx.H_lo = endian::read_be64(H + 8);
-
-        ctx.table_hi[0] = 0;
-        ctx.table_lo[0] = 0;
-        ctx.table_hi[1] = ctx.H_hi;
-        ctx.table_lo[1] = ctx.H_lo;
-
-        for (int i = 2; i < 256; ++i) {
-            if (i % 2 == 0) {
-                uint64_t hi = ctx.table_hi[i / 2];
-                uint64_t lo = ctx.table_lo[i / 2];
-                const bool carry = ((hi >> 63) & 1) != 0U;
-                hi = (hi << 1) | (lo >> 63);
-                lo = lo << 1;
-                if (carry) {
-                    hi ^= R_hi;
-                    lo ^= R_lo;
-                }
-                ctx.table_hi[i] = hi;
-                ctx.table_lo[i] = lo;
-            } else {
-                ctx.table_hi[i] = ctx.table_hi[i - 1] ^ ctx.H_hi;
-                ctx.table_lo[i] = ctx.table_lo[i - 1] ^ ctx.H_lo;
-            }
-        }
-
-        for (int i = 0; i < 256; ++i) {
-            uint64_t rh = 0, rl = 0;
-            uint64_t vh = ctx.H_hi, vl = ctx.H_lo;
-            for (int bit = 0; bit < 8; ++bit) {
-                if (((i >> bit) & 1) != 0) {
-                    rh ^= vh;
-                    rl ^= vl;
-                }
-                bool c = ((vh >> 63) & 1) != 0U;
-                vh = (vh << 1) | (vl >> 63);
-                vl = vl << 1;
-                if (c) {
-                    vh ^= R_hi;
-                    vl ^= R_lo;
-                }
-            }
-            ctx.red_hi[i] = rh;
-            ctx.red_lo[i] = rl;
-        }
     }
 
-    void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
-                      size_t len) {
+    void ghash_update(const ghash_context& ctx,
+                      uint64_t& state_hi, uint64_t& state_lo,
+                      const byte_t* data, size_t len) {
         while (len >= 16) {
             state_hi ^= endian::read_be64(data);
             state_lo ^= endian::read_be64(data + 8);
 
-            byte_t bytes[16];
-            endian::write_be64(bytes, state_hi);
-            endian::write_be64(bytes + 8, state_lo);
-
-            uint64_t new_hi = 0, new_lo = 0;
-            for (const byte_t idx: bytes) {
-                const uint64_t carry = new_hi >> 56;
-                new_hi = (new_hi << 8) | (new_lo >> 56);
-                new_lo = new_lo << 8;
-
-                new_hi ^= ctx.red_hi[carry];
-                new_lo ^= ctx.red_lo[carry];
-
-                new_hi ^= ctx.table_hi[idx];
-                new_lo ^= ctx.table_lo[idx];
-            }
-            state_hi = new_hi;
-            state_lo = new_lo;
+            gf128_multiply(state_hi, state_lo, ctx.H_hi, ctx.H_lo);
 
             data += 16;
             len -= 16;
@@ -318,8 +272,8 @@ namespace {
         }
     }
 
-    void ghash_final(const ghash_context& ctx, uint64_t state_hi, uint64_t state_lo, size_t a_len, size_t c_len,
-                     byte_t out_tag[16]) {
+    void ghash_final(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo,
+                     size_t a_len, size_t c_len, byte_t out_tag[16]) {
         byte_t len_block[16] = {0};
         endian::write_be64(len_block, a_len * 8);
         endian::write_be64(len_block + 8, c_len * 8);
@@ -331,8 +285,13 @@ namespace {
     }
 
     void inc32(byte_t* counter) {
-        const uint32_t n = endian::read_be32(counter + 12);
-        endian::write_be32(counter + 12, n + 1);
+        uint32_t n = (static_cast<uint32_t>(counter[12]) << 24) | (static_cast<uint32_t>(counter[13]) << 16) |
+                     (static_cast<uint32_t>(counter[14]) << 8) | (static_cast<uint32_t>(counter[15]));
+        ++n;
+        counter[12] = static_cast<byte_t>(n >> 24);
+        counter[13] = static_cast<byte_t>(n >> 16);
+        counter[14] = static_cast<byte_t>(n >> 8);
+        counter[15] = static_cast<byte_t>(n);
     }
 } // namespace
 
@@ -560,7 +519,7 @@ byte_vector AES256::decrypt_cbc_pkcs7(cbyte_view data, cbyte_view key, cbyte_vie
 }
 
 byte_vector AES256::encrypt_gcm(cbyte_view data, cbyte_view key, cbyte_view iv, cbyte_view aad, byte_t* tag,
-                                size_t tag_len) {
+                                const size_t tag_len) {
     if (key.size() != 32) {
         NEFORCE_THROW_EXCEPTION(value_exception("AES-256 requires 32-byte key"));
     }
@@ -579,13 +538,14 @@ byte_vector AES256::encrypt_gcm(cbyte_view data, cbyte_view key, cbyte_view iv, 
 
     byte_t H[16] = {0};
     encrypt_block(H, expanded_key);
+
     ghash_context gh_ctx;
     ghash_init(gh_ctx, H);
 
     byte_t J0[16] = {0};
     if (iv.size() == 12) {
         memory_copy(J0, iv.data(), 12);
-        J0[15] = 1;
+        J0[15] = 0x01;
     } else {
         uint64_t state_hi = 0, state_lo = 0;
         ghash_update(gh_ctx, state_hi, state_lo, iv.data(), iv.size());
@@ -630,7 +590,7 @@ byte_vector AES256::encrypt_gcm(cbyte_view data, cbyte_view key, cbyte_view iv, 
 }
 
 byte_vector AES256::decrypt_gcm(cbyte_view data, cbyte_view key, cbyte_view iv, cbyte_view aad, cbyte_view tag,
-                                size_t tag_len) {
+                                const size_t tag_len) {
     if (key.size() != 32) {
         NEFORCE_THROW_EXCEPTION(value_exception("AES-256 requires 32-byte key"));
     }

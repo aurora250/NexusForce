@@ -188,6 +188,7 @@ struct NEFORCE_API ports : iobject<ports> {
      * @param port 端口数值
      */
     constexpr explicit ports(const uint16_t port) noexcept :
+    // NOLINTNEXTLINE(clang-analyzer-optin.core.EnumCastOutOfRange)
     port(static_cast<raw>(port)) {}
 
     /**

@@ -25,6 +25,8 @@ NEFORCE_BEGIN_INNER__
 
 void sleep_for_aux(const ssize_t s, const ssize_t ns) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    (void) s;
+
     ::LARGE_INTEGER li{};
     li.QuadPart = -(ns / 100);
 

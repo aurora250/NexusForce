@@ -169,7 +169,7 @@ void locale::load_locale(const string& name) {
         wname_storage = character::to_wstring(win_name_.view());
         lname = wname_storage.data();
     }
-    if (!win_name_.empty() && !::IsValidLocaleName(lname)) {
+    if (!win_name_.empty() && ::IsValidLocaleName(lname) == FALSE) {
         throw locale_exception(("locale: cannot open '" + name_ + "'").data());
     }
 
@@ -476,21 +476,20 @@ int locale::compare(const string& a, const string& b, const collate_strength str
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD flags = 0;
     switch (strength) {
-        case collate_strength::primary:
+        case collate_strength::primary: {
             flags = NORM_IGNORECASE | NORM_IGNORENONSPACE | NORM_IGNORESYMBOLS;
             break;
-        case collate_strength::secondary:
+        }
+        case collate_strength::secondary: {
             flags = NORM_IGNORECASE;
             break;
+        }
         case collate_strength::tertiary:
-            flags = 0;
-            break;
         case collate_strength::identical:
+        default: {
             flags = 0;
             break;
-        default:
-            flags = 0;
-            break;
+        }
     }
 
     wstring wa = character::to_wstring(a.view());

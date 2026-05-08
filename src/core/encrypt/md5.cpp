@@ -29,14 +29,17 @@ namespace {
 byte_vector MD5::hash(const cbyte_view data) {
     byte_vector byte_data{data.begin(), data.end()};
     const uint64_t original_len = byte_data.size();
+
     byte_data.push_back(0x80);
-    while ((byte_data.size() % 64) != 56) {
-        byte_data.push_back(0);
-    }
+
+    const size_t current_mod = byte_data.size() % 64;
+    const size_t padding_zeros = (current_mod <= 56) ? (56 - current_mod) : (120 - current_mod);
+
+    byte_data.resize(byte_data.size() + padding_zeros, 0);
 
     const uint64_t bit_len = original_len * 8;
     for (int i = 0; i < 8; ++i) {
-        byte_data.push_back((bit_len >> (i * 8)) & 0xFF);
+        byte_data.push_back(static_cast<byte_t>((bit_len >> (i * 8)) & 0xFF));
     }
 
     uint32_t h0 = 0x67452301;
@@ -46,28 +49,30 @@ byte_vector MD5::hash(const cbyte_view data) {
 
     for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[16];
+
         for (int i = 0; i < 16; ++i) {
-            w[i] = (byte_data[chunk_start + static_cast<size_t>(i * 4)]) |
-                   (byte_data[chunk_start + static_cast<size_t>(i * 4 + 1)] << 8) |
-                   (byte_data[chunk_start + static_cast<size_t>(i * 4 + 2)] << 16) |
-                   (byte_data[chunk_start + static_cast<size_t>(i * 4 + 3)] << 24);
+            const size_t offset = chunk_start + static_cast<size_t>(i * 4);
+            w[i] = static_cast<uint32_t>(byte_data[offset + 0]) | (static_cast<uint32_t>(byte_data[offset + 1]) << 8) |
+                   (static_cast<uint32_t>(byte_data[offset + 2]) << 16) |
+                   (static_cast<uint32_t>(byte_data[offset + 3]) << 24);
         }
 
         uint32_t a = h0, b = h1, c = h2, d = h3;
+
         for (int i = 0; i < 64; ++i) {
             uint32_t f = 0, g = 0;
             if (i < 16) {
                 f = md5_F(b, c, d);
-                g = i;
+                g = static_cast<uint32_t>(i);
             } else if (i < 32) {
                 f = md5_G(b, c, d);
-                g = (5 * i + 1) % 16;
+                g = (5 * static_cast<uint32_t>(i) + 1) % 16;
             } else if (i < 48) {
                 f = md5_H(b, c, d);
-                g = (3 * i + 5) % 16;
+                g = (3 * static_cast<uint32_t>(i) + 5) % 16;
             } else {
                 f = md5_I(b, c, d);
-                g = (7 * i) % 16;
+                g = (7 * static_cast<uint32_t>(i)) % 16;
             }
 
             f = f + a + md5_K[i] + w[g];
@@ -76,6 +81,7 @@ byte_vector MD5::hash(const cbyte_view data) {
             c = b;
             b = b + md5_rotleft(f, md5_S[i]);
         }
+
         h0 += a;
         h1 += b;
         h2 += c;
@@ -84,10 +90,10 @@ byte_vector MD5::hash(const cbyte_view data) {
 
     byte_vector result(16);
     for (int i = 0; i < 4; ++i) {
-        result[i] = (h0 >> (i * 8)) & 0xFF;
-        result[i + 4] = (h1 >> (i * 8)) & 0xFF;
-        result[i + 8] = (h2 >> (i * 8)) & 0xFF;
-        result[i + 12] = (h3 >> (i * 8)) & 0xFF;
+        result[i] = static_cast<byte_t>((h0 >> (i * 8)) & 0xFF);
+        result[i + 4] = static_cast<byte_t>((h1 >> (i * 8)) & 0xFF);
+        result[i + 8] = static_cast<byte_t>((h2 >> (i * 8)) & 0xFF);
+        result[i + 12] = static_cast<byte_t>((h3 >> (i * 8)) & 0xFF);
     }
     return result;
 }

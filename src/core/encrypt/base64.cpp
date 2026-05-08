@@ -46,6 +46,10 @@ namespace {
 
 
 string base64::encode(const cbyte_view data) {
+    if (data.empty()) {
+        return {};
+    }
+
     string result;
     size_t i = 0;
 
@@ -73,6 +77,10 @@ string base64::encode(const cbyte_view data) {
 }
 
 byte_vector base64::decode(const string_view data) {
+    if (data.empty()) {
+        return {};
+    }
+
     string cleaned;
     cleaned.reserve(data.size());
     for (const char c: data) {
@@ -151,6 +159,10 @@ byte_vector base64::decode(const string_view data) {
 }
 
 string base64::encode_url(const cbyte_view data, bool padding) {
+    if (data.empty()) {
+        return {};
+    }
+
     string result;
     size_t i = 0;
 
@@ -185,6 +197,10 @@ string base64::encode_url(const cbyte_view data, bool padding) {
 }
 
 byte_vector base64::decode_url(const string_view data) {
+    if (data.empty()) {
+        return {};
+    }
+
     string cleaned;
     cleaned.reserve(data.size());
     for (const char c: data) {
@@ -212,6 +228,12 @@ byte_vector base64::decode_url(const string_view data) {
 
         if (a < 0 || b < 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64URL character in first two positions"));
+        }
+        if (cleaned[i + 2] != '=' && c < 0) {
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64URL character at position 3"));
+        }
+        if (cleaned[i + 3] != '=' && d < 0) {
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64URL character at position 4"));
         }
         if (cleaned[i + 2] == '=' && cleaned[i + 3] != '=') {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64URL padding: single '=' at wrong position"));

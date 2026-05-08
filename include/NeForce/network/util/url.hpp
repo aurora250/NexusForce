@@ -142,7 +142,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @see https://www.rfc-editor.org/rfc/rfc3986
  * @see https://url.spec.whatwg.org/
  */
-struct url : iobject<url> {
+struct NEFORCE_API url : iobject<url> {
     string scheme;   ///< 协议类型
     string host;     ///< 主机名或IP地址
     ports port;      ///< 端口号

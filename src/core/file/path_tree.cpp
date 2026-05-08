@@ -91,15 +91,13 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
         node_type type = is_dir ? node_type::directory : node_type::file;
 
-        bool type_ok;
+        bool type_ok = true;
         if (options.files_only && options.dirs_only) {
             type_ok = true;
         } else if (options.files_only) {
             type_ok = !is_dir;
         } else if (options.dirs_only) {
             type_ok = is_dir;
-        } else {
-            type_ok = true;
         }
 
         bool ext_ok = true;
@@ -402,9 +400,9 @@ path_tree::node::ptr path_tree::insert(const path& p, const node_type type) {
                               || (p.view().size() >= 2 && p.view()[1] == ':')
 #endif
                                       )) {
-        const string root_str = root_->get_path().str();
-        const string p_str = p.str();
-        if (p_str.size() >= root_str.size() && p_str.compare(0, root_str.size(), root_str) == 0) {
+        const string_view root_str = root_->get_path().view();
+        const string_view p_str = p.view();
+        if (p_str.size() >= root_str.size() && p_str.starts_with(root_str)) {
             size_t offset = root_str.size();
             while (offset < p_str.size() && (p_str[offset] == '/' || p_str[offset] == '\\')) {
                 ++offset;

@@ -502,7 +502,7 @@ file::size_type file::read(string& out) const {
         last_error_code_ = errc::invalid_seek;
         return 0;
     }
-    const size_type remaining = static_cast<size_type>(file_sz - static_cast<uint64_t>(pos));
+    const auto remaining = static_cast<size_type>(file_sz - static_cast<uint64_t>(pos));
     return read(out, remaining);
 }
 

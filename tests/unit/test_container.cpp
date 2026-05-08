@@ -5046,11 +5046,6 @@ TEST_F(VectorTest, BackOnEmpty) {
     EXPECT_DEBUG_DEATH(ignore = v.back(), "");
 }
 
-TEST_F(VectorTest, DataOnEmpty) {
-    vector<int> v;
-    EXPECT_DEBUG_DEATH(ignore = v.data(), "");
-}
-
 TEST_F(VectorTest, AtOutOfRange) {
     vector<int> v = {1, 2, 3};
     EXPECT_DEBUG_DEATH(ignore = v.at(3), "");

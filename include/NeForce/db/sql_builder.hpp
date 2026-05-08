@@ -10,6 +10,7 @@
 
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
+#include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

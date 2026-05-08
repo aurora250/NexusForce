@@ -37,8 +37,8 @@ public:
      * @brief 事件类型枚举
      */
     enum class type {
-        manual_reset,  ///< 手动重置，多个等待线程都会被唤醒，需要手动reset
-        auto_reset     ///< 自动重置，只唤醒一个等待线程，之后自动重置为无信号
+        manual_reset, ///< 手动重置，多个等待线程都会被唤醒，需要手动reset
+        auto_reset    ///< 自动重置，只唤醒一个等待线程，之后自动重置为无信号
     };
 
 private:
@@ -53,13 +53,13 @@ private:
 #endif
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    void* handle_;  ///< 事件句柄
+    void* handle_; ///< 事件句柄
 #else
-    unique_ptr<pthread_mutex_t, mutex_deleter> mutex_;  ///< 互斥锁
-    unique_ptr<pthread_cond_t, cond_deleter> cond_;     ///< 条件变量
-    bool signaled_;                                     ///< 信号状态
+    unique_ptr<pthread_mutex_t, mutex_deleter> mutex_; ///< 互斥锁
+    unique_ptr<pthread_cond_t, cond_deleter> cond_;    ///< 条件变量
+    bool signaled_;                                    ///< 信号状态
 #endif
-    type type_;  ///< 事件类型
+    type type_; ///< 事件类型
 
 public:
     /**

@@ -62,16 +62,18 @@ system_event::~system_event() {
 }
 
 system_event::system_event(system_event&& other) noexcept :
-type_(other.type_) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    handle_ = other.handle_;
+handle_(other.handle_),
+type_(other.type_) {
     other.handle_ = nullptr;
-#else
-    mutex_ = other.mutex_.release();
-    cond_ = other.cond_.release();
-    signaled_ = other.signaled_;
-#endif
 }
+#else
+mutex_(other.mutex_.release()),
+cond_(other.cond_.release()),
+signaled_(other.signaled_),
+type_(other.type_) {
+}
+#endif
 
 system_event& system_event::operator=(system_event&& other) noexcept {
     if (addressof(other) == this) {

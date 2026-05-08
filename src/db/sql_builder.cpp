@@ -376,12 +376,16 @@ sql_builder& sql_builder::set(string field, string value) {
 }
 
 sql_builder& sql_builder::set_increment(string field, const int value) {
-    ensure_update_data()->assignments.emplace_back(field + " = " + move(field) + " + " + _NEFORCE to_string(value));
+    string field_copy = field;
+    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(field_copy) + " + " +
+                                                   _NEFORCE to_string(value));
     return *this;
 }
 
 sql_builder& sql_builder::set_decrement(string field, const int value) {
-    ensure_update_data()->assignments.emplace_back(move(field) + " = " + field + " - " + _NEFORCE to_string(value));
+    string field_copy = field;
+    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(field_copy) + " - " +
+                                                   _NEFORCE to_string(value));
     return *this;
 }
 
@@ -513,6 +517,10 @@ sql_builder& sql_builder::reset() noexcept {
 }
 
 string sql_builder::build() const {
+    if (table_.empty()) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Table name is required"));
+    }
+
     string result;
     switch (sql_type_) {
         case sql_operate::SELECT: {
@@ -661,7 +669,9 @@ string sql_builder::build() const {
             break;
         }
     }
+
     result += ";";
+
     return result;
 }
 

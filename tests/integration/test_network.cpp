@@ -300,15 +300,15 @@ void test_https_server() {
 
             signal_guard guard;
 
-            signal_manager::instance().register_handler(signal_event::INTERRUPT,
-                                                        [&server](signal_event event, void* context) -> bool {
-                                                            if (event == signal_event::INTERRUPT) {
-                                                                println("Interrupting...");
-                                                                server.stop();
-                                                                immediate_exit(0);
-                                                            }
-                                                            return false;
-                                                        });
+            system_signal_manager::instance().register_handler(signal_event::INTERRUPT,
+                                                               [&server](signal_event event, void* context) -> bool {
+                                                                   if (event == signal_event::INTERRUPT) {
+                                                                       println("Interrupting...");
+                                                                       server.stop();
+                                                                       immediate_exit(0);
+                                                                   }
+                                                                   return false;
+                                                               });
 
             while (server.is_running()) {
                 this_thread::sleep_for(seconds(1));
@@ -425,17 +425,17 @@ void test_http_server() {
         });
 
         if (server.start()) {
-            signal_manager::instance().start_monitoring();
+            system_signal_manager::instance().start_monitoring();
 
-            signal_manager::instance().register_handler(signal_event::INTERRUPT,
-                                                        [&server](signal_event event, void* context) -> bool {
-                                                            if (event == signal_event::INTERRUPT) {
-                                                                println("Interrupting...");
-                                                                server.stop();
-                                                                immediate_exit(0);
-                                                            }
-                                                            return false;
-                                                        });
+            system_signal_manager::instance().register_handler(signal_event::INTERRUPT,
+                                                               [&server](signal_event event, void* context) -> bool {
+                                                                   if (event == signal_event::INTERRUPT) {
+                                                                       println("Interrupting...");
+                                                                       server.stop();
+                                                                       immediate_exit(0);
+                                                                   }
+                                                                   return false;
+                                                               });
 
             printcln(color::green(), "Press Ctrl+C to stop the server.");
             while (server.is_running()) {

@@ -691,44 +691,31 @@ public:
      * @brief 获取底层数据指针
      * @return 指向第一个元素的指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer data() noexcept {
-        NEFORCE_DEBUG_VERIFY(!empty(), "data called on empty vector");
-        return start_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer data() noexcept { return start_; }
 
     /**
      * @brief 获取底层数据常量指针
      * @return 指向第一个元素的常量指针
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer data() const noexcept {
-        NEFORCE_DEBUG_VERIFY(!empty(), "data called on empty vector");
-        return start_;
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer data() const noexcept { return start_; }
 
     /**
      * @brief 获取底层数据的视图
      * @return 指向元素的视图
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view<T> view() noexcept {
-        NEFORCE_DEBUG_VERIFY(!empty(), "data called on empty vector");
-        return {start_, size()};
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view<T> view() noexcept { return {start_, size()}; }
 
     /**
      * @brief 获取底层数据的常量视图
      * @return 指向元素的常量视图
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view<const T> view() const noexcept {
-        NEFORCE_DEBUG_VERIFY(!empty(), "data called on empty vector");
-        return {start_, size()};
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view<const T> view() const noexcept { return {start_, size()}; }
 
     /**
      * @brief 获取底层数据的视图
      * @return 指向元素的视图
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view<T> view(const size_type off, size_type count = npos) noexcept {
-        NEFORCE_DEBUG_VERIFY(!empty(), "data called on empty vector");
         count = _NEFORCE min(count, size() - off);
         return {start_ + off, count};
     }
@@ -739,7 +726,6 @@ public:
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 memory_view<const T> view(const size_type off,
                                                                     size_type count = npos) const noexcept {
-        NEFORCE_DEBUG_VERIFY(!empty(), "data called on empty vector");
         count = _NEFORCE min(count, size() - off);
         return {start_ + off, count};
     }
@@ -1043,21 +1029,20 @@ public:
         }
 
         if (static_cast<size_type>(pair_.value - finish_) >= n) {
-            const size_type elems_after = _NEFORCE distance(begin(), position);
+            const size_type elems_after = end() - position;
             iterator old_finish = end();
 
             if (elems_after > n) {
-                _NEFORCE uninitialized_copy(finish_ - n, finish_, finish_);
+                _NEFORCE uninitialized_move(old_finish - n, old_finish, old_finish);
                 finish_ += n;
-                _NEFORCE copy_backward(position, old_finish - n, old_finish);
-                _NEFORCE fill(position, position + n, value);
+                _NEFORCE move_backward(position, old_finish - n, old_finish);
+                _NEFORCE fill_n(position, n, value);
             } else {
                 _NEFORCE uninitialized_fill_n(finish_, n - elems_after, value);
                 finish_ += n - elems_after;
-                _NEFORCE uninitialized_move(position, old_finish, end());
+                _NEFORCE uninitialized_move(position, old_finish, finish_);
                 finish_ += elems_after;
-                _NEFORCE destroy(position, old_finish);
-                _NEFORCE uninitialized_fill(position, old_finish, value);
+                _NEFORCE fill(position, old_finish, value);
             }
         } else {
             const size_type old_size = size();

@@ -86,10 +86,36 @@ url url::parse(const string_view str) {
         }
     }
 
-    if (colon_pos != string::npos && colon_pos < host_port.size() - 1) {
-        target.port = ports::parse(host_port.substr(colon_pos + 1));
-        if (!target.port) {
-            NEFORCE_THROW_EXCEPTION(network_exception("URL invalid port"));
+    if (colon_pos != string::npos) {
+        if (colon_pos < host_port.size() - 1) {
+            const auto port_str = host_port.substr(colon_pos + 1);
+            target.port = ports::parse(port_str);
+
+            if (!target.port) {
+                bool is_valid_number = true;
+                uint16_t port_num = 0;
+
+                for (const char c: port_str) {
+                    if (c < '0' || c > '9') {
+                        is_valid_number = false;
+                        break;
+                    }
+                    const uint16_t new_val = port_num * 10 + (c - '0');
+                    if (new_val < port_num) {
+                        is_valid_number = false;
+                        break;
+                    }
+                    port_num = new_val;
+                }
+
+                if (is_valid_number && port_num > 0) {
+                    target.port = ports(port_num);
+                } else {
+                    NEFORCE_THROW_EXCEPTION(network_exception("URL invalid port"));
+                }
+            }
+        } else {
+            NEFORCE_THROW_EXCEPTION(network_exception("URL malformed: empty port"));
         }
     } else {
         target.port = ports::parse(target.scheme.view());
@@ -132,8 +158,8 @@ string url::to_string() const {
 
     bool show_port = static_cast<bool>(port);
     if (show_port) {
-        const ports dport = ports::parse(scheme.view());
-        if (!dport && port == dport) {
+        const ports default_port = ports::parse(scheme.view());
+        if (default_port && port == default_port) {
             show_port = false;
         }
     }
