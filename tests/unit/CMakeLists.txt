@@ -2,8 +2,8 @@ add_executable(NexusForceUnitTests
         main.cpp
         test.cpp
         test_algorithm.cpp
+        test_associative_container.cpp
         test_compress.cpp
-        test_container.cpp
         test_db.cpp
         test_encrypt.cpp
         test_file.cpp
@@ -11,9 +11,12 @@ add_executable(NexusForceUnitTests
         test_memory.cpp
         test_network.cpp
         test_numeric.cpp
+        test_sequence_container.cpp
         test_string.cpp
+        test_string_utils.cpp
         test_system.cpp
         test_time.cpp
+        test_util_container.cpp
         test_utility.cpp
 )
 

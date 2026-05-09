@@ -135,7 +135,7 @@ public:
         while (value != 0 && i < block_count) {
             blocks[i] = static_cast<block_type>(value);
             NEFORCE_IF_CONSTEXPR (bits_per_block < sizeof(unsigned long long) * 8) {
-                value >>= bits_per_block;
+                value >>= static_cast<uint32_t>(bits_per_block);
             } else {
                 value = 0;
             }
