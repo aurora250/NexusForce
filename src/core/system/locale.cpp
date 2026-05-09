@@ -540,7 +540,7 @@ int locale::compare(const string& a, const string& b, const collate_strength str
         case collate_strength::primary: {
 #    ifdef __GLIBC__
             {
-                int r = ::wcscasecmp_l(wa.c_str(), wb.c_str(), loc_);
+                int r = ::wcscasecmp_l(wa.data(), wb.data(), loc_);
                 return (r < 0) ? -1 : (r > 0) ? 1 : 0;
             }
 #    else
@@ -561,7 +561,7 @@ int locale::compare(const string& a, const string& b, const collate_strength str
         case collate_strength::secondary: {
 #    ifdef __GLIBC__
             {
-                int r = ::wcscasecmp_l(wa.c_str(), wb.c_str(), loc_);
+                int r = ::wcscasecmp_l(wa.data(), wb.data(), loc_);
                 return (r < 0) ? -1 : (r > 0) ? 1 : 0;
             }
 #    else
@@ -580,14 +580,14 @@ int locale::compare(const string& a, const string& b, const collate_strength str
 #    endif
         }
         case collate_strength::tertiary: {
-            return ::wcscoll_l(wa.c_str(), wb.c_str(), loc_);
+            return ::wcscoll_l(wa.data(), wb.data(), loc_);
         }
         case collate_strength::identical: {
-            int rc = ::wcscoll_l(wa.c_str(), wb.c_str(), loc_);
+            int rc = ::wcscoll_l(wa.data(), wb.data(), loc_);
             if (rc != 0) {
                 return (rc < 0) ? -1 : 1;
             }
-            rc = ::wcscmp(wa.c_str(), wb.c_str());
+            rc = ::wcscmp(wa.data(), wb.data());
             return (rc < 0) ? -1 : (rc > 0) ? 1 : 0;
         }
     }

@@ -252,7 +252,7 @@ NEFORCE_BEGIN_INNER__
 #ifdef NEFORCE_ARCH_BITS_32
 
 template <typename CharT, typename UT>
-constexpr enable_if_t<(sizeof(UT) > 4)> __uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
+constexpr enable_if_t<(sizeof(UT) > 4)> __uint_to_buff_aux(CharT* riter, UT& ux) {
     while (ux > static_cast<UT>(0xFFFFFFFFU)) {
         auto chunk = static_cast<uint32_t>(ux % static_cast<UT>(1000000000));
         ux /= static_cast<UT>(1000000000);
@@ -277,7 +277,7 @@ constexpr enable_if_t<(sizeof(UT) <= 4)> __uint_to_buff_aux(CharT*, UT&) noexcep
  * @return 指向转换后字符串起始位置的迭代器
  */
 template <typename CharT, typename UT>
-NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
+NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) {
     static_assert(is_unsigned_v<UT>, "UT must be a unsigned integer type");
 
 #ifdef NEFORCE_ARCH_BITS_64

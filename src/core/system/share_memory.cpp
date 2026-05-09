@@ -13,6 +13,7 @@
 #    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/exception/error_code.hpp>
 #    include <cerrno>
 #    include <cstring>
 #    include <fcntl.h>
@@ -230,7 +231,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         return "Unknown error";
 #    else
         const char* msg = ::strerror_r(error_code, errbuf, sizeof(errbuf));
-        return string(msg);
+        return {msg};
 #    endif
     };
 

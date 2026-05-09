@@ -588,7 +588,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x) no
             return x;
         }
         const decimal_t floor_pos = static_cast<decimal_t>(safe_decimal_to_uint64(pos));
-        if (pos == floor_pos) {
+        if (absolute(pos - floor_pos) < constants::MACHINE_EPSILON) {
             return -floor_pos;
         } else {
             return -(floor_pos + 1.0L);
@@ -609,7 +609,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x, co
 
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_even_integer(const decimal_t x) noexcept {
     const decimal_t half = x * 0.5L;
-    return (half == floor(half));
+    return absolute(half - floor(half)) < constants::MACHINE_EPSILON;
 }
 
 /**
@@ -628,7 +628,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil(const decimal_t x) noe
             return x;
         }
         const decimal_t floor_x = static_cast<decimal_t>(safe_decimal_to_uint64(x));
-        if (x == floor_x) {
+        if (absolute(x - floor_x) < constants::MACHINE_EPSILON) {
             return floor_x;
         } else {
             return floor_x + 1.0L;

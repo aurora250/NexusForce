@@ -1,6 +1,9 @@
 #include <NeForce/network/util/url.hpp>
 #include <NeForce/network/util/mac_address.hpp>
 #include <gtest/gtest.h>
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <arpa/inet.h>
+#endif
 using namespace neforce;
 
 class PortsTest : public ::testing::Test {

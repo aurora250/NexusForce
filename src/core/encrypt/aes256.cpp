@@ -227,16 +227,18 @@ namespace {
         uint64_t X_hi = hi, X_lo = lo;
 
         for (int i = 0; i < 128; ++i) {
-            if ((X_hi >> 63) & 1) {
+            if (((X_hi >> 63) & 1) != 0U) {
                 Z_hi ^= V_hi;
                 Z_lo ^= V_lo;
             }
             X_hi = (X_hi << 1) | (X_lo >> 63);
             X_lo <<= 1;
-            bool carry = (V_hi >> 63) & 1;
+            const bool carry = ((V_hi >> 63) & 1) != 0U;
             V_hi = (V_hi << 1) | (V_lo >> 63);
             V_lo <<= 1;
-            if (carry) V_lo ^= 0x87;
+            if (carry) {
+                V_lo ^= 0x87;
+            }
         }
         hi = Z_hi;
         lo = Z_lo;
@@ -252,9 +254,8 @@ namespace {
         ctx.H_lo = endian::read_be64(H + 8);
     }
 
-    void ghash_update(const ghash_context& ctx,
-                      uint64_t& state_hi, uint64_t& state_lo,
-                      const byte_t* data, size_t len) {
+    void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
+                      size_t len) {
         while (len >= 16) {
             state_hi ^= endian::read_be64(data);
             state_lo ^= endian::read_be64(data + 8);
@@ -272,8 +273,8 @@ namespace {
         }
     }
 
-    void ghash_final(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo,
-                     size_t a_len, size_t c_len, byte_t out_tag[16]) {
+    void ghash_final(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, size_t a_len, size_t c_len,
+                     byte_t out_tag[16]) {
         byte_t len_block[16] = {0};
         endian::write_be64(len_block, a_len * 8);
         endian::write_be64(len_block + 8, c_len * 8);

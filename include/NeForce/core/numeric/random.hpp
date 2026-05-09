@@ -64,7 +64,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 template <typename Generator>
-uint64_t lemire_bounded(Generator&& gen, const uint64_t max) noexcept {
+uint64_t lemire_bounded(Generator&& gen, const uint64_t max) noexcept(noexcept(gen())) {
     uint64_t hi = 0;
     uint64_t lo = _NEFORCE _umul128(gen(), max, &hi);
 
@@ -424,8 +424,8 @@ public:
         if (max == 1) {
             return 0;
         }
-        return static_cast<T>(_NEFORCE lemire_bounded([]() noexcept { return secret::generate_64bit(); },
-                                                      static_cast<uint64_t>(max)));
+        return static_cast<T>(
+                _NEFORCE lemire_bounded([]() { return secret::generate_64bit(); }, static_cast<uint64_t>(max)));
     }
 
     /**
@@ -463,7 +463,7 @@ public:
         if (max == 0 || max == 1) {
             return 0;
         }
-        return lemire_bounded([]() noexcept { return secret::generate_64bit(); }, max);
+        return lemire_bounded([]() { return secret::generate_64bit(); }, max);
     }
 
     /**

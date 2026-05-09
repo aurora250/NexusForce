@@ -2,6 +2,7 @@
 #include <NeForce/core/system/dynamic_library.hpp>
 #include <NeForce/core/system/environment.hpp>
 #include <NeForce/core/system/locale.hpp>
+#include <NeForce/core/system/pipe.hpp>
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/core/system/share_memory.hpp>
 #include <NeForce/core/system/signal.hpp>
@@ -15,6 +16,7 @@
 #else
 #    include <cstdlib>
 #    include <unistd.h>
+#    include <fcntl.h>
 #endif
 using namespace neforce;
 
@@ -1526,7 +1528,7 @@ TEST_F(EnvironmentTest, ThreadSafety_ConcurrentGetSet) {
     vector<thread> threads;
 
     for (int t = 0; t < num_threads; ++t) {
-        threads.emplace_back([this, t]() {
+        threads.emplace_back([t]() {
             for (int i = 0; i < num_iterations; ++i) {
                 string var_name = string(test_var_name) + "_" + to_string(t);
                 string value = "value_" + to_string(i);
@@ -1552,7 +1554,7 @@ TEST_F(EnvironmentTest, ThreadSafety_ConcurrentAllEnvs) {
     vector<thread> threads;
 
     for (int t = 0; t < num_threads; ++t) {
-        threads.emplace_back([this, t]() {
+        threads.emplace_back([]() {
             for (int i = 0; i < 20; ++i) {
                 auto env_map = environment::all_envs();
                 EXPECT_FALSE(env_map.empty());
@@ -2376,54 +2378,64 @@ protected:
 };
 
 TEST_F(PipeTest, DefaultConstructor_CreatesInvalidPipe) {
+    using neforce::pipe;
     pipe p;
     EXPECT_FALSE(p.is_valid());
 }
 
 TEST_F(PipeTest, Constructor_NonInheritable_CreatesValidPipe) {
+    using neforce::pipe;
     pipe p(false);
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, Constructor_Inheritable_CreatesValidPipe) {
+    using neforce::pipe;
     pipe p(true);
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, Constructor_DefaultParameter_CreatesValidPipe) {
+    using neforce::pipe;
     pipe p(false);
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, IsValid_AfterDefaultConstruction_ReturnsFalse) {
+    using neforce::pipe;
     pipe p;
     EXPECT_FALSE(p.is_valid());
 }
 
 TEST_F(PipeTest, IsValid_AfterConstruction_ReturnsTrue) {
+    using neforce::pipe;
     pipe p(false);
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, IsValid_AfterClose_ReturnsFalse) {
+    using neforce::pipe;
     pipe p(false);
     p.close();
     EXPECT_FALSE(p.is_valid());
 }
 
 TEST_F(PipeTest, IsValid_AfterCloseRead_ReturnsTrueIfWriteStillOpen) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, IsValid_AfterCloseWrite_ReturnsTrueIfReadStillOpen) {
+    using neforce::pipe;
     pipe p(false);
     p.close_write();
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, IsValid_AfterBothClosed_ReturnsFalse) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
     p.close_write();
@@ -2431,6 +2443,7 @@ TEST_F(PipeTest, IsValid_AfterBothClosed_ReturnsFalse) {
 }
 
 TEST_F(PipeTest, NativeReadHandle_AfterConstruction_ReturnsNonInvalid) {
+    using neforce::pipe;
     pipe p(false);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_NE(p.native_read_handle(), nullptr);
@@ -2440,6 +2453,7 @@ TEST_F(PipeTest, NativeReadHandle_AfterConstruction_ReturnsNonInvalid) {
 }
 
 TEST_F(PipeTest, NativeReadHandle_AfterCloseRead_ReturnsInvalid) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -2450,6 +2464,7 @@ TEST_F(PipeTest, NativeReadHandle_AfterCloseRead_ReturnsInvalid) {
 }
 
 TEST_F(PipeTest, NativeWriteHandle_AfterConstruction_ReturnsNonInvalid) {
+    using neforce::pipe;
     pipe p(false);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_NE(p.native_write_handle(), nullptr);
@@ -2459,6 +2474,7 @@ TEST_F(PipeTest, NativeWriteHandle_AfterConstruction_ReturnsNonInvalid) {
 }
 
 TEST_F(PipeTest, NativeWriteHandle_AfterCloseWrite_ReturnsInvalid) {
+    using neforce::pipe;
     pipe p(false);
     p.close_write();
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -2469,6 +2485,7 @@ TEST_F(PipeTest, NativeWriteHandle_AfterCloseWrite_ReturnsInvalid) {
 }
 
 TEST_F(PipeTest, Write_SimpleData_ReturnsPositiveCount) {
+    using neforce::pipe;
     pipe p(false);
     const char data[] = "hello";
     int written = p.write(data, string_length(data));
@@ -2477,12 +2494,14 @@ TEST_F(PipeTest, Write_SimpleData_ReturnsPositiveCount) {
 }
 
 TEST_F(PipeTest, Write_NullDataZeroSize_ReturnsPositiveCount) {
+    using neforce::pipe;
     pipe p(false);
     int written = p.write(nullptr, 0);
     EXPECT_GE(written, 0);
 }
 
 TEST_F(PipeTest, Write_AfterCloseWrite_ReturnsMinusOne) {
+    using neforce::pipe;
     pipe p(false);
     p.close_write();
     const char data[] = "test";
@@ -2491,6 +2510,7 @@ TEST_F(PipeTest, Write_AfterCloseWrite_ReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, Write_MultipleWrites_Success) {
+    using neforce::pipe;
     pipe p(false);
     const char data1[] = "first ";
     const char data2[] = "second";
@@ -2501,6 +2521,7 @@ TEST_F(PipeTest, Write_MultipleWrites_Success) {
 }
 
 TEST_F(PipeTest, Write_LargeData_Success) {
+    using neforce::pipe;
     pipe p(false);
     string large_data(65536, 'A');
 
@@ -2522,6 +2543,7 @@ TEST_F(PipeTest, Write_LargeData_Success) {
 }
 
 TEST_F(PipeTest, Read_AfterWrite_ReturnsSameData) {
+    using neforce::pipe;
     pipe p(false);
     const char sent[] = "hello pipe";
     p.write(sent, string_length(sent));
@@ -2533,6 +2555,7 @@ TEST_F(PipeTest, Read_AfterWrite_ReturnsSameData) {
 }
 
 TEST_F(PipeTest, Read_AfterCloseRead_ReturnsMinusOne) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
     char buffer[64];
@@ -2541,6 +2564,7 @@ TEST_F(PipeTest, Read_AfterCloseRead_ReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, Read_MultipleReads_Success) {
+    using neforce::pipe;
     pipe p(false);
     const char sent[] = "multiple reads test";
     size_t total_written = 0;
@@ -2564,12 +2588,14 @@ TEST_F(PipeTest, Read_MultipleReads_Success) {
 }
 
 TEST_F(PipeTest, Read_EmptyBuffer_ReturnsZero) {
+    using neforce::pipe;
     pipe p(false);
     int bytes_read = p.read(nullptr, 0);
     EXPECT_EQ(bytes_read, 0);
 }
 
 TEST_F(PipeTest, WriteRead_MultipleIterations_Success) {
+    using neforce::pipe;
     pipe p(false);
     for (int i = 0; i < 10; ++i) {
         string msg = "message_" + to_string(i);
@@ -2584,6 +2610,7 @@ TEST_F(PipeTest, WriteRead_MultipleIterations_Success) {
 }
 
 TEST_F(PipeTest, ReadAvailable_AfterWrite_ReturnsAllData) {
+    using neforce::pipe;
     pipe p(false);
     const string sent = "read available test data";
     p.write(sent.data(), sent.size());
@@ -2594,12 +2621,14 @@ TEST_F(PipeTest, ReadAvailable_AfterWrite_ReturnsAllData) {
 }
 
 TEST_F(PipeTest, ReadAvailable_NoData_ReturnsEmpty) {
+    using neforce::pipe;
     pipe p(false);
     string data = p.read_available();
     EXPECT_TRUE(data.empty());
 }
 
 TEST_F(PipeTest, ReadAvailable_AfterCloseRead_ReturnsEmpty) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
     string data = p.read_available();
@@ -2607,6 +2636,7 @@ TEST_F(PipeTest, ReadAvailable_AfterCloseRead_ReturnsEmpty) {
 }
 
 TEST_F(PipeTest, ReadAvailable_MultipleWritesBeforeRead_ReturnsConcatenated) {
+    using neforce::pipe;
     pipe p(false);
     p.write("Hello ", 6);
     p.write("World", 5);
@@ -2617,6 +2647,7 @@ TEST_F(PipeTest, ReadAvailable_MultipleWritesBeforeRead_ReturnsConcatenated) {
 }
 
 TEST_F(PipeTest, ReadAvailable_LargeData_Success) {
+    using neforce::pipe;
     pipe p(false);
     string large_data(100000, 'X');
     string received;
@@ -2642,6 +2673,7 @@ TEST_F(PipeTest, ReadAvailable_LargeData_Success) {
 }
 
 TEST_F(PipeTest, ReadAvailable_SmallData_Success) {
+    using neforce::pipe;
     pipe p(false);
     string small_data(4096, 'X');
     p.write(small_data.data(), small_data.size());
@@ -2652,6 +2684,7 @@ TEST_F(PipeTest, ReadAvailable_SmallData_Success) {
 }
 
 TEST_F(PipeTest, CloseRead_AfterWrite_ReadReturnsMinusOne) {
+    using neforce::pipe;
     pipe p(false);
     const char data[] = "test";
     p.write(data, string_length(data));
@@ -2663,6 +2696,7 @@ TEST_F(PipeTest, CloseRead_AfterWrite_ReadReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, CloseWrite_ThenRead_ReturnsAvailableData) {
+    using neforce::pipe;
     pipe p(false);
     const char data[] = "close write test";
     p.write(data, string_length(data));
@@ -2675,24 +2709,28 @@ TEST_F(PipeTest, CloseWrite_ThenRead_ReturnsAvailableData) {
 }
 
 TEST_F(PipeTest, CloseWrite_CalledTwice_NoThrow) {
+    using neforce::pipe;
     pipe p(false);
     p.close_write();
     EXPECT_NO_THROW(p.close_write());
 }
 
 TEST_F(PipeTest, CloseRead_CalledTwice_NoThrow) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
     EXPECT_NO_THROW(p.close_read());
 }
 
 TEST_F(PipeTest, Close_CalledTwice_NoThrow) {
+    using neforce::pipe;
     pipe p(false);
     p.close();
     EXPECT_NO_THROW(p.close());
 }
 
 TEST_F(PipeTest, Close_ThenWrite_ReturnsMinusOne) {
+    using neforce::pipe;
     pipe p(false);
     p.close();
     const char data[] = "test";
@@ -2701,6 +2739,7 @@ TEST_F(PipeTest, Close_ThenWrite_ReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, Close_ThenRead_ReturnsMinusOne) {
+    using neforce::pipe;
     pipe p(false);
     p.close();
     char buffer[64];
@@ -2709,11 +2748,13 @@ TEST_F(PipeTest, Close_ThenRead_ReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, Close_DefaultConstructedPipe_NoThrow) {
+    using neforce::pipe;
     pipe p;
     EXPECT_NO_THROW(p.close());
 }
 
 TEST_F(PipeTest, MoveConstructor_TransfersOwnership) {
+    using neforce::pipe;
     pipe p1(false);
     EXPECT_TRUE(p1.is_valid());
 
@@ -2729,6 +2770,7 @@ TEST_F(PipeTest, MoveConstructor_TransfersOwnership) {
 }
 
 TEST_F(PipeTest, MoveConstructor_FromDefaultConstructed_Success) {
+    using neforce::pipe;
     pipe p1;
     EXPECT_FALSE(p1.is_valid());
 
@@ -2739,6 +2781,7 @@ TEST_F(PipeTest, MoveConstructor_FromDefaultConstructed_Success) {
 }
 
 TEST_F(PipeTest, MoveAssignment_TransfersOwnership) {
+    using neforce::pipe;
     pipe p1(false);
     pipe p2(false);
 
@@ -2754,6 +2797,7 @@ TEST_F(PipeTest, MoveAssignment_TransfersOwnership) {
 }
 
 TEST_F(PipeTest, MoveAssignment_SelfAssignment_NoEffect) {
+    using neforce::pipe;
     pipe p(false);
     auto read_handle = p.native_read_handle();
     auto write_handle = p.native_write_handle();
@@ -2766,6 +2810,7 @@ TEST_F(PipeTest, MoveAssignment_SelfAssignment_NoEffect) {
 }
 
 TEST_F(PipeTest, MoveAssignment_ClosesPreviousHandle) {
+    using neforce::pipe;
     pipe p1(false);
     pipe p2(false);
 
@@ -2773,6 +2818,7 @@ TEST_F(PipeTest, MoveAssignment_ClosesPreviousHandle) {
 }
 
 TEST_F(PipeTest, DetachReadHandle_ReturnsValidAndMakesInvalid) {
+    using neforce::pipe;
     pipe p(false);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     auto handle = p.detach_read_handle();
@@ -2788,6 +2834,7 @@ TEST_F(PipeTest, DetachReadHandle_ReturnsValidAndMakesInvalid) {
 }
 
 TEST_F(PipeTest, DetachReadHandle_AfterClose_ReturnsInvalid) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -2800,6 +2847,7 @@ TEST_F(PipeTest, DetachReadHandle_AfterClose_ReturnsInvalid) {
 }
 
 TEST_F(PipeTest, DetachReadHandle_DefaultConstructed_ReturnsInvalid) {
+    using neforce::pipe;
     pipe p;
 #ifdef NEFORCE_PLATFORM_WINDOWS
     auto handle = p.detach_read_handle();
@@ -2811,6 +2859,7 @@ TEST_F(PipeTest, DetachReadHandle_DefaultConstructed_ReturnsInvalid) {
 }
 
 TEST_F(PipeTest, DetachWriteHandle_ReturnsValidAndMakesInvalid) {
+    using neforce::pipe;
     pipe p(false);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     auto handle = p.detach_write_handle();
@@ -2826,6 +2875,7 @@ TEST_F(PipeTest, DetachWriteHandle_ReturnsValidAndMakesInvalid) {
 }
 
 TEST_F(PipeTest, DetachWriteHandle_AfterClose_ReturnsInvalid) {
+    using neforce::pipe;
     pipe p(false);
     p.close_write();
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -2838,6 +2888,7 @@ TEST_F(PipeTest, DetachWriteHandle_AfterClose_ReturnsInvalid) {
 }
 
 TEST_F(PipeTest, DetachWriteHandle_DefaultConstructed_ReturnsInvalid) {
+    using neforce::pipe;
     pipe p;
 #ifdef NEFORCE_PLATFORM_WINDOWS
     auto handle = p.detach_write_handle();
@@ -2849,6 +2900,7 @@ TEST_F(PipeTest, DetachWriteHandle_DefaultConstructed_ReturnsInvalid) {
 }
 
 TEST_F(PipeTest, DetachReadHandle_CallerResponsibleForClose) {
+    using neforce::pipe;
     pipe p(false);
     const char data[] = "detach test";
     p.write(data, string_length(data));
@@ -2880,6 +2932,7 @@ TEST_F(PipeTest, DetachReadHandle_CallerResponsibleForClose) {
 }
 
 TEST_F(PipeTest, DetachWriteHandle_CallerResponsibleForClose) {
+    using neforce::pipe;
     pipe p(false);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -2912,6 +2965,7 @@ TEST_F(PipeTest, DetachWriteHandle_CallerResponsibleForClose) {
 }
 
 TEST_F(PipeTest, ThreadedWriteRead_Success) {
+    using neforce::pipe;
     pipe p(false);
 
     const string sent = "threaded pipe test message";
@@ -2943,6 +2997,7 @@ TEST_F(PipeTest, ThreadedWriteRead_Success) {
 }
 
 TEST_F(PipeTest, Destructor_ClosesHandles) {
+    using neforce::pipe;
     pipe::native_handle_type read_h;
     pipe::native_handle_type write_h;
 
@@ -2971,15 +3026,28 @@ TEST_F(PipeTest, Destructor_ClosesHandles) {
 #endif
 }
 
-TEST_F(PipeTest, CopyConstructor_IsDeleted) { EXPECT_FALSE(is_copy_constructible<pipe>::value); }
+TEST_F(PipeTest, CopyConstructor_IsDeleted) {
+    using neforce::pipe;
+    EXPECT_FALSE(is_copy_constructible<pipe>::value);
+}
 
-TEST_F(PipeTest, CopyAssignment_IsDeleted) { EXPECT_FALSE(is_copy_assignable<pipe>::value); }
+TEST_F(PipeTest, CopyAssignment_IsDeleted) {
+    using neforce::pipe;
+    EXPECT_FALSE(is_copy_assignable<pipe>::value);
+}
 
-TEST_F(PipeTest, MoveConstructor_IsNoexcept) { EXPECT_TRUE(is_nothrow_move_constructible<pipe>::value); }
+TEST_F(PipeTest, MoveConstructor_IsNoexcept) {
+    using neforce::pipe;
+    EXPECT_TRUE(is_nothrow_move_constructible<pipe>::value);
+}
 
-TEST_F(PipeTest, MoveAssignment_IsNoexcept) { EXPECT_TRUE(is_nothrow_move_assignable<pipe>::value); }
+TEST_F(PipeTest, MoveAssignment_IsNoexcept) {
+    using neforce::pipe;
+    EXPECT_TRUE(is_nothrow_move_assignable<pipe>::value);
+}
 
 TEST_F(PipeTest, ReadAvailable_MultiplePipes_Independent) {
+    using neforce::pipe;
     pipe p1(false);
     pipe p2(false);
 
@@ -2996,12 +3064,14 @@ TEST_F(PipeTest, ReadAvailable_MultiplePipes_Independent) {
 }
 
 TEST_F(PipeTest, Write_NullData_WithPositiveSize_Safe) {
+    using neforce::pipe;
     pipe p(false);
     int written = p.write(nullptr, 0);
     EXPECT_EQ(written, 0);
 }
 
 TEST_F(PipeTest, Read_ZeroSizeBuffer_ReturnsZero) {
+    using neforce::pipe;
     pipe p(false);
     const char data[] = "test";
     p.write(data, string_length(data));
@@ -3012,6 +3082,7 @@ TEST_F(PipeTest, Read_ZeroSizeBuffer_ReturnsZero) {
 }
 
 TEST_F(PipeTest, WriteFailsWhenReadEndClosed) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
 
@@ -3021,6 +3092,7 @@ TEST_F(PipeTest, WriteFailsWhenReadEndClosed) {
 }
 
 TEST_F(PipeTest, CloseWrite_DoesNotAffectRead) {
+    using neforce::pipe;
     pipe p(false);
     const char data[] = "read after close write";
     p.write(data, string_length(data));
@@ -3033,6 +3105,7 @@ TEST_F(PipeTest, CloseWrite_DoesNotAffectRead) {
 }
 
 TEST_F(PipeTest, MoveConstructedPipe_CanReadWrite) {
+    using neforce::pipe;
     pipe p1(false);
     const char sent[] = "moved pipe test";
     p1.write(sent, string_length(sent));
@@ -3047,6 +3120,7 @@ TEST_F(PipeTest, MoveConstructedPipe_CanReadWrite) {
 }
 
 TEST_F(PipeTest, MoveAssignedPipe_CanReadWrite) {
+    using neforce::pipe;
     pipe p1(false);
     pipe p2(false);
 
@@ -3063,6 +3137,7 @@ TEST_F(PipeTest, MoveAssignedPipe_CanReadWrite) {
 }
 
 TEST_F(PipeTest, Exception_What_ContainsErrorInfo) {
+    using neforce::pipe;
     try {
         pipe p(false);
         p.close();
@@ -3073,12 +3148,14 @@ TEST_F(PipeTest, Exception_What_ContainsErrorInfo) {
 }
 
 TEST_F(PipeTest, IsValid_AfterPartialClose_ReturnsTrue) {
+    using neforce::pipe;
     pipe p(false);
     p.close_read();
     EXPECT_TRUE(p.is_valid());
 }
 
 TEST_F(PipeTest, ReadAfterMove_SourcePipe_ReturnsMinusOne) {
+    using neforce::pipe;
     pipe p1(false);
     const char data[] = "test";
     p1.write(data, string_length(data));
@@ -3091,6 +3168,7 @@ TEST_F(PipeTest, ReadAfterMove_SourcePipe_ReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, WriteAfterMove_SourcePipe_ReturnsMinusOne) {
+    using neforce::pipe;
     pipe p1(false);
 
     pipe p2(move(p1));
@@ -5354,9 +5432,9 @@ TEST_F(SignalManagerTest, IsPlatformSignal_NativeSignal_ReturnsTrue) {
     EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::CTRL_BREAK));
     EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::CLOSE));
 #else
-    EXPECT_TRUE(signal_manager::is_platform_signal(system_signal_manager::event::INTERRUPT));
-    EXPECT_TRUE(signal_manager::is_platform_signal(system_signal_manager::event::TERMINATE));
-    EXPECT_TRUE(signal_manager::is_platform_signal(system_signal_manager::event::HANGUP));
+    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::INTERRUPT));
+    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::TERMINATE));
+    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::HANGUP));
 #endif
 }
 

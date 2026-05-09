@@ -195,15 +195,13 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
         }
 #    endif
 
-        bool type_ok;
+        bool type_ok = true;
         if (options.files_only && options.dirs_only) {
             type_ok = true;
         } else if (options.files_only) {
             type_ok = !is_dir;
         } else if (options.dirs_only) {
             type_ok = is_dir;
-        } else {
-            type_ok = true;
         }
 
         bool ext_ok = true;

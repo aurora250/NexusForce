@@ -93,8 +93,8 @@ private:
         session_manager(const session_manager&) = delete;
         session_manager& operator=(const session_manager&) = delete;
 
-        session_manager(session_manager&&) noexcept = default;
-        session_manager& operator=(session_manager&&) noexcept = default;
+        session_manager(session_manager&&) noexcept = delete;
+        session_manager& operator=(session_manager&&) noexcept = delete;
 
         http_session* get_session(const string& session_id, bool create = true);
         void remove_session(const string& session_id) noexcept;
@@ -150,8 +150,8 @@ public:
     http_server(const http_server&) = delete;
     http_server& operator=(const http_server&) = delete;
 
-    http_server(http_server&&) noexcept = default;
-    http_server& operator=(http_server&&) noexcept = default;
+    http_server(http_server&&) noexcept = delete;
+    http_server& operator=(http_server&&) noexcept = delete;
 
     /**
      * @brief 加载SSL证书

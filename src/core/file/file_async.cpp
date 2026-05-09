@@ -1,6 +1,7 @@
 #include <NeForce/core/file/file_async.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <cerrno>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -236,7 +237,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
 #else
         const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
         if (pos == static_cast<difference_type>(-1)) {
-            result.error_code = _NEFORCE last_error();
+            result.error = _NEFORCE last_error();
             return result;
         }
         resolved_offset = pos;

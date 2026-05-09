@@ -145,8 +145,8 @@ public:
     websocket_server(const websocket_server&) = delete;
     websocket_server& operator=(const websocket_server&) = delete;
 
-    websocket_server(websocket_server&&) noexcept = default;
-    websocket_server& operator=(websocket_server&&) noexcept = default;
+    websocket_server(websocket_server&&) noexcept = delete;
+    websocket_server& operator=(websocket_server&&) noexcept = delete;
 
     /**
      * @brief 注册WebSocket路由

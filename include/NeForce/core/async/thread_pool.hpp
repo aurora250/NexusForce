@@ -434,8 +434,8 @@ public:
     thread_pool(const thread_pool&) = delete;
     thread_pool& operator=(const thread_pool&) = delete;
 
-    thread_pool(thread_pool&&) = default;
-    thread_pool& operator=(thread_pool&&) = default;
+    thread_pool(thread_pool&&) = delete;
+    thread_pool& operator=(thread_pool&&) = delete;
 
     /**
      * @brief 设置线程池模式

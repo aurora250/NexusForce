@@ -88,8 +88,9 @@ namespace {
     thread_local void* g_signal_context = nullptr;
 } // namespace
 
-system_signal_manager::system_signal_manager() :
+system_signal_manager::system_signal_manager()
 #ifdef NEFORCE_PLATFORM_WINDOWS
+:
 notify_event_(false, system_event::type::auto_reset)
 #endif
 {
@@ -472,7 +473,9 @@ void system_signal_manager::trigger_force_exit() {
     if (force_exit_.compare_exchange_strong(expected, true)) {
         running_ = false;
         cv_.notify_all();
+#ifdef NEFORCE_PLATFORM_WINDOWS
         notify_event_.set();
+#endif
     }
 }
 
@@ -498,7 +501,9 @@ system_signal_manager::signal_result system_signal_manager::wait_for_signal_inte
 void system_signal_manager::send_signal_nolock(event event, void* context) {
     pending_signals_.emplace_back(event, context, steady_clock::now());
     cv_.notify_all();
+#ifdef NEFORCE_PLATFORM_WINDOWS
     notify_event_.set();
+#endif
 }
 
 bool system_signal_manager::block_signals(const vector<event>& signals_to_block) const {

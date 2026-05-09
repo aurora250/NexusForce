@@ -153,8 +153,8 @@ public:
     http_client(const http_client&) = delete;
     http_client& operator=(const http_client&) = delete;
 
-    http_client(http_client&&) noexcept = default;
-    http_client& operator=(http_client&&) noexcept = default;
+    http_client(http_client&&) noexcept = delete;
+    http_client& operator=(http_client&&) noexcept = delete;
 
     /**
      * @brief 设置客户端配置

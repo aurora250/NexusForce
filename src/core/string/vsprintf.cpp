@@ -255,12 +255,13 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
         return -1;
     }
 
-    char* str = nullptr;
+    char* str = buf;
     char* end = buf + MEMORY_BIG_ALLOC_THRESHHOLD - 1;
 
-    for (str = buf; *fmt != 0; ++fmt) {
+    while (*fmt != 0) {
         if (*fmt != '%') {
             *str++ = *fmt;
+            ++fmt;
             continue;
         }
 
@@ -408,6 +409,10 @@ int vsprintf(char* buf, const char* fmt, std::va_list args) noexcept {
                 }
                 break;
             }
+        }
+
+        if (*fmt != 0) {
+            ++fmt;
         }
     }
 

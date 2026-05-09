@@ -436,11 +436,21 @@ public:
     using const_reverse_iterator = _NEFORCE reverse_iterator<const_iterator>;
 
 private:
-    conditional_t<disjunction_v<is_default_constructible<T>, is_implicitly_default_constructible<T>>, T,
-                  empty_array_element_tag>
-            array_[1]{};
+    using placeholder =
+            conditional_t<disjunction_v<is_default_constructible<T>, is_implicitly_default_constructible<T>>, T,
+                          empty_array_element_tag>;
+
+    placeholder array_[1]{placeholder{}};
 
 public:
+    constexpr array() noexcept {}
+    NEFORCE_CONSTEXPR20 ~array() noexcept {}
+
+    constexpr array(const array&) noexcept {}
+    constexpr array& operator=(const array&) noexcept { return *this; }
+    constexpr array(array&&) noexcept {}
+    constexpr array& operator=(array&&) noexcept { return *this; }
+
     NEFORCE_NODISCARD NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE constexpr iterator begin() noexcept {
         return iterator{};
     }
