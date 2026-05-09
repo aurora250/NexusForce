@@ -36,10 +36,8 @@ private:
     uint32_t mask_ = 0;       ///< 掩码，用于定位特定位
 
 public:
-    /**
-     * @brief 默认构造函数
-     */
     NEFORCE_CONSTEXPR20 bit_reference() = default;
+    NEFORCE_CONSTEXPR20 ~bit_reference() = default;
 
     /**
      * @brief 构造函数
@@ -64,6 +62,9 @@ public:
      * @return 自身引用
      */
     NEFORCE_CONSTEXPR20 bit_reference& operator=(const bit_reference& other) noexcept {
+        if (addressof(other) == this) {
+            return *this;
+        }
         return *this = static_cast<bool>(other);
     }
 
@@ -84,6 +85,9 @@ public:
      * @return 自身引用
      */
     NEFORCE_CONSTEXPR20 bit_reference& operator=(bit_reference&& other) noexcept {
+        if (addressof(other) == this) {
+            return *this;
+        }
         *this = static_cast<bool>(other);
         other.ptr_ = nullptr;
         other.mask_ = 0;
@@ -115,7 +119,7 @@ public:
         if (ptr_ == nullptr) {
             return false;
         }
-        return *ptr_ & mask_;
+        return (*ptr_ & mask_) != 0U;
     }
 
     /**
@@ -291,11 +295,11 @@ public:
      */
     NEFORCE_CONSTEXPR20 void advance(difference_type off) noexcept {
         NEFORCE_DEBUG_VERIFY((ptr_ && container_) || off == 0, "Attempting to advance a null pointer");
-        difference_type n = off + off_;
-        ptr_ += n / BITMAP_WORD_SIZE;
-        n = n % BITMAP_WORD_SIZE;
+        difference_type n = off + static_cast<difference_type>(off_);
+        ptr_ += n / static_cast<difference_type>(BITMAP_WORD_SIZE);
+        n = n % static_cast<difference_type>(BITMAP_WORD_SIZE);
         if (n < 0) {
-            off_ = static_cast<uint32_t>(n) + BITMAP_WORD_SIZE;
+            off_ = static_cast<uint32_t>(n + BITMAP_WORD_SIZE);
             --ptr_;
         } else {
             off_ = static_cast<uint32_t>(n);
@@ -309,7 +313,7 @@ public:
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 difference_type distance_to(const bitmap_iterator& other) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == other.container_, "Attempting to distance to a different container");
-        return BITMAP_WORD_SIZE * (ptr_ - other.ptr_) + off_ - other.off_;
+        return BITMAP_WORD_SIZE * (ptr_ - other.ptr_) + static_cast<difference_type>(off_) - static_cast<difference_type>(other.off_);
     }
 
     /**
@@ -479,7 +483,7 @@ private:
 
     iterator start_{this};  ///< 起始迭代器
     iterator finish_{this}; ///< 结束迭代器
-    bit_storage storage_{}; ///< 底层存储
+    bit_storage storage_; ///< 底层存储
 
 private:
     /**

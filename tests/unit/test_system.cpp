@@ -4488,11 +4488,9 @@ TEST_F(SysinfoTest, GetArchitecture_MatchesPlatform) {
     sysinfo& inst = sysinfo::instance();
     auto arch = inst.get_architecture();
 
-#ifdef NEFORCE_ARCH_BITS_64
+#ifdef NEFORCE_ARCH_X86
     EXPECT_TRUE(arch == sysinfo::architecture::X64 || arch == sysinfo::architecture::ARM64 ||
-                arch == sysinfo::architecture::IA64);
-#else
-    EXPECT_TRUE(arch == sysinfo::architecture::X86 || arch == sysinfo::architecture::ARM);
+                arch == sysinfo::architecture::X86 || arch == sysinfo::architecture::ARM);
 #endif
 }
 

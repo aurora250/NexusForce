@@ -123,13 +123,27 @@ public:
 
     /**
      * @brief 整数初始化
-     * @param value 无符号整数值，用于初始化低位
+     * @param value 无符号64位整数值，用于初始化低位
      *
      * 将二进制位复制到bitset的低位，超出N的高位被忽略。
      */
-    constexpr explicit bitset(const block_type value) noexcept {
+    constexpr explicit bitset(unsigned long long value) noexcept {
         blocks.fill(0);
-        NEFORCE_IF_CONSTEXPR(block_count > 0) { blocks[0] = value & last_block_mask(); }
+        static_assert(sizeof(unsigned long long) >= sizeof(block_type),
+                      "unsigned long long should be at least as large as block_type");
+        size_t i = 0;
+        while (value != 0 && i < block_count) {
+            blocks[i] = static_cast<block_type>(value);
+            NEFORCE_IF_CONSTEXPR (bits_per_block < sizeof(unsigned long long) * 8) {
+                value >>= bits_per_block;
+            } else {
+                value = 0;
+            }
+            ++i;
+        }
+        NEFORCE_IF_CONSTEXPR (block_count > 0) {
+            blocks[block_count - 1] &= last_block_mask();
+        }
     }
 
     /**
@@ -514,18 +528,14 @@ public:
             }
         }
 
-        NEFORCE_IF_CONSTEXPR(sizeof(unsigned long long) >= sizeof(block_type)) {
-            return static_cast<unsigned long long>(blocks[0]);
+        unsigned long long result = 0;
+        constexpr size_t ullong_bits = sizeof(unsigned long long) * 8;
+        constexpr size_t blocks_needed = (ullong_bits + bits_per_block - 1) / bits_per_block;
+        constexpr size_t blocks_to_use = (block_count < blocks_needed) ? block_count : blocks_needed;
+        for (size_t i = 0; i < blocks_to_use; ++i) {
+            result |= static_cast<unsigned long long>(blocks[i]) << (i * bits_per_block);
         }
-        else {
-            unsigned long long result = 0;
-            constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
-            constexpr size_t blocks_to_use = ullong_blocks < block_count ? ullong_blocks : block_count;
-            for (size_t i = 0; i < blocks_to_use; ++i) {
-                result |= static_cast<unsigned long long>(blocks[i]) << (i * bits_per_block);
-            }
-            return result;
-        }
+        return result;
     }
 
     /**

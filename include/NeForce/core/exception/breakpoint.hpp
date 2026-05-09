@@ -18,7 +18,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-#if defined(NEFORCE_STATE_DEBUG) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STATE_DEBUG
 /**
  * @def NEFORCE_DEBUG_VERIFY
  * @brief 调试模式断言
@@ -36,7 +36,7 @@ NEFORCE_BEGIN_NAMESPACE__
 #    define NEFORCE_DEBUG_VERIFY(CON, MESG)
 #endif
 
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
 /**
  * @def NEFORCE_CONSTEXPR_ASSERT
  * @brief 编译时常量断言
@@ -73,7 +73,7 @@ NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable() noexcept {
 #endif
 }
 
-#if defined(NEFORCE_STANDARD_17) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_17
 /**
  * @brief 检查当前上下文是否在常量求值中
  * @return 如果在常量求值上下文中返回true，否则返回false

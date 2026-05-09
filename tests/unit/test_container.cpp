@@ -1485,7 +1485,7 @@ TEST(BitmapIteratorTest, AdvanceNegative) {
     bm[50] = true;
     auto it = bm.end();
     it -= 50;
-    EXPECT_TRUE(*it);
+    EXPECT_TRUE(static_cast<bool>(*it));
 }
 
 TEST(BitmapIteratorTest, DistanceTo) {
