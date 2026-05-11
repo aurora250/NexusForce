@@ -1,7 +1,7 @@
 #include <NeForce/core/config/msvc_intrinsic.hpp>
 #include <NeForce/core/exception/exception.hpp>
 #include <NeForce/core/numeric/int128.hpp>
-#if defined(NEFORCE_PLATFORM_WINDOWS) && defined(NEFORCE_ARCH_BITS_64)
+#if defined(NEFORCE_PLATFORM_WINDOWS) && defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
 #    include <intrin.h>
 #    if defined(NEFORCE_COMPILER_MINGW)
 #        pragma intrinsic(_umul128, _addcarry_u64, _subborrow_u64, __shiftright128, __shiftleft128)
@@ -21,7 +21,7 @@ namespace {
 #    undef NF_128
 #endif
 
-#if defined(NEFORCE_PLATFORM_WINDOWS) && !defined(NEFORCE_ARCH_BITS_64)
+#ifndef NEFORCE_SUPPORT_INTRINSIC_INT128
 #    define NF_128 _NEFORCE
 #else
 #    define NF_128 ::
@@ -29,7 +29,7 @@ namespace {
 
     uint128_t mul128(const uint128_t& a, const uint128_t& b) noexcept {
         uint128_t result;
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
         result.lo = NF_128 _umul128(a.lo, b.lo, &result.hi);
         uint64_t t1_hi = 0, t2_hi = 0;
         const uint64_t t1_lo = NF_128 _umul128(a.lo, b.hi, &t1_hi);
@@ -60,7 +60,7 @@ namespace {
             remainder = dividend;
             return;
         }
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
         if (divisor.hi == 0) {
             uint64_t rem = 0;
 #    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
@@ -98,7 +98,7 @@ namespace {
 
 
 uint128_t& uint128_t::operator+=(const uint128_t& other) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
     const byte_t carry = NF_128 _addcarry_u64(0, lo, other.lo, &lo);
     NF_128 _addcarry_u64(carry, hi, other.hi, &hi);
 #else
@@ -110,7 +110,7 @@ uint128_t& uint128_t::operator+=(const uint128_t& other) noexcept {
 }
 
 uint128_t& uint128_t::operator-=(const uint128_t& other) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
     const byte_t borrow = NF_128 _subborrow_u64(0, lo, other.lo, &lo);
     NF_128 _subborrow_u64(borrow, hi, other.hi, &hi);
 #else
@@ -142,7 +142,7 @@ uint128_t& uint128_t::operator%=(const uint128_t& other) {
 
 uint128_t uint128_t::mul64(uint64_t a, uint64_t b) noexcept {
     uint128_t res;
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
     res.lo = NF_128 _umul128(a, b, &res.hi);
 #else
     unsigned __int128 prod = static_cast<unsigned __int128>(a) * b;
@@ -153,7 +153,7 @@ uint128_t uint128_t::mul64(uint64_t a, uint64_t b) noexcept {
 }
 
 uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
     uint64_t rem = 0;
 #    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
     uint64_t quot = _udiv128(hi, lo, divisor, &rem);

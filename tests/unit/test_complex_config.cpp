@@ -3084,7 +3084,7 @@ TEST_F(YamlBuilderTest, BuildFloat) {
 
 TEST_F(YamlBuilderTest, BuildFloatSpecialInf) {
     yaml_builder b;
-    b.key("inf").value(INFINITY);
+    b.key("inf").value(numeric_traits<double>::infinity());
     auto result = b.build();
 
     auto* val = result->as_mapping()->get_member("inf");
@@ -3094,7 +3094,7 @@ TEST_F(YamlBuilderTest, BuildFloatSpecialInf) {
 
 TEST_F(YamlBuilderTest, BuildFloatSpecialNegInf) {
     yaml_builder b;
-    b.key("neginf").value(-INFINITY);
+    b.key("neginf").value(-numeric_traits<double>::infinity());
     auto result = b.build();
 
     auto* val = result->as_mapping()->get_member("neginf");
@@ -3105,7 +3105,7 @@ TEST_F(YamlBuilderTest, BuildFloatSpecialNegInf) {
 
 TEST_F(YamlBuilderTest, BuildFloatSpecialNaN) {
     yaml_builder b;
-    b.key("nan").value(NAN);
+    b.key("nan").value(numeric_traits<double>::quiet_nan());
     auto result = b.build();
 
     auto* val = result->as_mapping()->get_member("nan");

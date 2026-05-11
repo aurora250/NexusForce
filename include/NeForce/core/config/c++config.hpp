@@ -318,6 +318,10 @@
 #    define NEFORCE_SUPPORT_INTEL_TSX 1
 #endif
 
+#ifdef NEFORCE_ARCH_BITS_64
+#    define NEFORCE_SUPPORT_INTRINSIC_INT128 1
+#endif
+
 
 /**
  * @defgroup CxxStandardDetection C++标准检测
