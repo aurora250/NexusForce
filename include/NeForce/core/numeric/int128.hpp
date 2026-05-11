@@ -278,7 +278,7 @@ public:
      * @param remainder 输出余数
      * @return 商
      */
-    uint64_t div64(uint64_t divisor, uint64_t* remainder = nullptr) const noexcept;
+    uint64_t div64(uint64_t divisor, uint64_t* remainder = nullptr) const;
 
     /**
      * @brief 计算哈希值

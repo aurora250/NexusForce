@@ -152,7 +152,7 @@ uint128_t uint128_t::mul64(uint64_t a, uint64_t b) noexcept {
     return res;
 }
 
-uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const noexcept {
+uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const {
 #if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
     if (hi >= divisor) {
         uint128_t quot, rem;
