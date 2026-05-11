@@ -27,7 +27,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
     ::mode_t convert_attributes(const file_attri attr) {
         ::mode_t mode = 0;
-        if ((attr & file_attri::READONLY) != file_attri::OTHERS) {
+        if ((static_cast<fud_t>(attr) & S_IWUSR) == 0) {
             mode |= S_IRUSR | S_IRGRP | S_IROTH;
         } else {
             mode |= S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;

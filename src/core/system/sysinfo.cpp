@@ -17,6 +17,7 @@
 #    include <sys/sysinfo.h>
 #    include <sys/utsname.h>
 #    include <unistd.h>
+#    include <cstdio>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -26,7 +27,55 @@ namespace {
         return sysmutex;
     }
 
-    void get_cpu_info_internal(sysinfo::CPU_info& cpu_info) {
+#ifdef NEFORCE_PLATFORM_LINUX
+
+    string read_file_all(const char* filepath) {
+        string content;
+        ::FILE* fp = ::fopen(filepath, "r");
+        if (fp == nullptr) {
+            return content;
+        }
+
+        char buf[4096];
+        size_t n = 0;
+
+        while (true) {
+            n = ::fread(buf, 1, sizeof(buf), fp);
+            if (n > 0) {
+                content.append(buf, n);
+            }
+
+            if (n < sizeof(buf)) {
+                if (::feof(fp) != 0) {
+                    break;
+                }
+                if (::ferror(fp) != 0) {
+                    break;
+                }
+            }
+        }
+        ::fclose(fp);
+        return content;
+    }
+
+    uint32_t read_sysfs_freq(const char* path_str) {
+        const string content = read_file_all(path_str);
+        if (content.empty()) {
+            return 0;
+        }
+
+        string_view sv;
+        size_t ipos = 0;
+        getline(content.view(), ipos, sv, [](char c) { return is_space(c); });
+        if (!sv.empty()) {
+            return static_cast<uint32_t>(to_uint64(sv) / 1000); // kHz -> MHz
+        }
+        return 0;
+    }
+
+#endif
+
+    void get_cpu_info_internal(sysinfo::CPU_info& cpu_info, const sysinfo::architecture arch) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         int cpu_info_data[4] = {-1};
         char vendor[13] = {};
@@ -175,90 +224,187 @@ namespace {
         }
 
 #else
-        const file cpuinfo(path("/proc/cpuinfo"));
-        string_view line;
-        bool first_processor = true;
-        uint32_t processor_count = 0;
-        const string cpuinfo_str = cpuinfo.read();
-        size_t pos = 0;
+        const string data = read_file_all("/proc/cpuinfo");
+        if (data.empty()) {
+            cpu_info.cores = static_cast<uint32_t>(::sysconf(::_SC_NPROCESSORS_CONF));
+            cpu_info.logical_processors = static_cast<uint32_t>(::sysconf(::_SC_NPROCESSORS_ONLN));
+            return;
+        }
 
-        while (_NEFORCE getline(cpuinfo_str.view(), pos, line)) {
+        const auto* vendor_key = "vendor_id";
+        const auto* brand_key = "model name";
+        const auto* flags_key = "flags";
+        const auto* features_key = "Features";
+        const auto* freq_key = "cpu MHz";
+        const auto* cores_key = "cpu cores";
+
+        if (arch == sysinfo::architecture::RISCV32 || arch == sysinfo::architecture::RISCV64) {
+            vendor_key = "mvendorid";
+            brand_key = "uarch";
+            flags_key = "isa";
+            features_key = nullptr;
+            freq_key = nullptr;
+            cores_key = nullptr;
+        } else if (arch == sysinfo::architecture::LOONGARCH64 || arch == sysinfo::architecture::LOONGARCH32) {
+            vendor_key = "CPU Family";
+            brand_key = "Model Name";
+            flags_key = "flags";
+            freq_key = "CPU MHz";
+            cores_key = "CPU Cores";
+        }
+
+        string_view line;
+        size_t pos = 0;
+        bool first_processor = true;
+        uint32_t hart_count = 0;
+        uint32_t core_count_from_cpuinfo = 0;
+
+        while (getline(data.view(), pos, line)) {
             if (line.empty()) {
                 continue;
             }
 
-            // 统计 processor 条目数量
             if (line.starts_with("processor")) {
-                processor_count++;
+                if (arch == sysinfo::architecture::RISCV32 || arch == sysinfo::architecture::RISCV64) {
+                    hart_count++;
+                }
                 continue;
             }
 
             if (first_processor) {
-                if (line.starts_with("vendor_id")) {
+                bool extracted = false;
+
+                if (vendor_key != nullptr && line.starts_with(vendor_key)) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.vendor = line.tail(colon + 2);
+                        cpu_info.vendor = line.tail(colon + 1);
+                        cpu_info.vendor.trim();
+                        extracted = true;
                     }
-                } else if (line.starts_with("model name")) {
+                }
+
+                if (brand_key != nullptr && line.starts_with(brand_key)) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.brand = line.tail(colon + 2);
+                        cpu_info.brand = line.tail(colon + 1);
+                        cpu_info.brand.trim();
+                        extracted = true;
                     }
-                } else if (line.starts_with("cpu cores")) {
+                }
+
+                if (flags_key != nullptr && line.starts_with(flags_key)) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.cores = to_uint32(line.view(colon + 2));
+                        cpu_info.features = line.tail(colon + 1);
+                        cpu_info.features.trim();
+                        extracted = true;
                     }
-                } else if (line.starts_with("flags") || line.starts_with("Features")) {
+                } else if (features_key != nullptr && line.starts_with(features_key)) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.features = line.tail(colon + 2);
+                        cpu_info.features = line.tail(colon + 1);
+                        cpu_info.features.trim();
+                        extracted = true;
                     }
+                }
+
+                if (freq_key != nullptr && line.starts_with(freq_key)) {
+                    const size_t colon = line.find(':');
+                    if (colon != string::npos) {
+                        cpu_info.current_MHz = to_uint32(line.view(colon + 1));
+                        extracted = true;
+                    }
+                }
+
+                if (cores_key != nullptr && line.starts_with(cores_key)) {
+                    const size_t colon = line.find(':');
+                    if (colon != string::npos) {
+                        core_count_from_cpuinfo = to_uint32(line.view(colon + 1));
+                        extracted = true;
+                    }
+                }
+
+                if (extracted && !cpu_info.vendor.empty() && !cpu_info.brand.empty() && !cpu_info.features.empty() &&
+                    cpu_info.current_MHz > 0 && core_count_from_cpuinfo > 0) {
+                    first_processor = false;
                 }
             }
 
-            // 提取当前频率
-            if (line.starts_with("cpu MHz") && cpu_info.current_MHz == 0) {
+            if (cpu_info.current_MHz == 0 && line.starts_with("cpu MHz")) {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
-                    cpu_info.current_MHz = to_uint32(line.view(colon + 2));
+                    cpu_info.current_MHz = to_uint32(line.view(colon + 1));
                 }
             }
         }
 
-        // 当前在线的逻辑处理器数
-        cpu_info.logical_processors = ::sysconf(::_SC_NPROCESSORS_ONLN);
-        if (cpu_info.cores == 0) {
-            cpu_info.cores = ::sysconf(::_SC_NPROCESSORS_CONF);
-        }
-
-        // 最大频率
-        const path cpuinfo_max_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
-        const file cpu_max_freq(cpuinfo_max_freq);
-        if (cpu_max_freq.is_opened()) {
-            string_view freq_str;
-            size_t cmf_pos = 0;
-            const string data = cpu_max_freq.read();
-
-            getline(data.view(), cmf_pos, freq_str, [](const char c) { return is_space(c); });
-
-            if (!freq_str.empty()) {
-                cpu_info.max_MHz = to_uint64(freq_str) / 1000;
+        if (arch == sysinfo::architecture::RISCV32 || arch == sysinfo::architecture::RISCV64) {
+            cpu_info.logical_processors =
+                    (hart_count > 0) ? hart_count : static_cast<uint32_t>(::sysconf(_SC_NPROCESSORS_ONLN));
+        } else {
+            if (cpu_info.logical_processors == 0) {
+                cpu_info.logical_processors = static_cast<uint32_t>(::sysconf(_SC_NPROCESSORS_ONLN));
             }
         }
 
-        if (cpu_info.current_MHz == 0) {
-            const path scaling_cur_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
-            const file cpu_cur_freq(scaling_cur_freq);
-            if (cpu_cur_freq.is_opened()) {
-                string_view freq_str;
-                size_t cmf_pos = 0;
-                const string data = cpu_cur_freq.read();
+        if (core_count_from_cpuinfo > 0) {
+            cpu_info.cores = core_count_from_cpuinfo;
+        } else {
+            cpu_info.cores = cpu_info.logical_processors;
+        }
 
-                getline(data.view(), cmf_pos, freq_str, [](const char c) { return is_space(c); });
+        if (cpu_info.current_MHz == 0 || cpu_info.max_MHz == 0) {
+            auto try_sysfs = [&cpu_info]() {
+                cpu_info.max_MHz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
+                if (cpu_info.max_MHz == 0) {
+                    cpu_info.max_MHz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
+                }
+                if (cpu_info.current_MHz == 0) {
+                    cpu_info.current_MHz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
+                }
+            };
+            try_sysfs();
+        }
 
-                if (!freq_str.empty()) {
-                    cpu_info.current_MHz = to_uint64(freq_str) / 1000;
+        if (cpu_info.max_MHz == 0 && !cpu_info.brand.empty()) {
+            const char* ghz_pos = string_find_pattern(cpu_info.brand.data(), "GHz");
+            if (ghz_pos != nullptr) {
+                const char* num_start = ghz_pos - 1;
+                while (num_start >= cpu_info.brand.data() && (is_digit(*num_start) || *num_start == '.')) {
+                    num_start--;
+                }
+                num_start++;
+                if (num_start < ghz_pos) {
+                    try {
+                        const float freq_ghz = float32::parse(num_start).value();
+                        cpu_info.max_MHz = static_cast<uint32_t>(freq_ghz * 1000);
+                        if (cpu_info.current_MHz == 0) {
+                            cpu_info.current_MHz = cpu_info.max_MHz;
+                        }
+                        // NOLINTNEXTLINE(bugprone-empty-catch)
+                    } catch (...) {
+                        // ignore
+                    }
+                }
+            } else {
+                const char* mhz_pos = string_find_pattern(cpu_info.brand.data(), "MHz");
+                if (mhz_pos != nullptr) {
+                    const char* num_start = mhz_pos - 1;
+                    while (num_start >= cpu_info.brand.data() && is_digit(*num_start)) {
+                        num_start--;
+                    }
+                    num_start++;
+                    if (num_start < mhz_pos) {
+                        try {
+                            cpu_info.max_MHz = uinteger32::parse(num_start).value();
+                            if (cpu_info.current_MHz == 0) {
+                                cpu_info.current_MHz = cpu_info.max_MHz;
+                            }
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
+                        } catch (...) {
+                            // ignore
+                        }
+                    }
                 }
             }
         }
@@ -340,14 +486,13 @@ namespace {
             os_version_info.product_name = uname_data.sysname;
         }
 
-        const file os_release(path("/etc/os-release"));
-        if (!os_release.is_opened()) {
+        const string data = read_file_all("/etc/os-release");
+        if (data.empty()) {
             return;
         }
 
         string_view line;
         size_t pos = 0;
-        const string data = os_release.read();
         while (getline(data.view(), pos, line)) {
             if (line.starts_with("PRETTY_NAME")) {
                 const size_t eq_pos = line.find('=');
@@ -368,18 +513,6 @@ namespace {
     }
 } // namespace
 
-
-size_t sysinfo::memory_info::available_memory() const noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    return available_physical + available_virtual;
-#else
-    struct ::sysinfo info{};
-    if (::sysinfo(&info) == 0) {
-        return info.freeram * info.mem_unit + info.freeswap * info.mem_unit;
-    }
-    return 0;
-#endif
-}
 
 string sysinfo::os_version_info::version() const {
     return to_string(major) + "." + to_string(minor) + "." + to_string(build);
@@ -430,17 +563,13 @@ void sysinfo::init() {
             architecture_ = architecture::ARM64;
             break;
         }
-        case PROCESSOR_ARCHITECTURE_IA64: {
-            architecture_ = architecture::IA64;
-            break;
-        }
         default: {
             architecture_ = architecture::UNKNOWN;
             break;
         }
     }
 
-    get_cpu_info_internal(cpu_info_);
+    get_cpu_info_internal(cpu_info_, architecture_);
     get_os_version_internal(os_version_info_);
 
     ::MEMORYSTATUSEX mem_status{};
@@ -458,6 +587,12 @@ void sysinfo::init() {
     system_info_.page_size = ::sysconf(::_SC_PAGESIZE);
     system_info_.processor_numbers = ::sysconf(::_SC_NPROCESSORS_ONLN);
     system_info_.allocation_granularity = system_info_.page_size;
+    const long online_cpus = ::sysconf(_SC_NPROCESSORS_ONLN);
+    if (online_cpus > 0 && static_cast<size_t>(online_cpus) <= sizeof(uintptr_t) * 8) {
+        system_info_.active_processor_mask = (static_cast<uintptr_t>(1) << online_cpus) - 1;
+    } else {
+        system_info_.active_processor_mask = ~static_cast<uintptr_t>(0);
+    }
 
 #    ifdef NEFORCE_ARCH_BITS_64
     system_info_.min_app_address = 0x400000;
@@ -478,14 +613,20 @@ void sysinfo::init() {
             architecture_ = architecture::ARM;
         } else if (machine == "aarch64") {
             architecture_ = architecture::ARM64;
-        } else if (machine == "ia64") {
-            architecture_ = architecture::IA64;
+        } else if (machine == "riscv32") {
+            architecture_ = architecture::RISCV32;
+        } else if (machine == "riscv64") {
+            architecture_ = architecture::RISCV64;
+        } else if (machine == "loongarch64") {
+            architecture_ = architecture::LOONGARCH64;
+        } else if (machine == "loongarch32") {
+            architecture_ = architecture::LOONGARCH32;
         } else {
             architecture_ = architecture::UNKNOWN;
         }
     }
 
-    get_cpu_info_internal(cpu_info_);
+    get_cpu_info_internal(cpu_info_, architecture_);
     get_os_version_internal(os_version_info_);
 
     struct ::sysinfo linux_sysinfo{};
@@ -500,12 +641,11 @@ void sysinfo::init() {
         memory_info_.available_virtual = memory_info_.available_physical + memory_info_.available_page_file;
     }
 
-    const file meminfo(path("/proc/meminfo"));
-    if (meminfo.is_opened()) {
+    const string memdata = read_file_all("/proc/meminfo");
+    if (!memdata.empty()) {
         string_view line;
         size_t pos = 0;
-        const string data = meminfo.read();
-        while (getline(data.view(), pos, line)) {
+        while (getline(memdata.view(), pos, line)) {
             if (line.starts_with("MemTotal:")) {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
@@ -583,33 +723,36 @@ float64_t sysinfo::cpu_usage() {
     static uint64_t prev_total = 0;
     static uint64_t prev_idle = 0;
 
-    const file stat(path("/proc/stat"));
-    if (!stat.is_opened()) {
+    const string content = read_file_all("/proc/stat");
+    if (content.empty()) {
         return 0.0;
     }
 
     string line;
     size_t pos = 0;
-    getline(stat.read(), pos, line);
+    getline(content.view(), pos, line);
 
     if (line.starts_with("cpu ")) {
-        const string_view data = line.view(5);
-        string_view dsv;
-        uint64_t cll[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-        pos = 0;
+        const string_view data = line.view(4);
+        string_view token;
+        uint64_t fields[8] = {0};
+        size_t offset = 0;
+        int idx = 0;
 
-        if (getline(data, pos, dsv)) {
-            cll[pos] = to_uint64(dsv);
+        while (idx < 8 && getline(data, offset, token, is_space<char>)) {
+            if (!token.empty()) {
+                fields[idx++] = to_uint64(token);
+            }
         }
 
-        const uint64_t user = cll[0];
-        const uint64_t nice = cll[1];
-        const uint64_t system = cll[2];
-        const uint64_t idle = cll[3];
-        const uint64_t iowait = cll[4];
-        const uint64_t irq = cll[5];
-        const uint64_t softirq = cll[6];
-        const uint64_t steal = cll[7];
+        const uint64_t user = fields[0];
+        const uint64_t nice = fields[1];
+        const uint64_t system = fields[2];
+        const uint64_t idle = fields[3];
+        const uint64_t iowait = fields[4];
+        const uint64_t irq = fields[5];
+        const uint64_t softirq = fields[6];
+        const uint64_t steal = fields[7];
 
         const uint64_t total = user + nice + system + idle + iowait + irq + softirq + steal;
         const uint64_t current_idle = idle + iowait;

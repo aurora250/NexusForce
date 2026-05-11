@@ -186,7 +186,7 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                     }
                     const char32_t cp = parse_unicode_escape(4);
                     result += _NEFORCE to_string(cp);
-                    break;
+                    continue;
                 }
                 case 'U': {
                     advance();
@@ -195,7 +195,7 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                     }
                     const char32_t cp = parse_unicode_escape(8);
                     result += _NEFORCE to_string(cp);
-                    break;
+                    continue;
                 }
                 default:
                     throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
@@ -307,13 +307,13 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                     advance();
                     const char32_t cp = parse_unicode_escape(4);
                     result += _NEFORCE to_string(cp);
-                    break;
+                    continue;
                 }
                 case 'U': {
                     advance();
                     const char32_t cp = parse_unicode_escape(8);
                     result += _NEFORCE to_string(cp);
-                    break;
+                    continue;
                 }
                 default:
                     throw_parse_error(R"(Invalid escape sequence: \)"_s + current());

@@ -19,6 +19,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+inline string default_sink_format(const log_event& ev) { return "["_s + to_string(ev.level) + "] " + ev.message; }
+
 /**
  * @class log_sink
  * @brief 日志输出目标基类
@@ -66,16 +68,6 @@ public:
  * 如果没有设置格式化器，使用默认格式。
  */
 class NEFORCE_API console_sink final : public log_sink {
-private:
-    /**
-     * @brief 默认格式化函数
-     * @param ev 日志事件
-     * @return 格式化后的字符串
-     *
-     * 默认格式："[级别] 消息"
-     */
-    static string default_format(const log_event& ev);
-
 public:
     /**
      * @brief 输出日志到控制台

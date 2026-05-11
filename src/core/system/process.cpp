@@ -14,9 +14,10 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/file/file.hpp>
 #    include <NeForce/core/system/console.hpp>
+#    include <NeForce/core/system/sysinfo.hpp>
 #    include <cerrno>
 #    include <csignal>
-#    include <cstring>
+#    include <cstdio>
 #    include <sys/wait.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -76,11 +77,17 @@ namespace {
             delete[] argv;
         }
     }
+
+    const auto page_size = sysinfo::instance().get_system_info().page_size;
 #endif
 } // namespace
 
 
 process::state_info process::create(const string& executable, const vector<string>& args, bool capture_output) {
+    if (executable.empty()) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Executable path is empty"));
+    }
+
     state_info info{};
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -114,32 +121,38 @@ process::state_info process::create(const string& executable, const vector<strin
         info.stdout_pipe.close_write();
     }
 #else
+
+    int notify_fds[2] = {-1, -1};
+    if (::pipe2(notify_fds, O_CLOEXEC) == -1) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
+    }
+
     if (capture_output) {
         info.stdout_pipe = pipe(true);
     }
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
-        char errbuf[256];
-        char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-        NEFORCE_THROW_EXCEPTION(process_exception(msg));
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
     }
 
     if (pid == 0) {
+        ::close(notify_fds[0]);
+
         if (capture_output) {
             info.stdout_pipe.close_read();
 
             if (::dup2(info.stdout_pipe.native_write_handle(), STDOUT_FILENO) == -1) {
-                char errbuf[256];
-                char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-                printcln(color::red(), "dup2 stdout failed: ", msg);
+                const auto error = last_error();
+                printcln(color::red(), "dup2 stdout failed: ", error.message());
                 ::_exit(1);
             }
 
             if (::dup2(info.stdout_pipe.native_write_handle(), STDERR_FILENO) == -1) {
-                char errbuf[256];
-                char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-                printcln(color::red(), "dup2 stderr failed: ", msg);
+                const auto error = last_error();
+                printcln(color::red(), "dup2 stderr failed: ", error.message());
                 ::_exit(1);
             }
 
@@ -149,17 +162,34 @@ process::state_info process::create(const string& executable, const vector<strin
         char** argv = build_argv(executable, args);
         ::execvp(executable.data(), argv);
 
-        char errbuf[256];
-        char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-        printcln(color::red(), "execvp failed: ", msg);
+        const auto error = last_error();
+        const int saved_errno = error.value();
+        ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
+        ::close(notify_fds[1]);
+
+        printcln(color::red(), "execvp failed: ", error.message());
         free_argv(argv);
         ::_exit(1);
+    }
+
+    ::close(notify_fds[1]);
+
+    int child_errno = 0;
+    const ssize_t n = ::read(notify_fds[0], &child_errno, sizeof(child_errno));
+    ::close(notify_fds[0]);
+
+    if (n > 0) {
+        int status = 0;
+        ::waitpid(pid, &status, 0);
+        const error_code error{child_errno, system_category()};
+        NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
     }
 
     info.process_id = pid;
     if (capture_output) {
         info.stdout_pipe.close_write();
     }
+
 #endif
 
     info.is_running = true;
@@ -188,14 +218,15 @@ int process::wait_for(state_info& info, int timeout_ms) {
     }
     info.is_running = false;
     return static_cast<int>(exit_code);
+
 #else
+
     int status = 0;
 
     if (timeout_ms < 0) {
         if (::waitpid(info.process_id, &status, 0) == -1) {
-            char errbuf[256];
-            char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-            NEFORCE_THROW_EXCEPTION(process_exception(msg));
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
         }
     } else {
         int elapsed = 0;
@@ -204,9 +235,12 @@ int process::wait_for(state_info& info, int timeout_ms) {
             constexpr int sleep_interval = 100;
             const ::pid_t result = ::waitpid(info.process_id, &status, WNOHANG);
             if (result == -1) {
-                char errbuf[256];
-                char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-                NEFORCE_THROW_EXCEPTION(process_exception(msg));
+                const auto error = last_error();
+                if (error.error() == errc::no_child_process) {
+                    status = 0;
+                    break;
+                }
+                NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
             }
             if (result > 0) {
                 break;
@@ -241,8 +275,12 @@ bool process::terminate(const state_info& info) noexcept {
 #else
     if (::kill(info.process_id, SIGTERM) == 0) {
         ::usleep(100000);
-        if (is_running(info)) {
+        if (::kill(info.process_id, 0) == 0) {
             ::kill(info.process_id, SIGKILL);
+        }
+        int status = 0;
+        while (::waitpid(info.process_id, &status, 0) == -1 && errno == EINTR) {
+            this_thread::yield();
         }
         return true;
     }
@@ -280,8 +318,7 @@ bool process::is_running(const state_info& info) noexcept {
     }
     return false;
 #else
-    int status = 0;
-    return ::waitpid(info.process_id, &status, WNOHANG) == 0;
+    return ::kill(info.process_id, 0) == 0;
 #endif
 }
 
@@ -294,8 +331,10 @@ process::native_id_type process::current_id() noexcept {
 }
 
 process::memory_info process::get_memory_info(const state_info& info) {
-    memory_info mem_info{0, 0, 0, 0};
+    memory_info mem_info;
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
+
     ::PROCESS_MEMORY_COUNTERS pmc;
     if (::GetProcessMemoryInfo(info.process_handle, &pmc, sizeof(pmc)) == TRUE) {
         mem_info.working_set_size = pmc.WorkingSetSize;
@@ -303,23 +342,112 @@ process::memory_info process::get_memory_info(const state_info& info) {
         mem_info.pagefile_usage = pmc.PagefileUsage;
         mem_info.peak_pagefile_usage = pmc.PeakPagefileUsage;
     }
+
 #else
-    const path path("/proc/" + to_string(info.process_id) + "/statm");
-    const file statm(path);
-    if (!statm.is_opened()) {
-        return mem_info;
+
+    ::FILE* fp = ::fopen(("/proc/" + to_string(info.process_id) + "/statm").data(), "r");
+    if (fp != nullptr) {
+        char line[256];
+        if (::fgets(line, sizeof(line), fp) != nullptr) {
+            string_view line_view(line);
+            size_t pos = 0;
+
+            auto parse_next_ulong = [&line_view, &pos]() -> unsigned long {
+                while (pos < line_view.size() && line_view[pos] == ' ') {
+                    pos++;
+                }
+
+                if (pos >= line_view.size()) {
+                    return 0;
+                }
+
+                size_t end = pos;
+                while (end < line_view.size() && line_view[end] != ' ' && line_view[end] != '\n') {
+                    end++;
+                }
+
+                if (end == pos) {
+                    return 0;
+                }
+
+                const string_view num_sv(line_view.data() + pos, end - pos);
+                pos = end;
+
+                try {
+                    return static_cast<unsigned long>(to_uint64(num_sv));
+                } catch (...) {
+                    return 0;
+                }
+            };
+
+            ignore = parse_next_ulong(); // size
+            mem_info.working_set_size = parse_next_ulong() * static_cast<size_t>(page_size);
+        }
+        ::fclose(fp);
     }
-    const string text = statm.read();
-    if (statm.is_opened()) {
-        string tmp;
-        size_t pos = 0;
-        getline(text, pos, tmp, [](char c) { return is_space(c); });
-        size_t size NEFORCE_UNUSED = to_uint64(tmp.view());
-        getline(text, pos, tmp, [](char c) { return is_space(c); });
-        const size_t rss = to_uint64(tmp.view());
-        mem_info.working_set_size = rss * ::sysconf(_SC_PAGE_SIZE);
-        // Peak memory not directly available
+
+    fp = ::fopen(("/proc/" + to_string(info.process_id) + "/status").data(), "r");
+    if (fp != nullptr) {
+        char line[256];
+        while (::fgets(line, sizeof(line), fp) != nullptr) {
+            string_view line_view(line);
+
+            if (line_view.starts_with("VmHWM:")) {
+                string_view value_part = line_view.substr(6);
+                value_part = value_part.trim_left();
+
+                size_t num_end = 0;
+                while (num_end < value_part.size() &&
+                       ((value_part[num_end] >= '0' && value_part[num_end] <= '9') || value_part[num_end] == ' ')) {
+                    num_end++;
+                }
+
+                if (num_end > 0) {
+                    string_view num_sv = value_part.substr(0, num_end).trim_right();
+
+                    if (!num_sv.empty()) {
+                        try {
+                            const auto hwm_kb = static_cast<unsigned long>(to_uint64(num_sv));
+                            mem_info.peak_working_set_size = static_cast<size_t>(hwm_kb) * 1024;
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
+                        } catch (...) {
+                            // ignore
+                        }
+                    }
+                }
+            } else if (line_view.starts_with("VmSwap:")) {
+                string_view value_part = line_view.substr(7);
+                value_part = value_part.trim();
+
+                size_t num_end = 0;
+                while (num_end < value_part.size() &&
+                       ((value_part[num_end] >= '0' && value_part[num_end] <= '9') || value_part[num_end] == ' ')) {
+                    num_end++;
+                }
+
+                if (num_end > 0) {
+                    string_view num_sv = value_part.substr(0, num_end);
+                    while (!num_sv.empty() && num_sv.back() == ' ') {
+                        num_sv = num_sv.substr(0, num_sv.size() - 1);
+                    }
+
+                    if (!num_sv.empty()) {
+                        try {
+                            const auto swap_kb = static_cast<unsigned long>(to_uint64(num_sv));
+                            mem_info.pagefile_usage = static_cast<size_t>(swap_kb) * 1024;
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
+                        } catch (...) {
+                            // ignore
+                        }
+                    }
+                }
+            }
+        }
+        ::fclose(fp);
     }
+
+    mem_info.peak_pagefile_usage = 0;
+
 #endif
     return mem_info;
 }
@@ -338,23 +466,68 @@ process::state process::get_state(const state_info& info) {
         }
         return state::running;
     }
-#else
-    const path path("/proc/" + to_string(info.process_id) + "/stat");
-    const file stat(path);
-    if (stat.is_opened()) {
-        string state;
-        size_t pos = 0;
-        getline(stat.read(), pos, state, [](char c) { return is_space(c); });
-        if (state == "T") {
-            return state::suspended;
-        }
-        if (state == "Z") {
-            return state::exited;
-        }
-        return state::running;
-    }
-#endif
     return state::unknown;
+
+#else
+    ::FILE* fp = ::fopen(("/proc/" + to_string(info.process_id) + "/stat").data(), "r");
+    if (fp == nullptr) {
+        return state::unknown;
+    }
+
+    char line[512];
+    if (::fgets(line, sizeof(line), fp) == nullptr) {
+        ::fclose(fp);
+        return state::unknown;
+    }
+    ::fclose(fp);
+
+    string_view line_view(line);
+    size_t pos = 0;
+
+    auto skip_field = [&line_view, &pos]() noexcept {
+        while (pos < line_view.size() && line_view[pos] == ' ') {
+            pos++;
+        }
+
+        if (pos >= line_view.size()) {
+            return;
+        }
+
+        if (line_view[pos] == '(') {
+            pos++;
+            while (pos < line_view.size() && line_view[pos] != ')') {
+                pos++;
+            }
+            if (pos < line_view.size()) {
+                pos++;
+            }
+        } else {
+            while (pos < line_view.size() && line_view[pos] != ' ' && line_view[pos] != '\n') {
+                pos++;
+            }
+        }
+    };
+
+    skip_field(); // PID
+    skip_field(); // PNAME
+
+    while (pos < line_view.size() && line_view[pos] == ' ') {
+        pos++;
+    }
+
+    char state_ch = '\0';
+    if (pos < line_view.size()) {
+        state_ch = line_view[pos];
+    }
+
+    if (state_ch == 'T') {
+        return state::suspended;
+    }
+    if (state_ch == 'Z') {
+        return state::exited;
+    }
+    return state::running;
+#endif
 }
 
 bool process::check_permission(const state_info& info, permission permission) {

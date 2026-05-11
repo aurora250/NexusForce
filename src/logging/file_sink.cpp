@@ -31,12 +31,6 @@ void file_sink::rotate_by_date(string today) {
     open_new_file();
 }
 
-static string default_format(log_event event) {
-    string result;
-    result += "["_s + to_string(event.level) + "] " + _NEFORCE move(event.message);
-    return result;
-}
-
 file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation) :
 base_filename_(_NEFORCE move(filename)),
 max_file_size_(max_file_size),
@@ -50,7 +44,7 @@ enable_date_rotation_(enable_date_rotation) {
 }
 
 void file_sink::log(const log_event& event) {
-    const string formatted = formatter_ ? formatter_->format(event) : default_format(event);
+    const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);
     lock<mutex> lock(mutex_);
     if (enable_date_rotation_) {
         const string today = datetime::now().date().to_string();

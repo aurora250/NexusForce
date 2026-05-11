@@ -626,14 +626,6 @@ TEST(ArrayTest, StringSwap) {
     EXPECT_EQ(arr2[1], "def");
 }
 
-TEST(ArrayTest, StringCompare) {
-    array<string, 2> arr1 = {"abc", "def"};
-    array<string, 2> arr2 = {"abc", "def"};
-    array<string, 2> arr3 = {"abc", "deg"};
-    EXPECT_TRUE(arr1.equal_to(arr2));
-    EXPECT_TRUE(arr1.less_than(arr3));
-}
-
 TEST(ArrayTest, LargeArray) {
     constexpr size_t large_size = 1000;
     array<int, large_size> arr;

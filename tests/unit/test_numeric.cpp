@@ -1111,8 +1111,6 @@ TEST(SecretTest, NextFloatMax) {
     }
 }
 
-#if 0
-
 TEST(Uint128ConstructionTest, DefaultConstructor) {
     uint128_t a;
     EXPECT_EQ(a.lo, 0u);
@@ -1188,7 +1186,7 @@ TEST(Uint128ConstructionTest, StringConstructorDecimal) {
 TEST(Uint128ConstructionTest, StringConstructorHex) {
     uint128_t a("0x1A2B3C4D5E6F7890"_s, 0);
     string s = a.to_string();
-    EXPECT_EQ(a, uint128_t(0x1A2B3C4DULL, 0x5E6F7890ULL));
+    EXPECT_EQ(a, uint128_t(0x1A2B3C4D5E6F7890ULL));
 }
 
 TEST(Uint128ConstructionTest, StringViewConstructor) {
@@ -1395,7 +1393,7 @@ TEST(Uint128ArithmeticTest, AddCarryLarge) {
     uint128_t b(1, 0);
     a += b;
     EXPECT_EQ(a.hi, 0u);
-    EXPECT_EQ(a.lo, 0u);
+    EXPECT_EQ(a.lo, 0xFFFFFFFFFFFFFFFFULL);
 }
 
 TEST(Uint128BitwiseTest, AndAssign) {
@@ -1505,9 +1503,7 @@ TEST(Uint128ExceptionTest, DivisionByZero) {
     EXPECT_THROW(a %= uint128_t(0), math_exception);
 }
 
-TEST(Uint128ExceptionTest, InvalidString) {
-    EXPECT_THROW(uint128_t("not_a_number"_s), typecast_exception);
-}
+TEST(Uint128ExceptionTest, InvalidString) { EXPECT_THROW(uint128_t("not_a_number"_s), typecast_exception); }
 
 TEST(Int128ConstructionTest, DefaultConstructor) {
     int128_t a;
@@ -1541,8 +1537,8 @@ TEST(Int128ConstructionTest, LowBoolConstructor) {
 }
 
 TEST(Int128ConstructionTest, HighLowConstructor) {
-    int128_t a(0x8000000000000000ULL, 0ULL);
-    int128_t b(0x7FFFFFFFFFFFFFFFULL, 0xFFFFFFFFFFFFFFFFULL);
+    int128_t a(0x8000000000000000ULL, static_cast<uint64_t>(0ULL));
+    int128_t b(0x7FFFFFFFFFFFFFFFULL, static_cast<uint64_t>(0xFFFFFFFFFFFFFFFFULL));
     EXPECT_EQ(a.hi, 0x8000000000000000ULL);
     EXPECT_EQ(b.lo, 0xFFFFFFFFFFFFFFFFULL);
 }
@@ -1662,7 +1658,7 @@ TEST(Int128UnaryOperatorsTest, Negate) {
 }
 
 TEST(Int128UnaryOperatorsTest, BitwiseNot) {
-    int128_t a(0ULL, 0xF0F0ULL);
+    int128_t a(0ULL, static_cast<uint64_t>(0xF0F0ULL));
     int128_t b = ~a;
     EXPECT_EQ(b.hi, 0xFFFFFFFFFFFFFFFFULL);
     EXPECT_EQ(b.lo, 0xFFFFFFFFFFFF0F0FULL);
@@ -1741,37 +1737,37 @@ TEST(Int128ArithmeticTest, SubtractFreeFunction) {
 }
 
 TEST(Int128BitwiseTest, AndAssign) {
-    int128_t a(0xFFFF0000ULL, 0x0000FFFFULL);
-    int128_t b(0x00FF00FFULL, 0xFF00FF00ULL);
+    int128_t a(0xFFFF0000ULL, static_cast<uint64_t>(0x0000FFFFULL));
+    int128_t b(0x00FF00FFULL, static_cast<uint64_t>(0xFF00FF00ULL));
     a &= b;
     EXPECT_EQ(a.hi, 0x00FF0000u);
     EXPECT_EQ(a.lo, 0x0000FF00u);
 }
 
 TEST(Int128BitwiseTest, OrAssign) {
-    int128_t a(0x0F0F0F0FULL, 0xF0F0F0F0ULL);
-    int128_t b(0xF0F0F0F0ULL, 0x0F0F0F0FULL);
+    int128_t a(0x0F0F0F0FULL, static_cast<uint64_t>(0xF0F0F0F0ULL));
+    int128_t b(0xF0F0F0F0ULL, static_cast<uint64_t>(0x0F0F0F0FULL));
     a |= b;
     EXPECT_EQ(a.hi, 0xFFFFFFFFu);
     EXPECT_EQ(a.lo, 0xFFFFFFFFu);
 }
 
 TEST(Int128BitwiseTest, XorAssign) {
-    int128_t a(0xAAAAAAAAAAAAAAAAULL, 0x5555555555555555ULL);
-    a ^= int128_t(0xFFFFFFFFFFFFFFFFULL, 0xFFFFFFFFFFFFFFFFULL);
+    int128_t a(0xAAAAAAAAAAAAAAAAULL, static_cast<uint64_t>(0x5555555555555555ULL));
+    a ^= int128_t(0xFFFFFFFFFFFFFFFFULL, static_cast<uint64_t>(0xFFFFFFFFFFFFFFFFULL));
     EXPECT_EQ(a.hi, 0x5555555555555555ULL);
     EXPECT_EQ(a.lo, 0xAAAAAAAAAAAAAAAAULL);
 }
 
 TEST(Int128BitwiseTest, LeftShiftAssign) {
-    int128_t a(0ULL, 1ULL);
+    int128_t a(0ULL, static_cast<uint64_t>(1ULL));
     a <<= 64;
     EXPECT_EQ(a.hi, 1u);
     EXPECT_EQ(a.lo, 0u);
 }
 
 TEST(Int128BitwiseTest, ArithmeticRightShiftAssign) {
-    int128_t pos(0x7FFFFFFFFFFFFFFFULL, 0xFFFFFFFFFFFFFFFFULL);
+    int128_t pos(0x7FFFFFFFFFFFFFFFULL, static_cast<uint64_t>(0xFFFFFFFFFFFFFFFFULL));
     pos >>= 64;
     EXPECT_EQ(pos.hi, 0u);
     EXPECT_EQ(pos.lo, 0x7FFFFFFFFFFFFFFFULL);
@@ -1794,8 +1790,8 @@ TEST(Int128BitwiseTest, ShiftMoreThan128) {
 }
 
 TEST(Int128StaticMethodsTest, MinMax) {
-    EXPECT_EQ(int128_t::min(), int128_t(0x8000000000000000ULL, 0ULL));
-    EXPECT_EQ(int128_t::max(), int128_t(0x7FFFFFFFFFFFFFFFULL, 0xFFFFFFFFFFFFFFFFULL));
+    EXPECT_EQ(int128_t::min(), int128_t(0x8000000000000000ULL, static_cast<uint64_t>(0ULL)));
+    EXPECT_EQ(int128_t::max(), int128_t(0x7FFFFFFFFFFFFFFFULL, static_cast<uint64_t>(0xFFFFFFFFFFFFFFFFULL)));
 }
 
 TEST(Int128StaticMethodsTest, Parse) {
@@ -1804,7 +1800,7 @@ TEST(Int128StaticMethodsTest, Parse) {
 }
 
 TEST(Int128StaticMethodsTest, ToString) {
-    int128_t a(0x8000000000000000ULL, 0ULL);
+    int128_t a(0x8000000000000000ULL, static_cast<uint64_t>(0ULL));
     string s = a.to_string();
     EXPECT_FALSE(s.empty());
     int128_t b(s);
@@ -1835,9 +1831,7 @@ TEST(Int128ExceptionTest, DivisionByZero) {
     EXPECT_THROW(a %= int128_t(0), math_exception);
 }
 
-TEST(Int128ExceptionTest, InvalidString) {
-    EXPECT_THROW(int128_t("abc"_s), typecast_exception);
-}
+TEST(Int128ExceptionTest, InvalidString) { EXPECT_THROW(int128_t("abc"_s), typecast_exception); }
 
 TEST(GlobalConvertersTest, ToUint128) {
     auto val = to_uint128("42");
@@ -1890,8 +1884,8 @@ TEST(TypeTraitsTest, IsSigned) {
 TEST(MakeSignedUnsignedTest, Transformations) {
     using s = make_signed<uint128_t>::type;
     using u = make_unsigned<int128_t>::type;
-    EXPECT_TRUE((is_same_v<s, int128_t>));
-    EXPECT_TRUE((is_same_v<u, uint128_t>));
+    EXPECT_TRUE((is_same_v<s, int128_t>) );
+    EXPECT_TRUE((is_same_v<u, uint128_t>) );
 }
 
 TEST(CrossTypeTest, Uint128ToInt128Assignment) {
@@ -1908,5 +1902,3 @@ TEST(CrossTypeTest, ArithmeticMixedSign) {
     int128_t c = a + b.to_int128();
     EXPECT_EQ(c, int128_t(-5));
 }
-
-#endif

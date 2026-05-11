@@ -253,7 +253,7 @@ size_t path_tree::max_depth() const {
     }
     size_t max_d = 0;
     traverse_dfs([&](const node& n) -> visit_result {
-        max_d = max(static_cast<size_t>(0), n.depth());
+        max_d = max(max_d, n.depth());
         return visit_result::proceed;
     });
     return max_d;

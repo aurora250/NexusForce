@@ -269,7 +269,7 @@ NEFORCE_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept {
  * @return 所有参数的和
  */
 template <typename First, typename... Rests, enable_if_t<(sizeof...(Rests) > 0), int> = 0>
-NEFORCE_CONST_FUNCTION constexpr decltype(auto) sum(First first, Rests... args) {
+constexpr decltype(auto) sum(First first, Rests... args) {
     return first + _NEFORCE sum(args...);
 }
 
@@ -280,7 +280,7 @@ NEFORCE_CONST_FUNCTION constexpr decltype(auto) sum(First first, Rests... args) 
  * @return 平均值
  */
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
-NEFORCE_CONST_FUNCTION constexpr decltype(auto) average(Args... args) {
+constexpr decltype(auto) average(Args... args) {
     return _NEFORCE sum(args...) / sizeof...(Args);
 }
 
@@ -343,7 +343,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcep
  * @exception math_exception 除数为0时
  */
 template <typename T>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 enable_if_t<is_floating_point_v<T>, T> mod(const T x, const T y) {
+NEFORCE_CONSTEXPR14 enable_if_t<is_floating_point_v<T>, T> mod(const T x, const T y) {
     if (_NEFORCE is_nan(x) || _NEFORCE is_nan(y)) {
         return numeric_traits<T>::quiet_nan();
     }
@@ -365,7 +365,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 enable_if_t<is_floating_point_v<T>, T
  * @exception math_exception 除数为0时
  */
 template <typename T>
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 enable_if_t<is_integral_v<T>, T> mod(const T x, const T y) {
+NEFORCE_CONSTEXPR14 enable_if_t<is_integral_v<T>, T> mod(const T x, const T y) {
     if (y == 0) {
         NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
     }
@@ -466,7 +466,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t
  * @param base 底数
  * @return 以base为底x的对数
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm(const decimal_t x, const uint32_t base) {
+NEFORCE_CONSTEXPR14 decimal_t logarithm(const decimal_t x, const uint32_t base) {
     const decimal_t under = logarithm_e(base);
     if (under == 0.0L) {
         NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
@@ -479,14 +479,14 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm(const decimal_t x,
  * @param x 真数
  * @return log₂(x)
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_2(const decimal_t x) { return logarithm(x, 2); }
+NEFORCE_CONSTEXPR14 decimal_t logarithm_2(const decimal_t x) { return logarithm(x, 2); }
 
 /**
  * @brief 计算以10为底的对数
  * @param x 真数
  * @return log₁₀(x)
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_10(const decimal_t x) { return logarithm(x, 10); }
+NEFORCE_CONSTEXPR14 decimal_t logarithm_10(const decimal_t x) { return logarithm(x, 10); }
 
 /**
  * @brief 计算平方根
@@ -768,8 +768,8 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x)
  * @return 如果x接近axis的整数倍则返回true
  * @exception math_exception 当axis为0时抛出
  */
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_multiple(const decimal_t x, const decimal_t axis,
-                                                                const decimal_t toler = constants::DEFAULT_TOLERANCE) {
+NEFORCE_CONSTEXPR14 bool around_multiple(const decimal_t x, const decimal_t axis,
+                                         const decimal_t toler = constants::DEFAULT_TOLERANCE) {
     if (absolute(axis) < constants::MACHINE_EPSILON) {
         NEFORCE_THROW_EXCEPTION(math_exception("Axis Cannot be 0"));
     }
@@ -783,8 +783,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_multiple(const decimal_t 
  * @param toler 容差
  * @return 如果x接近π的整数倍则返回true
  */
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_pi(const decimal_t x,
-                                                          const decimal_t toler = constants::LOOSE_TOLERANCE) {
+NEFORCE_CONSTEXPR14 bool around_pi(const decimal_t x, const decimal_t toler = constants::LOOSE_TOLERANCE) {
     return around_multiple(x, constants::PI, toler);
 }
 
@@ -794,8 +793,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_pi(const decimal_t x,
  * @param toler 容差
  * @return 如果|x| < toler则返回true
  */
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool
-around_zero(const decimal_t x, const decimal_t toler = constants::LOOSE_TOLERANCE) noexcept {
+NEFORCE_CONSTEXPR14 bool around_zero(const decimal_t x, const decimal_t toler = constants::LOOSE_TOLERANCE) noexcept {
     return absolute(x) < toler;
 }
 

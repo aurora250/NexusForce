@@ -73,8 +73,18 @@ void yaml_parser::skip_to_next_line() noexcept {
 
 void yaml_parser::skip_blank_lines() noexcept {
     while (!eof()) {
-        if (is_whitespace(current()) || is_newline(current())) {
-            skip_to_next_line();
+        if (current() == ' ' || is_newline(current())) {
+            size_t peek_pos = pos_;
+            while (peek_pos < len_ && yaml_[peek_pos] == ' ') {
+                peek_pos++;
+            }
+            const bool is_blank =
+                    (peek_pos >= len_) || yaml_[peek_pos] == '\n' || yaml_[peek_pos] == '\r' || yaml_[peek_pos] == '#';
+            if (is_blank) {
+                skip_to_next_line();
+            } else {
+                break;
+            }
         } else if (current() == '#') {
             skip_comment();
             skip_to_next_line();
@@ -197,7 +207,7 @@ void yaml_parser::register_anchor(const string& anchor, const shared_ptr<yaml_va
     anchors_[anchor] = value;
 }
 
-yaml_ptr yaml_parser::parse_alias() {
+shared_ptr<yaml_value> yaml_parser::parse_alias() {
     if (current() != '*') {
         throw_parse_error("Expected '*' for alias");
     }
@@ -255,14 +265,14 @@ string yaml_parser::parse_tag() {
     } else if (current() == '!') {
         tag += '!';
         advance();
-        while (!eof() && !is_whitespace(current()) && current() != ':' && current() != ',' && current() != '[' &&
-               current() != ']' && current() != '{' && current() != '}' && current() != '#') {
+        while (!eof() && !is_whitespace(current()) && !is_newline(current()) && current() != ':' && current() != ',' &&
+               current() != '[' && current() != ']' && current() != '{' && current() != '}' && current() != '#') {
             tag += current();
             advance();
         }
     } else {
-        while (!eof() && !is_whitespace(current()) && current() != ':' && current() != ',' && current() != '[' &&
-               current() != ']' && current() != '{' && current() != '}' && current() != '#') {
+        while (!eof() && !is_whitespace(current()) && !is_newline(current()) && current() != ':' && current() != ',' &&
+               current() != '[' && current() != ']' && current() != '{' && current() != '}' && current() != '#') {
             tag += current();
             advance();
         }
@@ -617,7 +627,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
     int explicit_indent = -1;
     char chomping = 'c';
 
-    if (is_digit(current())) {
+    if (current() >= '1' && current() <= '9') {
         explicit_indent = current() - '0';
         advance();
     }
@@ -626,7 +636,7 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
         chomping = current();
         advance();
 
-        if (explicit_indent < 0 && is_digit(current())) {
+        if (explicit_indent < 0 && current() >= '1' && current() <= '9') {
             explicit_indent = current() - '0';
             advance();
         }
@@ -689,9 +699,16 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
 
     while (!eof()) {
         size_t line_indent = 0;
-        while (!eof() && current() == ' ') {
-            line_indent++;
-            advance();
+        if (explicit_indent > 0) {
+            while (!eof() && current() == ' ' && line_indent < block_indent) {
+                advance();
+                line_indent++;
+            }
+        } else {
+            while (!eof() && current() == ' ') {
+                line_indent++;
+                advance();
+            }
         }
 
         if (is_newline(current())) {
@@ -768,18 +785,23 @@ shared_ptr<yaml_string> yaml_parser::parse_folded_string() {
 
 
 shared_ptr<yaml_null> yaml_parser::parse_null() {
+    if (eof()) {
+        return make_shared<yaml_null>();
+    }
+
     string value;
+    const size_t temp_pos = pos_;
     while (!eof() && (is_alpha_or_digit(current()) || current() == '~')) {
         value += current();
         advance();
     }
 
-    if (value == "null" || value == "Null" || value == "NULL" || value == "~" || value.empty()) {
+    if (value == "null" || value == "Null" || value == "NULL" || value == "~") {
         return make_shared<yaml_null>();
     }
+    pos_ = temp_pos;
 
     throw_parse_error("Invalid null value: " + value);
-    return {};
 }
 
 shared_ptr<yaml_boolean> yaml_parser::parse_boolean() {
@@ -788,12 +810,17 @@ shared_ptr<yaml_boolean> yaml_parser::parse_boolean() {
         value += current();
         advance();
     }
-    try {
-        return make_shared<yaml_boolean>(boolean::parse(value.view()).value());
-    } catch (...) {
-        throw_parse_error("Invalid boolean value: " + value);
+    string lower_value = value;
+    lower_value.lowercase();
+
+    if (lower_value == "true" || lower_value == "yes" || lower_value == "on" || lower_value == "y") {
+        return make_shared<yaml_boolean>(true);
     }
-    return {};
+    if (lower_value == "false" || lower_value == "no" || lower_value == "off" || lower_value == "n") {
+        return make_shared<yaml_boolean>(false);
+    }
+
+    throw_parse_error("Invalid boolean value: " + value);
 }
 
 shared_ptr<yaml_value> yaml_parser::parse_number() {
@@ -879,6 +906,7 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
             }
             num_str += ch;
             advance();
+            is_float = true;
         } else if (ch == 'e' || ch == 'E') {
             if (is_hex || is_octal || is_binary) {
                 break;
@@ -917,7 +945,6 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
     } catch (...) {
         throw_parse_error("Invalid number: " + num_str);
     }
-    return {};
 }
 
 shared_ptr<yaml_timestamp> yaml_parser::parse_timestamp(const string_view str) const {
@@ -926,7 +953,6 @@ shared_ptr<yaml_timestamp> yaml_parser::parse_timestamp(const string_view str) c
     } catch (...) {
         throw_parse_error("Invalid timestamp: "_s + str);
     }
-    return {};
 }
 
 shared_ptr<yaml_value> yaml_parser::parse_scalar() {
@@ -947,54 +973,93 @@ shared_ptr<yaml_value> yaml_parser::parse_scalar() {
         skip_whitespace_inline();
     }
 
-    yaml_ptr value;
+    shared_ptr<yaml_value> value;
     const char ch = current();
 
-    if (ch == '~' || (ch == 'n' && peek(1) == 'u' && peek(2) == 'l' && peek(3) == 'l')) {
-        value = parse_null();
-    } else if ((ch == 't' && peek(1) == 'r' && peek(2) == 'u' && peek(3) == 'e') ||
-               (ch == 'f' && peek(1) == 'a' && peek(2) == 'l' && peek(3) == 's' && peek(4) == 'e') ||
-               (ch == 'T' && peek(1) == 'r' && peek(2) == 'u' && peek(3) == 'e') ||
-               (ch == 'F' && peek(1) == 'a' && peek(2) == 'l' && peek(3) == 's' && peek(4) == 'e') ||
-               (ch == 'T' && peek(1) == 'R' && peek(2) == 'U' && peek(3) == 'E') ||
-               (ch == 'F' && peek(1) == 'A' && peek(2) == 'L' && peek(3) == 'S' && peek(4) == 'E')) {
-        value = parse_boolean();
-    } else if (ch == '-' || ch == '+' || is_digit(ch) || ch == '.') {
-        const size_t saved_pos = pos_;
-        string potential_ts;
-
-        while (!eof() && (is_digit(current()) || current() == '-' || current() == ':' || current() == '.' ||
-                          current() == 'T' || current() == 'Z' || current() == '+' || current() == ' ')) {
-            potential_ts += current();
-            advance();
+    if (ch == '~' || is_alpha(ch)) {
+        string word;
+        if (ch == '~') {
+            word = "~";
+        } else {
+            while (!eof() && is_alpha(current())) {
+                word += current();
+                advance();
+            }
         }
-
-        bool is_timestamp = false;
-        if (potential_ts.contains('-') && (potential_ts.contains(':') || potential_ts.contains('T'))) {
-            is_timestamp = true;
+        string word_lower = word;
+        word_lower.lowercase();
+        bool word_is_null = (word == "~" || word_lower == "null");
+        bool word_is_bool =
+                (word_lower == "true" || word_lower == "false" || word_lower == "yes" || word_lower == "no" ||
+                 word_lower == "on" || word_lower == "off" || word_lower == "y" || word_lower == "n");
+        if (ch != '~') {
+            size_t word_end_advance = word.size();
+            while (word_end_advance > 0) {
+                pos_--;
+                column_--;
+                word_end_advance--;
+            }
         }
+        const char next_ch = peek(word.size());
+        bool is_word_terminated =
+                (next_ch == ' ' || next_ch == '\t' || next_ch == '\n' || next_ch == '\r' || next_ch == '\0' ||
+                 next_ch == ':' || next_ch == ',' || next_ch == ']' || next_ch == '}' || next_ch == '#');
+        if ((word_is_null || word_is_bool) && is_word_terminated) {
+            if (word_is_null) {
+                value = parse_null();
+            } else {
+                value = parse_boolean();
+            }
+        }
+    }
+    if (!value) {
+        if (ch == '-' || ch == '+' || is_digit(ch) || ch == '.') {
+            const size_t saved_pos = pos_;
+            string potential_ts;
 
-        if (is_timestamp) {
-            try {
-                value = parse_timestamp(potential_ts.view());
-            } catch (...) {
+            while (!eof() && (is_digit(current()) || current() == '-' || current() == ':' || current() == '.' ||
+                              current() == 'T' || current() == 'Z' || current() == '+' || current() == ' ')) {
+                potential_ts += current();
+                advance();
+            }
+
+            bool is_timestamp = false;
+            if (potential_ts.contains('-') && (potential_ts.contains(':') || potential_ts.contains('T'))) {
+                is_timestamp = true;
+            } else if (potential_ts.contains('-')) {
+                size_t hyphen_count = 0;
+                for (char c: potential_ts) {
+                    if (c == '-') {
+                        hyphen_count++;
+                    }
+                }
+                if (hyphen_count >= 2) {
+                    is_timestamp = true;
+                }
+            }
+
+            if (is_timestamp) {
+                try {
+                    value = parse_timestamp(potential_ts.view());
+                } catch (...) {
+                    pos_ = saved_pos;
+                    value = parse_plain_string();
+                }
+            } else {
                 pos_ = saved_pos;
                 value = parse_number();
             }
+        } else if (ch == '"') {
+            value = parse_double_quoted_string();
+        } else if (ch == '\'') {
+            value = parse_single_quoted_string();
+        } else if (ch == '|') {
+            value = parse_literal_string();
+        } else if (ch == '>') {
+            value = parse_folded_string();
         } else {
-            pos_ = saved_pos;
-            value = parse_number();
+            value = parse_plain_string();
         }
-    } else if (ch == '"') {
-        value = parse_double_quoted_string();
-    } else if (ch == '\'') {
-        value = parse_single_quoted_string();
-    } else if (ch == '|') {
-        value = parse_literal_string();
-    } else if (ch == '>') {
-        value = parse_folded_string();
-    } else {
-        value = parse_plain_string();
     }
 
     value->set_anchor(anchor);
@@ -1037,10 +1102,18 @@ shared_ptr<yaml_sequence> yaml_parser::parse_flow_sequence() {
         auto value = parse_inline_value();
         seq->add_element(_NEFORCE move(value));
         skip_whitespace_inline();
+        if (current() == '\n') {
+            skip_to_next_line();
+            skip_whitespace_inline();
+        }
 
         if (current() == ',') {
             advance();
             skip_whitespace_inline();
+            if (current() == '\n') {
+                skip_to_next_line();
+                skip_whitespace_inline();
+            }
 
             if (current() == ']') {
                 advance();
@@ -1092,10 +1165,18 @@ shared_ptr<yaml_mapping> yaml_parser::parse_flow_mapping() {
         map->add_member(key, _NEFORCE move(value));
 
         skip_whitespace_inline();
+        if (current() == '\n') {
+            skip_to_next_line();
+            skip_whitespace_inline();
+        }
 
         if (current() == ',') {
             advance();
             skip_whitespace_inline();
+            if (current() == '\n') {
+                skip_to_next_line();
+                skip_whitespace_inline();
+            }
             if (current() == '}') {
                 advance();
                 break;
@@ -1112,15 +1193,17 @@ shared_ptr<yaml_mapping> yaml_parser::parse_flow_mapping() {
 shared_ptr<yaml_sequence> yaml_parser::parse_block_sequence() {
     auto seq = make_shared<yaml_sequence>(yaml_sequence::Block);
     const size_t seq_indent = current_indent_;
+    bool at_line_start = true;
 
     while (!eof()) {
         const size_t line_indent = skip_indent();
-        if (line_indent < seq_indent) {
+        if (!at_line_start && line_indent < seq_indent) {
             break;
         }
         if (line_indent > seq_indent && current() != '-') {
             throw_parse_error("Invalid indentation in block sequence");
         }
+        at_line_start = false;
 
         if (is_newline(current()) || current() == '#') {
             skip_to_next_line();
@@ -1175,9 +1258,8 @@ shared_ptr<yaml_sequence> yaml_parser::parse_block_sequence() {
                 current_indent_ = saved_indent;
             } else {
                 value = parse_inline_value();
+                skip_to_next_line();
             }
-
-            skip_to_next_line();
         }
         seq->add_element(_NEFORCE move(value));
     }
@@ -1239,8 +1321,8 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
                 }
 
                 if (subsequent_key_indent == 0) {
-                    if (line_indent <= map_indent) {
-                        throw_parse_error("Subsequent keys must be indented more than the sequence marker");
+                    if (line_indent < map_indent) {
+                        throw_parse_error("Subsequent keys must be indented more than the parent context");
                     }
                     subsequent_key_indent = line_indent;
                 } else {
@@ -1275,6 +1357,120 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
         }
         if (current() == '!') {
             skip_tag();
+        }
+
+        if (current() == '?') {
+            const size_t complex_key_indent = current_indent_;
+            advance();
+            skip_whitespace_inline();
+
+            shared_ptr<yaml_value> complex_key;
+            string key_anchor;
+            string key_tag;
+
+            if (current() == '&') {
+                key_anchor = parse_anchor();
+                skip_whitespace_inline();
+            }
+            if (current() == '!') {
+                key_tag = parse_tag();
+                skip_whitespace_inline();
+            }
+
+            if (is_newline(current()) || current() == '#') {
+                if (current() == '#') {
+                    skip_comment();
+                }
+                skip_to_next_line();
+                const size_t key_indent = skip_indent();
+                if (key_indent <= complex_key_indent) {
+                    throw_parse_error("Complex key must be indented more than '?'");
+                }
+                const size_t saved_indent = current_indent_;
+                current_indent_ = key_indent;
+                complex_key = parse_block_value();
+                current_indent_ = saved_indent;
+            } else {
+                complex_key = parse_inline_value();
+                if (!eof() && is_newline(current())) {
+                    skip_to_next_line();
+                }
+            }
+
+            if (!key_anchor.empty()) {
+                complex_key->set_anchor(key_anchor);
+                register_anchor(key_anchor, complex_key);
+            }
+            if (!key_tag.empty()) {
+                complex_key->set_tag(key_tag);
+            }
+
+            skip_blank_lines();
+
+            const size_t colon_indent = skip_indent();
+            if (colon_indent < complex_key_indent) {
+                throw_parse_error("Expected ':' at same or greater indent after complex key");
+            }
+            if (current() != ':') {
+                throw_parse_error("Expected ':' after complex key");
+            }
+            advance();
+            skip_whitespace_inline();
+
+            string value_anchor;
+            string value_tag;
+            if (current() == '&') {
+                value_anchor = parse_anchor();
+                skip_whitespace_inline();
+            }
+            if (current() == '!') {
+                value_tag = parse_tag();
+                skip_whitespace_inline();
+            }
+
+            shared_ptr<yaml_value> value;
+
+            if (is_newline(current()) || current() == '#' || eof()) {
+                if (current() == '#') {
+                    skip_comment();
+                }
+                skip_to_next_line();
+                if (eof()) {
+                    value = make_shared<yaml_null>();
+                } else {
+                    const size_t value_indent = skip_indent();
+                    if (value_indent <= colon_indent) {
+                        value = make_shared<yaml_null>();
+                    } else {
+                        const size_t saved_indent = current_indent_;
+                        current_indent_ = value_indent;
+                        value = parse_block_value();
+                        current_indent_ = saved_indent;
+                    }
+                }
+            } else {
+                value = parse_inline_value();
+                if (!eof() && !is_newline(current())) {
+                    skip_whitespace_inline();
+                }
+                if (!eof() && current() == '#') {
+                    skip_comment();
+                }
+                if (!eof() && is_newline(current())) {
+                    skip_to_next_line();
+                }
+            }
+
+            if (!value_anchor.empty()) {
+                value->set_anchor(value_anchor);
+                register_anchor(value_anchor, value);
+            }
+            if (!value_tag.empty()) {
+                value->set_tag(value_tag);
+            }
+
+            map->add_member(complex_key->to_string(), _NEFORCE move(value));
+            continue;
         }
 
         string key = parse_key();
@@ -1321,7 +1517,6 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
                 if (value_indent <= effective_key_indent) {
                     value = make_shared<yaml_null>();
                 } else {
-                    skip_indent();
                     const size_t saved_indent = current_indent_;
                     current_indent_ = value_indent;
                     value = parse_block_value();
@@ -1435,7 +1630,7 @@ shared_ptr<yaml_value> yaml_parser::parse_inline_value() {
         skip_whitespace_inline();
     }
 
-    yaml_ptr value;
+    shared_ptr<yaml_value> value;
     const char ch = current();
 
     if (ch == '[') {
@@ -1475,6 +1670,10 @@ shared_ptr<yaml_value> yaml_parser::parse_single_document() {
 }
 
 shared_ptr<yaml_value> yaml_parser::parse_block_value() {
+    skip_indent();
+    if (current() == '?' && (peek(1) == ' ' || is_newline(peek(1)))) {
+        return parse_block_mapping(true);
+    }
     if (current() == '-' && (peek(1) == ' ' || is_newline(peek(1)))) {
         return parse_block_sequence();
     }
@@ -1525,7 +1724,12 @@ shared_ptr<yaml_value> yaml_parser::parse_value() {
         skip_whitespace_inline();
     }
 
-    yaml_ptr value;
+    if (is_newline(current())) {
+        skip_to_next_line();
+        skip_blank_lines();
+    }
+
+    shared_ptr<yaml_value> value;
     const char ch = current();
 
     if (ch == '[') {
@@ -1534,6 +1738,8 @@ shared_ptr<yaml_value> yaml_parser::parse_value() {
         value = parse_flow_mapping();
     } else if (ch == '|' || ch == '>') {
         value = parse_scalar();
+    } else if (ch == '?') {
+        value = parse_block_mapping(false);
     } else {
         const size_t saved_pos = pos_;
         const size_t saved_line = line_;
@@ -1587,6 +1793,9 @@ shared_ptr<yaml_value> yaml_parser::parse() {
     parse_document_start();
     skip_blank_lines();
     if (eof()) {
+        return make_shared<yaml_null>();
+    }
+    if (is_document_end()) {
         return make_shared<yaml_null>();
     }
 

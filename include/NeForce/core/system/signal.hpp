@@ -118,8 +118,8 @@ private:
      * @brief 信号等待结果
      */
     struct signal_result {
-        event event;   ///< 信号事件
-        void* context; ///< 上下文数据
+        system_signal_manager::event event; ///< 信号事件
+        void* context;                      ///< 上下文数据
     };
 
     /**
@@ -152,7 +152,7 @@ private:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     system_event notify_event_; ///< 事件对象
 #else
-    struct ::sigaction old_actions_[64]{}; ///< 原有信号处理器
+    struct ::sigaction old_actions_[64]{}; ///< 原始的信号处理行为
 #endif
 
     thread signal_thread_;  ///< 信号处理线程

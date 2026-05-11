@@ -89,10 +89,10 @@ public:
      * 包含进程的工作集和页面文件使用情况。
      */
     struct memory_info {
-        size_t working_set_size;      ///< 当前工作集大小
-        size_t peak_working_set_size; ///< 峰值工作集大小
-        size_t pagefile_usage;        ///< 页面文件使用量
-        size_t peak_pagefile_usage;   ///< 页面文件使用峰值
+        size_t working_set_size{0};      ///< 当前工作集大小
+        size_t peak_working_set_size{0}; ///< 峰值工作集大小
+        size_t pagefile_usage{0};        ///< 页面文件使用量
+        size_t peak_pagefile_usage{0};   ///< 页面文件使用峰值
     };
 
     /**

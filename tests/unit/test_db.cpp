@@ -44,14 +44,14 @@ TEST_F(SqlBuilderTest, CopyAssignmentSelf) {
 
 TEST_F(SqlBuilderTest, MoveConstructor) {
     builder.select("id").from("users");
-    sql_builder moved(std::move(builder));
+    sql_builder moved(move(builder));
     EXPECT_EQ(moved.build(), "SELECT id FROM users;");
 }
 
 TEST_F(SqlBuilderTest, MoveAssignment) {
     builder.select("id").from("users");
     sql_builder moved;
-    moved = std::move(builder);
+    moved = move(builder);
     EXPECT_EQ(moved.build(), "SELECT id FROM users;");
 }
 

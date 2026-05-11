@@ -1,6 +1,6 @@
 #include <NeForce/core/file/file_mapper.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <NeForce/core/system/sysinfo.hpp>
 #    include <memoryapi.h>
 #    if (_WIN32_WINNT < _WIN32_WINNT_WIN8)
 typedef struct _WIN32_MEMORY_RANGE_ENTRY {
@@ -12,7 +12,6 @@ typedef struct _WIN32_MEMORY_RANGE_ENTRY {
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <sys/mman.h>
 #    include <sys/stat.h>
-#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -22,6 +21,13 @@ namespace {
             INVALID_HANDLE_VALUE;
 #else
             -1;
+#endif
+
+    const auto granularity =
+#ifdef NEFORCE_PLATFORM_LINUX
+            sysinfo::instance().get_system_info().page_size;
+#else
+            sysinfo::instance().get_system_info().allocation_granularity;
 #endif
 
     void do_unmap(void*& ptr, file_mapper::size_type& size, file_mapper::size_type& offset
@@ -35,7 +41,6 @@ namespace {
         }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        const uint32_t granularity = sysinfo::instance().get_system_info().allocation_granularity;
         const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr) -
                                     (static_cast<uintptr_t>(offset) & (static_cast<uintptr_t>(granularity) - 1U));
         ::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_addr));
@@ -45,9 +50,8 @@ namespace {
             mapping_handle = invalid_handle;
         }
 #else
-        const long page_size = ::sysconf(_SC_PAGESIZE);
-        if (page_size > 0) {
-            const size_t page_mask = static_cast<size_t>(page_size) - 1;
+        if (granularity > 0) {
+            const size_t page_mask = static_cast<size_t>(granularity) - 1;
             const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr) - (static_cast<uintptr_t>(offset) & page_mask);
             const size_t total = size + (static_cast<size_t>(offset) & page_mask);
             ::munmap(reinterpret_cast<void*>(base_addr), total);
@@ -124,7 +128,6 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 #endif
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const uint32_t granularity = sysinfo::instance().get_system_info().allocation_granularity;
     const uint64_t aligned_offset = static_cast<uint64_t>(offset) & ~static_cast<uint64_t>(granularity - 1);
     const uint64_t offset_delta = static_cast<uint64_t>(offset) - aligned_offset;
     const uint64_t aligned_size = (size == 0) ? 0 : static_cast<uint64_t>(size) + offset_delta;
@@ -176,8 +179,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     }
 
 #else
-    const long page_size = ::sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) {
+    if (granularity <= 0) {
         return false;
     }
 
@@ -193,7 +195,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
         size = static_cast<size_type>(file_size - static_cast<uint64_t>(offset));
     }
 
-    const size_t page_mask = static_cast<size_t>(page_size) - 1;
+    const size_t page_mask = static_cast<size_t>(granularity) - 1;
     const size_t aligned_off = static_cast<size_t>(offset) & ~page_mask;
     const size_t offset_delta = static_cast<size_t>(offset) - aligned_off;
     const size_t aligned_size = static_cast<size_t>(size) + offset_delta;
@@ -271,12 +273,11 @@ bool file_mapper::flush(const bool async) noexcept {
     return true;
 
 #else
-    const long page_size = ::sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) {
+    if (granularity <= 0) {
         return false;
     }
 
-    const size_t page_mask = static_cast<size_t>(page_size) - 1;
+    const size_t page_mask = static_cast<size_t>(granularity) - 1;
     const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr_) - (static_cast<uintptr_t>(offset_) & page_mask);
     const size_t total = size_ + (static_cast<size_t>(offset_) & page_mask);
 
@@ -293,12 +294,11 @@ bool file_mapper::lock_pages(const bool lock_in_memory) const noexcept {
     return lock_in_memory ? ::VirtualLock(ptr_, size_) != 0 : ::VirtualUnlock(ptr_, size_) != 0;
 
 #else
-    const long page_size = ::sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) {
+    if (granularity <= 0) {
         return false;
     }
 
-    const size_t page_mask = static_cast<size_t>(page_size) - 1;
+    const size_t page_mask = static_cast<size_t>(granularity) - 1;
     const uintptr_t base_addr = reinterpret_cast<uintptr_t>(ptr_) - (static_cast<uintptr_t>(offset_) & page_mask);
     const size_t total = size_ + (static_cast<size_t>(offset_) & page_mask);
 

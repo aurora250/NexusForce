@@ -2,7 +2,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 bool tcp_client_base::try_connect_to_ip(const string& ip, ports port) {
-    const bool is_ipv6_conn = ip.find(':') != string::npos;
+    const bool is_ipv6_conn = ip.contains(':');
 
     try {
         auto sock = create_socket();

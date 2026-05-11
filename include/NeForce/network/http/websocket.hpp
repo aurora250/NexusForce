@@ -242,10 +242,10 @@ private:
     error_handler on_error_;     ///< 错误回调
 
     bool queue_frame(byte_vector frame, bool is_control = false);
-    void write_loop() noexcept;
+    void write_loop();
 
-    void read_loop() noexcept;
-    bool read_frame() noexcept;
+    void read_loop();
+    bool read_frame();
 
     bool dispatch(const websocket_frame_header& hdr, websocket_opcode opcode, string payload);
     void deliver_message(const string& data, websocket_opcode opcode);
@@ -253,9 +253,9 @@ private:
     void send_close_frame(websocket_status status, const string& reason);
     void handle_close_frame(string payload);
 
-    void heartbeat_loop() noexcept;
+    void heartbeat_loop();
 
-    void do_stop(websocket_status status, const string& reason) noexcept;
+    void do_stop(websocket_status status, const string& reason);
 
 public:
     /**

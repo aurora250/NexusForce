@@ -10,8 +10,8 @@
 #        undef min
 #    endif
 #else
-#    include <cerrno>
-#    include <cstring>
+#    include <NeForce/core/exception/error_code.hpp>
+#    include <csignal>
 #    include <fcntl.h>
 #    include <unistd.h>
 #endif
@@ -37,9 +37,8 @@ pipe::pipe(bool inheritable) {
     }
 #else
     if (::pipe(fds_) == -1) {
-        char errbuf[256];
-        char* msg = ::strerror_r(errno, errbuf, sizeof(errbuf));
-        NEFORCE_THROW_EXCEPTION(pipe_exception(msg));
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(pipe_exception(error.message().data()));
     }
 
     if (!inheritable) {
@@ -86,6 +85,12 @@ pipe& pipe::operator=(pipe&& other) noexcept {
 #endif
 
     return *this;
+}
+
+void pipe::ignore_sigpipe() noexcept {
+#ifdef NEFORCE_PLATFORM_LINUX
+    ::signal(SIGPIPE, SIG_IGN);
+#endif
 }
 
 int pipe::read(void* buffer, size_t size) noexcept {
@@ -186,7 +191,6 @@ int pipe::write(const void* data, size_t size) noexcept {
     if (fds_[1] < 0) {
         return -1;
     }
-
     const ssize_t result = ::write(fds_[1], data, size);
     return static_cast<int>(result);
 #endif

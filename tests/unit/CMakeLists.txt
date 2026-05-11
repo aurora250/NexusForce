@@ -1,17 +1,21 @@
 add_executable(NexusForceUnitTests
         main.cpp
-        test.cpp
         test_algorithm.cpp
         test_associative_container.cpp
+        test_async.cpp
+        test_complex_config.cpp
         test_compress.cpp
         test_db.cpp
         test_encrypt.cpp
         test_file.cpp
         test_functional.cpp
+        test_logging.cpp
         test_memory.cpp
         test_network.cpp
         test_numeric.cpp
+        test_ranges.cpp
         test_sequence_container.cpp
+        test_simple_config.cpp
         test_string.cpp
         test_string_utils.cpp
         test_system.cpp

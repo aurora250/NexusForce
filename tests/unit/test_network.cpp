@@ -569,7 +569,7 @@ TEST_F(UrlTest, MoveConstructor) {
     u1.query = "key=value";
     u1.fragment = "section";
 
-    url u2(std::move(u1));
+    url u2(move(u1));
     EXPECT_EQ(u2.scheme, "https");
     EXPECT_EQ(u2.host, "example.com");
     EXPECT_EQ(u2.port, ports::HTTPS);
@@ -584,7 +584,7 @@ TEST_F(UrlTest, MoveAssignment) {
     u1.host = "example.com";
 
     url u2;
-    u2 = std::move(u1);
+    u2 = move(u1);
     EXPECT_EQ(u2.scheme, "https");
     EXPECT_EQ(u2.host, "example.com");
 }
@@ -1279,7 +1279,7 @@ TEST_F(IpAddressTest, MoveConstructor) {
     ::inet_pton(AF_INET, "10.0.0.1", &a4.sin_addr);
 
     ip_address addr1(a4);
-    ip_address addr2(std::move(addr1));
+    ip_address addr2(move(addr1));
 
     EXPECT_TRUE(addr2.is_valid());
     EXPECT_TRUE(addr2.is_ipv4());
@@ -1293,7 +1293,7 @@ TEST_F(IpAddressTest, MoveAssignment) {
 
     ip_address addr1(a4);
     ip_address addr2;
-    addr2 = std::move(addr1);
+    addr2 = move(addr1);
 
     EXPECT_TRUE(addr2.is_valid());
     EXPECT_TRUE(addr2.is_ipv4());
@@ -1669,7 +1669,7 @@ TEST_F(IpAddressTest, ParseIpv4Broadcast) {
 
 TEST_F(IpAddressTest, EqualityAfterMove) {
     auto addr1 = ip_address::loopback(ports(80u), AF_INET);
-    ip_address addr2(std::move(addr1));
+    ip_address addr2(move(addr1));
     EXPECT_TRUE(addr2.is_valid());
 }
 
@@ -2011,7 +2011,7 @@ TEST_F(MacAddressTest, CopyAssignment) {
 TEST_F(MacAddressTest, MoveConstructor) {
     auto mac1 = mac_address::parse("00:11:22:33:44:55");
     EXPECT_TRUE(mac1.has_value());
-    mac_address mac2(std::move(*mac1));
+    mac_address mac2(move(*mac1));
     EXPECT_EQ(mac2.to_string(), "00:11:22:33:44:55");
 }
 
@@ -2019,6 +2019,6 @@ TEST_F(MacAddressTest, MoveAssignment) {
     auto mac1 = mac_address::parse("AA:BB:CC:DD:EE:FF");
     EXPECT_TRUE(mac1.has_value());
     mac_address mac2;
-    mac2 = std::move(*mac1);
+    mac2 = move(*mac1);
     EXPECT_EQ(mac2.to_string(), "AA:BB:CC:DD:EE:FF");
 }

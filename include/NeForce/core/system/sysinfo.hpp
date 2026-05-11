@@ -80,7 +80,7 @@ public:
          * @brief 获取总可用内存
          * @return 可用内存总量（物理+虚拟）
          */
-        NEFORCE_NODISCARD size_t available_memory() const noexcept;
+        NEFORCE_NODISCARD size_t available_memory() const noexcept { return available_physical + available_virtual; }
     };
 
     /**
@@ -129,21 +129,24 @@ public:
      * @brief 系统架构枚举
      */
     enum class architecture {
-        UNKNOWN, ///< 未知架构
-        X86,     ///< 32位x86
-        X64,     ///< 64位x86_64
-        ARM,     ///< 32位ARM
-        ARM64,   ///< 64位ARM
-        IA64     ///< Intel Itanium
+        UNKNOWN,     ///< 未知架构
+        X86,         ///< 32位x86
+        X64,         ///< 64位x86_64
+        ARM,         ///< 32位ARM
+        ARM64,       ///< 64位ARM
+        RISCV32,     ///< 32位RISC-V
+        RISCV64,     ///< 64位RISC-V
+        LOONGARCH64, ///< 64位LoongArch
+        LOONGARCH32  ///< 32位LoongArch
     };
 
 private:
-    system_info system_info_{};                         ///< 系统信息
-    memory_info memory_info_{};                         ///< 内存信息
-    CPU_info cpu_info_{};                               ///< CPU信息
-    os_version_info os_version_info_{};                 ///< 操作系统信息
-    architecture architecture_ = architecture::UNKNOWN; ///< 系统架构
-    atomic<bool> initialized_{false};                   ///< 初始化标志
+    system_info system_info_{};                        ///< 系统信息
+    memory_info memory_info_{};                        ///< 内存信息
+    CPU_info cpu_info_{};                              ///< CPU信息
+    os_version_info os_version_info_{};                ///< 操作系统信息
+    architecture architecture_{architecture::UNKNOWN}; ///< 系统架构
+    atomic<bool> initialized_{false};                  ///< 初始化标志
 
     /**
      * @brief 私有构造函数

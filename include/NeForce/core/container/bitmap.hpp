@@ -294,7 +294,8 @@ public:
      * @param off 前进距离
      */
     NEFORCE_CONSTEXPR20 void advance(difference_type off) noexcept {
-        NEFORCE_DEBUG_VERIFY((ptr_ && container_) || off == 0, "Attempting to advance a null pointer");
+        NEFORCE_DEBUG_VERIFY((off == 0 || (ptr_ != nullptr && container_ != nullptr)),
+                             "Attempting to advance a null pointer");
         difference_type n = off + static_cast<difference_type>(off_);
         ptr_ += n / static_cast<difference_type>(BITMAP_WORD_SIZE);
         n = n % static_cast<difference_type>(BITMAP_WORD_SIZE);
@@ -313,7 +314,8 @@ public:
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 difference_type distance_to(const bitmap_iterator& other) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == other.container_, "Attempting to distance to a different container");
-        return BITMAP_WORD_SIZE * (ptr_ - other.ptr_) + static_cast<difference_type>(off_) - static_cast<difference_type>(other.off_);
+        return BITMAP_WORD_SIZE * (ptr_ - other.ptr_) + static_cast<difference_type>(off_) -
+               static_cast<difference_type>(other.off_);
     }
 
     /**
@@ -483,7 +485,7 @@ private:
 
     iterator start_{this};  ///< 起始迭代器
     iterator finish_{this}; ///< 结束迭代器
-    bit_storage storage_; ///< 底层存储
+    bit_storage storage_;   ///< 底层存储
 
 private:
     /**

@@ -580,7 +580,7 @@ NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const Char
  *          - 零：两个字符串相等
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, const CharT* s2) {
+NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, const CharT* s2) noexcept {
     if (s1 == nullptr && s2 == nullptr) {
         return 0;
     }

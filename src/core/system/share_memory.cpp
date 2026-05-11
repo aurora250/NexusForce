@@ -222,19 +222,6 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 
     int flags = (access == access_mode::read_only) ? O_RDONLY : O_RDWR;
 
-    auto get_error_string = [](int error_code) -> string {
-        char errbuf[256];
-#    if (_POSIX_C_SOURCE >= 200112L) && !_GNU_SOURCE
-        if (::strerror_r(error_code, errbuf, sizeof(errbuf)) == 0) {
-            return string(errbuf);
-        }
-        return "Unknown error";
-#    else
-        const char* msg = ::strerror_r(error_code, errbuf, sizeof(errbuf));
-        return {msg};
-#    endif
-    };
-
     if (mode == open_mode::create_only) {
         if (size == 0) {
             NEFORCE_THROW_EXCEPTION(share_memory_exception("Size must be greater than 0 for create_only mode"));
@@ -247,25 +234,26 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         }
 
         if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
-            const int err = errno;
+            const auto error = last_error();
             ::close(handle_);
             handle_ = g_invalid_handle;
             ::shm_unlink(shm_name.data());
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(err).data()));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
         }
         size_ = size;
     } else if (mode == open_mode::open_only) {
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
         if (handle_ == g_invalid_handle) {
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(errno).data()));
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
         }
 
         struct ::stat stat_buf;
         if (::fstat(handle_, &stat_buf) == -1) {
-            const int err = errno;
+            const auto error = last_error();
             ::close(handle_);
             handle_ = g_invalid_handle;
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(err).data()));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
         }
 
         if (stat_buf.st_size == 0) {
@@ -279,15 +267,16 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         if (size == 0) {
             handle_ = ::shm_open(shm_name.data(), flags, 0666);
             if (handle_ == g_invalid_handle) {
-                NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(errno).data()));
+                const auto error = last_error();
+                NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
             }
 
             struct ::stat stat_buf;
             if (::fstat(handle_, &stat_buf) == -1) {
-                const int err = errno;
+                const auto error = last_error();
                 ::close(handle_);
                 handle_ = g_invalid_handle;
-                NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(err).data()));
+                NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
             }
 
             if (stat_buf.st_size == 0) {
@@ -300,24 +289,25 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         } else {
             handle_ = ::shm_open(shm_name.data(), flags | O_CREAT, 0666);
             if (handle_ == g_invalid_handle) {
-                NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(errno).data()));
+                const auto error = last_error();
+                NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
             }
 
             struct ::stat stat_buf;
             if (::fstat(handle_, &stat_buf) == -1) {
-                const int err = errno;
+                const auto error = last_error();
                 ::close(handle_);
                 handle_ = g_invalid_handle;
-                NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(err).data()));
+                NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
             }
 
             if (stat_buf.st_size == 0) {
                 if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
-                    const int err = errno;
+                    const auto error = last_error();
                     ::close(handle_);
                     handle_ = g_invalid_handle;
                     ::shm_unlink(shm_name.data());
-                    NEFORCE_THROW_EXCEPTION(share_memory_exception(get_error_string(err).data()));
+                    NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
                 }
                 size_ = size;
             } else {

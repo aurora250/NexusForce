@@ -60,10 +60,17 @@ public:
     lo(low) {}
 
     /**
-     * @brief 从64位无符号整数构造
-     * @param low 低64位值
+     * @brief 从无符号 long 构造
+     * @param low 无符号 long 值
      */
-    constexpr uint128_t(const uint64_t low) noexcept :
+    constexpr uint128_t(const unsigned long low) noexcept :
+    lo(low) {}
+
+    /**
+     * @brief 从无符号 long long 构造
+     * @param low 无符号 long long 值
+     */
+    constexpr uint128_t(const unsigned long long low) noexcept :
     lo(low) {}
 
     /**
@@ -321,15 +328,21 @@ public:
     NEFORCE_CONSTEXPR20 ~int128_t() = default;
 
     /**
+     * @brief 从 long 构造
+     */
+    constexpr int128_t(const long value) noexcept :
+    int128_t(static_cast<make_integer_t<sizeof(long)>>(value)) {}
+
+    /**
      * @brief 从32位有符号整数构造
      */
     constexpr int128_t(const int32_t value) noexcept :
-    int128_t(static_cast<int64_t>(value)) {}
+    int128_t(static_cast<long long>(value)) {}
 
     /**
-     * @brief 从64位有符号整数构造
+     * @brief 从 long long 构造
      */
-    constexpr int128_t(const int64_t value) noexcept :
+    constexpr int128_t(const long long value) noexcept :
     lo(static_cast<uint64_t>(value)),
     hi(value < 0 ? ~static_cast<uint64_t>(0) : 0) {}
 

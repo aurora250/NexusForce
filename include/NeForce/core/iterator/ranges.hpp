@@ -1,6 +1,6 @@
 #ifndef NEFORCE_CORE_ITERATOR_RANGES_HPP__
 #define NEFORCE_CORE_ITERATOR_RANGES_HPP__
-#include "../typeinfo/concepts.hpp"
+#include "NeForce/core/typeinfo/concepts.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 #ifdef NEFORCE_STANDARD_20
 
@@ -500,7 +500,6 @@ public:
     count_(count) {}
 
     constexpr reference operator*() const { return *current_; }
-
     constexpr pointer operator->() const { return _NEFORCE addressof(*current_); }
 
     constexpr take_iterator& operator++() {
@@ -518,7 +517,6 @@ public:
     constexpr bool operator==(const take_iterator& other) const {
         return current_ == other.current_ || count_ == other.count_;
     }
-
     constexpr bool operator!=(const take_iterator& other) const { return !(*this == other); }
 
     template <typename S>
@@ -533,19 +531,48 @@ public:
         return !(*this == s);
     }
 
+    constexpr const BaseIter& current() const { return current_; }
+    constexpr difference_type count() const { return count_; }
+
 private:
     BaseIter current_{};
     difference_type count_ = 0;
 };
 
+template <input_iterator BaseIter, typename BaseSentinel>
+class take_sentinel {
+public:
+    constexpr take_sentinel() = default;
+
+    constexpr take_sentinel(BaseSentinel base_sen, iter_difference_t<BaseIter> count) :
+    base_sen_(base_sen),
+    count_(count) {}
+
+    friend constexpr bool operator==(const take_iterator<BaseIter>& it, const take_sentinel& s) {
+        return it.count() == 0 || it.current() == s.base_sen_;
+    }
+    friend constexpr bool operator!=(const take_iterator<BaseIter>& it, const take_sentinel& s) { return !(it == s); }
+    friend constexpr bool operator==(const take_sentinel& s, const take_iterator<BaseIter>& it) { return it == s; }
+    friend constexpr bool operator!=(const take_sentinel& s, const take_iterator<BaseIter>& it) { return it != s; }
+
+private:
+    BaseSentinel base_sen_{};
+    iter_difference_t<BaseIter> count_{0};
+};
 
 template <View V>
 class take_view : public view_base<take_view<V>> {
 public:
     using base_iterator = decltype(_NEFORCE declval<remove_const_t<V>>().begin());
+    using base_sentinel = decltype(_NEFORCE declval<remove_const_t<V>>().end());
     using iterator = take_iterator<base_iterator>;
+    using sentinel = take_sentinel<base_iterator, base_sentinel>;
+
     using const_base_iterator = decltype(_NEFORCE declval<add_const_t<V>>().begin());
+    using const_base_sentinel = decltype(_NEFORCE declval<add_const_t<V>>().end());
     using const_iterator = take_iterator<const_base_iterator>;
+    using const_sentinel = take_sentinel<const_base_iterator, const_base_sentinel>;
+
     using difference_type = iter_difference_t<base_iterator>;
 
 private:
@@ -574,25 +601,17 @@ public:
     = default;
 
     constexpr iterator begin() { return iterator(base_.begin(), count_); }
-
-    constexpr iterator end() {
-        auto it = base_.begin();
-        _NEFORCE advance(it, _NEFORCE min(count_, _NEFORCE distance(base_.begin(), base_.end())));
-        return iterator(it, 0);
-    }
+    constexpr sentinel end() { return sentinel(base_.end(), 0); }
 
     constexpr const_iterator begin() const
         requires Range<const V>
     {
         return const_iterator(base_.begin(), count_);
     }
-
-    constexpr const_iterator end() const
+    constexpr const_sentinel end() const
         requires Range<const V>
     {
-        auto it = base_.begin();
-        _NEFORCE advance(it, _NEFORCE min(count_, _NEFORCE distance(base_.begin(), base_.end())));
-        return const_iterator(it, 0);
+        return const_sentinel(base_.end(), 0);
     }
 
     constexpr V base() const&
@@ -1077,9 +1096,30 @@ private:
 };
 
 template <typename T>
+class iota_sentinel {
+private:
+    bool has_bound_ = false;
+    iota_iterator<T> bound_iter_;
+
+public:
+    constexpr iota_sentinel() noexcept = default;
+    constexpr explicit iota_sentinel(T bound) noexcept :
+    has_bound_(true),
+    bound_iter_(bound) {}
+
+    friend constexpr bool operator==(const iota_iterator<T>& it, const iota_sentinel& s) noexcept {
+        return s.has_bound_ && it == s.bound_iter_;
+    }
+    friend constexpr bool operator!=(const iota_iterator<T>& it, const iota_sentinel& s) noexcept { return !(it == s); }
+    friend constexpr bool operator==(const iota_sentinel& s, const iota_iterator<T>& it) noexcept { return it == s; }
+    friend constexpr bool operator!=(const iota_sentinel& s, const iota_iterator<T>& it) noexcept { return !(it == s); }
+};
+
+template <typename T>
 class iota_view : public view_base<iota_view<T>> {
 public:
     using iterator = iota_iterator<T>;
+    using sentinel = iota_sentinel<T>;
 
     constexpr iota_view() = default;
     constexpr explicit iota_view(T start) :
@@ -1090,7 +1130,7 @@ public:
     has_bound_(true) {}
 
     constexpr iterator begin() const { return iterator(start_); }
-    constexpr iterator end() const { return has_bound_ ? iterator(bound_) : iterator(start_); }
+    constexpr sentinel end() const { return has_bound_ ? sentinel(bound_) : sentinel(); }
 
 private:
     T start_{};
@@ -1138,15 +1178,47 @@ public:
     constexpr bool operator==(const repeat_iterator& other) const { return count_ == other.count_; }
     constexpr bool operator!=(const repeat_iterator& other) const { return count_ != other.count_; }
 
+    ptrdiff_t count() const noexcept { return count_; }
+
 private:
     const T* value_ = nullptr;
     difference_type count_ = 0;
 };
 
 template <typename T>
+class repeat_sentinel {
+    bool has_bound_ = false;
+    ptrdiff_t bound_count_ = 0;
+
+public:
+    constexpr repeat_sentinel() noexcept = default;
+    constexpr explicit repeat_sentinel(ptrdiff_t bound) noexcept :
+    has_bound_(true),
+    bound_count_(bound) {}
+
+    friend constexpr bool operator==(const repeat_iterator<T>& it, const repeat_sentinel& s) noexcept {
+        if (s.has_bound_) {
+            return it.count() <= s.bound_count_;
+        } else {
+            return false;
+        }
+    }
+    friend constexpr bool operator!=(const repeat_iterator<T>& it, const repeat_sentinel& s) noexcept {
+        return !(it == s);
+    }
+    friend constexpr bool operator==(const repeat_sentinel& s, const repeat_iterator<T>& it) noexcept {
+        return it == s;
+    }
+    friend constexpr bool operator!=(const repeat_sentinel& s, const repeat_iterator<T>& it) noexcept {
+        return it != s;
+    }
+};
+
+template <typename T>
 class repeat_view : public view_base<repeat_view<T>> {
 public:
     using iterator = repeat_iterator<T>;
+    using sentinel = repeat_sentinel<T>;
     using difference_type = ptrdiff_t;
 
     constexpr repeat_view() = default;
@@ -1160,7 +1232,7 @@ public:
     has_bound_(true) {}
 
     constexpr iterator begin() const { return has_bound_ ? iterator(&value_, count_) : iterator(&value_, -1); }
-    constexpr iterator end() const { return iterator(&value_, 0); }
+    constexpr sentinel end() const { return has_bound_ ? sentinel(0) : sentinel(); }
 
 private:
     T value_{};
@@ -1603,6 +1675,7 @@ public:
     iterator current_;
     sentinel end_;
     T delimiter_;
+    bool trailing_empty_ = false;
 
     using iterator_category = forward_iterator_tag;
     using value_type = subrange_view<iterator>;
@@ -1611,12 +1684,16 @@ public:
     using reference = value_type;
 
     split_iterator() = default;
+
     split_iterator(iterator cur, sentinel end, T delim) :
     current_(cur),
     end_(end),
     delimiter_(delim) {}
 
     value_type operator*() const {
+        if (trailing_empty_) {
+            return value_type{end_, end_};
+        }
         iterator start = current_;
         iterator iter = current_;
         while (iter != end_ && !(*iter == delimiter_)) {
@@ -1627,14 +1704,23 @@ public:
 
     split_iterator& operator++() {
         if (current_ == end_) {
+            trailing_empty_ = false;
             return *this;
         }
-        while (current_ != end_ && !(*current_ == delimiter_)) {
-            ++current_;
+
+        iterator next = current_;
+        while (next != end_ && !(*next == delimiter_)) {
+            ++next;
         }
-        if (current_ != end_) {
-            ++current_;
+
+        if (next != end_) {
+            ++next;
+            trailing_empty_ = (next == end_);
+        } else {
+            trailing_empty_ = false;
         }
+
+        current_ = next;
         return *this;
     }
 
@@ -1644,7 +1730,9 @@ public:
         return tmp;
     }
 
-    bool operator==(const split_iterator& other) const { return current_ == other.current_; }
+    bool operator==(const split_iterator& other) const {
+        return current_ == other.current_ && trailing_empty_ == other.trailing_empty_;
+    }
     bool operator!=(const split_iterator& other) const { return !(*this == other); }
 };
 
@@ -1678,14 +1766,14 @@ class slice_view : public view_base<slice_view<V>> {
     using iterator = conditional_t<is_const_v<V>, const_base_iterator, base_iterator>;
     using difference_type = iter_difference_t<base_iterator>;
 
-    V base_;
-    difference_type offset_;
-    difference_type length_;
-
     struct cache_t {
         iterator begin_;
         iterator end_;
     };
+
+    V base_;
+    difference_type start_;
+    difference_type end_;
     mutable cache_t cache_;
     mutable bool has_value_ = false;
 
@@ -1697,31 +1785,31 @@ class slice_view : public view_base<slice_view<V>> {
         auto b = const_cast<remove_const_t<V>&>(base_).begin();
         auto e = const_cast<remove_const_t<V>&>(base_).end();
 
-        for (auto i = 0; i < offset_ && b != e; ++i, ++b)
+        for (auto i = 0; i < start_ && b != e; ++i, ++b)
             ;
         auto begin_it = b;
 
-        for (auto i = 0; i < length_ && b != e; ++i, ++b)
+        auto n = end_ - start_;
+        for (auto i = 0; i < n && b != e; ++i, ++b)
             ;
         auto end_it = b;
 
-        cache_ = cache_t{begin_it, end_it};
+        cache_ = {begin_it, end_it};
         has_value_ = true;
     }
 
 public:
     slice_view() = default;
 
-    slice_view(V base, iter_difference_t<base_iterator> offset, iter_difference_t<base_iterator> length) :
+    constexpr slice_view(V base, difference_type start, difference_type end) :
     base_(_NEFORCE move(base)),
-    offset_(offset),
-    length_(length) {}
+    start_(start),
+    end_(end) {}
 
     iterator begin() {
         ensure_cache();
         return cache_.begin_;
     }
-
     iterator end() {
         ensure_cache();
         return cache_.end_;
@@ -1733,7 +1821,6 @@ public:
         ensure_cache();
         return cache_.begin_;
     }
-
     iterator end() const
         requires Range<const V>
     {
@@ -2133,26 +2220,25 @@ NEFORCE_INLINE17 constexpr split_adaptor split;
 
 
 struct slice_adaptor_closure : range_adaptor_closure<slice_adaptor_closure> {
-    ptrdiff_t offset_, length_;
+    ptrdiff_t start_;
+    ptrdiff_t end_;
 
-    constexpr explicit slice_adaptor_closure(ptrdiff_t o, ptrdiff_t l) :
-    offset_(o),
-    length_(l) {}
+    constexpr explicit slice_adaptor_closure(ptrdiff_t s, ptrdiff_t e) :
+    start_(s),
+    end_(e) {}
 
     template <Range R>
     constexpr auto operator()(R&& range) const {
-        return slice_view{all(_NEFORCE forward<R>(range)), offset_, length_};
+        return slice_view{all(_NEFORCE forward<R>(range)), start_, end_};
     }
 };
 
 struct slice_adaptor {
-    constexpr auto operator()(ptrdiff_t offset, ptrdiff_t length) const {
-        return slice_adaptor_closure{offset, length};
-    }
+    constexpr auto operator()(ptrdiff_t start, ptrdiff_t end) const { return slice_adaptor_closure{start, end}; }
 
     template <Range R>
-    constexpr auto operator()(R&& range, ptrdiff_t offset, ptrdiff_t length) const {
-        return slice_view{all(_NEFORCE forward<R>(range)), offset, length};
+    constexpr auto operator()(R&& range, ptrdiff_t start, ptrdiff_t end) const {
+        return slice_view{all(_NEFORCE forward<R>(range)), start, end};
     }
 };
 

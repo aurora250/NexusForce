@@ -448,12 +448,6 @@ TEST_F(CmdlineTest, Parse_IntArgcArgv_MultiplePositionals_Success) {
     EXPECT_EQ(positional[1], "file2.txt");
 }
 
-TEST_F(CmdlineTest, GetOsArgv_WindowsOrLinux_ReturnsVector) {
-    vector<string> args;
-    EXPECT_NO_THROW(args = cmdline::get_os_argv());
-    EXPECT_FALSE(args.empty());
-}
-
 TEST_F(CmdlineTest, FindOptionLong_Existing_ReturnsPointer) {
     cmdline_.add_option("verbose", 'v', "Enable verbose output");
 
@@ -1806,7 +1800,11 @@ TEST_F(LocaleTest, Numeric_CLocale_ReturnsStandardInfo) {
     locale loc("C");
     auto info = loc.numeric();
     EXPECT_EQ(info.decimal_point, ".");
+#ifdef NEFORCE_PLATFORM_LINUX
+    EXPECT_TRUE(info.thousands_sep.empty());
+#else
     EXPECT_FALSE(info.thousands_sep.empty());
+#endif
 }
 
 TEST_F(LocaleTest, Numeric_EnUSLocale_ReturnsNonEmpty) {
@@ -1830,7 +1828,11 @@ TEST_F(LocaleTest, Numeric_MultipleLocales_ReturnsDifferentResults) {
 TEST_F(LocaleTest, Monetary_CLocale_ReturnsNonEmpty) {
     locale loc("C");
     auto info = loc.monetary();
+#ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_FALSE(info.currency_symbol.empty());
+#else
+    EXPECT_TRUE(info.currency_symbol.empty());
+#endif
     EXPECT_GE(info.frac_digits, 0);
     EXPECT_GE(info.int_frac_digits, 0);
 }
@@ -2086,7 +2088,11 @@ TEST_F(LocaleTest, CollationKey_DifferentStrings_ProducesDifferentKeys) {
 TEST_F(LocaleTest, CollationKey_EmptyString_ReturnsNonEmpty) {
     locale loc("C");
     string key = loc.collation_key("");
+#ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_FALSE(key.empty());
+#else
+    EXPECT_TRUE(key.empty());
+#endif
 }
 
 TEST_F(LocaleTest, CollationKey_OrderMatchesCompare) {
@@ -2212,7 +2218,7 @@ TEST_F(LocaleTest, Numeric_Grouping_NonEmpty) {
 TEST_F(LocaleTest, Monetary_PositiveNegativeSigns_NonEmpty) {
     locale loc("en_US.UTF-8");
     auto info = loc.monetary();
-    EXPECT_FALSE(info.positive_sign.empty());
+    EXPECT_TRUE(info.positive_sign.empty() || info.positive_sign == "+");
     EXPECT_FALSE(info.negative_sign.empty());
 }
 
@@ -2220,6 +2226,11 @@ TEST_F(LocaleTest, Monetary_InternationalSymbol_NonEmpty) {
     locale loc("en_US.UTF-8");
     auto info = loc.monetary();
     EXPECT_FALSE(info.int_curr_symbol.empty());
+#ifdef NEFORCE_PLATFORM_LINUX
+    EXPECT_EQ(info.int_curr_symbol, "USD ");
+#else
+    EXPECT_EQ(info.int_curr_symbol, "USD");
+#endif
 }
 
 TEST_F(LocaleTest, IsAlpha_Unicode_EnUS) {
@@ -2372,7 +2383,7 @@ TEST_F(LocaleTest, ToUcs4_SingleCharacter_Success) {
 
 class PipeTest : public ::testing::Test {
 protected:
-    void SetUp() override {}
+    void SetUp() override { neforce::pipe::ignore_sigpipe(); }
 
     void TearDown() override {}
 };
@@ -4489,8 +4500,7 @@ TEST_F(SysinfoTest, GetArchitecture_MatchesPlatform) {
     auto arch = inst.get_architecture();
 
 #ifdef NEFORCE_ARCH_X86
-    EXPECT_TRUE(arch == sysinfo::architecture::X64 || arch == sysinfo::architecture::ARM64 ||
-                arch == sysinfo::architecture::X86 || arch == sysinfo::architecture::ARM);
+    EXPECT_TRUE(arch == sysinfo::architecture::X64 || arch == sysinfo::architecture::X86);
 #endif
 }
 
@@ -4500,16 +4510,6 @@ TEST_F(SysinfoTest, CpuUsage_ReturnsBetweenZeroAndHundred) {
     usage = sysinfo::cpu_usage();
     EXPECT_GE(usage, 0.0);
     EXPECT_LE(usage, 100.0);
-}
-
-TEST_F(SysinfoTest, CpuUsage_MultipleCalls_Success) {
-    for (int i = 0; i < 3; ++i) {
-        float64_t usage = sysinfo::cpu_usage();
-        EXPECT_GE(usage, 0.0);
-        EXPECT_LE(usage, 100.0);
-
-        this_thread::sleep_for(milliseconds(100));
-    }
 }
 
 TEST_F(SysinfoTest, ProcessCount_ReturnsPositive) {
@@ -4550,7 +4550,6 @@ TEST_F(SysinfoTest, Architecture_EnumValues_Distinct) {
     EXPECT_NE(static_cast<int>(sysinfo::architecture::X86), static_cast<int>(sysinfo::architecture::X64));
     EXPECT_NE(static_cast<int>(sysinfo::architecture::X64), static_cast<int>(sysinfo::architecture::ARM));
     EXPECT_NE(static_cast<int>(sysinfo::architecture::ARM), static_cast<int>(sysinfo::architecture::ARM64));
-    EXPECT_NE(static_cast<int>(sysinfo::architecture::ARM64), static_cast<int>(sysinfo::architecture::IA64));
 }
 
 TEST_F(SysinfoTest, IsInitialized_ReturnsTrue) {

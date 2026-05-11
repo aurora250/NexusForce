@@ -12,6 +12,9 @@ void dynamic_library::open() {
     if (handle_ != nullptr) {
         return;
     }
+    if (path_.empty()) {
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception("trying to open a empty dynamic library."));
+    }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     handle_ = ::LoadLibraryA(path_.data());

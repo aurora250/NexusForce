@@ -1,4 +1,3 @@
-#include <NeForce/core/system/console.hpp>
 #include <NeForce/logging/logger.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -20,7 +19,7 @@ void logger::enqueue(const log_event& event) {
 
 void logger::start_worker() {
     running_ = true;
-    worker_.start([this] { worker_loop(); });
+    worker_ = thread([this] { worker_loop(); });
 }
 
 void logger::stop_worker() {
@@ -28,18 +27,7 @@ void logger::stop_worker() {
     cv_.notify_all();
 
     if (worker_.joinable()) {
-        constexpr auto timeout = seconds(5);
-        if (worker_.joinable()) {
-            auto start = steady_clock::now();
-            while (worker_.joinable() && steady_clock::now() - start < timeout) {
-                this_thread::sleep_for(milliseconds(10));
-            }
-
-            if (worker_.joinable()) {
-                println("Warning: Worker thread did not exit in time, detaching...");
-                worker_.detach();
-            }
-        }
+        worker_.join();
     }
 }
 
@@ -50,8 +38,10 @@ void logger::worker_loop() {
 
         {
             unique_lock<mutex> lock(queue_mutex_);
-            cv_.wait_for(lock, milliseconds(100),
-                         [this] { return !queue_.empty() || flush_requested_.load(memory_order_acquire); });
+            cv_.wait_for(lock, milliseconds(100), [this] {
+                return !queue_.empty() || flush_requested_.load(memory_order_acquire) ||
+                       !running_.load(memory_order_acquire);
+            });
 
             while (!queue_.empty()) {
                 events.push_back(_NEFORCE move(queue_.front()));
@@ -66,8 +56,13 @@ void logger::worker_loop() {
         if (!events.empty()) {
             lock<mutex> sl(sinks_mutex_);
             for (const auto& ev: events) {
-                for (const auto& sink: sinks_) {
-                    sink->log(ev);
+                try {
+                    for (const auto& sink: sinks_) {
+                        sink->log(ev);
+                    }
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (...) {
+                    // ignore
                 }
             }
         }
@@ -75,7 +70,12 @@ void logger::worker_loop() {
         if (should_flush) {
             lock<mutex> sl(sinks_mutex_);
             for (const auto& sink: sinks_) {
-                sink->flush();
+                try {
+                    sink->flush();
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (...) {
+                    // ignore
+                }
             }
             lock<mutex> fl(flush_mutex_);
             flush_cv_.notify_all();
@@ -93,20 +93,18 @@ running_(false) {
 }
 
 logger::~logger() {
-    if (async_) {
+    if (async_.load(memory_order_acquire)) {
         running_.store(false, memory_order_release);
         cv_.notify_all();
-        flush_cv_.notify_all();
-
         if (worker_.joinable()) {
             worker_.join();
         }
     }
+
     {
         lock<mutex> lock(sinks_mutex_);
         sinks_.clear();
     }
-
     {
         lock<mutex> lock(queue_mutex_);
         while (!queue_.empty()) {
@@ -152,15 +150,24 @@ void logger::enable_async(const bool async) {
     if (async) {
         start_worker();
     } else {
-        lock<mutex> lk(queue_mutex_);
-        while (!queue_.empty()) {
-            log_event ev = _NEFORCE move(queue_.front());
-            queue_.pop();
-            lock<mutex> slk(sinks_mutex_);
-            for (const auto& sink: sinks_) {
-                sink->log(ev);
+        vector<log_event> remaining;
+        {
+            lock<mutex> lk(queue_mutex_);
+            while (!queue_.empty()) {
+                remaining.push_back(_NEFORCE move(queue_.front()));
+                queue_.pop();
             }
         }
+
+        if (!remaining.empty()) {
+            lock<mutex> slk(sinks_mutex_);
+            for (const auto& ev: remaining) {
+                for (const auto& sink: sinks_) {
+                    sink->log(ev);
+                }
+            }
+        }
+
         stop_worker();
     }
 }
@@ -190,8 +197,8 @@ void logger::log(const log_level level, string msg, string file, string func, co
         }
     }
 
-    if (async_) {
-        enqueue(ev);
+    if (async_.load(memory_order_acquire)) {
+        enqueue(_NEFORCE move(ev));
     } else {
         lock<mutex> lock(sinks_mutex_);
         for (const auto& sink: sinks_) {

@@ -134,16 +134,15 @@ public:
         size_t i = 0;
         while (value != 0 && i < block_count) {
             blocks[i] = static_cast<block_type>(value);
-            NEFORCE_IF_CONSTEXPR (bits_per_block < sizeof(unsigned long long) * 8) {
+            NEFORCE_IF_CONSTEXPR(bits_per_block < sizeof(unsigned long long) * 8) {
                 value >>= static_cast<uint32_t>(bits_per_block);
-            } else {
+            }
+            else {
                 value = 0;
             }
             ++i;
         }
-        NEFORCE_IF_CONSTEXPR (block_count > 0) {
-            blocks[block_count - 1] &= last_block_mask();
-        }
+        NEFORCE_IF_CONSTEXPR(block_count > 0) { blocks[block_count - 1] &= last_block_mask(); }
     }
 
     /**

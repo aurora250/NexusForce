@@ -365,6 +365,7 @@ locale::monetary_info locale::monetary() const {
 
 #else
     info.currency_symbol = nl_str(CRNCYSTR, loc_);
+    info.int_curr_symbol = nl_str(INT_CURR_SYMBOL, loc_);
     if (!info.currency_symbol.empty()) {
         const char ind = info.currency_symbol[0];
         info.p_cs_precedes = (ind == '-');

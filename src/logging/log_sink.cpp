@@ -71,14 +71,8 @@ string log_formatter::resolve_placeholder(string ph, const log_event& event) con
 
 void log_sink::set_formatter(unique_ptr<log_formatter> formatter) { formatter_ = _NEFORCE move(formatter); }
 
-string console_sink::default_format(const log_event& ev) {
-    string result;
-    result += "["_s + to_string(ev.level) + "] " + ev.message;
-    return result;
-}
-
 void console_sink::log(const log_event& event) {
-    const string formatted = formatter_ ? formatter_->format(event) : default_format(event);
+    const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);
     println(formatted);
 }
 

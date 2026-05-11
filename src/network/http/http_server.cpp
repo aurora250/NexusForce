@@ -6,8 +6,6 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 namespace {
-    const auto max_header_size = 16_KB;
-    const auto max_body_size = 100_MB;
     constexpr int max_forward_count = 5;
 
     string compute_websocket_accept(const string_view key) {
@@ -299,7 +297,7 @@ bool http_server::try_websocket_upgrade(tcp_socket& client_socket, http_request&
     const string_view upgrade = request.header("Upgrade");
     const string_view connection = request.header("Connection");
 
-    if (upgrade != "websocket" || connection.find("Upgrade") == string::npos) {
+    if (upgrade != "websocket" || connection.contains("Upgrade")) {
         return false;
     }
 
@@ -351,16 +349,12 @@ void http_server::handle_request_with_forward(tcp_socket& client_socket, http_re
 }
 
 http_server::http_server(ports port, size_t worker_count) :
-server_(make_unique<tcp_server>(port, worker_count)),
-max_server_header_size(max_header_size),
-max_server_body_size(max_body_size) {
+server_(make_unique<tcp_server>(port, worker_count)) {
     server_->set_client_handler([this](tcp_socket sock) { this->handle_client(_NEFORCE move(sock)); });
 }
 
 http_server::http_server(ports port, ssl_context ctx, size_t worker_count) :
-server_(make_unique<ssl_server>(port, worker_count)),
-max_server_header_size(max_header_size),
-max_server_body_size(max_body_size) {
+server_(make_unique<ssl_server>(port, worker_count)) {
     auto* ssl_srv = dynamic_cast<ssl_server*>(server_.get());
     if (ssl_srv != nullptr) {
         ssl_srv->set_ssl_context(_NEFORCE move(ctx));

@@ -56,53 +56,67 @@ namespace {
     }
 
     void stringify_mapping(string& result, const yaml_mapping* map, const size_t indent, const bool inline_context) {
+        const auto& members = map->get_members();
+        vector<string> sorted_keys;
+        sorted_keys.reserve(members.size());
+        for (const auto& pair: members) {
+            sorted_keys.push_back(pair.first);
+        }
+        sort(sorted_keys.begin(), sorted_keys.end());
+
         if (map->get_style() == yaml_mapping::Flow || inline_context) {
             result += "{";
-            const auto& members = map->get_members();
             bool first = true;
 
-            for (const auto& pair: members) {
+            for (const auto& key: sorted_keys) {
                 if (!first) {
                     result += ", ";
                 }
                 first = false;
-                if (needs_quotes(pair.first)) {
-                    result += "\"" + escape(pair.first) + "\"";
+                if (needs_quotes(key)) {
+                    result += "\"" + escape(key) + "\"";
                 } else {
-                    result += pair.first;
+                    result += key;
                 }
                 result += ": ";
-                stringify_value(result, pair.second.get(), indent, true);
+                stringify_value(result, members.at(key).get(), indent, true);
             }
             result += "}";
         } else {
-            const auto& members = map->get_members();
             bool first = true;
 
-            for (const auto& pair: members) {
+            for (const auto& key: sorted_keys) {
                 if (!first) {
                     result += "\n";
                 }
                 first = false;
                 result += string(indent, ' ');
-                if (needs_quotes(pair.first)) {
-                    result += "\"" + escape(pair.first) + "\"";
+                if (needs_quotes(key)) {
+                    result += "\"" + escape(key) + "\"";
                 } else {
-                    result += pair.first;
+                    result += key;
                 }
 
                 result += ": ";
 
-                if (pair.second->is_sequence() || pair.second->is_mapping()) {
-                    stringify_value(result, pair.second.get(), indent + 2, false);
+                const auto& value = members.at(key);
+                if (value->is_sequence() || value->is_mapping()) {
+                    stringify_value(result, value.get(), indent + 2, false);
                 } else {
-                    stringify_value(result, pair.second.get(), indent + 2, true);
+                    stringify_value(result, value.get(), indent + 2, true);
                 }
             }
         }
     }
 
     void stringify_value(string& result, const yaml_value* value, const size_t indent, const bool inline_context) {
+        if (!value->anchor.empty()) {
+            result += "&" + value->anchor + " ";
+        }
+        if (!value->tag.empty()) {
+            result += value->tag + " ";
+        }
+
         switch (value->type()) {
             case yaml_value::Null: {
                 result += "null";
@@ -117,7 +131,19 @@ namespace {
                 break;
             }
             case yaml_value::Float: {
-                result += to_string(value->as_float()->get_value());
+                string float_str = to_string(value->as_float()->get_value());
+                auto dot_pos = float_str.find('.');
+                if (dot_pos != string::npos) {
+                    size_t end = float_str.size();
+                    while (end > dot_pos + 1 && float_str[end - 1] == '0') {
+                        end--;
+                    }
+                    if (end == dot_pos + 1) {
+                        end--;
+                    }
+                    float_str.resize(end);
+                }
+                result += float_str;
                 break;
             }
             case yaml_value::String: {
@@ -125,9 +151,14 @@ namespace {
                 const string& val = str->get_value();
 
                 if (str->get_style() == yaml_string::SingleQuoted) {
-                    result += "'" + val + "'";
-                } else if (str->get_style() == yaml_string::DoubleQuoted || needs_quotes(val)) {
-                    result += "\"" + escape(val) + "\"";
+                    string escaped_val;
+                    for (const char ch: val) {
+                        escaped_val += ch;
+                        if (ch == '\'') {
+                            escaped_val += '\'';
+                        }
+                    }
+                    result += "'" + escaped_val + "'";
                 } else if (str->get_style() == yaml_string::Literal) {
                     result += "|\n";
                     string line;
@@ -139,6 +170,8 @@ namespace {
                     result += ">\n";
                     const string indent_str(indent, ' ');
                     result += move(indent_str) + val + "\n";
+                } else if (str->get_style() == yaml_string::DoubleQuoted || needs_quotes(val)) {
+                    result += "\"" + escape(val) + "\"";
                 } else {
                     result += val;
                 }
@@ -153,10 +186,11 @@ namespace {
                 break;
             }
             case yaml_value::Mapping: {
-                if (!inline_context) {
+                const auto* map = value->as_mapping();
+                if (!inline_context && map->get_style() != yaml_mapping::Flow) {
                     result += "\n";
                 }
-                stringify_mapping(result, value->as_mapping(), indent, inline_context);
+                stringify_mapping(result, map, indent, inline_context);
                 break;
             }
         }

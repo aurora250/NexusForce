@@ -116,7 +116,7 @@ uint128_t& uint128_t::operator-=(const uint128_t& other) noexcept {
 #else
     const auto old_lo = this->lo;
     lo -= other.lo;
-    hi -= other.hi - static_cast<uint64_t>(old_lo < other.lo);
+    hi -= other.hi + static_cast<uint64_t>(old_lo < other.lo);
 #endif
     return *this;
 }

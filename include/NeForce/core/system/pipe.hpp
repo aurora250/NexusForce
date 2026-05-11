@@ -95,6 +95,15 @@ public:
     pipe& operator=(pipe&& other) noexcept;
 
     /**
+     * @brief 忽略 SIGPIPE 信号
+     * @note 在 POSIX 系统上，向没有读端的管道写入会触发 SIGPIPE 信号，默认行为是终止进程。
+     *       调用此函数后，系统将忽略该信号，改为由 write() 返回 -1 并设置 errno = EPIPE。
+     *       此操作是进程全局的，但也是线程安全的传统做法。
+     *       在 Windows 上该函数无任何效果。
+     */
+    static void ignore_sigpipe() noexcept;
+
+    /**
      * @brief 从管道读取数据
      * @param buffer 缓冲区
      * @param size 缓冲区大小

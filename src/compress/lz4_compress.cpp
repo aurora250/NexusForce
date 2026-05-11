@@ -39,7 +39,7 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
     byte_vector decompressed(estimated_original_size);
     int result = 0;
     int attempt = 0;
-    constexpr int max_attempts = 5;
+    constexpr int max_attempts = 10;
     constexpr size_t max_buffer_size{1024ULL * 1024 * 1024};
 
     do {

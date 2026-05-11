@@ -177,6 +177,9 @@ private:
      * 公式：m = -n * ln(p) / (ln2)^2
      */
     static size_t compute_m(const size_t n, const double p) noexcept {
+        if (p <= 0.0 || p >= 1.0) {
+            return 0;
+        }
         const double ln2 = logarithm_e(2.);
         const double m = -static_cast<double>(n) * logarithm_e(p) / (ln2 * ln2);
         return static_cast<size_t>(ceil(m));
@@ -191,6 +194,9 @@ private:
      * 公式：k = (m / n) * ln2
      */
     static size_t compute_k(const size_t n, const size_t m) noexcept {
+        if (n == 0 || m == 0) {
+            return 0;
+        }
         const double k = (static_cast<double>(m) / n) * logarithm_e(2.);
         return static_cast<size_t>(max(static_cast<decimal_t>(1), round(k)));
     }

@@ -120,9 +120,9 @@ private:
                                                const http_cookie_name& name);
 
 public:
-    byte_size max_server_header_size; ///< 最大请求头大小
-    byte_size max_server_body_size;   ///< 最大请求体大小
-    bool enable_websocket{true};      ///< 是否启用WebSocket
+    byte_size max_server_header_size{16_KB}; ///< 最大请求头大小
+    byte_size max_server_body_size{100_MB};  ///< 最大请求体大小
+    bool enable_websocket{true};             ///< 是否启用WebSocket
 
 private:
     void handle_client(tcp_socket client_socket);

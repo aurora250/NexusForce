@@ -30,7 +30,7 @@ namespace {
 } // namespace
 
 
-string_view http_request::client_ip() const noexcept {
+string_view http_request::client_ip() const {
     const auto xff = header("X-Forwarded-For");
     if (!xff.empty()) {
         const auto comma = xff.find(',');

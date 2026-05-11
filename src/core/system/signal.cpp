@@ -7,13 +7,12 @@
 #    include <WinBase.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include "NeForce/core/system/pipe.hpp"
+#    include <NeForce/core/system/pipe.hpp>
 #    include <cstdlib>
-#    include <cstring>
 #    include <unistd.h>
 #    include <fcntl.h>
 #    include <sys/select.h>
-#    include <errno.h>
+#    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -44,8 +43,8 @@ namespace {
         }
         return TRUE;
     }
-#else
 
+#else
     pipe& get_signal_pipe() {
         static pipe p(false);
         return p;
@@ -53,30 +52,14 @@ namespace {
 
     pipe* g_signal_pipe = nullptr;
 
-    void posix_handler(int sig) {
-        int saved_errno = errno;
-        if (g_signal_pipe) {
-            int s = sig;
-            ::write(g_signal_pipe->native_write_handle(), &s, sizeof(s));
+    void posix_handler(const int sig) {
+        const int saved_errno = errno;
+        if (g_signal_pipe != nullptr) {
+            ::write(g_signal_pipe->native_write_handle(), &sig, sizeof(sig));
         }
         errno = saved_errno;
     }
 
-    bool is_valid_posix_signal(int sig) { return sig > 0 && sig < 64; }
-
-    bool is_windows_simulated(system_signal_manager::event ev) {
-        int v = static_cast<int>(ev);
-        return v >= 1000 && v < 2000;
-    }
-
-    const unordered_map<system_signal_manager::event, int>& windows_to_posix_map() {
-        static unordered_map<system_signal_manager::event, int> m = {
-                {system_signal_manager::event::CTRL_BREAK, SIGTERM},
-                {system_signal_manager::event::CLOSE, SIGHUP},
-                {system_signal_manager::event::LOGOFF, SIGTERM},
-                {system_signal_manager::event::SHUTDOWN, SIGTERM}};
-        return m;
-    }
 #endif
 
     thread_local auto g_current_signal =
@@ -85,8 +68,10 @@ namespace {
 #else
             static_cast<system_signal_manager::event>(SIGTERM);
 #endif
+
     thread_local void* g_signal_context = nullptr;
 } // namespace
+
 
 system_signal_manager::system_signal_manager()
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -113,9 +98,13 @@ void system_signal_manager::initialize() {
     handlers_[event::SHUTDOWN] = nullptr;
 #else
     g_signal_pipe = &get_signal_pipe();
-    int fd = g_signal_pipe->native_read_handle();
-    int flags = ::fcntl(fd, F_GETFL, 0);
-    ::fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    const int read_fd = g_signal_pipe->native_read_handle();
+    const int rflags = ::fcntl(read_fd, F_GETFL, 0);
+    ::fcntl(read_fd, F_SETFL, rflags | O_NONBLOCK);
+
+    const int write_fd = g_signal_pipe->native_write_handle();
+    const int wflags = ::fcntl(write_fd, F_GETFL, 0);
+    ::fcntl(write_fd, F_SETFL, wflags | O_NONBLOCK);
 
     struct ::sigaction sa;
     memory_zero(&sa);
@@ -123,10 +112,10 @@ void system_signal_manager::initialize() {
     ::sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
 
-    int sigs[] = {SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,  SIGSEGV,
-                  SIGBUS, SIGPIPE, SIGALRM, SIGHUP, SIGUSR1, SIGUSR2};
-    for (size_t i = 0; i < sizeof(sigs) / sizeof(sigs[0]); ++i) {
-        ::sigaction(sigs[i], &sa, &old_actions_[sigs[i]]);
+    const int sigs[] = {SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,  SIGSEGV,
+                        SIGBUS, SIGPIPE, SIGALRM, SIGHUP, SIGUSR1, SIGUSR2};
+    for (const int sig: sigs) {
+        ::sigaction(sig, &sa, &old_actions_[sig]);
     }
 #endif
 }
@@ -227,8 +216,8 @@ void system_signal_manager::stop_monitoring() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         notify_event_.set();
 #else
-        if (g_signal_pipe) {
-            int wakeup = -1;
+        if (g_signal_pipe != nullptr) {
+            constexpr int wakeup = -1;
             ::write(g_signal_pipe->native_write_handle(), &wakeup, sizeof(wakeup));
         }
 #endif
@@ -263,7 +252,7 @@ bool system_signal_manager::is_running() const { return running_; }
 
 void system_signal_manager::signal_thread_func() {
 #ifdef NEFORCE_PLATFORM_LINUX
-    struct sched_param param{};
+    ::sched_param param{};
     param.sched_priority = 10;
     ::pthread_setschedparam(::pthread_self(), SCHED_FIFO, &param);
 #endif
@@ -290,11 +279,11 @@ void system_signal_manager::signal_thread_func() {
         }
 #else
         pipe& sig_pipe = get_signal_pipe();
-        int read_fd = sig_pipe.native_read_handle();
-        fd_set rfds;
+        const int read_fd = sig_pipe.native_read_handle();
+        ::fd_set rfds{};
         FD_ZERO(&rfds);
         FD_SET(read_fd, &rfds);
-        struct timeval tv;
+        ::timeval tv{};
         tv.tv_sec = 1;
         tv.tv_usec = 0;
         int ready = ::select(read_fd + 1, &rfds, nullptr, nullptr, &tv);
@@ -310,10 +299,23 @@ void system_signal_manager::signal_thread_func() {
 
         while (running_ && ready > 0 && FD_ISSET(read_fd, &rfds)) {
             int sig = 0;
-            ssize_t n = ::read(read_fd, &sig, sizeof(sig));
+            const ssize_t n = ::read(read_fd, &sig, sizeof(sig));
+
             if (n == sizeof(sig)) {
-                if (sig >= 0) {
-                    auto ev = static_cast<system_signal_manager::event>(sig);
+                if (sig == -2) {
+                    while (running_) {
+                        const signal_result result = wait_for_signal_internal(0);
+                        if (result.event == event::TIMEOUT) {
+                            break;
+                        }
+                        has_signals = true;
+                        process_signal(result.event, result.context);
+                        if (result.event == event::FORCE_EXIT) {
+                            return;
+                        }
+                    }
+                } else if (sig >= 0) {
+                    const auto ev = static_cast<system_signal_manager::event>(sig);
                     has_signals = true;
                     process_signal(ev, nullptr);
                     if (ev == system_signal_manager::event::FORCE_EXIT) {
@@ -503,6 +505,11 @@ void system_signal_manager::send_signal_nolock(event event, void* context) {
     cv_.notify_all();
 #ifdef NEFORCE_PLATFORM_WINDOWS
     notify_event_.set();
+#else
+    constexpr int wakeup = -2;
+    if (g_signal_pipe != nullptr) {
+        ::write(g_signal_pipe->native_write_handle(), &wakeup, sizeof(wakeup));
+    }
 #endif
 }
 
@@ -511,7 +518,7 @@ bool system_signal_manager::block_signals(const vector<event>& signals_to_block)
     ::sigset_t mask;
     ::sigemptyset(&mask);
     for (auto ev: signals_to_block) {
-        int sig = static_cast<int>(ev);
+        const int sig = static_cast<int>(ev);
         if (sig > 0) {
             ::sigaddset(&mask, sig);
         }
@@ -528,7 +535,7 @@ bool system_signal_manager::unblock_signals(const vector<event>& signals_to_unbl
     ::sigset_t mask;
     ::sigemptyset(&mask);
     for (auto ev: signals_to_unblock) {
-        int sig = static_cast<int>(ev);
+        const int sig = static_cast<int>(ev);
         if (sig > 0) {
             ::sigaddset(&mask, sig);
         }

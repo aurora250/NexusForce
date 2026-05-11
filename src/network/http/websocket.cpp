@@ -1,12 +1,10 @@
 #include <NeForce/core/numeric/random.hpp>
-#include <NeForce/core/utility/byte_size.hpp>
 #include <NeForce/network/http/websocket.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 namespace {
     constexpr size_t max_write_queue_size = 1024;
-    const auto max_payload_size{64_MB};
     constexpr seconds heartbeat_interval_sec{30};
     constexpr seconds heartbeat_timeout_sec{10};
 
@@ -131,7 +129,7 @@ bool websocket_session::queue_frame(byte_vector frame, const bool is_control) {
     return true;
 }
 
-void websocket_session::write_loop() noexcept {
+void websocket_session::write_loop() {
     try {
         while (running_) {
             byte_vector frame;
@@ -180,7 +178,7 @@ void websocket_session::write_loop() noexcept {
     }
 }
 
-void websocket_session::read_loop() noexcept {
+void websocket_session::read_loop() {
     try {
         while (running_) {
             if (!read_frame()) {
@@ -201,7 +199,7 @@ void websocket_session::read_loop() noexcept {
     }
 }
 
-bool websocket_session::read_frame() noexcept {
+bool websocket_session::read_frame() {
     try {
         websocket_frame_header hdr{};
         if (!receive_exact(*socket_, &hdr, 2)) {
@@ -241,7 +239,8 @@ bool websocket_session::read_frame() noexcept {
             return false;
         }
 
-        if (payload_len > max_payload_size.bytes()) {
+        constexpr uint64_t max_payload_length = 64ULL * 1024ULL * 1024ULL;
+        if (payload_len > max_payload_length) {
             send_close_frame(websocket_status::MESSAGE_TOO_BIG, "Payload exceeds limit");
             return false;
         }
@@ -372,7 +371,7 @@ void websocket_session::handle_close_frame(string payload) {
     do_stop(status, reason);
 }
 
-void websocket_session::heartbeat_loop() noexcept {
+void websocket_session::heartbeat_loop() {
     try {
         last_pong_ms_ = now_ms();
 
@@ -410,7 +409,7 @@ void websocket_session::heartbeat_loop() noexcept {
     }
 }
 
-void websocket_session::do_stop(websocket_status status, const string& reason) noexcept {
+void websocket_session::do_stop(websocket_status status, const string& reason) {
     if (closed_once_.test_and_set()) {
         return;
     }
@@ -449,7 +448,14 @@ websocket_session::websocket_session(unique_ptr<tcp_socket> sock, websocket_serv
 socket_(_NEFORCE move(sock)),
 server_(server) {}
 
-websocket_session::~websocket_session() { do_stop(websocket_status::NORMAL_CLOSURE, "Session destroyed"); }
+websocket_session::~websocket_session() {
+    try {
+        do_stop(websocket_status::NORMAL_CLOSURE, "Session destroyed");
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
+}
 
 void websocket_session::start() {
     if (running_.exchange(true)) {

@@ -16,8 +16,8 @@ type_(type) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateEvent failed"));
     }
 #else
-    auto m = ::new (std::nothrow) pthread_mutex_t;
-    auto c = ::new (std::nothrow) pthread_cond_t;
+    auto* const m = ::new (std::nothrow) pthread_mutex_t;
+    auto* const c = ::new (std::nothrow) pthread_cond_t;
     mutex_.reset(m);
     cond_.reset(c);
 
@@ -125,14 +125,13 @@ bool system_event::wait(uint32_t timeout_ms) noexcept {
 
     if (timeout_ms == numeric_traits<uint32_t>::max()) {
         while (!signaled_) {
-            int ret = ::pthread_cond_wait(cond_.get(), mutex_.get());
-            (void) ret;
+            (void) ::pthread_cond_wait(cond_.get(), mutex_.get());
         }
     } else {
-        struct ::timespec ts;
+        ::timespec ts;
         ::clock_gettime(CLOCK_REALTIME, &ts);
         ts.tv_sec += timeout_ms / 1000;
-        ts.tv_nsec += (timeout_ms % 1000) * 1000000;
+        ts.tv_nsec += static_cast<long>(timeout_ms % 1000) * 1000000;
         if (ts.tv_nsec >= 1000000000) {
             ts.tv_sec += 1;
             ts.tv_nsec -= 1000000000;

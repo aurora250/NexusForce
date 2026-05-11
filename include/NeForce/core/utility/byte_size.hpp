@@ -166,13 +166,13 @@ public:
      *
      * 创建大小为0的字节对象。
      */
-    constexpr byte_size() = default;
+    constexpr byte_size() noexcept = default;
 
     /**
      * @brief 从字节数构造
      * @param bytes 字节数
      */
-    constexpr explicit byte_size(uint64_t bytes) :
+    constexpr explicit byte_size(uint64_t bytes) noexcept :
     bytes_(bytes) {}
 
     /**
@@ -208,7 +208,7 @@ public:
      * @brief 获取字节数
      * @return 原始字节数
      */
-    NEFORCE_NODISCARD constexpr uint64_t bytes() const { return bytes_; }
+    NEFORCE_NODISCARD constexpr uint64_t bytes() const noexcept { return bytes_; }
 
     /**
      * @brief 转换为指定单位的值
@@ -240,7 +240,7 @@ public:
      */
     NEFORCE_NODISCARD constexpr bool is_zero() const noexcept { return bytes_ == 0; }
 
-    byte_size& operator+=(const byte_size& rhs) {
+    byte_size& operator+=(const byte_size& rhs) noexcept {
         bytes_ += rhs.bytes_;
         return *this;
     }
@@ -253,7 +253,7 @@ public:
         return *this;
     }
 
-    byte_size& operator*=(uint64_t factor) {
+    byte_size& operator*=(uint64_t factor) noexcept {
         bytes_ *= factor;
         return *this;
     }
@@ -291,10 +291,12 @@ public:
         return byte_size(bytes_ / divisor);
     }
 
-    NEFORCE_NODISCARD friend byte_size operator*(uint64_t factor, const byte_size& size) { return size * factor; }
+    NEFORCE_NODISCARD friend byte_size operator*(uint64_t factor, const byte_size& size) noexcept {
+        return size * factor;
+    }
 
-    NEFORCE_NODISCARD bool equal_to(const byte_size& rhs) const { return bytes_ == rhs.bytes_; }
-    NEFORCE_NODISCARD bool less_than(const byte_size& rhs) const { return bytes_ < rhs.bytes_; }
+    NEFORCE_NODISCARD bool equal_to(const byte_size& rhs) const noexcept { return bytes_ == rhs.bytes_; }
+    NEFORCE_NODISCARD bool less_than(const byte_size& rhs) const noexcept { return bytes_ < rhs.bytes_; }
 
     /**
      * @brief 计算哈希值
@@ -330,16 +332,14 @@ NEFORCE_NODISCARD inline byte_size operator""_B(const unsigned long long bytes) 
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_B(const decimal_t bytes) noexcept {
-    return byte_size{bytes, byte_size::unit::B};
-}
+NEFORCE_NODISCARD inline byte_size operator""_B(const decimal_t bytes) { return byte_size{bytes, byte_size::unit::B}; }
 
 /**
  * @brief 创建byte_size的字面量操作符
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_KB(const unsigned long long bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_KB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::KB};
 }
 
@@ -348,7 +348,7 @@ NEFORCE_NODISCARD inline byte_size operator""_KB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_KB(const decimal_t bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_KB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::KB};
 }
 
@@ -357,7 +357,7 @@ NEFORCE_NODISCARD inline byte_size operator""_KB(const decimal_t bytes) noexcept
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_MB(const unsigned long long bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_MB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::MB};
 }
 
@@ -366,7 +366,7 @@ NEFORCE_NODISCARD inline byte_size operator""_MB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_MB(const decimal_t bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_MB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::MB};
 }
 
@@ -375,7 +375,7 @@ NEFORCE_NODISCARD inline byte_size operator""_MB(const decimal_t bytes) noexcept
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_GB(const unsigned long long bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_GB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::GB};
 }
 
@@ -384,7 +384,7 @@ NEFORCE_NODISCARD inline byte_size operator""_GB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_GB(const decimal_t bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_GB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::GB};
 }
 
@@ -393,7 +393,7 @@ NEFORCE_NODISCARD inline byte_size operator""_GB(const decimal_t bytes) noexcept
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_TB(const unsigned long long bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_TB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::TB};
 }
 
@@ -402,7 +402,7 @@ NEFORCE_NODISCARD inline byte_size operator""_TB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_TB(const decimal_t bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_TB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::TB};
 }
 
@@ -411,7 +411,7 @@ NEFORCE_NODISCARD inline byte_size operator""_TB(const decimal_t bytes) noexcept
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_PB(const unsigned long long bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_PB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::PB};
 }
 
@@ -420,7 +420,7 @@ NEFORCE_NODISCARD inline byte_size operator""_PB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_PB(const decimal_t bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_PB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::PB};
 }
 
@@ -429,7 +429,7 @@ NEFORCE_NODISCARD inline byte_size operator""_PB(const decimal_t bytes) noexcept
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_EB(const unsigned long long bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_EB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::EB};
 }
 
@@ -438,7 +438,7 @@ NEFORCE_NODISCARD inline byte_size operator""_EB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_EB(const decimal_t bytes) noexcept {
+NEFORCE_NODISCARD inline byte_size operator""_EB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::EB};
 }
 

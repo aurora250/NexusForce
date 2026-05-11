@@ -116,17 +116,6 @@ private:
     }
 
     /**
-     * @brief 可迭代类型的分派函数
-     * @tparam Iterable 可迭代类型
-     * @param iterable 可迭代对象
-     * @return 自身引用
-     */
-    template <typename Iterable>
-    enable_if_t<is_iterable_v<Iterable>, toml_builder&> value_iterable_dispatch(const Iterable& iterable) {
-        return this->value_iterable_impl(iterable);
-    }
-
-    /**
      * @brief 映射表类型的实现（转换为内联表格）
      * @tparam Map 映射表类型
      * @param maplike 映射表对象
@@ -401,9 +390,9 @@ public:
      * - 映射表类型（如unordered_map）转换为内联表格
      * - 其他可迭代类型转换为数组
      */
-    template <typename Iterable>
-    toml_builder& value(const Iterable& iterable) {
-        return this->value_iterable_dispatch(iterable);
+    template <typename Iterable, enable_if_t<is_iterable_v<Iterable>, int> = 0>
+    toml_builder& value_iterable(const Iterable& iterable) {
+        return value_iterable_impl(iterable);
     }
 
     /**

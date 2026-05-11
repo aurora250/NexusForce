@@ -226,18 +226,30 @@ namespace {
         uint64_t V_hi = H_hi, V_lo = H_lo;
         uint64_t X_hi = hi, X_lo = lo;
 
-        for (int i = 0; i < 128; ++i) {
-            if (((X_hi >> 63) & 1) != 0U) {
+        for (int i = 63; i >= 0; --i) {
+            if (((X_hi >> i) & 1) != 0U) {
                 Z_hi ^= V_hi;
                 Z_lo ^= V_lo;
             }
-            X_hi = (X_hi << 1) | (X_lo >> 63);
-            X_lo <<= 1;
-            const bool carry = ((V_hi >> 63) & 1) != 0U;
-            V_hi = (V_hi << 1) | (V_lo >> 63);
-            V_lo <<= 1;
-            if (carry) {
-                V_lo ^= 0x87;
+            if ((V_lo & 1) != 0U) {
+                V_lo = (V_lo >> 1) | (V_hi << 63);
+                V_hi = (V_hi >> 1) ^ 0xE100000000000000ULL;
+            } else {
+                V_lo = (V_lo >> 1) | (V_hi << 63);
+                V_hi >>= 1;
+            }
+        }
+        for (int i = 63; i >= 0; --i) {
+            if (((X_lo >> i) & 1) != 0U) {
+                Z_hi ^= V_hi;
+                Z_lo ^= V_lo;
+            }
+            if ((V_lo & 1) != 0U) {
+                V_lo = (V_lo >> 1) | (V_hi << 63);
+                V_hi = (V_hi >> 1) ^ 0xE100000000000000ULL;
+            } else {
+                V_lo = (V_lo >> 1) | (V_hi << 63);
+                V_hi >>= 1;
             }
         }
         hi = Z_hi;

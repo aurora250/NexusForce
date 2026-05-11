@@ -184,7 +184,7 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * 优先从X-Forwarded-For头获取，其次从X-Real-IP头获取。
      * 适用于经过代理的请求。
      */
-    NEFORCE_NODISCARD string_view client_ip() const noexcept;
+    NEFORCE_NODISCARD string_view client_ip() const;
 
     /**
      * @brief 获取User-Agent
